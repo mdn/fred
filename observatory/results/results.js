@@ -3,7 +3,6 @@ import { Task } from "@lit/task";
 
 import "../feedback.js";
 import { Rating } from "./rating.js";
-import { ComparisonTable } from "./grade_svg.js";
 import { Tabs } from "./tabs.js";
 
 import { OBSERVATORY_API_URL } from "../constants.js";
@@ -12,6 +11,7 @@ import { OBSERVATORY_API_URL } from "../constants.js";
  * @typedef {import("../constants.js").ObservatoryScanResult} ObservatoryScanResult
  * @typedef {import('lit').PropertyDeclarations} PropertyDeclarations
  * @typedef {import('../constants.js').GradeDistribution} GradeDistribution
+ * @typedef {import("@mdn/rari").SPAPage} SPAPage
  */
 
 export class Results extends LitElement {
@@ -21,22 +21,39 @@ export class Results extends LitElement {
     }
   `;
 
+  constructor() {
+    super();
+    /** @type {Fred.Context<SPAPage> | null} */
+    this.context = null;
+    /** @type { string | null } */
+    this.host = null;
+    /** @type { number } */
+    this.selectedTab = 0;
+    /** @type { boolean } */
+    this._usePostInApi = false;
+  }
+
   /**
    * @type PropertyDeclarations
    */
   static properties = {
+    context: { type: Object },
     host: { type: String },
     selectedTab: { type: Number },
+    _usePostInApi: { type: Boolean },
   };
 
   _apiTask = new Task(this, {
     task: async ([host], { signal }) => {
+      if (!host) {
+        throw new Error("No host provided");
+      }
       try {
         const res = await fetch(
           `${OBSERVATORY_API_URL}/api/v2/analyze?host=${encodeURIComponent(
             host
           )}`,
-          { signal }
+          { signal, method: this._usePostInApi ? "POST" : "GET" }
         );
         if (!res.ok) {
           let message = `${res.status}: ${res.statusText}`;
@@ -56,14 +73,6 @@ export class Results extends LitElement {
     },
     args: () => [this.host],
   });
-
-  constructor() {
-    super();
-    /** @type { string | null } */
-    this.host = null;
-    /** @type { number } */
-    this.selectedTab = 0;
-  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -102,25 +111,24 @@ export class Results extends LitElement {
     return index === -1 ? 0 : index;
   }
 
+  /**
+   *
+   * @param {Event} e
+   */
   async _rescan(e) {
     e.preventDefault();
-    this._loading = true;
-    try {
-      const apiUrl = `https://observatory-api.mdn.mozilla.net/api/v2/analyze?host=${encodeURIComponent(
-        this.host
-      )}`;
-      const response = await fetch(apiUrl, { method: "POST" });
-      if (!response.ok) {
-        throw new Error(`API request failed: ${response.statusText}`);
-      }
-      this.data = await response.json();
-    } catch (error) {
-      console.error("Fetch error:", error);
-    } finally {
-      this._loading = false;
+    if (!this.host) {
+      return;
     }
+    this._usePostInApi = true;
+    this._apiTask.run();
   }
 
+  /**
+   *
+   * @param {number} index
+   * @param {string} key
+   */
   _handleTabSelect(index, key) {
     this.selectedTab = index;
     window.history.replaceState(
@@ -141,7 +149,7 @@ export class Results extends LitElement {
         <section class="summary">
           ${Rating({
             result: data,
-            host: this.host,
+            host: this.host || "",
             rescan: this._rescan,
           })}
         </section>

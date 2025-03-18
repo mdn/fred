@@ -26,10 +26,17 @@ export function Rating({ result, host, rescan }) {
     <section class="scan-result">
       <section class="grade-trend">
         <div class="overall">
-          <button popovertarget="grade-popover" aria-label="show info tooltip" class="info-tooltip" tabIndex="0">
-            <div class="${`grade grade-${result.scan.grade?.[0]?.toLowerCase()}`}">
-                ${formatMinus(result.scan.grade)}
-            <div>
+          <button
+            popovertarget="grade-popover"
+            aria-label="show info tooltip"
+            class="info-tooltip"
+            tabindex="0"
+          >
+            <div
+              class="${`grade grade-${result.scan.grade?.[0]?.toLowerCase()}`}"
+            >
+              ${formatMinus(result.scan.grade)}
+            </div>
             ${Tooltip(result)}
           </button>
         </div>
@@ -46,9 +53,9 @@ export function Rating({ result, host, rescan }) {
           <a href="#history">
             <span class="label">Scan Time</span>
           </a>
-          <mdn-observatory-human-duration .date=${new Date(
-            result.scan.scanned_at
-          )}></mdn-observatory-human-duration>
+          <mdn-observatory-human-duration
+            .date=${new Date(result.scan.scanned_at)}
+          ></mdn-observatory-human-duration>
         </div>
         <a href="/en-US/observatory/docs/tests_and_scoring" target="_blank">
           <span class="label">Tests Passed</span>
@@ -57,14 +64,17 @@ export function Rating({ result, host, rescan }) {
         ${result.scan.tests_quantity}
       </section>
       <section class="actions">
-        <mdn-observatory-rescan-button .from=${new Date(
-          result.scan.scanned_at
-        )} .duration=${60} @click=${rescan}></mdn-observatory-rescan-button>
+        <mdn-observatory-rescan-button
+          .from=${new Date(result.scan.scanned_at)}
+          .duration=${60}
+          @click=${rescan}
+        ></mdn-observatory-rescan-button>
         <div class="scan-another">
-          <a href="/en-US/observatory/" data-discover="true">Scan another website</a>
+          <a href="/en-US/observatory/" data-discover="true"
+            >Scan another website</a
+          >
         </div>
       </section>
-
     </section>
   `;
 }

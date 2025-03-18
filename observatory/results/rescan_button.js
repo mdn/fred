@@ -58,7 +58,7 @@ export class RescanButton extends LitElement {
             ></div>
             <small id="wait-secs">Wait ${remainingSecs}s to rescan</small>
           </button>`
-        : html` <button @click=${this.onClickHandler}>Rescan</button>`}
+        : html`<button>Rescan</button>`}
     `;
   }
 }

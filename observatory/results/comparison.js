@@ -3,11 +3,12 @@ import "./grade_svg";
 
 /**
  * @typedef {import("lit").TemplateResult} TemplateResult
+ * @typedef {import('../constants').ObservatoryResult} ObservatoryResult
  */
 
 /**
  *
- * @param {import('../constants').ObservatoryResult} result
+ * @param {{result: ObservatoryResult}} result
  * @returns { TemplateResult }
  */
 export function Comparison({ result }) {

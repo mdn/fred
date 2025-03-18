@@ -10,10 +10,10 @@ import { Faq } from "../faq.js";
  */
 
 /**
- * @param {Fred.Context<Rari.SPAPage>} _context
+ * @param {Fred.Context<Rari.SPAPage>} context
  * @returns {TemplateResult}
  */
-export function Landing(_context) {
+export function Landing(context) {
   return html`
     <section class="header">
       <section class="scan-form">
@@ -81,8 +81,8 @@ export function Landing(_context) {
           </figure>
         </div>
       </section>
-      ${Faq()}
-      ${Feedback()}
+      ${Faq(context)}
+      ${Feedback(context)}
     </section>
   </section>`;
 }

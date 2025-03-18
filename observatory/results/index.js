@@ -11,14 +11,14 @@ import "./index.css";
  */
 
 /**
- * @param {Fred.Context<Rari.SPAPage>} _context
+ * @param {Fred.Context<Rari.SPAPage>} context
  * @returns {TemplateResult}
  */
-export function Results(_context) {
+export function Results(context) {
   return html` <section class="main">
     <section class="heading">
       <h1><span class="accent">${OBSERVATORY_TITLE}</span> Report</h1>
-      <div class="feedback">${Feedback()}</div>
+      <div class="feedback">${Feedback(context)}</div>
     </section>
     <aside class="toc">
       <h2 class="toc-heading">${OBSERVATORY_TITLE}</h2>
@@ -33,6 +33,6 @@ export function Results(_context) {
         </li>
       </ul>
     </aside>
-    <mdn-observatory-results></mdn-observatory-results>
+    <mdn-observatory-results .context=${context}></mdn-observatory-results>
   </section>`;
 }
