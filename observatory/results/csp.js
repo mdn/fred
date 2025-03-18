@@ -4,6 +4,7 @@ import { PassIcon } from "../utils";
 /**
  * @typedef {import("lit").TemplateResult} TemplateResult
  * @typedef {import('../constants').ObservatoryResult} ObservatoryResult
+ * @typedef {import("../constants").ObservatoryPolicyItem} ObservatoryPolicyItem
  */
 
 const policyTests = [
@@ -39,7 +40,7 @@ const negatedPolicies = [
  */
 export function Csp({ result }) {
   const policy = result.tests["content-security-policy"]?.policy;
-  const pass = result.tests["content-security-policy"]?.pass;
+  const pass = result.tests["content-security-policy"]?.pass || false;
 
   if (!policy) {
     if (
@@ -98,19 +99,21 @@ export function Csp({ result }) {
       </thead>
       <tbody>
         ${policyTests.map((pt) => {
+          // @ts-ignore
           if (!policy[pt]) return null;
+          /** @type {ObservatoryPolicyItem} */
+          // @ts-ignore
+          const p = policy[pt];
 
           return html`
             <tr>
-              <td data-header="Test" .innerHTML=${policy[pt].description}></td>
+              <td data-header="Test" .innerHTML=${p.description}></td>
               <td data-header="Pass">
                 ${PassIcon({
-                  pass: negatedPolicies.includes(pt)
-                    ? !policy[pt].pass
-                    : policy[pt].pass,
+                  pass: negatedPolicies.includes(pt) ? !p.pass : p.pass,
                 })}
               </td>
-              <td data-header="Info" .innerHTML=${policy[pt].info}></td>
+              <td data-header="Info" .innerHTML=${p.info}></td>
             </tr>
           `;
         })}

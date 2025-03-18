@@ -33,6 +33,6 @@ export function Results(context) {
         </li>
       </ul>
     </aside>
-    <mdn-observatory-results .context=${context}></mdn-observatory-results>
+    <mdn-observatory-results></mdn-observatory-results>
   </section>`;
 }

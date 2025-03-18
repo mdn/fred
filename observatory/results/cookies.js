@@ -34,7 +34,9 @@ export function Cookies({ result }) {
 
   return html`
     <div class="detail-header">
-      <p class="arrow">${PassIcon({ pass })}</p>
+      <p class="arrow">
+        ${PassIcon({ pass: pass === undefined ? null : pass })}
+      </p>
       <div
         class="detail-header-content"
         .innerHTML=${result.tests["cookies"]?.score_description ??

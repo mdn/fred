@@ -5,7 +5,7 @@ import { formatMinus } from "../utils";
 import { OBSERVATORY_API_URL } from "../constants.js";
 
 /**
- * @typedef {import("../constants.js").ObservatoryScanResult} ObservatoryScanResult
+ * @typedef {import("../constants.js").ObservatoryResult} ObservatoryResult
  * @typedef {import('lit').PropertyDeclarations} PropertyDeclarations
  * @typedef {import('../constants.js').GradeDistribution} GradeDistribution
  */
@@ -116,7 +116,7 @@ export class ComparisonTable extends LitElement {
 
   constructor() {
     super();
-    /** @type {ObservatoryScanResult | null} */
+    /** @type {ObservatoryResult | null} */
     this.result = null;
   }
 
@@ -152,8 +152,13 @@ export class ComparisonTable extends LitElement {
     return this._gradeDistributionTask.render({
       pending: () => html`<progress></progress>`,
 
-      complete: (gradeDistribution) =>
-        GradeSVG({ gradeDistribution, result: this.result }),
+      complete: (gradeDistribution) => {
+        if (!this.result) {
+          return html``;
+        }
+
+        return GradeSVG({ gradeDistribution, result: this.result });
+      },
 
       error: (e) => html`<div class="error">${e}</div>`,
     });
@@ -164,8 +169,7 @@ customElements.define("mdn-observatory-comparison-table", ComparisonTable);
 
 /**
  *
- * @param {GradeDistribution[]} gradeDistribution
- * @param {ObservatoryScanResult} result
+ * @param {{gradeDistribution: GradeDistribution[], result: ObservatoryResult}} props
  * @returns {import("lit-html").TemplateResult}
  */
 function GradeSVG({ gradeDistribution, result }) {
@@ -189,7 +193,7 @@ function GradeSVG({ gradeDistribution, result }) {
   const yTickIncr = (height - bottomSpace - topSpace) / (yMarks.length - 1);
   const yTickMax = Math.max(...yMarks);
 
-  const table = html`
+  return html`
     <table id="grade-svg-a11y-table" class="visually-hidden">
       <caption>
         Number of sites by grade
@@ -202,19 +206,18 @@ function GradeSVG({ gradeDistribution, result }) {
       </thead>
       <tbody>
         ${gradeDistribution.map(
-          (item, index) => html` <tr>
-            <th>
-              ${formatMinus(item.grade)}
-              ${item.grade === result.scan.grade ? "(Current grade)" : ""}
-            </th>
-            <td>${item.count} sites</td>
-          </tr>`
+          (item) =>
+            html` <tr>
+              <th>
+                ${formatMinus(item.grade)}
+                ${item.grade === result.scan.grade ? "(Current grade)" : ""}
+              </th>
+              <td>${item.count} sites</td>
+            </tr>`
         )}
       </tbody>
     </table>
-  `;
-
-  return svg`
+    ${svg`
     <svg
       class="chart"
       viewBox="0 0 1200 380"
@@ -239,7 +242,7 @@ function GradeSVG({ gradeDistribution, result }) {
                 class="${[
                   "x-labels",
                   item.grade === result.scan.grade
-                    ? `current grade-${item.grade[0].toLowerCase()}`
+                    ? `current grade-${item.grade[0]?.toLowerCase()}`
                     : undefined,
                 ]
                   .filter(Boolean)
@@ -258,8 +261,8 @@ function GradeSVG({ gradeDistribution, result }) {
               class="bar grade-${item.grade
                 .replace(/[+-]/, "")
                 .toLowerCase()} ${
-              item.grade === result.scan.grade ? "current-grade" : ""
-            }"
+                item.grade === result.scan.grade ? "current-grade" : ""
+              }"
               x="${xTickOffset + index * xTickIncr - barWidth / 2}"
               y="${yTickOffset - barHeight - 1}"
               rx="4"
@@ -300,8 +303,8 @@ function GradeSVG({ gradeDistribution, result }) {
               key="you-are-here"
               class="you-are-here"
               transform="translate(${xTickOffset + index * xTickIncr}, ${
-              height - bottomSpace - barHeight - 50
-            })"
+                height - bottomSpace - barHeight - 50
+              })"
             >
               <polyline
                 points="-60,0 60,0 60,36 7,36 0,48 -7,36 -60,36"
@@ -321,6 +324,7 @@ function GradeSVG({ gradeDistribution, result }) {
         })}
       </g>
     </svg>
+  `}
   `;
 }
 

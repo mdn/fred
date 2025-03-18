@@ -23,8 +23,6 @@ export class Results extends LitElement {
 
   constructor() {
     super();
-    /** @type {Fred.Context<SPAPage> | null} */
-    this.context = null;
     /** @type { string | null } */
     this.host = null;
     /** @type { number } */
@@ -37,7 +35,6 @@ export class Results extends LitElement {
    * @type PropertyDeclarations
    */
   static properties = {
-    context: { type: Object },
     host: { type: String },
     selectedTab: { type: Number },
     _usePostInApi: { type: Boolean },
