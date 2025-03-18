@@ -9,6 +9,10 @@ import {
 } from "./pages/observatory/index.js";
 
 /**
+ * @typedef {import("./observatory/landing/index.js").SPAPage} SPAPage
+ */
+
+/**
  * @param {string} path
  * @returns {Promise<Fred.Context<Rari.DocPage>>}
  */
@@ -26,9 +30,27 @@ export async function render(path) {
   if (path.endsWith("settings")) {
     result = r(SettingsBody());
   } else if (path.indexOf("observatory/analyze") !== -1) {
-    result = r(ObservatoryResults());
+    /** @type {Fred.Context<SPAPage>} */
+    const context = {
+      noIndexing: true,
+      url: "/en-US/observatory/analyze",
+      pageTitle: "HTTP Observatory Report",
+      pageNotFound: false,
+      onlyFollow: false,
+      slug: "observatory/analyze",
+    };
+    result = r(ObservatoryResults(context));
   } else if (path.endsWith("observatory") || path.endsWith("observatory/")) {
-    result = r(ObservatoryBody());
+    /** @type {Fred.Context<SPAPage>} */
+    const context = {
+      noIndexing: true,
+      url: "/en-US/observatory/",
+      pageTitle: "HTTP Observatory",
+      pageNotFound: false,
+      onlyFollow: false,
+      slug: "observatory",
+    };
+    result = r(ObservatoryBody(context));
   } else {
     const context = await fetch_from_rari(path);
     context.l10n = await l10n(context.locale);
