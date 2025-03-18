@@ -4,7 +4,16 @@ import { OBSERVATORY_TITLE } from "../constants.js";
 import { Feedback } from "../feedback.js";
 import { Faq } from "../faq.js";
 
-export function Landing() {
+/**
+ * @typedef {import("@mdn/rari").SPAPage} SPAPage
+ * @typedef {import("lit-html").TemplateResult} TemplateResult
+ */
+
+/**
+ * @param {Fred.Context<Rari.SPAPage>} _context
+ * @returns {TemplateResult}
+ */
+export function Landing(_context) {
   return html`
     <section class="header">
       <section class="scan-form">
@@ -16,7 +25,7 @@ export function Landing() {
           analyzing compliance with best security practices. It has provided
           insights to over 6.9 million websites through 47 million scans.
         </p>
-        <mdn-observatory-form> </mdn-observatory-form>
+        <mdn-observatory-form></mdn-observatory-form>
       </section>
       <section class="landing-illustration">
         <landing-svg></landing-svg>

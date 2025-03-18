@@ -5,27 +5,34 @@ import { Feedback } from "../feedback.js";
 
 import "./index.css";
 
-export function Results() {
+/**
+ * @typedef {import("@mdn/rari").SPAPage} SPAPage
+ * @typedef {import("lit-html").TemplateResult} TemplateResult
+ */
+
+/**
+ * @param {Fred.Context<Rari.SPAPage>} _context
+ * @returns {TemplateResult}
+ */
+export function Results(_context) {
   return html` <section class="main">
     <section class="heading">
       <h1><span class="accent">${OBSERVATORY_TITLE}</span> Report</h1>
       <div class="feedback">${Feedback()}</div>
     </section>
     <aside class="toc">
-        <h2 class="toc-heading">${OBSERVATORY_TITLE}</h2>
-        <ul class="toc-list">
-          <li class="toc-item">
-            <a href="/en-US/observatory/docs/tests_and_scoring" class="toc-link">Tests &amp; Scoring</a>
-          </li>
-          <li class="toc-item">
-            <a href="/en-US/observatory/docs/faq" class="toc-link">FAQ</a>
-          </li>
-        </ul>
-      </section>
+      <h2 class="toc-heading">${OBSERVATORY_TITLE}</h2>
+      <ul class="toc-list">
+        <li class="toc-item">
+          <a href="/en-US/observatory/docs/tests_and_scoring" class="toc-link"
+            >Tests &amp; Scoring</a
+          >
+        </li>
+        <li class="toc-item">
+          <a href="/en-US/observatory/docs/faq" class="toc-link">FAQ</a>
+        </li>
+      </ul>
     </aside>
-
-    </section>
-
     <mdn-observatory-results></mdn-observatory-results>
   </section>`;
 }

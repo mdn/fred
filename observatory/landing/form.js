@@ -14,9 +14,14 @@ export class FormProgress extends LitElement {
     this.hostname = "";
   }
 
+  /**
+   * @param {Event} event
+   */
   async _handleSubmit(event) {
     event.preventDefault();
-    const input = this.shadowRoot.querySelector("#host");
+    /** @type {HTMLInputElement | null | undefined} */
+    const input = this.shadowRoot?.querySelector("#host");
+    if (!input) return;
     this.hostname = input.value.trim();
     if (!this.hostname) return; // Optionally, ignore if empty
     this._queryRunning = true;
@@ -55,9 +60,7 @@ export class FormProgress extends LitElement {
             value="${this.hostname}"
             autofocus
           />
-          <button type="submit" ${this._queryRunning ? "disabled" : ""}>
-            Scan
-          </button>
+          <button type="submit" ?disabled=${this._queryRunning}>Scan</button>
         </div>
       </form>`;
     }
