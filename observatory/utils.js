@@ -5,7 +5,7 @@ import failSvg from "./assets/fail-icon.svg?mdnsvg";
 
 /**
  * @typedef {import("lit").TemplateResult} TemplateResult
- * @typedef {import('../constants').ObservatoryResult} ObservatoryResult
+ * @typedef {import('./constants').ObservatoryResult} ObservatoryResult
  */
 
 /**
@@ -20,8 +20,8 @@ export function hostAsRedirectChain(host, result) {
     return host;
   }
   try {
-    const firstUrl = new URL(chain[0]);
-    const lastUrl = new URL(chain[chain.length - 1]);
+    const firstUrl = new URL(chain[0] || "");
+    const lastUrl = new URL(chain[chain.length - 1] || "");
     if (firstUrl.hostname === lastUrl.hostname) {
       return host;
     }
@@ -139,7 +139,7 @@ export function Timestamp({ expires }) {
 export function upperCaseHeaderName(input) {
   return input
     .split("-")
-    .map((p) => (p ? p[0].toUpperCase() + p.substring(1) : ""))
+    .map((p) => (p && p[0] ? p[0].toUpperCase() + p.substring(1) : ""))
     .join("-");
 }
 

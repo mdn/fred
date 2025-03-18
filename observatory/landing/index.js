@@ -1,8 +1,17 @@
 import { html } from "lit-html";
-import "./form.js";
+
 import { OBSERVATORY_TITLE } from "../constants.js";
 import { Feedback } from "../feedback.js";
 import { Faq } from "../faq.js";
+
+import landingSvg from "../assets/landing-illustration.svg?mdnsvg";
+import assessmentSvg from "../assets/assessment.svg?mdnsvg";
+import linesSvg from "../assets/lines.svg?mdnsvg";
+import scanningSvg from "../assets/scanning.svg?mdnsvg";
+import securitySvg from "../assets/security.svg?mdnsvg";
+import mdnSvg from "../assets/mdn.svg?mdnsvg";
+
+import "./form.js";
 
 /**
  * @typedef {import("@mdn/rari").SPAPage} SPAPage
@@ -28,7 +37,7 @@ export function Landing(context) {
         <mdn-observatory-form></mdn-observatory-form>
       </section>
       <section class="landing-illustration">
-        <landing-svg></landing-svg>
+        ${landingSvg}
       </section>
     </section>
     <section class="main">
@@ -36,7 +45,7 @@ export function Landing(context) {
         <h2>About the HTTP Observatory</h2>
         <div class="about-copy">
           <figure class="assessment">
-            <asessment-svg role="none"></asessment-svg>
+            ${assessmentSvg}
             <figcaption>
               <p>
                 Developed by Mozilla, the HTTP Observatory performs an in-depth
@@ -45,9 +54,10 @@ export function Landing(context) {
               </p>
             </figcaption>
           </figure>
-          <lines-svg class="lines assessment" role="none"></lines-svg>
+          <!-- lines-svg class="lines assessment" role="none"></lines-svg -->
+          ${linesSvg}
           <figure class="scanning">
-            <scannig-svg role="none"></scannig-svg>
+            ${scanningSvg}
             <figcaption>
               <p>
                 Its automated scanning process provides developers and website
@@ -56,9 +66,10 @@ export function Landing(context) {
               </p>
             </figcaption>
           </figure>
-          <lines-svg class="lines scanning" role="none"></lines-svg>
+          <!-- lines-svg class="lines scanning" role="none"></lines-svg -->
+          ${linesSvg}
           <figure class="security">
-            <security-svg role="none"></security-svg >
+            ${securitySvg}
             <figcaption>
               <p>
                 The tool is instrumental in helping developers and website
@@ -67,9 +78,10 @@ export function Landing(context) {
               </p>
             </figcaption>
           </figure>
-          <lines-svg class="lines security" role="none"></lines-svg>
+          <!-- lines-svg class="lines security" role="none"></lines-svg -->
+          ${linesSvg}
           <figure class="mdn">
-            <mdn-svg role="none"></mdn-svg>
+            ${mdnSvg}
             <figcaption>
               <p>
                 The HTTP Observatory provides effective security insights,
