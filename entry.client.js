@@ -3,6 +3,9 @@ import "./components/color-theme/index.js";
 import "./components/quick-search/index.js";
 import "./components/bcd/index.js";
 import "./components/dropdown/index.js";
+import "./observatory/landing/form.js";
+import "./observatory/results/results.js";
+
 import Prism from "prismjs";
 
 console.log("ENtER");
@@ -14,9 +17,9 @@ window.addEventListener("DOMContentLoaded", () => {
         code.innerHTML = Prism.highlight(
           code.textContent || "",
           Prism.languages.html,
-          "html",
+          "html"
         );
       }
-    },
+    }
   );
 });
