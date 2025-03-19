@@ -1,3 +1,40 @@
 # reference-toc
 
 in_this_article = In diesem Artikel
+
+# footer
+
+footer_tagline = Ihr Bauplan für ein besseres Internet.
+footer_mastodon = MDN auf Mastodon
+footer_x = MDN auf X
+footer_github = MDN auf GitHub
+footer_rss = MDN-Blog-RSS-Feed
+
+footer_about = Über uns
+footer_blog = Blog
+footer_careers = Karriere
+footer_advertise = Bei uns werben
+
+footer_support = Support
+footer_product_help = Produktunterstützung
+footer_report = Ein Problem melden
+
+footer_communities = Unsere Gemeinschaften
+footer_mdn_community = MDN-Community
+footer_mdn_forum = MDN-Forum
+footer_mdn_chat = MDN-Chat
+
+footer_developers = Entwickler
+footer_web = Web-Technologien
+footer_learn = Webentwicklung lernen
+footer_plus = MDN Plus
+footer_hacks = Hacks-Blog
+
+## legal
+
+footer_privacy = Datenschutzhinweis für die Website
+footer_cookies = Cookies
+footer_legal = Rechtliches
+footer_cpg = Richtlinien für die Teilnahme an der Community
+footer_mofo = Besuchen Sie das gemeinnützige Mutterunternehmen von <a data-l10n-name="moco">Mozilla Corporation</a>, die <a data-l10n-name="mofo">Mozilla Foundation</a>.
+footer_copyright = Teile dieses Inhalts sind ©1998–2024 von einzelnen mozilla.org-Mitwirkenden. Inhalte verfügbar unter <a data-l10n-name="cc">einer Creative-Commons-Lizenz</a>.

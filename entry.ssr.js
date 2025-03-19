@@ -2,7 +2,7 @@ import { render as r } from "@lit-labs/ssr";
 import { DocBody } from "./pages/doc/index.js";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 import { SettingsBody } from "./pages/settings/index.js";
-import l10n from "./fluent.js";
+import { addFluent } from "./context.js";
 import {
   ObservatoryBody,
   ObservatoryResults,
@@ -10,7 +10,7 @@ import {
 
 /**
  * @param {string} path
- * @returns {Promise<Fred.Context<Rari.DocPage>>}
+ * @returns {Promise<Rari.DocPage>}
  */
 async function fetch_from_rari(path) {
   const external_url = `http://localhost:8083${path}`;
@@ -23,6 +23,12 @@ async function fetch_from_rari(path) {
  * @param {string} path
  */
 export async function render(path) {
+  const locale = path.split("/")[1]
+
+  if (locale === "qa") {
+    path = path.replace("/qa/", "/en-US/")
+  }
+
   let result;
   if (path.endsWith("settings")) {
     // @ts-ignore
@@ -50,9 +56,9 @@ export async function render(path) {
     };
     result = r(ObservatoryBody(context));
   } else {
-    const context = await fetch_from_rari(path);
+    const page = await fetch_from_rari(path);
     // @ts-ignore
-    context.l10n = await l10n(context.locale);
+    const context = await addFluent(locale, page);
     console.log("context", context.url);
     result = r(DocBody(context));
   }
@@ -64,7 +70,7 @@ export async function render(path) {
  */
 export async function renderWithContext(context) {
   // @ts-ignore
-  context.l10n = await l10n(context.locale);
+  context = await addFluent("en-US", context);
   // @ts-ignore
   const result = r(DocBody(context));
   return await collectResult(result);
