@@ -1,11 +1,12 @@
 import { html } from "lit-html";
 
 import "./index.css";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 /**
- * @param {Fred.Context} _context 
+ * @param {Fred.Context} context
  */
-export function Footer(_context) {
+export function Footer(context) {
   return html`<div class="footer">
     <div class="footer__mdn">
       <div class="footer__intro">
@@ -23,11 +24,11 @@ export function Footer(_context) {
             />
           </svg>
         </a>
-        <p>Your blueprint for a better internet.</p>
+        <p>${context.l10n.get("footer_tagline")}</p>
       </div>
       <ul class="footer__socials">
         <li>
-          <a href="" aria-label="MDN on Mastodon">
+          <a href="" aria-label=${context.l10n.get("footer_mastodon")}>
             <svg class="icon" width="24" height="24" viewBox="-32 0 512 512">
               <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
               <path
@@ -37,7 +38,7 @@ export function Footer(_context) {
           </a>
         </li>
         <li>
-          <a href="" aria-label="MDN on X">
+          <a href="" aria-label=${context.l10n.get("footer_x")}>
             <svg class="icon" width="24" height="24" viewBox="0 0 512 512">
               <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
               <path
@@ -47,7 +48,7 @@ export function Footer(_context) {
           </a>
         </li>
         <li>
-          <a href="" aria-label="MDN on GitHub">
+          <a href="" aria-label=${context.l10n.get("footer_github")}>
             <svg class="icon" width="24" height="24" viewBox="-8 0 512 512">
               <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
               <path
@@ -57,7 +58,7 @@ export function Footer(_context) {
           </a>
         </li>
         <li>
-          <a href="" aria-label="MDN blog RSS feed">
+          <a href="" aria-label=${context.l10n.get("footer_rss")}>
             <svg class="icon" width="24" height="24" viewBox="-32 0 512 512">
               <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
               <path
@@ -71,40 +72,40 @@ export function Footer(_context) {
         <dt>MDN</dt>
         <dd>
           <ul>
-            <li><a href="">About</a></li>
-            <li><a href="">Blog</a></li>
-            <li><a href="">Careers</a></li>
-            <li><a href="">Advertise with us</a></li>
+            <li><a href="">${context.l10n.get("footer_about")}</a></li>
+            <li><a href="">${context.l10n.get("footer_blog")}</a></li>
+            <li><a href="">${context.l10n.get("footer_careers")}</a></li>
+            <li><a href="">${context.l10n.get("footer_advertise")}</a></li>
           </ul>
         </dd>
       </dl>
       <dl class="footer__links">
-        <dt>Support</dt>
+        <dt>${context.l10n.get("footer_support")}</dt>
         <dd>
           <ul>
-            <li><a href="">Product help</a></li>
-            <li><a href="">Report an issue</a></li>
+            <li><a href="">${context.l10n.get("footer_product_help")}</a></li>
+            <li><a href="">${context.l10n.get("footer_report")}</a></li>
           </ul>
         </dd>
       </dl>
       <dl class="footer__links">
-        <dt>Our communities</dt>
+        <dt>${context.l10n.get("footer_communities")}</dt>
         <dd>
           <ul>
-            <li><a href="">MDN Community</a></li>
-            <li><a href="">MDN Forum</a></li>
-            <li><a href="">MDN Chat</a></li>
+            <li><a href="">${context.l10n.get("footer_mdn_community")}</a></li>
+            <li><a href="">${context.l10n.get("footer_mdn_forum")}</a></li>
+            <li><a href="">${context.l10n.get("footer_mdn_chat")}</a></li>
           </ul>
         </dd>
       </dl>
       <dl class="footer__links">
-        <dt>Developers</dt>
+        <dt>${context.l10n.get("footer_developers")}</dt>
         <dd>
           <ul>
-            <li><a href="">Web Technologies</a></li>
-            <li><a href="">Learn Web Development</a></li>
-            <li><a href="">MDN Plus</a></li>
-            <li><a href="">Hacks Blog</a></li>
+            <li><a href="">${context.l10n.get("footer_web")}</a></li>
+            <li><a href="">${context.l10n.get("footer_learn")}</a></li>
+            <li><a href="">${context.l10n.get("footer_plus")}</a></li>
+            <li><a href="">${context.l10n.get("footer_hacks")}</a></li>
           </ul>
         </dd>
       </dl>
@@ -122,17 +123,32 @@ export function Footer(_context) {
         </svg>
       </a>
       <ul>
-        <li><a href="">Website Privacy Notice</a></li>
-        <li><a href="">Cookies</a></li>
-        <li><a href="">Legal</a></li>
-        <li><a href="">Community Participation Guidelines</a></li>
+        <li><a href="">${context.l10n.get("footer_privacy")}</a></li>
+        <li><a href="">${context.l10n.get("footer_cookies")}</a></li>
+        <li><a href="">${context.l10n.get("footer_legal")}</a></li>
+        <li><a href="">${context.l10n.get("footer_cpg")}</a></li>
       </ul>
       <p>
-        Visit <a href="">Mozilla Corporation's</a> not-for-profit parent, the
-        <a href="">Mozilla Foundation</a>.<br />
-        Portions of this content are ©1998–2024 by individual mozilla.org
-        contributors. Content available under
-        <a href="">a Creative Commons license</a>.
+        ${unsafeHTML(
+          context.l10n.get({
+            id: "footer_mofo",
+            tags: {
+              moco: { tag: "a", href: "https://www.mozilla.org/" },
+              mofo: { tag: "a", href: "https://foundation.mozilla.org/" },
+            },
+          }),
+        )}<br />
+        ${unsafeHTML(
+          context.l10n.get({
+            id: "footer_copyright",
+            tags: {
+              cc: {
+                tag: "a",
+                href: "/docs/MDN/Writing_guidelines/Attrib_copyright_license",
+              },
+            },
+          }),
+        )}
       </p>
     </div>
   </div> `;

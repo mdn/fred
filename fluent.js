@@ -3,7 +3,7 @@ import insane from "insane";
 import USStrings from "./l10n/en-us.flt";
 import DEStrings from "./l10n/de.flt";
 
-const languages = [["en-US", "English"]];
+const languages = { "en-US": USStrings, de: DEStrings };
 
 const whitelistedTags = ["i", "strong", "br"];
 const whitelistedAttributes = ["title", "aria-label"];
@@ -14,6 +14,8 @@ export class Fluent {
    * @param {string[]} resources
    */
   constructor(locale = "en-US", resources = []) {
+    this.locale = locale;
+
     this.usBundle = Fluent.constructBundle(new FluentBundle(locale), [
       USStrings,
     ]);
@@ -27,8 +29,8 @@ export class Fluent {
   }
 
   /**
-   * @param {FluentBundle} bundle 
-   * @param {string[]} resources 
+   * @param {FluentBundle} bundle
+   * @param {string[]} resources
    */
   static constructBundle(bundle, resources = []) {
     resources.forEach((r) => {
@@ -43,41 +45,28 @@ export class Fluent {
   }
 
   /**
-   * @param {readonly string[]} requested 
-   * @param {string[]} available 
-   */
-  static init(requested = navigator.languages, available) {
-    this.locales = this.resolveLocale(requested, available);
-    return this.load(...this.locales);
-  }
-
-  static languages() {
-    return languages;
-  }
-
-  /**
+   * @param {string | { id: string, attr?: string, args?: Record<string, any>, tags?: any[] }} arg1
+   * @param {string | Record<string, any>} [arg2]
    * @returns {string}
    */
-  get(...parameters) {
-    if (typeof parameters[0] === "string") {
-      const id = parameters[0];
-      switch (parameters.length) {
-        case 2:
-          if (typeof parameters[1] === "string") {
-            return this.get({ id, attr: parameters[1] });
-          }
-          return this.get({ id, args: parameters[1] });
-        default:
-          return this.get({ id });
+  get(arg1, arg2 = undefined) {
+    if (typeof arg1 === "string") {
+      const id = arg1;
+      if (arg2) {
+        if (typeof arg2 === "string") {
+          return this.get({ id, attr: arg2 });
+        }
+        return this.get({ id, args: arg2 });
       }
+      return this.get({ id });
     }
-    const { id, attr, args, tags } = parameters[0];
+    const { id, attr, args, tags } = arg1;
     const message = this.getMessage(id, attr, args);
     return Fluent.sanitize(message, tags);
   }
 
   /**
-   * @param {string} message 
+   * @param {string} message
    */
   static sanitize(message, tags = {}) {
     const allowedAttributes = {};
@@ -117,13 +106,23 @@ export class Fluent {
 
   /**
    * @param {string} id
+   * @param {string} [attr]
+   * @param {Record<string, any>} [args={}]
+   * @param {FluentBundle | undefined} [bundle=this.bundle]
+   * @param {boolean} [us=false]
    * @returns {string}
    */
-  getMessage(id, attr = null, args = {}, bundle = this.bundle, us = false) {
+  getMessage(
+    id,
+    attr = undefined,
+    args = {},
+    bundle = this.bundle,
+    us = false,
+  ) {
     const parentMessage = bundle ? bundle.getMessage(id) : undefined;
     let message;
 
-    if (Fluent.locales && Fluent.locales[1] === "__ids") {
+    if (this.locale === "qa") {
       return `[${id}${attr ? `.${attr}` : ""}]`;
     }
 
@@ -159,11 +158,11 @@ export class Fluent {
 }
 
 /** @type {Map<string, Fluent>} */
-let fluent = new Map();
+const fluent = new Map();
 
 async function l10n(locale = "en-US") {
   if (!fluent.has(locale)) {
-    const localeF = new Fluent(locale, [DEStrings]);
+    const localeF = new Fluent(locale, [languages[locale]]);
     fluent.set(locale, localeF);
   }
   return fluent.get(locale);

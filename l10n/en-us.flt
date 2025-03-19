@@ -1,3 +1,40 @@
 # reference-toc
 
 in_this_article = In this article
+
+# footer
+
+footer_tagline = Your blueprint for a better internet.
+footer_mastodon = MDN on Mastodon
+footer_x = MDN on X
+footer_github = MDN on GitHub
+footer_rss = MDN blog RSS feed
+
+footer_about = About
+footer_blog = Blog
+footer_careers = Careers
+footer_advertise = Advertise with us
+
+footer_support = Support
+footer_product_help = Product help
+footer_report = Report an issue
+
+footer_communities = Our communities
+footer_mdn_community = MDN Community
+footer_mdn_forum = MDN Forum
+footer_mdn_chat = MDN Chat
+
+footer_developers = Developers
+footer_web = Web Technologies
+footer_learn = Learn Web Development
+footer_plus = MDN Plus
+footer_hacks = Hacks Blog
+
+## legal
+
+footer_privacy = Website Privacy Notice
+footer_cookies = Cookies
+footer_legal = Legal
+footer_cpg = Community Participation Guidelines
+footer_mofo = Visit <a data-l10n-name="moco">Mozilla Corporation’s</a> not-for-profit parent, the <a data-l10n-name="mofo">Mozilla Foundation</a>.
+footer_copyright = Portions of this content are ©1998–2024 by individual mozilla.org contributors. Content available under <a data-l10n-name="cc">a Creative Commons license</a>.
