@@ -1,10 +1,11 @@
-import { LitElement, css, html, svg } from "lit";
+import { LitElement, css, html, nothing, svg } from "lit";
 import { Task } from "@lit/task";
 
 import { formatMinus } from "../utils";
 import { OBSERVATORY_API_URL } from "../constants.js";
 
 /**
+ * @import { TemplateResult } from "lit"
  * @import { ObservatoryResult, GradeDistribution } from "../constants"
  */
 
@@ -145,14 +146,14 @@ export class ComparisonTable extends LitElement {
 
   render() {
     if (!this.result) {
-      return html``;
+      return nothing;
     }
     return this._gradeDistributionTask.render({
       pending: () => html`<progress></progress>`,
 
       complete: (gradeDistribution) => {
         if (!this.result) {
-          return html``;
+          return nothing;
         }
 
         return GradeSVG({ gradeDistribution, result: this.result });
@@ -168,7 +169,7 @@ customElements.define("mdn-observatory-comparison-table", ComparisonTable);
 /**
  *
  * @param {{gradeDistribution: GradeDistribution[], result: ObservatoryResult}} props
- * @returns {import("lit-html").TemplateResult}
+ * @returns {TemplateResult}
  */
 function GradeSVG({ gradeDistribution, result }) {
   const width = 1200;
@@ -211,7 +212,7 @@ function GradeSVG({ gradeDistribution, result }) {
                 ${item.grade === result.scan.grade ? "(Current grade)" : ""}
               </th>
               <td>${item.count} sites</td>
-            </tr>`
+            </tr>`,
         )}
       </tbody>
     </table>
@@ -288,7 +289,7 @@ function GradeSVG({ gradeDistribution, result }) {
               <text class="y-labels" fill="currentColor" x="-25" dy="0.32em">
                 ${item / 1000}k
               </text>
-            </g>`
+            </g>`,
           )}
         </g>
       </g>

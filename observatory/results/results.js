@@ -6,6 +6,7 @@ import { Rating } from "./rating.js";
 import { Tabs } from "./tabs.js";
 
 import { OBSERVATORY_API_URL } from "../constants.js";
+import { nothing } from "lit-html";
 
 /**
  * @import { PropertyDeclarations } from "lit"
@@ -38,6 +39,7 @@ export class Results extends LitElement {
   };
 
   _apiTask = new Task(this, {
+    args: () => [this.host],
     task: async ([host], { signal }) => {
       if (!host) {
         throw new Error("No host provided");
@@ -45,9 +47,9 @@ export class Results extends LitElement {
       try {
         const res = await fetch(
           `${OBSERVATORY_API_URL}/api/v2/analyze?host=${encodeURIComponent(
-            host
+            host,
           )}`,
-          { signal, method: this._usePostInApi ? "POST" : "GET" }
+          { signal, method: this._usePostInApi ? "POST" : "GET" },
         );
         if (!res.ok) {
           let message = `${res.status}: ${res.statusText}`;
@@ -65,11 +67,11 @@ export class Results extends LitElement {
         throw new Error("Observatory API request for scan data failed");
       }
     },
-    args: () => [this.host],
   });
 
   connectedCallback() {
     super.connectedCallback();
+    this._updateSelectedTab = this._updateSelectedTab.bind(this);
     this.selectedTab = this._getSelectedTab();
     window.addEventListener("hashchange", this._updateSelectedTab);
   }
@@ -128,13 +130,13 @@ export class Results extends LitElement {
     window.history.replaceState(
       "",
       "",
-      window.location.pathname + window.location.search + "#" + key
+      window.location.pathname + window.location.search + "#" + key,
     );
   }
 
   render() {
     if (!this.host) {
-      return html``;
+      return nothing;
     }
     return this._apiTask.render({
       pending: () => html`<progress></progress>`,

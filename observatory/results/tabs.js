@@ -1,6 +1,6 @@
 import { html } from "lit-html";
 import { Scoring } from "./scoring";
-import { Csp } from "./csp";
+import { CSP } from "./csp";
 import { Cookies } from "./cookies";
 import { RawHeaders } from "./raw_headers";
 import { History } from "./history";
@@ -29,7 +29,7 @@ export function Tabs({ result, selectedTab = 0, onTabSelect }) {
     {
       label: "CSP analysis",
       key: "csp",
-      element: html`${Csp({ result })}`,
+      element: html`${CSP({ result })}`,
     },
     {
       label: "Cookies",
@@ -84,7 +84,7 @@ export function Tabs({ result, selectedTab = 0, onTabSelect }) {
                 <div class="scroll-container">${tab.element}</div>
               </section>
             </li>
-          `
+          `,
         )}
       </ol>
     </section>

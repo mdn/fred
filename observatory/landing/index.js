@@ -2,7 +2,7 @@ import { html } from "lit-html";
 
 import { OBSERVATORY_TITLE } from "../constants.js";
 import { Feedback } from "../feedback.js";
-import { Faq } from "../faq.js";
+import { FAQ } from "../faq.js";
 
 import landingSvg from "../assets/landing-illustration.svg?mdnsvg";
 import assessmentSvg from "../assets/assessment.svg?mdnsvg";
@@ -93,7 +93,7 @@ export function Landing(context) {
           </figure>
         </div>
       </section>
-      ${Faq(context)}
+      ${FAQ(context)}
       ${Feedback(context)}
     </section>
   </section>`;

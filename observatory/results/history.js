@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html, nothing } from "lit-html";
 import { formatDateTime, formatMinus } from "../utils";
 
 /**
@@ -9,11 +9,11 @@ import { formatDateTime, formatMinus } from "../utils";
 /**
  *
  * @param {{result: ObservatoryResult}} props
- * @returns { TemplateResult }
+ * @returns { TemplateResult | nothing }
  */
 export function History({ result }) {
   if (!result.history.length) {
-    return html``;
+    return nothing;
   }
 
   return html`
@@ -36,7 +36,7 @@ export function History({ result }) {
               <td data-header="Score">${score}</td>
               <td data-header="Grade">${formatMinus(grade)}</td>
             </tr>
-          `
+          `,
         )}
       </tbody>
     </table>

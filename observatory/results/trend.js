@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html, nothing } from "lit-html";
 
 /**
  * @import { TemplateResult } from "lit-html"
@@ -8,7 +8,7 @@ import { html } from "lit-html";
 /**
  *
  * @param {{result: ObservatoryResult}} props
- * @returns {TemplateResult}
+ * @returns {TemplateResult | nothing}
  */
 export function Trend({ result }) {
   switch (arrowState(result)) {
@@ -27,7 +27,7 @@ export function Trend({ result }) {
         </div>
       `;
     default:
-      return html``;
+      return nothing;
   }
 }
 

@@ -1,40 +1,42 @@
 import { LitElement, css, html } from "lit";
+import { createRef, ref, Ref } from "lit/directives/ref.js";
 
 export class FormProgress extends LitElement {
   static styles = css``;
 
   static properties = {
     _queryRunning: { state: true, type: Boolean },
-    hostname: { type: String },
+    _hostname: { type: String, state: true },
   };
 
   constructor() {
     super();
     this._queryRunning = false;
-    this.hostname = "";
+    this._hostname = "";
   }
+  /** @type {Ref<HTMLInputElement>}  */
+  inputRef = createRef();
 
   /**
    * @param {Event} event
    */
   async _handleSubmit(event) {
     event.preventDefault();
-    /** @type {HTMLInputElement | null | undefined} */
-    const input = this.shadowRoot?.querySelector("#host");
+    const input = this.inputRef.value;
     if (!input) return;
-    this.hostname = input.value.trim();
-    if (!this.hostname) return; // Optionally, ignore if empty
+    this._hostname = input.value.trim();
+    if (!this._hostname) return; // Optionally, ignore if empty
     this._queryRunning = true;
     try {
       const apiUrl = `https://observatory-api.mdn.mozilla.net/api/v2/analyze?host=${encodeURIComponent(
-        this.hostname
+        this._hostname,
       )}`;
       const response = await fetch(apiUrl, { method: "POST" });
       if (!response.ok) {
         throw new Error(`API request failed: ${response.statusText}`);
       }
       window.location.href = `observatory/analyze?host=${encodeURIComponent(
-        this.hostname
+        this._hostname,
       )}`;
     } catch (error) {
       console.error("API request error:", error);
@@ -57,8 +59,9 @@ export class FormProgress extends LitElement {
             type="text"
             name="host"
             id="host"
-            value="${this.hostname}"
+            value="${this._hostname}"
             autofocus
+            ${ref(this.inputRef)}
           />
           <button type="submit" ?disabled=${this._queryRunning}>Scan</button>
         </div>
