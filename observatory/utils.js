@@ -111,7 +111,7 @@ export function PassIcon({ pass }) {
 }
 
 /**
- * @param {{expires: string}}
+ * @param {{expires: string}} props
  * @returns {TemplateResult}
  */
 export function Timestamp({ expires }) {
