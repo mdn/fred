@@ -4,8 +4,8 @@ import passSvg from "./assets/pass-icon.svg?mdnsvg";
 import failSvg from "./assets/fail-icon.svg?mdnsvg";
 
 /**
- * @typedef {import("lit").TemplateResult} TemplateResult
- * @typedef {import('./constants').ObservatoryResult} ObservatoryResult
+ * @import { TemplateResult } from "lit-html"
+ * @import { ObservatoryResult } from "./constants"
  */
 
 /**

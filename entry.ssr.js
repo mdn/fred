@@ -9,7 +9,7 @@ import {
 } from "./pages/observatory/index.js";
 
 /**
- * @typedef {import("./observatory/landing/index.js").SPAPage} SPAPage
+ * @import { SPAPage } from "@mdn/rari"
  */
 
 /**

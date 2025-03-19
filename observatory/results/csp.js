@@ -2,9 +2,8 @@ import { html } from "lit-html";
 import { PassIcon } from "../utils";
 
 /**
- * @typedef {import("lit").TemplateResult} TemplateResult
- * @typedef {import('../constants').ObservatoryResult} ObservatoryResult
- * @typedef {import("../constants").ObservatoryPolicyItem} ObservatoryPolicyItem
+ * @import { TemplateResult } from "lit-html"
+ * @import { ObservatoryResult, ObservatoryPolicyItem } from "../constants"
  */
 
 const policyTests = [

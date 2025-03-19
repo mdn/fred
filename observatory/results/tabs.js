@@ -7,8 +7,8 @@ import { History } from "./history";
 import { Comparison } from "./comparison";
 
 /**
- * @typedef {import('../constants').ObservatoryResult} ObservatoryResult
- * @typedef {import('lit').TemplateResult} TemplateResult
+ * @import { TemplateResult } from "lit-html"
+ * @import { ObservatoryResult } from "../constants"
  */
 
 /**

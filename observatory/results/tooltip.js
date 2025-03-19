@@ -6,8 +6,12 @@ import starsSvg from "../assets/stars.svg?mdnsvg";
 import arrowSvg from "../assets/tooltip-arrow.svg?mdnsvg";
 
 /**
+ * @import { ObservatoryResult } from "../constants"
+ */
+
+/**
  *
- * @param {import('../constants').ObservatoryResult} result
+ * @param {ObservatoryResult} result
  */
 export function Tooltip(result) {
   return html`

@@ -7,8 +7,8 @@ import {
 } from "../utils";
 
 /**
- * @typedef {import("lit").TemplateResult} TemplateResult
- * @typedef {import('../constants').ObservatoryResult} ObservatoryResult
+ * @import { TemplateResult } from "lit-html"
+ * @import { ObservatoryResult } from "../constants"
  */
 
 /**

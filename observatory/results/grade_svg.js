@@ -5,9 +5,7 @@ import { formatMinus } from "../utils";
 import { OBSERVATORY_API_URL } from "../constants.js";
 
 /**
- * @typedef {import("../constants.js").ObservatoryResult} ObservatoryResult
- * @typedef {import('lit').PropertyDeclarations} PropertyDeclarations
- * @typedef {import('../constants.js').GradeDistribution} GradeDistribution
+ * @import { ObservatoryResult, GradeDistribution } from "../constants"
  */
 
 export class ComparisonTable extends LitElement {

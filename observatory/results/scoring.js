@@ -3,8 +3,8 @@ import { TEST_NAMES_IN_ORDER } from "../constants";
 import { formatMinus, PassIcon } from "../utils";
 
 /**
- * @typedef {import("lit").TemplateResult} TemplateResult
- * @typedef {import('../constants').ObservatoryResult} ObservatoryResult
+ * @import { TemplateResult } from "lit-html"
+ * @import { ObservatoryResult } from "../constants"
  */
 
 /**

@@ -8,10 +8,7 @@ import { Tabs } from "./tabs.js";
 import { OBSERVATORY_API_URL } from "../constants.js";
 
 /**
- * @typedef {import("../constants.js").ObservatoryScanResult} ObservatoryScanResult
- * @typedef {import('lit').PropertyDeclarations} PropertyDeclarations
- * @typedef {import('../constants.js').GradeDistribution} GradeDistribution
- * @typedef {import("@mdn/rari").SPAPage} SPAPage
+ * @import { PropertyDeclarations } from "lit"
  */
 
 export class Results extends LitElement {

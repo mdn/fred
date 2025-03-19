@@ -1,8 +1,8 @@
 import { html } from "lit-html";
 
 /**
- * @typedef {import("@mdn/rari").SPAPage} SPAPage
- * @typedef {import("lit-html").TemplateResult} TemplateResult
+ * @import { TemplateResult } from "lit-html"
+ * @import {SPAPage} from "@mdn/rari"
  */
 
 /**

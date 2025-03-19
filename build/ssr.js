@@ -86,6 +86,7 @@ async function ssrSingleDocument(file) {
     return outputFile;
   } catch (e) {
     console.error(`ERROR: Failed to render ${context.url}: ${e}`);
+    return;
   }
 }
 

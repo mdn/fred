@@ -6,12 +6,12 @@ import { Feedback } from "../feedback.js";
 import "./index.css";
 
 /**
- * @typedef {import("@mdn/rari").SPAPage} SPAPage
- * @typedef {import("lit-html").TemplateResult} TemplateResult
+ * @import { SPAPage } from "@mdn/rari"
+ * @import { TemplateResult } from "lit-html"
  */
 
 /**
- * @param {Fred.Context<Rari.SPAPage>} context
+ * @param {Fred.Context<SPAPage>} context
  * @returns {TemplateResult}
  */
 export function Results(context) {

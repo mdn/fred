@@ -9,8 +9,8 @@ import { Landing } from "../../observatory/landing/index.js";
 import { Results } from "../../observatory/results/index.js";
 
 /**
- * @typedef {import("@mdn/rari").SPAPage} SPAPage
- * @typedef {import("lit-html").TemplateResult} TemplateResult
+ * @import { TemplateResult } from "lit-html"
+ * @import { SPAPage } from "@mdn/rari"
  */
 
 /**
