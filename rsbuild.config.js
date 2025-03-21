@@ -63,9 +63,9 @@ export default defineConfig({
             test: /\.svg$/,
             loader: "svgo-loader",
           },
-        ]
-      }
-    }
+        ],
+      },
+    },
   },
   performance: {
     chunkSplit: {

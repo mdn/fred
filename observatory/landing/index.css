@@ -1,0 +1,38 @@
+.obs-landing-top {
+  color: var(--observatory-color-secondary);
+  background: var(--observatory-bg-secondary);
+  display: grid;
+  gap: 0 3rem;
+  grid-template-areas: "form svg .";
+  grid-template-columns: 2fr 1fr minmax(0, 200px);
+
+  max-width: var(--max-width);
+  padding: 1.5rem 1rem 1.5rem 1rem;
+  --border-radius: 0.3rem;
+
+  .accent {
+    color: var(--observatory-accent);
+  }
+}
+
+.obs-landing-top__form {
+  grid-area: form;
+}
+
+.obs-landing-top__illustration {
+  grid-area: svg;
+  svg {
+    height: auto;
+    max-width: 50vw;
+    width: 100%;
+  }
+}
+
+.obs-landing-about {
+}
+
+.obs-landing-about__content {
+}
+
+.obs-landing-about__links {
+}

@@ -1,17 +1,17 @@
 .logo__link {
-    display: block;
-    padding: 0.5rem;
+  display: block;
+  padding: 0.5rem;
 }
 
 .logo__image {
-    display: block;
+  display: block;
 }
 
 .logo__letter,
 .logo__cursor {
-    fill: var(--brand-blue);
+  fill: var(--brand-blue);
 }
 
 .logo__text {
-    fill: var(--text-primary);
+  fill: var(--text-primary);
 }

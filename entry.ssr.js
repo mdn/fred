@@ -4,7 +4,7 @@ import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 import { SettingsBody } from "./pages/settings/index.js";
 import l10n from "./fluent.js";
 import {
-  ObservatoryBody,
+  ObservatoryLanding,
   ObservatoryResults,
 } from "./pages/observatory/index.js";
 
@@ -50,7 +50,7 @@ export async function render(path) {
       onlyFollow: false,
       slug: "observatory",
     };
-    result = r(ObservatoryBody(context));
+    result = r(ObservatoryLanding(context));
   } else {
     const context = await fetch_from_rari(path);
     context.l10n = await l10n(context.locale);

@@ -12,6 +12,7 @@ import securitySvg from "../assets/security.svg?mdnsvg";
 import mdnSvg from "../assets/mdn.svg?mdnsvg";
 
 import "./form.js";
+import "./index.css";
 
 /**
  * @import { SPAPage } from "@mdn/rari"
@@ -24,8 +25,8 @@ import "./form.js";
  */
 export function Landing(context) {
   return html`
-    <section class="header">
-      <section class="scan-form">
+    <section class="obs-landing-top">
+      <section class="obs-landing-top__form">
         <h1>
           <span class="accent">${OBSERVATORY_TITLE}</span>
         </h1>
@@ -36,12 +37,12 @@ export function Landing(context) {
         </p>
         <mdn-observatory-form></mdn-observatory-form>
       </section>
-      <section class="landing-illustration">
+      <section class="obs-landing-top__illustration">
         ${landingSvg}
       </section>
     </section>
-    <section class="main">
-      <section class="about">
+    <section class="obs-landing-about">
+      <section class="obs-landing-about__content">
         <h2>About the HTTP Observatory</h2>
         <div class="about-copy">
           <figure class="assessment">
@@ -93,8 +94,10 @@ export function Landing(context) {
           </figure>
         </div>
       </section>
-      ${FAQ(context)}
-      ${Feedback(context)}
+      <section class="obs-landing-about__links">
+        ${FAQ(context)}
+        ${Feedback(context)}
+      </section>
     </section>
   </section>`;
 }

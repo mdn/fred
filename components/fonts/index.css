@@ -1,20 +1,116 @@
 @font-face {
   font-weight: 100 900;
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-display: swap;
-  src: url('fonts/inter.woff2') format('woff2');
+  src: url("fonts/inter.woff2") format("woff2");
 }
 
 @font-face {
   font-weight: 400;
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: italic;
   font-display: swap;
-  src: url('fonts/inter.woff2') format('woff2');
+  src: url("fonts/inter.woff2") format("woff2");
 }
 
 :root {
-  --font-text: 'Inter', sans-serif;
-  --font-code: 'Menlo', 'Consolas', 'Monaco', 'Liberation Mono', 'Lucida Console', monospace;
+  --font-fallback:
+    BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+  --font-body: Inter, var(--font-fallback);
+  --font-heading: Inter, var(--font-fallback);
+  --font-code:
+    Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+
+  --base-font-size: 100%;
+  --base-line-height: 1.2;
+  --intermediate-line-height: 1.5;
+  --heading-line-height: var(--base-line-height);
+  --heading-letter-spacing: -0.031rem;
+  --font-content-line-height: 1.75;
+  --font-body-strong-weight: 600;
+
+  /* based on the following type-scale https://type-scale.com/?size=16&scale=1.200&text=MDN%20Web%20Docs&font=Inter&fontweight=400&bodyfont=body_font_default&bodyfontweight=400&lineheight=1.75&backgroundcolor=%23ffffff&fontcolor=%23000000&preview=false */
+  --type-heading-h1-font-size: 2.488rem;
+  --type-heading-h2-font-size: 2.074rem;
+  --type-heading-h3-font-size: 1.728rem;
+  --type-heading-h4-font-size: 1.44rem;
+  --type-heading-h5-font-size: 1.2rem;
+  --type-base-font-size-rem: 1rem;
+  --type-smaller-font-size: 0.833rem;
+  --type-tiny-font-size: 0.694rem;
+
+  /* based on the following type-scale https://type-scale.com/?size=16&scale=1.125&text=MDN%20Web%20Docs&font=Inter&fontweight=400&bodyfont=body_font_default&bodyfontweight=400&lineheight=1.75&backgroundcolor=%23ffffff&fontcolor=%23000000&preview=false */
+  /* --type-heading-h1-font-size-mobile: 1.802rem;
+  --type-heading-h2-font-size-mobile: 1.602rem;
+  --type-heading-h3-font-size-mobile: 1.424rem;
+  --type-heading-h4-font-size-mobile: 1.266rem; */
+
+  --type-emphasis-m: var(--font-body-strong-weight)
+    var(--type-smaller-font-size) / 1.23 var(--font-body);
+  --type-label-s: 600 var(--type-tiny-font-size) / 1.2 var(--font-heading);
+
+  --type-heading-h1: 600 var(--type-heading-h1-font-size) /
+    var(--heading-line-height) var(--font-heading);
+  --type-heading-h2: 500 var(--type-heading-h2-font-size) /
+    var(--heading-line-height) var(--font-heading);
+  --type-heading-h3: 300 var(--type-heading-h3-font-size) /
+    var(--heading-line-height) var(--font-heading);
+  --type-heading-h4: 400 var(--type-heading-h4-font-size) /
+    var(--heading-line-height) var(--font-heading);
+  --type-heading-h5: 400 var(--type-heading-h5-font-size) /
+    var(--heading-line-height) var(--font-heading);
+  --type-heading-h6: 400 var(--type-base-font-size-rem) /
+    var(--heading-line-height) var(--font-heading);
+  --type-article-p: 400 var(--type-base-font-size-rem) /
+    var(--font-content-line-height) var(--font-body);
+
+  h1,
+  h2,
+  h3 {
+    letter-spacing: var(--heading-letter-spacing);
+  }
+
+  h1 {
+    font: var(--type-heading-h1);
+    word-break: break-word;
+  }
+
+  h2 {
+    font: var(--type-heading-h2);
+  }
+
+  h3 {
+    font: var(--type-heading-h3);
+  }
+
+  h4 {
+    font: var(--type-heading-h4);
+    letter-spacing: 0.5px;
+  }
+
+  h5 {
+    font: var(--type-heading-h5);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  h6 {
+    font: var(--type-heading-h6);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    code {
+      font-size: inherit;
+    }
+  }
 }

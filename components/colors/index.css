@@ -94,9 +94,39 @@
   );
 
   --background-red: light-dark(var(--red-light-super), var(--red-dark-super));
-  --background-orange: light-dark(var(--orange-light-super), var(--orange-dark-super));
-  --background-yellow: light-dark(var(--yellow-light-super), var(--yellow-dark-super));
-  --background-green: light-dark(var(--green-light-super), var(--green-dark-super));
-  --background-blue: light-dark(var(--blue-light-super), var(--blue-dark-super));
-  --background-purple: light-dark(var(--purple-light-super), var(--purple-dark-super));
+  --background-orange: light-dark(
+    var(--orange-light-super),
+    var(--orange-dark-super)
+  );
+  --background-yellow: light-dark(
+    var(--yellow-light-super),
+    var(--yellow-dark-super)
+  );
+  --background-green: light-dark(
+    var(--green-light-super),
+    var(--green-dark-super)
+  );
+  --background-blue: light-dark(
+    var(--blue-light-super),
+    var(--blue-dark-super)
+  );
+  --background-purple: light-dark(
+    var(--purple-light-super),
+    var(--purple-dark-super)
+  );
+}
+
+/* Buttons */
+:root {
+  --button-primary-default: light-dark(#1b1b1b, #fff);
+  --button-primary-hover: light-dark(#696969, #cdcdcd);
+  --button-primary-active: light-dark(#9e9e9e, #9e9e9e);
+  --button-primary-inactive: light-dark(#1b1b1b, #fff);
+  --button-secondary-default: light-dark(#fff, #4e4e4e);
+  --button-secondary-hover: light-dark(#cdcdcd, #858585);
+  --button-secondary-active: light-dark(#cdcdcd, #9e9e9e);
+  --button-secondary-inactive: light-dark(#f9f9fb, #4e4e4e);
+  --button-secondary-border-focus: light-dark(#0085f2, #0085f2);
+  --button-secondary-border-red: light-dark(#ff97a0, #ff97a0);
+  --button-secondary-border-red-focus: light-dark(#ffd9dc, #ffd9dc);
 }

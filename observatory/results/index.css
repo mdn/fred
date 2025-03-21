@@ -1,4 +1,4 @@
-html {
+:root {
   --observatory-bg: rgba(242, 242, 245, 1);
   --observatory-bg-code: #e1e1e1;
   --observatory-bg-secondary: rgba(255, 255, 255, 1);
@@ -42,8 +42,6 @@ html {
   h1,
   h2 {
     font-style: normal;
-    font-weight: 600;
-    letter-spacing: var(--heading-letter-spacing);
   }
 
   .obs-none {

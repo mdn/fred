@@ -1,8 +1,95 @@
 import { LitElement, css, html } from "lit";
 import { createRef, ref, Ref } from "lit/directives/ref.js";
+import "../../components/progress-bar/index.js";
 
 export class FormProgress extends LitElement {
-  static styles = css``;
+  static styles = css`
+    :host {
+      font: 400 var(--base-font-size) var(--font-body);
+    }
+
+    .visually-hidden {
+      border: 0 !important;
+      clip: rect(1px, 1px, 1px, 1px) !important;
+      -webkit-clip-path: inset(50%) !important;
+      clip-path: inset(50%) !important;
+      height: 1px !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      padding: 0 !important;
+      position: absolute !important;
+      white-space: nowrap !important;
+      width: 1px !important;
+    }
+
+    progress:indeterminate {
+      width: 100%;
+      /* color: light-dark(red, green); */
+      /* background-color: red; */
+      /* border-radius: 7px; */
+      /* height: 2rem; */
+    }
+
+    progress:indeterminate::-moz-progress-bar {
+      /* color: var(--observatory-accent); */
+      background-color: var(--observatory-accent);
+      border-radius: var(--border-radius);
+      /* width: 10px; */
+    }
+
+    .input-group {
+      display: flex;
+      height: 3rem;
+
+      :focus-visible {
+        outline: 1px solid var(--observatory-accent);
+        outline-offset: -1px;
+        outline-width: 1px;
+      }
+
+      ::placeholder {
+        color: var(--observatory-color-secondary);
+        opacity: 0.8;
+      }
+
+      input {
+        background-color: var(--observatory-bg);
+        border: 1px solid var(--observatory-border);
+        border-bottom-left-radius: var(--border-radius);
+        border-top-left-radius: var(--border-radius);
+        flex-grow: 1;
+        padding: 0 0.75rem;
+        width: 100%;
+        font: inherit;
+
+        &::placeholder {
+          overflow-x: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      button {
+        background: var(--button-primary-default);
+        border-bottom-right-radius: var(--border-radius);
+        border-top-right-radius: var(--border-radius);
+        color: var(--background-primary);
+        cursor: pointer;
+        font: var(--type-emphasis-m);
+        font-size: 1rem;
+        padding: 0 2rem;
+        appearance: none;
+        border: none;
+
+        &:hover {
+          background: var(--button-primary-hover);
+        }
+
+        &:active {
+          background: var(--button-primary-active);
+        }
+      }
+    }
+  `;
 
   static properties = {
     _queryRunning: { state: true, type: Boolean },
@@ -16,6 +103,10 @@ export class FormProgress extends LitElement {
   }
   /** @type {Ref<HTMLInputElement>}  */
   inputRef = createRef();
+
+  firstUpdated() {
+    this.inputRef.value?.focus();
+  }
 
   /**
    * @param {Event} event
@@ -46,6 +137,10 @@ export class FormProgress extends LitElement {
   }
 
   render() {
+    return html` <label class="visually-hidden" for="progress-bar">
+        Scanning ${this._hostname} </label
+      ><mdn-progress-bar id="progress-bar"></mdn-progress-bar>`;
+
     if (this._queryRunning) {
       return html` <progress></progress>`;
     } else {

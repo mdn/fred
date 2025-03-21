@@ -3,7 +3,7 @@ import { html } from "lit-html";
 import "./index.css";
 
 /**
- * @param {Fred.Context} _context 
+ * @param {Fred.Context} _context
  */
 export function Menu(_context) {
   return html`<nav class="menu">
@@ -114,12 +114,7 @@ export function Menu(_context) {
         aria-expanded="false"
         aria-controls="menu__learn"
       >
-        <svg
-          class="icon"
-          width="14"
-          height="12"
-          viewBox="0 0 14 12"
-        >
+        <svg class="icon" width="14" height="12" viewBox="0 0 14 12">
           <path
             d="M7 0.272705L0 4.09089L7 7.90907L12.7273 4.78452V9.1818H14V4.09089M2.54545 6.75089V9.29634L7 11.7273L11.4545 9.29634V6.75089L7 9.1818L2.54545 6.75089Z"
           />
@@ -144,12 +139,7 @@ export function Menu(_context) {
         aria-expanded="false"
         aria-controls="menu__tools"
       >
-        <svg
-          class="icon"
-          width="16"
-          height="16"
-          viewBox="0 0 16 16"
-        >
+        <svg class="icon" width="16" height="16" viewBox="0 0 16 16">
           <path
             d="M5.72727 3.3092C5.72727 2.10011 4.96364 1.01829 3.81818 0.636475V2.99102H1.90909V0.636475C0.763636 1.01829 0 2.10011 0 3.3092C0 4.51829 0.763636 5.60011 1.90909 5.98193V12.9819C1.90909 13.2365 2.03636 13.3637 2.22727 13.3637H3.5C3.69091 13.3637 3.81818 13.2365 3.81818 13.0456V6.04557C4.96364 5.66375 5.72727 4.58193 5.72727 3.3092ZM9.54545 4.45466C7.06364 4.51829 5.09091 6.49102 5.09091 8.9092C5.09091 11.391 7.06364 13.3637 9.54545 13.3637C12.0273 13.3637 14 11.391 14 8.9092C14 6.42738 12.0273 4.45466 9.54545 4.45466ZM9.54545 12.091C7.76364 12.091 6.36364 10.691 6.36364 8.9092C6.36364 7.12738 7.76364 5.72738 9.54545 5.72738C11.3273 5.72738 12.7273 7.12738 12.7273 8.9092C12.7273 10.691 11.3273 12.091 9.54545 12.091ZM8.90909 6.36375V9.54557L11.2 10.9456L11.7091 10.1819L9.86364 9.10011V6.36375H8.90909Z"
           />
@@ -463,7 +453,7 @@ export function Menu(_context) {
               </a>
             </li>
             <li>
-              <a href="">
+              <a href="/en-US/observatory">
                 <svg
                   class="icon"
                   width="34"
