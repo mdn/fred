@@ -3,8 +3,13 @@ import insane from "insane";
 import USStrings from "./l10n/en-us.flt";
 import DEStrings from "./l10n/de.flt";
 
+/**
+ * @typedef {import("insane").AllowedTags} AllowedTags
+ */
+
 const languages = [["en-US", "English"]];
 
+/** @type AllowedTags[] */
 const whitelistedTags = ["i", "strong", "br"];
 const whitelistedAttributes = ["title", "aria-label"];
 
@@ -47,7 +52,9 @@ export class Fluent {
    * @param {string[]} available
    */
   static init(requested = navigator.languages, available) {
+    // @ts-ignore
     this.locales = this.resolveLocale(requested, available);
+    // @ts-ignore
     return this.load(...this.locales);
   }
 
@@ -56,6 +63,7 @@ export class Fluent {
   }
 
   /**
+   * @param {...*} parameters
    * @returns {string}
    */
   get(...parameters) {
@@ -78,8 +86,10 @@ export class Fluent {
 
   /**
    * @param {string} message
+   * @param {Record<string, { tag: AllowedTags } & Record<string, string>>} tags
    */
   static sanitize(message, tags = {}) {
+    /** @type Record<string, string[]> */
     const allowedAttributes = {};
     Object.values(tags).forEach((t) => {
       allowedAttributes[t.tag] = Object.keys(t)
@@ -87,23 +97,27 @@ export class Fluent {
         .concat(whitelistedAttributes);
     });
 
+    const allowedTags = Object.values(tags)
+      .map((t) => t.tag)
+      .concat(whitelistedTags);
+
     return insane(
       message,
       {
         allowedAttributes,
-        allowedTags: Object.values(tags)
-          .map((t) => t.tag)
-          .concat(whitelistedTags),
+        allowedTags,
         allowedSchemes: ["http", "https", "mailto"],
         filter(token) {
           const name = token.attrs["data-l10n-name"];
           if (name) {
+            // @ts-ignore
             Object.entries(tags[name]).forEach(([k, v]) => {
               token.attrs[k] = v;
             });
           }
           if (
             whitelistedTags.includes(token.tag) ||
+            // @ts-ignore
             (Object.keys(tags).includes(name) && tags[name].tag === token.tag)
           ) {
             return true;
@@ -148,9 +162,13 @@ export class Fluent {
       message = parentMessage.value;
     }
 
+    if (!message || !bundle) {
+      return "";
+    }
+
     /** @type {Error[]} */
     const errors = [];
-    const formatted = bundle.formatPattern(message, args, errors);
+    const formatted = bundle?.formatPattern(message, args, errors);
     if (errors.length) {
       console.error(errors);
     }

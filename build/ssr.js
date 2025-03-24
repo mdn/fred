@@ -2,6 +2,8 @@ import { readFile, writeFile } from "node:fs/promises";
 
 import { fdir } from "fdir";
 
+// @ts-ignore
+// eslint-disable-next-line n/no-missing-import
 import ssr from "../dist/ssr/index.cjs";
 import { renderHTML } from "./utils.js";
 

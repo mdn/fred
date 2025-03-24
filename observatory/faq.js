@@ -1,8 +1,7 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 /**
- * @import { TemplateResult } from "lit-html"
- * @import {SPAPage} from "@mdn/rari"
+ * @typedef {import("lit").TemplateResult} TemplateResult
  */
 
 /**
@@ -14,7 +13,8 @@ export function FAQ(_context) {
     href="/en-US/observatory/docs/faq"
     target="_blank"
     rel="noopener"
-    class="feedback-link faq-link">
+    class="feedback-link faq-link"
+  >
     Read our FAQ
   </a>`;
 }

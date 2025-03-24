@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import { ReferenceToc } from "../reference-toc/index.js";
 import { Content } from "../content/index.js";
 

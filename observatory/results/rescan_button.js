@@ -54,7 +54,8 @@ export class RescanButton extends LitElement {
               class="progress"
               role="progressbar"
               aria-labelledby="wait-secs"
-              style="background: conic-gradient(var(--button-color) 0grad, ${progressPercent}%, rgba(0,0,0,0) ${progressPercent}% 100%)"></div>
+              style="background: conic-gradient(var(--button-color) 0grad, ${progressPercent}%, rgba(0,0,0,0) ${progressPercent}% 100%)"
+            ></div>
             <small id="wait-secs">Wait ${remainingSecs}s to rescan</small>
           </button>`
         : html`<button>Rescan</button>`}

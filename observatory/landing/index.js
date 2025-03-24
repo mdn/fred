@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 import { OBSERVATORY_TITLE } from "../constants.js";
 import { Feedback } from "../feedback.js";
@@ -14,12 +14,11 @@ import mdnSvg from "../assets/mdn.svg?mdnsvg";
 import "./form.js";
 
 /**
- * @import { SPAPage } from "@mdn/rari"
- * @import { TemplateResult } from "lit-html"
+ * @typedef {import("lit").TemplateResult} TemplateResult
  */
 
 /**
- * @param {Fred.Context<SPAPage>} context
+ * @param {Fred.Context<Rari.SPAPage>} context
  * @returns {TemplateResult}
  */
 export function Landing(context) {

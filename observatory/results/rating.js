@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 import { formatMinus, hostAsRedirectChain } from "../utils";
 
@@ -8,8 +8,8 @@ import "./human_duration";
 import "./rescan_button";
 
 /**
- * @import { TemplateResult } from "lit-html"
- * @import { ObservatoryResult } from "../constants"
+ * @typedef {import("lit").TemplateResult} TemplateResult
+ * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 
 /**
@@ -30,9 +30,11 @@ export function Rating({ result, host, rescan }) {
             popovertarget="grade-popover"
             aria-label="show info tooltip"
             class="info-tooltip"
-            tabindex="0">
+            tabindex="0"
+          >
             <div
-              class="${`grade grade-${result.scan.grade?.[0]?.toLowerCase()}`}">
+              class=${`grade grade-${result.scan.grade?.[0]?.toLowerCase()}`}
+            >
               ${formatMinus(result.scan.grade)}
             </div>
             ${Tooltip(result)}
@@ -52,9 +54,8 @@ export function Rating({ result, host, rescan }) {
             <span class="label">Scan Time</span>
           </a>
           <mdn-observatory-human-duration
-            .date=${new Date(
-              result.scan.scanned_at,
-            )}></mdn-observatory-human-duration>
+            .date=${new Date(result.scan.scanned_at)}
+          ></mdn-observatory-human-duration>
         </div>
         <a href="/en-US/observatory/docs/tests_and_scoring" target="_blank">
           <span class="label">Tests Passed</span>
@@ -66,7 +67,8 @@ export function Rating({ result, host, rescan }) {
         <mdn-observatory-rescan-button
           .from=${new Date(result.scan.scanned_at)}
           .duration=${60}
-          @click=${rescan}></mdn-observatory-rescan-button>
+          @click=${rescan}
+        ></mdn-observatory-rescan-button>
         <div class="scan-another">
           <a href="/en-US/observatory/" data-discover="true"
             >Scan another website</a

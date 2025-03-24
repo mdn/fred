@@ -1,10 +1,10 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import { TEST_NAMES_IN_ORDER } from "../constants";
 import { formatMinus, PassIcon } from "../utils";
 
 /**
- * @import { TemplateResult } from "lit-html"
- * @import { ObservatoryResult } from "../constants"
+ * @typedef {import("lit").TemplateResult} TemplateResult
+ * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 
 /**
@@ -18,7 +18,7 @@ function ScoreModifier({ overallScore, scoreModifier }) {
   );
 
   return html`
-    <span class="${!bonusEligible && scoreModifier > 0 ? "not-counted" : ""}">
+    <span class=${!bonusEligible && scoreModifier > 0 ? "not-counted" : ""}>
       ${!bonusEligible && scoreModifier > 0
         ? html`0<sup><a href="#bonus-points-explanation">*</a></sup>`
         : formattedScoreModifier}
@@ -29,7 +29,7 @@ function ScoreModifier({ overallScore, scoreModifier }) {
 /**
  *
  * @param {{ result: ObservatoryResult}} result
- * @returns { TemplateResult }
+ * @returns {TemplateResult}
  */
 export function Scoring({ result }) {
   const showFootnote =
@@ -40,6 +40,44 @@ export function Scoring({ result }) {
   if (Object.keys(result.tests).length === 0) {
     return html`No tests found.`;
   }
+
+  const rows = TEST_NAMES_IN_ORDER.map((name) => {
+    const test = result.tests[name];
+    if (!test) return null;
+
+    return html`
+      <tr>
+        <td data-header="Test">
+          <a
+            href=${test.link}
+            target="_blank"
+            rel="noreferrer"
+            class=${test.link.startsWith("/") ? "" : "external"}
+          >
+            ${test.title}
+          </a>
+        </td>
+        ${test.pass === null
+          ? html`<td data-header="Score">-</td>`
+          : html` <td class="score" data-header="Score">
+              <span>
+                <span class="obs-score-value">
+                  ${ScoreModifier({
+                    overallScore: result.scan.score || 0,
+                    scoreModifier: test.score_modifier,
+                  })}
+                </span>
+                ${PassIcon({ pass: test.pass })}
+              </span>
+            </td>`}
+        <td data-header="Reason" .innerHTML=${test.score_description}></td>
+        <td
+          data-header="Advice"
+          .innerHTML=${test.recommendation || `<p class="obs-none">None</p>`}
+        ></td>
+      </tr>
+    `;
+  });
 
   return html`
     <table class="tests">
@@ -52,44 +90,7 @@ export function Scoring({ result }) {
         </tr>
       </thead>
       <tbody>
-        ${TEST_NAMES_IN_ORDER.map((name) => {
-          const test = result.tests[name];
-          if (!test) return null;
-
-          return html`
-            <tr>
-              <td data-header="Test">
-                <a
-                  href="${test.link}"
-                  target="_blank"
-                  rel="noreferrer"
-                  class="${test.link.startsWith("/") ? "" : "external"}">
-                  ${test.title}
-                </a>
-              </td>
-              ${test.pass === null
-                ? html`<td data-header="Score">-</td>`
-                : html` <td class="score" data-header="Score">
-                    <span>
-                      <span class="obs-score-value">
-                        ${ScoreModifier({
-                          overallScore: result.scan.score || 0,
-                          scoreModifier: test.score_modifier,
-                        })}
-                      </span>
-                      ${PassIcon({ pass: test.pass })}
-                    </span>
-                  </td>`}
-              <td
-                data-header="Reason"
-                .innerHTML=${test.score_description}></td>
-              <td
-                data-header="Advice"
-                .innerHTML=${test.recommendation ||
-                `<p class="obs-none">None</p>`}></td>
-            </tr>
-          `;
-        })}
+        ${rows}
       </tbody>
     </table>
     ${showFootnote

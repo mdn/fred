@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import {
   PassIcon,
   Timestamp,
@@ -7,8 +7,8 @@ import {
 } from "../utils";
 
 /**
- * @import { TemplateResult } from "lit-html"
- * @import { ObservatoryResult } from "../constants"
+ * @typedef {import("lit").TemplateResult} TemplateResult
+ * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 
 /**
@@ -32,6 +32,28 @@ export function Cookies({ result }) {
     `;
   }
 
+  const rows = Object.entries(cookies).map(
+    ([key, value]) => html`
+      <tr>
+        <td data-header="Name" class="cookie-name">${key}</td>
+        <td data-header="Expires">
+          ${value.expires ? Timestamp({ expires: value.expires }) : "Session"}
+        </td>
+        <td data-header="Path">
+          <code>${value.path}</code>
+        </td>
+        <td data-header="Secure">${PassIcon({ pass: value.secure })}</td>
+        <td data-header="HttpOnly">${PassIcon({ pass: value.httponly })}</td>
+        <td data-header="SameSite">
+          ${value.samesite
+            ? html`<code>${upperCaseHeaderName(value.samesite)}</code>`
+            : "-"}
+        </td>
+        <td data-header="Prefixed">${CookiePrefix({ cookieName: key })}</td>
+      </tr>
+    `,
+  );
+
   return html`
     <div class="detail-header">
       <p class="arrow">
@@ -40,7 +62,8 @@ export function Cookies({ result }) {
       <div
         class="detail-header-content"
         .innerHTML=${result.tests["cookies"]?.score_description ??
-        `<p class="obs-none">None</p>`}></div>
+        `<p class="obs-none">None</p>`}
+      ></div>
     </div>
     <table class="cookies">
       <thead>
@@ -91,33 +114,7 @@ export function Cookies({ result }) {
         </tr>
       </thead>
       <tbody>
-        ${Object.entries(cookies).map(
-          ([key, value]) => html`
-            <tr>
-              <td data-header="Name" class="cookie-name">${key}</td>
-              <td data-header="Expires">
-                ${value.expires
-                  ? Timestamp({ expires: value.expires })
-                  : "Session"}
-              </td>
-              <td data-header="Path">
-                <code>${value.path}</code>
-              </td>
-              <td data-header="Secure">${PassIcon({ pass: value.secure })}</td>
-              <td data-header="HttpOnly">
-                ${PassIcon({ pass: value.httponly })}
-              </td>
-              <td data-header="SameSite">
-                ${value.samesite
-                  ? html`<code>${upperCaseHeaderName(value.samesite)}</code>`
-                  : "-"}
-              </td>
-              <td data-header="Prefixed">
-                ${CookiePrefix({ cookieName: key })}
-              </td>
-            </tr>
-          `,
-        )}
+        ${rows}
       </tbody>
     </table>
   `;

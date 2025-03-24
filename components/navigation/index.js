@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 import { Logo } from "../logo/index.js";
 import "../color-theme/index.js";

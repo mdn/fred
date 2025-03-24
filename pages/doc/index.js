@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import { Navigation } from "../../components/navigation/index.js";
 import { BreadCrumbs } from "../../components/breadcrumbs/index.js";
 import { ReferenceLayout } from "../../components/reference-layout/index.js";

@@ -5,7 +5,7 @@ import { renderHTML } from "./build/utils.js";
 
 /**
  * @import { Request, Response } from "express";
- * @import { RsbuildDevServer, ManifestData } from "@rsbuild/core";
+ * @import { RsbuildDevServer } from "@rsbuild/core";
  */
 
 /** @type {string} */
@@ -72,7 +72,7 @@ export async function startDevServer() {
     try {
       await serverRenderMiddleware(req, res);
     } catch (err) {
-      logger.error("SSR render error, downgrade to CSR...");
+      logger.error("SSR render error, downgrade to CSR...", err);
       next();
     }
   });

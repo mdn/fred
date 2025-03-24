@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { LitElement, css, html } from "lit";
 import { Task } from "@lit/task";
 import { getCurrentSupport } from "./helpers";
@@ -52,7 +54,7 @@ export class BCDTable extends LitElement {
     }
   `;
   static properties = {
-    query: {},
+    query: { type: String },
   };
 
   _dataTask = new Task(this, {
@@ -94,17 +96,21 @@ function Table(data) {
     firstData.source_file.split("/")?.at(-1)?.slice?.(0, -5),
     data.data,
   ]);
+
+  const rows = [firstRow, ...Object.entries(data.data).map(Row)];
+
   return (
     data &&
     html`<figure
       style="--cols: ${[...Object.keys(data.browsers).filter((b) => b != "ie")]
-        .length + 1};">
+        .length + 1};"
+    >
       <table>
         <thead>
           ${Browsers(data)}
         </thead>
         <tbody>
-          ${firstRow}${Object.entries(data.data).map(Row)}
+          ${rows}
         </tbody>
       </table>
     </figure> `
@@ -112,11 +118,13 @@ function Table(data) {
 }
 
 function Browsers(data) {
+  const cells = Object.entries(data.browsers).map(([browser]) =>
+    browser != "ie" ? html`<td>${browser}</td>` : null,
+  );
+
   return html`<tr>
     <td></td>
-    ${Object.entries(data.browsers).map(([browser]) =>
-      browser != "ie" ? html`<td>${browser}</td>` : null,
-    )}
+    ${cells}
   </tr>`;
 }
 
@@ -124,9 +132,12 @@ function Row([key, row]) {
   if (key == "__compat") {
     return null;
   }
+
+  const cells = Object.entries(row?.__compat?.support ?? {}).map(Cell);
+
   return html`<tr>
     <td><code>${key}</code></td>
-    ${Object.entries(row?.__compat?.support ?? {}).map(Cell)}
+    ${cells}
   </tr>`;
 }
 

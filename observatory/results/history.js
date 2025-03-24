@@ -1,9 +1,9 @@
-import { html, nothing } from "lit-html";
+import { html, nothing } from "lit";
 import { formatDateTime, formatMinus } from "../utils";
 
 /**
- * @import { TemplateResult } from "lit-html"
- * @import { ObservatoryResult } from "../constants"
+ * @typedef {import("lit").TemplateResult} TemplateResult
+ * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 
 /**
@@ -16,6 +16,16 @@ export function History({ result }) {
     return nothing;
   }
 
+  const rows = [...result.history].reverse().map(
+    ({ scanned_at, score, grade }) => html`
+      <tr>
+        <td data-header="Date">${formatDateTime(new Date(scanned_at))}</td>
+        <td data-header="Score">${score}</td>
+        <td data-header="Grade">${formatMinus(grade)}</td>
+      </tr>
+    `,
+  );
+
   return html`
     <h2>Changes in score over time</h2>
     <table class="history">
@@ -27,17 +37,7 @@ export function History({ result }) {
         </tr>
       </thead>
       <tbody>
-        ${[...result.history].reverse().map(
-          ({ scanned_at, score, grade }) => html`
-            <tr>
-              <td data-header="Date">
-                ${formatDateTime(new Date(scanned_at))}
-              </td>
-              <td data-header="Score">${score}</td>
-              <td data-header="Grade">${formatMinus(grade)}</td>
-            </tr>
-          `,
-        )}
+        ${rows}
       </tbody>
     </table>
   `;

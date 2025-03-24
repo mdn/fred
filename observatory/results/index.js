@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import "./results.js";
 import { OBSERVATORY_TITLE } from "../constants.js";
 import { Feedback } from "../feedback.js";
@@ -6,12 +6,11 @@ import { Feedback } from "../feedback.js";
 import "./index.css";
 
 /**
- * @import { SPAPage } from "@mdn/rari"
- * @import { TemplateResult } from "lit-html"
+ * @typedef {import("lit").TemplateResult} TemplateResult
  */
 
 /**
- * @param {Fred.Context<SPAPage>} context
+ * @param {Fred.Context<Rari.SPAPage>} context
  * @returns {TemplateResult}
  */
 export function Results(context) {

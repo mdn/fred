@@ -1,9 +1,9 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import { HeaderLink } from "../utils";
 
 /**
- * @import { TemplateResult } from "lit-html"
- * @import { ObservatoryResult } from "../constants"
+ * @typedef {import("lit").TemplateResult} TemplateResult
+ * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 
 /**
@@ -24,6 +24,15 @@ export function RawHeaders({ result }) {
     `;
   }
 
+  const rows = Object.entries(result.scan.response_headers).map(
+    ([header, value]) => html`
+      <tr>
+        <td data-header="Header">${HeaderLink({ header })}</td>
+        <td data-header="Value">${value}</td>
+      </tr>
+    `,
+  );
+
   return html`
     <table class="headers">
       <thead>
@@ -33,14 +42,7 @@ export function RawHeaders({ result }) {
         </tr>
       </thead>
       <tbody>
-        ${Object.entries(result.scan.response_headers).map(
-          ([header, value]) => html`
-            <tr>
-              <td data-header="Header">${HeaderLink({ header })}</td>
-              <td data-header="Value">${value}</td>
-            </tr>
-          `,
-        )}
+        ${rows}
       </tbody>
     </table>
   `;

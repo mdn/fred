@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 import { SCORING_TABLE } from "../constants";
 import { formatMinus } from "../utils";
@@ -6,7 +6,7 @@ import starsSvg from "../assets/stars.svg?mdnsvg";
 import arrowSvg from "../assets/tooltip-arrow.svg?mdnsvg";
 
 /**
- * @import { ObservatoryResult } from "../constants"
+ * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 
 /**
@@ -14,12 +14,25 @@ import arrowSvg from "../assets/tooltip-arrow.svg?mdnsvg";
  * @param {ObservatoryResult} result
  */
 export function Tooltip(result) {
+  const rows = SCORING_TABLE.map((st) => {
+    return html`
+      <tr class=${result.scan.grade === st.grade ? "current" : ""}>
+        <td>${formatMinus(st.grade)}</td>
+        <td>
+          ${st.scoreText}
+          ${result.scan.grade === st.grade && st.stars ? starsSvg : ""}
+        </td>
+      </tr>
+    `;
+  });
+
   return html`
     <span
       popover
       id="grade-popover"
       aria-describedby="grade-table"
-      class="tooltip-popup">
+      class="tooltip-popup"
+    >
       ${arrowSvg}
       <table class="grade-tooltip" id="grades-table" role="tooltip">
         <thead>
@@ -29,17 +42,7 @@ export function Tooltip(result) {
           </tr>
         </thead>
         <tbody>
-          ${SCORING_TABLE.map((st) => {
-            return html`
-              <tr class="${result.scan.grade === st.grade ? "current" : ""}">
-                <td>${formatMinus(st.grade)}</td>
-                <td>
-                  ${st.scoreText}
-                  ${result.scan.grade === st.grade && st.stars ? starsSvg : ""}
-                </td>
-              </tr>
-            `;
-          })}
+          ${rows}
         </tbody>
       </table>
     </span>
