@@ -17,6 +17,7 @@
 
 .obs-landing-top__form {
   grid-area: form;
+  --progress-color: var(--observatory-accent);
 }
 
 .obs-landing-top__illustration {

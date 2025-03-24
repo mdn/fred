@@ -15,7 +15,8 @@ import { nothing } from "lit-html";
 export class Results extends LitElement {
   static styles = css`
     :host {
-      --button-color: blue;
+      --border-radius: 0.3rem;
+      --progress-color: var(--observatory-accent);
     }
   `;
 
@@ -139,7 +140,10 @@ export class Results extends LitElement {
       return nothing;
     }
     return this._apiTask.render({
-      pending: () => html`<progress></progress>`,
+      pending: () =>
+        html` <label class="visually-hidden" for="progress-bar">
+            Rescanning ${this.host} </label
+          ><mdn-progress-bar id="progress-bar"></mdn-progress-bar>`,
 
       complete: (data) => html`
         <section class="summary">

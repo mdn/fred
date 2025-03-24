@@ -6,6 +6,8 @@ export class FormProgress extends LitElement {
   static styles = css`
     :host {
       font: 400 var(--base-font-size) var(--font-body);
+      --border-radius: 0.3rem;
+      --progress-color: var(--observatory-accent);
     }
 
     .visually-hidden {
@@ -20,21 +22,6 @@ export class FormProgress extends LitElement {
       position: absolute !important;
       white-space: nowrap !important;
       width: 1px !important;
-    }
-
-    progress:indeterminate {
-      width: 100%;
-      /* color: light-dark(red, green); */
-      /* background-color: red; */
-      /* border-radius: 7px; */
-      /* height: 2rem; */
-    }
-
-    progress:indeterminate::-moz-progress-bar {
-      /* color: var(--observatory-accent); */
-      background-color: var(--observatory-accent);
-      border-radius: var(--border-radius);
-      /* width: 10px; */
     }
 
     .input-group {
@@ -126,7 +113,7 @@ export class FormProgress extends LitElement {
       if (!response.ok) {
         throw new Error(`API request failed: ${response.statusText}`);
       }
-      window.location.href = `observatory/analyze?host=${encodeURIComponent(
+      window.location.href = `/en-US/observatory/analyze?host=${encodeURIComponent(
         this._hostname,
       )}`;
     } catch (error) {
@@ -137,12 +124,10 @@ export class FormProgress extends LitElement {
   }
 
   render() {
-    return html` <label class="visually-hidden" for="progress-bar">
-        Scanning ${this._hostname} </label
-      ><mdn-progress-bar id="progress-bar"></mdn-progress-bar>`;
-
     if (this._queryRunning) {
-      return html` <progress></progress>`;
+      return html` <label class="visually-hidden" for="progress-bar">
+          Scanning ${this._hostname} </label
+        ><mdn-progress-bar id="progress-bar"></mdn-progress-bar>`;
     } else {
       return html`<form @submit=${this._handleSubmit}>
         <div class="input-group">
