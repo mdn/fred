@@ -1,0 +1,9 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - run: npx prettier --write {staged_files}
+      stage_fixed: true
+
+output:
+  - summary
+  - failure

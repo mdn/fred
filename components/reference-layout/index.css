@@ -1,76 +1,76 @@
 /* Reference Layout */
 
 .reference-layout {
-    display: grid;
-    column-gap: 3rem;
-    padding-block: 0.5rem 3rem;
+  display: grid;
+  column-gap: 3rem;
+  padding-block: 0.5rem 3rem;
 
+  grid-template-rows: auto;
+  grid-template-columns: 1fr minmax(0, 2.5fr) 15rem;
+
+  @media (width < 769px) {
     grid-template-rows: auto;
-    grid-template-columns: 1fr minmax(0, 2.5fr) 15rem;
+    grid-template-columns: auto;
+  }
 
-    @media (width < 769px) {
-        grid-template-rows: auto;
-        grid-template-columns: auto;
-    }
+  @media (width < 1200px) {
+    grid-template-rows: min-content 1fr;
+    grid-template-columns: 1fr 2fr;
+  }
 
-    @media (width < 1200px) {
-        grid-template-rows: min-content 1fr;
-        grid-template-columns: 1fr 2fr;
-    }
-
-    @media (width > 1440px) {
-        padding-inline: calc((100% - 1440px) / 2);
-    }
+  @media (width > 1440px) {
+    padding-inline: calc((100% - 1440px) / 2);
+  }
 }
 
 /* Sidebar */
 
 .reference-layout__sidebar {
-    padding-inline: 1rem;
+  padding-inline: 1rem;
 
-    grid-row: 1 / 2;
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
+
+  @media (width < 1200px) {
+    grid-row: 2 / 3;
     grid-column: 1 / 2;
+  }
 
-    @media (width < 1200px) {
-        grid-row: 2 / 3;
-        grid-column: 1 / 2;
-    }
-
-    @media (width < 769px) {
-        grid-row: 2 / 3;
-        grid-column: 1 / 2;
-    }
+  @media (width < 769px) {
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+  }
 }
 
 /* Content */
 
 .reference-layout__content {
-    padding-inline: 1rem;
+  padding-inline: 1rem;
 
-    grid-row: 1 / 2;
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
+
+  @media (width < 1200px) {
+    grid-row: 1 / span 2;
     grid-column: 2 / 3;
+  }
 
-    @media (width < 1200px) {
-        grid-row: 1 / span 2;
-        grid-column: 2 / 3;
-    }
-
-    @media (width < 769px) {
-        grid-row: 3 / 4;
-        grid-column: 1 / 2;
-    }
+  @media (width < 769px) {
+    grid-row: 3 / 4;
+    grid-column: 1 / 2;
+  }
 }
 
 /* TOC */
 
 .reference-layout__toc {
-    padding-inline: 1rem;
+  padding-inline: 1rem;
 
+  grid-row: 1 / 2;
+  grid-column: 3 / 4;
+
+  @media (width < 1200px) {
     grid-row: 1 / 2;
-    grid-column: 3 / 4;
-
-    @media (width < 1200px) {
-        grid-row: 1 / 2;
-        grid-column: 1 / 2;
-    }
+    grid-column: 1 / 2;
+  }
 }

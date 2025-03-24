@@ -98,8 +98,7 @@ function Table(data) {
     data &&
     html`<figure
       style="--cols: ${[...Object.keys(data.browsers).filter((b) => b != "ie")]
-        .length + 1};"
-    >
+        .length + 1};">
       <table>
         <thead>
           ${Browsers(data)}

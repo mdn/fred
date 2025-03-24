@@ -1,9 +1,9 @@
 import { defineConfig } from "@rsbuild/core";
 import { pluginFluent } from "./plugin-fluent/fluent.js";
-import { pluginSvg } from "./plugin-mdnsvg/svg.js";
+import { pluginReset } from "./plugin-reset/reset.js";
 
 export default defineConfig({
-  plugins: [pluginFluent(), pluginSvg()],
+  plugins: [pluginFluent(), pluginReset()],
   environments: {
     client: {
       output: {
@@ -63,9 +63,9 @@ export default defineConfig({
             test: /\.svg$/,
             loader: "svgo-loader",
           },
-        ]
-      }
-    }
+        ],
+      },
+    },
   },
   performance: {
     chunkSplit: {

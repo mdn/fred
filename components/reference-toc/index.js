@@ -3,7 +3,7 @@ import { html } from "lit-html";
 import "./index.css";
 
 /**
- * @param {Fred.Context<Rari.DocPage>} context 
+ * @param {Fred.Context<Rari.DocPage>} context
  */
 export function ReferenceToc(context) {
   return html`<div class="reference-toc">

@@ -22,8 +22,7 @@ export function Switch({
         type="checkbox"
         name={name}
         checked={checked}
-        onChange={toggle}
-      ></input>
+        onChange={toggle}></input>
       <span className="slider"></span>
       {children && <span className="label">{children}</span>}
     </label>

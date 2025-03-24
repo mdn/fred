@@ -39,8 +39,7 @@ export function Manage() {
                         }
                         user?.mutate();
                         setSaving(false);
-                      }}
-                    ></Switch>
+                      }}></Switch>
                   )}
                 </>
               ) : (
@@ -66,8 +65,7 @@ export function Manage() {
                 rel="noreferrer noopener"
                 target="_blank"
                 href={FXA_SETTINGS_URL}
-                className="manage external"
-              >
+                className="manage external">
                 Account
               </a>
             </div>
@@ -83,8 +81,7 @@ export function Manage() {
                   rel="noreferrer noopener"
                   target="_blank"
                   href={FXA_MANAGE_SUBSCRIPTIONS_URL}
-                  className="manage external"
-                >
+                  className="manage external">
                   Subscriptions
                 </a>
               </div>

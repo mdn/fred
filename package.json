@@ -51,8 +51,13 @@
     "@types/express": "^5.0.0",
     "@types/insane": "^1.0.0",
     "@types/prismjs": "^1.26.5",
+    "lefthook": "^1.11.4",
     "postcss-preset-env": "^10.1.5",
+    "prettier": "^3.5.3",
     "svgo-loader": "^4.0.0",
     "typescript": "^5.8.2"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }

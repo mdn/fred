@@ -3,6 +3,14 @@ import { DocBody } from "./pages/doc/index.js";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 import { SettingsBody } from "./pages/settings/index.js";
 import l10n from "./fluent.js";
+import {
+  ObservatoryBody,
+  ObservatoryResults,
+} from "./pages/observatory/index.js";
+
+/**
+ * @import { SPAPage } from "@mdn/rari"
+ */
 
 /**
  * @param {string} path
@@ -15,12 +23,34 @@ async function fetch_from_rari(path) {
 }
 
 /**
- * @param {string} path 
+ * @param {string} path
  */
 export async function render(path) {
   let result;
   if (path.endsWith("settings")) {
     result = r(SettingsBody());
+  } else if (path.indexOf("observatory/analyze") !== -1) {
+    /** @type {Fred.Context<SPAPage>} */
+    const context = {
+      noIndexing: true,
+      url: "/en-US/observatory/analyze",
+      pageTitle: "HTTP Observatory Report",
+      pageNotFound: false,
+      onlyFollow: false,
+      slug: "observatory/analyze",
+    };
+    result = r(ObservatoryResults(context));
+  } else if (path.endsWith("observatory") || path.endsWith("observatory/")) {
+    /** @type {Fred.Context<SPAPage>} */
+    const context = {
+      noIndexing: true,
+      url: "/en-US/observatory/",
+      pageTitle: "HTTP Observatory",
+      pageNotFound: false,
+      onlyFollow: false,
+      slug: "observatory",
+    };
+    result = r(ObservatoryBody(context));
   } else {
     const context = await fetch_from_rari(path);
     context.l10n = await l10n(context.locale);
@@ -31,7 +61,7 @@ export async function render(path) {
 }
 
 /**
- * @param {Rari.BuiltPage} context 
+ * @param {Rari.BuiltPage} context
  */
 export async function renderWithContext(context) {
   context.l10n = await l10n(context.locale);

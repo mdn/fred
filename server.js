@@ -14,9 +14,10 @@ let ssrManifest;
 let clientManifest;
 
 /**
- * @param {RsbuildDevServer} serverAPI 
+ * @param {RsbuildDevServer} serverAPI
  */
-const serverRender = (serverAPI) => 
+const serverRender =
+  (serverAPI) =>
   /**
    * @param {Request} req
    * @param {Response} res
@@ -26,7 +27,12 @@ const serverRender = (serverAPI) =>
     const indexModule = await serverAPI.environments.ssr?.loadBundle("index");
     const markup = await indexModule?.render(req.path);
 
-    const html = renderHTML(ssrManifest, clientManifest, req?.path?.endsWith("settings"), markup);
+    const html = renderHTML(
+      ssrManifest,
+      clientManifest,
+      req?.path?.endsWith("settings"),
+      markup,
+    );
 
     res.writeHead(200, {
       "Content-Type": "text/html",

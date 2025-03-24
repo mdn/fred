@@ -34,9 +34,7 @@ export function renderHTML(ssrManifest, clientManifest, legacy, markup) {
   const { scriptTags: legacyScriptTags, styleTags: legacyStyleTags } =
     tagsFromManifest(clientManifest, "legacy");
 
-  const legacyTags = legacy
-    ? [legacyScriptTags, legacyStyleTags]
-    : [];
+  const legacyTags = legacy ? [legacyScriptTags, legacyStyleTags] : [];
 
   const tags = [
     //ssrScriptTags,

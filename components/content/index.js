@@ -6,7 +6,7 @@ import { Heading } from "../heading-anchor/index.js";
 import "./index.css";
 
 /**
- * @param {Fred.Context<Rari.DocPage>} context 
+ * @param {Fred.Context<Rari.DocPage>} context
  */
 export function Content(context) {
   return html`<div class="content">
@@ -16,7 +16,7 @@ export function Content(context) {
 }
 
 /**
- * @param {Rari.Section} section 
+ * @param {Rari.Section} section
  */
 function Section({ type, value }) {
   switch (type) {
@@ -28,7 +28,7 @@ function Section({ type, value }) {
 }
 
 /**
- * @param {Rari.Prose} section 
+ * @param {Rari.Prose} section
  */
 function Prose({ id, title, content, isH3 }) {
   const level = isH3 ? 3 : 2;
@@ -38,7 +38,7 @@ function Prose({ id, title, content, isH3 }) {
 }
 
 /**
- * @param {Rari.Compat} section 
+ * @param {Rari.Compat} section
  */
 function BCD({ id, title, query, isH3 }) {
   const level = isH3 ? 3 : 2;

@@ -10,7 +10,7 @@ import "../formal-syntax/index.css";
 import { LeftSidebar } from "../left-sidebar/index.js";
 
 /**
- * @param {Fred.Context<Rari.DocPage>} context 
+ * @param {Fred.Context<Rari.DocPage>} context
  */
 export function ReferenceLayout(context) {
   return html`

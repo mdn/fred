@@ -27,8 +27,8 @@ export class Fluent {
   }
 
   /**
-   * @param {FluentBundle} bundle 
-   * @param {string[]} resources 
+   * @param {FluentBundle} bundle
+   * @param {string[]} resources
    */
   static constructBundle(bundle, resources = []) {
     resources.forEach((r) => {
@@ -43,8 +43,8 @@ export class Fluent {
   }
 
   /**
-   * @param {readonly string[]} requested 
-   * @param {string[]} available 
+   * @param {readonly string[]} requested
+   * @param {string[]} available
    */
   static init(requested = navigator.languages, available) {
     this.locales = this.resolveLocale(requested, available);
@@ -77,7 +77,7 @@ export class Fluent {
   }
 
   /**
-   * @param {string} message 
+   * @param {string} message
    */
   static sanitize(message, tags = {}) {
     const allowedAttributes = {};

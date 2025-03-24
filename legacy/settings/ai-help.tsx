@@ -16,8 +16,7 @@ export function ManageAIHelp() {
         <li>
           <section
             id="ai-help--history-enable"
-            aria-labelledby="enable-history"
-          >
+            aria-labelledby="enable-history">
             <h3 id="enable-history">Enable History</h3>
             <div className="setting-row">
               <span>
@@ -52,8 +51,7 @@ export function ManageAIHelp() {
                     }
                     user?.mutate?.();
                     setSaving(false);
-                  }}
-                ></Switch>
+                  }}></Switch>
               )}
             </div>
           </section>
@@ -82,8 +80,7 @@ export function ManageAIHelp() {
                       method: "DELETE",
                     });
                   }
-                }}
-              >
+                }}>
                 Delete History
               </button>
             </div>

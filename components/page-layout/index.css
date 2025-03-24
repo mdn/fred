@@ -1,15 +1,21 @@
 .page-layout {
-    display: grid;
-    grid-template-rows:
-        min-content
-        min-content
-        1fr
-        min-content;
-    margin-inline: auto;
+  display: grid;
+  grid-template-rows:
+    min-content
+    min-content
+    1fr
+    min-content;
+  margin-inline: auto;
 }
 
 .page-layout__header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
+
+/* .page-layout__main {
+}
+
+.page-layout__footer {
+} */

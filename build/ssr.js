@@ -52,7 +52,7 @@ export async function ssrAllDocuments() {
   console.log(
     `Rendered ${count.toLocaleString()} pages in ${took}, at a rate of ${(
       count / seconds
-    ).toFixed(1)} documents per second.`
+    ).toFixed(1)} documents per second.`,
   );
 }
 
@@ -74,7 +74,7 @@ async function ssrSingleDocument(file) {
   const context = JSON.parse(await readFile(file, "utf-8"));
   if (!context?.url) {
     console.warn(
-      `WARNING: Skipped rendering HTML. Document is missing url: ${file}`
+      `WARNING: Skipped rendering HTML. Document is missing url: ${file}`,
     );
     return;
   }
@@ -86,6 +86,7 @@ async function ssrSingleDocument(file) {
     return outputFile;
   } catch (e) {
     console.error(`ERROR: Failed to render ${context.url}: ${e}`);
+    return;
   }
 }
 

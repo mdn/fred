@@ -1,45 +1,45 @@
 .left-sidebar {
-    h4 {
-        margin: 0;
-        font-weight: normal;
-        font-size: 1.5rem;
+  h4 {
+    margin: 0;
+    font-weight: normal;
+    font-size: 1.5rem;
+  }
+
+  summary {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--background-secondary);
+    }
+  }
+
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    display: inline flex;
+    align-items: baseline;
+    column-gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: var(--text-primary);
+
+    &:hover {
+      color: var(--link-normal);
     }
 
-    summary {
-        padding: 0.75rem 1rem;
-        cursor: pointer;
-
-        &:hover {
-            background-color: var(--background-secondary);
-        }
+    &[aria-current="true"] {
+      display: flex;
+      border-left: 2px solid var(--blue);
+      background-color: var(--background-blue);
     }
+  }
 
-    ol {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
-
-    a {
-        display: inline flex;
-        align-items: baseline;
-        column-gap: 0.5rem;
-        padding: 0.75rem 1rem;
-        text-decoration: none;
-        color: var(--text-primary);
-
-        &:hover {
-            color: var(--link-normal);
-        }
-
-        &[aria-current="true"] {
-            display: flex;
-            border-left: 2px solid var(--blue);
-            background-color: var(--background-blue);
-        }
-    }
-
-    svg {
-        flex-shrink: 0;
-    }
+  svg {
+    flex-shrink: 0;
+  }
 }

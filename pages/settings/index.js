@@ -7,7 +7,7 @@ import "./index.css";
 import "../../components/index.css";
 
 /**
- * @param {Fred.Context} context 
+ * @param {Fred.Context} context
  */
 export function SettingsBody(context) {
   return html`

@@ -3,9 +3,8 @@ import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 import "./index.css";
 
-
 /**
- * @param {Fred.Context<Rari.DocPage>} context 
+ * @param {Fred.Context<Rari.DocPage>} context
  */
 export function LeftSidebar(context) {
   return html`<nav class="left-sidebar">

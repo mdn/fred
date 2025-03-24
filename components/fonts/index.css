@@ -1,20 +1,22 @@
 @font-face {
   font-weight: 100 900;
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-display: swap;
-  src: url('fonts/inter.woff2') format('woff2');
+  src: url("fonts/inter.woff2") format("woff2");
 }
 
 @font-face {
   font-weight: 400;
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: italic;
   font-display: swap;
-  src: url('fonts/inter.woff2') format('woff2');
+  src: url("fonts/inter.woff2") format("woff2");
 }
 
 :root {
-  --font-text: 'Inter', sans-serif;
-  --font-code: 'Menlo', 'Consolas', 'Monaco', 'Liberation Mono', 'Lucida Console', monospace;
+  --font-text: "Inter", sans-serif;
+  --font-code:
+    "Menlo", "Consolas", "Monaco", "Liberation Mono", "Lucida Console",
+    monospace;
 }
