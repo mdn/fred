@@ -1,4 +1,5 @@
 .obs-landing-top {
+  padding-inline: calc(50% - 720px);
   color: var(--observatory-color-secondary);
   background: var(--observatory-bg-secondary);
   display: grid;
@@ -7,7 +8,7 @@
   grid-template-columns: 2fr 1fr minmax(0, 200px);
 
   max-width: var(--max-width);
-  padding: 1.5rem 1rem 1.5rem 1rem;
+  /* padding: 1.5rem 1rem 1.5rem 1rem; */
   --border-radius: 0.3rem;
 
   .accent {
@@ -30,6 +31,106 @@
 }
 
 .obs-landing-about {
+  padding: 1.5rem 1rem 1.5rem 1rem;
+  background: var(--observatory-bg);
+  p {
+    color: var(--observatory-color-secondary);
+  }
+
+  h1,
+  h2 {
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: var(--heading-letter-spacing);
+  }
+
+  h2 {
+    margin-bottom: 2rem;
+  }
+
+  /*
+  $screen-sm: 426px;
+  $screen-md: 769px;
+  $screen-lg: 992px;
+  $screen-xl: 1200px;
+  $screen-xxl: 1441px;
+   */
+
+  @media (min-width: 769px) {
+    .assessment {
+      margin-left: 0;
+    }
+
+    .scanning {
+      margin-left: 3.125rem;
+    }
+
+    .security {
+      margin-left: 6.25rem;
+    }
+
+    .mdn {
+      margin-left: 9.75rem;
+    }
+  }
+  @media (max-width: 768px) {
+    figure ~ figure {
+      margin-top: 1.75rem;
+    }
+
+    .lines {
+      display: none;
+    }
+  }
+  @media (min-width: 769px) and (max-width: 991px) {
+    .about-copy {
+      width: 80%;
+    }
+  }
+
+  svg defs#defs3 #gradient {
+    stop#stop1 {
+      stop-color: var(--observatory-accent);
+    }
+
+    stop#stop2 {
+      stop-color: color-mix(
+        in srgb,
+        var(--observatory-accent),
+        var(--observatory-bg)
+      );
+    }
+
+    stop#stop3 {
+      stop-color: var(--observatory-bg);
+    }
+  }
+
+  figure {
+    align-items: start;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 2rem 1fr;
+
+    figcaption {
+      p {
+        color: var(--observatory-color);
+        margin: 0;
+      }
+    }
+
+    &.assessment {
+      margin-left: 0;
+    }
+    &.assessment,
+    &.scanning,
+    &.security,
+    &.mdn {
+      svg path {
+        fill: var(--observatory-accent);
+      }
+    }
+  }
 }
 
 .obs-landing-about__content {

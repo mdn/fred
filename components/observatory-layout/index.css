@@ -1,7 +1,6 @@
 /* Observatory main layout */
 
 .obs-layout {
-  padding-inline: calc(50% - 720px);
 }
 
 .obs-layout--landing {

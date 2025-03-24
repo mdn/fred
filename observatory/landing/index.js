@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html, svg } from "lit-html";
 
 import { OBSERVATORY_TITLE } from "../constants.js";
 import { Feedback } from "../feedback.js";
@@ -6,7 +6,6 @@ import { FAQ } from "../faq.js";
 
 import landingSvg from "../assets/landing-illustration.svg?mdnsvg";
 import assessmentSvg from "../assets/assessment.svg?mdnsvg";
-import linesSvg from "../assets/lines.svg?mdnsvg";
 import scanningSvg from "../assets/scanning.svg?mdnsvg";
 import securitySvg from "../assets/security.svg?mdnsvg";
 import mdnSvg from "../assets/mdn.svg?mdnsvg";
@@ -56,7 +55,7 @@ export function Landing(context) {
             </figcaption>
           </figure>
           <!-- lines-svg class="lines assessment" role="none"></lines-svg -->
-          ${linesSvg}
+          ${LinesSVG({ className: "lines assessment" })}
           <figure class="scanning">
             ${scanningSvg}
             <figcaption>
@@ -68,7 +67,7 @@ export function Landing(context) {
             </figcaption>
           </figure>
           <!-- lines-svg class="lines scanning" role="none"></lines-svg -->
-          ${linesSvg}
+          ${LinesSVG({ className: "lines scanning" })}
           <figure class="security">
             ${securitySvg}
             <figcaption>
@@ -80,7 +79,7 @@ export function Landing(context) {
             </figcaption>
           </figure>
           <!-- lines-svg class="lines security" role="none"></lines-svg -->
-          ${linesSvg}
+          ${LinesSVG({ className: "lines security" })}
           <figure class="mdn">
             ${mdnSvg}
             <figcaption>
@@ -100,4 +99,25 @@ export function Landing(context) {
       </section>
     </section>
   </section>`;
+}
+
+/**
+ *
+ * @param {{className: string}} props
+ * @returns {TemplateResult}
+ */
+function LinesSVG({ className = "" }) {
+  return svg`
+  <svg width="75" class="${className}" role="none" height="75" viewBox="-25 0 75 75" version="1.1" id="svg1">
+   <path d="M 1,0 V 35 H 48 V 75" stroke="url(#gradient)" stroke-width="2" stroke-dasharray="4, 4" fill="none"
+      style="stroke-linejoin:miter;stroke-linecap:butt;stroke-width:2;stroke-dasharray:4, 3.992;stroke-dashoffset:0;stroke:url(#gradient)"
+      id="path1" />
+   <defs id="defs3">
+      <linearGradient id="gradient" x1="25.321022" y1="0" x2="48" y2="75" gradientUnits="userSpaceOnUse">
+         <stop offset="0.01046867" stop-color="#7171E1" id="stop1" />
+         <stop offset="0.57600665" stop-color="#CFCFF5" id="stop2" />
+         <stop offset="1" stop-color="#ECECFB" id="stop3" />
+      </linearGradient>
+   </defs>
+</svg>`;
 }

@@ -28,7 +28,7 @@
   --base-line-height: 1.2;
   --intermediate-line-height: 1.5;
   --heading-line-height: var(--base-line-height);
-  --heading-letter-spacing: -0.031rem;
+  --heading-letter-spacing: normal;
   --font-content-line-height: 1.75;
   --font-body-strong-weight: 600;
 
