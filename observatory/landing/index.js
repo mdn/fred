@@ -11,7 +11,7 @@ import securitySvg from "../assets/security.svg?mdnsvg";
 import mdnSvg from "../assets/mdn.svg?mdnsvg";
 
 import "./form.js";
-import "./index.css";
+import "../index.css";
 
 /**
  * @typedef {import("lit").TemplateResult} TemplateResult

@@ -3,15 +3,18 @@
   font-family: "Inter";
   font-style: normal;
   font-display: swap;
+  font-variation-settings: "opsz" 14;
+  font-feature-settings: "ss02" on;
   src: url("fonts/inter.woff2") format("woff2");
 }
 
 @font-face {
-  font-weight: 400;
+  font-weight: 100 900;
   font-family: "Inter";
   font-style: italic;
   font-display: swap;
-  src: url("fonts/inter.woff2") format("woff2");
+  font-variation-settings: "opsz" 14;
+  src: url("fonts/inter-italic.woff2") format("woff2");
 }
 
 :root {
@@ -28,7 +31,6 @@
   --base-line-height: 1.2;
   --intermediate-line-height: 1.5;
   --heading-line-height: var(--base-line-height);
-  --heading-letter-spacing: normal;
   --font-content-line-height: 1.75;
   --font-body-strong-weight: 600;
 
@@ -67,38 +69,38 @@
   --type-article-p: 400 var(--type-base-font-size-rem) /
     var(--font-content-line-height) var(--font-body);
 
-  h1,
-  h2,
-  h3 {
-    letter-spacing: var(--heading-letter-spacing);
-  }
-
   h1 {
     font: var(--type-heading-h1);
+    font-variation-settings: "opsz" 26;
     word-break: break-word;
   }
 
   h2 {
     font: var(--type-heading-h2);
+    font-variation-settings: "opsz" 24;
   }
 
   h3 {
     font: var(--type-heading-h3);
+    font-variation-settings: "opsz" 18;
   }
 
   h4 {
     font: var(--type-heading-h4);
+    font-variation-settings: "opsz" 14;
     letter-spacing: 0.5px;
   }
 
   h5 {
     font: var(--type-heading-h5);
+    font-variation-settings: "opsz" 14;
     letter-spacing: 1.5px;
     text-transform: uppercase;
   }
 
   h6 {
     font: var(--type-heading-h6);
+    font-variation-settings: "opsz" 14;
     letter-spacing: 1.5px;
     text-transform: uppercase;
   }

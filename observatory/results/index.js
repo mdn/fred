@@ -3,7 +3,7 @@ import "./results.js";
 import { OBSERVATORY_TITLE } from "../constants.js";
 import { Feedback } from "../feedback.js";
 
-import "./index.css";
+import "../index.css";
 
 /**
  * @typedef {import("lit").TemplateResult} TemplateResult
