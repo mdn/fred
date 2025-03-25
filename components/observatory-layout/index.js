@@ -1,10 +1,10 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import "./index.css";
-import { Landing } from "../../observatory/landing";
-import { Results } from "../../observatory/results";
+import { Landing } from "../../observatory/landing/index";
+import { Results } from "../../observatory/results/index";
 
 /**
- * @import { TemplateResult, nothing } from "lit-html"
+ * @import { TemplateResult } from "lit"
  */
 
 /**

@@ -1,4 +1,4 @@
-import { html, nothing } from "lit-html";
+import { html } from "lit";
 import { Navigation } from "../../components/navigation/index.js";
 import { Footer } from "../../components/footer/index.js";
 

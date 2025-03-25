@@ -31,7 +31,7 @@ export async function render(path) {
     if (!isSPAContext(rawContext)) {
       throw new Error("Expected SPA context for observatory/analyze");
     }
-    /** @type {Fred.Context<SPAPage>} */
+    /** @type {Fred.Context<Rari.SPAPage>} */
     const context = rawContext;
     result = r(ObservatoryResults(context));
   } else if (path.endsWith("observatory") || path.endsWith("observatory/")) {
@@ -39,7 +39,7 @@ export async function render(path) {
     if (!isSPAContext(rawContext)) {
       throw new Error("Expected SPA context for observatory/analyze");
     }
-    /** @type {Fred.Context<SPAPage>} */
+    /** @type {Fred.Context<Rari.SPAPage>} */
     const context = rawContext;
     console.log("ctx", context);
     result = r(ObservatoryLanding(context));
@@ -48,6 +48,7 @@ export async function render(path) {
     // @ts-ignore
     context.l10n = await l10n(context.locale);
     console.log("context", context.url);
+    // @ts-ignore
     result = r(DocBody(context));
   }
   return await collectResult(result);
@@ -67,7 +68,7 @@ export async function renderWithContext(context) {
 /**
  * Type guard to check if a context is an SPAPage context
  * @param {Fred.Context<Rari.DocPage | Rari.SPAPage>} context
- * @returns {context is Fred.Context<SPAPage>}
+ * @returns {context is Fred.Context<Rari.SPAPage>}
  */
 function isSPAContext(context) {
   return "noIndexing" in context && "pageTitle" in context && "slug" in context;

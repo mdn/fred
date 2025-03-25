@@ -1,4 +1,4 @@
-import { html, svg } from "lit-html";
+import { html, svg } from "lit";
 
 import { OBSERVATORY_TITLE } from "../constants.js";
 import { Feedback } from "../feedback.js";
