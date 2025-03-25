@@ -1,34 +1,73 @@
 :root {
-  --observatory-bg: rgba(242, 242, 245, 1);
-  --observatory-bg-code: #e1e1e1;
-  --observatory-bg-secondary: rgba(255, 255, 255, 1);
-  --observatory-color: #000;
-  --observatory-color-secondary: rgba(105, 105, 105, 1);
-  --observatory-inverse-color: rgba(255, 255, 255, 1);
-  --observatory-inverse-color-secondary: rgba(179, 179, 179, 1);
-  --observatory-accent: #5a23d7;
-  --observatory-accent-light: #5a23d7aa;
-  --observatory-border: rgba(228, 228, 246, 1);
-  --observatory-border-accent: rgba(90, 35, 215, 1);
-  --observatory-pass-icon-bg: rgba(229, 250, 230, 1);
-  --observatory-pass-icon-color: rgba(0, 121, 54, 1);
-  --observatory-fail-icon-bg: rgba(250, 229, 229, 1);
-  --observatory-fail-icon-color: rgba(211, 0, 56, 1);
-  --observatory-table-bg: rgba(255, 255, 255, 1);
-  --observatory-table-bg-alternate: #f9f9fb;
-  --observatory-table-header-bg: rgba(249, 249, 251, 1);
-  --observatory-grade-a-bg: #d2fadd;
-  --observatory-grade-a-border: #017a37;
-  --observatory-grade-b-bg: #e8fad2;
-  --observatory-grade-b-border: #547a01;
-  --observatory-grade-c-bg: #faf8d2;
-  --observatory-grade-c-border: #7a7001;
-  --observatory-grade-d-bg: #fae8d2;
-  --observatory-grade-d-border: #a65001;
-  --observatory-grade-f-bg: #fad2d2;
-  --observatory-grade-f-border: #a00;
-  --observatory-arrow-down-color: rgba(158, 0, 39, 1);
-  --observatory-arrow-up-color: rgba(0, 121, 54, 1);
+  --observatory-bg: light-dark(rgba(242, 242, 245, 1), rgba(52, 52, 52, 1));
+  --observatory-bg-code: light-dark(#e1e1e1, #4d4d4d);
+  --observatory-bg-secondary: light-dark(
+    rgba(255, 255, 255, 1),
+    rgba(0, 0, 0, 1)
+  );
+  --observatory-color: light-dark(#000, #fff);
+  --observatory-color-secondary: light-dark(
+    rgba(105, 105, 105, 1),
+    rgba(249, 249, 251, 1)
+  );
+  --observatory-inverse-color: light-dark(
+    rgba(255, 255, 255, 1),
+    rgb(27, 27, 27)
+  );
+  --observatory-inverse-color-secondary: light-dark(
+    rgba(179, 179, 179, 1),
+    rgba(105, 105, 105, 1)
+  );
+  --observatory-accent: light-dark(#5a23d7, #a388ff);
+  --observatory-accent-light: light-dark(#5a23d7aa, #a388ffaa);
+  --observatory-border: light-dark(
+    rgba(228, 228, 246, 1),
+    rgba(105, 105, 105, 1)
+  );
+  --observatory-border-accent: light-dark(
+    rgba(90, 35, 215, 1),
+    rgba(163, 136, 255, 1)
+  );
+  --observatory-pass-icon-bg: light-dark(
+    rgba(229, 250, 230, 1),
+    rgba(38, 92, 61, 1)
+  );
+  --observatory-pass-icon-color: light-dark(
+    rgba(0, 121, 54, 1),
+    rgba(138, 255, 163, 1)
+  );
+  --observatory-fail-icon-bg: light-dark(
+    rgba(250, 229, 229, 1),
+    rgba(92, 38, 38, 1)
+  );
+  --observatory-fail-icon-color: light-dark(
+    rgba(211, 0, 56, 1),
+    rgba(255, 121, 155, 1)
+  );
+  --observatory-table-bg: light-dark(rgba(255, 255, 255, 1), rgb(27, 27, 27));
+  --observatory-table-bg-alternate: light-dark(#f9f9fb, #212121);
+  --observatory-table-header-bg: light-dark(
+    rgba(249, 249, 251, 1),
+    rgb(27, 27, 27)
+  );
+  --observatory-grade-a-bg: light-dark(#d2fadd, #265c3d);
+  --observatory-grade-a-border: light-dark(#017a37, #89fca1);
+  --observatory-grade-b-bg: light-dark(#e8fad2, #52662a);
+  --observatory-grade-b-border: light-dark(#547a01, #d5fc88);
+  --observatory-grade-c-bg: light-dark(#faf8d2, #66602a);
+  --observatory-grade-c-border: light-dark(#7a7001, #fcf988);
+  --observatory-grade-d-bg: light-dark(#fae8d2, #5c3d26);
+  --observatory-grade-d-border: light-dark(#a65001, #ff6a00);
+  --observatory-grade-f-bg: light-dark(#fad2d2, #5c2626);
+  --observatory-grade-f-border: light-dark(#a00, #fc8888);
+  --observatory-arrow-down-color: light-dark(
+    rgba(158, 0, 39, 1),
+    rgba(255, 112, 127, 1)
+  );
+  --observatory-arrow-up-color: light-dark(
+    rgba(0, 121, 54, 1),
+    rgba(0, 255, 106, 1)
+  );
 
   --font-body: Inter, var(--font-fallback);
 }
