@@ -1,5 +1,5 @@
 .obs-landing-top {
-  padding-inline: calc(50% - 720px);
+  padding-inline: calc((100% - 1440px + (1rem * 2)) / 2);
   color: var(--observatory-color-secondary);
   background: var(--observatory-bg-secondary);
   display: grid;
@@ -31,7 +31,7 @@
 }
 
 .obs-landing-about {
-  padding: 1.5rem 1rem 1.5rem 1rem;
+  padding-inline: calc((100% - 1440px + (1rem * 2)) / 2);
   background: var(--observatory-bg);
   p {
     color: var(--observatory-color-secondary);
