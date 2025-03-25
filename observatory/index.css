@@ -71,7 +71,13 @@
     rgba(0, 255, 106, 1)
   );
 
+  --form-invalid-color: light-dark(#d30038, #ff97a0);
+
   --font-body: Inter, var(--font-fallback);
+}
+
+:root {
+  --alert-circle-img: url(assets/alert-circle.svg);
 }
 
 /* landing */

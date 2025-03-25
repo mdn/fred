@@ -1,10 +1,14 @@
-import { LitElement, css, html } from "lit";
+import { LitElement, css, html, nothing } from "lit";
 import { createRef, ref } from "lit/directives/ref.js";
 import "../../components/progress-bar/index.js";
 
 /**
  * @import { Ref } from "lit/directives/ref.js"
  */
+
+const ERROR_MAP = {
+  TypeError: "Observatory is currently down.", // `fetch()` errors catch-all
+};
 
 export class FormProgress extends LitElement {
   static styles = css`
@@ -80,17 +84,36 @@ export class FormProgress extends LitElement {
         }
       }
     }
+    .error {
+      color: var(--form-invalid-color);
+      margin-top: 0.5rem;
+      &::before {
+        background-color: var(--form-invalid-color);
+        content: "";
+        display: inline-block;
+        height: 1.15rem;
+        margin-bottom: 0.25rem;
+        margin-right: 0.5rem;
+        mask-image: var(--alert-circle-img);
+        mask-position: center;
+        mask-repeat: no-repeat;
+        vertical-align: middle;
+        width: 1.5em;
+      }
+    }
   `;
 
   static properties = {
-    _queryRunning: { state: true, type: Boolean },
+    _queryRunning: { type: Boolean, state: true },
     _hostname: { type: String, state: true },
+    _errorMessage: { typoe: String, state: true },
   };
 
   constructor() {
     super();
     this._queryRunning = false;
     this._hostname = "";
+    this._errorMessage = "";
   }
   /** @type {Ref<HTMLInputElement>}  */
   inputRef = createRef();
@@ -104,8 +127,12 @@ export class FormProgress extends LitElement {
    */
   async _handleSubmit(event) {
     event.preventDefault();
+    this._errorMessage = "";
     const input = this.inputRef.value;
-    if (!input) return;
+    if (!input.value.trim()) {
+      this._errorMessage = "Please enter a valid hostname";
+      return;
+    }
     this._hostname = input.value.trim();
     if (!this._hostname) return; // Optionally, ignore if empty
     this._queryRunning = true;
@@ -115,13 +142,14 @@ export class FormProgress extends LitElement {
       )}`;
       const response = await fetch(apiUrl, { method: "POST" });
       if (!response.ok) {
-        throw new Error(`API request failed: ${response.statusText}`);
+        const json = await response.json();
+        throw new Error(`Request failed: ${json.message}`);
       }
       window.location.href = `/en-US/observatory/analyze?host=${encodeURIComponent(
         this._hostname,
       )}`;
     } catch (error) {
-      console.error("API request error:", error);
+      this._errorMessage = `${ERROR_MAP[error.name] || error.message}`;
     } finally {
       this._queryRunning = false;
     }
@@ -134,22 +162,25 @@ export class FormProgress extends LitElement {
         ><mdn-progress-bar id="progress-bar"></mdn-progress-bar>`;
     } else {
       return html`<form @submit=${this._handleSubmit}>
-        <div class="input-group">
-          <label htmlFor="host" class="visually-hidden">
-            Domain name or URL
-          </label>
-          <input
-            placeholder="Scan a website for free (e.g. mdn.dev)"
-            type="text"
-            name="host"
-            id="host"
-            .value=${this._hostname}
-            autofocus
-            ${ref(this.inputRef)}
-          />
-          <button type="submit" ?disabled=${this._queryRunning}>Scan</button>
-        </div>
-      </form>`;
+          <div class="input-group">
+            <label htmlFor="host" class="visually-hidden">
+              Domain name or URL
+            </label>
+            <input
+              placeholder="Scan a website for free (e.g. mdn.dev)"
+              type="text"
+              name="host"
+              id="host"
+              .value=${this._hostname}
+              autofocus
+              ${ref(this.inputRef)}
+            />
+            <button type="submit" ?disabled=${this._queryRunning}>Scan</button>
+          </div>
+        </form>
+        ${this._errorMessage
+          ? html`<div class="error">Error: ${this._errorMessage}</div>`
+          : nothing}`;
     }
   }
 }
