@@ -247,6 +247,9 @@
   color: var(--observatory-color-secondary);
   font-size: var(--type-tiny-font-size);
   text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
   &::before {
     content: "";
     background-color: var(--observatory-color-secondary);
@@ -260,20 +263,6 @@
     vertical-align: middle;
   }
 }
-
-/*
-display: inline-flex;
-  height: 1em;
-  margin-right: .4em;
-  -webkit-mask-image:
-url(/static/media/feedback.8628a9cde87e3951f74c.svg);
-  mask-image: url(/static/media/feedback.8628a9cde87e3951f74c.svg);
-  -webkit-mask-size:
-cover;
-  mask-size: cover;
-  vertical-align: middle;
-  width: 1em;
-}*/
 
 .obs-links__link--faq {
   &::before {
