@@ -17,9 +17,9 @@ window.addEventListener("DOMContentLoaded", () => {
         code.innerHTML = Prism.highlight(
           code.textContent || "",
           Prism.languages.html,
-          "html"
+          "html",
         );
       }
-    }
+    },
   );
 });

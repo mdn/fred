@@ -1,9 +1,10 @@
+// @ts-nocheck
+
 import { html, css, LitElement } from "lit";
 
 import osDefault from "../icon/theme.svg?mdnsvg";
 import light from "../icon/sun.svg?mdnsvg";
 import dark from "../icon/moon.svg?mdnsvg";
-import { LitElement } from "lit";
 
 export class ColorTheme extends LitElement {
   static styles = css`
@@ -126,12 +127,16 @@ export class ColorTheme extends LitElement {
   _themeChanged() {}
 
   render() {
+    const setDefault = () => this._setMode("osDefault");
+    const setLight = () => this._setMode("light");
+    const setDark = () => this._setMode("dark");
+
     return html`<div class="color-theme">
       <button
         class="color-theme__button dropdown"
         aria-expanded="false"
         aria-controls="color-theme__dropdown-1"
-        @click=${(e) => this._toggleDropDown(e)}
+        @click=${this._toggleDropDown}
       >
         ${this._getCurrent()} Theme
       </button>
@@ -143,26 +148,17 @@ export class ColorTheme extends LitElement {
       >
         <ul class="color-theme__list">
           <li>
-            <button
-              class="color-theme__option"
-              @click=${() => this._setMode("osDefault")}
-            >
+            <button class="color-theme__option" @click=${setDefault}>
               ${osDefault} OS default
             </button>
           </li>
           <li>
-            <button
-              class="color-theme__option"
-              @click=${() => this._setMode("light")}
-            >
+            <button class="color-theme__option" @click=${setLight}>
               ${light} Light
             </button>
           </li>
           <li>
-            <button
-              class="color-theme__option"
-              @click=${() => this._setMode("dark")}
-            >
+            <button class="color-theme__option" @click=${setDark}>
               ${dark} Dark
             </button>
           </li>

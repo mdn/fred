@@ -4,7 +4,7 @@ import express from "express";
 import { Doc } from "./pages/doc/index.js";
 
 /**
- * @param {string} path 
+ * @param {string} path
  * @returns {Promise<Fred.Context<Rari.DocPage>>}
  */
 async function fetch_from_rari(path) {

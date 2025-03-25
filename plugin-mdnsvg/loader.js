@@ -7,5 +7,5 @@ export default function litSvgLoader(contents) {
     .replaceAll(`\\`, `\\\\`)
     .replaceAll(`$`, `\\$`)
     .replaceAll(`\``, `\\\``);
-  return `import { svg as s } from "lit-html"; const svg = s\`${escaped}\`; export default svg;`;
+  return `import { svg as s } from "lit"; const svg = s\`${escaped}\`; export default svg;`;
 }

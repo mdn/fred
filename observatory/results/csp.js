@@ -1,8 +1,8 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import { PassIcon } from "../utils";
 
 /**
- * @import { TemplateResult } from "lit-html"
+ * @import { TemplateResult } from "lit"
  * @import { ObservatoryResult, ObservatoryPolicyItem, ObservatoryCSPPolicy } from "../constants"
  */
 
@@ -79,6 +79,24 @@ export function CSP({ result }) {
     `;
   }
 
+  const rows = policyTests.map((pt) => {
+    if (!policy[pt]) return null;
+    /** @type {ObservatoryPolicyItem} */
+    const p = policy[pt];
+
+    return html`
+      <tr>
+        <td data-header="Test" .innerHTML=${p.description}></td>
+        <td data-header="Pass">
+          ${PassIcon({
+            pass: negatedPolicies.includes(pt) ? !p.pass : p.pass,
+          })}
+        </td>
+        <td data-header="Info" .innerHTML=${p.info}></td>
+      </tr>
+    `;
+  });
+
   return html`
     <div class="detail-header">
       <p class="arrow">${PassIcon({ pass })}</p>
@@ -98,23 +116,7 @@ export function CSP({ result }) {
         </tr>
       </thead>
       <tbody>
-        ${policyTests.map((pt) => {
-          if (!policy[pt]) return null;
-          /** @type {ObservatoryPolicyItem} */
-          const p = policy[pt];
-
-          return html`
-            <tr>
-              <td data-header="Test" .innerHTML=${p.description}></td>
-              <td data-header="Pass">
-                ${PassIcon({
-                  pass: negatedPolicies.includes(pt) ? !p.pass : p.pass,
-                })}
-              </td>
-              <td data-header="Info" .innerHTML=${p.info}></td>
-            </tr>
-          `;
-        })}
+        ${rows}
       </tbody>
     </table>
   `;

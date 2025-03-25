@@ -1,8 +1,7 @@
 import fs from "node:fs";
 
 /**
- * @import { Request, Response } from "express";
- * @import { RsbuildDevServer, ManifestData } from "@rsbuild/core";
+ * @import { ManifestData } from "@rsbuild/core";
  */
 
 const templateHtml = fs.readFileSync("./template.html", "utf-8");
@@ -26,20 +25,26 @@ export function tagsFromManifest(manifest, entry = "index") {
   return { scriptTags, styleTags };
 }
 
+/**
+ *
+ * @param {string} ssrManifest
+ * @param {string} clientManifest
+ * @param {boolean} legacy
+ * @param {string} [markup]
+ * @returns
+ */
 export function renderHTML(ssrManifest, clientManifest, legacy, markup) {
-  const { scriptTags: ssrScriptTags, styleTags: ssrStyleTags } =
+  const { scriptTags: _ssrScriptTags, styleTags: ssrStyleTags } =
     tagsFromManifest(ssrManifest);
   const { scriptTags: clientScriptTags, styleTags: clientStyleTags } =
     tagsFromManifest(clientManifest);
   const { scriptTags: legacyScriptTags, styleTags: legacyStyleTags } =
     tagsFromManifest(clientManifest, "legacy");
 
-  const legacyTags = legacy
-    ? [legacyScriptTags, legacyStyleTags]
-    : [];
+  const legacyTags = legacy ? [legacyScriptTags, legacyStyleTags] : [];
 
   const tags = [
-    //ssrScriptTags,
+    //_ssrScriptTags,
     ssrStyleTags,
     clientScriptTags,
     clientStyleTags,

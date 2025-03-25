@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import { Scoring } from "./scoring";
 import { CSP } from "./csp";
 import { Cookies } from "./cookies";
@@ -7,8 +7,8 @@ import { History } from "./history";
 import { Comparison } from "./comparison";
 
 /**
- * @import { TemplateResult } from "lit-html"
- * @import { ObservatoryResult } from "../constants"
+ * @typedef {import("lit").TemplateResult} TemplateResult
+ * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 
 /**
@@ -53,6 +53,33 @@ export function Tabs({ result, selectedTab = 0, onTabSelect }) {
     },
   ];
 
+  const tabElements = tabs.map((tab, i) => {
+    const onChange = () => onTabSelect(i, tab.key);
+    return html`
+      <li id="tabs-${i}" class="tabs-list-item">
+        <input
+          class="visually-hidden"
+          id="tab-${i}"
+          name="selected"
+          type="radio"
+          role="tab"
+          .checked=${i === selectedTab}
+          aria-controls="tab-container-${i}"
+          @change=${onChange}
+        />
+        <label for="tab-${i}" id="tab-label-${i}">${tab.label}</label>
+        <section
+          class="tab-content"
+          role="tabpanel"
+          aria-labelledby="tab-label-${i}"
+          id="tab-container-${i}"
+        >
+          <div class="scroll-container">${tab.element}</div>
+        </section>
+      </li>
+    `;
+  });
+
   return html`
     <section class="scan-results">
       <h2 class="result" id="scan-results-header">Scan results</h2>
@@ -61,31 +88,7 @@ export function Tabs({ result, selectedTab = 0, onTabSelect }) {
         role="tablist"
         aria-labelledby="scan-results-header"
       >
-        ${tabs.map(
-          (tab, i) => html`
-            <li id="tabs-${i}" class="tabs-list-item">
-              <input
-                class="visually-hidden"
-                id="tab-${i}"
-                name="selected"
-                type="radio"
-                role="tab"
-                .checked=${i === selectedTab}
-                aria-controls="tab-container-${i}"
-                @change=${() => onTabSelect(i, tab.key)}
-              />
-              <label for="tab-${i}" id="tab-label-${i}">${tab.label}</label>
-              <section
-                class="tab-content"
-                role="tabpanel"
-                aria-labelledby="tab-label-${i}"
-                id="tab-container-${i}"
-              >
-                <div class="scroll-container">${tab.element}</div>
-              </section>
-            </li>
-          `,
-        )}
+        ${tabElements}
       </ol>
     </section>
   `;

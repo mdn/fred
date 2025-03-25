@@ -1,11 +1,11 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 import passSvg from "./assets/pass-icon.svg?mdnsvg";
 import failSvg from "./assets/fail-icon.svg?mdnsvg";
 
 /**
- * @import { TemplateResult } from "lit-html"
- * @import { ObservatoryResult } from "./constants"
+ * @typedef {import("lit").TemplateResult} TemplateResult
+ * @typedef {import("./constants").ObservatoryResult} ObservatoryResult
  */
 
 /**
@@ -26,14 +26,14 @@ export function hostAsRedirectChain(host, result) {
       return host;
     }
     return `${firstUrl.hostname} → ${lastUrl.hostname}`;
-  } catch (e) {
+  } catch {
     return host;
   }
 }
 
 /**
  *
- * @param {string | null | undefined} term
+ * @param {string | null | undefined} term
  * @returns {null | string}
  */
 export function formatMinus(term) {
@@ -167,13 +167,13 @@ export function CookiePrefix({ cookieName }) {
 export function HeaderLink({ header }) {
   const displayHeaderName = upperCaseHeaderName(header);
   const headerPath = `/en-US/docs/Web/HTTP/Headers/${encodeURIComponent(
-    displayHeaderName
+    displayHeaderName,
   )}`;
 
   // Simple approach: always show the link, it will 404 if the page doesn't exist
   // Alternative: you could maintain a list of known valid headers
   return html`
-    <a href="${headerPath}" target="_blank" rel="noreferrer">
+    <a href=${headerPath} target="_blank" rel="noreferrer">
       ${displayHeaderName}
     </a>
   `;

@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import { ReferenceToc } from "../reference-toc/index.js";
 import { Content } from "../content/index.js";
 
@@ -10,7 +10,7 @@ import "../formal-syntax/index.css";
 import { LeftSidebar } from "../left-sidebar/index.js";
 
 /**
- * @param {Fred.Context<Rari.DocPage>} context 
+ * @param {Fred.Context<Rari.DocPage>} context
  */
 export function ReferenceLayout(context) {
   return html`

@@ -2,6 +2,10 @@ import { LitElement, css, html } from "lit";
 import { createRef, ref, Ref } from "lit/directives/ref.js";
 import "../../components/progress-bar/index.js";
 
+/**
+ * @import { Ref } from "lit/directives/ref.js"
+ */
+
 export class FormProgress extends LitElement {
   static styles = css`
     :host {
@@ -139,7 +143,7 @@ export class FormProgress extends LitElement {
             type="text"
             name="host"
             id="host"
-            value="${this._hostname}"
+            .value=${this._hostname}
             autofocus
             ${ref(this.inputRef)}
           />

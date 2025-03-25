@@ -1,23 +1,23 @@
 .heading:target {
-    scroll-margin-top: var(--sticky-header-height);
+  scroll-margin-top: var(--sticky-header-height);
 }
 
 .heading-anchor {
-    color: inherit;
+  color: inherit;
+
+  &::before {
+    position: absolute;
+    content: "#";
+    color: var(--text-secondary);
+    padding-inline-end: 0.4em;
+    margin-inline-start: -0.8em;
+  }
+
+  &:not(:hover, :focus) {
+    text-decoration: none;
 
     &::before {
-        position: absolute;
-        content: "#";
-        color: var(--text-secondary);
-        padding-inline-end: 0.4em;
-        margin-inline-start: -0.8em;
+      visibility: hidden;
     }
-
-    &:not(:hover, :focus) {
-        text-decoration: none;
-
-        &::before {
-            visibility: hidden;
-        }
-    }
+  }
 }

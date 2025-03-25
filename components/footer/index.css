@@ -1,189 +1,189 @@
 /* Footer */
 
 .footer {
-    --footer-side-padding: 1rem;
+  --footer-side-padding: 1rem;
 
-    background-color: var(--background-secondary);
-    color: var(--text-secondary);
+  background-color: var(--background-secondary);
+  color: var(--text-secondary);
 }
 
 /* MDN */
 
 .footer__mdn {
-    display: grid;
-    align-items: start;
+  display: grid;
+  align-items: start;
+  grid-template-areas:
+    "intro"
+    "socials"
+    "links";
+  row-gap: 2rem;
+  column-gap: 1rem;
+  padding-block: 2rem 1.5rem;
+  padding-inline: var(--footer-side-padding);
+
+  @media (width > 480px) {
     grid-template-areas:
-        "intro"
-        "socials"
-        "links";
-    row-gap: 2rem;
-    column-gap: 1rem;
-    padding-block: 2rem 1.5rem;
-    padding-inline: var(--footer-side-padding);
+      "intro socials"
+      "links links";
+    grid-template-columns: 1fr 1fr;
+  }
 
-    @media (width > 480px) {
-        grid-template-areas:
-            "intro socials"
-            "links links";
-        grid-template-columns: 1fr 1fr;
-    }
+  @media (width > 640px) {
+    grid-template-areas:
+      "intro socials socials"
+      "links links   links";
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 
-    @media (width > 640px) {
-        grid-template-areas:
-            "intro socials socials"
-            "links links   links";
-        grid-template-columns: 1fr 1fr 1fr;
-    }
+  @media (width > 840px) {
+    grid-template-areas:
+      "intro   intro   intro   intro"
+      "socials socials socials socials"
+      "links   links   links   links";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 
-    @media (width > 840px) {
-        grid-template-areas:
-            "intro   intro   intro   intro"
-            "socials socials socials socials"
-            "links   links   links   links";
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
+  @media (width > 1200px) {
+    grid-template-areas:
+      "intro   links links links links"
+      "socials links links links links";
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+  }
 
-    @media (width > 1200px) {
-        grid-template-areas:
-            "intro   links links links links"
-            "socials links links links links";
-        grid-template-columns: 2fr 1fr 1fr 1fr;
-    }
-
-    @media (width > 1440px) {
-        padding-inline: calc(
-            (100% - 1440px + (var(--footer-side-padding) * 2)) / 2
-        );
-    }
+  @media (width > 1440px) {
+    padding-inline: calc(
+      (100% - 1440px + (var(--footer-side-padding) * 2)) / 2
+    );
+  }
 }
 
 /* Logo */
 
 .footer__logo {
-    color: var(--text-secondary);
+  color: var(--text-secondary);
 
-    &:hover {
-        color: var(--text-primary);
-    }
+  &:hover {
+    color: var(--text-primary);
+  }
 
-    svg {
-        display: block;
-        fill: currentColor;
-    }
+  svg {
+    display: block;
+    fill: currentColor;
+  }
 }
 
 /* Intro */
 
 .footer__intro {
-    grid-area: intro;
-    display: grid;
-    justify-items: start;
-    row-gap: 1rem;
+  grid-area: intro;
+  display: grid;
+  justify-items: start;
+  row-gap: 1rem;
 
-    p {
-        margin: 0;
-    }
+  p {
+    margin: 0;
+  }
 }
 
 /* Socials */
 
 .footer__socials {
-    grid-area: socials;
-    display: flex;
-    column-gap: 0.75rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  grid-area: socials;
+  display: flex;
+  column-gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 
-    a {
-        color: var(--text-secondary);
+  a {
+    color: var(--text-secondary);
 
-        &:hover {
-            color: var(--text-primary);
-        }
+    &:hover {
+      color: var(--text-primary);
     }
+  }
 
-    svg {
-        display: block;
-    }
+  svg {
+    display: block;
+  }
 }
 
 /* List */
 
 .footer__links {
-    display: grid;
-    row-gap: 0.75rem;
+  display: grid;
+  row-gap: 0.75rem;
+  margin: 0;
+
+  dt {
+    font-size: 1.25rem;
+  }
+
+  dd {
     margin: 0;
+    display: contents;
+  }
 
-    dt {
-        font-size: 1.25rem;
+  ul {
+    display: contents;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  a {
+    color: inherit;
+
+    &:hover {
+      color: var(--text-primary);
     }
+  }
 
-    dd {
-        margin: 0;
-        display: contents;
-    }
-
-    ul {
-        display: contents;
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-    }
-
-    a {
-        color: inherit;
-
-        &:hover {
-            color: var(--text-primary);
-        }
-    }
-
-    @media (width > 1200px) {
-        grid-row-end: span 2;
-    }
+  @media (width > 1200px) {
+    grid-row-end: span 2;
+  }
 }
 
 /* Mozilla */
 
 .footer__mozilla {
-    display: grid;
-    grid-template-columns: min-content 1fr;
-    justify-items: start;
-    align-items: start;
-    row-gap: 1rem;
-    column-gap: 1.5rem;
-    padding-block: 1.5rem;
-    padding-inline: var(--footer-side-padding);
-    border-block-start: 1px solid var(--text-secondary);
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  justify-items: start;
+  align-items: start;
+  row-gap: 1rem;
+  column-gap: 1.5rem;
+  padding-block: 1.5rem;
+  padding-inline: var(--footer-side-padding);
+  border-block-start: 1px solid var(--text-secondary);
 
-    @media (width > 1440px) {
-        padding-inline: calc(
-            (100% - 1440px + (var(--footer-side-padding) * 2)) / 2
-        );
+  @media (width > 1440px) {
+    padding-inline: calc(
+      (100% - 1440px + (var(--footer-side-padding) * 2)) / 2
+    );
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    line-height: 2;
+  }
+
+  p {
+    margin: 0;
+    grid-column: span 2;
+    line-height: 1.5;
+  }
+
+  a {
+    color: inherit;
+
+    &:hover {
+      color: var(--text-primary);
     }
-
-    ul {
-        display: flex;
-        flex-wrap: wrap;
-        column-gap: 1rem;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        line-height: 2;
-    }
-
-    p {
-        margin: 0;
-        grid-column: span 2;
-        line-height: 1.5;
-    }
-
-    a {
-        color: inherit;
-
-        &:hover {
-            color: var(--text-primary);
-        }
-    }
+  }
 }

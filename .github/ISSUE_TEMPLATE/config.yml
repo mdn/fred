@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Content or feature request
+    url: https://github.com/mdn/mdn/issues/new/choose
+    about: Propose new content for MDN Web Docs or submit a feature request using this link.
+  - name: MDN GitHub Discussions
+    url: https://github.com/orgs/mdn/discussions
+    about: Does the issue involve a lot of changes, or is it hard to split it into actionable tasks? Start a discussion before opening an issue.

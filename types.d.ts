@@ -44,7 +44,8 @@ namespace Rari {
   type BlogPostDoc = import("@mdn/rari").BlogPostDoc;
   type BlogIndex = import("@mdn/rari").BlogIndex;
   type ContributorSpotlightPage = import("@mdn/rari").ContributorSpotlightPage;
-  type ContributorSpotlightHyData = import("@mdn/rari").ContributorSpotlightHyData;
+  type ContributorSpotlightHyData =
+    import("@mdn/rari").ContributorSpotlightHyData;
   type Usernames = import("@mdn/rari").Usernames;
   type GenericPage = import("@mdn/rari").GenericPage;
   type GenericHyData = import("@mdn/rari").GenericHyData;
@@ -52,10 +53,14 @@ namespace Rari {
   type HomePage = import("@mdn/rari").HomePage;
   type HomePageSPAHyData = import("@mdn/rari").HomePageSPAHyData;
   type HomePageFeaturedArticle = import("@mdn/rari").HomePageFeaturedArticle;
-  type HomePageFeaturedContributor = import("@mdn/rari").HomePageFeaturedContributor;
-  type ItemContainerFor_HomePageLatestNewsItem = import("@mdn/rari").ItemContainerFor_HomePageLatestNewsItem;
+  type HomePageFeaturedContributor =
+    import("@mdn/rari").HomePageFeaturedContributor;
+  type ItemContainerFor_HomePageLatestNewsItem =
+    import("@mdn/rari").ItemContainerFor_HomePageLatestNewsItem;
   type HomePageLatestNewsItem = import("@mdn/rari").HomePageLatestNewsItem;
   type NameUrl = import("@mdn/rari").NameUrl;
-  type ItemContainerFor_HomePageRecentContribution = import("@mdn/rari").ItemContainerFor_HomePageRecentContribution;
-  type HomePageRecentContribution = import("@mdn/rari").HomePageRecentContribution;
+  type ItemContainerFor_HomePageRecentContribution =
+    import("@mdn/rari").ItemContainerFor_HomePageRecentContribution;
+  type HomePageRecentContribution =
+    import("@mdn/rari").HomePageRecentContribution;
 }

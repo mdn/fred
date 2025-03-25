@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 import { formatMinus, hostAsRedirectChain } from "../utils";
 
@@ -8,8 +8,8 @@ import "./human_duration";
 import "./rescan_button";
 
 /**
- * @import { TemplateResult } from "lit-html"
- * @import { ObservatoryResult } from "../constants"
+ * @typedef {import("lit").TemplateResult} TemplateResult
+ * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 
 /**
@@ -33,7 +33,7 @@ export function Rating({ result, host, rescan }) {
             tabindex="0"
           >
             <div
-              class="${`grade grade-${result.scan.grade?.[0]?.toLowerCase()}`}"
+              class=${`grade grade-${result.scan.grade?.[0]?.toLowerCase()}`}
             >
               ${formatMinus(result.scan.grade)}
             </div>

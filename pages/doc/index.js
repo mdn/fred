@@ -1,4 +1,4 @@
-import { html } from "lit-html";
+import { html } from "lit";
 import { Navigation } from "../../components/navigation/index.js";
 import { BreadCrumbs } from "../../components/breadcrumbs/index.js";
 import { ReferenceLayout } from "../../components/reference-layout/index.js";
@@ -8,7 +8,7 @@ import "./index.css";
 import "../../components/index.css";
 
 /**
- * @param {Fred.Context<Rari.DocPage>} context 
+ * @param {Fred.Context<Rari.DocPage>} context
  */
 export function DocBody(context) {
   return html`
@@ -23,7 +23,7 @@ export function DocBody(context) {
 }
 
 /**
- * @param {Fred.Context<Rari.DocPage>} context 
+ * @param {Fred.Context<Rari.DocPage>} context
  */
 export function Doc(context) {
   return html`

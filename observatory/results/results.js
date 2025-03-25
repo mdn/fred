@@ -6,7 +6,7 @@ import { Rating } from "./rating.js";
 import { Tabs } from "./tabs.js";
 
 import { OBSERVATORY_API_URL } from "../constants.js";
-import { nothing } from "lit-html";
+import { nothing } from "lit";
 
 /**
  * @import { PropertyDeclarations } from "lit"
@@ -35,8 +35,8 @@ export class Results extends LitElement {
    */
   static properties = {
     host: { type: String },
-    selectedTab: { type: Number },
-    _usePostInApi: { type: Boolean },
+    selectedTab: { state: true, type: Number },
+    _usePostInApi: { state: true, type: Boolean },
   };
 
   _apiTask = new Task(this, {
@@ -59,13 +59,16 @@ export class Results extends LitElement {
             if (data.error) {
               message = data.message;
             }
-          } finally {
-            throw new Error(message);
+          } catch {
+            // Ignore.
           }
+          throw new Error(message);
         }
         return await res.json();
       } catch (e) {
-        throw new Error("Observatory API request for scan data failed");
+        throw new Error("Observatory API request for scan data failed", {
+          cause: e,
+        });
       }
     },
   });

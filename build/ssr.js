@@ -2,6 +2,8 @@ import { readFile, writeFile } from "node:fs/promises";
 
 import { fdir } from "fdir";
 
+// @ts-ignore
+// eslint-disable-next-line n/no-missing-import
 import ssr from "../dist/ssr/index.cjs";
 import { renderHTML } from "./utils.js";
 
@@ -52,7 +54,7 @@ export async function ssrAllDocuments() {
   console.log(
     `Rendered ${count.toLocaleString()} pages in ${took}, at a rate of ${(
       count / seconds
-    ).toFixed(1)} documents per second.`
+    ).toFixed(1)} documents per second.`,
   );
 }
 
@@ -74,7 +76,7 @@ async function ssrSingleDocument(file) {
   const context = JSON.parse(await readFile(file, "utf-8"));
   if (!context?.url) {
     console.warn(
-      `WARNING: Skipped rendering HTML. Document is missing url: ${file}`
+      `WARNING: Skipped rendering HTML. Document is missing url: ${file}`,
     );
     return;
   }

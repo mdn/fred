@@ -1,9 +1,9 @@
-import { html } from "lit-html";
+import { html } from "lit";
 
 import "./index.css";
 
 /**
- * @param {Fred.Context} _context 
+ * @param {Fred.Context} _context
  */
 export function Footer(_context) {
   return html`<div class="footer">

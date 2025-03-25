@@ -9,12 +9,8 @@ import {
 } from "./pages/observatory/index.js";
 
 /**
- * @import { SPAPage } from "@mdn/rari"
- */
-
-/**
  * @param {string} path
- * @returns {Promise<Fred.Context<Rari.DocPage | Rari.SPAPage>>}
+ * @returns {Promise<Fred.Context<Rari.DocPage | Rari.SPAPage>>}
  */
 async function fetch_from_rari(path) {
   const external_url = `http://localhost:8083${path}`;
@@ -28,6 +24,7 @@ async function fetch_from_rari(path) {
 export async function render(path) {
   let result;
   if (path.endsWith("settings")) {
+    // @ts-ignore
     result = r(SettingsBody());
   } else if (path.includes("observatory/analyze")) {
     const rawContext = await fetch_from_rari(path.trim().replace(/\/$/, ""));
@@ -48,6 +45,7 @@ export async function render(path) {
     result = r(ObservatoryLanding(context));
   } else {
     const context = await fetch_from_rari(path);
+    // @ts-ignore
     context.l10n = await l10n(context.locale);
     console.log("context", context.url);
     result = r(DocBody(context));
@@ -59,7 +57,9 @@ export async function render(path) {
  * @param {Rari.BuiltPage} context
  */
 export async function renderWithContext(context) {
+  // @ts-ignore
   context.l10n = await l10n(context.locale);
+  // @ts-ignore
   const result = r(DocBody(context));
   return await collectResult(result);
 }
