@@ -15,7 +15,8 @@ import {
 async function fetch_from_rari(path) {
   const external_url = `http://localhost:8083${path}`;
   console.log(`using ${external_url}`);
-  return await (await fetch(external_url)).json();
+  const response = await fetch(external_url);
+  return await response.json();
 }
 
 /**
@@ -26,7 +27,7 @@ export async function render(path) {
   if (path.endsWith("settings")) {
     // @ts-ignore
     result = r(SettingsBody());
-  } else if (path.indexOf("observatory/analyze") !== -1) {
+  } else if (path.includes("observatory/analyze")) {
     /** @type {Fred.Context<Rari.SPAPage>} */
     const context = {
       noIndexing: true,

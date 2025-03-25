@@ -120,7 +120,7 @@ const TEST_NAMES_IN_ORDER = [
 
 /**
  * @typedef {Object} ObservatoryPolicyItem
- * @property {boolean|null} pass
+ * @property {boolean|undefined} pass
  * @property {string} description
  * @property {string} info
  */

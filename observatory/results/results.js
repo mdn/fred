@@ -21,8 +21,8 @@ export class Results extends LitElement {
 
   constructor() {
     super();
-    /** @type { string | null } */
-    this.host = null;
+    /** @type { string | undefined } */
+    this.host = undefined;
     /** @type { number } */
     this.selectedTab = 0;
     /** @type { boolean } */
@@ -64,9 +64,9 @@ export class Results extends LitElement {
           throw new Error(message);
         }
         return await res.json();
-      } catch (e) {
+      } catch (error) {
         throw new Error("Observatory API request for scan data failed", {
-          cause: e,
+          cause: error,
         });
       }
     },
@@ -76,17 +76,17 @@ export class Results extends LitElement {
     super.connectedCallback();
     this._updateSelectedTab = this._updateSelectedTab.bind(this);
     this.selectedTab = this._getSelectedTab();
-    window.addEventListener("hashchange", this._updateSelectedTab);
+    globalThis.addEventListener("hashchange", this._updateSelectedTab);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    window.removeEventListener("hashchange", this._updateSelectedTab);
+    globalThis.removeEventListener("hashchange", this._updateSelectedTab);
   }
 
   firstUpdated() {
-    const params = new URLSearchParams(window.location.search);
-    this.host = params.get("host");
+    const params = new URLSearchParams(globalThis.location.search);
+    this.host = params.get("host") ?? undefined;
   }
 
   _updateSelectedTab() {
@@ -97,7 +97,7 @@ export class Results extends LitElement {
    * @returns {number}
    */
   _getSelectedTab() {
-    const hash = window.location.hash.replace("#", "");
+    const hash = globalThis.location.hash.replace("#", "");
     const tabs = [
       "scoring",
       "csp",
@@ -130,10 +130,10 @@ export class Results extends LitElement {
    */
   _handleTabSelect(index, key) {
     this.selectedTab = index;
-    window.history.replaceState(
+    globalThis.history.replaceState(
       "",
       "",
-      window.location.pathname + window.location.search + "#" + key,
+      globalThis.location.pathname + globalThis.location.search + "#" + key,
     );
   }
 

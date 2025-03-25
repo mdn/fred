@@ -18,7 +18,7 @@ export class RescanButton extends LitElement {
     this.from = new Date();
     this.duration = 60;
     this._remainingTime = 0;
-    this._interval = null;
+    this._interval = undefined;
   }
 
   connectedCallback() {
@@ -33,13 +33,13 @@ export class RescanButton extends LitElement {
     super.disconnectedCallback();
     if (this._interval) {
       clearInterval(this._interval);
-      this._interval = null;
+      this._interval = undefined;
     }
   }
 
   _calculateRemainingTime() {
     const endTime = this.from.getTime() + this.duration * 1000;
-    return Math.max(0, endTime - new Date().getTime());
+    return Math.max(0, endTime - Date.now());
   }
 
   render() {
@@ -48,8 +48,9 @@ export class RescanButton extends LitElement {
     const progressPercent = (remainingSecs * 100) / 60;
 
     return html`
-      ${!isExpired
-        ? html` <button disabled>
+      ${isExpired
+        ? html`<button>Rescan</button>`
+        : html` <button disabled>
             <div
               class="progress"
               role="progressbar"
@@ -57,8 +58,7 @@ export class RescanButton extends LitElement {
               style="background: conic-gradient(var(--button-color) 0grad, ${progressPercent}%, rgba(0,0,0,0) ${progressPercent}% 100%)"
             ></div>
             <small id="wait-secs">Wait ${remainingSecs}s to rescan</small>
-          </button>`
-        : html`<button>Rescan</button>`}
+          </button>`}
     `;
   }
 }

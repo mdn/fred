@@ -10,7 +10,8 @@ import { Doc } from "./pages/doc/index.js";
 async function fetch_from_rari(path) {
   const external_url = `http://localhost:8083${path}`;
   console.log(`using ${external_url}`);
-  return await (await fetch(external_url)).json();
+  const response = await fetch(external_url);
+  return await response.json();
 }
 
 const app = express();

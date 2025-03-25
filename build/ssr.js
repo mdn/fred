@@ -9,8 +9,8 @@ import { renderHTML } from "./utils.js";
 
 const BUILD_OUT_ROOT = "./out";
 
-const ssrManifest = await readFile("./dist/ssr/manifest.json", "utf-8");
-const clientManifest = await readFile("./dist/client/manifest.json", "utf-8");
+const ssrManifest = await readFile("./dist/ssr/manifest.json", "utf8");
+const clientManifest = await readFile("./dist/client/manifest.json", "utf8");
 
 /**
  * @template T
@@ -41,7 +41,9 @@ export async function ssrAllDocuments() {
 
   const renderedFiles = [];
   for (const chunk of chunks(files, 1000)) {
-    const out = await Promise.all(chunk.map(ssrSingleDocument).filter(Boolean));
+    const out = await Promise.all(
+      chunk.map((file) => ssrSingleDocument(file)).filter(Boolean),
+    );
     renderedFiles.push(...out);
   }
 
@@ -73,7 +75,7 @@ async function findDocuments() {
  * @returns {Promise<string | undefined>}
  */
 async function ssrSingleDocument(file) {
-  const context = JSON.parse(await readFile(file, "utf-8"));
+  const context = JSON.parse(await readFile(file, "utf8"));
   if (!context?.url) {
     console.warn(
       `WARNING: Skipped rendering HTML. Document is missing url: ${file}`,
@@ -86,10 +88,10 @@ async function ssrSingleDocument(file) {
     const outputFile = file.replace(/.json$/, ".html");
     await writeFile(outputFile, html);
     return outputFile;
-  } catch (e) {
-    console.error(`ERROR: Failed to render ${context.url}: ${e}`);
+  } catch (error) {
+    console.error(`ERROR: Failed to render ${context.url}: ${error}`);
     return;
   }
 }
 
-ssrAllDocuments();
+await ssrAllDocuments();

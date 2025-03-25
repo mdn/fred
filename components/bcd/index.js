@@ -48,7 +48,6 @@ export class BCDTable extends LitElement {
             .more {
               grid-column: 1/-1;
             }
-          }
         }
       }
     }
@@ -73,7 +72,7 @@ export class BCDTable extends LitElement {
 
         return response.json();
       } else {
-        return null;
+        return;
       }
     },
     args: () => [this.query],
@@ -97,12 +96,15 @@ function Table(data) {
     data.data,
   ]);
 
-  const rows = [firstRow, ...Object.entries(data.data).map(Row)];
+  const rows = [
+    firstRow,
+    ...Object.entries(data.data).map((item) => Row(item)),
+  ];
 
   return (
     data &&
     html`<figure
-      style="--cols: ${[...Object.keys(data.browsers).filter((b) => b != "ie")]
+      style="--cols: ${Object.keys(data.browsers).filter((b) => b != "ie")
         .length + 1};"
     >
       <table>
@@ -119,7 +121,7 @@ function Table(data) {
 
 function Browsers(data) {
   const cells = Object.entries(data.browsers).map(([browser]) =>
-    browser != "ie" ? html`<td>${browser}</td>` : null,
+    browser == "ie" ? undefined : html`<td>${browser}</td>`,
   );
 
   return html`<tr>
@@ -130,10 +132,12 @@ function Browsers(data) {
 
 function Row([key, row]) {
   if (key == "__compat") {
-    return null;
+    return;
   }
 
-  const cells = Object.entries(row?.__compat?.support ?? {}).map(Cell);
+  const cells = Object.entries(row?.__compat?.support ?? {}).map((item) =>
+    Cell(item),
+  );
 
   return html`<tr>
     <td><code>${key}</code></td>
@@ -143,7 +147,7 @@ function Row([key, row]) {
 
 function Cell([browser, cell]) {
   if (browser == "ie") {
-    return null;
+    return;
   }
   let support = getCurrentSupport(cell);
   return html`<td>

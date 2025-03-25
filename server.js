@@ -57,11 +57,11 @@ export async function startDevServer() {
     // update manifest info when rebuild
     ssrManifest = await fs.promises.readFile(
       "./dist/ssr/manifest.json",
-      "utf-8",
+      "utf8",
     );
     clientManifest = await fs.promises.readFile(
       "./dist/client/manifest.json",
-      "utf-8",
+      "utf8",
     );
     rsbuildServer.printUrls();
   });
@@ -71,8 +71,8 @@ export async function startDevServer() {
   app.get("/*mdnUrl", async (req, res, next) => {
     try {
       await serverRenderMiddleware(req, res);
-    } catch (err) {
-      logger.error("SSR render error, downgrade to CSR...", err);
+    } catch (error) {
+      logger.error("SSR render error, downgrade to CSR...", error);
       next();
     }
   });
@@ -97,4 +97,4 @@ export async function startDevServer() {
   };
 }
 
-startDevServer();
+await startDevServer();

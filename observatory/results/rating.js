@@ -4,8 +4,8 @@ import { formatMinus, hostAsRedirectChain } from "../utils";
 
 import { Trend } from "./trend";
 import { Tooltip } from "./tooltip";
-import "./human_duration";
-import "./rescan_button";
+import "./human-duration";
+import "./rescan-button";
 
 /**
  * @typedef {import("lit").TemplateResult} TemplateResult

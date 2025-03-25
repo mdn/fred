@@ -6,7 +6,9 @@ const dropdownButtons = document.querySelectorAll(".dropdown");
 function toggleDropdown(button) {
   const isExpanded = button.getAttribute("aria-expanded") === "true";
   const dropdownId = button.getAttribute("aria-controls");
-  const dropdown = dropdownId ? document.getElementById(dropdownId) : null;
+  const dropdown = dropdownId
+    ? document.querySelector(`#${dropdownId}`)
+    : undefined;
 
   if (dropdown) {
     button.setAttribute("aria-expanded", String(!isExpanded));
@@ -14,26 +16,27 @@ function toggleDropdown(button) {
   }
 }
 
-dropdownButtons.forEach((button) => {
+for (const button of dropdownButtons) {
   button.addEventListener("click", () => {
     toggleDropdown(button);
   });
-});
+}
 
 document.addEventListener("click", (event) => {
-  dropdownButtons.forEach((button) => {
+  for (const button of dropdownButtons) {
     const dropdownId = button.getAttribute("aria-controls");
-    const dropdown = dropdownId ? document.getElementById(dropdownId) : null;
+    const dropdown = dropdownId
+      ? document.querySelector(`#${dropdownId}`)
+      : undefined;
 
     if (
       event.target instanceof Node &&
       !button.contains(event.target) &&
       dropdown &&
-      !dropdown.contains(event.target)
+      !dropdown.contains(event.target) &&
+      button.getAttribute("aria-expanded") === "true"
     ) {
-      if (button.getAttribute("aria-expanded") === "true") {
-        toggleDropdown(button);
-      }
+      toggleDropdown(button);
     }
-  });
+  }
 });
