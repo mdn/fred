@@ -13,7 +13,7 @@ export class HumanDuration extends LitElement {
     super();
     this.date = new Date();
     this._text = "";
-    this._interval = null;
+    this._interval = undefined;
   }
 
   connectedCallback() {
@@ -21,14 +21,14 @@ export class HumanDuration extends LitElement {
     this._text = humanizedDurationFromNow(this.date);
     this._interval = setInterval(() => {
       this._text = humanizedDurationFromNow(this.date);
-    }, 10000);
+    }, 10_000);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     if (this._interval) {
       clearInterval(this._interval);
-      this._interval = null;
+      this._interval = undefined;
     }
   }
 

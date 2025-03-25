@@ -2,7 +2,7 @@ import { html } from "lit";
 import { Scoring } from "./scoring";
 import { CSP } from "./csp";
 import { Cookies } from "./cookies";
-import { RawHeaders } from "./raw_headers";
+import { RawHeaders } from "./raw-headers";
 import { History } from "./history";
 import { Comparison } from "./comparison";
 

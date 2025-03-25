@@ -9,17 +9,15 @@ import "./observatory/results/results.js";
 import Prism from "prismjs";
 
 console.log("ENtER");
-window.addEventListener("DOMContentLoaded", () => {
-  [...(document.querySelectorAll('pre[class~="brush:"]') || [])].forEach(
-    (pre) => {
-      const code = pre.firstChild;
-      if (code instanceof HTMLElement && Prism.languages.html) {
-        code.innerHTML = Prism.highlight(
-          code.textContent || "",
-          Prism.languages.html,
-          "html",
-        );
-      }
-    },
-  );
+globalThis.addEventListener("DOMContentLoaded", () => {
+  for (const pre of document.querySelectorAll('pre[class~="brush:"]') || []) {
+    const code = pre.firstChild;
+    if (code instanceof HTMLElement && Prism.languages.html) {
+      code.innerHTML = Prism.highlight(
+        code.textContent || "",
+        Prism.languages.html,
+        "html",
+      );
+    }
+  }
 });

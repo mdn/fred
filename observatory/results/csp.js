@@ -22,7 +22,7 @@ const policyTests = [
 ];
 
 // Policies where pass means bad
-const negatedPolicies = [
+const negatedPolicies = new Set([
   "insecureBaseUri",
   "insecureFormAction",
   "insecureSchemeActive",
@@ -31,7 +31,7 @@ const negatedPolicies = [
   "unsafeInline",
   "unsafeInlineStyle",
   "unsafeObjects",
-];
+]);
 
 /**
  *
@@ -80,7 +80,7 @@ export function CSP({ result }) {
   }
 
   const rows = policyTests.map((pt) => {
-    if (!policy[pt]) return null;
+    if (!policy[pt]) return;
     /** @type {ObservatoryPolicyItem} */
     const p = policy[pt];
 
@@ -89,7 +89,7 @@ export function CSP({ result }) {
         <td data-header="Test" .innerHTML=${p.description}></td>
         <td data-header="Pass">
           ${PassIcon({
-            pass: negatedPolicies.includes(pt) ? !p.pass : p.pass,
+            pass: negatedPolicies.has(pt) ? !p.pass : p.pass,
           })}
         </td>
         <td data-header="Info" .innerHTML=${p.info}></td>

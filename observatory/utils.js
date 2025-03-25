@@ -16,12 +16,12 @@ import failSvg from "./assets/fail-icon.svg?mdnsvg";
  */
 export function hostAsRedirectChain(host, result) {
   const chain = result.tests.redirection?.route;
-  if (!chain || chain.length < 1) {
+  if (!chain || chain.length === 0) {
     return host;
   }
   try {
     const firstUrl = new URL(chain[0] || "");
-    const lastUrl = new URL(chain[chain.length - 1] || "");
+    const lastUrl = new URL(chain.at(-1) || "");
     if (firstUrl.hostname === lastUrl.hostname) {
       return host;
     }
@@ -34,17 +34,17 @@ export function hostAsRedirectChain(host, result) {
 /**
  *
  * @param {string | null | undefined} term
- * @returns {null | string}
+ * @returns {undefined | string}
  */
 export function formatMinus(term) {
   if (!term) {
-    return null;
+    return;
   }
   // replace dash with unicode minus symbol
   // −
   // MINUS SIGN
   // Unicode: U+2212, UTF-8: E2 88 92
-  return `${term}`.replaceAll(/-/g, "−");
+  return `${term}`.replaceAll("-", "−");
 }
 
 /**
@@ -72,7 +72,7 @@ const YEAR = DAY * 364;
  * @returns {string}
  */
 export function humanizedDurationFromNow(date) {
-  const currentTime = new Date().getTime();
+  const currentTime = Date.now();
   const targetTime = date.getTime();
   const diffSecs = Math.round((targetTime - currentTime) / 1000);
 
@@ -95,7 +95,7 @@ export function humanizedDurationFromNow(date) {
 }
 
 /**
- * @param {{pass: boolean | null}} props
+ * @param {{pass: boolean | undefined}} props
  * @returns {TemplateResult}
  */
 export function PassIcon({ pass }) {
@@ -139,7 +139,7 @@ export function Timestamp({ expires }) {
 export function upperCaseHeaderName(input) {
   return input
     .split("-")
-    .map((p) => (p && p[0] ? p[0].toUpperCase() + p.substring(1) : ""))
+    .map((p) => (p && p[0] ? p[0].toUpperCase() + p.slice(1) : ""))
     .join("-");
 }
 
