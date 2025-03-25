@@ -149,7 +149,7 @@ export class FormProgress extends LitElement {
         this._hostname,
       )}`;
     } catch (error) {
-      this._errorMessage = `${ERROR_MAP[error.name] || error.message}`;
+      this._errorMessage = `${ERROR_MAP[error.name] || error}`;
     } finally {
       this._queryRunning = false;
     }
@@ -179,7 +179,7 @@ export class FormProgress extends LitElement {
           </div>
         </form>
         ${this._errorMessage
-          ? html`<div class="error">Error: ${this._errorMessage}</div>`
+          ? html`<div class="error">${this._errorMessage}</div>`
           : nothing}`;
     }
   }
