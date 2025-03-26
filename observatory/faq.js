@@ -1,14 +1,9 @@
 import { html } from "lit";
 
 /**
- * @typedef {import("lit").TemplateResult} TemplateResult
+ * @returns {Lit.TemplateResult}
  */
-
-/**
- * @param {Fred.Context<Rari.SPAPage>} _context
- * @returns {TemplateResult}
- */
-export function FAQ(_context) {
+export function FAQ() {
   return html`<a
     href="/en-US/observatory/docs/faq"
     target="_blank"

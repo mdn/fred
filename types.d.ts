@@ -1,10 +1,14 @@
-namespace Fred {
+declare namespace Fred {
   type Context<T = Rari.BuiltPage> = T & {
     l10n?: import("./fluent.js").Fluent;
   };
 }
 
-namespace Rari {
+declare namespace Lit {
+  type TemplateResult = import("lit").TemplateResult;
+}
+
+declare namespace Rari {
   type BuiltPage = import("@mdn/rari").BuiltPage;
   type BaselineHighLow = import("@mdn/rari").BaselineHighLow;
   type Section = import("@mdn/rari").Section;

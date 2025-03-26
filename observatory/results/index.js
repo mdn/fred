@@ -6,32 +6,37 @@ import { Feedback } from "../feedback.js";
 import "../index.css";
 
 /**
- * @typedef {import("lit").TemplateResult} TemplateResult
+ * @param {Fred.Context<Rari.SPAPage>} _context
+ * @returns {Lit.TemplateResult}
  */
-
-/**
- * @param {Fred.Context<Rari.SPAPage>} context
- * @returns {TemplateResult}
- */
-export function Results(context) {
-  return html` <section class="main">
-    <section class="heading">
-      <h1><span class="accent">${OBSERVATORY_TITLE}</span> Report</h1>
-      <div class="feedback">${Feedback(context)}</div>
+export function Results(_context) {
+  return html` <section class="obs-results">
+    <section class="obs-results__header">
+      <h1 class="obs-results__title">
+        <span class="obs-results__title-accent">${OBSERVATORY_TITLE}</span>
+        Report
+      </h1>
+      <div class="obs-results__feedback">${Feedback()}</div>
     </section>
-    <aside class="toc">
-      <h2 class="toc-heading">${OBSERVATORY_TITLE}</h2>
-      <ul class="toc-list">
-        <li class="toc-item">
-          <a href="/en-US/observatory/docs/tests_and_scoring" class="toc-link"
+
+    <aside class="obs-toc">
+      <h2 class="obs-toc__heading">${OBSERVATORY_TITLE}</h2>
+      <ul class="obs-toc__list">
+        <li class="obs-toc__item">
+          <a
+            href="/en-US/observatory/docs/tests_and_scoring"
+            class="obs-toc__link"
             >Tests &amp; Scoring</a
           >
         </li>
-        <li class="toc-item">
-          <a href="/en-US/observatory/docs/faq" class="toc-link">FAQ</a>
+        <li class="obs-toc__item">
+          <a href="/en-US/observatory/docs/faq" class="obs-toc__link">FAQ</a>
         </li>
       </ul>
     </aside>
-    <mdn-observatory-results></mdn-observatory-results>
+
+    <mdn-observatory-results
+      class="obs-results__mdn-results"
+    ></mdn-observatory-results>
   </section>`;
 }

@@ -130,3 +130,10 @@
   --button-secondary-border-red: light-dark(#ff97a0, #ff97a0);
   --button-secondary-border-red-focus: light-dark(#ffd9dc, #ffd9dc);
 }
+
+/* borders */
+
+:root {
+  --border-primary: light-dark(#cdcdcd, #858585);
+  --border-secondary: light-dark(#cdcdcd, #696969);
+}

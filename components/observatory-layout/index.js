@@ -31,7 +31,6 @@ export function ObservatoryLayoutResult(context) {
       <div class="obs-layout__content obs-layout__content--results">
         ${Results(context)}
       </div>
-      <div class="obs-layout__toc">TODO: toc</div>
     </div>
   `;
 }

@@ -14,14 +14,10 @@ import "./form.js";
 import "../index.css";
 
 /**
- * @typedef {import("lit").TemplateResult} TemplateResult
+ * @param {Fred.Context<Rari.SPAPage>} _context
+ * @returns {Lit.TemplateResult}
  */
-
-/**
- * @param {Fred.Context<Rari.SPAPage>} context
- * @returns {TemplateResult}
- */
-export function Landing(context) {
+export function Landing(_context) {
   return html`
     <section class="obs-landing-top">
       <section class="obs-landing-top__form">
@@ -93,8 +89,8 @@ export function Landing(context) {
         </div>
       </section>
       <section class="obs-landing-about__links">
-        ${FAQ(context)}
-        ${Feedback(context)}
+        ${FAQ()}
+        ${Feedback()}
       </section>
     </section>
   </section>`;
@@ -103,7 +99,7 @@ export function Landing(context) {
 /**
  *
  * @param {{className: string}} props
- * @returns {TemplateResult}
+ * @returns {Lit.TemplateResult}
  */
 function LinesSVG({ className = "" }) {
   return svg`
