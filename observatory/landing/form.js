@@ -115,7 +115,7 @@ export class FormProgress extends LitElement {
     this._hostname = "";
     this._errorMessage = "";
   }
-  /** @type {Ref<HTMLInputElement>}  */
+  /** @type {Lit.Ref<HTMLInputElement>}  */
   inputRef = createRef();
 
   firstUpdated() {

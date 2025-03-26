@@ -3,15 +3,6 @@ export const OBSERVATORY_TITLE_FULL = "HTTP Observatory | MDN";
 export const OBSERVATORY_API_URL = "https://observatory-api.mdn.mozilla.net";
 
 /**
- * @typedef {Object} ObservatoryAnalyzeRequest
- * @property {string} host - The host to analyze
- */
-
-/**
- * @typedef {"ABORTED"|"FAILED"|"FINISHED"|"PENDING"|"STARTING"|"RUNNING"} ObservatoryScanState
- */
-
-/**
  * Scoring table for Observatory grades
  * @type {Array<{grade: string, scoreText: string, score: number, stars?: boolean}>}
  */
@@ -47,98 +38,6 @@ const TEST_NAMES_IN_ORDER = [
   "x-frame-options",
   "cross-origin-resource-policy",
 ];
-
-/**
- * @typedef {Object} ObservatoryResult
- * @property {ObservatoryScanResult} scan
- * @property {ObservatoryTestResult} tests
- * @property {ObservatoryHistoryResult[]} history
- */
-
-/**
- * @typedef {Object} GradeDistribution
- * @property {string} grade
- * @property {number} count
- */
-
-/**
- * @typedef {Object} ObservatoryScanResult
- * @property {number} algorithm_version
- * @property {string} scanned_at
- * @property {string|null} [error]
- * @property {string|null} [grade]
- * @property {number} id
- * @property {Object.<string, string>} [response_headers]
- * @property {number} [score]
- * @property {number} [status_code]
- * @property {number} tests_failed
- * @property {number} tests_passed
- * @property {number} tests_quantity
- */
-
-/**
- * @typedef {Object.<string, ObservatoryIndividualTest>} ObservatoryTestResult
- */
-
-/**
- * @typedef {Object} ObservatoryIndividualTest
- * @property {null|ObservatoryCookiesData} data
- * @property {string} expectation
- * @property {string} name
- * @property {string} title
- * @property {string} link
- * @property {boolean} pass
- * @property {string} result
- * @property {string} score_description
- * @property {string} recommendation
- * @property {number} score_modifier
- * @property {ObservatoryCSPPolicy} [policy]
- * @property {string[]} [route]
- */
-
-/**
- * @typedef {Object} ObservatoryHistoryResult
- * @property {string} scanned_at
- * @property {string} grade
- * @property {number} id
- * @property {number} score
- */
-
-/**
- * @typedef {Object.<string, ObservatoryIndividualCookie>} ObservatoryCookiesData
- */
-
-/**
- * @typedef {Object} ObservatoryIndividualCookie
- * @property {string} domain
- * @property {string} expires
- * @property {boolean} httponly
- * @property {string} path
- * @property {string} samesite
- * @property {boolean} secure
- */
-
-/**
- * @typedef {Object} ObservatoryPolicyItem
- * @property {boolean|undefined} pass
- * @property {string} description
- * @property {string} info
- */
-
-/**
- * @typedef {Object} ObservatoryCSPPolicy
- * @property {ObservatoryPolicyItem} antiClickjacking
- * @property {ObservatoryPolicyItem} defaultNone
- * @property {ObservatoryPolicyItem} insecureBaseUri
- * @property {ObservatoryPolicyItem} insecureFormAction
- * @property {ObservatoryPolicyItem} insecureSchemeActive
- * @property {ObservatoryPolicyItem} insecureSchemePassive
- * @property {ObservatoryPolicyItem} strictDynamic
- * @property {ObservatoryPolicyItem} unsafeEval
- * @property {ObservatoryPolicyItem} unsafeInline
- * @property {ObservatoryPolicyItem} unsafeInlineStyle
- * @property {ObservatoryPolicyItem} unsafeObjects
- */
 
 // Export the constants
 export { SCORING_TABLE, TEST_NAMES_IN_ORDER };

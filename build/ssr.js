@@ -5,6 +5,7 @@ import { fdir } from "fdir";
 // @ts-ignore
 // eslint-disable-next-line n/no-missing-import
 import ssr from "../dist/ssr/index.cjs";
+
 import { renderHTML } from "./utils.js";
 
 const BUILD_OUT_ROOT = "./out";
@@ -16,6 +17,7 @@ const clientManifest = await readFile("./dist/client/manifest.json", "utf8");
  * @template T
  * @param {T[]} array
  * @param {number} size
+ * @yields {T[]}
  * @returns {Generator<T[]>}
  */
 export function* chunks(array, size) {

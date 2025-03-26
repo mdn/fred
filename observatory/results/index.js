@@ -1,4 +1,5 @@
 import { html } from "lit";
+
 import "./results.js";
 import { OBSERVATORY_TITLE } from "../constants.js";
 import { Feedback } from "../feedback.js";

@@ -2,20 +2,15 @@ import { html } from "lit";
 
 import { formatMinus, hostAsRedirectChain } from "../utils";
 
-import { Trend } from "./trend";
 import { Tooltip } from "./tooltip";
+import { Trend } from "./trend";
 import "./human-duration";
 import "./rescan-button";
 
 /**
- * @typedef {import("lit").TemplateResult} TemplateResult
- * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
- */
-
-/**
  *
- * @param {{result: ObservatoryResult, host: string, rescan: function}} props
- * @returns {TemplateResult}
+ * @param {{result: Observatory.Result, host: string, rescan: Function}} props
+ * @returns {Lit.TemplateResult}
  */
 export function Rating({ result, host, rescan }) {
   return html`

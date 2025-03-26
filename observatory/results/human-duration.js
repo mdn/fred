@@ -1,4 +1,5 @@
 import { LitElement, css, html } from "lit";
+
 import { formatDateTime, humanizedDurationFromNow } from "../utils";
 
 export class HumanDuration extends LitElement {

@@ -2,14 +2,9 @@ import { html } from "lit";
 import "./grade-svg";
 
 /**
- * @typedef {import("lit").TemplateResult} TemplateResult
- * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
- */
-
-/**
  *
- * @param {{result: ObservatoryResult}} result
- * @returns { TemplateResult }
+ * @param {{result: Observatory.Result}} result
+ * @returns { Lit.TemplateResult }
  */
 export function Comparison({ result }) {
   return html`

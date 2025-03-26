@@ -1,4 +1,5 @@
 import { defineConfig } from "@rsbuild/core";
+
 import { pluginFluent } from "./plugin-fluent/fluent.js";
 import { pluginReset } from "./plugin-reset/reset.js";
 

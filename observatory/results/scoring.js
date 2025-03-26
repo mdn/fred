@@ -1,15 +1,11 @@
 import { html } from "lit";
-import { TEST_NAMES_IN_ORDER } from "../constants";
-import { formatMinus, PassIcon } from "../utils";
 
-/**
- * @typedef {import("lit").TemplateResult} TemplateResult
- * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
- */
+import { TEST_NAMES_IN_ORDER } from "../constants";
+import { PassIcon, formatMinus } from "../utils";
 
 /**
  * @param {{overallScore: number, scoreModifier: number}} props
- * @returns {TemplateResult}
+ * @returns {Lit.TemplateResult}
  */
 function ScoreModifier({ overallScore, scoreModifier }) {
   const bonusEligible = overallScore >= 90;
@@ -28,8 +24,8 @@ function ScoreModifier({ overallScore, scoreModifier }) {
 
 /**
  *
- * @param {{ result: ObservatoryResult}} result
- * @returns {TemplateResult}
+ * @param {{ result: Observatory.Result}} result
+ * @returns {Lit.TemplateResult}
  */
 export function Scoring({ result }) {
   const showFootnote =

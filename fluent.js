@@ -1,15 +1,16 @@
 import { FluentBundle, FluentResource } from "@fluent/bundle";
 import insane from "insane";
-import USStrings from "./l10n/en-us.flt";
+
 import DEStrings from "./l10n/de.flt";
+import USStrings from "./l10n/en-us.flt";
 
 /**
- * @typedef {import("insane").AllowedTags} AllowedTags
+ * @import { AllowedTags } from "insane";
  */
 
 const languages = [["en-US", "English"]];
 
-/** @type AllowedTags[] */
+/** @type { AllowedTags[] } */
 const whitelistedTags = ["i", "strong", "br"];
 const whitelistedAttributes = ["title", "aria-label"];
 
@@ -48,7 +49,7 @@ export class Fluent {
   }
 
   /**
-   * @param {readonly string[]} requested
+   * @param {Readonly<string[]>} requested
    * @param {string[]} available
    */
   static init(requested = navigator.languages, available) {
@@ -91,7 +92,7 @@ export class Fluent {
    * @param {Record<string, { tag: AllowedTags } & Record<string, string>>} tags
    */
   static sanitize(message, tags = {}) {
-    /** @type Record<string, string[]> */
+    /** @type { Record<string, string[]> } */
     const allowedAttributes = {};
     for (const t of Object.values(tags)) {
       allowedAttributes[t.tag] = [
@@ -134,8 +135,11 @@ export class Fluent {
   }
 
   /**
-   * @param {string | undefined} attr
    * @param {string} id
+   * @param {string | undefined} attr
+   * @param args
+   * @param bundle
+   * @param us
    * @returns {string}
    */
   getMessage(id, attr, args = {}, bundle = this.bundle, us = false) {
