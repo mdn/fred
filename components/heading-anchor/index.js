@@ -1,5 +1,5 @@
 import { nothing } from "lit";
-import { unsafeStatic, html as hh } from "lit/static-html.js";
+import { html as hh, unsafeStatic } from "lit/static-html.js";
 
 import "./index.css";
 

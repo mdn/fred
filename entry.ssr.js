@@ -1,12 +1,13 @@
 import { render as r } from "@lit-labs/ssr";
-import { DocBody } from "./pages/doc/index.js";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
-import { SettingsBody } from "./pages/settings/index.js";
+
 import l10n from "./fluent.js";
+import { DocBody } from "./pages/doc/index.js";
 import {
   ObservatoryBody,
   ObservatoryResults,
 } from "./pages/observatory/index.js";
+import { SettingsBody } from "./pages/settings/index.js";
 
 /**
  * @param {string} path

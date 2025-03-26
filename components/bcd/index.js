@@ -1,7 +1,8 @@
 // @ts-nocheck
 
-import { LitElement, css, html } from "lit";
 import { Task } from "@lit/task";
+import { LitElement, css, html } from "lit";
+
 import { getCurrentSupport } from "./helpers";
 
 export class BCDTable extends LitElement {

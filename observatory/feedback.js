@@ -1,11 +1,8 @@
 import { html } from "lit";
 
 /**
- * @typedef {import("lit").TemplateResult} TemplateResult
- */
-/**
  * @param {Fred.Context<Rari.SPAPage>} _context
- * @returns {TemplateResult}
+ * @returns {Lit.TemplateResult}
  */
 export function Feedback(_context) {
   return html`<a

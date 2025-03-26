@@ -1,6 +1,8 @@
-import express from "express";
 import fs from "node:fs";
+
 import { createRsbuild, loadConfig, logger } from "@rsbuild/core";
+import express from "express";
+
 import { renderHTML } from "./build/utils.js";
 
 /**

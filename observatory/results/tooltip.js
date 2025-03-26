@@ -1,17 +1,16 @@
 import { html } from "lit";
 
-import { SCORING_TABLE } from "../constants";
-import { formatMinus } from "../utils";
 import starsSvg from "../assets/stars.svg?mdnsvg";
 import arrowSvg from "../assets/tooltip-arrow.svg?mdnsvg";
+import { SCORING_TABLE } from "../constants";
+import { formatMinus } from "../utils";
 
 /**
- * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
  */
 
 /**
  *
- * @param {ObservatoryResult} result
+ * @param {Observatory.Result} result
  */
 export function Tooltip(result) {
   const rows = SCORING_TABLE.map((st) => {

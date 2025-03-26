@@ -1,23 +1,19 @@
 import { html } from "lit";
-import { Scoring } from "./scoring";
-import { CSP } from "./csp";
-import { Cookies } from "./cookies";
-import { RawHeaders } from "./raw-headers";
-import { History } from "./history";
-import { Comparison } from "./comparison";
 
-/**
- * @typedef {import("lit").TemplateResult} TemplateResult
- * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
- */
+import { Comparison } from "./comparison";
+import { Cookies } from "./cookies";
+import { CSP } from "./csp";
+import { History } from "./history";
+import { RawHeaders } from "./raw-headers";
+import { Scoring } from "./scoring";
 
 /**
  * @param {{
- *   result: ObservatoryResult,
+ *   result: Observatory.Result,
  *   selectedTab: number,
  *   onTabSelect: (index: number, key: string) => void
  * }} props
- * @returns {TemplateResult}
+ * @returns {Lit.TemplateResult}
  */
 export function Tabs({ result, selectedTab = 0, onTabSelect }) {
   const tabs = [

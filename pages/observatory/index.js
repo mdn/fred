@@ -1,6 +1,7 @@
 import { html } from "lit";
-import { Navigation } from "../../components/navigation/index.js";
+
 import { Footer } from "../../components/footer/index.js";
+import { Navigation } from "../../components/navigation/index.js";
 
 import "./index.css";
 import "../../components/index.css";
@@ -8,14 +9,9 @@ import { Landing } from "../../observatory/landing/index.js";
 import { Results } from "../../observatory/results/index.js";
 
 /**
- * @import { TemplateResult } from "lit"
- * @import { SPAPage } from "@mdn/rari"
- */
-
-/**
  *
- * @param {Fred.Context<SPAPage>} context
- * @returns {TemplateResult}
+ * @param {Fred.Context<Rari.SPAPage>} context
+ * @returns {Lit.TemplateResult}
  */
 export function ObservatoryBody(context) {
   return html`
@@ -31,8 +27,8 @@ export function ObservatoryBody(context) {
 
 /**
  *
- * @param {Fred.Context<SPAPage>} context
- * @returns {TemplateResult}
+ * @param {Fred.Context<Rari.SPAPage>} context
+ * @returns {Lit.TemplateResult}
  */
 export function ObservatoryResults(context) {
   return html`
@@ -48,8 +44,8 @@ export function ObservatoryResults(context) {
 
 /**
  *
- * @param {Fred.Context<SPAPage>} _context
- * @returns {TemplateResult}
+ * @param {Fred.Context<Rari.SPAPage>} _context
+ * @returns {Lit.TemplateResult}
  */
 export function ObservatoryBreadCrumbs(_context) {
   const items = [{ title: "HTTP Observatory", uri: "/en-US/observatory/" }].map(

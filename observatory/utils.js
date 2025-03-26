@@ -1,17 +1,12 @@
 import { html } from "lit";
 
-import passSvg from "./assets/pass-icon.svg?mdnsvg";
 import failSvg from "./assets/fail-icon.svg?mdnsvg";
-
-/**
- * @typedef {import("lit").TemplateResult} TemplateResult
- * @typedef {import("./constants").ObservatoryResult} ObservatoryResult
- */
+import passSvg from "./assets/pass-icon.svg?mdnsvg";
 
 /**
  *
  * @param {string} host
- * @param {ObservatoryResult} result
+ * @param {Observatory.Result} result
  * @returns
  */
 export function hostAsRedirectChain(host, result) {
@@ -96,7 +91,7 @@ export function humanizedDurationFromNow(date) {
 
 /**
  * @param {{pass: boolean | undefined}} props
- * @returns {TemplateResult}
+ * @returns {Lit.TemplateResult}
  */
 export function PassIcon({ pass }) {
   if (pass === null) {
@@ -112,7 +107,7 @@ export function PassIcon({ pass }) {
 
 /**
  * @param {{expires: string}} props
- * @returns {TemplateResult}
+ * @returns {Lit.TemplateResult}
  */
 export function Timestamp({ expires }) {
   const d = new Date(expires);
@@ -147,7 +142,7 @@ export function upperCaseHeaderName(input) {
  * Returns the cookie prefix, either "Host" or "Secure" if prefixed accordingly (`__host` & `__secure`),
  * or "-" if no prefix is present.
  * @param {{cookieName: string}} props
- * @returns {TemplateResult}
+ * @returns {Lit.TemplateResult}
  */
 export function CookiePrefix({ cookieName }) {
   if (cookieName.startsWith("__Host-")) {
@@ -162,7 +157,7 @@ export function CookiePrefix({ cookieName }) {
 /**
  * Link to a header documentation page inside MDN content
  * @param {{header: string}} props
- * @returns {TemplateResult}
+ * @returns {Lit.TemplateResult}
  */
 export function HeaderLink({ header }) {
   const displayHeaderName = upperCaseHeaderName(header);

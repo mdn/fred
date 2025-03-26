@@ -1,16 +1,13 @@
-import { LitElement, css, html } from "lit";
 import { Task } from "@lit/task";
+import { LitElement, css, html } from "lit";
 
 import "../feedback.js";
-import { Rating } from "./rating.js";
-import { Tabs } from "./tabs.js";
-
-import { OBSERVATORY_API_URL } from "../constants.js";
 import { nothing } from "lit";
 
-/**
- * @import { PropertyDeclarations } from "lit"
- */
+import { OBSERVATORY_API_URL } from "../constants.js";
+
+import { Rating } from "./rating.js";
+import { Tabs } from "./tabs.js";
 
 export class Results extends LitElement {
   static styles = css`
@@ -30,7 +27,7 @@ export class Results extends LitElement {
   }
 
   /**
-   * @type PropertyDeclarations
+   * @type { Lit.PropertyDeclarations }
    */
   static properties = {
     host: { type: String },

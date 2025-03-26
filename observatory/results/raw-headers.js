@@ -1,15 +1,11 @@
 import { html } from "lit";
+
 import { HeaderLink } from "../utils";
 
 /**
- * @typedef {import("lit").TemplateResult} TemplateResult
- * @typedef {import("../constants").ObservatoryResult} ObservatoryResult
- */
-
-/**
  *
- * @param {{result: ObservatoryResult}} props
- * @returns { TemplateResult }
+ * @param {{result: Observatory.Result}} props
+ * @returns { Lit.TemplateResult }
  */
 export function RawHeaders({ result }) {
   if (!result.scan.response_headers) {

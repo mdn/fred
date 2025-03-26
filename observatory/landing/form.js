@@ -1,10 +1,6 @@
 import { LitElement, css, html } from "lit";
 import { createRef, ref } from "lit/directives/ref.js";
 
-/**
- * @import { Ref } from "lit/directives/ref.js"
- */
-
 export class FormProgress extends LitElement {
   static styles = css``;
 
@@ -18,7 +14,7 @@ export class FormProgress extends LitElement {
     this._queryRunning = false;
     this._hostname = "";
   }
-  /** @type {Ref<HTMLInputElement>}  */
+  /** @type {Lit.Ref<HTMLInputElement>}  */
   inputRef = createRef();
 
   /**
