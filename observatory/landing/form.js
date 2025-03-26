@@ -2,10 +2,6 @@ import { LitElement, css, html, nothing } from "lit";
 import { createRef, ref } from "lit/directives/ref.js";
 import "../../components/progress-bar/index.js";
 
-/**
- * @import { Ref } from "lit/directives/ref.js"
- */
-
 const ERROR_MAP = {
   TypeError: "Observatory is currently down.", // `fetch()` errors catch-all
 };
