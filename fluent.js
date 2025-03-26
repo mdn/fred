@@ -36,14 +36,14 @@ export class Fluent {
    * @param {string[]} resources
    */
   static constructBundle(bundle, resources = []) {
-    resources.forEach((r) => {
+    for (const r of resources) {
       const errors = bundle.addResource(new FluentResource(r), {
         allowOverrides: true,
       });
-      if (errors.length) {
+      if (errors.length > 0) {
         console.error(errors);
       }
-    });
+    }
     return bundle;
   }
 
@@ -70,13 +70,15 @@ export class Fluent {
     if (typeof parameters[0] === "string") {
       const id = parameters[0];
       switch (parameters.length) {
-        case 2:
+        case 2: {
           if (typeof parameters[1] === "string") {
             return this.get({ id, attr: parameters[1] });
           }
           return this.get({ id, args: parameters[1] });
-        default:
+        }
+        default: {
           return this.get({ id });
+        }
       }
     }
     const { id, attr, args, tags } = parameters[0];
@@ -91,15 +93,17 @@ export class Fluent {
   static sanitize(message, tags = {}) {
     /** @type Record<string, string[]> */
     const allowedAttributes = {};
-    Object.values(tags).forEach((t) => {
-      allowedAttributes[t.tag] = Object.keys(t)
-        .filter((x) => x !== "tag")
-        .concat(whitelistedAttributes);
-    });
+    for (const t of Object.values(tags)) {
+      allowedAttributes[t.tag] = [
+        ...Object.keys(t).filter((x) => x !== "tag"),
+        ...whitelistedAttributes,
+      ];
+    }
 
-    const allowedTags = Object.values(tags)
-      .map((t) => t.tag)
-      .concat(whitelistedTags);
+    const allowedTags = [
+      ...Object.values(tags).map((t) => t.tag),
+      ...whitelistedTags,
+    ];
 
     return insane(
       message,
@@ -111,9 +115,9 @@ export class Fluent {
           const name = token.attrs["data-l10n-name"];
           if (name) {
             // @ts-ignore
-            Object.entries(tags[name]).forEach(([k, v]) => {
+            for (const [k, v] of Object.entries(tags[name])) {
               token.attrs[k] = v;
-            });
+            }
           }
           if (
             whitelistedTags.includes(token.tag) ||
@@ -130,10 +134,11 @@ export class Fluent {
   }
 
   /**
+   * @param {string | undefined} attr
    * @param {string} id
    * @returns {string}
    */
-  getMessage(id, attr = null, args = {}, bundle = this.bundle, us = false) {
+  getMessage(id, attr, args = {}, bundle = this.bundle, us = false) {
     const parentMessage = bundle ? bundle.getMessage(id) : undefined;
     let message;
 
@@ -169,7 +174,7 @@ export class Fluent {
     /** @type {Error[]} */
     const errors = [];
     const formatted = bundle?.formatPattern(message, args, errors);
-    if (errors.length) {
+    if (errors.length > 0) {
       console.error(errors);
     }
     return formatted;

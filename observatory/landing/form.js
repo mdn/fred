@@ -145,7 +145,7 @@ export class FormProgress extends LitElement {
         const json = await response.json();
         throw new Error(`Request failed: ${json.message}`);
       }
-      window.location.href = `/en-US/observatory/analyze?host=${encodeURIComponent(
+      globalThis.location.href = `observatory/analyze?host=${encodeURIComponent(
         this._hostname,
       )}`;
     } catch (error) {
@@ -157,12 +157,9 @@ export class FormProgress extends LitElement {
   }
 
   render() {
-    if (this._queryRunning) {
-      return html` <label class="visually-hidden" for="progress-bar">
+    return this._queryRunning ? html` <label class="visually-hidden" for="progress-bar">
           Scanning ${this._hostname} </label
-        ><mdn-progress-bar id="progress-bar"></mdn-progress-bar>`;
-    } else {
-      return html`<form @submit=${this._handleSubmit}>
+        ><mdn-progress-bar id="progress-bar"></mdn-progress-bar>` : html`<form @submit=${this._handleSubmit}>
           <div class="input-group">
             <label htmlFor="host" class="visually-hidden">
               Domain name or URL
@@ -182,7 +179,6 @@ export class FormProgress extends LitElement {
         ${this._errorMessage
           ? html`<div class="error">${this._errorMessage}</div>`
           : nothing}`;
-    }
   }
 }
 

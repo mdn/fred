@@ -5,7 +5,7 @@ import "./index.css";
 
 /**
  * @param {number} level
- * @param {string?} id
+ * @param {string|undefined} id
  * @param {string} title
  */
 export function Heading(level, id, title) {

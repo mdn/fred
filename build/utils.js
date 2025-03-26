@@ -4,7 +4,7 @@ import fs from "node:fs";
  * @import { ManifestData } from "@rsbuild/core";
  */
 
-const templateHtml = fs.readFileSync("./template.html", "utf-8");
+const templateHtml = fs.readFileSync("./template.html", "utf8");
 
 /**
  * @param {string} manifest

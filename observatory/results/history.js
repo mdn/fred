@@ -12,7 +12,7 @@ import { formatDateTime, formatMinus } from "../utils";
  * @returns { TemplateResult | nothing }
  */
 export function History({ result }) {
-  if (!result.history.length) {
+  if (result.history.length === 0) {
     return nothing;
   }
 

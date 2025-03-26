@@ -41,7 +41,7 @@ export const SUPPORT = {
 
 // Prioritizes support items
 export function getCurrentSupport(support) {
-  if (!support) return undefined;
+  if (!support) return;
 
   // Full support without limitation
   const noLimitationSupportItem = asList(support).find((item) =>

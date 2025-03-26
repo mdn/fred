@@ -43,7 +43,7 @@ export function Scoring({ result }) {
 
   const rows = TEST_NAMES_IN_ORDER.map((name) => {
     const test = result.tests[name];
-    if (!test) return null;
+    if (!test) return;
 
     return html`
       <tr>
@@ -102,6 +102,6 @@ export function Scoring({ result }) {
           </a>
           ).
         </section>`
-      : null}
+      : undefined}
   `;
 }

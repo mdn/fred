@@ -1,5 +1,5 @@
 import { html } from "lit";
-import "./grade_svg";
+import "./grade-svg";
 
 /**
  * @typedef {import("lit").TemplateResult} TemplateResult

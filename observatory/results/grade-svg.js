@@ -115,8 +115,8 @@ export class ComparisonTable extends LitElement {
 
   constructor() {
     super();
-    /** @type {ObservatoryResult | null} */
-    this.result = null;
+    /** @type {ObservatoryResult | undefined} */
+    this.result = undefined;
   }
 
   _gradeDistributionTask = new Task(this, {
@@ -134,11 +134,11 @@ export class ComparisonTable extends LitElement {
           } catch {
             // Ignore.
           }
-          throw Error(message);
+          throw new Error(message);
         }
         return await res.json();
-      } catch (e) {
-        console.log(e);
+      } catch (error) {
+        console.log(error);
         throw new Error("Observatory API request for comparison data failed");
       }
     },
