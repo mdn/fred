@@ -7,16 +7,20 @@ pre-commit:
     - run: npx eslint --fix --cache {staged_files}
       stage_fixed: true
 
+    - run: npx stylelint --fix {staged_files}
+      glob: "*.css"
+
 pre-push:
   piped: true
   jobs:
     - run: npm install
 
-    - name: eslint/tsc
+    - name: eslint/stylelint/tsc
       group:
         parallel: true
         jobs:
           - run: npx eslint --cache
+          - run: npx stylelint '**/*.css'
           - run: npx tsc --noEmit
 
 output:
