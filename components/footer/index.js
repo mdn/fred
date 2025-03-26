@@ -1,7 +1,6 @@
 import { html } from "lit";
 
 import "./index.css";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 /**
  * @param {Fred.Context} context
@@ -129,26 +128,22 @@ export function Footer(context) {
         <li><a href="">${context.l10n.get("footer_cpg")}</a></li>
       </ul>
       <p>
-        ${unsafeHTML(
-          context.l10n.get({
-            id: "footer_mofo",
-            tags: {
-              moco: { tag: "a", href: "https://www.mozilla.org/" },
-              mofo: { tag: "a", href: "https://foundation.mozilla.org/" },
+        ${context.l10n.get({
+          id: "footer_mofo",
+          tags: {
+            moco: { tag: "a", href: "https://www.mozilla.org/" },
+            mofo: { tag: "a", href: "https://foundation.mozilla.org/" },
+          },
+        })}<br />
+        ${context.l10n.get({
+          id: "footer_copyright",
+          tags: {
+            cc: {
+              tag: "a",
+              href: "/docs/MDN/Writing_guidelines/Attrib_copyright_license",
             },
-          }),
-        )}<br />
-        ${unsafeHTML(
-          context.l10n.get({
-            id: "footer_copyright",
-            tags: {
-              cc: {
-                tag: "a",
-                href: "/docs/MDN/Writing_guidelines/Attrib_copyright_license",
-              },
-            },
-          }),
-        )}
+          },
+        })}
       </p>
     </div>
   </div> `;
