@@ -129,7 +129,7 @@ export class FormProgress extends LitElement {
     event.preventDefault();
     this._errorMessage = "";
     const input = this.inputRef.value;
-    if (!input.value.trim()) {
+    if (!input?.value.trim()) {
       this._errorMessage = "Please enter a valid hostname";
       return;
     }
@@ -149,7 +149,8 @@ export class FormProgress extends LitElement {
         this._hostname,
       )}`;
     } catch (error) {
-      this._errorMessage = `${ERROR_MAP[error.name] || error}`;
+      // @ts-ignore
+      this._errorMessage = `${ERROR_MAP[error.name] || "message" in error ? error["message"] : error}`;
     } finally {
       this._queryRunning = false;
     }
