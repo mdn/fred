@@ -34,7 +34,7 @@
 
     &[aria-current="true"] {
       display: flex;
-      border-left: 2px solid var(--blue);
+      border-left: 2px solid var(--color-blue);
       background-color: var(--background-blue);
     }
   }

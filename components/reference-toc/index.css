@@ -30,7 +30,7 @@
     }
 
     &[aria-current="true"] {
-      box-shadow: -2px 0 0 var(--blue);
+      box-shadow: -2px 0 0 var(--color-blue);
       background-color: var(--background-blue);
     }
   }

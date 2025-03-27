@@ -29,7 +29,7 @@
       color: var(--text-blue);
 
       svg path {
-        fill: var(--blue);
+        fill: var(--color-blue);
       }
     }
 
@@ -51,7 +51,7 @@
       color: var(--text-orange);
 
       svg path {
-        fill: var(--orange);
+        fill: var(--color-orange);
       }
     }
   }
@@ -63,7 +63,7 @@
       color: var(--text-purple);
 
       svg path {
-        fill: var(--purple);
+        fill: var(--color-purple);
       }
     }
   }
@@ -75,7 +75,7 @@
       color: var(--text-green);
 
       svg path {
-        fill: var(--green);
+        fill: var(--color-green);
       }
     }
   }
