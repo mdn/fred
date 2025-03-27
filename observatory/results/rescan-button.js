@@ -7,9 +7,37 @@ export class RescanButton extends LitElement {
     _remainingTime: { state: true },
   };
   static styles = css`
+    button {
+      align-items: center;
+      background-color: var(--button-primary-default);
+      border: 1px solid var(--button-border-color);
+      border-radius: 0.25rem;
+      color: var(--background-primary);
+      display: flex;
+      font: var(--type-emphasis-m);
+      gap: 0.25rem;
+      height: 2rem;
+      justify-content: center;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      position: relative;
+      width: 9rem;
+    }
+
+    button:hover {
+      background: var(--button-primary-hover);
+    }
+
+    button[disabled] {
+      opacity: 0.65;
+      cursor: default;
+    }
+
     .progress {
-      height: 1rem;
-      width: 1rem;
+      border-radius: 50%;
+      display: block;
+      height: 0.8rem;
+      width: 0.8rem;
     }
   `;
 
@@ -55,7 +83,7 @@ export class RescanButton extends LitElement {
               class="progress"
               role="progressbar"
               aria-labelledby="wait-secs"
-              style="background: conic-gradient(var(--button-color) 0grad, ${progressPercent}%, rgba(0,0,0,0) ${progressPercent}% 100%)"
+              style="background: conic-gradient(var(--background-primary) 0grad, ${progressPercent}%, rgba(0,0,0,0) ${progressPercent}% 100%)"
             ></div>
             <small id="wait-secs">Wait ${remainingSecs}s to rescan</small>
           </button>`}
