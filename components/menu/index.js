@@ -2,6 +2,11 @@ import { html } from "lit";
 
 import "./index.css";
 
+// Elements
+import "./elements/tabs.css";
+import "./elements/panel.css";
+import "./elements/content.css";
+
 /**
  * @param {Fred.Context} _context
  */
@@ -9,182 +14,188 @@ export function Menu(_context) {
   return html`<nav class="menu">
     <div class="menu__tabs">
       <button
-        class="dropdown"
+        class="menu__tabs-button dropdown"
         type="button"
         aria-expanded="false"
         aria-controls="menu__html"
       >
         HTML
         <svg
-          class="icon"
+          class="menu__tabs-arrow"
           width="16"
           height="16"
           viewBox="0 0 320 512"
           aria-hidden="true"
         >
-          <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path
             d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
           />
         </svg>
       </button>
       <button
-        class="dropdown"
+        class="menu__tabs-button dropdown"
         type="button"
         aria-expanded="false"
         aria-controls="menu__css"
       >
         CSS
         <svg
-          class="icon"
+          class="menu__tabs-arrow"
           width="16"
           height="16"
           viewBox="0 0 320 512"
           aria-hidden="true"
         >
-          <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path
             d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
           />
         </svg>
       </button>
       <button
-        class="dropdown"
+        class="menu__tabs-button dropdown"
         type="button"
         aria-expanded="false"
         aria-controls="menu__javascript"
       >
         JavaScript
         <svg
-          class="icon"
+          class="menu__tabs-arrow"
           width="16"
           height="16"
           viewBox="0 0 320 512"
           aria-hidden="true"
         >
-          <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path
             d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
           />
         </svg>
       </button>
       <button
-        class="dropdown"
+        class="menu__tabs-button dropdown"
         type="button"
         aria-expanded="false"
         aria-controls="menu__apis"
       >
         Web APIs
         <svg
-          class="icon"
+          class="menu__tabs-arrow"
           width="16"
           height="16"
           viewBox="0 0 320 512"
           aria-hidden="true"
         >
-          <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path
             d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
           />
         </svg>
       </button>
       <button
-        class="dropdown"
+        class="menu__tabs-button dropdown"
         type="button"
         aria-expanded="false"
         aria-controls="menu__all"
       >
         All
         <svg
-          class="icon"
+          class="menu__tabs-arrow"
           width="16"
           height="16"
           viewBox="0 0 320 512"
           aria-hidden="true"
         >
-          <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path
             d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
           />
         </svg>
       </button>
       <button
-        class="dropdown"
+        class="menu__tabs-button menu__tabs-button--learn dropdown"
         type="button"
         aria-expanded="false"
         aria-controls="menu__learn"
       >
-        <svg class="icon" width="14" height="12" viewBox="0 0 14 12">
+        <svg
+          class="menu__tabs-icon"
+          width="16"
+          height="16"
+          viewBox="0 0 640 512"
+          aria-hidden="true"
+        >
           <path
-            d="M7 0.272705L0 4.09089L7 7.90907L12.7273 4.78452V9.1818H14V4.09089M2.54545 6.75089V9.29634L7 11.7273L11.4545 9.29634V6.75089L7 9.1818L2.54545 6.75089Z"
+            d="M320 32c-8.1 0-16.1 1.4-23.7 4.1L15.8 137.4C6.3 140.9 0 149.9 0 160s6.3 19.1 15.8 22.6l57.9 20.9C57.3 229.3 48 259.8 48 291.9l0 28.1c0 28.4-10.8 57.7-22.3 80.8c-6.5 13-13.9 25.8-22.5 37.6C0 442.7-.9 448.3 .9 453.4s6 8.9 11.2 10.2l64 16c4.2 1.1 8.7 .3 12.4-2s6.3-6.1 7.1-10.4c8.6-42.8 4.3-81.2-2.1-108.7C90.3 344.3 86 329.8 80 316.5l0-24.6c0-30.2 10.2-58.7 27.9-81.5c12.9-15.5 29.6-28 49.2-35.7l157-61.7c8.2-3.2 17.5 .8 20.7 9s-.8 17.5-9 20.7l-157 61.7c-12.4 4.9-23.3 12.4-32.2 21.6l159.6 57.6c7.6 2.7 15.6 4.1 23.7 4.1s16.1-1.4 23.7-4.1L624.2 182.6c9.5-3.4 15.8-12.5 15.8-22.6s-6.3-19.1-15.8-22.6L343.7 36.1C336.1 33.4 328.1 32 320 32zM128 408c0 35.3 86 72 192 72s192-36.7 192-72L496.7 262.6 354.5 314c-11.1 4-22.8 6-34.5 6s-23.5-2-34.5-6L143.3 262.6 128 408z"
           />
         </svg>
         Learn
         <svg
-          class="icon"
+          class="menu__tabs-arrow"
           width="16"
           height="16"
           viewBox="0 0 320 512"
           aria-hidden="true"
         >
-          <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path
             d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
           />
         </svg>
       </button>
       <button
-        class="dropdown"
+        class="menu__tabs-button menu__tabs-button--tools dropdown"
         type="button"
         aria-expanded="false"
         aria-controls="menu__tools"
       >
-        <svg class="icon" width="16" height="16" viewBox="0 0 16 16">
+        <svg
+          class="menu__tabs-icon"
+          width="16"
+          height="16"
+          viewBox="0 0 512 512"
+          aria-hidden="true"
+        >
           <path
-            d="M5.72727 3.3092C5.72727 2.10011 4.96364 1.01829 3.81818 0.636475V2.99102H1.90909V0.636475C0.763636 1.01829 0 2.10011 0 3.3092C0 4.51829 0.763636 5.60011 1.90909 5.98193V12.9819C1.90909 13.2365 2.03636 13.3637 2.22727 13.3637H3.5C3.69091 13.3637 3.81818 13.2365 3.81818 13.0456V6.04557C4.96364 5.66375 5.72727 4.58193 5.72727 3.3092ZM9.54545 4.45466C7.06364 4.51829 5.09091 6.49102 5.09091 8.9092C5.09091 11.391 7.06364 13.3637 9.54545 13.3637C12.0273 13.3637 14 11.391 14 8.9092C14 6.42738 12.0273 4.45466 9.54545 4.45466ZM9.54545 12.091C7.76364 12.091 6.36364 10.691 6.36364 8.9092C6.36364 7.12738 7.76364 5.72738 9.54545 5.72738C11.3273 5.72738 12.7273 7.12738 12.7273 8.9092C12.7273 10.691 11.3273 12.091 9.54545 12.091ZM8.90909 6.36375V9.54557L11.2 10.9456L11.7091 10.1819L9.86364 9.10011V6.36375H8.90909Z"
+            d="M352 320c88.4 0 160-71.6 160-160c0-15.3-2.2-30.1-6.2-44.2c-3.1-10.8-16.4-13.2-24.3-5.3l-76.8 76.8c-3 3-7.1 4.7-11.3 4.7L336 192c-8.8 0-16-7.2-16-16l0-57.4c0-4.2 1.7-8.3 4.7-11.3l76.8-76.8c7.9-7.9 5.4-21.2-5.3-24.3C382.1 2.2 367.3 0 352 0C263.6 0 192 71.6 192 160c0 19.1 3.4 37.5 9.5 54.5L19.9 396.1C7.2 408.8 0 426.1 0 444.1C0 481.6 30.4 512 67.9 512c18 0 35.3-7.2 48-19.9L297.5 310.5c17 6.2 35.4 9.5 54.5 9.5zM80 408a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"
           />
         </svg>
         Tools
         <svg
-          class="icon"
+          class="menu__tabs-arrow"
           width="16"
           height="16"
           viewBox="0 0 320 512"
           aria-hidden="true"
         >
-          <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path
             d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
           />
         </svg>
       </button>
       <button
-        class="dropdown"
+        class="menu__tabs-button menu__tabs-button--about dropdown"
         type="button"
         aria-expanded="false"
         aria-controls="menu__about"
       >
         About
         <svg
-          class="icon"
+          class="menu__tabs-arrow"
           width="16"
           height="16"
           viewBox="0 0 320 512"
           aria-hidden="true"
         >
-          <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path
             d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
           />
         </svg>
       </button>
-      <a href="">Blog</a>
+      <a class="menu__tabs-link" href="">Blog</a>
     </div>
-    <section class="menu__panel" id="menu__html" hidden>
-      <h4><a href="">HTML: Markup language</a></h4>
+    <section class="menu__panel menu__panel--html" id="menu__html" hidden>
+      <h4 class="menu__panel-title">
+        <a href="">HTML: Markup language</a>
+      </h4>
       <div class="menu__content">
         <div class="menu__content-primary">
-          <dl class="menu__list">
+          <dl class="menu__content-list">
             <dt>HTML References</dt>
             <dd>
               <ul>
@@ -197,7 +208,7 @@ export function Menu(_context) {
               </ul>
             </dd>
           </dl>
-          <dl class="menu__list">
+          <dl class="menu__content-list">
             <dt>Markup languages</dt>
             <dd>
               <ul>
@@ -209,7 +220,7 @@ export function Menu(_context) {
           </dl>
         </div>
         <div class="menu__content-secondary">
-          <dl class="menu__list">
+          <dl class="menu__content-list">
             <dt>HTML Guides</dt>
             <dd>
               <ul>
@@ -225,11 +236,13 @@ export function Menu(_context) {
         </div>
       </div>
     </section>
-    <section class="menu__panel" id="menu__css" hidden>
-      <h4><a href="">CSS: Styling language</a></h4>
+    <section class="menu__panel menu__panel--css" id="menu__css" hidden>
+      <h4 class="menu__panel-title">
+        <a href="">CSS: Styling language</a>
+      </h4>
       <div class="menu__content">
         <div class="menu__content-primary">
-          <dl class="menu__list">
+          <dl class="menu__content-list">
             <dt>References</dt>
             <dd>
               <ul>
@@ -244,7 +257,7 @@ export function Menu(_context) {
           </dl>
         </div>
         <div class="menu__content-secondary">
-          <dl class="menu__list">
+          <dl class="menu__content-list">
             <dt>Guides</dt>
             <dd>
               <ul>
@@ -256,7 +269,7 @@ export function Menu(_context) {
               </ul>
             </dd>
           </dl>
-          <dl class="menu__list">
+          <dl class="menu__content-list">
             <dt>Tools</dt>
             <dd>
               <ul>
@@ -270,11 +283,17 @@ export function Menu(_context) {
         </div>
       </div>
     </section>
-    <section class="menu__panel" id="menu__javascript" hidden>
-      <h4><a href="">JavaScript. Scripting language</a></h4>
+    <section
+      class="menu__panel menu__panel--javascript"
+      id="menu__javascript"
+      hidden
+    >
+      <h4 class="menu__panel-title">
+        <a href="">JavaScript. Scripting language</a>
+      </h4>
       <div class="menu__content">
         <div class="menu__content-primary">
-          <dl class="menu__list">
+          <dl class="menu__content-list">
             <dt>References</dt>
             <dd>
               <ul>
@@ -288,7 +307,7 @@ export function Menu(_context) {
           </dl>
         </div>
         <div class="menu__content-secondary">
-          <dl class="menu__list">
+          <dl class="menu__content-list">
             <dt>Guides</dt>
             <dd>
               <ul>
@@ -302,11 +321,13 @@ export function Menu(_context) {
         </div>
       </div>
     </section>
-    <section class="menu__panel" id="menu__apis" hidden>
-      <h4><a href="">Web API. Programming interfaces</a></h4>
+    <section class="menu__panel menu__panel--apis" id="menu__apis" hidden>
+      <h4 class="menu__panel-title">
+        <a href="">Web API. Programming interfaces</a>
+      </h4>
       <div class="menu__content">
         <div class="menu__content-primary">
-          <dl class="menu__list">
+          <dl class="menu__content-list">
             <dt>References</dt>
             <dd>
               <ul>
@@ -320,7 +341,7 @@ export function Menu(_context) {
           </dl>
         </div>
         <div class="menu__content-secondary">
-          <dl class="menu__list">
+          <dl class="menu__content-list">
             <dt>Guides</dt>
             <dd>
               <ul>
@@ -334,11 +355,13 @@ export function Menu(_context) {
         </div>
       </div>
     </section>
-    <section class="menu__panel" id="menu__all" hidden>
-      <h4><a href="">All web technology</a></h4>
+    <section class="menu__panel menu__panel--all" id="menu__all" hidden>
+      <h4 class="menu__panel-title">
+        <a href="">All web technology</a>
+      </h4>
       <div class="menu__content">
         <div class="menu__content-primary">
-          <dl class="menu__list">
+          <dl class="menu__content-list">
             <dt>References</dt>
             <dd>
               <ul>
@@ -365,7 +388,7 @@ export function Menu(_context) {
           </dl>
         </div>
         <div class="menu__content-secondary">
-          <dl class="menu__list">
+          <dl class="menu__content-list">
             <dt>Topics</dt>
             <dd>
               <ul>
@@ -390,11 +413,13 @@ export function Menu(_context) {
         </div>
       </div>
     </section>
-    <section class="menu__panel" id="menu__learn" hidden>
-      <h4><a href="">Learn web development</a></h4>
+    <section class="menu__panel menu__panel--learn" id="menu__learn" hidden>
+      <h4 class="menu__panel-title">
+        <a href="">Learn web development</a>
+      </h4>
       <div class="menu__content">
         <div class="menu__content-primary">
-          <dl class="menu__list">
+          <dl class="menu__content-list">
             <dt>Frontend developer course</dt>
             <dd>
               <ul>
@@ -406,7 +431,7 @@ export function Menu(_context) {
           </dl>
         </div>
         <div class="menu__content-secondary">
-          <dl class="menu__list">
+          <dl class="menu__content-list">
             <dt>Learn HTML</dt>
             <dd>
               <ul>
@@ -415,7 +440,7 @@ export function Menu(_context) {
               </ul>
             </dd>
           </dl>
-          <dl class="menu__list">
+          <dl class="menu__content-list">
             <dt>Learn CSS</dt>
             <dd>
               <ul>
@@ -424,7 +449,7 @@ export function Menu(_context) {
               </ul>
             </dd>
           </dl>
-          <dl class="menu__list">
+          <dl class="menu__content-list">
             <dt>Learn JavaScript</dt>
             <dd>
               <ul>
@@ -436,18 +461,17 @@ export function Menu(_context) {
         </div>
       </div>
     </section>
-    <section class="menu__panel" id="menu__tools" hidden>
-      <h4>Discover MDN's unique tools</h4>
+    <section class="menu__panel menu__panel--tools" id="menu__tools" hidden>
+      <h4 class="menu__panel-title">Discover MDN's unique tools</h4>
       <div class="menu__content">
         <div class="menu__content-full">
-          <ul class="menu__featured">
+          <ul class="menu__content-featured">
             <li>
               <a href="">
-                <svg class="icon" width="24" height="24" viewBox="0 0 384 512">
-                  <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                <svg width="24" height="24" viewBox="0 0 384 512">
                   <path
                     d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"
-                  ></path>
+                  />
                 </svg>
                 Playground
               </a>
@@ -455,9 +479,8 @@ export function Menu(_context) {
             <li>
               <a href="">
                 <svg
-                  class="icon"
-                  width="34"
-                  height="34"
+                  width="24"
+                  height="24"
                   viewBox="0 0 34 34"
                   aria-hidden="true"
                 >
@@ -471,9 +494,8 @@ export function Menu(_context) {
             <li>
               <a href="">
                 <svg
-                  class="icon"
-                  width="25"
-                  height="20"
+                  width="24"
+                  height="24"
                   viewBox="0 0 25 20"
                   aria-hidden="true"
                 >
@@ -487,13 +509,11 @@ export function Menu(_context) {
             <li>
               <a href="">
                 <svg
-                  class="icon"
                   width="24"
                   height="24"
                   viewBox="0 0 448 512"
                   aria-hidden="true"
                 >
-                  <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                   <path
                     d="M159.3 5.4c7.8-7.3 19.9-7.2 27.7 .1c27.6 25.9 53.5 53.8 77.7 84c11-14.4 23.5-30.1 37-42.9c7.9-7.4 20.1-7.4 28 .1c34.6 33 63.9 76.6 84.5 118c20.3 40.8 33.8 82.5 33.8 111.9C448 404.2 348.2 512 224 512C98.4 512 0 404.1 0 276.5c0-38.4 17.8-85.3 45.4-131.7C73.3 97.7 112.7 48.6 159.3 5.4zM225.7 416c25.3 0 47.7-7 68.8-21c42.1-29.4 53.4-88.2 28.1-134.4c-4.5-9-16-9.6-22.5-2l-25.2 29.3c-6.6 7.6-18.5 7.4-24.7-.5c-16.5-21-46-58.5-62.8-79.8c-6.3-8-18.3-8.1-24.7-.1c-33.8 42.5-50.8 69.3-50.8 99.4C112 375.4 162.6 416 225.7 416z"
                   />
@@ -505,17 +525,16 @@ export function Menu(_context) {
         </div>
       </div>
     </section>
-    <section class="menu__panel" id="menu__about" hidden>
-      <h4>About: Get to know MDN better</h4>
+    <section class="menu__panel menu__panel--about" id="menu__about" hidden>
+      <h4 class="menu__panel-title">About: Get to know MDN better</h4>
       <div class="menu__content">
         <div class="menu__content-full">
-          <ul class="menu__featured">
+          <ul class="menu__content-featured">
             <li>
               <a href="">
                 <svg
-                  class="icon"
                   width="24"
-                  height="23"
+                  height="24"
                   viewBox="0 0 24 23"
                   aria-hidden="true"
                 >
@@ -529,9 +548,8 @@ export function Menu(_context) {
             <li>
               <a href="">
                 <svg
-                  class="icon"
                   width="24"
-                  height="15"
+                  height="24"
                   viewBox="0 0 24 15"
                   aria-hidden="true"
                 >
@@ -545,9 +563,8 @@ export function Menu(_context) {
             <li>
               <a href="">
                 <svg
-                  class="icon"
-                  width="23"
-                  height="10"
+                  width="24"
+                  height="24"
                   viewBox="0 0 23 10"
                   aria-hidden="true"
                 >

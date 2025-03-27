@@ -1,0 +1,43 @@
+/* Panel */
+
+.menu__panel {
+  --menu__panel-back: var(--background-blue);
+  --menu__panel-link: var(--link-normal);
+
+  position: absolute;
+  inset: 3rem 0 auto 0;
+  margin-block-start: -1px;
+  border: 1px solid light-dark(var(--gray-4), var(--gray-6));
+  border-radius: 2px;
+  background-color: var(--background-primary);
+  box-shadow: 0px 0px 10px 1px hsl(0, 0%, 0%, 0.05);
+}
+
+.menu__panel--learn {
+  --menu__panel-back: var(--background-orange);
+  --menu__panel-link: var(--text-orange);
+}
+
+.menu__panel--tools {
+  --menu__panel-back: var(--background-purple);
+  --menu__panel-link: var(--text-purple);
+}
+
+.menu__panel--about {
+  --menu__panel-back: var(--background-green);
+  --menu__panel-link: var(--text-green);
+}
+
+/* Title */
+
+.menu__panel-title {
+  margin: 0;
+  padding: 1.4rem;
+  font-weight: normal;
+  grid-column: span 3;
+  background-color: var(--menu__panel-back);
+
+  a {
+    color: var(--menu__panel-link);
+  }
+}
