@@ -116,6 +116,8 @@ jobs:
           node build/ssr.js
           cp -r dist/* $BUILD_OUT_ROOT/static/
 
+          echo ${{ github.event.number }} > ${BUILD_OUT_ROOT}/NR
+
       - uses: actions/upload-artifact@v4
         with:
           name: build
