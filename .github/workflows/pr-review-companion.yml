@@ -1,0 +1,93 @@
+name: PR review companion
+
+on:
+  workflow_run:
+    workflows: ["Test"]
+    types:
+      - completed
+
+  workflow_call:
+    secrets:
+      GCP_PROJECT_NAME:
+        required: true
+      WIP_PROJECT_ID:
+        required: true
+
+permissions:
+  # Download artifact.
+  actions: read
+  # Post comment in pull request.
+  pull-requests: write
+  # Authenticate with GCP.
+  id-token: write
+
+jobs:
+  review:
+    environment: review
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success'
+    steps:
+      - name: "Download artifact"
+        uses: actions/download-artifact@v4
+        with:
+          pattern: build
+          path: build
+          merge-multiple: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Check for artifacts
+        id: check
+        if: hashFiles('build/') != ''
+        run: |
+          echo "HAS_ARTIFACT=true" >> "$GITHUB_OUTPUT"
+          PR_NUMBER=`cat build/NR | tr -dc '0-9'`
+          echo "PR_NUMBER=$PR_NUMBER" >> "$GITHUB_OUTPUT"
+          echo "PREFIX=fred-$PR_NUMBER" >> "$GITHUB_OUTPUT"
+
+      - name: Authenticate with GCP
+        if: steps.check.outputs.HAS_ARTIFACT
+        uses: google-github-actions/auth@v2
+        with:
+          token_format: access_token
+          service_account: deploy-mdn-review-content@${{ secrets.GCP_PROJECT_NAME }}.iam.gserviceaccount.com
+          workload_identity_provider: projects/${{ secrets.WIP_PROJECT_ID }}/locations/global/workloadIdentityPools/github-actions/providers/github-actions
+
+      - name: Setup gcloud
+        if: steps.check.outputs.HAS_ARTIFACT
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Upload to GCS
+        if: steps.check.outputs.HAS_ARTIFACT
+        uses: google-github-actions/upload-cloud-storage@v2
+        with:
+          path: "build"
+          destination: "${{ vars.GCP_BUCKET_NAME }}/${{ steps.check.outputs.PREFIX }}"
+          resumable: false
+          concurrency: 500
+          parent: false
+          process_gcloudignore: false
+
+      - name: Post message in PR
+        if: steps.check.outputs.HAS_ARTIFACT
+        run: |
+          GH_USER=$(gh api user --jq '.login')
+          COMMENT_ID=$(gh pr view "$PR_NUMBER" --repo "${{ github.repository }}" --comments --json comments \
+            --jq ".comments | sort_by(.createdAt) | map(select(.author.login == \"$GH_USER\")) | .[0].id")
+
+          if [ -n "$COMMENT_ID" ]; then
+            gh api graphql -f query='
+                mutation($id:ID!, $body:String!) {
+                updateIssueComment(input:{id:$id, body:$body}) {
+                    issueComment {
+                        id
+                    }
+                }
+            }' -f id="$COMMENT_ID" -f body="$BODY"
+          else
+            gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" --body "$BODY"
+          fi
+        env:
+          BODY: "Review deployment: https://${{ steps.check.outputs.PREFIX }}.review.mdn.allizom.net/"
+          PR_NUMBER: ${{ steps.check.outputs.PR_NUMBER }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
