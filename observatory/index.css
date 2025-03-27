@@ -210,6 +210,9 @@
     padding-inline: calc((100% - 1440px + (1rem * 2)) / 2);
   }
 
+  --summary-icon: url(assets/summary-icon.svg);
+  --results-icon: url(assets/results-icon.svg);
+
   color: var(--text-primary);
   background: var(--observatory-bg);
 
@@ -245,7 +248,7 @@
   flex-wrap: wrap;
   gap: 1.5rem;
   justify-content: space-between;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 .obs-results__feedback {

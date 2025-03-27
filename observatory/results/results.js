@@ -16,6 +16,20 @@ export class Results extends LitElement {
       --progress-color: var(--observatory-accent);
     }
 
+    .visually-hidden {
+      border: 0 !important;
+      clip: rect(1px, 1px, 1px, 1px) !important;
+      -webkit-clip-path: inset(50%) !important;
+      clip-path: inset(50%) !important;
+      height: 1px !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      padding: 0 !important;
+      position: absolute !important;
+      white-space: nowrap !important;
+      width: 1px !important;
+    }
+
     .scan-result {
       background-color: var(--background-primary);
       border-radius: var(--border-radius);
@@ -29,6 +43,40 @@ export class Results extends LitElement {
       display: grid;
       grid-template-areas: "grade data actions";
       grid-template-columns: auto 1fr auto;
+    }
+
+    h2 {
+      font-size: 1.375rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      margin-top: 1.5rem;
+      &::before {
+        background-color: var(--observatory-color);
+        content: "";
+        display: inline-block;
+        mask-position: left;
+        mask-repeat: no-repeat;
+        mask-size: contain;
+      }
+      .host {
+        font-weight: 400;
+      }
+    }
+
+    h2.summary::before {
+      height: 1.4rem;
+      mask-image: var(--summary-icon);
+      width: 2rem;
+    }
+
+    h2.result::before {
+      height: 1.2rem;
+      mask-image: var(--results-icon);
+      width: 2rem;
+    }
+
+    code {
+      font-weight: 600;
     }
 
     .grade-trend {
@@ -50,6 +98,28 @@ export class Results extends LitElement {
       background: none;
       cursor: pointer;
       display: inline-block;
+    }
+
+    .scan-another {
+      font-size: var(--type-smaller-font-size);
+      font-weight: 400;
+      margin-top: 1.2rem;
+      a {
+        color: var(--observatory-color-secondary);
+      }
+    }
+
+    .label {
+      font-weight: 600;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--observatory-color);
+      &:hover {
+        text-decoration: underline;
+        text-decoration-color: var(--observatory-color-secondary);
+      }
     }
 
     .grade {
@@ -91,10 +161,125 @@ export class Results extends LitElement {
       --grade-border: var(--observatory-grade-f-border);
     }
 
-    table {
+    .tooltip-popup {
+      border-width: 0;
+      background-color: var(--button-primary-default);
+      border-radius: var(--border-radius);
+      color: var(--observatory-inverse-color-secondary);
+      left: 50%;
+      margin-top: 2rem;
+      max-width: min(100vw, 20rem);
+      padding: 1.5rem;
+      position: absolute;
+      text-align: center;
+      /* top: 100%; */
+      /* transform: translateX(var(--tooltip-offset)); */
+      /* visibility: hidden; */
+      width: max-content;
+      z-index: 1;
+
+      table {
+        border: 0;
+        border-collapse: collapse;
+        white-space: nowrap;
+        width: 10rem;
+
+        tr {
+          color: var(--observatory-inverse-color-secondary);
+          font-size: 0.875rem;
+
+          &.current {
+            color: var(--observatory-inverse-color);
+          }
+        }
+
+        th,
+        td {
+          background-color: unset;
+          border: 0;
+          font-weight: var(--font-body);
+          text-align: left;
+          width: 50%;
+        }
+
+        th {
+          font-size: 1rem;
+          padding: 0 0 0.75rem;
+        }
+
+        td {
+          padding: 0;
+
+          svg {
+            vertical-align: -0.3rem;
+          }
+        }
+      }
+    }
+
+    .scroll-container {
+      margin-bottom: 1.5rem;
+      margin-top: 0.8rem;
+      overflow-x: auto;
+      overscroll-behavior-x: none;
+    }
+
+    .footnote {
+      font-size: var(--type-smaller-font-size);
+      margin-top: 1rem;
+    }
+
+    .detail-header {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0 1.5rem 0 0;
+
+      .arrow {
+        color: var(--observatory-color-secondary);
+      }
+
+      .detail-header-title {
+        font-weight: 600;
+        padding-right: 0.2rem;
+      }
+
+      p {
+        margin: 1rem 0;
+      }
+    }
+
+    .obs-pass-icon {
+      svg.pass {
+        path {
+          fill: var(--observatory-pass-icon-bg);
+        }
+
+        circle {
+          fill: var(--observatory-pass-icon-color);
+        }
+      }
+
+      svg.fail {
+        path {
+          fill: var(--observatory-fail-icon-bg);
+        }
+
+        circle {
+          fill: var(--observatory-fail-icon-color);
+        }
+      }
+    }
+
+    .footnote {
+      font-size: var(--type-smaller-font-size);
+      margin-top: 1rem;
+    }
+
+    .scan-results table {
       background: var(--observatory-table-bg);
       border: none;
-      min-width: calc($screen-lg - 2rem - 12rem);
+      border-collapse: collapse;
+      min-width: calc(992px - 2rem - 12rem);
 
       th {
         background: var(--observatory-table-header-bg);
@@ -145,7 +330,7 @@ export class Results extends LitElement {
         }
       }
 
-      // Some column width hints on the different result table.
+      /* Some column width hints on the different result table. */
       &.tests {
         th,
         td {
@@ -216,7 +401,7 @@ export class Results extends LitElement {
       }
 
       @media (max-width: #{$screen-lg - 0.02}) {
-        // responsive table
+        /* responsive table */
         min-width: 0;
 
         thead {
@@ -288,6 +473,127 @@ export class Results extends LitElement {
             display: inline-block;
             height: 1.5em;
             vertical-align: top;
+          }
+        }
+      }
+    }
+
+    ol.tabs-list {
+      column-gap: 3rem;
+      display: grid;
+      grid-template-areas:
+        "tab-0 tab-1 tab-2 tab-3 tab-4 tab-5 ."
+        "hr    hr    hr    hr    hr    hr    hr "
+        "mod   mod   mod   mod   mod   mod   mod";
+      grid-template-columns: repeat(6, max-content) 1fr;
+      margin: 0;
+      overflow-x: auto;
+      overscroll-behavior-x: none;
+      padding: 0;
+
+      @media (max-width: #{$screen-lg - 0.02}) {
+        column-gap: 1.75rem;
+        grid-template-columns: repeat(6, max-content) auto;
+      }
+
+      &::before {
+        border: none;
+        border-top: 1px solid var(--observatory-border);
+        content: "";
+        grid-area: hr;
+        margin: 0;
+        width: 100%;
+      }
+
+      input[type="radio"]:not(:checked) ~ .tab-content {
+        display: none;
+      }
+
+      li.tabs-list-item {
+        display: contents;
+
+        > input:checked + label {
+          border-bottom: 2px solid var(--observatory-accent);
+          color: var(--text-primary);
+        }
+
+        > input:not(:checked) + label:hover {
+          border-bottom: 2px solid var(--observatory-accent-light);
+          color: var(--text-primary);
+        }
+
+        > input:checked:focus-visible + label {
+          outline-color: var(--accent-primary);
+          outline-offset: 1px;
+          outline-style: auto;
+        }
+
+        > input:not(:checked) + label {
+          color: var(--text-secondary);
+          opacity: 0.775;
+        }
+
+        > label {
+          cursor: pointer;
+          height: 2.2rem;
+          width: max-content;
+        }
+
+        &#tabs-0 {
+          > label,
+          > input {
+            grid-area: tab-0;
+          }
+        }
+
+        &#tabs-1 {
+          > label,
+          > input {
+            grid-area: tab-1;
+          }
+        }
+
+        &#tabs-2 {
+          > label,
+          > input {
+            grid-area: tab-2;
+          }
+        }
+
+        &#tabs-3 {
+          > label,
+          > input {
+            grid-area: tab-3;
+          }
+        }
+
+        &#tabs-4 {
+          > label,
+          > input {
+            grid-area: tab-4;
+          }
+        }
+
+        &#tabs-5 {
+          > label,
+          > input {
+            grid-area: tab-5;
+          }
+        }
+
+        > section.tab-content {
+          grid-area: mod;
+          left: 0;
+          margin: 0;
+          position: sticky;
+
+          @media (max-width: #{$screen-lg - 0.02}) {
+            width: calc(
+              100vw - 12rem - 3rem
+            ); /* 12rem: placement width; 3rem: padding */
+          }
+          @media (max-width: #{$screen-md - 0.02}) {
+            width: calc(100vw - 2rem); // 2rem: padding
           }
         }
       }
