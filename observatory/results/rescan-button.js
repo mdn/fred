@@ -24,7 +24,7 @@ export class RescanButton extends LitElement {
       width: 9rem;
     }
 
-    button:hover {
+    button:not(:disabled):hover {
       background: var(--button-primary-hover);
     }
 
