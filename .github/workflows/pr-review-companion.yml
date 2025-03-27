@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.user.login != 'dependabot[bot]'
     env:
-      BUILD_OUT_ROOT: ${{ github.workspace }}/build
+      BUILD_OUT_ROOT: ${{ github.workspace }}/mdn/fred/out
 
     steps:
       - name: Checkout (fred)
