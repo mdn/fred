@@ -118,24 +118,9 @@
   );
 
   --background-red: light-dark(var(--color-red-3), var(--color-red-7));
-  --background-orange: light-dark(
-    var(--color-orange-3),
-    var(--color-orange-7)
-  );
-  --background-yellow: light-dark(
-    var(--color-yellow-3),
-    var(--color-yellow-7)
-  );
-  --background-green: light-dark(
-    var(--color-green-3),
-    var(--color-green-7)
-  );
-  --background-blue: light-dark(
-    var(--color-blue-3),
-    var(--color-blue-7)
-  );
-  --background-purple: light-dark(
-    var(--color-purple-3),
-    var(--color-purple-7)
-  );
+  --background-orange: light-dark(var(--color-orange-3), var(--color-orange-7));
+  --background-yellow: light-dark(var(--color-yellow-3), var(--color-yellow-7));
+  --background-green: light-dark(var(--color-green-3), var(--color-green-7));
+  --background-blue: light-dark(var(--color-blue-3), var(--color-blue-7));
+  --background-purple: light-dark(var(--color-purple-3), var(--color-purple-7));
 }
