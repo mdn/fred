@@ -109,14 +109,12 @@ jobs:
 
           npm run rari git-history
 
-          npm run rari build -- --spas --curriculum --generics --templ-stats
+          npm run rari build -- --spas --blog --curriculum --generics --templ-stats
 
           # SSR all pages
           npm run build
           node build/ssr.js
           cp -r dist/* $BUILD_OUT_ROOT/static/
-
-          cp ../../assets/nonprod/robots.txt $BUILD_OUT_ROOT/robots.txt
 
       - uses: actions/upload-artifact@v4
         with:
