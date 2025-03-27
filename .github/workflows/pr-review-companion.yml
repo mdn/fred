@@ -1,9 +1,9 @@
 name: PR review companion
 
 on:
-  push:
+  pull_request:
     branches:
-      - review-companion
+      - main
 
   workflow_call:
     secrets:
