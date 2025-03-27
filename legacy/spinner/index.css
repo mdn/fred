@@ -29,6 +29,7 @@
     animation-delay: -0.15s;
   }
 }
+
 @keyframes spinner {
   0% {
     transform: rotate(0deg);

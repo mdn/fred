@@ -52,13 +52,13 @@
 /* Icon */
 
 .menu__tabs-icon {
-  fill: currentColor;
+  fill: currentcolor;
 }
 
 /* Arrow */
 
 .menu__tabs-arrow {
-  fill: currentColor;
+  fill: currentcolor;
 
   [aria-expanded="true"] & {
     scale: -1;

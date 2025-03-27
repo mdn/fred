@@ -1,22 +1,22 @@
 html {
-  --observatory-bg: rgba(242, 242, 245, 1);
+  --observatory-bg: rgb(242 242 245 / 100%);
   --observatory-bg-code: #e1e1e1;
-  --observatory-bg-secondary: rgba(255, 255, 255, 1);
+  --observatory-bg-secondary: rgb(255 255 255 / 100%);
   --observatory-color: #000;
-  --observatory-color-secondary: rgba(105, 105, 105, 1);
-  --observatory-inverse-color: rgba(255, 255, 255, 1);
-  --observatory-inverse-color-secondary: rgba(179, 179, 179, 1);
+  --observatory-color-secondary: rgb(105 105 105 / 100%);
+  --observatory-inverse-color: rgb(255 255 255 / 100%);
+  --observatory-inverse-color-secondary: rgb(179 179 179 / 100%);
   --observatory-accent: #5a23d7;
   --observatory-accent-light: #5a23d7aa;
-  --observatory-border: rgba(228, 228, 246, 1);
-  --observatory-border-accent: rgba(90, 35, 215, 1);
-  --observatory-pass-icon-bg: rgba(229, 250, 230, 1);
-  --observatory-pass-icon-color: rgba(0, 121, 54, 1);
-  --observatory-fail-icon-bg: rgba(250, 229, 229, 1);
-  --observatory-fail-icon-color: rgba(211, 0, 56, 1);
-  --observatory-table-bg: rgba(255, 255, 255, 1);
+  --observatory-border: rgb(228 228 246 / 100%);
+  --observatory-border-accent: rgb(90 35 215 / 100%);
+  --observatory-pass-icon-bg: rgb(229 250 230 / 100%);
+  --observatory-pass-icon-color: rgb(0 121 54 / 100%);
+  --observatory-fail-icon-bg: rgb(250 229 229 / 100%);
+  --observatory-fail-icon-color: rgb(211 0 56 / 100%);
+  --observatory-table-bg: rgb(255 255 255 / 100%);
   --observatory-table-bg-alternate: #f9f9fb;
-  --observatory-table-header-bg: rgba(249, 249, 251, 1);
+  --observatory-table-header-bg: rgb(249 249 251 / 100%);
   --observatory-grade-a-bg: #d2fadd;
   --observatory-grade-a-border: #017a37;
   --observatory-grade-b-bg: #e8fad2;
@@ -27,10 +27,10 @@ html {
   --observatory-grade-d-border: #a65001;
   --observatory-grade-f-bg: #fad2d2;
   --observatory-grade-f-border: #a00;
-  --observatory-arrow-down-color: rgba(158, 0, 39, 1);
-  --observatory-arrow-up-color: rgba(0, 121, 54, 1);
+  --observatory-arrow-down-color: rgb(158 0 39 / 100%);
+  --observatory-arrow-up-color: rgb(0 121 54 / 100%);
 
-  --font-body: Inter, var(--font-fallback);
+  --font-body: inter, var(--font-fallback);
 }
 
 .observatory {
@@ -130,6 +130,7 @@ html {
         height: 1.15rem;
         margin-bottom: 0.25rem;
         margin-right: 0.5rem;
+
         /* mask-image: url("../assets/icons/alert-circle.svg"); */
         mask-position: center;
         mask-repeat: no-repeat;

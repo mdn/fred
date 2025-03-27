@@ -5,12 +5,12 @@
   --menu__panel-link: var(--link-normal);
 
   position: absolute;
-  inset: 3rem 0 auto 0;
+  inset: 3rem 0 auto;
   margin-block-start: -1px;
   border: 1px solid light-dark(var(--gray-4), var(--gray-6));
   border-radius: 2px;
   background-color: var(--background-primary);
-  box-shadow: 0px 0px 10px 1px hsl(0, 0%, 0%, 0.05);
+  box-shadow: 0 0 10px 1px hsl(0deg 0% 0% / 5%);
 }
 
 .menu__panel--learn {
