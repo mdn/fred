@@ -134,7 +134,6 @@ jobs:
           path: build
           merge-multiple: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: ${{ github.event.workflow_run.id }}
 
       - name: Check for artifacts
         id: check
