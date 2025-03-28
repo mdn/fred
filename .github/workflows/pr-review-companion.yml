@@ -21,9 +21,12 @@ permissions:
   id-token: write
 
 jobs:
-  check:
+  build:
     if: github.repository_owner == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]'
     runs-on: ubuntu-latest
+    env:
+      BUILD_OUT_ROOT: ${{ github.workspace }}/mdn/fred/out
+
     steps:
       - name: Check if author/actor is not an admin
         env:
@@ -49,14 +52,6 @@ jobs:
               fi
           fi
 
-  build:
-    runs-on: ubuntu-latest
-    needs:
-      - check
-    env:
-      BUILD_OUT_ROOT: ${{ github.workspace }}/mdn/fred/out
-
-    steps:
       - name: Checkout (fred)
         uses: actions/checkout@v4
         with:
