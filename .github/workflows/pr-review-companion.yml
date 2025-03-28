@@ -121,10 +121,6 @@ jobs:
         run: |
           set -eo pipefail
 
-          # Info about which CONTENT_* environment variables were set and to what.
-          echo "CONTENT_ROOT=$CONTENT_ROOT"
-          echo "BLOG_ROOT=$BLOG_ROOT"
-
           npm ci
           mkdir -p $BUILD_OUT_ROOT/static
 
