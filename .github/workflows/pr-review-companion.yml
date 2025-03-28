@@ -122,7 +122,6 @@ jobs:
           set -eo pipefail
 
           npm ci
-          mkdir -p $BUILD_OUT_ROOT/static
 
           npm run rari git-history
 
