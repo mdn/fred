@@ -138,7 +138,7 @@ jobs:
           npm run ssr
 
           # Copy assets.
-          cp -r dist/* $BUILD_OUT_ROOT/static/
+          cp -r dist $BUILD_OUT_ROOT/static
 
       - name: Authenticate with GCP
         uses: google-github-actions/auth@v2
