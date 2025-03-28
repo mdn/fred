@@ -9,7 +9,7 @@ export function Footer(_context) {
   return html`<div class="footer">
     <div class="footer__mdn">
       <div class="footer__intro">
-        <a class="footer__logo" href="">
+        <a class="footer__logo" href="/">
           <svg width="48" height="17" viewBox="0 0 48 17">
             <title>MDN logo</title>
             <path
@@ -26,8 +26,9 @@ export function Footer(_context) {
         <p>Your blueprint for a better internet.</p>
       </div>
       <ul class="footer__socials">
+        <!-- TODO Add Bluesky. -->
         <li>
-          <a href="" aria-label="MDN on Mastodon">
+          <a href="https://mastodon.social/@mdn" aria-label="MDN on Mastodon">
             <svg class="icon" width="24" height="24" viewBox="-32 0 512 512">
               <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
               <path
@@ -37,7 +38,7 @@ export function Footer(_context) {
           </a>
         </li>
         <li>
-          <a href="" aria-label="MDN on X">
+          <a href="https://twitter.com/mozdevnet" aria-label="MDN on X">
             <svg class="icon" width="24" height="24" viewBox="0 0 512 512">
               <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
               <path
@@ -47,7 +48,7 @@ export function Footer(_context) {
           </a>
         </li>
         <li>
-          <a href="" aria-label="MDN on GitHub">
+          <a href="https://github.com/mdn/" aria-label="MDN on GitHub">
             <svg class="icon" width="24" height="24" viewBox="-8 0 512 512">
               <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
               <path
@@ -57,7 +58,7 @@ export function Footer(_context) {
           </a>
         </li>
         <li>
-          <a href="" aria-label="MDN blog RSS feed">
+          <a href="/en-US/blog/rss.xml" aria-label="MDN blog RSS feed">
             <svg class="icon" width="24" height="24" viewBox="-32 0 512 512">
               <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
               <path
@@ -71,10 +72,15 @@ export function Footer(_context) {
         <dt>MDN</dt>
         <dd>
           <ul>
-            <li><a href="">About</a></li>
-            <li><a href="">Blog</a></li>
-            <li><a href="">Careers</a></li>
-            <li><a href="">Advertise with us</a></li>
+            <li><a href="/en-US/about">About</a></li>
+            <li><a href="/en-US/blog/">Blog</a></li>
+            <li>
+              <a
+                href="https://www.mozilla.org/en-US/careers/listings/?team=ProdOps"
+                >Careers</a
+              >
+            </li>
+            <li><a href="/en-US/advertising">Advertise with us</a></li>
           </ul>
         </dd>
       </dl>
@@ -82,8 +88,14 @@ export function Footer(_context) {
         <dt>Support</dt>
         <dd>
           <ul>
-            <li><a href="">Product help</a></li>
-            <li><a href="">Report an issue</a></li>
+            <li>
+              <a href="https://support.mozilla.org/products/mdn-plus"
+                >Product help</a
+              >
+            </li>
+            <li>
+              <a href="/en-US/docs/MDN/Community/Issues">Report an issue</a>
+            </li>
           </ul>
         </dd>
       </dl>
@@ -91,9 +103,11 @@ export function Footer(_context) {
         <dt>Our communities</dt>
         <dd>
           <ul>
-            <li><a href="">MDN Community</a></li>
-            <li><a href="">MDN Forum</a></li>
-            <li><a href="">MDN Chat</a></li>
+            <li><a href="/en-US/community">MDN Community</a></li>
+            <li>
+              <a href="https://discourse.mozilla.org/c/mdn/236">MDN Forum</a>
+            </li>
+            <li><a href="/discord">MDN Chat</a></li>
           </ul>
         </dd>
       </dl>
@@ -101,16 +115,16 @@ export function Footer(_context) {
         <dt>Developers</dt>
         <dd>
           <ul>
-            <li><a href="">Web Technologies</a></li>
-            <li><a href="">Learn Web Development</a></li>
-            <li><a href="">MDN Plus</a></li>
-            <li><a href="">Hacks Blog</a></li>
+            <li><a href="/en-US/docs/Web">Web Technologies</a></li>
+            <li><a href="/en-US/docs/Learn">Learn Web Development</a></li>
+            <li><a href="/en-US/plus">MDN Plus</a></li>
+            <li><a href="https://hacks.mozilla.org/">Hacks Blog</a></li>
           </ul>
         </dd>
       </dl>
     </div>
     <div class="footer__mozilla">
-      <a class="footer__logo" href="">
+      <a class="footer__logo" href="https://www.mozilla.org/">
         <svg width="112" height="32" viewBox="0 0 112 32">
           <title>Mozilla logo</title>
           <path
@@ -122,17 +136,36 @@ export function Footer(_context) {
         </svg>
       </a>
       <ul>
-        <li><a href="">Website Privacy Notice</a></li>
-        <li><a href="">Cookies</a></li>
-        <li><a href="">Legal</a></li>
-        <li><a href="">Community Participation Guidelines</a></li>
+        <li>
+          <a href="https://www.mozilla.org/privacy/websites/"
+            >Website Privacy Notice</a
+          >
+        </li>
+        <li>
+          <a href="https://www.mozilla.org/privacy/websites/#cookies"
+            >Cookies</a
+          >
+        </li>
+        <li>
+          <a href="https://www.mozilla.org/about/legal/terms/mozilla">Legal</a>
+        </li>
+        <li>
+          <a
+            href="https://www.mozilla.org/about/governance/policies/participation/"
+            >Community Participation Guidelines</a
+          >
+        </li>
       </ul>
       <p>
-        Visit <a href="">Mozilla Corporation's</a> not-for-profit parent, the
-        <a href="">Mozilla Foundation</a>.<br />
+        Visit
+        <a href="https://www.mozilla.org/">Mozilla Corporation's</a>
+        not-for-profit parent, the
+        <a href="https://foundation.mozilla.org/">Mozilla Foundation</a>.<br />
         Portions of this content are ©1998–2024 by individual mozilla.org
         contributors. Content available under
-        <a href="">a Creative Commons license</a>.
+        <a href="/en-US/docs/MDN/Writing_guidelines/Attrib_copyright_license"
+          >a Creative Commons license</a
+        >.
       </p>
     </div>
   </div> `;
