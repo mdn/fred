@@ -477,7 +477,7 @@ export function Menu(_context) {
               </a>
             </li>
             <li>
-              <a href="">
+              <a href="/en-US/observatory">
                 <svg
                   width="24"
                   height="24"
