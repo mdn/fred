@@ -103,6 +103,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
+          cache: npm
           node-version-file: "mdn/fred/.nvmrc"
 
       - name: Build some pages
