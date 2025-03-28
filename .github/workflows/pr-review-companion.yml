@@ -113,10 +113,10 @@ jobs:
           BLOG_ROOT: ${{ github.workspace }}/mdn/mdn-studio/content/posts
           CURRICULUM_ROOT: ${{ github.workspace }}/mdn/curriculum
           GENERIC_CONTENT_ROOT: ${{ github.workspace }}/mdn/generic-content/files
-          
+
           LIVE_SAMPLES_BASE_URL: https://live.mdnyalp.dev
           INTERACTIVE_EXAMPLES_BASE_URL: https://interactive-examples.mdn.allizom.net
-          
+
           ADDITIONAL_LOCALES_FOR_GENERICS_AND_SPAS: de
         run: |
           set -eo pipefail
