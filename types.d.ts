@@ -1,6 +1,7 @@
 namespace Fred {
   type Context<T = Rari.BuiltPage> = T & {
-    l10n: import("./fluent.js").Fluent;
+    locale: string;
+    l10n: import("./fluent-types-2").L10nFunction;
   };
 }
 

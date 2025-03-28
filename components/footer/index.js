@@ -23,11 +23,11 @@ export function Footer(context) {
             />
           </svg>
         </a>
-        <p>${context.l10n.get("footer_tagline")}</p>
+        <p>${context.l10n("footer_tagline")}</p>
       </div>
       <ul class="footer__socials">
         <li>
-          <a href="" aria-label=${context.l10n.get("footer_mastodon")}>
+          <a href="" aria-label=${context.l10n("footer_mastodon")}>
             <svg class="icon" width="24" height="24" viewBox="-32 0 512 512">
               <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
               <path
@@ -37,7 +37,7 @@ export function Footer(context) {
           </a>
         </li>
         <li>
-          <a href="" aria-label=${context.l10n.get("footer_x")}>
+          <a href="" aria-label=${context.l10n("footer_x")}>
             <svg class="icon" width="24" height="24" viewBox="0 0 512 512">
               <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
               <path
@@ -47,7 +47,7 @@ export function Footer(context) {
           </a>
         </li>
         <li>
-          <a href="" aria-label=${context.l10n.get("footer_github")}>
+          <a href="" aria-label=${context.l10n("footer_github")}>
             <svg class="icon" width="24" height="24" viewBox="-8 0 512 512">
               <!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
               <path
@@ -57,7 +57,7 @@ export function Footer(context) {
           </a>
         </li>
         <li>
-          <a href="" aria-label=${context.l10n.get("footer_rss")}>
+          <a href="" aria-label=${context.l10n("footer_rss")}>
             <svg class="icon" width="24" height="24" viewBox="-32 0 512 512">
               <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
               <path
@@ -71,40 +71,40 @@ export function Footer(context) {
         <dt>MDN</dt>
         <dd>
           <ul>
-            <li><a href="">${context.l10n.get("footer_about")}</a></li>
-            <li><a href="">${context.l10n.get("footer_blog")}</a></li>
-            <li><a href="">${context.l10n.get("footer_careers")}</a></li>
-            <li><a href="">${context.l10n.get("footer_advertise")}</a></li>
+            <li><a href="">${context.l10n`About`}</a></li>
+            <li><a href="">${context.l10n("footer_blog")}</a></li>
+            <li><a href="">${context.l10n("footer_careers")}</a></li>
+            <li><a href="">${context.l10n("footer_advertise")}</a></li>
           </ul>
         </dd>
       </dl>
       <dl class="footer__links">
-        <dt>${context.l10n.get("footer_support")}</dt>
+        <dt>${context.l10n("footer_support")}</dt>
         <dd>
           <ul>
-            <li><a href="">${context.l10n.get("footer_product_help")}</a></li>
-            <li><a href="">${context.l10n.get("footer_report")}</a></li>
+            <li><a href="">${context.l10n("footer_product_help")}</a></li>
+            <li><a href="">${context.l10n("footer_report")}</a></li>
           </ul>
         </dd>
       </dl>
       <dl class="footer__links">
-        <dt>${context.l10n.get("footer_communities")}</dt>
+        <dt>${context.l10n("footer_communities")}</dt>
         <dd>
           <ul>
-            <li><a href="">${context.l10n.get("footer_mdn_community")}</a></li>
-            <li><a href="">${context.l10n.get("footer_mdn_forum")}</a></li>
-            <li><a href="">${context.l10n.get("footer_mdn_chat")}</a></li>
+            <li><a href="">${context.l10n("footer_mdn_community")}</a></li>
+            <li><a href="">${context.l10n("footer_mdn_forum")}</a></li>
+            <li><a href="">${context.l10n("footer_mdn_chat")}</a></li>
           </ul>
         </dd>
       </dl>
       <dl class="footer__links">
-        <dt>${context.l10n.get("footer_developers")}</dt>
+        <dt>${context.l10n("footer_developers")}</dt>
         <dd>
           <ul>
-            <li><a href="">${context.l10n.get("footer_web")}</a></li>
-            <li><a href="">${context.l10n.get("footer_learn")}</a></li>
-            <li><a href="">${context.l10n.get("footer_plus")}</a></li>
-            <li><a href="">${context.l10n.get("footer_hacks")}</a></li>
+            <li><a href="">${context.l10n("footer_web")}</a></li>
+            <li><a href="">${context.l10n("footer_learn")}</a></li>
+            <li><a href="">${context.l10n("footer_plus")}</a></li>
+            <li><a href="">${context.l10n("footer_hacks")}</a></li>
           </ul>
         </dd>
       </dl>
@@ -122,22 +122,22 @@ export function Footer(context) {
         </svg>
       </a>
       <ul>
-        <li><a href="">${context.l10n.get("footer_privacy")}</a></li>
-        <li><a href="">${context.l10n.get("footer_cookies")}</a></li>
-        <li><a href="">${context.l10n.get("footer_legal")}</a></li>
-        <li><a href="">${context.l10n.get("footer_cpg")}</a></li>
+        <li><a href="">${context.l10n("footer_privacy")}</a></li>
+        <li><a href="">${context.l10n("footer_cookies")}</a></li>
+        <li><a href="">${context.l10n("footer_legal")}</a></li>
+        <li><a href="">${context.l10n("footer_cpg")}</a></li>
       </ul>
       <p>
-        ${context.l10n.get({
+        ${context.l10n.raw({
           id: "footer_mofo",
-          tags: {
+          elements: {
             moco: { tag: "a", href: "https://www.mozilla.org/" },
             mofo: { tag: "a", href: "https://foundation.mozilla.org/" },
           },
         })}<br />
-        ${context.l10n.get({
+        ${context.l10n.raw({
           id: "footer_copyright",
-          tags: {
+          elements: {
             cc: {
               tag: "a",
               href: "/docs/MDN/Writing_guidelines/Attrib_copyright_license",

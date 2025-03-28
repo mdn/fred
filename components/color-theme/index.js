@@ -1,12 +1,11 @@
-// @ts-nocheck
-
 import { html, css, LitElement } from "lit";
+import { L10nMixin } from "../../l10n/mixin";
 
 import osDefault from "../icon/theme.svg?mdnsvg";
 import light from "../icon/sun.svg?mdnsvg";
 import dark from "../icon/moon.svg?mdnsvg";
 
-export class ColorTheme extends LitElement {
+export class ColorTheme extends L10nMixin(LitElement) {
   static styles = css`
     .color-theme {
       position: relative;
@@ -140,7 +139,8 @@ export class ColorTheme extends LitElement {
         aria-controls="color-theme__dropdown-1"
         @click=${this._toggleDropDown}
       >
-        ${this._getCurrent()} Theme
+        ${this._getCurrent()}
+        ${this.l10n`Theme`}
       </button>
       <div
         class="color-theme__dropdown"
@@ -151,17 +151,20 @@ export class ColorTheme extends LitElement {
         <ul class="color-theme__list">
           <li>
             <button class="color-theme__option" @click=${setDefault}>
-              ${osDefault} OS default
+              ${osDefault}
+              ${this.l10n("default")`OS default`}
             </button>
           </li>
           <li>
             <button class="color-theme__option" @click=${setLight}>
-              ${light} Light
+              ${light}
+              ${this.l10n`Light`}
             </button>
           </li>
           <li>
             <button class="color-theme__option" @click=${setDark}>
-              ${dark} Dark
+              ${dark}
+              ${this.l10n`Dark`}
             </button>
           </li>
         </ul>

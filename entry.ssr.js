@@ -23,7 +23,7 @@ async function fetch_from_rari(path) {
  * @param {string} path
  */
 export async function render(path) {
-  const locale = path.split("/")[1]
+  const locale = path.split("/")[1] || "en-US";
 
   if (locale === "qa") {
     path = path.replace("/qa/", "/en-US/")
@@ -56,8 +56,8 @@ export async function render(path) {
     };
     result = r(ObservatoryBody(context));
   } else {
+    /** @type {Rari.DocPage} */
     const page = await fetch_from_rari(path);
-    // @ts-ignore
     const context = await addFluent(locale, page);
     console.log("context", context.url);
     result = r(DocBody(context));
@@ -69,7 +69,6 @@ export async function render(path) {
  * @param {Rari.BuiltPage} context
  */
 export async function renderWithContext(context) {
-  // @ts-ignore
   context = await addFluent("en-US", context);
   // @ts-ignore
   const result = r(DocBody(context));

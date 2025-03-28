@@ -1,12 +1,15 @@
-import l10n from "./fluent.js";
+import getFluentContext from "./fluent.js";
 
 /**
- * @param {Rari.BuiltPage} page
- * @returns {Promise<Fred.Context>}
+ * @template {Rari.BuiltPage} PageType
+ * @param {string} locale
+ * @param {PageType} page
+ * @returns {Promise<Fred.Context<PageType>>}
  */
 export async function addFluent(locale, page) {
   return {
     ...page,
-    l10n: await l10n(locale)
+    locale: locale,
+    l10n: getFluentContext(locale)
   }
 }
