@@ -100,14 +100,20 @@ jobs:
           repository: mdn/mdn-contributor-spotlight
           path: mdn/mdn-contributor-spotlight
 
-      - name: Setup Node.js
+      - name: Setup (fred)
         uses: actions/setup-node@v4
         with:
           node-version-file: "mdn/fred/.nvmrc"
           cache: npm
           cache-dependency-path: "mdn/fred/package-lock.json"
 
-      - name: Build some pages
+      - name: Install (fred)
+        run: npm ci
+
+      - name: Build (fred)
+        run: npm run build
+
+      - name: Build (rari)
         working-directory: mdn/fred
         env:
           CONTENT_ROOT: ${{ github.workspace }}/mdn/content/files
@@ -123,23 +129,17 @@ jobs:
         run: |
           set -eo pipefail
 
-          npm ci
-
-          # Build frontend.
-          npm run build
-
           npm run rari git-history
 
           # Only build some content pages.
           find $CONTENT_ROOT -name 'index.md' -type f -maxdepth 4 > ${{ github.workspace }}/files.txt
 
-          # Build pages (index.json).
-          npm run rari build -- --all --file-list ${{ github.workspace }}/files.txt --templ-stats 
+          npm run rari build -- --all --file-list ${{ github.workspace }}/files.txt --templ-stats
 
-          # SSR pages (index.html).
+      - name: Render (fred)
+        run: |
           npm run ssr
 
-          # Copy assets.
           cp -r dist $BUILD_OUT_ROOT/static
 
       - name: Authenticate with GCP
