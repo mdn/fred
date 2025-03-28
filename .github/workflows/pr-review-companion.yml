@@ -35,7 +35,7 @@ jobs:
       BUILD_OUT_ROOT: ${{ github.workspace }}/mdn/fred/out
 
     steps:
-      - name: Check if author/actor is not an admin
+      - name: Stop if author/actor is not an admin
         env:
           ACTOR: ${{ github.actor }}
           AUTHOR: ${{ github.event.pull_request.user.login }}
