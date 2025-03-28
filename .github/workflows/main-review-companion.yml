@@ -1,0 +1,13 @@
+name: Main Review Companion
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/_deploy.yml
+    secrets: inherit
+    with:
+      prefix: fred
