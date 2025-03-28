@@ -13,8 +13,6 @@ on:
         required: true
 
 permissions:
-  # Download artifact.
-  actions: read
   # Post comment in pull request.
   pull-requests: write
   # Authenticate with GCP.
