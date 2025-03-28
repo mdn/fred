@@ -1,10 +1,6 @@
 name: Main Review Companion
 
 on:
-  push:
-    branches:
-      - main-review-companion
-
   schedule:
     - cron: "0 0 * * *"
 
