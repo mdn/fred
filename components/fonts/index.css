@@ -1,6 +1,6 @@
 @font-face {
   font-weight: 100 900;
-  font-family: "Inter";
+  font-family: Inter;
   font-style: normal;
   font-display: swap;
   font-variation-settings: "opsz" 14;
@@ -10,7 +10,7 @@
 
 @font-face {
   font-weight: 100 900;
-  font-family: "Inter";
+  font-family: Inter;
   font-style: italic;
   font-display: swap;
   font-variation-settings: "opsz" 14;
@@ -19,13 +19,13 @@
 
 :root {
   --font-fallback:
-    BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    blinkmacsystemfont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 
-  --font-body: Inter, var(--font-fallback);
-  --font-heading: Inter, var(--font-fallback);
+  --font-body: inter, var(--font-fallback);
+  --font-heading: inter, var(--font-fallback);
   --font-code:
-    Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+    menlo, consolas, monaco, liberation mono, lucida console, monospace;
 
   --base-font-size: 100%;
   --base-line-height: 1.2;
@@ -45,6 +45,7 @@
   --type-tiny-font-size: 0.694rem;
 
   /* based on the following type-scale https://type-scale.com/?size=16&scale=1.125&text=MDN%20Web%20Docs&font=Inter&fontweight=400&bodyfont=body_font_default&bodyfontweight=400&lineheight=1.75&backgroundcolor=%23ffffff&fontcolor=%23000000&preview=false */
+
   /* --type-heading-h1-font-size-mobile: 1.802rem;
   --type-heading-h2-font-size-mobile: 1.602rem;
   --type-heading-h3-font-size-mobile: 1.424rem;
@@ -72,7 +73,8 @@
   h1 {
     font: var(--type-heading-h1);
     font-variation-settings: "opsz" 26;
-    word-break: break-word;
+    overflow-wrap: anywhere;
+    word-break: normal;
   }
 
   h2 {

@@ -1,31 +1,31 @@
 /* Panel */
 
 .menu__panel {
-  --menu__panel-back: var(--background-blue);
-  --menu__panel-link: var(--link-normal);
+  --menu-panel-back: var(--background-blue);
+  --menu-panel-link: var(--link-normal);
 
   position: absolute;
-  inset: 3rem 0 auto 0;
+  inset: 3rem 0 auto;
   margin-block-start: -1px;
   border: 1px solid light-dark(var(--gray-4), var(--gray-6));
   border-radius: 2px;
   background-color: var(--background-primary);
-  box-shadow: 0px 0px 10px 1px hsl(0, 0%, 0%, 0.05);
+  box-shadow: 0 0 10px 1px hsl(0deg 0% 0% / 5%);
 }
 
 .menu__panel--learn {
-  --menu__panel-back: var(--background-orange);
-  --menu__panel-link: var(--text-orange);
+  --menu-panel-back: var(--background-orange);
+  --menu-panel-link: var(--text-orange);
 }
 
 .menu__panel--tools {
-  --menu__panel-back: var(--background-purple);
-  --menu__panel-link: var(--text-purple);
+  --menu-panel-back: var(--background-purple);
+  --menu-panel-link: var(--text-purple);
 }
 
 .menu__panel--about {
-  --menu__panel-back: var(--background-green);
-  --menu__panel-link: var(--text-green);
+  --menu-panel-back: var(--background-green);
+  --menu-panel-link: var(--text-green);
 }
 
 /* Title */
@@ -35,9 +35,9 @@
   padding: 1.4rem;
   font-weight: normal;
   grid-column: span 3;
-  background-color: var(--menu__panel-back);
+  background-color: var(--menu-panel-back);
 
   a {
-    color: var(--menu__panel-link);
+    color: var(--menu-panel-link);
   }
 }

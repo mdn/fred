@@ -44,7 +44,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--base-font-size);
   line-height: var(--font-content-line-height);
-  text-rendering: optimizeSpeed;
+  text-rendering: optimizespeed;
 }
 
 a:not([class]) {
@@ -94,7 +94,6 @@ select {
 .visually-hidden {
   border: 0 !important;
   clip: rect(1px, 1px, 1px, 1px) !important;
-  -webkit-clip-path: inset(50%) !important;
   clip-path: inset(50%) !important;
   height: 1px !important;
   margin: -1px !important;

@@ -6,6 +6,7 @@
 .obs-landing-top {
   padding-block: 0.75rem;
   padding-inline: 1rem;
+
   @media (width > 1440px) {
     padding-inline: calc((100% - 1440px + (1rem * 2)) / 2);
   }
@@ -20,12 +21,12 @@
   max-width: var(--max-width);
   --border-radius: 0.3rem;
 
-  @media (max-width: 1199px) {
+  @media (width <= 1199px) {
     grid-template-areas: "form svg";
     grid-template-columns: auto;
   }
 
-  @media (max-width: 767px) {
+  @media (width <= 767px) {
     grid-template-areas: "form" "svg";
 
     .landing-illustration {
@@ -49,12 +50,14 @@
 
 .obs-landing-top__illustration {
   grid-area: svg;
+
   svg {
     height: 100%;
     max-width: 50vw;
     width: auto;
   }
-  @media (max-width: 767px) {
+
+  @media (width <= 767px) {
     text-align: center;
   }
 }
@@ -62,11 +65,13 @@
 .obs-landing-about {
   padding-block: 0.75rem;
   padding-inline: 1rem;
+
   @media (width > 1440px) {
     padding-inline: calc((100% - 1440px + (1rem * 2)) / 2);
   }
 
   background: var(--observatory-bg);
+
   p {
     color: var(--observatory-color-secondary);
   }
@@ -90,7 +95,7 @@
   $screen-xxl: 1441px;
    */
 
-  @media (min-width: 769px) {
+  @media (width >= 769px) {
     .assessment {
       margin-left: 0;
     }
@@ -107,7 +112,8 @@
       margin-left: 9.75rem;
     }
   }
-  @media (max-width: 768px) {
+
+  @media (width <= 768px) {
     figure ~ figure {
       margin-top: 1.75rem;
     }
@@ -116,7 +122,8 @@
       display: none;
     }
   }
-  @media (min-width: 769px) and (max-width: 991px) {
+
+  @media (width >= 769px) and (width <= 991px) {
     .about-copy {
       width: 80%;
     }
@@ -156,6 +163,7 @@
     &.assessment {
       margin-left: 0;
     }
+
     &.assessment,
     &.scanning,
     &.security,
@@ -174,9 +182,11 @@
   color: var(--observatory-color-secondary);
   font-size: var(--type-tiny-font-size);
   text-decoration: underline;
+
   &:hover {
     text-decoration: none;
   }
+
   &::before {
     content: "";
     background-color: var(--observatory-color-secondary);
@@ -193,12 +203,13 @@
 
 .obs-links__link--faq {
   &::before {
-    mask-image: url(../components/icon/message-question.svg);
+    mask-image: url("../components/icon/message-question.svg");
   }
 }
+
 .obs-links__link--feedback {
   &::before {
-    mask-image: url(../components/icon/feedback.svg);
+    mask-image: url("../components/icon/feedback.svg");
   }
 }
 
@@ -206,12 +217,13 @@
 .obs-results {
   padding-block: 0.75rem;
   padding-inline: 1rem;
+
   @media (width > 1440px) {
     padding-inline: calc((100% - 1440px + (1rem * 2)) / 2);
   }
 
-  --summary-icon: url(assets/summary-icon.svg);
-  --results-icon: url(assets/results-icon.svg);
+  --summary-icon: url("assets/summary-icon.svg");
+  --results-icon: url("assets/results-icon.svg");
 
   color: var(--text-primary);
   background: var(--observatory-bg);
@@ -228,7 +240,7 @@
   max-width: var(--max-width);
   --border-radius: 0.3rem;
 
-  @media (min-width: 767px) {
+  @media (width >= 767px) {
     column-gap: 1rem;
     grid-template-areas: "header sidebar" "main sidebar";
     grid-template-columns: minmax(0, 1fr) 12rem;
@@ -239,7 +251,7 @@
     }
   }
 
-  @media (min-width: 1199px) {
+  @media (width >= 1199px) {
     column-gap: 3rem;
     grid-template-areas: "header sidebar" "main sidebar";
     grid-template-columns: 2fr minmax(0, 200px);
@@ -289,20 +301,22 @@ h2.obs-toc__heading {
   text-decoration: none;
   font-size: var(--type-smaller-font-size);
   list-style: none;
-  /* padding-left: 0; */
 }
 
 .obs-toc__item {
   padding: 0.5rem 0;
   color: var(--text-secondary);
+
   a {
     color: var(--text-secondary);
     text-decoration: none;
   }
 }
 
+/*
 .obs-results__title {
 }
+*/
 
 .obs-results__title-accent {
   color: var(--observatory-accent);

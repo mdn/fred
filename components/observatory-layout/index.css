@@ -3,59 +3,59 @@
 .obs-layout {
   /* colors */
 
-  --text-primary: light-dark(#1b1b1b, #fff);
+  --text-primary: light-dark(#1b1b1b, #ffffff);
   --text-secondary: light-dark(#4e4e4e, #cdcdcd);
 
-  --observatory-bg: light-dark(rgba(242, 242, 245, 1), rgba(52, 52, 52, 1));
+  --observatory-bg: light-dark(rgb(242 242 245 / 100%), rgb(52 52 52 / 100%));
   --observatory-bg-code: light-dark(#e1e1e1, #4d4d4d);
   --observatory-bg-secondary: light-dark(
-    rgba(255, 255, 255, 1),
-    rgba(0, 0, 0, 1)
+    rgb(255 255 255 / 100%),
+    rgb(0 0 0 / 100%)
   );
-  --observatory-color: light-dark(#000, #fff);
+  --observatory-color: light-dark(#000000, #ffffff);
   --observatory-color-secondary: light-dark(
-    rgba(105, 105, 105, 1),
-    rgba(249, 249, 251, 1)
+    rgb(105 105 105 / 100%),
+    rgb(249 249 251 / 100%)
   );
   --observatory-inverse-color: light-dark(
-    rgba(255, 255, 255, 1),
-    rgb(27, 27, 27)
+    rgb(255 255 255 / 100%),
+    rgb(27 27 27)
   );
   --observatory-inverse-color-secondary: light-dark(
-    rgba(179, 179, 179, 1),
-    rgba(105, 105, 105, 1)
+    rgb(179 179 179 / 100%),
+    rgb(105 105 105 / 100%)
   );
   --observatory-accent: light-dark(#5a23d7, #a388ff);
   --observatory-accent-light: light-dark(#5a23d7aa, #a388ffaa);
   --observatory-border: light-dark(
-    rgba(228, 228, 246, 1),
-    rgba(105, 105, 105, 1)
+    rgb(228 228 246 / 100%),
+    rgb(105 105 105 / 100%)
   );
   --observatory-border-accent: light-dark(
-    rgba(90, 35, 215, 1),
-    rgba(163, 136, 255, 1)
+    rgb(90 35 215 / 100%),
+    rgb(163 136 255 / 100%)
   );
   --observatory-pass-icon-bg: light-dark(
-    rgba(229, 250, 230, 1),
-    rgba(38, 92, 61, 1)
+    rgb(229 250 230 / 100%),
+    rgb(38 92 61 / 100%)
   );
   --observatory-pass-icon-color: light-dark(
-    rgba(0, 121, 54, 1),
-    rgba(138, 255, 163, 1)
+    rgb(0 121 54 / 100%),
+    rgb(138 255 163 / 100%)
   );
   --observatory-fail-icon-bg: light-dark(
-    rgba(250, 229, 229, 1),
-    rgba(92, 38, 38, 1)
+    rgb(250 229 229 / 100%),
+    rgb(92 38 38 / 100%)
   );
   --observatory-fail-icon-color: light-dark(
-    rgba(211, 0, 56, 1),
-    rgba(255, 121, 155, 1)
+    rgb(211 0 56 / 100%),
+    rgb(255 121 155 / 100%)
   );
-  --observatory-table-bg: light-dark(rgba(255, 255, 255, 1), rgb(27, 27, 27));
+  --observatory-table-bg: light-dark(rgb(255 255 255 / 100%), rgb(27 27 27));
   --observatory-table-bg-alternate: light-dark(#f9f9fb, #212121);
   --observatory-table-header-bg: light-dark(
-    rgba(249, 249, 251, 1),
-    rgb(27, 27, 27)
+    rgb(249 249 251 / 100%),
+    rgb(27 27 27)
   );
   --observatory-grade-a-bg: light-dark(#d2fadd, #265c3d);
   --observatory-grade-a-border: light-dark(#017a37, #89fca1);
@@ -66,24 +66,25 @@
   --observatory-grade-d-bg: light-dark(#fae8d2, #5c3d26);
   --observatory-grade-d-border: light-dark(#a65001, #ff6a00);
   --observatory-grade-f-bg: light-dark(#fad2d2, #5c2626);
-  --observatory-grade-f-border: light-dark(#a00, #fc8888);
+  --observatory-grade-f-border: light-dark(#aa0000, #fc8888);
   --observatory-arrow-down-color: light-dark(
-    rgba(158, 0, 39, 1),
-    rgba(255, 112, 127, 1)
+    rgb(158 0 39 / 100%),
+    rgb(255 112 127 / 100%)
   );
   --observatory-arrow-up-color: light-dark(
-    rgba(0, 121, 54, 1),
-    rgba(0, 255, 106, 1)
+    rgb(0 121 54 / 100%),
+    rgb(0 255 106 / 100%)
   );
 
   --form-invalid-color: light-dark(#d30038, #ff97a0);
 
-  --font-body: Inter, var(--font-fallback);
+  --font-body: inter, var(--font-fallback);
 
   /* icons */
-  --alert-circle-img: url(../../observatory/assets/alert-circle.svg);
+  --alert-circle-img: url("../../observatory/assets/alert-circle.svg");
 }
 
+/*
 .obs-layout--landing {
 }
 
@@ -92,3 +93,4 @@
 
 .obs-layout__toc {
 }
+*/

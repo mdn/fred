@@ -1,7 +1,7 @@
-@import "colors/index.css";
-@import "fonts/index.css";
-@import "global/index.css";
-@import "vars.css";
+@import url("colors/index.css");
+@import url("fonts/index.css");
+@import url("global/index.css");
+@import url("vars.css");
 
 /* Components */
 

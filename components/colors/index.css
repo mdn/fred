@@ -22,47 +22,47 @@
 /* Tinted */
 
 :root {
-  --red: hsl(350, 84%, 45%);
-  --red-light: hsl(350, 90%, 60%);
-  --red-dark: hsl(350, 84%, 39%);
-  --red-light-super: hsl(350, 100%, 95%);
-  --red-dark-super: hsl(350, 60%, 15%);
+  --red: hsl(350deg 84% 45%);
+  --red-light: hsl(350deg 90% 60%);
+  --red-dark: hsl(350deg 84% 39%);
+  --red-light-super: hsl(350deg 100% 95%);
+  --red-dark-super: hsl(350deg 60% 15%);
 
-  --orange: hsl(25, 76%, 53%);
-  --orange-light: hsl(25, 93%, 63%);
-  --orange-dark: hsl(25, 78%, 40%);
-  --orange-light-super: hsl(25, 92%, 95%);
-  --orange-dark-super: hsl(25, 55%, 15%);
+  --orange: hsl(25deg 76% 53%);
+  --orange-light: hsl(25deg 93% 63%);
+  --orange-dark: hsl(25deg 78% 40%);
+  --orange-light-super: hsl(25deg 92% 95%);
+  --orange-dark-super: hsl(25deg 55% 15%);
 
-  --yellow: hsl(46, 92%, 47%);
-  --yellow-light: hsl(46, 90%, 70%);
-  --yellow-dark: hsl(46, 75%, 38%);
-  --yellow-light-super: hsl(46, 95%, 95%);
-  --yellow-dark-super: hsl(46, 70%, 12%);
+  --yellow: hsl(46deg 92% 47%);
+  --yellow-light: hsl(46deg 90% 70%);
+  --yellow-dark: hsl(46deg 75% 38%);
+  --yellow-light-super: hsl(46deg 95% 95%);
+  --yellow-dark-super: hsl(46deg 70% 12%);
 
-  --green: hsl(145, 90%, 30%);
-  --green-light: hsl(145, 55%, 55%);
-  --green-dark: hsl(145, 70%, 24%);
-  --green-light-super: hsl(145, 40%, 93%);
-  --green-dark-super: hsl(145, 50%, 10%);
+  --green: hsl(145deg 90% 30%);
+  --green-light: hsl(145deg 55% 55%);
+  --green-dark: hsl(145deg 70% 24%);
+  --green-light-super: hsl(145deg 40% 93%);
+  --green-dark-super: hsl(145deg 50% 10%);
 
-  --blue: hsl(212, 90%, 39%);
-  --blue-light: hsl(212, 91%, 64%);
-  --blue-dark: hsl(212, 80%, 33%);
-  --blue-light-super: hsl(212, 91%, 95%);
-  --blue-dark-super: hsl(212, 65%, 12%);
+  --blue: hsl(212deg 90% 39%);
+  --blue-light: hsl(212deg 91% 64%);
+  --blue-dark: hsl(212deg 80% 33%);
+  --blue-light-super: hsl(212deg 91% 95%);
+  --blue-dark-super: hsl(212deg 65% 12%);
 
-  --purple: hsl(267, 76%, 56%);
-  --purple-light: hsl(267, 99%, 74%);
-  --purple-dark: hsl(267, 65%, 40%);
-  --purple-light-super: hsl(267, 99%, 96%);
-  --purple-dark-super: hsl(267, 55%, 14%);
+  --purple: hsl(267deg 76% 56%);
+  --purple-light: hsl(267deg 99% 74%);
+  --purple-dark: hsl(267deg 65% 40%);
+  --purple-light-super: hsl(267deg 99% 96%);
+  --purple-dark-super: hsl(267deg 55% 14%);
 }
 
 /* Brand */
 
 :root {
-  --brand-blue: hsl(212, 90%, 39%);
+  --brand-blue: hsl(212deg 90% 39%);
 }
 
 /* Text */
@@ -118,11 +118,11 @@
 
 /* Buttons */
 :root {
-  --button-primary-default: light-dark(#1b1b1b, #fff);
+  --button-primary-default: light-dark(#1b1b1b, #ffffff);
   --button-primary-hover: light-dark(#696969, #cdcdcd);
   --button-primary-active: light-dark(#9e9e9e, #9e9e9e);
-  --button-primary-inactive: light-dark(#1b1b1b, #fff);
-  --button-secondary-default: light-dark(#fff, #4e4e4e);
+  --button-primary-inactive: light-dark(#1b1b1b, #ffffff);
+  --button-secondary-default: light-dark(#ffffff, #4e4e4e);
   --button-secondary-hover: light-dark(#cdcdcd, #858585);
   --button-secondary-active: light-dark(#cdcdcd, #9e9e9e);
   --button-secondary-inactive: light-dark(#f9f9fb, #4e4e4e);
