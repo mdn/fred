@@ -20,14 +20,19 @@ permissions:
   # Authenticate with GCP.
   id-token: write
 
+env:
+  PREFIX: fred-pr${{ github.event.number }}
+  HOST: "review.mdn.allizom.net"
+
 jobs:
   deploy:
     if: github.repository_owner == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]'
-    environment: review
+    environment:
+      name: review
+      url: https://${{ env.PREFIX }}.${{ env.HOST }}
     runs-on: ubuntu-latest
     env:
       BUILD_OUT_ROOT: ${{ github.workspace }}/mdn/fred/out
-      PREFIX: fred-pr${{ github.event.number }}
 
     steps:
       - name: Check if author/actor is not an admin
@@ -188,6 +193,6 @@ jobs:
             gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" --body "$BODY"
           fi
         env:
-          BODY: "Review deployment: https://${{ env.PREFIX }}.review.mdn.allizom.net/"
+          BODY: "Review deployment: https://${{ env.PREFIX }}.${{ env.HOST }}/"
           PR_NUMBER: ${{ github.event.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
