@@ -18,6 +18,10 @@ permissions:
   # Authenticate with GCP.
   id-token: write
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.number }}
+  cancel-in-progress: true
+
 env:
   PREFIX: fred-pr${{ github.event.number }}
   HOST: "review.mdn.allizom.net"
