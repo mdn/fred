@@ -38,11 +38,25 @@ export class Results extends LitElement {
       max-width: var(--max-width);
       padding: var(--spacing);
 
-      grid-column-gap: var(--spacing);
       column-gap: var(--spacing);
       display: grid;
       grid-template-areas: "grade data actions";
       grid-template-columns: auto 1fr auto;
+
+      @media (max-width: 1199px) {
+        align-items: flex-start;
+        grid-template-areas: "grade data actions";
+        grid-template-columns: auto 1fr auto;
+        justify-content: space-between;
+        row-gap: calc(var(--spacing) / 2);
+      }
+
+      @media (max-width: 991px) {
+        grid-template-areas:
+          "grade data   "
+          ".     actions";
+        grid-template-columns: min-content 1fr;
+      }
     }
 
     h2 {
@@ -390,7 +404,7 @@ export class Results extends LitElement {
         width: 1.3rem;
       }
 
-      @media (max-width: #{$screen-sm - 0.02}) {
+      @media (max-width: 425.99px) {
         td {
           .iso-date {
             code {
@@ -400,7 +414,7 @@ export class Results extends LitElement {
         }
       }
 
-      @media (max-width: #{$screen-lg - 0.02}) {
+      @media (max-width: 991.99px) {
         /* responsive table */
         min-width: 0;
 
