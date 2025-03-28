@@ -21,7 +21,6 @@ concurrency:
 env:
   BUILD_OUT_ROOT: ${{ github.workspace }}/mdn/fred/out
   PREFIX: ${{ inputs.prefix }}
-  HOST: "review.mdn.allizom.net"
 
 jobs:
   deploy:
@@ -29,7 +28,7 @@ jobs:
 
     environment:
       name: review
-      url: https://${{ env.PREFIX }}.${{ env.HOST }}
+      url: https://${{ env.PREFIX }}.${{ vars.HOST }}
 
     steps:
       - name: Stop if PR author/actor is not an admin
@@ -184,6 +183,6 @@ jobs:
             gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" --body "$BODY"
           fi
         env:
-          BODY: "${{ github.sha }} was deployed to: https://${{ env.PREFIX }}.${{ env.HOST }}/"
+          BODY: "${{ github.sha }} was deployed to: https://${{ env.PREFIX }}.${{ vars.HOST }}/"
           PR_NUMBER: ${{ github.event.pull_request.number }}
           GITHUB_TOKEN: ${{ github.token }}
