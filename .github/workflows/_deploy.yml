@@ -129,9 +129,16 @@ jobs:
 
           npm run rari git-history
 
-          find $CONTENT_ROOT -name 'index.md' -type f -maxdepth 4 > ${{ github.workspace }}/files.txt
+          if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
+            # Partial build.
+            find $CONTENT_ROOT -name 'index.md' -type f -maxdepth 4 > ${{ github.workspace }}/files.txt
+            FILE_LIST="--file-list ${{ github.workspace }}/files.txt"
+          else
+            # Full build.
+            FILE_LIST=""
+          fi
 
-          npm run rari build -- --all --file-list ${{ github.workspace }}/files.txt --templ-stats
+          npm run rari build -- --all $FILE_LIST --templ-stats
 
       - name: Render (fred)
         working-directory: mdn/fred
