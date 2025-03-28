@@ -2,7 +2,7 @@ html {
   --observatory-bg: rgb(242 242 245 / 100%);
   --observatory-bg-code: #e1e1e1;
   --observatory-bg-secondary: rgb(255 255 255 / 100%);
-  --observatory-color: #000;
+  --observatory-color: #000000;
   --observatory-color-secondary: rgb(105 105 105 / 100%);
   --observatory-inverse-color: rgb(255 255 255 / 100%);
   --observatory-inverse-color-secondary: rgb(179 179 179 / 100%);
@@ -26,7 +26,7 @@ html {
   --observatory-grade-d-bg: #fae8d2;
   --observatory-grade-d-border: #a65001;
   --observatory-grade-f-bg: #fad2d2;
-  --observatory-grade-f-border: #a00;
+  --observatory-grade-f-border: #aa0000;
   --observatory-arrow-down-color: rgb(158 0 39 / 100%);
   --observatory-arrow-up-color: rgb(0 121 54 / 100%);
 

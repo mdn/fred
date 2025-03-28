@@ -1,6 +1,7 @@
 {
   "extends": ["stylelint-config-standard"],
   "rules": {
+    "color-hex-length": "long",
     "custom-property-empty-line-before": null,
     "declaration-block-no-redundant-longhand-properties": null,
     "declaration-empty-line-before": null,
