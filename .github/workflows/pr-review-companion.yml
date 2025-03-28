@@ -38,6 +38,7 @@ jobs:
 
           if [ "$AUTHOR_PERMISSION" != "admin" ]; then
               echo "PR author ($AUTHOR) is not an admin, please ping someone for a review."
+              gh run cancel --repo "${{ github.repository }}" ${{ github.run_id }}
               exit 1
           fi
 
@@ -48,6 +49,7 @@ jobs:
 
               if [ "$ACTOR_PERMISSION" != "admin" ]; then
                   echo "PR actor ($ACTOR) is not an admin, please ping someone for a review."
+                  gh run cancel --repo "${{ github.repository }}" ${{ github.run_id }}
                   exit 1
               fi
           fi
