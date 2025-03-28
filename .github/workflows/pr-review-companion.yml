@@ -32,26 +32,28 @@ jobs:
     steps:
       - name: Check if author/actor is not an admin
         env:
+          ACTOR: ${{ github.actor }}
+          AUTHOR: ${{ github.event.pull_request.user.login }}
           GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
         run: |
           # Check author.
-          AUTHOR="${{ github.event.pull_request.user.login }}"
-          AUTHOR_PERMISSION=$(gh api https://api.github.com/repos/${{ github.repository }}/collaborators/$AUTHOR/permission --jq .permission)
+          AUTHOR_PERMISSION=$(gh api https://api.github.com/repos/$REPO/collaborators/$AUTHOR/permission --jq .permission)
 
           if [ "$AUTHOR_PERMISSION" != "admin" ]; then
               echo "PR author ($AUTHOR) is not an admin, please ping someone for a review."
-              gh run cancel --repo "${{ github.repository }}" ${{ github.run_id }}
+              gh run cancel --repo "$REPO" $RUN_ID
               exit 1
           fi
 
           # Check actor.
-          ACTOR="${{ github.actor }}"
           if [ "$ACTOR" != "$AUTHOR" ]; then
-              ACTOR_PERMISSION=$(gh api https://api.github.com/repos/${{ github.repository }}/collaborators/$ACTOR/permission --jq .permission)
+              ACTOR_PERMISSION=$(gh api https://api.github.com/repos/$REPO/collaborators/$ACTOR/permission --jq .permission)
 
               if [ "$ACTOR_PERMISSION" != "admin" ]; then
                   echo "PR actor ($ACTOR) is not an admin, please ping someone for a review."
-                  gh run cancel --repo "${{ github.repository }}" ${{ github.run_id }}
+                  gh run cancel --repo "$REPO" $RUN_ID
                   exit 1
               fi
           fi
