@@ -1,0 +1,77 @@
+/* Tabs */
+
+.menu__tabs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  column-gap: 0.5rem;
+}
+
+/* Button */
+
+.menu__tabs-button {
+  --menu-tabs-button-background: var(--background-blue);
+  --menu-tabs-button-text: var(--text-blue);
+
+  margin: 0;
+  padding: 0.7rem;
+  display: flex;
+  column-gap: 0.25rem;
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-block-end: none;
+  border-radius: 2px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  font: inherit;
+  cursor: pointer;
+
+  &:is([aria-expanded="true"], :hover) {
+    background-color: var(--menu-tabs-button-background);
+    color: var(--menu-tabs-button-text);
+  }
+}
+
+.menu__tabs-button--learn {
+  --menu-tabs-button-background: var(--background-orange);
+  --menu-tabs-button-text: var(--text-orange);
+}
+
+.menu__tabs-button--tools {
+  --menu-tabs-button-background: var(--background-purple);
+  --menu-tabs-button-text: var(--text-purple);
+}
+
+.menu__tabs-button--about {
+  --menu-tabs-button-background: var(--background-green);
+  --menu-tabs-button-text: var(--text-green);
+}
+
+/* Icon */
+
+.menu__tabs-icon {
+  fill: currentcolor;
+}
+
+/* Arrow */
+
+.menu__tabs-arrow {
+  fill: currentcolor;
+
+  [aria-expanded="true"] & {
+    scale: -1;
+  }
+}
+
+/* Link */
+
+.menu__tabs-link {
+  padding: 0.7rem;
+  color: var(--text-primary);
+
+  &:hover {
+    text-decoration: none;
+  }
+}

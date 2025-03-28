@@ -12,7 +12,7 @@
     &:checked + .slider {
       background-color: var(--text-link);
 
-      &:before {
+      &::before {
         left: 53.25%;
         right: 3.25%;
       }
@@ -34,7 +34,7 @@
     transition: 0.4s;
     width: 3em;
 
-    &:before {
+    &::before {
       background-color: var(--background-primary);
       border-radius: 50%;
       bottom: 7.5%;
