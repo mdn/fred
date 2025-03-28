@@ -10,6 +10,9 @@ pre-commit:
     - run: npx stylelint --fix {staged_files}
       glob: "*.css"
 
+    - run: npx stylelint --fix '**/*.css'
+      glob: ".stylelintrc.json"
+
 pre-push:
   piped: true
   jobs:
