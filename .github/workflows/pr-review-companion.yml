@@ -103,8 +103,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          cache: npm
           node-version-file: "mdn/fred/.nvmrc"
+          cache: npm
+          cache-dependency-path: "mdn/fred/package-lock.json"
 
       - name: Build some pages
         working-directory: mdn/fred
