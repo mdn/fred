@@ -134,7 +134,7 @@ jobs:
           npm run rari git-history
 
           # Only build some content pages.
-          find $CONTENT_ROOT -name 'index.md' -type f -maxdepth 4 > ${{ github.workspace }}/files.txt
+          find $CONTENT_ROOT -name 'index.md' -type f -maxdepth 5 > ${{ github.workspace }}/files.txt
 
           npm run rari build -- --all --file-list ${{ github.workspace }}/files.txt --templ-stats
 
