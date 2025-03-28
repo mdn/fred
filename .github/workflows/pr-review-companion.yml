@@ -123,16 +123,21 @@ jobs:
 
           npm ci
 
+          # Build frontend.
+          npm run build
+
           npm run rari git-history
 
           # Only build some content pages.
           find $CONTENT_ROOT -name 'index.md' -type f -maxdepth 4 > ${{ github.workspace }}/files.txt
 
-          npm run rari build -- --all --file-list ${{ github.workspace }}/files.txt --templ-stats
+          # Build pages (index.json).
+          npm run rari build -- --all --file-list ${{ github.workspace }}/files.txt --templ-stats 
 
-          # SSR all pages
-          npm run build
-          node build/ssr.js
+          # SSR pages (index.html).
+          npm run ssr
+
+          # Copy assets.
           cp -r dist/* $BUILD_OUT_ROOT/static/
 
       - name: Authenticate with GCP

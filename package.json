@@ -7,6 +7,7 @@
     "build": "rsbuild build",
     "dev": "node ./server.js",
     "preview": "node ./prod-server.js",
+    "ssr": "node build/ssr.js",
     "tsc": "tsc",
     "rari": "rari"
   },
