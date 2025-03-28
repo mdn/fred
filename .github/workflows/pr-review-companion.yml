@@ -113,26 +113,11 @@ jobs:
           BLOG_ROOT: ${{ github.workspace }}/mdn/mdn-studio/content/posts
           CURRICULUM_ROOT: ${{ github.workspace }}/mdn/curriculum
           GENERIC_CONTENT_ROOT: ${{ github.workspace }}/mdn/generic-content/files
-
-          # rari
+          
           LIVE_SAMPLES_BASE_URL: https://live.test.mdnyalp.dev
           INTERACTIVE_EXAMPLES_BASE_URL: https://interactive-examples.mdn.allizom.net
+          
           ADDITIONAL_LOCALES_FOR_GENERICS_AND_SPAS: de
-
-          BUILD_LIVE_SAMPLES_BASE_URL: https://live.mdnyalp.dev
-          BUILD_LEGACY_LIVE_SAMPLES_BASE_URL: https://live.mdnyalp.dev
-
-          # Use the stage version of interactive examples.
-          BUILD_INTERACTIVE_EXAMPLES_BASE_URL: https://interactive-examples.mdn.allizom.net
-
-          # Now is not the time to worry about flaws.
-          BUILD_FLAW_LEVELS: "*:ignore"
-
-          # This adds the ability to sign in (stage only for now)
-          REACT_APP_DISABLE_AUTH: true
-
-          # Playground
-          REACT_APP_PLAYGROUND_BASE_HOST: mdnyalp.dev
         run: |
           set -eo pipefail
 
