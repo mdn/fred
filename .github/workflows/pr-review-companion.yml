@@ -204,9 +204,8 @@ jobs:
       - name: Post message in PR
         if: steps.check.outputs.HAS_ARTIFACT
         run: |
-          GH_USER=$(gh api user --jq '.login')
           COMMENT_ID=$(gh pr view "$PR_NUMBER" --repo "${{ github.repository }}" --comments --json comments \
-            --jq ".comments | sort_by(.createdAt) | map(select(.author.login == \"$GH_USER\")) | .[0].id")
+            --jq ".comments | sort_by(.createdAt) | map(select(.author.login == \"github-actions\")) | .[0].id")
 
           if [ -n "$COMMENT_ID" ]; then
             gh api graphql -f query='
