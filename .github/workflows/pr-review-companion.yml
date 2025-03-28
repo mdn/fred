@@ -19,11 +19,11 @@ permissions:
   id-token: write
 
 concurrency:
-  group: ci-${{ github.workflow }}-${{ github.event.number }}
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 env:
-  PREFIX: fred-pr${{ github.event.number }}
+  PREFIX: fred-pr${{ github.event.pull_request.number }}
   HOST: "review.mdn.allizom.net"
 
 jobs:
@@ -186,5 +186,5 @@ jobs:
           fi
         env:
           BODY: "${{ github.sha }} was deployed to: https://${{ env.PREFIX }}.${{ env.HOST }}/"
-          PR_NUMBER: ${{ github.event.number }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
