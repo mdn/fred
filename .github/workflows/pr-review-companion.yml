@@ -88,17 +88,18 @@ jobs:
           repository: mdn/generic-content
           path: mdn/generic-content
 
-      - uses: actions/checkout@v4
+      - name: Checkout (mdn-contributor-spotlight)
+        uses: actions/checkout@v4
         with:
           repository: mdn/mdn-contributor-spotlight
           path: mdn/mdn-contributor-spotlight
 
-      - name: Setup Node.js environment
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: "mdn/fred/.nvmrc"
 
-      - name: Build everything
+      - name: Build some pages
         working-directory: mdn/fred
         env:
           CONTENT_ROOT: ${{ github.workspace }}/mdn/content/files
