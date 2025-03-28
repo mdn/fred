@@ -7,6 +7,10 @@ pre-commit:
     - run: npx eslint --fix --cache {staged_files}
       stage_fixed: true
 
+    - run: npx eslint --fix --cache .
+      glob: eslint.config.js
+      stage_fixed: true
+
     - run: npx stylelint --fix {staged_files}
       glob: "*.css"
 
