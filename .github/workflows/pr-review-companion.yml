@@ -108,9 +108,11 @@ jobs:
           cache-dependency-path: "mdn/fred/package-lock.json"
 
       - name: Install (fred)
+        working-directory: mdn/fred
         run: npm ci
 
       - name: Build (fred)
+        working-directory: mdn/fred
         run: npm run build
 
       - name: Build (rari)
@@ -137,6 +139,7 @@ jobs:
           npm run rari build -- --all --file-list ${{ github.workspace }}/files.txt --templ-stats
 
       - name: Render (fred)
+        working-directory: mdn/fred
         run: |
           npm run ssr
 
