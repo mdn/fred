@@ -13,9 +13,11 @@ pre-commit:
 
     - run: npx stylelint --fix {staged_files}
       glob: "*.css"
+      stage_fixed: true
 
     - run: npx stylelint --fix '**/*.css'
       glob: ".stylelintrc.json"
+      stage_fixed: true
 
 pre-push:
   piped: true
