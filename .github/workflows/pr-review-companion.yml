@@ -138,7 +138,10 @@ jobs:
 
           npm run rari git-history
 
-          npm run rari build -- --spas --blog --curriculum --generics --templ-stats
+          # Only build 1000 content pages.
+          find $CONTENT_ROOT -name 'index.md' -type f | sort | head -n 1000 > ${{ github.workspace }}/files.txt
+
+          npm run rari build -- --file-list ${{ github.workspace }}/files.txt --spas --blog --curriculum --generics --templ-stats
 
           # SSR all pages
           npm run build
