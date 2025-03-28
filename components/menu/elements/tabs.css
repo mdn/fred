@@ -11,8 +11,8 @@
 /* Button */
 
 .menu__tabs-button {
-  --menu__tabs-button-background: var(--background-blue);
-  --menu__tabs-button-text: var(--text-blue);
+  --menu-tabs-button-background: var(--background-blue);
+  --menu-tabs-button-text: var(--text-blue);
 
   margin: 0;
   padding: 0.7rem;
@@ -29,24 +29,24 @@
   cursor: pointer;
 
   &:is([aria-expanded="true"], :hover) {
-    background-color: var(--menu__tabs-button-background);
-    color: var(--menu__tabs-button-text);
+    background-color: var(--menu-tabs-button-background);
+    color: var(--menu-tabs-button-text);
   }
 }
 
 .menu__tabs-button--learn {
-  --menu__tabs-button-background: var(--background-orange);
-  --menu__tabs-button-text: var(--text-orange);
+  --menu-tabs-button-background: var(--background-orange);
+  --menu-tabs-button-text: var(--text-orange);
 }
 
 .menu__tabs-button--tools {
-  --menu__tabs-button-background: var(--background-purple);
-  --menu__tabs-button-text: var(--text-purple);
+  --menu-tabs-button-background: var(--background-purple);
+  --menu-tabs-button-text: var(--text-purple);
 }
 
 .menu__tabs-button--about {
-  --menu__tabs-button-background: var(--background-green);
-  --menu__tabs-button-text: var(--text-green);
+  --menu-tabs-button-background: var(--background-green);
+  --menu-tabs-button-text: var(--text-green);
 }
 
 /* Icon */
