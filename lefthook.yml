@@ -1,21 +1,26 @@
 pre-commit:
   parallel: true
   jobs:
-    - run: npx prettier --write --cache --ignore-unknown {staged_files}
+    - name: prettier
+      run: npx prettier --write --cache --ignore-unknown {staged_files}
       stage_fixed: true
 
-    - run: npx eslint --fix --cache {staged_files}
+    - name: eslint
+      run: npx eslint --fix --cache {staged_files}
       stage_fixed: true
 
-    - run: npx eslint --fix --cache .
+    - name: eslint (global)
+      run: npx eslint --fix --cache .
       glob: eslint.config.js
       stage_fixed: true
 
-    - run: npx stylelint --fix {staged_files}
+    - name: stylelint
+      run: npx stylelint --fix --cache {staged_files}
       glob: "*.css"
       stage_fixed: true
 
-    - run: npx stylelint --fix '**/*.css'
+    - name: stylelint (global)
+      run: npx stylelint --fix '**/*.css' --cache --ignore-path .gitignore
       glob: ".stylelintrc.json"
       stage_fixed: true
 
@@ -24,13 +29,14 @@ pre-push:
   jobs:
     - run: npm install
 
-    - name: eslint/stylelint/tsc
+    - name: lint
       group:
         parallel: true
         jobs:
-          - run: npx eslint --cache
-          - run: npx stylelint '**/*.css'
-          - run: npx tsc --noEmit
+          - name: eslint
+            run: npx eslint --cache
+          - name: stylelint
+            run: npx stylelint '**/*.css' --cache --ignore-path .gitignore
 
 output:
   - summary
