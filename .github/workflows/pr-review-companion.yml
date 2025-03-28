@@ -133,7 +133,7 @@ jobs:
           # Only build some content pages.
           find $CONTENT_ROOT -name 'index.md' -type f -maxdepth 4 > ${{ github.workspace }}/files.txt
 
-          npm run rari build -- --file-list ${{ github.workspace }}/files.txt --spas --blog --curriculum --generics --templ-stats
+          npm run rari build -- --all --file-list ${{ github.workspace }}/files.txt --templ-stats
 
           # SSR all pages
           npm run build
