@@ -188,7 +188,7 @@ export class Results extends LitElement {
       position: relative;
       text-align: center;
       inset: unset;
-      transform: translateX(var(--tooltip-offset)); */
+      transform: translateX(var(--tooltip-offset));
       width: max-content;
       z-index: 1;
       overflow: visible;

@@ -14,7 +14,7 @@
   font-style: italic;
   font-display: swap;
   font-variation-settings: "opsz" 14;
-  src: url("fonts/inter-italic.woff2") format("woff2");
+  src: url("fonts/inter.woff2") format("woff2");
 }
 
 :root {
