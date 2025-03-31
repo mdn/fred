@@ -76,7 +76,7 @@ export function Footer(_context) {
             <li><a href="/en-US/blog/">Blog</a></li>
             <li>
               <a
-                href="https://www.mozilla.org/en-US/careers/listings/?team=ProdOps"
+                href="https://www.mozilla.org/en-US/careers/listings/"
                 >Careers</a
               >
             </li>
@@ -142,7 +142,7 @@ export function Footer(_context) {
           >
         </li>
         <li>
-          <a href="https://www.mozilla.org/privacy/websites/#cookies"
+          <a href="https://www.mozilla.org/privacy/websites/cookie-settings/"
             >Cookies</a
           >
         </li>
