@@ -176,21 +176,30 @@ export class Results extends LitElement {
     }
 
     .tooltip-popup {
+      --tooltip-offset: -6.3rem;
       border-width: 0;
       background-color: var(--button-primary-default);
       border-radius: var(--border-radius);
       color: var(--observatory-inverse-color-secondary);
       left: 50%;
-      margin-top: 2rem;
+      margin-top: 0.5rem;
       max-width: min(100vw, 20rem);
       padding: 1.5rem;
-      position: absolute;
+      position: relative;
       text-align: center;
-      /* top: 100%; */
-      /* transform: translateX(var(--tooltip-offset)); */
-      /* visibility: hidden; */
+      inset: unset;
+      transform: translateX(var(--tooltip-offset)); */
       width: max-content;
       z-index: 1;
+      overflow: visible;
+
+      .arrow {
+        fill: var(--button-primary-default);
+        margin-left: -1rem;
+        margin-top: -2rem;
+        padding: 0;
+        position: absolute;
+      }
 
       table {
         border: 0;
