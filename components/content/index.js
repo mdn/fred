@@ -49,6 +49,6 @@ function BCD({ id, title, query, isH3 }) {
   const level = isH3 ? 3 : 2;
   return html`<section aria-labelledby=${id}>
     ${Heading(level, id ? String(id) : null, String(title))}
-    <bcd-table query=${query}></bcd-table>
+    <lazy-compat-table locale="en-US" query=${query}></lazy-compat-table>
   </section>`;
 }
