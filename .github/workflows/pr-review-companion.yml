@@ -1,0 +1,14 @@
+name: PR Review Companion
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    if: github.repository_owner == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]'
+    uses: ./.github/workflows/_deploy.yml
+    secrets: inherit
+    with:
+      prefix: fred-pr${{ github.event.pull_request.number }}
