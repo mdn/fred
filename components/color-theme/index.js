@@ -1,12 +1,12 @@
-// @ts-nocheck
-
 import { LitElement, css, html } from "lit";
+
+import { L10nMixin } from "../../l10n/mixin";
 
 import dark from "../icon/moon.svg?mdnsvg";
 import light from "../icon/sun.svg?mdnsvg";
 import osDefault from "../icon/theme.svg?mdnsvg";
 
-export class ColorTheme extends LitElement {
+export class ColorTheme extends L10nMixin(LitElement) {
   static styles = css`
     .color-theme {
       position: relative;
@@ -74,6 +74,7 @@ export class ColorTheme extends LitElement {
   `;
 
   static properties = {
+    ...super.properties,
     _mode: { attribute: false },
   };
 
@@ -92,6 +93,7 @@ export class ColorTheme extends LitElement {
     this._mode = mode;
   }
 
+  // @ts-expect-error
   _setMode(mode) {
     try {
       localStorage.setItem("theme", mode);
@@ -99,6 +101,7 @@ export class ColorTheme extends LitElement {
       console.warn("Unable to write theme to localStorage", error);
     }
     this._mode = mode;
+    // @ts-expect-error
     document.querySelector(":root").style.colorScheme =
       mode === "osDefault" ? "light dark" : mode;
     this._toggleDropDown();
@@ -118,12 +121,18 @@ export class ColorTheme extends LitElement {
     }
   }
   _toggleDropDown() {
+    // @ts-expect-error
     const button = this.shadowRoot.querySelector(".dropdown");
+    // @ts-expect-error
     const isExpanded = button.getAttribute("aria-expanded") === "true";
+    // @ts-expect-error
     const dropdownId = button.getAttribute("aria-controls");
+    // @ts-expect-error
     const dropdown = this.shadowRoot.querySelector(`#${dropdownId}`);
 
+    // @ts-expect-error
     button.setAttribute("aria-expanded", !isExpanded);
+    // @ts-expect-error
     dropdown.toggleAttribute("hidden");
   }
   _themeChanged() {}
@@ -140,7 +149,7 @@ export class ColorTheme extends LitElement {
         aria-controls="color-theme__dropdown-1"
         @click=${this._toggleDropDown}
       >
-        ${this._getCurrent()} Theme
+        ${this._getCurrent()} ${this.l10n`Theme`}
       </button>
       <div
         class="color-theme__dropdown"
@@ -151,17 +160,17 @@ export class ColorTheme extends LitElement {
         <ul class="color-theme__list">
           <li>
             <button class="color-theme__option" @click=${setDefault}>
-              ${osDefault} OS default
+              ${osDefault} ${this.l10n("theme_default")`OS default`}
             </button>
           </li>
           <li>
             <button class="color-theme__option" @click=${setLight}>
-              ${light} Light
+              ${light} ${this.l10n`Light`}
             </button>
           </li>
           <li>
             <button class="color-theme__option" @click=${setDark}>
-              ${dark} Dark
+              ${dark} ${this.l10n`Dark`}
             </button>
           </li>
         </ul>

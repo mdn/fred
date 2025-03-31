@@ -1,7 +1,7 @@
 import { render as r } from "@lit-labs/ssr";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 
-import l10n from "./fluent.js";
+import { addFluent } from "./l10n/context.js";
 import { DocBody } from "./pages/doc/index.js";
 import {
   ObservatoryBody,
@@ -11,7 +11,7 @@ import { SettingsBody } from "./pages/settings/index.js";
 
 /**
  * @param {string} path
- * @returns {Promise<Fred.Context<Rari.DocPage>>}
+ * @returns {Promise<Rari.DocPage>}
  */
 async function fetch_from_rari(path) {
   const external_url = `http://localhost:8083${path}`;
@@ -24,12 +24,19 @@ async function fetch_from_rari(path) {
  * @param {string} path
  */
 export async function render(path) {
+  const locale = path.split("/")[1] || "en-US";
+
+  if (locale === "qa") {
+    path = path.replace("/qa/", "/en-US/");
+  }
+
   let result;
   if (path.endsWith("settings")) {
     // @ts-ignore
     result = r(SettingsBody());
   } else if (path.includes("observatory/analyze")) {
     /** @type {Fred.Context<Rari.SPAPage>} */
+    // @ts-expect-error
     const context = {
       noIndexing: true,
       url: "/en-US/observatory/analyze",
@@ -41,6 +48,7 @@ export async function render(path) {
     result = r(ObservatoryResults(context));
   } else if (path.endsWith("observatory") || path.endsWith("observatory/")) {
     /** @type {Fred.Context<Rari.SPAPage>} */
+    // @ts-expect-error
     const context = {
       noIndexing: true,
       url: "/en-US/observatory/",
@@ -51,9 +59,9 @@ export async function render(path) {
     };
     result = r(ObservatoryBody(context));
   } else {
-    const context = await fetch_from_rari(path);
-    // @ts-ignore
-    context.l10n = await l10n(context.locale);
+    /** @type {Rari.DocPage} */
+    const page = await fetch_from_rari(path);
+    const context = await addFluent(locale, page);
     console.log("context", context.url);
     result = r(DocBody(context));
   }
@@ -64,8 +72,7 @@ export async function render(path) {
  * @param {Rari.BuiltPage} context
  */
 export async function renderWithContext(context) {
-  // @ts-ignore
-  context.l10n = await l10n(context.locale);
+  context = await addFluent("en-US", context);
   // @ts-ignore
   const result = r(DocBody(context));
   return await collectResult(result);
