@@ -11,7 +11,7 @@ import { SettingsBody } from "./pages/settings/index.js";
 
 /**
  * @param {string} path
- * @returns {Promise<Fred.Context<Rari.DocPage | Rari.SPAPage>>}
+ * @returns {Promise<Rari.DocPage | Rari.SPAPage>}
  */
 async function fetch_from_rari(path) {
   const external_url = `http://localhost:8083${path}`;
@@ -35,24 +35,26 @@ export async function render(path) {
     // @ts-ignore
     result = r(SettingsBody());
   } else if (path.includes("observatory/analyze")) {
+    // @tsignore
     const rawContext = await fetch_from_rari(path.trim().replace(/\/$/, ""));
     if (!isSPAContext(rawContext)) {
       throw new Error("Expected SPA context for observatory/analyze");
     }
     /** @type {Fred.Context<Rari.SPAPage>} */
-    const context = rawContext;
+    const context = await addFluent(locale, rawContext);
     result = r(ObservatoryResults(context));
   } else if (path.endsWith("observatory") || path.endsWith("observatory/")) {
+    // @tsignore
     const rawContext = await fetch_from_rari(path.trim().replace(/\/$/, ""));
     if (!isSPAContext(rawContext)) {
       throw new Error("Expected SPA context for observatory/analyze");
     }
     /** @type {Fred.Context<Rari.SPAPage>} */
-    const context = rawContext;
+    const context = await addFluent(locale, rawContext);
     console.log("ctx", context);
     result = r(ObservatoryLanding(context));
   } else {
-    /** @type {Rari.DocPage} */
+    // @tsignore
     const page = await fetch_from_rari(path);
     const context = await addFluent(locale, page);
     console.log("context", context.url);
@@ -74,7 +76,7 @@ export async function renderWithContext(context) {
 
 /**
  * Type guard to check if a context is an SPAPage context
- * @param {Fred.Context<Rari.DocPage | Rari.SPAPage>} context
+ * @param {any} context
  * @returns {context is Fred.Context<Rari.SPAPage>}
  */
 function isSPAContext(context) {
