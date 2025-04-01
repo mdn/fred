@@ -1,3 +1,5 @@
+import { getSymmetricContext } from "../symmetric-context/both.js";
+
 import getFluentContext from "./fluent.js";
 
 /**
@@ -5,31 +7,18 @@ import getFluentContext from "./fluent.js";
  */
 
 /**
- * @template {(new (...args: any[]) => LitElement) & Pick<typeof LitElement, "properties">} TBase
+ * @template {new (...args: any[]) => LitElement} TBase
  * @param {TBase} Base
  */
 export const L10nMixin = (Base) =>
   class LocalizedElement extends Base {
-    static properties = {
-      ...Base.properties,
-      locale: { type: String },
-    };
-
     /**
      * @param  {...any} args
      */
     constructor(...args) {
       super(...args);
-      this.locale = "";
-      this.l10n = getFluentContext();
-    }
-
-    /**
-     * @param {import("lit").PropertyValues<this>} changedProperties
-     */
-    willUpdate(changedProperties) {
-      if (changedProperties.has("locale")) {
-        this.l10n = getFluentContext(this.locale);
-      }
+      const context = getSymmetricContext();
+      const locale = context.locale;
+      this.l10n = getFluentContext(locale);
     }
   };

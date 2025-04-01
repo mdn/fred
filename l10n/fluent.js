@@ -92,7 +92,7 @@ export class Fluent {
       message,
       {
         allowedAttributes,
-        allowedTags: /** @type AllowedTags[] */ (allowedTags),
+        allowedTags: /** @type {AllowedTags[]} */ (allowedTags),
         allowedSchemes: ["http", "https", "mailto"],
         filter(token) {
           // TODO: use element names directly
@@ -228,7 +228,6 @@ export default function getFluentContext(locale) {
       tag.toString = () => {
         // called as a function, used as a function:
         // ${l10n("foobar")}
-        console.log(locale, localizedString, fallbackString);
         return (
           (typeof localizedString === "string" && localizedString) ||
           fallbackString

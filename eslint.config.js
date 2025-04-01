@@ -52,6 +52,7 @@ export default defineConfig([
       "jsdoc/require-returns-description": "off",
       "jsdoc/require-returns-type": "off",
       "n/no-unsupported-features/node-builtins": ["off"],
+      "n/no-unpublished-import": "off",
       "unicorn/prevent-abbreviations": ["off"],
       "unicorn/template-indent": ["off"],
     },

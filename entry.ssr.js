@@ -8,6 +8,7 @@ import {
   ObservatoryResults,
 } from "./pages/observatory/index.js";
 import { SettingsBody } from "./pages/settings/index.js";
+import { runWithContext } from "./symmetric-context/server.js";
 
 /**
  * @param {string} path
@@ -30,42 +31,44 @@ export async function render(path) {
     path = path.replace("/qa/", "/en-US/");
   }
 
-  let result;
-  if (path.endsWith("settings")) {
-    // @ts-ignore
-    result = r(SettingsBody());
-  } else if (path.includes("observatory/analyze")) {
-    /** @type {Fred.Context<Rari.SPAPage>} */
-    // @ts-expect-error
-    const context = {
-      noIndexing: true,
-      url: "/en-US/observatory/analyze",
-      pageTitle: "HTTP Observatory Report",
-      pageNotFound: false,
-      onlyFollow: false,
-      slug: "observatory/analyze",
-    };
-    result = r(ObservatoryResults(context));
-  } else if (path.endsWith("observatory") || path.endsWith("observatory/")) {
-    /** @type {Fred.Context<Rari.SPAPage>} */
-    // @ts-expect-error
-    const context = {
-      noIndexing: true,
-      url: "/en-US/observatory/",
-      pageTitle: "HTTP Observatory",
-      pageNotFound: false,
-      onlyFollow: false,
-      slug: "observatory",
-    };
-    result = r(ObservatoryBody(context));
-  } else {
-    /** @type {Rari.DocPage} */
-    const page = await fetch_from_rari(path);
-    const context = await addFluent(locale, page);
-    console.log("context", context.url);
-    result = r(DocBody(context));
-  }
-  return await collectResult(result);
+  return runWithContext({ locale }, async () => {
+    let result;
+    if (path.endsWith("settings")) {
+      // @ts-ignore
+      result = r(SettingsBody());
+    } else if (path.includes("observatory/analyze")) {
+      /** @type {Fred.Context<Rari.SPAPage>} */
+      // @ts-expect-error
+      const context = {
+        noIndexing: true,
+        url: "/en-US/observatory/analyze",
+        pageTitle: "HTTP Observatory Report",
+        pageNotFound: false,
+        onlyFollow: false,
+        slug: "observatory/analyze",
+      };
+      result = r(ObservatoryResults(context));
+    } else if (path.endsWith("observatory") || path.endsWith("observatory/")) {
+      /** @type {Fred.Context<Rari.SPAPage>} */
+      // @ts-expect-error
+      const context = {
+        noIndexing: true,
+        url: "/en-US/observatory/",
+        pageTitle: "HTTP Observatory",
+        pageNotFound: false,
+        onlyFollow: false,
+        slug: "observatory",
+      };
+      result = r(ObservatoryBody(context));
+    } else {
+      /** @type {Rari.DocPage} */
+      const page = await fetch_from_rari(path);
+      const context = await addFluent(locale, page);
+      console.log("context", context.url);
+      result = r(DocBody(context));
+    }
+    return await collectResult(result);
+  });
 }
 
 /**
