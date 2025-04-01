@@ -9,7 +9,7 @@ import {
   labelFromString,
   versionLabelFromSupport,
 } from "./feature-row.js";
-//import styles from "./index.css?css" with { type: "css" };
+import styles from "./index.css?lit";
 import { getActiveLegendItems } from "./legend.js";
 import {
   HIDDEN_BROWSERS,
@@ -88,7 +88,7 @@ export class CompatTable extends LitElement {
     _browsers: { state: true },
   };
 
-  //static styles = styles;
+  static styles = styles;
 
   constructor() {
     super();
