@@ -18,8 +18,8 @@ export class Results extends LitElement {
 
   constructor() {
     super();
-    /** @type { string | undefined } */
-    this.host = undefined;
+    /** @type { string | null } */
+    this.host = null;
     /** @type { number } */
     this.selectedTab = 0;
     /** @type { boolean } */
@@ -83,7 +83,7 @@ export class Results extends LitElement {
 
   firstUpdated() {
     const params = new URLSearchParams(globalThis.location.search);
-    this.host = params.get("host") ?? undefined;
+    this.host = params.get("host");
   }
 
   _updateSelectedTab() {

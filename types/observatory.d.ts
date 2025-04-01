@@ -73,7 +73,7 @@ namespace Observatory {
   }
 
   interface PolicyItem {
-    pass?: boolean;
+    pass: boolean | null;
     description: string;
     info: string;
   }

@@ -110,8 +110,8 @@ export class ComparisonTable extends LitElement {
 
   constructor() {
     super();
-    /** @type {Observatory.Result | undefined} */
-    this.result = undefined;
+    /** @type {Observatory.Result | null} */
+    this.result = null;
   }
 
   _gradeDistributionTask = new Task(this, {

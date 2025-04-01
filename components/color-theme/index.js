@@ -80,11 +80,11 @@ export class ColorTheme extends L10nMixin(LitElement) {
 
   constructor() {
     super();
-    this._mode = undefined;
+    this._mode = null;
   }
 
   firstUpdated() {
-    let mode;
+    let mode = null;
     try {
       mode = localStorage.getItem("theme");
     } catch (error) {
