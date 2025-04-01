@@ -40,22 +40,19 @@ export function Rating({ result, host, rescan }) {
       <section class="data">
         <div>
           <a href="/en-US/observatory/docs/tests_and_scoring" target="_blank">
-            <span class="label">Score</span>
-          </a>
-          : ${result.scan.score}&thinsp;/&thinsp;100
+            <span class="label">Score</span></a
+          >: ${result.scan.score}&thinsp;/&thinsp;100
         </div>
         <div>
-          <a href="#history">
-            <span class="label">Scan Time</span>
-          </a>
+          <a href="#history"> <span class="label">Scan Time</span></a
+          >:
           <mdn-observatory-human-duration
             .date=${new Date(result.scan.scanned_at)}
           ></mdn-observatory-human-duration>
         </div>
         <a href="/en-US/observatory/docs/tests_and_scoring" target="_blank">
-          <span class="label">Tests Passed</span>
-        </a>
-        : ${result.scan.tests_passed}&thinsp;/&thinsp;
+          <span class="label">Tests Passed</span></a
+        >: ${result.scan.tests_passed}&thinsp;/&thinsp;
         ${result.scan.tests_quantity}
       </section>
       <section class="actions">

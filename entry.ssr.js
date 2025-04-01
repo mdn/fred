@@ -4,14 +4,14 @@ import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 import { addFluent } from "./l10n/context.js";
 import { DocBody } from "./pages/doc/index.js";
 import {
-  ObservatoryBody,
+  ObservatoryLanding,
   ObservatoryResults,
 } from "./pages/observatory/index.js";
 import { SettingsBody } from "./pages/settings/index.js";
 
 /**
  * @param {string} path
- * @returns {Promise<Rari.DocPage>}
+ * @returns {Promise<Rari.DocPage | Rari.SPAPage>}
  */
 async function fetch_from_rari(path) {
   const external_url = `http://localhost:8083${path}`;
@@ -35,34 +35,26 @@ export async function render(path) {
     // @ts-ignore
     result = r(SettingsBody());
   } else if (path.includes("observatory/analyze")) {
+    /** @type Rari.SPAPage */
+    // @ts-ignore
+    const rawContext = await fetch_from_rari(path.trim().replace(/\/$/, ""));
     /** @type {Fred.Context<Rari.SPAPage>} */
-    // @ts-expect-error
-    const context = {
-      noIndexing: true,
-      url: "/en-US/observatory/analyze",
-      pageTitle: "HTTP Observatory Report",
-      pageNotFound: false,
-      onlyFollow: false,
-      slug: "observatory/analyze",
-    };
+    const context = await addFluent(locale, rawContext);
     result = r(ObservatoryResults(context));
   } else if (path.endsWith("observatory") || path.endsWith("observatory/")) {
+    /** @type Rari.SPAPage */
+    // @ts-ignore
+    const rawContext = await fetch_from_rari(path.trim().replace(/\/$/, ""));
     /** @type {Fred.Context<Rari.SPAPage>} */
-    // @ts-expect-error
-    const context = {
-      noIndexing: true,
-      url: "/en-US/observatory/",
-      pageTitle: "HTTP Observatory",
-      pageNotFound: false,
-      onlyFollow: false,
-      slug: "observatory",
-    };
-    result = r(ObservatoryBody(context));
+    const context = await addFluent(locale, rawContext);
+    console.log("ctx", context);
+    result = r(ObservatoryLanding(context));
   } else {
-    /** @type {Rari.DocPage} */
+    // @tsignore
     const page = await fetch_from_rari(path);
     const context = await addFluent(locale, page);
     console.log("context", context.url);
+    // @ts-ignore
     result = r(DocBody(context));
   }
   return await collectResult(result);
