@@ -1,7 +1,7 @@
 import { html } from "lit";
 
-import failSvg from "./assets/fail-icon.svg?mdnsvg";
-import passSvg from "./assets/pass-icon.svg?mdnsvg";
+import failSvg from "./assets/fail-icon.svg?lit";
+import passSvg from "./assets/pass-icon.svg?lit";
 
 /**
  *
