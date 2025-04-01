@@ -1,12 +1,16 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 
 import "./index.css";
 
 /**
- * @param {Fred.Context<Rari.DocPage>} context
+ * @param {Fred.Context} context
  */
 export function BreadCrumbs(context) {
-  const items = (context?.doc?.parents || []).map(
+  if (!("doc" in context)) {
+    return nothing;
+  }
+
+  const items = context.doc.parents.map(
     ({ uri, title }) =>
       html`<a class="breadcrumbs__link" href=${uri}> ${title} </a>
         <svg
