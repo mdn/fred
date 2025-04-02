@@ -1,3 +1,5 @@
+/* Compat (global) */
+
 :host {
   --compat-background-primary: var(
     --background-primary,

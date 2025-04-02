@@ -1,3 +1,5 @@
+/* Compat (common trailer) */
+
 .bcd-cell-text-wrapper {
   display: flex;
   flex-direction: row;

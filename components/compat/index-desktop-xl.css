@@ -1,6 +1,4 @@
-/*
- * @use "../../ui/vars" as *;
- */
+/* Compat (desktop-xl) */
 
 @media (width >= /* $screen-xl */ 1200px) {
   .table-container {

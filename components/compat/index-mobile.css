@@ -1,6 +1,4 @@
-/* @use "../../ui/vars" as *; */
-
-/* Style for mobile. */
+/* Compat (mobile) */
 
 @media (width <= /* $screen-sm - 0.02 */ 425.98px) {
   .bc-table {
