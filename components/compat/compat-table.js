@@ -182,7 +182,7 @@ export class CompatTable extends LitElement {
         ${this._renderIssueLink()}
         <table
           class="bc-table bc-table-web"
-          style="--browser-count: ${Object.keys(this._browsers).length}"
+          style="--compat-browser-count: ${Object.keys(this._browsers).length}"
         >
           ${this._renderTableHeader()} ${this._renderTableBody()}
         </table>

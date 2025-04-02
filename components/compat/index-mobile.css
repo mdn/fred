@@ -13,11 +13,11 @@
     tr {
       td.bc-support {
         border: none;
-        border-top: 1px solid var(--border-primary);
+        border-top: 1px solid var(--compat-border-primary);
         display: block;
 
         &:last-child {
-          border-bottom: 1px solid var(--border-primary);
+          border-bottom: 1px solid var(--compat-border-primary);
         }
       }
     }
@@ -29,7 +29,7 @@
 
     tr:not(:first-of-type) .bc-feature {
       /* Feature separator. */
-      border-top: 2px solid var(--border-primary);
+      border-top: 2px solid var(--compat-border-primary);
     }
 
     .bc-feature,

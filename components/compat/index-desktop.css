@@ -4,7 +4,7 @@
   .bc-table {
     /* Expand all columns. */
     grid-template-columns: minmax(20vw, min-content) repeat(
-        var(--browser-count),
+        var(--compat-browser-count),
         auto
       );
 
@@ -19,7 +19,7 @@
     }
 
     tbody {
-      --border: 1px solid var(--border-secondary);
+      --compat-border: 1px solid var(--compat-border-secondary);
 
       /* Border. */
       tr {
@@ -27,19 +27,19 @@
           th,
           td {
             > * {
-              border-top: var(--border);
+              border-top: var(--compat-border);
             }
           }
 
           .bc-feature {
-            border-top: var(--border);
+            border-top: var(--compat-border);
           }
         }
 
         th:not(:first-child),
         td:not(:first-child) {
           > * {
-            border-left: var(--border);
+            border-left: var(--compat-border);
           }
         }
       }
@@ -61,13 +61,13 @@
 
     .timeline {
       border-left: none !important;
-      border-top: var(--border);
+      border-top: var(--compat-border);
     }
 
     .bc-has-history:focus-within > button {
       /* Highlight expanded item. */
       --padding-bottom-offset: -2px;
-      border-bottom: 2px solid var(--text-primary);
+      border-bottom: 2px solid var(--compat-text-primary);
     }
   }
 
@@ -115,7 +115,7 @@
     cursor: pointer;
 
     > button:hover {
-      background: var(--background-secondary);
+      background: var(--compat-background-secondary);
     }
   }
 }

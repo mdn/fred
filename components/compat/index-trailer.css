@@ -16,24 +16,24 @@
 }
 
 .bcd-cell-text-copy {
-  color: var(--text-primary);
+  color: var(--compat-text-primary);
 }
 
 .bc-supports-yes {
   .bcd-cell-text-copy {
-    color: var(--text-primary-green);
+    color: var(--compat-text-primary-green);
   }
 }
 
 .bc-supports-partial {
   .bcd-cell-text-copy {
-    color: var(--text-primary-yellow);
+    color: var(--compat-text-primary-yellow);
   }
 }
 
 .bc-supports-no {
   .bcd-cell-text-copy {
-    color: var(--text-primary-red);
+    color: var(--compat-text-primary-red);
   }
 }
 
@@ -49,7 +49,7 @@
 @media (width >= /* $screen-sm */ 426px) {
   .bc-table {
     td.bc-support > button {
-      padding-bottom: calc(0.5rem + var(--padding-bottom-offset, 0px));
+      padding-bottom: calc(0.5rem + var(--compat-padding-bottom-offset, 0px));
       padding-left: 0.25rem;
       padding-right: 0.25rem;
       padding-top: 0.5rem;

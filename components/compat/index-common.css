@@ -40,34 +40,34 @@ table {
 }
 
 .bc-on-github {
-  font-size: var(--type-smaller-font-size);
+  font-size: var(--compat-type-smaller-font-size);
 }
 
 .bc-table {
-  border: 1px solid var(--border-primary);
+  border: 1px solid var(--compat-border-primary);
   border-collapse: separate;
-  border-radius: var(--elem-radius);
+  border-radius: var(--compat-elem-radius);
   border-spacing: 0;
   margin: 0;
   width: 100%;
 
   td,
   th {
-    border: 1px solid var(--border-secondary);
+    border: 1px solid var(--compat-border-secondary);
     border-width: 0 0 1px 1px;
 
-    font-size: var(--type-smaller-font-size);
+    font-size: var(--compat-type-smaller-font-size);
     font-weight: 500;
     padding: 0;
     padding: 0.4rem;
 
     code {
-      font-size: var(--type-smaller-font-size);
+      font-size: var(--compat-type-smaller-font-size);
     }
   }
 
   th {
-    background: var(--background-primary);
+    background: var(--compat-background-primary);
     padding: 0.4rem;
     vertical-align: bottom;
   }
@@ -110,19 +110,19 @@ table {
       }
 
       &.bc-supports-no > button > span {
-        color: var(--text-primary-red);
+        color: var(--compat-text-primary-red);
       }
 
       &.bc-supports-partial > button > span {
-        color: var(--text-primary-yellow);
+        color: var(--compat-text-primary-yellow);
       }
 
       &.bc-supports-preview > button > span {
-        color: var(--text-primary-blue);
+        color: var(--compat-text-primary-blue);
       }
 
       &.bc-supports-yes > button > span {
-        color: var(--text-primary-green);
+        color: var(--compat-text-primary-green);
       }
     }
   }
@@ -131,13 +131,13 @@ table {
     margin-bottom: 1rem;
 
     .icon-wrap {
-      background: var(--background-primary);
+      background: var(--compat-background-primary);
     }
   }
 
   .bc-supports.bc-supports-removed-partial {
     .bcd-cell-text-copy {
-      color: var(--text-primary-yellow);
+      color: var(--compat-text-primary-yellow);
     }
   }
 
@@ -163,21 +163,21 @@ table {
     }
 
     .icon.icon-removed-partial {
-      background-color: var(--icon-critical);
+      background-color: var(--compat-icon-critical);
 
       /* override icon */
       mask-image: url("./icons/no.svg");
     }
 
     .timeline .icon.icon-removed-partial {
-      background-color: var(--icon-primary);
+      background-color: var(--compat-icon-primary);
       mask-image: url("./icons/partial.svg");
     }
   }
 
   .bc-support.bc-supports-removed-partial {
     .bcd-cell-text-copy {
-      color: var(--text-primary-red);
+      color: var(--compat-text-primary-red);
     }
   }
 
@@ -195,11 +195,11 @@ table {
   }
 
   .bc-feature-depth-2 {
-    border-left: 7px solid var(--border-primary);
+    border-left: 7px solid var(--compat-border-primary);
   }
 
   .bc-feature-depth-3 {
-    border-left: 15px solid var(--border-primary);
+    border-left: 15px solid var(--compat-border-primary);
   }
 
   .timeline {
@@ -225,23 +225,23 @@ table {
 }
 
 .bc-level-no {
-  background-color: var(--icon-critical);
+  background-color: var(--compat-icon-critical);
 }
 
 .bc-level-preview {
-  background-color: var(--icon-information);
+  background-color: var(--compat-icon-information);
 }
 
 .bc-legend-items-container {
   display: flex;
   flex-wrap: wrap;
-  font-size: var(--type-smaller-font-size);
+  font-size: var(--compat-type-smaller-font-size);
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
 
 .bc-legend-tip {
-  font-size: var(--type-smaller-font-size);
+  font-size: var(--compat-type-smaller-font-size);
   font-style: italic;
   font-variation-settings: "slnt" -10;
   margin-bottom: 1rem;
@@ -258,7 +258,7 @@ table {
   display: flex;
 
   .icon {
-    background-color: var(--icon-primary);
+    background-color: var(--compat-icon-primary);
   }
 }
 
@@ -298,7 +298,7 @@ table {
   width: 100%;
 
   &::before {
-    background: var(--border-primary);
+    background: var(--compat-border-primary);
     content: "";
     height: calc(100% - 0.25rem);
     left: 7px;
@@ -313,7 +313,7 @@ table {
     position: relative;
 
     &::before {
-      background: var(--background-primary);
+      background: var(--compat-background-primary);
       bottom: 0;
       content: "";
       height: calc(100% - 6px);
@@ -326,14 +326,14 @@ table {
 
   .bc-level-yes.icon.icon-yes {
     /* override icon */
-    background-color: var(--icon-success);
+    background-color: var(--compat-icon-success);
     mask-image: url("./icons/yes-circle.svg");
   }
 
   .bc-supports-dd {
     .icon {
-      background: var(--border-primary);
-      border: 3px solid var(--background-primary);
+      background: var(--compat-border-primary);
+      border: 3px solid var(--compat-background-primary);
       border-radius: 50%;
       mask-image: none;
     }
@@ -360,7 +360,7 @@ table {
 }
 
 .bc-notes-wrapper {
-  color: var(--text-primary);
+  color: var(--compat-text-primary);
   margin-bottom: 1rem;
 
   &:last-child {
@@ -416,17 +416,17 @@ dl.bc-notes-list {
     vertical-align: text-top;
 
     .icon {
-      background-color: var(--icon-secondary);
+      background-color: var(--compat-icon-secondary);
 
       &:hover {
-        background-color: var(--icon-primary);
+        background-color: var(--compat-icon-primary);
       }
     }
   }
 }
 
 .bc-github-link {
-  font: var(--type-smaller-font-size);
+  font: var(--compat-type-smaller-font-size);
 }
 
 .main-page-content {
