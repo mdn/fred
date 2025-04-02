@@ -2,7 +2,8 @@ import { render as r } from "@lit-labs/ssr";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 
 import { addFluent } from "./l10n/context.js";
-import { DocBody } from "./pages/doc/index.js";
+import { Doc } from "./pages/doc/index.js";
+import { HomePage } from "./pages/home/index.js";
 import {
   ObservatoryBody,
   ObservatoryResults,
@@ -16,67 +17,48 @@ import { runWithContext } from "./symmetric-context/server.js";
  */
 async function fetch_from_rari(path) {
   const external_url = `http://localhost:8083${path}`;
-  console.log(`using ${external_url}`);
+  console.log(`loading ${external_url}`);
   const response = await fetch(external_url);
+  if (!response.ok) {
+    throw new Error(
+      `${response.status}: ${response.statusText} for ${external_url}`,
+    );
+  }
   return await response.json();
 }
 
 /**
  * @param {string} path
+ * @param {Rari.BuiltPage} [page]
  */
-export async function render(path) {
-  const locale = path.split("/")[1] || "en-US";
+export async function render(path, page) {
+  if (!page) {
+    page = await fetch_from_rari(path);
+  }
 
+  const locale = path.split("/")[1] || "en-US";
   if (locale === "qa") {
     path = path.replace("/qa/", "/en-US/");
   }
+  const context = await addFluent(locale, page);
 
   return runWithContext({ locale }, async () => {
-    let result;
+    let component;
     if (path.endsWith("settings")) {
-      // @ts-ignore
-      result = r(SettingsBody());
+      component = SettingsBody(context);
     } else if (path.includes("observatory/analyze")) {
-      /** @type {Fred.Context<Rari.SPAPage>} */
       // @ts-expect-error
-      const context = {
-        noIndexing: true,
-        url: "/en-US/observatory/analyze",
-        pageTitle: "HTTP Observatory Report",
-        pageNotFound: false,
-        onlyFollow: false,
-        slug: "observatory/analyze",
-      };
-      result = r(ObservatoryResults(context));
+      component = ObservatoryResults(context);
     } else if (path.endsWith("observatory") || path.endsWith("observatory/")) {
-      /** @type {Fred.Context<Rari.SPAPage>} */
       // @ts-expect-error
-      const context = {
-        noIndexing: true,
-        url: "/en-US/observatory/",
-        pageTitle: "HTTP Observatory",
-        pageNotFound: false,
-        onlyFollow: false,
-        slug: "observatory",
-      };
-      result = r(ObservatoryBody(context));
+      component = ObservatoryBody(context);
+    } else if (path.endsWith("/en-US/")) {
+      // @ts-expect-error
+      component = HomePage(context);
     } else {
-      /** @type {Rari.DocPage} */
-      const page = await fetch_from_rari(path);
-      const context = await addFluent(locale, page);
-      console.log("context", context.url);
-      result = r(DocBody(context));
+      // @ts-expect-error
+      component = Doc(context);
     }
-    return await collectResult(result);
+    return await collectResult(r(component));
   });
-}
-
-/**
- * @param {Rari.BuiltPage} context
- */
-export async function renderWithContext(context) {
-  context = await addFluent("en-US", context);
-  // @ts-ignore
-  const result = r(DocBody(context));
-  return await collectResult(result);
 }

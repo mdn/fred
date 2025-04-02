@@ -1,11 +1,11 @@
 import { html } from "lit";
 
-import assessmentSvg from "../assets/assessment.svg?mdnsvg";
-import landingSvg from "../assets/landing-illustration.svg?mdnsvg";
-import linesSvg from "../assets/lines.svg?mdnsvg";
-import mdnSvg from "../assets/mdn.svg?mdnsvg";
-import scanningSvg from "../assets/scanning.svg?mdnsvg";
-import securitySvg from "../assets/security.svg?mdnsvg";
+import assessmentSvg from "../assets/assessment.svg?lit";
+import landingSvg from "../assets/landing-illustration.svg?lit";
+import linesSvg from "../assets/lines.svg?lit";
+import mdnSvg from "../assets/mdn.svg?lit";
+import scanningSvg from "../assets/scanning.svg?lit";
+import securitySvg from "../assets/security.svg?lit";
 import { OBSERVATORY_TITLE } from "../constants.js";
 import { FAQ } from "../faq.js";
 import { Feedback } from "../feedback.js";

@@ -70,6 +70,9 @@ export async function startDevServer() {
 
   const serverRenderMiddleware = serverRender(rsbuildServer);
 
+  // Apply Rsbuild’s built-in middlewares
+  app.use(rsbuildServer.middlewares);
+
   app.get("/*mdnUrl", async (req, res, next) => {
     try {
       await serverRenderMiddleware(req, res);
@@ -78,9 +81,6 @@ export async function startDevServer() {
       next();
     }
   });
-
-  // Apply Rsbuild’s built-in middlewares
-  app.use(rsbuildServer.middlewares);
 
   const httpServer = app.listen(rsbuildServer.port, () => {
     // Notify Rsbuild that the custom server has started
