@@ -491,24 +491,32 @@ export class CompatTable extends LitElement {
                       `${hasAddedVersion ? " until" : "Until"} ${item.version_removed} (exclusive)`,
                     hasAddedVersion || hasRemovedVersion ? ": this" : "This",
                     " feature is behind the",
-                    ...flags.map((flag, i) => {
-                      const valueToSet = flag.value_to_set
-                        ? html` (needs to be set to
-                            <code>${flag.value_to_set}</code>)`
-                        : "";
+                    ...flags.map(
+                      /**
+                       * @param {BCD.FlagStatement} flag
+                       * @param {number} i
+                       */ (flag, i) => {
+                        const valueToSet = flag.value_to_set
+                          ? html` (needs to be set to
+                              <code>${flag.value_to_set}</code>)`
+                          : "";
 
-                      return [
-                        html`<code>${flag.name}</code>`,
-                        flag.type === "preference" &&
-                          html` preference${valueToSet}`,
-                        flag.type === "runtime_flag" &&
-                          html` runtime flag${valueToSet}`,
-                        i < flags.length - 1 && " and the ",
-                      ].filter(Boolean);
-                    }),
+                        return [
+                          html`<code>${flag.name}</code>`,
+                          flag.type === "preference" &&
+                            html` preference${valueToSet}`,
+                          flag.type === "runtime_flag" &&
+                            html` runtime flag${valueToSet}`,
+                          i < flags.length - 1 && " and the ",
+                        ].filter(Boolean);
+                      },
+                    ),
                     ".",
                     browser.pref_url &&
-                      flags.some((flag) => flag.type === "preference") &&
+                      flags.some(
+                        /** @param {BCD.FlagStatement} flag */ (flag) =>
+                          flag.type === "preference",
+                      ) &&
                       ` To change preferences in ${browser.name}, visit ${browser.pref_url}.`,
                   ]
                     .filter(Boolean)
@@ -520,18 +528,23 @@ export class CompatTable extends LitElement {
             : undefined,
           item.notes
             ? (Array.isArray(item.notes) ? item.notes : [item.notes]).map(
-                (note) => ({ iconName: "footnote", label: note }),
+                /** @param {string} note */ (note) => ({
+                  iconName: "footnote",
+                  label: note,
+                }),
               )
             : undefined,
           item.impl_url
             ? (Array.isArray(item.impl_url)
                 ? item.impl_url
                 : [item.impl_url]
-              ).map((impl_url) => ({
-                iconName: "footnote",
-                label: html`See
-                  <a href=${impl_url}>${bugURLToString(impl_url)}</a>.`,
-              }))
+              ).map(
+                /** @param {string} impl_url */ (impl_url) => ({
+                  iconName: "footnote",
+                  label: html`See
+                    <a href=${impl_url}>${bugURLToString(impl_url)}</a>.`,
+                }),
+              )
             : undefined,
           versionIsPreview(item.version_added, browser)
             ? {

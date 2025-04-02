@@ -4,6 +4,7 @@ namespace BCD {
     BrowserStatement,
     Browsers,
     CompatStatement,
+    FlagStatement,
     Identifier,
     SimpleSupportStatement,
     StatusBlock,

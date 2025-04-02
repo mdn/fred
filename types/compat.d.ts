@@ -5,6 +5,7 @@ namespace Compat {
     depth: number;
   }
 
+  // FIXME SimpleSupportStatement properties are not observed.
   type SimpleSupportStatementExtended = BCD.SimpleSupportStatement & {
     release_date?: string;
     version_last?: BCD.VersionValue;
