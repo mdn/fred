@@ -93,6 +93,12 @@ a {
   color: var(--compat-text-link);
 }
 
+button {
+  appearance: none;
+  background: none;
+  border: medium;
+}
+
 .external::after {
   background-color: var(--compat-icon-primary);
   content: "";
