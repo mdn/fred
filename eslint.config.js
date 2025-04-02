@@ -56,6 +56,7 @@ export default defineConfig([
       "n/no-unpublished-import": "off",
       "unicorn/no-null": ["off"],
       "unicorn/prevent-abbreviations": ["off"],
+      "unicorn/switch-case-braces": "off",
       "unicorn/template-indent": ["off"],
     },
   },

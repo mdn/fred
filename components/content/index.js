@@ -16,9 +16,9 @@ export function Content(context) {
 }
 
 /**
- * @param {Rari.Section} section
+ * @param {import("@mdn/rari").Section} section
  */
-function Section({ type, value }) {
+export function Section({ type, value }) {
   switch (type) {
     case "browser_compatibility": {
       return BCD(value);
@@ -31,7 +31,7 @@ function Section({ type, value }) {
 }
 
 /**
- * @param {Rari.Prose} section
+ * @param {import("@mdn/rari").Prose} section
  */
 function Prose({ id, title, content, isH3 }) {
   const level = isH3 ? 3 : 2;
@@ -43,7 +43,7 @@ function Prose({ id, title, content, isH3 }) {
 }
 
 /**
- * @param {Rari.Compat} section
+ * @param {import("@mdn/rari").Compat} section
  */
 function BCD({ id, title, query, isH3 }) {
   const level = isH3 ? 3 : 2;

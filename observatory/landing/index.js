@@ -13,7 +13,7 @@ import { Feedback } from "../feedback.js";
 import "./form.js";
 
 /**
- * @param {Fred.Context<Rari.SPAPage>} context
+ * @param {Fred.Context<Rari.SpaPage>} context
  * @returns {Lit.TemplateResult}
  */
 export function Landing(context) {
