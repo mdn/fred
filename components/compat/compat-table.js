@@ -24,12 +24,6 @@ import {
   versionIsPreview,
 } from "./utils.js";
 
-/**
- * @import { TemplateResult } from "lit"
- * @import { BrowserName, BrowserStatement, SupportStatement, Browsers, Identifier, StatusBlock } from "@mdn/browser-compat-data"
- * @typedef {{ title: string, text: string, iconClassName: string }} StatusIcon
- */
-
 const ISSUE_METADATA_TEMPLATE = `
 <!-- Do not make changes below this line -->
 <details>
@@ -42,7 +36,7 @@ const ISSUE_METADATA_TEMPLATE = `
 `;
 
 /**
- * @param {BrowserName} browser
+ * @param {BCD.BrowserName} browser
  * @returns {string}
  */
 function browserToIconName(browser) {
@@ -93,16 +87,16 @@ export class CompatTable extends LitElement {
   constructor() {
     super();
     this.query = "";
-    /** @type {Identifier} */
+    /** @type {BCD.Identifier} */
     this.data = {};
-    /** @type {Browsers} */
+    /** @type {BCD.Browsers} */
     // @ts-ignore
     this.browserInfo = {};
     this.locale = "";
     this._pathname = "";
     /** @type {string[]} */
     this._platforms = [];
-    /** @type {BrowserName[]} */
+    /** @type {BCD.BrowserName[]} */
     this._browsers = [];
   }
 
@@ -359,7 +353,7 @@ export class CompatTable extends LitElement {
   }
 
   /**
-   * @param {SupportStatement} support
+   * @param {BCD.SupportStatement} support
    */
   _renderCellIcons(support) {
     const supportItem = getCurrentSupport(support);
@@ -382,7 +376,7 @@ export class CompatTable extends LitElement {
 
   /**
    * @param {string} name
-   * @returns {TemplateResult}
+   * @returns {Lit.TemplateResult}
    */
   _renderIcon(name) {
     const title = name in LEGEND_LABELS ? LEGEND_LABELS[name] : name;
@@ -394,12 +388,12 @@ export class CompatTable extends LitElement {
   }
 
   /**
-   * @param {StatusBlock} status
+   * @param {BCD.StatusBlock} status
    */
   _renderStatusIcons(status) {
     // <StatusIcons>
     /**
-     * @type {StatusIcon[]}
+     * @type {Compat.StatusIcon[]}
      */
     const icons = [];
     if (status.experimental) {
@@ -443,15 +437,15 @@ export class CompatTable extends LitElement {
 
   /**
    *
-   * @param {BrowserStatement} browser
-   * @param {SupportStatement} support
+   * @param {BCD.BrowserStatement} browser
+   * @param {BCD.SupportStatement} support
    */
   _renderNotes(browser, support) {
     return [...asList(support)]
       .reverse()
       .flatMap((item, i) => {
         /**
-         * @type {Array<{iconName: string; label: string | TemplateResult } | undefined>}
+         * @type {Array<{iconName: string; label: string | Lit.TemplateResult } | undefined>}
          */
         const supportNotes = [
           item.version_removed &&
@@ -572,7 +566,7 @@ export class CompatTable extends LitElement {
         }
 
         /**
-         * @type {Array<{iconName: string; label: string | TemplateResult }>}
+         * @type {Array<{iconName: string; label: string | Lit.TemplateResult }>}
          */
         const filteredSupportNotes = supportNotes.filter(
           (v) => v !== undefined,
@@ -607,8 +601,8 @@ export class CompatTable extends LitElement {
 
   /**
    *
-   * @param {SupportStatement | undefined} support
-   * @param {BrowserStatement} browser
+   * @param {BCD.SupportStatement | undefined} support
+   * @param {BCD.BrowserStatement} browser
    * @param {boolean} [timeline]
    */
   _renderCellText(support, browser, timeline = false) {
@@ -792,9 +786,9 @@ customElements.define("compat-table", CompatTable);
  * shown. In all other categories, if compat data has info about Deno / Node.js
  * those are also shown. Deno is always shown if Node.js is shown.
  * @param {string} category
- * @param {Identifier} data
- * @param {Browsers} browserInfo
- * @returns {[string[], BrowserName[]]}
+ * @param {BCD.Identifier} data
+ * @param {BCD.Browsers} browserInfo
+ * @returns {[string[], BCD.BrowserName[]]}
  */
 export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
   const hasNodeJSData = data.__compat && "nodejs" in data.__compat.support;
@@ -805,13 +799,13 @@ export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
     platforms.push("server");
   }
 
-  /** @type {BrowserName[]} */
+  /** @type {BCD.BrowserName[]} */
   let browsers = [];
 
   // Add browsers in platform order to align table cells
   for (const platform of platforms) {
     /**
-     * @type {BrowserName[]}
+     * @type {BCD.BrowserName[]}
      */
     // @ts-ignore
     const platformBrowsers = Object.keys(browserInfo);

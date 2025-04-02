@@ -9,7 +9,6 @@ import {
 } from "./utils.js";
 
 /**
- * @import { BrowserName, Browsers, Identifier } from "@mdn/browser-compat-data"
  * @typedef {"yes" | "partial" | "preview" | "no" | "unknown" | "experimental" | "nonstandard" | "deprecated" | "footnote" | "disabled" | "altname" | "prefix" | "more"} LegendKey
  */
 
@@ -35,10 +34,10 @@ export const LEGEND_LABELS = {
 
 /**
  * Gets the active legend items based on browser compatibility data.
- * @param {Identifier} compat - The compatibility data identifier.
+ * @param {BCD.Identifier} compat - The compatibility data identifier.
  * @param {string} name - The name of the feature.
- * @param {Browsers} browserInfo - Information about browsers.
- * @param {BrowserName[]} browsers - The list of displayed browsers.
+ * @param {BCD.Browsers} browserInfo - Information about browsers.
+ * @param {BCD.BrowserName[]} browsers - The list of displayed browsers.
  * @returns {Array<[LegendKey, string]>} An array of legend item entries, where each entry is a tuple of the legend key and its label.
  */
 export function getActiveLegendItems(compat, name, browserInfo, browsers) {

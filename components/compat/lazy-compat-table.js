@@ -5,8 +5,7 @@ import "./compat-table.js";
 import { BCD_BASE_URL, DEFAULT_LOCALE } from "./constants.js";
 
 /**
- * @import { Browsers, Identifier } from "@mdn/browser-compat-data"
- * @typedef {{data: Identifier, browsers: Browsers}} Compat
+ * @typedef {{data: BCD.Identifier, browsers: BCD.Browsers}} Compat
  */
 
 export class LazyCompatTable extends LitElement {

@@ -1,19 +1,4 @@
 /**
- * @import { SimpleSupportStatement, VersionValue, CompatStatement, Identifier, SupportStatement, BrowserStatement } from "@mdn/browser-compat-data"
- * @import { SupportStatementExtended, SimpleSupportStatementExtended } from "./types"
- */
-
-/**
- */
-
-/**
- * @typedef {object} Feature
- * @property {string} name the name of the feature.
- * @property {CompatStatement} compat the compat statement.
- * @property {number} depth the depth of the feature.
- */
-
-/**
  * A list of browsers to be hidden.
  * @constant {string[]}
  */
@@ -41,11 +26,11 @@ export function asList(a) {
 
 /**
  * Finds the first compatibility depth in a BCD Identifier.
- * @param {Identifier} identifier
+ * @param {BCD.Identifier} identifier
  * @returns {number}
  */
 function findFirstCompatDepth(identifier) {
-  /** @type {Array<[string, Identifier]>} */
+  /** @type {Array<[string, BCD.Identifier]>} */
   const entries = [["", identifier]];
 
   do {
@@ -73,12 +58,12 @@ function findFirstCompatDepth(identifier) {
 
 /**
  * Recursively lists features from a BCD Identifier.
- * @param {Identifier} identifier
+ * @param {BCD.Identifier} identifier
  * @param {string} [parentName]
  * @param {string} [rootName]
  * @param {number} [depth]
  * @param {number} [firstCompatDepth]
- * @returns {Feature[]}
+ * @returns {Compat.Feature[]}
  */
 export function listFeatures(
   identifier,
@@ -87,7 +72,7 @@ export function listFeatures(
   depth = 0,
   firstCompatDepth = 0,
 ) {
-  /** @type {Feature[]} */
+  /** @type {Compat.Feature[]} */
   const features = [];
 
   if (rootName && identifier.__compat) {
@@ -132,7 +117,7 @@ export function listFeatures(
 
 /**
  * Checks if the support statement is an array with more than one item.
- * @param {SupportStatement | undefined} support
+ * @param {BCD.SupportStatement | undefined} support
  * @returns {boolean}
  */
 export function hasMore(support) {
@@ -141,8 +126,8 @@ export function hasMore(support) {
 
 /**
  * Determines if a version is a preview version.
- * @param {string | VersionValue | undefined} version
- * @param {BrowserStatement} browser
+ * @param {string | BCD.VersionValue | undefined} version
+ * @param {BCD.BrowserStatement} browser
  * @returns {boolean}
  */
 export function versionIsPreview(version, browser) {
@@ -161,7 +146,7 @@ export function versionIsPreview(version, browser) {
 
 /**
  * Checks if the support statement has noteworthy notes.
- * @param {SimpleSupportStatement} support
+ * @param {BCD.SimpleSupportStatement} support
  * @returns {boolean}
  */
 export function hasNoteworthyNotes(support) {
@@ -190,7 +175,7 @@ export function bugURLToString(url) {
 
 /**
  * Checks if a support statement has any limitation.
- * @param {SimpleSupportStatement} support
+ * @param {BCD.SimpleSupportStatement} support
  * @returns {boolean}
  */
 function hasLimitation(support) {
@@ -199,7 +184,7 @@ function hasLimitation(support) {
 
 /**
  * Checks if a support statement has major limitations.
- * @param {SimpleSupportStatement} support
+ * @param {BCD.SimpleSupportStatement} support
  * @returns {boolean}
  */
 function hasMajorLimitation(support) {
@@ -214,7 +199,7 @@ function hasMajorLimitation(support) {
 
 /**
  * Checks if a support statement is fully supported without any limitation.
- * @param {SimpleSupportStatement} support
+ * @param {BCD.SimpleSupportStatement} support
  * @returns {boolean}
  */
 export function isFullySupportedWithoutLimitation(support) {
@@ -223,7 +208,7 @@ export function isFullySupportedWithoutLimitation(support) {
 
 /**
  * Checks if a support statement is not supported at all.
- * @param {SimpleSupportStatement} support
+ * @param {BCD.SimpleSupportStatement} support
  * @returns {boolean}
  */
 export function isNotSupportedAtAll(support) {
@@ -232,7 +217,7 @@ export function isNotSupportedAtAll(support) {
 
 /**
  * Checks if a support statement is fully supported without major limitations.
- * @param {SimpleSupportStatement} support
+ * @param {BCD.SimpleSupportStatement} support
  * @returns {boolean}
  */
 function isFullySupportedWithoutMajorLimitation(support) {
@@ -249,8 +234,8 @@ function isFullySupportedWithoutMajorLimitation(support) {
  * 4. Partial support.
  * 5. Support with flags only.
  * 6. No/Inactive support.
- * @param {SupportStatementExtended | undefined} support
- * @returns {SimpleSupportStatementExtended | undefined}
+ * @param {Compat.SupportStatementExtended | undefined} support
+ * @returns {Compat.SimpleSupportStatementExtended | undefined}
  */
 export function getCurrentSupport(support) {
   if (!support) return;
