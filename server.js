@@ -3,6 +3,8 @@ import fs from "node:fs";
 import { createRsbuild, loadConfig, logger } from "@rsbuild/core";
 import express from "express";
 
+import { createProxyMiddleware } from "http-proxy-middleware";
+
 import { renderHTML } from "./build/utils.js";
 
 /**
@@ -79,6 +81,19 @@ export async function startDevServer() {
     });
     res.end();
   });
+
+  app.all(
+    "/api/*_",
+    createProxyMiddleware({
+      target: `https://developer.allizom.org`,
+      changeOrigin: true,
+      proxyTimeout: 20_000,
+      timeout: 20_000,
+      headers: {
+        Connection: "keep-alive",
+      },
+    }),
+  );
 
   app.get("/*mdnUrl", async (req, res, next) => {
     try {

@@ -14,6 +14,7 @@ import {
   ObservatoryBody,
   ObservatoryResults,
 } from "./pages/observatory/index.js";
+import { Search } from "./pages/search/index.js";
 import { SettingsBody } from "./pages/settings/index.js";
 import { runWithContext } from "./symmetric-context/server.js";
 
@@ -92,7 +93,7 @@ export async function render(path, page) {
         case "SpaPlusUpdates":
           return PageLayout(context, "TODO: BUpdates");
         case "SpaSearch":
-          return PageLayout(context, "TODO: Search");
+          return Search(context);
         case "SpaUnknown":
           return PageLayout(context, `Unknown: ${context.pageTitle}`);
         case "SpaNotFound":

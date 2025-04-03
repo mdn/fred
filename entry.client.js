@@ -6,6 +6,7 @@ import "./components/quick-search/index.js";
 import "./components/dropdown/index.js";
 import "./observatory/landing/form.js";
 import "./observatory/results/results.js";
+import "./components/site-search/index.js";
 
 import Prism from "prismjs";
 
