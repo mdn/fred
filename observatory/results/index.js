@@ -7,7 +7,7 @@ import { Feedback } from "../feedback.js";
 import "./index.css";
 
 /**
- * @param {Fred.Context<Rari.SPAPage>} context
+ * @param {Fred.Context<Rari.SpaPage>} context
  * @returns {Lit.TemplateResult}
  */
 export function Results(context) {

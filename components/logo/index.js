@@ -1,6 +1,6 @@
 import "./index.css";
 
-import logo from "./logo.svg?mdnsvg";
+import logo from "./logo.svg?lit";
 
 /**
  * @param {Fred.Context} _context

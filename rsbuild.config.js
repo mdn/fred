@@ -1,10 +1,9 @@
-import { defineConfig } from "@rsbuild/core";
+import { defineConfig, rspack } from "@rsbuild/core";
 
-import { pluginFluent } from "./plugin-fluent/fluent.js";
-import { pluginReset } from "./plugin-reset/reset.js";
+import { pluginReset } from "./build/plugins/reset.js";
 
 export default defineConfig({
-  plugins: [pluginFluent(), pluginReset()],
+  plugins: [pluginReset()],
   environments: {
     client: {
       output: {
@@ -56,13 +55,44 @@ export default defineConfig({
       module: {
         rules: [
           {
-            test: /\.svg$/,
-            resourceQuery: /mdnsvg/,
-            loader: "./plugin-mdnsvg/loader.js",
+            test: /\.flt$/i,
+            loader: "./build/loaders/fluent.js",
           },
           {
-            test: /\.svg$/,
+            test: /\.css$/i,
+            loader: "postcss-loader",
+            oneOf: [
+              {
+                resourceQuery: /lit/,
+                use: [
+                  "./build/loaders/lit-css.js",
+                  {
+                    loader: "postcss-loader",
+                    options: {
+                      postcssOptions: {
+                        plugins: ["postcss-import"],
+                      },
+                    },
+                  },
+                ],
+              },
+              {
+                use: [rspack.CssExtractRspackPlugin.loader, "css-loader"],
+              },
+            ],
+          },
+          {
+            test: /\.svg$/i,
             loader: "svgo-loader",
+            oneOf: [
+              {
+                resourceQuery: /lit/,
+                loader: "./build/loaders/lit-svg.js",
+              },
+              {
+                type: "asset/resource",
+              },
+            ],
           },
         ],
       },

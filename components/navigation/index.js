@@ -15,8 +15,7 @@ export function Navigation(context) {
     <div class="navigation__logo">${Logo(context)}</div>
     <div class="navigation__menu">${Menu(context)}</div>
     <div class="navigation__tools">
-      <mdn-color-theme locale=${context.locale}></mdn-color-theme
-      ><quick-search></quick-search>
+      <mdn-color-theme></mdn-color-theme><quick-search></quick-search>
     </div>
   </nav>`;
 }

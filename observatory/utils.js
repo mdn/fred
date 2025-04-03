@@ -1,7 +1,7 @@
 import { html } from "lit";
 
-import failSvg from "./assets/fail-icon.svg?mdnsvg";
-import passSvg from "./assets/pass-icon.svg?mdnsvg";
+import failSvg from "./assets/fail-icon.svg?lit";
+import passSvg from "./assets/pass-icon.svg?lit";
 
 /**
  *
@@ -29,11 +29,11 @@ export function hostAsRedirectChain(host, result) {
 /**
  *
  * @param {string | null | undefined} term
- * @returns {undefined | string}
+ * @returns {null | string}
  */
 export function formatMinus(term) {
   if (!term) {
-    return;
+    return null;
   }
   // replace dash with unicode minus symbol
   // −
@@ -90,7 +90,7 @@ export function humanizedDurationFromNow(date) {
 }
 
 /**
- * @param {{pass: boolean | undefined}} props
+ * @param {{pass: boolean | null}} props
  * @returns {Lit.TemplateResult}
  */
 export function PassIcon({ pass }) {

@@ -16,9 +16,9 @@ export function Content(context) {
 }
 
 /**
- * @param {Rari.Section} section
+ * @param {import("@mdn/rari").Section} section
  */
-function Section({ type, value }) {
+export function Section({ type, value }) {
   switch (type) {
     case "browser_compatibility": {
       return BCD(value);
@@ -31,24 +31,24 @@ function Section({ type, value }) {
 }
 
 /**
- * @param {Rari.Prose} section
+ * @param {import("@mdn/rari").Prose} section
  */
 function Prose({ id, title, content, isH3 }) {
   const level = isH3 ? 3 : 2;
   // @ts-nocheck
   return html`<section aria-labelledby=${id}>
-    ${Heading(level, id ? String(id) : undefined, String(title))}
+    ${Heading(level, id ? String(id) : null, String(title))}
     ${unsafeHTML(content)}
   </section>`;
 }
 
 /**
- * @param {Rari.Compat} section
+ * @param {import("@mdn/rari").Compat} section
  */
 function BCD({ id, title, query, isH3 }) {
   const level = isH3 ? 3 : 2;
   return html`<section aria-labelledby=${id}>
-    ${Heading(level, id ? String(id) : undefined, String(title))}
-    <bcd-table query=${query}></bcd-table>
+    ${Heading(level, id ? String(id) : null, String(title))}
+    <lazy-compat-table locale="en-US" query=${query}></lazy-compat-table>
   </section>`;
 }

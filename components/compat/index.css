@@ -1,0 +1,15 @@
+/*
+@use "sass:meta";
+@use "~@mdn/minimalist/sass/mixins/utils" as *;
+@use "../../ui/vars" as *;
+@use "../../ui/atoms/button";
+@use "../../ui/atoms/icon";
+*/
+
+@import url("global.css");
+@import url("index-common.css");
+@import url("index-mobile.css");
+@import url("index-desktop.css");
+@import url("index-desktop-md.css");
+@import url("index-desktop-xl.css");
+@import url("index-trailer.css");

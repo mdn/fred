@@ -1,4 +1,5 @@
 namespace Lit {
-  export { PropertyDeclarations, TemplateResult } from "lit";
-  export { Ref } from "lit/directives/ref.js";
+  export type PropertyDeclarations = import("lit").PropertyDeclarations;
+  export type TemplateResult = import("lit").TemplateResult;
+  export type Ref<T> = import("lit/directives/ref.js").Ref<T>;
 }

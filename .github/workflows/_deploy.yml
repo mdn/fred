@@ -130,7 +130,8 @@ jobs:
 
           if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
             # Partial build.
-            find $CONTENT_ROOT -name 'index.md' -type f -maxdepth 4 > ${{ github.workspace }}/files.txt
+            find $CONTENT_ROOT -name 'index.md' -type f -maxdepth 4 >> ${{ github.workspace }}/files.txt
+            find $CONTENT_ROOT -path '*/web/api/window/index.md' >> ${{ github.workspace }}/files.txt
             FILE_LIST="--file-list ${{ github.workspace }}/files.txt"
           else
             # Full build.

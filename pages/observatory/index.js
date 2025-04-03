@@ -10,7 +10,7 @@ import { Results } from "../../observatory/results/index.js";
 
 /**
  *
- * @param {Fred.Context<Rari.SPAPage>} context
+ * @param {Fred.Context<Rari.SpaPage>} context
  * @returns {Lit.TemplateResult}
  */
 export function ObservatoryBody(context) {
@@ -27,7 +27,7 @@ export function ObservatoryBody(context) {
 
 /**
  *
- * @param {Fred.Context<Rari.SPAPage>} context
+ * @param {Fred.Context<Rari.SpaPage>} context
  * @returns {Lit.TemplateResult}
  */
 export function ObservatoryResults(context) {
@@ -44,7 +44,7 @@ export function ObservatoryResults(context) {
 
 /**
  *
- * @param {Fred.Context<Rari.SPAPage>} _context
+ * @param {Fred.Context<Rari.SpaPage>} _context
  * @returns {Lit.TemplateResult}
  */
 export function ObservatoryBreadCrumbs(_context) {

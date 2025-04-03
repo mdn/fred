@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 /**
- * @param {Fred.Context<Rari.SPAPage>} _context
+ * @param {Fred.Context<Rari.SpaPage>} _context
  * @returns {Lit.TemplateResult}
  */
 export function FAQ(_context) {

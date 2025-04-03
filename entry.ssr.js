@@ -1,89 +1,105 @@
+/* eslint-disable unicorn/no-useless-switch-case */
 import { render as r } from "@lit-labs/ssr";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 
+import { PageLayout } from "./components/page-layout/index.js";
 import { addFluent } from "./l10n/context.js";
-import { DocBody } from "./pages/doc/index.js";
+import { NotFound } from "./pages/404/index.js";
+import { ContributorSpotlight } from "./pages/contributor-spotlight/index.js";
+import { Curriculum } from "./pages/curriculum/index.js";
+import { Doc } from "./pages/doc/index.js";
+import { Generic } from "./pages/generic/index.js";
+import { HomePage } from "./pages/home/index.js";
 import {
   ObservatoryBody,
   ObservatoryResults,
 } from "./pages/observatory/index.js";
 import { SettingsBody } from "./pages/settings/index.js";
+import { runWithContext } from "./symmetric-context/server.js";
 
 /**
  * @param {string} path
- * @returns {Promise<Rari.DocPage | Rari.BlogPostPage | Rari.SPAPage>}
+ * @returns {Promise<Rari.BuiltPage>}
  */
 async function fetch_from_rari(path) {
   const external_url = `http://localhost:8083${path}`;
-  console.log(`using ${external_url}`);
+  console.log(`loading ${external_url}`);
   const response = await fetch(external_url);
+  if (!response.ok) {
+    throw new Error(
+      `${response.status}: ${response.statusText} for ${external_url}`,
+    );
+  }
   return await response.json();
 }
 
 /**
  * @param {string} path
+ * @param {Rari.BuiltPage} [page]
  */
-export async function render(path) {
-  const locale = path.split("/")[1] || "en-US";
+export async function render(path, page) {
+  if (!page) {
+    page = await fetch_from_rari(path);
+  }
 
+  const locale = path.split("/")[1] || "en-US";
   if (locale === "qa") {
     path = path.replace("/qa/", "/en-US/");
   }
+  const context = await addFluent(locale, page);
 
-  let result;
-  if (path.endsWith("settings")) {
-    // @ts-ignore
-    result = r(SettingsBody());
-  } else if (path.endsWith("/blog/")) {
-    const page = /** @type {Rari.BlogPostPage} */ await fetch_from_rari(path);
-    console.log("page", page);
-    result = `blog index: <pre>${JSON.stringify(page, undefined, 2)}</pre>`;
-  } else if (path.includes("/blog/")) {
-    const page = /** @type {Rari.BlogPostPage} */ await fetch_from_rari(path);
-    console.log("page", page);
-    result = `blog post page: <pre>${JSON.stringify(page, undefined, 2)}</pre>`;
-  } else if (path.includes("observatory/analyze")) {
-    /** @type {Fred.Context<Rari.SPAPage>} */
-    // @ts-expect-error
-    const context = {
-      noIndexing: true,
-      url: "/en-US/observatory/analyze",
-      pageTitle: "HTTP Observatory Report",
-      pageNotFound: false,
-      onlyFollow: false,
-      slug: "observatory/analyze",
-    };
-    result = r(ObservatoryResults(context));
-  } else if (path.endsWith("observatory") || path.endsWith("observatory/")) {
-    /** @type {Fred.Context<Rari.SPAPage>} */
-    // @ts-expect-error
-    const context = {
-      noIndexing: true,
-      url: "/en-US/observatory/",
-      pageTitle: "HTTP Observatory",
-      pageNotFound: false,
-      onlyFollow: false,
-      slug: "observatory",
-    };
-    result = r(ObservatoryBody(context));
-  } else {
-    const page = /** @type {Rari.DocPage} */ await fetch_from_rari(path);
-    const context = /** @type {Fred.Context<Rari.DocPage>} */ await addFluent(
-      locale,
-      page,
-    );
-    console.log("context", context.url);
-    result = r(DocBody(/** @type {Fred.Context<Rari.DocPage>} */ context));
-  }
-  return await collectResult(result);
-}
-
-/**
- * @param {Rari.BuiltPage} context
- */
-export async function renderWithContext(context) {
-  context = await addFluent("en-US", context);
-  // @ts-ignore
-  const result = r(DocBody(context));
-  return await collectResult(result);
+  return runWithContext({ locale }, async () => {
+    const component = (() => {
+      switch (context.renderer) {
+        case "BlogIndex":
+        case "BlogPost":
+          // @ts-expect-error
+          return Doc(context);
+        case "ContributorSpotlight":
+          return ContributorSpotlight(context);
+        case "CurriculumAbout":
+        case "CurriculumDefault":
+        case "CurriculumLanding":
+        case "CurriculumModule":
+        case "CurriculumOverview":
+          return Curriculum(context);
+        case "Doc":
+          return Doc(context);
+        case "GenericAbout":
+        case "GenericCommunity":
+        case "GenericDoc":
+          return Generic(context);
+        case "Homepage":
+          return HomePage(context);
+        case "SpaAdvertise":
+          return PageLayout(context, "TODO: Advertise");
+        case "SpaObservatoryAnalyze":
+          return ObservatoryResults(context);
+        case "SpaObservatoryLanding":
+          return ObservatoryBody(context);
+        case "SpaPlay":
+          return PageLayout(context, "TODO: Playground");
+        case "SpaPlusAiHelp":
+          return PageLayout(context, "TODO: AI Help");
+        case "SpaPlusCollections":
+          return PageLayout(context, "TODO: Collections");
+        case "SpaPlusCollectionsFrequentlyViewed":
+          return PageLayout(context, "TODO: Collections frequently viewed");
+        case "SpaPlusLanding":
+          return PageLayout(context, "TODO: Plus landing");
+        case "SpaPlusSettings":
+          return SettingsBody(context);
+        case "SpaPlusUpdates":
+          return PageLayout(context, "TODO: BUpdates");
+        case "SpaSearch":
+          return PageLayout(context, "TODO: Search");
+        case "SpaUnknown":
+          return PageLayout(context, `Unknown: ${context.pageTitle}`);
+        case "SpaNotFound":
+        default:
+          return NotFound(context);
+      }
+    })();
+    return await collectResult(r(component));
+  });
 }

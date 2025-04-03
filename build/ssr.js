@@ -85,7 +85,7 @@ async function ssrSingleDocument(file) {
     return;
   }
   try {
-    const markup = await ssr.renderWithContext(context);
+    const markup = await ssr.render(context.url, context);
     const html = renderHTML(ssrManifest, clientManifest, false, markup);
     const outputFile = file.replace(/.json$/, ".html");
     await writeFile(outputFile, html);
