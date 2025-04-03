@@ -1,33 +1,38 @@
+// @ts-nocheck
+import { html } from "lit";
+
 /** @import { AuthorMetadata, BlogPostMetadata } from "../types" */
 
 function MaybeLink({ className = "", link, children }) {
   return link
     ? link.startsWith("https://")
       ? html`<a
-          href="${link}"
+          href=${link}
           className="external ${className}"
           target="_blank"
           rel="noreferrer"
         >
           ${children}
         </a>`
-      : html`<a href="${link}" className="${className}"> ${children} </a>`
-    : html`<span className="${className}">${children}</span>`;
+      : html`<a href=${link} className=${className}> ${children} </a>`
+    : html`<span className=${className}>${children}</span>`;
 }
 
 /**
- * @param {{readtime?: string}}
+ * @param root0
+ * @param root0.readTime
  * @returns
  */
 export function TimeToRead({ readTime }) {
   if (!readTime) {
-    return null;
+    return;
   }
   return html`<span className="read-time">${readTime} minute read</span>`;
 }
 
 /**
- * @param {{date?: string}}
+ * @param root0
+ * @param root0.date
  * @returns
  */
 export function PublishDate({ date }) {
@@ -48,7 +53,7 @@ export function Author({ metadata }) {
     link: metadata?.link,
     className: "author",
     children: html`<img
-        src="${metadata?.avatar_url ?? "/assets/avatar.png"}"
+        src=${metadata?.avatar_url ?? "/assets/avatar.png"}
         alt="Author avatar"
       />
       ${metadata?.name || "The MDN Team"} `,
@@ -57,16 +62,14 @@ export function Author({ metadata }) {
 
 /**
  *
- * @param {{ metadata: BlogPostMetadata}}
+ * @param root0
+ * @param root0.metadata
  * @returns
  */
 export function AuthorDateReadTime({ metadata }) {
-  return (
+  return html`
     <div className="date-author">
-      ${Author(metadata)}
-      <Author metadata={metadata.author} />
-      <PublishDate date={metadata.date} />
-      <TimeToRead readTime={metadata.readTime} />
+      ${Author(metadata)} ${PublishDate(metadata)} ${TimeToRead(metadata)}
     </div>
-  );
+  `;
 }

@@ -11,7 +11,7 @@ import { SettingsBody } from "./pages/settings/index.js";
 
 /**
  * @param {string} path
- * @returns {Promise<Rari.DocPage>}
+ * @returns {Promise<Rari.DocPage | Rari.BlogPostPage | Rari.SPAPage>}
  */
 async function fetch_from_rari(path) {
   const external_url = `http://localhost:8083${path}`;
@@ -34,6 +34,14 @@ export async function render(path) {
   if (path.endsWith("settings")) {
     // @ts-ignore
     result = r(SettingsBody());
+  } else if (path.endsWith("/blog/")) {
+    const page = /** @type {Rari.BlogPostPage} */ await fetch_from_rari(path);
+    console.log("page", page);
+    result = `blog index: <pre>${JSON.stringify(page, undefined, 2)}</pre>`;
+  } else if (path.includes("/blog/")) {
+    const page = /** @type {Rari.BlogPostPage} */ await fetch_from_rari(path);
+    console.log("page", page);
+    result = `blog post page: <pre>${JSON.stringify(page, undefined, 2)}</pre>`;
   } else if (path.includes("observatory/analyze")) {
     /** @type {Fred.Context<Rari.SPAPage>} */
     // @ts-expect-error
@@ -59,11 +67,13 @@ export async function render(path) {
     };
     result = r(ObservatoryBody(context));
   } else {
-    /** @type {Rari.DocPage} */
-    const page = await fetch_from_rari(path);
-    const context = await addFluent(locale, page);
+    const page = /** @type {Rari.DocPage} */ await fetch_from_rari(path);
+    const context = /** @type {Fred.Context<Rari.DocPage>} */ await addFluent(
+      locale,
+      page,
+    );
     console.log("context", context.url);
-    result = r(DocBody(context));
+    result = r(DocBody(/** @type {Fred.Context<Rari.DocPage>} */ context));
   }
   return await collectResult(result);
 }

@@ -1,27 +1,26 @@
-import { html } from "lit-html";
-
-/** @import { BlogImage, BlogPostMetadata } from "../types" */
+// @ts-nocheck
+import { html } from "lit";
 
 /**
- * @param {{image: BlogImage, slug: string, width: number, height: number}}
+ * @param {object} root0
+ * @param {{file: string, alt: string}} root0.image
+ * @param {string} root0.slug
+ * @param {number} root0.width
+ * @param {number} root0.height
  */
 export function BlogIndexImageFigure({ image, slug, width, height }) {
   const src = `./${slug}/${image.file}`;
   return html`<figure className="blog-image">
     <a href="./${slug}/">
-      <img
-        alt="${image.alt || ""}"
-        src="${src}"
-        height=${height}
-        width=${width}
-      />
+      <img alt=${image.alt || ""} src=${src} height=${height} width=${width} />
     </a>
   </figure>`;
 }
 
 /**
  *
- * @param {{fm: BlogPostMetadata}}
+ * @param {object} root0
+ * @param root0.fm
  */
 function PostPreview({ fm }) {
   return html`<article>
@@ -30,7 +29,7 @@ function PostPreview({ fm }) {
       <h2>
         <a href="./${fm.slug}/">${fm.title}</a>
       </h2>
-      <AuthorDateReadTime metadata="{fm}" />
+      <!-- AuthorDateReadTime metadata="{fm}" / -->
     </header>
     <p>${fm.description}</p>
     <footer>
