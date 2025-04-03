@@ -2,6 +2,7 @@
 import { render as r } from "@lit-labs/ssr";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 
+import { renderHTML } from "./build/utils.js";
 import { PageLayout } from "./components/page-layout/index.js";
 import { addFluent } from "./l10n/context.js";
 import { NotFound } from "./pages/404/index.js";
@@ -36,9 +37,11 @@ async function fetch_from_rari(path) {
 
 /**
  * @param {string} path
+ * @param {import("@rsbuild/core").ManifestData} ssrManifest
+ * @param {import("@rsbuild/core").ManifestData} clientManifest
  * @param {Rari.BuiltPage} [page]
  */
-export async function render(path, page) {
+export async function render(path, ssrManifest, clientManifest, page) {
   if (!page) {
     page = await fetch_from_rari(path);
   }
@@ -47,7 +50,12 @@ export async function render(path, page) {
   if (locale === "qa") {
     path = path.replace("/qa/", "/en-US/");
   }
-  const context = await addFluent(locale, page);
+
+  const context = {
+    path,
+    ...(await addFluent(locale)),
+    ...page,
+  };
 
   return runWithContext({ locale }, async () => {
     const component = (() => {
@@ -101,6 +109,8 @@ export async function render(path, page) {
           return NotFound(context);
       }
     })();
-    return await collectResult(r(component));
+    return await collectResult(
+      r(renderHTML(ssrManifest, clientManifest, context, component)),
+    );
   });
 }

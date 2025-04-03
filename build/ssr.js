@@ -6,12 +6,14 @@ import { fdir } from "fdir";
 // eslint-disable-next-line n/no-missing-import
 import ssr from "../dist/ssr/index.cjs";
 
-import { renderHTML } from "./utils.js";
-
 const BUILD_OUT_ROOT = "./out";
 
-const ssrManifest = await readFile("./dist/ssr/manifest.json", "utf8");
-const clientManifest = await readFile("./dist/client/manifest.json", "utf8");
+const ssrManifest = JSON.parse(
+  await readFile("./dist/ssr/manifest.json", "utf8"),
+);
+const clientManifest = JSON.parse(
+  await readFile("./dist/client/manifest.json", "utf8"),
+);
 
 /**
  * @template T
@@ -85,8 +87,12 @@ async function ssrSingleDocument(file) {
     return;
   }
   try {
-    const markup = await ssr.render(context.url, context);
-    const html = renderHTML(ssrManifest, clientManifest, false, markup);
+    const html = await ssr.render(
+      context.url,
+      ssrManifest,
+      clientManifest,
+      context,
+    );
     const outputFile = file.replace(/.json$/, ".html");
     await writeFile(outputFile, html);
     return outputFile;

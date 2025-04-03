@@ -1,56 +1,53 @@
-import fs from "node:fs";
-
 /**
  * @import { ManifestData } from "@rsbuild/core";
  */
 
-const templateHtml = fs.readFileSync("./template.html", "utf8");
+import { html } from "@lit-labs/ssr";
 
 /**
- * @param {string} manifest
+ * @param {ManifestData} manifest
  * @param {string} entry
  */
-export function tagsFromManifest(manifest, entry = "index") {
-  /** @type {ManifestData} */
-  const { entries } = JSON.parse(manifest);
-
+export function tagsFromManifest({ entries }, entry = "index") {
   const { js = [], css = [] } = entries[entry]?.initial || {};
 
-  const scriptTags = js
-    .map((url) => `<script src="${url}" defer></script>`)
-    .join("\n");
-  const styleTags = css
-    .map((file) => `<link rel="stylesheet" href="${file}">`)
-    .join("\n");
+  const scriptTags = js.map((url) => html`<script src=${url} defer></script>`);
+  const styleTags = css.map(
+    (file) => html`<link rel="stylesheet" href=${file} />`,
+  );
   return { scriptTags, styleTags };
 }
 
 /**
  *
- * @param {string} ssrManifest
- * @param {string} clientManifest
- * @param {boolean} legacy
- * @param {string} [markup]
+ * @param {ManifestData} ssrManifest
+ * @param {ManifestData} clientManifest
+ * @param {Fred.Context} context
+ * @param {import("lit-html").TemplateResult} [markup]
  * @returns
  */
-export function renderHTML(ssrManifest, clientManifest, legacy, markup) {
-  const { scriptTags: _ssrScriptTags, styleTags: ssrStyleTags } =
-    tagsFromManifest(ssrManifest);
+export function renderHTML(ssrManifest, clientManifest, context, markup) {
+  const { styleTags: ssrStyleTags } = tagsFromManifest(ssrManifest);
   const { scriptTags: clientScriptTags, styleTags: clientStyleTags } =
     tagsFromManifest(clientManifest);
   const { scriptTags: legacyScriptTags, styleTags: legacyStyleTags } =
     tagsFromManifest(clientManifest, "legacy");
 
-  const legacyTags = legacy ? [legacyScriptTags, legacyStyleTags] : [];
+  const legacyTags = context.path.endsWith("settings")
+    ? [legacyScriptTags, legacyStyleTags]
+    : [];
 
-  const tags = [
-    //_ssrScriptTags,
-    ssrStyleTags,
-    clientScriptTags,
-    clientStyleTags,
-    ...legacyTags,
-  ].join("\n");
-  return templateHtml
-    .replace("<!--app-content-->", markup || "")
-    .replace("<!--app-head-->", tags);
+  const tags = [ssrStyleTags, clientScriptTags, clientStyleTags, ...legacyTags];
+  return html`
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        ${tags}
+        <title>${context.pageTitle || "MDN"}</title>
+      </head>
+      ${markup}
+    </html>
+  `;
 }
