@@ -3,6 +3,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { Heading } from "../heading-anchor/index.js";
+import { SpecificationsList } from "../specifications-list/index.js";
 
 import "./index.css";
 
@@ -13,21 +14,24 @@ import "./index.css";
 export function Content(context) {
   return html`<div class="content">
     <h1>${context?.doc?.title}</h1>
-    ${context?.doc?.body.map((section) => Section(section))}
+    ${context?.doc?.body.map((section) => Section(context, section))}
   </div>`;
 }
 
 /**
+ * @param {Fred.Context} context
  * @param {import("@mdn/rari").Section} section
  * @returns {Lit.TemplateResult}
  */
-export function Section({ type, value }) {
+export function Section(context, { type, value }) {
   switch (type) {
     case "browser_compatibility": {
       return BCD(value);
     }
+    case "specifications": {
+      return SpecificationsSection(context, value);
+    }
     default: {
-      // @ts-ignore
       return Prose(value);
     }
   }
@@ -55,5 +59,17 @@ function BCD({ id, title, query, isH3 }) {
   return html`<section aria-labelledby=${ifDefined(id ?? undefined)}>
     ${Heading(level, id ? String(id) : null, String(title))}
     <lazy-compat-table locale="en-US" query=${query}></lazy-compat-table>
+  </section>`;
+}
+
+/**
+ * @param {Fred.Context} context
+ * @param {import("@mdn/rari").SpecificationSection} section
+ */
+function SpecificationsSection(context, { id, title, specifications, isH3 }) {
+  const level = isH3 ? 3 : 2;
+  return html`<section aria-labelledby=${id}>
+    ${Heading(level, id ? String(id) : null, String(title))}
+    ${SpecificationsList(context, specifications)}
   </section>`;
 }

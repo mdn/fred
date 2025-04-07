@@ -9,6 +9,8 @@ import { PageLayout } from "../../components/page-layout/index.js";
 export function Generic(context) {
   return PageLayout(
     context,
-    html` ${context.hyData.sections.map((section) => Section(section))} `,
+    html`
+      ${context.hyData.sections.map((section) => Section(context, section))}
+    `,
   );
 }

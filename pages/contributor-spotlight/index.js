@@ -18,7 +18,7 @@ export function ContributorSpotlight(context) {
       <a href=${"https://github.com/" + context.hyData.usernames.github}
         >@${context.hyData.usernames.github}</a
       >
-      ${context.hyData.sections.map((section) => Section(section))}
+      ${context.hyData.sections.map((section) => Section(context, section))}
     `,
   );
 }

@@ -11,7 +11,7 @@ export function Curriculum(context) {
     context,
     html`
       <h1>${context.doc.title}</h1>
-      ${context.doc.body.map((section) => Section(section))}
+      ${context.doc.body.map((section) => Section(context, section))}
     `,
   );
 }
