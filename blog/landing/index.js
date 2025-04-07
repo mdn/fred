@@ -1,14 +1,26 @@
-// @ts-nocheck
 import { html } from "lit";
 
+import { PageLayout } from "../../components/page-layout/index.js";
+import {
+  BlogContainer,
+  MaybeLink,
+  PublishDate,
+  TimeToRead,
+} from "../shared/index.js";
+
 /**
- * @param {object} root0
- * @param {{file: string, alt: string}} root0.image
- * @param {string} root0.slug
- * @param {number} root0.width
- * @param {number} root0.height
+ * @import {BlogMeta, BlogImage} from "@mdn/rari"
  */
-export function BlogIndexImageFigure({ image, slug, width, height }) {
+
+/**
+ * @param {Fred.Context} _context
+ * @param {object} params
+ * @param {BlogImage} params.image
+ * @param {string} params.slug
+ * @param {number} params.width
+ * @param {number} params.height
+ */
+export function BlogIndexImageFigure(_context, { image, slug, width, height }) {
   const src = `./${slug}/${image.file}`;
   return html`<figure className="blog-image">
     <a href="./${slug}/">
@@ -19,36 +31,74 @@ export function BlogIndexImageFigure({ image, slug, width, height }) {
 
 /**
  *
- * @param {object} root0
- * @param root0.fm
+ * @param {Fred.Context} context
+ * @param {BlogMeta} blogMeta
+ * @returns {Lit.TemplateResult}
  */
-function PostPreview({ fm }) {
+function AuthorDateReadTime(context, blogMeta) {
+  const author = html`
+    <img
+      src=${blogMeta.author.avatar_url || "/assets/avatar.png"}
+      alt="Author avatar"
+    />
+    ${blogMeta.author.name || "The MDN Team"}
+  `;
+  const link = blogMeta.author.link;
+
+  return html`<div className="author-date-readtime">
+    ${MaybeLink(context, { link, content: author })}
+    ${PublishDate(context, { date: blogMeta.date })}
+    ${TimeToRead(context, { readTime: blogMeta.readTime })}
+  </div>`;
+}
+
+/**
+ *
+ * @param {Fred.Context} context
+ * @param {BlogMeta} blogMeta
+ */
+function PostPreview(context, blogMeta) {
   return html`<article>
     <header>
-      ${BlogIndexImageFigure({ image: fm.image, slug: fm.slug, width: 200 })}
+      ${BlogIndexImageFigure(context, {
+        image: blogMeta.image,
+        slug: blogMeta.slug,
+        width: 200,
+        height: 200,
+      })}
       <h2>
-        <a href="./${fm.slug}/">${fm.title}</a>
+        <a href="./${blogMeta.slug}/">${blogMeta.title}</a>
       </h2>
-      <!-- AuthorDateReadTime metadata="{fm}" / -->
+      ${AuthorDateReadTime(context, blogMeta)}
     </header>
-    <p>${fm.description}</p>
+    <p>${blogMeta.description}</p>
     <footer>
-      ${fm.sponsored && html`<span className="sponsored">Sponsored</span>`}
-      <a href="./${fm.slug}/" target="_self"> Read more → </a>
+      ${blogMeta.sponsored &&
+      html`<span className="sponsored">Sponsored</span>`}
+      <a href="./${blogMeta.slug}/" target="_self"> Read more → </a>
     </footer>
   </article>`;
 }
 
+/**
+ *
+ * @param {Fred.Context<Rari.BlogPage>} context
+ * @returns {Lit.TemplateResult}
+ */
 export function BlogIndex(context) {
-  return html`<main
-    className="blog-container blog-index container main-page-content"
-    lang="en-US"
-  >
-    <header>
-      <h1 className="mify">Blog it better</h1>
-    </header>
-    <section className="article-list">
-      ${context?.posts.map((fm) => PostPreview(fm))}
-    </section>
-  </main>`;
+  const content = BlogContainer(
+    context,
+    html`
+      <header>
+        <h1 class="mify">${context.l10n`Blog it better`}</h1>
+      </header>
+      <section className="article-list">
+        ${context.hyData?.posts.map((blogMeta) => {
+          // return html`<p>${blogMeta.title}</p>`;
+          return PostPreview(context, blogMeta);
+        })}
+      </section>
+    `,
+  );
+  return PageLayout(context, content);
 }

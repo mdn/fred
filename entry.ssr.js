@@ -2,6 +2,7 @@
 import { render as r } from "@lit-labs/ssr";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 
+import { BlogIndex } from "./blog/landing/index.js";
 import { PageLayout } from "./components/page-layout/index.js";
 import { addFluent } from "./l10n/context.js";
 import { NotFound } from "./pages/404/index.js";
@@ -52,9 +53,11 @@ export async function render(path, page) {
     const component = (() => {
       switch (context.renderer) {
         case "BlogIndex":
-        case "BlogPost":
-          // @ts-expect-error
-          return Doc(context);
+          return BlogIndex(context);
+        case "BlogPost": {
+          console.log("BlogPost context", context);
+          return ""; //Doc(context);
+        }
         case "ContributorSpotlight":
           return ContributorSpotlight(context);
         case "CurriculumAbout":

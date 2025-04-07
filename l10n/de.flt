@@ -5,3 +5,8 @@ footer_mofo = Besuche die gemeinnützige Muttergesellschaft der <a data-l10n-nam
 footer_copyright = Teile dieses Inhalts sind ©1998–2024 von einzelnen mozilla.org-Mitwirkenden. Inhalte sind verfügbar unter <a data-l10n-name="cc">einer Creative-Commons-Lizenz</a>.
 
 theme_default = Systemstandard
+
+blog_time_to_read = { $minutes ->
+    [one]   { $minutes } Minute Lesezeit
+   *[other] { $minutes } Minuten Lesezeit
+}
