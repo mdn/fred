@@ -15,7 +15,6 @@ export function BlogContainer(context, content) {
  *
  * @param {Fred.Context} _context
  * @param {object} params
- * @param {string | undefined} [params.className]
  * @param {string | null | undefined} params.link
  * @param {Lit.TemplateResult} params.content
  * @returns

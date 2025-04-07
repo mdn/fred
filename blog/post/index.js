@@ -53,7 +53,7 @@ function SidePlacement(_context) {
  * @returns {Lit.TemplateResult}
  */
 function RenderBlogContent(_context, { doc }) {
-  return html` ${doc.body.map((section) => Section(section))} `;
+  return html` ${doc.body.map((section, _i) => Section(section))} `;
 }
 
 /**
