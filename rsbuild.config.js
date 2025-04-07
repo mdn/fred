@@ -67,11 +67,9 @@ export default defineConfig({
                 use: [
                   "./build/loaders/lit-css.js",
                   {
-                    loader: "postcss-loader",
+                    loader: "css-loader",
                     options: {
-                      postcssOptions: {
-                        plugins: ["postcss-import"],
-                      },
+                      exportType: "string",
                     },
                   },
                 ],

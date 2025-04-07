@@ -66,11 +66,13 @@ export class QuickSearch extends LitElement {
     }
   `;
   render() {
-    return html`<form class="quick-search" action="">
+    // TODO: set locale properly
+    return html`<form class="quick-search" action="/en-US/search">
       <input
         class="quick-search__field"
         type="text"
         placeholder="__"
+        name="q"
         required
       />
       <button

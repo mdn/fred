@@ -3,6 +3,7 @@ import { render as r } from "@lit-labs/ssr";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 
 import { BlogIndex } from "./blog/landing/index.js";
+import { renderHTML } from "./build/utils.js";
 import { PageLayout } from "./components/page-layout/index.js";
 import { addFluent } from "./l10n/context.js";
 import { NotFound } from "./pages/404/index.js";
@@ -15,6 +16,7 @@ import {
   ObservatoryBody,
   ObservatoryResults,
 } from "./pages/observatory/index.js";
+import { Search } from "./pages/search/index.js";
 import { SettingsBody } from "./pages/settings/index.js";
 import { runWithContext } from "./symmetric-context/server.js";
 
@@ -36,9 +38,11 @@ async function fetch_from_rari(path) {
 
 /**
  * @param {string} path
+ * @param {import("@rsbuild/core").ManifestData} ssrManifest
+ * @param {import("@rsbuild/core").ManifestData} clientManifest
  * @param {Rari.BuiltPage} [page]
  */
-export async function render(path, page) {
+export async function render(path, ssrManifest, clientManifest, page) {
   if (!page) {
     page = await fetch_from_rari(path);
   }
@@ -47,7 +51,12 @@ export async function render(path, page) {
   if (locale === "qa") {
     path = path.replace("/qa/", "/en-US/");
   }
-  const context = await addFluent(locale, page);
+
+  const context = {
+    path,
+    ...(await addFluent(locale)),
+    ...page,
+  };
 
   return runWithContext({ locale }, async () => {
     const component = (() => {
@@ -95,7 +104,7 @@ export async function render(path, page) {
         case "SpaPlusUpdates":
           return PageLayout(context, "TODO: BUpdates");
         case "SpaSearch":
-          return PageLayout(context, "TODO: Search");
+          return Search(context);
         case "SpaUnknown":
           return PageLayout(context, `Unknown: ${context.pageTitle}`);
         case "SpaNotFound":
@@ -103,6 +112,8 @@ export async function render(path, page) {
           return NotFound(context);
       }
     })();
-    return await collectResult(r(component));
+    return await collectResult(
+      r(renderHTML(ssrManifest, clientManifest, context, component)),
+    );
   });
 }

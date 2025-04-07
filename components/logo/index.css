@@ -1,10 +1,17 @@
-.logo__link {
-  display: block;
-  padding: 0.5rem;
-}
-
 .logo__image {
   display: block;
+
+  @media (width > 1024px) {
+    &[data-type="mobile"] {
+      display: none;
+    }
+  }
+
+  @media (width <= 1024px) {
+    &[data-type="desktop"] {
+      display: none;
+    }
+  }
 }
 
 .logo__letter,

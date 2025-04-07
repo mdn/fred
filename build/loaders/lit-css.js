@@ -1,9 +1,8 @@
-import escape from "./escape.js";
-
 /**
  * @this {import("@rspack/core").LoaderContext}
- * @param {string} contents
+ * @param {string} source
  */
-export default function litCssLoader(contents) {
-  return `import { css } from "lit"; export default css\`${escape(contents)}\`;`;
+export default function litCssLoader(source) {
+  return `import { css } from "lit";
+${source.replace(/export default (.*);/, "export default css([$1]);")}`;
 }

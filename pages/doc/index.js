@@ -8,5 +8,6 @@ import "../../components/index.css";
  * @param {Fred.Context<Rari.DocPage>} context
  */
 export function Doc(context) {
+  context.pageTitle = context.doc.title;
   return PageLayout(context, ReferenceLayout(context));
 }

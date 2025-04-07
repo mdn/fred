@@ -11,11 +11,3 @@
 [hidden] {
   display: none !important;
 }
-
-body {
-  min-height: 100svh;
-  margin: 0;
-  background-color: var(--background-primary);
-  color: var(--text-primary);
-  font-family: var(--font-text);
-}
