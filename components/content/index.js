@@ -2,6 +2,7 @@ import { html } from "lit";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { Heading } from "../heading-anchor/index.js";
+import { SpecificationsList } from "../specifications-list/index.js";
 
 import "./index.css";
 
@@ -23,8 +24,10 @@ export function Section({ type, value }) {
     case "browser_compatibility": {
       return BCD(value);
     }
+    case "specifications": {
+      return SpecificationsSection(value);
+    }
     default: {
-      // @ts-ignore
       return Prose(value);
     }
   }
@@ -50,5 +53,16 @@ function BCD({ id, title, query, isH3 }) {
   return html`<section aria-labelledby=${id}>
     ${Heading(level, id ? String(id) : null, String(title))}
     <lazy-compat-table locale="en-US" query=${query}></lazy-compat-table>
+  </section>`;
+}
+
+/**
+ * @param {import("@mdn/rari").SpecificationSection} section
+ */
+function SpecificationsSection({ id, title, specifications, isH3 }) {
+  const level = isH3 ? 3 : 2;
+  return html`<section aria-labelledby=${id}>
+    ${Heading(level, id ? String(id) : null, String(title))}
+    ${SpecificationsList(specifications)}
   </section>`;
 }
