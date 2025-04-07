@@ -1,0 +1,57 @@
+.feedback {
+  border: none;
+  margin: 0;
+  margin-bottom: 0.25rem;
+  padding: 0;
+
+  > label {
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .thank-you {
+    display: block;
+    margin-bottom: calc(2.75rem + 2px);
+  }
+
+  .button-container {
+    /* Ensure both buttons take minimal width. */
+    display: inline-flex;
+    gap: 0.75rem;
+    margin: 0.25rem 0;
+  }
+
+  button {
+    /* Ensure both buttons have same size. */
+    flex: 1;
+    min-width: 0;
+
+    &:not(:hover) {
+      --button-bg: var(--article-footer-background);
+      --button-color: var(--article-footer-color);
+    }
+
+    &.yes {
+      --button-bg-hover: var(--article-footer-color-yes);
+    }
+
+    &.no {
+      --button-bg-hover: var(--article-footer-color-no);
+    }
+  }
+
+  .button-wrap {
+    display: flex;
+
+    /* Increase space between icon and button label. */
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .radio-container {
+    align-items: center;
+    display: flex;
+    gap: 0.25rem;
+    margin: 0.25rem 0;
+  }
+}

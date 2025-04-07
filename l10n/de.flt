@@ -1,3 +1,7 @@
+article_footer_feedback_question = War diese Übersetzung hilfreich?
+article_footer_feedback_thanks = Vielen Dank für die Rückmeldung!
+article_footer_reason_label = Warum war diese Übersetzung nicht hilfreich?
+
 reference_toc_header = In diesem Artikel
 
 footer_tagline = Dein Bauplan für ein besseres Internet.
@@ -5,3 +9,7 @@ footer_mofo = Besuche die gemeinnützige Muttergesellschaft der <a data-l10n-nam
 footer_copyright = Teile dieses Inhalts sind ©1998–2024 von einzelnen mozilla.org-Mitwirkenden. Inhalte sind verfügbar unter <a data-l10n-name="cc">einer Creative-Commons-Lizenz</a>.
 
 theme_default = Systemstandard
+
+No = Nein
+Submit = Abschicken
+Yes = Ja

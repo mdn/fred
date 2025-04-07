@@ -3,6 +3,7 @@ import { html } from "lit";
 import svg from "./article-footer.svg?lit";
 
 import "./index.css";
+import "./feedback.js";
 
 /**
  * @param {Fred.Context<Rari.DocPage>} context
@@ -18,7 +19,9 @@ export function ArticleFooter(context) {
     <div class="article-footer-inner">
       <div class="svg-container">${svg}</div>
       <h2 id="article_footer">${context.l10n`Help improve MDN`}</h2>
-      <!-- TODO Feedback -->
+      <article-footer-feedback
+        locale=${context.locale}
+      ></article-footer-feedback>
       ${ContributeLink(context)} ${LastModified(context)}
       ${GitHubLinks(context)}
     </div>
@@ -80,7 +83,7 @@ function LastModified(context) {
  * @param {Fred.Context<Rari.DocPage>} context
  */
 function GitHubLinks(context) {
-  return html`<div id="on-github" className="on-github">
+  return html`<div id="on-github" class="on-github">
     ${GitHubSourceLink(context)} • ${GitHubIssueLink(context)}
   </div>`;
 }
