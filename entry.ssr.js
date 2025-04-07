@@ -3,21 +3,21 @@ import { render as r } from "@lit-labs/ssr";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 
 import { renderHTML } from "./build/utils.js";
-import { PageLayout } from "./components/page-layout/index.js";
-import { addFluent } from "./l10n/context.js";
-import { NotFound } from "./pages/404/index.js";
-import { ContributorSpotlight } from "./pages/contributor-spotlight/index.js";
-import { Curriculum } from "./pages/curriculum/index.js";
-import { Doc } from "./pages/doc/index.js";
-import { Generic } from "./pages/generic/index.js";
-import { HomePage } from "./pages/home/index.js";
+import { PageLayout } from "./src/components/page-layout/index.js";
+import { addFluent } from "./src/l10n/context.js";
+import { NotFound } from "./src/pages/404/index.js";
+import { ContributorSpotlight } from "./src/pages/contributor-spotlight/index.js";
+import { Curriculum } from "./src/pages/curriculum/index.js";
+import { Doc } from "./src/pages/doc/index.js";
+import { Generic } from "./src/pages/generic/index.js";
+import { HomePage } from "./src/pages/home/index.js";
 import {
   ObservatoryBody,
   ObservatoryResults,
-} from "./pages/observatory/index.js";
-import { Search } from "./pages/search/index.js";
-import { SettingsBody } from "./pages/settings/index.js";
-import { runWithContext } from "./symmetric-context/server.js";
+} from "./src/pages/observatory/index.js";
+import { Search } from "./src/pages/search/index.js";
+import { SettingsBody } from "./src/pages/settings/index.js";
+import { runWithContext } from "./src/symmetric-context/server.js";
 
 /**
  * @param {string} path

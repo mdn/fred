@@ -2,11 +2,11 @@ import { html } from "lit";
 
 import { Footer } from "../../components/footer/index.js";
 import { Navigation } from "../../components/navigation/index.js";
+import { Landing } from "../../observatory/landing/index.js";
+import { Results } from "../../observatory/results/index.js";
 
 import "./index.css";
 import "../../components/index.css";
-import { Landing } from "../../observatory/landing/index.js";
-import { Results } from "../../observatory/results/index.js";
 
 /**
  *
