@@ -98,7 +98,12 @@ function GitHubSourceLink(context) {
 
   return html`<a
     href=${`${github_url}?plain=1`}
-    title=${`Folder: ${folder} (Opens in a new tab)`}
+    title=${context.l10n.raw({
+      id: "article_footer_source_link_title",
+      args: {
+        folder,
+      },
+    })}
     target="_blank"
     rel="noopener"
   >
