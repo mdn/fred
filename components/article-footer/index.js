@@ -59,6 +59,10 @@ function LastModified(context) {
           tag: "time",
           datetime: doc.modified,
         },
+        contributors: {
+          tag: "a",
+          href: `${doc.mdn_url}/contributors.txt`,
+        },
       },
     })}
   </p>`;
