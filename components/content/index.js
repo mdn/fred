@@ -1,6 +1,7 @@
 import { html } from "lit";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
+import { ArticleFooter } from "../article-footer/index.js";
 import { Heading } from "../heading-anchor/index.js";
 import { SpecificationsList } from "../specifications-list/index.js";
 
@@ -13,6 +14,7 @@ export function Content(context) {
   return html`<div class="content">
     <h1>${context?.doc?.title}</h1>
     ${context?.doc?.body.map((section) => Section(context, section))}
+    ${ArticleFooter(context)}
   </div>`;
 }
 

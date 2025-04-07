@@ -1,3 +1,5 @@
+article_footer_last_modified = This page was last modified on <time data-l10n-name="date">{ $date }</timestamp>.
+
 footer_mofo = Visit <a data-l10n-name="moco">Mozilla Corporation’s</a> not-for-profit parent, the <a data-l10n-name="mofo">Mozilla Foundation</a>.
 footer_copyright = Portions of this content are ©1998–2024 by individual mozilla.org contributors. Content available under <a data-l10n-name="cc">a Creative Commons license</a>.
 
