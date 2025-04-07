@@ -8,6 +8,7 @@ import "./index.css";
 
 /**
  * @param {Fred.Context<Rari.DocPage>} context
+ * @returns {Lit.TemplateResult}
  */
 export function Content(context) {
   return html`<div class="content">
@@ -18,6 +19,7 @@ export function Content(context) {
 
 /**
  * @param {import("@mdn/rari").Section} section
+ * @returns {Lit.TemplateResult}
  */
 export function Section({ type, value }) {
   switch (type) {
@@ -33,6 +35,7 @@ export function Section({ type, value }) {
 
 /**
  * @param {import("@mdn/rari").Prose} section
+ * @returns {Lit.TemplateResult}
  */
 function Prose({ id, title, content, isH3 }) {
   const level = isH3 ? 3 : 2;
@@ -45,6 +48,7 @@ function Prose({ id, title, content, isH3 }) {
 
 /**
  * @param {import("@mdn/rari").Compat} section
+ * @returns {Lit.TemplateResult}
  */
 function BCD({ id, title, query, isH3 }) {
   const level = isH3 ? 3 : 2;
