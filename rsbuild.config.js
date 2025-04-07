@@ -1,9 +1,10 @@
 import { defineConfig, rspack } from "@rsbuild/core";
 
 import { pluginReset } from "./build/plugins/reset.js";
+import { pluginTsNocheck } from "./build/plugins/ts-nocheck.js";
 
 export default defineConfig({
-  plugins: [pluginReset()],
+  plugins: [pluginReset(), pluginTsNocheck()],
   environments: {
     client: {
       output: {
@@ -34,8 +35,8 @@ export default defineConfig({
         distPath: {
           root: "dist/ssr",
         },
-        filename: {
-          js: "[name].cjs",
+        cleanDistPath: {
+          keep: [/\/index\.d\.ts$/, /\/package\.json$/],
         },
         assetPrefix: "/static/ssr/",
       },
