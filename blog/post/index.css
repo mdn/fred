@@ -1,0 +1,114 @@
+.blog-post__main {
+  display: grid;
+  gap: 3rem;
+  grid-template-areas:
+    "post"
+    "newsletter";
+  padding: 0;
+  width: 100%;
+
+  @media (width >= 992px) {
+    grid-template-areas:
+      "post toc"
+      "newsletter toc";
+    grid-template-columns: minmax(auto, 100%) minmax(0, 12rem);
+  }
+
+  @media (width >= 1200px) {
+    grid-template-areas:
+      "nothing post toc"
+      "nothing newsletter toc";
+    grid-template-columns: minmax(auto, 1fr) minmax(0, 52rem) minmax(15rem, 1fr);
+  }
+
+  @media (width >= 1441px) {
+    grid-template-areas:
+      "toc post place"
+      "toc newsletter place";
+    grid-template-columns: minmax(15rem, 1fr) minmax(0, 52rem) minmax(
+        15rem,
+        1fr
+      );
+  }
+}
+
+.blog-post__content {
+  grid-area: post;
+}
+
+.blog-post__sidebar {
+  --offset: var(--sticky-header-height);
+  grid-area: toc;
+  display: none;
+
+  .blog-toc__header h2 {
+    font: var(--type-heading-h5);
+    letter-spacing: 1.5px;
+    margin: 0 0 1rem;
+  }
+
+  .blog-toc {
+    margin-top: 0;
+    position: sticky;
+    top: var(--offset);
+    max-height: calc(100vh - var(--offset));
+    overflow: auto;
+  }
+
+  @media (width >= 992px) {
+    display: flex;
+    flex-direction: column;
+    grid-area: toc;
+
+    .blog-toc {
+      margin-top: 2rem;
+    }
+  }
+
+  @media (width >= 1441px) {
+    display: contents;
+
+    .blog-toc {
+      height: max-content;
+      position: sticky;
+
+      /* mask-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgb(0, 0, 0) 3rem calc(100% - 3rem),
+        rgba(0, 0, 0, 0) 100%
+      ); */
+      max-height: calc(100vh - var(--offset));
+      overflow: auto;
+      top: var(--offset);
+    }
+
+    .place.side {
+      grid-area: place;
+      margin-top: 0;
+
+      > .pong-box2,
+      > .pong-box {
+        margin-top: 2rem;
+      }
+    }
+  }
+}
+
+.blog-toc__entries {
+  font-size: var(--type-smaller-font-size);
+  list-style: none;
+  padding-left: 0;
+}
+
+.blog-toc__entry {
+  margin: 0;
+
+  :not(.button) {
+    border-left: 2px solid var(--border-secondary);
+    color: var(--text-secondary);
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+  }
+}

@@ -1,4 +1,5 @@
 import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { Heading } from "../heading-anchor/index.js";
@@ -36,7 +37,7 @@ export function Section({ type, value }) {
 function Prose({ id, title, content, isH3 }) {
   const level = isH3 ? 3 : 2;
   // @ts-nocheck
-  return html`<section aria-labelledby=${id}>
+  return html`<section aria-labelledby=${ifDefined(id ?? undefined)}>
     ${Heading(level, id ? String(id) : null, String(title))}
     ${unsafeHTML(content)}
   </section>`;
@@ -47,7 +48,7 @@ function Prose({ id, title, content, isH3 }) {
  */
 function BCD({ id, title, query, isH3 }) {
   const level = isH3 ? 3 : 2;
-  return html`<section aria-labelledby=${id}>
+  return html`<section aria-labelledby=${ifDefined(id ?? undefined)}>
     ${Heading(level, id ? String(id) : null, String(title))}
     <lazy-compat-table locale="en-US" query=${query}></lazy-compat-table>
   </section>`;

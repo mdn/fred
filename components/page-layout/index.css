@@ -10,7 +10,7 @@
   min-height: 100svh;
   background-color: var(--background-primary);
   color: var(--text-primary);
-  font-family: var(--font-text);
+  font-family: var(--font-body);
 }
 
 .page-layout__header {

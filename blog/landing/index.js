@@ -9,13 +9,9 @@ import {
 } from "../shared/index.js";
 
 /**
- * @import {BlogMeta, BlogImage} from "@mdn/rari"
- */
-
-/**
  * @param {Fred.Context} _context
  * @param {object} params
- * @param {BlogImage} params.image
+ * @param {Rari.BlogImage} params.image
  * @param {string} params.slug
  * @param {number} params.width
  * @param {number} params.height
@@ -32,7 +28,7 @@ export function BlogIndexImageFigure(_context, { image, slug, width, height }) {
 /**
  *
  * @param {Fred.Context} context
- * @param {BlogMeta} blogMeta
+ * @param {Rari.BlogMeta} blogMeta
  * @returns {Lit.TemplateResult}
  */
 function AuthorDateReadTime(context, blogMeta) {
@@ -43,19 +39,20 @@ function AuthorDateReadTime(context, blogMeta) {
     />
     ${blogMeta.author.name || "The MDN Team"}
   `;
-  const link = blogMeta.author.link;
+  console.log("author", blogMeta.author);
+  const link = blogMeta.author?.link ?? undefined;
 
-  return html`<div className="author-date-readtime">
+  return html`
     ${MaybeLink(context, { link, content: author })}
     ${PublishDate(context, { date: blogMeta.date })}
     ${TimeToRead(context, { readTime: blogMeta.readTime })}
-  </div>`;
+  `;
 }
 
 /**
  *
  * @param {Fred.Context} context
- * @param {BlogMeta} blogMeta
+ * @param {Rari.BlogMeta} blogMeta
  */
 function PostPreview(context, blogMeta) {
   return html`<article>
@@ -69,7 +66,9 @@ function PostPreview(context, blogMeta) {
       <h2>
         <a href="./${blogMeta.slug}/">${blogMeta.title}</a>
       </h2>
-      ${AuthorDateReadTime(context, blogMeta)}
+      <div class="blog-index__author-read-time">
+        ${AuthorDateReadTime(context, blogMeta)}
+      </div>
     </header>
     <p>${blogMeta.description}</p>
     <footer>
@@ -94,7 +93,6 @@ export function BlogIndex(context) {
       </header>
       <section className="article-list">
         ${context.hyData?.posts.map((blogMeta) => {
-          // return html`<p>${blogMeta.title}</p>`;
           return PostPreview(context, blogMeta);
         })}
       </section>

@@ -3,6 +3,7 @@ import { render as r } from "@lit-labs/ssr";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 
 import { BlogIndex } from "./blog/landing/index.js";
+import { BlogPost } from "./blog/post/index.js";
 import { renderHTML } from "./build/utils.js";
 import { PageLayout } from "./components/page-layout/index.js";
 import { addFluent } from "./l10n/context.js";
@@ -63,10 +64,8 @@ export async function render(path, ssrManifest, clientManifest, page) {
       switch (context.renderer) {
         case "BlogIndex":
           return BlogIndex(context);
-        case "BlogPost": {
-          console.log("BlogPost context", context);
-          return ""; //Doc(context);
-        }
+        case "BlogPost":
+          return BlogPost(context);
         case "ContributorSpotlight":
           return ContributorSpotlight(context);
         case "CurriculumAbout":

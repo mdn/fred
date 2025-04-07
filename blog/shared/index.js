@@ -1,8 +1,6 @@
 // @ts-nocheck
 import { html, nothing } from "lit";
 
-/** @import { AuthorMetadata, BlogPostMetadata } from "../types" */
-
 /**
  *
  * @param {Fred.Context} context
@@ -10,7 +8,7 @@ import { html, nothing } from "lit";
  * @returns {Lit.TemplateResult}
  */
 export function BlogContainer(context, content) {
-  return html`<div className="blog-container">${content}</div>`;
+  return html`<div className="page-layout__blog-container">${content}</div>`;
 }
 
 /**
@@ -22,12 +20,12 @@ export function BlogContainer(context, content) {
  * @param {Lit.TemplateResult} params.content
  * @returns
  */
-export function MaybeLink(_context, { className = "", link, content }) {
+export function MaybeLink(_context, { link, content }) {
   return link
     ? link.startsWith("https://")
       ? html` <a
           href=${link}
-          className="external ${className}"
+          className="external"
           target="_blank"
           rel="noreferrer"
         >
@@ -41,10 +39,13 @@ export function MaybeLink(_context, { className = "", link, content }) {
  *
  * @param {Fred.Context} _context
  * @param {object} params
- * @param {string} params.date
- * @returns {Lit.TemplateResult}
+ * @param {string | undefined} params.date
+ * @returns {Lit.TemplateResult | nothing}
  */
 export function PublishDate(_context, { date }) {
+  if (!date) {
+    return nothing;
+  }
   return html`
     <time class="date">
       ${Intl.DateTimeFormat(undefined, { dateStyle: "long" }).format(
@@ -75,33 +76,46 @@ export function TimeToRead(context, { readTime }) {
 
 /**
  *
- * @param {{metadata?: AuthorMetadata }} param0
- * @returns
+ * @param {Fred.Context} context
+ * @param {object} params
+ * @param {Rari.BlogMeta} params.blogMeta
+ * @returns {Lit.TemplateResult | nothing}
  */
-export function Author({ metadata }) {
-  return MaybeLink({
-    link: metadata?.link,
+export function Author(context, { blogMeta }) {
+  const author = blogMeta.author;
+  if (!author) {
+    return nothing;
+  }
+  console.log("author", author);
+  return MaybeLink(context, {
+    link: author.link,
     className: "author",
-    children: html`<img
-        src=${metadata?.avatar_url ?? "/assets/avatar.png"}
+    content: html`<img
+        src=${author.avatar_url ?? "/assets/avatar.png"}
         alt="Author avatar"
       />
-      ${metadata?.name || "The MDN Team"} `,
+      ${author.name || "The MDN Team"} `,
   });
 }
 
 /**
  *
- * @param root0
- * @param root0.metadata
  * @param {Fred.Context} context
- * @returns
+ * @param {object} params
+ * @param {Rari.BlogMeta} params.blogMeta
+ * @returns {Lit.TemplateResult | nothing}
  */
-export function AuthorDateReadTime(context, { metadata }) {
+export function AuthorDateReadTime(context, { blogMeta }) {
+  if (!blogMeta.author) {
+    return nothing;
+  }
+  console.log("blogPostMetaData", blogMeta);
+
   return html`
-    <div className="date-author">
-      ${Author(metadata)} ${PublishDate(metadata)}
-      ${TimeToRead(context, metadata)}
+    <div class="blog__date-author">
+      ${Author(context, { blogMeta })}
+      ${PublishDate(context, { date: blogMeta.published })}
+      ${TimeToRead(context, { readTime: blogMeta.readTime })}
     </div>
   `;
 }

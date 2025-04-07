@@ -10,3 +10,7 @@ blog_time_to_read = { $minutes ->
     [one]   { $minutes } Minute Lesezeit
    *[other] { $minutes } Minuten Lesezeit
 }
+blog_post_not_found = Blogartikel nicht gefunden.
+
+page_previous = Voriger Artikel
+page_next = Nächster Artikel
