@@ -1,6 +1,7 @@
-import { LitElement, html } from "lit";
+import { LitElement, css, html } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin";
+import buttonStyles from "../button/index.css?lit";
 import { Button } from "../button/index.js";
 
 import thumbsDown from "../icon/thumbs_down.svg?lit";
@@ -31,7 +32,10 @@ const FEEDBACK_REASONS_DE = {
 };
 
 export class ArticleFooterFeedback extends L10nMixin(LitElement) {
-  static styles = styles;
+  static styles = css`
+    ${styles}
+    ${buttonStyles}
+  `;
 
   static properties = {
     locale: { type: String },

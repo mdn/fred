@@ -2,8 +2,6 @@ import { html, nothing } from "lit";
 
 import { ifDefined } from "lit/directives/if-defined.js";
 
-import "./index.css";
-
 /**
  * @param {object} options
  * @param {string|Lit.TemplateResult} [options.label]
