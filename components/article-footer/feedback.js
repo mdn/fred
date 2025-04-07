@@ -1,6 +1,10 @@
 import { LitElement, html } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin";
+import { Button } from "../button/index.js";
+
+import thumbsDown from "../icon/thumbs_down.svg?lit";
+import thumbsUp from "../icon/thumbs_up.svg?lit";
 
 import styles from "./feedback.css?lit";
 
@@ -64,20 +68,18 @@ export class ArticleFooterFeedback extends L10nMixin(LitElement) {
         )`Was this page helpful to you?`}
       </label>
       <div class="button-container">
-        <button
-          type="button"
-          class="button yes"
-          @click=${{ handleEvent: () => this._handleVote(true) }}
-        >
-          ${this.l10n`Yes`}
-        </button>
-        <button
-          type="button"
-          class="button no"
-          @click=${{ handleEvent: () => this._handleVote(false) }}
-        >
-          ${this.l10n`No`}
-        </button>
+        ${Button({
+          extraClasses: "yes",
+          handleClick: () => this._handleVote(true),
+          icon: thumbsUp,
+          label: this.l10n`Yes`,
+        })}
+        ${Button({
+          extraClasses: "no",
+          handleClick: () => this._handleVote(false),
+          icon: thumbsDown,
+          label: this.l10n`No`,
+        })}
       </div>`;
   }
 
@@ -112,14 +114,13 @@ export class ArticleFooterFeedback extends L10nMixin(LitElement) {
           </div>`,
       )}
       <div class="button-container">
-        <button
-          type="button"
-          class="button primary"
-          ?disabled=${!this._reason}
-          @click=${this._handleFeedback}
-        >
-          ${this.l10n`Submit`}
-        </button>
+        ${Button({
+          type: "button",
+          extraClasses: "primary",
+          disabled: !this._reason,
+          handleClick: this._handleFeedback,
+          label: this.l10n`Submit`,
+        })}
       </div>`;
   }
 
