@@ -1,0 +1,138 @@
+/** Article footer. */
+
+.article-footer {
+  --article-footer-background: var(
+    --background-secondary,
+    light-dark(#f9f9f9, #313131)
+  );
+  --article-footer-border-color: var(
+    --border-primary,
+    light-dark(#cdcdcd, #858585)
+  );
+  --article-footer-border-radius: var(--elem-radius, 0.25rem);
+  --article-footer-box-shadow: var(--shadow-01, 0 1px 2px #2b2a330d);
+  --article-footer-color: var(--text-primary, light-dark(#1b1b1b, #ffffff));
+  --article-footer-color-yes: var(
+    --text-primary-green,
+    light-dark(#007936, #00d061)
+  );
+  --article-footer-color-no: var(
+    --text-primary-red,
+    light-dark(#d30038, #ff97a0)
+  );
+
+  background-color: var(--article-footer-background);
+  border: 1px solid var(--article-footer-border-color);
+  border-radius: var(--article-footer-border-radius);
+  box-shadow: var(--article-footer-box-shadow);
+  margin: 0;
+  padding: 1rem;
+
+  @media (width <= /* $screen-md */ 769px) {
+    margin: 3rem;
+
+    /* Reduce space to article content. */
+    margin-top: 0;
+  }
+
+  @media (width <= /* $screen-sm */ 426px) {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .article-footer-inner {
+    margin: 0 auto;
+    max-width: 1440px;
+    width: 100%;
+
+    .svg-container {
+      position: relative;
+
+      svg {
+        height: auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 20%;
+      }
+    }
+
+    h2 {
+      margin-bottom: 0.5rem;
+      margin-top: 0;
+      padding: 0;
+    }
+
+    .feedback {
+      border: none;
+      margin: 0;
+      margin-bottom: 0.25rem;
+      padding: 0;
+
+      > label {
+        display: block;
+        margin-bottom: 0.25rem;
+      }
+
+      .thank-you {
+        display: block;
+        margin-bottom: calc(2.75rem + 2px);
+      }
+
+      .button-container {
+        /* Ensure both buttons take minimal width. */
+        display: inline-flex;
+        gap: 0.75rem;
+        margin: 0.25rem 0;
+      }
+
+      button {
+        /* Ensure both buttons have same size. */
+        flex: 1;
+        min-width: 0;
+
+        &:not(:hover) {
+          --button-bg: var(--article-footer-background);
+          --button-color: var(--article-footer-color);
+        }
+
+        &.yes {
+          --button-bg-hover: var(--article-footer-color-yes);
+        }
+
+        &.no {
+          --button-bg-hover: var(--article-footer-color-no);
+        }
+      }
+
+      .button-wrap {
+        display: flex;
+
+        /* Increase space between icon and button label. */
+        gap: 0.5rem;
+        padding: 1rem;
+      }
+
+      .radio-container {
+        align-items: center;
+        display: flex;
+        gap: 0.25rem;
+        margin: 0.25rem 0;
+      }
+    }
+
+    .contribute {
+      margin-top: 0.25rem;
+    }
+
+    .last-modified-date {
+      margin-bottom: 0;
+      margin-top: 2rem;
+    }
+
+    .emoji {
+      /* Ensure emojis are shown in color. */
+      font-family: initial;
+    }
+  }
+}
