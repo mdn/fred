@@ -68,7 +68,7 @@ function BCD({ id, title, query, isH3 }) {
  */
 function SpecificationsSection(context, { id, title, specifications, isH3 }) {
   const level = isH3 ? 3 : 2;
-  return html`<section aria-labelledby=${id}>
+  return html`<section aria-labelledby=${ifDefined(id ?? undefined)}>
     ${Heading(level, id ? String(id) : null, String(title))}
     ${SpecificationsList(context, specifications)}
   </section>`;

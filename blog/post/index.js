@@ -47,13 +47,13 @@ function SidePlacement(_context) {
 }
 
 /**
- * @param {Fred.Context} _context
+ * @param {Fred.Context} context
  * @param {object} params
  * @param {Rari.BlogPostDoc} params.doc
  * @returns {Lit.TemplateResult}
  */
-function RenderBlogContent(_context, { doc }) {
-  return html` ${doc.body.map((section) => Section(section))} `;
+function RenderBlogContent(context, { doc }) {
+  return html` ${doc.body.map((section) => Section(context, section))} `;
 }
 
 /**
