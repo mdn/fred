@@ -7,7 +7,7 @@ import { Button } from "../button/index.js";
 import thumbsDown from "../icon/thumbs_down.svg?lit";
 import thumbsUp from "../icon/thumbs_up.svg?lit";
 
-import styles from "./feedback.css?lit";
+import styles from "./index.css?lit";
 
 /**
  * @typedef {"outdated"|"incomplete"|"code_examples"|"technical"|"consistency"|"incomprehensible"|"linguistic"|"other"} FeedbackReason
@@ -31,7 +31,7 @@ const FEEDBACK_REASONS_DE = {
   other: "Sonstige",
 };
 
-export class ArticleFooterFeedback extends L10nMixin(LitElement) {
+export class ContentFeedback extends L10nMixin(LitElement) {
   static styles = css`
     ${styles}
     ${buttonStyles}
@@ -68,10 +68,10 @@ export class ArticleFooterFeedback extends L10nMixin(LitElement) {
   _renderVote() {
     return html`<label
         >${this.l10n(
-          "article_footer_feedback_question",
+          "content-feedback_question",
         )`Was this page helpful to you?`}
       </label>
-      <div class="article-footer--feedback-buttons">
+      <div class="content-feedback--buttons">
         ${Button({
           extraClasses: "yes",
           handleClick: () => this._handleVote(true),
@@ -98,14 +98,14 @@ export class ArticleFooterFeedback extends L10nMixin(LitElement) {
 
     return html`<label
         >${this.l10n(
-          "article_footer_reason_label",
+          "content-feedback_reason",
         )`Why was this page not helpful to you?`}</label
       >
       ${Object.entries(
         this.locale === "de" ? FEEDBACK_REASONS_DE : FEEDBACK_REASONS,
       ).map(
         ([key, label]) =>
-          html`<div class="article-footer--feedback-radios">
+          html`<div class="content-feedback--radios">
             <input
               type="radio"
               id=${`reason_${key}`}
@@ -130,9 +130,7 @@ export class ArticleFooterFeedback extends L10nMixin(LitElement) {
 
   _renderThanks() {
     return html`<span class="thank-you">
-      ${this.l10n(
-        "article_footer_feedback_thanks",
-      )`Thank you for your feedback!`}
+      ${this.l10n("content-feedback_thanks")`Thank you for your feedback!`}
       <span class="emoji">❤️</span>
     </span>`;
   }
@@ -152,10 +150,10 @@ export class ArticleFooterFeedback extends L10nMixin(LitElement) {
   }
 
   render() {
-    return html`<fieldset class="article-footer--feedback">
+    return html`<fieldset class="content-feedback">
       ${this._renderInner(this._view)}
     </fieldset>`;
   }
 }
 
-customElements.define("article-footer-feedback", ArticleFooterFeedback);
+customElements.define("mdn-content-feedback", ContentFeedback);

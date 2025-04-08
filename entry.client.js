@@ -1,6 +1,6 @@
 import "./symmetric-context/client.js";
 import "@lit-labs/ssr-client/lit-element-hydrate-support.js";
-import "./components/article-footer/feedback.js";
+import "./components/content-feedback/index.js";
 import "./components/color-theme/index.js";
 import "./components/compat/index.js";
 import "./components/quick-search/index.js";
