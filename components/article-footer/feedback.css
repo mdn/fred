@@ -21,10 +21,14 @@
     margin: 0.25rem 0;
   }
 
-  button {
+  .button {
     /* Ensure both buttons have same size. */
     flex: 1;
     min-width: 0;
+
+    /* Increase space between icon and button label. */
+    gap: 0.5rem;
+    padding: 1rem;
 
     &:not(:hover) {
       --button-bg: var(--article-footer-background);
@@ -38,14 +42,6 @@
     &.no {
       --button-bg-hover: var(--article-footer-color-no);
     }
-  }
-
-  .button-wrap {
-    display: flex;
-
-    /* Increase space between icon and button label. */
-    gap: 0.5rem;
-    padding: 1rem;
   }
 
   .radio-container {
