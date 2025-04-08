@@ -1,8 +1,19 @@
 article-footer_last-modified = This page was last modified on <time data-l10n-name="date">{ $date }</timestamp> by <a data-l10n-name="contributors">MDN contributors</a>.
 article-footer_source_title = Folder: { $folder } (Opens in a new tab)
 
+reference_toc_header = In this article
+
 footer_mofo = Visit <a data-l10n-name="moco">Mozilla Corporation’s</a> not-for-profit parent, the <a data-l10n-name="mofo">Mozilla Foundation</a>.
 footer_copyright = Portions of this content are ©1998–2024 by individual mozilla.org contributors. Content available under <a data-l10n-name="cc">a Creative Commons license</a>.
 
 search_title = Search results for: <em>{ $query }</em>
 search_stats = Found { $results } matches in { $time } milliseconds.
+
+blog_time_to_read = { $minutes ->
+    [one]   { $minutes } minute read
+   *[other] { $minutes } minutes read
+}
+blog_post_not_found = Blog post not found.
+
+page_previous = Previous Post
+page_next = Next Post

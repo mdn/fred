@@ -8,3 +8,4 @@ dist/ssr/*
 out/
 .eslintcache
 .stylelintcache
+.DS_Store

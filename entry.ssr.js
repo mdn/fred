@@ -2,6 +2,8 @@
 import { render as r } from "@lit-labs/ssr";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 
+import { BlogIndex } from "./blog/landing/index.js";
+import { BlogPost } from "./blog/post/index.js";
 import { renderHTML } from "./build/utils.js";
 import { PageLayout } from "./components/page-layout/index.js";
 import { addFluent } from "./l10n/context.js";
@@ -61,9 +63,9 @@ export async function render(path, ssrManifest, clientManifest, page) {
     const component = (() => {
       switch (context.renderer) {
         case "BlogIndex":
+          return BlogIndex(context);
         case "BlogPost":
-          // @ts-expect-error
-          return Doc(context);
+          return BlogPost(context);
         case "ContributorSpotlight":
           return ContributorSpotlight(context);
         case "CurriculumAbout":

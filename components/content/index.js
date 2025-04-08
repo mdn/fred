@@ -1,4 +1,5 @@
 import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { ArticleFooter } from "../article-footer/index.js";
@@ -9,6 +10,7 @@ import "./index.css";
 
 /**
  * @param {Fred.Context<Rari.DocPage>} context
+ * @returns {Lit.TemplateResult}
  */
 export function Content(context) {
   return html`<div class="content">
@@ -21,6 +23,7 @@ export function Content(context) {
 /**
  * @param {Fred.Context} context
  * @param {import("@mdn/rari").Section} section
+ * @returns {Lit.TemplateResult}
  */
 export function Section(context, { type, value }) {
   switch (type) {
@@ -38,11 +41,12 @@ export function Section(context, { type, value }) {
 
 /**
  * @param {import("@mdn/rari").Prose} section
+ * @returns {Lit.TemplateResult}
  */
 function Prose({ id, title, content, isH3 }) {
   const level = isH3 ? 3 : 2;
   // @ts-nocheck
-  return html`<section aria-labelledby=${id}>
+  return html`<section aria-labelledby=${ifDefined(id ?? undefined)}>
     ${Heading(level, id ? String(id) : null, String(title))}
     ${unsafeHTML(content)}
   </section>`;
@@ -50,10 +54,11 @@ function Prose({ id, title, content, isH3 }) {
 
 /**
  * @param {import("@mdn/rari").Compat} section
+ * @returns {Lit.TemplateResult}
  */
 function BCD({ id, title, query, isH3 }) {
   const level = isH3 ? 3 : 2;
-  return html`<section aria-labelledby=${id}>
+  return html`<section aria-labelledby=${ifDefined(id ?? undefined)}>
     ${Heading(level, id ? String(id) : null, String(title))}
     <lazy-compat-table locale="en-US" query=${query}></lazy-compat-table>
   </section>`;
@@ -65,7 +70,7 @@ function BCD({ id, title, query, isH3 }) {
  */
 function SpecificationsSection(context, { id, title, specifications, isH3 }) {
   const level = isH3 ? 3 : 2;
-  return html`<section aria-labelledby=${id}>
+  return html`<section aria-labelledby=${ifDefined(id ?? undefined)}>
     ${Heading(level, id ? String(id) : null, String(title))}
     ${SpecificationsList(context, specifications)}
   </section>`;

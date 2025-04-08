@@ -11,3 +11,83 @@
 [hidden] {
   display: none !important;
 }
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100svh;
+  margin: 0;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--base-font-size);
+  line-height: var(--font-content-line-height);
+  text-rendering: optimizespeed;
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.visually-hidden {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
+}
