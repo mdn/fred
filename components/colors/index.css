@@ -115,3 +115,25 @@
     var(--purple-dark-super)
   );
 }
+
+/* Buttons */
+:root {
+  --button-primary-default: light-dark(#1b1b1b, #ffffff);
+  --button-primary-hover: light-dark(#696969, #cdcdcd);
+  --button-primary-active: light-dark(#9e9e9e, #9e9e9e);
+  --button-primary-inactive: light-dark(#1b1b1b, #ffffff);
+  --button-secondary-default: light-dark(#ffffff, #4e4e4e);
+  --button-secondary-hover: light-dark(#cdcdcd, #858585);
+  --button-secondary-active: light-dark(#cdcdcd, #9e9e9e);
+  --button-secondary-inactive: light-dark(#f9f9fb, #4e4e4e);
+  --button-secondary-border-focus: light-dark(#0085f2, #0085f2);
+  --button-secondary-border-red: light-dark(#ff97a0, #ff97a0);
+  --button-secondary-border-red-focus: light-dark(#ffd9dc, #ffd9dc);
+}
+
+/* borders */
+
+:root {
+  --border-primary: light-dark(#cdcdcd, #858585);
+  --border-secondary: light-dark(#cdcdcd, #696969);
+}

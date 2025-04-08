@@ -1,12 +1,9 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 
 import { PageLayout } from "../../components/page-layout/index.js";
-import {
-  BlogContainer,
-  MaybeLink,
-  PublishDate,
-  TimeToRead,
-} from "../shared/index.js";
+import { AuthorDateReadTime, BlogContainer } from "../shared/index.js";
+
+import "./index.css";
 
 /**
  * @param {Fred.Context} _context
@@ -29,33 +26,9 @@ export function BlogIndexImageFigure(_context, { image, slug, width, height }) {
  *
  * @param {Fred.Context} context
  * @param {Rari.BlogMeta} blogMeta
- * @returns {Lit.TemplateResult}
- */
-function AuthorDateReadTime(context, blogMeta) {
-  const author = html`
-    <img
-      src=${blogMeta.author.avatar_url || "/assets/avatar.png"}
-      alt="Author avatar"
-    />
-    ${blogMeta.author.name || "The MDN Team"}
-  `;
-  console.log("author", blogMeta.author);
-  const link = blogMeta.author?.link ?? undefined;
-
-  return html`
-    ${MaybeLink(context, { link, content: author })}
-    ${PublishDate(context, { date: blogMeta.date })}
-    ${TimeToRead(context, { readTime: blogMeta.readTime })}
-  `;
-}
-
-/**
- *
- * @param {Fred.Context} context
- * @param {Rari.BlogMeta} blogMeta
  */
 function PostPreview(context, blogMeta) {
-  return html`<article>
+  return html`<article class="blog-index__article">
     <header>
       ${BlogIndexImageFigure(context, {
         image: blogMeta.image,
@@ -67,13 +40,14 @@ function PostPreview(context, blogMeta) {
         <a href="./${blogMeta.slug}/">${blogMeta.title}</a>
       </h2>
       <div class="blog-index__author-read-time">
-        ${AuthorDateReadTime(context, blogMeta)}
+        ${AuthorDateReadTime(context, { blogMeta })}
       </div>
     </header>
     <p>${blogMeta.description}</p>
     <footer>
-      ${blogMeta.sponsored &&
-      html`<span className="sponsored">Sponsored</span>`}
+      ${blogMeta.sponsored
+        ? html`<span className="sponsored">Sponsored</span>`
+        : nothing}
       <a href="./${blogMeta.slug}/" target="_self"> Read more → </a>
     </footer>
   </article>`;
@@ -88,14 +62,16 @@ export function BlogIndex(context) {
   const content = BlogContainer(
     context,
     html`
-      <header>
-        <h1 class="mify">${context.l10n`Blog it better`}</h1>
-      </header>
-      <section className="article-list">
-        ${context.hyData?.posts.map((blogMeta) => {
-          return PostPreview(context, blogMeta);
-        })}
-      </section>
+      <div class="blog-index__main">
+        <header class="blog-index__header">
+          <h1 class="mify">${context.l10n`Blog it better`}</h1>
+        </header>
+        <section class="blog-index__articles">
+          ${context.hyData?.posts.map((blogMeta) => {
+            return PostPreview(context, blogMeta);
+          })}
+        </section>
+      </div>
     `,
   );
   return PageLayout(context, content);

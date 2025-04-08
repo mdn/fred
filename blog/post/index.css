@@ -1,10 +1,14 @@
 .blog-post__main {
+  --navigation-side-padding: 1rem;
+  padding-inline: calc(
+    (100% - 1440px + (var(--navigation-side-padding) * 2)) / 2
+  );
+
   display: grid;
   gap: 3rem;
   grid-template-areas:
     "post"
     "newsletter";
-  padding: 0;
   width: 100%;
 
   @media (width >= 992px) {

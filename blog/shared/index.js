@@ -108,13 +108,10 @@ export function AuthorDateReadTime(context, { blogMeta }) {
   if (!blogMeta.author) {
     return nothing;
   }
-  console.log("blogPostMetaData", blogMeta);
 
   return html`
-    <div class="blog__date-author">
-      ${Author(context, { blogMeta })}
-      ${PublishDate(context, { date: blogMeta.published })}
-      ${TimeToRead(context, { readTime: blogMeta.readTime })}
-    </div>
+    ${Author(context, { blogMeta })}
+    ${PublishDate(context, { date: blogMeta.published })}
+    ${TimeToRead(context, { readTime: blogMeta.readTime })}
   `;
 }

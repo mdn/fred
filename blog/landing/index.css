@@ -1,0 +1,26 @@
+.blog-index__main {
+  --navigation-side-padding: 1rem;
+  padding-inline: calc(
+    (100% - 1440px + (var(--navigation-side-padding) * 2)) / 2
+  );
+}
+
+.blog-index__header {
+  margin: 2rem 0 1rem;
+}
+
+.blog-index__articles {
+  display: grid;
+  column-gap: 2rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.blog-index__article {
+  border: 1px solid var(--border-primary);
+  border-radius: 1rem;
+  display: grid;
+  grid-row: span 6;
+  grid-template-rows: subgrid;
+  margin-top: 2rem;
+  padding: 2rem;
+}
