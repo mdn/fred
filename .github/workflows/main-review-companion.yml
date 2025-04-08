@@ -3,11 +3,15 @@ name: Main Review Companion
 on:
   schedule:
     - cron: "0 0 * * *"
+  push:
+    branches:
+      - main
 
   workflow_dispatch:
 
 jobs:
   deploy:
+    if: github.event_name == 'schedule' || github.actor != 'dependabot[bot]'
     uses: ./.github/workflows/_deploy.yml
     secrets: inherit
     with:

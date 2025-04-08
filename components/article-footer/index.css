@@ -1,0 +1,60 @@
+/** Article footer. */
+
+.article-footer {
+  background-color: var(--background-secondary, light-dark(#f9f9f9, #313131));
+  border: 1px solid var(--border-primary, light-dark(#cdcdcd, #858585));
+  border-radius: var(--elem-radius, 0.25rem);
+  box-shadow: var(--shadow-01, 0 1px 2px #2b2a330d);
+  margin: 0;
+  padding: 1rem;
+
+  @media (width <= /* $screen-md */ 769px) {
+    margin: 3rem;
+
+    /* Reduce space to article content. */
+    margin-top: 0;
+  }
+
+  @media (width <= /* $screen-sm */ 426px) {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+.article-footer__inner {
+  margin: 0 auto;
+  max-width: 1440px;
+  width: 100%;
+
+  h2 {
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+    padding: 0;
+  }
+
+  .emoji {
+    /* Ensure emojis are shown in color. */
+    font-family: initial;
+  }
+}
+
+.article-footer__svg-container {
+  position: relative;
+
+  svg {
+    height: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20%;
+  }
+}
+
+.article-footer__contribute {
+  margin-top: 0.25rem;
+}
+
+.article-footer__last-modified {
+  margin-bottom: 0;
+  margin-top: 2rem;
+}

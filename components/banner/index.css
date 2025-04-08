@@ -1,0 +1,10 @@
+.banner {
+  padding: 16px;
+  border-block-end: 1px solid var(--text-secondary);
+  background-color: var(--background-secondary);
+  background-image: repeating-linear-gradient(
+    115deg,
+    rgb(255 255 255 / 10%) 0 24px,
+    rgb(0 0 0 / 10%) 24px 48px
+  );
+}

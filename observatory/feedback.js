@@ -1,9 +1,10 @@
 import { html } from "lit";
 
 /**
+ * @param {Fred.Context<Rari.SpaPage>} _context
  * @returns {Lit.TemplateResult}
  */
-export function Feedback() {
+export function Feedback(_context) {
   return html`<a
     href="https://survey.alchemer.com/s3/7897385/MDN-HTTP-Observatory"
     target="_blank"

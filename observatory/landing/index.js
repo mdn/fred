@@ -1,10 +1,15 @@
 import { html, svg } from "lit";
 
-import assessmentSvg from "../assets/assessment.svg?mdnsvg";
-import landingSvg from "../assets/landing-illustration.svg?mdnsvg";
-import mdnSvg from "../assets/mdn.svg?mdnsvg";
-import scanningSvg from "../assets/scanning.svg?mdnsvg";
-import securitySvg from "../assets/security.svg?mdnsvg";
+// @ts-ignore
+import assessmentSvg from "../assets/assessment.svg?lit";
+// @ts-ignore
+import landingSvg from "../assets/landing-illustration.svg?lit";
+// @ts-ignore
+import mdnSvg from "../assets/mdn.svg?lit";
+// @ts-ignore
+import scanningSvg from "../assets/scanning.svg?lit";
+// @ts-ignore
+import securitySvg from "../assets/security.svg?lit";
 import { OBSERVATORY_TITLE } from "../constants.js";
 import { FAQ } from "../faq.js";
 import { Feedback } from "../feedback.js";
@@ -13,10 +18,10 @@ import "./form.js";
 import "../index.css";
 
 /**
- * @param {Fred.Context<Rari.SPAPage>} _context
+ * @param {Fred.Context<Rari.SpaPage>} context
  * @returns {Lit.TemplateResult}
  */
-export function Landing(_context) {
+export function Landing(context) {
   return html`
     <section class="obs-landing-top">
       <section class="obs-landing-top__form">
@@ -88,8 +93,8 @@ export function Landing(_context) {
         </div>
       </section>
       <section class="obs-landing-about__links">
-        ${FAQ()}
-        ${Feedback()}
+        ${FAQ(context)}
+        ${Feedback(context)}
       </section>
     </section>
   </section>`;

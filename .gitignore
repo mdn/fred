@@ -1,6 +1,11 @@
-node_modules
-dist
-out
+.vscode/
+node_modules/
+dist/*
+!dist/ssr/
+dist/ssr/*
+!dist/ssr/index.d.ts
+!dist/ssr/package.json
+out/
 .eslintcache
 .stylelintcache
 .DS_Store

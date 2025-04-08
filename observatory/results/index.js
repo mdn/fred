@@ -7,17 +7,17 @@ import { Feedback } from "../feedback.js";
 import "../index.css";
 
 /**
- * @param {Fred.Context<Rari.SPAPage>} _context
+ * @param {Fred.Context<Rari.SpaPage>} context
  * @returns {Lit.TemplateResult}
  */
-export function Results(_context) {
+export function Results(context) {
   return html` <section class="obs-results">
     <section class="obs-results__header">
       <h1 class="obs-results__title">
         <span class="obs-results__title-accent">${OBSERVATORY_TITLE}</span>
         Report
       </h1>
-      <div class="obs-results__feedback">${Feedback()}</div>
+      <div class="obs-results__feedback">${Feedback(context)}</div>
     </section>
 
     <aside class="obs-toc">

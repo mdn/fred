@@ -1,7 +1,7 @@
 import { html } from "lit";
 
-import starsSvg from "../assets/stars.svg?mdnsvg";
-import arrowSvg from "../assets/tooltip-arrow.svg?mdnsvg";
+import starsSvg from "../assets/stars.svg?lit";
+import arrowSvg from "../assets/tooltip-arrow.svg?lit";
 import { SCORING_TABLE } from "../constants";
 import { formatMinus } from "../utils";
 

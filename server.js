@@ -3,16 +3,16 @@ import fs from "node:fs";
 import { createRsbuild, loadConfig, logger } from "@rsbuild/core";
 import express from "express";
 
-import { renderHTML } from "./build/utils.js";
+import { createProxyMiddleware } from "http-proxy-middleware";
 
 /**
  * @import { Request, Response } from "express";
  * @import { RsbuildDevServer } from "@rsbuild/core";
  */
 
-/** @type {string} */
+/** @type {import("@rsbuild/core").ManifestData} */
 let ssrManifest;
-/** @type {string} */
+/** @type {import("@rsbuild/core").ManifestData} */
 let clientManifest;
 
 /**
@@ -27,13 +27,10 @@ const serverRender =
   async (req, res) => {
     /** @type {import("./entry.ssr") | undefined} */
     const indexModule = await serverAPI.environments.ssr?.loadBundle("index");
-    const markup = await indexModule?.render(req.path);
-
-    const html = renderHTML(
+    const html = await indexModule?.render(
+      req.path,
       ssrManifest,
       clientManifest,
-      req?.path?.endsWith("settings"),
-      markup,
     );
 
     res.writeHead(200, {
@@ -57,18 +54,39 @@ export async function startDevServer() {
 
   rsbuild.onDevCompileDone(async () => {
     // update manifest info when rebuild
-    ssrManifest = await fs.promises.readFile(
-      "./dist/ssr/manifest.json",
-      "utf8",
+    ssrManifest = JSON.parse(
+      await fs.promises.readFile("./dist/ssr/manifest.json", "utf8"),
     );
-    clientManifest = await fs.promises.readFile(
-      "./dist/client/manifest.json",
-      "utf8",
+    clientManifest = JSON.parse(
+      await fs.promises.readFile("./dist/client/manifest.json", "utf8"),
     );
     rsbuildServer.printUrls();
   });
 
   const serverRenderMiddleware = serverRender(rsbuildServer);
+
+  // Apply Rsbuild’s built-in middlewares
+  app.use(rsbuildServer.middlewares);
+
+  app.get("/", async (_req, res, _next) => {
+    res.writeHead(302, {
+      Location: "/en-US/",
+    });
+    res.end();
+  });
+
+  app.all(
+    "/api/*_",
+    createProxyMiddleware({
+      target: `https://developer.allizom.org`,
+      changeOrigin: true,
+      proxyTimeout: 20_000,
+      timeout: 20_000,
+      headers: {
+        Connection: "keep-alive",
+      },
+    }),
+  );
 
   app.get("/*mdnUrl", async (req, res, next) => {
     try {
@@ -78,9 +96,6 @@ export async function startDevServer() {
       next();
     }
   });
-
-  // Apply Rsbuild’s built-in middlewares
-  app.use(rsbuildServer.middlewares);
 
   const httpServer = app.listen(rsbuildServer.port, () => {
     // Notify Rsbuild that the custom server has started

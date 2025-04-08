@@ -37,6 +37,8 @@ pre-push:
             run: npx eslint --cache
           - name: stylelint
             run: npx stylelint '**/*.css' --cache --ignore-path .gitignore
+          - name: tsc
+            run: npx tsc
 
 output:
   - summary

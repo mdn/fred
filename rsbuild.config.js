@@ -1,10 +1,10 @@
-import { defineConfig } from "@rsbuild/core";
+import { defineConfig, rspack } from "@rsbuild/core";
 
-import { pluginFluent } from "./plugin-fluent/fluent.js";
-import { pluginReset } from "./plugin-reset/reset.js";
+import { pluginReset } from "./build/plugins/reset.js";
+import { pluginTsNocheck } from "./build/plugins/ts-nocheck.js";
 
 export default defineConfig({
-  plugins: [pluginFluent(), pluginReset()],
+  plugins: [pluginReset(), pluginTsNocheck()],
   environments: {
     client: {
       output: {
@@ -35,8 +35,8 @@ export default defineConfig({
         distPath: {
           root: "dist/ssr",
         },
-        filename: {
-          js: "[name].cjs",
+        cleanDistPath: {
+          keep: [/\/index\.d\.ts$/, /\/package\.json$/],
         },
         assetPrefix: "/static/ssr/",
       },
@@ -56,13 +56,42 @@ export default defineConfig({
       module: {
         rules: [
           {
-            test: /\.svg$/,
-            resourceQuery: /mdnsvg/,
-            loader: "./plugin-mdnsvg/loader.js",
+            test: /\.flt$/i,
+            loader: "./build/loaders/fluent.js",
           },
           {
-            test: /\.svg$/,
+            test: /\.css$/i,
+            loader: "postcss-loader",
+            oneOf: [
+              {
+                resourceQuery: /lit/,
+                use: [
+                  "./build/loaders/lit-css.js",
+                  {
+                    loader: "css-loader",
+                    options: {
+                      exportType: "string",
+                    },
+                  },
+                ],
+              },
+              {
+                use: [rspack.CssExtractRspackPlugin.loader, "css-loader"],
+              },
+            ],
+          },
+          {
+            test: /\.svg$/i,
             loader: "svgo-loader",
+            oneOf: [
+              {
+                resourceQuery: /lit/,
+                loader: "./build/loaders/lit-svg.js",
+              },
+              {
+                type: "asset/resource",
+              },
+            ],
           },
         ],
       },

@@ -12,7 +12,7 @@ import USStrings from "../l10n/en-us.flt";
 /** @type {Record<string, string>} */
 const fltMap = { "en-US": USStrings, de: DEStrings };
 
-const whitelistedTags = ["i", "strong", "br"];
+const whitelistedTags = ["i", "strong", "br", "em"];
 const whitelistedAttributes = ["title", "aria-label"];
 
 export class Fluent {
@@ -63,17 +63,15 @@ export class Fluent {
     if (!message) {
       return;
     }
-    if (!elements) {
-      return message;
-    }
     return Fluent.sanitize(message, elements);
   }
 
   /**
    * @param {string} message
-   * @param {Record<string, import("../types/fluent").Element>} elements
+   * @param {Record<string, import("../types/fluent").Element>} [elements]
+   * @returns {string | ReturnType<typeof unsafeHTML>}
    */
-  static sanitize(message, elements) {
+  static sanitize(message, elements = {}) {
     /** @type { Record<string, string[]> } */
     const allowedAttributes = {};
     for (const t of Object.values(elements)) {
@@ -88,11 +86,12 @@ export class Fluent {
       ...whitelistedTags,
     ];
 
+    let safe = true;
     const sanitized = insane(
       message,
       {
         allowedAttributes,
-        allowedTags: /** @type AllowedTags[] */ (allowedTags),
+        allowedTags: /** @type {AllowedTags[]} */ (allowedTags),
         allowedSchemes: ["http", "https", "mailto"],
         filter(token) {
           // TODO: use element names directly
@@ -108,6 +107,7 @@ export class Fluent {
               Object.keys(elements).includes(name) &&
               elements[name]?.tag === token.tag)
           ) {
+            safe = false;
             return true;
           }
           return false;
@@ -115,7 +115,7 @@ export class Fluent {
       },
       true,
     );
-    return unsafeHTML(sanitized);
+    return safe ? sanitized : unsafeHTML(sanitized);
   }
 
   /**
@@ -228,7 +228,6 @@ export default function getFluentContext(locale) {
       tag.toString = () => {
         // called as a function, used as a function:
         // ${l10n("foobar")}
-        console.log(locale, localizedString, fallbackString);
         return (
           (typeof localizedString === "string" && localizedString) ||
           fallbackString

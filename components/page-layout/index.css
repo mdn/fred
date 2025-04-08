@@ -5,7 +5,12 @@
     min-content
     1fr
     min-content;
+  margin: 0;
   margin-inline: auto;
+  min-height: 100svh;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
 }
 
 .page-layout__header {

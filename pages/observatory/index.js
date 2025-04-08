@@ -12,7 +12,7 @@ import {
 
 /**
  *
- * @param {Fred.Context<Rari.SPAPage>} context
+ * @param {Fred.Context<Rari.SpaPage>} context
  * @returns {Lit.TemplateResult}
  */
 export function ObservatoryLanding(context) {
@@ -29,7 +29,7 @@ export function ObservatoryLanding(context) {
 
 /**
  *
- * @param {Fred.Context<Rari.SPAPage>} context
+ * @param {Fred.Context<Rari.SpaPage>} context
  * @returns {Lit.TemplateResult}
  */
 export function ObservatoryResults(context) {
@@ -46,7 +46,7 @@ export function ObservatoryResults(context) {
 
 /**
  *
- * @param {Fred.Context<Rari.SPAPage>} _context
+ * @param {Fred.Context<Rari.SpaPage>} _context
  * @returns {Lit.TemplateResult}
  */
 export function ObservatoryBreadCrumbs(_context) {

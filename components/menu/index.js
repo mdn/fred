@@ -187,11 +187,11 @@ export function Menu(_context) {
           />
         </svg>
       </button>
-      <a class="menu__tabs-link" href="">Blog</a>
+      <a class="menu__tabs-link" href="/en-US/blog/">Blog</a>
     </div>
     <section class="menu__panel menu__panel--html" id="menu__html" hidden>
       <h4 class="menu__panel-title">
-        <a href="">HTML: Markup language</a>
+        <a href="/en-US/docs/Web/HTML">HTML: Markup language</a>
       </h4>
       <div class="menu__content">
         <div class="menu__content-primary">
@@ -199,11 +199,21 @@ export function Menu(_context) {
             <dt>HTML References</dt>
             <dd>
               <ul>
-                <li><a href="">Elements</a></li>
-                <li><a href="">Global attributes</a></li>
-                <li><a href="">Attributes</a></li>
+                <li><a href="/en-US/docs/Web/HTML/Element">Elements</a></li>
                 <li>
-                  <a href="" aria-label="See all HTML references">See all…</a>
+                  <a href="/en-US/docs/Web/HTML/Global_attributes"
+                    >Global attributes</a
+                  >
+                </li>
+                <li>
+                  <a href="/en-US/docs/Web/HTML/Attributes">Attributes</a>
+                </li>
+                <li>
+                  <a
+                    href="/en-US/docs/Web/HTML/Reference"
+                    aria-label="See all HTML references"
+                    >See all…</a
+                  >
                 </li>
               </ul>
             </dd>
@@ -212,9 +222,9 @@ export function Menu(_context) {
             <dt>Markup languages</dt>
             <dd>
               <ul>
-                <li><a href="">SVG</a></li>
-                <li><a href="">MathML</a></li>
-                <li><a href="">XML</a></li>
+                <li><a href="/en-US/docs/Web/SVG">SVG</a></li>
+                <li><a href="/en-US/docs/Web/MathML">MathML</a></li>
+                <li><a href="/en-US/docs/Web/XML">XML</a></li>
               </ul>
             </dd>
           </dl>
@@ -224,11 +234,28 @@ export function Menu(_context) {
             <dt>HTML Guides</dt>
             <dd>
               <ul>
-                <li><a href="">Responsive images</a></li>
-                <li><a href="">Video & audio content</a></li>
-                <li><a href="">Date & time formats</a></li>
                 <li>
-                  <a href="" aria-label="See all HTML guides">See all…</a>
+                  <a href="/en-US/docs/Web/HTML/Responsive_images"
+                    >Responsive images</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/en-US/docs/Learn_web_development/Core/Structuring_content/HTML_video_and_audio"
+                    >Video & audio content [Learn]</a
+                  >
+                </li>
+                <li>
+                  <a href="/en-US/docs/Web/HTML/Date_and_time_formats"
+                    >Date & time formats</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/en-US/docs/Web/HTML#guides"
+                    aria-label="See all HTML guides"
+                    >See all…</a
+                  >
                 </li>
               </ul>
             </dd>
@@ -238,7 +265,7 @@ export function Menu(_context) {
     </section>
     <section class="menu__panel menu__panel--css" id="menu__css" hidden>
       <h4 class="menu__panel-title">
-        <a href="">CSS: Styling language</a>
+        <a href="/en-US/docs/Web/CSS">CSS: Styling language</a>
       </h4>
       <div class="menu__content">
         <div class="menu__content-primary">
@@ -246,12 +273,20 @@ export function Menu(_context) {
             <dt>References</dt>
             <dd>
               <ul>
-                <li><a href="">Modules</a></li>
-                <li><a href="">Properties</a></li>
-                <li><a href="">Selectors</a></li>
-                <li><a href="">At-rules</a></li>
-                <li><a href="">Functions</a></li>
-                <li><a href="">See all…</a></li>
+                <li><a href="/en-US/docs/Web/CSS/Modules">Modules [404]</a></li>
+                <li>
+                  <a href="/en-US/docs/Web/CSS/Properties">Properties [404]</a>
+                </li>
+                <li>
+                  <a href="/en-US/docs/Web/CSS/CSS_selectors">Selectors</a>
+                </li>
+                <li>
+                  <a href="/en-US/docs/Web/CSS/CSS_syntax/At-rule">At-rules</a>
+                </li>
+                <li>
+                  <a href="/en-US/docs/Web/CSS/Functions">Functions [404]</a>
+                </li>
+                <li><a href="/en-US/docs/Web/CSS/Reference">See all…</a></li>
               </ul>
             </dd>
           </dl>
@@ -261,11 +296,26 @@ export function Menu(_context) {
             <dt>Guides</dt>
             <dd>
               <ul>
-                <li><a href="">Box model</a></li>
-                <li><a href="">Animations</a></li>
-                <li><a href="">Flexbox</a></li>
-                <li><a href="">Colors</a></li>
-                <li><a href="">See all…</a></li>
+                <li>
+                  <a
+                    href="/en-US/docs/Learn_web_development/Core/Styling_basics/Box_model"
+                    >Box model [Learn]</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/en-US/docs/Web/CSS/CSS_animations/Using_CSS_animations"
+                    >Animations</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox"
+                    >Flexbox [Learn]</a
+                  >
+                </li>
+                <li><a href="/en-US/docs/Web/CSS/CSS_colors">Colors</a></li>
+                <li><a href="/en-US/docs/Web/CSS/Guides">See all…</a></li>
               </ul>
             </dd>
           </dl>
@@ -273,10 +323,29 @@ export function Menu(_context) {
             <dt>Tools</dt>
             <dd>
               <ul>
-                <li><a href="">Color picker</a></li>
-                <li><a href="">Box-shadow generator</a></li>
-                <li><a href="">Border-image generator</a></li>
-                <li><a href="">Border-radius generator</a></li>
+                <li>
+                  <a href="/en-US/docs/Web/CSS/CSS_colors/Color_picker_tool"
+                    >Color picker</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/en-US/docs/Web/CSS/CSS_backgrounds_and_borders/Box-shadow_generator"
+                    >Box-shadow generator</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/en-US/docs/Web/CSS/CSS_backgrounds_and_borders/Border-image_generator"
+                    >Border-image generator</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/en-US/docs/Web/CSS/CSS_backgrounds_and_borders/Border-radius_generator"
+                    >Border-radius generator</a
+                  >
+                </li>
               </ul>
             </dd>
           </dl>
@@ -289,7 +358,7 @@ export function Menu(_context) {
       hidden
     >
       <h4 class="menu__panel-title">
-        <a href="">JavaScript. Scripting language</a>
+        <a href="/en-US/docs/Web/JavaScript">JavaScript. Scripting language</a>
       </h4>
       <div class="menu__content">
         <div class="menu__content-primary">
@@ -297,11 +366,29 @@ export function Menu(_context) {
             <dt>References</dt>
             <dd>
               <ul>
-                <li><a href="">Built-in objects</a></li>
-                <li><a href="">Expressions & operators</a></li>
-                <li><a href="">Statements & declarations</a></li>
-                <li><a href="">Functions</a></li>
-                <li><a href="">See all…</a></li>
+                <li>
+                  <a href="/en-US/docs/Web/JavaScript/Reference/Global_Objects"
+                    >Built-in objects</a
+                  >
+                </li>
+                <li>
+                  <a href="/en-US/docs/Web/JavaScript/Reference/Operators"
+                    >Expressions & operators</a
+                  >
+                </li>
+                <li>
+                  <a href="/en-US/docs/Web/JavaScript/Reference/Statements"
+                    >Statements & declarations</a
+                  >
+                </li>
+                <li>
+                  <a href="/en-US/docs/Web/JavaScript/Reference/Functions"
+                    >Functions</a
+                  >
+                </li>
+                <li>
+                  <a href="/en-US/docs/Web/JavaScript/Reference">See all…</a>
+                </li>
               </ul>
             </dd>
           </dl>
@@ -311,10 +398,28 @@ export function Menu(_context) {
             <dt>Guides</dt>
             <dd>
               <ul>
-                <li><a href="">Complete beginners</a></li>
-                <li><a href="">Intermediate</a></li>
-                <li><a href="">Advanced</a></li>
-                <li><a href="">See all…</a></li>
+                <li>
+                  <a href="/en-US/docs/Learn_web_development/Core/Scripting"
+                    >Complete beginners [Learn]</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/en-US/docs/Learn_web_development/Extensions/Advanced_JavaScript_objects"
+                    >Intermediate [Learn]</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain"
+                    >Advanced [Learn]</a
+                  >
+                </li>
+                <li>
+                  <a href="/en-US/docs/Web/JavaScript#javascript_guides"
+                    >See all…</a
+                  >
+                </li>
               </ul>
             </dd>
           </dl>
@@ -323,7 +428,7 @@ export function Menu(_context) {
     </section>
     <section class="menu__panel menu__panel--apis" id="menu__apis" hidden>
       <h4 class="menu__panel-title">
-        <a href="">Web API. Programming interfaces</a>
+        <a href="/en-US/docs/Web/API">Web API. Programming interfaces</a>
       </h4>
       <div class="menu__content">
         <div class="menu__content-primary">
@@ -331,11 +436,19 @@ export function Menu(_context) {
             <dt>References</dt>
             <dd>
               <ul>
-                <li><a href="">Fetch API</a></li>
-                <li><a href="">Canvas API</a></li>
-                <li><a href="">Geolocation API</a></li>
-                <li><a href="">View transitions API</a></li>
-                <li><a href="">See all…</a></li>
+                <li><a href="/en-US/docs/Web/API/Fetch_API">Fetch API</a></li>
+                <li><a href="/en-US/docs/Web/API/Canvas_API">Canvas API</a></li>
+                <li>
+                  <a href="/en-US/docs/Web/API/Geolocation_API"
+                    >Geolocation API</a
+                  >
+                </li>
+                <li>
+                  <a href="/en-US/docs/Web/API/View_Transition_API"
+                    >View Transition API</a
+                  >
+                </li>
+                <li><a href="/en-US/docs/Web/API">See all…</a></li>
               </ul>
             </dd>
           </dl>
@@ -345,10 +458,25 @@ export function Menu(_context) {
             <dt>Guides</dt>
             <dd>
               <ul>
-                <li><a href="">Using the web audio API</a></li>
-                <li><a href="">Manipulating video with canvas</a></li>
-                <li><a href="">Using the web animation API</a></li>
-                <li><a href="">See all…</a></li>
+                <li>
+                  <a
+                    href="/en-US/docs/Web/API/Web_Audio_API/Using_Web_Audio_API"
+                    >Using the web audio API</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/en-US/docs/Web/API/Canvas_API/Manipulating_video_using_canvas"
+                    >Manipulating video with canvas</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/en-US/docs/Web/API/Web_Animations_API/Using_the_Web_Animations_API"
+                    >Using the web animation API</a
+                  >
+                </li>
+                <li><a href="">See all… [TODO]</a></li>
               </ul>
             </dd>
           </dl>
@@ -357,7 +485,7 @@ export function Menu(_context) {
     </section>
     <section class="menu__panel menu__panel--all" id="menu__all" hidden>
       <h4 class="menu__panel-title">
-        <a href="">All web technology</a>
+        <a href="/en-US/docs/Web">All web technology</a>
       </h4>
       <div class="menu__content">
         <div class="menu__content-primary">
@@ -366,22 +494,24 @@ export function Menu(_context) {
             <dd>
               <ul>
                 <li>
-                  <a href="">Accessibility</a>
+                  <a href="/en-US/docs/Web/Accessibility">Accessibility</a>
                 </li>
                 <li>
-                  <a href="">HTTP</a>
+                  <a href="/en-US/docs/Web/HTTP">HTTP</a>
                 </li>
                 <li>
-                  <a href="">Web extensions</a>
+                  <a href="/en-US/docs/Mozilla/Add-ons/WebExtensions"
+                    >Web extensions</a
+                  >
                 </li>
                 <li>
-                  <a href="">Web assembly</a>
+                  <a href="/en-US/docs/WebAssembly">WebAssembly</a>
                 </li>
                 <li>
-                  <a href="">WebDriver</a>
+                  <a href="/en-US/docs/Web/WebDriver">WebDriver</a>
                 </li>
                 <li>
-                  <a href="">See all…</a>
+                  <a href="/en-US/docs/Web">See all…</a>
                 </li>
               </ul>
             </dd>
@@ -393,19 +523,21 @@ export function Menu(_context) {
             <dd>
               <ul>
                 <li>
-                  <a href="">Performance</a>
+                  <a href="/en-US/docs/Web/API/Performance">Performance</a>
                 </li>
                 <li>
-                  <a href="">Privacy</a>
+                  <a href="/en-US/docs/Web/Privacy">Privacy</a>
                 </li>
                 <li>
-                  <a href="">Security</a>
+                  <a href="/en-US/docs/Web/Security">Security</a>
                 </li>
                 <li>
-                  <a href="">Progressive web apps</a>
+                  <a href="/en-US/docs/Web/Progressive_web_apps"
+                    >Progressive web apps</a
+                  >
                 </li>
                 <li>
-                  <a href="">See all…</a>
+                  <a href="">See all… [TODO]</a>
                 </li>
               </ul>
             </dd>
@@ -415,7 +547,7 @@ export function Menu(_context) {
     </section>
     <section class="menu__panel menu__panel--learn" id="menu__learn" hidden>
       <h4 class="menu__panel-title">
-        <a href="">Learn web development</a>
+        <a href="/en-US/docs/Learn_web_development">Learn web development</a>
       </h4>
       <div class="menu__content">
         <div class="menu__content-primary">
@@ -423,9 +555,17 @@ export function Menu(_context) {
             <dt>Frontend developer course</dt>
             <dd>
               <ul>
-                <li><a href="">Getting started</a></li>
-                <li><a href="">Common questions</a></li>
-                <li><a href="">Curriculum</a></li>
+                <li>
+                  <a href="/en-US/docs/Learn_web_development/Getting_started"
+                    >Getting started</a
+                  >
+                </li>
+                <li>
+                  <a href="/en-US/docs/Learn_web_development/Howto"
+                    >Common questions</a
+                  >
+                </li>
+                <li><a href="/en-US/curriculum/">Curriculum</a></li>
               </ul>
             </dd>
           </dl>
@@ -435,8 +575,18 @@ export function Menu(_context) {
             <dt>Learn HTML</dt>
             <dd>
               <ul>
-                <li><a href="">Introduction to HTML</a></li>
-                <li><a href="">Getting started with HTML</a></li>
+                <li>
+                  <a
+                    href="/en-US/docs/Learn_web_development/Core/Structuring_content"
+                    >Introduction to HTML</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax"
+                    >Getting started with HTML</a
+                  >
+                </li>
               </ul>
             </dd>
           </dl>
@@ -444,8 +594,18 @@ export function Menu(_context) {
             <dt>Learn CSS</dt>
             <dd>
               <ul>
-                <li><a href="">What is CSS</a></li>
-                <li><a href="">Getting started with CSS</a></li>
+                <li>
+                  <a
+                    href="/en-US/docs/Learn_web_development/Core/Styling_basics/What_is_CSS"
+                    >What is CSS</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/en-US/docs/Learn_web_development/Core/Styling_basics/Getting_started"
+                    >Getting started with CSS</a
+                  >
+                </li>
               </ul>
             </dd>
           </dl>
@@ -453,8 +613,18 @@ export function Menu(_context) {
             <dt>Learn JavaScript</dt>
             <dd>
               <ul>
-                <li><a href="">How to use data attributes</a></li>
-                <li><a href="">How to use JS in a webpage</a></li>
+                <li>
+                  <a
+                    href="/en-US/docs/Learn_web_development/Howto/Solve_HTML_problems/Use_data_attributes"
+                    >How to use data attributes</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/en-US/docs/Learn_web_development/Howto/Solve_HTML_problems/Use_JavaScript_within_a_webpage"
+                    >How to use JS in a webpage</a
+                  >
+                </li>
               </ul>
             </dd>
           </dl>
@@ -467,7 +637,7 @@ export function Menu(_context) {
         <div class="menu__content-full">
           <ul class="menu__content-featured">
             <li>
-              <a href="">
+              <a href="/en-US/play">
                 <svg width="24" height="24" viewBox="0 0 384 512">
                   <path
                     d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"
@@ -492,7 +662,7 @@ export function Menu(_context) {
               </a>
             </li>
             <li>
-              <a href="">
+              <a href="/en-US/plus/ai-help">
                 <svg
                   width="24"
                   height="24"
@@ -507,7 +677,7 @@ export function Menu(_context) {
               </a>
             </li>
             <li>
-              <a href="">
+              <a href="/en-US/plus/updates">
                 <svg
                   width="24"
                   height="24"
@@ -531,7 +701,7 @@ export function Menu(_context) {
         <div class="menu__content-full">
           <ul class="menu__content-featured">
             <li>
-              <a href="">
+              <a href="/en-US/about">
                 <svg
                   width="24"
                   height="24"
@@ -546,7 +716,7 @@ export function Menu(_context) {
               </a>
             </li>
             <li>
-              <a href="">
+              <a href="/en-US/community">
                 <svg
                   width="24"
                   height="24"
@@ -561,7 +731,7 @@ export function Menu(_context) {
               </a>
             </li>
             <li>
-              <a href="">
+              <a href="/en-US/advertising">
                 <svg
                   width="24"
                   height="24"

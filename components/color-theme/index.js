@@ -1,77 +1,15 @@
-import { LitElement, css, html } from "lit";
+import { LitElement, html } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin";
 
-import dark from "../icon/moon.svg?mdnsvg";
-import light from "../icon/sun.svg?mdnsvg";
-import osDefault from "../icon/theme.svg?mdnsvg";
+import dark from "../icon/moon.svg?lit";
+import light from "../icon/sun.svg?lit";
+import osDefault from "../icon/theme.svg?lit";
+
+import styles from "./index.css?lit";
 
 export class ColorTheme extends L10nMixin(LitElement) {
-  static styles = css`
-    .color-theme {
-      position: relative;
-    }
-
-    .color-theme__button {
-      margin: 0;
-      padding: 0.5rem;
-      display: flex;
-      align-items: center;
-      column-gap: 0.25rem;
-      border: none;
-      background-color: transparent;
-      color: inherit;
-      font: inherit;
-
-      &:is(:hover, :focus),
-      &[aria-expanded="true"] {
-        background-color: var(--background-secondary);
-      }
-    }
-
-    .color-theme__dropdown {
-      position: absolute;
-      z-index: 1;
-      margin: 0;
-      padding: 0.75rem;
-      width: max-content;
-      border: 1px solid var(--text-secondary);
-      background-color: var(--background-primary);
-
-      &[data-side="left"] {
-        right: 0;
-      }
-
-      &[data-side="right"] {
-        left: 0;
-      }
-    }
-
-    .color-theme__list {
-      margin: 0;
-      padding: 0;
-      width: max-content;
-      background-color: var(--background-primary);
-      list-style: none;
-    }
-
-    .color-theme__option {
-      display: flex;
-      align-items: center;
-      column-gap: 0.25rem;
-      margin: 0;
-      padding: 0.25rem;
-      width: 100%;
-      border: none;
-      background-color: transparent;
-      color: var(--text-secondary);
-      font: inherit;
-
-      &:hover {
-        background-color: var(--background-secondary);
-      }
-    }
-  `;
+  static styles = styles;
 
   static properties = {
     ...super.properties,
@@ -80,11 +18,11 @@ export class ColorTheme extends L10nMixin(LitElement) {
 
   constructor() {
     super();
-    this._mode = undefined;
+    this._mode = null;
   }
 
   firstUpdated() {
-    let mode;
+    let mode = null;
     try {
       mode = localStorage.getItem("theme");
     } catch (error) {
