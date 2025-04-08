@@ -2,6 +2,7 @@
 
 button,
 .button {
+  /* Reset. */
   appearance: none;
   background: none;
   border: none;
@@ -37,15 +38,15 @@ button,
     --focus-effect,
     0 0 0 3px var(--accent-primary-engage, #0085f21a)
   );
+  --button-gap--default: 0.25rem;
   --button-height--default: var(--form-elem-height, 2rem);
   --button-padding--default: 0.5rem;
   --button-radius--default: var(--elem-radius, 0.25rem);
 
   /* Layout. */
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
+  place-items: center;
+  gap: var(--button-gap, var(--button-gap--default));
   padding: 0 var(--button-padding, var(--button-padding--default));
   height: var(--button-height, var(--button-height--default));
 
@@ -62,20 +63,6 @@ button,
 }
 
 /* Button States */
-
-.button:hover,
-.button.hover {
-  /* In most cases, we want the border to be the same color as the background. */
-  --button-border-color: var(
-    --button-bg-hover,
-    var(--button-bg, var(--button-bg-hover--default))
-  );
-
-  background-color: var(
-    --button-bg-hover,
-    var(--button-bg, var(--button-bg-hover--default))
-  );
-}
 
 .button:active,
 .button.active {
@@ -94,8 +81,22 @@ button,
   box-shadow: var(--button-focus-effect, var(--button-focus-effect--default));
 }
 
-.button.button[disabled],
-.button.button.inactive {
+.button:hover,
+.button.hover {
+  /* In most cases, we want the border to be the same color as the background. */
+  --button-border-color: var(
+    --button-bg-hover,
+    var(--button-bg, var(--button-bg-hover--default))
+  );
+
+  background-color: var(
+    --button-bg-hover,
+    var(--button-bg, var(--button-bg-hover--default))
+  );
+}
+
+.button[disabled],
+.button.disabled {
   cursor: default;
   opacity: 0.65;
 
