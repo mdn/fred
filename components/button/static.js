@@ -11,7 +11,7 @@ import "./global.css";
  */
 export function Button({ label, icon, disabled = false, href }) {
   return href
-    ? html`<a class="button">
+    ? html`<a class="button" href=${href}>
         ${icon ? html`<span class="icon">${icon}</span>` : nothing} ${label}
       </a>`
     : html`<button ?disabled=${disabled} class="button">
