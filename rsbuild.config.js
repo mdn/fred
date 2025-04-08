@@ -10,7 +10,7 @@ export default defineConfig({
       output: {
         manifest: true,
         target: "web",
-        emitCss: true,
+        emitCss: false,
         distPath: {
           root: "dist/client",
         },

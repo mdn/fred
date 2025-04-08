@@ -1,8 +1,8 @@
-import { LitElement, css, html } from "lit";
+import "../button/element.js";
+
+import { LitElement, html } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin";
-import buttonStyles from "../button/index.css?lit";
-import { Button } from "../button/index.js";
 
 import thumbsDown from "../icon/thumbs_down.svg?lit";
 import thumbsUp from "../icon/thumbs_up.svg?lit";
@@ -32,10 +32,7 @@ const FEEDBACK_REASONS_DE = {
 };
 
 export class ContentFeedback extends L10nMixin(LitElement) {
-  static styles = css`
-    ${styles}
-    ${buttonStyles}
-  `;
+  static styles = styles;
 
   static properties = {
     locale: { type: String },
@@ -52,12 +49,15 @@ export class ContentFeedback extends L10nMixin(LitElement) {
   }
 
   /**
-   * @param {boolean} value
+   * @param {MouseEvent} event
    */
-  _handleVote(value) {
-    this._view = value ? "thanks" : "feedback";
-    // Reusing Thumbs' key to be able to reuse queries.
-    // FIXME gleanClick(`${THUMBS}: ${ARTICLE_FOOTER} -> ${Number(value)}`);
+  _handleVote({ target }) {
+    if (target instanceof HTMLElement) {
+      const vote = target.dataset.vote;
+      this._view = vote === "yes" ? "thanks" : "feedback";
+      // Reusing Thumbs' key to be able to reuse queries.
+      // FIXME gleanClick(`${THUMBS}: ${ARTICLE_FOOTER} -> ${Number(value)}`);
+    }
   }
 
   _handleFeedback() {
@@ -72,18 +72,20 @@ export class ContentFeedback extends L10nMixin(LitElement) {
         )`Was this page helpful to you?`}
       </label>
       <div class="content-feedback--buttons">
-        ${Button({
-          extraClasses: "yes",
-          handleClick: () => this._handleVote(true),
-          icon: thumbsUp,
-          label: this.l10n`Yes`,
-        })}
-        ${Button({
-          extraClasses: "no",
-          handleClick: () => this._handleVote(false),
-          icon: thumbsDown,
-          label: this.l10n`No`,
-        })}
+        <mdn-button
+          data-vote="yes"
+          @click=${this._handleVote}
+          .icon=${thumbsUp}
+        >
+          ${this.l10n`Yes`}
+        </mdn-button>
+        <mdn-button
+          data-vote="no"
+          @click=${this._handleVote}
+          .icon=${thumbsDown}
+        >
+          ${this.l10n`No`}
+        </mdn-button>
       </div>`;
   }
 
@@ -118,13 +120,13 @@ export class ContentFeedback extends L10nMixin(LitElement) {
           </div>`,
       )}
       <div class="button-container">
-        ${Button({
-          type: "button",
-          extraClasses: "primary",
-          disabled: !this._reason,
-          handleClick: this._handleFeedback,
-          label: this.l10n`Submit`,
-        })}
+        <mdn-button
+          class="primary"
+          @click=${this._handleFeedback}
+          ?disabled=${!this._reason}
+        >
+          ${this.l10n`Submit`}
+        </mdn-button>
       </div>`;
   }
 
