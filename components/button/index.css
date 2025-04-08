@@ -25,6 +25,10 @@ button,
     --button-primary-default,
     light-dark(#1d1d1d, #ffffff)
   );
+  --button-color--default: var(
+    --background-primary,
+    light-dark(#ffffff, #1b1b1b)
+  );
   --button-focus-border-color--default: var(
     --button-secondary-border-focus,
     #0085f2
@@ -34,11 +38,6 @@ button,
     0 0 0 3px var(--accent-primary-engage, #0085f21a)
   );
   --button-height--default: var(--form-elem-height, 2rem);
-  --button-color--default: var(
-    --background-primary,
-    light-dark(#ffffff, #1b1b1b)
-  );
-
   --button-padding--default: 0.5rem;
   --button-radius--default: var(--elem-radius, 0.25rem);
 
