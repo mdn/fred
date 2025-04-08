@@ -16,13 +16,6 @@
     margin-bottom: calc(2.75rem + 2px);
   }
 
-  .content-feedback--buttons {
-    /* Ensure both buttons take minimal width. */
-    display: inline-flex;
-    gap: 0.75rem;
-    margin: 0.25rem 0;
-  }
-
   .button {
     /* Ensure both buttons have same size. */
     flex: 1;
@@ -48,11 +41,18 @@
       --button-bg-hover: var(--text-primary-red, light-dark(#d30038, #ff97a0));
     }
   }
+}
 
-  .content-feedback--radios {
-    align-items: center;
-    display: flex;
-    gap: 0.25rem;
-    margin: 0.25rem 0;
-  }
+.content-feedback--buttons {
+  /* Ensure both buttons take minimal width. */
+  display: inline-flex;
+  gap: 0.75rem;
+  margin: 0.25rem 0;
+}
+
+.content-feedback--radios {
+  align-items: center;
+  display: flex;
+  gap: 0.25rem;
+  margin: 0.25rem 0;
 }

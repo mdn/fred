@@ -19,22 +19,22 @@
     margin-left: 1rem;
     margin-right: 1rem;
   }
+}
 
-  .article-footer__inner {
-    margin: 0 auto;
-    max-width: 1440px;
-    width: 100%;
+.article-footer__inner {
+  margin: 0 auto;
+  max-width: 1440px;
+  width: 100%;
 
-    h2 {
-      margin-bottom: 0.5rem;
-      margin-top: 0;
-      padding: 0;
-    }
+  h2 {
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+    padding: 0;
+  }
 
-    .emoji {
-      /* Ensure emojis are shown in color. */
-      font-family: initial;
-    }
+  .emoji {
+    /* Ensure emojis are shown in color. */
+    font-family: initial;
   }
 }
 
