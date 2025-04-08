@@ -1,4 +1,4 @@
-.feedback {
+.article-footer--feedback {
   border: none;
   margin: 0;
   margin-bottom: 0.25rem;
@@ -14,7 +14,7 @@
     margin-bottom: calc(2.75rem + 2px);
   }
 
-  .button-container {
+  .article-footer--feedback-buttons {
     /* Ensure both buttons take minimal width. */
     display: inline-flex;
     gap: 0.75rem;
@@ -44,7 +44,7 @@
     }
   }
 
-  .radio-container {
+  .article-footer--feedback-radios {
     align-items: center;
     display: flex;
     gap: 0.25rem;

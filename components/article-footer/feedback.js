@@ -71,7 +71,7 @@ export class ArticleFooterFeedback extends L10nMixin(LitElement) {
           "article_footer_feedback_question",
         )`Was this page helpful to you?`}
       </label>
-      <div class="button-container">
+      <div class="article-footer--feedback-buttons">
         ${Button({
           extraClasses: "yes",
           handleClick: () => this._handleVote(true),
@@ -105,7 +105,7 @@ export class ArticleFooterFeedback extends L10nMixin(LitElement) {
         this.locale === "de" ? FEEDBACK_REASONS_DE : FEEDBACK_REASONS,
       ).map(
         ([key, label]) =>
-          html`<div class="radio-container">
+          html`<div class="article-footer--feedback-radios">
             <input
               type="radio"
               id=${`reason_${key}`}
@@ -152,7 +152,7 @@ export class ArticleFooterFeedback extends L10nMixin(LitElement) {
   }
 
   render() {
-    return html`<fieldset class="feedback">
+    return html`<fieldset class="article-footer--feedback">
       ${this._renderInner(this._view)}
     </fieldset>`;
   }
