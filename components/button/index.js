@@ -25,8 +25,6 @@ export function Button({
     class=${`button ${extraClasses}`.trim()}
     @click=${ifDefined(handleClick)}
   >
-    <span class="button-wrap">
-      ${icon ? html`<span class="icon">${icon}</span>` : nothing} ${label}
-    </span>
+    ${icon ? html`<span class="icon">${icon}</span>` : nothing} ${label}
   </button>`;
 }

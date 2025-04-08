@@ -8,7 +8,7 @@ button,
 }
 
 .button {
-  /* Defaults: */
+  /* Defaults. */
   --button-bg--default: var(
     --button-primary-default,
     light-dark(#1b1b1b, #ffffff)
@@ -39,34 +39,27 @@ button,
     light-dark(#ffffff, #1b1b1b)
   );
 
-  /* --button-font: var(--type-emphasis-m); */
   --button-padding--default: 0.5rem;
   --button-radius--default: var(--elem-radius, 0.25rem);
 
-  border-radius: var(--button-radius, var(--button-radius--default));
-
-  cursor: pointer;
-  display: inline-block;
-  padding: 0;
-  text-decoration: none;
-}
-
-.button-wrap {
+  /* Layout. */
+  display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0 var(--button-padding, var(--button-padding--default));
+  height: var(--button-height, var(--button-height--default));
+
+  /* Visual. */
   background-color: var(--button-bg, var(--button-bg--default));
   border: 1px solid
     var(--button-border-color, var(--button-border-color--default));
   border-radius: var(--button-radius, var(--button-radius--default));
   color: var(--button-color, var(--button-color--default));
-  display: flex;
+  text-decoration: none;
 
-  /* font: var(--button-font); */
-  gap: 0.25rem;
-  height: var(--button-height, var(--button-height--default));
-  justify-content: center;
-  padding-left: var(--button-padding, var(--button-padding--default));
-  padding-right: var(--button-padding, var(--button-padding--default));
-  position: relative;
+  /* Interactivity. */
+  cursor: pointer;
 }
 
 /* Button States */
@@ -79,36 +72,27 @@ button,
     var(--button-bg, var(--button-bg-hover--default))
   );
 
-  .button-wrap {
-    background-color: var(
-      --button-bg-hover,
-      var(--button-bg, var(--button-bg-hover--default))
-    );
-  }
+  background-color: var(
+    --button-bg-hover,
+    var(--button-bg, var(--button-bg-hover--default))
+  );
 }
 
 .button:active,
 .button.active {
-  .button-wrap {
-    background-color: var(
-      --button-bg-active,
-      var(--button-bg, var(--button-bg-active--default))
-    );
-  }
+  background-color: var(
+    --button-bg-active,
+    var(--button-bg, var(--button-bg-active--default))
+  );
 }
 
 .button:focus,
 .button.focus {
   outline: none;
 
-  .button-wrap {
-    border: 1px solid
-      var(
-        --button-focus-border-color,
-        var(--button-focus-border-color--default)
-      );
-    box-shadow: var(--button-focus-effect, var(--button-focus-effect--default));
-  }
+  border: 1px solid
+    var(--button-focus-border-color, var(--button-focus-border-color--default));
+  box-shadow: var(--button-focus-effect, var(--button-focus-effect--default));
 }
 
 .button.button[disabled],
