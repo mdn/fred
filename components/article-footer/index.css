@@ -1,30 +1,10 @@
 /** Article footer. */
 
 .article-footer {
-  --article-footer-background: var(
-    --background-secondary,
-    light-dark(#f9f9f9, #313131)
-  );
-  --article-footer-border-color: var(
-    --border-primary,
-    light-dark(#cdcdcd, #858585)
-  );
-  --article-footer-border-radius: var(--elem-radius, 0.25rem);
-  --article-footer-box-shadow: var(--shadow-01, 0 1px 2px #2b2a330d);
-  --article-footer-color: var(--text-primary, light-dark(#1b1b1b, #ffffff));
-  --article-footer-color-yes: var(
-    --text-primary-green,
-    light-dark(#007936, #00d061)
-  );
-  --article-footer-color-no: var(
-    --text-primary-red,
-    light-dark(#d30038, #ff97a0)
-  );
-
-  background-color: var(--article-footer-background);
-  border: 1px solid var(--article-footer-border-color);
-  border-radius: var(--article-footer-border-radius);
-  box-shadow: var(--article-footer-box-shadow);
+  background-color: var(--background-secondary, light-dark(#f9f9f9, #313131));
+  border: 1px solid var(--border-primary, light-dark(#cdcdcd, #858585));
+  border-radius: var(--elem-radius, 0.25rem);
+  box-shadow: var(--shadow-01, 0 1px 2px #2b2a330d);
   margin: 0;
   padding: 1rem;
 
