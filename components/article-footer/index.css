@@ -20,22 +20,10 @@
     margin-right: 1rem;
   }
 
-  .article-footer-inner {
+  .article-footer__inner {
     margin: 0 auto;
     max-width: 1440px;
     width: 100%;
-
-    .svg-container {
-      position: relative;
-
-      svg {
-        height: auto;
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 20%;
-      }
-    }
 
     h2 {
       margin-bottom: 0.5rem;
@@ -43,18 +31,30 @@
       padding: 0;
     }
 
-    .contribute {
-      margin-top: 0.25rem;
-    }
-
-    .last-modified-date {
-      margin-bottom: 0;
-      margin-top: 2rem;
-    }
-
     .emoji {
       /* Ensure emojis are shown in color. */
       font-family: initial;
     }
   }
+}
+
+.article-footer__svg-container {
+  position: relative;
+
+  svg {
+    height: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20%;
+  }
+}
+
+.article-footer__contribute {
+  margin-top: 0.25rem;
+}
+
+.article-footer__last-modified {
+  margin-bottom: 0;
+  margin-top: 2rem;
 }

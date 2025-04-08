@@ -16,12 +16,11 @@ export function ArticleFooter(context) {
   }
 
   return html`<aside class="article-footer">
-    <div class="article-footer-inner">
-      <div class="svg-container">${svg}</div>
+    <div class="article-footer__inner">
+      <div class="article-footer__svg-container">${svg}</div>
       <h2 id="article_footer">${context.l10n`Help improve MDN`}</h2>
       <mdn-content-feedback locale=${context.locale}></mdn-content-feedback>
-      ${ContributeLink(context)} ${LastModified(context)}
-      ${GitHubLinks(context)}
+      ${Contribute(context)} ${LastModified(context)} ${Links(context)}
     </div>
   </aside>`;
 }
@@ -29,9 +28,9 @@ export function ArticleFooter(context) {
 /**
  * @param {Fred.Context<Rari.DocPage>} context
  */
-function ContributeLink(context) {
+function Contribute(context) {
   return html`<a
-    class="contribute"
+    class="article-footer__contribute"
     href="https://github.com/mdn/content/blob/main/CONTRIBUTING.md"
     title=${context.l10n`This will take you to our contribution guidelines on GitHub.`}
     target="_blank"
@@ -57,7 +56,7 @@ function LastModified(context) {
     day: "numeric",
   });
 
-  return html`<p class="last-modified-date">
+  return html`<p class="article-footer__last-modified">
     ${context.l10n.raw({
       id: "article_footer_last_modified",
       args: {
@@ -80,8 +79,8 @@ function LastModified(context) {
 /**
  * @param {Fred.Context<Rari.DocPage>} context
  */
-function GitHubLinks(context) {
-  return html`<div id="on-github" class="on-github">
+function Links(context) {
+  return html`<div class="article-footer__links">
     ${GitHubSourceLink(context)} • ${GitHubIssueLink(context)}
   </div>`;
 }
