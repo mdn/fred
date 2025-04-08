@@ -3,7 +3,6 @@ import { html } from "lit";
 import svg from "./article-footer.svg?lit";
 
 import "./index.css";
-import "../content-feedback/index.js";
 
 /**
  * @param {Fred.Context<Rari.DocPage>} context
