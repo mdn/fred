@@ -49,7 +49,7 @@ function PostPreview(context, blogMeta) {
       ${blogMeta.sponsored
         ? html`<span className="sponsored">Sponsored</span>`
         : nothing}
-      ${Button({ label: "Read more →", href: "./${blogMeta.slug}/" })}
+      ${Button({ label: "Read more →", href: `./${blogMeta.slug}/` })}
     </footer>
   </article>`;
 }
