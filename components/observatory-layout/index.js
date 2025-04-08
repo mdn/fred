@@ -9,7 +9,7 @@ import { Results } from "../../observatory/results/index";
  */
 
 /**
- * @param {Fred.Context<Rari.SPAPage>} context
+ * @param {Fred.Context<Rari.SpaPage>} context
  * @returns {TemplateResult}
  */
 export function ObservatoryLayoutLanding(context) {
@@ -23,7 +23,7 @@ export function ObservatoryLayoutLanding(context) {
 }
 
 /**
- * @param {Fred.Context<Rari.SPAPage>} context
+ * @param {Fred.Context<Rari.SpaPage>} context
  * @returns {TemplateResult}
  */
 export function ObservatoryLayoutResult(context) {
