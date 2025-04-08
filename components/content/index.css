@@ -3,54 +3,64 @@
 
   h1 {
     margin-block-start: 0;
-    font-weight: 450;
+
     font-size: 2.5rem;
+    font-weight: 450;
   }
 
   h2 {
-    font-weight: 450;
     font-size: 2rem;
+    font-weight: 450;
   }
 
   h3 {
-    font-weight: 400;
     font-size: 1.5rem;
+    font-weight: 400;
   }
 
   code {
     padding: 0.125em 0.25em;
-    border-radius: 0.25em;
-    background-color: var(--background-secondary-alpha);
-    font-size-adjust: 0.5;
+
     font-family: var(--font-code);
+    font-size-adjust: 0.5;
+
+    background-color: var(--background-secondary-alpha);
+    border-radius: 0.25em;
   }
 
   pre {
-    overflow: auto;
     padding: 1rem;
-    border-radius: 0.25em;
+
+    overflow: auto;
+
     background-color: var(--background-secondary);
+    border-radius: 0.25em;
 
     code {
       padding: 0;
+
       background-color: unset;
     }
   }
 
   table {
     width: 100%;
+
     border-collapse: collapse;
 
     th,
     td {
       padding: 0.5rem 0.75rem;
+
       border: 1px solid var(--text-secondary);
     }
 
     th {
-      background-color: var(--background-secondary);
-      text-align: left;
       font-weight: normal;
+
+      text-align: left;
+
+      background-color: var(--background-secondary);
     }
   }
 }

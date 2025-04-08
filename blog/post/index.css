@@ -1,14 +1,17 @@
 .blog-post__main {
-  padding-inline: calc(
-    (100% - 1440px + (var(--navigation-side-padding) * 2)) / 2
-  );
-
   display: grid;
-  gap: 3rem;
+
   grid-template-areas:
     "post"
     "newsletter";
+
+  gap: 3rem;
+
   width: 100%;
+
+  padding-inline: calc(
+    (100% - 1440px + (var(--navigation-side-padding) * 2)) / 2
+  );
 
   @media (width >= 992px) {
     grid-template-areas:
@@ -41,26 +44,34 @@
 
 .blog-post__sidebar {
   --offset: var(--sticky-header-height);
-  grid-area: toc;
   display: none;
 
+  grid-area: toc;
+
   .blog-toc__header h2 {
-    font: var(--type-heading-h5);
-    letter-spacing: 1.5px;
     margin: 0 0 1rem;
+
+    font: var(--type-heading-h5);
+
+    letter-spacing: 1.5px;
   }
 
   .blog-toc {
-    margin-top: 0;
     position: sticky;
     top: var(--offset);
+
     max-height: calc(100vh - var(--offset));
+
+    margin-top: 0;
+
     overflow: auto;
   }
 
   @media (width >= 992px) {
     display: flex;
+
     flex-direction: column;
+
     grid-area: toc;
 
     .blog-toc {
@@ -72,8 +83,10 @@
     display: contents;
 
     .blog-toc {
-      height: max-content;
       position: sticky;
+      top: var(--offset);
+
+      height: max-content;
 
       /* mask-image: linear-gradient(
         to bottom,
@@ -82,12 +95,13 @@
         rgba(0, 0, 0, 0) 100%
       ); */
       max-height: calc(100vh - var(--offset));
+
       overflow: auto;
-      top: var(--offset);
     }
 
     .place.side {
       grid-area: place;
+
       margin-top: 0;
 
       > .pong-box2,
@@ -99,19 +113,25 @@
 }
 
 .blog-toc__entries {
-  font-size: var(--type-smaller-font-size);
-  list-style: none;
   padding-left: 0;
+
+  font-size: var(--type-smaller-font-size);
+
+  list-style: none;
 }
 
 .blog-toc__entry {
   margin: 0;
 
   :not(.button) {
-    border-left: 2px solid var(--border-secondary);
-    color: var(--text-secondary);
     display: inline-block;
+
     padding: 0.5rem 1rem;
+
+    color: var(--text-secondary);
+
     text-decoration: none;
+
+    border-left: 2px solid var(--border-secondary);
   }
 }

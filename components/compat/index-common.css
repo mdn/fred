@@ -2,6 +2,7 @@
 
 table {
   display: grid;
+
   grid-auto-flow: row dense;
 
   thead {
@@ -11,6 +12,7 @@ table {
       th,
       td {
         display: grid;
+
         grid-template-columns: subgrid;
       }
     }
@@ -28,6 +30,7 @@ table {
 
         button {
           display: grid;
+
           grid-template-columns: subgrid;
         }
 
@@ -44,22 +47,26 @@ table {
 }
 
 .bc-table {
-  border: 1px solid var(--compat-border-primary);
-  border-collapse: separate;
-  border-radius: var(--compat-elem-radius);
-  border-spacing: 0;
-  margin: 0;
   width: 100%;
+
+  margin: 0;
+
+  border-spacing: 0;
+  border-collapse: separate;
+
+  border: 1px solid var(--compat-border-primary);
+  border-radius: var(--compat-elem-radius);
 
   td,
   th {
-    border: 1px solid var(--compat-border-secondary);
-    border-width: 0 0 1px 1px;
+    padding: 0;
+    padding: 0.4rem;
 
     font-size: var(--compat-type-smaller-font-size);
     font-weight: 500;
-    padding: 0;
-    padding: 0.4rem;
+
+    border: 1px solid var(--compat-border-secondary);
+    border-width: 0 0 1px 1px;
 
     code {
       font-size: var(--compat-type-smaller-font-size);
@@ -67,13 +74,16 @@ table {
   }
 
   th {
-    background: var(--compat-background-primary);
     padding: 0.4rem;
+
     vertical-align: bottom;
+
+    background: var(--compat-background-primary);
   }
 
   thead {
     line-height: 1;
+
     white-space: nowrap;
   }
 
@@ -96,8 +106,9 @@ table {
       }
 
       th {
-        border-left-width: 0;
         vertical-align: middle;
+
+        border-left-width: 0;
       }
     }
 
@@ -105,8 +116,9 @@ table {
       vertical-align: top;
 
       button {
-        cursor: pointer;
         width: 100%;
+
+        cursor: pointer;
       }
 
       &.bc-supports-no > button > span {
@@ -143,17 +155,23 @@ table {
 
   .icon-wrap {
     .bc-support-level {
+      position: absolute !important;
+
+      width: 1px !important;
+      height: 1px !important;
+
+      padding: 0 !important;
+      margin: -1px !important;
+
+      overflow: hidden !important;
+
+      white-space: nowrap !important;
+
       /* visually-hidden */
       border: 0 !important;
+
       clip: rect(1px, 1px, 1px, 1px) !important;
       clip-path: inset(50%) !important;
-      height: 1px !important;
-      margin: -1px !important;
-      overflow: hidden !important;
-      padding: 0 !important;
-      position: absolute !important;
-      white-space: nowrap !important;
-      width: 1px !important;
     }
   }
 
@@ -171,6 +189,7 @@ table {
 
     .timeline .icon.icon-removed-partial {
       background-color: var(--compat-icon-primary);
+
       mask-image: url("./icons/partial.svg");
     }
   }
@@ -182,15 +201,20 @@ table {
   }
 
   .bc-feature {
-    align-items: center;
-    border: none;
     display: flex;
-    text-align: left;
+
+    align-items: center;
+
     width: 100%;
 
+    text-align: left;
+
+    border: none;
+
     > * {
-      border: none !important;
       flex-basis: max-content;
+
+      border: none !important;
     }
   }
 
@@ -213,15 +237,19 @@ table {
 
 .bc-head-txt-label {
   line-height: 1;
-  text-orientation: sideways;
-  transform: rotate(180deg);
+
   white-space: nowrap;
+
   writing-mode: vertical-rl;
+
+  transform: rotate(180deg);
+  text-orientation: sideways;
 }
 
 .bc-support {
-  text-align: center;
   vertical-align: middle;
+
+  text-align: center;
 }
 
 .bc-level-no {
@@ -234,24 +262,30 @@ table {
 
 .bc-legend-items-container {
   display: flex;
+
   flex-wrap: wrap;
-  font-size: var(--compat-type-smaller-font-size);
+
   gap: 1.5rem;
+
   margin-bottom: 2rem;
+
+  font-size: var(--compat-type-smaller-font-size);
 }
 
 .bc-legend-tip {
-  font-size: var(--compat-type-smaller-font-size);
-  font-style: italic;
-  font-variation-settings: "slnt" -10;
-  margin-bottom: 1rem;
   margin-top: 0;
+  margin-bottom: 1rem;
+
+  font-size: var(--compat-type-smaller-font-size);
+  font-variation-settings: "slnt" -10;
+  font-style: italic;
 }
 
 .bc-legend-item {
-  align-items: center;
   display: flex;
+
   gap: 0.5rem;
+  align-items: center;
 }
 
 .bc-legend-item-dt {
@@ -265,8 +299,9 @@ table {
 /* Row with desktop / mobile icons. */
 .bc-platforms {
   th {
-    align-items: center;
     display: flex;
+
+    align-items: center;
     justify-content: center;
   }
 
@@ -278,11 +313,14 @@ table {
 /* Row with browser names. */
 .bc-browsers {
   th {
-    align-items: center;
     display: flex;
+
     flex-direction: column;
+
     gap: 0.25rem;
+    align-items: center;
     justify-content: end;
+
     vertical-align: bottom;
   }
 
@@ -292,20 +330,27 @@ table {
 }
 
 .bc-notes-list {
-  margin: 0.5rem 0;
   position: relative;
-  text-align: left;
+
   width: 100%;
 
+  margin: 0.5rem 0;
+
+  text-align: left;
+
   &::before {
-    background: var(--compat-border-primary);
-    content: "";
-    height: calc(100% - 0.25rem);
-    left: 7px;
-    margin-top: 0.25rem;
     position: absolute;
-    width: 2px;
+    left: 7px;
     z-index: -1;
+
+    width: 2px;
+    height: calc(100% - 0.25rem);
+
+    margin-top: 0.25rem;
+
+    content: "";
+
+    background: var(--compat-border-primary);
   }
 
   /* complicated selector to cover the last bit of the grey line above. */
@@ -313,20 +358,24 @@ table {
     position: relative;
 
     &::before {
-      background: var(--compat-background-primary);
-      bottom: 0;
-      content: "";
-      height: calc(100% - 6px);
-      left: 7px;
       position: absolute;
-      width: 2px;
+      bottom: 0;
+      left: 7px;
       z-index: -1;
+
+      width: 2px;
+      height: calc(100% - 6px);
+
+      content: "";
+
+      background: var(--compat-background-primary);
     }
   }
 
   .bc-level-yes.icon.icon-yes {
     /* override icon */
     background-color: var(--compat-icon-success);
+
     mask-image: url("./icons/yes-circle.svg");
   }
 
@@ -335,6 +384,7 @@ table {
       background: var(--compat-border-primary);
       border: 3px solid var(--compat-background-primary);
       border-radius: 50%;
+
       mask-image: none;
     }
   }
@@ -345,12 +395,14 @@ table {
 
   abbr {
     margin-right: 4px;
+
     text-decoration: none;
   }
 
   dd {
-    margin-bottom: 1rem;
     padding-left: 1.5rem;
+    margin-bottom: 1rem;
+
     text-indent: -1.5rem;
 
     &:last-child {
@@ -360,8 +412,9 @@ table {
 }
 
 .bc-notes-wrapper {
-  color: var(--compat-text-primary);
   margin-bottom: 1rem;
+
+  color: var(--compat-text-primary);
 
   &:last-child {
     margin-bottom: 0;
@@ -387,23 +440,31 @@ dl.bc-notes-list {
 }
 
 .only-icon span {
+  position: absolute !important;
+
+  width: 1px !important;
+  height: 1px !important;
+
+  padding: 0 !important;
+  margin: -1px !important;
+
+  overflow: hidden !important;
+
+  white-space: nowrap !important;
+
   /* visually-hidden */
   border: 0 !important;
+
   clip: rect(1px, 1px, 1px, 1px) !important;
   clip-path: inset(50%) !important;
-  height: 1px !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  padding: 0 !important;
-  position: absolute !important;
-  white-space: nowrap !important;
-  width: 1px !important;
 }
 
 .bc-table-row-header {
-  padding: 0.25em;
-  text-align: left;
   width: 100%;
+
+  padding: 0.25em;
+
+  text-align: left;
 
   code {
     overflow: hidden;
@@ -411,8 +472,11 @@ dl.bc-notes-list {
 
   .bc-icons {
     display: inline-flex;
+
     gap: 0.5ch;
+
     margin-left: 0.5ch;
+
     vertical-align: text-top;
 
     .icon {
@@ -433,9 +497,9 @@ dl.bc-notes-list {
   .bc-legend {
     dd,
     dt {
+      margin-top: 0;
       margin-bottom: 0;
       margin-left: 0;
-      margin-top: 0;
     }
   }
 

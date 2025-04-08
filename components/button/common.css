@@ -4,6 +4,7 @@ button,
 .button {
   /* Reset. */
   appearance: none;
+
   background: none;
   border: none;
 }
@@ -45,22 +46,27 @@ button,
 
   /* Layout. */
   display: flex;
-  place-items: center;
+
   gap: var(--button-gap, var(--button-gap--default));
-  padding: 0 var(--button-padding, var(--button-padding--default));
-  height: var(--button-height, var(--button-height--default));
+  place-items: center;
+
   width: fit-content;
+  height: var(--button-height, var(--button-height--default));
+
+  padding: 0 var(--button-padding, var(--button-padding--default));
+
+  color: var(--button-color, var(--button-color--default));
+
+  text-decoration: none;
+
+  /* Interactivity. */
+  cursor: pointer;
 
   /* Visual. */
   background-color: var(--button-bg, var(--button-bg--default));
   border: 1px solid
     var(--button-border-color, var(--button-border-color--default));
   border-radius: var(--button-radius, var(--button-radius--default));
-  color: var(--button-color, var(--button-color--default));
-  text-decoration: none;
-
-  /* Interactivity. */
-  cursor: pointer;
 }
 
 /* Button States */
@@ -99,6 +105,7 @@ button,
 .button[disabled],
 .button.disabled {
   cursor: default;
+
   opacity: 0.65;
 
   &:hover {

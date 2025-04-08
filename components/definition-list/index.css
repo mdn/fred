@@ -1,5 +1,6 @@
 /* border for nested dls */
 .definition-list dl dl {
   padding-left: 20px;
+
   border-left: 2px solid var(--background-secondary);
 }

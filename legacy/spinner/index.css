@@ -1,20 +1,27 @@
 .spinner {
-  display: inline-block;
-  height: 1rem;
   position: relative;
+
+  display: inline-block;
+
   width: 1rem;
+  height: 1rem;
 
   div {
-    animation: spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    position: absolute;
+
+    box-sizing: border-box;
+    display: block;
+
+    width: 0.8rem;
+    height: 0.8rem;
+
+    margin: 0.1rem;
+
     border: 0.1rem solid var(--text-primary);
     border-color: var(--text-primary) transparent transparent transparent;
     border-radius: 50%;
-    box-sizing: border-box;
-    display: block;
-    height: 0.8rem;
-    margin: 0.1rem;
-    position: absolute;
-    width: 0.8rem;
+
+    animation: spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   }
 
   div:nth-child(1) {

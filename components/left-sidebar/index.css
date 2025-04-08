@@ -1,12 +1,14 @@
 .left-sidebar {
   h4 {
     margin: 0;
-    font-weight: normal;
+
     font-size: 1.5rem;
+    font-weight: normal;
   }
 
   summary {
     padding: 0.75rem 1rem;
+
     cursor: pointer;
 
     &:hover {
@@ -15,18 +17,23 @@
   }
 
   ol {
-    margin: 0;
     padding: 0;
+    margin: 0;
+
     list-style: none;
   }
 
   a {
     display: inline flex;
-    align-items: baseline;
+
     column-gap: 0.5rem;
+    align-items: baseline;
+
     padding: 0.75rem 1rem;
-    text-decoration: none;
+
     color: var(--text-primary);
+
+    text-decoration: none;
 
     &:hover {
       color: var(--link-normal);
@@ -34,8 +41,9 @@
 
     &[aria-current="true"] {
       display: flex;
-      border-left: 2px solid var(--blue);
+
       background-color: var(--background-blue);
+      border-left: 2px solid var(--blue);
     }
   }
 

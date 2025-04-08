@@ -1,9 +1,11 @@
 article.settings {
   display: block;
-  margin: auto;
-  max-width: 60em;
-  padding: 1rem;
+
   width: min(90vw, 40em);
+  max-width: 60em;
+
+  padding: 1rem;
+  margin: auto;
 
   h3 {
     margin-top: 0;
@@ -24,8 +26,10 @@ article.settings {
 
       li {
         display: grid;
-        gap: 0 1rem;
+
         grid-template-columns: 1fr 5em;
+
+        gap: 0 1rem;
 
         section {
           margin: 0.125rem 0;
@@ -38,9 +42,10 @@ article.settings {
         }
 
         .setting-row {
-          align-items: center;
           display: flex;
+
           gap: 1rem;
+          align-items: center;
           justify-content: space-between;
         }
 
@@ -57,36 +62,47 @@ article.settings {
         }
 
         span {
-          font-size: 0.8rem;
           grid-column: 1/2;
-          line-height: 1.2em;
+
           padding-top: 0.3em;
+
+          font-size: 0.8rem;
+
+          line-height: 1.2em;
         }
 
         .loading,
         .switch {
-          align-self: center;
-          grid-column: 2/3;
           grid-row: 1/3;
+          grid-column: 2/3;
+
+          align-self: center;
           justify-self: end;
         }
 
         button,
         .manage {
+          grid-row: 1/3;
+          grid-column: 2/3;
+
           align-self: center;
+          justify-self: end;
+
+          width: max-content;
+          min-width: 10rem;
+          height: max-content;
+
+          padding: 0.5rem 1rem;
+
+          font-size: 0.8rem;
+
+          color: var(--text-link);
+
+          text-align: center;
+
           background-color: var(--background-primary);
           border: 1px solid var(--text-primary);
           border-radius: var(--elem-radius);
-          color: var(--text-link);
-          font-size: 0.8rem;
-          grid-column: 2/3;
-          grid-row: 1/3;
-          height: max-content;
-          justify-self: end;
-          min-width: 10rem;
-          padding: 0.5rem 1rem;
-          text-align: center;
-          width: max-content;
 
           &:hover {
             background-color: var(--background-secondary);
@@ -94,9 +110,10 @@ article.settings {
         }
 
         button[disabled] {
+          color: var(--text-secondary);
+
           background-color: var(--background-secondary);
           border: 1px solid var(--text-secondary);
-          color: var(--text-secondary);
         }
       }
     }

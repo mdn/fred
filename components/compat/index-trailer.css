@@ -2,18 +2,23 @@
 
 .bcd-cell-text-wrapper {
   display: flex;
+
   flex-direction: row;
+
   gap: 0.5rem;
 
   @media (width >= /* $screen-sm */ 426px) {
-    align-items: center;
     flex-direction: column;
+
+    align-items: center;
   }
 }
 
 .bcd-timeline-cell-text-wrapper {
   display: flex;
+
   flex-direction: row;
+
   gap: 0.25rem;
 }
 
@@ -41,6 +46,7 @@
 
 .bcd-cell-icons {
   display: flex;
+
   gap: 0.5rem;
 
   @media (width >= /* $screen-sm */ 426px) {
@@ -51,10 +57,10 @@
 @media (width >= /* $screen-sm */ 426px) {
   .bc-table {
     td.bc-support > button {
+      padding-top: 0.5rem;
+      padding-right: 0.25rem;
       padding-bottom: calc(0.5rem + var(--compat-padding-bottom-offset, 0px));
       padding-left: 0.25rem;
-      padding-right: 0.25rem;
-      padding-top: 0.5rem;
     }
   }
 }

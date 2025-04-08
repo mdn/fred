@@ -10,16 +10,21 @@
 
 .blog-index__articles {
   display: grid;
-  column-gap: 2rem;
+
   grid-template-columns: 1fr 1fr;
+
+  column-gap: 2rem;
 }
 
 .blog-index__article {
+  display: grid;
+
+  grid-template-rows: subgrid;
+  grid-row: span 6;
+
+  padding: 2rem;
+  margin-top: 2rem;
+
   border: 1px solid var(--border-primary);
   border-radius: 1rem;
-  display: grid;
-  grid-row: span 6;
-  grid-template-rows: subgrid;
-  margin-top: 2rem;
-  padding: 2rem;
 }

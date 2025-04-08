@@ -6,10 +6,12 @@
 
   position: absolute;
   inset: 3rem 0 auto;
+
   margin-block-start: -1px;
+
+  background-color: var(--background-primary);
   border: 1px solid light-dark(var(--gray-4), var(--gray-6));
   border-radius: 2px;
-  background-color: var(--background-primary);
   box-shadow: 0 0 10px 1px hsl(0deg 0% 0% / 5%);
 }
 
@@ -31,10 +33,13 @@
 /* Title */
 
 .menu__panel-title {
-  margin: 0;
-  padding: 1.4rem;
-  font-weight: normal;
   grid-column: span 3;
+
+  padding: 1.4rem;
+  margin: 0;
+
+  font-weight: normal;
+
   background-color: var(--menu-panel-back);
 
   a {
