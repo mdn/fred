@@ -3,6 +3,7 @@
   "rules": {
     "color-hex-length": "long",
     "custom-property-empty-line-before": null,
+    "custom-property-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*(--default)?$",
     "declaration-block-no-redundant-longhand-properties": null,
     "declaration-empty-line-before": null,
     "no-descending-specificity": null,
