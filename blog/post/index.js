@@ -98,7 +98,6 @@ function PrevNextLinks(context, { blogMeta }) {
  * @returns {Lit.TemplateResult}
  */
 export function BlogPost(context) {
-  console.log("context", context);
   const { blogMeta, doc } = context;
 
   if (!blogMeta || !doc) {
