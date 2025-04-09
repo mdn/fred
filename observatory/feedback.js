@@ -9,7 +9,7 @@ export function Feedback(_context) {
     href="https://survey.alchemer.com/s3/7897385/MDN-HTTP-Observatory"
     target="_blank"
     rel="noopener"
-    class="feedback-link"
+    class="obs-links__link obs-links__link--feedback"
   >
     Report Feedback
   </a>`;

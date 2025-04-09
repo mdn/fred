@@ -14,7 +14,7 @@ import { Doc } from "./pages/doc/index.js";
 import { Generic } from "./pages/generic/index.js";
 import { HomePage } from "./pages/home/index.js";
 import {
-  ObservatoryBody,
+  ObservatoryLanding,
   ObservatoryResults,
 } from "./pages/observatory/index.js";
 import { Search } from "./pages/search/index.js";
@@ -87,7 +87,7 @@ export async function render(path, ssrManifest, clientManifest, page) {
         case "SpaObservatoryAnalyze":
           return ObservatoryResults(context);
         case "SpaObservatoryLanding":
-          return ObservatoryBody(context);
+          return ObservatoryLanding(context);
         case "SpaPlay":
           return PageLayout(context, "TODO: Playground");
         case "SpaPlusAiHelp":

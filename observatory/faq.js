@@ -9,7 +9,7 @@ export function FAQ(_context) {
     href="/en-US/observatory/docs/faq"
     target="_blank"
     rel="noopener"
-    class="feedback-link faq-link"
+    class="obs-links__link obs-links__link--faq"
   >
     Read our FAQ
   </a>`;
