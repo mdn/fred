@@ -1,5 +1,6 @@
 import { html } from "lit";
 
+import { BreadCrumbs } from "../../components/breadcrumbs/index.js";
 import { Footer } from "../../components/footer/index.js";
 import { Navigation } from "../../components/navigation/index.js";
 
@@ -19,7 +20,7 @@ export function ObservatoryLanding(context) {
   return html`
     <body class="page-layout">
       <header class="page-layout__header">
-        ${Navigation(context)} ${ObservatoryBreadCrumbs(context)}
+        ${Navigation(context)} ${BreadCrumbs(context)}
       </header>
       <div class="page-layout__main">${ObservatoryLayoutLanding(context)}</div>
       <div class="page-layout__footer">${Footer(context)}</div>
@@ -50,7 +51,7 @@ export function ObservatoryResults(context) {
  * @returns {Lit.TemplateResult}
  */
 export function ObservatoryBreadCrumbs(_context) {
-  const items = [{ title: "HTTP Observatory", uri: "/en-US/observatory/" }].map(
+  const items = [{ title: "HTTP Observatory", uri: "/en-US/observatory" }].map(
     ({ uri, title }) =>
       html`<a class="breadcrumbs__link" href=${uri}> ${title} </a>
         <svg
