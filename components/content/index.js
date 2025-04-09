@@ -1,4 +1,4 @@
-import { html, nothing } from "lit";
+import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
@@ -17,7 +17,7 @@ export function Content(context) {
   const { doc } = context;
   return html`<div class="content">
     <h1>${doc.title}</h1>
-    ${doc.baseline ? BaselineIndicator(doc.baseline) : nothing}
+    ${BaselineIndicator(context)}
     ${doc.body.map((section) => Section(context, section))}
     ${ArticleFooter(context)}
   </div>`;
