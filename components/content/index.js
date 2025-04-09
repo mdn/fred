@@ -1,8 +1,9 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { ArticleFooter } from "../article-footer/index.js";
+import { BaselineIndicator } from "../baseline-indicator/index.js";
 import { Heading } from "../heading-anchor/index.js";
 import { SpecificationsList } from "../specifications-list/index.js";
 
@@ -13,9 +14,11 @@ import "./index.css";
  * @returns {Lit.TemplateResult}
  */
 export function Content(context) {
+  const { doc } = context;
   return html`<div class="content">
-    <h1>${context?.doc?.title}</h1>
-    ${context?.doc?.body.map((section) => Section(context, section))}
+    <h1>${doc.title}</h1>
+    ${doc.baseline ? BaselineIndicator(doc.baseline) : nothing}
+    ${doc.body.map((section) => Section(context, section))}
     ${ArticleFooter(context)}
   </div>`;
 }
