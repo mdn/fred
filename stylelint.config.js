@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-expect-error
 import propertyGroups from "stylelint-config-recess-order/groups";
 
 /** @type {import('stylelint').Config} */
