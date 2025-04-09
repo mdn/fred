@@ -47,8 +47,8 @@
 
     td,
     th {
-      background: inherit;
       padding: 0.25rem;
+      background: inherit;
     }
 
     td.bc-support {
@@ -60,8 +60,8 @@
     }
 
     .timeline {
-      border-left: none !important;
       border-top: var(--compat-border);
+      border-left: none !important;
     }
 
     .bc-has-history:focus-within > button {
@@ -72,23 +72,25 @@
   }
 
   .table-container {
+    width: 100vw;
     margin: 0 -3rem;
     overflow: auto;
-    width: 100vw;
   }
 
   .table-container-inner {
+    position: relative;
     min-width: max-content;
     padding: 0 3rem;
-    position: relative;
 
     &::after {
-      bottom: 0;
-      content: "";
-      height: 10px;
       position: absolute;
       right: 0;
+      bottom: 0;
+
       width: 10px;
+      height: 10px;
+
+      content: "";
     }
   }
 
@@ -100,9 +102,9 @@
   }
 
   .bc-notes-list {
-    margin-left: 20%;
-    max-width: 80vw;
     width: auto;
+    max-width: 80vw;
+    margin-left: 20%;
   }
 
   .bc-support {

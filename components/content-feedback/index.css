@@ -1,10 +1,11 @@
 /** Content feedback. */
 
 .content-feedback {
-  border: none;
+  padding: 0;
   margin: 0;
   margin-bottom: 0.25rem;
-  padding: 0;
+
+  border: none;
 
   > label {
     display: block;
@@ -16,28 +17,24 @@
     margin-bottom: calc(2.75rem + 2px);
   }
 
-  .button {
+  mdn-button {
     /* Ensure both buttons have same size. */
     flex: 1;
     min-width: 0;
-
-    /* Increase space between icon and button label. */
-    gap: 0.5rem;
-    padding: 1rem;
 
     &:not(:hover) {
       --button-bg: var(--background-secondary, light-dark(#f9f9f9, #313131));
       --button-color: var(--text-primary, light-dark(#1b1b1b, #ffffff));
     }
 
-    &.yes {
+    &[data-vote="yes"] {
       --button-bg-hover: var(
         --text-primary-green,
         light-dark(#007936, #00d061)
       );
     }
 
-    &.no {
+    &[data-vote="no"] {
       --button-bg-hover: var(--text-primary-red, light-dark(#d30038, #ff97a0));
     }
   }
@@ -51,8 +48,10 @@
 }
 
 .content-feedback--radios {
-  align-items: center;
   display: flex;
+
   gap: 0.25rem;
+  align-items: center;
+
   margin: 0.25rem 0;
 }

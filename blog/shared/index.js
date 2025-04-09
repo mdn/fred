@@ -1,13 +1,12 @@
-// @ts-nocheck
 import { html, nothing } from "lit";
 
 /**
  *
- * @param {Fred.Context} context
+ * @param {Fred.Context} _context
  * @param {Lit.TemplateResult} content
  * @returns {Lit.TemplateResult}
  */
-export function BlogContainer(context, content) {
+export function BlogContainer(_context, content) {
   return html`<div className="page-layout__blog-container">${content}</div>`;
 }
 
@@ -87,6 +86,7 @@ export function Author(context, { blogMeta }) {
   }
   return MaybeLink(context, {
     link: author.link,
+    // @ts-expect-error
     className: "author",
     content: html`<img
         src=${author.avatar_url ?? "/assets/avatar.png"}
@@ -110,7 +110,10 @@ export function AuthorDateReadTime(context, { blogMeta }) {
 
   return html`
     ${Author(context, { blogMeta })}
-    ${PublishDate(context, { date: blogMeta.published })}
+    ${
+      // @ts-expect-error
+      PublishDate(context, { date: blogMeta.published })
+    }
     ${TimeToRead(context, { readTime: blogMeta.readTime })}
   `;
 }

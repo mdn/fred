@@ -2,8 +2,8 @@
 
 @media (width >= /* $screen-xl */ 1200px) {
   .table-container {
-    margin: 0;
     width: 100%;
+    margin: 0;
   }
 
   .table-container-inner {

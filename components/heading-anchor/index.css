@@ -7,10 +7,13 @@
 
   &::before {
     position: absolute;
-    content: "#";
-    color: var(--text-secondary);
+
     padding-inline-end: 0.4em;
     margin-inline-start: -0.8em;
+
+    color: var(--text-secondary);
+
+    content: "#";
   }
 
   &:not(:hover, :focus) {

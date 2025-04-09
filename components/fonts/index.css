@@ -1,20 +1,22 @@
 @font-face {
-  font-weight: 100 900;
   font-family: Inter;
-  font-style: normal;
-  font-display: swap;
   font-variation-settings: "opsz" 14;
+  font-style: normal;
+  font-weight: 100 900;
   font-feature-settings: "ss02" on;
+
   src: url("fonts/inter.woff2") format("woff2");
+  font-display: swap;
 }
 
 @font-face {
-  font-weight: 100 900;
   font-family: Inter;
-  font-style: italic;
-  font-display: swap;
   font-variation-settings: "opsz" 14;
+  font-style: italic;
+  font-weight: 100 900;
+
   src: url("fonts/inter.woff2") format("woff2");
+  font-display: swap;
 }
 
 :root {
@@ -73,8 +75,9 @@
   h1 {
     font: var(--type-heading-h1);
     font-variation-settings: "opsz" 26;
-    overflow-wrap: anywhere;
+
     word-break: normal;
+    overflow-wrap: anywhere;
   }
 
   h2 {
@@ -96,15 +99,17 @@
   h5 {
     font: var(--type-heading-h5);
     font-variation-settings: "opsz" 14;
-    letter-spacing: 1.5px;
+
     text-transform: uppercase;
+    letter-spacing: 1.5px;
   }
 
   h6 {
     font: var(--type-heading-h6);
     font-variation-settings: "opsz" 14;
-    letter-spacing: 1.5px;
+
     text-transform: uppercase;
+    letter-spacing: 1.5px;
   }
 
   h1,

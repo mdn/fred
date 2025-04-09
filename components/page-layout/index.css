@@ -1,16 +1,22 @@
 .page-layout {
   display: grid;
+
   grid-template-rows:
     min-content
     min-content
     1fr
     min-content;
+
+  min-height: 100svh;
+
   margin: 0;
   margin-inline: auto;
-  min-height: 100svh;
-  background-color: var(--background-primary);
-  color: var(--text-primary);
+
   font-family: var(--font-body);
+
+  color: var(--text-primary);
+
+  background-color: var(--background-primary);
 }
 
 .page-layout__header {

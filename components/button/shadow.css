@@ -1,0 +1,5 @@
+@import url("./common.css");
+
+:host {
+  display: inline-block;
+}

@@ -21,7 +21,7 @@ pre-commit:
 
     - name: stylelint (global)
       run: npx stylelint --fix '**/*.css' --cache --ignore-path .gitignore
-      glob: ".stylelintrc.json"
+      glob: stylelint.config.js
       stage_fixed: true
 
 pre-push:

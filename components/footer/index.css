@@ -2,22 +2,24 @@
 
 .footer {
   --footer-side-padding: 1rem;
-
-  background-color: var(--background-secondary);
   color: var(--text-secondary);
+  background-color: var(--background-secondary);
 }
 
 /* MDN */
 
 .footer__mdn {
   display: grid;
-  align-items: start;
+
   grid-template-areas:
     "intro"
     "socials"
     "links";
+
   row-gap: 2rem;
   column-gap: 1rem;
+  align-items: start;
+
   padding-block: 2rem 1.5rem;
   padding-inline: var(--footer-side-padding);
 
@@ -75,10 +77,12 @@
 /* Intro */
 
 .footer__intro {
-  grid-area: intro;
   display: grid;
-  justify-items: start;
+
+  grid-area: intro;
+
   row-gap: 1rem;
+  justify-items: start;
 
   p {
     margin: 0;
@@ -88,11 +92,15 @@
 /* Socials */
 
 .footer__socials {
-  grid-area: socials;
   display: flex;
+
+  grid-area: socials;
+
   column-gap: 0.75rem;
-  margin: 0;
+
   padding: 0;
+  margin: 0;
+
   list-style: none;
 
   a {
@@ -120,14 +128,16 @@
   }
 
   dd {
-    margin: 0;
     display: contents;
+    margin: 0;
   }
 
   ul {
     display: contents;
-    margin: 0;
+
     padding: 0;
+    margin: 0;
+
     list-style-type: none;
   }
 
@@ -148,13 +158,17 @@
 
 .footer__mozilla {
   display: grid;
+
   grid-template-columns: min-content 1fr;
-  justify-items: start;
-  align-items: start;
+
   row-gap: 1rem;
   column-gap: 1.5rem;
+  align-items: start;
+  justify-items: start;
+
   padding-block: 1.5rem;
   padding-inline: var(--footer-side-padding);
+
   border-block-start: 1px solid var(--text-secondary);
 
   @media (width > 1440px) {
@@ -165,17 +179,22 @@
 
   ul {
     display: flex;
+
     flex-wrap: wrap;
+
     column-gap: 1rem;
-    margin: 0;
+
     padding: 0;
-    list-style: none;
+    margin: 0;
+
     line-height: 2;
+
+    list-style: none;
   }
 
   p {
-    margin: 0;
     grid-column: span 2;
+    margin: 0;
     line-height: 1.5;
   }
 

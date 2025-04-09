@@ -10,9 +10,9 @@
 
     tr {
       td.bc-support {
+        display: block;
         border: none;
         border-top: 1px solid var(--compat-border-primary);
-        display: block;
 
         &:last-child {
           border-bottom: 1px solid var(--compat-border-primary);
@@ -32,10 +32,12 @@
 
     .bc-feature,
     .bc-support > button {
-      align-content: center;
       display: flex;
+
       flex-wrap: wrap;
+
       gap: 0.5rem;
+      align-content: center;
     }
   }
 
