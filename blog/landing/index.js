@@ -1,5 +1,6 @@
 import { html, nothing } from "lit";
 
+import { Button } from "../../components/button/pure.js";
 import { PageLayout } from "../../components/page-layout/index.js";
 import { AuthorDateReadTime, BlogContainer } from "../shared/index.js";
 
@@ -48,7 +49,7 @@ function PostPreview(context, blogMeta) {
       ${blogMeta.sponsored
         ? html`<span className="sponsored">Sponsored</span>`
         : nothing}
-      <a href="./${blogMeta.slug}/" target="_self"> Read more → </a>
+      ${Button({ label: "Read more →", href: `./${blogMeta.slug}/` })}
     </footer>
   </article>`;
 }

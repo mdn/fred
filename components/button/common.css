@@ -49,6 +49,7 @@ button,
   gap: var(--button-gap, var(--button-gap--default));
   padding: 0 var(--button-padding, var(--button-padding--default));
   height: var(--button-height, var(--button-height--default));
+  width: fit-content;
 
   /* Visual. */
   background-color: var(--button-bg, var(--button-bg--default));
