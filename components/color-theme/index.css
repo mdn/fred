@@ -3,15 +3,20 @@
 }
 
 .color-theme__button {
-  margin: 0;
-  padding: 0.5rem;
   display: flex;
-  align-items: center;
+
   column-gap: 0.25rem;
-  border: none;
-  background-color: transparent;
-  color: inherit;
+  align-items: center;
+
+  padding: 0.5rem;
+  margin: 0;
+
   font: inherit;
+
+  color: inherit;
+
+  background-color: transparent;
+  border: none;
 
   &:is(:hover, :focus),
   &[aria-expanded="true"] {
@@ -22,11 +27,14 @@
 .color-theme__dropdown {
   position: absolute;
   z-index: 1;
-  margin: 0;
-  padding: 0.75rem;
+
   width: max-content;
-  border: 1px solid var(--text-secondary);
+
+  padding: 0.75rem;
+  margin: 0;
+
   background-color: var(--background-primary);
+  border: 1px solid var(--text-secondary);
 
   &[data-side="left"] {
     right: 0;
@@ -38,24 +46,33 @@
 }
 
 .color-theme__list {
-  margin: 0;
-  padding: 0;
   width: max-content;
-  background-color: var(--background-primary);
+
+  padding: 0;
+  margin: 0;
+
   list-style: none;
+
+  background-color: var(--background-primary);
 }
 
 .color-theme__option {
   display: flex;
-  align-items: center;
+
   column-gap: 0.25rem;
-  margin: 0;
-  padding: 0.25rem;
+  align-items: center;
+
   width: 100%;
-  border: none;
-  background-color: transparent;
-  color: var(--text-secondary);
+
+  padding: 0.25rem;
+  margin: 0;
+
   font: inherit;
+
+  color: var(--text-secondary);
+
+  background-color: transparent;
+  border: none;
 
   &:hover {
     background-color: var(--background-secondary);

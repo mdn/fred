@@ -27,9 +27,9 @@ dd {
 
 ul,
 ol {
-  list-style: none;
-  margin: 0;
   padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 html {
@@ -38,12 +38,17 @@ html {
 
 body {
   min-height: 100svh;
+
   margin: 0;
-  background-color: var(--background-primary);
-  color: var(--text-primary);
+
   font-family: var(--font-body);
   font-size: var(--base-font-size);
+
   line-height: var(--font-content-line-height);
+
+  color: var(--text-primary);
+
+  background-color: var(--background-primary);
   text-rendering: optimizespeed;
 }
 
@@ -72,22 +77,29 @@ select {
   *,
   *::before,
   *::after {
+    transition-duration: 0.01ms !important;
+
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
   }
 }
 
 .visually-hidden {
+  position: absolute !important;
+
+  width: 1px !important;
+  height: 1px !important;
+
+  padding: 0 !important;
+  margin: -1px !important;
+
+  overflow: hidden !important;
+
+  white-space: nowrap !important;
+
   border: 0 !important;
+
   clip: rect(1px, 1px, 1px, 1px) !important;
   clip-path: inset(50%) !important;
-  height: 1px !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  padding: 0 !important;
-  position: absolute !important;
-  white-space: nowrap !important;
-  width: 1px !important;
 }

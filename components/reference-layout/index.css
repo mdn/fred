@@ -2,11 +2,13 @@
 
 .reference-layout {
   display: grid;
-  column-gap: 3rem;
-  padding-block: 0.5rem 3rem;
 
   grid-template-rows: auto;
   grid-template-columns: 1fr minmax(0, 2.5fr) 15rem;
+
+  column-gap: 3rem;
+
+  padding-block: 0.5rem 3rem;
 
   @media (width < 769px) {
     grid-template-rows: auto;
@@ -26,10 +28,9 @@
 /* Sidebar */
 
 .reference-layout__sidebar {
-  padding-inline: 1rem;
-
   grid-row: 1 / 2;
   grid-column: 1 / 2;
+  padding-inline: 1rem;
 
   @media (width < 1200px) {
     grid-row: 2 / 3;
@@ -45,10 +46,9 @@
 /* Content */
 
 .reference-layout__content {
-  padding-inline: 1rem;
-
   grid-row: 1 / 2;
   grid-column: 2 / 3;
+  padding-inline: 1rem;
 
   @media (width < 1200px) {
     grid-row: 1 / span 2;
@@ -64,10 +64,9 @@
 /* TOC */
 
 .reference-layout__toc {
-  padding-inline: 1rem;
-
   grid-row: 1 / 2;
   grid-column: 3 / 4;
+  padding-inline: 1rem;
 
   @media (width < 1200px) {
     grid-row: 1 / 2;

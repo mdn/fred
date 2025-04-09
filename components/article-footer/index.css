@@ -1,12 +1,13 @@
 /** Article footer. */
 
 .article-footer {
+  padding: 1rem;
+  margin: 0;
+
   background-color: var(--background-secondary, light-dark(#f9f9f9, #313131));
   border: 1px solid var(--border-primary, light-dark(#cdcdcd, #858585));
   border-radius: var(--elem-radius, 0.25rem);
   box-shadow: var(--shadow-01, 0 1px 2px #2b2a330d);
-  margin: 0;
-  padding: 1rem;
 
   @media (width <= /* $screen-md */ 769px) {
     margin: 3rem;
@@ -16,20 +17,20 @@
   }
 
   @media (width <= /* $screen-sm */ 426px) {
-    margin-left: 1rem;
     margin-right: 1rem;
+    margin-left: 1rem;
   }
 }
 
 .article-footer__inner {
-  margin: 0 auto;
-  max-width: 1440px;
   width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
 
   h2 {
-    margin-bottom: 0.5rem;
-    margin-top: 0;
     padding: 0;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
   }
 
   .emoji {
@@ -42,11 +43,12 @@
   position: relative;
 
   svg {
-    height: auto;
     position: absolute;
-    right: 0;
     top: 0;
+    right: 0;
+
     width: 20%;
+    height: auto;
   }
 }
 
@@ -55,6 +57,6 @@
 }
 
 .article-footer__last-modified {
-  margin-bottom: 0;
   margin-top: 2rem;
+  margin-bottom: 0;
 }
