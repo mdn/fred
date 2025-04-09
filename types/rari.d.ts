@@ -12,4 +12,9 @@ namespace Rari {
   type BlogImage = import("@mdn/rari").BlogImage;
   type TocEntry = import("@mdn/rari").TocEntry;
   type BlogPostDoc = import("@mdn/rari").BlogPostDoc;
+
+  type Section = import("@mdn/rari").Section;
+  type Prose = import("@mdn/rari").Prose;
+  type Compat = import("@mdn/rari").Compat;
+  type SpecificationSection = import("@mdn/rari").SpecificationSection;
 }

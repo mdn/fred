@@ -22,7 +22,7 @@ export function Content(context) {
 
 /**
  * @param {Fred.Context} context
- * @param {import("@mdn/rari").Section} section
+ * @param {Rari.Section} section
  * @returns {Lit.TemplateResult}
  */
 export function Section(context, { type, value }) {
@@ -40,7 +40,7 @@ export function Section(context, { type, value }) {
 }
 
 /**
- * @param {import("@mdn/rari").Prose} section
+ * @param {Rari.Prose} section
  * @returns {Lit.TemplateResult}
  */
 function Prose({ id, title, content, isH3 }) {
@@ -53,7 +53,7 @@ function Prose({ id, title, content, isH3 }) {
 }
 
 /**
- * @param {import("@mdn/rari").Compat} section
+ * @param {Rari.Compat} section
  * @returns {Lit.TemplateResult}
  */
 function BCD({ id, title, query, isH3 }) {
@@ -66,7 +66,7 @@ function BCD({ id, title, query, isH3 }) {
 
 /**
  * @param {Fred.Context} context
- * @param {import("@mdn/rari").SpecificationSection} section
+ * @param {Rari.SpecificationSection} section
  */
 function SpecificationsSection(context, { id, title, specifications, isH3 }) {
   const level = isH3 ? 3 : 2;

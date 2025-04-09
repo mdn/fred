@@ -5,21 +5,23 @@ import { Navigation } from "../../components/navigation/index.js";
 
 import "./index.css";
 import "../../components/index.css";
-import { Landing } from "../../observatory/landing/index.js";
-import { Results } from "../../observatory/results/index.js";
+import {
+  ObservatoryLayoutLanding,
+  ObservatoryLayoutResult,
+} from "../../components/observatory-layout/index.js";
 
 /**
  *
  * @param {Fred.Context<Rari.SpaPage>} context
  * @returns {Lit.TemplateResult}
  */
-export function ObservatoryBody(context) {
+export function ObservatoryLanding(context) {
   return html`
     <body class="page-layout">
       <header class="page-layout__header">
         ${Navigation(context)} ${ObservatoryBreadCrumbs(context)}
       </header>
-      <div class="page-layout__main">${Landing(context)}</div>
+      <div class="page-layout__main">${ObservatoryLayoutLanding(context)}</div>
       <div class="page-layout__footer">${Footer(context)}</div>
     </body>
   `;
@@ -36,7 +38,7 @@ export function ObservatoryResults(context) {
       <header class="page-layout__header">
         ${Navigation(context)} ${ObservatoryBreadCrumbs(context)}
       </header>
-      <div class="page-layout__main">${Results(context)}</div>
+      <div class="page-layout__main">${ObservatoryLayoutResult(context)}</div>
       <div class="page-layout__footer">${Footer(context)}</div>
     </body>
   `;

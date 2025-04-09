@@ -1,4 +1,5 @@
 import { nothing } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { html as hh, unsafeStatic } from "lit/static-html.js";
 
 import "./index.css";
@@ -10,6 +11,6 @@ import "./index.css";
  */
 export function Heading(level, id, title) {
   return id
-    ? hh`<${unsafeStatic("h" + level)} id=${id} class="heading"><a class="heading-anchor" href="#${id}">${title}</a></${unsafeStatic("h" + level)}>`
+    ? hh`<${unsafeStatic("h" + level)} id=${ifDefined(id)} class="heading"><a class="heading-anchor" href="#${id}">${title}</a></${unsafeStatic("h" + level)}>`
     : nothing;
 }

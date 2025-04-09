@@ -4,9 +4,12 @@ import { LitElement, html } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin";
 
+// @ts-ignore
 import thumbsDown from "../icon/thumbs_down.svg?lit";
+// @ts-ignore
 import thumbsUp from "../icon/thumbs_up.svg?lit";
 
+// @ts-ignore
 import styles from "./index.css?lit";
 
 /**
