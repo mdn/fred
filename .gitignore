@@ -9,3 +9,4 @@ out/
 .eslintcache
 .stylelintcache
 .DS_Store
+.env
