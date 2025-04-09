@@ -90,7 +90,6 @@ export class CompatTable extends LitElement {
     /** @type {BCD.Identifier} */
     this.data = {};
     /** @type {BCD.Browsers} */
-    // @ts-ignore
     this.browserInfo = {};
     this.locale = "";
     this._pathname = "";
@@ -820,7 +819,6 @@ export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
     /**
      * @type {BCD.BrowserName[]}
      */
-    // @ts-ignore
     const platformBrowsers = Object.keys(browserInfo);
     browsers.push(
       ...platformBrowsers.filter(

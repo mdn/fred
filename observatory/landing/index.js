@@ -1,14 +1,9 @@
 import { html, svg } from "lit";
 
-// @ts-ignore
 import assessmentSvg from "../assets/assessment.svg?lit";
-// @ts-ignore
 import landingSvg from "../assets/landing-illustration.svg?lit";
-// @ts-ignore
 import mdnSvg from "../assets/mdn.svg?lit";
-// @ts-ignore
 import scanningSvg from "../assets/scanning.svg?lit";
-// @ts-ignore
 import securitySvg from "../assets/security.svg?lit";
 import { OBSERVATORY_TITLE } from "../constants.js";
 import { FAQ } from "../faq.js";

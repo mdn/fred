@@ -145,7 +145,7 @@ export class FormProgress extends LitElement {
         this._hostname,
       )}`;
     } catch (error) {
-      // @ts-ignore
+      // @ts-expect-error
       this._errorMessage = `${ERROR_MAP[error.name] || "message" in error ? error["message"] : error}`;
     } finally {
       this._queryRunning = false;
