@@ -3,7 +3,6 @@
 .footer {
   --footer-side-padding: 1rem;
   color: var(--text-secondary);
-
   background-color: var(--background-secondary);
 }
 
@@ -71,7 +70,6 @@
 
   svg {
     display: block;
-
     fill: currentcolor;
   }
 }
@@ -122,9 +120,7 @@
 
 .footer__links {
   display: grid;
-
   row-gap: 0.75rem;
-
   margin: 0;
 
   dt {
@@ -133,7 +129,6 @@
 
   dd {
     display: contents;
-
     margin: 0;
   }
 
@@ -199,9 +194,7 @@
 
   p {
     grid-column: span 2;
-
     margin: 0;
-
     line-height: 1.5;
   }
 

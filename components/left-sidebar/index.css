@@ -1,14 +1,12 @@
 .left-sidebar {
   h4 {
     margin: 0;
-
     font-size: 1.5rem;
     font-weight: normal;
   }
 
   summary {
     padding: 0.75rem 1rem;
-
     cursor: pointer;
 
     &:hover {
@@ -19,7 +17,6 @@
   ol {
     padding: 0;
     margin: 0;
-
     list-style: none;
   }
 
@@ -41,7 +38,6 @@
 
     &[aria-current="true"] {
       display: flex;
-
       background-color: var(--background-blue);
       border-left: 2px solid var(--blue);
     }

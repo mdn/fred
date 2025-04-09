@@ -2,7 +2,6 @@
 
 table {
   display: grid;
-
   grid-auto-flow: row dense;
 
   thead {
@@ -12,7 +11,6 @@ table {
       th,
       td {
         display: grid;
-
         grid-template-columns: subgrid;
       }
     }
@@ -30,7 +28,6 @@ table {
 
         button {
           display: grid;
-
           grid-template-columns: subgrid;
         }
 
@@ -75,15 +72,12 @@ table {
 
   th {
     padding: 0.4rem;
-
     vertical-align: bottom;
-
     background: var(--compat-background-primary);
   }
 
   thead {
     line-height: 1;
-
     white-space: nowrap;
   }
 
@@ -107,7 +101,6 @@ table {
 
       th {
         vertical-align: middle;
-
         border-left-width: 0;
       }
     }
@@ -117,7 +110,6 @@ table {
 
       button {
         width: 100%;
-
         cursor: pointer;
       }
 
@@ -189,7 +181,6 @@ table {
 
     .timeline .icon.icon-removed-partial {
       background-color: var(--compat-icon-primary);
-
       mask-image: url("./icons/partial.svg");
     }
   }
@@ -213,7 +204,6 @@ table {
 
     > * {
       flex-basis: max-content;
-
       border: none !important;
     }
   }
@@ -248,7 +238,6 @@ table {
 
 .bc-support {
   vertical-align: middle;
-
   text-align: center;
 }
 
@@ -283,7 +272,6 @@ table {
 
 .bc-legend-item {
   display: flex;
-
   gap: 0.5rem;
   align-items: center;
 }
@@ -300,7 +288,6 @@ table {
 .bc-platforms {
   th {
     display: flex;
-
     align-items: center;
     justify-content: center;
   }
@@ -375,7 +362,6 @@ table {
   .bc-level-yes.icon.icon-yes {
     /* override icon */
     background-color: var(--compat-icon-success);
-
     mask-image: url("./icons/yes-circle.svg");
   }
 
@@ -395,14 +381,12 @@ table {
 
   abbr {
     margin-right: 4px;
-
     text-decoration: none;
   }
 
   dd {
     padding-left: 1.5rem;
     margin-bottom: 1rem;
-
     text-indent: -1.5rem;
 
     &:last-child {
@@ -413,7 +397,6 @@ table {
 
 .bc-notes-wrapper {
   margin-bottom: 1rem;
-
   color: var(--compat-text-primary);
 
   &:last-child {
@@ -461,9 +444,7 @@ dl.bc-notes-list {
 
 .bc-table-row-header {
   width: 100%;
-
   padding: 0.25em;
-
   text-align: left;
 
   code {

@@ -56,7 +56,6 @@
 
 * {
   box-sizing: border-box;
-
   overflow-wrap: break-word;
 }
 
@@ -95,9 +94,7 @@ dd {
 
 code {
   width: fit-content;
-
   padding: 0.125rem 0.25rem;
-
   background: var(--compat-code-background-inline);
 }
 
@@ -107,7 +104,6 @@ a {
 
 button {
   appearance: none;
-
   background: none;
   border: medium;
 }

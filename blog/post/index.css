@@ -45,14 +45,11 @@
 .blog-post__sidebar {
   --offset: var(--sticky-header-height);
   display: none;
-
   grid-area: toc;
 
   .blog-toc__header h2 {
     margin: 0 0 1rem;
-
     font: var(--type-heading-h5);
-
     letter-spacing: 1.5px;
   }
 
@@ -69,9 +66,7 @@
 
   @media (width >= 992px) {
     display: flex;
-
     flex-direction: column;
-
     grid-area: toc;
 
     .blog-toc {
@@ -101,7 +96,6 @@
 
     .place.side {
       grid-area: place;
-
       margin-top: 0;
 
       > .pong-box2,
@@ -114,9 +108,7 @@
 
 .blog-toc__entries {
   padding-left: 0;
-
   font-size: var(--type-smaller-font-size);
-
   list-style: none;
 }
 

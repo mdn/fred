@@ -39,7 +39,6 @@
 
   &:is([aria-expanded="true"], :hover) {
     color: var(--menu-tabs-button-text);
-
     background-color: var(--menu-tabs-button-background);
   }
 }
@@ -79,7 +78,6 @@
 
 .menu__tabs-link {
   padding: 0.7rem;
-
   color: var(--text-primary);
 
   &:hover {

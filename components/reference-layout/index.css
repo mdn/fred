@@ -30,7 +30,6 @@
 .reference-layout__sidebar {
   grid-row: 1 / 2;
   grid-column: 1 / 2;
-
   padding-inline: 1rem;
 
   @media (width < 1200px) {
@@ -49,7 +48,6 @@
 .reference-layout__content {
   grid-row: 1 / 2;
   grid-column: 2 / 3;
-
   padding-inline: 1rem;
 
   @media (width < 1200px) {
@@ -68,7 +66,6 @@
 .reference-layout__toc {
   grid-row: 1 / 2;
   grid-column: 3 / 4;
-
   padding-inline: 1rem;
 
   @media (width < 1200px) {

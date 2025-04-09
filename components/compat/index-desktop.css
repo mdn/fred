@@ -48,7 +48,6 @@
     td,
     th {
       padding: 0.25rem;
-
       background: inherit;
     }
 
@@ -74,17 +73,13 @@
 
   .table-container {
     width: 100vw;
-
     margin: 0 -3rem;
-
     overflow: auto;
   }
 
   .table-container-inner {
     position: relative;
-
     min-width: max-content;
-
     padding: 0 3rem;
 
     &::after {
@@ -109,7 +104,6 @@
   .bc-notes-list {
     width: auto;
     max-width: 80vw;
-
     margin-left: 20%;
   }
 

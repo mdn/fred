@@ -26,9 +26,7 @@ article.settings {
 
       li {
         display: grid;
-
         grid-template-columns: 1fr 5em;
-
         gap: 0 1rem;
 
         section {
@@ -111,7 +109,6 @@ article.settings {
 
         button[disabled] {
           color: var(--text-secondary);
-
           background-color: var(--background-secondary);
           border: 1px solid var(--text-secondary);
         }

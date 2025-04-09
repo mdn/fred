@@ -1,8 +1,6 @@
 .switch {
   position: relative;
-
   display: inline-flex;
-
   align-items: center;
 
   input {

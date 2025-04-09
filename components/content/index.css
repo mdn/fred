@@ -3,7 +3,6 @@
 
   h1 {
     margin-block-start: 0;
-
     font-size: 2.5rem;
     font-weight: 450;
   }
@@ -38,28 +37,23 @@
 
     code {
       padding: 0;
-
       background-color: unset;
     }
   }
 
   table {
     width: 100%;
-
     border-collapse: collapse;
 
     th,
     td {
       padding: 0.5rem 0.75rem;
-
       border: 1px solid var(--text-secondary);
     }
 
     th {
       font-weight: normal;
-
       text-align: left;
-
       background-color: var(--background-secondary);
     }
   }

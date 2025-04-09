@@ -2,7 +2,6 @@
 
 .menu__content {
   display: grid;
-
   grid-template-columns: repeat(3, 1fr);
 }
 
@@ -22,9 +21,7 @@
 
 .menu__content-primary {
   display: grid;
-
   row-gap: 1.6rem;
-
   padding: 1.6rem;
 }
 
@@ -92,7 +89,6 @@
 
   a {
     color: var(--text-primary);
-
     text-decoration: none;
 
     &:hover {

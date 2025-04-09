@@ -12,13 +12,16 @@ export default {
     "declaration-empty-line-before": null,
     "no-descending-specificity": null,
     "no-duplicate-selectors": null,
-    "order/properties-order": propertyGroups.map(
-      (/** @type {any} */ group) => ({
+    "order/properties-order": [
+      propertyGroups.map((/** @type {any} */ group) => ({
         ...group,
-        emptyLineBefore: "always",
+        emptyLineBefore: "threshold",
         noEmptyLineBetween: true,
-      }),
-    ),
+      })),
+      {
+        emptyLineMinimumPropertyThreshold: 4,
+      },
+    ],
     "selector-class-pattern": null,
     "selector-id-pattern": null,
   },
