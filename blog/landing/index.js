@@ -1,6 +1,6 @@
 import { html, nothing } from "lit";
 
-import { Button } from "../../components/button/static.js";
+import { Button } from "../../components/button/pure.js";
 import { PageLayout } from "../../components/page-layout/index.js";
 import { AuthorDateReadTime, BlogContainer } from "../shared/index.js";
 

@@ -10,11 +10,9 @@ import "./global.css";
  * @param {string} [options.href]
  */
 export function Button({ label, icon, disabled = false, href }) {
+  const inner = html`${icon ? html`<span class="icon">${icon}</span>` : nothing}
+  ${label}`;
   return href
-    ? html`<a class="button" href=${href}>
-        ${icon ? html`<span class="icon">${icon}</span>` : nothing} ${label}
-      </a>`
-    : html`<button ?disabled=${disabled} class="button">
-        ${icon ? html`<span class="icon">${icon}</span>` : nothing} ${label}
-      </button>`;
+    ? html`<a class="button" href=${href}>${inner}</a>`
+    : html`<button ?disabled=${disabled} class="button">${inner}</button>`;
 }

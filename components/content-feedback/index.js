@@ -54,7 +54,11 @@ export class ContentFeedback extends L10nMixin(LitElement) {
   _handleVote({ target }) {
     if (target instanceof HTMLElement) {
       const vote = target.dataset.vote;
-      this._view = vote === "yes" ? "thanks" : "feedback";
+      if (vote === "yes") {
+        this._view = "thanks";
+      } else if (vote === "no") {
+        this._view = "feedback";
+      }
       // Reusing Thumbs' key to be able to reuse queries.
       // FIXME gleanClick(`${THUMBS}: ${ARTICLE_FOOTER} -> ${Number(value)}`);
     }
