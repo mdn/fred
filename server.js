@@ -23,21 +23,41 @@ const serverRender =
   /**
    * @param {Request} req
    * @param {Response} res
+   * @param {Rari.BuiltPage} page
    */
-  async (req, res) => {
-    /** @type {import("./entry.ssr") | undefined} */
-    const indexModule = await serverAPI.environments.ssr?.loadBundle("index");
-    const html = await indexModule?.render(
-      req.path,
-      ssrManifest,
-      clientManifest,
-    );
+  async (req, res, page) => {
+    try {
+      /** @type {import("./entry.ssr") | undefined} */
+      const indexModule = await serverAPI.environments.ssr?.loadBundle("index");
+      const html = await indexModule?.render(
+        req.path,
+        ssrManifest,
+        clientManifest,
+        page,
+      );
 
-    res.writeHead(200, {
-      "Content-Type": "text/html",
-    });
-    res.end(html);
+      res.writeHead(res.statusCode, {
+        "Content-Type": "text/html",
+      });
+      res.end(html);
+    } catch (error) {
+      logger.error("SSR render error:", error);
+      res.writeHead(500).end();
+    }
   };
+
+/**
+ * @param {import("http").IncomingMessage} stream
+ * @returns {Promise<Buffer>}
+ */
+const streamToBuffer = (stream) =>
+  new Promise((resolve, reject) => {
+    /** @type {Buffer[]} */
+    const chunks = [];
+    stream.on("data", (chunk) => chunks.push(chunk));
+    stream.on("end", () => resolve(Buffer.concat(chunks)));
+    stream.on("error", reject);
+  });
 
 export async function startDevServer() {
   const { content } = await loadConfig({});
@@ -88,14 +108,54 @@ export async function startDevServer() {
     }),
   );
 
-  app.get("/*mdnUrl", async (req, res, next) => {
-    try {
-      await serverRenderMiddleware(req, res);
-    } catch (error) {
-      logger.error("SSR render error, downgrade to CSR...", error);
-      next();
-    }
-  });
+  app.use(
+    createProxyMiddleware({
+      target: `http://localhost:8083`,
+      changeOrigin: true,
+      proxyTimeout: 20_000,
+      timeout: 20_000,
+      headers: {
+        Connection: "keep-alive",
+      },
+      selfHandleResponse: true,
+      on: {
+        proxyRes: async (proxyRes, req, res) => {
+          const contentType = proxyRes.headers["content-type"] || "";
+          const statusCode = proxyRes.statusCode || 500;
+
+          if (!contentType && statusCode === 404) {
+            // render 404 page
+            res.statusCode = 404;
+            const notFoundRes = await fetch(
+              `http://localhost:8083/en-US/404/index.json`,
+            );
+            const json = await notFoundRes.json();
+            return serverRenderMiddleware(req, res, json);
+          }
+
+          if (
+            !contentType.includes("application/json") ||
+            req.path.endsWith(".json")
+          ) {
+            // stream assets
+            res.writeHead(statusCode, proxyRes.headers);
+            proxyRes.pipe(res);
+            return;
+          }
+
+          const buffer = await streamToBuffer(proxyRes);
+          const json = JSON.parse(buffer.toString("utf8"));
+
+          if ("renderer" in json) {
+            return serverRenderMiddleware(req, res, json);
+          }
+
+          res.writeHead(statusCode, proxyRes.headers);
+          res.end(buffer);
+        },
+      },
+    }),
+  );
 
   const httpServer = app.listen(rsbuildServer.port, () => {
     // Notify Rsbuild that the custom server has started

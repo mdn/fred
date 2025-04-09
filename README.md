@@ -4,13 +4,10 @@ MDN's next fr(ont)e(n)d.
 
 ## Getting started
 
-1. Install dependencies `npm install`
-2. In one terminal window, start the backend:
-
-- Run `CONTENT_ROOT=../content/files npm run rari serve`
-- Where `CONTENT_ROOT` points to the location of the [mdn/content](https://github.com/mdn/content/) files.
-
-3. In another terminal window, start the frontend:
+1. Copy `.env-dist` to `.env` and update
+2. Install dependencies `npm install`
+3. In one terminal window, start the backend: `node --env-file=.env --run rari -- serve`
+4. In another terminal window, start the frontend:
 
 - Run local dev server `npm run dev`
 - Open `http://localhost:3000/en-US/` to see the homepage

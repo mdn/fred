@@ -23,31 +23,11 @@ import { runWithContext } from "./symmetric-context/server.js";
 
 /**
  * @param {string} path
- * @returns {Promise<Rari.BuiltPage>}
- */
-async function fetch_from_rari(path) {
-  const external_url = `http://localhost:8083${path}`;
-  console.log(`loading ${external_url}`);
-  const response = await fetch(external_url);
-  if (!response.ok) {
-    throw new Error(
-      `${response.status}: ${response.statusText} for ${external_url}`,
-    );
-  }
-  return await response.json();
-}
-
-/**
- * @param {string} path
  * @param {import("@rsbuild/core").ManifestData} ssrManifest
  * @param {import("@rsbuild/core").ManifestData} clientManifest
- * @param {Rari.BuiltPage} [page]
+ * @param {Rari.BuiltPage} page
  */
 export async function render(path, ssrManifest, clientManifest, page) {
-  if (!page) {
-    page = await fetch_from_rari(path);
-  }
-
   const locale = path.split("/")[1] || "en-US";
   if (locale === "qa") {
     path = path.replace("/qa/", "/en-US/");
