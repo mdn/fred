@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 
 import { includeIgnoreFile } from "@eslint/compat";
 import js from "@eslint/js";
+import tseslint from "@typescript-eslint/eslint-plugin";
 import { defineConfig } from "eslint/config";
 import prettierConfig from "eslint-config-prettier/flat";
 // @ts-expect-error
@@ -34,6 +35,19 @@ export default defineConfig([
     files: ["**/*.{js,mjs,cjs}"],
     plugins: { js },
     extends: ["js/recommended"],
+  },
+  {
+    files: ["**/*.{js,mjs,cjs}"],
+    // @ts-expect-error
+    plugins: { "@typescript-eslint": tseslint },
+    rules: {
+      "@typescript-eslint/ban-ts-comment": [
+        "error",
+        {
+          "ts-expect-error": false,
+        },
+      ],
+    },
   },
   {
     rules: {
