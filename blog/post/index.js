@@ -74,7 +74,7 @@ function PrevNextLinks(context, { blogMeta }) {
     ? html`
         <a href="../${blogMeta.links.previous.slug}/">
           <article>
-            ${context.l10n("page_previous")`Previous Post`}
+            ${context.l10n("blog_previous")`Previous Post`}
             ${blogMeta.links.previous.title}
           </article>
         </a>
@@ -84,7 +84,7 @@ function PrevNextLinks(context, { blogMeta }) {
     ? html`
         <a href="../${blogMeta.links.next.slug}/">
           <article>
-            ${context.l10n("page_next")`Next post`} ${blogMeta.links.next.title}
+            ${context.l10n("blog_next")`Next post`} ${blogMeta.links.next.title}
           </article>
         </a>
       `

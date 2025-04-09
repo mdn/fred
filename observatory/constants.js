@@ -1,5 +1,3 @@
-export const OBSERVATORY_TITLE = "HTTP Observatory";
-export const OBSERVATORY_TITLE_FULL = "HTTP Observatory | MDN";
 export const OBSERVATORY_API_URL = "https://observatory-api.mdn.mozilla.net";
 
 /**

@@ -5,7 +5,6 @@ import landingSvg from "../assets/landing-illustration.svg?lit";
 import mdnSvg from "../assets/mdn.svg?lit";
 import scanningSvg from "../assets/scanning.svg?lit";
 import securitySvg from "../assets/security.svg?lit";
-import { OBSERVATORY_TITLE } from "../constants.js";
 import { FAQ } from "../faq.js";
 import { Feedback } from "../feedback.js";
 
@@ -21,12 +20,10 @@ export function Landing(context) {
     <section class="obs-landing-top">
       <section class="obs-landing-top__form">
         <h1>
-          <span class="accent">${OBSERVATORY_TITLE}</span>
+          <span class="accent">${context.l10n("obs_title")}</span>
         </h1>
         <p>
-          Launched in 2016, the HTTP Observatory enhances web security by
-          analyzing compliance with best security practices. It has provided
-          insights to over 6.9 million websites through 47 million scans.
+          ${context.l10n("obs_landing_intro")}
         </p>
         <mdn-observatory-form></mdn-observatory-form>
       </section>
@@ -36,15 +33,13 @@ export function Landing(context) {
     </section>
     <section class="obs-landing-about">
       <section class="obs-landing-about__content">
-        <h2>About the HTTP Observatory</h2>
+        <h2>${context.l10n("obs_about_title")`About the HTTP Observatory`}</h2>
         <div class="about-copy">
           <figure class="assessment">
             ${assessmentSvg}
             <figcaption>
               <p>
-                Developed by Mozilla, the HTTP Observatory performs an in-depth
-                assessment of a site’s HTTP headers and other key security
-                configurations.
+                ${context.l10n("obs_assessment")}
               </p>
             </figcaption>
           </figure>
@@ -54,9 +49,7 @@ export function Landing(context) {
             ${scanningSvg}
             <figcaption>
               <p>
-                Its automated scanning process provides developers and website
-                administrators with detailed, actionable feedback, focusing on
-                identifying and addressing potential security vulnerabilities.
+                ${context.l10n("obs_scanning")}
               </p>
             </figcaption>
           </figure>
@@ -66,9 +59,7 @@ export function Landing(context) {
             ${securitySvg}
             <figcaption>
               <p>
-                The tool is instrumental in helping developers and website
-                administrators strengthen their sites against common security
-                threats in a constantly advancing digital environment.
+                ${context.l10n("obs_security")}
               </p>
             </figcaption>
           </figure>
@@ -78,10 +69,7 @@ export function Landing(context) {
             ${mdnSvg}
             <figcaption>
               <p>
-                The HTTP Observatory provides effective security insights,
-                guided by Mozilla's expertise and commitment to a safer and more
-                secure internet and based on well-established trends and
-                guidelines.
+                ${context.l10n("obs_mdn")}
               </p>
             </figcaption>
           </figure>

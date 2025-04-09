@@ -16,9 +16,19 @@ blog_time_to_read = { $minutes ->
 }
 blog_post_not_found = Blogartikel nicht gefunden.
 
-page_previous = Voriger Artikel
-page_next = Nächster Artikel
+blog_previous = Voriger Artikel
+blog_next = Nächster Artikel
 
 No = Nein
 Submit = Abschicken
 Yes = Ja
+
+Report = Report
+
+obs_title = HTTP Observatory
+obs_title_full = HTTP Observatory | MDN
+obs_landing_intro = Das 2016 gestartete HTTP Observatory verbessert die Sicherheit durch Analyse der Einhaltung bewährter Sicherheitspraktiken. Es hat durch 47 Millionen Scans Einblicke in über 6,9 Millionen Websites geliefert.
+obs_assessment = Das von Mozilla entwickelte HTTP Observatory führt eine umfassende Bewertung der HTTP-Header und weiterer zentraler Sicherheitskonfigurationen einer Website durch.
+obs_scanning = Der automatisierte Scan-Prozess liefert Entwicklern und Website-Administratoren detailliertes, handlungsorientiertes Feedback und konzentriert sich darauf, potenzielle Sicherheitslücken zu erkennen und zu beheben.
+obs_security = Das Tool unterstützt Entwickler und Website-Administratoren maßgeblich dabei, ihre Websites in einem sich stetig weiterentwickelnden digitalen Umfeld gegen häufige Sicherheitsbedrohungen abzusichern.
+obs_mdn = Das HTTP Observatory bietet wirksame Sicherheitseinblicke auf Grundlage von Mozillas Expertise und Engagement für ein sichereres Internet sowie basierend auf etablierten Trends und Richtlinien.
