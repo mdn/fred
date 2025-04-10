@@ -210,7 +210,7 @@
       &.icon-chevron {
         position: absolute;
         right: var(--chevron-padding-right);
-        mask-image: url("../icon/chevron.svg");
+        mask-image: url("./icons/chevron.svg");
       }
     }
   }
