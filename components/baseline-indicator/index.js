@@ -74,30 +74,49 @@ export function BaselineIndicator(context) {
 
   const feedbackLink = `${SURVEY_URL}?page=${encodeURIComponent(context.url)}&level=${level}`;
 
-  const supported = /** @param {Baseline.BrowserGroup} browser */ (browser) => {
+  const isBrowserSupported = /** @param {Baseline.BrowserGroup} browser */ (
+    browser,
+  ) => {
     return browser.ids.map((id) => status.support?.[id]).every(Boolean);
   };
 
   const engineTitle = /** @param {Baseline.BrowserGroup[]} browsers */ (
     browsers,
-  ) =>
-    browsers
-      .map((browser, index, array) => {
-        // @ts-expect-error Understand why this works in yari, but not here.
-        const previous = index > 0 ? supported(array[index - 1]) : undefined;
-        const current = supported(browser);
-        const name = browser.name;
-        return previous === undefined
-          ? current
-            ? `Supported in ${name}`
-            : `Not widely supported in ${name}`
-          : current === previous
-            ? ` and ${name}`
-            : current
-              ? `, and supported in ${name}`
-              : `, and not widely supported in ${name}`;
-      })
-      .join("");
+  ) => {
+    const supported = [];
+    const unsupported = [];
+
+    for (const browser of browsers) {
+      if (isBrowserSupported(browser)) {
+        supported.push(browser.name);
+      } else {
+        unsupported.push(browser.name);
+      }
+    }
+
+    const formatter = new Intl.ListFormat(context.locale);
+    const parts = [];
+
+    if (supported.length > 0) {
+      parts.push(
+        context.l10n.raw({
+          id: "baseline_supported_in",
+          args: { browsers: formatter.format(supported) },
+        }),
+      );
+    }
+
+    if (unsupported.length > 0) {
+      parts.push(
+        context.l10n.raw({
+          id: "baseline_not_widely_supported_in",
+          args: { browsers: formatter.format(unsupported) },
+        }),
+      );
+    }
+
+    return parts.join(" ");
+  };
 
   return html`<details
     class="baseline-indicator ${level}"
@@ -107,23 +126,27 @@ export function BaselineIndicator(context) {
       <span
         class="indicator"
         role="img"
-        aria-label=${level === "not" ? "Baseline Cross" : "Baseline Check"}
+        aria-label=${level === "not"
+          ? context.l10n`Baseline Cross`
+          : context.l10n`Baseline Check`}
       ></span>
       <div class="status-title">
         ${level === "not"
-          ? html`<span class="not-bold">Limited availability</span>`
+          ? html`<span class="not-bold"
+              >${context.l10n`Limited availability`}</span
+            >`
           : html`
-              Baseline
+              ${context.l10n`Baseline`}
               <span class="not-bold">
                 ${level === "high"
-                  ? "Widely available"
+                  ? context.l10n`Widely available`
                   : low_date?.getFullYear()}
               </span>
               ${status.asterisk && " *"}
             `}
       </div>
       ${level === "low"
-        ? html`<div class="pill">Newly available</div>`
+        ? html`<div class="pill">${context.l10n`Newly available`}</div>`
         : nothing}
       <div class="browsers">
         ${ENGINES.map(
@@ -138,10 +161,10 @@ export function BaselineIndicator(context) {
                   html`<span
                     key=${browser.ids[0]}
                     class=${`browser ${browser.ids[0]} ${
-                      supported(browser) ? "supported" : ""
+                      isBrowserSupported(browser) ? "supported" : ""
                     }`}
                     role="img"
-                    aria-label=${`${browser.name} ${supported(browser) ? "check" : "cross"}`}
+                    aria-label=${`${browser.name} ${isBrowserSupported(browser) ? context.l10n`check` : context.l10n`cross`}`}
                   ></span>`,
               )}
             </span>`,
@@ -152,32 +175,35 @@ export function BaselineIndicator(context) {
     <div class="extra">
       ${level === "high" && low_date
         ? html`<p>
-            This feature is well established and works across many devices and
-            browser versions. It’s been available across browsers since
-            ${low_date.toLocaleDateString(DEFAULT_LOCALE, {
-              year: "numeric",
-              month: "long",
+            ${context.l10n.raw({
+              id: "baseline_high_extra",
+              args: {
+                date: low_date.toLocaleDateString(context.locale, {
+                  year: "numeric",
+                  month: "long",
+                }),
+              },
             })}
-            .
           </p>`
         : level === "low" && low_date
           ? html`<p>
-              Since
-              ${low_date.toLocaleDateString(DEFAULT_LOCALE, {
-                year: "numeric",
-                month: "long",
+              ${context.l10n.raw({
+                id: "baseline_low_extra",
+                args: {
+                  date: low_date.toLocaleDateString(DEFAULT_LOCALE, {
+                    year: "numeric",
+                    month: "long",
+                  }),
+                },
               })}
-              , this feature works across the latest devices and browser
-              versions. This feature might not work in older devices or
-              browsers.
             </p>`
-          : html`<p>
-              This feature is not Baseline because it does not work in some of
-              the most widely-used browsers.
-            </p>`}
+          : html`<p>${context.l10n("baseline_not_extra")}</p>`}
       ${status.asterisk
         ? html`<p>
-            * Some parts of this feature may have varying levels of support.
+            ${context.l10n.raw({
+              id: "baseline_asterisk",
+              args: { asterisk: "*" },
+            })}
           </p>`
         : nothing}
       <ul>
@@ -188,12 +214,12 @@ export function BaselineIndicator(context) {
             target="_blank"
             class="learn-more"
           >
-            Learn more
+            ${context.l10n`Learn more`}
           </a>
         </li>
         <li>
           <a href=${bcdLink} data-glean="baseline_link_bcd_table">
-            See full compatibility
+            ${context.l10n`See full compatibility`}
           </a>
         </li>
         <li>
@@ -204,7 +230,7 @@ export function BaselineIndicator(context) {
             target="_blank"
             rel="noreferrer"
           >
-            Report feedback
+            ${context.l10n`Report feedback`}
           </a>
         </li>
       </ul>
