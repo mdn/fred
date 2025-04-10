@@ -94,7 +94,10 @@ export function BaselineIndicator(context) {
       }
     }
 
-    const formatter = new Intl.ListFormat(context.locale);
+    const formatter =
+      supported.length > 1 || unsupported.length > 1
+        ? new Intl.ListFormat(context.locale)
+        : { format: /** @param {string[]} list */ (list) => list.at(0) };
 
     if (supported.length > 0 && unsupported.length > 0) {
       return context.l10n.raw({
