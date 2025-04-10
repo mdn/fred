@@ -2,7 +2,7 @@ import { LitElement, html } from "lit";
 
 import { MDNButton } from "../button/element";
 
-export class MDNCopy extends LitElement {
+export class MDNCopyButton extends LitElement {
   static properties = {
     _message: { state: true },
   };
@@ -51,4 +51,4 @@ export class MDNCopy extends LitElement {
   }
 }
 
-customElements.define("mdn-copy", MDNCopy);
+customElements.define("mdn-copy-button", MDNCopyButton);

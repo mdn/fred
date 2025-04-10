@@ -10,7 +10,7 @@ import "./components/dropdown/index.js";
 import "./observatory/landing/form.js";
 import "./observatory/results/results.js";
 import "./components/site-search/index.js";
-import "./components/copy/index.js";
+import "./components/copy-button/index.js";
 
 // hooks:
 import "./hooks/code-examples.js";

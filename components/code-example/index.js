@@ -43,7 +43,7 @@ export class MDNCodeExample extends LitElement {
       <div class="wrapper">
         <div class="header">
           ${this.language}
-          <mdn-copy .copiesFrom=${this._codeRef.value}></mdn-copy>
+          <mdn-copy-button .copiesFrom=${this._codeRef.value}></mdn-copy-button>
         </div>
         <pre><code ${ref(this._codeRef)}>${this._highlightTask.render({
           initial: () => this._code,
