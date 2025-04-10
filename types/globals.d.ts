@@ -1,3 +1,4 @@
+import { MDNCodeExample } from "../components/code-example";
 import { ColorTheme } from "../components/color-theme";
 import { LazyCompatTable } from "../components/compat";
 import { MDNCopy } from "../components/copy";
@@ -9,5 +10,6 @@ declare global {
     "mdn-color-theme": ColorTheme;
     "quick-search": QuickSearch;
     "mdn-copy": MDNCopy;
+    "mdn-code-example": MDNCodeExample;
   }
 }

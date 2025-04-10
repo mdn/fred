@@ -43,7 +43,7 @@ export async function highlightElement(element, language) {
  * @param {string} language
  * @returns {Promise<string | undefined>}
  */
-async function highlightString(text, language) {
+export async function highlightString(text, language) {
   const resolvedLanguage = ALIASES.get(language) || language;
 
   try {

@@ -13,4 +13,4 @@ import "./components/site-search/index.js";
 import "./components/copy/index.js";
 
 // hooks:
-import "./hooks/code-examples/index.js";
+import "./hooks/code-examples.js";

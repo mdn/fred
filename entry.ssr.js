@@ -21,10 +21,6 @@ import { Search } from "./pages/search/index.js";
 import { SettingsBody } from "./pages/settings/index.js";
 import { runWithContext } from "./symmetric-context/server.js";
 
-// TODO: remove once we've implemented our own theme
-// TODO: move to a more sensible place: how should hooks import css server side?
-import "prismjs/themes/prism.css";
-
 /**
  * @param {string} path
  * @param {import("@rsbuild/core").ManifestData} ssrManifest
