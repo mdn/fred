@@ -149,7 +149,7 @@ export function BaselineIndicator(context) {
             </span>`,
         )}
       </div>
-      <!-- TODO <Icon name="chevron" /> -->
+      <span class="icon icon-chevron"></span>
     </summary>
     <div class="extra">
       ${level === "high" && low_date

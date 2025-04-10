@@ -196,12 +196,22 @@
       }
     }
 
-    .icon-chevron {
-      --icon-size: var(--chevron-size);
-      --icon-primary: var(--text-primary);
+    .icon {
+      display: inline-block;
 
-      position: absolute;
-      right: var(--chevron-padding-right);
+      width: var(--chevron-size);
+      height: var(--chevron-size);
+
+      background-color: var(--color-text-primary);
+
+      mask-repeat: no-repeat;
+      mask-position: center;
+
+      &.icon-chevron {
+        position: absolute;
+        right: var(--chevron-padding-right);
+        mask-image: url("../icon/chevron.svg");
+      }
     }
   }
 
