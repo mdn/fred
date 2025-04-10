@@ -17,70 +17,72 @@ import "../index.css";
  */
 export function Landing(context) {
   return html`
-    <section class="obs-landing-top">
-      <section class="obs-landing-top__form">
-        <h1>
-          <span class="accent">${context.l10n("obs_title")}</span>
-        </h1>
-        <p>
-          ${context.l10n("obs_landing_intro")}
-        </p>
-        <mdn-observatory-form></mdn-observatory-form>
-      </section>
-      <section class="obs-landing-top__illustration">
-        ${landingSvg}
-      </section>
-    </section>
-    <section class="obs-landing-about">
-      <section class="obs-landing-about__content">
-        <h2>${context.l10n("obs_about_title")`About the HTTP Observatory`}</h2>
-        <div class="about-copy">
-          <figure class="assessment">
-            ${assessmentSvg}
-            <figcaption>
-              <p>
-                ${context.l10n("obs_assessment")}
-              </p>
-            </figcaption>
-          </figure>
-          <!-- lines-svg class="lines assessment" role="none"></lines-svg -->
-          ${LinesSVG({ className: "lines assessment" })}
-          <figure class="scanning">
-            ${scanningSvg}
-            <figcaption>
-              <p>
-                ${context.l10n("obs_scanning")}
-              </p>
-            </figcaption>
-          </figure>
-          <!-- lines-svg class="lines scanning" role="none"></lines-svg -->
-          ${LinesSVG({ className: "lines scanning" })}
-          <figure class="security">
-            ${securitySvg}
-            <figcaption>
-              <p>
-                ${context.l10n("obs_security")}
-              </p>
-            </figcaption>
-          </figure>
-          <!-- lines-svg class="lines security" role="none"></lines-svg -->
-          ${LinesSVG({ className: "lines security" })}
-          <figure class="mdn">
-            ${mdnSvg}
-            <figcaption>
-              <p>
-                ${context.l10n("obs_mdn")}
-              </p>
-            </figcaption>
-          </figure>
-        </div>
-      </section>
-      <section class="obs-landing-about__links">
-        ${FAQ(context)}
-        ${Feedback(context)}
-      </section>
-    </section>
-  </section>`;
+    <div class="obs-layout obs-layout--landing">
+      <div class="obs-layout__content obs-layout__content--landing">
+        <section class="obs-landing-top">
+          <section class="obs-landing-top__form">
+            <h1>
+              <span class="accent">${context.l10n("obs_title")}</span>
+            </h1>
+            <p>
+              ${context.l10n("obs_landing_intro")}
+            </p>
+            <mdn-observatory-form></mdn-observatory-form>
+          </section>
+          <section class="obs-landing-top__illustration">
+            ${landingSvg}
+          </section>
+        </section>
+        <section class="obs-landing-about">
+          <section class="obs-landing-about__content">
+            <h2>${context.l10n("obs_about_title")`About the HTTP Observatory`}</h2>
+            <div class="about-copy">
+              <figure class="assessment">
+                ${assessmentSvg}
+                <figcaption>
+                  <p>
+                    ${context.l10n("obs_assessment")}
+                  </p>
+                </figcaption>
+              </figure>
+              ${LinesSVG({ className: "lines assessment" })}
+              <figure class="scanning">
+                ${scanningSvg}
+                <figcaption>
+                  <p>
+                    ${context.l10n("obs_scanning")}
+                  </p>
+                </figcaption>
+              </figure>
+              ${LinesSVG({ className: "lines scanning" })}
+              <figure class="security">
+                ${securitySvg}
+                <figcaption>
+                  <p>
+                    ${context.l10n("obs_security")}
+                  </p>
+                </figcaption>
+              </figure>
+              ${LinesSVG({ className: "lines security" })}
+              <figure class="mdn">
+                ${mdnSvg}
+                <figcaption>
+                  <p>
+                    ${context.l10n("obs_mdn")}
+                  </p>
+                </figcaption>
+              </figure>
+            </div>
+          </section>
+          <section class="obs-landing-about__links">
+            ${FAQ(context)}
+            ${Feedback(context)}
+          </section>
+        </section>
+        </section>
+      </div>
+    </div>
+  `;
 }
 
 /**
