@@ -11,6 +11,6 @@ import "./index.css";
  */
 export function Heading(level, id, title) {
   return id
-    ? hh`<${unsafeStatic("h" + level)} id=${ifDefined(id)} class="heading"><a class="heading-anchor" href="#${id}">${title}</a></${unsafeStatic("h" + level)}>`
+    ? hh`<${unsafeStatic("h" + level)} id=${ifDefined(id)} class="heading"><a class="heading-anchor" href="#${id}">${unsafeStatic(title)}</a></${unsafeStatic("h" + level)}>`
     : nothing;
 }
