@@ -176,12 +176,12 @@ table {
       background-color: var(--compat-icon-critical);
 
       /* override icon */
-      mask-image: url("./icons/no.svg");
+      mask-image: url("./icons/status/no.svg");
     }
 
     .timeline .icon.icon-removed-partial {
       background-color: var(--compat-icon-primary);
-      mask-image: url("./icons/partial.svg");
+      mask-image: url("./icons/status/partial.svg");
     }
   }
 
@@ -362,7 +362,7 @@ table {
   .bc-level-yes.icon.icon-yes {
     /* override icon */
     background-color: var(--compat-icon-success);
-    mask-image: url("./icons/yes-circle.svg");
+    mask-image: url("./icons/status/yes-circle.svg");
   }
 
   .bc-supports-dd {

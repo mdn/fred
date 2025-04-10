@@ -1,0 +1,131 @@
+.icon {
+  --color: var(--icon-primary, light-dark(#696969, #ffffff));
+  --size: var(--icon-size, 1rem);
+
+  display: inline-block;
+
+  flex-shrink: 0;
+
+  width: var(--size);
+  height: var(--size);
+
+  vertical-align: middle;
+
+  background-color: var(--color);
+
+  mask-repeat: no-repeat;
+  mask-position: center center;
+
+  /** Platform icons. */
+  &.icon-desktop {
+    mask-image: url("./icons/platform/desktop.svg");
+  }
+
+  &.icon-mobile {
+    mask-image: url("./icons/platform/mobile.svg");
+  }
+
+  &.icon-server {
+    mask-image: url("./icons/platform/server.svg");
+  }
+
+  /** Browser icons. */
+
+  &.icon-chrome {
+    mask-image: url("./icons/browser/chrome.svg");
+  }
+
+  &.icon-deno {
+    mask-image: url("./icons/browser/deno.svg");
+  }
+
+  &.icon-edge {
+    mask-image: url("./icons/browser/edge.svg");
+  }
+
+  &.icon-firefox {
+    mask-image: url("./icons/browser/firefox.svg");
+  }
+
+  &.icon-edge {
+    mask-image: url("./icons/browser/edge.svg");
+  }
+
+  &.icon-nodejs {
+    mask-image: url("./icons/browser/nodejs.svg");
+  }
+
+  &.icon-opera {
+    mask-image: url("./icons/browser/opera.svg");
+  }
+
+  &.icon-safari {
+    mask-image: url("./icons/browser/safari.svg");
+  }
+
+  &.icon-samsunginternet {
+    mask-image: url("./icons/browser/samsunginternet.svg");
+  }
+
+  &.icon-webview {
+    mask-image: url("./icons/browser/webview.svg");
+  }
+
+  /** Status icons. */
+
+  &.icon-no {
+    mask-image: url("./icons/status/no.svg");
+  }
+
+  &.icon-partial {
+    mask-image: url("./icons/status/partial.svg");
+  }
+
+  &.icon-yes {
+    mask-image: url("./icons/status/yes.svg");
+  }
+
+  &.icon-yes-circle {
+    mask-image: url("./icons/status/yes-circle.svg");
+  }
+
+  &.icon-experimental {
+    mask-image: url("./icons/status/experimental.svg");
+  }
+
+  &.icon-deprecated {
+    mask-image: url("./icons/status/deprecated.svg");
+  }
+
+  &.icon-nonstandard {
+    mask-image: url("./icons/status/nonstandard.svg");
+  }
+
+  &.icon-footnote {
+    mask-image: url("./icons/status/footnote.svg");
+  }
+
+  &.icon-unknown {
+    mask-image: url("./icons/status/unknown.svg");
+  }
+
+  &.icon-prefix {
+    mask-image: url("./icons/status/prefix.svg");
+  }
+
+  &.icon-altname {
+    mask-image: url("./icons/status/altname.svg");
+  }
+
+  &.icon-disabled {
+    mask-image: url("./icons/status/disabled.svg");
+  }
+
+  &.icon-more {
+    mask-image: url("./icons/status/more.svg");
+  }
+
+  &.icon-preview {
+    mask-image: url("./icons/status/preview.svg");
+  }
+}

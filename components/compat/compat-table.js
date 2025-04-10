@@ -41,7 +41,7 @@ const ISSUE_METADATA_TEMPLATE = `
  */
 function browserToIconName(browser) {
   if (browser.startsWith("firefox")) {
-    return "simple-firefox";
+    return "firefox";
   } else if (browser === "webview_android") {
     return "webview";
   } else if (browser === "webview_ios") {
