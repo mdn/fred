@@ -17,8 +17,8 @@
 
     margin: 0.1rem;
 
-    border: 0.1rem solid var(--text-primary);
-    border-color: var(--text-primary) transparent transparent transparent;
+    border: 0.1rem solid var(--color-text-primary);
+    border-color: var(--color-text-primary) transparent transparent transparent;
     border-radius: 50%;
 
     animation: spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;

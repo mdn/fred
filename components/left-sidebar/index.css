@@ -10,7 +10,7 @@
     cursor: pointer;
 
     &:hover {
-      background-color: var(--background-secondary);
+      background-color: var(--color-background-secondary);
     }
   }
 
@@ -28,18 +28,18 @@
 
     padding: 0.75rem 1rem;
 
-    color: var(--text-primary);
+    color: var(--color-text-primary);
 
     text-decoration: none;
 
     &:hover {
-      color: var(--link-normal);
+      color: var(--color-link-normal);
     }
 
     &[aria-current="true"] {
       display: flex;
-      background-color: var(--background-blue);
-      border-left: 2px solid var(--blue);
+      background-color: var(--color-background-blue);
+      border-left: 2px solid var(--color-blue);
     }
   }
 

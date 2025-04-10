@@ -23,7 +23,7 @@
     font-family: var(--font-code);
     font-size-adjust: 0.5;
 
-    background-color: var(--background-secondary-alpha);
+    background-color: var(--color-background-secondary);
     border-radius: 0.25em;
   }
 
@@ -32,7 +32,7 @@
 
     overflow: auto;
 
-    background-color: var(--background-secondary);
+    background-color: var(--color-background-secondary);
     border-radius: 0.25em;
 
     code {
@@ -48,13 +48,13 @@
     th,
     td {
       padding: 0.5rem 0.75rem;
-      border: 1px solid var(--text-secondary);
+      border: 1px solid var(--color-text-secondary);
     }
 
     th {
       font-weight: normal;
       text-align: left;
-      background-color: var(--background-secondary);
+      background-color: var(--color-background-secondary);
     }
   }
 }
