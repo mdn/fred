@@ -1,0 +1,12 @@
+/* Link */
+
+:root {
+  --color-link-normal: light-dark(
+    var(--color-blue-dark),
+    var(--color-blue-light)
+  );
+  --color-link-visited: light-dark(
+    var(--color-purple-dark),
+    var(--color-purple-light)
+  );
+}

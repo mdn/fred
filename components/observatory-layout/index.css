@@ -3,8 +3,8 @@
 .obs-layout {
   /* colors */
 
-  --text-primary: light-dark(#1b1b1b, #ffffff);
-  --text-secondary: light-dark(#4e4e4e, #cdcdcd);
+  --color-text-primary: light-dark(#1b1b1b, #ffffff);
+  --color-text-secondary: light-dark(#4e4e4e, #cdcdcd);
 
   --observatory-bg: light-dark(rgb(242 242 245 / 100%), rgb(52 52 52 / 100%));
   --observatory-bg-code: light-dark(#e1e1e1, #4d4d4d);

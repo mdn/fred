@@ -33,12 +33,12 @@
     text-decoration: none;
 
     &:hover:not([aria-current="true"]) {
-      color: var(--link-normal);
+      color: var(--color-link-normal);
     }
 
     &[aria-current="true"] {
-      background-color: var(--background-blue);
-      box-shadow: -2px 0 0 var(--blue);
+      background-color: var(--color-background-blue);
+      box-shadow: -2px 0 0 var(--color-blue);
     }
   }
 }

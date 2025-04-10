@@ -63,7 +63,7 @@ export class ComparisonTable extends LitElement {
     }
 
     .chart {
-      background-color: var(--background-primary);
+      background-color: var(--color-background-primary);
       border-radius: var(--border-radius);
     }
 
@@ -107,13 +107,13 @@ export class ComparisonTable extends LitElement {
 
     .you-are-here {
       & polyline {
-        fill: var(--background-primary);
+        fill: var(--color-background-primary);
         filter: drop-shadow(0 0 3px rgb(170 170 170));
         z-index: 9;
       }
 
       & text {
-        fill: var(--text-primary);
+        fill: var(--color-text-primary);
         font-family: var(--font-body);
         font-size: 0.85rem;
         font-weight: 300;

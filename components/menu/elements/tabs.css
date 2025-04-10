@@ -14,8 +14,8 @@
 /* Button */
 
 .menu__tabs-button {
-  --menu-tabs-button-background: var(--background-blue);
-  --menu-tabs-button-text: var(--text-blue);
+  --menu-tabs-button-background: var(--color-background-blue);
+  --menu-tabs-button-text: var(--color-text-blue);
   display: flex;
 
   column-gap: 0.25rem;
@@ -26,7 +26,7 @@
 
   font: inherit;
 
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 
   white-space: nowrap;
 
@@ -44,18 +44,18 @@
 }
 
 .menu__tabs-button--learn {
-  --menu-tabs-button-background: var(--background-orange);
-  --menu-tabs-button-text: var(--text-orange);
+  --menu-tabs-button-background: var(--color-background-orange);
+  --menu-tabs-button-text: var(--color-text-orange);
 }
 
 .menu__tabs-button--tools {
-  --menu-tabs-button-background: var(--background-purple);
-  --menu-tabs-button-text: var(--text-purple);
+  --menu-tabs-button-background: var(--color-background-purple);
+  --menu-tabs-button-text: var(--color-text-purple);
 }
 
 .menu__tabs-button--about {
-  --menu-tabs-button-background: var(--background-green);
-  --menu-tabs-button-text: var(--text-green);
+  --menu-tabs-button-background: var(--color-background-green);
+  --menu-tabs-button-text: var(--color-text-green);
 }
 
 /* Icon */
@@ -78,7 +78,7 @@
 
 .menu__tabs-link {
   padding: 0.7rem;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 
   &:hover {
     text-decoration: none;

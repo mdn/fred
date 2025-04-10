@@ -63,7 +63,7 @@ export class FormProgress extends LitElement {
         background: var(--button-primary-default);
         border-bottom-right-radius: var(--border-radius);
         border-top-right-radius: var(--border-radius);
-        color: var(--background-primary);
+        color: var(--color-background-primary);
         cursor: pointer;
         font: var(--type-emphasis-m);
         font-size: 1rem;

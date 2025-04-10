@@ -247,7 +247,7 @@
   padding-block: 0.75rem;
   padding-inline: 1rem;
 
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 
   background: var(--observatory-bg);
 
@@ -314,7 +314,7 @@ h2.obs-toc__heading {
   font: var(--type-heading-h5);
   font-size: var(--type-base-font-size-rem);
 
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 
   letter-spacing: 1.5px;
 }
@@ -326,21 +326,21 @@ h2.obs-toc__heading {
 
   font-size: var(--type-smaller-font-size);
 
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 
   text-decoration: none;
 
   list-style: none;
 
-  border-left: 2px solid var(--border-secondary);
+  border-left: 2px solid var(--color-border-secondary);
 }
 
 .obs-toc__item {
   padding: 0.5rem 0;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 
   a {
-    color: var(--text-secondary);
+    color: var(--color-text-secondary);
     text-decoration: none;
   }
 }

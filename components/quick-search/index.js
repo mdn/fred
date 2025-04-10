@@ -10,11 +10,11 @@ export class QuickSearch extends LitElement {
       height: 2rem;
       align-items: center;
       border-radius: calc(infinity * 1px);
-      border: 1px solid var(--text-secondary);
+      border: 1px solid var(--color-text-secondary);
 
       &:focus-within {
         width: 192px;
-        outline: 2px solid var(--brand-blue);
+        outline: 2px solid var(--color-blue);
         outline-offset: 2px;
       }
     }
@@ -32,7 +32,7 @@ export class QuickSearch extends LitElement {
 
       &::placeholder {
         font-weight: bold;
-        color: var(--brand-blue);
+        color: var(--color-blue);
       }
     }
 
@@ -46,16 +46,16 @@ export class QuickSearch extends LitElement {
       border: none;
       border-radius: 50%;
       background-color: transparent;
-      color: var(--text-secondary);
+      color: var(--color-text-secondary);
       cursor: pointer;
       font: inherit;
 
       &:hover {
-        background-color: var(--background-secondary);
+        background-color: var(--color-background-secondary);
       }
 
       &:focus-visible {
-        outline: 2px solid var(--brand-blue);
+        outline: 2px solid var(--color-blue);
       }
     }
 

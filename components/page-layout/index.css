@@ -14,9 +14,9 @@
 
   font-family: var(--font-body);
 
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 
-  background-color: var(--background-primary);
+  background-color: var(--color-background-primary);
 }
 
 .page-layout__header {

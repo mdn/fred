@@ -20,7 +20,7 @@
 
   &:is(:hover, :focus),
   &[aria-expanded="true"] {
-    background-color: var(--background-secondary);
+    background-color: var(--color-background-secondary);
   }
 }
 
@@ -33,8 +33,8 @@
   padding: 0.75rem;
   margin: 0;
 
-  background-color: var(--background-primary);
-  border: 1px solid var(--text-secondary);
+  background-color: var(--color-background-primary);
+  border: 1px solid var(--color-text-secondary);
 
   &[data-side="left"] {
     right: 0;
@@ -53,7 +53,7 @@
 
   list-style: none;
 
-  background-color: var(--background-primary);
+  background-color: var(--color-background-primary);
 }
 
 .color-theme__option {
@@ -69,12 +69,12 @@
 
   font: inherit;
 
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 
   background-color: transparent;
   border: none;
 
   &:hover {
-    background-color: var(--background-secondary);
+    background-color: var(--color-background-secondary);
   }
 }

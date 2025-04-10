@@ -13,8 +13,8 @@
   padding-block: 0.75rem;
   padding-inline: var(--navigation-side-padding);
 
-  background-color: var(--background-primary);
-  border-block-end: 1px solid var(--text-secondary);
+  background-color: var(--color-background-primary);
+  border-block-end: 1px solid var(--color-border-secondary);
 
   @media (width > 1440px) {
     padding-inline: calc(

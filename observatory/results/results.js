@@ -31,7 +31,7 @@ export class Results extends LitElement {
     }
 
     .scan-result {
-      background-color: var(--background-primary);
+      background-color: var(--color-background-primary);
       border-radius: var(--border-radius);
       justify-content: space-between;
       margin-bottom: 3rem;
@@ -306,7 +306,7 @@ export class Results extends LitElement {
 
       th {
         background: var(--observatory-table-header-bg);
-        color: var(--text-secondary);
+        color: var(--color-text-secondary);
         font-weight: 500;
         vertical-align: top;
       }
@@ -537,12 +537,12 @@ export class Results extends LitElement {
 
         > input:checked + label {
           border-bottom: 2px solid var(--observatory-accent);
-          color: var(--text-primary);
+          color: var(--color-text-primary);
         }
 
         > input:not(:checked) + label:hover {
           border-bottom: 2px solid var(--observatory-accent-light);
-          color: var(--text-primary);
+          color: var(--color-text-primary);
         }
 
         > input:checked:focus-visible + label {
@@ -552,7 +552,7 @@ export class Results extends LitElement {
         }
 
         > input:not(:checked) + label {
-          color: var(--text-secondary);
+          color: var(--color-text-secondary);
           opacity: 0.775;
         }
 

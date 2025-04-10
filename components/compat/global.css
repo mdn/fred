@@ -2,16 +2,19 @@
 
 :host {
   --compat-background-primary: var(
-    --background-primary,
+    --color-background-primary,
     light-dark(#ffffff, #1b1b1b)
   );
   --compat-background-secondary: var(
-    --background-secondary,
+    --color-background-secondary,
     light-dark(#f9f9fb, #313131)
   );
-  --compat-border-primary: var(--border-primary, light-dark(#cdcdcd, #858585));
+  --compat-border-primary: var(
+    --color-border-primary,
+    light-dark(#cdcdcd, #858585)
+  );
   --compat-border-secondary: var(
-    --border-secondary,
+    --color-border-secondary,
     light-dark(#cdcdcd, #696969)
   );
 
@@ -33,24 +36,27 @@
   --compat-icon-success: var(--icon-success, light-dark(#007936, #00b755));
 
   /* --compat-padding-bottom-offset (internal) */
-  --compat-text-link: var(--text-link, light-dark(#0069c2, #8cb4ff));
+  --compat-text-link: var(--color-text-link, light-dark(#0069c2, #8cb4ff));
   --compat-text-primary-blue: var(
-    --text-primary-blue,
+    --color-text-primary-blue,
     light-dark(#0069c2, #8cb4ff)
   );
   --compat-text-primary-green: var(
-    --text-primary-green,
+    --color-text-primary-green,
     light-dark(#007936, #00d061)
   );
   --compat-text-primary-red: var(
-    --text-primary-red,
+    --color-text-primary-red,
     light-dark(#d30038, #ff97a0)
   );
   --compat-text-primary-yellow: var(
-    --text-primary-yellow,
+    --color-text-primary-yellow,
     light-dark(#746a00, #c7b700)
   );
-  --compat-text-primary: var(--text-primary, light-dark(#1b1b1b, #ffffff));
+  --compat-text-primary: var(
+    --color-text-primary,
+    light-dark(#1b1b1b, #ffffff)
+  );
   --compat-type-smaller-font-size: var(--type-smaller-font-size, 0.833rem);
 }
 

@@ -94,23 +94,23 @@ article.settings {
 
           font-size: 0.8rem;
 
-          color: var(--text-link);
+          color: var(--color-text-link);
 
           text-align: center;
 
-          background-color: var(--background-primary);
-          border: 1px solid var(--text-primary);
+          background-color: var(--color-background-primary);
+          border: 1px solid var(--color-text-primary);
           border-radius: var(--elem-radius);
 
           &:hover {
-            background-color: var(--background-secondary);
+            background-color: var(--color-background-secondary);
           }
         }
 
         button[disabled] {
-          color: var(--text-secondary);
-          background-color: var(--background-secondary);
-          border: 1px solid var(--text-secondary);
+          color: var(--color-text-secondary);
+          background-color: var(--color-background-secondary);
+          border: 1px solid var(--color-text-secondary);
         }
       }
     }

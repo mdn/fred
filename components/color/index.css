@@ -1,0 +1,67 @@
+/* Color */
+
+@import url("border.css");
+@import url("background.css");
+@import url("text.css");
+@import url("link.css");
+
+/* Basic */
+
+:root {
+  --color-white: #ffffff;
+  --color-black: #000000;
+}
+
+/* Gray */
+
+:root {
+  --color-gray-1: #f9f9fb;
+  --color-gray-2: #e9e9e9;
+  --color-gray-3: #d9d9d9;
+  --color-gray-4: #c9c9c9;
+  --color-gray-5: #b9b9b9;
+  --color-gray-6: #a9a9a9;
+  --color-gray-7: #696969;
+  --color-gray-8: #2f2f2f;
+  --color-gray-9: #1b1b1b;
+}
+
+/* Tinted */
+
+:root {
+  --color-red: hsl(350deg 84% 45%);
+  --color-red-light: hsl(350deg 90% 60%);
+  --color-red-dark: hsl(350deg 84% 39%);
+  --color-red-light-super: hsl(350deg 100% 95%);
+  --color-red-dark-super: hsl(350deg 60% 15%);
+
+  --color-orange: hsl(25deg 76% 53%);
+  --color-orange-light: hsl(25deg 93% 63%);
+  --color-orange-dark: hsl(25deg 78% 40%);
+  --color-orange-light-super: hsl(25deg 92% 95%);
+  --color-orange-dark-super: hsl(25deg 55% 15%);
+
+  --color-yellow: hsl(46deg 92% 47%);
+  --color-yellow-light: hsl(46deg 90% 70%);
+  --color-yellow-dark: hsl(46deg 75% 38%);
+  --color-yellow-light-super: hsl(46deg 95% 95%);
+  --color-yellow-dark-super: hsl(46deg 70% 12%);
+
+  --color-green: hsl(145deg 90% 30%);
+  --color-green-light: hsl(145deg 55% 55%);
+  --color-green-dark: hsl(145deg 70% 24%);
+  --color-green-light-super: hsl(145deg 40% 93%);
+  --color-green-dark-super: hsl(145deg 50% 10%);
+
+  --color-blue: hsl(212deg 90% 39%);
+  --color-blue-light: hsl(212deg 91% 64%);
+  --color-blue-dark: hsl(212deg 80% 33%);
+  --color-blue-light-super: hsl(212deg 91% 95%);
+  --color-blue-dark-super: hsl(212deg 65% 12%);
+
+  --color-purple: hsl(267deg 76% 56%);
+  --color-purple-light: hsl(267deg 99% 74%);
+  --color-purple-dark: hsl(267deg 65% 40%);
+  --color-purple-light-super: hsl(267deg 99% 96%);
+  --color-purple-dark-super: hsl(267deg 55% 14%);
+}

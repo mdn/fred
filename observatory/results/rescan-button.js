@@ -12,7 +12,7 @@ export class RescanButton extends LitElement {
       background-color: var(--button-primary-default);
       border: 1px solid var(--button-border-color);
       border-radius: 0.25rem;
-      color: var(--background-primary);
+      color: var(--color-background-primary);
       display: flex;
       font: var(--type-emphasis-m);
       gap: 0.25rem;
@@ -83,7 +83,7 @@ export class RescanButton extends LitElement {
               class="progress"
               role="progressbar"
               aria-labelledby="wait-secs"
-              style="background: conic-gradient(var(--background-primary) 0grad, ${progressPercent}%, rgba(0,0,0,0) ${progressPercent}% 100%)"
+              style="background: conic-gradient(var(--color-background-primary) 0grad, ${progressPercent}%, rgba(0,0,0,0) ${progressPercent}% 100%)"
             ></div>
             <small id="wait-secs">Wait ${remainingSecs}s to rescan</small>
           </button>`}
