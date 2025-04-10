@@ -21,7 +21,6 @@ blog_next = Next Post
 Report = Report
 
 obs_title = HTTP Observatory
-obs_title_full = HTTP Observatory | MDN
 obs_landing_intro = Launched in 2016, the HTTP Observatory enhances web security by analyzing compliance with best security practices. It has provided insights to over 6.9 million websites through 47 million scans.
 obs_assessment = Developed by Mozilla, the HTTP Observatory performs an in-depth assessment of a site’s HTTP headers and other key security configurations.
 obs_scanning = Its automated scanning process provides developers and website administrators with detailed, actionable feedback, focusing on identifying and addressing potential security vulnerabilities.
