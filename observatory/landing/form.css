@@ -63,22 +63,22 @@
     font: var(--type-emphasis-m);
     font-size: 1rem;
 
-    color: var(--background-primary);
+    color: var(--observatory-button-primary-default);
 
     appearance: none;
     cursor: pointer;
 
-    background: var(--button-primary-default);
+    background: var(--observatory-button-primary-background);
     border: none;
     border-top-right-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
 
     &:hover {
-      background: var(--button-primary-hover);
+      background: var(--observatory-button-primary-default);
     }
 
     &:active {
-      background: var(--button-primary-active);
+      background: var(--observatory-button-primary-active);
     }
   }
 }
