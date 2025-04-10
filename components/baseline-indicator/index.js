@@ -95,27 +95,28 @@ export function BaselineIndicator(context) {
     }
 
     const formatter = new Intl.ListFormat(context.locale);
-    const parts = [];
 
-    if (supported.length > 0) {
-      parts.push(
-        context.l10n.raw({
-          id: "baseline_supported_in",
-          args: { browsers: formatter.format(supported) },
-        }),
-      );
+    if (supported.length > 0 && unsupported.length > 0) {
+      return context.l10n.raw({
+        id: "baseline_supported_and_unsupported_in",
+        args: {
+          supported: formatter.format(supported),
+          unsupported: formatter.format(unsupported),
+        },
+      });
+    } else if (supported.length > 0) {
+      return context.l10n.raw({
+        id: "baseline_supported_in",
+        args: { browsers: formatter.format(supported) },
+      });
+    } else if (unsupported.length > 0) {
+      return context.l10n.raw({
+        id: "baseline_unsupported_in",
+        args: { browsers: formatter.format(unsupported) },
+      });
+    } else {
+      return "";
     }
-
-    if (unsupported.length > 0) {
-      parts.push(
-        context.l10n.raw({
-          id: "baseline_not_widely_supported_in",
-          args: { browsers: formatter.format(unsupported) },
-        }),
-      );
-    }
-
-    return parts.join(" ");
   };
 
   return html`<details

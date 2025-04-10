@@ -5,8 +5,9 @@ baseline_asterisk = { $asterisk } Some parts of this feature may have varying le
 baseline_high_extra = This feature is well established and works across many devices and browser versions. It’s been available across browsers since { $date }.
 baseline_low_extra = Since { $date }, this feature works across the latest devices and browser versions. This feature might not work in older devices or browsers.
 baseline_not_extra = This feature is not Baseline because it does not work in some of the most widely-used browsers.
-baseline_supported_in = Supported in { $browsers }.
-baseline_not_widely_supported_in = Not widely supported in { $browsers }.
+baseline_supported_in = Supported in { $browsers }
+baseline_unsupported_in = Not widely supported in { $browsers }
+baseline_supported_and_unsupported_in = Supported in { $supported }, but not widely supported in { $unsupported }
 
 reference_toc_header = In this article
 
