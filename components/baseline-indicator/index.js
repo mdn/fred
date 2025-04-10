@@ -70,9 +70,7 @@ export function BaselineIndicator(context) {
     ? new Date(status.baseline_low_date.slice(low_date_range ? 1 : 0))
     : undefined;
 
-  const level =
-    // @ts-expect-error Check whether baseline can be false.
-    status.baseline ?? (status.baseline === false ? "not" : undefined);
+  const level = status.baseline || "not";
 
   const feedbackLink = `${SURVEY_URL}?page=${encodeURIComponent(context.url)}&level=${level}`;
 
