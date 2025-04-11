@@ -66,15 +66,19 @@ export class FormProgress extends LitElement {
 
   render() {
     return this._queryRunning
-      ? html` <label class="visually-hidden" for="progress-bar">
+      ? html`
+          <label class="visually-hidden" for="progress-bar">
             Scanning ${this._hostname} </label
-          ><mdn-progress-bar id="progress-bar"></mdn-progress-bar>`
-      : html`<form @submit=${this._handleSubmit}>
-            <div class="input-group">
+          ><mdn-progress-bar id="progress-bar"></mdn-progress-bar>
+        `
+      : html`
+          <form @submit=${this._handleSubmit} class="observatory-form">
+            <div class="observatory-form__input-group">
               <label htmlFor="host" class="visually-hidden">
                 Domain name or URL
               </label>
               <input
+                class="input observatory-form__input"
                 placeholder="Scan a website for free (e.g. mdn.dev)"
                 type="text"
                 name="host"
@@ -83,14 +87,19 @@ export class FormProgress extends LitElement {
                 autofocus
                 ${ref(this.inputRef)}
               />
-              <button type="submit" ?disabled=${this._queryRunning}>
+              <button
+                class="button observatory-form__submit"
+                type="submit"
+                ?disabled=${this._queryRunning}
+              >
                 Scan
               </button>
             </div>
           </form>
           ${this._errorMessage
             ? html`<div class="error">${this._errorMessage}</div>`
-            : nothing}`;
+            : nothing}
+        `;
   }
 }
 

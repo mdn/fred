@@ -68,7 +68,7 @@ export class ComparisonTable extends LitElement {
     }
 
     .tick text {
-      fill: var(--observatory-color-secondary);
+      fill: var(--color-text-secondary);
       font-family: var(--font-body);
       font-size: 1rem;
       font-weight: 300;
@@ -88,9 +88,9 @@ export class ComparisonTable extends LitElement {
     }
 
     .tick line {
-      color: var(--observatory-color-secondary);
+      color: var(--color-text-secondary);
       opacity: 0.9;
-      stroke: var(--observatory-border);
+      stroke: var(--color-border-primary);
       stroke-dasharray: 5, 5;
       stroke-width: 1px;
     }

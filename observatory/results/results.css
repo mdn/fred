@@ -1,26 +1,5 @@
-:host {
-  --border-radius: 0.3rem;
-  --progress-color: var(--observatory-accent);
-}
-
-.visually-hidden {
-  position: absolute !important;
-
-  width: 1px !important;
-  height: 1px !important;
-
-  padding: 0 !important;
-  margin: -1px !important;
-
-  overflow: hidden !important;
-
-  white-space: nowrap !important;
-
-  border: 0 !important;
-
-  clip: rect(1px, 1px, 1px, 1px) !important;
-  clip-path: inset(50%) !important;
-}
+@import url("./../../components/visually-hidden/index.css");
+@import url("./../../components/button/common.css");
 
 .scan-result {
   display: grid;
@@ -36,7 +15,7 @@
   padding: var(--spacing);
   margin-bottom: 3rem;
 
-  background-color: var(--background-primary);
+  background-color: var(--color-background-primary);
   border-radius: var(--border-radius);
 
   @media (width <= 1199px) {
@@ -68,7 +47,7 @@ h2 {
 
     content: "";
 
-    background-color: var(--observatory-color);
+    background-color: var(--color-text-primary);
 
     mask-repeat: no-repeat;
     mask-position: left;
@@ -125,9 +104,25 @@ code {
   font-size: var(--type-smaller-font-size);
   font-weight: 400;
 
-  a {
-    color: var(--observatory-color-secondary);
+  a.button {
+    color: var(--button-primary-default);
+    background-color: var(--color-background-secondary);
+
+    &:hover {
+      color: var(--button-primary-hover);
+      text-decoration: none;
+      background-color: var(--color-background-secondary);
+    }
+
+    &:active {
+      color: var(--button-primary-active);
+      background-color: var(--color-background-secondary);
+    }
   }
+
+  /* a {
+    color: var(--color-text-secondary);
+  } */
 }
 
 .label {
@@ -135,12 +130,12 @@ code {
 }
 
 a {
-  color: var(--observatory-color);
+  color: var(--color-text-primary);
   text-decoration: none;
 
   &:hover {
     text-decoration: underline;
-    text-decoration-color: var(--observatory-color-secondary);
+    text-decoration-color: var(--color-text-secondary);
   }
 }
 
@@ -289,7 +284,7 @@ a {
   padding: 0 1.5rem 0 0;
 
   .arrow {
-    color: var(--observatory-color-secondary);
+    color: var(--color-text-secondary);
   }
 
   .detail-header-title {
@@ -342,7 +337,7 @@ a {
 
     vertical-align: top;
 
-    color: var(--text-secondary);
+    color: var(--color-text-secondary);
 
     background: var(--observatory-table-header-bg);
   }
@@ -373,9 +368,9 @@ a {
   }
 
   a {
-    color: var(--observatory-color);
+    color: var(--color-text-primary);
     text-decoration: underline;
-    text-decoration-color: var(--observatory-color-secondary);
+    text-decoration-color: var(--color-text-secondary);
 
     &:hover,
     &:active {
@@ -384,7 +379,7 @@ a {
   }
 
   span.not-counted {
-    color: var(--observatory-color-secondary);
+    color: var(--color-text-secondary);
 
     a {
       text-decoration: none;
@@ -574,7 +569,7 @@ ol.tabs-list {
     content: "";
 
     border: none;
-    border-top: 1px solid var(--observatory-border);
+    border-top: 1px solid var(--color-border-primary);
   }
 
   input[type="radio"]:not(:checked) ~ .tab-content {
@@ -585,12 +580,12 @@ ol.tabs-list {
     display: contents;
 
     > input:checked + label {
-      color: var(--text-primary);
+      color: var(--color-text-primary);
       border-bottom: 2px solid var(--observatory-accent);
     }
 
     > input:not(:checked) + label:hover {
-      color: var(--text-primary);
+      color: var(--color-text-primary);
       border-bottom: 2px solid var(--observatory-accent-light);
     }
 
@@ -601,7 +596,7 @@ ol.tabs-list {
     }
 
     > input:not(:checked) + label {
-      color: var(--text-secondary);
+      color: var(--color-text-secondary);
       opacity: 0.775;
     }
 

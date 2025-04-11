@@ -1,28 +1,11 @@
+@import url("../../components/button/common.css");
+@import url("../../components/visually-hidden/index.css");
+
 :host {
   font: 400 var(--base-font-size) var(--font-body);
-  --border-radius: 0.3rem;
-  --progress-color: var(--observatory-accent);
 }
 
-.visually-hidden {
-  position: absolute !important;
-
-  width: 1px !important;
-  height: 1px !important;
-
-  padding: 0 !important;
-  margin: -1px !important;
-
-  overflow: hidden !important;
-
-  white-space: nowrap !important;
-
-  border: 0 !important;
-
-  clip-path: inset(50%) !important;
-}
-
-.input-group {
+.observatory-form__input-group {
   display: flex;
   height: 3rem;
 
@@ -33,11 +16,11 @@
   }
 
   ::placeholder {
-    color: var(--observatory-color-secondary);
+    color: var(--color-text-secondary);
     opacity: 0.8;
   }
 
-  input {
+  .observatory-form__input {
     flex-grow: 1;
 
     width: 100%;
@@ -46,8 +29,8 @@
 
     font: inherit;
 
-    background-color: var(--observatory-bg);
-    border: 1px solid var(--observatory-border);
+    background-color: var(--color-background-secondary);
+    border: 1px solid var(--color-border-secondary);
     border-top-left-radius: var(--border-radius);
     border-bottom-left-radius: var(--border-radius);
 
@@ -57,29 +40,24 @@
     }
   }
 
-  button {
+  .observatory-form__submit {
+    height: unset;
+
     padding: 0 2rem;
 
     font: var(--type-emphasis-m);
     font-size: 1rem;
 
-    color: var(--observatory-button-primary-default);
+    /* color: var(--button-color--default); */
 
-    appearance: none;
-    cursor: pointer;
+    /* appearance: none;
+    cursor: pointer; */
 
-    background: var(--observatory-button-primary-background);
+    /* background: var(--button-bg--default); */
     border: none;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
     border-top-right-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
-
-    &:hover {
-      background: var(--observatory-button-primary-default);
-    }
-
-    &:active {
-      background: var(--observatory-button-primary-active);
-    }
   }
 }
 

@@ -3,30 +3,8 @@
 .obs-layout {
   --spacing: 2rem;
 
-  /* colors */
+  --progress-color: var(--observatory-accent);
 
-  --text-primary: light-dark(var(--color-gray-9), var(--color-white));
-  --text-secondary: light-dark(var(--color-gray-7), var(--color-gray-3));
-
-  --observatory-bg: light-dark(var(--color-gray-1), #var(--color-gray-8));
-  --observatory-bg-code: light-dark(var(--color-gray-2), #var(--color-gray-7));
-  --observatory-bg-secondary: light-dark(
-    var(--color-white),
-    var(--color-black)
-  );
-  --observatory-color: light-dark(var(--color-black), #var(--color-white));
-  --observatory-color-secondary: light-dark(
-    var(--color-gray-7),
-    var(--color-gray-1)
-  );
-  --observatory-inverse-color: light-dark(
-    var(--color-white),
-    var(--color-gray-9)
-  );
-  --observatory-inverse-color-secondary: light-dark(
-    var(--color-gray-5),
-    var(--color-gray-7)
-  );
   --observatory-accent: light-dark(
     var(--color-purple-dark),
     var(--color-purple-light)
@@ -35,11 +13,7 @@
     var(--color-purple-dark),
     var(--color-purple-light)
   );
-  --observatory-border: light-dark(var(--color-gray-2), var(--color-gray-7));
-  --observatory-border-accent: light-dark(
-    var(--color-purple-dark),
-    var(--color-purple-light)
-  );
+
   --observatory-pass-icon-bg: light-dark(
     var(--color-green-light-super),
     var(--color-green-dark)
@@ -56,6 +30,7 @@
     var(--color-red),
     var(--color-red-light)
   );
+
   --observatory-table-bg: light-dark(var(--color-white), var(--color-gray-9));
   --observatory-table-bg-alternate: light-dark(
     var(--color-gray-1),
@@ -115,23 +90,6 @@
     var(--color-green-light)
   );
 
-  --observatory-button-primary-default: light-dark(
-    var(--color-gray-9),
-    var(--color-white)
-  );
-  --observatory-button-primary-background: light-dark(
-    var(--color-gray-9),
-    var(--color-gray-4)
-  );
-  --observatory-button-primary-active: light-dark(
-    var(--color-gray-6),
-    var(--color-gray-6)
-  );
-  --observatory-button-primary-inactive: light-dark(
-    var(--color-gray-9),
-    var(--color-white)
-  );
-
   --form-invalid-color: light-dark(var(--color-red), var(--color-red-light));
 
   --font-body: inter, var(--font-fallback);
@@ -153,10 +111,6 @@
 
   padding-block: 0.75rem;
   padding-inline: 1rem;
-
-  color: var(--observatory-color-secondary);
-
-  background: var(--observatory-bg-secondary);
 
   @media (width > 1440px) {
     padding-inline: calc((100% - 1440px + (1rem * 2)) / 2);
@@ -183,7 +137,6 @@
 
 .obs-landing-top__form {
   grid-area: form;
-  --progress-color: var(--observatory-accent);
 
   p {
     margin: 1rem 0 2rem;
@@ -212,10 +165,12 @@
     padding-inline: calc((100% - 1440px + (1rem * 2)) / 2);
   }
 
-  background: var(--observatory-bg);
+  color: var(--color-text-secondary);
+
+  background: var(--color-background-secondary);
 
   p {
-    color: var(--observatory-color-secondary);
+    color: var(--color-text-secondary);
   }
 
   h1,
@@ -228,14 +183,6 @@
   h2 {
     margin-bottom: 2rem;
   }
-
-  /*
-  $screen-sm: 426px;
-  $screen-md: 769px;
-  $screen-lg: 992px;
-  $screen-xl: 1200px;
-  $screen-xxl: 1441px;
-   */
 
   @media (width >= 769px) {
     .assessment {
@@ -280,12 +227,12 @@
       stop-color: color-mix(
         in srgb,
         var(--observatory-accent),
-        var(--observatory-bg)
+        var(--color-background-secondary)
       );
     }
 
     stop#stop3 {
-      stop-color: var(--observatory-bg);
+      stop-color: var(--color-background-secondary);
     }
   }
 
@@ -300,7 +247,7 @@
     figcaption {
       p {
         margin: 0;
-        color: var(--observatory-color);
+        color: var(--color-text-primary);
       }
     }
 
@@ -327,7 +274,7 @@
 
   font-size: var(--type-tiny-font-size);
 
-  color: var(--observatory-color-secondary);
+  color: var(--color-text-secondary);
 
   text-decoration: underline;
 
@@ -347,7 +294,7 @@
 
     content: "";
 
-    background-color: var(--observatory-color-secondary);
+    background-color: var(--color-text-secondary);
 
     mask-repeat: no-repeat;
     mask-position: center;
@@ -387,7 +334,7 @@
 
   color: var(--color-text-primary);
 
-  background: var(--observatory-bg);
+  background: var(--color-background-secondary);
 
   @media (width > 1440px) {
     padding-inline: calc((100% - 1440px + (1rem * 2)) / 2);
@@ -425,8 +372,6 @@
   gap: 1.5rem;
   align-items: start;
   justify-content: space-between;
-
-  margin-bottom: 1.5rem;
 }
 
 .obs-results__feedback {
