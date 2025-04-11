@@ -19,16 +19,10 @@
   background-color: var(--color-background-primary);
 }
 
-.page-layout__header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
+@media (width > 1110px) {
+  .page-layout__header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
 }
-
-/*
-.page-layout__main {
-}
-
-.page-layout__footer {
-}
-*/

@@ -1,0 +1,21 @@
+/* Navigation */
+
+.navigation {
+  --navigation-side-padding: 1rem;
+
+  background-color: var(--color-background-primary);
+  border-bottom: 1px solid var(--color-border-secondary);
+
+  &[data-scheme="dark"] {
+    color: var(--color-text-primary);
+    color-scheme: dark;
+  }
+}
+
+/* Tools */
+
+.navigation__tools {
+  display: flex;
+  column-gap: 1rem;
+  align-items: center;
+}

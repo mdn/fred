@@ -1,0 +1,153 @@
+/* Base */
+
+/* Tab */
+
+.menu__tab {
+  --menu-tab-background: var(--color-background-blue);
+  --menu-tab-text: var(--color-text-blue);
+
+  &[data-section="learn"] {
+    --menu-tab-background: var(--color-background-orange);
+    --menu-tab-text: var(--color-text-orange);
+  }
+
+  &[data-section="tools"] {
+    --menu-tab-background: var(--color-background-purple);
+    --menu-tab-text: var(--color-text-purple);
+  }
+
+  &[data-section="about"] {
+    --menu-tab-background: var(--color-background-green);
+    --menu-tab-text: var(--color-text-green);
+  }
+}
+
+/* Tab Button */
+
+.menu__tab-button {
+  padding: 0.5rem 0.7rem;
+  margin: 0;
+
+  font: inherit;
+
+  line-height: 1;
+
+  color: var(--color-text-primary);
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  background-color: transparent;
+
+  &:is([aria-expanded="true"], :hover) {
+    color: var(--menu-tab-text);
+    background-color: var(--menu-tab-background);
+  }
+}
+
+/* Tab Icon */
+
+.menu__tab-icon {
+  fill: currentcolor;
+}
+
+/* Tab Arrow */
+
+.menu__tab-arrow {
+  fill: currentcolor;
+
+  [aria-expanded="true"] & {
+    scale: -1;
+  }
+}
+
+/* Tab Link */
+
+.menu__tab-link {
+  display: block;
+
+  padding: 0.5rem 0.7rem;
+
+  line-height: 24px;
+
+  color: var(--color-text-primary);
+
+  &:hover {
+    color: var(--menu-tab-text);
+    background-color: var(--menu-tab-background);
+  }
+}
+
+/* Panel */
+
+.menu__panel-title {
+  padding: 0.7rem;
+  margin: 0;
+
+  a {
+    color: inherit;
+  }
+}
+
+/* Content */
+
+.menu__panel-content {
+  display: grid;
+  gap: 0.825rem;
+  padding: 0.7rem;
+
+  dl {
+    display: grid;
+
+    row-gap: 0.25rem;
+    align-content: start;
+
+    margin: 0;
+  }
+
+  dt {
+    font-size: 0.825rem;
+
+    color: var(--color-text-secondary);
+
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  ul {
+    display: grid;
+
+    row-gap: 0.25rem;
+
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
+  }
+
+  a {
+    color: var(--color-text-primary);
+    text-decoration-color: var(--color-text-secondary);
+  }
+}
+
+/* Featured */
+
+.menu__panel-featured {
+  color: tomato;
+
+  a {
+    display: flex;
+    column-gap: 0.25rem;
+    align-items: center;
+  }
+
+  svg {
+    fill: currentcolor;
+  }
+}

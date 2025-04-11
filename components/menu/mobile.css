@@ -1,0 +1,39 @@
+/* Mobile */
+
+@media (width <= 1136px) {
+  /* Tab */
+
+  .menu__tab {
+    display: grid;
+    border-top: 1px solid var(--color-border-secondary);
+  }
+
+  /* Button */
+
+  .menu__tab-button {
+    display: flex;
+
+    column-gap: 0.25rem;
+    align-items: center;
+
+    border: none;
+  }
+
+  /* Label */
+
+  .menu__tab-label {
+    order: -1;
+  }
+
+  /* Arrow */
+
+  .menu__tab-arrow {
+    margin-left: auto;
+  }
+
+  /* Title */
+
+  .menu__panel-title {
+    border-bottom: 1px solid var(--color-border-secondary);
+  }
+}

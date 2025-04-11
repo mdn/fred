@@ -1,39 +1,5 @@
 /* Navigation */
 
-.navigation {
-  --navigation-side-padding: 1rem;
-
-  display: grid;
-
-  grid-template-columns: min-content 1fr min-content;
-
-  column-gap: 1rem;
-  align-items: center;
-
-  padding-block: 0.75rem;
-  padding-inline: var(--navigation-side-padding);
-
-  background-color: var(--color-background-primary);
-  border-block-end: 1px solid var(--color-border-secondary);
-
-  @media (width > 1440px) {
-    padding-inline: calc(
-      (100% - 1440px + (var(--navigation-side-padding) * 2)) / 2
-    );
-  }
-}
-
-/* Logo */
-
-.navigation__logo {
-  padding: 0.5rem;
-  margin-inline-start: -6px;
-}
-
-/* Tools */
-
-.navigation__tools {
-  display: flex;
-  column-gap: 1rem;
-  align-items: center;
-}
+@import url("base.css");
+@import url("mobile.css");
+@import url("desktop.css");

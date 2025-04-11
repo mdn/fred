@@ -1,0 +1,59 @@
+/* Desktop */
+
+@media (width > 1136px) {
+  .menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Button */
+
+  .menu__tab-button {
+    display: flex;
+
+    column-gap: 0.125rem;
+    align-items: center;
+
+    border: 1px solid transparent;
+    border-bottom: none;
+
+    &[aria-expanded="true"] {
+      position: relative;
+      z-index: 1;
+      border-color: var(--color-border-secondary);
+    }
+  }
+
+  /* Arrow */
+
+  .menu__tab-arrow {
+    margin-right: -7px;
+  }
+
+  /* Panel */
+
+  .menu__panel {
+    position: absolute;
+    right: 0;
+    left: 0;
+
+    margin-top: -1px;
+
+    background-color: var(--color-background-primary);
+    border: 1px solid var(--color-border-secondary);
+  }
+
+  /* Title */
+
+  .menu__panel-title {
+    color: var(--menu-tab-text);
+    background-color: var(--menu-tab-background);
+  }
+
+  /* Content */
+
+  .menu__panel-content {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
