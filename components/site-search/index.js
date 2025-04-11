@@ -1,7 +1,7 @@
 import { Task } from "@lit/task";
 import { LitElement, html } from "lit";
 
-import { L10nMixin } from "../../l10n/mixin";
+import { L10nMixin } from "../../l10n/mixin.js";
 
 class SiteSearch extends L10nMixin(LitElement) {
   static properties = {
@@ -30,7 +30,7 @@ class SiteSearch extends L10nMixin(LitElement) {
       if (!res.ok) {
         throw new Error(`${res.status}: ${res.statusText}`);
       }
-      return /** @type {Promise<import("./types").SearchResponse>} */ (
+      return /** @type {Promise<import("./types.js").SearchResponse>} */ (
         res.json()
       );
     },

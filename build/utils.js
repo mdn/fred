@@ -1,43 +1,44 @@
-/**
- * @import { ManifestData } from "@rsbuild/core";
- */
-
 import { html } from "@lit-labs/ssr";
 
 /**
- * @param {ManifestData} manifest
- * @param {string} entry
+ * @param {import("@rspack/core").StatsCompilation} [manifest]
+ * @param {string} [entry]
  */
-export function tagsFromManifest({ entries }, entry = "index") {
-  const { js = [], css = [] } = entries[entry]?.initial || {};
+export function tagsFromManifest(manifest, entry = "index") {
+  const publicPath = manifest?.publicPath;
+  if (!publicPath) {
+    throw new Error("publicPath is not defined in manifest");
+  }
 
-  const scriptTags = js.map((url) => html`<script src=${url} defer></script>`);
-  const styleTags = css.map(
-    (file) => html`<link rel="stylesheet" href=${file} />`,
-  );
+  const scriptTags = [];
+  const styleTags = [];
+
+  for (const { name } of manifest.entrypoints?.[entry]?.assets || []) {
+    if (name.endsWith(".js")) {
+      scriptTags.push(
+        html`<script src=${publicPath + name} type="module"></script>`,
+      );
+    } else if (name.endsWith(".css")) {
+      styleTags.push(html`<link rel="stylesheet" href=${publicPath + name} />`);
+    }
+  }
+
   return { scriptTags, styleTags };
 }
 
 /**
- *
- * @param {ManifestData} ssrManifest
- * @param {ManifestData} clientManifest
  * @param {Fred.Context} context
- * @param {import("lit-html").TemplateResult} [markup]
- * @returns
+ * @param {import("lit-html").TemplateResult} markup
+ * @param {import("@rspack/core").StatsCompilation[]} manifest
  */
-export function renderHTML(ssrManifest, clientManifest, context, markup) {
-  const { styleTags: ssrStyleTags } = tagsFromManifest(ssrManifest);
+export function renderHTML(context, markup, manifest) {
+  const { styleTags: ssrStyleTags } = tagsFromManifest(
+    manifest.find((x) => x.name === "ssr"),
+  );
   const { scriptTags: clientScriptTags, styleTags: clientStyleTags } =
-    tagsFromManifest(clientManifest);
-  const { scriptTags: legacyScriptTags, styleTags: legacyStyleTags } =
-    tagsFromManifest(clientManifest, "legacy");
+    tagsFromManifest(manifest.find((x) => x.name === "client"));
 
-  const legacyTags = context.path.endsWith("settings")
-    ? [legacyScriptTags, legacyStyleTags]
-    : [];
-
-  const tags = [ssrStyleTags, clientScriptTags, clientStyleTags, ...legacyTags];
+  const tags = [ssrStyleTags, clientScriptTags, clientStyleTags];
   return html`
     <!doctype html>
     <html lang="en">

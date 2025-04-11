@@ -2,8 +2,8 @@ import { html } from "lit";
 
 import starsSvg from "../assets/stars.svg?lit";
 import arrowSvg from "../assets/tooltip-arrow.svg?lit";
-import { SCORING_TABLE } from "../constants";
-import { formatMinus } from "../utils";
+import { SCORING_TABLE } from "../constants.js";
+import { formatMinus } from "../utils.js";
 
 /**
  */

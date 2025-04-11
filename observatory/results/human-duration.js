@@ -1,6 +1,6 @@
 import { LitElement, css, html } from "lit";
 
-import { formatDateTime, humanizedDurationFromNow } from "../utils";
+import { formatDateTime, humanizedDurationFromNow } from "../utils.js";
 
 export class HumanDuration extends LitElement {
   static properties = {

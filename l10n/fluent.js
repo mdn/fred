@@ -55,7 +55,7 @@ export class Fluent {
    * @param {string} id
    * @param {string} [attr]
    * @param {Record<string, any>} [args]
-   * @param {Record<string, import("../types/fluent").Element>} [elements]
+   * @param {Record<string, import("../types/fluent.js").Element>} [elements]
    * @returns {string | ReturnType<typeof unsafeHTML> | undefined}
    */
   get(id, attr, args, elements) {
@@ -68,7 +68,7 @@ export class Fluent {
 
   /**
    * @param {string} message
-   * @param {Record<string, import("../types/fluent").Element>} [elements]
+   * @param {Record<string, import("../types/fluent.js").Element>} [elements]
    * @returns {string | ReturnType<typeof unsafeHTML>}
    */
   static sanitize(message, elements = {}) {
@@ -197,7 +197,7 @@ export default function getFluentContext(locale) {
    * @overload
    * @param {string} id
    * @param {string} [_comment]
-   * @returns {import("../types/fluent").L10nTag}
+   * @returns {import("../types/fluent.js").L10nTag}
    */
 
   /**
@@ -209,7 +209,7 @@ export default function getFluentContext(locale) {
   /**
    * @param {string | TemplateStringsArray} idOrStrings
    * @param {string} [_comment]
-   * @returns {import("../types/fluent").L10nTag | string}
+   * @returns {import("../types/fluent.js").L10nTag | string}
    */
   function l10n(idOrStrings, _comment) {
     if (typeof idOrStrings === "string") {
@@ -218,7 +218,7 @@ export default function getFluentContext(locale) {
       const id = idOrStrings;
       const localizedString = getLocale(locale)?.get(id);
       const fallbackString = `[${id}]`;
-      /** @type {import("../types/fluent").L10nTag} */
+      /** @type {import("../types/fluent.js").L10nTag} */
       const tag = (strings) => {
         // we don't currently support any expressions in the template string
         // we might in the future, if we use l10n.raw a lot
@@ -244,7 +244,7 @@ export default function getFluentContext(locale) {
   }
 
   /**
-   * @param {{ id: string, attr?: string, args?: Record<string, any>, elements?: Record<string, import("../types/fluent").Element> }} param0
+   * @param {{ id: string, attr?: string, args?: Record<string, any>, elements?: Record<string, import("../types/fluent.js").Element> }} param0
    */
   l10n.raw = function ({ id, attr, args, elements }) {
     const fluent = getLocale(locale);

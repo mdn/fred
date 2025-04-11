@@ -1,5 +1,5 @@
 import { html } from "lit";
-import "./grade-svg";
+import "./grade-svg.js";
 
 /**
  *

@@ -1,11 +1,11 @@
 import { html } from "lit";
 
-import { formatMinus, hostAsRedirectChain } from "../utils";
+import { formatMinus, hostAsRedirectChain } from "../utils.js";
 
-import { Tooltip } from "./tooltip";
-import { Trend } from "./trend";
-import "./human-duration";
-import "./rescan-button";
+import { Tooltip } from "./tooltip.js";
+import { Trend } from "./trend.js";
+import "./human-duration.js";
+import "./rescan-button.js";
 
 /**
  *

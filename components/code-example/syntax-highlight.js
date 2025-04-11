@@ -1,9 +1,9 @@
 import Prism from "prismjs";
-import components from "prismjs/components";
+import components from "prismjs/components.js";
 
 Prism.manual = true;
 
-/** @type {Record<string, import("./types").PrismLanguage>} */
+/** @type {Record<string, import("./types.js").PrismLanguage>} */
 const PRISM_LANGUAGES = components.languages;
 
 // Add things to this list to help make things convenient. Sometimes

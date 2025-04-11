@@ -8,6 +8,10 @@
     "target": "es2022",
     "module": "preserve",
     "moduleResolution": "bundler",
+    // TODO: turn on once we fix rari type exports in esm
+    // "target": "esnext",
+    // "module": "nodenext",
+    // "moduleResolution": "nodenext",
     // fix for badly-formed types in dependencies:
     "skipLibCheck": true,
     // rules:

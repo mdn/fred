@@ -4,7 +4,7 @@ globalThis.__MDNServerContext = new AsyncLocalStorage();
 
 /**
  * @template R
- * @param {import("./types").SymmetricContext} context The server-derived values of the symmetric context
+ * @param {import("./types.js").SymmetricContext} context The server-derived values of the symmetric context
  * @param {() => R} callback
  */
 export function runWithContext(context, callback) {

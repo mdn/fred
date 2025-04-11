@@ -14,3 +14,19 @@ import "./components/copy-button/index.js";
 
 // hooks:
 import "./hooks/code-examples.js";
+
+// reload on ssr changes:
+// TODO: extract into development-only file
+const hmr = new EventSource("/__webpack_hmr");
+
+hmr.addEventListener("message", (event) => {
+  try {
+    const message = JSON.parse(event.data);
+    if (message.action === "built") {
+      console.log(`Reloading page: ${message.name} bundle updated`);
+      location.reload();
+    }
+  } catch {
+    //
+  }
+});

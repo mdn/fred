@@ -1,6 +1,6 @@
 import { LitElement, html } from "lit";
 
-import { L10nMixin } from "../../l10n/mixin";
+import { L10nMixin } from "../../l10n/mixin.js";
 
 import dark from "../icon/moon.svg?lit";
 import light from "../icon/sun.svg?lit";

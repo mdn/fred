@@ -1,6 +1,6 @@
 import { html } from "lit";
 
-import { HeaderLink } from "../utils";
+import { HeaderLink } from "../utils.js";
 
 /**
  *

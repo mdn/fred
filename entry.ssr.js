@@ -23,11 +23,10 @@ import { runWithContext } from "./symmetric-context/server.js";
 
 /**
  * @param {string} path
- * @param {import("@rsbuild/core").ManifestData} ssrManifest
- * @param {import("@rsbuild/core").ManifestData} clientManifest
  * @param {Rari.BuiltPage} page
+ * @param {import("@rspack/core").StatsCompilation[]} manifest
  */
-export async function render(path, ssrManifest, clientManifest, page) {
+export async function render(path, page, manifest) {
   const locale = path.split("/")[1] || "en-US";
   if (locale === "qa") {
     path = path.replace("/qa/", "/en-US/");
@@ -91,8 +90,6 @@ export async function render(path, ssrManifest, clientManifest, page) {
           return NotFound(context);
       }
     })();
-    return await collectResult(
-      r(renderHTML(ssrManifest, clientManifest, context, component)),
-    );
+    return await collectResult(r(renderHTML(context, component, manifest)));
   });
 }

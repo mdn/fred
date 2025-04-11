@@ -2,7 +2,7 @@ import { Task } from "@lit/task";
 import { LitElement, css, html, nothing, svg } from "lit";
 
 import { OBSERVATORY_API_URL } from "../constants.js";
-import { formatMinus } from "../utils";
+import { formatMinus } from "../utils.js";
 
 export class ComparisonTable extends LitElement {
   static properties = {

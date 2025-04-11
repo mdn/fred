@@ -1,6 +1,6 @@
 import { html } from "lit";
 
-import { PassIcon } from "../utils";
+import { PassIcon } from "../utils.js";
 
 /** @type {(keyof Observatory.CSPPolicy)[]} */
 const policyTests = [

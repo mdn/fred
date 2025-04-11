@@ -2,15 +2,15 @@ import { readFile, writeFile } from "node:fs/promises";
 
 import { fdir } from "fdir";
 
-import ssr from "../dist/ssr/index.js";
+import { render } from "../dist/ssr/index.js";
 
 const BUILD_OUT_ROOT = "./out";
 
-const ssrManifest = JSON.parse(
-  await readFile("./dist/ssr/manifest.json", "utf8"),
-);
-const clientManifest = JSON.parse(
-  await readFile("./dist/client/manifest.json", "utf8"),
+/** @type {import("@rspack/core").StatsCompilation} */
+const ssrStats = JSON.parse(await readFile("./dist/ssr/stats.json", "utf8"));
+/** @type {import("@rspack/core").StatsCompilation} */
+const clientStats = JSON.parse(
+  await readFile("./dist/client/stats.json", "utf8"),
 );
 
 /**
@@ -85,12 +85,16 @@ async function ssrSingleDocument(file) {
     return;
   }
   try {
-    const html = await ssr.render(
-      context.url,
-      ssrManifest,
-      clientManifest,
-      context,
-    );
+    const html = await render(context.url, context, [
+      {
+        name: "ssr",
+        ...ssrStats,
+      },
+      {
+        name: "client",
+        ...clientStats,
+      },
+    ]);
     const outputFile = file.replace(/.json$/, ".html");
     await writeFile(outputFile, html);
     return outputFile;

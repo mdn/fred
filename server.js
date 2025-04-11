@@ -1,50 +1,75 @@
-import fs from "node:fs";
+import path from "node:path";
 
-import { createRsbuild, loadConfig, logger } from "@rsbuild/core";
+import { rspack } from "@rspack/core";
 import express from "express";
 
 import { createProxyMiddleware } from "http-proxy-middleware";
+import webpackMiddleware from "webpack-dev-middleware";
+import webpackMiddlewareHMR from "webpack-hot-middleware";
+
+import rspackConfig from "./rspack.config.js";
+
+import "source-map-support/register.js";
 
 /**
  * @import { Request, Response } from "express";
- * @import { RsbuildDevServer } from "@rsbuild/core";
+ * @import { Stats } from "@rspack/core";
  */
 
-/** @type {import("@rsbuild/core").ManifestData} */
-let ssrManifest;
-/** @type {import("@rsbuild/core").ManifestData} */
-let clientManifest;
+if (process.env.NODE_ENV === "production") {
+  throw new Error(
+    "dev server doesn't support running with NODE_ENV=production",
+  );
+  // this is because when NODE_ENV=production we don't add a hash to the ssr output file
+  // we need it to cachebust importing it in dev, but in prod we want a common name across builds
+}
 
 /**
- * @param {RsbuildDevServer} serverAPI
+ * @param {Request} req
+ * @param {Response} res
+ * @param {Rari.BuiltPage} page
  */
-const serverRender =
-  (serverAPI) =>
-  /**
-   * @param {Request} req
-   * @param {Response} res
-   * @param {Rari.BuiltPage} page
-   */
-  async (req, res, page) => {
-    try {
-      /** @type {import("./entry.ssr") | undefined} */
-      const indexModule = await serverAPI.environments.ssr?.loadBundle("index");
-      const html = await indexModule?.render(
-        req.path,
-        ssrManifest,
-        clientManifest,
-        page,
-      );
+async function serverRenderMiddleware(req, res, page) {
+  try {
+    /** @type {Stats} */
+    const stats = res.locals.webpack.devMiddleware.stats;
 
-      res.writeHead(res.statusCode, {
-        "Content-Type": "text/html",
-      });
-      res.end(html);
-    } catch (error) {
-      logger.error("SSR render error:", error);
-      res.writeHead(500).end();
+    const compliationStats = stats.toJson().children;
+    if (!compliationStats) {
+      throw new Error("cannot parse the rspack config, did you modify it?");
     }
-  };
+
+    const ssrStats = compliationStats.find((x) => x.name === "ssr");
+    if (!ssrStats) {
+      throw new Error(
+        "cannot find the ssr rspack config, did you change its name?",
+      );
+    }
+    const { outputPath, entrypoints } = ssrStats;
+    const outputName = entrypoints?.index?.assets?.find(
+      ({ name }) => name.startsWith("index.") && name.endsWith(".js"),
+    )?.name;
+    const indexModulePath =
+      outputPath && outputName && path.join(outputPath, outputName);
+    if (!indexModulePath) {
+      throw new Error(
+        "cannot find ssr entrypoint, did you change output.path or output.name in the rspack config?",
+      );
+    }
+
+    /** @type {import("./entry.ssr.js")} */
+    const indexModule = await import(indexModulePath);
+    const html = await indexModule?.render(req.path, page, compliationStats);
+
+    res.writeHead(res.statusCode, {
+      "Content-Type": "text/html",
+    });
+    res.end(html);
+  } catch (error) {
+    console.error("SSR render error:", error);
+    res.writeHead(500).end();
+  }
+}
 
 /**
  * @param {import("http").IncomingMessage} stream
@@ -60,33 +85,20 @@ const streamToBuffer = (stream) =>
   });
 
 export async function startDevServer() {
-  const { content } = await loadConfig({});
-
-  // Init Rsbuild
-  const rsbuild = await createRsbuild({
-    rsbuildConfig: content,
-  });
-
   const app = express();
 
-  // Create Rsbuild DevServer instance
-  const rsbuildServer = await rsbuild.createDevServer();
+  const rspackCompiler = rspack(rspackConfig);
 
-  rsbuild.onDevCompileDone(async () => {
-    // update manifest info when rebuild
-    ssrManifest = JSON.parse(
-      await fs.promises.readFile("./dist/ssr/manifest.json", "utf8"),
-    );
-    clientManifest = JSON.parse(
-      await fs.promises.readFile("./dist/client/manifest.json", "utf8"),
-    );
-    rsbuildServer.printUrls();
-  });
+  app.use(
+    // @ts-expect-error
+    webpackMiddleware(rspackCompiler, {
+      serverSideRender: true,
+      writeToDisk: true,
+    }),
+  );
 
-  const serverRenderMiddleware = serverRender(rsbuildServer);
-
-  // Apply Rsbuild’s built-in middlewares
-  app.use(rsbuildServer.middlewares);
+  // @ts-expect-error
+  app.use(webpackMiddlewareHMR(rspackCompiler));
 
   app.get("/", async (_req, res, _next) => {
     res.writeHead(302, {
@@ -157,18 +169,12 @@ export async function startDevServer() {
     }),
   );
 
-  const httpServer = app.listen(rsbuildServer.port, () => {
-    // Notify Rsbuild that the custom server has started
-    rsbuildServer.afterListen();
-
-    console.log(`Server started at http://localhost:${rsbuildServer.port}`);
+  const httpServer = app.listen(3000, () => {
+    console.log(`Server started at http://localhost:3000`);
   });
-
-  rsbuildServer.connectWebSocket({ server: httpServer });
 
   return {
     close: async () => {
-      await rsbuildServer.close();
       httpServer.close();
     },
   };

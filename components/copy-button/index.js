@@ -1,6 +1,6 @@
 import { LitElement, html } from "lit";
 
-import { MDNButton } from "../button/element";
+import { MDNButton } from "../button/element.js";
 
 export class MDNCopyButton extends LitElement {
   static properties = {

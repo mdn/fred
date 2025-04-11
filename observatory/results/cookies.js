@@ -5,7 +5,7 @@ import {
   PassIcon,
   Timestamp,
   upperCaseHeaderName,
-} from "../utils";
+} from "../utils.js";
 
 /**
  *

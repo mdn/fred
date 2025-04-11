@@ -1,7 +1,7 @@
 import { html } from "lit";
 
-import { TEST_NAMES_IN_ORDER } from "../constants";
-import { PassIcon, formatMinus } from "../utils";
+import { TEST_NAMES_IN_ORDER } from "../constants.js";
+import { PassIcon, formatMinus } from "../utils.js";
 
 /**
  * @param {{overallScore: number, scoreModifier: number}} props
