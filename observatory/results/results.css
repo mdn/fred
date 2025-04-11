@@ -119,10 +119,6 @@ code {
       background-color: var(--color-background-secondary);
     }
   }
-
-  /* a {
-    color: var(--color-text-secondary);
-  } */
 }
 
 .label {
