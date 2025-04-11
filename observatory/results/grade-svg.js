@@ -68,29 +68,28 @@ export class ComparisonTable extends LitElement {
     }
 
     .tick text {
-      fill: var(--observatory-color-secondary);
+      fill: var(--color-text-secondary);
       font-family: var(--font-body);
       font-size: 1rem;
       font-weight: 300;
       transform: scale(1);
+    }
+    .tick text.x-labels {
+      text-anchor: middle;
 
-      & .x-labels {
-        text-anchor: middle;
-
-        &.current {
-          fill: var(--grade-border);
-        }
-      }
-
-      & .y-labels {
-        text-anchor: end;
+      &.current {
+        fill: var(--grade-border);
       }
     }
 
+    .tick text.y-labels {
+      text-anchor: end;
+    }
+
     .tick line {
-      color: var(--observatory-color-secondary);
+      color: var(--color-text-secondary);
       opacity: 0.9;
-      stroke: var(--observatory-border);
+      stroke: var(--color-border-primary);
       stroke-dasharray: 5, 5;
       stroke-width: 1px;
     }

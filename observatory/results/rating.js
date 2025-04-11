@@ -62,7 +62,7 @@ export function Rating({ result, host, rescan }) {
           @click=${rescan}
         ></mdn-observatory-rescan-button>
         <div class="scan-another">
-          <a href="/en-US/observatory" data-discover="true"
+          <a class="button" href="/en-US/observatory" data-discover="true"
             >Scan another website</a
           >
         </div>

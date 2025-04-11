@@ -1,0 +1,28 @@
+@import url("../../components/button/common.css");
+
+button {
+  position: relative;
+
+  display: flex;
+
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+
+  width: 9rem;
+  height: 2rem;
+
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+
+  font: var(--type-emphasis-m);
+}
+
+.progress {
+  display: block;
+
+  width: 0.8rem;
+  height: 0.8rem;
+
+  border-radius: 50%;
+}

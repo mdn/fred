@@ -3,82 +3,94 @@
 .obs-layout {
   --spacing: 2rem;
 
-  /* colors */
+  --progress-color: var(--observatory-accent);
 
-  --text-primary: light-dark(#1b1b1b, #ffffff);
-  --text-secondary: light-dark(#4e4e4e, #cdcdcd);
+  --observatory-accent: light-dark(
+    var(--color-purple-dark),
+    var(--color-purple-light)
+  );
+  --observatory-accent-light: light-dark(
+    var(--color-purple-dark),
+    var(--color-purple-light)
+  );
 
-  --observatory-bg: light-dark(rgb(242 242 245 / 100%), rgb(52 52 52 / 100%));
-  --observatory-bg-code: light-dark(#e1e1e1, #4d4d4d);
-  --observatory-bg-secondary: light-dark(
-    rgb(255 255 255 / 100%),
-    rgb(0 0 0 / 100%)
-  );
-  --observatory-color: light-dark(#000000, #ffffff);
-  --observatory-color-secondary: light-dark(
-    rgb(105 105 105 / 100%),
-    rgb(249 249 251 / 100%)
-  );
-  --observatory-inverse-color: light-dark(
-    rgb(255 255 255 / 100%),
-    rgb(27 27 27)
-  );
-  --observatory-inverse-color-secondary: light-dark(
-    rgb(179 179 179 / 100%),
-    rgb(105 105 105 / 100%)
-  );
-  --observatory-accent: light-dark(#5a23d7, #a388ff);
-  --observatory-accent-light: light-dark(#5a23d7aa, #a388ffaa);
-  --observatory-border: light-dark(
-    rgb(228 228 246 / 100%),
-    rgb(105 105 105 / 100%)
-  );
-  --observatory-border-accent: light-dark(
-    rgb(90 35 215 / 100%),
-    rgb(163 136 255 / 100%)
-  );
   --observatory-pass-icon-bg: light-dark(
-    rgb(229 250 230 / 100%),
-    rgb(38 92 61 / 100%)
+    var(--color-green-light-super),
+    var(--color-green-dark)
   );
   --observatory-pass-icon-color: light-dark(
-    rgb(0 121 54 / 100%),
-    rgb(138 255 163 / 100%)
+    var(--color-green),
+    var(--color-green-light)
   );
   --observatory-fail-icon-bg: light-dark(
-    rgb(250 229 229 / 100%),
-    rgb(92 38 38 / 100%)
+    var(--color-red-light-super),
+    var(--color-red-dark-super)
   );
   --observatory-fail-icon-color: light-dark(
-    rgb(211 0 56 / 100%),
-    rgb(255 121 155 / 100%)
-  );
-  --observatory-table-bg: light-dark(rgb(255 255 255 / 100%), rgb(27 27 27));
-  --observatory-table-bg-alternate: light-dark(#f9f9fb, #212121);
-  --observatory-table-header-bg: light-dark(
-    rgb(249 249 251 / 100%),
-    rgb(27 27 27)
-  );
-  --observatory-grade-a-bg: light-dark(#d2fadd, #265c3d);
-  --observatory-grade-a-border: light-dark(#017a37, #89fca1);
-  --observatory-grade-b-bg: light-dark(#e8fad2, #52662a);
-  --observatory-grade-b-border: light-dark(#547a01, #d5fc88);
-  --observatory-grade-c-bg: light-dark(#faf8d2, #66602a);
-  --observatory-grade-c-border: light-dark(#7a7001, #fcf988);
-  --observatory-grade-d-bg: light-dark(#fae8d2, #5c3d26);
-  --observatory-grade-d-border: light-dark(#a65001, #ff6a00);
-  --observatory-grade-f-bg: light-dark(#fad2d2, #5c2626);
-  --observatory-grade-f-border: light-dark(#aa0000, #fc8888);
-  --observatory-arrow-down-color: light-dark(
-    rgb(158 0 39 / 100%),
-    rgb(255 112 127 / 100%)
-  );
-  --observatory-arrow-up-color: light-dark(
-    rgb(0 121 54 / 100%),
-    rgb(0 255 106 / 100%)
+    var(--color-red),
+    var(--color-red-light)
   );
 
-  --form-invalid-color: light-dark(#d30038, #ff97a0);
+  --observatory-table-bg: light-dark(var(--color-white), var(--color-gray-9));
+  --observatory-table-bg-alternate: light-dark(
+    var(--color-gray-1),
+    var(--color-gray-8)
+  );
+  --observatory-table-header-bg: light-dark(
+    var(--color-gray-1),
+    var(--color-gray-9)
+  );
+
+  --observatory-grade-a-bg: light-dark(
+    var(--color-green-light-super),
+    var(--color-green-dark-super)
+  );
+  --observatory-grade-a-border: light-dark(
+    var(--color-green),
+    var(--color-green-light)
+  );
+  --observatory-grade-b-bg: light-dark(
+    var(--color-yellow-light-super),
+    var(--color-yellow-dark-super)
+  );
+  --observatory-grade-b-border: light-dark(
+    var(--color-yellow),
+    var(--color-yellow-light)
+  );
+  --observatory-grade-c-bg: light-dark(
+    var(--color-yellow-light-super),
+    var(--color-yellow-dark-super)
+  );
+  --observatory-grade-c-border: light-dark(
+    var(--color-yellow-dark),
+    var(--color-yellow)
+  );
+  --observatory-grade-d-bg: light-dark(
+    var(--color-orange-light-super),
+    var(--color-orange-dark-super)
+  );
+  --observatory-grade-d-border: light-dark(
+    var(--color-orange),
+    var(--color-orange)
+  );
+  --observatory-grade-f-bg: light-dark(
+    var(--color-red-light-super),
+    var(--color-red-dark-super)
+  );
+  --observatory-grade-f-border: light-dark(
+    var(--color-red),
+    var(--color-red-light)
+  );
+  --observatory-arrow-down-color: light-dark(
+    var(--color-red-dark),
+    var(--color-red-light)
+  );
+  --observatory-arrow-up-color: light-dark(
+    var(--color-green),
+    var(--color-green-light)
+  );
+
+  --form-invalid-color: light-dark(var(--color-red), var(--color-red-light));
 
   --font-body: inter, var(--font-fallback);
 
@@ -99,10 +111,6 @@
 
   padding-block: 0.75rem;
   padding-inline: 1rem;
-
-  color: var(--observatory-color-secondary);
-
-  background: var(--observatory-bg-secondary);
 
   @media (width > 1440px) {
     padding-inline: calc((100% - 1440px + (1rem * 2)) / 2);
@@ -129,7 +137,6 @@
 
 .obs-landing-top__form {
   grid-area: form;
-  --progress-color: var(--observatory-accent);
 
   p {
     margin: 1rem 0 2rem;
@@ -158,10 +165,12 @@
     padding-inline: calc((100% - 1440px + (1rem * 2)) / 2);
   }
 
-  background: var(--observatory-bg);
+  color: var(--color-text-secondary);
+
+  background: var(--color-background-secondary);
 
   p {
-    color: var(--observatory-color-secondary);
+    color: var(--color-text-secondary);
   }
 
   h1,
@@ -174,14 +183,6 @@
   h2 {
     margin-bottom: 2rem;
   }
-
-  /*
-  $screen-sm: 426px;
-  $screen-md: 769px;
-  $screen-lg: 992px;
-  $screen-xl: 1200px;
-  $screen-xxl: 1441px;
-   */
 
   @media (width >= 769px) {
     .assessment {
@@ -226,12 +227,12 @@
       stop-color: color-mix(
         in srgb,
         var(--observatory-accent),
-        var(--observatory-bg)
+        var(--color-background-secondary)
       );
     }
 
     stop#stop3 {
-      stop-color: var(--observatory-bg);
+      stop-color: var(--color-background-secondary);
     }
   }
 
@@ -246,7 +247,7 @@
     figcaption {
       p {
         margin: 0;
-        color: var(--observatory-color);
+        color: var(--color-text-primary);
       }
     }
 
@@ -273,7 +274,7 @@
 
   font-size: var(--type-tiny-font-size);
 
-  color: var(--observatory-color-secondary);
+  color: var(--color-text-secondary);
 
   text-decoration: underline;
 
@@ -293,7 +294,7 @@
 
     content: "";
 
-    background-color: var(--observatory-color-secondary);
+    background-color: var(--color-text-secondary);
 
     mask-repeat: no-repeat;
     mask-position: center;
@@ -333,7 +334,7 @@
 
   color: var(--color-text-primary);
 
-  background: var(--observatory-bg);
+  background: var(--color-background-secondary);
 
   @media (width > 1440px) {
     padding-inline: calc((100% - 1440px + (1rem * 2)) / 2);
@@ -371,8 +372,6 @@
   gap: 1.5rem;
   align-items: start;
   justify-content: space-between;
-
-  margin-bottom: 1.5rem;
 }
 
 .obs-results__feedback {

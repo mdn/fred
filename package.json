@@ -80,6 +80,7 @@
     "stylelint-config-standard": "^38.0.0",
     "svgo-loader": "^4.0.0",
     "typescript": "^5.8.2",
+    "web-features": "^2.33.0",
     "webpack-dev-middleware": "^7.4.2",
     "webpack-hot-middleware": "^2.26.1",
     "webpack-merge": "^6.0.1",

@@ -17,4 +17,6 @@ namespace Rari {
   type Prose = import("@mdn/rari").Prose;
   type Compat = import("@mdn/rari").Compat;
   type SpecificationSection = import("@mdn/rari").SpecificationSection;
+
+  type Baseline = import("@mdn/rari").Baseline;
 }

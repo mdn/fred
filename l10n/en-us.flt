@@ -1,6 +1,14 @@
 article-footer_last-modified = This page was last modified on <time data-l10n-name="date">{ $date }</timestamp> by <a data-l10n-name="contributors">MDN contributors</a>.
 article-footer_source_title = Folder: { $folder } (Opens in a new tab)
 
+baseline_asterisk = { $asterisk } Some parts of this feature may have varying levels of support.
+baseline_high_extra = This feature is well established and works across many devices and browser versions. It’s been available across browsers since { $date }.
+baseline_low_extra = Since { $date }, this feature works across the latest devices and browser versions. This feature might not work in older devices or browsers.
+baseline_not_extra = This feature is not Baseline because it does not work in some of the most widely-used browsers.
+baseline_supported_in = Supported in { $browsers }
+baseline_unsupported_in = Not widely supported in { $browsers }
+baseline_supported_and_unsupported_in = Supported in { $supported }, but not widely supported in { $unsupported }
+
 reference_toc_header = In this article
 
 footer_mofo = Visit <a data-l10n-name="moco">Mozilla Corporation’s</a> not-for-profit parent, the <a data-l10n-name="mofo">Mozilla Foundation</a>.

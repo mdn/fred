@@ -1,4 +1,6 @@
-import { LitElement, css, html } from "lit";
+import { LitElement, html } from "lit";
+
+import styles from "./rescan-button.css?lit";
 
 export class RescanButton extends LitElement {
   static properties = {
@@ -6,40 +8,8 @@ export class RescanButton extends LitElement {
     duration: { type: Number },
     _remainingTime: { state: true },
   };
-  static styles = css`
-    button {
-      align-items: center;
-      background-color: var(--button-primary-default);
-      border: 1px solid var(--button-border-color);
-      border-radius: 0.25rem;
-      color: var(--color-background-primary);
-      display: flex;
-      font: var(--type-emphasis-m);
-      gap: 0.25rem;
-      height: 2rem;
-      justify-content: center;
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-      position: relative;
-      width: 9rem;
-    }
 
-    button:not(:disabled):hover {
-      background: var(--button-primary-hover);
-    }
-
-    button[disabled] {
-      opacity: 0.65;
-      cursor: default;
-    }
-
-    .progress {
-      border-radius: 50%;
-      display: block;
-      height: 0.8rem;
-      width: 0.8rem;
-    }
-  `;
+  static styles = styles;
 
   constructor() {
     super();
@@ -83,7 +53,7 @@ export class RescanButton extends LitElement {
               class="progress"
               role="progressbar"
               aria-labelledby="wait-secs"
-              style="background: conic-gradient(var(--color-background-primary) 0grad, ${progressPercent}%, rgba(0,0,0,0) ${progressPercent}% 100%)"
+              style="background: conic-gradient(var(--color-text-secondary) 0grad, ${progressPercent}%, rgba(0,0,0,0) ${progressPercent}% 100%)"
             ></div>
             <small id="wait-secs">Wait ${remainingSecs}s to rescan</small>
           </button>`}

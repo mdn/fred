@@ -1,6 +1,4 @@
-:root {
-  color-scheme: light dark;
-}
+/* Normalize */
 
 *,
 ::before,
@@ -8,39 +6,30 @@
   box-sizing: border-box;
 }
 
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
 [hidden] {
   display: none !important;
 }
 
-body,
-h1,
-h2,
-h3,
-h4,
-p,
-figure,
-blockquote,
-dl,
-dd {
-  margin: 0;
-}
-
-ul,
-ol {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
+/* Motion */
 
 html {
   scroll-behavior: smooth;
+
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
 }
 
+/* Typography */
+
 body {
-  min-height: 100svh;
-
-  margin: 0;
-
   font-family: var(--font-body);
   font-size: var(--base-font-size);
 
@@ -50,56 +39,4 @@ body {
 
   background-color: var(--color-background-primary);
   text-rendering: optimizespeed;
-}
-
-a:not([class]) {
-  text-decoration-skip-ink: auto;
-}
-
-a {
-  text-decoration: none;
-}
-
-/* Inherit fonts for inputs and buttons */
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
-
-/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0.01ms !important;
-
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-.visually-hidden {
-  position: absolute !important;
-
-  width: 1px !important;
-  height: 1px !important;
-
-  padding: 0 !important;
-  margin: -1px !important;
-
-  overflow: hidden !important;
-
-  white-space: nowrap !important;
-
-  border: 0 !important;
-
-  clip: rect(1px, 1px, 1px, 1px) !important;
-  clip-path: inset(50%) !important;
 }
