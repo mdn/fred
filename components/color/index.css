@@ -5,6 +5,12 @@
 @import url("text.css");
 @import url("link.css");
 
+/* Light/dark */
+
+:root {
+  color-scheme: light dark;
+}
+
 /* Basic */
 
 :root {

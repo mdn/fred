@@ -1,0 +1,263 @@
+/** Baseline indicator. */
+
+.baseline-indicator {
+  --baseline-bg: light-dark(#f1f3f4, #282a2c);
+  --baseline-engine-bg: light-dark(#e3e6e8, #1d1e1f);
+  --baseline-img: url("./icons/status/limited.svg");
+  --baseline-check: #1e8e3e;
+  --baseline-cross: #ea8600;
+  --feedback-link-icon: var(--icon-primary, light-dark(#696969, #ffffff));
+
+  padding-left: 3.8125rem;
+  margin: 1rem 0;
+
+  background: var(--baseline-bg);
+  border-radius: 0.25rem;
+
+  @media (prefers-color-scheme: dark) {
+    --baseline-img: url("./icons/status/limited-dark.svg");
+  }
+
+  &.high {
+    --baseline-bg: light-dark(#e6f4ea, #0e2a10);
+    --baseline-engine-bg: light-dark(#ceead6, #031b05);
+    --baseline-img: url("./icons/status/high.svg");
+    --baseline-check: #099949;
+
+    @media (prefers-color-scheme: dark) {
+      --baseline-img: url("./icons/status/high-dark.svg");
+    }
+  }
+
+  &.low {
+    --baseline-bg: light-dark(#e8f0fe, #041e49);
+    --baseline-engine-bg: light-dark(#d2e3fc, #020d20);
+    --baseline-img: url("./icons/status/low.svg");
+    --baseline-check: #1a73e8;
+    --baseline-pill-bg: #3367d6;
+    --baseline-pill-color: #f1f3f4;
+
+    @media (prefers-color-scheme: dark) {
+      --baseline-img: url("./icons/status/low-dark.svg");
+    }
+  }
+
+  &[open] {
+    summary .icon-chevron {
+      transform: rotate(180deg);
+    }
+  }
+
+  summary {
+    --chevron-size: 0.6875rem;
+    --chevron-padding-left: 0.75rem;
+    --chevron-padding-right: 1.25rem;
+
+    position: relative;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 1rem 0;
+    padding-right: calc(
+      var(--chevron-padding-left) + var(--chevron-size) +
+        var(--chevron-padding-right)
+    );
+
+    cursor: pointer;
+
+    &::-webkit-details-marker {
+      /* Remove arrow from older versions of Safari. */
+      display: none;
+    }
+
+    .indicator {
+      --width: 2.3125rem;
+
+      position: absolute;
+      top: 1rem;
+      left: calc(-0.5rem - var(--width));
+
+      display: block;
+
+      width: var(--width);
+      height: 2.25rem;
+
+      background-image: var(--baseline-img);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+
+    .status-title {
+      padding: 0.375rem 0;
+      margin: 0;
+
+      font-size: 1rem;
+      font-weight: 600;
+
+      line-height: 1.5;
+
+      letter-spacing: 0;
+
+      .not-bold {
+        font-weight: normal;
+      }
+    }
+
+    .pill {
+      padding: 0 0.25rem;
+      margin-right: auto;
+
+      font-size: 0.75rem;
+      font-weight: 600;
+
+      color: var(--baseline-pill-color);
+
+      text-transform: uppercase;
+
+      background: var(--baseline-pill-bg);
+      border-radius: 0.125rem;
+    }
+
+    .browsers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+
+      .engine {
+        display: flex;
+
+        flex-wrap: wrap;
+
+        gap: 0.5rem;
+
+        padding: 0.5rem 0.625rem;
+
+        background: var(--baseline-engine-bg);
+        border-radius: 2rem;
+
+        .browser {
+          display: flex;
+
+          &::before {
+            display: block;
+
+            width: 1.25rem;
+            height: 1.25rem;
+
+            content: "";
+
+            background-repeat: no-repeat;
+            background-size: contain;
+          }
+
+          &.chrome::before {
+            background-image: url("./icons/browser/chrome.svg");
+          }
+
+          &.edge::before {
+            background-image: url("./icons/browser/edge.svg");
+          }
+
+          &.firefox::before {
+            background-image: url("./icons/browser/firefox.svg");
+          }
+
+          &.safari::before {
+            background-image: url("./icons/browser/safari.svg");
+          }
+
+          &::after {
+            display: block;
+
+            width: 1rem;
+            height: 1.25rem;
+
+            content: "";
+
+            background-color: var(--baseline-cross);
+
+            mask-image: url("./icons/browser-cross.svg");
+            mask-repeat: no-repeat;
+            mask-size: contain;
+          }
+
+          &.supported::after {
+            background-color: var(--baseline-check);
+            mask-image: url("./icons/browser-check.svg");
+          }
+        }
+      }
+    }
+
+    .icon {
+      display: inline-block;
+
+      width: var(--chevron-size);
+      height: var(--chevron-size);
+
+      background-color: var(--color-text-primary);
+
+      mask-repeat: no-repeat;
+      mask-position: center;
+
+      &.icon-chevron {
+        position: absolute;
+        right: var(--chevron-padding-right);
+        mask-image: url("./icons/chevron.svg");
+      }
+    }
+  }
+
+  .extra {
+    padding-right: 1rem;
+    padding-bottom: 1.5rem;
+
+    p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      row-gap: 1rem;
+      column-gap: 1.5rem;
+
+      padding: 0;
+      margin: 0;
+
+      li {
+        margin: 0;
+        font-weight: 500;
+        list-style: none;
+
+        a.learn-more {
+          &,
+          &:active,
+          &:visited {
+            color: var(--text-link);
+            background: none;
+          }
+        }
+
+        a:not(.learn-more) {
+          &,
+          &:active,
+          &:visited {
+            color: var(--text-primary);
+            background: none;
+          }
+        }
+      }
+    }
+  }
+}
