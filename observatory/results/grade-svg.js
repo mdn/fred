@@ -73,18 +73,17 @@ export class ComparisonTable extends LitElement {
       font-size: 1rem;
       font-weight: 300;
       transform: scale(1);
+    }
+    .tick text.x-labels {
+      text-anchor: middle;
 
-      & .x-labels {
-        text-anchor: middle;
-
-        &.current {
-          fill: var(--grade-border);
-        }
+      &.current {
+        fill: var(--grade-border);
       }
+    }
 
-      & .y-labels {
-        text-anchor: end;
-      }
+    .tick text.y-labels {
+      text-anchor: end;
     }
 
     .tick line {
