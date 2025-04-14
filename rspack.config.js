@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { rspack } from "@rspack/core";
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import { merge } from "webpack-merge";
 // @ts-expect-error
 import { StatsWriterPlugin } from "webpack-stats-plugin";
@@ -21,6 +22,17 @@ const common = {
       fields: ["publicPath", "entrypoints"],
     }),
   ],
+  optimization: {
+    minimizer: [
+      new rspack.SwcJsMinimizerRspackPlugin({
+        extractComments: true,
+      }),
+      // lightningcss breaks our dark theme (https://github.com/parcel-bundler/lightningcss/issues/873):
+      // new rspack.LightningCssMinimizerRspackPlugin(),
+      // so use cssnano instead:
+      new CssMinimizerPlugin(),
+    ],
+  },
   module: {
     rules: [
       {
@@ -29,7 +41,7 @@ const common = {
       },
       {
         test: /\.css$/i,
-        loader: "postcss-loader",
+        // loader: "postcss-loader",
         oneOf: [
           {
             resourceQuery: /lit/,
