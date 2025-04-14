@@ -27,7 +27,7 @@ const serverRender =
    */
   async (req, res, page) => {
     try {
-      /** @type {import("./entry.ssr") | undefined} */
+      /** @type {import("./entry.ssr.js") | undefined} */
       const indexModule = await serverAPI.environments.ssr?.loadBundle("index");
       const html = await indexModule?.render(
         req.path,

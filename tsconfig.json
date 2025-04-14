@@ -5,9 +5,9 @@
     "checkJs": true,
     "maxNodeModuleJsDepth": 0,
     "noEmit": true,
-    "target": "es2022",
-    "module": "preserve",
-    "moduleResolution": "bundler",
+    "target": "esnext",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     // fix for badly-formed types in dependencies:
     "skipLibCheck": true,
     // rules:

@@ -1,11 +1,11 @@
 import { html } from "lit";
 
-import { Comparison } from "./comparison";
-import { Cookies } from "./cookies";
-import { CSP } from "./csp";
-import { History } from "./history";
-import { RawHeaders } from "./raw-headers";
-import { Scoring } from "./scoring";
+import { Comparison } from "./comparison.js";
+import { Cookies } from "./cookies.js";
+import { CSP } from "./csp.js";
+import { History } from "./history.js";
+import { RawHeaders } from "./raw-headers.js";
+import { Scoring } from "./scoring.js";
 
 /**
  * @param {{

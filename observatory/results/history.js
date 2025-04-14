@@ -1,6 +1,6 @@
 import { html, nothing } from "lit";
 
-import { formatDateTime, formatMinus } from "../utils";
+import { formatDateTime, formatMinus } from "../utils.js";
 
 /**
  *

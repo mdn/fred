@@ -2,7 +2,7 @@ import "../button/element.js";
 
 import { LitElement, html } from "lit";
 
-import { L10nMixin } from "../../l10n/mixin";
+import { L10nMixin } from "../../l10n/mixin.js";
 
 import thumbsDown from "../icon/thumbs_down.svg?lit";
 import thumbsUp from "../icon/thumbs_up.svg?lit";

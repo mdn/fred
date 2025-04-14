@@ -1,1 +1,1 @@
-export { LazyCompatTable } from "./lazy-compat-table";
+export { LazyCompatTable } from "./lazy-compat-table.js";
