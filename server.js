@@ -4,8 +4,8 @@ import { rspack } from "@rspack/core";
 import express from "express";
 
 import { createProxyMiddleware } from "http-proxy-middleware";
-import webpackMiddleware from "webpack-dev-middleware";
-import webpackMiddlewareHMR from "webpack-hot-middleware";
+import webpackDevMiddleware from "webpack-dev-middleware";
+import webpackHotMiddleware from "webpack-hot-middleware";
 
 import rspackConfig from "./rspack.config.js";
 
@@ -91,14 +91,14 @@ export async function startDevServer() {
 
   app.use(
     // @ts-expect-error
-    webpackMiddleware(rspackCompiler, {
+    webpackDevMiddleware(rspackCompiler, {
       serverSideRender: true,
       writeToDisk: true,
     }),
   );
 
   // @ts-expect-error
-  app.use(webpackMiddlewareHMR(rspackCompiler));
+  app.use(webpackHotMiddleware(rspackCompiler));
 
   app.get("/", async (_req, res, _next) => {
     res.writeHead(302, {

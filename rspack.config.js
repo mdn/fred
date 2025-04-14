@@ -15,6 +15,7 @@ const isProd = process.env.NODE_ENV === "production";
 /** @type {import("@rspack/core").RspackOptions} */
 const common = {
   mode: isProd ? "production" : "development",
+  stats: isProd,
   devtool: "source-map",
   plugins: [
     /** @type {import("@rspack/core").Plugin} */
