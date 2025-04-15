@@ -17,6 +17,16 @@ MDN's next fr(ont)e(n)d.
 
 ## Development principles
 
+## Components and Elements
+
+- Components which are or make use of a custom element should place that element's code in `components/element-name/element.js`
+  - The class should be exported, and named `MDNElementName`
+  - The element should be registered with a name of `mdn-element-name`
+  - If all this is done:
+    - The element will be automatically loaded client side if it's present in the DOM at page load
+      - Elements dynamically injected won't be automatically loaded, and the code dynamically injecting them should handle loading their code
+    - The element will be automatically loaded server side, always
+
 ### Typing
 
 - We use [TypeScript in JSDoc annotations](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html) for typing, so we can write and directly execute JavaScript (with no transpilation step)

@@ -21,6 +21,19 @@ import { Search } from "./pages/search/index.js";
 import { SettingsBody } from "./pages/settings/index.js";
 import { runWithContext } from "./symmetric-context/server.js";
 
+// load all custom elements
+// @ts-expect-error
+// eslint-disable-next-line unicorn/prefer-module, no-undef
+const elementsContext = require.context(
+  "./components/",
+  true,
+  /\/element\.js$/,
+);
+for (const key of elementsContext.keys()) {
+  // load element code
+  elementsContext(key);
+}
+
 /**
  * @param {string} path
  * @param {Rari.BuiltPage} page
