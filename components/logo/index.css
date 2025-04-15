@@ -16,7 +16,7 @@
 
 .logo__letter,
 .logo__cursor {
-  fill: var(--color-blue);
+  fill: light-dark(var(--color-blue), var(--color-blue-light));
 }
 
 .logo__text {
