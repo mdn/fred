@@ -42,7 +42,7 @@ const common = {
       },
       {
         test: /\.css$/i,
-        // loader: "postcss-loader",
+        loader: "postcss-loader",
         oneOf: [
           {
             resourceQuery: /lit/,
