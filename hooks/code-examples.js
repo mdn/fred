@@ -1,4 +1,4 @@
-import "../components/code-example/index.js";
+import "../components/code-example/element.js";
 
 for (const pre of document.querySelectorAll(
   "div.code-example pre:not(.hidden)",

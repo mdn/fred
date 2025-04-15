@@ -3,7 +3,7 @@ import { LitElement, html } from "lit";
 import { createRef, ref } from "lit/directives/ref.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
-import styles from "./index.css?lit";
+import styles from "./element.css?lit";
 
 export class MDNCodeExample extends LitElement {
   static styles = styles;

@@ -26,6 +26,7 @@ MDN's next fr(ont)e(n)d.
     - The element will be automatically loaded client side if it's present in the DOM at page load
       - Elements dynamically injected won't be automatically loaded, and the code dynamically injecting them should handle loading their code
     - The element will be automatically loaded server side, always
+    - The element will automatically be added to `types/element-map.d.ts` to provide proper types in e.g. `querySelector("mdn-element-name")`
 
 ### Typing
 

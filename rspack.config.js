@@ -8,6 +8,8 @@ import { merge } from "webpack-merge";
 // @ts-expect-error
 import { StatsWriterPlugin } from "webpack-stats-plugin";
 
+import { GenerateElementMapPlugin } from "./build/plugins/generate-element-map.js";
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const isProd = process.env.NODE_ENV === "production";
@@ -119,6 +121,7 @@ export default [
     },
     // TODO: look at this, check it's modern, can use browserslist?
     target: "web",
+    plugins: [!isProd && new GenerateElementMapPlugin()],
     output: {
       path: path.resolve(__dirname, "dist/client"),
       filename: "[name].js",
