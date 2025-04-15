@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+
+dialog {
+  width: 50vw;
+  max-height: 90vh;
+  margin: 5vh auto;
+}
+
+li[data-selected] {
+  background: yellow;
+}
+
+.mdn-search {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: row-reverse;
+
+  align-items: center;
+
+  width: 5rem;
+
+  padding: 0.5rem;
+
+  border: 1px solid
+    light-dark(var(--color-grey-mid-dark), var(--color-grey-mid-light));
+  border-radius: 2rem;
+
+  &::before {
+    position: absolute;
+    right: 64%;
+    bottom: 0.5rem;
+    left: 14%;
+
+    height: 2px;
+
+    content: "";
+
+    background-color: var(--color-text-blue);
+  }
+}

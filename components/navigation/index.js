@@ -2,7 +2,7 @@ import { html } from "lit";
 
 import { Logo } from "../logo/index.js";
 import "../color-theme/index.js";
-import "../quick-search/index.js";
+import "../search-modal/element.js";
 import { Menu } from "../menu/index.js";
 
 import "./index.css";
@@ -16,7 +16,7 @@ export function Navigation(context) {
     <div class="navigation__menu">${Menu(context)}</div>
     <div class="navigation__tools">
       <mdn-color-theme></mdn-color-theme>
-      <quick-search></quick-search>
+      <mdn-search-modal></mdn-search-modal>
     </div>
   </nav>`;
 }
