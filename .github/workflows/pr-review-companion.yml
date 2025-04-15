@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    if: github.repository_owner == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]'
+    if: github.repository_owner == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
     uses: ./.github/workflows/_deploy.yml
     secrets: inherit
     with:
