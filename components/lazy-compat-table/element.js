@@ -89,6 +89,7 @@ export class MDNLazyCompatTable extends LitElement {
 
   render() {
     return this._dataTask.render({
+      initial: () => html`<p>Loading...</p>`,
       pending: () => html`<p>Loading...</p>`,
 
       complete:
