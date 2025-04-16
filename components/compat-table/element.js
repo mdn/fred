@@ -64,7 +64,7 @@ export const LEGEND_LABELS = {
   more: "Has more compatibility info.",
 };
 
-export class CompatTable extends LitElement {
+export class MDNCompatTable extends LitElement {
   static properties = {
     query: {},
     locale: {},
@@ -779,7 +779,7 @@ export class CompatTable extends LitElement {
   }
 }
 
-customElements.define("compat-table", CompatTable);
+customElements.define("mdn-compat-table", MDNCompatTable);
 
 /**
  * Return a list of platforms and browsers that are relevant for this category &
