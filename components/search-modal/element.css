@@ -1,4 +1,6 @@
-* {
+*,
+::before,
+::after {
   box-sizing: border-box;
 }
 
@@ -13,32 +15,32 @@ li[data-selected] {
 }
 
 .mdn-search {
-  position: relative;
-
   display: flex;
 
-  flex-direction: row-reverse;
-
   align-items: center;
+  justify-content: space-between;
 
   width: 5rem;
 
-  padding: 0.5rem;
+  padding: 0.25rem;
+  padding-left: 0.75rem;
+  margin: 0;
 
-  border: 1px solid
-    light-dark(var(--color-grey-mid-dark), var(--color-grey-mid-light));
-  border-radius: 2rem;
+  background-color: var(--color-background-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: calc(infinity * 1px);
 
   &::before {
-    position: absolute;
-    right: 64%;
-    bottom: 0.5rem;
-    left: 14%;
-
-    height: 2px;
+    width: 15px;
+    height: 18px;
 
     content: "";
 
-    background-color: var(--color-text-blue);
+    border-bottom: 2px solid
+      light-dark(var(--color-blue), var(--color-blue-light));
+  }
+
+  svg {
+    fill: var(--color-text-primary);
   }
 }
