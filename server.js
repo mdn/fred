@@ -1,3 +1,4 @@
+import fs from "node:fs/promises";
 import path from "node:path";
 
 import { rspack } from "@rspack/core";
@@ -59,7 +60,19 @@ async function serverRenderMiddleware(req, res, page) {
 
     /** @type {import("./entry.ssr.js")} */
     const indexModule = await import(indexModulePath);
-    const html = await indexModule?.render(req.path, page, compliationStats);
+    const inlineScript = await fs.readFile(
+      path.join(
+        compliationStats.find((x) => x.name === "inline")?.outputPath || "",
+        "inline.js",
+      ),
+      "utf8",
+    );
+    const html = await indexModule?.render(
+      req.path,
+      page,
+      compliationStats,
+      inlineScript,
+    );
 
     res.writeHead(res.statusCode, {
       "Content-Type": "text/html",

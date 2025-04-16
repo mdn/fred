@@ -12,6 +12,7 @@ const ssrStats = JSON.parse(await readFile("./dist/ssr/stats.json", "utf8"));
 const clientStats = JSON.parse(
   await readFile("./dist/client/stats.json", "utf8"),
 );
+const inlineScript = await readFile("./dist/inline/inline.js", "utf8");
 
 /**
  * @template T
@@ -85,16 +86,21 @@ async function ssrSingleDocument(file) {
     return;
   }
   try {
-    const html = await render(context.url, context, [
-      {
-        name: "ssr",
-        ...ssrStats,
-      },
-      {
-        name: "client",
-        ...clientStats,
-      },
-    ]);
+    const html = await render(
+      context.url,
+      context,
+      [
+        {
+          name: "ssr",
+          ...ssrStats,
+        },
+        {
+          name: "client",
+          ...clientStats,
+        },
+      ],
+      inlineScript,
+    );
     const outputFile = file.replace(/.json$/, ".html");
     await writeFile(outputFile, html);
     return outputFile;
