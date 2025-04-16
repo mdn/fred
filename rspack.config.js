@@ -102,6 +102,7 @@ export default [
     },
     plugins: [
       new rspack.CssExtractRspackPlugin({
+        filename: isProd ? "[name].[contenthash].css" : "[name].css",
         runtime: false,
       }),
     ],
@@ -127,7 +128,7 @@ export default [
     plugins: [!isProd && new GenerateElementMapPlugin()],
     output: {
       path: path.resolve(__dirname, "dist/client"),
-      filename: "[name].js",
+      filename: isProd ? "[name].[contenthash].js" : "[name].js",
       clean: true,
       publicPath: "/static/client/",
     },
