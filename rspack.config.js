@@ -122,7 +122,9 @@ export default [
   merge(common, {
     name: "client",
     entry: {
-      index: ["./entry.client.js"],
+      index: [!isProd && "./build/hmr.js", "./entry.client.js"].filter(
+        (x) => typeof x === "string",
+      ),
     },
     target: ["web", "browserslist"],
     plugins: [!isProd && new GenerateElementMapPlugin()],
