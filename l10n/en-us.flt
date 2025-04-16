@@ -34,3 +34,46 @@ obs_assessment = Developed by Mozilla, the HTTP Observatory performs an in-depth
 obs_scanning = Its automated scanning process provides developers and website administrators with detailed, actionable feedback, focusing on identifying and addressing potential security vulnerabilities.
 obs_security = The tool is instrumental in helping developers and website administrators strengthen their sites against common security threats in a constantly advancing digital environment.
 obs_mdn = The HTTP Observatory provides effective security insights, guided by Mozilla's expertise and commitment to a safer and more secure internet and based on well-established trends and guidelines.
+
+
+compat_loading = Loading…
+
+compat_browser_version_date = { $browser } { $version } – Released { $date }
+
+compat_link_report_issue = Report problems with this compatibility data
+compat_link_report_issue_title = Report an issue with this compatibility data
+compat_link_report_missing_title = Report missing compatibility data
+compat_link_report_missing = Report this issue
+compat_link_source = View data on GitHub
+compat_link_source_title = File: { $filename }
+
+compat_deprecated = Deprecated
+compat_experimental = Experimental
+compat_nonstandard = Non-standard
+compat_no = No
+
+compat_support_full = Full support
+compat_support_partial = Partial support
+compat_support_no = No support
+compat_support_unknown = Support unknown
+compat_support_preview = Preview browser support
+compat_support_prefix = Implemented with the vendor prefix: { $prefix }
+compat_support_altname = Alternate name: { $altname }
+compat_support_removed = Removed in { $version } and later
+compat_support_see_impl_url = See <a data-l10n-name="impl_url">{ $label }</a>
+
+compat_legend = Legend
+compat_legend_tip = Tip: you can click/tap on a cell for more information.
+compat_legend_yes = { compat_support_full }
+compat_legend_partial = { compat_support_partial }
+compat_legend_preview = In development. Supported in a pre-release version.
+compat_legend_no = { compat_support_no }
+compat_legend_unknown = Compatibility unknown
+compat_legend_experimental = { compat_experimental }. Expect behavior to change in the future.
+compat_legend_nonstandard = { compat_nonstandard }. Check cross-browser support before using.
+compat_legend_deprecated = { compat_deprecated }. Not for use in new websites.
+compat_legend_footnote = See implementation notes.
+compat_legend_disabled = User must explicitly enable this feature.
+compat_legend_altname = Uses a non-standard name.
+compat_legend_prefix = Requires a vendor prefix or different name for use.
+compat_legend_more = Has more compatibility info.

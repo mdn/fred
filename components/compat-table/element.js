@@ -2,6 +2,8 @@ import { LitElement, html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
+import { L10nMixin } from "../../l10n/mixin.js";
+
 import {
   BCD_TABLE,
   DEFAULT_LOCALE,
@@ -14,12 +16,12 @@ import {
   versionLabelFromSupport,
 } from "./feature-row.js";
 import styles from "./index.css?lit";
-import { getActiveLegendItems } from "./legend.js";
 import {
   HIDDEN_BROWSERS,
   asList,
   bugURLToString,
   getCurrentSupport,
+  getFirst,
   hasMore,
   hasNoteworthyNotes,
   isFullySupportedWithoutLimitation,
@@ -27,6 +29,23 @@ import {
   listFeatures,
   versionIsPreview,
 } from "./utils.js";
+
+/** @type {Compat.LegendKey[]} */
+const LEGEND_KEYS = [
+  "yes",
+  "partial",
+  "preview",
+  "no",
+  "unknown",
+  "experimental",
+  "nonstandard",
+  "deprecated",
+  "footnote",
+  "disabled",
+  "altname",
+  "prefix",
+  "more",
+];
 
 /**
  * @param {BCD.BrowserName} browser
@@ -44,27 +63,7 @@ function browserToIconName(browser) {
   }
 }
 
-// Also specifies the order in which the legend
-/**
- * @type {Record<string, string>}
- */
-export const LEGEND_LABELS = {
-  yes: "Full support",
-  partial: "Partial support",
-  preview: "In development. Supported in a pre-release version.",
-  no: "No support",
-  unknown: "Compatibility unknown",
-  experimental: "Experimental. Expect behavior to change in the future.",
-  nonstandard: "Non-standard. Check cross-browser support before using.",
-  deprecated: "Deprecated. Not for use in new websites.",
-  footnote: "See implementation notes.",
-  disabled: "User must explicitly enable this feature.",
-  altname: "Uses a non-standard name.",
-  prefix: "Requires a vendor prefix or different name for use.",
-  more: "Has more compatibility info.",
-};
-
-export class MDNCompatTable extends LitElement {
+export class MDNCompatTable extends L10nMixin(LitElement) {
   static properties = {
     query: {},
     locale: {},
@@ -102,6 +101,90 @@ export class MDNCompatTable extends LitElement {
 
   get _name() {
     return this._breadcrumbs.at(-1) ?? "";
+  }
+
+  /**
+   * Gets the active legend items based on browser compatibility data.
+   * @param {BCD.Identifier} compat - The compatibility data identifier.
+   * @param {string} name - The name of the feature.
+   * @param {BCD.Browsers} browserInfo - Information about browsers.
+   * @param {BCD.BrowserName[]} browsers - The list of displayed browsers.
+   * @returns {Compat.LegendKey[]} An array of legend keys.
+   */
+  _getActiveLegendItems(compat, name, browserInfo, browsers) {
+    /** @type {Set<Compat.LegendKey>} */
+    const legendItems = new Set();
+
+    for (const feature of listFeatures(compat, "", name)) {
+      const { status } = feature.compat;
+
+      if (status) {
+        if (status.experimental) {
+          legendItems.add("experimental");
+        }
+        if (status.deprecated) {
+          legendItems.add("deprecated");
+        }
+        if (!status.standard_track) {
+          legendItems.add("nonstandard");
+        }
+      }
+
+      for (const browser of browsers) {
+        const browserSupport = feature.compat.support[browser] ?? {
+          version_added: null,
+        };
+
+        if (HIDDEN_BROWSERS.includes(browser)) {
+          continue;
+        }
+
+        const firstSupportItem = getFirst(browserSupport);
+        if (firstSupportItem && hasNoteworthyNotes(firstSupportItem)) {
+          legendItems.add("footnote");
+        }
+
+        for (const versionSupport of asList(browserSupport)) {
+          if (versionSupport.version_added) {
+            if (versionSupport.flags && versionSupport.flags.length > 0) {
+              legendItems.add("no");
+            } else if (
+              versionIsPreview(
+                versionSupport.version_added,
+                browserInfo[browser],
+              )
+            ) {
+              legendItems.add("preview");
+            } else {
+              legendItems.add("yes");
+            }
+          } else if (versionSupport.version_added == undefined) {
+            legendItems.add("unknown");
+          } else {
+            legendItems.add("no");
+          }
+
+          if (versionSupport.partial_implementation) {
+            legendItems.add("partial");
+          }
+          if (versionSupport.prefix) {
+            legendItems.add("prefix");
+          }
+          if (versionSupport.alternative_name) {
+            legendItems.add("altname");
+          }
+          if (versionSupport.flags) {
+            legendItems.add("disabled");
+          }
+        }
+
+        if (hasMore(browserSupport)) {
+          legendItems.add("more");
+        }
+      }
+    }
+
+    return LEGEND_KEYS.filter((key) => legendItems.has(key));
   }
 
   connectedCallback() {
@@ -144,9 +227,13 @@ export class MDNCompatTable extends LitElement {
         @click=${onClick}
         target="_blank"
         rel="noopener noreferrer"
-        title="Report an issue with this compatibility data"
+        title=${this.l10n(
+          "compat_link_report_issue_title",
+        )`Report an issue with this compatibility data`}
       >
-        Report problems with this compatibility data</a
+        ${this.l10n(
+          "compat_link_report_issue",
+        )`Report problems with this compatibility data`}</a
       >${source_file
         ? html` •
             <a
@@ -154,9 +241,14 @@ export class MDNCompatTable extends LitElement {
               href=${`https://github.com/mdn/browser-compat-data/tree/main/${source_file}`}
               target="_blank"
               rel="noopener noreferrer"
-              title=${`File: ${source_file}`}
+              title=${this.l10n.raw({
+                id: "compat_link_source_title",
+                args: {
+                  filename: source_file,
+                },
+              })}
             >
-              View data on GitHub
+              ${this.l10n("compat_link_source")`View data on GitHub`}
             </a>`
         : undefined}
     </div>`;
@@ -371,7 +463,7 @@ export class MDNCompatTable extends LitElement {
    * @returns {Lit.TemplateResult}
    */
   _renderIcon(name) {
-    const title = name in LEGEND_LABELS ? LEGEND_LABELS[name] : name;
+    const title = this.l10n.raw({ id: `compat_legend_${name}` });
 
     return html`<abbr class="only-icon" title=${ifDefined(title)}>
       <span>${name}</span>
@@ -385,29 +477,35 @@ export class MDNCompatTable extends LitElement {
   _renderStatusIcons(status) {
     // <StatusIcons>
     /**
-     * @type {Compat.StatusIcon[]}
+     * @type {Array<{ title: Lit.L10nResult; text: Lit.L10nResult; iconClassName: string }>}
      */
     const icons = [];
     if (status.experimental) {
       icons.push({
-        title: "Experimental. Expect behavior to change in the future.",
-        text: "Experimental",
+        title: this.l10n(
+          "compat_legend_experimental",
+        )`Experimental. Expect behavior to change in the future.`,
+        text: this.l10n("compat_experimental")`Experimental`,
         iconClassName: "icon-experimental",
       });
     }
 
     if (status.deprecated) {
       icons.push({
-        title: "Deprecated. Not for use in new websites.",
-        text: "Deprecated",
+        title: this.l10n(
+          "compat_legend_deprecated",
+        )`Deprecated. Not for use in new websites.`,
+        text: this.l10n("compat_deprecated")`Experimental`,
         iconClassName: "icon-deprecated",
       });
     }
 
     if (!status.standard_track) {
       icons.push({
-        title: "Non-standard. Expect poor cross-browser support.",
-        text: "Non-standard",
+        title: this.l10n(
+          "compat_legend_nonstandard",
+        )`Non-standard. Expect poor cross-browser support.`,
+        text: this.l10n("compat_nonstandard")`Non-standard`,
         iconClassName: "icon-nonstandard",
       });
     }
@@ -437,7 +535,7 @@ export class MDNCompatTable extends LitElement {
       .reverse()
       .flatMap((item, i) => {
         /**
-         * @type {Array<{iconName: string; label: string | Lit.TemplateResult } | undefined>}
+         * @type {Array<{iconName: string; label: string | Lit.L10nResult } | undefined>}
          */
         const supportNotes = [
           item.version_removed &&
@@ -446,25 +544,40 @@ export class MDNCompatTable extends LitElement {
           )
             ? {
                 iconName: "footnote",
-                label: `Removed in ${labelFromString(item.version_removed, browser)} and later`,
+                label: this.l10n.raw({
+                  id: "compat_support_removed",
+                  args: {
+                    version: labelFromString(item.version_removed, browser),
+                  },
+                }),
               }
             : undefined,
           item.partial_implementation
             ? {
                 iconName: "footnote",
-                label: "Partial support",
+                label: this.l10n("compat_support_partial")`Partial support`,
               }
             : undefined,
           item.prefix
             ? {
                 iconName: "prefix",
-                label: `Implemented with the vendor prefix: ${item.prefix}`,
+                label: this.l10n.raw({
+                  id: "compat_support_prefix",
+                  args: {
+                    prefix: item.prefix,
+                  },
+                }),
               }
             : undefined,
           item.alternative_name
             ? {
                 iconName: "altname",
-                label: `Alternate name: ${item.alternative_name}`,
+                label: this.l10n.raw({
+                  id: "compat_support_altname",
+                  args: {
+                    altname: item.alternative_name,
+                  },
+                }),
               }
             : undefined,
           item.flags
@@ -477,6 +590,7 @@ export class MDNCompatTable extends LitElement {
                     typeof item.version_removed === "string";
                   const flags = item.flags || [];
 
+                  // TODO l10n
                   const items = [
                     hasAddedVersion && `From version ${item.version_added}`,
                     hasRemovedVersion &&
@@ -533,15 +647,27 @@ export class MDNCompatTable extends LitElement {
               ).map(
                 /** @param {string} impl_url */ (impl_url) => ({
                   iconName: "footnote",
-                  label: html`See
-                    <a href=${impl_url}>${bugURLToString(impl_url)}</a>.`,
+                  label: this.l10n.raw({
+                    id: "compat_support_see_impl_url",
+                    args: {
+                      label: bugURLToString(impl_url),
+                    },
+                    elements: {
+                      impl_url: {
+                        tag: "a",
+                        href: impl_url,
+                      },
+                    },
+                  }),
                 }),
               )
             : undefined,
           versionIsPreview(item.version_added, browser)
             ? {
                 iconName: "footnote",
-                label: "Preview browser support",
+                label: this.l10n(
+                  "compat_support_preview",
+                )`Preview browser support`,
               }
             : undefined,
           // If we encounter nothing else than the required `version_added` and
@@ -551,12 +677,12 @@ export class MDNCompatTable extends LitElement {
           !versionIsPreview(item.version_added, browser)
             ? {
                 iconName: "footnote",
-                label: "Full support",
+                label: this.l10n("compat_support_full")`Full support`,
               }
             : isNotSupportedAtAll(item)
               ? {
                   iconName: "footnote",
-                  label: "No support",
+                  label: this.l10n("compat_support_no")`No support`,
                 }
               : undefined,
         ]
@@ -566,12 +692,12 @@ export class MDNCompatTable extends LitElement {
         if (supportNotes.length === 0) {
           supportNotes.push({
             iconName: "unknown",
-            label: "Support unknown",
+            label: this.l10n("compat_support_unknown")`Support unknown`,
           });
         }
 
         /**
-         * @type {Array<{iconName: string; label: string | Lit.TemplateResult }>}
+         * @type {Array<{iconName: string; label: string | Lit.L10nResult }>}
          */
         const filteredSupportNotes = supportNotes.filter(
           (v) => v !== undefined,
@@ -647,46 +773,47 @@ export class MDNCompatTable extends LitElement {
     }
 
     let label;
+    /** @type {"" | Lit.L10nResult} */
     let title = "";
 
     switch (status.isSupported) {
       case "yes": {
-        title = "Full support";
-        label = status.label || "Yes";
+        title = this.l10n("compat_support_full")`Full support`;
+        label = status.label || this.l10n("compat_yes")`Yes`;
         break;
       }
 
       case "partial": {
-        title = "Partial support";
-        label = status.label || "Partial";
+        title = this.l10n("compat_support_partial")`Partial support`;
+        label = status.label || this.l10n("compat_partial")`Partial`;
         break;
       }
 
       case "removed-partial": {
         if (timeline) {
-          title = "Partial support";
-          label = status.label || "Partial";
+          title = this.l10n("compat_support_partial")`Partial support`;
+          label = status.label || this.l10n("compat_partial")`Partial`;
         } else {
-          title = "No support";
-          label = status.label || "No";
+          title = this.l10n("compat_support_no")`No support`;
+          label = status.label || this.l10n("compat_no")`No`;
         }
         break;
       }
 
       case "no": {
-        title = "No support";
-        label = status.label || "No";
+        title = this.l10n("compat_support_no")`No support`;
+        label = status.label || this.l10n("compat_no")`No`;
         break;
       }
 
       case "preview": {
-        title = "Preview support";
+        title = this.l10n("compat_support_preview")`Preview support`;
         label = status.label || browser.preview_name;
         break;
       }
 
       case "unknown": {
-        title = "Support unknown";
+        title = this.l10n("compat_support_unknown")`Support unknown`;
         label = "?";
         break;
       }
@@ -717,12 +844,20 @@ export class MDNCompatTable extends LitElement {
         <span
           class="bc-version-label"
           title=${browserReleaseDate && !timeline
-            ? `${browser.name} ${added} – Released ${browserReleaseDate}`
+            ? this.l10n.raw({
+                id: "compat_browser_version_date",
+                args: {
+                  browser: browser.name,
+                  version: added,
+                  date: browserReleaseDate,
+                },
+              })
             : ""}
         >
           ${!timeline || added ? label : undefined}
           ${browserReleaseDate && timeline
-            ? ` (Released ${browserReleaseDate})`
+            ? // TODO l10n
+              ` (Released ${browserReleaseDate})`
             : ""}
         </span>
       </div>
@@ -737,13 +872,14 @@ export class MDNCompatTable extends LitElement {
       throw new Error("Missing browser info");
     }
 
-    const items = getActiveLegendItems(
+    const items = this._getActiveLegendItems(
       this.data,
       this._name,
       browserInfo,
       browsers,
-    ).map(([key, label]) =>
-      ["yes", "partial", "no", "unknown", "preview"].includes(key)
+    ).map((key) => {
+      const label = this.l10n(`compat_legend_${key}`);
+      return ["yes", "partial", "no", "unknown", "preview"].includes(key)
         ? html`<div class="bc-legend-item">
             <dt class="bc-legend-item-dt">
               <span class=${`bc-supports-${key} bc-supports`}>
@@ -762,13 +898,17 @@ export class MDNCompatTable extends LitElement {
               <abbr class="legend-icons icon icon-${key}" title=${label}></abbr>
             </dt>
             <dd class="bc-legend-item-dd">${label}</dd>
-          </div>`,
-    );
+          </div>`;
+    });
 
     return html`<section class="bc-legend">
-      <h3 class="visually-hidden" id="Legend">Legend</h3>
+      <h3 class="visually-hidden" id="Legend">
+        ${this.l10n("compat_legend")`Legend`}
+      </h3>
       <p class="bc-legend-tip">
-        Tip: you can click/tap on a cell for more information.
+        ${this.l10n(
+          "compat_legend_tip",
+        )`Tip: you can click/tap on a cell for more information.`}
       </p>
       <dl class="bc-legend-items-container">${items}</dl>
     </section>`;

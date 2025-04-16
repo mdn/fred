@@ -5,17 +5,26 @@ namespace Compat {
     depth: number;
   }
 
+  type LegendKey =
+    | "yes"
+    | "partial"
+    | "preview"
+    | "no"
+    | "unknown"
+    | "experimental"
+    | "nonstandard"
+    | "deprecated"
+    | "footnote"
+    | "disabled"
+    | "altname"
+    | "prefix"
+    | "more";
+
   // FIXME SimpleSupportStatement properties are not observed.
   type SimpleSupportStatementExtended = BCD.SimpleSupportStatement & {
     release_date?: string;
     version_last?: BCD.VersionValue;
   };
-
-  interface StatusIcon {
-    title: string;
-    text: string;
-    iconClassName: string;
-  }
 
   type SupportStatementExtended =
     | SimpleSupportStatementExtended

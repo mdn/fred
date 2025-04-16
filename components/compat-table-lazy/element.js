@@ -2,6 +2,7 @@ import { Task } from "@lit/task";
 import { LitElement, html } from "lit";
 
 import "../compat-table/element.js";
+import { L10nMixin } from "../../l10n/mixin.js";
 import {
   BCD_BASE_URL,
   DEFAULT_LOCALE,
@@ -12,7 +13,7 @@ import {
  * @typedef {{data: BCD.Identifier, browsers: BCD.Browsers}} Compat
  */
 
-export class MDNCompatTableLazy extends LitElement {
+export class MDNCompatTableLazy extends L10nMixin(LitElement) {
   static properties = {
     query: {},
     locale: {},
@@ -60,8 +61,10 @@ export class MDNCompatTableLazy extends LitElement {
       @click=${onClick}
       target="_blank"
       rel="noopener noreferrer"
-      title="Report missing compatibility data"
-      >Report this issue</a
+      title=${this.l10n(
+        "compat_link_report_missing_title",
+      )`Report missing compatibility data`}
+      >${this.l10n("compat_link_report_missing")`Report this issue`}</a
     >`;
   }
 
@@ -89,8 +92,8 @@ export class MDNCompatTableLazy extends LitElement {
 
   render() {
     return this._dataTask.render({
-      initial: () => html`<p>Loading...</p>`,
-      pending: () => html`<p>Loading...</p>`,
+      initial: () => html`<p>${this.l10n("compat_loading")`Loading…`}</p>`,
+      pending: () => html`<p>${this.l10n("compat_loading")`Loading…`}</p>`,
 
       complete:
         /**
