@@ -19,6 +19,13 @@ const common = {
   mode: isProd ? "production" : "development",
   stats: isProd,
   devtool: "source-map",
+  output: {
+    module: true,
+    chunkFormat: "module",
+  },
+  experiments: {
+    outputModule: true,
+  },
   plugins: [
     /** @type {import("@rspack/core").Plugin} */
     new StatsWriterPlugin({
@@ -37,6 +44,11 @@ const common = {
     ],
   },
   module: {
+    parser: {
+      javascript: {
+        url: "relative",
+      },
+    },
     rules: [
       {
         test: /\.flt$/i,
@@ -84,9 +96,6 @@ const common = {
 export default [
   merge(common, {
     name: "ssr",
-    experiments: {
-      outputModule: true,
-    },
     target: "node",
     entry: {
       index: "./entry.ssr.js",
@@ -107,30 +116,20 @@ export default [
       },
       publicPath: "/static/ssr/",
       library: { type: "module" },
-      chunkFormat: "module",
     },
   }),
   merge(common, {
     name: "client",
-    // TODO: output esm, see TODO above publicPath below
-    // experiments: {
-    //   outputModule: true,
-    // },
     entry: {
       index: ["./entry.client.js"],
     },
-    // TODO: look at this, check it's modern, can use browserslist?
-    target: "web",
+    target: ["web", "browserslist"],
     plugins: [!isProd && new GenerateElementMapPlugin()],
     output: {
       path: path.resolve(__dirname, "dist/client"),
       filename: "[name].js",
       clean: true,
       publicPath: "/static/client/",
-      // TODO: for esm output, we have to fully resolve the publicPath:
-      // publicPath: "http://localhost:3000/static/client/",
-      // library: { type: "module" },
-      // chunkFormat: "module",
     },
   }),
 ];
