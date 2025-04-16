@@ -2,7 +2,11 @@ import { LitElement, html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
-import { BCD_TABLE, DEFAULT_LOCALE } from "./constants.js";
+import {
+  BCD_TABLE,
+  DEFAULT_LOCALE,
+  ISSUE_METADATA_TEMPLATE,
+} from "./constants.js";
 import {
   getSupportBrowserReleaseDate,
   getSupportClassName,
@@ -23,17 +27,6 @@ import {
   listFeatures,
   versionIsPreview,
 } from "./utils.js";
-
-const ISSUE_METADATA_TEMPLATE = `
-<!-- Do not make changes below this line -->
-<details>
-<summary>MDN page report details</summary>
-
-* Query: \`$QUERY_ID\`
-* Report started: $DATE
-
-</details>
-`;
 
 /**
  * @param {BCD.BrowserName} browser
