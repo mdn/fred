@@ -102,6 +102,7 @@ export default [
     },
     plugins: [
       new rspack.CssExtractRspackPlugin({
+        filename: isProd ? "[name].[contenthash].css" : "[name].css",
         runtime: false,
       }),
     ],
