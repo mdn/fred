@@ -1,8 +1,7 @@
-import "../components/code-example/element.js";
-
 for (const pre of document.querySelectorAll(
   "div.code-example pre:not(.hidden)",
 )) {
+  await import("../components/code-example/element.js");
   const example = pre.closest("div.code-example");
   const language = example?.querySelector(".language-name")?.textContent;
   const code = example?.querySelector("code");

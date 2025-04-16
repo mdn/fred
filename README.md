@@ -21,11 +21,12 @@ MDN's next fr(ont)e(n)d.
 
 - Components which are or make use of a custom element should place that element's code in `components/element-name/element.js`
   - The class should be exported, and named `MDNElementName`
+    - Acronyms should be kept all caps, to match the naming of `HTMLElement` class names, and added to `ACRONYMS` in `build/plugins/generate-element-map.js` to allow the correct types to be generated
   - The element should be registered with a name of `mdn-element-name`
   - If all this is done:
     - The element will be automatically loaded client side if it's present in the DOM at page load
-      - Elements dynamically injected won't be automatically loaded, and the code dynamically injecting them should handle loading their code
-    - The element will be automatically loaded server side, always
+      - Elements inserted client side (i.e. in a hook) won't be automatically loaded, and the hook should handle loading them: probably with an async `import()`
+    - The element will be automatically loaded client side for SSR
     - The element will automatically be added to `types/element-map.d.ts` to provide proper types in e.g. `querySelector("mdn-element-name")`
 
 ### Typing
