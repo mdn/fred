@@ -12,7 +12,7 @@ import {
  * @typedef {{data: BCD.Identifier, browsers: BCD.Browsers}} Compat
  */
 
-export class MDNLazyCompatTable extends LitElement {
+export class MDNCompatTableLazy extends LitElement {
   static properties = {
     query: {},
     locale: {},
@@ -110,4 +110,4 @@ export class MDNLazyCompatTable extends LitElement {
   }
 }
 
-customElements.define("mdn-lazy-compat-table", MDNLazyCompatTable);
+customElements.define("mdn-compat-table-lazy", MDNCompatTableLazy);
