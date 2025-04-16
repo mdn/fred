@@ -39,7 +39,7 @@ export class GenerateElementMapPlugin {
 
 declare global {
   interface HTMLElementTagNameMap {
-    ${mapping.join(`
+    ${mapping.toSorted().join(`
     `)}
   }
 }
