@@ -7,7 +7,7 @@ import { L10nMixin } from "../../l10n/mixin.js";
 import thumbsDown from "../icon/thumbs_down.svg?lit";
 import thumbsUp from "../icon/thumbs_up.svg?lit";
 
-import styles from "./index.css?lit";
+import styles from "./element.css?lit";
 
 /**
  * @typedef {"outdated"|"incomplete"|"code_examples"|"technical"|"consistency"|"incomprehensible"|"linguistic"|"other"} FeedbackReason
@@ -31,7 +31,7 @@ const FEEDBACK_REASONS_DE = {
   other: "Sonstige",
 };
 
-export class ContentFeedback extends L10nMixin(LitElement) {
+export class MDNContentFeedback extends L10nMixin(LitElement) {
   static styles = styles;
 
   static properties = {
@@ -162,4 +162,4 @@ export class ContentFeedback extends L10nMixin(LitElement) {
   }
 }
 
-customElements.define("mdn-content-feedback", ContentFeedback);
+customElements.define("mdn-content-feedback", MDNContentFeedback);

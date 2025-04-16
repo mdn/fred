@@ -1,7 +1,6 @@
 import { html } from "lit";
 
 import { Logo } from "../logo/index.js";
-import "../color-theme/index.js";
 import { Menu } from "../menu/index.js";
 
 import "./index.css";

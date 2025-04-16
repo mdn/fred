@@ -6,9 +6,9 @@ import dark from "../icon/moon.svg?lit";
 import light from "../icon/sun.svg?lit";
 import osDefault from "../icon/theme.svg?lit";
 
-import styles from "./index.css?lit";
+import styles from "./element.css?lit";
 
-export class ColorTheme extends L10nMixin(LitElement) {
+export class MDNColorTheme extends L10nMixin(LitElement) {
   static styles = styles;
 
   static properties = {
@@ -117,4 +117,4 @@ export class ColorTheme extends L10nMixin(LitElement) {
   }
 }
 
-customElements.define("mdn-color-theme", ColorTheme);
+customElements.define("mdn-color-theme", MDNColorTheme);

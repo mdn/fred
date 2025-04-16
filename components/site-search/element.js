@@ -3,7 +3,7 @@ import { LitElement, html } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
-class SiteSearch extends L10nMixin(LitElement) {
+export class MDNSiteSearch extends L10nMixin(LitElement) {
   static properties = {
     _query: { state: true },
     _page: { state: true },
@@ -82,4 +82,4 @@ class SiteSearch extends L10nMixin(LitElement) {
   }
 }
 
-customElements.define("mdn-site-search", SiteSearch);
+customElements.define("mdn-site-search", MDNSiteSearch);

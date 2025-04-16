@@ -3,17 +3,13 @@ import "@lit-labs/ssr-client/lit-element-hydrate-support.js";
 
 // elements:
 // TODO: migrate these all the the proper naming schema so they can be loaded by load-elements.js below
-import "./components/content-feedback/index.js";
-import "./components/color-theme/index.js";
 import "./components/compat/index.js";
-import "./components/dropdown/index.js";
 import "./observatory/landing/form.js";
 import "./observatory/results/results.js";
-import "./components/site-search/index.js";
-import "./components/copy-button/index.js";
 
 // hooks:
 import "./hooks/load-elements.js";
+import "./hooks/dropdown.js";
 import "./hooks/code-examples.js";
 
 // reload on ssr changes:
