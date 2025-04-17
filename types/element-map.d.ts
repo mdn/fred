@@ -9,6 +9,7 @@ declare global {
     "mdn-compat-table-lazy": import("../components/compat-table-lazy/element.js").MDNCompatTableLazy;
     "mdn-content-feedback": import("../components/content-feedback/element.js").MDNContentFeedback;
     "mdn-copy-button": import("../components/copy-button/element.js").MDNCopyButton;
+    "mdn-dropdown": import("../components/dropdown/element.js").MDNDropdown;
     "mdn-search-modal": import("../components/search-modal/element.js").MDNSearchModal;
     "mdn-site-search": import("../components/site-search/element.js").MDNSiteSearch;
   }

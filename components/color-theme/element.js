@@ -8,18 +8,18 @@ import osDefault from "../icon/theme.svg?lit";
 
 import styles from "./element.css?lit";
 
+import "../dropdown/element.js";
+
 export class MDNColorTheme extends L10nMixin(LitElement) {
   static styles = styles;
 
   static properties = {
     _mode: { state: true },
-    _dropdown: { state: true },
   };
 
   constructor() {
     super();
     this._mode = "light dark";
-    this._dropdown = false;
   }
 
   /** @param {MouseEvent} event */
@@ -33,7 +33,10 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
         } catch (error) {
           console.warn("Unable to write theme to localStorage", error);
         }
-        this._dropdown = false;
+        const dropdown = this.shadowRoot?.querySelector("mdn-dropdown");
+        if (dropdown) {
+          dropdown.open = false;
+        }
       }
     }
   }
@@ -52,10 +55,6 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
     }
   }
 
-  _toggleDropDown() {
-    this._dropdown = !this._dropdown;
-  }
-
   /**
    * @param {import("lit").PropertyValues<this>} changedProperties
    */
@@ -67,49 +66,46 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
 
   render() {
     return html`<div class="color-theme">
-      <button
-        class="color-theme__button dropdown"
-        aria-expanded=${this._dropdown}
-        aria-controls="color-theme__dropdown"
-        @click=${this._toggleDropDown}
-      >
-        ${this._icon} ${this.l10n`Theme`}
-      </button>
-      <div
-        class="color-theme__dropdown"
-        id="color-theme__dropdown"
-        ?hidden=${!this._dropdown}
-      >
-        <ul class="color-theme__list">
-          <li>
-            <button
-              class="color-theme__option"
-              data-mode="light dark"
-              @click=${this._setMode}
-            >
-              ${osDefault} ${this.l10n("theme_default")`OS default`}
-            </button>
-          </li>
-          <li>
-            <button
-              class="color-theme__option"
-              data-mode="light"
-              @click=${this._setMode}
-            >
-              ${light} ${this.l10n`Light`}
-            </button>
-          </li>
-          <li>
-            <button
-              class="color-theme__option"
-              data-mode="dark"
-              @click=${this._setMode}
-            >
-              ${dark} ${this.l10n`Dark`}
-            </button>
-          </li>
-        </ul>
-      </div>
+      <mdn-dropdown>
+        <button slot="button" class="color-theme__button dropdown">
+          ${this._icon} ${this.l10n`Theme`}
+        </button>
+        <div
+          slot="dropdown"
+          class="color-theme__dropdown"
+          id="color-theme__dropdown"
+        >
+          <ul class="color-theme__list">
+            <li>
+              <button
+                class="color-theme__option"
+                data-mode="light dark"
+                @click=${this._setMode}
+              >
+                ${osDefault} ${this.l10n("theme_default")`OS default`}
+              </button>
+            </li>
+            <li>
+              <button
+                class="color-theme__option"
+                data-mode="light"
+                @click=${this._setMode}
+              >
+                ${light} ${this.l10n`Light`}
+              </button>
+            </li>
+            <li>
+              <button
+                class="color-theme__option"
+                data-mode="dark"
+                @click=${this._setMode}
+              >
+                ${dark} ${this.l10n`Dark`}
+              </button>
+            </li>
+          </ul>
+        </div>
+      </mdn-dropdown>
     </div>`;
   }
 
