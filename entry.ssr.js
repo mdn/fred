@@ -38,9 +38,8 @@ for (const key of elementsContext.keys()) {
  * @param {string} path
  * @param {Rari.BuiltPage} page
  * @param {import("@rspack/core").StatsCompilation[]} manifest
- * @param {string} inlineScript
  */
-export async function render(path, page, manifest, inlineScript) {
+export async function render(path, page, manifest) {
   const locale = path.split("/")[1] || "en-US";
   if (locale === "qa") {
     path = path.replace("/qa/", "/en-US/");
@@ -104,8 +103,6 @@ export async function render(path, page, manifest, inlineScript) {
           return NotFound(context);
       }
     })();
-    return await collectResult(
-      r(renderHTML(context, component, manifest, inlineScript)),
-    );
+    return await collectResult(r(renderHTML(context, component, manifest)));
   });
 }

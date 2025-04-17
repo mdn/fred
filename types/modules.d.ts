@@ -17,3 +17,13 @@ declare module "*.flt" {
   const flt: string;
   export default flt;
 }
+
+declare module "*?source" {
+  const source: string;
+  export default source;
+}
+
+declare module "*?source&csp=true" {
+  const source: string;
+  export default source;
+}

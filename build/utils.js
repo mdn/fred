@@ -1,6 +1,8 @@
 import { html } from "@lit-labs/ssr";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
+import inlineScript from "../entry.inline.js?source&csp=true";
+
 /**
  * @param {import("@rspack/core").StatsCompilation} [manifest]
  * @param {string} [entry]
@@ -31,9 +33,8 @@ export function tagsFromManifest(manifest, entry = "index") {
  * @param {Fred.Context} context
  * @param {import("lit-html").TemplateResult} markup
  * @param {import("@rspack/core").StatsCompilation[]} manifest
- * @param {string} inlineScript
  */
-export function renderHTML(context, markup, manifest, inlineScript) {
+export function renderHTML(context, markup, manifest) {
   const { styleTags: ssrStyleTags } = tagsFromManifest(
     manifest.find((x) => x.name === "ssr"),
   );

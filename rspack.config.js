@@ -8,6 +8,7 @@ import { merge } from "webpack-merge";
 // @ts-expect-error
 import { StatsWriterPlugin } from "webpack-stats-plugin";
 
+import { CSPHashPlugin } from "./build/plugins/csp-hash.js";
 import { GenerateElementMapPlugin } from "./build/plugins/generate-element-map.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -50,6 +51,10 @@ const common = {
       },
     },
     rules: [
+      {
+        resourceQuery: /source/,
+        type: "asset/source",
+      },
       {
         test: /\.flt$/i,
         loader: "./build/loaders/fluent.js",
@@ -105,6 +110,7 @@ export default [
         filename: isProd ? "[name].[contenthash].css" : "[name].css",
         runtime: false,
       }),
+      isProd && new CSPHashPlugin(),
     ],
     output: {
       path: path.resolve(__dirname, "dist/ssr"),
