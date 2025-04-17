@@ -17,7 +17,7 @@ export function Navigation(context) {
       <button
         class="navigation__button"
         type="button"
-        aria-expanded="true"
+        aria-expanded="false"
         aria-controls="navigation__popup"
       >
         <svg
@@ -43,7 +43,7 @@ export function Navigation(context) {
           />
         </svg>
       </button>
-      <div class="navigation__popup" data-open="true" id="navigation__popup">
+      <div class="navigation__popup" data-open="false" id="navigation__popup">
         <div class="navigation__menu">${Menu(context)}</div>
         <div class="navigation__search">
           <mdn-search-modal></mdn-search-modal>
