@@ -3,30 +3,21 @@
 .breadcrumbs {
   --breadcrumbs-side-padding: 1rem;
 
-  /* these colors should go globally - these are the greys */
-  --color-grey-light-super: hsl(212deg 7% 98%);
-  --color-grey-light: hsl(212deg 7% 93%);
-  --color-grey-mid-light: hsl(212deg 7% 80%);
-  --color-grey-mid-dark: hsl(212deg 7% 26%);
-  --color-grey-dark: hsl(212deg 7% 16%);
-  --color-grey-dark-super: hsl(212deg 7% 12%);
-
-  display: grid;
-
-  grid-template-columns: 1fr repeat(4, max-content);
+  display: flex;
 
   column-gap: 1rem;
   align-items: center;
+  justify-content: end;
 
   padding-block: 0.2rem;
   padding-inline: var(--breadcrumbs-side-padding);
 
   background-color: light-dark(
-    var(--color-grey-light-super),
-    var(--color-grey-dark-super)
+    var(--color-gray-light-super),
+    var(--color-gray-dark-super)
   );
   border-block-end: 1px solid
-    light-dark(var(--color-grey-mid-light), var(--color-grey-mid-dark));
+    light-dark(var(--color-gray-mid-light), var(--color-gray-mid-dark));
 
   &[data-scheme="dark"] {
     color: var(--color-text-primary);
@@ -38,57 +29,61 @@
       (100% - 1440px + (var(--breadcrumbs-side-padding) * 2)) / 2
     );
   }
+}
 
-  ul {
+/* Path */
+
+.breadcrumbs__path {
+  display: flex;
+
+  align-items: center;
+
+  padding: 0;
+  margin: 0;
+  margin-right: auto;
+
+  list-style: none;
+
+  li {
     display: flex;
+    place-items: center;
 
-    column-gap: 0.5rem;
-    align-items: center;
+    a {
+      color: var(--color-text-primary);
 
-    padding: 0;
-    margin: 0;
-
-    list-style-position: outside;
-    list-style-type: none;
-
-    li {
-      display: flex;
-      place-items: center;
-
-      a {
-        color: var(--color-text-primary);
-
-        &:not(:hover) {
-          text-decoration: none;
-        }
+      &:not(:hover) {
+        text-decoration: none;
       }
+    }
 
-      svg {
-        color: light-dark(
-          var(--color-grey-mid-light),
-          var(--color-grey-mid-dark)
-        );
-      }
+    svg {
+      margin-inline: 0.5rem;
+      fill: var(--color-text-secondary);
     }
   }
+}
 
-  /* right side 'buttons' these are styled the same as the color-theme component */
-  div[class^="breadcrumbs__"] {
-    display: flex;
+/* Component */
 
-    column-gap: 0.25rem;
-    align-items: center;
+/* Temporary, until we have actual components */
 
-    padding: 0 0.5rem;
+.breadcrumbs__component {
+  display: flex;
 
-    background-color: transparent;
-    border-radius: 2px;
+  column-gap: 0.25rem;
+  align-items: center;
 
-    &:hover {
-      background-color: light-dark(
-        var(--color-grey-mid-light),
-        var(--color-grey-mid-dark)
-      );
-    }
+  padding: 0 0.5rem;
+  margin: 0;
+
+  background-color: transparent;
+  border: none;
+
+  &:hover {
+    background-color: var(--color-background-secondary);
+  }
+
+  svg {
+    fill: var(--color-text-primary);
   }
 }

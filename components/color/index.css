@@ -30,6 +30,13 @@
   --color-gray-7: #696969;
   --color-gray-8: #2f2f2f;
   --color-gray-9: #1b1b1b;
+
+  --color-gray-light-super: hsl(212deg 7% 98%);
+  --color-gray-light: hsl(212deg 7% 93%);
+  --color-gray-mid-light: hsl(212deg 7% 80%);
+  --color-gray-mid-dark: hsl(212deg 7% 26%);
+  --color-gray-dark: hsl(212deg 7% 16%);
+  --color-gray-dark-super: hsl(212deg 7% 12%);
 }
 
 /* Tinted */
