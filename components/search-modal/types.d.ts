@@ -17,5 +17,4 @@ export interface SearchIndex {
 export type SearchResultItem = {
   title: string;
   url: string;
-  positions: Set<number>;
 };

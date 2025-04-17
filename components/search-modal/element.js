@@ -71,8 +71,9 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     }
   }
 
-  /** @param {SubmitEvent} _event */
-  _submit(_event) {
+  /** @param {SubmitEvent} event */
+  _submit(event) {
+    event.preventDefault();
     const item = this.shadowRoot?.querySelector("[data-selected] a");
     if (item instanceof HTMLElement) {
       item.click();
@@ -125,7 +126,14 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
               results?.map(
                 ({ title, url }, i) => html`
                   <li ?data-selected=${this._selected === i} data-result=${i}>
-                    <a href=${url}>${title}</a>
+                    <a href=${url}>${HighlightMatch(title, this._query)}</a>
+                    <small>
+                      ${url
+                        .split("/")
+                        .slice(1)
+                        .filter((p) => !["docs", this.locale].includes(p))
+                        .join(" / ")}
+                    </small>
                   </li>
                 `,
               ),
@@ -191,4 +199,24 @@ export function splitQuery(term) {
       term.split(/[ ,]+/)
     : // Dot is probably just a word separator.
       term.split(/[ ,.]+/);
+}
+
+/**
+ * @param {string} title
+ * @param {string} query
+ */
+function HighlightMatch(title, query) {
+  // Split on highlight term and include term into parts, ignore case.
+  const words = splitQuery(query);
+  // $& means the whole matched string
+  const regexWords = words.map((s) =>
+    s.replaceAll(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`),
+  );
+  const regex = regexWords.map((word) => `(${word})`).join("|");
+  const parts = title.split(new RegExp(regex, "gi"));
+  return parts
+    .filter(Boolean)
+    .map((part) =>
+      words.includes(part.toLowerCase()) ? html`<mark>${part}</mark>` : part,
+    );
 }
