@@ -7,7 +7,6 @@ import light from "../icon/sun.svg?lit";
 import osDefault from "../icon/theme.svg?lit";
 
 import styles from "./element.css?lit";
-import { applyColorTheme, loadColorTheme } from "./utils.js";
 
 export class MDNColorTheme extends L10nMixin(LitElement) {
   static styles = styles;
@@ -19,8 +18,7 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
 
   constructor() {
     super();
-    /** @type {string | null} */
-    this._mode = null;
+    this._mode = "light dark";
     this._dropdown = false;
   }
 
@@ -35,7 +33,6 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
         } catch (error) {
           console.warn("Unable to write theme to localStorage", error);
         }
-        applyColorTheme(this._mode);
         this._dropdown = false;
       }
     }
@@ -59,6 +56,15 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
     this._dropdown = !this._dropdown;
   }
 
+  /**
+   * @param {import("lit").PropertyValues<this>} changedProperties
+   */
+  willUpdate(changedProperties) {
+    if (changedProperties.has("_mode") && globalThis.document) {
+      document.documentElement.style.colorScheme = this._mode;
+    }
+  }
+
   render() {
     return html`<div class="color-theme">
       <button
@@ -79,7 +85,7 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
           <li>
             <button
               class="color-theme__option"
-              data-mode="osDefault"
+              data-mode="light dark"
               @click=${this._setMode}
             >
               ${osDefault} ${this.l10n("theme_default")`OS default`}
@@ -109,10 +115,20 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
   }
 
   firstUpdated() {
-    const mode = loadColorTheme();
+    // we have to do this here and immediately cause a re-render
+    // as doing so in connectedCallback causes a hydration error:
+    // https://github.com/lit/lit/issues/1434
+
+    // this logic is also reflected in "/entry.inline.js"
+
+    let mode;
+    try {
+      mode = localStorage.getItem("theme");
+    } catch (error) {
+      console.warn("Unable to read theme from localStorage", error);
+    }
     if (mode) {
       this._mode = mode;
-      applyColorTheme(mode);
     }
   }
 }
