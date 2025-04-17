@@ -70,15 +70,14 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
       <button
         class="color-theme__button dropdown"
         aria-expanded=${this._dropdown}
-        aria-controls="color-theme__dropdown-1"
+        aria-controls="color-theme__dropdown"
         @click=${this._toggleDropDown}
       >
         ${this._icon} ${this.l10n`Theme`}
       </button>
       <div
         class="color-theme__dropdown"
-        id="color-theme__dropdown-1"
-        data-side="right"
+        id="color-theme__dropdown"
         ?hidden=${!this._dropdown}
       >
         <ul class="color-theme__list">

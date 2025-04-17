@@ -18,14 +18,18 @@
   background-color: transparent;
   border: none;
 
-  &:is(:hover, :focus),
-  &[aria-expanded="true"] {
+  &:is(:hover, :focus, [aria-expanded="true"]) {
     background-color: var(--color-background-secondary);
+  }
+
+  svg {
+    fill: var(--color-text-primary);
   }
 }
 
 .color-theme__dropdown {
   position: absolute;
+  left: 0;
   z-index: 1;
 
   width: max-content;
@@ -35,14 +39,6 @@
 
   background-color: var(--color-background-primary);
   border: 1px solid var(--color-text-secondary);
-
-  &[data-side="left"] {
-    right: 0;
-  }
-
-  &[data-side="right"] {
-    left: 0;
-  }
 }
 
 .color-theme__list {
@@ -69,12 +65,16 @@
 
   font: inherit;
 
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
 
   background-color: transparent;
   border: none;
 
   &:hover {
     background-color: var(--color-background-secondary);
+  }
+
+  svg {
+    fill: var(--color-text-primary);
   }
 }
