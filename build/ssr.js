@@ -12,7 +12,7 @@ const ssrStats = JSON.parse(await readFile("./dist/ssr/stats.json", "utf8"));
 const clientStats = JSON.parse(
   await readFile("./dist/client/stats.json", "utf8"),
 );
-const inlineScript = await readFile("./dist/inline/inline.js", "utf8");
+const inlineScript = await readFile("../entry.inline.js", "utf8");
 
 /**
  * @template T

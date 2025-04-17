@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { rspack } from "@rspack/core";
 import express from "express";
@@ -16,6 +17,8 @@ import "source-map-support/register.js";
  * @import { Request, Response } from "express";
  * @import { Stats } from "@rspack/core";
  */
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 if (process.env.NODE_ENV === "production") {
   throw new Error(
@@ -61,10 +64,7 @@ async function serverRenderMiddleware(req, res, page) {
     /** @type {import("./entry.ssr.js")} */
     const indexModule = await import(indexModulePath);
     const inlineScript = await fs.readFile(
-      path.join(
-        compliationStats.find((x) => x.name === "inline")?.outputPath || "",
-        "inline.js",
-      ),
+      path.join(__dirname, "entry.inline.js"),
       "utf8",
     );
     const html = await indexModule?.render(

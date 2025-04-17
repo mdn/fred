@@ -15,13 +15,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const isProd = process.env.NODE_ENV === "production";
 
 /** @type {import("@rspack/core").RspackOptions} */
-const clientAndSsrAndInline = {
+const common = {
   mode: isProd ? "production" : "development",
   stats: isProd,
   devtool: "source-map",
-};
-
-const clientAndSsr = merge(clientAndSsrAndInline, {
   output: {
     module: true,
     chunkFormat: "module",
@@ -93,11 +90,11 @@ const clientAndSsr = merge(clientAndSsrAndInline, {
       },
     ],
   },
-});
+};
 
 /** @type {import("@rspack/core").MultiRspackOptions} */
 export default [
-  merge(clientAndSsr, {
+  merge(common, {
     name: "ssr",
     target: "node",
     entry: {
@@ -122,7 +119,7 @@ export default [
       library: { type: "module" },
     },
   }),
-  merge(clientAndSsr, {
+  merge(common, {
     name: "client",
     entry: {
       index: [!isProd && "./build/hmr.js", "./entry.client.js"].filter(
@@ -136,31 +133,6 @@ export default [
       filename: isProd ? "[name].[contenthash].js" : "[name].js",
       clean: true,
       publicPath: "/static/client/",
-    },
-  }),
-  merge(clientAndSsrAndInline, {
-    name: "inline",
-    entry: {
-      inline: "./entry.inline.js",
-    },
-    output: {
-      path: path.resolve(__dirname, "dist/inline"),
-      publicPath: "/static/inline/",
-      filename: "[name].js",
-      clean: true,
-    },
-    plugins: [
-      new rspack.SourceMapDevToolPlugin({
-        filename: "[name].[contenthash].js.map",
-        publicPath: "/static/inline/",
-        append: `
-//# sourceURL=[file]
-//# sourceMappingURL=[url]`,
-      }),
-    ],
-    optimization: {
-      splitChunks: false,
-      runtimeChunk: false,
     },
   }),
 ];
