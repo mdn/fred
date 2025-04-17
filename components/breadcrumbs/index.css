@@ -28,6 +28,11 @@
   border-block-end: 1px solid
     light-dark(var(--color-grey-mid-light), var(--color-grey-mid-dark));
 
+  &[data-scheme="dark"] {
+    color: var(--color-text-primary);
+    color-scheme: dark;
+  }
+
   @media (width > 1440px) {
     padding-inline: calc(
       (100% - 1440px + (var(--breadcrumbs-side-padding) * 2)) / 2
