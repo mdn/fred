@@ -1,17 +1,5 @@
 .logo__image {
   display: block;
-
-  @media (width > 1100px) {
-    &[data-type="mobile"] {
-      display: none;
-    }
-  }
-
-  @media (width <= 1100px) {
-    &[data-type="desktop"] {
-      display: none;
-    }
-  }
 }
 
 .logo__letter,
