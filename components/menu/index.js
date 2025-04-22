@@ -249,7 +249,8 @@ export function Menu(_context) {
           aria-expanded="false"
           aria-controls="menu__javascript"
         >
-          <span class="menu__tab-label">JavaScript</span>
+          <span class="menu__tab-label" data-type="long">JavaScript</span>
+          <span class="menu__tab-label" data-type="short">JS</span>
           <svg
             class="menu__tab-arrow"
             width="24"

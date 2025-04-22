@@ -1,6 +1,6 @@
 /* Desktop */
 
-@media (width > 1136px) {
+@media (width > 1006px) {
   .navigation {
     display: grid;
 
@@ -24,6 +24,7 @@
 
   .navigation__logo {
     padding: 0.5rem;
+    padding-right: 0;
     margin-inline-start: -6px;
   }
 
