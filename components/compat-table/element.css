@@ -6,7 +6,7 @@
 @use "../../ui/atoms/icon";
 */
 
-@import url("global.css");
+@import url("index-global.css");
 @import url("icons.css");
 @import url("index-common.css");
 @import url("index-mobile.css");

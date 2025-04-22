@@ -9,13 +9,13 @@ import {
   DEFAULT_LOCALE,
   ISSUE_METADATA_TEMPLATE,
 } from "./constants.js";
+import styles from "./element.css?lit";
 import {
   getSupportBrowserReleaseDate,
   getSupportClassName,
   labelFromString,
   versionLabelFromSupport,
 } from "./feature-row.js";
-import styles from "./index.css?lit";
 import {
   HIDDEN_BROWSERS,
   asList,

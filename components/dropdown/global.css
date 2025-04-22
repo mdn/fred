@@ -1,0 +1,9 @@
+mdn-dropdown {
+  display: contents;
+
+  &:not([data-loaded="true"]) {
+    [slot="dropdown"] {
+      display: none;
+    }
+  }
+}

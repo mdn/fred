@@ -1,7 +1,5 @@
 import { html, nothing } from "lit";
 
-import "./global.css";
-
 /**
  * @param {object} options
  * @param {string | Lit.TemplateResult} [options.label]

@@ -27,7 +27,7 @@ import { runWithContext } from "./symmetric-context/server.js";
 const elementsContext = require.context(
   "./components/",
   true,
-  /\/element\.js$/,
+  /\/(element\.js|global\.css)$/,
 );
 for (const key of elementsContext.keys()) {
   // load element code

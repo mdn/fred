@@ -54,6 +54,7 @@ export class MDNDropdown extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    this.dataset.loaded = "true";
     this._globalClick = this._globalClick.bind(this);
     document.addEventListener("click", this._globalClick);
   }
