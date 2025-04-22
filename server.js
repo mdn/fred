@@ -1,4 +1,4 @@
-import path from "node:path";
+import { Worker } from "node:worker_threads";
 
 import { rspack } from "@rspack/core";
 import express from "express";
@@ -8,8 +8,6 @@ import webpackDevMiddleware from "webpack-dev-middleware";
 import webpackHotMiddleware from "webpack-hot-middleware";
 
 import rspackConfig from "./rspack.config.js";
-
-import "source-map-support/register.js";
 
 /**
  * @import { Request, Response } from "express";
@@ -39,27 +37,24 @@ async function serverRenderMiddleware(req, res, page) {
       throw new Error("cannot parse the rspack config, did you modify it?");
     }
 
-    const ssrStats = compliationStats.find((x) => x.name === "ssr");
-    if (!ssrStats) {
-      throw new Error(
-        "cannot find the ssr rspack config, did you change its name?",
+    const html = await new Promise((resolve, reject) => {
+      // use worker so we have a fresh esm cache each page load
+      const worker = new Worker(
+        new URL("build/server-worker.js", import.meta.url),
+        {
+          /** @type {import("./build/types.js").WorkerData} */
+          workerData: {
+            reqPath: req.path,
+            page,
+            compliationStats,
+          },
+        },
       );
-    }
-    const { outputPath, entrypoints } = ssrStats;
-    const outputName = entrypoints?.index?.assets?.find(
-      ({ name }) => name.startsWith("index.") && name.endsWith(".js"),
-    )?.name;
-    const indexModulePath =
-      outputPath && outputName && path.join(outputPath, outputName);
-    if (!indexModulePath) {
-      throw new Error(
-        "cannot find ssr entrypoint, did you change output.path or output.name in the rspack config?",
-      );
-    }
 
-    /** @type {import("./entry.ssr.js")} */
-    const indexModule = await import(indexModulePath);
-    const html = await indexModule?.render(req.path, page, compliationStats);
+      worker.on("message", ({ html, error }) => {
+        error ? reject(error) : resolve(html);
+      });
+    });
 
     res.writeHead(res.statusCode, {
       "Content-Type": "text/html",
