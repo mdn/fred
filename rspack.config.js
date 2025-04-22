@@ -114,7 +114,7 @@ export default [
     ],
     output: {
       path: path.resolve(__dirname, "dist/ssr"),
-      filename: isProd ? "[name].js" : "[name].[contenthash].js",
+      filename: "[name].js",
       // use proper file names in sourcemaps:
       devtoolModuleFilenameTemplate: (info) =>
         path.resolve(info.absoluteResourcePath),
