@@ -1,6 +1,6 @@
 @import url("../visually-hidden/index.css");
 
-.sidebar-filter-container {
+:host {
   display: flex;
 
   flex-direction: column;
