@@ -36,7 +36,9 @@ export class SidebarFilterer {
      */
     this.allParents = [...root.querySelectorAll("details")];
 
-    const links = [...root.querySelectorAll("a[href]")];
+    const links = [...root.querySelectorAll("a[href]")].filter(
+      (a) => a instanceof HTMLAnchorElement,
+    );
 
     /**
      * @type {Item[]}
@@ -49,7 +51,10 @@ export class SidebarFilterer {
       parents: this.getParentsOf(link),
     }));
 
-    this.toc = root.closest(".sidebar")?.querySelector(".in-nav-toc") || null;
+    /**
+     * @type {HTMLElement|null}
+     */
+    this.toc = root.querySelector(".reference-toc") || null;
   }
 
   /**
@@ -247,7 +252,17 @@ export class SidebarFilterer {
       const span = this.replaceChildNode(node, "span");
       span.className = "highlight-container";
 
-      let rest = span.childNodes[0];
+      /** @type {Text|undefined} */
+      const initialRest = [...span.childNodes].find(
+        (node) => node instanceof Text,
+      );
+
+      if (!initialRest) {
+        continue;
+      }
+
+      /** @type {Text} */
+      let rest = initialRest;
       let cursor = 0;
 
       for (const [rangeBegin, rangeEnd] of sortedRanges) {
@@ -273,15 +288,17 @@ export class SidebarFilterer {
    * Recursively collects all text nodes under a given node.
    * @private
    * @param {Node} node The node to search within.
-   * @returns {Array<Node>} An array of text nodes.
+   * @returns {Array<Node & Text>} An array of text nodes.
    */
   getTextNodesOf(node) {
     const parents = [node];
+    /** @type {Array<Node & Text>} */
     const nodes = [];
 
     for (const parent of parents) {
       for (const childNode of parent.childNodes) {
         if (childNode.nodeType === Node.TEXT_NODE) {
+          // @ts-expect-error TypeScript doesn't understand that Node.TEXT_NODE implies Node & Text.
           nodes.push(childNode);
         } else if (childNode.hasChildNodes && childNode.hasChildNodes()) {
           parents.push(childNode);

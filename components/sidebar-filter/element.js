@@ -8,20 +8,11 @@ import cancelIcon from "../icon/cancel.svg?lit";
 
 import { SidebarFilterer } from "./sidebar-filterer.js";
 
-const SIDEBAR_FILTER_FOCUS = "sidebar_filter_focus";
-const SIDEBAR_FILTER_TYPED = "sidebar_filter_typed";
-
-/**
- * SidebarFilterElement is a web component that provides a sidebar filtering functionality.
- * It integrates a SidebarFilterer to filter content and includes telemetry tracking via the gleanClick callback.
- * @augments {LitElement}
- */
-class SidebarFilter extends LitElement {
+class MDNSidebarFilter extends LitElement {
   static properties = {
     query: { type: String },
     matchCount: { state: true, type: Number },
-    isActive: { state: true, type: Boolean },
-    hasTyped: { state: true, type: Boolean },
+    _active: { state: true, type: Boolean },
   };
 
   /**
@@ -34,14 +25,9 @@ class SidebarFilter extends LitElement {
     /** @type {number|undefined} */
     this.matchCount = undefined;
     /** @type {boolean} */
-    this.isActive = false;
+    this._active = false;
     /** @type {boolean} */
     this.hasTyped = false;
-    /**
-     * TODO
-     * @type {function(string):void}
-     */
-    this.gleanClick = () => {};
     /**
      * @type {SidebarFilterer|null}
      */
@@ -56,16 +42,12 @@ class SidebarFilter extends LitElement {
     this._sidebarInnerNav = null;
   }
 
-  /**
-   * Lifecycle callback called after the component’s DOM has been updated the first time.
-   * Initializes references to the quicklinks elements used for scrolling.
-   */
   firstUpdated() {
-    this._quicklinks = document.querySelector("#sidebar-quicklinks");
+    this._quicklinks = document.querySelector(".left-sidebar");
     if (this._quicklinks) {
       this._sidebarInnerNav =
         /** @type {HTMLElement|null} */ (
-          this._quicklinks.querySelector(".sidebar-inner-nav")
+          this._quicklinks.querySelector(".left-sidebar--content")
         ) || null;
     }
   }
@@ -77,11 +59,7 @@ class SidebarFilter extends LitElement {
   _saveScrollPosition() {
     const refs = [this._quicklinks, this._sidebarInnerNav];
     for (const el of refs) {
-      if (
-        el instanceof HTMLElement &&
-        el.dataset.lastScrollTop === undefined &&
-        el.scrollTop > 0
-      ) {
+      if (el && el.dataset.lastScrollTop === undefined && el.scrollTop > 0) {
         el.dataset.lastScrollTop = String(el.scrollTop);
         el.scrollTop = 0;
       }
@@ -108,17 +86,6 @@ class SidebarFilter extends LitElement {
    * @param {Map<string, any>} changedProperties
    */
   updated(changedProperties) {
-    if (changedProperties.has("isActive")) {
-      if (this.isActive) {
-        // When the input becomes active, send telemetry for focus.
-        if (typeof this.gleanClick === "function") {
-          this.gleanClick(SIDEBAR_FILTER_FOCUS);
-        }
-      } else {
-        // When deactivated, reset the typed state.
-        this.hasTyped = false;
-      }
-    }
     if (changedProperties.has("query")) {
       // Mark that the user has typed if the query is non-empty.
       if (this.query && this.query.trim().length > 0 && !this.hasTyped) {
@@ -128,7 +95,7 @@ class SidebarFilter extends LitElement {
       if (this._quicklinks) {
         // Initialize the filterer if it has not yet been created.
         if (!this._filterer) {
-          const root = this._quicklinks.querySelector(".sidebar-body");
+          const root = this._quicklinks.querySelector(".left-sidebar--content");
           if (root instanceof HTMLElement) {
             this._filterer = new SidebarFilterer(root);
           }
@@ -146,13 +113,6 @@ class SidebarFilter extends LitElement {
         }
       }
     }
-    if (
-      changedProperties.has("hasTyped") &&
-      this.hasTyped && // When the user has typed, send telemetry for typing.
-      typeof this.gleanClick === "function"
-    ) {
-      this.gleanClick(SIDEBAR_FILTER_TYPED);
-    }
   }
 
   /**
@@ -160,7 +120,7 @@ class SidebarFilter extends LitElement {
    * @private
    */
   _onFocus() {
-    this.isActive = true;
+    this._active = true;
   }
 
   /**
@@ -179,12 +139,12 @@ class SidebarFilter extends LitElement {
    */
   _clearFilter() {
     this.query = "";
-    this.isActive = false;
+    this._active = false;
   }
 
   /**
    * Renders the component template.
-   * @returns {import('lit').TemplateResult}
+   * @returns {Lit.TemplateResult}
    */
   render() {
     return html`
@@ -201,7 +161,7 @@ class SidebarFilter extends LitElement {
           <input
             id="sidebar-filter-input"
             autocomplete="off"
-            class="sidebar-filter-input-field ${this.isActive
+            class="sidebar-filter-input-field ${this._active
               ? "is-active"
               : ""}"
             type="text"
@@ -234,4 +194,4 @@ class SidebarFilter extends LitElement {
   }
 }
 
-customElements.define("sidebar-filter", SidebarFilter);
+customElements.define("mdn-sidebar-filter", MDNSidebarFilter);

@@ -8,6 +8,9 @@ import "./index.css";
  */
 export function LeftSidebar(context) {
   return html`<nav class="left-sidebar">
-    ${unsafeHTML(context?.doc?.sidebarHTML)}
+    <mdn-sidebar-filter></mdn-sidebar-filter>
+    <section class="left-sidebar--content">
+      ${unsafeHTML(context?.doc?.sidebarHTML)}
+    </section>
   </nav>`;
 }

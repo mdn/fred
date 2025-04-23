@@ -10,6 +10,7 @@ declare global {
     "mdn-content-feedback": import("../components/content-feedback/element.js").MDNContentFeedback;
     "mdn-copy-button": import("../components/copy-button/element.js").MDNCopyButton;
     "mdn-search-modal": import("../components/search-modal/element.js").MDNSearchModal;
+    "mdn-sidebar-filter": import("../components/sidebar-filter/element.js").MDNSidebarFilter;
     "mdn-site-search": import("../components/site-search/element.js").MDNSiteSearch;
   }
 }
