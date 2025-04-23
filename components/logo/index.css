@@ -4,7 +4,7 @@
 
 .logo__letter,
 .logo__cursor {
-  fill: light-dark(var(--color-blue), var(--color-blue-light));
+  fill: light-dark(var(--color-blue), var(--color-blue-lighter));
 }
 
 .logo__text {

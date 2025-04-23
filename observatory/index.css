@@ -1,34 +1,44 @@
 /* Observatory main layout */
 
 .obs-layout {
+  --color-gray-1: #f9f9fb;
+  --color-gray-2: #e9e9e9;
+  --color-gray-3: #d9d9d9;
+  --color-gray-4: #c9c9c9;
+  --color-gray-5: #b9b9b9;
+  --color-gray-6: #a9a9a9;
+  --color-gray-7: #696969;
+  --color-gray-8: #2f2f2f;
+  --color-gray-9: #1b1b1b;
+
   --spacing: 2rem;
 
   --progress-color: var(--observatory-accent);
 
   --observatory-accent: light-dark(
-    var(--color-purple-dark),
-    var(--color-purple-light)
+    var(--color-purple-darker),
+    var(--color-purple-lighter)
   );
   --observatory-accent-light: light-dark(
-    var(--color-purple-dark),
-    var(--color-purple-light)
+    var(--color-purple-darker),
+    var(--color-purple-lighter)
   );
 
   --observatory-pass-icon-bg: light-dark(
-    var(--color-green-light-super),
-    var(--color-green-dark)
+    var(--color-green-lightest),
+    var(--color-green-darker)
   );
   --observatory-pass-icon-color: light-dark(
     var(--color-green),
-    var(--color-green-light)
+    var(--color-green-lighter)
   );
   --observatory-fail-icon-bg: light-dark(
-    var(--color-red-light-super),
-    var(--color-red-dark-super)
+    var(--color-red-lightest),
+    var(--color-red-darkest)
   );
   --observatory-fail-icon-color: light-dark(
     var(--color-red),
-    var(--color-red-light)
+    var(--color-red-lighter)
   );
 
   --observatory-table-bg: light-dark(var(--color-white), var(--color-gray-9));
@@ -42,55 +52,55 @@
   );
 
   --observatory-grade-a-bg: light-dark(
-    var(--color-green-light-super),
-    var(--color-green-dark-super)
+    var(--color-green-lightest),
+    var(--color-green-darkest)
   );
   --observatory-grade-a-border: light-dark(
     var(--color-green),
-    var(--color-green-light)
+    var(--color-green-lighter)
   );
   --observatory-grade-b-bg: light-dark(
-    var(--color-yellow-light-super),
-    var(--color-yellow-dark-super)
+    var(--color-yellow-lightest),
+    var(--color-yellow-darkest)
   );
   --observatory-grade-b-border: light-dark(
     var(--color-yellow),
-    var(--color-yellow-light)
+    var(--color-yellow-lighter)
   );
   --observatory-grade-c-bg: light-dark(
-    var(--color-yellow-light-super),
-    var(--color-yellow-dark-super)
+    var(--color-yellow-lightest),
+    var(--color-yellow-darkest)
   );
   --observatory-grade-c-border: light-dark(
-    var(--color-yellow-dark),
+    var(--color-yellow-darker),
     var(--color-yellow)
   );
   --observatory-grade-d-bg: light-dark(
-    var(--color-orange-light-super),
-    var(--color-orange-dark-super)
+    var(--color-orange-lightest),
+    var(--color-orange-darkest)
   );
   --observatory-grade-d-border: light-dark(
     var(--color-orange),
     var(--color-orange)
   );
   --observatory-grade-f-bg: light-dark(
-    var(--color-red-light-super),
-    var(--color-red-dark-super)
+    var(--color-red-lightest),
+    var(--color-red-darkest)
   );
   --observatory-grade-f-border: light-dark(
     var(--color-red),
-    var(--color-red-light)
+    var(--color-red-lighter)
   );
   --observatory-arrow-down-color: light-dark(
-    var(--color-red-dark),
-    var(--color-red-light)
+    var(--color-red-darker),
+    var(--color-red-lighter)
   );
   --observatory-arrow-up-color: light-dark(
     var(--color-green),
-    var(--color-green-light)
+    var(--color-green-lighter)
   );
 
-  --form-invalid-color: light-dark(var(--color-red), var(--color-red-light));
+  --form-invalid-color: light-dark(var(--color-red), var(--color-red-lighter));
 
   --font-body: inter, var(--font-fallback);
 

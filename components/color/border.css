@@ -1,9 +1,12 @@
 /* Border */
 
 :root {
-  --color-border-primary: light-dark(var(--color-gray-7), var(--color-gray-6));
+  --color-border-primary: light-dark(
+    var(--color-gray-dark),
+    var(--color-gray-light)
+  );
   --color-border-secondary: light-dark(
-    var(--color-gray-3),
-    var(--color-gray-7)
+    var(--color-gray-light),
+    var(--color-gray-dark)
   );
 }

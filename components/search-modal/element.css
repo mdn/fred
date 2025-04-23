@@ -37,7 +37,7 @@ li[data-selected] {
     content: "";
 
     border-bottom: 2px solid
-      light-dark(var(--color-blue), var(--color-blue-light));
+      light-dark(var(--color-blue), var(--color-blue-lighter));
   }
 
   svg {

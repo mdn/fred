@@ -2,11 +2,11 @@
 
 :root {
   --color-link-normal: light-dark(
-    var(--color-blue-dark),
-    var(--color-blue-light)
+    var(--color-blue-darker),
+    var(--color-blue-lighter)
   );
   --color-link-visited: light-dark(
-    var(--color-purple-dark),
-    var(--color-purple-light)
+    var(--color-purple-darker),
+    var(--color-purple-lighter)
   );
 }

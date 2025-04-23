@@ -5,11 +5,11 @@
 :root {
   --color-background-primary: light-dark(
     var(--color-white),
-    var(--color-gray-9)
+    var(--color-gray-darkest)
   );
   --color-background-secondary: light-dark(
-    var(--color-gray-2),
-    var(--color-gray-8)
+    var(--color-gray-lighter),
+    var(--color-gray-darker)
   );
 }
 
@@ -17,27 +17,27 @@
 
 :root {
   --color-background-red: light-dark(
-    var(--color-red-light-super),
-    var(--color-red-dark-super)
+    var(--color-red-lightest),
+    var(--color-red-darkest)
   );
   --color-background-orange: light-dark(
-    var(--color-orange-light-super),
-    var(--color-orange-dark-super)
+    var(--color-orange-lightest),
+    var(--color-orange-darkest)
   );
   --color-background-yellow: light-dark(
-    var(--color-yellow-light-super),
-    var(--color-yellow-dark-super)
+    var(--color-yellow-lightest),
+    var(--color-yellow-darkest)
   );
   --color-background-green: light-dark(
-    var(--color-green-light-super),
-    var(--color-green-dark-super)
+    var(--color-green-lightest),
+    var(--color-green-darkest)
   );
   --color-background-blue: light-dark(
-    var(--color-blue-light-super),
-    var(--color-blue-dark-super)
+    var(--color-blue-lightest),
+    var(--color-blue-darkest)
   );
   --color-background-purple: light-dark(
-    var(--color-purple-light-super),
-    var(--color-purple-dark-super)
+    var(--color-purple-lightest),
+    var(--color-purple-darkest)
   );
 }

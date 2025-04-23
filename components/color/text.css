@@ -4,31 +4,37 @@
 
 :root {
   --color-text-primary: light-dark(var(--color-black), var(--color-white));
-  --color-text-secondary: light-dark(var(--color-gray-7), var(--color-gray-6));
+  --color-text-secondary: light-dark(
+    var(--color-gray-dark),
+    var(--color-gray-light)
+  );
 }
 
 /* Tinted */
 
 :root {
-  --color-text-red: light-dark(var(--color-red-dark), var(--color-red-light));
+  --color-text-red: light-dark(
+    var(--color-red-darker),
+    var(--color-red-lighter)
+  );
   --color-text-orange: light-dark(
-    var(--color-orange-dark),
-    var(--color-orange-light)
+    var(--color-orange-darker),
+    var(--color-orange-lighter)
   );
   --color-text-yellow: light-dark(
-    var(--color-yellow-dark),
-    var(--color-yellow-light)
+    var(--color-yellow-darker),
+    var(--color-yellow-lighter)
   );
   --color-text-green: light-dark(
-    var(--color-green-dark),
-    var(--color-green-light)
+    var(--color-green-darker),
+    var(--color-green-lighter)
   );
   --color-text-blue: light-dark(
-    var(--color-blue-dark),
-    var(--color-blue-light)
+    var(--color-blue-darker),
+    var(--color-blue-lighter)
   );
   --color-text-purple: light-dark(
-    var(--color-purple-dark),
-    var(--color-purple-light)
+    var(--color-purple-darker),
+    var(--color-purple-lighter)
   );
 }

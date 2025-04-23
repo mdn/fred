@@ -4,13 +4,9 @@
   padding: 1rem;
   margin: 0;
 
-  background-color: var(
-    --color-background-secondary,
-    light-dark(#f9f9f9, #313131)
-  );
-  border: 1px solid var(--color-border-primary, light-dark(#cdcdcd, #858585));
+  background-color: var(--color-background-secondary);
+  border: 1px solid var(--color-border-primary);
   border-radius: var(--elem-radius, 0.25rem);
-  box-shadow: var(--shadow-01, 0 1px 2px #2b2a330d);
 
   @media (width <= /* $screen-md */ 769px) {
     margin: 3rem;
