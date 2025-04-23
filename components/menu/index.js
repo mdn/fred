@@ -241,7 +241,8 @@ export function Menu(_context) {
       <div class="menu__tab" data-section="javascript">
         <mdn-dropdown>
           <button class="menu__tab-button" type="button" slot="button">
-            <span class="menu__tab-label">JavaScript</span>
+            <span class="menu__tab-label" data-type="long">JavaScript</span>
+            <span class="menu__tab-label" data-type="short">JS</span>
             <svg
               class="menu__tab-arrow"
               width="24"

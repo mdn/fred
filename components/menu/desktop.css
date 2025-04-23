@@ -1,6 +1,6 @@
 /* Desktop */
 
-@media (width > 1136px) {
+@media (width > 1006px) {
   .menu {
     position: relative;
     display: flex;
@@ -22,6 +22,24 @@
       position: relative;
       z-index: 1;
       border-color: var(--color-border-secondary);
+    }
+  }
+
+  /* Label */
+
+  .menu__tab-label {
+    &[data-type="short"] {
+      display: none;
+    }
+
+    @media (width <= 1065px) {
+      &[data-type="long"] {
+        display: none;
+      }
+
+      &[data-type="short"] {
+        display: block;
+      }
     }
   }
 

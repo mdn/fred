@@ -168,7 +168,7 @@ const METADATA_TEMPLATE = `
 /**
  *
  * @param {string} template
- * @param {import("@mdn/rari").Doc} doc
+ * @param {Rari.Doc} doc
  * @returns
  */
 function fillMetadata(template, doc) {

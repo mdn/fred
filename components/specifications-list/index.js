@@ -2,7 +2,7 @@ import { html } from "lit";
 
 /**
  * @param {Fred.Context} context
- * @param {import("@mdn/rari").Specification[]} specifications
+ * @param {Rari.Specification[]} specifications
  */
 export function SpecificationsList(context, specifications) {
   if (specifications.length === 0) {

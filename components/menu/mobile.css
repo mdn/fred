@@ -1,6 +1,6 @@
 /* Mobile */
 
-@media (width <= 1136px) {
+@media (width <= 1006px) {
   /* Tab */
 
   .menu__tab {
@@ -23,6 +23,10 @@
 
   .menu__tab-label {
     order: -1;
+
+    &[data-type="short"] {
+      display: none;
+    }
   }
 
   /* Arrow */
