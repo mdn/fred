@@ -65,6 +65,11 @@ export default defineConfig([
       "jsdoc/require-returns": "off",
       "jsdoc/require-returns-description": "off",
       "jsdoc/require-returns-type": "off",
+      "jsdoc/tag-lines": "off",
+      "jsdoc/check-tag-names": [
+        "error",
+        { definedTags: ["element", "attr", "slot"] },
+      ],
       "lit/no-template-map": "off",
       "n/no-missing-import": "off",
       "n/no-unsupported-features/node-builtins": ["off"],

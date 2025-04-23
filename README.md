@@ -19,15 +19,23 @@ MDN's next fr(ont)e(n)d.
 
 ## Components and Elements
 
-- Components which are or make use of a custom element should place that element's code in `components/element-name/element.js`
-  - The class should be exported, and named `MDNElementName`
+- Components should live in the `components/` folder, with reserved names which cause certain behavior, explained further below:
+  - `component-name/`
+    - `element.js` - (reserved): custom element, automatically imported client side, always imported server side
+    - `element.css` - (recommended): styles for custom element's shadow dom
+    - `global.css` - (reserved): automatically added to global styles
+- Components which are or make use of a custom element should place that element's code in `components/component-name/element.js`
+  - The class should be exported, and named `MDNComponentName`
     - Acronyms should be kept all caps, to match the naming of `HTMLElement` class names, and added to `ACRONYMS` in `build/plugins/generate-element-map.js` to allow the correct types to be generated
-  - The element should be registered with a name of `mdn-element-name`
+  - The element should be registered with a name of `mdn-component-name`
   - If all this is done:
     - The element will be automatically loaded client side if it's present in the DOM at page load
       - Elements inserted client side (i.e. in a hook) won't be automatically loaded, and the hook should handle loading them: probably with an async `import()`
-    - The element will be automatically loaded client side for SSR
-    - The element will automatically be added to `types/element-map.d.ts` to provide proper types in e.g. `querySelector("mdn-element-name")`
+    - The element will be automatically loaded server side for SSR
+    - The element will automatically be added to `types/element-map.d.ts` to provide proper types in e.g. `querySelector("mdn-component-name")`
+- Components which need to set global styles should place those styles in `components/component-name/global.css`
+  - These will be automatically loaded server side, adding them to the global stylesheet
+    - Therefore, these styles should be scoped to the component: either with a class name for server components, or the custom element name for elements
 
 ### Typing
 

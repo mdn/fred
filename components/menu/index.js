@@ -24,7 +24,7 @@ export function Menu(_context) {
               />
             </svg>
           </button>
-          <section class="menu__panel" id="menu__html" slot="dropdown">
+          <section class="menu__panel" slot="dropdown">
             <p class="menu__panel-title">
               <a href="/en-US/docs/Web/HTML">HTML: Markup language</a>
             </p>
@@ -123,7 +123,7 @@ export function Menu(_context) {
               />
             </svg>
           </button>
-          <section class="menu__panel" id="menu__css" slot="dropdown">
+          <section class="menu__panel" slot="dropdown">
             <p class="menu__panel-title">
               <a href="/en-US/docs/Web/CSS">CSS: Styling language</a>
             </p>
@@ -254,7 +254,7 @@ export function Menu(_context) {
               />
             </svg>
           </button>
-          <section class="menu__panel" id="menu__javascript" slot="dropdown">
+          <section class="menu__panel" slot="dropdown">
             <p class="menu__panel-title">
               <a href="/en-US/docs/Web/JavaScript">
                 JavaScript: Scripting language
@@ -354,7 +354,7 @@ export function Menu(_context) {
               />
             </svg>
           </button>
-          <section class="menu__panel" id="menu__webapis" slot="dropdown">
+          <section class="menu__panel" slot="dropdown">
             <p class="menu__panel-title">
               <a href="/en-US/docs/Web/API">Web APIs: Programming interfaces</a>
             </p>
@@ -443,7 +443,7 @@ export function Menu(_context) {
               />
             </svg>
           </button>
-          <section class="menu__panel" id="menu__all" slot="dropdown">
+          <section class="menu__panel" slot="dropdown">
             <p class="menu__panel-title">
               <a href="/en-US/docs/Web">All web technology</a>
             </p>
@@ -537,7 +537,7 @@ export function Menu(_context) {
               />
             </svg>
           </button>
-          <section class="menu__panel" id="menu__learn" slot="dropdown">
+          <section class="menu__panel" slot="dropdown">
             <p class="menu__panel-title">
               <a href="/en-US/docs/Learn_web_development">
                 Learn web development
@@ -660,7 +660,7 @@ export function Menu(_context) {
               />
             </svg>
           </button>
-          <section class="menu__panel" id="menu__tools" slot="dropdown">
+          <section class="menu__panel" slot="dropdown">
             <p class="menu__panel-title">Discover our tools</p>
             <div class="menu__panel-content">
               <ul class="menu__panel-featured">
@@ -725,7 +725,7 @@ export function Menu(_context) {
               />
             </svg>
           </button>
-          <section class="menu__panel" id="menu__about" slot="dropdown">
+          <section class="menu__panel" slot="dropdown">
             <p class="menu__panel-title">Get to know MDN better</p>
             <div class="menu__panel-content">
               <ul class="menu__panel-featured">
