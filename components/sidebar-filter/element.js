@@ -4,11 +4,16 @@
 
 import { LitElement, html } from "lit";
 
+import { L10nMixin } from "../../l10n/mixin.js";
 import cancelIcon from "../icon/cancel.svg?lit";
+import filterIcon from "../icon/filter.svg?lit";
 
+import styles from "./element.css?lit";
 import { SidebarFilterer } from "./sidebar-filterer.js";
 
-class MDNSidebarFilter extends LitElement {
+class MDNSidebarFilter extends L10nMixin(LitElement) {
+  static styles = styles;
+
   static properties = {
     query: { type: String },
     matchCount: { state: true, type: Number },
@@ -155,8 +160,8 @@ class MDNSidebarFilter extends LitElement {
             class="sidebar-filter-label"
             for="sidebar-filter-input"
           >
-            <span class="icon icon-filter"></span>
-            <span class="visually-hidden">Filter sidebar</span>
+            <span class="icon">${filterIcon}</span>
+            <span class="visually-hidden">${this.l10n`Filter sidebar`}</span>
           </label>
           <input
             id="sidebar-filter-input"
@@ -165,7 +170,7 @@ class MDNSidebarFilter extends LitElement {
               ? "is-active"
               : ""}"
             type="text"
-            placeholder="Filter"
+            placeholder=${this.l10n`Filter`}
             .value=${this.query}
             @focus=${this._onFocus}
             @input=${this._onInput}
@@ -174,11 +179,12 @@ class MDNSidebarFilter extends LitElement {
             ? ""
             : html`
                 <span class="sidebar-filter-count">
-                  ${this.matchCount === 0
-                    ? "No matches"
-                    : `${this.matchCount} ${
-                        this.matchCount === 1 ? "match" : "matches"
-                      }`}
+                  ${this.l10n.raw({
+                    id: "sidebar-filter-matches",
+                    args: {
+                      matches: this.matchCount,
+                    },
+                  })}
                 </span>
               `}
           <mdn-button
@@ -186,7 +192,9 @@ class MDNSidebarFilter extends LitElement {
             .icon=${cancelIcon}
             @click=${this._clearFilter}
           >
-            <span class="visually-hidden">Clear filter input</span>
+            <span class="visually-hidden"
+              >${this.l10n`Clear filter input`}</span
+            >
           </mdn-button>
         </div>
       </section>

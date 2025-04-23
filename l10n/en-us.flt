@@ -77,3 +77,9 @@ compat_legend_disabled = User must explicitly enable this feature.
 compat_legend_altname = Uses a non-standard name.
 compat_legend_prefix = Requires a vendor prefix or different name for use.
 compat_legend_more = Has more compatibility info.
+
+sidebar-filter-matches = { $matches ->
+  [0] No matches
+  [1] { $matches } match
+   *[other] { $matches } matches
+}
