@@ -24,5 +24,6 @@ export default {
     ],
     "selector-class-pattern": null,
     "selector-id-pattern": null,
+    "font-family-name-quotes": "always-unless-keyword",
   },
 };

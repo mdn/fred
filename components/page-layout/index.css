@@ -11,12 +11,6 @@
 
   margin: 0;
   margin-inline: auto;
-
-  font-family: var(--font-body);
-
-  color: var(--color-text-primary);
-
-  background-color: var(--color-background-primary);
 }
 
 @media (width > 1110px) {

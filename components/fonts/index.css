@@ -1,5 +1,5 @@
 @font-face {
-  font-family: Inter;
+  font-family: "Inter";
   font-variation-settings: "opsz" 14;
   font-style: normal;
   font-weight: 100 900;
@@ -10,7 +10,7 @@
 }
 
 @font-face {
-  font-family: Inter;
+  font-family: "Inter";
   font-variation-settings: "opsz" 14;
   font-style: italic;
   font-weight: 100 900;
@@ -71,55 +71,4 @@
     var(--heading-line-height) var(--font-heading);
   --type-article-p: 400 var(--type-base-font-size-rem) /
     var(--font-content-line-height) var(--font-body);
-
-  h1 {
-    font: var(--type-heading-h1);
-    font-variation-settings: "opsz" 26;
-
-    word-break: normal;
-    overflow-wrap: anywhere;
-  }
-
-  h2 {
-    font: var(--type-heading-h2);
-    font-variation-settings: "opsz" 24;
-  }
-
-  h3 {
-    font: var(--type-heading-h3);
-    font-variation-settings: "opsz" 18;
-  }
-
-  h4 {
-    font: var(--type-heading-h4);
-    font-variation-settings: "opsz" 14;
-    letter-spacing: 0.5px;
-  }
-
-  h5 {
-    font: var(--type-heading-h5);
-    font-variation-settings: "opsz" 14;
-
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-  }
-
-  h6 {
-    font: var(--type-heading-h6);
-    font-variation-settings: "opsz" 14;
-
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    code {
-      font-size: inherit;
-    }
-  }
 }

@@ -13,6 +13,11 @@ select {
   font: inherit;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 [hidden] {
   display: none !important;
 }
@@ -30,13 +35,12 @@ html {
 /* Typography */
 
 body {
-  font-family: var(--font-body);
-  font-size: var(--base-font-size);
+  font-family: var(--font-family-text);
+  font-size: var(--font-size-normal);
 
-  line-height: var(--font-content-line-height);
+  line-height: var(--font-line-normal);
 
   color: var(--color-text-primary);
 
   background-color: var(--color-background-primary);
-  text-rendering: optimizespeed;
 }

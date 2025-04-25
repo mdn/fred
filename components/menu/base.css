@@ -30,7 +30,7 @@
 
   font: inherit;
 
-  line-height: 1;
+  line-height: var(--font-line-ui);
 
   color: var(--color-text-primary);
 
@@ -69,6 +69,7 @@
 
   padding: 0.5rem 0.7rem;
 
+  /* Custom, to match the icon height */
   line-height: 24px;
 
   color: var(--color-text-primary);
