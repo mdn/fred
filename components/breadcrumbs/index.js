@@ -34,11 +34,13 @@ export function BreadCrumbs(context) {
       <mdn-color-theme></mdn-color-theme>
       <button class="breadcrumbs__component">${bookmarkSvg} Save</button>
       <mdn-language-switcher
-        .locale=${context.locale}
-        .translations=${"doc" in context && "other_translations" in context.doc
-          ? context.doc.other_translations
-          : []}
-        .url=${context.url}
+        locale=${context.locale}
+        translations=${JSON.stringify(
+          "doc" in context && "other_translations" in context.doc
+            ? context.doc.other_translations
+            : [],
+        )}
+        url=${context.url}
       ></mdn-language-switcher>
     </div>
   `;
