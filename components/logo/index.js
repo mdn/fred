@@ -15,7 +15,7 @@ export function Logo(_context) {
         viewBox="0 0 83 24"
         role="img"
       >
-        <title>MDN Web Docs</title>
+        <title>MDN</title>
         <path
           class="logo__letter"
           d="M9.4 0 2.81 21.17H.12L6.69 0H9.4Zm2.38 0v21.17H9.4V0h2.4Zm9.27 0-6.56 21.17H11.8L18.36 0h2.69Zm2.39 0v21.17h-2.4V0h2.4Z"
