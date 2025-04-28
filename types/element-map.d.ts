@@ -10,6 +10,13 @@ declare global {
     "mdn-content-feedback": import("../components/content-feedback/element.js").MDNContentFeedback;
     "mdn-copy-button": import("../components/copy-button/element.js").MDNCopyButton;
     "mdn-dropdown": import("../components/dropdown/element.js").MDNDropdown;
+    "mdn-language-switcher": import("../components/language-switcher/element.js").MDNLanguageSwitcher;
+    "mdn-observatory-comparison-table": import("../components/observatory-comparison-table/element.js").MDNObservatoryComparisonTable;
+    "mdn-observatory-form": import("../components/observatory-form/element.js").MDNObservatoryForm;
+    "mdn-observatory-human-duration": import("../components/observatory-human-duration/element.js").MDNObservatoryHumanDuration;
+    "mdn-observatory-rescan-button": import("../components/observatory-rescan-button/element.js").MDNObservatoryRescanButton;
+    "mdn-observatory-results": import("../components/observatory-results/element.js").MDNObservatoryResults;
+    "mdn-progress-bar": import("../components/progress-bar/element.js").MDNProgressBar;
     "mdn-search-modal": import("../components/search-modal/element.js").MDNSearchModal;
     "mdn-sidebar-filter": import("../components/sidebar-filter/element.js").MDNSidebarFilter;
     "mdn-site-search": import("../components/site-search/element.js").MDNSiteSearch;

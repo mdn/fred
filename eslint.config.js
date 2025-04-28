@@ -15,6 +15,8 @@ import unicorn from "eslint-plugin-unicorn";
 import * as wc from "eslint-plugin-wc";
 import globals from "globals";
 
+import fred from "./build/eslint-fred.js";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const gitignorePath = path.resolve(__dirname, ".gitignore");
@@ -35,6 +37,14 @@ export default defineConfig([
     files: ["**/*.{js,mjs,cjs}"],
     plugins: { js },
     extends: ["js/recommended"],
+  },
+  {
+    files: ["**/*.{js,mjs,cjs}"],
+    plugins: { fred },
+    rules: {
+      "fred/custom-element-name": "error",
+      "fred/server-component-name": "error",
+    },
   },
   {
     files: ["**/*.{js,mjs,cjs}"],

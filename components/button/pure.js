@@ -7,7 +7,7 @@ import { html, nothing } from "lit";
  * @param {boolean} [options.disabled]
  * @param {string} [options.href]
  */
-export function Button({ label, icon, disabled = false, href }) {
+export default function Button({ label, icon, disabled = false, href }) {
   const inner = html`${icon ? html`<span class="icon">${icon}</span>` : nothing}
   ${label}`;
   return href

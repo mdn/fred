@@ -1,26 +1,46 @@
 .content {
-  line-height: 1.75;
+  line-height: var(--font-line-content);
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: normal;
+  }
 
   h1 {
-    margin-block-start: 0;
-    font-size: 2.5rem;
-    font-weight: 450;
+    margin-top: 0;
+    font-size: var(--font-size-largest);
   }
 
   h2 {
-    font-size: 2rem;
-    font-weight: 450;
+    font-size: var(--font-size-larger);
   }
 
   h3 {
-    font-size: 1.5rem;
-    font-weight: 400;
+    font-size: var(--font-size-large);
+  }
+
+  h4 {
+    font-size: var(--font-size-normal);
+    font-weight: 500;
+  }
+
+  h5,
+  h6 {
+    font-size: var(--font-size-small);
+    font-weight: 500;
+
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
   }
 
   code {
     padding: 0.125em 0.25em;
 
-    font-family: var(--font-code);
+    font-family: var(--font-family-code);
     font-size-adjust: 0.5;
 
     background-color: var(--color-background-secondary);

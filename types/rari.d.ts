@@ -21,4 +21,5 @@ namespace Rari {
 
   type Baseline = import("@mdn/rari").Baseline;
   type Specification = import("@mdn/rari").Specification;
+  type Translation = import("@mdn/rari").Translation;
 }

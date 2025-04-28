@@ -1,0 +1,46 @@
+/* Normalize */
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* Motion */
+
+html {
+  scroll-behavior: smooth;
+
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
+}
+
+/* Typography */
+
+body {
+  font-family: var(--font-family-text);
+  font-size: var(--font-size-normal);
+
+  line-height: var(--font-line-normal);
+
+  color: var(--color-text-primary);
+
+  background-color: var(--color-background-primary);
+}

@@ -24,6 +24,7 @@ MDN's next fr(ont)e(n)d.
     - `element.js` - (reserved): custom element, automatically imported client side, always imported server side
     - `element.css` - (recommended): styles for custom element's shadow dom
     - `global.css` - (reserved): automatically added to global styles
+    - `index.css` - (reserved): automatically added to the page when the server component is used in that page
 - Components which are or make use of a custom element should place that element's code in `components/component-name/element.js`
   - The class should be exported, and named `MDNComponentName`
     - Acronyms should be kept all caps, to match the naming of `HTMLElement` class names, and added to `ACRONYMS` in `build/plugins/generate-element-map.js` to allow the correct types to be generated
