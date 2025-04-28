@@ -1,7 +1,7 @@
 import { LitElement, html } from "lit";
 
-import { Button } from "./pure.js";
-import styles from "./shadow.css?lit";
+import styles from "./element.css?lit";
+import Button from "./pure.js";
 
 export class MDNButton extends LitElement {
   static styles = styles;

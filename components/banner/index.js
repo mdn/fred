@@ -1,7 +1,9 @@
 import { html } from "lit";
 
-import "./index.css";
+import { ServerComponent } from "../server.js";
 
-export function Banner() {
-  return html`<div class="banner">Banner</div>`;
+export class Banner extends ServerComponent {
+  render() {
+    return html`<div class="banner">Banner</div>`;
+  }
 }

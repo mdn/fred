@@ -1,27 +1,29 @@
 import { html } from "lit";
 
+import { ServerComponent } from "../server.js";
+
 import svg from "./article-footer.svg?lit";
 
-import "./index.css";
+export class ArticleFooter extends ServerComponent {
+  /**
+   * @param {Fred.Context<Rari.DocPage>} context
+   */
+  render(context) {
+    const { doc } = context;
 
-/**
- * @param {Fred.Context<Rari.DocPage>} context
- */
-export function ArticleFooter(context) {
-  const { doc } = context;
+    if (!doc) {
+      return;
+    }
 
-  if (!doc) {
-    return;
+    return html`<aside class="article-footer">
+      <div class="article-footer__inner">
+        <div class="article-footer__svg-container">${svg}</div>
+        <h2 id="article_footer">${context.l10n`Help improve MDN`}</h2>
+        <mdn-content-feedback locale=${context.locale}></mdn-content-feedback>
+        ${Contribute(context)} ${LastModified(context)} ${Links(context)}
+      </div>
+    </aside>`;
   }
-
-  return html`<aside class="article-footer">
-    <div class="article-footer__inner">
-      <div class="article-footer__svg-container">${svg}</div>
-      <h2 id="article_footer">${context.l10n`Help improve MDN`}</h2>
-      <mdn-content-feedback locale=${context.locale}></mdn-content-feedback>
-      ${Contribute(context)} ${LastModified(context)} ${Links(context)}
-    </div>
-  </aside>`;
 }
 
 /**

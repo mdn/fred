@@ -1,0 +1,88 @@
+/* TODO */
+@import url("../../components/button/global.css");
+@import url("../../components/visually-hidden/global.css");
+
+:host {
+  font: 400 var(--base-font-size) var(--font-body);
+}
+
+.observatory-form__input-group {
+  display: flex;
+  height: 3rem;
+
+  :focus-visible {
+    outline: 1px solid var(--observatory-accent);
+    outline-width: 1px;
+    outline-offset: -1px;
+  }
+
+  ::placeholder {
+    color: var(--color-text-secondary);
+    opacity: 0.8;
+  }
+
+  .observatory-form__input {
+    flex-grow: 1;
+
+    width: 100%;
+
+    padding: 0 0.75rem;
+
+    font: inherit;
+
+    background-color: var(--color-background-secondary);
+    border: 1px solid var(--color-border-secondary);
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+
+    &::placeholder {
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .observatory-form__submit {
+    height: unset;
+
+    padding: 0 2rem;
+
+    font: var(--type-emphasis-m);
+    font-size: 1rem;
+
+    /* color: var(--button-color--default); */
+
+    /* appearance: none;
+    cursor: pointer; */
+
+    /* background: var(--button-bg--default); */
+    border: none;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+  }
+}
+
+.error {
+  margin-top: 0.5rem;
+  color: var(--form-invalid-color);
+
+  &::before {
+    display: inline-block;
+
+    width: 1.5em;
+    height: 1.15rem;
+
+    margin-right: 0.5rem;
+    margin-bottom: 0.25rem;
+
+    vertical-align: middle;
+
+    content: "";
+
+    background-color: var(--form-invalid-color);
+
+    mask-image: var(--alert-circle-img);
+    mask-repeat: no-repeat;
+    mask-position: center;
+  }
+}

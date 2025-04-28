@@ -1,4 +1,4 @@
-@import url("../visually-hidden/index.css");
+@import url("../visually-hidden/global.css");
 
 :host {
   position: relative;

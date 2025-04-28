@@ -1,57 +1,22 @@
-import { html } from "@lit-labs/ssr";
-import { unsafeHTML } from "lit/directives/unsafe-html.js";
+const ACRONYMS = new Set(["MDN"]);
 
-import inlineScript from "../entry.inline.js?source&csp=true";
-
-/**
- * @param {import("@rspack/core").StatsCompilation} [manifest]
- * @param {string} [entry]
- */
-export function tagsFromManifest(manifest, entry = "index") {
-  const publicPath = manifest?.publicPath;
-  if (!publicPath) {
-    throw new Error("publicPath is not defined in manifest");
-  }
-
-  const scriptTags = [];
-  const styleTags = [];
-
-  for (const { name } of manifest.entrypoints?.[entry]?.assets || []) {
-    if (name.endsWith(".js")) {
-      scriptTags.push(
-        html`<script src=${publicPath + name} type="module"></script>`,
-      );
-    } else if (name.endsWith(".css")) {
-      styleTags.push(html`<link rel="stylesheet" href=${publicPath + name} />`);
-    }
-  }
-
-  return { scriptTags, styleTags };
+/** @param {string} name */
+export function toPascalCase(name) {
+  return name
+    .split("-")
+    .map((word) => {
+      if (ACRONYMS.has(word.toUpperCase())) {
+        return word.toUpperCase();
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join("");
 }
 
-/**
- * @param {Fred.Context} context
- * @param {import("lit-html").TemplateResult} markup
- * @param {import("@rspack/core").StatsCompilation[]} manifest
- */
-export function renderHTML(context, markup, manifest) {
-  const { styleTags: ssrStyleTags } = tagsFromManifest(
-    manifest.find((x) => x.name === "ssr"),
-  );
-  const { scriptTags: clientScriptTags, styleTags: clientStyleTags } =
-    tagsFromManifest(manifest.find((x) => x.name === "client"));
-
-  const tags = [ssrStyleTags, clientScriptTags, clientStyleTags];
-  return html`
-    <!doctype html>
-    <html lang="en" style="color-scheme: light dark;">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        ${unsafeHTML(`<script>${inlineScript}</script>`)} ${tags}
-        <title>${context.pageTitle || "MDN"}</title>
-      </head>
-      ${markup}
-    </html>
-  `;
+/** @param {string} name */
+export function toCamelCase(name) {
+  return name
+    .replaceAll(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .replaceAll(/([A-Z])([A-Z][a-z])/g, "$1-$2")
+    .toLowerCase();
 }

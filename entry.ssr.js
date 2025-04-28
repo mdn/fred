@@ -2,37 +2,22 @@
 import { render as r } from "@lit-labs/ssr";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 
-import { BlogIndex } from "./blog/landing/index.js";
-import { BlogPost } from "./blog/post/index.js";
-import { renderHTML } from "./build/utils.js";
+import { BlogIndex } from "./components/blog-index/index.js";
+import { BlogPost } from "./components/blog-post/index.js";
+import { ContributorSpotlight } from "./components/contributor-spotlight/index.js";
+import { Curriculum } from "./components/curriculum/index.js";
+import { Doc } from "./components/doc/index.js";
+import { Generic } from "./components/generic/index.js";
+import { HomePage } from "./components/home-page/index.js";
+import { NotFound } from "./components/not-found/index.js";
+import { ObservatoryLanding } from "./components/observatory-landing/index.js";
+import { ObservatoryResults } from "./components/observatory-results/index.js";
+import { OuterLayout } from "./components/outer-layout/index.js";
 import { PageLayout } from "./components/page-layout/index.js";
+import { Search } from "./components/search/index.js";
+import { Settings } from "./components/settings/index.js";
 import { addFluent } from "./l10n/context.js";
-import { NotFound } from "./pages/404/index.js";
-import { ContributorSpotlight } from "./pages/contributor-spotlight/index.js";
-import { Curriculum } from "./pages/curriculum/index.js";
-import { Doc } from "./pages/doc/index.js";
-import { Generic } from "./pages/generic/index.js";
-import { HomePage } from "./pages/home/index.js";
-import {
-  ObservatoryLanding,
-  ObservatoryResults,
-} from "./pages/observatory/index.js";
-import { Search } from "./pages/search/index.js";
-import { SettingsBody } from "./pages/settings/index.js";
 import { runWithContext } from "./symmetric-context/server.js";
-
-// load all custom elements
-// @ts-expect-error
-// eslint-disable-next-line unicorn/prefer-module, no-undef
-const elementsContext = require.context(
-  "./components/",
-  true,
-  /\/(element\.js|global\.css)$/,
-);
-for (const key of elementsContext.keys()) {
-  // load element code
-  elementsContext(key);
-}
 
 /**
  * @param {string} path
@@ -51,58 +36,66 @@ export async function render(path, page, manifest) {
     ...page,
   };
 
-  return runWithContext({ locale }, async () => {
+  // TODO: maybe don't use symmetric context, or give it a different name?
+  const serverComponents = new Set();
+
+  return runWithContext({ locale, serverComponents }, async () => {
     const component = (() => {
       switch (context.renderer) {
         case "BlogIndex":
-          return BlogIndex(context);
+          return BlogIndex.render(context);
         case "BlogPost":
-          return BlogPost(context);
+          return BlogPost.render(context);
         case "ContributorSpotlight":
-          return ContributorSpotlight(context);
+          return ContributorSpotlight.render(context);
         case "CurriculumAbout":
         case "CurriculumDefault":
         case "CurriculumLanding":
         case "CurriculumModule":
         case "CurriculumOverview":
-          return Curriculum(context);
+          return Curriculum.render(context);
         case "Doc":
-          return Doc(context);
+          return Doc.render(context);
         case "GenericAbout":
         case "GenericCommunity":
         case "GenericDoc":
-          return Generic(context);
+          return Generic.render(context);
         case "Homepage":
-          return HomePage(context);
+          return HomePage.render(context);
         case "SpaAdvertise":
-          return PageLayout(context, "TODO: Advertise");
+          return PageLayout.render(context, "TODO: Advertise");
         case "SpaObservatoryAnalyze":
-          return ObservatoryResults(context);
+          return ObservatoryResults.render(context);
         case "SpaObservatoryLanding":
-          return ObservatoryLanding(context);
+          return ObservatoryLanding.render(context);
         case "SpaPlay":
-          return PageLayout(context, "TODO: Playground");
+          return PageLayout.render(context, "TODO: Playground");
         case "SpaPlusAiHelp":
-          return PageLayout(context, "TODO: AI Help");
+          return PageLayout.render(context, "TODO: AI Help");
         case "SpaPlusCollections":
-          return PageLayout(context, "TODO: Collections");
+          return PageLayout.render(context, "TODO: Collections");
         case "SpaPlusCollectionsFrequentlyViewed":
-          return PageLayout(context, "TODO: Collections frequently viewed");
+          return PageLayout.render(
+            context,
+            "TODO: Collections frequently viewed",
+          );
         case "SpaPlusLanding":
-          return PageLayout(context, "TODO: Plus landing");
+          return PageLayout.render(context, "TODO: Plus landing");
         case "SpaPlusSettings":
-          return SettingsBody(context);
+          return Settings.render(context);
         case "SpaPlusUpdates":
-          return PageLayout(context, "TODO: BUpdates");
+          return PageLayout.render(context, "TODO: BUpdates");
         case "SpaSearch":
-          return Search(context);
+          return Search.render(context);
         case "SpaUnknown":
-          return PageLayout(context, `Unknown: ${context.pageTitle}`);
+          return PageLayout.render(context, `Unknown: ${context.pageTitle}`);
         case "SpaNotFound":
         default:
-          return NotFound(context);
+          return NotFound.render(context);
       }
     })();
-    return await collectResult(r(renderHTML(context, component, manifest)));
+    return await collectResult(
+      r(OuterLayout.render(context, component, manifest, serverComponents)),
+    );
   });
 }

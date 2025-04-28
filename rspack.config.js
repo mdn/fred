@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 
 import { rspack } from "@rspack/core";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
+import { fdir } from "fdir";
 import { merge } from "webpack-merge";
 // @ts-expect-error
 import { StatsWriterPlugin } from "webpack-stats-plugin";
@@ -26,8 +27,14 @@ const common = {
   },
   experiments: {
     outputModule: true,
+    // futureDefaults: true
   },
   plugins: [
+    new rspack.CssExtractRspackPlugin({
+      filename: isProd ? "[name].[contenthash].css" : "[name].css",
+      // chunkFilename: "[name].[contenthash].css",
+      runtime: false,
+    }),
     /** @type {import("@rspack/core").Plugin} */
     new StatsWriterPlugin({
       fields: ["publicPath", "entrypoints"],
@@ -35,14 +42,37 @@ const common = {
   ],
   optimization: {
     minimizer: [
+      // TODO: do we need to minimize ssr bundle at all?
       new rspack.SwcJsMinimizerRspackPlugin({
         extractComments: true,
+        minimizerOptions: {
+          mangle: {
+            keep_classnames: true,
+          },
+        },
       }),
       // lightningcss breaks our dark theme (https://github.com/parcel-bundler/lightningcss/issues/873):
       // new rspack.LightningCssMinimizerRspackPlugin(),
       // so use cssnano instead:
       new CssMinimizerPlugin(),
     ],
+    // TODO: ensure common chunks across entrypoints get deduped
+    // splitChunks: {
+    //   cacheGroups: {
+    //     styles: {
+    //       // name(module, chunks, cacheGroupKey) {
+    //       //   // console.log(module, chunks, cacheGroupKey)
+    //       //   return module.identifier().split("/").at(-2)
+    //       // },
+    //       test: /\.css$/,
+    //       // type: "css/mini-extract",
+    //       chunks: "all",
+    //       // minChunks: 1,
+    //       reuseExistingChunk: false,
+    //       enforce: true,
+    //     },
+    //   },
+    // },
   },
   module: {
     parser: {
@@ -62,6 +92,7 @@ const common = {
       {
         test: /\.css$/i,
         loader: "postcss-loader",
+        type: "javascript/auto",
         oneOf: [
           {
             resourceQuery: /lit/,
@@ -101,17 +132,37 @@ const common = {
 export default [
   merge(common, {
     name: "ssr",
-    target: "node",
-    entry: {
-      index: "./entry.ssr.js",
+    target: "node22",
+    async entry() {
+      return {
+        // TODO: move all css to client bundle?
+        // TODO: prohibit css imports in js in server bundle?
+        index: [
+          ...(await new fdir()
+            .withFullPaths()
+            .filter(
+              (filePath) =>
+                filePath.endsWith("/element.js") ||
+                filePath.endsWith("/global.css"),
+            )
+            .crawl(path.join(__dirname, "components"))
+            .withPromise()),
+          "./entry.ssr.js",
+        ],
+        ...Object.fromEntries(
+          (
+            await new fdir()
+              .withFullPaths()
+              .filter((filePath) => filePath.endsWith("/index.css"))
+              .crawl(path.join(__dirname, "components"))
+              .withPromise()
+          )
+            // eslint-disable-next-line unicorn/no-await-expression-member
+            .map((file) => ["styles-" + file.split("/").at(-2), file]),
+        ),
+      };
     },
-    plugins: [
-      new rspack.CssExtractRspackPlugin({
-        filename: isProd ? "[name].[contenthash].css" : "[name].css",
-        runtime: false,
-      }),
-      isProd && new CSPHashPlugin(),
-    ],
+    plugins: [isProd && new CSPHashPlugin()],
     output: {
       path: path.resolve(__dirname, "dist/ssr"),
       filename: "[name].js",

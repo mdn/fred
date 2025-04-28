@@ -3,11 +3,11 @@ import path from "node:path";
 
 import { fdir } from "fdir";
 
+import { toPascalCase } from "../utils.js";
+
 /**
  * @import { Compiler } from "@rspack/core"
  */
-
-const ACRONYMS = new Set(["MDN"]);
 
 export class GenerateElementMapPlugin {
   /**
@@ -28,10 +28,7 @@ export class GenerateElementMapPlugin {
             ".." + filePath.replace(compiler.context, "").replaceAll("\\", "/");
           const folderName = relPath.split("/").at(-2);
           const tagName = `mdn-${folderName}`;
-          const className = tagName
-            .split("-")
-            .map((x) => toPascalCase(x))
-            .join("");
+          const className = toPascalCase(tagName);
           return `"${tagName}": import("${relPath}").${className};`;
         });
 
@@ -56,12 +53,4 @@ export {};
       },
     );
   }
-}
-
-/** @param {string} word */
-function toPascalCase(word) {
-  if (ACRONYMS.has(word.toUpperCase())) {
-    return word.toUpperCase();
-  }
-  return word.charAt(0).toUpperCase() + word.slice(1);
 }
