@@ -55,6 +55,7 @@
     position: absolute;
     right: 0;
     left: 0;
+    z-index: 1; /* prevents menu foldout to be drawn below language chooser */
 
     margin-top: -1px;
 
