@@ -36,6 +36,8 @@ export async function render(path, page, manifest) {
     ...page,
   };
 
+  console.log("Rendering context/doc", context);
+
   // TODO: maybe don't use symmetric context, or give it a different name?
   const serverComponents = new Set();
 
