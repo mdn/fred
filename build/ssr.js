@@ -7,7 +7,13 @@ import { render } from "../dist/ssr/index.js";
 const BUILD_OUT_ROOT = "./out";
 
 /** @type {import("@rspack/core").StatsCompilation} */
-const manifest = JSON.parse(await readFile("./dist/client/stats.json", "utf8"));
+const clientManifest = JSON.parse(
+  await readFile("./dist/client/stats.json", "utf8"),
+);
+/** @type {import("@rspack/core").StatsCompilation} */
+const legacyManifest = JSON.parse(
+  await readFile("./dist/legacy/stats.json", "utf8"),
+);
 
 /**
  * @template T
@@ -81,7 +87,10 @@ async function ssrSingleDocument(file) {
     return;
   }
   try {
-    const html = await render(context.url, context, manifest);
+    const html = await render(context.url, context, {
+      client: clientManifest,
+      legacy: legacyManifest,
+    });
     const outputFile = file.replace(/.json$/, ".html");
     await writeFile(outputFile, html);
     return outputFile;

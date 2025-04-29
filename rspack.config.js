@@ -209,4 +209,69 @@ export default [
       ],
     },
   }),
+  merge(common, {
+    name: "legacy",
+    entry: {
+      index: "./legacy/index.tsx",
+    },
+    target: ["web", "browserslist"],
+    plugins: [
+      new rspack.CssExtractRspackPlugin({
+        filename: isProd ? "[name].[contenthash].css" : "[name].css",
+        // chunkFilename: "[name].[contenthash].css",
+        runtime: false,
+      }),
+    ],
+    output: {
+      path: path.resolve(__dirname, "dist/legacy"),
+      filename: isProd ? "[name].[contenthash].js" : "[name].js",
+      clean: true,
+      publicPath: "/static/legacy/",
+    },
+    resolve: {
+      extensions: ["...", ".tsx", ".ts", ".jsx"],
+    },
+    module: {
+      rules: [
+        {
+          test: /\.css$/i,
+          use: [
+            rspack.CssExtractRspackPlugin.loader,
+            "css-loader",
+            "postcss-loader",
+          ],
+        },
+        {
+          test: /\.jsx$/,
+          use: {
+            loader: "builtin:swc-loader",
+            options: {
+              jsc: {
+                parser: {
+                  syntax: "ecmascript",
+                  jsx: true,
+                },
+              },
+            },
+          },
+          type: "javascript/auto",
+        },
+        {
+          test: /\.tsx$/,
+          use: {
+            loader: "builtin:swc-loader",
+            options: {
+              jsc: {
+                parser: {
+                  syntax: "typescript",
+                  tsx: true,
+                },
+              },
+            },
+          },
+          type: "javascript/auto",
+        },
+      ],
+    },
+  }),
 ];

@@ -9,15 +9,25 @@ export class OuterLayout extends ServerComponent {
   /**
    * @param {Fred.Context} context
    * @param {import("lit-html").TemplateResult} markup
-   * @param {import("@rspack/core").StatsCompilation} manifest
+   * @param {Fred.CompilationStats} compilationStats
    * @param {Set<string>} components
    */
-  render(context, markup, manifest, components) {
-    const { scriptTags } = this.tagsFromManifest(manifest);
+  render(context, markup, compilationStats, components) {
+    let legacyTags;
+    if (components.has("legacy")) {
+      components.delete("legacy");
+      legacyTags = Object.values(
+        this.tagsFromManifest(compilationStats.legacy),
+      ).flat();
+    }
+
+    const { scriptTags } = this.tagsFromManifest(compilationStats.client);
     const styleTags = ["global", ...components].flatMap(
       (component) =>
-        this.tagsFromManifest(manifest, `styles-${toCamelCase(component)}`)
-          .styleTags,
+        this.tagsFromManifest(
+          compilationStats.client,
+          `styles-${toCamelCase(component)}`,
+        ).styleTags,
     );
 
     return html`
@@ -30,7 +40,7 @@ export class OuterLayout extends ServerComponent {
             content="width=device-width, initial-scale=1.0"
           />
           ${unsafeHTML(`<script>${inlineScript}</script>`)} ${styleTags}
-          ${scriptTags}
+          ${scriptTags} ${legacyTags}
           <title>${context.pageTitle || "MDN"}</title>
         </head>
         ${markup}
@@ -39,11 +49,11 @@ export class OuterLayout extends ServerComponent {
   }
 
   /**
-   * @param {import("@rspack/core").StatsCompilation} [manifest]
+   * @param {import("@rspack/core").StatsCompilation} manifest
    * @param {string} [entry]
    */
   tagsFromManifest(manifest, entry = "index") {
-    const publicPath = manifest?.publicPath;
+    const publicPath = manifest.publicPath;
     if (!publicPath) {
       throw new Error("publicPath is not defined in manifest");
     }
