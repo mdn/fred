@@ -1,10 +1,10 @@
 import { html } from "lit";
 
-import { Section } from "../../components/content/index.js";
-import { PageLayout } from "../../components/page-layout/index.js";
+import { Section } from "../content/index.js";
+import { PageLayout } from "../page-layout/index.js";
 import { ServerComponent } from "../server.js";
 
-export class Generic extends ServerComponent {
+export class GenericDoc extends ServerComponent {
   /**
    * @param {Fred.Context<Rari.GenericPage>} context
    */

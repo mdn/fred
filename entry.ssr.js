@@ -7,7 +7,7 @@ import { BlogPost } from "./components/blog-post/index.js";
 import { ContributorSpotlight } from "./components/contributor-spotlight/index.js";
 import { Curriculum } from "./components/curriculum/index.js";
 import { Doc } from "./components/doc/index.js";
-import { Generic } from "./components/generic/index.js";
+import { GenericDoc } from "./components/generic-doc/index.js";
 import { HomePage } from "./components/home-page/index.js";
 import { NotFound } from "./components/not-found/index.js";
 import { ObservatoryLanding } from "./components/observatory-landing/index.js";
@@ -59,7 +59,7 @@ export async function render(path, page, manifest) {
         case "GenericAbout":
         case "GenericCommunity":
         case "GenericDoc":
-          return Generic.render(context);
+          return GenericDoc.render(context);
         case "Homepage":
           return HomePage.render(context);
         case "SpaAdvertise":
