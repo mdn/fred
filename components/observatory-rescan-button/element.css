@@ -1,5 +1,5 @@
 /* TODO */
-@import url("../../components/button/global.css");
+@import url("../../components/button/index.css");
 
 button {
   position: relative;
