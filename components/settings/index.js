@@ -3,7 +3,7 @@ import { html } from "lit";
 import { Breadcrumbs } from "../../components/breadcrumbs/index.js";
 import { Footer } from "../../components/footer/index.js";
 import { Navigation } from "../../components/navigation/index.js";
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 
 export class Settings extends ServerComponent {
   /**

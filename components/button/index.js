@@ -1,4 +1,4 @@
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 
 import PureButton from "./pure.js";
 

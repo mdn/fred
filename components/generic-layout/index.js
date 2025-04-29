@@ -3,7 +3,7 @@ import { html } from "lit";
 import { GenericContent } from "../generic-content/index.js";
 import { GenericSidebar } from "../generic-sidebar/index.js";
 import { GenericToc } from "../generic-toc/index.js";
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 
 export class GenericLayout extends ServerComponent {
   /**

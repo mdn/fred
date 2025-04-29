@@ -1,7 +1,7 @@
 import { html } from "lit";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 
 export class LeftSidebar extends ServerComponent {
   /**

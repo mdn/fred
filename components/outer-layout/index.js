@@ -3,35 +3,23 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { toCamelCase } from "../../build/utils.js";
 import inlineScript from "../../entry.inline.js?source&csp=true";
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 
 export class OuterLayout extends ServerComponent {
   /**
    * @param {Fred.Context} context
    * @param {import("lit-html").TemplateResult} markup
-   * @param {import("@rspack/core").StatsCompilation[]} manifest
+   * @param {import("@rspack/core").StatsCompilation} manifest
    * @param {Set<string>} components
    */
   render(context, markup, manifest, components) {
-    const { styleTags: ssrStyleTags } = this.tagsFromManifest(
-      manifest.find((x) => x.name === "ssr"),
-    );
-    const { scriptTags: clientScriptTags, styleTags: clientStyleTags } =
-      this.tagsFromManifest(manifest.find((x) => x.name === "client"));
-    const componentStyleTags = [...components].flatMap(
+    const { scriptTags } = this.tagsFromManifest(manifest);
+    const styleTags = ["global", ...components].flatMap(
       (component) =>
-        this.tagsFromManifest(
-          manifest.find((x) => x.name === "ssr"),
-          `styles-${toCamelCase(component)}`,
-        ).styleTags,
+        this.tagsFromManifest(manifest, `styles-${toCamelCase(component)}`)
+          .styleTags,
     );
 
-    const tags = [
-      ssrStyleTags,
-      clientScriptTags,
-      clientStyleTags,
-      ...componentStyleTags,
-    ];
     return html`
       <!doctype html>
       <html lang="en" style="color-scheme: light dark;">
@@ -41,7 +29,8 @@ export class OuterLayout extends ServerComponent {
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          ${unsafeHTML(`<script>${inlineScript}</script>`)} ${tags}
+          ${unsafeHTML(`<script>${inlineScript}</script>`)} ${styleTags}
+          ${scriptTags}
           <title>${context.pageTitle || "MDN"}</title>
         </head>
         ${markup}

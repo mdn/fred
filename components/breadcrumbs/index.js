@@ -2,7 +2,7 @@ import { html, nothing } from "lit";
 
 import bookmarkSvg from "../icon/bookmark.svg?lit";
 
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 
 import dividerSvg from "./divider.svg?lit";
 

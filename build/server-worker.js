@@ -24,10 +24,17 @@ if (!indexModulePath) {
   );
 }
 
+const clientStats = compliationStats.find((x) => x.name === "client");
+if (!clientStats) {
+  throw new Error(
+    "cannot find the client rspack config, did you change its name?",
+  );
+}
+
 try {
   /** @type {import("../entry.ssr.js")} */
   const indexModule = await import(indexModulePath);
-  const html = await indexModule?.render(reqPath, page, compliationStats);
+  const html = await indexModule?.render(reqPath, page, clientStats);
   parentPort?.postMessage({ html });
 } catch (error) {
   parentPort?.postMessage({ error });

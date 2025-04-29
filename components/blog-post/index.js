@@ -5,7 +5,7 @@ import { PageLayout } from "../../components/page-layout/index.js";
 import { ReferenceToc } from "../../components/reference-toc/index.js";
 import { AuthorDateReadTime, BlogContainer } from "../blog/index.js";
 
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 
 /**
  * @param {Fred.Context} _context

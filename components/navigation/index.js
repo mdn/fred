@@ -3,7 +3,7 @@ import { html } from "lit";
 import { Logo } from "../logo/index.js";
 import { Menu } from "../menu/index.js";
 
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 
 export class Navigation extends ServerComponent {
   /**

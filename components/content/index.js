@@ -5,7 +5,7 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import { ArticleFooter } from "../article-footer/index.js";
 import { BaselineIndicator } from "../baseline-indicator/index.js";
 import { HeadingAnchor } from "../heading-anchor/index.js";
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 import { SpecificationsList } from "../specifications-list/index.js";
 
 export class Content extends ServerComponent {

@@ -1,4 +1,4 @@
-import { getSymmetricContext } from "../symmetric-context/both.js";
+import { asyncLocalStorage } from "./async-local-storage.js";
 
 export class ServerComponent {
   /**
@@ -8,7 +8,7 @@ export class ServerComponent {
    * @returns {ReturnType<InstanceType<T>["render"]>}
    */
   static render(...args) {
-    getSymmetricContext().serverComponents?.add(this.name);
+    asyncLocalStorage.getStore()?.componentsUsed?.add(this.name);
     return new this().render(...args);
   }
 

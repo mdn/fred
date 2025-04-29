@@ -1,6 +1,6 @@
 import { PageLayout } from "../../components/page-layout/index.js";
 import { ReferenceLayout } from "../../components/reference-layout/index.js";
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 
 export class Doc extends ServerComponent {
   /**

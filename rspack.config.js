@@ -27,14 +27,9 @@ const common = {
   },
   experiments: {
     outputModule: true,
-    // futureDefaults: true
+    futureDefaults: true,
   },
   plugins: [
-    new rspack.CssExtractRspackPlugin({
-      filename: isProd ? "[name].[contenthash].css" : "[name].css",
-      // chunkFilename: "[name].[contenthash].css",
-      runtime: false,
-    }),
     /** @type {import("@rspack/core").Plugin} */
     new StatsWriterPlugin({
       fields: ["publicPath", "entrypoints"],
@@ -90,25 +85,24 @@ const common = {
         loader: "./build/loaders/fluent.js",
       },
       {
+        // don't do anything with css, because we don't want direct imports to work
+        // in server components: we have a path-based system for loading the correct
+        // styles. set type to javascript/auto to disable native rspack css handling
         test: /\.css$/i,
-        loader: "postcss-loader",
         type: "javascript/auto",
-        oneOf: [
+      },
+      {
+        test: /\.css$/i,
+        resourceQuery: /lit/,
+        use: [
+          "./build/loaders/lit-css.js",
           {
-            resourceQuery: /lit/,
-            use: [
-              "./build/loaders/lit-css.js",
-              {
-                loader: "css-loader",
-                options: {
-                  exportType: "string",
-                },
-              },
-            ],
+            loader: "css-loader",
+            options: {
+              exportType: "string",
+            },
           },
-          {
-            use: [rspack.CssExtractRspackPlugin.loader, "css-loader"],
-          },
+          "postcss-loader",
         ],
       },
       {
@@ -135,31 +129,15 @@ export default [
     target: "node22",
     async entry() {
       return {
-        // TODO: move all css to client bundle?
-        // TODO: prohibit css imports in js in server bundle?
         index: [
+          // load custom elements
           ...(await new fdir()
             .withFullPaths()
-            .filter(
-              (filePath) =>
-                filePath.endsWith("/element.js") ||
-                filePath.endsWith("/global.css"),
-            )
+            .filter((filePath) => filePath.endsWith("/element.js"))
             .crawl(path.join(__dirname, "components"))
             .withPromise()),
           "./entry.ssr.js",
         ],
-        ...Object.fromEntries(
-          (
-            await new fdir()
-              .withFullPaths()
-              .filter((filePath) => filePath.endsWith("/index.css"))
-              .crawl(path.join(__dirname, "components"))
-              .withPromise()
-          )
-            // eslint-disable-next-line unicorn/no-await-expression-member
-            .map((file) => ["styles-" + file.split("/").at(-2), file]),
-        ),
       };
     },
     plugins: [isProd && new CSPHashPlugin()],
@@ -178,18 +156,57 @@ export default [
   }),
   merge(common, {
     name: "client",
-    entry: {
-      index: [!isProd && "./build/hmr.js", "./entry.client.js"].filter(
-        (x) => typeof x === "string",
-      ),
+    async entry() {
+      return {
+        index: [!isProd && "./build/hmr.js", "./entry.client.js"].filter(
+          (x) => typeof x === "string",
+        ),
+        // load `components/*/global.css` files into global style entrypoint
+        "styles-global": await new fdir()
+          .withFullPaths()
+          .filter((filePath) => filePath.endsWith("/global.css"))
+          .crawl(path.join(__dirname, "components"))
+          .withPromise(),
+        // load `components/*/index.css` files into per-component style entrypoints
+        ...Object.fromEntries(
+          (
+            await new fdir()
+              .withFullPaths()
+              .filter((filePath) => filePath.endsWith("/index.css"))
+              .crawl(path.join(__dirname, "components"))
+              .withPromise()
+          )
+            // eslint-disable-next-line unicorn/no-await-expression-member
+            .map((file) => ["styles-" + file.split("/").at(-2), file]),
+        ),
+      };
     },
     target: ["web", "browserslist"],
-    plugins: [!isProd && new GenerateElementMapPlugin()],
+    plugins: [
+      new rspack.CssExtractRspackPlugin({
+        filename: isProd ? "[name].[contenthash].css" : "[name].css",
+        // chunkFilename: "[name].[contenthash].css",
+        runtime: false,
+      }),
+      !isProd && new GenerateElementMapPlugin(),
+    ],
     output: {
       path: path.resolve(__dirname, "dist/client"),
       filename: isProd ? "[name].[contenthash].js" : "[name].js",
       clean: true,
       publicPath: "/static/client/",
+    },
+    module: {
+      rules: [
+        {
+          test: /\.css$/i,
+          use: [
+            rspack.CssExtractRspackPlugin.loader,
+            "css-loader",
+            "postcss-loader",
+          ],
+        },
+      ],
     },
   }),
 ];

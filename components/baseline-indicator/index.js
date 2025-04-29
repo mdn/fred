@@ -1,6 +1,6 @@
 import { html, nothing } from "lit";
 
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 
 /**
  * @type {{ name: string, browsers: Baseline.BrowserGroup[] }[]}

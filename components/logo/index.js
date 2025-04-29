@@ -1,6 +1,6 @@
 import { html } from "lit";
 
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 
 export class Logo extends ServerComponent {
   /**

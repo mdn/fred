@@ -4,7 +4,7 @@ import { Banner } from "../banner/index.js";
 import { Breadcrumbs } from "../breadcrumbs/index.js";
 import { Footer } from "../footer/index.js";
 import { Navigation } from "../navigation/index.js";
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 
 export class PageLayout extends ServerComponent {
   /**

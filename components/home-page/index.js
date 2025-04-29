@@ -1,7 +1,7 @@
 import { html, nothing } from "lit";
 
 import { PageLayout } from "../../components/page-layout/index.js";
-import { ServerComponent } from "../../components/server.js";
+import { ServerComponent } from "../server/index.js";
 
 export class HomePage extends ServerComponent {
   /**

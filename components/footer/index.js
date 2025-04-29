@@ -6,7 +6,7 @@ import mastodon from "../icon/mastodon.svg?lit";
 import rss from "../icon/rss.svg?lit";
 import x from "../icon/x.svg?lit";
 
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 
 import mdn from "./mdn.svg?lit";
 import mozilla from "./mozilla.svg?lit";

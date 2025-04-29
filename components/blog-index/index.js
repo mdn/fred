@@ -3,7 +3,7 @@ import { html, nothing } from "lit";
 import { AuthorDateReadTime, BlogContainer } from "../blog/index.js";
 import { Button } from "../button/index.js";
 import { PageLayout } from "../page-layout/index.js";
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 
 /**
  * @param {Fred.Context} _context

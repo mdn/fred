@@ -3,7 +3,7 @@ import { html } from "lit";
 import { Content } from "../content/index.js";
 import { LeftSidebar } from "../left-sidebar/index.js";
 import { ReferenceToc } from "../reference-toc/index.js";
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 
 export class ReferenceLayout extends ServerComponent {
   /**

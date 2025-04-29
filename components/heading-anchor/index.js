@@ -2,7 +2,7 @@ import { nothing } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html as hh, unsafeStatic } from "lit/static-html.js";
 
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 
 export class HeadingAnchor extends ServerComponent {
   /**

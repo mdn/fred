@@ -8,7 +8,7 @@ import securitySvg from "../observatory/assets/security.svg?lit";
 
 import { PageLayout } from "../page-layout/index.js";
 
-import { ServerComponent } from "../server.js";
+import { ServerComponent } from "../server/index.js";
 
 import { FAQ } from "./faq.js";
 import { Feedback } from "./feedback.js";
