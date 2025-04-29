@@ -7,7 +7,6 @@ export class GenericSidebar extends ServerComponent {
    * @param {Fred.Context<Rari.GenericPage>} context
    */
   render(context) {
-    console.log("PATH", context.path);
     if (context.path.startsWith("/en-US/observatory/docs")) {
       return html`<nav class="generic-sidebar">
         <section class="generic-sidebar--content">
