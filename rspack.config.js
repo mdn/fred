@@ -170,12 +170,12 @@ export default [
           .filter((filePath) => filePath.endsWith("/global.css"))
           .crawl(path.join(__dirname, "components"))
           .withPromise(),
-        // load `components/*/index.css` files into per-component style entrypoints
+        // load `components/*/server.css` files into per-component style entrypoints
         ...Object.fromEntries(
           (
             await new fdir()
               .withFullPaths()
-              .filter((filePath) => filePath.endsWith("/index.css"))
+              .filter((filePath) => filePath.endsWith("/server.css"))
               .crawl(path.join(__dirname, "components"))
               .withPromise()
           )

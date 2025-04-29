@@ -1,9 +1,9 @@
 import { html, nothing } from "lit";
 
-import { Section } from "../../components/content/index.js";
-import { PageLayout } from "../../components/page-layout/index.js";
-import { ReferenceToc } from "../../components/reference-toc/index.js";
 import { AuthorDateReadTime, BlogContainer } from "../blog/index.js";
+import { Section } from "../content/server.js";
+import { PageLayout } from "../page-layout/server.js";
+import { ReferenceToc } from "../reference-toc/server.js";
 
 import { ServerComponent } from "../server/index.js";
 

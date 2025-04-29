@@ -61,12 +61,12 @@ export default {
               const expectedPath = path.join(
                 "components",
                 expectedDir,
-                "index.js",
+                "server.js",
               );
               if (!filename.endsWith(expectedPath)) {
                 context.report({
                   node,
-                  message: `Class '${className}' extends ServerComponent and should be in a file named './components/${expectedDir}/index.js'.`,
+                  message: `Class '${className}' extends ServerComponent and should be in a file named './components/${expectedDir}/server.js'.`,
                 });
               }
             }

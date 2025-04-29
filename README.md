@@ -21,22 +21,28 @@ MDN's next fr(ont)e(n)d.
 
 - Components should live in the `components/` folder, with reserved names which cause certain behavior, explained further below:
   - `component-name/`
+    - `global.css` - (reserved): automatically added to global styles
     - `element.js` - (reserved): custom element, automatically imported client side, always imported server side
     - `element.css` - (recommended): styles for custom element's shadow dom
-    - `global.css` - (reserved): automatically added to global styles
-    - `index.css` - (reserved): automatically added to the page when the server component is used in that page
-- Components which are or make use of a custom element should place that element's code in `components/component-name/element.js`
+    - `server.js` - (reserved): server component, will automatically load the adjacent `server.css` file when used
+    - `server.css` - (reserved): automatically added to page styles when its server component is used in that page
+- `global.css`: components which have CSS which should be loaded on _all_ pages should expose that through a `global.css` file:
+  - This should be used sparingly, use it for things needed in almost all components, like colors, fonts, etc.
+  - Or, when creating a custom element, use it to set the "browser default" styles on that custom element: usually as simple as just `mdn-component-name { display: block; }` or similar
+- `element.js`: custom elements should be defined in `components/component-name/element.js`
   - The class should be exported, and named `MDNComponentName`
     - Acronyms should be kept all caps, to match the naming of `HTMLElement` class names, and added to `ACRONYMS` in `build/plugins/generate-element-map.js` to allow the correct types to be generated
   - The element should be registered with a name of `mdn-component-name`
   - If all this is done:
     - The element will be automatically loaded client side if it's present in the DOM at page load
-      - Elements inserted client side (i.e. in a hook) won't be automatically loaded, and the hook should handle loading them: probably with an async `import()`
+      - Elements inserted client side (i.e. in a hook, or another custom element) won't be automatically loaded, and the hook should handle loading them: probably with an async `import()`
     - The element will be automatically loaded server side for SSR
     - The element will automatically be added to `types/element-map.d.ts` to provide proper types in e.g. `querySelector("mdn-component-name")`
-- Components which need to set global styles should place those styles in `components/component-name/global.css`
-  - These will be automatically loaded server side, adding them to the global stylesheet
-    - Therefore, these styles should be scoped to the component: either with a class name for server components, or the custom element name for elements
+- `server.js`: server components should be defined in `components/component-name/server.js`
+  - The class should extend `ServerComponent` from `components/server/index.js`, and be named `ComponentName`
+- `server.css`: server component styles should be placed in `components/component-name/server.css`
+  - These will be automatically loaded server side when the adjacent `ServerComponent` is used
+    - Therefore, these styles should be scoped to the component, usually with a wrapping class
 
 ### Typing
 

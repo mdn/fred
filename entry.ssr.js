@@ -2,21 +2,21 @@
 import { render as r } from "@lit-labs/ssr";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 
-import { BlogIndex } from "./components/blog-index/index.js";
-import { BlogPost } from "./components/blog-post/index.js";
-import { ContributorSpotlight } from "./components/contributor-spotlight/index.js";
-import { Curriculum } from "./components/curriculum/index.js";
-import { Doc } from "./components/doc/index.js";
-import { GenericDoc } from "./components/generic-doc/index.js";
-import { HomePage } from "./components/home-page/index.js";
-import { NotFound } from "./components/not-found/index.js";
-import { ObservatoryLanding } from "./components/observatory-landing/index.js";
-import { ObservatoryResults } from "./components/observatory-results/index.js";
-import { OuterLayout } from "./components/outer-layout/index.js";
-import { PageLayout } from "./components/page-layout/index.js";
-import { Search } from "./components/search/index.js";
+import { BlogIndex } from "./components/blog-index/server.js";
+import { BlogPost } from "./components/blog-post/server.js";
+import { ContributorSpotlight } from "./components/contributor-spotlight/server.js";
+import { Curriculum } from "./components/curriculum/server.js";
+import { Doc } from "./components/doc/server.js";
+import { GenericDoc } from "./components/generic-doc/server.js";
+import { HomePage } from "./components/home-page/server.js";
+import { NotFound } from "./components/not-found/server.js";
+import { ObservatoryLanding } from "./components/observatory-landing/server.js";
+import { ObservatoryResults } from "./components/observatory-results/server.js";
+import { OuterLayout } from "./components/outer-layout/server.js";
+import { PageLayout } from "./components/page-layout/server.js";
+import { Search } from "./components/search/server.js";
 import { asyncLocalStorage } from "./components/server/async-local-storage.js";
-import { Settings } from "./components/settings/index.js";
+import { Settings } from "./components/settings/server.js";
 import { addFluent } from "./l10n/context.js";
 import { runWithContext } from "./symmetric-context/server.js";
 

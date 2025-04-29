@@ -1,7 +1,7 @@
 import { html } from "lit";
 
-import { Section } from "../../components/content/index.js";
-import { PageLayout } from "../../components/page-layout/index.js";
+import { Section } from "../content/server.js";
+import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
 
 export class ContributorSpotlight extends ServerComponent {

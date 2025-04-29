@@ -1,6 +1,6 @@
 import { html } from "lit";
 
-import { Section } from "../content/index.js";
+import { Section } from "../content/server.js";
 import { ServerComponent } from "../server/index.js";
 
 export class GenericContent extends ServerComponent {

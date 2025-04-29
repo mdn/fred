@@ -1,7 +1,7 @@
 import { html } from "lit";
 
-import { Logo } from "../logo/index.js";
-import { Menu } from "../menu/index.js";
+import { Logo } from "../logo/server.js";
+import { Menu } from "../menu/server.js";
 
 import { ServerComponent } from "../server/index.js";
 

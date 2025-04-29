@@ -2,9 +2,9 @@ import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
-import { ArticleFooter } from "../article-footer/index.js";
-import { BaselineIndicator } from "../baseline-indicator/index.js";
-import { HeadingAnchor } from "../heading-anchor/index.js";
+import { ArticleFooter } from "../article-footer/server.js";
+import { BaselineIndicator } from "../baseline-indicator/server.js";
+import { HeadingAnchor } from "../heading-anchor/server.js";
 import { ServerComponent } from "../server/index.js";
 import { SpecificationsList } from "../specifications-list/index.js";
 

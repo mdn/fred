@@ -1,5 +1,5 @@
-import { GenericLayout } from "../generic-layout/index.js";
-import { PageLayout } from "../page-layout/index.js";
+import { GenericLayout } from "../generic-layout/server.js";
+import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
 
 export class GenericDoc extends ServerComponent {

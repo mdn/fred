@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 import { Feedback } from "../observatory-landing/feedback.js";
-import { PageLayout } from "../page-layout/index.js";
+import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
 
 export class ObservatoryResults extends ServerComponent {
