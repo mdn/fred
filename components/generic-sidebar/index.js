@@ -8,32 +8,31 @@ export class GenericSidebar extends ServerComponent {
    */
   render(context) {
     if (context.path.startsWith("/en-US/observatory/docs")) {
+      const links = [
+        {
+          href: "/en-US/observatory/docs/tests_and_scoring",
+          title: "Scoring Methodology",
+        },
+        { href: "/en-US/observatory/docs/faq", title: "FAQ" },
+      ];
+
+      const items = links.map(
+        ({ href, title }) => html`
+          <li class="section">
+            ${context.path === href
+              ? html`<em><a href=${href}>${title}</a></em>`
+              : html`<a href=${href}>${title}</a>`}
+          </li>
+        `,
+      );
+
       return html`<nav class="generic-sidebar">
         <section class="generic-sidebar--content">
           <header>
-            <h2>HTTP Observatory</h2>
+            <h4>HTTP Observatory</h4>
           </header>
           <ol>
-            <li class="section">
-              ${context.path === "/en-US/observatory/docs/tests_and_scoring"
-                ? html`<em>
-                    <a href="/en-US/observatory/docs/tests_and_scoring"
-                      >Scoring Methodology</a
-                    >
-                  </em>`
-                : html`
-                    <a href="/en-US/observatory/docs/tests_and_scoring"
-                      >Scoring Methodology</a
-                    >
-                  `}
-            </li>
-            <li>
-              ${context.path === "/en-US/observatory/docs/faq"
-                ? html`<em>
-                    <a href="/en-US/observatory/docs/faq">FAQ</a>
-                  </em>`
-                : html` <a href="/en-US/observatory/docs/faq">FAQ</a> `}
-            </li>
+            ${items}
           </ol>
         </section>
       </nav>`;
