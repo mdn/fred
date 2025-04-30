@@ -9,6 +9,8 @@ import { Rating } from "./rating.js";
 import { Tabs } from "./tabs.js";
 
 import "../../components/progress-bar/element.js";
+import "../../components/observatory-comparison-table/element.js";
+import "../../components/observatory-human-duration/element.js";
 
 export class MDNObservatoryResults extends LitElement {
   static styles = styles;
