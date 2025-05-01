@@ -1,5 +1,6 @@
 import { html } from "lit";
 
+import Button from "../button/pure.js";
 import { formatMinus, hostAsRedirectChain } from "../observatory/utils.js";
 
 import { Tooltip } from "./tooltip.js";
@@ -62,9 +63,10 @@ export function Rating({ result, host, rescan }) {
           @click=${rescan}
         ></mdn-observatory-rescan-button>
         <div class="scan-another">
-          <a class="button" href="/en-US/observatory" data-discover="true"
-            >Scan another website</a
-          >
+          ${Button({
+            label: "Scan another website",
+            href: "/en-US/observatory",
+          })}
         </div>
       </section>
     </section>

@@ -106,22 +106,6 @@ code {
   margin-top: 1.2rem;
   font-size: var(--type-smaller-font-size);
   font-weight: 400;
-
-  a.button {
-    color: var(--button-primary-default);
-    background-color: var(--color-background-secondary);
-
-    &:hover {
-      color: var(--button-primary-hover);
-      text-decoration: none;
-      background-color: var(--color-background-secondary);
-    }
-
-    &:active {
-      color: var(--button-primary-active);
-      background-color: var(--color-background-secondary);
-    }
-  }
 }
 
 .label {

@@ -47,13 +47,13 @@ export class MDNObservatoryRescanButton extends LitElement {
 
     return html`
       ${isExpired
-        ? html`<button>Rescan</button>`
-        : html` <button disabled>
+        ? html`<button class="button">Rescan</button>`
+        : html` <button disabled class="button">
             <div
               class="progress"
               role="progressbar"
               aria-labelledby="wait-secs"
-              style="background: conic-gradient(var(--color-text-secondary) 0grad, ${progressPercent}%, rgba(0,0,0,0) ${progressPercent}% 100%)"
+              style="background: conic-gradient(var(--color-white) 0grad, ${progressPercent}%, rgba(0,0,0,0) ${progressPercent}% 100%)"
             ></div>
             <small id="wait-secs">Wait ${remainingSecs}s to rescan</small>
           </button>`}
