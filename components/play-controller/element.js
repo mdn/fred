@@ -68,7 +68,6 @@ export class MDNPlayController extends LitElement {
     for (const [language, value] of Object.entries(this._hiddenCode)) {
       code[language] = code[language] ? `${value}\n${code[language]}` : value;
     }
-    console.log(code);
     return code;
   }
 

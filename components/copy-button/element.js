@@ -4,11 +4,13 @@ import { MDNButton } from "../button/element.js";
 
 export class MDNCopyButton extends LitElement {
   static properties = {
+    variant: {},
     _message: { state: true },
   };
 
   constructor() {
     super();
+    this.variant = "primary";
     /** @type {Element | undefined} */
     this.copiesFrom = undefined;
   }
@@ -46,8 +48,10 @@ export class MDNCopyButton extends LitElement {
   }
 
   render() {
-    return html`<mdn-button @click=${this._copy}>Copy</mdn-button> ${this
-        ._message}`;
+    return html`<mdn-button @click=${this._copy} variant=${this.variant}
+        >Copy</mdn-button
+      >
+      ${this._message}`;
   }
 }
 

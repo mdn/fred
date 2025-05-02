@@ -1,0 +1,59 @@
+.code-example {
+  --border: 1px solid var(--color-border-secondary);
+  overflow: hidden;
+  border: var(--border);
+  border-radius: 0.25rem;
+
+  .example-header {
+    box-sizing: border-box;
+    display: flex;
+
+    align-items: center;
+
+    min-height: 3.1rem;
+
+    padding: 0.5rem 1rem;
+
+    line-height: var(--font-line-ui);
+
+    border-bottom: var(--border);
+
+    .language-name {
+      text-transform: uppercase;
+    }
+  }
+
+  pre {
+    padding: 1rem;
+    margin: 0;
+
+    overflow: auto;
+
+    background-color: var(--color-background-secondary);
+
+    code {
+      padding: 0;
+      background-color: unset;
+    }
+
+    &.hidden,
+    &[class*="interactive-example"] {
+      display: none;
+    }
+  }
+
+  &:has(.hidden, [class*="interactive-example"]) {
+    /* TODO: we might want to fix this in rari */
+    display: none;
+  }
+
+  iframe,
+  mdn-play-runner {
+    box-sizing: content-box;
+    display: block;
+
+    padding: 1rem;
+
+    border: none;
+  }
+}

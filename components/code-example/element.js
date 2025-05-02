@@ -6,33 +6,26 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import "../copy-button/element.js";
 import styles from "./element.css?lit";
 
+const LANGUAGE_CLASSES = new Set(["html", "js", "css", "wat"]);
+
 export class MDNCodeExample extends LitElement {
   static styles = styles;
 
   static properties = {
-    _code: { state: true },
+    language: { type: String },
+    code: { type: String },
   };
 
   constructor() {
     super();
     this.language = "";
-    this._code = "";
+    this.code = "";
   }
 
   _codeRef = createRef();
 
-  /** @param {Event} event */
-  _slotchange({ target }) {
-    if (target instanceof HTMLSlotElement) {
-      this._code = target
-        .assignedNodes({ flatten: true })
-        .map((node) => node.textContent || "")
-        .join("");
-    }
-  }
-
   _highlightTask = new Task(this, {
-    args: () => [this.language, this._code],
+    args: () => [this.language, this.code],
     task: async ([language, code]) => {
       const { highlightString } = await import("./syntax-highlight.js");
       return highlightString(code, language);
@@ -41,20 +34,46 @@ export class MDNCodeExample extends LitElement {
 
   render() {
     return html`
-      <div class="wrapper">
-        <div class="header">
-          ${this.language}
-          <mdn-copy-button .copiesFrom=${this._codeRef.value}></mdn-copy-button>
+      <div class="code-example">
+        <div class="example-header">
+          <span class="language-name">${this.language}</span>
+          <mdn-copy-button
+            .copiesFrom=${this._codeRef.value}
+            variant="secondary"
+          ></mdn-copy-button>
         </div>
         <pre><code ${ref(this._codeRef)}>${this._highlightTask.render({
-          initial: () => this._code,
-          pending: () => this._code,
+          initial: () => this.code,
+          pending: () => this.code,
           complete: (highlighted) => unsafeHTML(highlighted),
         })}</code></pre>
       </div>
-      <slot hidden @slotchange=${this._slotchange}></slot>
     `;
   }
 }
 
 customElements.define("mdn-code-example", MDNCodeExample);
+
+/**
+ * @param {Element} pre
+ * @returns {MDNCodeExample | undefined}
+ */
+export function upgradePre(pre) {
+  if (pre instanceof HTMLPreElement) {
+    const example = pre.closest("div.code-example");
+    const language = [...pre.classList].find((c) => LANGUAGE_CLASSES.has(c));
+    const hidden = [...pre.classList].some(
+      (c) => c === "hidden" || c.startsWith("interactive-example"),
+    );
+    const code = pre.querySelector("code")?.textContent;
+    if (example && language && code) {
+      const newExample = document.createElement("mdn-code-example");
+      newExample.language = language;
+      newExample.code = code;
+      newExample.hidden = hidden;
+      example.replaceWith(newExample);
+      return newExample;
+    }
+  }
+  return;
+}

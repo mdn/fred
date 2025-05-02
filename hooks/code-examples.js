@@ -1,16 +1,8 @@
 for (const pre of document.querySelectorAll(
-  "div.code-example pre:not(.hidden)",
+  `div.code-example pre:not(.hidden):not([class*="live-sample"]):not([class*="interactive-example"])`,
 )) {
-  await import("../components/code-example/element.js");
-  const example = pre.closest("div.code-example");
-  const language = example?.querySelector(".language-name")?.textContent;
-  const code = example?.querySelector("code");
-  if (example && language && code) {
-    const newExample = document.createElement("mdn-code-example");
-    newExample.language = language;
-    newExample.append(code);
-    example.replaceWith(newExample);
-  }
+  const { upgradePre } = await import("../components/code-example/element.js");
+  upgradePre(pre);
 }
 
 export {};

@@ -1,5 +1,6 @@
 import { Task } from "@lit/task";
 import { LitElement, html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { createRef, ref } from "lit/directives/ref.js";
 
 import { ThemeController } from "../color-theme/controller.js";
@@ -21,7 +22,9 @@ export class MDNPlayRunner extends LitElement {
     code: { type: Object },
     defaults: { type: String },
     srcPrefix: { type: String, attribute: "src-prefix" },
+    allow: { type: String },
     sandbox: { type: String },
+    src: { reflect: true },
   };
 
   static styles = styles;
@@ -35,7 +38,10 @@ export class MDNPlayRunner extends LitElement {
     this.defaults = undefined;
     /** @type {string | undefined} */
     this.srcPrefix = undefined;
-    this.sandbox = "";
+    /** @type {string | undefined} */
+    this.allow = undefined;
+    /** @type {string | undefined} */
+    this.sandbox = undefined;
     this._subdomain = crypto.randomUUID();
     /** @type {Promise<true>} */
     this.ready = new Promise((resolve) => {
@@ -123,8 +129,8 @@ export class MDNPlayRunner extends LitElement {
       url.pathname = `${prefix}/runner.html`;
       const src = url.href;
       // update iframe src without adding to browser history
-      console.log(src);
       this._iframe.value?.contentWindow?.location.replace(src);
+      this.src = src;
     },
   });
 
@@ -149,7 +155,15 @@ export class MDNPlayRunner extends LitElement {
         ${ref(this._iframe)}
         src=${url.href}
         title="runner"
-        sandbox="allow-scripts allow-same-origin allow-forms ${this.sandbox}"
+        allow=${ifDefined(this.allow)}
+        sandbox=${[
+          ...new Set([
+            "allow-scripts",
+            "allow-same-origin",
+            "allow-forms",
+            ...(this.sandbox?.split(" ") || []),
+          ]),
+        ].join(" ")}
       ></iframe>
     `;
   }
