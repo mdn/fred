@@ -1,0 +1,161 @@
+.about-container {
+  display: flow-root;
+  color: var(--color-text-primary);
+  background: var(--color-background-primary);
+
+  --max-width: 74rem;
+  --gutter: 1rem;
+  --about-stats-height: 5.75rem;
+  --about-section-gap: 5rem;
+  --inner-width: calc(min(var(--max-width), 100vw) - 2 * var(--gutter));
+
+  --about-join-us-image: url("./assets/building.svg");
+  --about-journey-dot: url("./assets/dot.svg");
+  --about-global-impact-image: url("./assets/global-impact.svg");
+
+  --stats-box-shadow:
+    4px -2px 15px 0 light-dark(rgb(179 179 179 / 20%), rgb(38 38 38 / 20%)),
+    4px -4px 15px 0 light-dark(rgb(179 179 179 / 15%), rgb(38 38 38 / 15%));
+  --boxes-shadow:
+    -4px 4px 8px 0 light-dark(rgb(179 179 179 / 15%), none),
+    4px 4px 8px 0 light-dark(rgb(179 179 179 / 18%), none);
+  --about-core-values-shadow: 0 4px 15px 0
+    light-dark(rgb(179 179 179 / 20%), rgb(179 179 179 / 20%));
+  --about-team-shadow: 0 4px 15px 0
+    light-dark(rgb(179 179 179 / 20%), rgb(179 179 179 / 20%));
+  --about-journey-shadow:
+    4px -4px 15px 0 light-dark(rgb(179 179 179 / 25%), rgb(179 179 179 / 25%)),
+    4px 4px 15px 0 light-dark(rgb(179 179 179 / 25%), rgb(179 179 179 / 25%));
+  --about-join-us-border: none;
+
+  --header-next-section-bg: light-dark(#f2f2f5, #1b1b1b);
+  --header-text-primary: light-dark(#000000, #ffffff);
+  --header-text-secondary: light-dark(#343434, #b3b3b3);
+  --header-bg: light-dark(#ffffff, #101010);
+  --stats-bg: light-dark(#ffffff, #000000);
+  --stats-text-primary: light-dark(#000000, #b3b3b3);
+  --stats-stat-bg: light-dark(#d7f5dc, #394035);
+  --stats-stat-text: light-dark(#007936, #8ff295);
+  --boxes-bg: light-dark(#ffffff, #000000);
+  --boxes-border: light-dark(none, #4e4e4e);
+  --boxes-header-bg-1: light-dark(#d5e8fb, #141e34);
+  --boxes-header-color-1: light-dark(inherit, #9bb6f2);
+  --boxes-header-bg-2: light-dark(#fbe3d5, #321d13);
+  --boxes-header-color-2: light-dark(inherit, #e3642a);
+  --boxes-header-bg-3: light-dark(#fbf7d5, #343114);
+  --boxes-header-color-3: light-dark(inherit, #d4c53b);
+  --boxes-header-bg-4: light-dark(#fbd5d5, #341419);
+  --boxes-header-color-4: light-dark(inherit, #f19ca1);
+  --boxes-header-bg-5: light-dark(#dfd5fb, #1d1434);
+  --boxes-header-color-5: light-dark(inherit, #bf94ec);
+  --boxes-main-color: light-dark(#000000, #b3b3b3);
+  --stairs-color: light-dark(#007936, #8ff295);
+  --about-bg-primary: light-dark(#ffffff, #1b1b1b);
+  --about-bg-secondary: light-dark(#f2f2f5, #1b1b1b);
+  --about-join-us-bg: light-dark(#f2f2f5, #000000);
+  --about-join-us-color: light-dark(#343434, #b3b3b3);
+  --about-tablist-border: light-dark(#858585, #858585);
+  --about-tablist-color: light-dark(rgb(0 0 0 / 60%), #b3b3b3);
+  --about-tablist-active-border: light-dark(#007936, #8ff295);
+  --about-tablist-active-color: light-dark(#000000, #ffffff);
+  --about-color: light-dark(#000000, #b3b3b3);
+  --about-heading-color: light-dark(#000000, #ffffff);
+  --about-core-values-bg: light-dark(#ffffff, #000000);
+  --about-core-values-bg-secondary: light-dark(#d7f5dc, #007936);
+  --about-core-values-color: light-dark(#000000, #ffffff);
+  --about-team-title-color: light-dark(#007936, #8ff295);
+  --about-team-bg: light-dark(#ffffff, #000000);
+  --about-team-github-bg: light-dark(rgb(255 255 255 / 75%), rgb(0 0 0 / 70%));
+  --about-team-color: light-dark(#000000, #ffffff);
+  --about-journey-line-color: light-dark(#007936, #8ff295);
+  --about-journey-image-border: light-dark(#ffffff, #000000);
+
+  h2,
+  h3,
+  p {
+    margin: 0;
+  }
+
+  h2,
+  h3 {
+    color: var(--color-text-primary);
+  }
+
+  h2 a,
+  h3 a {
+    color: unset;
+    text-decoration: none;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+  p + p {
+    margin-top: 1.5rem;
+  }
+
+  h2 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-weight: 600;
+
+    @media (width <= 769px) {
+      font-size: 1.375rem;
+    }
+  }
+}
+
+@media (width <= 769px) {
+  .about-container {
+    --about-section-gap: 3rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .about-container {
+    --about-join-us-image: url("./assets/building-dark.svg");
+    --about-journey-dot: url("./assets/dot-dark.svg");
+    --about-global-impact-image: url("./assets/global-impact-dark.svg");
+    --about-join-us-border: 1px solid #4e4e4e;
+  }
+}
+
+.about-header {
+  --header-stats-height: var(--about-stats-height);
+  background: linear-gradient(
+    to top,
+    var(--header-next-section-bg, transparent) 0%,
+    var(--header-next-section-bg, transparent)
+      calc(var(--header-stats-height) / 2),
+    var(--header-bg) calc(var(--header-stats-height) / 2),
+    var(--header-bg) 100%
+  );
+}
+
+@media (width <= 769px) {
+  .about-header {
+    padding-top: 1rem;
+  }
+}
+
+.about-header__section {
+  width: 100%;
+  max-width: var(--max-width);
+
+  padding-top: 5rem;
+  padding-right: var(--gutter);
+  padding-left: var(--gutter);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* .about-header__paragraph {
+}
+
+.about-header__h1 {
+} */

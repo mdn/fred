@@ -11,9 +11,9 @@ declare global {
     "mdn-copy-button": import("../components/copy-button/element.js").MDNCopyButton;
     "mdn-dropdown": import("../components/dropdown/element.js").MDNDropdown;
     "mdn-interactive-example": import("../components/interactive-example/element.js").MDNInteractiveExample;
-    "mdn-ix-tab": import("../components/ix-tab/element.js").MDNIxTab;
-    "mdn-ix-tab-panel": import("../components/ix-tab-panel/element.js").MDNIxTabPanel;
-    "mdn-ix-tab-wrapper": import("../components/ix-tab-wrapper/element.js").MDNIxTabWrapper;
+    "mdn-ix-tab": import("../components/ix-tab/element.js").MDNIXTab;
+    "mdn-ix-tab-panel": import("../components/ix-tab-panel/element.js").MDNIXTabPanel;
+    "mdn-ix-tab-wrapper": import("../components/ix-tab-wrapper/element.js").MDNIXTabWrapper;
     "mdn-language-switcher": import("../components/language-switcher/element.js").MDNLanguageSwitcher;
     "mdn-observatory-comparison-table": import("../components/observatory-comparison-table/element.js").MDNObservatoryComparisonTable;
     "mdn-observatory-form": import("../components/observatory-form/element.js").MDNObservatoryForm;
