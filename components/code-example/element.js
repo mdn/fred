@@ -61,7 +61,9 @@ customElements.define("mdn-code-example", MDNCodeExample);
 export function upgradePre(pre) {
   if (pre instanceof HTMLPreElement) {
     const example = pre.closest("div.code-example");
-    const language = [...pre.classList].find((c) => LANGUAGE_CLASSES.has(c));
+    const language =
+      [...pre.classList].find((c) => LANGUAGE_CLASSES.has(c)) ||
+      example?.querySelector(".language-name")?.textContent?.trim();
     const hidden = [...pre.classList].some(
       (c) => c === "hidden" || c.startsWith("interactive-example"),
     );
