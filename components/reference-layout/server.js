@@ -14,6 +14,7 @@ export class ReferenceLayout extends ServerComponent {
       <div class="reference-layout">
         <aside class="reference-layout__toc">
           ${ReferenceToc.render(context)}
+          <mdn-placement-sidebar></mdn-placement-sidebar>
         </aside>
         <div class="reference-layout__content">${Content.render(context)}</div>
         <aside class="reference-layout__sidebar">

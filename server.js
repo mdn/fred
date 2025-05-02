@@ -105,7 +105,7 @@ export async function startDevServer() {
   });
 
   app.all(
-    "/api/*_",
+    ["/api/*_", "/pong/*_", "/pimg/*_"],
     createProxyMiddleware({
       target: `https://developer.allizom.org`,
       changeOrigin: true,

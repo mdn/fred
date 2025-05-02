@@ -1,6 +1,5 @@
 import { html } from "lit";
 
-import { Banner } from "../banner/server.js";
 import { Breadcrumbs } from "../breadcrumbs/server.js";
 import { Footer } from "../footer/server.js";
 import { Navigation } from "../navigation/server.js";
@@ -14,7 +13,9 @@ export class PageLayout extends ServerComponent {
   render(context, child) {
     return html`
       <body class="page-layout">
-        <div class="page-layout__banner">${Banner.render()}</div>
+        <div class="page-layout__banner">
+          <mdn-placement-top></mdn-placement-top>
+        </div>
         <header class="page-layout__header">
           ${Navigation.render(context)} ${Breadcrumbs.render(context)}
         </header>
