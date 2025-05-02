@@ -34,6 +34,9 @@ const common = {
     new StatsWriterPlugin({
       fields: ["publicPath", "entrypoints"],
     }),
+    new rspack.EnvironmentPlugin({
+      FRED_PLAYGROUND_BASE_HOST: "mdnplay.dev",
+    }),
   ],
   optimization: {
     minimizer: [

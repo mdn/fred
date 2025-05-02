@@ -20,5 +20,5 @@
     // temporary, while migrating:
     // "noImplicitAny": false
   },
-  "exclude": ["node_modules", "dist", "legacy"]
+  "exclude": ["node_modules", "dist", "legacy", "vendor"]
 }

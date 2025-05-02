@@ -1,6 +1,7 @@
 import { Worker } from "node:worker_threads";
 
 import { rspack } from "@rspack/core";
+import cookieParser from "cookie-parser";
 import express from "express";
 
 import { createProxyMiddleware } from "http-proxy-middleware";
@@ -8,6 +9,7 @@ import webpackDevMiddleware from "webpack-dev-middleware";
 import webpackHotMiddleware from "webpack-hot-middleware";
 
 import rspackConfig from "./rspack.config.js";
+import { handleRunner } from "./vendor/yari/libs/play/index.js";
 
 /**
  * @import { Request, Response } from "express";
@@ -112,6 +114,25 @@ export async function startDevServer() {
       headers: {
         Connection: "keep-alive",
       },
+    }),
+  );
+
+  app.use(cookieParser());
+
+  app.get(["/*_/runner.html", "/runner.html"], (req, res) => {
+    handleRunner(req, res);
+  });
+
+  app.get(
+    "/shared-assets/*_",
+    createProxyMiddleware({
+      target: "https://mdn.github.io/shared-assets/",
+      pathRewrite: {
+        "^/shared-assets/": "/",
+      },
+      changeOrigin: true,
+      autoRewrite: true,
+      xfwd: true,
     }),
   );
 

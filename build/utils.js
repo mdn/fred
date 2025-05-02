@@ -1,4 +1,4 @@
-const ACRONYMS = new Set(["MDN"]);
+const ACRONYMS = new Set(["MDN", "IX"]);
 
 /** @param {string} name */
 export function toPascalCase(name) {

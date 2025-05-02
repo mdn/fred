@@ -23,6 +23,9 @@ const gitignorePath = path.resolve(__dirname, ".gitignore");
 
 export default defineConfig([
   includeIgnoreFile(gitignorePath),
+  {
+    ignores: ["./vendor/"],
+  },
   jsdoc.configs["flat/recommended"],
   n.configs["flat/recommended"],
   wc.configs["flat/best-practice"],

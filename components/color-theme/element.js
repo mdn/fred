@@ -19,6 +19,7 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
 
   constructor() {
     super();
+    /** @type {import("./types.js").ColorScheme} */
     this._mode = "light dark";
   }
 
@@ -26,7 +27,7 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
   _setMode({ target }) {
     if (target instanceof HTMLElement) {
       const mode = target.dataset.mode;
-      if (mode) {
+      if (mode === "light dark" || mode === "light" || mode === "dark") {
         this._mode = mode;
         try {
           localStorage.setItem("theme", mode);
@@ -61,6 +62,13 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
   willUpdate(changedProperties) {
     if (changedProperties.has("_mode") && globalThis.document) {
       document.documentElement.style.colorScheme = this._mode;
+      this.dispatchEvent(
+        new CustomEvent("mdn-color-theme-update", {
+          bubbles: true,
+          composed: true,
+          detail: this._mode,
+        }),
+      );
     }
   }
 
@@ -122,7 +130,7 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
     } catch (error) {
       console.warn("Unable to read theme from localStorage", error);
     }
-    if (mode) {
+    if (mode === "light dark" || mode === "light" || mode === "dark") {
       this._mode = mode;
     }
   }

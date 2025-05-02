@@ -1,0 +1,313 @@
+:host {
+  --border: 1px solid var(--color-border-secondary);
+  --tabbed-font-heading: 600 0.625rem/1.2 var(--font-family-text);
+  --elem-radius: 0.25rem;
+}
+
+header {
+  display: flex;
+
+  grid-area: header;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0.5rem 1rem;
+
+  border-bottom: var(--border);
+  border-top-left-radius: var(--elem-radius);
+  border-top-right-radius: var(--elem-radius);
+
+  h4 {
+    margin: 0;
+
+    font-size: 1rem;
+    font-weight: normal;
+
+    line-height: 1.1876;
+  }
+
+  mdn-button {
+    margin-right: -0.5rem;
+  }
+}
+
+mdn-play-editor {
+  grid-area: editor;
+  height: 100%;
+  overflow: auto;
+}
+
+.buttons {
+  display: flex;
+
+  flex-direction: column;
+
+  grid-area: buttons;
+
+  gap: 0.5rem;
+}
+
+mdn-play-console {
+  grid-area: console;
+  border: var(--border);
+  border-radius: var(--elem-radius);
+}
+
+mdn-ix-tab-wrapper {
+  grid-area: tabs;
+}
+
+/* -----------------------
+   JavaScript/WAT examples
+   ----------------------- */
+
+.template-console {
+  display: grid;
+
+  grid-template-areas:
+    "header  header"
+    "editor  editor"
+    "buttons console";
+  grid-template-rows: max-content 1fr 8rem;
+  grid-template-columns: max-content 1fr;
+
+  gap: 0.5rem;
+  align-content: start;
+
+  height: 100%;
+
+  header {
+    border: var(--border);
+  }
+
+  mdn-play-runner {
+    display: none;
+  }
+
+  > mdn-play-editor,
+  mdn-ix-tab-wrapper {
+    grid-area: editor;
+
+    margin-top: -0.5rem;
+
+    border: var(--border);
+    border-top: 0;
+    border-bottom-right-radius: var(--elem-radius);
+    border-bottom-left-radius: var(--elem-radius);
+  }
+
+  @media (width < 769px) {
+    grid-template-areas:
+      "header"
+      "editor"
+      "buttons"
+      "console";
+    grid-template-rows: max-content 1fr max-content 8rem;
+    grid-template-columns: 1fr;
+
+    .buttons {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}
+
+/* ---------------
+   Tabbed examples
+   --------------- */
+
+.template-tabbed {
+  display: grid;
+
+  grid-template-areas:
+    "header header"
+    "tabs   runner";
+  grid-template-rows: max-content 1fr;
+  grid-template-columns: 6fr 4fr;
+
+  height: 100%;
+
+  overflow: hidden;
+
+  border: var(--border);
+  border-radius: var(--elem-radius);
+
+  .output-wrapper {
+    position: relative;
+
+    grid-area: runner;
+
+    overflow: hidden;
+
+    border-left: var(--border);
+
+    h4 {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+
+      padding: 0.5rem 1.6rem;
+      margin: 0;
+
+      font: var(--tabbed-font-heading);
+
+      color: var(--text-secondary);
+
+      text-transform: uppercase;
+
+      background-color: var(--color-background-secondary);
+      border-bottom-left-radius: var(--elem-radius);
+    }
+  }
+
+  @media (width < 992px) {
+    grid-template-areas:
+      "header"
+      "tabs"
+      "runner";
+    grid-template-rows: max-content 1fr 1fr;
+    grid-template-columns: 1fr;
+
+    .output-wrapper {
+      border-top: var(--border);
+      border-left: 0;
+    }
+  }
+}
+
+/* ---------------
+   Choice examples
+   --------------- */
+
+.template-choices {
+  display: grid;
+
+  grid-template-areas:
+    "header header"
+    "choice runner";
+  grid-template-rows: max-content 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+  height: 100%;
+
+  border: var(--border);
+  border-radius: var(--elem-radius);
+
+  @media (width < 992px) {
+    grid-template-areas: "header" "choice" "runner";
+    grid-template-columns: 1fr;
+  }
+
+  .choice-wrapper {
+    display: flex;
+
+    flex-direction: column;
+
+    grid-area: choice;
+
+    row-gap: 0.4rem;
+
+    padding: 1rem;
+    padding-right: 0;
+
+    overflow-y: auto;
+
+    border-right: var(--border);
+
+    @media (width < 992px) {
+      padding-right: 1em;
+      border-right: none;
+      border-bottom: var(--border);
+    }
+
+    .choice {
+      --field-focus-border: light-dark(
+        var(--color-blue),
+        var(--color-blue-lighter)
+      );
+      --focus-01: 0 0 0 3px
+        light-dark(var(--color-blue-lightest), var(--color-blue-darkest));
+      display: flex;
+      flex-grow: 1;
+      align-items: center;
+
+      &::after {
+        width: 1rem;
+
+        padding: 0;
+        padding-right: 1rem;
+        padding-left: 0.25rem;
+
+        font-size: 0.5rem;
+
+        color: var(--field-focus-border);
+
+        content: "▶";
+
+        opacity: 0;
+
+        @media (width < 992px) {
+          display: none;
+        }
+      }
+
+      &.selected {
+        mdn-play-editor {
+          cursor: text;
+          border-color: var(--field-focus-border);
+          box-shadow: var(--focus-01);
+        }
+
+        &::after {
+          padding-right: 0.5rem;
+          padding-left: 0.75rem;
+
+          opacity: 1;
+
+          transition: all 0.2s ease-out;
+        }
+      }
+
+      &.unsupported {
+        mdn-play-editor {
+          border-color: light-dark(
+            var(--color-yellow),
+            var(--color-yellow-lighter)
+          );
+        }
+
+        &::after {
+          width: 1rem;
+          height: 1rem;
+
+          content: "";
+
+          background-image: url("../icon/warning.svg");
+          background-repeat: no-repeat;
+          background-position: center center;
+          background-size: 1rem;
+
+          opacity: 1;
+
+          transition: none;
+        }
+      }
+
+      mdn-play-editor {
+        width: 100%;
+
+        cursor: pointer;
+
+        border: var(--border);
+        border-radius: var(--elem-radius);
+      }
+    }
+  }
+
+  .output-wrapper {
+    height: 300px;
+    overflow: hidden;
+  }
+}

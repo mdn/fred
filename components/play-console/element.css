@@ -1,0 +1,35 @@
+:host {
+  box-sizing: border-box;
+  display: flex;
+
+  flex-direction: column;
+
+  width: 100%;
+
+  margin: 0;
+
+  overflow: auto;
+
+  font-size: 0.875rem;
+
+  background-color: var(--color-background-secondary);
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+li {
+  padding: 0 0.5em;
+
+  &::before {
+    content: ">";
+  }
+}
+
+code {
+  font-family: var(--font-family-code);
+  tab-size: 4;
+}

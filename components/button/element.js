@@ -8,6 +8,7 @@ export class MDNButton extends LitElement {
 
   static properties = {
     disabled: { type: Boolean },
+    variant: { type: String },
     icon: { state: true },
   };
 
@@ -16,6 +17,8 @@ export class MDNButton extends LitElement {
     this.disabled = false;
     /** @type {Lit.TemplateResult | undefined} */
     this.icon = undefined;
+    /** @type {import("./types.js").ButtonVariants} */
+    this.variant = "primary";
   }
 
   render() {
@@ -23,6 +26,7 @@ export class MDNButton extends LitElement {
       label: html`<slot></slot>`,
       disabled: this.disabled,
       icon: this.icon,
+      variant: this.variant,
     });
   }
 }

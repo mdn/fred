@@ -1,0 +1,135 @@
+import { LitElement } from "lit";
+import { createRef } from "lit/directives/ref.js";
+
+import styles from "./element.css?lit";
+import { InteractiveExampleWithChoices } from "./with-choices.js";
+import { InteractiveExampleWithConsole } from "./with-console.js";
+import { InteractiveExampleWithTabs } from "./with-tabs.js";
+
+/**
+ * @import { Ref } from 'lit/directives/ref.js';
+ * @import { MDNPlayController } from "../play-controller/element.js";
+ * @import { MDNPlayRunner } from "../play-runner/element.js";
+ */
+
+const LANGUAGE_CLASSES = new Set(["html", "js", "css", "wat"]);
+// const GLEAN_EVENT_TYPES = ["focus", "copy", "cut", "paste", "click"];
+
+// eslint-disable-next-line fred/custom-element-name
+export class InteractiveExampleBase extends LitElement {
+  static ssr = false;
+
+  static properties = { name: { type: String } };
+
+  static styles = styles;
+
+  constructor() {
+    super();
+    this.name = "";
+    /** @type {string[]} */
+    this._languages = [];
+    /** @type {Record<string, string>} */
+    this._code = {};
+  }
+
+  /** @type {Ref<MDNPlayController>} */
+  _controller = createRef();
+  /** @type {Ref<MDNPlayRunner>} */
+  _runner = createRef();
+
+  _run() {
+    this._controller.value?.run();
+  }
+
+  _reset() {
+    this._controller.value?.reset();
+  }
+
+  _initialCode() {
+    const exampleNodes = this.closest("section")?.querySelectorAll(
+      ".code-example pre.interactive-example",
+    );
+    // eslint-disable-next-line unicorn/no-array-reduce
+    const code = [...(exampleNodes || [])].reduce((acc, pre) => {
+      const language = [...pre.classList].find((c) => LANGUAGE_CLASSES.has(c));
+      return language && pre.textContent
+        ? {
+            ...acc,
+            [language]: acc[language]
+              ? `${acc[language]}\n${pre.textContent}`
+              : pre.textContent,
+          }
+        : acc;
+    }, /** @type {{[language: string]: string}} */ ({}));
+    const choiceNodes = this.closest("section")?.querySelectorAll(
+      ".code-example pre.interactive-example-choice",
+    );
+    this._choices = [...(choiceNodes || [])].map((pre) =>
+      pre.textContent?.trim(),
+    );
+    this._languages = Object.keys(code);
+    this._template =
+      this._choices.length > 0
+        ? "choices"
+        : (this._languages.length === 1 && this._languages[0] === "js") ||
+            (this._languages.includes("js") && this._languages.includes("wat"))
+          ? "console"
+          : "tabbed";
+    return code;
+  }
+
+  /** @param {string} lang */
+  _langName(lang) {
+    switch (lang) {
+      case "js":
+        return "JavaScript";
+      default:
+        return lang.toUpperCase();
+    }
+  }
+
+  // /** @param {Event} ev  */
+  // _telemetryHandler(ev) {
+  //   let action = ev.type;
+  //   if (
+  //     ev.type === "click" &&
+  //     ev.target instanceof HTMLElement &&
+  //     ev.target.id
+  //   ) {
+  //     action = `click@${ev.target.id}`;
+  //   }
+  //   this._gleanClick(`interactive-examples-lit: ${action}`);
+  // }
+
+  connectedCallback() {
+    super.connectedCallback();
+    // this._telemetryHandler = this._telemetryHandler.bind(this);
+    // for (const type of GLEAN_EVENT_TYPES) {
+    //   this.renderRoot.addEventListener(type, this._telemetryHandler);
+    // }
+    this._code = this._initialCode();
+  }
+
+  firstUpdated() {
+    if (this._controller.value) {
+      this._controller.value.code = this._code;
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    // for (const type of GLEAN_EVENT_TYPES) {
+    //   this.renderRoot.removeEventListener(type, this._telemetryHandler);
+    // }
+  }
+}
+
+export class MDNInteractiveExample extends InteractiveExampleWithChoices(
+  InteractiveExampleWithTabs(
+    InteractiveExampleWithConsole(InteractiveExampleBase),
+  ),
+) {}
+
+// TODO: rari outputs <interactive-example> rather than <mdn-interactive-example>
+// customElements.define("mdn-interactive-example", MDNInteractiveExample);
+customElements.define("interactive-example", MDNInteractiveExample);

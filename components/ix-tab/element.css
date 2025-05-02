@@ -1,0 +1,34 @@
+:host {
+  --ix-tab-background-active: light-dark(
+    var(--color-gray-lightest),
+    var(--color-gray-darkest)
+  );
+  padding: 0.5em 30px;
+
+  font-size: 0.833rem;
+
+  color: var(--color-text-secondary);
+
+  cursor: pointer;
+
+  background-color: transparent;
+  border: 0 none;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+
+  transition:
+    color 0.2s,
+    background-color 0.2s;
+}
+
+:host(:hover),
+:host(:focus) {
+  color: var(--text-primary);
+  background-color: var(--ix-tab-background-active);
+}
+
+:host([aria-selected="true"]) {
+  color: var(--color-border-active);
+  background-color: var(--ix-tab-background-active);
+  border-bottom-color: var(--color-border-active);
+}

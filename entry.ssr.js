@@ -20,6 +20,15 @@ import { Settings } from "./components/settings/index.js";
 import { addFluent } from "./l10n/context.js";
 import { runWithContext } from "./symmetric-context/server.js";
 
+// remove custom elements with `static ssr = false`
+// @ts-expect-error
+for (const [name, def] of customElements.__definitions) {
+  if (def?.ctor?.ssr === false) {
+    // @ts-expect-error
+    customElements.__definitions.delete(name);
+  }
+}
+
 /**
  * @param {string} path
  * @param {Rari.BuiltPage} page
