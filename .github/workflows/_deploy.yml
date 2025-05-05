@@ -131,7 +131,7 @@ jobs:
           if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
             # Partial build.
             find $CONTENT_ROOT -maxdepth 4 ! -path "*/en-us/glossary/*" -type f -name 'index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/en-us/index.md' \
+            find $CONTENT_ROOT -path '*/en-us/glossary/index.md' \
               -o -path '*/en-us/learn_web_development/core/css_layout/flexbox/index.md' \
               -o -path '*/en-us/learn_web_development/core/scripting/index.md' \
               -o -path '*/en-us/learn_web_development/core/structuring_content/index.md' \
