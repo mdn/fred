@@ -12,11 +12,11 @@ export class GenericLayout extends ServerComponent {
   render(context) {
     return html`
       <div class="generic-layout">
-        <div class="generic-layout__sidebar">
-          ${GenericSidebar.render(context)}
-        </div>
         <div class="generic-layout__content">
           ${GenericContent.render(context)}
+        </div>
+        <div class="generic-layout__sidebar">
+          ${GenericSidebar.render(context)}
         </div>
         <div class="generic-layout__toc">${GenericToc.render(context)}</div>
       </div>

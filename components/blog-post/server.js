@@ -113,9 +113,6 @@ export class BlogPost extends ServerComponent {
 
     const postContent = html`
       <article class="blog-post__main">
-        <aside class="blog-post__sidebar">
-          ${BlogPostSidebar(context, { toc })} ${SidePlacement(context)}
-        </aside>
         <div class="blog-post__content">
           <header class="blog-post__header">
             ${BlogTitleImageFigure(context, {
@@ -138,6 +135,9 @@ export class BlogPost extends ServerComponent {
             ${PrevNextLinks(context, { blogMeta })}
           </footer>
         </div>
+        <aside class="blog-post__sidebar">
+          ${BlogPostSidebar(context, { toc })} ${SidePlacement(context)}
+        </aside>
       </article>
     `;
 
