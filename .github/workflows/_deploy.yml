@@ -131,11 +131,7 @@ jobs:
           if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
             # Partial build.
             find $CONTENT_ROOT -maxdepth 4 ! -path "*/en-us/glossary/*" -type f -name 'index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/en-us/web/api/window/index.md' \
-              -o -path '*/en-us/web/css/@container/index.md' \
-              -o -path '*/en-us/web/css/color/index.md' \
-              -o -path '*/en-us/web/javascript/reference/global_objects/temporal/index.md' \
-              -o -path '*/en-us/learn_web_development/index.md' \
+            find $CONTENT_ROOT -path '*/en-us/index.md' \
               -o -path '*/en-us/learn_web_development/core/css_layout/flexbox/index.md' \
               -o -path '*/en-us/learn_web_development/core/scripting/index.md' \
               -o -path '*/en-us/learn_web_development/core/structuring_content/index.md' \
@@ -145,13 +141,9 @@ jobs:
               -o -path '*/en-us/learn_web_development/core/styling_basics/getting_started/index.md' \
               -o -path '*/en-us/learn_web_development/core/styling_basics/what_is_css/index.md' \
               -o -path '*/en-us/learn_web_development/extensions/advanced_javascript_objects/index.md' \
-              -o -path '*/en-us/learn_web_development/getting_started/index.md' \
-              -o -path '*/en-us/learn_web_development/howto/index.md' \
               -o -path '*/en-us/learn_web_development/howto/solve_html_problems/use_javascript_within_a_webpage/index.md' \
               -o -path '*/en-us/learn_web_development/howto/solve_html_problems/use_data_attributes/index.md' \
               -o -path '*/en-us/mozilla/add-ons/webextensions/index.md' \
-              -o -path '*/en-us/web/index.md' \
-              -o -path '*/en-us/web/api/index.md' \
               -o -path '*/en-us/web/api/canvas_api/index.md' \
               -o -path '*/en-us/web/api/canvas_api/manipulating_video_using_canvas/index.md' \
               -o -path '*/en-us/web/api/fetch_api/index.md' \
@@ -160,8 +152,9 @@ jobs:
               -o -path '*/en-us/web/api/view_transition_api/index.md' \
               -o -path '*/en-us/web/api/web_animations_api/using_the_web_animations_api/index.md' \
               -o -path '*/en-us/web/api/web_audio_api/using_web_audio_api/index.md' \
-              -o -path '*/en-us/web/accessibility/index.md' \
-              -o -path '*/en-us/web/css/index.md' \
+              -o -path '*/en-us/web/api/window/index.md' \
+              -o -path '*/en-us/web/css/@container/index.md' \
+              -o -path '*/en-us/web/css/color/index.md' \
               -o -path '*/en-us/web/css/css_animations/using_css_animations/index.md' \
               -o -path '*/en-us/web/css/css_backgrounds_and_borders/border-image_generator/index.md' \
               -o -path '*/en-us/web/css/css_backgrounds_and_borders/border-radius_generator/index.md' \
@@ -175,31 +168,19 @@ jobs:
               -o -path '*/en-us/web/css/modules/index.md' \
               -o -path '*/en-us/web/css/properties/index.md' \
               -o -path '*/en-us/web/css/reference/index.md' \
-              -o -path '*/en-us/web/html/index.md' \
-              -o -path '*/en-us/web/html/index.md' \
               -o -path '*/en-us/web/html/attributes/index.md' \
               -o -path '*/en-us/web/html/date_and_time_formats/index.md' \
               -o -path '*/en-us/web/html/element/index.md' \
               -o -path '*/en-us/web/html/global_attributes/index.md' \
               -o -path '*/en-us/web/html/reference/index.md' \
               -o -path '*/en-us/web/html/responsive_images/index.md' \
-              -o -path '*/en-us/web/http/index.md' \
-              -o -path '*/en-us/web/javascript/index.md' \
-              -o -path '*/en-us/web/javascript/index.md' \
               -o -path '*/en-us/web/javascript/guide/inheritance_and_the_prototype_chain/index.md' \
               -o -path '*/en-us/web/javascript/reference/index.md' \
               -o -path '*/en-us/web/javascript/reference/functions/index.md' \
               -o -path '*/en-us/web/javascript/reference/global_objects/index.md' \
+              -o -path '*/en-us/web/javascript/reference/global_objects/temporal/index.md' \
               -o -path '*/en-us/web/javascript/reference/operators/index.md' \
-              -o -path '*/en-us/web/javascript/reference/statements/index.md' \
-              -o -path '*/en-us/web/mathml/index.md' \
-              -o -path '*/en-us/web/privacy/index.md' \
-              -o -path '*/en-us/web/progressive_web_apps/index.md' \
-              -o -path '*/en-us/web/svg/index.md' \
-              -o -path '*/en-us/web/security/index.md' \
-              -o -path '*/en-us/web/webdriver/index.md' \
-              -o -path '*/en-us/web/xml/index.md' \
-              -o -path '*/en-us/webassembly/index.md' >> ${{ github.workspace }}/files.txt
+              -o -path '*/en-us/web/javascript/reference/statements/index.md' >> ${{ github.workspace }}/files.txt
 
             FILE_LIST="--file-list ${{ github.workspace }}/files.txt"
           else
