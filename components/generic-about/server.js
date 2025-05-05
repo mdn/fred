@@ -3,7 +3,7 @@ import { html, nothing } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
-import { PageLayout } from "../page-layout/index.js";
+import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
 
 /**
