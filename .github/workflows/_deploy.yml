@@ -130,77 +130,76 @@ jobs:
 
           if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
             # Partial build.
-            find $CONTENT_ROOT -name 'index.md' -type f -maxdepth 4 >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/window/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/@container/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/color/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/temporal/index.md' >> ${{ github.workspace }}/files.txt
-            # Menu.
-            find $CONTENT_ROOT -path '*/learn_web_development/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/learn_web_development/core/css_layout/flexbox/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/learn_web_development/core/scripting/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/learn_web_development/core/structuring_content/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/learn_web_development/core/structuring_content/basic_html_syntax/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/learn_web_development/core/structuring_content/html_video_and_audio/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/learn_web_development/core/styling_basics/box_model/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/learn_web_development/core/styling_basics/getting_started/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/learn_web_development/core/styling_basics/what_is_css/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/learn_web_development/extensions/advanced_javascript_objects/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/learn_web_development/getting_started/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/learn_web_development/howto/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/learn_web_development/howto/solve_html_problems/use_javascript_within_a_webpage/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/learn_web_development/howto/solve_html_problems/use_data_attributes/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/mozilla/add-ons/webextensions/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/api/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/api/canvas_api/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/api/canvas_api/manipulating_video_using_canvas/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/api/fetch_api/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/api/geolocation_api/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/api/performance/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/api/view_transition_api/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/api/web_animations_api/using_the_web_animations_api/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/api/web_audio_api/using_web_audio_api/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/accessibility/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/css/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/css/css_animations/using_css_animations/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/css/css_backgrounds_and_borders/border-image_generator/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/css/css_backgrounds_and_borders/border-radius_generator/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/css/css_backgrounds_and_borders/box-shadow_generator/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/css/css_colors/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/css/css_colors/color_picker_tool/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/css/css_selectors/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/css/css_syntax/at-rule/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/css/functions/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/css/guides/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/css/modules/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/css/properties/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/css/reference/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/html/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/html/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/html/attributes/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/html/date_and_time_formats/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/html/element/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/html/global_attributes/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/html/reference/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/html/responsive_images/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/http/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/javascript/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/javascript/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/javascript/guide/inheritance_and_the_prototype_chain/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/javascript/reference/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/javascript/reference/functions/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/javascript/reference/global_objects/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/javascript/reference/operators/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/javascript/reference/statements/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/mathml/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/privacy/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/progressive_web_apps/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/svg/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/security/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/webdriver/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/web/xml/index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/webassembly/index.md' >> ${{ github.workspace }}/files.txt
+            find $CONTENT_ROOT -maxdepth 4 -type f -name 'index.md' >> ${{ github.workspace }}/files.txt
+            find $CONTENT_ROOT -path '*/en-us/web/api/window/index.md' \
+              -o -path '*/en-us/web/css/@container/index.md' \
+              -o -path '*/en-us/web/css/color/index.md' \
+              -o -path '*/en-us/web/javascript/reference/global_objects/temporal/index.md' \
+              -o -path '*/en-us/learn_web_development/index.md' \
+              -o -path '*/en-us/learn_web_development/core/css_layout/flexbox/index.md' \
+              -o -path '*/en-us/learn_web_development/core/scripting/index.md' \
+              -o -path '*/en-us/learn_web_development/core/structuring_content/index.md' \
+              -o -path '*/en-us/learn_web_development/core/structuring_content/basic_html_syntax/index.md' \
+              -o -path '*/en-us/learn_web_development/core/structuring_content/html_video_and_audio/index.md' \
+              -o -path '*/en-us/learn_web_development/core/styling_basics/box_model/index.md' \
+              -o -path '*/en-us/learn_web_development/core/styling_basics/getting_started/index.md' \
+              -o -path '*/en-us/learn_web_development/core/styling_basics/what_is_css/index.md' \
+              -o -path '*/en-us/learn_web_development/extensions/advanced_javascript_objects/index.md' \
+              -o -path '*/en-us/learn_web_development/getting_started/index.md' \
+              -o -path '*/en-us/learn_web_development/howto/index.md' \
+              -o -path '*/en-us/learn_web_development/howto/solve_html_problems/use_javascript_within_a_webpage/index.md' \
+              -o -path '*/en-us/learn_web_development/howto/solve_html_problems/use_data_attributes/index.md' \
+              -o -path '*/en-us/mozilla/add-ons/webextensions/index.md' \
+              -o -path '*/en-us/web/index.md' \
+              -o -path '*/en-us/web/api/index.md' \
+              -o -path '*/en-us/web/api/canvas_api/index.md' \
+              -o -path '*/en-us/web/api/canvas_api/manipulating_video_using_canvas/index.md' \
+              -o -path '*/en-us/web/api/fetch_api/index.md' \
+              -o -path '*/en-us/web/api/geolocation_api/index.md' \
+              -o -path '*/en-us/web/api/performance/index.md' \
+              -o -path '*/en-us/web/api/view_transition_api/index.md' \
+              -o -path '*/en-us/web/api/web_animations_api/using_the_web_animations_api/index.md' \
+              -o -path '*/en-us/web/api/web_audio_api/using_web_audio_api/index.md' \
+              -o -path '*/en-us/web/accessibility/index.md' \
+              -o -path '*/en-us/web/css/index.md' \
+              -o -path '*/en-us/web/css/css_animations/using_css_animations/index.md' \
+              -o -path '*/en-us/web/css/css_backgrounds_and_borders/border-image_generator/index.md' \
+              -o -path '*/en-us/web/css/css_backgrounds_and_borders/border-radius_generator/index.md' \
+              -o -path '*/en-us/web/css/css_backgrounds_and_borders/box-shadow_generator/index.md' \
+              -o -path '*/en-us/web/css/css_colors/index.md' \
+              -o -path '*/en-us/web/css/css_colors/color_picker_tool/index.md' \
+              -o -path '*/en-us/web/css/css_selectors/index.md' \
+              -o -path '*/en-us/web/css/css_syntax/at-rule/index.md' \
+              -o -path '*/en-us/web/css/functions/index.md' \
+              -o -path '*/en-us/web/css/guides/index.md' \
+              -o -path '*/en-us/web/css/modules/index.md' \
+              -o -path '*/en-us/web/css/properties/index.md' \
+              -o -path '*/en-us/web/css/reference/index.md' \
+              -o -path '*/en-us/web/html/index.md' \
+              -o -path '*/en-us/web/html/index.md' \
+              -o -path '*/en-us/web/html/attributes/index.md' \
+              -o -path '*/en-us/web/html/date_and_time_formats/index.md' \
+              -o -path '*/en-us/web/html/element/index.md' \
+              -o -path '*/en-us/web/html/global_attributes/index.md' \
+              -o -path '*/en-us/web/html/reference/index.md' \
+              -o -path '*/en-us/web/html/responsive_images/index.md' \
+              -o -path '*/en-us/web/http/index.md' \
+              -o -path '*/en-us/web/javascript/index.md' \
+              -o -path '*/en-us/web/javascript/index.md' \
+              -o -path '*/en-us/web/javascript/guide/inheritance_and_the_prototype_chain/index.md' \
+              -o -path '*/en-us/web/javascript/reference/index.md' \
+              -o -path '*/en-us/web/javascript/reference/functions/index.md' \
+              -o -path '*/en-us/web/javascript/reference/global_objects/index.md' \
+              -o -path '*/en-us/web/javascript/reference/operators/index.md' \
+              -o -path '*/en-us/web/javascript/reference/statements/index.md' \
+              -o -path '*/en-us/web/mathml/index.md' \
+              -o -path '*/en-us/web/privacy/index.md' \
+              -o -path '*/en-us/web/progressive_web_apps/index.md' \
+              -o -path '*/en-us/web/svg/index.md' \
+              -o -path '*/en-us/web/security/index.md' \
+              -o -path '*/en-us/web/webdriver/index.md' \
+              -o -path '*/en-us/web/xml/index.md' \
+              -o -path '*/en-us/webassembly/index.md' >> ${{ github.workspace }}/files.txt
 
             FILE_LIST="--file-list ${{ github.workspace }}/files.txt"
           else
