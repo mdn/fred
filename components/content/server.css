@@ -1,3 +1,5 @@
+@import url("../code-example/common.css");
+
 .content {
   line-height: var(--font-line-content);
 
@@ -47,24 +49,6 @@
     border-radius: 0.25em;
   }
 
-  pre {
-    padding: 1rem;
-
-    overflow: auto;
-
-    background-color: var(--color-background-secondary);
-    border-radius: 0.25em;
-
-    code {
-      padding: 0;
-      background-color: unset;
-    }
-
-    &[class*="interactive-example"] {
-      display: none;
-    }
-  }
-
   table {
     width: 100%;
     border-collapse: collapse;
@@ -79,6 +63,16 @@
       font-weight: normal;
       text-align: left;
       background-color: var(--color-background-secondary);
+    }
+  }
+
+  .code-example,
+  mdn-code-example,
+  mdn-live-sample-result {
+    margin: 1rem 0;
+
+    & + & {
+      margin-top: 1.5rem;
     }
   }
 

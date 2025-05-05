@@ -2,7 +2,7 @@
 @import url("./../../components/visually-hidden/global.css");
 
 /* TODO: remove this import, buttons should use the button component directly, not its styles */
-@import url("./../../components/button/index.css");
+@import url("./../../components/button/server.css");
 
 .scan-result {
   display: grid;

@@ -1,8 +1,8 @@
 import { html } from "lit";
 
-import { GenericContent } from "../generic-content/index.js";
-import { GenericSidebar } from "../generic-sidebar/index.js";
-import { GenericToc } from "../generic-toc/index.js";
+import { GenericContent } from "../generic-content/server.js";
+import { GenericSidebar } from "../generic-sidebar/server.js";
+import { GenericToc } from "../generic-toc/server.js";
 import { ServerComponent } from "../server/index.js";
 
 export class GenericLayout extends ServerComponent {

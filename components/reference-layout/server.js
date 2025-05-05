@@ -1,8 +1,8 @@
 import { html } from "lit";
 
-import { Content } from "../content/index.js";
-import { LeftSidebar } from "../left-sidebar/index.js";
-import { ReferenceToc } from "../reference-toc/index.js";
+import { Content } from "../content/server.js";
+import { LeftSidebar } from "../left-sidebar/server.js";
+import { ReferenceToc } from "../reference-toc/server.js";
 import { ServerComponent } from "../server/index.js";
 
 export class ReferenceLayout extends ServerComponent {

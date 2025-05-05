@@ -1,6 +1,8 @@
 import { LitElement } from "lit";
 import { createRef } from "lit/directives/ref.js";
 
+import { upgradePre } from "../code-example/element.js";
+
 import styles from "./element.css?lit";
 import { InteractiveExampleWithChoices } from "./with-choices.js";
 import { InteractiveExampleWithConsole } from "./with-console.js";
@@ -12,7 +14,6 @@ import { InteractiveExampleWithTabs } from "./with-tabs.js";
  * @import { MDNPlayRunner } from "../play-runner/element.js";
  */
 
-const LANGUAGE_CLASSES = new Set(["html", "js", "css", "wat"]);
 // const GLEAN_EVENT_TYPES = ["focus", "copy", "cut", "paste", "click"];
 
 // eslint-disable-next-line fred/custom-element-name
@@ -46,28 +47,29 @@ export class InteractiveExampleBase extends LitElement {
   }
 
   _initialCode() {
-    const exampleNodes = this.closest("section")?.querySelectorAll(
+    /** @type {Record<string, string>} */
+    const initialCode = {};
+    for (const pre of this.closest("section")?.querySelectorAll(
       ".code-example pre.interactive-example",
-    );
-    // eslint-disable-next-line unicorn/no-array-reduce
-    const code = [...(exampleNodes || [])].reduce((acc, pre) => {
-      const language = [...pre.classList].find((c) => LANGUAGE_CLASSES.has(c));
-      return language && pre.textContent
-        ? {
-            ...acc,
-            [language]: acc[language]
-              ? `${acc[language]}\n${pre.textContent}`
-              : pre.textContent,
-          }
-        : acc;
-    }, /** @type {{[language: string]: string}} */ ({}));
-    const choiceNodes = this.closest("section")?.querySelectorAll(
-      ".code-example pre.interactive-example-choice",
-    );
-    this._choices = [...(choiceNodes || [])].map((pre) =>
-      pre.textContent?.trim(),
-    );
-    this._languages = Object.keys(code);
+    ) ?? []) {
+      const example = upgradePre(pre);
+      if (example) {
+        const { language, code } = example;
+        initialCode[language] = initialCode[language]
+          ? `${initialCode[language]}\n${code}`
+          : code;
+      }
+    }
+
+    this._choices = [
+      ...(this.closest("section")?.querySelectorAll(
+        ".code-example pre.interactive-example-choice",
+      ) || []),
+    ]
+      .map((pre) => upgradePre(pre)?.code.trim())
+      .filter((x) => x !== undefined);
+
+    this._languages = Object.keys(initialCode);
     this._template =
       this._choices.length > 0
         ? "choices"
@@ -75,7 +77,8 @@ export class InteractiveExampleBase extends LitElement {
             (this._languages.includes("js") && this._languages.includes("wat"))
           ? "console"
           : "tabbed";
-    return code;
+
+    return initialCode;
   }
 
   /** @param {string} lang */

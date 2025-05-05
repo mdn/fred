@@ -15,6 +15,7 @@ declare global {
     "mdn-ix-tab-panel": import("../components/ix-tab-panel/element.js").MDNIXTabPanel;
     "mdn-ix-tab-wrapper": import("../components/ix-tab-wrapper/element.js").MDNIXTabWrapper;
     "mdn-language-switcher": import("../components/language-switcher/element.js").MDNLanguageSwitcher;
+    "mdn-live-sample-result": import("../components/live-sample-result/element.js").MDNLiveSampleResult;
     "mdn-observatory-comparison-table": import("../components/observatory-comparison-table/element.js").MDNObservatoryComparisonTable;
     "mdn-observatory-form": import("../components/observatory-form/element.js").MDNObservatoryForm;
     "mdn-observatory-human-duration": import("../components/observatory-human-duration/element.js").MDNObservatoryHumanDuration;

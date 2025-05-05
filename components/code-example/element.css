@@ -1,1 +1,7 @@
 @import url("prismjs/themes/prism.css");
+@import url("./common.css");
+
+mdn-copy-button {
+  margin-right: -0.5rem;
+  margin-left: auto;
+}

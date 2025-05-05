@@ -5,3 +5,4 @@ import "@lit-labs/ssr-client/lit-element-hydrate-support.js";
 import "./hooks/load-elements.js";
 import "./components/navigation/hook.js";
 import "./hooks/code-examples.js";
+import "./hooks/live-samples.js";

@@ -9,4 +9,9 @@ namespace Fred {
     locale: string;
     l10n: import("./fluent-2").L10nFunction;
   };
+
+  type CompilationStats = {
+    client: import("@rspack/core").StatsCompilation;
+    legacy: import("@rspack/core").StatsCompilation;
+  };
 }

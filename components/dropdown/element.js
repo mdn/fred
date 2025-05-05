@@ -21,11 +21,13 @@ export class MDNDropdown extends LitElement {
 
   static properties = {
     open: { type: Boolean },
+    loaded: { type: Boolean, reflect: true },
   };
 
   constructor() {
     super();
     this.open = false;
+    this.loaded = false;
   }
 
   get _buttonSlotElements() {
@@ -72,7 +74,6 @@ export class MDNDropdown extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.dataset.loaded = "true";
     this._globalClick = this._globalClick.bind(this);
     document.addEventListener("click", this._globalClick);
   }
@@ -80,12 +81,16 @@ export class MDNDropdown extends LitElement {
   render() {
     return html`
       <slot name="button" @click=${this._toggleDropDown}></slot>
-      <slot name="dropdown" ?hidden=${!this.open}></slot>
+      <slot name="dropdown" ?hidden=${!this.open && this.loaded}></slot>
     `;
   }
 
   updated() {
     this._setAriaAttributes();
+  }
+
+  firstUpdated() {
+    this.loaded = true;
   }
 
   disconnectedCallback() {

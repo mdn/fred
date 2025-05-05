@@ -6,7 +6,7 @@ import mdnSvg from "../observatory/assets/mdn.svg?lit";
 import scanningSvg from "../observatory/assets/scanning.svg?lit";
 import securitySvg from "../observatory/assets/security.svg?lit";
 
-import { PageLayout } from "../page-layout/index.js";
+import { PageLayout } from "../page-layout/server.js";
 
 import { ServerComponent } from "../server/index.js";
 

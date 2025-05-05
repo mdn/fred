@@ -1,6 +1,8 @@
 import { asyncLocalStorage } from "./async-local-storage.js";
 
 export class ServerComponent {
+  static legacy = false;
+
   /**
    * @template {typeof ServerComponent} T
    * @this {T}
@@ -8,7 +10,11 @@ export class ServerComponent {
    * @returns {ReturnType<InstanceType<T>["render"]>}
    */
   static render(...args) {
-    asyncLocalStorage.getStore()?.componentsUsed?.add(this.name);
+    const { componentsUsed } = asyncLocalStorage.getStore() || {};
+    componentsUsed?.add(this.name);
+    if (this.legacy) {
+      componentsUsed?.add("legacy");
+    }
     return new this().render(...args);
   }
 

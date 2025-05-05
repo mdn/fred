@@ -1,9 +1,9 @@
 import { html } from "lit";
 
-import { Banner } from "../banner/index.js";
-import { Breadcrumbs } from "../breadcrumbs/index.js";
-import { Footer } from "../footer/index.js";
-import { Navigation } from "../navigation/index.js";
+import { Banner } from "../banner/server.js";
+import { Breadcrumbs } from "../breadcrumbs/server.js";
+import { Footer } from "../footer/server.js";
+import { Navigation } from "../navigation/server.js";
 import { ServerComponent } from "../server/index.js";
 
 export class PageLayout extends ServerComponent {

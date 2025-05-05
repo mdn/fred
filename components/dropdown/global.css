@@ -1,7 +1,7 @@
 mdn-dropdown {
   display: contents;
 
-  &:not([data-loaded="true"]) {
+  &:not([loaded], :focus-within) {
     [slot="dropdown"] {
       display: none;
     }
