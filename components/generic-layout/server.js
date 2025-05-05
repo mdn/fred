@@ -15,10 +15,10 @@ export class GenericLayout extends ServerComponent {
         <div class="generic-layout__content">
           ${GenericContent.render(context)}
         </div>
-        <div class="generic-layout__sidebar">
+        <aside class="generic-layout__sidebar">
           ${GenericSidebar.render(context)}
-        </div>
-        <div class="generic-layout__toc">${GenericToc.render(context)}</div>
+        </aside>
+        <aside class="generic-layout__toc">${GenericToc.render(context)}</aside>
       </div>
     `;
   }
