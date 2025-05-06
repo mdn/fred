@@ -44,88 +44,57 @@ export class GenericAbout extends ServerComponent {
       // Render Header Section (First section)
       if (i === 0) {
         return section.value.content
-          ? html`
-              <header class="about-header">
-                <section class="about-header__section">
-                  ${unsafeHTML(section.value.content)}
-                </section>
-              </header>
-            `
+          ? html`<header>
+              <section>${unsafeHTML(section.value.content)}</section>
+            </header>`
           : nothing;
       } else if (section.H3s) {
         const { id, title, content } = section.value;
         const h3s = section.H3s || [];
         // Static rendering defaults to the first tab being active
-        const defaultActiveTab = 0;
+        // const defaultActiveTab = 0;
 
         return id && content
-          ? html`
-              <section aria-labelledby=${id} data-interactive-tabs>
-                <h2 id=${id}>${title}</h2>
-                <div class="section-content">${unsafeHTML(content)}</div>
-                ${h3s.length > 0
-                  ? html`
-                      <div class="tabs">
-                        <div class="tablist-wrapper">
-                          <div class="tablist" role="tablist">
-                            ${h3s.map(({ value: h3Value }, tabIndex) =>
-                              h3Value.id && h3Value.content
-                                ? html`
-                                    <a
-                                      key=${h3Value.id}
-                                      id=${`${h3Value.id}-tab`}
-                                      href=${`#${h3Value.id}`}
-                                      class=${tabIndex === defaultActiveTab
-                                        ? "active"
-                                        : ""}
-                                      role="tab"
-                                      aria-selected=${tabIndex ===
-                                      defaultActiveTab
-                                        ? "true"
-                                        : "false"}
-                                      aria-controls=${`${h3Value.id}-panel`}
-                                      data-tab-index=${tabIndex}
-                                    >
-                                      ${h3Value.title}
-                                    </a>
-                                  `
-                                : nothing,
-                            )}
-                          </div>
-                        </div>
-                        ${h3s.map(({ value: h3Value }, tabIndex) =>
-                          h3Value.id && h3Value.content
-                            ? html`
-                                <div
-                                  key=${h3Value.id}
-                                  id=${`${h3Value.id}-panel`}
-                                  class="tabpanel ${tabIndex ===
-                                  defaultActiveTab
-                                    ? "active"
-                                    : ""}"
-                                  role="tabpanel"
-                                  aria-labelledby=${`${h3Value.id}-tab`}
-                                >
-                                  ${unsafeHTML(h3Value.content)}
-                                </div>
-                              `
-                            : nothing,
-                        )}
-                      </div>
-                    `
-                  : nothing}
-              </section>
-            `
+          ? html`<section aria-labelledby=${id} data-interactive-tabs>
+              <h2 id=${id}>${title}</h2>
+              <div class="section-content">${unsafeHTML(content)}</div>
+              ${h3s.length > 0
+                ? html`
+                    <mdn-about-tabs>
+                      ${h3s.map(({ value: h3Value }, _idx) =>
+                        h3Value.id && h3Value.content
+                          ? html`
+                              <a
+                                slot="tab"
+                                href="#${h3Value.id}"
+                                data-panel-id="${h3Value.id}-panel"
+                              >
+                                ${h3Value.title}
+                              </a>
+                            `
+                          : nothing,
+                      )}
+                      ${h3s.map(({ value: h3Value }, _idx) =>
+                        h3Value.id && h3Value.content
+                          ? html`
+                              <div slot="panel" id="${h3Value.id}-panel">
+                                ${unsafeHTML(h3Value.content)}
+                              </div>
+                            `
+                          : nothing,
+                      )}
+                    </mdn-about-tabs>
+                  `
+                : nothing}
+            </section>`
           : nothing;
       } else {
         // Render other sections (like Prose)
         // Basic rendering for other sections, assuming they have content
         return section.value.content
-          ? html`
-              <section id=${ifDefined(section.value.id ?? undefined)}>
-                ${unsafeHTML(section.value.content)}
-              </section>
-            `
+          ? html`<section id=${ifDefined(section.value.id ?? undefined)}>
+              ${unsafeHTML(section.value.content)}
+            </section>`
           : nothing;
       }
     });
@@ -136,3 +105,47 @@ export class GenericAbout extends ServerComponent {
     return PageLayout.render(context, h);
   }
 }
+
+// ? html`<div class="tabs">
+//     <div class="tablist-wrapper">
+//       <div class="tablist" role="tablist">
+//         ${h3s.map(({ value: h3Value }, tabIndex) =>
+//           h3Value.id && h3Value.content
+//             ? html`
+//                 <a
+//                   key=${h3Value.id}
+//                   id=${`${h3Value.id}-tab`}
+//                   href=${`#${h3Value.id}`}
+//                   class=${tabIndex === defaultActiveTab
+//                     ? "active"
+//                     : ""}
+//                   role="tab"
+//                   aria-selected=${tabIndex === defaultActiveTab
+//                     ? "true"
+//                     : "false"}
+//                   aria-controls=${`${h3Value.id}-panel`}
+//                   data-tab-index=${tabIndex}
+//                 >
+//                   ${h3Value.title}
+//                 </a>
+//               `
+//             : nothing,
+//         )}
+//       </div>
+//     </div>
+//     ${h3s.map(({ value: h3Value }, tabIndex) =>
+//       h3Value.id && h3Value.content
+//         ? html`<div
+//             key=${h3Value.id}
+//             id=${`${h3Value.id}-panel`}
+//             class="tabpanel ${tabIndex === defaultActiveTab
+//               ? "active"
+//               : ""}"
+//             role="tabpanel"
+//             aria-labelledby=${`${h3Value.id}-tab`}
+//           >
+//             ${unsafeHTML(h3Value.content)}
+//           </div> `
+//         : nothing,
+//     )}
+//   </div> `

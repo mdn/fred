@@ -2,6 +2,7 @@
 
 declare global {
   interface HTMLElementTagNameMap {
+    "mdn-about-tabs": import("../components/about-tabs/element.js").MDNAboutTabs;
     "mdn-button": import("../components/button/element.js").MDNButton;
     "mdn-code-example": import("../components/code-example/element.js").MDNCodeExample;
     "mdn-color-theme": import("../components/color-theme/element.js").MDNColorTheme;
