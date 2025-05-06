@@ -29,7 +29,7 @@ function BlogTitleImageFigure(_context, { image, width, height }) {
  * @param {Rari.TocEntry[] | undefined} params.toc
  * @returns {Lit.TemplateResult | nothing}
  */
-function BlogPostSidebar(context, { toc }) {
+function BlogPostToc(context, { toc }) {
   if (!toc || toc.length === 0) {
     return nothing;
   }
@@ -113,6 +113,9 @@ export class BlogPost extends ServerComponent {
 
     const postContent = html`
       <article class="blog-post__main">
+        <aside class="blog-post__sidebar">
+          ${BlogPostToc(context, { toc })} ${SidePlacement(context)}
+        </aside>
         <div class="blog-post__content">
           <header class="blog-post__header">
             ${BlogTitleImageFigure(context, {
@@ -135,9 +138,6 @@ export class BlogPost extends ServerComponent {
             ${PrevNextLinks(context, { blogMeta })}
           </footer>
         </div>
-        <aside class="blog-post__sidebar">
-          ${BlogPostSidebar(context, { toc })} ${SidePlacement(context)}
-        </aside>
       </article>
     `;
 

@@ -12,12 +12,12 @@ export class ReferenceLayout extends ServerComponent {
   render(context) {
     return html`
       <div class="reference-layout">
+        <aside class="reference-layout__toc">
+          ${ReferenceToc.render(context)}
+        </aside>
         <div class="reference-layout__content">${Content.render(context)}</div>
         <aside class="reference-layout__sidebar">
           ${LeftSidebar.render(context)}
-        </aside>
-        <aside class="reference-layout__toc">
-          ${ReferenceToc.render(context)}
         </aside>
       </div>
     `;
