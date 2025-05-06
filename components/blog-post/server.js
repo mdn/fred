@@ -34,7 +34,9 @@ function BlogPostToc(context, { toc }) {
     return nothing;
   }
 
-  return html` <nav class="blog-toc">${ReferenceToc.render(context)}</nav> `;
+  return html`
+    <div class="blog-post__toc">${ReferenceToc.render(context)}</div>
+  `;
 }
 
 /**
