@@ -45,3 +45,10 @@ body {
 
   background-color: var(--color-background-primary);
 }
+
+/* TopBar */
+:root {
+  --top-nav-height: 4.125rem;
+  --breadcrumbs-height: 2rem;
+  --top-bar-height: calc(var(--top-nav-height) + var(--breadcrumbs-height));
+}

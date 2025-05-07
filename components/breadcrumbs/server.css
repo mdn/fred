@@ -9,6 +9,8 @@
   align-items: center;
   justify-content: end;
 
+  height: var(--breadcrumbs-height);
+
   padding-block: 0.2rem;
   padding-inline: var(--breadcrumbs-side-padding);
 

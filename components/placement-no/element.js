@@ -1,12 +1,13 @@
 import { Task } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
 
+import { L10nMixin } from "../../l10n/mixin.js";
 import { globalPlacementContext } from "../global/placements.js";
 import { globalUser } from "../global/user.js";
 
-import styles from "./index.css?lit";
+import styles from "./element.css?lit";
 
-class MDNPlacementNo extends LitElement {
+class MDNPlacementNo extends L10nMixin(LitElement) {
   static styles = styles;
 
   _dataTask = new Task(this, {
@@ -45,7 +46,7 @@ class MDNPlacementNo extends LitElement {
                   ? "/en-US/plus/settings?ref=nope"
                   : "/en-US/plus?ref=nope"}
               >
-                Don't want to see ads?
+                ${this.l10n("placement_no")}
               </a>`
             : nothing;
         },

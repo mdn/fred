@@ -13,8 +13,10 @@ export class ReferenceLayout extends ServerComponent {
     return html`
       <div class="reference-layout">
         <aside class="reference-layout__toc">
-          ${ReferenceToc.render(context)}
-          <mdn-placement-sidebar></mdn-placement-sidebar>
+          <div class="reference-layout__toc-inner">
+            ${ReferenceToc.render(context)}
+            <mdn-placement-sidebar></mdn-placement-sidebar>
+          </div>
         </aside>
         <div class="reference-layout__content">${Content.render(context)}</div>
         <aside class="reference-layout__sidebar">

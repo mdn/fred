@@ -83,3 +83,6 @@ sidebar-filter-matches = { $matches ->
   [1] { $matches } match
    *[other] { $matches } matches
 }
+
+placement_note = Ad
+placement_no = Don't want to see ads?

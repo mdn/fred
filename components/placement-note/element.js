@@ -1,8 +1,10 @@
 import { LitElement, html } from "lit";
 
+import { L10nMixin } from "../../l10n/mixin.js";
+
 import styles from "./element.css?lit";
 
-class MDNPlacementNote extends LitElement {
+class MDNPlacementNote extends L10nMixin(LitElement) {
   static styles = styles;
 
   render() {
@@ -12,7 +14,7 @@ class MDNPlacementNote extends LitElement {
       data-glean="pong: pong-&gt;about"
       target="_blank"
       rel="noreferrer"
-      >Ad</a
+      >${this.l10n("placement_note")}</a
     >`;
   }
 }
