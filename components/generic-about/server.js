@@ -1,8 +1,8 @@
 import { html, nothing } from "lit";
 
-import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
+import { Section } from "../content/server.js";
 import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
 
@@ -17,6 +17,8 @@ export class GenericAbout extends ServerComponent {
    */
   render(context) {
     const doc = context.hyData;
+
+    console.log("GenericAbout", doc.sections);
 
     // Process sections to group H3s under their preceding H2
 
@@ -91,10 +93,8 @@ export class GenericAbout extends ServerComponent {
       } else {
         // Render other sections (like Prose)
         // Basic rendering for other sections, assuming they have content
-        return section.value.content
-          ? html`<section id=${ifDefined(section.value.id ?? undefined)}>
-              ${unsafeHTML(section.value.content)}
-            </section>`
+        return section.type === "prose"
+          ? Section(context, { type: section.type, value: section.value })
           : nothing;
       }
     });
