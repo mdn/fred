@@ -11,6 +11,7 @@ export class HomePage extends ServerComponent {
     return PageLayout.render(
       context,
       html`
+        <mdn-placement-hp-main></mdn-placement-hp-main>
         <section>
           <h2>${context.l10n`Featured articles`}</h2>
           <ul>

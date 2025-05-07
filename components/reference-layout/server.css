@@ -8,7 +8,7 @@
 .reference-layout {
   --reference-layout-padding-top: 0.5rem;
   --reference-layout-top-bar-height: calc(
-    var(--top-bar-height) + var(--reference-layout-padding-top)
+    var(--sticky-header-height) + var(--reference-layout-padding-top)
   );
 
   display: grid;

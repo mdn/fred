@@ -21,6 +21,8 @@ declare global {
     "mdn-observatory-human-duration": import("../components/observatory-human-duration/element.js").MDNObservatoryHumanDuration;
     "mdn-observatory-rescan-button": import("../components/observatory-rescan-button/element.js").MDNObservatoryRescanButton;
     "mdn-observatory-results": import("../components/observatory-results/element.js").MDNObservatoryResults;
+    "mdn-placement-bottom": import("../components/placement-bottom/element.js").MDNPlacementBottom;
+    "mdn-placement-hp-main": import("../components/placement-hp-main/element.js").MDNPlacementHpMain;
     "mdn-placement-no": import("../components/placement-no/element.js").MDNPlacementNo;
     "mdn-placement-note": import("../components/placement-note/element.js").MDNPlacementNote;
     "mdn-placement-sidebar": import("../components/placement-sidebar/element.js").MDNPlacementSidebar;

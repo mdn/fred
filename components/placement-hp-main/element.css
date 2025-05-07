@@ -1,0 +1,72 @@
+.hp-main-placement {
+  --hp-main-background-light: var(--color-background-primary);
+  --hp-main-color-light: var(--color-text-primary);
+
+  --hp-main-background-dark: var(--color-background-primary);
+  --hp-main-color-dark: var(--color-text-primary);
+
+  --hp-main-background: light-dark(
+    var(--hp-main-background-light),
+    var(--hp-main-background-dark)
+  );
+  --hp-main-color: light-dark(
+    var(--hp-main-color-light),
+    var(--hp-main-color-dark)
+  );
+
+  padding-inline: var(--navigation-side-padding);
+  background-color: var(--hp-main-background);
+
+  @media (width > 1440px) {
+    padding-inline: calc(
+      (100% - 1440px + (var(--navigation-side-padding) * 2)) / 2
+    );
+  }
+
+  .placement-container {
+    display: grid;
+
+    grid-template-areas:
+      "nope pong note"
+      "nope pong no";
+    grid-template-columns: auto auto auto;
+
+    column-gap: 3rem;
+
+    padding: 0 1rem;
+    margin: 0 auto;
+
+    @media (width <= 1440px) {
+      grid-template-areas:
+        "pong note"
+        "pong no";
+      grid-template-rows: auto 2rem;
+      grid-template-columns: auto max-content;
+    }
+
+    @media (width <= 767px) {
+      grid-template-areas:
+        "pong"
+        "note";
+      grid-template-rows: auto 2rem;
+      grid-template-columns: auto;
+    }
+
+    .placement-link {
+      display: flex;
+      grid-area: pong;
+      justify-content: center;
+
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    mdn-placement-note {
+      grid-area: note;
+      margin: 0 0 auto auto;
+    }
+  }
+}

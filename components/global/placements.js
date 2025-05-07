@@ -4,40 +4,47 @@
 const PLACEMENT_MAP = {
   side: {
     typ: "side",
+    renderer:
+      /Doc|BlogPost|CurriculumDefault|GenericDoc|SpaSearch|SpaNotFound|SpaPlay|SpaObservatoryAnalyze/gi,
     pattern:
       /^\/[^/]+\/(play|docs\/|blog\/|observatory\/?|curriculum\/[^$]|search$)/i,
   },
   top: {
     typ: "top-banner",
+    renderer: /^(?!Homepage$).+/gi,
     pattern: /^\/[^/]+\/(?!$|_homepage$).*/i,
   },
   hpTop: {
     typ: "top-banner",
+    renderer: /Homepag/gi,
     pattern: /^\/[^/]+\/($|_homepage$)/i,
   },
   hpMain: {
     typ: "hp-main",
+    renderer: /Homepage/gi,
     pattern: /^\/[^/]+\/($|_homepage$)/i,
   },
   hpFooter: {
     typ: "hp-footer",
+    renderer: /Homepage/gi,
     pattern: /^\/[^/]+\/($|_homepage$)/i,
   },
   bottom: {
     typ: "bottom-banner",
+    renderer: /^(?!Homepage$).+/gi,
     pattern: /^\/[^/]+\/docs\//i,
   },
 };
 
 /**
  *
- * @param {string} pathname
+ * @param {string} renderer
  * @returns {string[]}
  */
-function placementTypes(pathname) {
+function placementTypes(renderer) {
   return (
     Object.entries(PLACEMENT_MAP)
-      .map(([k, { pattern: re }]) => (re.test(pathname) ? k : null))
+      .map(([k, { renderer: re }]) => (re.test(renderer) ? k : null))
       .filter((k) => k !== null) || []
   );
 }
@@ -67,7 +74,9 @@ async function fetchPlacementData() {
     },
     body: JSON.stringify({
       keywords: [],
-      pongs: placementTypes(globalThis.location.pathname),
+      pongs: placementTypes(
+        globalThis.document.documentElement.dataset.renderer || "Unknown",
+      ),
     }),
   });
   if (!response.ok) {

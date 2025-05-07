@@ -7,7 +7,10 @@ namespace Placements {
     | "hpFooter"
     | "bottom";
 
-  type PlacementMap = Record<PlacementType, { typ: string; pattern: RegExp }>;
+  type PlacementMap = Record<
+    PlacementType,
+    { typ: string; pattern: RegExp; renderer: RegExp }
+  >;
 
   interface PlacementContextData
     extends Partial<Record<PlacementType, PlacementData>> {
