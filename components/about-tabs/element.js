@@ -71,10 +71,18 @@ export class MDNAboutTabs extends LitElement {
       tabEl.setAttribute("tabindex", i === this.active_index ? "0" : "-1");
       tabEl.classList.toggle("active", i === this.active_index);
 
-      // detach any old listener
-      tabEl.addEventListener("click", () => {
+      const handleClick = (/** @type {Event} */ e) => {
+        e.preventDefault();
+        if (tabEl.dataset.panelId) {
+          globalThis.location.hash = tabEl.dataset.panelId;
+        }
         this.active_index = i;
-      });
+      };
+      // @ts-expect-error
+      tabEl.removeEventListener("click", tabEl.__handleClick);
+      tabEl.addEventListener("click", handleClick);
+      // @ts-expect-error
+      tabEl.__handleClick = handleClick;
     }
 
     for (const [i, panelEl] of panels.entries()) {
