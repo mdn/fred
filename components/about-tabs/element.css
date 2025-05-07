@@ -2,29 +2,45 @@
   display: block;
 }
 
+.tablist-wrapper {
+  position: sticky;
+  top: var(--top-nav-height);
+  z-index: 2;
+
+  padding: 0 var(--center-padding);
+  margin: 0 calc(var(--center-padding) * -1);
+  margin-bottom: 2rem;
+
+  background: var(--about-bg-secondary);
+}
+
 .tablist {
   display: flex;
-  border-bottom: 1px solid #cccccc;
+
+  gap: 3rem;
+
+  overflow-x: auto;
+
+  border-bottom: 1px solid var(--about-tablist-border);
 }
 
 ::slotted([slot="tab"]) {
-  padding: 0.5em 1em;
+  flex-shrink: 0;
 
-  color: inherit;
+  font-weight: normal;
+
+  color: var(--about-tablist-color);
 
   text-decoration: none;
-
-  cursor: pointer;
 }
 
 ::slotted([slot="tab"].active) {
-  font-weight: bold;
-  border-bottom: 2px solid #007acc;
+  color: var(--about-tablist-active-color);
+  border-bottom: 2px solid var(--about-tablist-active-border);
 }
 
-::slotted([slot="panel"]) {
-  display: none;
-  padding: 1em 0;
+::slotted([slot="panel"]:not(.active)) {
+  display: none !important;
 }
 
 ::slotted([slot="panel"].active) {

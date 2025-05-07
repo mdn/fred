@@ -19,12 +19,28 @@ export class MDNAboutTabs extends LitElement {
     if (this.shadowRoot === null) {
       return;
     }
-    const el = this.shadowRoot.querySelector("slot[name='tab']");
-    if (el === null) {
+    const tabSlot = this.shadowRoot.querySelector("slot[name='tab']");
+    if (tabSlot === null) {
       return;
     }
-    el.addEventListener("slotchange", () => this._wireSlots());
-    this._wireSlots();
+
+    // Check for URL hash and set active_index accordingly
+    const hash = globalThis.location.hash.slice(1);
+    if (hash) {
+      // @ts-expect-error
+      const tabs = tabSlot.assignedElements({ flatten: true });
+      if (tabs && tabs.length > 0) {
+        for (const [i, tabEl] of tabs.entries()) {
+          if (tabEl instanceof HTMLElement && tabEl.dataset.panelId === hash) {
+            this.active_index = i;
+            break;
+          }
+        }
+      }
+    }
+
+    tabSlot.addEventListener("slotchange", () => this._wireSlots());
+    this._wireSlots(); // Initial wiring
   }
 
   _wireSlots() {
@@ -51,40 +67,38 @@ export class MDNAboutTabs extends LitElement {
     for (const [i, tabEl] of tabs.entries()) {
       // ensure ARIA roles & attributes
       tabEl.setAttribute("role", "tab");
-      tabEl.setAttribute("aria-selected", (i === this.activeIndex).toString());
-      tabEl.setAttribute("tabindex", i === this.activeIndex ? "0" : "-1");
-      tabEl.classList.toggle("active", i === this.activeIndex);
+      tabEl.setAttribute("aria-selected", (i === this.active_index).toString());
+      tabEl.setAttribute("tabindex", i === this.active_index ? "0" : "-1");
+      tabEl.classList.toggle("active", i === this.active_index);
 
       // detach any old listener
       tabEl.addEventListener("click", () => {
-        this.activeIndex = i;
+        this.active_index = i;
       });
     }
 
     for (const [i, panelEl] of panels.entries()) {
       panelEl.setAttribute("role", "tabpanel");
-      panelEl.setAttribute("aria-hidden", (i !== this.activeIndex).toString());
-      panelEl.classList.toggle("active", i === this.activeIndex);
+      panelEl.setAttribute("aria-hidden", (i !== this.active_index).toString());
+      panelEl.classList.toggle("active", i === this.active_index);
     }
   }
 
   /** @param {Map<string | number | symbol, unknown>} changed */
   updated(changed) {
-    if (changed.has("activeIndex")) {
+    if (changed.has("active_index")) {
       this._wireSlots();
     }
   }
 
   render() {
     return html`
-      <div class="tabs">
-        <div class="tablist-wrapper">
-          <div class="tablist" role="tablist">
-            <slot name="tab"></slot>
-          </div>
+      <div class="tablist-wrapper">
+        <div class="tablist">
+          <slot name="tab"></slot>
         </div>
-        <slot name="panel"></slot>
       </div>
+      <slot name="panel"></slot>
     `;
   }
 }

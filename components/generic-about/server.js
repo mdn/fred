@@ -67,7 +67,7 @@ export class GenericAbout extends ServerComponent {
                               <a
                                 slot="tab"
                                 href="#${h3Value.id}"
-                                data-panel-id="${h3Value.id}-panel"
+                                data-panel-id=${h3Value.id}
                               >
                                 ${h3Value.title}
                               </a>
@@ -77,7 +77,7 @@ export class GenericAbout extends ServerComponent {
                       ${h3s.map(({ value: h3Value }, _idx) =>
                         h3Value.id && h3Value.content
                           ? html`
-                              <div slot="panel" id="${h3Value.id}-panel">
+                              <div slot="panel" id=${h3Value.id}>
                                 ${unsafeHTML(h3Value.content)}
                               </div>
                             `
