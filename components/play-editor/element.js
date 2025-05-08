@@ -59,6 +59,7 @@ export class MDNPlayEditor extends LitElement {
       });
       this._editor.setState(state);
     }
+    this.dispatchEvent(new Event("update", { bubbles: true, composed: true }));
   }
 
   get value() {
@@ -69,12 +70,6 @@ export class MDNPlayEditor extends LitElement {
     this._editor?.focus();
   }
 
-  /**
-   * @param {string} type
-   */
-  _dispatch(type) {
-    this.dispatchEvent(new Event(type, { bubbles: true, composed: true }));
-  }
   _extensions() {
     const language = (() => {
       switch (this.language) {
@@ -114,7 +109,12 @@ export class MDNPlayEditor extends LitElement {
       ...(this.theme.value === "dark" ? [oneDark] : []),
       ...language,
       EditorView.focusChangeEffect.of((_, focusing) => {
-        this._dispatch(focusing ? "focus" : "blur");
+        this.dispatchEvent(
+          new Event(focusing ? "focus" : "blur", {
+            bubbles: true,
+            composed: true,
+          }),
+        );
         return null;
       }),
       EditorView.updateListener.of((update) => {
@@ -124,7 +124,9 @@ export class MDNPlayEditor extends LitElement {
           }
           this._updateTimer = globalThis?.setTimeout(() => {
             this._updateTimer = -1;
-            this._dispatch("update");
+            this.dispatchEvent(
+              new Event("update", { bubbles: true, composed: true }),
+            );
           }, this.delay);
         }
       }),
@@ -171,7 +173,6 @@ export class MDNPlayEditor extends LitElement {
       });
       if (this.value === unformatted && unformatted !== formatted) {
         this.value = formatted;
-        this._dispatch("update");
       }
     }
   }

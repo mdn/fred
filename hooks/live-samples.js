@@ -2,7 +2,7 @@ for (const iframe of document.querySelectorAll("iframe[data-live-id]")) {
   if (iframe instanceof HTMLIFrameElement) {
     const { liveId, livePath } = iframe.dataset;
     if (liveId) {
-      /** @type {import("../components/playground/types.js").EditorContent} */
+      /** @type {import("../components/playground/types.js").PlaygroundStateParam} */
       const playCode = {
         css: "",
         html: "",

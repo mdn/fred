@@ -25,6 +25,7 @@ declare global {
     "mdn-play-controller": import("../components/play-controller/element.js").MDNPlayController;
     "mdn-play-editor": import("../components/play-editor/element.js").MDNPlayEditor;
     "mdn-play-runner": import("../components/play-runner/element.js").MDNPlayRunner;
+    "mdn-playground": import("../components/playground/element.js").MDNPlayground;
     "mdn-progress-bar": import("../components/progress-bar/element.js").MDNProgressBar;
     "mdn-search-modal": import("../components/search-modal/element.js").MDNSearchModal;
     "mdn-sidebar-filter": import("../components/sidebar-filter/element.js").MDNSidebarFilter;

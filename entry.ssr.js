@@ -14,6 +14,7 @@ import { ObservatoryLanding } from "./components/observatory-landing/server.js";
 import { ObservatoryResults } from "./components/observatory-results/server.js";
 import { OuterLayout } from "./components/outer-layout/server.js";
 import { PageLayout } from "./components/page-layout/server.js";
+import { Playground } from "./components/playground/server.js";
 import { Search } from "./components/search/server.js";
 import { asyncLocalStorage } from "./components/server/async-local-storage.js";
 import { Settings } from "./components/settings/server.js";
@@ -77,7 +78,7 @@ export async function render(path, page, compilationStats) {
           case "SpaObservatoryLanding":
             return ObservatoryLanding.render(context);
           case "SpaPlay":
-            return PageLayout.render(context, "TODO: Playground");
+            return Playground.render(context);
           case "SpaPlusAiHelp":
             return PageLayout.render(context, "TODO: AI Help");
           case "SpaPlusCollections":
