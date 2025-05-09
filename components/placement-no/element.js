@@ -2,10 +2,15 @@ import { Task } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
-import { globalPlacementContext } from "../global/placements.js";
-import { globalUser } from "../global/user.js";
+import { globalPlacementContext } from "../placement/context.js";
+import { globalUser } from "../user/context.js";
 
 import styles from "./element.css?lit";
+
+/**
+ * @import * as Placements from "../placement/types.js";
+ * @import * as User from "../user/types.js";
+ */
 
 class MDNPlacementNo extends L10nMixin(LitElement) {
   static styles = styles;

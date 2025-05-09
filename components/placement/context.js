@@ -1,4 +1,8 @@
 /**
+ * @import * as Placements from "../placement/types.js";
+ */
+
+/**
  * @type {Placements.PlacementMap}
  */
 const PLACEMENT_MAP = {

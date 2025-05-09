@@ -2,14 +2,15 @@ import { Task } from "@lit/task";
 import { nothing } from "lit";
 import { createRef } from "lit/directives/ref.js";
 
-import { globalPlacementContext } from "../global/placements.js";
-import "../placement-no/element.js";
 import { ViewedController } from "../viewed-controller/viewed-controller.js";
 
-import { viewedLink } from "./links.js";
+import { globalPlacementContext } from "./context.js";
+
+import "../placement-no/element.js";
 
 /**
  * @import { LitElement, TemplateResult } from "lit";
+ * @import * as Placements from "./types.js";
  */
 
 /**
@@ -19,15 +20,6 @@ import { viewedLink } from "./links.js";
 export const PlacementMixin = (Base) =>
   class PlacementElement extends Base {
     _placementRef = createRef();
-
-    /**
-     * @type {string | undefined}
-     */
-    viewedUrl;
-    /**
-     * @type {number | undefined}
-     */
-    version;
 
     _dataTask = new Task(this, {
       task: async () => {
@@ -41,10 +33,20 @@ export const PlacementMixin = (Base) =>
      */
     constructor(...args) {
       super(...args);
+      /**
+       * @type {string | undefined}
+       */
+      this._viewedUrl;
+      /**
+       * @type {number | undefined}
+       */
+      this._version;
       /** @type {ViewedController} */
       this.viewed = new ViewedController(this, this._placementRef, () => {
-        if (this.viewedUrl) {
-          navigator.sendBeacon?.(viewedLink(this.viewedUrl, this.version));
+        if (this._viewedUrl) {
+          navigator.sendBeacon?.(
+            this.viewedLink(this._viewedUrl, this._version),
+          );
         }
       });
     }
@@ -56,17 +58,13 @@ export const PlacementMixin = (Base) =>
 
     /**
      *
+     * @abstract
      * @param {Placements.PlacementContextData} _placementContext
      */
-    renderComplete(_placementContext) {}
-
-    /**
-     *
-     * @returns {TemplateResult | symbol}
-     */
-    renderPending() {
-      return nothing;
+    renderComplete(_placementContext) {
+      console.error("Must be implemented by subclass");
     }
+
     /**
      *
      * @returns {TemplateResult | symbol}
@@ -78,11 +76,42 @@ export const PlacementMixin = (Base) =>
     render() {
       return this._dataTask.render({
         initial: () => this.renderInitial(),
-        pending: () => this.renderPending(),
+        pending: () => this.renderInitial(),
 
         complete: (placementContext) => {
           return this.renderComplete(placementContext);
         },
       });
+    }
+
+    /**
+     *
+     * @param {string} click
+     * @param {number |undefined } version
+     * @returns
+     */
+    clickLink(click, version) {
+      return `/pong/click?code=${encodeURIComponent(click)}&version=${version}`;
+    }
+
+    /**
+     *
+     * @param {string | undefined} image
+     * @returns
+     */
+    imgLink(image) {
+      return `/pimg/${encodeURIComponent(image || "")}`;
+    }
+
+    /**
+     *
+     * @param {string} viewed
+     * @param {number | undefined} version
+     * @returns
+     */
+    viewedLink(viewed, version) {
+      return `/pong/viewed?code=${encodeURIComponent(viewed)}${
+        version ? `&version=${version}` : ""
+      }`;
     }
   };

@@ -5,10 +5,13 @@ import { styleMap } from "lit/directives/style-map.js";
 import "../placement-note/element.js";
 import "../placement-no/element.js";
 
-import { clickLink, imgLink } from "../placement-utils/links.js";
-import { PlacementMixin } from "../placement-utils/mixin.js";
+import { PlacementMixin } from "../placement/mixin.js";
 
 import styles from "./element.css?lit";
+
+/**
+ * @import * as Placements from "../placement/types.js";
+ */
 
 export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
   static styles = styles;
@@ -39,9 +42,9 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
     if (status !== "success") {
       return nothing;
     }
-    if (!this.viewedUrl) {
-      this.viewedUrl = view;
-      this.version = version;
+    if (!this._viewedUrl) {
+      this._viewedUrl = view;
+      this._version = version;
     }
     const { textColor, backgroundColor, textColorDark, backgroundColorDark } =
       colors || {};
@@ -63,11 +66,11 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
         <a
           class="placement-link"
           data-glean="pong: pong-&gt;click side"
-          href=${clickLink(click, version)}
+          href=${this.clickLink(click, version)}
           target="_blank"
           rel="sponsored noreferrer"
           ><img
-            src=${imgLink(image)}
+            src=${this.imgLink(image)}
             aria-hidden=${!alt}
             alt=${alt || ""}
             width="125px"

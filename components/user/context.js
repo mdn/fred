@@ -1,3 +1,7 @@
+/**
+ * @import * as User from "../user/types.js";
+ */
+
 const DEFAULT_GEO = { country: "United States", country_iso: "US" };
 
 /**
