@@ -15,7 +15,7 @@ export class Content extends ServerComponent {
    */
   render(context) {
     const { doc } = context;
-    return html`<div class="content">
+    return html`<div id="content" class="content">
       <h1>${doc.title}</h1>
       ${BaselineIndicator.render(context)}
       ${doc.body.map((section) => Section(context, section))}
