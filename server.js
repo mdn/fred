@@ -105,7 +105,7 @@ export async function startDevServer() {
   });
 
   app.all(
-    "/api/*_",
+    ["/api/*_", "/pong/*_", "/pimg/*_"],
     createProxyMiddleware({
       target: `https://developer.allizom.org`,
       changeOrigin: true,
@@ -114,25 +114,6 @@ export async function startDevServer() {
       headers: {
         Connection: "keep-alive",
       },
-    }),
-  );
-
-  app.use(cookieParser());
-
-  app.get(["/*_/runner.html", "/runner.html"], (req, res) => {
-    handleRunner(req, res);
-  });
-
-  app.get(
-    "/shared-assets/*_",
-    createProxyMiddleware({
-      target: "https://mdn.github.io/shared-assets/",
-      pathRewrite: {
-        "^/shared-assets/": "/",
-      },
-      changeOrigin: true,
-      autoRewrite: true,
-      xfwd: true,
     }),
   );
 
@@ -185,13 +166,39 @@ export async function startDevServer() {
     }),
   );
 
+  const play = express();
+
+  play.use(cookieParser());
+
+  play.get(["/*_/runner.html", "/runner.html"], (req, res) => {
+    handleRunner(req, res);
+  });
+
+  play.get(
+    "/shared-assets/*_",
+    createProxyMiddleware({
+      target: "https://mdn.github.io/shared-assets/",
+      pathRewrite: {
+        "^/shared-assets/": "/",
+      },
+      changeOrigin: true,
+      autoRewrite: true,
+      xfwd: true,
+    }),
+  );
+
   const httpServer = app.listen(3000, () => {
     console.log(`Server started at http://localhost:3000`);
+  });
+
+  const playServer = play.listen(3001, () => {
+    console.log(`Play server started at http://localhost:3001`);
   });
 
   return {
     close: async () => {
       httpServer.close();
+      playServer.close();
     },
   };
 }

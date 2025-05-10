@@ -1,8 +1,9 @@
 import { LitElement, html } from "lit";
 
+import { L10nMixin } from "../../l10n/mixin.js";
 import { MDNButton } from "../button/element.js";
 
-export class MDNCopyButton extends LitElement {
+export class MDNCopyButton extends L10nMixin(LitElement) {
   static properties = {
     variant: {},
     _message: { state: true },
@@ -35,8 +36,8 @@ export class MDNCopyButton extends LitElement {
       }
 
       this._message = copiedSuccessfully
-        ? "Copied!"
-        : "Error trying to copy to clipboard!";
+        ? this.l10n`Copied`
+        : this.l10n`Copy failed!`;
 
       setTimeout(
         () => {
@@ -49,9 +50,8 @@ export class MDNCopyButton extends LitElement {
 
   render() {
     return html`<mdn-button @click=${this._copy} variant=${this.variant}
-        >Copy</mdn-button
-      >
-      ${this._message}`;
+      >${this._message ?? this.l10n`Copy`}</mdn-button
+    >`;
   }
 }
 

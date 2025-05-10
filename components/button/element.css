@@ -1,7 +1,7 @@
 @import url("./server.css");
 
 :host {
-  display: inline-block;
+  display: inline-flex;
 }
 
 .button {

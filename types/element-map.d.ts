@@ -23,10 +23,17 @@ declare global {
     "mdn-observatory-human-duration": import("../components/observatory-human-duration/element.js").MDNObservatoryHumanDuration;
     "mdn-observatory-rescan-button": import("../components/observatory-rescan-button/element.js").MDNObservatoryRescanButton;
     "mdn-observatory-results": import("../components/observatory-results/element.js").MDNObservatoryResults;
+    "mdn-placement-bottom": import("../components/placement-bottom/element.js").MDNPlacementBottom;
+    "mdn-placement-hp-main": import("../components/placement-hp-main/element.js").MDNPlacementHpMain;
+    "mdn-placement-no": import("../components/placement-no/element.js").MDNPlacementNo;
+    "mdn-placement-note": import("../components/placement-note/element.js").MDNPlacementNote;
+    "mdn-placement-sidebar": import("../components/placement-sidebar/element.js").MDNPlacementSidebar;
+    "mdn-placement-top": import("../components/placement-top/element.js").MDNPlacementTop;
     "mdn-play-console": import("../components/play-console/element.js").MDNPlayConsole;
     "mdn-play-controller": import("../components/play-controller/element.js").MDNPlayController;
     "mdn-play-editor": import("../components/play-editor/element.js").MDNPlayEditor;
     "mdn-play-runner": import("../components/play-runner/element.js").MDNPlayRunner;
+    "mdn-playground": import("../components/playground/element.js").MDNPlayground;
     "mdn-progress-bar": import("../components/progress-bar/element.js").MDNProgressBar;
     "mdn-search-modal": import("../components/search-modal/element.js").MDNSearchModal;
     "mdn-sidebar-filter": import("../components/sidebar-filter/element.js").MDNSidebarFilter;

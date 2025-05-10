@@ -1,0 +1,135 @@
+.sidebar-placement {
+  display: flex;
+
+  flex-direction: column;
+
+  max-width: 12rem;
+  height: fit-content;
+  min-height: 22rem;
+
+  margin: 1rem 0;
+
+  .placement-container {
+    --side-background-light: #111111;
+    --side-color-light: #ffffff;
+
+    --side-background-dark: #111111;
+    --side-color-dark: #ffffff;
+
+    --side-background: light-dark(
+      var(--side-background-light),
+      var(--side-background-dark)
+    );
+    --side-color: light-dark(var(--side-color-light), var(--side-color-dark));
+
+    --border-radius: 0.5rem;
+    position: relative;
+
+    width: 11rem;
+    min-height: 20rem;
+
+    margin: 0;
+
+    overflow: hidden;
+
+    border: 1px solid var(--color-border-primary);
+    border-radius: var(--border-radius);
+
+    .placement-link {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+
+      > img {
+        width: 100%;
+        height: auto;
+      }
+
+      > .placement-content {
+        position: absolute;
+        top: 0;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 0.25rem;
+        justify-content: end;
+
+        width: 100%;
+        height: 100%;
+
+        line-height: 1.25;
+
+        color: var(--side-color);
+
+        background: linear-gradient(
+          to top,
+          var(--side-background) 9rem,
+          transparent 12rem,
+          transparent
+        );
+        border-radius: var(--border-radius);
+
+        .placement-heading {
+          padding: 0 1rem;
+          font-size: 0.8875rem;
+        }
+
+        .placement-copy {
+          padding: 0 1rem;
+          font-size: 0.75rem;
+        }
+
+        .placement-cta {
+          --color: var(--side-color);
+          --icon-primary: var(--color);
+          padding: 0.5em 1em;
+          margin: 0.5rem auto 1rem 1rem;
+
+          font-size: 0.75rem;
+          font-weight: 600;
+
+          color: var(--color);
+
+          background-color: #ffffff11;
+          border: solid 2px;
+          border-radius: 2rem;
+
+          transition: all 0.3s ease-in-out;
+
+          &::after {
+            transition: all 0.3s ease-in-out;
+          }
+
+          &:hover {
+            --color: var(--side-background);
+            background-color: var(--side-color);
+          }
+
+          &::after {
+            display: inline-flex;
+
+            width: 0.625rem;
+            height: 0.625rem;
+
+            margin-left: 0.25rem;
+
+            content: "";
+
+            background-color: var(--color);
+
+            mask-image: url("../icon/external.svg");
+            mask-size: cover;
+          }
+        }
+      }
+    }
+  }
+
+  mdn-placement-note {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}

@@ -31,7 +31,7 @@ export class ArticleFooter extends ServerComponent {
  */
 function Contribute(context) {
   return html`<a
-    class="article-footer__contribute"
+    class="article-footer__contribute external"
     href="https://github.com/mdn/content/blob/main/CONTRIBUTING.md"
     title=${context.l10n`This will take you to our contribution guidelines on GitHub.`}
     target="_blank"
@@ -98,6 +98,7 @@ function GitHubSourceLink(context) {
   } = context;
 
   return html`<a
+    class="external"
     href=${`${github_url}?plain=1`}
     title=${context.l10n.raw({
       id: "article-footer_source_title",
@@ -107,11 +108,10 @@ function GitHubSourceLink(context) {
     })}
     target="_blank"
     rel="noopener"
-  >
-    ${locale === "de"
+    >${locale === "de"
       ? "Übersetzung auf GitHub anzeigen"
-      : context.l10n`View this page on GitHub`}
-  </a>`;
+      : context.l10n`View this page on GitHub`}</a
+  >`;
 }
 
 /**
@@ -142,15 +142,15 @@ function GitHubIssueLink(context) {
   url.search = sp.toString();
 
   return html`<a
+    class="external"
     href=${url.href}
     title=${context.l10n`This will take you to GitHub to file a new issue.`}
     target="_blank"
     rel="noopener"
-  >
-    ${locale === "de"
+    >${locale === "de"
       ? "Fehler mit dieser Übersetzung melden"
-      : context.l10n`Report a problem with this content`}
-  </a>`;
+      : context.l10n`Report a problem with this content`}</a
+  >`;
 }
 
 const METADATA_TEMPLATE = `

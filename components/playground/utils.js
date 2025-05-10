@@ -4,8 +4,6 @@
 //  * @import { EditorContent } from "./types.js";
 //  */
 
-// export const SESSION_KEY = "playground-session-code";
-
 // /**
 //  * @param {EditorContent} code
 //  * @returns {string}
@@ -97,39 +95,40 @@ export async function compressAndBase64Encode(inputString) {
   return { state, hash };
 }
 
-// /**
-//  * @param {string} base64
-//  * @returns {ArrayBuffer}
-//  */
-// function base64ToBytes(base64) {
-//   const binString = atob(base64);
-//   const len = binString.length;
-//   const bytes = new Uint8Array(len);
-//   for (let i = 0; i < len; i++) {
-//     bytes[i] = binString.charCodeAt(i);
-//   }
-//   return bytes.buffer;
-// }
+/**
+ * @param {string} base64
+ * @returns {ArrayBuffer}
+ */
+function base64ToBytes(base64) {
+  const binString = atob(base64);
+  const len = binString.length;
+  const bytes = new Uint8Array(len);
+  for (let i = 0; i < len; i++) {
+    // eslint-disable-next-line unicorn/prefer-code-point
+    bytes[i] = binString.charCodeAt(i);
+  }
+  return bytes.buffer;
+}
 
-// /**
-//  * This is the browser version of `libs/play/index.js`. Keep in sync!
-//  * @param {string} base64String
-//  */
-// export async function decompressFromBase64(base64String) {
-//   if (!base64String) {
-//     return { state: null, hash: null };
-//   }
-//   const bytes = base64ToBytes(base64String);
-//   const hashBuffer = await window.crypto.subtle.digest("SHA-256", bytes);
-//   const hashArray = Array.from(new Uint8Array(hashBuffer)).slice(0, 20);
-//   const hash = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+/**
+ * This is the browser version of `libs/play/index.js`. Keep in sync!
+ * @param {string} base64String
+ */
+export async function decompressFromBase64(base64String) {
+  if (!base64String) {
+    return { state: null, hash: null };
+  }
+  const bytes = base64ToBytes(base64String);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", bytes);
+  const hashArray = [...new Uint8Array(hashBuffer)].slice(0, 20);
+  const hash = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
 
-//   const decompressionStream = new DecompressionStream("deflate-raw");
+  const decompressionStream = new DecompressionStream("deflate-raw");
 
-//   const decompressedStream = new Response(
-//     new Blob([bytes]).stream().pipeThrough(decompressionStream)
-//   ).arrayBuffer();
+  const decompressedStream = new Response(
+    new Blob([bytes]).stream().pipeThrough(decompressionStream),
+  ).arrayBuffer();
 
-//   const state = new TextDecoder().decode(await decompressedStream);
-//   return { state, hash };
-// }
+  const state = new TextDecoder().decode(await decompressedStream);
+  return { state, hash };
+}

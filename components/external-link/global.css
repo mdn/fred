@@ -1,0 +1,19 @@
+.external::after {
+  display: inline-flex;
+
+  width: 0.75em;
+  height: 0.75em;
+
+  margin-left: 0.25em;
+
+  content: "";
+
+  background-color: var(--color-border-secondary);
+
+  mask-image: url("../icon/external.svg");
+  mask-size: cover;
+}
+
+.external:hover::after {
+  background-color: var(--color-border-primary);
+}

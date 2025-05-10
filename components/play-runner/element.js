@@ -53,19 +53,9 @@ export class MDNPlayRunner extends LitElement {
   _iframe = createRef();
 
   /** @param {MessageEvent} e  */
-  _onMessage({ data: { typ, prop, args }, origin, source }) {
-    /** @type {string | undefined} */
-    let uuid = new URL(origin, "https://example.com").hostname.split(".")[0];
-    if (uuid !== this._subdomain && source && "location" in source) {
-      // `origin` doesn't contain the uuid on localhost
-      // so check `source` for the uuid param we set
-      // this only works on localhost (it errors cross-origin)
-      try {
-        uuid =
-          new URLSearchParams(source.location.search).get("uuid") || undefined;
-      } catch {
-        uuid = undefined;
-      }
+  _onMessage({ data: { typ, prop, args, uuid }, origin }) {
+    if (!uuid) {
+      uuid = new URL(origin, "https://example.com").hostname.split(".")[0];
     }
     if (uuid !== this._subdomain) {
       return;
@@ -82,9 +72,10 @@ export class MDNPlayRunner extends LitElement {
   }
 
   _constructUrl() {
+    // TODO: set this properly, when we have proper env var support
     const url = new URL(
       globalThis.location.hostname.endsWith("localhost")
-        ? globalThis.location.origin
+        ? globalThis.location.origin.replace("3000", "3001")
         : `${globalThis.location.protocol}//${
             PLAYGROUND_BASE_HOST.startsWith("localhost")
               ? ""
@@ -121,16 +112,21 @@ export class MDNPlayRunner extends LitElement {
       signal.throwIfAborted();
       // We're using a random subdomain for origin isolation.
       const url = this._constructUrl();
-      if (!url.host.startsWith(this._subdomain)) {
-        // pass the uuid for postMessage isolation on localhost
-        url.searchParams.set("uuid", this._subdomain);
-      }
+      // pass the uuid for postMessage isolation
+      url.searchParams.set("uuid", this._subdomain);
       url.searchParams.set("state", state);
       url.pathname = `${prefix}/runner.html`;
       const src = url.href;
       // update iframe src without adding to browser history
       this._iframe.value?.contentWindow?.location.replace(src);
       this.src = src;
+      this.dispatchEvent(
+        new CustomEvent("mdn-play-runner-src", {
+          bubbles: true,
+          composed: true,
+          detail: src,
+        }),
+      );
     },
   });
 

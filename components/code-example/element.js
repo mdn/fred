@@ -1,10 +1,14 @@
 import { Task } from "@lit/task";
-import { LitElement, html } from "lit";
+import { LitElement, html, nothing } from "lit";
 import { createRef, ref } from "lit/directives/ref.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import "../copy-button/element.js";
 import styles from "./element.css?lit";
+
+/**
+ * @import { MDNLiveSampleResult } from "../live-sample-result/element.js";
+ */
 
 const LANGUAGE_CLASSES = new Set(["html", "js", "css", "wat"]);
 
@@ -20,6 +24,33 @@ export class MDNCodeExample extends LitElement {
     super();
     this.language = "";
     this.code = "";
+    /** @type {MDNLiveSampleResult | undefined} */
+    this._liveSample = undefined;
+    this._liveSampleUpdate = this._liveSampleUpdate.bind(this);
+  }
+
+  get liveSample() {
+    return this._liveSample;
+  }
+
+  set liveSample(result) {
+    if (result) {
+      if (this._liveSample) {
+        this._liveSample.removeEventListener(
+          "mdn-play-runner-src",
+          this._liveSampleUpdate,
+        );
+      }
+      this._liveSample = result;
+      this._liveSample.addEventListener(
+        "mdn-play-runner-src",
+        this._liveSampleUpdate,
+      );
+    }
+  }
+
+  _liveSampleUpdate() {
+    this.requestUpdate();
   }
 
   _codeRef = createRef();
@@ -41,6 +72,13 @@ export class MDNCodeExample extends LitElement {
             .copiesFrom=${this._codeRef.value}
             variant="secondary"
           ></mdn-copy-button>
+          ${this.liveSample?.breakoutLink
+            ? html`<mdn-button
+                variant="secondary"
+                href=${this.liveSample?.breakoutLink}
+                >Play</mdn-button
+              >`
+            : nothing}
         </div>
         <pre><code ${ref(this._codeRef)}>${this._highlightTask.render({
           initial: () => this.code,

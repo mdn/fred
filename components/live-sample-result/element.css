@@ -1,1 +1,8 @@
 @import url("../code-example/common.css");
+
+.code-example {
+  .example-header {
+    justify-content: end;
+    padding-right: 0.5rem;
+  }
+}

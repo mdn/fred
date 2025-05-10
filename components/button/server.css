@@ -31,6 +31,9 @@
 
   padding: var(--button-padding, var(--button-padding--default));
 
+  font-family: var(--font-family-text);
+  font-size: var(--font-size-small);
+
   line-height: var(--font-line-ui);
 
   color: var(--button-color, var(--button-color--default));

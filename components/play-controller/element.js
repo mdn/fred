@@ -46,9 +46,7 @@ export class MDNPlayController extends LitElement {
       const language = editor.language;
       if (language) {
         const value = code[language];
-        if (value !== undefined) {
-          editor.value = value;
-        }
+        editor.value = value ?? "";
       }
     }
     if (this.runOnStart) {
@@ -91,9 +89,7 @@ export class MDNPlayController extends LitElement {
   }
 
   reset() {
-    if (this.initialCode) {
-      this.code = this.initialCode;
-    }
+    this.code = this.initialCode ?? {};
     if (this.runOnStart) {
       this.run();
     } else {
@@ -105,6 +101,12 @@ export class MDNPlayController extends LitElement {
     }
   }
 
+  clear() {
+    this.initialCode = undefined;
+    this.srcPrefix = "";
+    this.reset();
+  }
+
   _onEditorUpdate() {
     if (this.runOnChange) {
       this.run();
@@ -114,10 +116,6 @@ export class MDNPlayController extends LitElement {
   /** @param {CustomEvent<VConsole>} ev */
   _onConsole(ev) {
     this.querySelector("mdn-play-console")?.onConsole(ev);
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
   }
 
   render() {

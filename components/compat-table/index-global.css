@@ -1,5 +1,8 @@
 /* Compat (global) */
 
+@import url("../external-link/global.css");
+@import url("../visually-hidden/global.css");
+
 :host {
   --compat-background-primary: var(
     --color-background-primary,
@@ -79,25 +82,6 @@ dd {
   margin: 0;
 }
 
-.visually-hidden {
-  position: absolute !important;
-
-  width: 1px !important;
-  height: 1px !important;
-
-  padding: 0 !important;
-  margin: -1px !important;
-
-  overflow: hidden !important;
-
-  white-space: nowrap !important;
-
-  border: 0 !important;
-
-  clip: rect(1px, 1px, 1px, 1px) !important;
-  clip-path: inset(50%) !important;
-}
-
 code {
   width: fit-content;
   padding: 0.125rem 0.25rem;
@@ -112,20 +96,4 @@ button {
   appearance: none;
   background: none;
   border: medium;
-}
-
-.external::after {
-  display: inline-flex;
-
-  width: 10px;
-  height: 10px;
-
-  margin-left: 4px;
-
-  content: "";
-
-  background-color: var(--compat-icon-primary);
-
-  mask-image: url("../icon/external.svg");
-  mask-size: cover;
 }

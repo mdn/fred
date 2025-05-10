@@ -32,7 +32,11 @@ export class OuterLayout extends ServerComponent {
 
     return html`
       <!doctype html>
-      <html lang="en" style="color-scheme: light dark;">
+      <html
+        lang="en"
+        style="color-scheme: light dark;"
+        data-renderer=${context.renderer}
+      >
         <head>
           <meta charset="UTF-8" />
           <meta

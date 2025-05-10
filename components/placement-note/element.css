@@ -1,0 +1,28 @@
+.placement-note {
+  display: block;
+
+  width: max-content;
+
+  padding: 0 0.25rem;
+  margin: 0.25rem;
+
+  font-size: 0.625rem;
+
+  color: #313131;
+
+  text-transform: uppercase;
+
+  text-decoration: underline;
+
+  background-color: #f9f9fbd0;
+  border: 1px solid #313131;
+  border-radius: 0.25rem;
+
+  opacity: 0.85;
+
+  &:focus,
+  &:hover {
+    text-decoration: none;
+    opacity: unset;
+  }
+}

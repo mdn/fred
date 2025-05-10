@@ -1,0 +1,21 @@
+:host {
+  line-height: 1rem;
+}
+
+.placement-no {
+  width: 100%;
+  max-width: 12rem;
+
+  padding: 0;
+  margin-bottom: 0.5rem;
+
+  font-size: 0.6rem;
+
+  color: var(--text-secondary);
+
+  &:focus,
+  &:hover {
+    text-decoration: none;
+    opacity: unset;
+  }
+}
