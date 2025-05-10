@@ -851,67 +851,414 @@ div#our_core_values {
   }
 }
 
-/* .about-header {
-  --header-stats-height: var(--about-stats-height);
-  background: linear-gradient(
-    to top,
-    var(--header-next-section-bg, transparent) 0%,
-    var(--header-next-section-bg, transparent)
-      calc(var(--header-stats-height) / 2),
-    var(--header-bg) calc(var(--header-stats-height) / 2),
-    var(--header-bg) 100%
-  );
-}
-@media (width <= 769px) {
-  .about-header {
-    padding-top: 1rem;
+div#our_team,
+div#our_partners > div {
+  --team-grid-gap: 2.5rem;
+  --team-card-padding: 1.5rem;
+  display: grid;
+
+  grid-template-columns: [full-start] 1fr 1fr 1fr [full-end];
+  grid-auto-flow: dense;
+
+  gap: 0 var(--team-grid-gap);
+
+  @media (width <= 992px) {
+    --team-grid-gap: 2rem;
+    grid-template-columns: [full-start] 1fr 1fr [full-end];
   }
-} */
 
-/* .about-header__section {
-  width: 100%;
-  max-width: var(--max-width);
+  > * {
+    margin: calc(var(--team-grid-gap) / 2) 0;
+    scroll-margin-top: calc(
+      var(--sticky-header-without-actions-height) + 1.5rem + 1rem
+    );
+  }
 
-  padding-top: 5rem;
-  padding-right: var(--gutter);
-  padding-left: var(--gutter);
-  margin-right: auto;
-  margin-left: auto;
-} */
+  > h4,
+  p {
+    grid-column: full;
 
-/* .about-header__paragraph {
+    :first-child {
+      margin-top: 0;
+    }
+
+    :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  h4,
+  h5 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    text-transform: none;
+
+    @media (width <= 769px) {
+      font-size: 1rem;
+    }
+  }
 }
 
-.about-header__h1 {
-} */
+#our_partners > div {
+  margin-top: 2.5rem;
+}
 
-/*
-      .tablist-wrapper {
-        position: sticky;
-        top: var(--top-nav-height);
-        z-index: 2;
+div#our_team,
+div#our_partners > div {
+  --team-grid-gap: 2.5rem;
+  --team-card-padding: 1.5rem;
+  display: grid;
 
-        padding: 0 var(--center-padding);
-        margin: 0 calc(var(--center-padding) * -1);
-        margin-bottom: 2rem;
+  grid-template-columns: [full-start] 1fr 1fr 1fr [full-end];
+  grid-auto-flow: dense;
 
-        background: var(--about-bg-secondary);
+  gap: 0 var(--team-grid-gap);
+
+  > * {
+    margin: calc(var(--team-grid-gap) / 2) 0;
+    scroll-margin-top: calc(
+      var(--sticky-header-without-actions-height) + 1.5rem + 1rem
+    );
+  }
+
+  > h4,
+  p {
+    grid-column: full;
+
+    :first-child {
+      margin-top: 0;
+    }
+
+    :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  h4,
+  h5 {
+    font-size: var(--font-line-content);
+    font-weight: 600;
+    text-transform: none;
+  }
+
+  @media (width <= 769px) {
+    h4,
+    h5 {
+      font-size: var(--font-size-normal);
+    }
+  }
+
+  /* mdn-about-team-member {
+    align-content: start;
+    background: var(--about-team-bg);
+    border: 1px solid var(--about-team-bg);
+    box-shadow: var(--about-team-shadow);
+    color: var(--about-team-color);
+    cursor: pointer;
+    display: grid;
+    gap: 0;
+    grid-row: span 5;
+    grid-template-areas: "name" "title" "picture" "bio" ".";
+    grid-template-rows: subgrid;
+    padding: calc(var(--team-card-padding) - 1px);
+    user-select: none;
+    &:hover {
+      border-color: var(--text-inactive);
+    }
+    h4,
+    h5 {
+      grid-area: name;
+      margin: 0;
+      margin-bottom: 0.5rem;
+    }
+    ul {
+      display: contents;
+    }
+    li:first-of-type {
+      color: var(--about-team-title-color);
+      font-weight: 600;
+      grid-area: title;
+      margin-bottom: 0.75rem;
+    }
+    li:nth-of-type(2) {
+      grid-area: picture;
+    }
+    li:nth-of-type(3):not(:last-of-type) {
+      align-self: end;
+      grid-area: picture;
+    }
+    li:last-of-type {
+      grid-area: bio;
+      line-height: 1.75;
+      max-height: 5.25em;
+      overflow: hidden;
+      position: relative;
+    }
+    li:last-of-type::after {
+      background: var(--about-team-bg);
+      content: "";
+      display: block;
+      height: 1.75em;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 75%);
+      mask-image: linear-gradient(to right, transparent, #000 75%);
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 3.5em;
+      width: 20ch;
+    }
+    li:last-of-type:dir(rtl)::after {
+      left: 0;
+      -webkit-mask-image: linear-gradient(to left, transparent, #000 75%);
+      mask-image: linear-gradient(to left, transparent, #000 75%);
+      right: initial;
+    }
+    img {
+      aspect-ratio: 1;
+      margin-bottom: 0.75rem;
+      width: 100%;
+    }
+  }
+  mdn-about-team-member a[href^="https://github.com"]
+  {
+    background: var(--about-team-github-bg);
+    border-top-right-radius: 0.5rem;
+    color: var(--about-team-color);
+    margin-top: -2.9rem;
+    padding: 0.25rem 0.5rem;
+    padding-right: 0.7rem;
+    position: absolute;
+    ::before {
+      background: var(--about-team-color);
+      content: "";
+      display: inline-block;
+      height: 1.2em;
+      margin-bottom: 0.2em;
+      margin-right: 0.2em;
+      mask-image: url("./assets/github-mark-small.svg");
+      mask-repeat: no-repeat;
+      vertical-align: middle;
+      width: 1.2em;
+    }
+    :focus-within {
+      align-content: start;
+      cursor: unset;
+      display: grid;
+      gap: 0 var(--team-card-padding);
+      grid-column: span 2;
+      grid-template-areas: "name    name" "title   title" "picture bio" ".       bio" ".       bio";
+      grid-template-columns:
+        calc((100% - var(--team-grid-gap) - 2 * var(--team-card-padding)) / 2)
+        1fr;
+      user-select: auto;
+      li:last-of-type {
+        max-height: unset;
+      }
+      li:last-of-type::after {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: 426px) {
+    mdn-about-team-member {
+      grid-column: full;
+      :focus-within {
+        grid-template-areas: "name" "title" "picture" "bio";
+        grid-template-columns: 1fr;
+      }
+    }
+  } */
+
+  mdn-about-team-member {
+    display: grid;
+
+    grid-template-areas: "name" "title" "picture" "bio" ".";
+    grid-template-rows: subgrid;
+    grid-row: span 5;
+
+    gap: 0;
+    align-content: start;
+
+    padding: calc(var(--team-card-padding) - 1px);
+
+    color: var(--about-team-color);
+
+    cursor: pointer;
+    user-select: none;
+
+    background: var(--about-team-bg);
+    border: 1px solid var(--about-team-bg);
+    box-shadow: var(--about-team-shadow);
+
+    @media (width <= 426px) {
+      grid-column: full;
+    }
+
+    &:hover {
+      border-color: var(--text-inactive);
+    }
+
+    h4,
+    h5 {
+      grid-area: name;
+      margin: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    ul {
+      display: contents;
+    }
+
+    li:first-of-type {
+      grid-area: title;
+
+      margin-bottom: 0.75rem;
+
+      font-weight: 600;
+
+      color: var(--about-team-title-color);
+    }
+
+    li:nth-of-type(2) {
+      grid-area: picture;
+    }
+
+    li:nth-of-type(3):not(:last-of-type) {
+      grid-area: picture;
+      align-self: end;
+    }
+
+    li:last-of-type {
+      position: relative;
+
+      grid-area: bio;
+
+      max-height: 5.25em;
+
+      overflow: hidden;
+
+      line-height: 1.75;
+
+      &::after {
+        position: absolute;
+        top: 3.5em;
+        right: 0;
+
+        display: block;
+
+        width: 20ch;
+        height: 1.75em;
+
+        pointer-events: none;
+
+        content: "";
+
+        background: var(--about-team-bg);
+
+        mask-image: linear-gradient(to right, transparent, #000000 75%);
       }
 
-      .tablist {
-        display: flex;
-        gap: 3rem;
-        overflow-x: auto;
-        border-bottom: 1px solid var(--about-tablist-border);
-        /* a {
-          flex-shrink: 0;
-          color: var(--about-tablist-color);
-          text-decoration: none;
-          font-weight: 600;
-        }
+      &:dir(rtl)::after {
+        right: initial;
+        left: 0;
+        mask-image: linear-gradient(to left, transparent, #000000 75%);
+      }
+    }
 
-        .active {
-          color: var(--about-tablist-active-color);
-          border-bottom: 2px solid var(--about-tablist-active-border);
+    img {
+      width: 100%;
+      aspect-ratio: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    a[href^="https://github.com"]
+    {
+      position: absolute;
+
+      padding: 0.25rem 0.5rem;
+      padding-right: 0.7rem;
+      margin-top: -2.9rem;
+
+      color: var(--about-team-color);
+
+      background: var(--about-team-github-bg);
+      border-top-right-radius: 0.5rem;
+
+      &::before {
+        display: inline-block;
+
+        width: 1.2em;
+        height: 1.2em;
+
+        margin-right: 0.2em;
+        margin-bottom: 0.2em;
+
+        vertical-align: middle;
+
+        content: "";
+
+        background: var(--about-team-color);
+
+        mask-image: url("./assets/github-mark-small.svg");
+        mask-repeat: no-repeat;
+      }
+    }
+
+    &:focus-within,
+    &.test {
+      display: grid;
+
+      grid-template-areas: "name    name" "title   title" "picture bio" ".       bio" ".       bio";
+      grid-template-columns:
+        calc((100% - var(--team-grid-gap) - 2 * var(--team-card-padding)) / 2)
+        1fr;
+      grid-column: span 2;
+
+      gap: 0 var(--team-card-padding);
+      align-content: start;
+
+      cursor: unset;
+      user-select: auto;
+
+      li:last-of-type {
+        max-height: unset;
+
+        ::after {
+          display: none;
         }
-      } */
+      }
+
+      @media (width <= 426px) {
+        grid-template-areas: "name" "title" "picture" "bio";
+        grid-template-columns: 1fr;
+
+        ul li:nth-of-type(3):not(:last-of-type) {
+          grid-area: picture;
+          align-self: end;
+
+          a {
+            position: absolute;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (width <= 992px) {
+  div#our_team,
+  div#our_partners > div {
+    --team-grid-gap: 2rem;
+    grid-template-columns: [full-start] 1fr 1fr [full-end];
+
+    ul li:nth-of-type(3):not(:last-of-type) {
+      grid-area: picture;
+      align-self: end;
+
+      a {
+        position: absolute;
+      }
+    }
+  }
+}

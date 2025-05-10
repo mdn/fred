@@ -40,7 +40,7 @@ export class MDNAboutTabs extends LitElement {
     }
 
     tabSlot.addEventListener("slotchange", () => this._wireSlots());
-    this._wireSlots(); // Initial wiring
+    this._wireSlots();
   }
 
   _wireSlots() {
@@ -89,6 +89,7 @@ export class MDNAboutTabs extends LitElement {
       panelEl.setAttribute("role", "tabpanel");
       panelEl.setAttribute("aria-hidden", (i !== this.active_index).toString());
       panelEl.classList.toggle("active", i === this.active_index);
+      panelEl.classList.add("tabpanel");
     }
   }
 

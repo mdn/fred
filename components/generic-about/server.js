@@ -19,10 +19,7 @@ export class GenericAbout extends ServerComponent {
   render(context) {
     const doc = context.hyData;
 
-    // console.log("GenericAbout", doc.sections);
-
     // Process sections to group H3s under their preceding H2
-
     const originalSections = doc?.sections || [];
     /** @type {AboutSection[]} */
     const sections = [];
@@ -34,6 +31,16 @@ export class GenericAbout extends ServerComponent {
           if (!lastSection.H3s) {
             lastSection.H3s = [];
           }
+          let { content } = section.value;
+          content = content?.replaceAll(
+            "<team-member>",
+            "<mdn-about-team-member>",
+          );
+          content = content?.replaceAll(
+            "</team-member>",
+            "</mdn-about-team-member>",
+          );
+          section.value.content = content;
           lastSection.H3s.push(section);
         }
       } else {
@@ -45,6 +52,7 @@ export class GenericAbout extends ServerComponent {
 
     const bodyContent = sections.map((section, i) => {
       // Render Header Section (First section)
+
       if (i === 0) {
         return section.value.content
           ? html`<header>
@@ -54,9 +62,6 @@ export class GenericAbout extends ServerComponent {
       } else if (section.H3s) {
         const { id, title, content } = section.value;
         const h3s = section.H3s || [];
-        // Static rendering defaults to the first tab being active
-        // const defaultActiveTab = 0;
-
         return id && content
           ? html`<section aria-labelledby=${id} data-interactive-tabs>
               <h2 id=${id}>${title}</h2>
@@ -94,7 +99,6 @@ export class GenericAbout extends ServerComponent {
       } else {
         // Render other sections (like Prose)
         // Basic rendering for other sections, assuming they have content
-        // Section(context, { type: section.type, value: section.value });
         const { id, title, content } = section.value;
         return section.type === "prose" && id && content
           ? html`
@@ -118,47 +122,3 @@ export class GenericAbout extends ServerComponent {
     return PageLayout.render(context, h);
   }
 }
-
-// ? html`<div class="tabs">
-//     <div class="tablist-wrapper">
-//       <div class="tablist" role="tablist">
-//         ${h3s.map(({ value: h3Value }, tabIndex) =>
-//           h3Value.id && h3Value.content
-//             ? html`
-//                 <a
-//                   key=${h3Value.id}
-//                   id=${`${h3Value.id}-tab`}
-//                   href=${`#${h3Value.id}`}
-//                   class=${tabIndex === defaultActiveTab
-//                     ? "active"
-//                     : ""}
-//                   role="tab"
-//                   aria-selected=${tabIndex === defaultActiveTab
-//                     ? "true"
-//                     : "false"}
-//                   aria-controls=${`${h3Value.id}-panel`}
-//                   data-tab-index=${tabIndex}
-//                 >
-//                   ${h3Value.title}
-//                 </a>
-//               `
-//             : nothing,
-//         )}
-//       </div>
-//     </div>
-//     ${h3s.map(({ value: h3Value }, tabIndex) =>
-//       h3Value.id && h3Value.content
-//         ? html`<div
-//             key=${h3Value.id}
-//             id=${`${h3Value.id}-panel`}
-//             class="tabpanel ${tabIndex === defaultActiveTab
-//               ? "active"
-//               : ""}"
-//             role="tabpanel"
-//             aria-labelledby=${`${h3Value.id}-tab`}
-//           >
-//             ${unsafeHTML(h3Value.content)}
-//           </div> `
-//         : nothing,
-//     )}
-//   </div> `
