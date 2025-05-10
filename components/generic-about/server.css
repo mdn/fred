@@ -77,14 +77,23 @@
   );
 }
 
-/* :root[data-theme="dark"] .about-container {
+:root[data-theme="dark"] {
   .about-container {
     --about-join-us-image: url("./assets/building-dark.svg");
     --about-journey-dot: url("./assets/dot-dark.svg");
     --about-global-impact-image: url("./assets/global-impact-dark.svg");
     --about-join-us-border: 1px solid #4e4e4e;
   }
-} */
+}
+
+@media (prefers-color-scheme: dark) {
+  .about-container {
+    --about-join-us-image: url("./assets/building-dark.svg");
+    --about-journey-dot: url("./assets/dot-dark.svg");
+    --about-global-impact-image: url("./assets/global-impact-dark.svg");
+    --about-join-us-border: 1px solid #4e4e4e;
+  }
+}
 
 @media (width <= 769px) {
   .about-container {
