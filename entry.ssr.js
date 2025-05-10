@@ -7,6 +7,7 @@ import { BlogPost } from "./components/blog-post/server.js";
 import { ContributorSpotlight } from "./components/contributor-spotlight/server.js";
 import { Curriculum } from "./components/curriculum/server.js";
 import { Doc } from "./components/doc/server.js";
+import { GenericAbout } from "./components/generic-about/server.js";
 import { GenericDoc } from "./components/generic-doc/server.js";
 import { HomePage } from "./components/home-page/server.js";
 import { NotFound } from "./components/not-found/server.js";
@@ -66,6 +67,7 @@ export async function render(path, page, compilationStats) {
           case "Doc":
             return Doc.render(context);
           case "GenericAbout":
+            return GenericAbout.render(context);
           case "GenericCommunity":
           case "GenericDoc":
             return GenericDoc.render(context);

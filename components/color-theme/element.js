@@ -62,6 +62,7 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
   willUpdate(changedProperties) {
     if (changedProperties.has("_mode") && globalThis.document) {
       document.documentElement.style.colorScheme = this._mode;
+      document.documentElement.dataset.theme = this._mode;
       this.dispatchEvent(
         new CustomEvent("mdn-color-theme-update", {
           bubbles: true,

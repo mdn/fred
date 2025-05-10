@@ -2,6 +2,7 @@
 
 declare global {
   interface HTMLElementTagNameMap {
+    "mdn-about-tabs": import("../components/about-tabs/element.js").MDNAboutTabs;
     "mdn-button": import("../components/button/element.js").MDNButton;
     "mdn-code-example": import("../components/code-example/element.js").MDNCodeExample;
     "mdn-color-theme": import("../components/color-theme/element.js").MDNColorTheme;
@@ -10,6 +11,7 @@ declare global {
     "mdn-content-feedback": import("../components/content-feedback/element.js").MDNContentFeedback;
     "mdn-copy-button": import("../components/copy-button/element.js").MDNCopyButton;
     "mdn-dropdown": import("../components/dropdown/element.js").MDNDropdown;
+    "mdn-image-history": import("../components/image-history/element.js").MDNImageHistory;
     "mdn-interactive-example": import("../components/interactive-example/element.js").MDNInteractiveExample;
     "mdn-ix-tab": import("../components/ix-tab/element.js").MDNIXTab;
     "mdn-ix-tab-panel": import("../components/ix-tab-panel/element.js").MDNIXTabPanel;
