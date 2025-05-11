@@ -16,7 +16,7 @@ export class MDNAboutTeamMember extends LitElement {
   /** @param {FocusEvent} ev */
   _focusin({ currentTarget }) {
     if (currentTarget instanceof HTMLElement) {
-      globalThis.history.pushState({}, "", `#${currentTarget.id}`);
+      // globalThis.history.pushState({}, "", `#${currentTarget.id}`);
       this.scrollIntoView({ block: "nearest", inline: "nearest" });
     }
   }

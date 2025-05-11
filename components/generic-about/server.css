@@ -948,128 +948,6 @@ div#our_partners > div {
     }
   }
 
-  /* mdn-about-team-member {
-    align-content: start;
-    background: var(--about-team-bg);
-    border: 1px solid var(--about-team-bg);
-    box-shadow: var(--about-team-shadow);
-    color: var(--about-team-color);
-    cursor: pointer;
-    display: grid;
-    gap: 0;
-    grid-row: span 5;
-    grid-template-areas: "name" "title" "picture" "bio" ".";
-    grid-template-rows: subgrid;
-    padding: calc(var(--team-card-padding) - 1px);
-    user-select: none;
-    &:hover {
-      border-color: var(--text-inactive);
-    }
-    h4,
-    h5 {
-      grid-area: name;
-      margin: 0;
-      margin-bottom: 0.5rem;
-    }
-    ul {
-      display: contents;
-    }
-    li:first-of-type {
-      color: var(--about-team-title-color);
-      font-weight: 600;
-      grid-area: title;
-      margin-bottom: 0.75rem;
-    }
-    li:nth-of-type(2) {
-      grid-area: picture;
-    }
-    li:nth-of-type(3):not(:last-of-type) {
-      align-self: end;
-      grid-area: picture;
-    }
-    li:last-of-type {
-      grid-area: bio;
-      line-height: 1.75;
-      max-height: 5.25em;
-      overflow: hidden;
-      position: relative;
-    }
-    li:last-of-type::after {
-      background: var(--about-team-bg);
-      content: "";
-      display: block;
-      height: 1.75em;
-      -webkit-mask-image: linear-gradient(to right, transparent, #000 75%);
-      mask-image: linear-gradient(to right, transparent, #000 75%);
-      pointer-events: none;
-      position: absolute;
-      right: 0;
-      top: 3.5em;
-      width: 20ch;
-    }
-    li:last-of-type:dir(rtl)::after {
-      left: 0;
-      -webkit-mask-image: linear-gradient(to left, transparent, #000 75%);
-      mask-image: linear-gradient(to left, transparent, #000 75%);
-      right: initial;
-    }
-    img {
-      aspect-ratio: 1;
-      margin-bottom: 0.75rem;
-      width: 100%;
-    }
-  }
-  mdn-about-team-member a[href^="https://github.com"]
-  {
-    background: var(--about-team-github-bg);
-    border-top-right-radius: 0.5rem;
-    color: var(--about-team-color);
-    margin-top: -2.9rem;
-    padding: 0.25rem 0.5rem;
-    padding-right: 0.7rem;
-    position: absolute;
-    ::before {
-      background: var(--about-team-color);
-      content: "";
-      display: inline-block;
-      height: 1.2em;
-      margin-bottom: 0.2em;
-      margin-right: 0.2em;
-      mask-image: url("./assets/github-mark-small.svg");
-      mask-repeat: no-repeat;
-      vertical-align: middle;
-      width: 1.2em;
-    }
-    :focus-within {
-      align-content: start;
-      cursor: unset;
-      display: grid;
-      gap: 0 var(--team-card-padding);
-      grid-column: span 2;
-      grid-template-areas: "name    name" "title   title" "picture bio" ".       bio" ".       bio";
-      grid-template-columns:
-        calc((100% - var(--team-grid-gap) - 2 * var(--team-card-padding)) / 2)
-        1fr;
-      user-select: auto;
-      li:last-of-type {
-        max-height: unset;
-      }
-      li:last-of-type::after {
-        display: none;
-      }
-    }
-  }
-
-  @media (max-width: 426px) {
-    mdn-about-team-member {
-      grid-column: full;
-      :focus-within {
-        grid-template-areas: "name" "title" "picture" "bio";
-        grid-template-columns: 1fr;
-      }
-    }
-  } */
-
   mdn-about-team-member {
     display: grid;
 
@@ -1178,7 +1056,7 @@ div#our_partners > div {
 
       padding: 0.25rem 0.5rem;
       padding-right: 0.7rem;
-      margin-top: -2.9rem;
+      margin-top: -3.5rem;
 
       color: var(--about-team-color);
 
@@ -1205,8 +1083,7 @@ div#our_partners > div {
       }
     }
 
-    &:focus-within,
-    &.test {
+    &:focus-within {
       display: grid;
 
       grid-template-areas: "name    name" "title   title" "picture bio" ".       bio" ".       bio";
@@ -1224,7 +1101,7 @@ div#our_partners > div {
       li:last-of-type {
         max-height: unset;
 
-        ::after {
+        &::after {
           display: none;
         }
       }
