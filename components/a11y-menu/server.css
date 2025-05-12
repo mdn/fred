@@ -11,10 +11,6 @@
 
   list-style: none; /* Reset. */
 
-  &:focus-within {
-    top: 2px;
-  }
-
   a {
     position: absolute;
     right: 0;
@@ -29,5 +25,9 @@
     text-decoration: none;
 
     background-color: var(--color-background-primary);
+
+    &:focus-within {
+      top: calc(20em + 2px);
+    }
   }
 }
