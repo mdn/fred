@@ -3,9 +3,11 @@
 }
 
 .tablist-wrapper {
-  position: sticky;
-  top: var(--top-nav-height);
-  z-index: 2;
+  @media (width >= 1111px) {
+    position: sticky;
+    top: var(--top-nav-height);
+    z-index: 2;
+  }
 
   padding: 0 var(--center-padding);
   margin: 0 calc(var(--center-padding) * -1);

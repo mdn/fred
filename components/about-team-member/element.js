@@ -12,7 +12,6 @@ export class MDNAboutTeamMember extends LitElement {
   _setID() {
     const hx = this.querySelector("h4, h5");
     const panel = hx?.closest(".tabpanel");
-    console.log("panel", panel);
     if (hx && panel) {
       const id = `${panel.id}_${hx.id}`;
       if (this.id !== id) {
@@ -39,11 +38,10 @@ export class MDNAboutTeamMember extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.tabIndex = 0;
-    // this._setID();
     setTimeout(() => {
       this._setID();
-      if (globalThis.location.hash.slice(1) === `${this.id}`) {
-        this.focus();
+      if (globalThis.location.hash.slice(1) === this.id) {
+        this.focus({ preventScroll: true });
       }
     }, 0);
     this.addEventListener("mousedown", this._mousedown);
