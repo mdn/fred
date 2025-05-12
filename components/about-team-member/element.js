@@ -1,10 +1,18 @@
-import { LitElement, html } from "lit";
+import { LitElement } from "lit";
 
 export class MDNAboutTeamMember extends LitElement {
+  // Force client-side rendering for disabled shadow DOM
+  static ssr = false;
+
+  // Disable shadow DOM
+  createRenderRoot() {
+    return this;
+  }
+
   _setID() {
     const hx = this.querySelector("h4, h5");
-    // no simpler selector like ".tabindex" would work?
-    const panel = this.closest("div[slot='panel']");
+    const panel = hx?.closest(".tabpanel");
+    console.log("panel", panel);
     if (hx && panel) {
       const id = `${panel.id}_${hx.id}`;
       if (this.id !== id) {
@@ -14,9 +22,9 @@ export class MDNAboutTeamMember extends LitElement {
   }
 
   /** @param {FocusEvent} ev */
-  _focusin({ currentTarget }) {
+  _focus({ currentTarget }) {
     if (currentTarget instanceof HTMLElement) {
-      // globalThis.history.pushState({}, "", `#${currentTarget.id}`);
+      globalThis.history.pushState({}, "", `#${currentTarget.id}`);
       this.scrollIntoView({ block: "nearest", inline: "nearest" });
     }
   }
@@ -28,29 +36,24 @@ export class MDNAboutTeamMember extends LitElement {
     }
   }
 
-  createRenderRoot() {
-    return this;
-  }
-
-  render() {
-    return html`<slot></slot>`;
-  }
-
   connectedCallback() {
     super.connectedCallback();
     this.tabIndex = 0;
-    this._setID();
+    // this._setID();
+    setTimeout(() => {
+      this._setID();
+      if (globalThis.location.hash.slice(1) === `${this.id}`) {
+        this.focus();
+      }
+    }, 0);
     this.addEventListener("mousedown", this._mousedown);
-    this.addEventListener("focusin", this._focusin);
-    if (globalThis.location.hash === `${this.id}`) {
-      setTimeout(() => this.focus(), 0);
-    }
+    this.addEventListener("focus", this._focus);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListener("mousedown", this._mousedown);
-    this.removeEventListener("focusin", this._focusin);
+    this.removeEventListener("focus", this._focus);
   }
 }
 

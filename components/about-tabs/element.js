@@ -27,11 +27,22 @@ export class MDNAboutTabs extends LitElement {
     // Check for URL hash and set active_index accordingly
     const hash = globalThis.location.hash.slice(1);
     if (hash) {
+      const tabHash = hash.startsWith("our_team")
+        ? "our_team"
+        : hash.startsWith("our_partners") ||
+            hash === "product_advisory_board" ||
+            hash === "open_web_docs"
+          ? "our_partners"
+          : hash;
+
       // @ts-expect-error
       const tabs = tabSlot.assignedElements({ flatten: true });
       if (tabs && tabs.length > 0) {
         for (const [i, tabEl] of tabs.entries()) {
-          if (tabEl instanceof HTMLElement && tabEl.dataset.panelId === hash) {
+          if (
+            tabEl instanceof HTMLElement &&
+            tabEl.dataset.panelId === tabHash
+          ) {
             this.active_index = i;
             break;
           }
