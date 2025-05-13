@@ -1,8 +1,6 @@
 /* Footer */
 
 .footer {
-  --footer-side-padding: 1rem;
-
   color: var(--color-text-secondary);
   background-color: var(--color-background-secondary);
 }
@@ -22,7 +20,7 @@
   align-items: start;
 
   padding-block: 2rem 1.5rem;
-  padding-inline: var(--footer-side-padding);
+  padding-inline: var(--layout-side-padding);
 
   @media (width > 480px) {
     grid-template-areas:
@@ -51,12 +49,6 @@
       "intro   links links links links"
       "socials links links links links";
     grid-template-columns: 2fr 1fr 1fr 1fr;
-  }
-
-  @media (width > 1440px) {
-    padding-inline: calc(
-      (100% - 1440px + (var(--footer-side-padding) * 2)) / 2
-    );
   }
 }
 
@@ -169,15 +161,9 @@
   justify-items: start;
 
   padding-block: 1.5rem;
-  padding-inline: var(--footer-side-padding);
+  padding-inline: var(--layout-side-padding);
 
   border-block-start: 1px solid var(--color-border-secondary);
-
-  @media (width > 1440px) {
-    padding-inline: calc(
-      (100% - 1440px + (var(--footer-side-padding) * 2)) / 2
-    );
-  }
 
   ul {
     display: flex;

@@ -1,0 +1,29 @@
+:root {
+  --layout-side-padding: max(1rem, calc((100vw - 1440px + (2rem)) / 2));
+
+  /* prettier-ignore */
+  --layout-1-col:
+    [extended-full-start] 
+      var(--layout-side-padding)
+    [full-start]          
+      1fr
+    [full-end]            
+      var(--layout-side-padding)
+    [extended-full-end];
+
+  /* WARNING: TODO: left/center/right cols widths will change */
+
+  /* prettier-ignore */
+  --layout-3-col:
+    [extended-full-start]
+      var(--layout-side-padding)
+    [full-start   left-start  center-left-start]
+      1fr
+    [center-start left-end    center-right-start]
+      3fr
+    [center-end   right-start center-left-end]
+      1fr
+    [full-end     right-end   center-right-end]
+      var(--layout-side-padding)
+    [extended-full-end];
+}

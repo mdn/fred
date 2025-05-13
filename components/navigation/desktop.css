@@ -11,13 +11,7 @@
     justify-items: center;
 
     padding-block: 0.75rem;
-    padding-inline: var(--navigation-side-padding);
-
-    @media (width > 1440px) {
-      padding-inline: calc(
-        (100% - 1440px + (var(--navigation-side-padding) * 2)) / 2
-      );
-    }
+    padding-inline: var(--layout-side-padding);
   }
 
   /* Logo */
