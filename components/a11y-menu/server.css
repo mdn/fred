@@ -1,11 +1,14 @@
 .a11y-menu {
+  --offset: 20em;
+  --outline: 2px;
+
   position: absolute;
-  top: -20em;
-  right: 2px;
-  left: 2px;
+  top: calc(-1 * var(--offset));
+  right: var(--outline);
+  left: var(--outline);
   z-index: 1000;
 
-  width: calc(100% - 4px);
+  width: calc(100% - 2 * var(--outline));
 
   margin: 0; /* Reset. */
 
@@ -27,7 +30,7 @@
     background-color: var(--color-background-primary);
 
     &:focus-within {
-      top: calc(20em + 2px);
+      top: calc(var(--offset) + var(--outline));
     }
   }
 }
