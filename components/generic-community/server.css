@@ -258,7 +258,6 @@
         flex-wrap: wrap;
 
         column-gap: 1rem;
-        column-gap: 1rem;
         align-items: baseline;
         justify-content: center;
 
@@ -295,10 +294,7 @@
   > section {
     --community-circle-height: 57rem;
     display: grid;
-
     grid-template-columns: 4fr 6fr;
-
-    column-gap: min(5rem, 5vw);
     column-gap: min(5rem, 5vw);
 
     @media (width <= 769px) {
@@ -580,7 +576,6 @@
             36% 50%;
           background-size: 13%, 60%;
 
-          clip-path: circle(35%);
           clip-path: circle(35%);
 
           &:focus-visible::after {
