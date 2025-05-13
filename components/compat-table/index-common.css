@@ -40,7 +40,7 @@ table {
 }
 
 .bc-on-github {
-  font-size: var(--compat-type-smaller-font-size);
+  font-size: var(--font-size-small);
 }
 
 .bc-table {
@@ -51,29 +51,29 @@ table {
   border-spacing: 0;
   border-collapse: separate;
 
-  border: 1px solid var(--compat-border-primary);
-  border-radius: var(--compat-elem-radius);
+  border: 1px solid var(--color-border-secondary);
+  border-radius: 0.25rem;
 
   td,
   th {
     padding: 0;
     padding: 0.4rem;
 
-    font-size: var(--compat-type-smaller-font-size);
+    font-size: var(--font-size-small);
     font-weight: 500;
 
-    border: 1px solid var(--compat-border-secondary);
+    border: 1px solid var(--color-border-secondary);
     border-width: 0 0 1px 1px;
 
     code {
-      font-size: var(--compat-type-smaller-font-size);
+      font-size: var(--font-size-small);
     }
   }
 
   th {
     padding: 0.4rem;
     vertical-align: bottom;
-    background: var(--compat-background-primary);
+    background: var(--color-background-primary);
   }
 
   thead {
@@ -114,19 +114,19 @@ table {
       }
 
       &.bc-supports-no > button > span {
-        color: var(--compat-text-primary-red);
+        color: var(--color-red);
       }
 
       &.bc-supports-partial > button > span {
-        color: var(--compat-text-primary-yellow);
+        color: var(--color-yellow);
       }
 
       &.bc-supports-preview > button > span {
-        color: var(--compat-text-primary-blue);
+        color: var(--color-blue);
       }
 
       &.bc-supports-yes > button > span {
-        color: var(--compat-text-primary-green);
+        color: var(--color-green);
       }
     }
   }
@@ -135,13 +135,13 @@ table {
     margin-bottom: 1rem;
 
     .icon-wrap {
-      background: var(--compat-background-primary);
+      background: var(--color-background-primary);
     }
   }
 
   .bc-supports.bc-supports-removed-partial {
     .bcd-cell-text-copy {
-      color: var(--compat-text-primary-yellow);
+      color: var(--color-yellow);
     }
   }
 
@@ -173,21 +173,21 @@ table {
     }
 
     .icon.icon-removed-partial {
-      background-color: var(--compat-icon-critical);
+      background-color: var(--color-red);
 
       /* override icon */
       mask-image: url("./icons/status/no.svg");
     }
 
     .timeline .icon.icon-removed-partial {
-      background-color: var(--compat-icon-primary);
+      background-color: var(--color-yellow);
       mask-image: url("./icons/status/partial.svg");
     }
   }
 
   .bc-support.bc-supports-removed-partial {
     .bcd-cell-text-copy {
-      color: var(--compat-text-primary-red);
+      color: var(--color-red);
     }
   }
 
@@ -209,11 +209,11 @@ table {
   }
 
   .bc-feature-depth-2 {
-    border-left: 7px solid var(--compat-border-primary);
+    border-left: 7px solid var(--color-border-secondary);
   }
 
   .bc-feature-depth-3 {
-    border-left: 15px solid var(--compat-border-primary);
+    border-left: 15px solid var(--color-border-secondary);
   }
 
   .timeline {
@@ -242,11 +242,15 @@ table {
 }
 
 .bc-level-no {
-  background-color: var(--compat-icon-critical);
+  background-color: var(--color-red);
+}
+
+.bc-level-partial {
+  background-color: var(--color-yellow);
 }
 
 .bc-level-preview {
-  background-color: var(--compat-icon-information);
+  background-color: var(--color-blue);
 }
 
 .bc-legend-items-container {
@@ -258,14 +262,14 @@ table {
 
   margin-bottom: 2rem;
 
-  font-size: var(--compat-type-smaller-font-size);
+  font-size: var(--font-size-small);
 }
 
 .bc-legend-tip {
   margin-top: 0;
   margin-bottom: 1rem;
 
-  font-size: var(--compat-type-smaller-font-size);
+  font-size: var(--font-size-small);
   font-variation-settings: "slnt" -10;
   font-style: italic;
 }
@@ -280,7 +284,7 @@ table {
   display: flex;
 
   .icon {
-    background-color: var(--compat-icon-primary);
+    background-color: var(--color-border-primary);
   }
 }
 
@@ -337,7 +341,7 @@ table {
 
     content: "";
 
-    background: var(--compat-border-primary);
+    background: var(--color-border-secondary);
   }
 
   /* complicated selector to cover the last bit of the grey line above. */
@@ -355,20 +359,20 @@ table {
 
       content: "";
 
-      background: var(--compat-background-primary);
+      background: var(--color-background-primary);
     }
   }
 
   .bc-level-yes.icon.icon-yes {
     /* override icon */
-    background-color: var(--compat-icon-success);
+    background-color: var(--color-green);
     mask-image: url("./icons/status/yes-circle.svg");
   }
 
   .bc-supports-dd {
     .icon {
-      background: var(--compat-border-primary);
-      border: 3px solid var(--compat-background-primary);
+      background: var(--color-border-secondary);
+      border: 3px solid var(--color-background-primary);
       border-radius: 50%;
 
       mask-image: none;
@@ -397,7 +401,7 @@ table {
 
 .bc-notes-wrapper {
   margin-bottom: 1rem;
-  color: var(--compat-text-primary);
+  color: var(--color-border-primary);
 
   &:last-child {
     margin-bottom: 0;
@@ -461,17 +465,17 @@ dl.bc-notes-list {
     vertical-align: text-top;
 
     .icon {
-      background-color: var(--compat-icon-secondary);
+      background-color: var(--color-border-secondary);
 
       &:hover {
-        background-color: var(--compat-icon-primary);
+        background-color: var(--color-border-primary);
       }
     }
   }
 }
 
 .bc-github-link {
-  font: var(--compat-type-smaller-font-size);
+  font: var(--font-size-small);
 }
 
 .main-page-content {

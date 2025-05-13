@@ -1,5 +1,4 @@
 .icon {
-  --color: var(--icon-primary, light-dark(#696969, #ffffff));
   --size: var(--icon-size, 1rem);
 
   display: inline-block;
@@ -11,7 +10,7 @@
 
   vertical-align: middle;
 
-  background-color: var(--color);
+  background-color: var(--color-border-primary);
 
   mask-repeat: no-repeat;
   mask-position: center center;

@@ -3,66 +3,6 @@
 @import url("../external-link/global.css");
 @import url("../visually-hidden/global.css");
 
-:host {
-  --compat-background-primary: var(
-    --color-background-primary,
-    light-dark(#ffffff, #1b1b1b)
-  );
-  --compat-background-secondary: var(
-    --color-background-secondary,
-    light-dark(#f9f9fb, #313131)
-  );
-  --compat-border-primary: var(
-    --color-border-primary,
-    light-dark(#cdcdcd, #858585)
-  );
-  --compat-border-secondary: var(
-    --color-border-secondary,
-    light-dark(#cdcdcd, #696969)
-  );
-
-  /* --compat-border (internal) */
-
-  /* --compat-browser-count (internal) */
-  --compat-code-background-inline: var(
-    --code-background-inline,
-    light-dark(#f2f1f1, #343434)
-  );
-  --compat-elem-radius: var(--elem-radius, 0.25rem);
-  --compat-icon-critical: var(--icon-critical, light-dark(#d30038, #ff707f));
-  --compat-icon-information: var(
-    --icon-information,
-    light-dark(#0085f2, #5e9eff)
-  );
-  --compat-icon-primary: var(--icon-primary, light-dark(#696969, #ffffff));
-  --compat-icon-secondary: var(--icon-secondary, light-dark(#b3b3b3, #b3b3b3));
-  --compat-icon-success: var(--icon-success, light-dark(#007936, #00b755));
-
-  /* --compat-padding-bottom-offset (internal) */
-  --compat-text-link: var(--color-text-link, light-dark(#0069c2, #8cb4ff));
-  --compat-text-primary-blue: var(
-    --color-text-primary-blue,
-    light-dark(#0069c2, #8cb4ff)
-  );
-  --compat-text-primary-green: var(
-    --color-text-primary-green,
-    light-dark(#007936, #00d061)
-  );
-  --compat-text-primary-red: var(
-    --color-text-primary-red,
-    light-dark(#d30038, #ff97a0)
-  );
-  --compat-text-primary-yellow: var(
-    --color-text-primary-yellow,
-    light-dark(#746a00, #c7b700)
-  );
-  --compat-text-primary: var(
-    --color-text-primary,
-    light-dark(#1b1b1b, #ffffff)
-  );
-  --compat-type-smaller-font-size: var(--type-smaller-font-size, 0.833rem);
-}
-
 * {
   box-sizing: border-box;
   overflow-wrap: break-word;
@@ -85,11 +25,7 @@ dd {
 code {
   width: fit-content;
   padding: 0.125rem 0.25rem;
-  background: var(--compat-code-background-inline);
-}
-
-a {
-  color: var(--compat-text-link);
+  background-color: var(--color-background-secondary);
 }
 
 button {

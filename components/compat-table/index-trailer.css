@@ -18,24 +18,24 @@
 }
 
 .bcd-cell-text-copy {
-  color: var(--compat-text-primary);
+  color: var(--color-text-primary);
 }
 
 .bc-supports-yes {
   .bcd-cell-text-copy {
-    color: var(--compat-text-primary-green);
+    color: var(--color-green);
   }
 }
 
 .bc-supports-partial {
   .bcd-cell-text-copy {
-    color: var(--compat-text-primary-yellow);
+    color: var(--color-yellow);
   }
 }
 
 .bc-supports-no {
   .bcd-cell-text-copy {
-    color: var(--compat-text-primary-red);
+    color: var(--color-red);
   }
 }
 
@@ -53,7 +53,7 @@
     td.bc-support > button {
       padding-top: 0.5rem;
       padding-right: 0.25rem;
-      padding-bottom: calc(0.5rem + var(--compat-padding-bottom-offset, 0px));
+      padding-bottom: calc(0.5rem + var(--padding-bottom-offset, 0px));
       padding-left: 0.25rem;
     }
   }

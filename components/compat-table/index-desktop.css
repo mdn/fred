@@ -19,7 +19,7 @@
     }
 
     tbody {
-      --compat-border: 1px solid var(--compat-border-secondary);
+      --border: 1px solid var(--color-border-secondary);
 
       /* Border. */
       tr {
@@ -27,19 +27,19 @@
           th,
           td {
             > * {
-              border-top: var(--compat-border);
+              border-top: var(--border);
             }
           }
 
           .bc-feature {
-            border-top: var(--compat-border);
+            border-top: var(--border);
           }
         }
 
         th:not(:first-child),
         td:not(:first-child) {
           > * {
-            border-left: var(--compat-border);
+            border-left: var(--border);
           }
         }
       }
@@ -60,14 +60,14 @@
     }
 
     .timeline {
-      border-top: var(--compat-border);
+      border-top: var(--border);
       border-left: none !important;
     }
 
     .bc-has-history:focus-within > button {
       /* Highlight expanded item. */
       --padding-bottom-offset: -2px;
-      border-bottom: 2px solid var(--compat-text-primary);
+      border-bottom: 2px solid var(--color-border-primary);
     }
   }
 
@@ -117,7 +117,7 @@
     cursor: pointer;
 
     > button:hover {
-      background: var(--compat-background-secondary);
+      background: var(--color-background-secondary);
     }
   }
 }
