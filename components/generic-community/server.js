@@ -20,14 +20,11 @@ export class GenericCommunity extends ServerComponent {
     const issues = [];
     if (i === 0) {
       return html`
-        <section aria-labelledby=${ifDefined(section.value.id ?? undefined)}>
-          <h1 id=${ifDefined(section.value.id ?? undefined)}>
-            ${section.value.title}
-          </h1>
-          <div class="section-content">
+        <header>
+          <section aria-labelledby=${ifDefined(section.value.id ?? undefined)}>
             ${unsafeHTML(section.value.content)}
-          </div>
-        </section>
+          </section>
+        </header>
       `;
     } else if (section.value.id === "help_us_fix_open_issues") {
       return html`
