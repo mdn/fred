@@ -32,6 +32,9 @@ export class GenericAbout extends ServerComponent {
             lastSection.H3s = [];
           }
           let { content } = section.value;
+          // Replace <team-member> with <mdn-about-team-member> for
+          // compatibility with the Fred naming conventions and Yari.
+          // Update the markup in generic-content when Yari is phased out.
           content = content?.replaceAll(
             "<team-member>",
             "<mdn-about-team-member>",
@@ -111,8 +114,7 @@ export class GenericAbout extends ServerComponent {
                 <div class="section-content">${unsafeHTML(content)}</div>
               </section>
             `
-          : // ? Section(context, { type: section.type, value: section.value })
-            nothing;
+          : nothing;
       }
     });
 
