@@ -5,6 +5,8 @@ import styles from "./element.css?lit";
 /** @import { ContributorData } from "./types.d.ts" */
 
 export class MDNContributorList extends LitElement {
+  static ssr = false;
+
   static properties = {
     _contributors: { state: true },
   };

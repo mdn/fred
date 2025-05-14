@@ -679,19 +679,19 @@
       }
 
       li a {
-        --button-bg: var(--button-primary-default);
-        --button-bg-hover: var(--button-primary-hover);
-        --button-bg-active: var(--button-primary-active);
-        --button-border-color: var(--button-primary-default);
-        --button-color: var(--background-primary);
-        --button-font: var(--type-emphasis-m);
+        --button-bg: var(--button-bg--default);
+        --button-bg-hover: var(--button-bg-hover--default);
+        --button-bg-active: var(--button-bg-active--default);
+        --button-border-color: var(--button-border-color--default);
+        --button-color: var(--button-color--default);
         --button-padding: 0.43rem 1rem;
         --button-radius: var(--elem-radius, 0.25rem);
         display: inline-block;
 
         padding: var(--button-padding);
 
-        font: var(--button-font);
+        font: var(--font-size-small);
+        font-weight: 600;
 
         color: var(--button-color);
 
@@ -878,19 +878,19 @@
         }
 
         a {
-          --button-bg: var(--button-primary-default);
-          --button-bg-hover: var(--button-primary-hover);
-          --button-bg-active: var(--button-primary-active);
-          --button-border-color: var(--button-primary-default);
-          --button-color: var(--background-primary);
-          --button-font: var(--type-emphasis-m);
+          --button-bg: var(--button-bg--default);
+          --button-bg-hover: var(--button-bg-hover--default);
+          --button-bg-active: var(--button-bg-active--default);
+          --button-border-color: var(--button-border-color--default);
+          --button-color: var(--button-color--default);
           --button-padding: 0.43rem 1rem;
           --button-radius: var(--elem-radius, 0.25rem);
           display: inline-block;
 
           padding: var(--button-padding);
 
-          font: var(--button-font);
+          font-size: var(--font-size-small);
+          font-weight: 600;
 
           color: var(--button-color);
 

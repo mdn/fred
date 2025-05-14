@@ -45,7 +45,7 @@ export class GenericCommunity extends ServerComponent {
           <div class="section-content">
             ${unsafeHTML(section.value.content)}
           </div>
-          <div class="issues-table">
+          <mdn-issues-table class="issues-table">
             <table>
               <thead>
                 <tr>
@@ -95,7 +95,7 @@ export class GenericCommunity extends ServerComponent {
                 )}
               </tbody>
             </table>
-          </div>
+          </mdn-issues-table>
         </section>
       `;
     }

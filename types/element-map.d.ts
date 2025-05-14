@@ -15,6 +15,7 @@ declare global {
     "mdn-dropdown": import("../components/dropdown/element.js").MDNDropdown;
     "mdn-image-history": import("../components/image-history/element.js").MDNImageHistory;
     "mdn-interactive-example": import("../components/interactive-example/element.js").MDNInteractiveExample;
+    "mdn-issues-table": import("../components/issues-table/element.js").MDNIssuesTable;
     "mdn-ix-tab": import("../components/ix-tab/element.js").MDNIXTab;
     "mdn-ix-tab-panel": import("../components/ix-tab-panel/element.js").MDNIXTabPanel;
     "mdn-ix-tab-wrapper": import("../components/ix-tab-wrapper/element.js").MDNIXTabWrapper;
