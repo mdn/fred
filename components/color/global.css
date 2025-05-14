@@ -4,10 +4,10 @@
 @import url("background.css");
 @import url("text.css");
 @import url("link.css");
+@import url("scrollbar.css");
 
 /* Light/dark */
-
-:root {
+: root {
   color-scheme: light dark;
 }
 
@@ -67,4 +67,12 @@
   --color-purple: hsl(267deg 76% 56%);
   --color-purple-darker: hsl(267deg 65% 40%);
   --color-purple-darkest: hsl(267deg 55% 14%);
+}
+
+/* translucent */
+
+:root {
+  --color-transparent: #00000000;
+  --color-transparent-light: #ffffff40;
+  --color-transparent-dark: #00000040;
 }

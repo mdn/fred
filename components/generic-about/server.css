@@ -69,9 +69,6 @@
   --about-journey-line-color: light-dark(#007936, #8ff295);
   --about-journey-image-border: light-dark(#ffffff, #000000);
 
-  --scrollbar-bg: light-dark(#00000000, #00000000);
-  --scrollbar-color: light-dark(#00000040, #ffffff40);
-
   --center-padding: max(
     calc((100vw - var(--max-width)) / 2 + var(--gutter)),
     var(--gutter)

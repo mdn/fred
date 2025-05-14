@@ -7,12 +7,9 @@
   --community-text-success: light-dark(#007936, #8ff295);
   --community-header-text: light-dark(#696969, #b3b3b3);
   --community-header-stats-bg: light-dark(#e1f5e5, #394035);
-  --community-box-shadow: light-dark(
-    4px -2px 1rem 0 rgb(179 179 179 / 20%),
-    4px -4px 1rem 0 rgb(179 179 179 / 15%),
-    4px -2px 15px 0 rgb(38 38 38 / 20%),
-    4px -4px 15px 0 rgb(38 38 38 / 15%)
-  );
+  --community-box-shadow:
+    4px -2px 1rem 0 light-dark(rgb(179 179 179 / 20%), rgb(38 38 38 / 20%)),
+    4px -4px 1rem 0 light-dark(rgb(179 179 179 / 15%), rgb(38 38 38 / 15%));
   --community-circle-img-border: light-dark(#ffffff, #4e4e4e);
   --community-card-bg: light-dark(#ffffff, #000000);
   --community-card-header-bg: light-dark(#e1f5e5, #354039);
@@ -27,6 +24,12 @@
   --community-video-bg: url("./assets/video-bg.svg");
   --community-discord-bg: url("./assets/discord.svg");
   --community-calls-bg: url("./assets/community-calls.svg");
+
+  --button-bg--default: light-dark(#1b1b1b, #ffffff);
+  --button-bg-hover--default: light-dark(#696969, #cdcdcd);
+  --button-bg-active--default: light-dark(#9e9e9e, #9e9e9e);
+  --button-border-color--default: light-dark(#1d1d1d, #ffffff);
+  --button-color--default: var(--color-background-primary);
 }
 
 :root[data-theme="dark"] {
@@ -57,6 +60,7 @@
   --max-width: 74rem;
   --layout-text-primary: var(--community-text-primary);
   color: var(--community-text-secondary);
+  scrollbar-color: var(--scrollbar-color) var(--scrollbar-bg);
   background: var(--community-bg-secondary);
 
   h2,
@@ -85,6 +89,12 @@
 
   p + p {
     margin-top: 1.5rem;
+  }
+
+  ol,
+  ul {
+    padding: 0;
+    list-style: none;
   }
 
   section {
@@ -177,19 +187,19 @@
       }
 
       a {
-        --button-bg: var(--button-primary-default);
-        --button-bg-hover: var(--button-primary-hover);
-        --button-bg-active: var(--button-primary-active);
-        --button-border-color: var(--button-primary-default);
-        --button-color: var(--background-primary);
-        --button-font: var(--type-emphasis-m);
+        --button-bg: var(--button-bg--default);
+        --button-bg-hover: var(--button-bg-hover--default);
+        --button-bg-active: var(--button-bg-active--default);
+        --button-border-color: var(--button-border-color--default);
+        --button-color: var(--button-color--default);
         --button-padding: 0.43rem 1rem;
-        --button-radius: var(--elem-radius, 0.25rem);
+        --button-radius: 0.25rem;
         display: inline-block;
 
         padding: var(--button-padding);
 
-        font: var(--button-font);
+        font-size: var(--font-size-small);
+        font-weight: 600;
 
         color: var(--button-color);
 
@@ -332,19 +342,20 @@
           }
 
           a {
-            --button-bg: var(--button-primary-default);
-            --button-bg-hover: var(--button-primary-hover);
-            --button-bg-active: var(--button-primary-active);
-            --button-border-color: var(--button-primary-default);
-            --button-color: var(--background-primary);
-            --button-font: var(--type-emphasis-m);
+            --button-bg: var(--button-bg--default);
+            --button-bg-hover: var(--button-bg-hover--default);
+            --button-bg-active: var(--button-bg-active--default);
+            --button-border-color: var(--button-border-color--default);
+            --button-color: var(--button-color--default);
             --button-padding: 0.43rem 1rem;
-            --button-radius: var(--elem-radius, 0.25rem);
+            --button-radius: 0.25rem;
+
             display: inline-block;
 
             padding: var(--button-padding);
 
-            font: var(--button-font);
+            font-size: var(--font-size-small);
+            font-weight: 600;
 
             color: var(--button-color);
 
@@ -377,7 +388,7 @@
           }
         }
 
-        contributor-list {
+        mdn-contributor-list {
           grid-row: 1/5;
           grid-column: 1;
           min-width: 0;

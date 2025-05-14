@@ -16,6 +16,18 @@ export class GenericCommunity extends ServerComponent {
    * @returns
    */
   renderSection(section, i) {
+    // Pre-process section content for proper custom element naming.
+    // After yari has been sunset, change in generic-content
+    // and remove these replacements.
+    section.value.content = section.value.content?.replaceAll(
+      "<contributor-list>",
+      "<mdn-contributor-list>",
+    );
+    section.value.content = section.value.content?.replaceAll(
+      "</contributor-list>",
+      "</mdn-contributor-list>",
+    );
+
     /** @type {Github.Issues} */
     const issues = [];
     if (i === 0) {

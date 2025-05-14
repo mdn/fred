@@ -10,6 +10,7 @@ declare global {
     "mdn-compat-table": import("../components/compat-table/element.js").MDNCompatTable;
     "mdn-compat-table-lazy": import("../components/compat-table-lazy/element.js").MDNCompatTableLazy;
     "mdn-content-feedback": import("../components/content-feedback/element.js").MDNContentFeedback;
+    "mdn-contributor-list": import("../components/contributor-list/element.js").MDNContributorList;
     "mdn-copy-button": import("../components/copy-button/element.js").MDNCopyButton;
     "mdn-dropdown": import("../components/dropdown/element.js").MDNDropdown;
     "mdn-image-history": import("../components/image-history/element.js").MDNImageHistory;
