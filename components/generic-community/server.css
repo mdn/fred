@@ -1,4 +1,6 @@
 .community-container {
+  --gutter: 1rem;
+
   --community-bg-primary: light-dark(#fcfcfc, #101010);
   --community-bg-secondary: light-dark(#f2f2f5, #1b1b1b);
   --community-text-primary: light-dark(#000000, #ffffff);
@@ -59,9 +61,20 @@
   --community-section-gap: 5rem;
   --max-width: 74rem;
   --layout-text-primary: var(--community-text-primary);
+
+  display: flow-root;
+
+  min-height: 80vh;
+
   color: var(--community-text-secondary);
+
   scrollbar-color: var(--scrollbar-color) var(--scrollbar-bg);
+
   background: var(--community-bg-secondary);
+
+  blockquote {
+    margin: 0;
+  }
 
   h2,
   h3,
