@@ -9,36 +9,36 @@ import { ServerComponent } from "../server/index.js";
 const SCRIM_URL = "https://v2.scrimba.com/s06icdv?via=mdn";
 
 /** @enum {string} */
-const Topic = {
-  WebStandards: "Web Standards & Semantics",
-  Styling: "Styling",
-  Scripting: "Scripting",
-  BestPractices: "Best Practices",
-  Tooling: "Tooling",
-  None: "",
-};
+// const Topic = {
+//   WebStandards: "Web Standards & Semantics",
+//   Styling: "Styling",
+//   Scripting: "Scripting",
+//   BestPractices: "Best Practices",
+//   Tooling: "Tooling",
+//   None: "",
+// };
 
 /**
  * Maps a topic enum value to a CSS class string.
  * @param {Topic | undefined} topic
  * @returns {string} The corresponding CSS class name.
  */
-function _topic2css(topic) {
-  switch (topic) {
-    case Topic.WebStandards:
-      return "standards";
-    case Topic.Styling:
-      return "styling";
-    case Topic.Scripting:
-      return "scripting";
-    case Topic.Tooling:
-      return "tooling";
-    case Topic.BestPractices:
-      return "practices";
-    default:
-      return "none";
-  }
-}
+// function topic2css(topic) {
+//   switch (topic) {
+//     case Topic.WebStandards:
+//       return "standards";
+//     case Topic.Styling:
+//       return "styling";
+//     case Topic.Scripting:
+//       return "scripting";
+//     case Topic.Tooling:
+//       return "tooling";
+//     case Topic.BestPractices:
+//       return "practices";
+//     default:
+//       return "none";
+//   }
+// }
 
 export class CurriculumLanding extends ServerComponent {
   /**
