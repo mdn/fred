@@ -35,8 +35,10 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
       <mdn-dropdown>
         <button slot="button" class="language-switcher__button dropdown">
           ${globeSvg}
-          ${translations.find((translation) => locale === translation.locale)
-            ?.native}
+          <span
+            >${translations.find((translation) => locale === translation.locale)
+              ?.native}</span
+          >
         </button>
         <div
           slot="dropdown"

@@ -76,8 +76,12 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
   render() {
     return html`<div class="color-theme">
       <mdn-dropdown>
-        <button slot="button" class="color-theme__button dropdown">
-          ${this._icon} ${this.l10n`Theme`}
+        <button
+          slot="button"
+          class="color-theme__button dropdown"
+          title=${this.l10n`Switch color theme`}
+        >
+          ${this._icon} <span>${this.l10n`Theme`}</span>
         </button>
         <div
           slot="dropdown"

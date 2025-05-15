@@ -12,6 +12,10 @@
     &:hover {
       background-color: var(--color-background-secondary);
     }
+
+    a {
+      padding: 0;
+    }
   }
 
   ol {

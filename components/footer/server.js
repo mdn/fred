@@ -16,8 +16,9 @@ export class Footer extends ServerComponent {
    * @param {Fred.Context} context
    */
   render(context) {
-    return html`<mdn-placement-bottom></mdn-placement-bottom>
-      <div class="footer">
+    return html`
+      <mdn-placement-bottom></mdn-placement-bottom>
+      <footer class="footer">
         <div class="footer__mdn">
           <div class="footer__intro">
             <a class="footer__logo" href="/">${mdn}</a>
@@ -200,6 +201,7 @@ export class Footer extends ServerComponent {
             })}
           </p>
         </div>
-      </div> `;
+      </footer>
+    `;
   }
 }

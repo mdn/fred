@@ -25,6 +25,12 @@
   svg {
     fill: var(--color-text-primary);
   }
+
+  @media screen and (width <= 768px) {
+    > span {
+      display: none;
+    }
+  }
 }
 
 .color-theme__dropdown {

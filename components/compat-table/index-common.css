@@ -114,19 +114,19 @@ table {
       }
 
       &.bc-supports-no > button > span {
-        color: var(--color-red);
+        color: var(--color-text-red);
       }
 
       &.bc-supports-partial > button > span {
-        color: var(--color-yellow);
+        color: var(--color-text-yellow);
       }
 
       &.bc-supports-preview > button > span {
-        color: var(--color-blue);
+        color: var(--color-text-blue);
       }
 
       &.bc-supports-yes > button > span {
-        color: var(--color-green);
+        color: var(--color-text-green);
       }
     }
   }
@@ -141,7 +141,7 @@ table {
 
   .bc-supports.bc-supports-removed-partial {
     .bcd-cell-text-copy {
-      color: var(--color-yellow);
+      color: var(--color-text-yellow);
     }
   }
 
@@ -173,21 +173,21 @@ table {
     }
 
     .icon.icon-removed-partial {
-      background-color: var(--color-red);
+      background-color: var(--color-text-red);
 
       /* override icon */
       mask-image: url("./icons/status/no.svg");
     }
 
     .timeline .icon.icon-removed-partial {
-      background-color: var(--color-yellow);
+      background-color: var(--color-text-yellow);
       mask-image: url("./icons/status/partial.svg");
     }
   }
 
   .bc-support.bc-supports-removed-partial {
     .bcd-cell-text-copy {
-      color: var(--color-red);
+      color: var(--color-text-red);
     }
   }
 
@@ -242,15 +242,15 @@ table {
 }
 
 .bc-level-no {
-  background-color: var(--color-red);
+  background-color: var(--color-text-red);
 }
 
 .bc-level-partial {
-  background-color: var(--color-yellow);
+  background-color: var(--color-text-yellow);
 }
 
 .bc-level-preview {
-  background-color: var(--color-blue);
+  background-color: var(--color-text-blue);
 }
 
 .bc-legend-items-container {
@@ -365,7 +365,7 @@ table {
 
   .bc-level-yes.icon.icon-yes {
     /* override icon */
-    background-color: var(--color-green);
+    background-color: var(--color-text-green);
     mask-image: url("./icons/status/yes-circle.svg");
   }
 

@@ -25,6 +25,12 @@
   svg {
     fill: var(--color-text-primary);
   }
+
+  @media screen and (width <= 480px) {
+    > span {
+      display: none;
+    }
+  }
 }
 
 .language-switcher__dropdown {

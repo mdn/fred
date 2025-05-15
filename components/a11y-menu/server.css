@@ -1,0 +1,36 @@
+.a11y-menu {
+  --offset: 20em;
+  --outline: 2px;
+
+  position: absolute;
+  top: calc(-1 * var(--offset));
+  right: var(--outline);
+  left: var(--outline);
+  z-index: 1000;
+
+  width: calc(100% - 2 * var(--outline));
+
+  margin: 0; /* Reset. */
+
+  list-style: none; /* Reset. */
+
+  a {
+    position: absolute;
+    right: 0;
+    left: 0;
+
+    padding: 0.8em;
+
+    font-weight: 600;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    background-color: var(--color-background-primary);
+
+    &:focus-within {
+      top: calc(var(--offset) + var(--outline));
+    }
+  }
+}
