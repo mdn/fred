@@ -1,6 +1,6 @@
 .homepage {
   display: grid;
-  grid-template-columns: var(--layout-3-col);
+  grid-template-columns: var(--layout-3-col-extended);
 
   > * {
     grid-column: center;
