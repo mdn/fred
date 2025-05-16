@@ -3,6 +3,7 @@ namespace Rari {
   type DocPage = import("@mdn/rari").DocPage;
   type CurriculumPage = import("@mdn/rari").CurriculumPage;
   type CurriculumDoc = import("@mdn/rari").CurriculumDoc;
+  type CurriculumIndexEntry = import("@mdn/rari").CurriculumIndexEntry;
   type BlogPage = import("@mdn/rari").BlogPage;
   type ContributorSpotlightPage = import("@mdn/rari").ContributorSpotlightPage;
   type GenericPage = import("@mdn/rari").GenericPage;

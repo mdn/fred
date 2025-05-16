@@ -1,0 +1,198 @@
+@import url("../visually-hidden/global.css");
+
+:host {
+  display: block;
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  padding: 0;
+
+  appearance: none;
+
+  background: none;
+  border: none;
+}
+
+dialog {
+  display: contents;
+
+  &[open] {
+    width: 90vw;
+    height: 90vh;
+    background-color: rgb(0 0 0 / 60%);
+  }
+}
+
+.inner {
+  display: flex;
+
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: #000000;
+  border: 1px solid #000000;
+  container-type: size;
+}
+
+.header {
+  display: flex;
+
+  gap: 0.25rem;
+  align-items: center;
+
+  width: 100%;
+  min-height: 1.75rem;
+
+  padding: 0 0.5rem;
+  margin: 0;
+
+  background: #000000;
+
+  span {
+    margin-right: auto;
+    font-size: var(--type-tiny-font-size);
+    color: #ffffff;
+  }
+}
+
+.toggle,
+.external {
+  width: 1rem;
+  height: 1rem;
+
+  cursor: pointer;
+
+  background-color: #ffffff;
+
+  mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-position: center;
+  mask-size: contain;
+  mask-size: contain;
+
+  &:hover {
+    background-color: var(--curriculum-color);
+  }
+
+  &:focus-visible {
+    outline-style: auto;
+    outline-color: var(--accent-primary);
+    outline-offset: 1px;
+  }
+
+  &.enter {
+    mask-image: url("../icon/fullscreen-enter.svg");
+  }
+
+  &.exit {
+    mask-image: url("../icon/cancel.svg");
+  }
+}
+
+.external {
+  mask-image: url("../icon/external.svg");
+  mask-size: 75%;
+}
+
+.body {
+  position: relative;
+  flex: 1;
+  font-size: 4cqmin;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+
+  background-color: #453c78;
+  background-image:
+    url("./assets/scrimba-logo.svg"), url("./assets/scrim-hexagons.svg"),
+    url("./assets/scrim-bg.png");
+  background-repeat: no-repeat;
+  background-position:
+    1.5em 1.5em,
+    right,
+    center;
+  background-size:
+    auto 0.6em,
+    contain,
+    cover;
+
+  h1 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 60%;
+
+    margin: 0.5em;
+
+    font-family: "BarlowCondensed-SemiBold", "Inter", sans-serif;
+    font-size: 3em;
+    font-weight: 600;
+
+    line-height: 1;
+
+    color: #ffffff;
+
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+}
+
+.background-noise {
+  position: absolute;
+  inset: 0;
+
+  mix-blend-mode: soft-light;
+
+  filter: url("#noise");
+}
+
+.open,
+iframe {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  border: none;
+}
+
+.open {
+  --color: #8cb4ffcc;
+  font-size: inherit;
+
+  cursor: pointer;
+
+  background-image: var(--scrim-img);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  &:hover {
+    --color: #8cb4ffe5;
+  }
+
+  svg {
+    width: auto;
+    height: 9em;
+    stroke-width: 2px;
+
+    circle {
+      fill: var(--color);
+    }
+
+    path {
+      fill: #ffffff;
+    }
+  }
+}
