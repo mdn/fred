@@ -3,6 +3,7 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { toCamelCase } from "../../build/utils.js";
 import inlineScript from "../../entry.inline.js?source&csp=true";
+import Favicon from "../favicon/pure.js";
 import { ServerComponent } from "../server/index.js";
 
 export class OuterLayout extends ServerComponent {
@@ -43,8 +44,8 @@ export class OuterLayout extends ServerComponent {
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          ${unsafeHTML(`<script>${inlineScript}</script>`)} ${styleTags}
-          ${scriptTags} ${legacyTags}
+          ${Favicon()} ${unsafeHTML(`<script>${inlineScript}</script>`)}
+          ${styleTags} ${scriptTags} ${legacyTags}
           <title>${context.pageTitle || "MDN"}</title>
         </head>
         ${markup}
