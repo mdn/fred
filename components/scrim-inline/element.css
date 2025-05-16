@@ -72,10 +72,7 @@ dialog {
   background-color: #ffffff;
 
   mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
   mask-position: center;
-  mask-position: center;
-  mask-size: contain;
   mask-size: contain;
 
   &:hover {
