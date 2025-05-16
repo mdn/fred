@@ -114,7 +114,7 @@ table {
       }
 
       &.bc-supports-no > button > span {
-        color: var(--color-red);
+        color: var(--color-text-red);
       }
 
       &.bc-supports-partial > button > span {
@@ -173,7 +173,7 @@ table {
     }
 
     .icon.icon-removed-partial {
-      background-color: var(--color-red);
+      background-color: var(--color-text-red);
 
       /* override icon */
       mask-image: url("./icons/status/no.svg");
@@ -187,7 +187,7 @@ table {
 
   .bc-support.bc-supports-removed-partial {
     .bcd-cell-text-copy {
-      color: var(--color-red);
+      color: var(--color-text-red);
     }
   }
 
@@ -242,7 +242,7 @@ table {
 }
 
 .bc-level-no {
-  background-color: var(--color-red);
+  background-color: var(--color-text-red);
 }
 
 .bc-level-partial {

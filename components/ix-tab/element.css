@@ -1,7 +1,7 @@
 :host {
   --ix-tab-background-active: light-dark(
-    var(--color-gray-lightest),
-    var(--color-gray-darkest)
+    var(--color-gray-90),
+    var(--color-gray-10)
   );
   padding: 0.5em 30px;
 

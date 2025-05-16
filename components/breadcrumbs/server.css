@@ -41,12 +41,19 @@
       mask-position: center;
       mask-size: auto;
     }
+  }
 
-    @media screen and (width <= 768px) {
-      /* Hide grand-parents on mobile. */
-      &:not(:nth-last-child(-n + 2)) {
+  @media screen and (width <= 768px) {
+    @media (hover: hover) {
+      /* Hide grand-parents on hover devices. */
+      li:not(:nth-last-child(-n + 2)) {
         display: none;
       }
+    }
+
+    @media (hover: none) {
+      overflow-x: auto;
+      scrollbar-color: transparent transparent;
     }
   }
 }

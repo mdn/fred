@@ -35,7 +35,7 @@
 
 .bc-supports-no {
   .bcd-cell-text-copy {
-    color: var(--color-red);
+    color: var(--color-text-red);
   }
 }
 

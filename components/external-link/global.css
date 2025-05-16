@@ -1,19 +1,17 @@
-.external::after {
+.external {
   display: inline-flex;
+  column-gap: 0.25em;
+  align-items: center;
 
-  width: 0.75em;
-  height: 0.75em;
+  &::after {
+    width: 1em;
+    height: 1em;
 
-  margin-left: 0.25em;
+    content: "";
 
-  content: "";
+    background-color: currentcolor;
 
-  background-color: var(--color-border-secondary);
-
-  mask-image: url("../icon/external.svg");
-  mask-size: cover;
-}
-
-.external:hover::after {
-  background-color: var(--color-border-primary);
+    mask-image: url("../icon/external.svg");
+    mask-size: cover;
+  }
 }

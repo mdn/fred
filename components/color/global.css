@@ -4,9 +4,9 @@
 @import url("background.css");
 @import url("text.css");
 @import url("link.css");
+@import url("scrollbar.css");
 
 /* Light/dark */
-
 :root {
   color-scheme: light dark;
 }
@@ -21,12 +21,13 @@
 /* Gray */
 
 :root {
-  --color-gray-lightest: hsl(212deg 7% 98%);
-  --color-gray-lighter: hsl(212deg 7% 93%);
-  --color-gray-light: hsl(212deg 7% 80%);
-  --color-gray-dark: hsl(212deg 7% 26%);
-  --color-gray-darker: hsl(212deg 7% 16%);
-  --color-gray-darkest: hsl(212deg 7% 12%);
+  --color-gray-90: hsl(212deg 7% 97%);
+  --color-gray-80: hsl(212deg 7% 91%);
+  --color-gray-60: hsl(212deg 7% 78%);
+  --color-gray-40: hsl(212deg 7% 34%);
+  --color-gray-20: hsl(212deg 7% 22%);
+  --color-gray-10: hsl(212deg 7% 15%);
+  --color-gray-05: hsl(212deg 7% 10%);
 }
 
 /* Tinted */
@@ -67,4 +68,12 @@
   --color-purple: hsl(267deg 76% 56%);
   --color-purple-darker: hsl(267deg 65% 40%);
   --color-purple-darkest: hsl(267deg 55% 14%);
+}
+
+/* translucent */
+
+:root {
+  --color-transparent: #00000000;
+  --color-transparent-light: #ffffff40;
+  --color-transparent-dark: #00000040;
 }

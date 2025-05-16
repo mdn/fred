@@ -5,8 +5,8 @@
 :root {
   --color-text-primary: light-dark(var(--color-black), var(--color-white));
   --color-text-secondary: light-dark(
-    var(--color-gray-dark),
-    var(--color-gray-light)
+    var(--color-gray-40),
+    var(--color-gray-60)
   );
 }
 

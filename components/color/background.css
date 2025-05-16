@@ -3,13 +3,14 @@
 /* Basic */
 
 :root {
+  --color-background-page: light-dark(var(--color-white), var(--color-gray-05));
   --color-background-primary: light-dark(
     var(--color-white),
-    var(--color-gray-darkest)
+    var(--color-gray-10)
   );
   --color-background-secondary: light-dark(
-    var(--color-gray-lighter),
-    var(--color-gray-darker)
+    var(--color-gray-80),
+    var(--color-gray-20)
   );
 }
 

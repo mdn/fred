@@ -1,0 +1,10 @@
+:root {
+  --scrollbar-bg: light-dark(
+    var(--color-transparent),
+    var(--color-transparent)
+  );
+  --scrollbar-color: light-dark(
+    var(--color-transparent-dark),
+    var(--color-transparent-light)
+  );
+}

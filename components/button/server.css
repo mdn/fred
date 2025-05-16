@@ -50,7 +50,7 @@
   border-radius: var(--button-radius, var(--button-radius--default));
 
   &,
-  &.primary {
+  &[data-variant="primary"] {
     --button-bg--default: light-dark(#1b1b1b, #ffffff);
     --button-bg-hover--default: light-dark(#696969, #cdcdcd);
     --button-bg-active--default: light-dark(#9e9e9e, #9e9e9e);
@@ -58,12 +58,20 @@
     --button-color--default: var(--color-background-primary);
   }
 
-  &.secondary {
+  &[data-variant="secondary"] {
     --button-bg--default: var(--color-background-primary);
     --button-bg-hover--default: var(--color-border-secondary);
     --button-bg-active--default: var(--color-border-secondary);
     --button-border-color--default: var(--color-border-primary);
     --button-color--default: var(--color-border-primary);
+  }
+
+  &[data-variant="invisible"] {
+    --button-bg--default: transparent;
+    --button-bg-hover--default: transparent;
+    --button-bg-active--default: transparent;
+    --button-border-color--default: transparent;
+    --button-color--default: var(--color-text-primary);
   }
 }
 
