@@ -2,9 +2,9 @@
 <mask id="path-1-inside-1_1540_4582" fill="white">
 <rect y="1" width="16" height="13.5" rx="1"/>
 </mask>
-<rect y="1" width="16" height="13.5" rx="1" stroke="#4E4E4E" stroke-width="3" mask="url(#path-1-inside-1_1540_4582)"/>
-<line x1="6.75" y1="2" x2="6.75" y2="14" stroke="#4E4E4E" stroke-width="1.5"/>
-<rect x="3" y="4" width="1.5" height="1.5" fill="#4E4E4E"/>
-<rect x="3" y="7" width="1.5" height="1.5" fill="#4E4E4E"/>
-<rect x="3" y="10" width="1.5" height="1.5" fill="#4E4E4E"/>
+<rect y="1" width="16" height="13.5" rx="1" stroke="currentcolor" stroke-width="3" mask="url(#path-1-inside-1_1540_4582)"/>
+<line x1="6.75" y1="2" x2="6.75" y2="14" stroke="currentcolor" stroke-width="1.5"/>
+<rect x="3" y="4" width="1.5" height="1.5" fill="currentcolor"/>
+<rect x="3" y="7" width="1.5" height="1.5" fill="currentcolor"/>
+<rect x="3" y="10" width="1.5" height="1.5" fill="currentcolor"/>
 </svg>

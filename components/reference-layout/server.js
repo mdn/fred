@@ -1,8 +1,10 @@
 import { html } from "lit";
 
-import { Content } from "../content/server.js";
+import { ArticleFooter } from "../article-footer/server.js";
+import { BaselineIndicator } from "../baseline-indicator/server.js";
 import { LeftSidebar } from "../left-sidebar/server.js";
 import { ReferenceToc } from "../reference-toc/server.js";
+import { Section } from "../section/server.js";
 import { ServerComponent } from "../server/index.js";
 
 export class ReferenceLayout extends ServerComponent {
@@ -10,16 +12,27 @@ export class ReferenceLayout extends ServerComponent {
    * @param {Fred.Context<Rari.DocPage>} context
    */
   render(context) {
+    const { doc } = context;
+    const [description, ...sections] = doc.body.map((section) =>
+      Section.render(context, section),
+    );
+
     return html`
       <div class="reference-layout">
-        <aside class="reference-layout__toc">
-          <div class="reference-layout__toc-inner">
+        <main id="content" class="reference-layout__content">
+          <div class="reference-layout__content__header">
+            <h1>${doc.title}</h1>
+            ${BaselineIndicator.render(context)} ${description}
+          </div>
+          <aside class="reference-layout__toc">
             ${ReferenceToc.render(context)}
             <mdn-placement-sidebar></mdn-placement-sidebar>
+          </aside>
+          <div class="reference-layout__content__body">
+            ${sections} ${ArticleFooter.render(context)}
           </div>
-        </aside>
-        <div class="reference-layout__content">${Content.render(context)}</div>
-        <aside class="reference-layout__sidebar">
+        </main>
+        <aside class="reference-layout__sidebar" id="main-sidebar">
           ${LeftSidebar.render(context)}
         </aside>
       </div>

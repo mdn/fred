@@ -1,9 +1,9 @@
 import { html, nothing } from "lit";
 
 import { AuthorDateReadTime, BlogContainer } from "../blog/index.js";
-import { Section } from "../content/server.js";
 import { PageLayout } from "../page-layout/server.js";
 import { ReferenceToc } from "../reference-toc/server.js";
+import { Section } from "../section/server.js";
 
 import { ServerComponent } from "../server/index.js";
 
@@ -55,7 +55,7 @@ function SidePlacement(_context) {
  * @returns {Lit.TemplateResult}
  */
 function RenderBlogContent(context, { doc }) {
-  return html` ${doc.body.map((section) => Section(context, section))} `;
+  return html` ${doc.body.map((section) => Section.render(context, section))} `;
 }
 
 /**

@@ -1,0 +1,9 @@
+:host {
+  display: block;
+  height: 100%;
+  border-right: 1px solid var(--color-border-secondary);
+}
+
+mdn-button {
+  height: 100%;
+}
