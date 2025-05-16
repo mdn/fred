@@ -6,6 +6,7 @@
     min-content
     1fr
     min-content;
+  grid-template-columns: minmax(0, 1fr);
 
   min-height: 100svh;
 
