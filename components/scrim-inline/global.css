@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "BarlowCondensed-SemiBold";
+  font-weight: 600;
+
+  src:
+    local("BarlowCondensed-SemiBold"),
+    url("./assets/BarlowCondensed-SemiBold.woff2") format("woff2");
+  font-display: block;
+}

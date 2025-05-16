@@ -38,6 +38,7 @@ declare global {
     "mdn-play-runner": import("../components/play-runner/element.js").MDNPlayRunner;
     "mdn-playground": import("../components/playground/element.js").MDNPlayground;
     "mdn-progress-bar": import("../components/progress-bar/element.js").MDNProgressBar;
+    "mdn-scrim-inline": import("../components/scrim-inline/element.js").MDNScrimInline;
     "mdn-search-modal": import("../components/search-modal/element.js").MDNSearchModal;
     "mdn-sidebar-filter": import("../components/sidebar-filter/element.js").MDNSidebarFilter;
     "mdn-site-search": import("../components/site-search/element.js").MDNSiteSearch;
