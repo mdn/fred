@@ -4,4 +4,5 @@
   );
 
   --z-index-sticky-header: 100;
+  --z-index-sidebar-mobile: 90;
 }

@@ -41,6 +41,7 @@ declare global {
     "mdn-search-modal": import("../components/search-modal/element.js").MDNSearchModal;
     "mdn-sidebar-filter": import("../components/sidebar-filter/element.js").MDNSidebarFilter;
     "mdn-site-search": import("../components/site-search/element.js").MDNSiteSearch;
+    "mdn-toggle-sidebar": import("../components/toggle-sidebar/element.js").MDNToggleSidebar;
   }
 }
 

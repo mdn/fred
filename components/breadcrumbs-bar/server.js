@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 
 import { Breadcrumbs } from "../breadcrumbs/server.js";
 import bookmarkSvg from "../icon/bookmark.svg?lit";
@@ -11,10 +11,14 @@ export class BreadcrumbsBar extends ServerComponent {
    */
   render(context) {
     const colorScheme = context.renderer === "Homepage" ? "dark" : "";
+    const toggleSidebar =
+      context.renderer === "Doc"
+        ? html`<mdn-toggle-sidebar></mdn-toggle-sidebar>`
+        : nothing;
 
     return html`
       <div class="breadcrumbs-bar" data-scheme=${colorScheme}>
-        ${Breadcrumbs.render(context)}
+        ${toggleSidebar} ${Breadcrumbs.render(context)}
         <mdn-color-theme></mdn-color-theme>
         <button
           class="breadcrumbs-bar__component"
