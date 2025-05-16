@@ -15,17 +15,17 @@
 
   padding-block: 0.5rem 3rem;
 
-  @media (width < 769px) {
+  @media (--screen-md) {
     grid-template-rows: auto;
     grid-template-columns: auto;
   }
 
-  @media (width < 1200px) {
+  @media (--screen-xl) {
     grid-template-rows: min-content 1fr;
     grid-template-columns: 1fr 2fr;
   }
 
-  @media (width > 1440px) {
+  @media (--gt-screen-xxl) {
     padding-inline: calc((100% - 1440px) / 2);
   }
 }
@@ -37,12 +37,12 @@
   grid-column: 1 / 2;
   padding-inline: 1rem;
 
-  @media (width < 1200px) {
+  @media (--screen-xl) {
     grid-row: 2 / 3;
     grid-column: 1 / 2;
   }
 
-  @media (width < 769px) {
+  @media (--screen-md) {
     grid-row: 2 / 3;
     grid-column: 1 / 2;
   }
@@ -55,12 +55,12 @@
   grid-column: 2 / 3;
   padding-inline: 1rem;
 
-  @media (width < 1200px) {
+  @media (--screen-xl) {
     grid-row: 1 / span 2;
     grid-column: 2 / 3;
   }
 
-  @media (width < 769px) {
+  @media (--screen-md) {
     grid-row: 3 / 4;
     grid-column: 1 / 2;
   }
@@ -73,7 +73,7 @@
   grid-column: 3 / 4;
   padding-inline: 1rem;
 
-  @media (width < 1200px) {
+  @media (--screen-xl) {
     grid-row: 1 / 2;
     grid-column: 1 / 2;
   }

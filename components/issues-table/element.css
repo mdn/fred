@@ -29,7 +29,7 @@ td {
   padding: 1.5rem;
   border: none;
 
-  @media (width <= 769px) {
+  @media (--screen-md) {
     &:last-of-type {
       display: none;
     }
@@ -44,7 +44,7 @@ th {
 
   background: none;
 
-  @media (width <= 769px) {
+  @media (--screen-md) {
     display: none;
   }
 }

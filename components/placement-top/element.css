@@ -52,7 +52,7 @@
 
     font-size: 0.75rem;
 
-    @media (width >= /* $screen-md */ 769px) {
+    @media (--gt-screen-md) {
       grid-template-areas: "pong cta note" "pong cta no";
       grid-template-columns: fit-content(100%) auto fit-content(100%);
     }

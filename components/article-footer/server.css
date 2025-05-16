@@ -8,14 +8,15 @@
   border: 1px solid var(--color-border-primary);
   border-radius: var(--elem-radius, 0.25rem);
 
-  @media (width <= /* $screen-md */ 769px) {
+  @media (--screen-md) {
     margin: 3rem;
 
     /* Reduce space to article content. */
     margin-top: 0;
+    background: red;
   }
 
-  @media (width <= /* $screen-sm */ 426px) {
+  @media (--screen-sm) {
     margin-right: 1rem;
     margin-left: 1rem;
   }
