@@ -1,0 +1,10 @@
+@custom-media --screen-sm (width <= 426px);
+@custom-media --gt-screen-sm (width > 426px);
+@custom-media --screen-md (width <= 769px);
+@custom-media --gt-screen-md (width > 769px);
+@custom-media --screen-lg (width <= 992px);
+@custom-media --gt-screen-lg (width > 992px);
+@custom-media --screen-xl (width <= 1200px);
+@custom-media --gt-screen-xl (width > 1200px);
+@custom-media --screen-xxl (width <= 1441px);
+@custom-media --gt-screen-xxl (width > 1441px);

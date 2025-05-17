@@ -21,7 +21,7 @@
   background-color: var(--color-background-primary);
   border-radius: var(--border-radius);
 
-  @media (width <= 1199px) {
+  @media (--screen-xl) {
     grid-template-areas: "grade data actions";
     grid-template-columns: auto 1fr auto;
 
@@ -30,7 +30,7 @@
     justify-content: space-between;
   }
 
-  @media (width <= 991px) {
+  @media (--screen-lg) {
     grid-template-areas:
       "grade data   "
       ".     actions";
@@ -429,7 +429,7 @@ a {
     height: 1.3rem;
   }
 
-  @media (width <= 425.99px) {
+  @media (--screen-sm) {
     td {
       .iso-date {
         code {
@@ -439,7 +439,7 @@ a {
     }
   }
 
-  @media (width <= 991.99px) {
+  @media (--screen-lg) {
     /* responsive table */
     min-width: 0;
 
@@ -537,7 +537,7 @@ ol.tabs-list {
 
   overscroll-behavior-x: none;
 
-  @media (width <= 991.98px) {
+  @media (--screen-lg) {
     grid-template-columns: repeat(6, max-content) auto;
     column-gap: 1.75rem;
   }
@@ -639,13 +639,13 @@ ol.tabs-list {
 
       margin: 0;
 
-      @media (width <= 991.98px) {
+      @media (--screen-lg) {
         width: calc(
           100vw - 12rem - 3rem
         ); /* 12rem: placement width; 3rem: padding */
       }
 
-      @media (width <= 768.98px) {
+      @media (--screen-md) {
         width: calc(100vw - 2rem);
       }
     }

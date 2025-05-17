@@ -90,7 +90,7 @@ table {
     tr {
       height: 3rem;
 
-      @media (width >= /* $screen-sm */ 426px) {
+      @media (--gt-screen-sm) {
         &:last-child {
           th,
           td {

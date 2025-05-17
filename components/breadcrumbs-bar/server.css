@@ -24,13 +24,13 @@
     color-scheme: dark;
   }
 
-  @media (width > 1440px) {
+  @media (--gt-screen-xxl) {
     padding-inline: calc(
       (100% - 1440px + (var(--breadcrumbs-bar-side-padding) * 2)) / 2
     );
   }
 
-  @media screen and (width <= 768px) {
+  @media (--screen-md) {
     column-gap: 0.5rem;
   }
 
@@ -63,7 +63,7 @@
     fill: var(--color-text-primary);
   }
 
-  @media screen and (width <= 768px) {
+  @media (--screen-md) {
     > span {
       display: none;
     }

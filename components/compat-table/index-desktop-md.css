@@ -1,6 +1,6 @@
 /* Compat (desktop-md) */
 
-@media (width >= /* $screen-md */ 769px) {
+@media (--gt-screen-md) {
   .table-container {
     width: calc(100% + 6rem);
   }

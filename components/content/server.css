@@ -106,7 +106,7 @@
       height: 631px;
     }
 
-    @media (width < 992px) {
+    @media (--screen-lg) {
       height: 675px;
 
       &[name^="JavaScript Demo:" i] {
