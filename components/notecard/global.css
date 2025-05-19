@@ -1,12 +1,12 @@
 .notecard,
 .callout {
   padding-block: 1px;
-  padding-inline: 16px;
-  margin-block: 16px;
+  padding-inline: 1em;
+  margin-block: 1em;
 
   background-color: var(--color-background-secondary);
   border-inline-start: 2px solid var(--color-text-secondary);
-  border-radius: 8px;
+  border-radius: 0.5em;
 
   &.note,
   &.secure,
