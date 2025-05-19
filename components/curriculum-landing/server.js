@@ -3,13 +3,14 @@ import { html, nothing, svg } from "lit";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { Section } from "../content/server.js";
+import _landingStairwaySVG1 from "../curriculum/assets/curriculum-landing-stairway-1.svg?lit";
+import _landingStairwaySVG2Small from "../curriculum/assets/curriculum-landing-stairway-2-small.svg?lit";
+import _landingStairwaySVG2 from "../curriculum/assets/curriculum-landing-stairway-2.svg?lit";
 import landingSVG from "../curriculum/assets/curriculum-landing-top.svg?lit";
+import partnerBannerDark from "../curriculum/assets/curriculum-partner-banner-illustration-large-dark.svg";
+import partnerBannerLight from "../curriculum/assets/curriculum-partner-banner-illustration-large-light.svg";
 import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
-
-// import landingStairwaySVG1 from "../curriculum/assets/curriculum-landing-stairway-1.svg?lit";
-// import landingStairwaySVG2Small from "../curriculum/assets/curriculum-landing-stairway-2-small.svg?lit";
-// import landingStairwaySVG2 from "../curriculum/assets/curriculum-landing-stairway-2.svg?lit";
 
 const SCRIM_URL = "https://v2.scrimba.com/s06icdv?via=mdn";
 const SCRIM_TITLE = "MDN + Scrimba partnership announcement scrim";
@@ -43,7 +44,6 @@ export class CurriculumLanding extends ServerComponent {
         // Render the about section
         content.push(this.renderAbout(doc, section));
       } else if (section.value.id === "modules") {
-        console.log("Modules section", section);
         // Render the modules and stairway sections
         content.push(this.renderModules(doc, section));
       } else {
@@ -101,7 +101,7 @@ export class CurriculumLanding extends ServerComponent {
     // content is already the HTML content
     const contentHtml = content;
     // Path needs to be correct relative to the server rendering context
-    const scrimBg = "./assets/landing-scrim.png"; // Assuming root-relative path
+    const scrimBg = "../curriculum/assets/landing-scrim.png"; // Assuming root-relative path
 
     return html`
       <section id=${id} class="landing-about-container">
@@ -145,7 +145,7 @@ export class CurriculumLanding extends ServerComponent {
     const { title, id } = section.value;
     const modules = doc?.modules;
 
-    console.log("modules", modules);
+    // console.log("modules", modules);
 
     // Placeholder SVGs for the stairway section.
     // The classes and IDs match the React component structure for CSS styling.
@@ -214,56 +214,58 @@ export class CurriculumLanding extends ServerComponent {
    * Renders the ModulesListList structure, including the tab labels and the selected modules list.
    * On the server, this defaults to rendering the 'Core modules' list (index 1) content.
    * Client-side JS would be needed to enable interactive tab switching.
-   * @param {Rari.CurriculumIndexEntry[]} modulesListGroups - Array of module list groups (e.g., Started, Core, Extensions).
+   * @param {Rari.CurriculumIndexEntry[]} modules - Array of module list groups (e.g., Started, Core, Extensions).
    * @returns {Lit.TemplateResult | Lit.nothing} The Lit HTML template for the module list list, or undefined if no modules.
    */
-  renderModulesListList(modulesListGroups) {
-    if (!modulesListGroups || modulesListGroups.length === 0) {
+  renderModulesListList(modules) {
+    if (!modules || modules.length === 0) {
       return nothing;
     }
 
-    // Default to rendering the 'Core modules' list (index 1) as in the React component's initial state
-    const selectedTabIndex = 1;
-    const selectedModuleListEntry = modulesListGroups[selectedTabIndex];
-    const selectedModuleList = selectedModuleListEntry?.children;
-    const letsBeginUrl = selectedModuleListEntry?.children?.[0]?.url;
-
     return html`
-      <ol class="modules-list-list">
-        ${modulesListGroups.map((modulesListItem, i) => {
-          const isSelectedTab = i === selectedTabIndex;
-          const selectedContent =
-            isSelectedTab && selectedModuleList
-              ? html`
-                  ${this.renderModulesList(selectedModuleList)}
-                  ${letsBeginUrl
-                    ? html`<a
-                        class="lets-begin button button-primary"
-                        href=${letsBeginUrl}
-                        >Let's begin</a
-                      >`
-                    : nothing}
-                `
-              : nothing;
-          return html`
-            <li id="modules-${i}" class="modules-list-list-item">
-              <input
-                class="visually-hidden"
-                id="module-${i}"
-                name="selected"
-                type="radio"
-                ?checked=${isSelectedTab}
-                readonly
-              />
-              <label for="module-${i}"
-                >${modulesListItem.title.replace(/ modules$/, "")}</label
+      <mdn-curriculum-tabs>
+        <ol class="modules-list-list">
+          ${modules.map((modulesList, i) => {
+            const listItemId = `modules-${i}`;
+            const radioId = `module-${i}`;
+            const isChecked = i === 1;
+
+            // Recursively render children if they exist
+            const nestedChildrenHtml =
+              modulesList.children && modulesList.children.length > 0
+                ? html`${this.renderModulesList(modulesList.children)}
+                    <a
+                      href=${modulesList.children[0]?.url || "#"}
+                      target="_self"
+                      class="lets-begin"
+                    >
+                      Let's begin
+                    </a> `
+                : nothing;
+
+            return html`
+              <li
+                id=${listItemId}
+                class="modules-list-list-item"
+                key="mll-${i}"
               >
-              ${selectedContent}
-            </li>
-          `;
-        })}
-        <!-- CSS handles the horizontal rule ::before -->
-      </ol>
+                <input
+                  class="visually-hidden"
+                  id=${radioId}
+                  name="selected"
+                  type="radio"
+                  ${isChecked ? "checked" : ""}
+                  data-index=${i}
+                />
+                <label for=${radioId}>
+                  ${modulesList.title.replace(/ modules$/, "")}
+                </label>
+                ${nestedChildrenHtml}
+              </li>
+            `;
+          })}
+        </ol>
+      </mdn-curriculum-tabs>
     `;
   }
 
@@ -274,6 +276,7 @@ export class CurriculumLanding extends ServerComponent {
    * @returns {Lit.TemplateResult | Lit.nothing} The Lit HTML template for the module list.
    */
   renderModulesList(modules) {
+    // console.log("modules", modules);
     if (!modules || modules.length === 0) {
       return nothing;
     }
@@ -309,10 +312,8 @@ export class CurriculumLanding extends ServerComponent {
    */
   renderPartnerBanner() {
     // Paths need to be correct relative to the server rendering context
-    const bannerDark =
-      "/assets/curriculum/curriculum-partner-banner-illustration-large-dark.svg";
-    const bannerLight =
-      "/assets/curriculum/curriculum-partner-banner-illustration-large-light.svg";
+    const bannerDark = partnerBannerDark;
+    const bannerLight = partnerBannerLight;
 
     return html`
       <section class="curriculum-partner-banner-container">
@@ -342,11 +343,13 @@ export class CurriculumLanding extends ServerComponent {
             </a>
           </section>
 
-          <!-- Replicate ThemedPicture with source and img tags -->
-          <picture>
-            <source srcset=${bannerDark} media="(prefers-color-scheme: dark)" />
-            <img src=${bannerLight} alt="" />
-          </picture>
+          <mdn-themed-image
+            src-light=${bannerLight}
+            src-dark=${bannerDark}
+            alt="MDN partner illustration"
+          >
+            <img src=${bannerLight} alt="MDN partner illustration" />
+          </mdn-themed-image>
         </div>
       </section>
     `;
