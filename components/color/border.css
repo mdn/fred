@@ -9,8 +9,5 @@
     var(--color-gray-60),
     var(--color-gray-40)
   );
-  --color-border-active: light-dark(
-    var(--color-blue-lighter),
-    var(--color-blue-darker)
-  );
+  --color-border-active: light-dark(var(--color-blue-80), var(--color-blue-20));
 }

@@ -15,6 +15,9 @@
     aside {
       display: flex;
 
+      flex-wrap: wrap;
+
+      gap: 0.5rem;
       align-items: center;
 
       padding: 0.5rem;
@@ -24,16 +27,19 @@
 
       h1 {
         margin: 0;
+        margin-right: auto;
         font-size: var(--font-size-normal);
       }
 
       menu {
         display: flex;
 
+        flex-wrap: wrap;
+
         gap: 0.5rem;
 
+        padding: 0;
         margin: 0;
-        margin-left: auto;
       }
     }
 
@@ -51,6 +57,7 @@
       &[open] {
         flex-grow: 1;
         flex-basis: 0;
+        min-height: 12rem;
       }
 
       summary {
@@ -92,5 +99,10 @@
         }
       }
     }
+  }
+
+  @media (width <= 769px) {
+    display: flex;
+    flex-direction: column;
   }
 }

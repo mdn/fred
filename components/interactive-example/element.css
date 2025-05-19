@@ -224,11 +224,11 @@ mdn-ix-tab-wrapper {
 
     .choice {
       --field-focus-border: light-dark(
-        var(--color-blue),
-        var(--color-blue-lighter)
+        var(--color-blue-50),
+        var(--color-blue-80)
       );
       --focus-01: 0 0 0 3px
-        light-dark(var(--color-blue-lightest), var(--color-blue-darkest));
+        light-dark(var(--color-blue-90), var(--color-blue-10));
       display: flex;
       flex-grow: 1;
       align-items: center;
@@ -273,8 +273,8 @@ mdn-ix-tab-wrapper {
       &.unsupported {
         mdn-play-editor {
           border-color: light-dark(
-            var(--color-yellow),
-            var(--color-yellow-lighter)
+            var(--color-yellow-50),
+            var(--color-yellow-80)
           );
         }
 
