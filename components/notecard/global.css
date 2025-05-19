@@ -1,4 +1,5 @@
-.notecard {
+.notecard,
+.callout {
   padding-block: 1px;
   padding-inline: 16px;
   margin-block: 16px;
@@ -21,5 +22,72 @@
 
   &.tip {
     background-color: var(--color-background-green);
+  }
+
+  &.deprecated,
+  &.experimental,
+  &.nonstandard,
+  &.note,
+  &.secure,
+  &.tip,
+  &.warning,
+  &.worker {
+    > *:first-child::before {
+      display: inline-block;
+
+      width: 1em;
+      height: 1em;
+
+      margin-right: 0.5ch;
+
+      vertical-align: middle;
+
+      content: "";
+
+      background-color: var(--color-text-primary);
+
+      mask-repeat: no-repeat;
+      mask-position: center center;
+    }
+  }
+
+  &.deprecated > *:first-child::before {
+    /* e.g. Window: blur() method */
+    mask-image: url("./icons/deprecated.svg");
+  }
+
+  &.experimental > *:first-child::before {
+    /* e.g. Barcode Detection API */
+    mask-image: url("./icons/experimental.svg");
+  }
+
+  &.nonstandard > *:first-child::before {
+    /* e.g. Document: caretRangeFromPoint() method */
+    mask-image: url("./icons/warning.svg");
+  }
+
+  &.note > *:first-child::before {
+    /* e.g. Barcode Detection API */
+    mask-image: url("./icons/note.svg");
+  }
+
+  &.secure > *:first-child::before {
+    /* e.g. Barcode Detection API */
+    mask-image: url("./icons/secure.svg");
+  }
+
+  &.tip > *:first-child::before {
+    /* (Not used in content yet) */
+    mask-image: url("./icons/tip.svg");
+  }
+
+  &.warning > *:first-child::before {
+    /* e.g. Navigator: scheduling property */
+    mask-image: url("./icons/warning.svg");
+  }
+
+  &.worker p::before {
+    /* e.g. Worker: Worker() constructor (needs rari change) */
+    mask-image: url("./icons/worker.svg");
   }
 }
