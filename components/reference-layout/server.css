@@ -20,17 +20,17 @@
 
   padding-block: var(--reference-layout-padding-top) 3rem;
 
-  @media (--screen-md) {
+  @media (--screen-small-and-narrower) {
     grid-template-rows: auto;
     grid-template-columns: auto;
   }
 
-  @media (--screen-xl) {
+  @media (--screen-large-and-narrower) {
     grid-template-rows: min-content 1fr;
     grid-template-columns: 1fr 2fr;
   }
 
-  @media (--gt-screen-xxl) {
+  @media (--screen-extra-extra-large) {
     padding-inline: calc((100% - 1440px) / 2);
   }
 
@@ -41,12 +41,12 @@
     grid-column: 1 / 2;
     padding-inline: 1rem;
 
-    @media (--screen-xl) {
+    @media (--screen-large-and-narrower) {
       grid-row: 2 / 3;
       grid-column: 1 / 2;
     }
 
-    @media (--screen-md) {
+    @media (--screen-small-and-narrower) {
       grid-row: 2 / 3;
       grid-column: 1 / 2;
     }
@@ -68,12 +68,12 @@
     grid-column: 2 / 3;
     padding-inline: 1rem;
 
-    @media (--screen-xl) {
+    @media (--screen-large-and-narrower) {
       grid-row: 1 / span 2;
       grid-column: 2 / 3;
     }
 
-    @media (--screen-md) {
+    @media (--screen-small-and-narrower) {
       grid-row: 3 / 4;
       grid-column: 1 / 2;
     }
@@ -86,7 +86,7 @@
     grid-column: 3 / 4;
     padding-inline: 1rem;
 
-    @media (--screen-xl) {
+    @media (--screen-large-and-narrower) {
       grid-row: 1 / 2;
       grid-column: 1 / 2;
     }

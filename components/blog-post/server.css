@@ -11,21 +11,21 @@
 
   padding-inline: var(--layout-side-padding);
 
-  @media (--gt-screen-lg) {
+  @media (--screen-large-and-wider) {
     grid-template-areas:
       "post toc"
       "newsletter toc";
     grid-template-columns: minmax(auto, 100%) minmax(0, 12rem);
   }
 
-  @media (--gt-screen-xl) {
+  @media (--screen-extra-large-and-wider) {
     grid-template-areas:
       "nothing post toc"
       "nothing newsletter toc";
     grid-template-columns: minmax(auto, 1fr) minmax(0, 52rem) minmax(15rem, 1fr);
   }
 
-  @media (--gt-screen-xxl) {
+  @media (--screen-extra-extra-large) {
     grid-template-areas:
       "toc post place"
       "toc newsletter place";
@@ -56,7 +56,7 @@
     overflow: auto;
   }
 
-  @media (--gt-screen-lg) {
+  @media (--screen-large-and-wider) {
     display: flex;
     flex-direction: column;
     grid-area: toc;
@@ -66,7 +66,7 @@
     }
   }
 
-  @media (--gt-screen-xxl) {
+  @media (--screen-extra-extra-large) {
     display: contents;
 
     .blog-post__toc {

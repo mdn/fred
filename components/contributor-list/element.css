@@ -21,7 +21,7 @@ ul {
   margin: 0;
 }
 
-@media (--screen-md) {
+@media (--screen-small-and-narrower) {
   ul {
     display: flex;
     margin-top: 2rem;
@@ -67,7 +67,7 @@ svg {
 }
 
 @supports (offset-path: ellipse(100% 50% at 100% 50%)) {
-  @media (--gt-screen-md) {
+  @media (--screen-medium-and-wider) {
     .wrap {
       width: 100%;
       height: 100%;

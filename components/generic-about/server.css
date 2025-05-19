@@ -114,11 +114,11 @@
     margin: 0;
   }
 
-  @media (--screen-md) {
+  @media (--screen-small-and-narrower) {
     --about-section-gap: 3rem;
   }
 
-  @media (--gt-screen-md) {
+  @media (--screen-medium-and-wider) {
     h1 {
       font-size: var(--font-size-largest);
       font-weight: 600;
@@ -144,7 +144,7 @@
     section {
       padding-top: 5rem;
 
-      @media (--screen-md) {
+      @media (--screen-small-and-narrower) {
         padding-top: 1rem;
       }
     }
@@ -154,7 +154,7 @@
       font-size: var(--font-size-largest);
       color: var(--header-text-primary);
 
-      @media (--screen-md) {
+      @media (--screen-small-and-narrower) {
         font-size: var(--font-size-larger);
       }
 
@@ -166,7 +166,7 @@
 
         line-height: 120%;
 
-        @media (--screen-md) {
+        @media (--screen-small-and-narrower) {
           font-size: 1.25rem;
         }
       }
@@ -188,7 +188,7 @@
     + section {
       margin-top: 4.56rem;
 
-      @media (--screen-md) {
+      @media (--screen-small-and-narrower) {
         margin-top: 2rem;
       }
     }
@@ -213,7 +213,7 @@
       border-radius: 0.5rem;
       box-shadow: var(--stats-box-shadow);
 
-      @media (--screen-md) {
+      @media (--screen-small-and-narrower) {
         flex-wrap: wrap;
         margin-top: 2rem;
       }
@@ -231,7 +231,7 @@
 
         overflow-wrap: anywhere;
 
-        @media (--screen-md) {
+        @media (--screen-small-and-narrower) {
           flex: 1;
           flex-direction: column;
 
@@ -313,7 +313,7 @@
       var(--inner-width) - var(--separator-width) - var(--image-width)
     );
 
-    @media (--screen-xl) {
+    @media (--screen-large-and-narrower) {
       --separator-width: 6rem;
     }
 
@@ -326,7 +326,7 @@
       margin-top: 3rem;
       border-right: var(--about-journey-line-color) dashed 0.0625rem;
 
-      @media (--screen-lg) {
+      @media (--screen-medium-and-narrower) {
         width: auto;
 
         margin-left: 1rem;
@@ -351,7 +351,7 @@
           margin-bottom: 2rem;
         }
 
-        @media (--screen-lg) {
+        @media (--screen-medium-and-narrower) {
           padding-left: 2rem;
         }
 
@@ -371,7 +371,7 @@
           background-repeat: no-repeat;
           background-position: center center;
 
-          @media (--screen-lg) {
+          @media (--screen-medium-and-narrower) {
             --dot-height: 2rem;
             right: auto;
             left: calc(var(--dot-height) / -2);
@@ -396,7 +396,7 @@
 
         text-decoration-line: underline;
 
-        @media (--screen-lg) {
+        @media (--screen-medium-and-narrower) {
           margin-bottom: -0.75em;
           font-size: 1.25rem;
         }
@@ -420,7 +420,7 @@
           mask-position: center right;
           mask-size: cover;
 
-          @media (--screen-lg) {
+          @media (--screen-medium-and-narrower) {
             content: none;
           }
         }
@@ -442,7 +442,7 @@
             var(--about-journey-image-border);
           box-shadow: var(--about-journey-shadow);
 
-          @media (--screen-lg) {
+          @media (--screen-medium-and-narrower) {
             position: relative;
             top: auto;
             left: auto;
@@ -530,7 +530,7 @@
     display: block;
     margin: var(--about-section-gap) auto;
 
-    @media (--gt-screen-lg) {
+    @media (--screen-large-and-wider) {
       .section-content {
         padding-right: 30rem;
 
@@ -630,7 +630,7 @@
         --stairs-icon: url("./assets/handshake.svg");
       }
 
-      @media (--screen-md) {
+      @media (--screen-small-and-narrower) {
         li {
           --stairs-step-indent: 0;
           --stairs-padding-left: var(--stairs-icon-size);
@@ -662,7 +662,7 @@
     border: var(--about-join-us-border);
     border-radius: 0.5rem;
 
-    @media (--screen-md) {
+    @media (--screen-small-and-narrower) {
       padding: 1rem 0;
       padding-bottom: 12rem;
 
@@ -681,7 +681,7 @@
 
     gap: 2rem;
 
-    @media (--gt-screen-md) {
+    @media (--screen-medium-and-wider) {
       gap: 5rem;
     }
 
@@ -809,7 +809,7 @@
         background: var(--about-core-values-bg);
       }
 
-      @media (--gt-screen-lg) {
+      @media (--screen-large-and-wider) {
         display: grid;
 
         grid-template-columns: [left-start] 40% [left-end right-start] 1fr [right-end];
@@ -923,14 +923,14 @@
       text-transform: none;
     }
 
-    @media (--screen-md) {
+    @media (--screen-small-and-narrower) {
       h4,
       h5 {
         font-size: var(--font-size-normal);
       }
     }
 
-    @media (--screen-lg) {
+    @media (--screen-medium-and-narrower) {
       --team-grid-gap: 2rem;
       grid-template-columns: [full-start] 1fr 1fr [full-end];
 
@@ -965,7 +965,7 @@
       border: 1px solid var(--about-team-bg);
       box-shadow: var(--about-team-shadow);
 
-      @media (--screen-sm) {
+      @media (--screen-extra-small) {
         grid-column: full;
       }
 
@@ -1102,7 +1102,7 @@
           }
         }
 
-        @media (--screen-sm) {
+        @media (--screen-extra-small) {
           grid-template-areas: "name" "title" "picture" "bio";
           grid-template-columns: 1fr;
 

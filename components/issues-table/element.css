@@ -29,7 +29,7 @@ td {
   padding: 1.5rem;
   border: none;
 
-  @media (--screen-md) {
+  @media (--screen-small-and-narrower) {
     &:last-of-type {
       display: none;
     }
@@ -44,7 +44,7 @@ th {
 
   background: none;
 
-  @media (--screen-md) {
+  @media (--screen-small-and-narrower) {
     display: none;
   }
 }

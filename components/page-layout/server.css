@@ -20,7 +20,7 @@
   z-index: var(--z-index-sticky-header);
 }
 
-@media (--screen-md) {
+@media (--screen-small-and-narrower) {
   .page-layout__banner {
     display: none;
   }

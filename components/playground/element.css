@@ -101,7 +101,7 @@
     }
   }
 
-  @media (width <= 769px) {
+  @media (--screen-small-and-narrower) {
     display: flex;
     flex-direction: column;
   }

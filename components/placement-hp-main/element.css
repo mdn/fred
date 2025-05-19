@@ -30,7 +30,7 @@
     padding: 0 1rem;
     margin: 0 auto;
 
-    @media (--screen-xxl) {
+    @media (--screen-extra-large-and-narrower) {
       grid-template-areas:
         "pong note"
         "pong no";
@@ -38,7 +38,7 @@
       grid-template-columns: auto max-content;
     }
 
-    @media (--screen-md) {
+    @media (--screen-small-and-narrower) {
       grid-template-areas:
         "pong"
         "note";

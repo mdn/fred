@@ -1,6 +1,6 @@
 /* Compat (desktop) */
 
-@media (--gt-screen-sm) {
+@media (--screen-small-and-wider) {
   .bc-table {
     /* Expand all columns. */
     grid-template-columns: minmax(20vw, min-content) repeat(
