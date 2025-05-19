@@ -13,28 +13,19 @@
 /* Tinted */
 
 :root {
-  --color-text-red: light-dark(
-    var(--color-red-darker),
-    var(--color-red-lighter)
-  );
+  --color-text-red: light-dark(var(--color-red-20), var(--color-red-80));
   --color-text-orange: light-dark(
-    var(--color-orange-darker),
-    var(--color-orange-lighter)
+    var(--color-orange-20),
+    var(--color-orange-80)
   );
   --color-text-yellow: light-dark(
-    var(--color-yellow-darker),
-    var(--color-yellow-lighter)
+    var(--color-yellow-20),
+    var(--color-yellow-80)
   );
-  --color-text-green: light-dark(
-    var(--color-green-darker),
-    var(--color-green-lighter)
-  );
-  --color-text-blue: light-dark(
-    var(--color-blue-darker),
-    var(--color-blue-lighter)
-  );
+  --color-text-green: light-dark(var(--color-green-20), var(--color-green-80));
+  --color-text-blue: light-dark(var(--color-blue-20), var(--color-blue-80));
   --color-text-purple: light-dark(
-    var(--color-purple-darker),
-    var(--color-purple-lighter)
+    var(--color-purple-20),
+    var(--color-purple-80)
   );
 }
