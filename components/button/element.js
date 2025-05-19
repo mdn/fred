@@ -10,6 +10,7 @@ export class MDNButton extends LitElement {
     disabled: { type: Boolean },
     variant: { type: String },
     icon: { state: true },
+    iconOnly: { type: Boolean, attribute: "icon-only" },
     href: { type: String },
   };
 
@@ -18,6 +19,7 @@ export class MDNButton extends LitElement {
     this.disabled = false;
     /** @type {Lit.TemplateResult | undefined} */
     this.icon = undefined;
+    this.iconOnly = false;
     /** @type {import("./types.js").ButtonVariants} */
     this.variant = "primary";
     /** @type {string | undefined} */
@@ -29,6 +31,7 @@ export class MDNButton extends LitElement {
       label: html`<slot></slot>`,
       disabled: this.disabled,
       icon: this.icon,
+      iconOnly: this.iconOnly,
       variant: this.variant,
       href: this.href,
     });

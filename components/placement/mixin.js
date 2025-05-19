@@ -62,7 +62,7 @@ export const PlacementMixin = (Base) =>
      * @param {Placements.PlacementContextData} _placementContext
      */
     renderComplete(_placementContext) {
-      console.error("Must be implemented by subclass");
+      throw new Error("Must be implemented by subclass");
     }
 
     /**

@@ -22,7 +22,6 @@ export class MDNPlacementHpMain extends PlacementMixin(LitElement) {
    * @returns
    */
   renderComplete(placementContext) {
-    super.renderComplete(placementContext);
     const { hpMain: data } = placementContext;
     if (!data) {
       return nothing;

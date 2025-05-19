@@ -1,9 +1,9 @@
 const button = document.querySelector(`[aria-controls="navigation__popup"]`);
-const menu = document.querySelector("#navigation__popup");
-if (button instanceof HTMLElement && menu instanceof HTMLElement) {
+const navigation = document.querySelector(".navigation");
+if (button instanceof HTMLElement && navigation instanceof HTMLElement) {
   button.addEventListener("click", () => {
-    const open = (!(menu.dataset.open === "true")).toString();
-    menu.dataset.open = open;
+    const open = (!(navigation.dataset.open === "true")).toString();
+    navigation.dataset.open = open;
     button.setAttribute("aria-expanded", open);
   });
 }

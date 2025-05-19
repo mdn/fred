@@ -37,11 +37,11 @@ html {
 body {
   font-family: var(--font-family-text);
   font-size: var(--font-size-normal);
-  font-feature-settings: "ss02";
+  font-variant-alternates: styleset(disambiguation);
 
   line-height: var(--font-line-normal);
 
   color: var(--color-text-primary);
 
-  background-color: var(--color-background-primary);
+  background-color: var(--color-background-page);
 }

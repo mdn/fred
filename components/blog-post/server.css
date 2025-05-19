@@ -9,9 +9,7 @@
 
   width: 100%;
 
-  padding-inline: calc(
-    (100% - 1440px + (var(--navigation-side-padding) * 2)) / 2
-  );
+  padding-inline: var(--layout-side-padding);
 
   @media (width >= 992px) {
     grid-template-areas:

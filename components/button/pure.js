@@ -1,9 +1,11 @@
 import { html, nothing } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 /**
  * @param {object} options
- * @param {string | Lit.TemplateResult} [options.label]
+ * @param {string | Lit.TemplateResult} options.label
  * @param {Lit.TemplateResult} [options.icon]
+ * @param {boolean} [options.iconOnly]
  * @param {boolean} [options.disabled]
  * @param {string} [options.href]
  * @param {import("./types.js").ButtonVariants} [options.variant]
@@ -11,15 +13,30 @@ import { html, nothing } from "lit";
 export default function Button({
   label,
   icon,
+  iconOnly,
   disabled = false,
   href,
   variant,
 }) {
-  const inner = html`${icon ? html`<span class="icon">${icon}</span>` : nothing}
-  ${label}`;
+  const inner = [
+    icon ? html`<span class="icon">${icon}</span>` : nothing,
+    html`<span id="label" class="label" ?hidden=${iconOnly}>${label}</span>`,
+  ];
   return href
-    ? html`<a class="button ${variant}" href=${href}>${inner}</a>`
-    : html`<button ?disabled=${disabled} class="button ${variant}">
+    ? html`<a
+        class="button"
+        data-variant=${ifDefined(variant)}
+        href=${href}
+        aria-labelledby="label"
+      >
+        ${inner}
+      </a>`
+    : html`<button
+        ?disabled=${disabled}
+        class="button"
+        data-variant=${ifDefined(variant)}
+        aria-labelledby="label"
+      >
         ${inner}
       </button>`;
 }

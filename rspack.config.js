@@ -103,6 +103,7 @@ const common = {
             loader: "css-loader",
             options: {
               exportType: "string",
+              importLoaders: 1,
             },
           },
           "postcss-loader",
@@ -125,157 +126,152 @@ const common = {
   },
 };
 
-/** @type {import("@rspack/core").MultiRspackOptions} */
-export default [
-  merge(common, {
-    name: "ssr",
-    target: "node22",
-    async entry() {
-      return {
-        index: [
-          // load custom elements
-          ...(await new fdir()
-            .withFullPaths()
-            .filter((filePath) => filePath.endsWith("/element.js"))
-            .crawl(path.join(__dirname, "components"))
-            .withPromise()),
-          "./entry.ssr.js",
-        ],
-      };
-    },
-    plugins: [isProd && new CSPHashPlugin()],
-    output: {
-      path: path.resolve(__dirname, "dist/ssr"),
-      filename: "[name].js",
-      // use proper file names in sourcemaps:
-      devtoolModuleFilenameTemplate: (info) =>
-        path.resolve(info.absoluteResourcePath),
-      clean: {
-        keep: "index.d.ts",
-      },
-      publicPath: "/static/ssr/",
-      library: { type: "module" },
-    },
-  }),
-  merge(common, {
-    name: "client",
-    async entry() {
-      return {
-        index: [!isProd && "./build/hmr.js", "./entry.client.js"].filter(
-          (x) => typeof x === "string",
-        ),
-        // load `components/*/global.css` files into global style entrypoint
-        "styles-global": await new fdir()
+const ssrConfig = merge(common, {
+  name: "ssr",
+  target: "node22",
+  async entry() {
+    return {
+      index: [
+        // load custom elements
+        ...(await new fdir()
           .withFullPaths()
-          .filter((filePath) => filePath.endsWith("/global.css"))
+          .filter((filePath) => filePath.endsWith("/element.js"))
           .crawl(path.join(__dirname, "components"))
-          .withPromise(),
-        // load `components/*/server.css` files into per-component style entrypoints
-        ...Object.fromEntries(
-          (
-            await new fdir()
-              .withFullPaths()
-              .filter((filePath) => filePath.endsWith("/server.css"))
-              .crawl(path.join(__dirname, "components"))
-              .withPromise()
-          )
-            // eslint-disable-next-line unicorn/no-await-expression-member
-            .map((file) => ["styles-" + file.split("/").at(-2), file]),
-        ),
-      };
-    },
-    target: ["web", "browserslist"],
-    plugins: [
-      new rspack.CssExtractRspackPlugin({
-        filename: isProd ? "[name].[contenthash].css" : "[name].css",
-        // chunkFilename: "[name].[contenthash].css",
-        runtime: false,
-      }),
-      !isProd && new GenerateElementMapPlugin(),
-    ],
-    output: {
-      path: path.resolve(__dirname, "dist/client"),
-      filename: isProd ? "[name].[contenthash].js" : "[name].js",
-      clean: true,
-      publicPath: "/static/client/",
-    },
-    module: {
-      rules: [
-        {
-          test: /\.css$/i,
-          resourceQuery: /^$/,
-          use: [
-            rspack.CssExtractRspackPlugin.loader,
-            "css-loader",
-            "postcss-loader",
-          ],
-        },
+          .withPromise()),
+        "./entry.ssr.js",
       ],
+    };
+  },
+  plugins: [isProd && new CSPHashPlugin()],
+  output: {
+    path: path.resolve(__dirname, "dist/ssr"),
+    filename: "[name].js",
+    // use proper file names in sourcemaps:
+    devtoolModuleFilenameTemplate: (info) =>
+      path.resolve(info.absoluteResourcePath),
+    clean: {
+      keep: "index.d.ts",
     },
-  }),
-  merge(common, {
-    name: "legacy",
-    entry: {
-      index: "./legacy/index.tsx",
-    },
-    target: ["web", "browserslist"],
-    plugins: [
-      new rspack.CssExtractRspackPlugin({
-        filename: isProd ? "[name].[contenthash].css" : "[name].css",
-        // chunkFilename: "[name].[contenthash].css",
-        runtime: false,
-      }),
-    ],
-    output: {
-      path: path.resolve(__dirname, "dist/legacy"),
-      filename: isProd ? "[name].[contenthash].js" : "[name].js",
-      clean: true,
-      publicPath: "/static/legacy/",
-    },
-    resolve: {
-      extensions: ["...", ".tsx", ".ts", ".jsx"],
-    },
-    module: {
-      rules: [
-        {
-          test: /\.css$/i,
-          use: [
-            rspack.CssExtractRspackPlugin.loader,
-            "css-loader",
-            "postcss-loader",
-          ],
-        },
-        {
-          test: /\.jsx$/,
-          use: {
-            loader: "builtin:swc-loader",
+    publicPath: "/static/ssr/",
+    library: { type: "module" },
+  },
+});
+
+/** @type {import("@rspack/core").RspackOptions} */
+const clientAndLegacyCommon = {
+  target: ["web", "browserslist"],
+  plugins: [
+    new rspack.CssExtractRspackPlugin({
+      filename: isProd ? "[name].[contenthash].css" : "[name].css",
+      // chunkFilename: "[name].[contenthash].css",
+      runtime: false,
+    }),
+  ],
+  output: {
+    filename: isProd ? "[name].[contenthash].js" : "[name].js",
+    clean: true,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        resourceQuery: /^$/,
+        use: [
+          rspack.CssExtractRspackPlugin.loader,
+          {
+            loader: "css-loader",
             options: {
-              jsc: {
-                parser: {
-                  syntax: "ecmascript",
-                  jsx: true,
-                },
+              importLoaders: 1,
+            },
+          },
+          "postcss-loader",
+        ],
+      },
+    ],
+  },
+};
+
+const clientConfig = merge(common, clientAndLegacyCommon, {
+  name: "client",
+  async entry() {
+    return {
+      index: [!isProd && "./build/hmr.js", "./entry.client.js"].filter(
+        (x) => typeof x === "string",
+      ),
+      // load `components/*/global.css` files into global style entrypoint
+      "styles-global": await new fdir()
+        .withFullPaths()
+        .filter((filePath) => filePath.endsWith("/global.css"))
+        .crawl(path.join(__dirname, "components"))
+        .withPromise(),
+      // load `components/*/server.css` files into per-component style entrypoints
+      ...Object.fromEntries(
+        (
+          await new fdir()
+            .withFullPaths()
+            .filter((filePath) => filePath.endsWith("/server.css"))
+            .crawl(path.join(__dirname, "components"))
+            .withPromise()
+        )
+          // eslint-disable-next-line unicorn/no-await-expression-member
+          .map((file) => ["styles-" + file.split("/").at(-2), file]),
+      ),
+    };
+  },
+  plugins: [!isProd && new GenerateElementMapPlugin()],
+  output: {
+    path: path.resolve(__dirname, "dist/client"),
+    publicPath: "/static/client/",
+  },
+});
+
+const legacyConfig = merge(common, clientAndLegacyCommon, {
+  name: "legacy",
+  entry: {
+    index: "./legacy/index.tsx",
+  },
+  output: {
+    path: path.resolve(__dirname, "dist/legacy"),
+    publicPath: "/static/legacy/",
+  },
+  resolve: {
+    extensions: ["...", ".tsx", ".ts", ".jsx"],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx$/,
+        use: {
+          loader: "builtin:swc-loader",
+          options: {
+            jsc: {
+              parser: {
+                syntax: "ecmascript",
+                jsx: true,
               },
             },
           },
-          type: "javascript/auto",
         },
-        {
-          test: /\.tsx$/,
-          use: {
-            loader: "builtin:swc-loader",
-            options: {
-              jsc: {
-                parser: {
-                  syntax: "typescript",
-                  tsx: true,
-                },
+        type: "javascript/auto",
+      },
+      {
+        test: /\.tsx$/,
+        use: {
+          loader: "builtin:swc-loader",
+          options: {
+            jsc: {
+              parser: {
+                syntax: "typescript",
+                tsx: true,
               },
             },
           },
-          type: "javascript/auto",
         },
-      ],
-    },
-  }),
-];
+        type: "javascript/auto",
+      },
+    ],
+  },
+});
+
+/** @type {import("@rspack/core").MultiRspackOptions} */
+export default [ssrConfig, clientConfig, legacyConfig];

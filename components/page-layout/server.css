@@ -14,10 +14,14 @@
   margin-inline: auto;
 }
 
-@media (width > 1110px) {
-  .page-layout__header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
+.page-layout__header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-sticky-header);
+}
+
+@media (width < 769px) {
+  .page-layout__banner {
+    display: none;
   }
 }

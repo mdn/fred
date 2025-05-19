@@ -16,6 +16,12 @@
   font-display: swap;
 }
 
+@font-feature-values "Inter" {
+  @styleset {
+    disambiguation: 2;
+  }
+}
+
 :root {
   --font-family-text: "Inter", sans-serif;
   --font-family-code:
