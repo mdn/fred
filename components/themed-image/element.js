@@ -1,8 +1,6 @@
 import { LitElement, html } from "lit";
 
 export class MDNThemedImage extends LitElement {
-  // static styles = styles;
-
   static ssr = false;
 
   static properties = {
