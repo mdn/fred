@@ -1,0 +1,25 @@
+.notecard {
+  padding-block: 1px;
+  padding-inline: 16px;
+  margin-block: 16px;
+
+  background-color: var(--color-background-secondary);
+  border-inline-start: 2px solid var(--color-text-secondary);
+  border-radius: 8px;
+
+  &.note,
+  &.secure,
+  &.experimental {
+    background-color: var(--color-background-blue);
+  }
+
+  &.warning,
+  &.deprecated,
+  &.nonstandard {
+    background-color: var(--color-background-red);
+  }
+
+  &.tip {
+    background-color: var(--color-background-green);
+  }
+}
