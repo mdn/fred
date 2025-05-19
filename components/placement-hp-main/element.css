@@ -14,14 +14,8 @@
     var(--hp-main-color-dark)
   );
 
-  padding-inline: var(--navigation-side-padding);
+  padding-inline: var(--layout-side-padding);
   background-color: var(--hp-main-background);
-
-  @media (width > 1440px) {
-    padding-inline: calc(
-      (100% - 1440px + (var(--navigation-side-padding) * 2)) / 2
-    );
-  }
 
   .placement-container {
     display: grid;

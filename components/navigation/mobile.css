@@ -1,9 +1,26 @@
 /* Mobile */
 
 @media (width <= 1006px) {
+  :root {
+    --top-nav-height: 2.9rem;
+  }
+
   .navigation {
     display: grid;
     grid-template-columns: 1fr min-content;
+    height: var(--top-nav-height);
+
+    &[data-open="true"] {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+
+      align-content: start;
+
+      height: auto;
+
+      overflow-y: auto;
+    }
   }
 
   /* Popup */
@@ -11,10 +28,10 @@
   .navigation__popup {
     display: none;
     grid-column: 1 / -1;
+  }
 
-    &[data-open="true"] {
-      display: block;
-    }
+  .navigation[data-open="true"] .navigation__popup {
+    display: block;
   }
 
   /* Logo */

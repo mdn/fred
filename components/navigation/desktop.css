@@ -1,6 +1,10 @@
 /* Desktop */
 
 @media (width > 1006px) {
+  :root {
+    --top-nav-height: 4.125rem;
+  }
+
   .navigation {
     display: grid;
 
@@ -10,14 +14,10 @@
     align-items: center;
     justify-items: center;
 
-    padding-block: 0.75rem;
-    padding-inline: var(--navigation-side-padding);
+    height: var(--top-nav-height);
 
-    @media (width > 1440px) {
-      padding-inline: calc(
-        (100% - 1440px + (var(--navigation-side-padding) * 2)) / 2
-      );
-    }
+    padding-block: 0.75rem;
+    padding-inline: var(--layout-side-padding);
   }
 
   /* Logo */

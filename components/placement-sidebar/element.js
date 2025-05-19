@@ -22,7 +22,6 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
    * @returns
    */
   renderComplete(placementContext) {
-    super.renderComplete(placementContext);
     const { side: data } = placementContext;
     if (!data) {
       return nothing;

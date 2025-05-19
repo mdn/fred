@@ -1,0 +1,12 @@
+.homepage {
+  display: grid;
+  grid-template-columns: var(--layout-3-col-extended);
+
+  > * {
+    grid-column: center;
+  }
+
+  mdn-placement-hp-main {
+    grid-column: extended-full;
+  }
+}

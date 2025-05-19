@@ -13,7 +13,7 @@ export class Navigation extends ServerComponent {
     const colorScheme = context.renderer === "Homepage" ? "dark" : "";
 
     return html`
-      <nav class="navigation" data-scheme=${colorScheme}>
+      <nav class="navigation" data-scheme=${colorScheme} data-open="false">
         <div class="navigation__logo">${Logo.render(context)}</div>
         <button
           class="navigation__button"
@@ -44,7 +44,7 @@ export class Navigation extends ServerComponent {
             />
           </svg>
         </button>
-        <div class="navigation__popup" data-open="false" id="navigation__popup">
+        <div class="navigation__popup" id="navigation__popup">
           <div class="navigation__menu">${Menu.render(context)}</div>
           <div class="navigation__search">
             <mdn-search-modal id="search"></mdn-search-modal>

@@ -22,7 +22,6 @@ export class MDNPlacementBottom extends PlacementMixin(LitElement) {
    * @returns
    */
   renderComplete(placementContext) {
-    super.renderComplete(placementContext);
     const data = placementContext?.hpFooter || placementContext?.bottom;
     if (!data) {
       return nothing;
