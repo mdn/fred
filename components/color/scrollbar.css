@@ -1,10 +1,7 @@
 :root {
-  --scrollbar-bg: light-dark(
-    var(--color-transparent),
-    var(--color-transparent)
-  );
+  --scrollbar-bg: transparent;
   --scrollbar-color: light-dark(
-    var(--color-transparent-dark),
-    var(--color-transparent-light)
+    var(--color-black-alpha-25),
+    var(--color-white-alpha-25)
   );
 }
