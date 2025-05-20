@@ -1,6 +1,6 @@
 /* Compat (mobile) */
 
-@media (--screen-extra-small) {
+@media (--screen-xsmall) {
   .bc-table {
     grid-template-columns: auto;
 

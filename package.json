@@ -28,7 +28,7 @@
     "plugins": {
       "@csstools/postcss-global-data": {
         "files": [
-          "./components/vars/media.css"
+          "./components/media/index.css"
         ]
       },
       "postcss-custom-media": {},

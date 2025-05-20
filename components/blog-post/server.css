@@ -18,14 +18,14 @@
     grid-template-columns: minmax(auto, 100%) minmax(0, 12rem);
   }
 
-  @media (--screen-extra-large-and-wider) {
+  @media (--screen-xlarge-and-wider) {
     grid-template-areas:
       "nothing post toc"
       "nothing newsletter toc";
     grid-template-columns: minmax(auto, 1fr) minmax(0, 52rem) minmax(15rem, 1fr);
   }
 
-  @media (--screen-extra-extra-large) {
+  @media (--screen-xxlarge) {
     grid-template-areas:
       "toc post place"
       "toc newsletter place";
@@ -66,7 +66,7 @@
     }
   }
 
-  @media (--screen-extra-extra-large) {
+  @media (--screen-xxlarge) {
     display: contents;
 
     .blog-post__toc {

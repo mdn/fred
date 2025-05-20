@@ -122,7 +122,7 @@
   padding-block: 0.75rem;
   padding-inline: 1rem;
 
-  @media (--screen-extra-extra-large) {
+  @media (--screen-xxlarge) {
     padding-inline: calc((100% - 1440px + (1rem * 2)) / 2);
   }
   --border-radius: 0.3rem;
@@ -171,7 +171,7 @@
   padding-block: 0.75rem;
   padding-inline: 1rem;
 
-  @media (--screen-extra-extra-large) {
+  @media (--screen-xxlarge) {
     padding-inline: calc((100% - 1440px + (1rem * 2)) / 2);
   }
 
@@ -346,7 +346,7 @@
 
   background: var(--color-background-secondary);
 
-  @media (--screen-extra-extra-large) {
+  @media (--screen-xxlarge) {
     padding-inline: calc((100% - 1440px + (1rem * 2)) / 2);
   }
 
@@ -365,7 +365,7 @@
     }
   }
 
-  @media (--screen-extra-large-and-wider) {
+  @media (--screen-xlarge-and-wider) {
     grid-template-areas: "header sidebar" "main sidebar";
     grid-template-columns: 2fr minmax(0, 200px);
     column-gap: 3rem;

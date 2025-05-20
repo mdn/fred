@@ -1,14 +1,21 @@
-@custom-media --screen-extra-small (width <= 426px);
+/* stylelint-disable */
+
+@custom-media --screen-xsmall (width <= 426px);
+
 @custom-media --screen-small-and-wider (426px < width);
 @custom-media --screen-small-only (426px < width <= 769px);
 @custom-media --screen-small-and-narrower (width <= 769px);
+
 @custom-media --screen-medium-and-wider (769px < width);
 @custom-media --screen-medium-only (769px < width <= 992px);
 @custom-media --screen-medium-and-narrower (width <= 992px);
+
 @custom-media --screen-large-and-wider (992px < width);
 @custom-media --screen-large-only (992px < width <= 1200px);
 @custom-media --screen-large-and-narrower (width <= 1200px);
-@custom-media --screen-extra-large-and-wider (1200px < width);
-@custom-media --screen-extra-large-only (1200px < width <= 1441px);
-@custom-media --screen-extra-large-and-narrower (width <= 1441px);
-@custom-media --screen-extra-extra-large (1441px < width);
+
+@custom-media --screen-xlarge-and-wider (1200px < width);
+@custom-media --screen-xlarge-only (1200px < width <= 1441px);
+@custom-media --screen-xlarge-and-narrower (width <= 1441px);
+
+@custom-media --screen-xxlarge (1441px < width);

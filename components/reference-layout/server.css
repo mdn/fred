@@ -30,7 +30,7 @@
     grid-template-columns: 1fr 2fr;
   }
 
-  @media (--screen-extra-extra-large) {
+  @media (--screen-xxlarge) {
     padding-inline: calc((100% - 1440px) / 2);
   }
 

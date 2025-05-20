@@ -965,7 +965,7 @@
       border: 1px solid var(--about-team-bg);
       box-shadow: var(--about-team-shadow);
 
-      @media (--screen-extra-small) {
+      @media (--screen-xsmall) {
         grid-column: full;
       }
 
@@ -1102,7 +1102,7 @@
           }
         }
 
-        @media (--screen-extra-small) {
+        @media (--screen-xsmall) {
           grid-template-areas: "name" "title" "picture" "bio";
           grid-template-columns: 1fr;
 

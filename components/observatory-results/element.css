@@ -429,7 +429,7 @@ a {
     height: 1.3rem;
   }
 
-  @media (--screen-extra-small) {
+  @media (--screen-xsmall) {
     td {
       .iso-date {
         code {

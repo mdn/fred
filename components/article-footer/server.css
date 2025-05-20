@@ -16,7 +16,7 @@
     background: red;
   }
 
-  @media (--screen-extra-small) {
+  @media (--screen-xsmall) {
     margin-right: 1rem;
     margin-left: 1rem;
   }
