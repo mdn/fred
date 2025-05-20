@@ -6,4 +6,5 @@ namespace Lit {
   export type TemplateResult = import("lit").TemplateResult;
   export type Ref<T> = import("lit/directives/ref.js").Ref<T>;
   export type nothing = import("lit").nothing;
+  export type SVGTemplateResult = import("lit").SVGTemplateResult;
 }

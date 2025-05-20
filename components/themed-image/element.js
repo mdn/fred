@@ -81,7 +81,7 @@ export class MDNThemedImage extends LitElement {
               srcset=${this.srcDark}
               media="(prefers-color-scheme: dark)"
             />
-            <img xbla=${this._theme} src=${this.srcLight} alt=${this.alt} />
+            <img src=${this.srcLight} alt=${this.alt} />
           </picture>
         `;
       case "dark":

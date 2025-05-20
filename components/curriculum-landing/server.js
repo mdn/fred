@@ -1,14 +1,20 @@
-import { html, nothing, svg } from "lit";
+import { html, nothing } from "lit";
 
+import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
-import { Section } from "../content/server.js";
-import _landingStairwaySVG1 from "../curriculum/assets/curriculum-landing-stairway-1.svg?lit";
-import _landingStairwaySVG2Small from "../curriculum/assets/curriculum-landing-stairway-2-small.svg?lit";
-import _landingStairwaySVG2 from "../curriculum/assets/curriculum-landing-stairway-2.svg?lit";
+import landingStairwaySVG1 from "../curriculum/assets/curriculum-landing-stairway-1.svg?lit";
+import landingStairwaySVG2Small from "../curriculum/assets/curriculum-landing-stairway-2-small.svg?lit";
+import landingStairwaySVG2 from "../curriculum/assets/curriculum-landing-stairway-2.svg?lit";
 import landingSVG from "../curriculum/assets/curriculum-landing-top.svg?lit";
 import partnerBannerDark from "../curriculum/assets/curriculum-partner-banner-illustration-large-dark.svg";
 import partnerBannerLight from "../curriculum/assets/curriculum-partner-banner-illustration-large-light.svg";
+import practicesSVG from "../curriculum/assets/curriculum-topic-practices.svg?lit";
+import scriptingSVG from "../curriculum/assets/curriculum-topic-scripting.svg?lit";
+import standardsSVG from "../curriculum/assets/curriculum-topic-standards.svg?lit";
+import stylingSVG from "../curriculum/assets/curriculum-topic-styling.svg?lit";
+import toolingSVG from "../curriculum/assets/curriculum-topic-tooling.svg?lit";
+import { HeadingAnchor } from "../heading-anchor/server.js";
 import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
 
@@ -34,7 +40,7 @@ export class CurriculumLanding extends ServerComponent {
     // console.log(context);
     const doc = context.doc;
 
-    /** @type {Lit.TemplateResult[]} */
+    /** @type {(Lit.TemplateResult | nothing)[]} */
     const content = [];
     for (const [i, section] of doc.body.entries()) {
       if (i === 0) {
@@ -48,7 +54,7 @@ export class CurriculumLanding extends ServerComponent {
         content.push(this.renderModules(doc, section));
       } else {
         // Use the default Section renderer for other sections
-        content.push(Section(context, section));
+        content.push(this.renderSection(doc, section));
       }
     }
 
@@ -88,6 +94,36 @@ export class CurriculumLanding extends ServerComponent {
         ${landingSVG}
       </header>
     `;
+  }
+
+  /**
+   * @param {Rari.CurriculumDoc} _doc - The curriculum document data.
+   * @param {Rari.Section} section - The section object containing about data.
+   * @returns {Lit.TemplateResult | nothing} The Lit HTML template for the about section.
+   */
+  renderSection(_doc, section) {
+    const { id, title, content, isH3 } = section.value;
+    switch (section.type) {
+      case "browser_compatibility": {
+        return nothing;
+      }
+      case "specifications": {
+        return nothing;
+      }
+      default: {
+        const level = isH3 ? 3 : 2;
+        return html`
+          <section aria-labelledby=${ifDefined(id ?? undefined)}>
+            ${HeadingAnchor.render(
+              level,
+              id ? String(id) : null,
+              String(title),
+            )}
+            <div class="section-content">${unsafeHTML(content)}</div>
+          </section>
+        `;
+      }
+    }
   }
 
   /**
@@ -145,28 +181,6 @@ export class CurriculumLanding extends ServerComponent {
     const { title, id } = section.value;
     const modules = doc?.modules;
 
-    // console.log("modules", modules);
-
-    // Placeholder SVGs for the stairway section.
-    // The classes and IDs match the React component structure for CSS styling.
-    const stairwaySvg1Placeholder = html`<svg
-      aria-label="woman presenting the following text"
-      role="img"
-      class="stairway-svg-placeholder-1"
-    ></svg>`;
-    const stairwaySvg2LargePlaceholder = html`<svg
-      aria-label="woman on top of a stairway with a flag"
-      role="img"
-      id="stairway2large"
-      class="stairway-svg-placeholder-2large"
-    ></svg>`;
-    const stairwaySvg2SmallPlaceholder = html`<svg
-      aria-label="woman on top of a stairway with a flag"
-      role="img"
-      id="stairway2small"
-      class="stairway-svg-placeholder-2small"
-    ></svg>`;
-
     return html`
       <section id=${id} class="modules">
         ${title && html`<h2 id=${id}><a href=${`#${id}`}>${title}</a></h2>`}
@@ -178,7 +192,7 @@ export class CurriculumLanding extends ServerComponent {
       <section class="landing-stairway">
         <div>
           <div id="stairway1-container">
-            ${stairwaySvg1Placeholder}
+            ${landingStairwaySVG1}
             <p id="stairway1">
               <span id="stairway1_how_can">How can you</span>
               <span id="stairway1_boost" class="color"
@@ -189,7 +203,7 @@ export class CurriculumLanding extends ServerComponent {
             </p>
           </div>
           <div id="stairway2-container">
-            ${stairwaySvg2LargePlaceholder} ${stairwaySvg2SmallPlaceholder}
+            ${landingStairwaySVG2} ${landingStairwaySVG2Small}
             <p id="stairway2">
               <span id="stair-1"
                 >Learn about research collaboration and other essential soft
@@ -290,7 +304,7 @@ export class CurriculumLanding extends ServerComponent {
             >
               <a href=${module.url}>
                 <header>
-                  ${module.topic && this.renderTopicIcon(module.topic)}
+                  ${module.topic ? this.renderTopicIcon(module.topic) : nothing}
                   <span>${module.title}</span>
                 </header>
                 <section>
@@ -360,62 +374,40 @@ export class CurriculumLanding extends ServerComponent {
    * In a real server-rendering setup, the SVG content would ideally be embedded or referenced correctly.
    * This placeholder includes basic circle and path elements styled by CSS.
    * @param {string} topic - The topic string.
-   * @returns {Lit.TemplateResult} The Lit HTML template for the topic icon SVG.
+   * @returns {Lit.TemplateResult | nothing} The Lit HTML template for the topic icon SVG.
    */
   renderTopicIcon(topic) {
-    const className = `topic-icon ${this._topic2css(topic)}`;
+    const className = `topic-icon topic-${this._topic2css(topic)}`;
     // Simplified placeholder SVG content, using currentColor for fill where CSS vars apply.
-    let svgContent = svg``;
     switch (topic) {
       case "Web Standards & Semantics":
-        svgContent = svg`<circle
-            cx="32"
-            cy="32"
-            r="30"
-            fill="currentColor"
-          /><path d="M16 32L32 48L48 32L32 16L16 32Z" fill="white" />`;
-        break;
+        return addAttrs(standardsSVG, {
+          role: "none",
+          class: className,
+        });
       case "Styling":
-        svgContent = svg`<circle
-            cx="32"
-            cy="32"
-            r="30"
-            fill="currentColor"
-          /><path d="M16 32L32 48L48 32L32 16L16 32Z" fill="white" />`;
-        break;
+        return addAttrs(stylingSVG, {
+          role: "none",
+          class: className,
+        });
       case "Scripting":
-        svgContent = svg`<circle
-            cx="32"
-            cy="32"
-            r="30"
-            fill="currentColor"
-          /><path d="M16 32L32 48L48 32L32 16L16 32Z" fill="white" />`;
-        break;
+        return addAttrs(scriptingSVG, {
+          role: "none",
+          class: className,
+        });
       case "Tooling":
-        svgContent = svg`<circle
-            cx="32"
-            cy="32"
-            r="30"
-            fill="currentColor"
-          /><path d="M16 32L32 48L48 32L32 16L16 32Z" fill="white" />`;
-        break;
+        return addAttrs(toolingSVG, {
+          role: "none",
+          class: className,
+        });
       case "Best Practices":
-        svgContent = svg`<circle
-            cx="32"
-            cy="32"
-            r="30"
-            fill="currentColor"
-          /><path d="M16 32L32 48L48 32L32 16L16 32Z" fill="white" />`;
-        break;
+        return addAttrs(practicesSVG, {
+          role: "none",
+          class: className,
+        });
       default:
-        return svg``; // Render nothing for unknown topics
+        return nothing;
     }
-
-    return html`
-      <svg role="none" class=${className} viewBox="0 0 64 64">
-        ${svgContent}
-      </svg>
-    `;
   }
 
   /**
@@ -439,4 +431,29 @@ export class CurriculumLanding extends ServerComponent {
         return "none";
     }
   }
+}
+
+/**
+ *
+ * @param {Lit.SVGTemplateResult} original
+ * @param {{[key: string]: string}} attrs
+ * @returns {Lit.SVGTemplateResult}
+ */
+
+function addAttrs(original, attrs) {
+  // turn { role: 'img', 'aria-label': 'Foo' } into: role="img" aria-label="Foo"
+  const attrString = Object.entries(attrs)
+    .map(([k, v]) => `${k}="${v}"`)
+    .join(" ");
+  const [head, ...restStrings] = original.strings;
+  if (!head) {
+    return original;
+  }
+  const newHead = head.replace(/<svg([\s\S]*?)>/, `<svg$1 ${attrString}>`);
+  const newStrings = [newHead, ...restStrings];
+  // @ts-expect-error
+  newStrings.raw = [newHead, ...restStrings];
+  // @ts-expect-error
+  original.strings = newStrings;
+  return original;
 }
