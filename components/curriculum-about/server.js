@@ -9,7 +9,6 @@ export class CurriculumAbout extends ServerComponent {
    * @param {Fred.Context<Rari.CurriculumPage>} context
    */
   render(context) {
-    console.log(context);
     return PageLayout.render(
       context,
       html`
