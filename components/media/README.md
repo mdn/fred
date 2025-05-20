@@ -1,4 +1,4 @@
-# Media Queries
+# Media queries
 
 We use a couple of postcss plugins to define our media queries in one place, so we can use them across multiple components.
 
