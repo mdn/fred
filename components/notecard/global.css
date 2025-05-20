@@ -1,12 +1,23 @@
 .notecard,
 .callout {
+  --notecard-color-link: light-dark(var(--color-gray-10), var(--color-gray-90));
+  --notecard-color-text: var(--color-text-secondary);
+
+  position: relative;
+
   padding-block: 1px;
-  padding-inline: 1em;
+  padding-inline-start: 3em;
   margin-block: 1em;
+
+  color: var(--notecard-color-text);
 
   background-color: var(--color-background-secondary);
   border-inline-start: 2px solid var(--color-text-secondary);
-  border-radius: 0.5em;
+  border-radius: 0.25em;
+
+  a {
+    color: var(--notecard-color-link);
+  }
 
   &.note,
   &.secure,
@@ -32,61 +43,62 @@
   &.tip,
   &.warning,
   &.worker {
-    > *:first-child::before {
-      display: inline-block;
+    &::before {
+      position: absolute;
+      top: 1.35em;
+      left: 1em;
+
+      display: block;
 
       width: 1em;
       height: 1em;
 
-      margin-right: 0.5ch;
-
-      vertical-align: middle;
-
       content: "";
 
-      background-color: var(--color-text-primary);
+      background-color: var(--notecard-color-text);
 
       mask-repeat: no-repeat;
       mask-position: center center;
+      mask-size: contain;
     }
   }
 
-  &.deprecated > *:first-child::before {
+  &.deprecated::before {
     /* e.g. Window: blur() method */
     mask-image: url("./icons/deprecated.svg");
   }
 
-  &.experimental > *:first-child::before {
+  &.experimental::before {
     /* e.g. Barcode Detection API */
     mask-image: url("./icons/experimental.svg");
   }
 
-  &.nonstandard > *:first-child::before {
+  &.nonstandard::before {
     /* e.g. Document: caretRangeFromPoint() method */
     mask-image: url("./icons/warning.svg");
   }
 
-  &.note > *:first-child::before {
+  &.note::before {
     /* e.g. Barcode Detection API */
     mask-image: url("./icons/note.svg");
   }
 
-  &.secure > *:first-child::before {
+  &.secure::before {
     /* e.g. Barcode Detection API */
     mask-image: url("./icons/secure.svg");
   }
 
-  &.tip > *:first-child::before {
+  &.tip::before {
     /* (Not used in content yet) */
     mask-image: url("./icons/tip.svg");
   }
 
-  &.warning > *:first-child::before {
+  &.warning::before {
     /* e.g. Navigator: scheduling property */
     mask-image: url("./icons/warning.svg");
   }
 
-  &.worker p::before {
+  &.worker::before {
     /* e.g. Worker: Worker() constructor (needs rari change) */
     mask-image: url("./icons/worker.svg");
   }
