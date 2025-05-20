@@ -1,12 +1,9 @@
 /* Link */
 
 :root {
-  --color-link-normal: light-dark(
-    var(--color-blue-darker),
-    var(--color-blue-lighter)
-  );
+  --color-link-normal: light-dark(var(--color-blue-20), var(--color-blue-80));
   --color-link-visited: light-dark(
-    var(--color-purple-darker),
-    var(--color-purple-lighter)
+    var(--color-purple-20),
+    var(--color-purple-80)
   );
 }

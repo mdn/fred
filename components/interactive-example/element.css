@@ -97,7 +97,7 @@ mdn-ix-tab-wrapper {
     border-bottom-left-radius: var(--elem-radius);
   }
 
-  @media (width < 769px) {
+  @media (--screen-small-and-narrower) {
     grid-template-areas:
       "header"
       "editor"
@@ -162,7 +162,7 @@ mdn-ix-tab-wrapper {
     }
   }
 
-  @media (width < 992px) {
+  @media (--screen-medium-and-narrower) {
     grid-template-areas:
       "header"
       "tabs"
@@ -195,7 +195,7 @@ mdn-ix-tab-wrapper {
   border: var(--border);
   border-radius: var(--elem-radius);
 
-  @media (width < 992px) {
+  @media (--screen-medium-and-narrower) {
     grid-template-areas: "header" "choice" "runner";
     grid-template-columns: 1fr;
   }
@@ -216,7 +216,7 @@ mdn-ix-tab-wrapper {
 
     border-right: var(--border);
 
-    @media (width < 992px) {
+    @media (--screen-medium-and-narrower) {
       padding-right: 1em;
       border-right: none;
       border-bottom: var(--border);
@@ -224,11 +224,11 @@ mdn-ix-tab-wrapper {
 
     .choice {
       --field-focus-border: light-dark(
-        var(--color-blue),
-        var(--color-blue-lighter)
+        var(--color-blue-50),
+        var(--color-blue-80)
       );
       --focus-01: 0 0 0 3px
-        light-dark(var(--color-blue-lightest), var(--color-blue-darkest));
+        light-dark(var(--color-blue-90), var(--color-blue-10));
       display: flex;
       flex-grow: 1;
       align-items: center;
@@ -248,7 +248,7 @@ mdn-ix-tab-wrapper {
 
         opacity: 0;
 
-        @media (width < 992px) {
+        @media (--screen-medium-and-narrower) {
           display: none;
         }
       }
@@ -273,8 +273,8 @@ mdn-ix-tab-wrapper {
       &.unsupported {
         mdn-play-editor {
           border-color: light-dark(
-            var(--color-yellow),
-            var(--color-yellow-lighter)
+            var(--color-yellow-50),
+            var(--color-yellow-80)
           );
         }
 

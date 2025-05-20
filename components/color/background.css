@@ -17,28 +17,25 @@
 /* Tinted */
 
 :root {
-  --color-background-red: light-dark(
-    var(--color-red-lightest),
-    var(--color-red-darkest)
-  );
+  --color-background-red: light-dark(var(--color-red-90), var(--color-red-10));
   --color-background-orange: light-dark(
-    var(--color-orange-lightest),
-    var(--color-orange-darkest)
+    var(--color-orange-90),
+    var(--color-orange-10)
   );
   --color-background-yellow: light-dark(
-    var(--color-yellow-lightest),
-    var(--color-yellow-darkest)
+    var(--color-yellow-90),
+    var(--color-yellow-10)
   );
   --color-background-green: light-dark(
-    var(--color-green-lightest),
-    var(--color-green-darkest)
+    var(--color-green-90),
+    var(--color-green-10)
   );
   --color-background-blue: light-dark(
-    var(--color-blue-lightest),
-    var(--color-blue-darkest)
+    var(--color-blue-90),
+    var(--color-blue-10)
   );
   --color-background-purple: light-dark(
-    var(--color-purple-lightest),
-    var(--color-purple-darkest)
+    var(--color-purple-90),
+    var(--color-purple-10)
   );
 }

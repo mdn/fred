@@ -1,6 +1,6 @@
 /* Compat (desktop-xl) */
 
-@media (width >= /* $screen-xl */ 1200px) {
+@media (--screen-xlarge-and-wider) {
   /* TODO: removed to stop overflowing
   .table-container {
     width: 100%;

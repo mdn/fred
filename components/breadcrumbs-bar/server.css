@@ -37,7 +37,7 @@
     }
   }
 
-  @media screen and (width <= 768px) {
+  @media (--screen-small-and-narrower) {
     column-gap: 0.5rem;
     padding-inline: 0;
   }
@@ -71,7 +71,7 @@
     fill: var(--color-text-primary);
   }
 
-  @media screen and (width <= 768px) {
+  @media (--screen-small-and-narrower) {
     > span {
       display: none;
     }
