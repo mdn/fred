@@ -1,30 +1,81 @@
+/* --layout-side-padding-min * 2 + (--layout-sidebar-min + --layout-sidebar-gap) * 2 + --layout-content-min */
+@custom-media --screen-layout-1-sidebar-or-less (width < calc(1rem * 2 + (14rem + 2rem) * 2 + 31rem));
+
+/* --layout-side-padding-min * 2 + --layout-sidebar-min + --layout-sidebar-gap + --layout-content-min */
+@custom-media --screen-layout-no-sidebar (width < calc(1rem * 2 + 14rem + 2rem + 31rem));
+
 :root {
-  --layout-side-padding: max(1rem, calc((100vw - 1440px + (2rem)) / 2));
+  --layout-side-padding-min: 1rem;
+  --layout-side-padding: max(
+    var(--layout-side-padding-min),
+    calc((100vw - 1440px + (2rem)) / 2)
+  );
   --layout-full-width: calc(100vw - 2 * var(--layout-side-padding));
+
+  --layout-sidebar-min: 14rem;
+  --layout-sidebar-gap: 2rem;
+  --layout-content-min: 31rem;
+  --layout-content-max: 48rem;
 
   /* WARNING: TODO: left/center/right cols widths will change */
 
   /* prettier-ignore */
-  --layout-3-col:
-    [full-start   left-start  center-left-start]
-      minmax(250px, 1fr)
-    [center-start left-end    center-right-start]
-      minmax(0, 3fr)
-    [center-end   right-start center-left-end]
-      minmax(250px, 1fr)
-    [full-end     right-end   center-right-end];
+  --layout-2-sidebars:
+    [full-start left-sidebar-start]
+      minmax(var(--layout-sidebar-min), 1fr)
+    [left-sidebar-end]
+      var(--layout-sidebar-gap)
+    [content-start]
+      minmax(0, var(--layout-content-max))
+    [content-end]
+      var(--layout-sidebar-gap)
+    [right-sidebar-start]
+      minmax(var(--layout-sidebar-min), 1fr)
+    [full-end right-sidebar-end];
 
   /* prettier-ignore */
-  --layout-3-col-extended:
+  --layout-1-sidebar-left:
+    [full-start sidebar-start left-sidebar-start]
+      minmax(var(--layout-sidebar-min), 1fr)
+    [sidebar-end left-sidebar-end]
+      var(--layout-sidebar-gap)
+    [content-start]
+      minmax(0, var(--layout-content-max))
+    [full-end content-end]
+      minmax(0, 1fr);
+
+  /* prettier-ignore */
+  --layout-1-sidebar-right:
+      minmax(0, 1fr)
+    [full-start content-start]
+      minmax(0, var(--layout-content-max))
+    [content-end]
+      var(--layout-sidebar-gap)
+    [sidebar-start right-sidebar-start]
+      minmax(var(--layout-sidebar-min), 1fr)
+    [full-end sidebar-end right-sidebar-end];
+
+  /* prettier-ignore */
+  --layout-no-sidebar:
+    [full-start]
+      1fr
+    [content-start]
+      minmax(0, var(--layout-content-max))
+    [content-end]
+      1fr
+    [full-end];
+
+  /* prettier-ignore */
+  --layout-no-sidebar-extended:
     [extended-full-start]
       var(--layout-side-padding)
-    [full-start   left-start  center-left-start]
-      minmax(250px, 1fr)
-    [center-start left-end    center-right-start]
-      minmax(0, 3fr)
-    [center-end   right-start center-left-end]
-      minmax(250px, 1fr)
-    [full-end     right-end   center-right-end]
+    [full-start]
+      1fr
+    [content-start]
+      minmax(0, var(--layout-content-max))
+    [content-end]
+      1fr
+    [full-end]
       var(--layout-side-padding)
     [extended-full-end];
 }

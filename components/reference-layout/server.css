@@ -9,12 +9,12 @@
   display: grid;
 
   grid-template-areas:
-    "sidebar header toc"
-    "sidebar body   toc";
+    "sidebar . header . toc"
+    "sidebar . body   . toc";
   grid-template-rows: min-content auto;
-  grid-template-columns: var(--layout-3-col);
+  grid-template-columns: var(--layout-2-sidebars);
 
-  column-gap: 1rem;
+  justify-content: space-between;
 
   padding-inline: var(--layout-side-padding);
 
@@ -69,10 +69,11 @@
     overflow-y: auto;
   }
 
-  @media (width < 1200px) {
+  @media (--screen-layout-1-sidebar-or-less) {
     grid-template-areas:
-      "toc header header"
-      "toc body   body";
+      "toc . header"
+      "toc . body";
+    grid-template-columns: var(--layout-1-sidebar-left);
 
     .reference-layout__sidebar {
       z-index: 1;
@@ -85,7 +86,7 @@
     }
   }
 
-  @media (width < 769px) {
+  @media (--screen-layout-no-sidebar) {
     display: block;
 
     .reference-layout__sidebar {

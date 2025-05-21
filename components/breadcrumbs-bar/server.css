@@ -29,7 +29,7 @@
     display: none;
   }
 
-  @media screen and (width < 1200px) {
+  @media (--screen-layout-1-sidebar-or-less) {
     padding-left: 0;
 
     mdn-toggle-sidebar {

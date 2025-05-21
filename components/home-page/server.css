@@ -1,9 +1,9 @@
 .homepage {
   display: grid;
-  grid-template-columns: var(--layout-3-col-extended);
+  grid-template-columns: var(--layout-no-sidebar-extended);
 
   > * {
-    grid-column: center;
+    grid-column: content;
   }
 
   mdn-placement-hp-main {

@@ -1,99 +1,33 @@
 .blog-post__main {
   display: grid;
 
-  grid-template-areas:
-    "post"
-    "newsletter";
+  grid-template-columns: var(--layout-1-sidebar-right);
+  grid-auto-flow: dense;
 
-  gap: 3rem;
-
-  width: 100%;
+  row-gap: 3rem;
 
   padding-inline: var(--layout-side-padding);
 
-  @media (--screen-large-and-wider) {
-    grid-template-areas:
-      "post toc"
-      "newsletter toc";
-    grid-template-columns: minmax(auto, 100%) minmax(0, 12rem);
-  }
-
-  @media (--screen-xlarge-and-wider) {
-    grid-template-areas:
-      "nothing post toc"
-      "nothing newsletter toc";
-    grid-template-columns: minmax(auto, 1fr) minmax(0, 52rem) minmax(15rem, 1fr);
-  }
-
-  @media (--screen-xxlarge) {
-    grid-template-areas:
-      "toc post place"
-      "toc newsletter place";
-    grid-template-columns: minmax(15rem, 1fr) minmax(0, 52rem) minmax(
-        15rem,
-        1fr
-      );
+  @media (--screen-layout-no-sidebar) {
+    grid-template-columns: var(--layout-no-sidebar);
   }
 }
 
 .blog-post__content {
-  grid-area: post;
+  grid-column: content;
 }
 
 .blog-post__sidebar {
-  --offset: var(--sticky-header-height);
-  display: none;
-  grid-area: toc;
+  position: sticky;
+  top: var(--sticky-header-height);
 
-  .blog-post__toc {
-    position: sticky;
-    top: var(--offset);
+  grid-column: sidebar;
 
-    max-height: calc(100vh - var(--offset));
+  max-height: calc(100vh - var(--sticky-header-height));
 
-    margin-top: 0;
+  overflow-y: auto;
 
-    overflow: auto;
-  }
-
-  @media (--screen-large-and-wider) {
-    display: flex;
-    flex-direction: column;
-    grid-area: toc;
-
-    .blog-post__toc {
-      margin-top: 2rem;
-    }
-  }
-
-  @media (--screen-xxlarge) {
-    display: contents;
-
-    .blog-post__toc {
-      position: sticky;
-      top: var(--offset);
-
-      height: max-content;
-
-      /* mask-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0) 0%,
-        rgb(0, 0, 0) 3rem calc(100% - 3rem),
-        rgba(0, 0, 0, 0) 100%
-      ); */
-      max-height: calc(100vh - var(--offset));
-
-      overflow: auto;
-    }
-
-    .place.side {
-      grid-area: place;
-      margin-top: 0;
-
-      > .pong-box2,
-      > .pong-box {
-        margin-top: 2rem;
-      }
-    }
+  @media (--screen-layout-no-sidebar) {
+    display: none;
   }
 }
