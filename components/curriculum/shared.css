@@ -15,7 +15,10 @@
     hsl(30deg 77% 95%),
     hsl(22deg 44% 10%)
   );
-  --curriculum-bg-color-landing: light-dark(hsl(0deg 0% 100%), hsl(18deg 13% 5%));
+  --curriculum-bg-color-landing: light-dark(
+    hsl(0deg 0% 100%),
+    hsl(18deg 13% 5%)
+  );
   --curriculum-bg-color-list-item-body: light-dark(
     hsl(0deg 0% 100%),
     hsl(0deg 0% 0%)
@@ -64,7 +67,10 @@
     hsl(30deg 77% 95% / 50%),
     hsl(26deg 10% 18%)
   );
-  --curriculum-bg-color-partner: light-dark(hsl(0deg 0% 100%), hsl(30deg 7% 12%));
+  --curriculum-bg-color-partner: light-dark(
+    hsl(0deg 0% 100%),
+    hsl(30deg 7% 12%)
+  );
   --curriculum-bg-color-topic-practices: light-dark(
     hsl(265deg 100% 70% / 19%),
     hsl(265deg 31% 38%)
@@ -92,7 +98,10 @@
     hsl(0deg 0% 80% / 65%)
   );
   --curriculum-border-color: light-dark(hsl(0deg 4% 95%), hsl(0deg 0% 31%));
-  --curriculum-category-color: light-dark(hsl(18deg 76% 53%), hsl(18deg 76% 53%));
+  --curriculum-category-color: light-dark(
+    hsl(18deg 76% 53%),
+    hsl(18deg 76% 53%)
+  );
   --curriculum-color-landing-laptop: light-dark(
     hsl(18deg 76% 53%),
     hsl(22deg 54% 45%)
