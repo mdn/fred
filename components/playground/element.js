@@ -41,6 +41,9 @@ export class MDNPlayground extends LitElement {
       controller.clear();
       this._storeSession();
       this.requestUpdate();
+      const urlWithoutSearch = new URL(location.href);
+      urlWithoutSearch.search = "";
+      history.replaceState(undefined, "", urlWithoutSearch);
     }
   }
 
@@ -81,14 +84,24 @@ export class MDNPlayground extends LitElement {
   }
 
   async _loadFromUrl() {
-    const stateParam = new URLSearchParams(location.search).get("state");
     const controller = this._controller.value;
-    if (stateParam && controller) {
-      const { state } = await decompressFromBase64(stateParam);
-      const { srcPrefix, code } = stateToSession(JSON.parse(state || "{}"));
+    if (controller) {
+      const params = new URLSearchParams(location.search);
+      const idParam = params.get("id");
+      const stateParam = params.get("state");
+
+      const { srcPrefix, code } =
+        (await (idParam
+          ? this._sessionFromApi(idParam)
+          : stateParam
+            ? this._sessionFromState(stateParam)
+            : undefined)) || {};
+
       if (
-        controller.srcPrefix !== srcPrefix ||
-        !compareCode(controller.initialCode, code)
+        srcPrefix !== undefined &&
+        code !== undefined &&
+        (controller.srcPrefix !== srcPrefix ||
+          !compareCode(controller.initialCode, code))
       ) {
         controller.srcPrefix = srcPrefix;
         controller.initialCode = code;
@@ -96,10 +109,25 @@ export class MDNPlayground extends LitElement {
         this._storeSession();
         this.requestUpdate();
       }
-      const urlWithoutSearch = new URL(location.href);
-      urlWithoutSearch.search = "";
-      history.replaceState(undefined, "", urlWithoutSearch);
     }
+  }
+
+  /** @param {string} id */
+  async _sessionFromApi(id) {
+    const response = await fetch(`/api/v1/play/${encodeURIComponent(id)}`);
+    if (!response.ok) {
+      console.error(response.statusText);
+      return;
+    }
+    // TODO: gleanClick(`${PLAYGROUND}: load-shared`);
+    const code = await response.json();
+    return stateToSession(code);
+  }
+
+  /** @param {string} stateParam */
+  async _sessionFromState(stateParam) {
+    const { state } = await decompressFromBase64(stateParam);
+    return stateToSession(JSON.parse(state || "{}"));
   }
 
   _editorUpdate() {
