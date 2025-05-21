@@ -44,7 +44,7 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 
-  @media (width > 1200px) {
+  @media (--screen-xlarge-and-wider) {
     grid-template-areas:
       "intro   links links links links"
       "socials links links links links";
@@ -143,7 +143,7 @@
     }
   }
 
-  @media (width > 1200px) {
+  @media (--screen-xlarge-and-wider) {
     grid-row-end: span 2;
   }
 }

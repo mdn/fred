@@ -21,6 +21,10 @@ MDN's next fr(ont)e(n)d.
 
 See [the layout README](./components/layout/README.md).
 
+### Media queries
+
+See [the media queries README](./components/media/README.md).
+
 ### Components and Elements
 
 - Components should live in the `components/` folder, with reserved names which cause certain behavior, explained further below:

@@ -80,6 +80,10 @@ const common = {
     },
     rules: [
       {
+        resourceQuery: /url/,
+        type: "asset/resource",
+      },
+      {
         resourceQuery: /source/,
         type: "asset/source",
       },

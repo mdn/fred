@@ -18,6 +18,11 @@ declare module "*.flt" {
   export default flt;
 }
 
+declare module "*?url" {
+  const url: string;
+  export default url;
+}
+
 declare module "*?source" {
   const source: string;
   export default source;

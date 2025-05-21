@@ -14,8 +14,11 @@
 /* Basic */
 
 :root {
-  --color-white: #ffffff;
-  --color-black: #000000;
+  --color-white: hsl(0deg 0% 100%);
+  --color-white-alpha-25: hsl(0deg 0% 100% / 25%);
+
+  --color-black: hsl(0deg 0% 0%);
+  --color-black-alpha-25: hsl(0deg 0% 0% / 25%);
 }
 
 /* Gray */
@@ -68,12 +71,4 @@
   --color-purple-50: hsl(267deg 76% 56%);
   --color-purple-20: hsl(267deg 65% 40%);
   --color-purple-10: hsl(267deg 55% 14%);
-}
-
-/* translucent */
-
-:root {
-  --color-transparent: #00000000;
-  --color-transparent-light: #ffffff40;
-  --color-transparent-dark: #00000040;
 }

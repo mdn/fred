@@ -1,0 +1,105 @@
+.notecard,
+.callout {
+  --notecard-color-link: light-dark(var(--color-gray-10), var(--color-gray-90));
+  --notecard-color-text: var(--color-text-secondary);
+
+  position: relative;
+
+  padding-block: 1px;
+  padding-inline-start: 3em;
+  margin-block: 1em;
+
+  color: var(--notecard-color-text);
+
+  background-color: var(--color-background-secondary);
+  border-inline-start: 2px solid var(--color-text-secondary);
+  border-radius: 0.25em;
+
+  a {
+    color: var(--notecard-color-link);
+  }
+
+  &.note,
+  &.secure,
+  &.experimental {
+    background-color: var(--color-background-blue);
+  }
+
+  &.warning,
+  &.deprecated,
+  &.nonstandard {
+    background-color: var(--color-background-red);
+  }
+
+  &.tip {
+    background-color: var(--color-background-green);
+  }
+
+  &.deprecated,
+  &.experimental,
+  &.nonstandard,
+  &.note,
+  &.secure,
+  &.tip,
+  &.warning,
+  &.worker {
+    &::before {
+      position: absolute;
+      top: 1.35em;
+      left: 1em;
+
+      display: block;
+
+      width: 1em;
+      height: 1em;
+
+      content: "";
+
+      background-color: var(--notecard-color-text);
+
+      mask-repeat: no-repeat;
+      mask-position: center center;
+      mask-size: contain;
+    }
+  }
+
+  &.deprecated::before {
+    /* e.g. Window: blur() method */
+    mask-image: url("./icons/deprecated.svg");
+  }
+
+  &.experimental::before {
+    /* e.g. Barcode Detection API */
+    mask-image: url("./icons/experimental.svg");
+  }
+
+  &.nonstandard::before {
+    /* e.g. Document: caretRangeFromPoint() method */
+    mask-image: url("./icons/warning.svg");
+  }
+
+  &.note::before {
+    /* e.g. Barcode Detection API */
+    mask-image: url("./icons/note.svg");
+  }
+
+  &.secure::before {
+    /* e.g. Barcode Detection API */
+    mask-image: url("./icons/secure.svg");
+  }
+
+  &.tip::before {
+    /* (Not used in content yet) */
+    mask-image: url("./icons/tip.svg");
+  }
+
+  &.warning::before {
+    /* e.g. Navigator: scheduling property */
+    mask-image: url("./icons/warning.svg");
+  }
+
+  &.worker::before {
+    /* e.g. Worker: Worker() constructor (needs rari change) */
+    mask-image: url("./icons/worker.svg");
+  }
+}

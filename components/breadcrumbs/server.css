@@ -43,7 +43,7 @@
     }
   }
 
-  @media screen and (width <= 768px) {
+  @media (--screen-small-and-narrower) {
     @media (hover: hover) {
       /* Hide grand-parents on hover devices. */
       li:not(:nth-last-child(-n + 2)) {

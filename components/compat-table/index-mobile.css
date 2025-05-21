@@ -1,6 +1,6 @@
 /* Compat (mobile) */
 
-@media (width <= /* $screen-sm - 0.02 */ 425.98px) {
+@media (--screen-xsmall) {
   .bc-table {
     grid-template-columns: auto;
 
