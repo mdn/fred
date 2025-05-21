@@ -1,0 +1,48 @@
+.pagination {
+  width: fit-content;
+  margin: 0 auto;
+
+  .pagination__list {
+    display: flex;
+
+    gap: 0.25rem;
+    align-items: center;
+
+    padding: 0;
+    margin: 2rem;
+
+    list-style: none;
+
+    .pagination__item {
+      margin: 0;
+    }
+
+    .pagination__ellipsis,
+    .pagination__link {
+      padding: 0 0.75rem;
+      color: var(--text-primary);
+    }
+
+    .pagination__link--active {
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .pagination__link--disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .pagination__item--prev > .pagination__link,
+    .pagination__item--next > .pagination__link {
+      padding: 0 1rem;
+      text-decoration: none;
+    }
+
+    @media (width <= 768px) {
+      .pagination__item:not(.pagination__item--prev, .pagination__item--next, :has(.pagination__link--active)) {
+        display: none;
+      }
+    }
+  }
+}
