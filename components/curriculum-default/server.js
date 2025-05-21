@@ -1,7 +1,7 @@
 import { html } from "lit";
 
-import { Section } from "../content/server.js";
 import { PageLayout } from "../page-layout/server.js";
+import { Section } from "../section/server.js";
 import { ServerComponent } from "../server/index.js";
 
 export class CurriculumDefault extends ServerComponent {
@@ -13,7 +13,7 @@ export class CurriculumDefault extends ServerComponent {
       context,
       html`
         <h1>DEFAULT ${context.doc.title}</h1>
-        ${context.doc.body.map((section) => Section(context, section))}
+        ${context.doc.body.map((section) => Section.render(context, section))}
       `,
     );
   }
