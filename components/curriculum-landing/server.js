@@ -14,7 +14,7 @@ import scriptingSVG from "../curriculum/assets/curriculum-topic-scripting.svg?li
 import standardsSVG from "../curriculum/assets/curriculum-topic-standards.svg?lit";
 import stylingSVG from "../curriculum/assets/curriculum-topic-styling.svg?lit";
 import toolingSVG from "../curriculum/assets/curriculum-topic-tooling.svg?lit";
-// import scrimBg from "../curriculum/assets/landing-scrim.png";
+import scrimBg from "../curriculum/assets/landing-scrim.png?url";
 import { HeadingAnchor } from "../heading-anchor/server.js";
 import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
@@ -137,7 +137,7 @@ export class CurriculumLanding extends ServerComponent {
     // content is already the HTML content
     const contentHtml = content;
     // Path needs to be correct relative to the server rendering context
-    const scrimBg = "../curriculum/assets/landing-scrim.png"; // Assuming root-relative path
+    // const scrimBg = "../curriculum/assets/landing-scrim.png"; // Assuming root-relative path
 
     return html`
       <section id=${id} class="landing-about-container">
