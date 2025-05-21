@@ -1,7 +1,13 @@
 import { html } from "@lit-labs/ssr";
 
-import favicon from "./favicon-48x48.png?url";
-
 export default function Favicon() {
-  return html`<link rel="icon" href=${favicon} />`;
+  return html`<link
+      rel="shortcut icon"
+      href="https://developer.mozilla.org/favicon.ico"
+    />
+    <link
+      rel="alternate icon"
+      type="image/svg+xml"
+      href="https://developer.mozilla.org/favicon.svg"
+    />`;
 }
