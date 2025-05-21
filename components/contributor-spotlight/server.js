@@ -6,7 +6,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class ContributorSpotlight extends ServerComponent {
   /**
-   * @param {Fred.Context<Rari.ContributorSpotlightPage>} context
+   * @param {import("types/fred.js").Context<import("types/rari.js").ContributorSpotlightPage>} context
    */
   render(context) {
     return PageLayout.render(

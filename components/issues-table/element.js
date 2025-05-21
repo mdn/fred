@@ -13,7 +13,7 @@ export class MDNIssuesTable extends LitElement {
 
   constructor() {
     super();
-    /** @type {Github.Issues} */
+    /** @type {import("types/github.js").Issues} */
     this._issues = [];
     /** @type {boolean} */
     this._isLoading = true; // Start in loading state

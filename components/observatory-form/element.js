@@ -23,7 +23,7 @@ export class MDNObservatoryForm extends LitElement {
     this._hostname = "";
     this._errorMessage = "";
   }
-  /** @type {Lit.Ref<HTMLInputElement>}  */
+  /** @type {import("types/lit.js").Ref<HTMLInputElement>}  */
   inputRef = createRef();
 
   firstUpdated() {

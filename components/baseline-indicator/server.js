@@ -3,7 +3,7 @@ import { html, nothing } from "lit";
 import { ServerComponent } from "../server/index.js";
 
 /**
- * @type {{ name: string, browsers: Baseline.BrowserGroup[] }[]}
+ * @type {{ name: string, browsers: import("types/baseline.js").BrowserGroup[] }[]}
  */
 const ENGINES = [
   {
@@ -47,7 +47,7 @@ const SURVEY_URL =
 export class BaselineIndicator extends ServerComponent {
   /**
    *
-   * @param {Fred.Context<Rari.DocPage>} context
+   * @param {import("types/fred.js").Context<import("types/rari.js").DocPage>} context
    */
   render(context) {
     const { doc } = context;
@@ -75,53 +75,55 @@ export class BaselineIndicator extends ServerComponent {
 
     const feedbackLink = `${SURVEY_URL}?page=${encodeURIComponent(context.url)}&level=${level}`;
 
-    const isBrowserSupported = /** @param {Baseline.BrowserGroup} browser */ (
-      browser,
-    ) => {
-      return browser.ids.map((id) => status.support?.[id]).every(Boolean);
-    };
+    const isBrowserSupported =
+      /** @param {import("types/baseline.js").BrowserGroup} browser */ (
+        browser,
+      ) => {
+        return browser.ids.map((id) => status.support?.[id]).every(Boolean);
+      };
 
-    const engineTitle = /** @param {Baseline.BrowserGroup[]} browsers */ (
-      browsers,
-    ) => {
-      const supported = [];
-      const unsupported = [];
+    const engineTitle =
+      /** @param {import("types/baseline.js").BrowserGroup[]} browsers */ (
+        browsers,
+      ) => {
+        const supported = [];
+        const unsupported = [];
 
-      for (const browser of browsers) {
-        if (isBrowserSupported(browser)) {
-          supported.push(browser.name);
-        } else {
-          unsupported.push(browser.name);
+        for (const browser of browsers) {
+          if (isBrowserSupported(browser)) {
+            supported.push(browser.name);
+          } else {
+            unsupported.push(browser.name);
+          }
         }
-      }
 
-      const formatter =
-        supported.length > 1 || unsupported.length > 1
-          ? new Intl.ListFormat(context.locale)
-          : { format: /** @param {string[]} list */ (list) => list.at(0) };
+        const formatter =
+          supported.length > 1 || unsupported.length > 1
+            ? new Intl.ListFormat(context.locale)
+            : { format: /** @param {string[]} list */ (list) => list.at(0) };
 
-      if (supported.length > 0 && unsupported.length > 0) {
-        return context.l10n.raw({
-          id: "baseline_supported_and_unsupported_in",
-          args: {
-            supported: formatter.format(supported),
-            unsupported: formatter.format(unsupported),
-          },
-        });
-      } else if (supported.length > 0) {
-        return context.l10n.raw({
-          id: "baseline_supported_in",
-          args: { browsers: formatter.format(supported) },
-        });
-      } else if (unsupported.length > 0) {
-        return context.l10n.raw({
-          id: "baseline_unsupported_in",
-          args: { browsers: formatter.format(unsupported) },
-        });
-      } else {
-        return "";
-      }
-    };
+        if (supported.length > 0 && unsupported.length > 0) {
+          return context.l10n.raw({
+            id: "baseline_supported_and_unsupported_in",
+            args: {
+              supported: formatter.format(supported),
+              unsupported: formatter.format(unsupported),
+            },
+          });
+        } else if (supported.length > 0) {
+          return context.l10n.raw({
+            id: "baseline_supported_in",
+            args: { browsers: formatter.format(supported) },
+          });
+        } else if (unsupported.length > 0) {
+          return context.l10n.raw({
+            id: "baseline_unsupported_in",
+            args: { browsers: formatter.format(unsupported) },
+          });
+        } else {
+          return "";
+        }
+      };
 
     return html`<details
       class="baseline-indicator ${level}"

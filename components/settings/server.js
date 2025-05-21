@@ -7,7 +7,7 @@ export class Settings extends ServerComponent {
   static legacy = true;
 
   /**
-   * @param {Fred.Context} context
+   * @param {import("types/fred.js").Context} context
    */
   render(context) {
     return PageLayout.render(context, html`<div id="root"></div>`);

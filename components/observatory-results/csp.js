@@ -2,7 +2,7 @@ import { html } from "lit";
 
 import { PassIcon } from "../observatory/utils.js";
 
-/** @type {(keyof Observatory.CSPPolicy)[]} */
+/** @type {(keyof import("types/observatory.js").CSPPolicy)[]} */
 const policyTests = [
   "unsafeInline",
   "unsafeEval",
@@ -31,8 +31,8 @@ const negatedPolicies = new Set([
 
 /**
  *
- * @param {{result: Observatory.Result}} props
- * @returns { Lit.TemplateResult }
+ * @param {{result: import("types/observatory.js").Result}} props
+ * @returns { import("types/lit.js").TemplateResult }
  */
 export function CSP({ result }) {
   const policy = result.tests["content-security-policy"]?.policy;
@@ -77,7 +77,7 @@ export function CSP({ result }) {
 
   const rows = policyTests.map((pt) => {
     if (!policy[pt]) return null;
-    /** @type {Observatory.PolicyItem} */
+    /** @type {import("types/observatory.js").PolicyItem} */
     const p = policy[pt];
 
     return html`

@@ -6,7 +6,7 @@ import svg from "./article-footer.svg?lit";
 
 export class ArticleFooter extends ServerComponent {
   /**
-   * @param {Fred.Context<Rari.DocPage>} context
+   * @param {import("types/fred.js").Context<import("types/rari.js").DocPage>} context
    */
   render(context) {
     const { doc } = context;
@@ -27,7 +27,7 @@ export class ArticleFooter extends ServerComponent {
 }
 
 /**
- * @param {Fred.Context<Rari.DocPage>} context
+ * @param {import("types/fred.js").Context<import("types/rari.js").DocPage>} context
  */
 function Contribute(context) {
   return html`<a
@@ -41,7 +41,7 @@ function Contribute(context) {
 }
 
 /**
- * @param {Fred.Context<Rari.DocPage>} context
+ * @param {import("types/fred.js").Context<import("types/rari.js").DocPage>} context
  */
 function LastModified(context) {
   const { doc, locale } = context;
@@ -78,7 +78,7 @@ function LastModified(context) {
 }
 
 /**
- * @param {Fred.Context<Rari.DocPage>} context
+ * @param {import("types/fred.js").Context<import("types/rari.js").DocPage>} context
  */
 function Links(context) {
   return html`<div class="article-footer__links">
@@ -87,7 +87,7 @@ function Links(context) {
 }
 
 /**
- * @param {Fred.Context<Rari.DocPage>} context
+ * @param {import("types/fred.js").Context<import("types/rari.js").DocPage>} context
  */
 function GitHubSourceLink(context) {
   const {
@@ -115,7 +115,7 @@ function GitHubSourceLink(context) {
 }
 
 /**
- * @param {Fred.Context<Rari.DocPage>} context
+ * @param {import("types/fred.js").Context<import("types/rari.js").DocPage>} context
  */
 function GitHubIssueLink(context) {
   const { doc } = context;
@@ -170,7 +170,7 @@ const METADATA_TEMPLATE = `
 /**
  *
  * @param {string} template
- * @param {Rari.Doc} doc
+ * @param {import("types/rari.js").Doc} doc
  * @returns
  */
 function fillMetadata(template, doc) {

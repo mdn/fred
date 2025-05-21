@@ -15,8 +15,8 @@ import { Feedback } from "./feedback.js";
 
 export class ObservatoryLanding extends ServerComponent {
   /**
-   * @param {Fred.Context<Rari.SpaPage>} context
-   * @returns {Lit.TemplateResult}
+   * @param {import("types/fred.js").Context<import("types/rari.js").SpaPage>} context
+   * @returns {import("types/lit.js").TemplateResult}
    */
   render(context) {
     return PageLayout.render(
@@ -95,7 +95,7 @@ export class ObservatoryLanding extends ServerComponent {
 /**
  *
  * @param {{className: string}} props
- * @returns {Lit.TemplateResult}
+ * @returns {import("types/lit.js").TemplateResult}
  */
 function LinesSVG({ className = "" }) {
   return svg`

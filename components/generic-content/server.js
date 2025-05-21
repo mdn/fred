@@ -5,8 +5,8 @@ import { ServerComponent } from "../server/index.js";
 
 export class GenericContent extends ServerComponent {
   /**
-   * @param {Fred.Context<Rari.GenericPage>} context
-   * @returns {Lit.TemplateResult}
+   * @param {import("types/fred.js").Context<import("types/rari.js").GenericPage>} context
+   * @returns {import("types/lit.js").TemplateResult}
    */
   render(context) {
     return html`<div id="content" class="content">

@@ -1,8 +1,8 @@
 import { html } from "lit";
 
 /**
- * @param {Fred.Context<Rari.SpaPage>} _context
- * @returns {Lit.TemplateResult}
+ * @param {import("types/fred.js").Context<import("types/rari.js").SpaPage>} _context
+ * @returns {import("types/lit.js").TemplateResult}
  */
 export function Feedback(_context) {
   return html`<a

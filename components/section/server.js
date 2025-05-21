@@ -8,9 +8,9 @@ import { SpecificationsList } from "../specifications-list/index.js";
 
 export class Section extends ServerComponent {
   /**
-   * @param {Fred.Context} context
-   * @param {Rari.Section} section
-   * @returns {Lit.TemplateResult}
+   * @param {import("types/fred.js").Context} context
+   * @param {import("types/rari.js").Section} section
+   * @returns {import("types/lit.js").TemplateResult}
    */
   render(context, { type, value }) {
     switch (type) {
@@ -28,8 +28,8 @@ export class Section extends ServerComponent {
 }
 
 /**
- * @param {Rari.Prose} section
- * @returns {Lit.TemplateResult}
+ * @param {import("types/rari.js").Prose} section
+ * @returns {import("types/lit.js").TemplateResult}
  */
 function Prose({ id, title, content, isH3 }) {
   const level = isH3 ? 3 : 2;
@@ -44,8 +44,8 @@ function Prose({ id, title, content, isH3 }) {
 }
 
 /**
- * @param {Rari.Compat} section
- * @returns {Lit.TemplateResult}
+ * @param {import("types/rari.js").Compat} section
+ * @returns {import("types/lit.js").TemplateResult}
  */
 function BCD({ id, title, query, isH3 }) {
   const level = isH3 ? 3 : 2;
@@ -59,8 +59,8 @@ function BCD({ id, title, query, isH3 }) {
 }
 
 /**
- * @param {Fred.Context} context
- * @param {Rari.SpecificationSection} section
+ * @param {import("types/fred.js").Context} context
+ * @param {import("types/rari.js").SpecificationSection} section
  */
 function SpecificationsSection(context, { id, title, specifications, isH3 }) {
   const level = isH3 ? 3 : 2;

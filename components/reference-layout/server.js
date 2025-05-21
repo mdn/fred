@@ -9,7 +9,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class ReferenceLayout extends ServerComponent {
   /**
-   * @param {Fred.Context<Rari.DocPage>} context
+   * @param {import("types/fred.js").Context<import("types/rari.js").DocPage>} context
    */
   render(context) {
     const { doc } = context;

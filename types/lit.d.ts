@@ -1,9 +1,7 @@
-namespace Lit {
-  export type L10nResult = import("lit-html/directive.js").DirectiveResult<
-    typeof UnsafeHTMLDirective
-  >;
-  export type PropertyDeclarations = import("lit").PropertyDeclarations;
-  export type TemplateResult = import("lit").TemplateResult;
-  export type Ref<T> = import("lit/directives/ref.js").Ref<T>;
-  export type nothing = import("lit").nothing;
-}
+import { UnsafeHTMLDirective } from "lit-html/directives/unsafe-html.js";
+import { DirectiveResult } from "lit/directive.js";
+
+export * from "lit";
+export * from "lit/directives/ref.js";
+
+export type L10nResult = DirectiveResult<typeof UnsafeHTMLDirective>;

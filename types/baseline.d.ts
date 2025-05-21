@@ -1,13 +1,13 @@
-namespace Baseline {
-  type SupportStatus =
-    (typeof import("web-features").features)[keyof typeof import("web-features").features]["status"] & {
-      asterisk?: boolean;
-    };
-  type BrowserIdentifier =
-    keyof (typeof import("web-features").features)[keyof typeof import("web-features").features]["status"]["support"];
+import { features } from "web-features";
 
-  interface BrowserGroup {
-    name: string;
-    ids: BrowserIdentifier[];
-  }
+export type SupportStatus =
+  (typeof features)[keyof typeof features]["status"] & {
+    asterisk?: boolean;
+  };
+export type BrowserIdentifier =
+  keyof (typeof features)[keyof typeof features]["status"]["support"];
+
+export interface BrowserGroup {
+  name: string;
+  ids: BrowserIdentifier[];
 }

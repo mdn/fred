@@ -4,7 +4,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class ReferenceToc extends ServerComponent {
   /**
-   * @param {Fred.Context<Rari.DocPage | Rari.BlogPage>} context
+   * @param {import("types/fred.js").Context<import("types/rari.js").DocPage | import("types/rari.js").BlogPage>} context
    */
   render(context) {
     return html`<nav class="reference-toc">

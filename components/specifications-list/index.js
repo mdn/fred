@@ -1,8 +1,8 @@
 import { html, nothing } from "lit";
 
 /**
- * @param {Fred.Context} context
- * @param {Rari.Specification[]} specifications
+ * @param {import("types/fred.js").Context} context
+ * @param {import("types/rari.js").Specification[]} specifications
  */
 export function SpecificationsList(context, specifications) {
   if (specifications.length === 0) {

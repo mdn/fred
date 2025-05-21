@@ -4,7 +4,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class Breadcrumbs extends ServerComponent {
   /**
-   * @param {Fred.Context} context
+   * @param {import("types/fred.js").Context} context
    */
   render(context) {
     if (context.renderer !== "Doc") {

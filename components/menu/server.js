@@ -4,7 +4,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class Menu extends ServerComponent {
   /**
-   * @param {Fred.Context} _context
+   * @param {import("types/fred.js").Context} _context
    */
   render(_context) {
     return html`

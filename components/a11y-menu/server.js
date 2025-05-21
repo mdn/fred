@@ -4,7 +4,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class A11yMenu extends ServerComponent {
   /**
-   * @param {Fred.Context<Rari.BuiltPage>} context
+   * @param {import("types/fred.js").Context<import("types/rari.js").BuiltPage>} context
    */
   render(context) {
     return html`<ul class="a11y-menu">

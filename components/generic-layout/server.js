@@ -7,7 +7,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class GenericLayout extends ServerComponent {
   /**
-   * @param {Fred.Context<Rari.GenericPage>} context
+   * @param {import("types/fred.js").Context<import("types/rari.js").GenericPage>} context
    */
   render(context) {
     return html`

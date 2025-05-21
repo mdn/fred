@@ -10,7 +10,7 @@ import { formatMinus } from "../observatory/utils.js";
 
 /**
  *
- * @param {Observatory.Result} result
+ * @param {import("types/observatory.js").Result} result
  */
 export function Tooltip(result) {
   const rows = SCORING_TABLE.map((st) => {

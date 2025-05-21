@@ -6,7 +6,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class Curriculum extends ServerComponent {
   /**
-   * @param {Fred.Context<Rari.CurriculumPage>} context
+   * @param {import("types/fred.js").Context<import("types/rari.js").CurriculumPage>} context
    */
   render(context) {
     return PageLayout.render(

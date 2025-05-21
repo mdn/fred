@@ -13,7 +13,7 @@ import mozilla from "./mozilla.svg?lit";
 
 export class Footer extends ServerComponent {
   /**
-   * @param {Fred.Context} context
+   * @param {import("types/fred.js").Context} context
    */
   render(context) {
     return html`

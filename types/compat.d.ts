@@ -1,40 +1,44 @@
-namespace Compat {
-  interface Feature {
-    name: string;
-    compat: BCD.CompatStatement;
-    depth: number;
-  }
+import {
+  CompatStatement,
+  SimpleSupportStatement,
+  VersionValue,
+} from "@mdn/browser-compat-data";
 
-  type LegendKey =
-    | "yes"
-    | "partial"
-    | "preview"
-    | "no"
-    | "unknown"
-    | "experimental"
-    | "nonstandard"
-    | "deprecated"
-    | "footnote"
-    | "disabled"
-    | "altname"
-    | "prefix"
-    | "more";
-
-  // FIXME SimpleSupportStatement properties are not observed.
-  type SimpleSupportStatementExtended = BCD.SimpleSupportStatement & {
-    release_date?: string;
-    version_last?: BCD.VersionValue;
-  };
-
-  type SupportStatementExtended =
-    | SimpleSupportStatementExtended
-    | SimpleSupportStatementExtended[];
-
-  type SupportClassName =
-    | "no"
-    | "yes"
-    | "partial"
-    | "preview"
-    | "removed-partial"
-    | "unknown";
+export interface Feature {
+  name: string;
+  compat: CompatStatement;
+  depth: number;
 }
+
+export type LegendKey =
+  | "yes"
+  | "partial"
+  | "preview"
+  | "no"
+  | "unknown"
+  | "experimental"
+  | "nonstandard"
+  | "deprecated"
+  | "footnote"
+  | "disabled"
+  | "altname"
+  | "prefix"
+  | "more";
+
+// FIXME SimpleSupportStatement properties are not observed.
+export type SimpleSupportStatementExtended = SimpleSupportStatement & {
+  release_date?: string;
+  version_last?: VersionValue;
+};
+
+export type SupportStatementExtended =
+  | SimpleSupportStatementExtended
+  | SimpleSupportStatementExtended[];
+
+export type SupportClassName =
+  | "no"
+  | "yes"
+  | "partial"
+  | "preview"
+  | "removed-partial"
+  | "unknown";

@@ -26,11 +26,11 @@ export function asList(a) {
 
 /**
  * Finds the first compatibility depth in a BCD Identifier.
- * @param {BCD.Identifier} identifier
+ * @param {import("types/bcd.js").Identifier} identifier
  * @returns {number}
  */
 function findFirstCompatDepth(identifier) {
-  /** @type {Array<[string, BCD.Identifier]>} */
+  /** @type {Array<[string, import("types/bcd.js").Identifier]>} */
   const entries = [["", identifier]];
 
   do {
@@ -58,12 +58,12 @@ function findFirstCompatDepth(identifier) {
 
 /**
  * Recursively lists features from a BCD Identifier.
- * @param {BCD.Identifier} identifier
+ * @param {import("types/bcd.js").Identifier} identifier
  * @param {string} [parentName]
  * @param {string} [rootName]
  * @param {number} [depth]
  * @param {number} [firstCompatDepth]
- * @returns {Compat.Feature[]}
+ * @returns {import("types/compat.js").Feature[]}
  */
 export function listFeatures(
   identifier,
@@ -72,7 +72,7 @@ export function listFeatures(
   depth = 0,
   firstCompatDepth = 0,
 ) {
-  /** @type {Compat.Feature[]} */
+  /** @type {import("types/compat.js").Feature[]} */
   const features = [];
 
   if (rootName && identifier.__compat) {
@@ -117,7 +117,7 @@ export function listFeatures(
 
 /**
  * Checks if the support statement is an array with more than one item.
- * @param {BCD.SupportStatement | undefined} support
+ * @param {import("types/bcd.js").SupportStatement | undefined} support
  * @returns {boolean}
  */
 export function hasMore(support) {
@@ -126,8 +126,8 @@ export function hasMore(support) {
 
 /**
  * Determines if a version is a preview version.
- * @param {string | BCD.VersionValue | undefined} version
- * @param {BCD.BrowserStatement} browser
+ * @param {string | import("types/bcd.js").VersionValue | undefined} version
+ * @param {import("types/bcd.js").BrowserStatement} browser
  * @returns {boolean}
  */
 export function versionIsPreview(version, browser) {
@@ -146,7 +146,7 @@ export function versionIsPreview(version, browser) {
 
 /**
  * Checks if the support statement has noteworthy notes.
- * @param {BCD.SimpleSupportStatement} support
+ * @param {import("types/bcd.js").SimpleSupportStatement} support
  * @returns {boolean}
  */
 export function hasNoteworthyNotes(support) {
@@ -175,7 +175,7 @@ export function bugURLToString(url) {
 
 /**
  * Checks if a support statement has any limitation.
- * @param {BCD.SimpleSupportStatement} support
+ * @param {import("types/bcd.js").SimpleSupportStatement} support
  * @returns {boolean}
  */
 function hasLimitation(support) {
@@ -184,7 +184,7 @@ function hasLimitation(support) {
 
 /**
  * Checks if a support statement has major limitations.
- * @param {BCD.SimpleSupportStatement} support
+ * @param {import("types/bcd.js").SimpleSupportStatement} support
  * @returns {boolean}
  */
 function hasMajorLimitation(support) {
@@ -199,7 +199,7 @@ function hasMajorLimitation(support) {
 
 /**
  * Checks if a support statement is fully supported without any limitation.
- * @param {BCD.SimpleSupportStatement} support
+ * @param {import("types/bcd.js").SimpleSupportStatement} support
  * @returns {boolean}
  */
 export function isFullySupportedWithoutLimitation(support) {
@@ -208,7 +208,7 @@ export function isFullySupportedWithoutLimitation(support) {
 
 /**
  * Checks if a support statement is not supported at all.
- * @param {BCD.SimpleSupportStatement} support
+ * @param {import("types/bcd.js").SimpleSupportStatement} support
  * @returns {boolean}
  */
 export function isNotSupportedAtAll(support) {
@@ -217,7 +217,7 @@ export function isNotSupportedAtAll(support) {
 
 /**
  * Checks if a support statement is fully supported without major limitations.
- * @param {BCD.SimpleSupportStatement} support
+ * @param {import("types/bcd.js").SimpleSupportStatement} support
  * @returns {boolean}
  */
 function isFullySupportedWithoutMajorLimitation(support) {
@@ -234,8 +234,8 @@ function isFullySupportedWithoutMajorLimitation(support) {
  * 4. Partial support.
  * 5. Support with flags only.
  * 6. No/Inactive support.
- * @param {Compat.SupportStatementExtended | undefined} support
- * @returns {Compat.SimpleSupportStatementExtended | undefined}
+ * @param {import("types/compat.js").SupportStatementExtended | undefined} support
+ * @returns {import("types/compat.js").SimpleSupportStatementExtended | undefined}
  */
 export function getCurrentSupport(support) {
   if (!support) return;

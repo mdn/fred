@@ -1,17 +1,19 @@
-namespace Fred {
-  type Context<T = Rari.BuiltPage> = T &
-    L10nContext & {
-      pageTitle?: string;
-      path: string;
-    };
+import { BuiltPage } from "@mdn/rari";
+import { L10nFunction } from "./fluent-2.js";
+import { StatsCompilation } from "@rspack/core";
 
-  type L10nContext = {
-    locale: string;
-    l10n: import("./fluent-2").L10nFunction;
+export type Context<T = BuiltPage> = T &
+  L10nContext & {
+    pageTitle?: string;
+    path: string;
   };
 
-  type CompilationStats = {
-    client: import("@rspack/core").StatsCompilation;
-    legacy: import("@rspack/core").StatsCompilation;
-  };
-}
+export type L10nContext = {
+  locale: string;
+  l10n: L10nFunction;
+};
+
+export type CompilationStats = {
+  client: StatsCompilation;
+  legacy: StatsCompilation;
+};

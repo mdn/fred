@@ -10,8 +10,8 @@ import "../observatory-rescan-button/element.js";
 
 /**
  *
- * @param {{result: Observatory.Result, host: string, rescan: Function}} props
- * @returns {Lit.TemplateResult}
+ * @param {{result: import("types/observatory.js").Result, host: string, rescan: Function}} props
+ * @returns {import("types/lit.js").TemplateResult}
  */
 export function Rating({ result, host, rescan }) {
   return html`
