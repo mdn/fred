@@ -1,6 +1,7 @@
 /* Compat (desktop-xl) */
 
 @media (--screen-xlarge-and-wider) {
+  /* TODO: removed to stop overflowing
   .table-container {
     width: 100%;
     margin: 0;
@@ -8,7 +9,7 @@
 
   .table-container-inner {
     padding: 0;
-  }
+  } */
 
   .bc-table {
     /* 33% for feature, 67% for browser columns. */

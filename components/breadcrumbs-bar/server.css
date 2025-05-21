@@ -1,4 +1,5 @@
 /* Breadcrumbs */
+
 :root {
   --breadcrumbs-bar-height: 2rem;
 }
@@ -24,14 +25,21 @@
     color-scheme: dark;
   }
 
-  @media (--screen-xxlarge) {
-    padding-inline: calc(
-      (100% - 1440px + (var(--breadcrumbs-bar-side-padding) * 2)) / 2
-    );
+  mdn-toggle-sidebar {
+    display: none;
+  }
+
+  @media (--screen-layout-1-sidebar-or-less) {
+    padding-left: 0;
+
+    mdn-toggle-sidebar {
+      display: block;
+    }
   }
 
   @media (--screen-small-and-narrower) {
     column-gap: 0.5rem;
+    padding-inline: 0;
   }
 
   @media screen and (width <= 480px) {

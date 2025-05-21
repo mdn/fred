@@ -1,7 +1,7 @@
 import { html } from "lit";
 
-import { Section } from "../content/server.js";
 import { PageLayout } from "../page-layout/server.js";
+import { Section } from "../section/server.js";
 import { ServerComponent } from "../server/index.js";
 
 export class CurriculumAbout extends ServerComponent {
@@ -12,8 +12,8 @@ export class CurriculumAbout extends ServerComponent {
     return PageLayout.render(
       context,
       html`
-        <h1>ABOUT ${context.doc.title}</h1>
-        ${context.doc.body.map((section) => Section(context, section))}
+        <h1>${context.doc.title}</h1>
+        ${context.doc.body.map((section) => Section.render(context, section))}
       `,
     );
   }

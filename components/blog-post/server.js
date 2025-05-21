@@ -1,9 +1,9 @@
 import { html, nothing } from "lit";
 
 import { AuthorDateReadTime, BlogContainer } from "../blog/index.js";
-import { Section } from "../content/server.js";
 import { PageLayout } from "../page-layout/server.js";
 import { ReferenceToc } from "../reference-toc/server.js";
+import { Section } from "../section/server.js";
 
 import { ServerComponent } from "../server/index.js";
 
@@ -24,38 +24,13 @@ function BlogTitleImageFigure(_context, { image, width, height }) {
 }
 
 /**
- * @param {Fred.Context<Rari.BlogPage>} context
- * @param {object} params
- * @param {Rari.TocEntry[] | undefined} params.toc
- * @returns {Lit.TemplateResult | nothing}
- */
-function BlogPostToc(context, { toc }) {
-  if (!toc || toc.length === 0) {
-    return nothing;
-  }
-
-  return html`
-    <div class="blog-post__toc">${ReferenceToc.render(context)}</div>
-  `;
-}
-
-/**
- * @param {Fred.Context} _context
- * @returns {Lit.TemplateResult | nothing}
- */
-function SidePlacement(_context) {
-  // TODO: implement somewhere central
-  return nothing;
-}
-
-/**
  * @param {Fred.Context} context
  * @param {object} params
  * @param {Rari.BlogPostDoc} params.doc
  * @returns {Lit.TemplateResult}
  */
 function RenderBlogContent(context, { doc }) {
-  return html` ${doc.body.map((section) => Section(context, section))} `;
+  return html` ${doc.body.map((section) => Section.render(context, section))} `;
 }
 
 /**
@@ -111,12 +86,12 @@ export class BlogPost extends ServerComponent {
         </p>`,
       );
     }
-    const { toc } = doc;
 
     const postContent = html`
       <article class="blog-post__main">
         <aside class="blog-post__sidebar">
-          ${BlogPostToc(context, { toc })} ${SidePlacement(context)}
+          ${ReferenceToc.render(context)}
+          <mdn-placement-sidebar></mdn-placement-sidebar>
         </aside>
         <div class="blog-post__content">
           <header class="blog-post__header">

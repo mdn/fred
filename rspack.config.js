@@ -36,6 +36,8 @@ const common = {
     }),
     new rspack.EnvironmentPlugin({
       FRED_PLAYGROUND_BASE_HOST: "mdnplay.dev",
+      GLEAN_ENABLED: "false",
+      GLEAN_CHANNEL: "dev",
     }),
   ],
   optimization: {

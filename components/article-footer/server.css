@@ -13,7 +13,6 @@
 
     /* Reduce space to article content. */
     margin-top: 0;
-    background: red;
   }
 
   @media (--screen-xsmall) {

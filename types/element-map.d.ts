@@ -44,6 +44,7 @@ declare global {
     "mdn-sidebar-filter": import("../components/sidebar-filter/element.js").MDNSidebarFilter;
     "mdn-site-search": import("../components/site-search/element.js").MDNSiteSearch;
     "mdn-themed-image": import("../components/themed-image/element.js").MDNThemedImage;
+    "mdn-toggle-sidebar": import("../components/toggle-sidebar/element.js").MDNToggleSidebar;
   }
 }
 
