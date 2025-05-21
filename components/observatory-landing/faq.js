@@ -1,8 +1,8 @@
 import { html } from "lit";
 
 /**
- * @param {import("types/fred.js").Context<import("types/rari.js").SpaPage>} _context
- * @returns {import("types/lit.js").TemplateResult}
+ * @param {import("@fred").Context<import("@rari").SpaPage>} _context
+ * @returns {import("@lit").TemplateResult}
  */
 export function FAQ(_context) {
   return html`<a

@@ -26,7 +26,7 @@ export class MDNObservatoryResults extends LitElement {
   }
 
   /**
-   * @type { import("types/lit.js").PropertyDeclarations }
+   * @type { import("@lit").PropertyDeclarations }
    */
   static properties = {
     host: { type: String },

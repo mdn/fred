@@ -10,7 +10,7 @@ import {
 } from "../compat-table/constants.js";
 
 /**
- * @typedef {{data: import("types/bcd.js").Identifier, browsers: import("types/bcd.js").Browsers}} Compat
+ * @typedef {{data: import("@bcd").Identifier, browsers: import("@bcd").Browsers}} Compat
  */
 
 export class MDNCompatTableLazy extends L10nMixin(LitElement) {

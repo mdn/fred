@@ -7,7 +7,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class BreadcrumbsBar extends ServerComponent {
   /**
-   * @param {import("types/fred.js").Context} context
+   * @param {import("@fred").Context} context
    */
   render(context) {
     const colorScheme = context.renderer === "Homepage" ? "dark" : "";

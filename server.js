@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === "production") {
 /**
  * @param {Request} req
  * @param {Response} res
- * @param {import("types/rari.js").BuiltPage} page
+ * @param {import("@rari").BuiltPage} page
  */
 async function serverRenderMiddleware(req, res, page) {
   try {

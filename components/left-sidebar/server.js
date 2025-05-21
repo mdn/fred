@@ -5,7 +5,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class LeftSidebar extends ServerComponent {
   /**
-   * @param {import("types/fred.js").Context<import("types/rari.js").DocPage>} context
+   * @param {import("@fred").Context<import("@rari").DocPage>} context
    */
   render(context) {
     return html`<nav class="left-sidebar">

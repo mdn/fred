@@ -5,7 +5,7 @@ import { PassIcon, formatMinus } from "../observatory/utils.js";
 
 /**
  * @param {{overallScore: number, scoreModifier: number}} props
- * @returns {import("types/lit.js").TemplateResult}
+ * @returns {import("@lit").TemplateResult}
  */
 function ScoreModifier({ overallScore, scoreModifier }) {
   const bonusEligible = overallScore >= 90;
@@ -24,8 +24,8 @@ function ScoreModifier({ overallScore, scoreModifier }) {
 
 /**
  *
- * @param {{ result: import("types/observatory.js").Result}} result
- * @returns {import("types/lit.js").TemplateResult}
+ * @param {{ result: import("@observatory").Result}} result
+ * @returns {import("@lit").TemplateResult}
  */
 export function Scoring({ result }) {
   const showFootnote =

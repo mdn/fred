@@ -149,7 +149,7 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
 
   /**
    * Renders the component template.
-   * @returns {import("types/lit.js").TemplateResult}
+   * @returns {import("@lit").TemplateResult}
    */
   render() {
     return html`

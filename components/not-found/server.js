@@ -5,7 +5,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class NotFound extends ServerComponent {
   /**
-   * @param {import("types/fred.js").Context} context
+   * @param {import("@fred").Context} context
    */
   render(context) {
     return PageLayout.render(

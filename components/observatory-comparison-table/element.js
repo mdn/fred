@@ -122,7 +122,7 @@ export class MDNObservatoryComparisonTable extends LitElement {
 
   constructor() {
     super();
-    /** @type {import("types/observatory.js").Result | null} */
+    /** @type {import("@observatory").Result | null} */
     this.result = null;
   }
 
@@ -179,8 +179,8 @@ customElements.define(
 
 /**
  *
- * @param {{gradeDistribution: import("types/observatory.js").GradeDistribution[], result: import("types/observatory.js").Result}} props
- * @returns {import("types/lit.js").TemplateResult}
+ * @param {{gradeDistribution: import("@observatory").GradeDistribution[], result: import("@observatory").Result}} props
+ * @returns {import("@lit").TemplateResult}
  */
 function GradeSVG({ gradeDistribution, result }) {
   const width = 1200;
@@ -342,7 +342,7 @@ function GradeSVG({ gradeDistribution, result }) {
 
 /**
  * Calculate
- * @param {import("types/observatory.js").GradeDistribution[]} gradeDistribution
+ * @param {import("@observatory").GradeDistribution[]} gradeDistribution
  * @returns {number[]}
  */
 function calculateTicks(gradeDistribution) {

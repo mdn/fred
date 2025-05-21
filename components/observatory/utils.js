@@ -6,7 +6,7 @@ import passSvg from "./assets/pass-icon.svg?lit";
 /**
  *
  * @param {string} host
- * @param {import("types/observatory.js").Result} result
+ * @param {import("@observatory").Result} result
  * @returns
  */
 export function hostAsRedirectChain(host, result) {
@@ -91,7 +91,7 @@ export function humanizedDurationFromNow(date) {
 
 /**
  * @param {{pass: boolean | null}} props
- * @returns {import("types/lit.js").TemplateResult}
+ * @returns {import("@lit").TemplateResult}
  */
 export function PassIcon({ pass }) {
   if (pass === null) {
@@ -107,7 +107,7 @@ export function PassIcon({ pass }) {
 
 /**
  * @param {{expires: string}} props
- * @returns {import("types/lit.js").TemplateResult}
+ * @returns {import("@lit").TemplateResult}
  */
 export function Timestamp({ expires }) {
   const d = new Date(expires);
@@ -142,7 +142,7 @@ export function upperCaseHeaderName(input) {
  * Returns the cookie prefix, either "Host" or "Secure" if prefixed accordingly (`__host` & `__secure`),
  * or "-" if no prefix is present.
  * @param {{cookieName: string}} props
- * @returns {import("types/lit.js").TemplateResult}
+ * @returns {import("@lit").TemplateResult}
  */
 export function CookiePrefix({ cookieName }) {
   if (cookieName.startsWith("__Host-")) {
@@ -157,7 +157,7 @@ export function CookiePrefix({ cookieName }) {
 /**
  * Link to a header documentation page inside MDN content
  * @param {{header: string}} props
- * @returns {import("types/lit.js").TemplateResult}
+ * @returns {import("@lit").TemplateResult}
  */
 export function HeaderLink({ header }) {
   const displayHeaderName = upperCaseHeaderName(header);

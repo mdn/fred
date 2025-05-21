@@ -34,8 +34,8 @@ for (const [name, def] of customElements.__definitions) {
 
 /**
  * @param {string} path
- * @param {import("types/rari.js").BuiltPage} page
- * @param {import("types/fred.js").CompilationStats} compilationStats
+ * @param {import("@rari").BuiltPage} page
+ * @param {import("@fred").CompilationStats} compilationStats
  */
 export async function render(path, page, compilationStats) {
   const locale = path.split("/")[1] || "en-US";

@@ -4,7 +4,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class Logo extends ServerComponent {
   /**
-   * @param {import("types/fred.js").Context} _context
+   * @param {import("@fred").Context} _context
    */
   render(_context) {
     return html`

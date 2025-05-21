@@ -3,7 +3,7 @@ import { html, nothing } from "lit";
 import { ServerComponent } from "../server/index.js";
 
 /**
- * @type {{ name: string, browsers: import("types/baseline.js").BrowserGroup[] }[]}
+ * @type {{ name: string, browsers: import("@baseline").BrowserGroup[] }[]}
  */
 const ENGINES = [
   {
@@ -47,7 +47,7 @@ const SURVEY_URL =
 export class BaselineIndicator extends ServerComponent {
   /**
    *
-   * @param {import("types/fred.js").Context<import("types/rari.js").DocPage>} context
+   * @param {import("@fred").Context<import("@rari").DocPage>} context
    */
   render(context) {
     const { doc } = context;
@@ -76,14 +76,12 @@ export class BaselineIndicator extends ServerComponent {
     const feedbackLink = `${SURVEY_URL}?page=${encodeURIComponent(context.url)}&level=${level}`;
 
     const isBrowserSupported =
-      /** @param {import("types/baseline.js").BrowserGroup} browser */ (
-        browser,
-      ) => {
+      /** @param {import("@baseline").BrowserGroup} browser */ (browser) => {
         return browser.ids.map((id) => status.support?.[id]).every(Boolean);
       };
 
     const engineTitle =
-      /** @param {import("types/baseline.js").BrowserGroup[]} browsers */ (
+      /** @param {import("@baseline").BrowserGroup[]} browsers */ (
         browsers,
       ) => {
         const supported = [];

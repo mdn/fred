@@ -6,7 +6,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class Generic extends ServerComponent {
   /**
-   * @param {import("types/fred.js").Context<import("types/rari.js").GenericPage>} context
+   * @param {import("@fred").Context<import("@rari").GenericPage>} context
    */
   render(context) {
     return PageLayout.render(

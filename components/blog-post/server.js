@@ -8,12 +8,12 @@ import { Section } from "../section/server.js";
 import { ServerComponent } from "../server/index.js";
 
 /**
- * @param {import("types/fred.js").Context} _context
+ * @param {import("@fred").Context} _context
  * @param {object} params
- * @param {import("types/rari.js").BlogImage} params.image
+ * @param {import("@rari").BlogImage} params.image
  * @param {number} params.width
  * @param {number} params.height
- * @returns {import("types/lit.js").TemplateResult}
+ * @returns {import("@lit").TemplateResult}
  */
 function BlogTitleImageFigure(_context, { image, width, height }) {
   // In post view, image paths are relative to the post's directory sibling
@@ -24,10 +24,10 @@ function BlogTitleImageFigure(_context, { image, width, height }) {
 }
 
 /**
- * @param {import("types/fred.js").Context<import("types/rari.js").BlogPage>} context
+ * @param {import("@fred").Context<import("@rari").BlogPage>} context
  * @param {object} params
- * @param {import("types/rari.js").TocEntry[] | undefined} params.toc
- * @returns {import("types/lit.js").TemplateResult | nothing}
+ * @param {import("@rari").TocEntry[] | undefined} params.toc
+ * @returns {import("@lit").TemplateResult | nothing}
  */
 function BlogPostToc(context, { toc }) {
   if (!toc || toc.length === 0) {
@@ -40,8 +40,8 @@ function BlogPostToc(context, { toc }) {
 }
 
 /**
- * @param {import("types/fred.js").Context} _context
- * @returns {import("types/lit.js").TemplateResult | nothing}
+ * @param {import("@fred").Context} _context
+ * @returns {import("@lit").TemplateResult | nothing}
  */
 function SidePlacement(_context) {
   // TODO: implement somewhere central
@@ -49,20 +49,20 @@ function SidePlacement(_context) {
 }
 
 /**
- * @param {import("types/fred.js").Context} context
+ * @param {import("@fred").Context} context
  * @param {object} params
- * @param {import("types/rari.js").BlogPostDoc} params.doc
- * @returns {import("types/lit.js").TemplateResult}
+ * @param {import("@rari").BlogPostDoc} params.doc
+ * @returns {import("@lit").TemplateResult}
  */
 function RenderBlogContent(context, { doc }) {
   return html` ${doc.body.map((section) => Section.render(context, section))} `;
 }
 
 /**
- * @param {import("types/fred.js").Context} context
+ * @param {import("@fred").Context} context
  * @param {object} params
- * @param {import("types/rari.js").BlogMeta} params.blogMeta
- * @returns {import("types/lit.js").TemplateResult | nothing}
+ * @param {import("@rari").BlogMeta} params.blogMeta
+ * @returns {import("@lit").TemplateResult | nothing}
  */
 function PrevNextLinks(context, { blogMeta }) {
   if (!blogMeta.links) {
@@ -97,8 +97,8 @@ function PrevNextLinks(context, { blogMeta }) {
 export class BlogPost extends ServerComponent {
   /**
    *
-   * @param {import("types/fred.js").Context<import("types/rari.js").BlogPage>} context
-   * @returns {import("types/lit.js").TemplateResult}
+   * @param {import("@fred").Context<import("@rari").BlogPage>} context
+   * @returns {import("@lit").TemplateResult}
    */
   render(context) {
     const { blogMeta, doc } = context;

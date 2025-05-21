@@ -12,7 +12,7 @@
     "skipLibCheck": true,
     // alias for imports:
     "paths": {
-      "types/*": ["./types/*"]
+      "@*": ["./types/*.js"]
     },
     // rules:
     "strict": true,

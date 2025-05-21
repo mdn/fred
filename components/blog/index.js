@@ -2,9 +2,9 @@ import { html, nothing } from "lit";
 
 /**
  *
- * @param {import("types/fred.js").Context} _context
- * @param {import("types/lit.js").TemplateResult} content
- * @returns {import("types/lit.js").TemplateResult}
+ * @param {import("@fred").Context} _context
+ * @param {import("@lit").TemplateResult} content
+ * @returns {import("@lit").TemplateResult}
  */
 export function BlogContainer(_context, content) {
   return html`<div className="page-layout__blog-container">${content}</div>`;
@@ -12,10 +12,10 @@ export function BlogContainer(_context, content) {
 
 /**
  *
- * @param {import("types/fred.js").Context} _context
+ * @param {import("@fred").Context} _context
  * @param {object} params
  * @param {string | null | undefined} params.link
- * @param {import("types/lit.js").TemplateResult} params.content
+ * @param {import("@lit").TemplateResult} params.content
  * @returns
  */
 export function MaybeLink(_context, { link, content }) {
@@ -35,10 +35,10 @@ export function MaybeLink(_context, { link, content }) {
 
 /**
  *
- * @param {import("types/fred.js").Context} _context
+ * @param {import("@fred").Context} _context
  * @param {object} params
  * @param {string | undefined} params.date
- * @returns {import("types/lit.js").TemplateResult | nothing}
+ * @returns {import("@lit").TemplateResult | nothing}
  */
 export function PublishDate(_context, { date }) {
   if (!date) {
@@ -55,10 +55,10 @@ export function PublishDate(_context, { date }) {
 
 /**
  *
- * @param {import("types/fred.js").Context} context
+ * @param {import("@fred").Context} context
  * @param {object} params
  * @param {number} params.readTime
- * @returns {import("types/lit.js").TemplateResult | nothing}
+ * @returns {import("@lit").TemplateResult | nothing}
  */
 export function TimeToRead(context, { readTime }) {
   if (!readTime) {
@@ -74,10 +74,10 @@ export function TimeToRead(context, { readTime }) {
 
 /**
  *
- * @param {import("types/fred.js").Context} context
+ * @param {import("@fred").Context} context
  * @param {object} params
- * @param {import("types/rari.js").BlogMeta} params.blogMeta
- * @returns {import("types/lit.js").TemplateResult | nothing}
+ * @param {import("@rari").BlogMeta} params.blogMeta
+ * @returns {import("@lit").TemplateResult | nothing}
  */
 export function Author(context, { blogMeta }) {
   const author = blogMeta.author;
@@ -98,10 +98,10 @@ export function Author(context, { blogMeta }) {
 
 /**
  *
- * @param {import("types/fred.js").Context} context
+ * @param {import("@fred").Context} context
  * @param {object} params
- * @param {import("types/rari.js").BlogMeta} params.blogMeta
- * @returns {import("types/lit.js").TemplateResult | nothing}
+ * @param {import("@rari").BlogMeta} params.blogMeta
+ * @returns {import("@lit").TemplateResult | nothing}
  */
 export function AuthorDateReadTime(context, { blogMeta }) {
   if (!blogMeta.author) {

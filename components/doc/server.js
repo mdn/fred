@@ -4,7 +4,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class Doc extends ServerComponent {
   /**
-   * @param {import("types/fred.js").Context<import("types/rari.js").DocPage>} context
+   * @param {import("@fred").Context<import("@rari").DocPage>} context
    */ render(context) {
     context.pageTitle = context.doc.title;
     return PageLayout.render(context, ReferenceLayout.render(context));

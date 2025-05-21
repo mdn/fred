@@ -8,8 +8,8 @@ import { ServerComponent } from "../server/index.js";
 
 export class PageLayout extends ServerComponent {
   /**
-   * @param {import("types/fred.js").Context} context
-   * @param {import("types/lit.js").TemplateResult | string | import("types/lit.js").nothing} child
+   * @param {import("@fred").Context} context
+   * @param {import("@lit").TemplateResult | string | import("@lit").nothing} child
    */
   render(context, child) {
     return html`

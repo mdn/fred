@@ -2,7 +2,7 @@ import getFluentContext from "./fluent.js";
 
 /**
  * @param {string} locale
- * @returns {Promise<import("types/fred.js").L10nContext>}
+ * @returns {Promise<import("@fred").L10nContext>}
  */
 export async function addFluent(locale) {
   return {

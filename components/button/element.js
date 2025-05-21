@@ -17,7 +17,7 @@ export class MDNButton extends LitElement {
   constructor() {
     super();
     this.disabled = false;
-    /** @type {import("types/lit.js").TemplateResult | undefined} */
+    /** @type {import("@lit").TemplateResult | undefined} */
     this.icon = undefined;
     this.iconOnly = false;
     /** @type {import("./types.js").ButtonVariants} */

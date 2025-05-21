@@ -11,7 +11,7 @@ const LABELS = new Set(["good first issue", "accepting PR"]);
 export class GenericCommunity extends ServerComponent {
   /**
    *
-   * @param {import("types/rari.js").Section} section
+   * @param {import("@rari").Section} section
    * @param {number} i
    * @returns
    */
@@ -28,7 +28,7 @@ export class GenericCommunity extends ServerComponent {
       "</mdn-contributor-list>",
     );
 
-    /** @type {import("types/github.js").Issues} */
+    /** @type {import("@github").Issues} */
     const issues = [];
     if (i === 0) {
       return html`
@@ -111,7 +111,7 @@ export class GenericCommunity extends ServerComponent {
   }
 
   /**
-   * @param {import("types/fred.js").Context<import("types/rari.js").GenericPage>} context
+   * @param {import("@fred").Context<import("@rari").GenericPage>} context
    */
   render(context) {
     const doc = context.hyData;

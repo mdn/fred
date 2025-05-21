@@ -30,7 +30,7 @@ import {
   versionIsPreview,
 } from "./utils.js";
 
-/** @type {import("types/compat.js").LegendKey[]} */
+/** @type {import("@compat").LegendKey[]} */
 const LEGEND_KEYS = [
   "yes",
   "partial",
@@ -48,7 +48,7 @@ const LEGEND_KEYS = [
 ];
 
 /**
- * @param {import("types/bcd.js").BrowserName} browser
+ * @param {import("@bcd").BrowserName} browser
  * @returns {string}
  */
 function browserToIconName(browser) {
@@ -79,15 +79,15 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   constructor() {
     super();
     this.query = "";
-    /** @type {import("types/bcd.js").Identifier} */
+    /** @type {import("@bcd").Identifier} */
     this.data = {};
-    /** @type {Partial<import("types/bcd.js").Browsers>} */
+    /** @type {Partial<import("@bcd").Browsers>} */
     this.browserInfo = {};
     this.locale = "";
     this._pathname = "";
     /** @type {string[]} */
     this._platforms = [];
-    /** @type {import("types/bcd.js").BrowserName[]} */
+    /** @type {import("@bcd").BrowserName[]} */
     this._browsers = [];
   }
 
@@ -105,14 +105,14 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
   /**
    * Gets the active legend items based on browser compatibility data.
-   * @param {import("types/bcd.js").Identifier} compat - The compatibility data identifier.
+   * @param {import("@bcd").Identifier} compat - The compatibility data identifier.
    * @param {string} name - The name of the feature.
-   * @param {Partial<import("types/bcd.js").Browsers>} browserInfo - Information about browsers.
-   * @param {import("types/bcd.js").BrowserName[]} browsers - The list of displayed browsers.
-   * @returns {import("types/compat.js").LegendKey[]} An array of legend keys.
+   * @param {Partial<import("@bcd").Browsers>} browserInfo - Information about browsers.
+   * @param {import("@bcd").BrowserName[]} browsers - The list of displayed browsers.
+   * @returns {import("@compat").LegendKey[]} An array of legend keys.
    */
   _getActiveLegendItems(compat, name, browserInfo, browsers) {
-    /** @type {Set<import("types/compat.js").LegendKey>} */
+    /** @type {Set<import("@compat").LegendKey>} */
     const legendItems = new Set();
 
     for (const feature of listFeatures(compat, "", name)) {
@@ -441,7 +441,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   }
 
   /**
-   * @param {import("types/bcd.js").SupportStatement} support
+   * @param {import("@bcd").SupportStatement} support
    */
   _renderCellIcons(support) {
     const supportItem = getCurrentSupport(support);
@@ -464,7 +464,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
   /**
    * @param {string} name
-   * @returns {import("types/lit.js").TemplateResult}
+   * @returns {import("@lit").TemplateResult}
    */
   _renderIcon(name) {
     const title = this.l10n.raw({ id: `compat_legend_${name}` });
@@ -476,12 +476,12 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   }
 
   /**
-   * @param {import("types/bcd.js").StatusBlock} status
+   * @param {import("@bcd").StatusBlock} status
    */
   _renderStatusIcons(status) {
     // <StatusIcons>
     /**
-     * @type {Array<{ title: import("types/lit.js").L10nResult; text: import("types/lit.js").L10nResult; iconClassName: string }>}
+     * @type {Array<{ title: import("@lit").L10nResult; text: import("@lit").L10nResult; iconClassName: string }>}
      */
     const icons = [];
     if (status.experimental) {
@@ -531,15 +531,15 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
   /**
    *
-   * @param {import("types/bcd.js").BrowserStatement} browser
-   * @param {import("types/bcd.js").SupportStatement} support
+   * @param {import("@bcd").BrowserStatement} browser
+   * @param {import("@bcd").SupportStatement} support
    */
   _renderNotes(browser, support) {
     return [...asList(support)]
       .reverse()
       .flatMap((item, i) => {
         /**
-         * @type {Array<{iconName: string; label: string | import("types/lit.js").L10nResult | undefined } | undefined>}
+         * @type {Array<{iconName: string; label: string | import("@lit").L10nResult | undefined } | undefined>}
          */
         const supportNotes = [
           item.version_removed &&
@@ -603,7 +603,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
                     " feature is behind the",
                     ...flags.map(
                       /**
-                       * @param {import("types/bcd.js").FlagStatement} flag
+                       * @param {import("@bcd").FlagStatement} flag
                        * @param {number} i
                        */ (flag, i) => {
                         const valueToSet = flag.value_to_set
@@ -624,7 +624,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
                     ".",
                     browser.pref_url &&
                       flags.some(
-                        /** @param {import("types/bcd.js").FlagStatement} flag */ (
+                        /** @param {import("@bcd").FlagStatement} flag */ (
                           flag,
                         ) => flag.type === "preference",
                       ) &&
@@ -702,7 +702,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         }
 
         /**
-         * @type {Array<{iconName: string; label: string | import("types/lit.js").L10nResult | undefined }>}
+         * @type {Array<{iconName: string; label: string | import("@lit").L10nResult | undefined }>}
          */
         const filteredSupportNotes = supportNotes.filter(
           (v) => v !== undefined,
@@ -737,8 +737,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
   /**
    *
-   * @param {import("types/bcd.js").SupportStatement | undefined} support
-   * @param {import("types/bcd.js").BrowserStatement} browser
+   * @param {import("@bcd").SupportStatement | undefined} support
+   * @param {import("@bcd").BrowserStatement} browser
    * @param {boolean} [timeline]
    */
   _renderCellText(support, browser, timeline = false) {
@@ -778,7 +778,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     }
 
     let label;
-    /** @type {"" | import("types/lit.js").L10nResult} */
+    /** @type {"" | import("@lit").L10nResult} */
     let title = "";
 
     switch (status.isSupported) {
@@ -936,9 +936,9 @@ customElements.define("mdn-compat-table", MDNCompatTable);
  * shown. In all other categories, if compat data has info about Deno / Node.js
  * those are also shown. Deno is always shown if Node.js is shown.
  * @param {string} category
- * @param {import("types/bcd.js").Identifier} data
- * @param {Partial<import("types/bcd.js").Browsers>} browserInfo
- * @returns {[string[], import("types/bcd.js").BrowserName[]]}
+ * @param {import("@bcd").Identifier} data
+ * @param {Partial<import("@bcd").Browsers>} browserInfo
+ * @returns {[string[], import("@bcd").BrowserName[]]}
  */
 export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
   const hasNodeJSData = data.__compat && "nodejs" in data.__compat.support;
@@ -949,15 +949,14 @@ export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
     platforms.push("server");
   }
 
-  /** @type {import("types/bcd.js").BrowserName[]} */
+  /** @type {import("@bcd").BrowserName[]} */
   let browsers = [];
 
   // Add browsers in platform order to align table cells
   for (const platform of platforms) {
-    const platformBrowsers =
-      /** @type {import("types/bcd.js").BrowserName[]} */ (
-        Object.keys(browserInfo)
-      );
+    const platformBrowsers = /** @type {import("@bcd").BrowserName[]} */ (
+      Object.keys(browserInfo)
+    );
     browsers.push(
       ...platformBrowsers.filter(
         (browser) =>

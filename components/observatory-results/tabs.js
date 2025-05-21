@@ -9,11 +9,11 @@ import { Scoring } from "./scoring.js";
 
 /**
  * @param {{
- *   result: import("types/observatory.js").Result,
+ *   result: import("@observatory").Result,
  *   selectedTab: number,
  *   onTabSelect: (index: number, key: string) => void
  * }} props
- * @returns {import("types/lit.js").TemplateResult}
+ * @returns {import("@lit").TemplateResult}
  */
 export function Tabs({ result, selectedTab = 0, onTabSelect }) {
   const tabs = [
