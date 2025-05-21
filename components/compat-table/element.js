@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit";
+import { LitElement, html, nothing } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
@@ -81,7 +81,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     this.query = "";
     /** @type {import("types/bcd.js").Identifier} */
     this.data = {};
-    /** @type {import("types/bcd.js").Browsers} */
+    /** @type {Partial<import("types/bcd.js").Browsers>} */
     this.browserInfo = {};
     this.locale = "";
     this._pathname = "";
@@ -107,7 +107,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
    * Gets the active legend items based on browser compatibility data.
    * @param {import("types/bcd.js").Identifier} compat - The compatibility data identifier.
    * @param {string} name - The name of the feature.
-   * @param {import("types/bcd.js").Browsers} browserInfo - Information about browsers.
+   * @param {Partial<import("types/bcd.js").Browsers>} browserInfo - Information about browsers.
    * @param {import("types/bcd.js").BrowserName[]} browsers - The list of displayed browsers.
    * @returns {import("types/compat.js").LegendKey[]} An array of legend keys.
    */
@@ -149,6 +149,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
             if (versionSupport.flags && versionSupport.flags.length > 0) {
               legendItems.add("no");
             } else if (
+              browserInfo[browser] &&
               versionIsPreview(
                 versionSupport.version_added,
                 browserInfo[browser],
@@ -278,7 +279,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     const platformsWithBrowsers = this._platforms.map((platform) => ({
       platform,
       browsers: this._browsers.filter(
-        (browser) => this.browserInfo[browser].type === platform,
+        (browser) => this.browserInfo[browser]?.type === platform,
       ),
     }));
 
@@ -397,6 +398,9 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       const browserCells = browsers.map((browserName) => {
         // <CompatCell>
         const browser = browserInfo[browserName];
+        if (!browser) {
+          return nothing;
+        }
         const support = compat.support[browserName] ?? {
           version_added: null,
         };
@@ -535,7 +539,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       .reverse()
       .flatMap((item, i) => {
         /**
-         * @type {Array<{iconName: string; label: string | import("types/lit.js").L10nResult } | undefined>}
+         * @type {Array<{iconName: string; label: string | import("types/lit.js").L10nResult | undefined } | undefined>}
          */
         const supportNotes = [
           item.version_removed &&
@@ -698,7 +702,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         }
 
         /**
-         * @type {Array<{iconName: string; label: string | import("types/lit.js").L10nResult }>}
+         * @type {Array<{iconName: string; label: string | import("types/lit.js").L10nResult | undefined }>}
          */
         const filteredSupportNotes = supportNotes.filter(
           (v) => v !== undefined,
@@ -933,7 +937,7 @@ customElements.define("mdn-compat-table", MDNCompatTable);
  * those are also shown. Deno is always shown if Node.js is shown.
  * @param {string} category
  * @param {import("types/bcd.js").Identifier} data
- * @param {import("types/bcd.js").Browsers} browserInfo
+ * @param {Partial<import("types/bcd.js").Browsers>} browserInfo
  * @returns {[string[], import("types/bcd.js").BrowserName[]]}
  */
 export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
@@ -950,14 +954,14 @@ export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
 
   // Add browsers in platform order to align table cells
   for (const platform of platforms) {
-    /**
-     * @type {import("types/bcd.js").BrowserName[]}
-     */
-    const platformBrowsers = Object.keys(browserInfo);
+    const platformBrowsers =
+      /** @type {import("types/bcd.js").BrowserName[]} */ (
+        Object.keys(browserInfo)
+      );
     browsers.push(
       ...platformBrowsers.filter(
         (browser) =>
-          browser in browserInfo && browserInfo[browser].type === platform,
+          browser in browserInfo && browserInfo[browser]?.type === platform,
       ),
     );
   }
@@ -965,7 +969,7 @@ export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
   // Filter WebExtension browsers in corresponding tables.
   if (category === "webextensions") {
     browsers = browsers.filter(
-      (browser) => browserInfo[browser].accepts_webextensions,
+      (browser) => browserInfo[browser]?.accepts_webextensions,
     );
   }
 
