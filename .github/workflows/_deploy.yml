@@ -108,6 +108,9 @@ jobs:
 
       - name: Build (fred)
         working-directory: mdn/fred
+        env:
+          GLEAN_ENABLED: true
+          GLEAN_CHANNEL: review
         run: npm run build
 
       - name: Build (rari)

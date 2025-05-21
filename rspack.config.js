@@ -36,6 +36,8 @@ const common = {
     }),
     new rspack.EnvironmentPlugin({
       FRED_PLAYGROUND_BASE_HOST: "mdnplay.dev",
+      GLEAN_ENABLED: "false",
+      GLEAN_CHANNEL: "dev",
     }),
   ],
   optimization: {
@@ -79,6 +81,10 @@ const common = {
       },
     },
     rules: [
+      {
+        resourceQuery: /url/,
+        type: "asset/resource",
+      },
       {
         resourceQuery: /source/,
         type: "asset/source",
