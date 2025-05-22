@@ -1,6 +1,8 @@
+/* Scrollbar */
+
 :root {
-  --scrollbar-bg: transparent;
-  --scrollbar-color: light-dark(
+  --color-scrollbar-track: transparent;
+  --color-scrollbar-thumb: light-dark(
     var(--color-black-alpha-25),
     var(--color-white-alpha-25)
   );
