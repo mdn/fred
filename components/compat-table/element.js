@@ -338,7 +338,15 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   _renderTableBody() {
     // <FeatureListAccordion>
     const { data, _browsers: browsers, browserInfo, locale } = this;
-    const features = listFeatures(data, "", this._name);
+    let features = listFeatures(data, "", this._name);
+
+    // enormous BCD tables are unusable and have terrible performance: crashing in some browsers
+    if (features.length > 100) {
+      features = features.filter(({ depth }) => depth < 2);
+      if (features.length > 100) {
+        features = features.filter(({ depth }) => depth < 1);
+      }
+    }
 
     const featureRows = features.map((feature) => {
       // <FeatureRow>
