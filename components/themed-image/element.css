@@ -1,3 +1,17 @@
 :host {
-  background-color: green;
+  display: block;
+
+  picture {
+    display: block;
+    max-width: 100%;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+  picture: {
+    justify-self: end;
+    width: 100%;
+  }
 }

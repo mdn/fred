@@ -300,11 +300,16 @@
   > .curriculum-content {
     max-width: 100%;
 
+    :target {
+      scroll-margin-top: var(--sticky-header-height);
+    }
+
     h1 {
       font-weight: 600;
     }
 
     h2 {
+      font-size: var(--font-size-larger);
       font-weight: 500;
     }
 
@@ -371,30 +376,11 @@
   }
 
   .curriculum-content {
-    a {
-      color: var(--text-link);
-
-      &:link,
-      &:visited {
-        text-decoration: underline;
-
-        &.button {
-          text-decoration: none;
-        }
-      }
-
-      &:hover,
-      &:focus {
-        text-decoration: none;
-      }
-
-      &:visited:not([href^="#"]) {
-        color: var(--text-visited);
-      }
-    }
-
     ol,
     ul {
+      padding: 0;
+      list-style: none;
+
       li > p {
         margin: 0;
       }

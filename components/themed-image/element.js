@@ -1,6 +1,9 @@
 import { LitElement, html } from "lit";
 
+import styles from "./element.css?lit";
+
 export class MDNThemedImage extends LitElement {
+  static styles = styles;
   static ssr = false;
 
   static properties = {
@@ -71,21 +74,16 @@ export class MDNThemedImage extends LitElement {
   render() {
     switch (this._theme) {
       case "os":
-        return html`
-          <picture>
-            <source
-              srcset=${this.srcLight}
-              media="(prefers-color-scheme: light)"
-            />
-            <source
-              srcset=${this.srcDark}
-              media="(prefers-color-scheme: dark)"
-            />
-            <img src=${this.srcLight} alt=${this.alt} />
-          </picture>
-        `;
+        return html`<picture>
+          <source
+            srcset=${this.srcLight}
+            media="(prefers-color-scheme: light)"
+          />
+          <source srcset=${this.srcDark} media="(prefers-color-scheme: dark)" />
+          <img src=${this.srcLight} alt=${this.alt} />
+        </picture>`;
       case "dark":
-        return html` <img src=${this.srcDark} alt=${this.alt} /> `;
+        return html`<img src=${this.srcDark} alt=${this.alt} />`;
       default:
         return html`<img src=${this.srcLight} alt=${this.alt} />`;
     }

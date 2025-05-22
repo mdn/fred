@@ -1,0 +1,112 @@
+.curriculum-partner-banner-container {
+  .partner-banner {
+    display: grid;
+
+    grid-template-areas: "h2" "image" "p" "a";
+
+    margin: 1rem auto;
+
+    background-color: var(--curriculum-bg-color-partner);
+    background-image: var(--curriculum-bg-image-partner);
+    background-repeat: no-repeat;
+    border: 1px solid var(--curriculum-border-color);
+    box-shadow: var(--curriculum-shadow);
+
+    @media screen and (--screen-medium-and-wider) {
+      grid-template-areas: "copy image";
+      grid-template-columns: 2fr minmax(24rem, 1fr);
+    }
+
+    > mdn-themed-image {
+      grid-area: image;
+
+      align-self: end;
+      justify-self: center;
+
+      width: 90%;
+      max-width: max-content;
+      height: max-content;
+
+      @media screen and (--screen-medium-and-wider) {
+        justify-self: end;
+        width: 100%;
+      }
+    }
+
+    > section {
+      display: contents;
+      grid-area: copy;
+      padding: 2rem 4rem;
+
+      @media screen and (--screen-medium-and-wider) {
+        display: block;
+      }
+
+      > h2 {
+        grid-area: h2;
+        margin: 1rem 0 2rem;
+        text-align: center;
+
+        @media screen and (--screen-medium-and-wider) {
+          margin: 0 0 1rem;
+          text-align: left;
+        }
+
+        > a {
+          display: inline-block;
+          min-width: max-content;
+          color: var(--curriculum-category-color);
+
+          &:visited:not([href^="#"]) {
+            color: var(--curriculum-category-color);
+          }
+
+          &::before {
+            position: absolute;
+            content: url("./assets/curriculum-partner-underline-small.svg");
+            transform: translate3d(-0.1em, 0.4em, 0);
+
+            @media screen and (--screen-medium-and-wider) {
+              content: url("./assets/curriculum-partner-underline-large.svg");
+            }
+          }
+
+          &:focus,
+          &:visited,
+          &:hover {
+            text-decoration: none;
+
+            &::before {
+              content: none;
+            }
+          }
+
+          &::after {
+            width: 0.625em;
+            height: 0.625em;
+            background-color: var(--curriculum-category-color);
+          }
+        }
+      }
+
+      > p {
+        grid-area: p;
+        margin: 1.5rem 1rem;
+
+        @media screen and (--screen-medium-and-wider) {
+          margin: 1rem 0 1.5rem;
+        }
+      }
+
+      > a {
+        grid-area: a;
+        margin: 1rem;
+        color: var(--text-primary);
+
+        @media screen and (--screen-medium-and-wider) {
+          margin: 1rem 0 0;
+        }
+      }
+    }
+  }
+}

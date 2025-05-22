@@ -45,16 +45,16 @@ export class CurriculumLanding extends ServerComponent {
     for (const [i, section] of doc.body.entries()) {
       if (i === 0) {
         // Render the header section
-        content.push(this.renderHeader(doc, section));
+        content.push(this.renderHeader(context, section));
       } else if (section.value.id === "about_the_curriculum") {
         // Render the about section
-        content.push(this.renderAbout(doc, section));
+        content.push(this.renderAbout(context, section));
       } else if (section.value.id === "modules") {
         // Render the modules and stairway sections
-        content.push(this.renderModules(doc, section));
+        content.push(this.renderModules(context, section));
       } else {
         // Use the default Section renderer for other sections
-        content.push(this.renderSection(doc, section));
+        content.push(this.renderSection(context, section));
       }
     }
 
@@ -74,11 +74,12 @@ export class CurriculumLanding extends ServerComponent {
   }
 
   /**
-   * @param {Rari.CurriculumDoc} doc - The curriculum document data.
+   * @param {Fred.Context<Rari.CurriculumPage>} context
    * @param {Rari.Section} section - The section object containing header data.
    * @returns {Lit.TemplateResult} The Lit HTML template for the header.
    */
-  renderHeader(doc, section) {
+  renderHeader(context, section) {
+    const doc = context.doc;
     const h1 = doc?.title;
     const h2 = section.value.title;
     // section.value.content is already the HTML content
@@ -97,11 +98,11 @@ export class CurriculumLanding extends ServerComponent {
   }
 
   /**
-   * @param {Rari.CurriculumDoc} _doc - The curriculum document data.
+   * @param {Fred.Context<Rari.CurriculumPage>} _context
    * @param {Rari.Section} section - The section object containing about data.
    * @returns {Lit.TemplateResult | nothing} The Lit HTML template for the about section.
    */
-  renderSection(_doc, section) {
+  renderSection(_context, section) {
     const { id, title, content, isH3 } = section.value;
     switch (section.type) {
       case "browser_compatibility": {
@@ -111,6 +112,8 @@ export class CurriculumLanding extends ServerComponent {
         return nothing;
       }
       default: {
+        console.log("section!", section);
+
         const level = isH3 ? 3 : 2;
         return html`
           <section aria-labelledby=${ifDefined(id ?? undefined)}>
@@ -128,11 +131,11 @@ export class CurriculumLanding extends ServerComponent {
 
   /**
    * Renders the About the Curriculum section.
-   * @param {Rari.CurriculumDoc} _doc - The curriculum document data.
+   * @param {Fred.Context<Rari.CurriculumPage>} _context
    * @param {Rari.Section} section - The section object containing about data.
    * @returns {Lit.TemplateResult} The Lit HTML template for the about section.
    */
-  renderAbout(_doc, section) {
+  renderAbout(_context, section) {
     const { title, content, id } = section.value;
     // content is already the HTML content
     const contentHtml = content;
@@ -173,21 +176,22 @@ export class CurriculumLanding extends ServerComponent {
 
   /**
    * Renders the Modules section, including the modules list, partner banner, and stairway.
-   * @param {Rari.CurriculumDoc} doc - The curriculum document data.
+   * @param {Fred.Context<Rari.CurriculumPage>} context
    * @param {Rari.Section} section - The section object containing modules data.
    * @returns {Lit.TemplateResult} The Lit HTML template for the modules section.
    */
-  renderModules(doc, section) {
+  renderModules(context, section) {
+    const doc = context.doc;
     const { title, id } = section.value;
     const modules = doc?.modules;
 
     return html`
       <section id=${id} class="modules">
         ${title && html`<h2 id=${id}><a href=${`#${id}`}>${title}</a></h2>`}
-        ${this.renderModulesListList(modules)}
+        ${this.renderModulesListList(context, modules)}
       </section>
 
-      ${this.renderPartnerBanner()}
+      ${this.renderPartnerBanner(context)}
 
       <section class="landing-stairway">
         <div>
@@ -203,7 +207,8 @@ export class CurriculumLanding extends ServerComponent {
             </p>
           </div>
           <div id="stairway2-container">
-            ${landingStairwaySVG2} ${landingStairwaySVG2Small}
+            ${addAttrs(landingStairwaySVG2, { id: "stairway2large" })}
+            ${addAttrs(landingStairwaySVG2Small, { id: "stairway2small" })}
             <p id="stairway2">
               <span id="stair-1"
                 >Learn about research collaboration and other essential soft
@@ -227,11 +232,11 @@ export class CurriculumLanding extends ServerComponent {
   /**
    * Renders the ModulesListList structure, including the tab labels and the selected modules list.
    * On the server, this defaults to rendering the 'Core modules' list (index 1) content.
-   * Client-side JS would be needed to enable interactive tab switching.
+   * @param {Fred.Context<Rari.CurriculumPage>} context
    * @param {Rari.CurriculumIndexEntry[]} modules - Array of module list groups (e.g., Started, Core, Extensions).
    * @returns {Lit.TemplateResult | Lit.nothing} The Lit HTML template for the module list list, or undefined if no modules.
    */
-  renderModulesListList(modules) {
+  renderModulesListList(context, modules) {
     if (!modules || modules.length === 0) {
       return nothing;
     }
@@ -247,11 +252,12 @@ export class CurriculumLanding extends ServerComponent {
             // Recursively render children if they exist
             const nestedChildrenHtml =
               modulesList.children && modulesList.children.length > 0
-                ? html`${this.renderModulesList(modulesList.children)}
+                ? html`${this.renderModulesList(context, modulesList.children)}
                     <a
                       href=${modulesList.children[0]?.url || "#"}
                       target="_self"
-                      class="lets-begin"
+                      class="button lets-begin"
+                      data-variant="primary"
                     >
                       Let's begin
                     </a> `
@@ -268,7 +274,7 @@ export class CurriculumLanding extends ServerComponent {
                   id=${radioId}
                   name="selected"
                   type="radio"
-                  ${isChecked ? "checked" : ""}
+                  ?checked=${isChecked}
                   data-index=${i}
                 />
                 <label for=${radioId}>
@@ -286,10 +292,11 @@ export class CurriculumLanding extends ServerComponent {
   /**
    * Renders a single list of modules.
    * Corresponds to the inner ModulesList component in the React version.
+   * @param {Fred.Context<Rari.CurriculumPage>} context
    * @param {Rari.CurriculumIndexEntry[]} modules - Array of module entries within a group.
    * @returns {Lit.TemplateResult | Lit.nothing} The Lit HTML template for the module list.
    */
-  renderModulesList(modules) {
+  renderModulesList(context, modules) {
     // console.log("modules", modules);
     if (!modules || modules.length === 0) {
       return nothing;
@@ -300,11 +307,13 @@ export class CurriculumLanding extends ServerComponent {
           (module, j) => html`
             <li
               key="ml-${j}"
-              class="module-list-item topic-${this._topic2css(module.topic)}"
+              class="module-list-item topic-${this.topic2css(module.topic)}"
             >
               <a href=${module.url}>
                 <header>
-                  ${module.topic ? this.renderTopicIcon(module.topic) : nothing}
+                  ${module.topic
+                    ? this.renderTopicIcon(context, module.topic)
+                    : nothing}
                   <span>${module.title}</span>
                 </header>
                 <section>
@@ -322,9 +331,10 @@ export class CurriculumLanding extends ServerComponent {
   /**
    * Renders the PartnerBanner structure.
    * Corresponds to the PartnerBanner component in the React version.
+   * @param {Fred.Context<Rari.CurriculumPage>} _context
    * @returns {Lit.TemplateResult} The Lit HTML template for the partner banner.
    */
-  renderPartnerBanner() {
+  renderPartnerBanner(_context) {
     // Paths need to be correct relative to the server rendering context
     const bannerDark = partnerBannerDark;
     const bannerLight = partnerBannerLight;
@@ -373,11 +383,12 @@ export class CurriculumLanding extends ServerComponent {
    * Renders a placeholder SVG structure for the TopicIcon.
    * In a real server-rendering setup, the SVG content would ideally be embedded or referenced correctly.
    * This placeholder includes basic circle and path elements styled by CSS.
+   * @param {Fred.Context<Rari.CurriculumPage>} _context
    * @param {string} topic - The topic string.
    * @returns {Lit.TemplateResult | nothing} The Lit HTML template for the topic icon SVG.
    */
-  renderTopicIcon(topic) {
-    const className = `topic-icon topic-${this._topic2css(topic)}`;
+  renderTopicIcon(_context, topic) {
+    const className = `topic-icon topic-${this.topic2css(topic)}`;
     // Simplified placeholder SVG content, using currentColor for fill where CSS vars apply.
     switch (topic) {
       case "Web Standards & Semantics":
@@ -415,7 +426,7 @@ export class CurriculumLanding extends ServerComponent {
    * @param {Topic | undefined} topic
    * @returns {string} The corresponding CSS class name.
    */
-  _topic2css(topic) {
+  topic2css(topic) {
     switch (topic) {
       case Topic.WebStandards:
         return "standards";
