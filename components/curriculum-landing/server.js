@@ -295,7 +295,6 @@ export class CurriculumLanding extends ServerComponent {
    * @returns {Lit.TemplateResult | Lit.nothing} The Lit HTML template for the module list.
    */
   renderModulesList(context, modules) {
-    // console.log("modules", modules);
     if (!modules || modules.length === 0) {
       return nothing;
     }
