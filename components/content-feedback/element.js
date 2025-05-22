@@ -4,8 +4,8 @@ import { LitElement, html } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
-import thumbsDown from "../icon/thumbs_down.svg?lit";
-import thumbsUp from "../icon/thumbs_up.svg?lit";
+import thumbsDown from "../icon/thumbs-down.svg?lit";
+import thumbsUp from "../icon/thumbs-up.svg?lit";
 
 import styles from "./element.css?lit";
 
