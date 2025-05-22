@@ -112,8 +112,6 @@ export class CurriculumLanding extends ServerComponent {
         return nothing;
       }
       default: {
-        console.log("section!", section);
-
         const level = isH3 ? 3 : 2;
         return html`
           <section aria-labelledby=${ifDefined(id ?? undefined)}>
