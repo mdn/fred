@@ -1,0 +1,20 @@
+dialog {
+  padding: 0;
+  border: 1px solid var(--color-border-secondary);
+  border-radius: 0.25rem;
+}
+
+header {
+  display: flex;
+  padding: 0.5rem;
+
+  mdn-button {
+    margin-left: auto;
+  }
+}
+
+slot {
+  display: block;
+  padding: 1rem;
+  padding-top: 0;
+}
