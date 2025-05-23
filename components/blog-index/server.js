@@ -3,6 +3,7 @@ import { html, nothing } from "lit";
 import { AuthorDateReadTime, BlogContainer } from "../blog/index.js";
 import { Button } from "../button/server.js";
 import { PageLayout } from "../page-layout/server.js";
+import { Pagination } from "../pagination/server.js";
 import { ServerComponent } from "../server/index.js";
 
 /**
@@ -75,6 +76,13 @@ export class BlogIndex extends ServerComponent {
               return PostPreview(context, blogMeta);
             })}
           </section>
+          ${Pagination.render(context, {
+            ...context.hyData?.pagination,
+            pageUrl: (page) =>
+              page === 1
+                ? `/${context.locale}/blog/`
+                : `/${context.locale}/blog/${page}/`,
+          })}
         </div>
       `,
     );
