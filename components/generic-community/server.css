@@ -27,33 +27,29 @@
   --community-discord-bg: url("./assets/discord.svg");
   --community-calls-bg: url("./assets/community-calls.svg");
 
+  @media (prefers-color-scheme: dark) {
+    --community-header-bg: url("./assets/people-dark.svg");
+    --community-quote-start: url("./assets/quote-start-dark.svg");
+    --community-quote-end: url("./assets/quote-end-dark.svg");
+    --community-video-bg: url("./assets/video-bg-dark.svg");
+    --community-discord-bg: url("./assets/discord-dark.svg");
+    --community-calls-bg: url("./assets/community-calls-dark.svg");
+  }
+
+  :root[data-theme="dark"] & {
+    --community-header-bg: url("./assets/people-dark.svg");
+    --community-quote-start: url("./assets/quote-start-dark.svg");
+    --community-quote-end: url("./assets/quote-end-dark.svg");
+    --community-video-bg: url("./assets/video-bg-dark.svg");
+    --community-discord-bg: url("./assets/discord-dark.svg");
+    --community-calls-bg: url("./assets/community-calls-dark.svg");
+  }
+
   --button-bg--default: light-dark(#1b1b1b, #ffffff);
   --button-bg-hover--default: light-dark(#696969, #cdcdcd);
   --button-bg-active--default: light-dark(#9e9e9e, #9e9e9e);
   --button-border-color--default: light-dark(#1d1d1d, #ffffff);
   --button-color--default: var(--color-background-primary);
-}
-
-:root[data-theme="dark"] {
-  .about-container {
-    --community-header-bg: url("./assets/people-dark.svg");
-    --community-quote-start: url("./assets/quote-start-dark.svg");
-    --community-quote-end: url("./assets/quote-end-dark.svg");
-    --community-video-bg: url("./assets/video-bg-dark.svg");
-    --community-discord-bg: url("./assets/discord-dark.svg");
-    --community-calls-bg: url("./assets/community-calls-dark.svg");
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .about-container {
-    --community-header-bg: url("./assets/people-dark.svg");
-    --community-quote-start: url("./assets/quote-start-dark.svg");
-    --community-quote-end: url("./assets/quote-end-dark.svg");
-    --community-video-bg: url("./assets/video-bg-dark.svg");
-    --community-discord-bg: url("./assets/discord-dark.svg");
-    --community-calls-bg: url("./assets/community-calls-dark.svg");
-  }
 }
 
 .community-container {
