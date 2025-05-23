@@ -24,31 +24,6 @@ function BlogTitleImageFigure(_context, { image, width, height }) {
 }
 
 /**
- * @param {import("@fred").Context<import("@rari").BlogPage>} context
- * @param {object} params
- * @param {import("@rari").TocEntry[] | undefined} params.toc
- * @returns {import("@lit").TemplateResult | nothing}
- */
-function BlogPostToc(context, { toc }) {
-  if (!toc || toc.length === 0) {
-    return nothing;
-  }
-
-  return html`
-    <div class="blog-post__toc">${ReferenceToc.render(context)}</div>
-  `;
-}
-
-/**
- * @param {import("@fred").Context} _context
- * @returns {import("@lit").TemplateResult | nothing}
- */
-function SidePlacement(_context) {
-  // TODO: implement somewhere central
-  return nothing;
-}
-
-/**
  * @param {import("@fred").Context} context
  * @param {object} params
  * @param {import("@rari").BlogPostDoc} params.doc
@@ -111,12 +86,12 @@ export class BlogPost extends ServerComponent {
         </p>`,
       );
     }
-    const { toc } = doc;
 
     const postContent = html`
       <article class="blog-post__main">
         <aside class="blog-post__sidebar">
-          ${BlogPostToc(context, { toc })} ${SidePlacement(context)}
+          ${ReferenceToc.render(context)}
+          <mdn-placement-sidebar></mdn-placement-sidebar>
         </aside>
         <div class="blog-post__content">
           <header class="blog-post__header">

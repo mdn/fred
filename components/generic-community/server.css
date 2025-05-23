@@ -68,7 +68,7 @@
 
   color: var(--community-text-secondary);
 
-  scrollbar-color: var(--scrollbar-color) var(--scrollbar-bg);
+  scrollbar-color: var(--color-scrollbar-thumb) var(--color-scrollbar-track);
 
   background: var(--community-bg-secondary);
 
