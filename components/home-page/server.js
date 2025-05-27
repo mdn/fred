@@ -1,5 +1,6 @@
-import { html, nothing } from "lit";
+import { html } from "lit";
 
+import { FeaturedArticles } from "../featured-articles/server.js";
 import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
 
@@ -13,24 +14,9 @@ export class HomePage extends ServerComponent {
       html`
         <div class="homepage">
           <mdn-placement-hp-main></mdn-placement-hp-main>
-          <section>
+          <section class="homepage-section">
             <h2>${context.l10n`Featured articles`}</h2>
-            <ul>
-              ${context.hyData.featuredArticles.map(
-                (article) =>
-                  html`<li>
-                    <article>
-                      ${article.tag
-                        ? html`<a href=${article.tag.uri}
-                            >${article.tag.title}</a
-                          >`
-                        : nothing}
-                      <h3><a href=${article.mdn_url}>${article.title}</a></h3>
-                      <p>${article.summary}</p>
-                    </article>
-                  </li>`,
-              )}
-            </ul>
+            ${FeaturedArticles.render(context.hyData.featuredArticles)}
           </section>
           <section>
             <h2>${context.l10n`Recent contributions`}</h2>

@@ -9,4 +9,11 @@
   mdn-placement-hp-main {
     grid-column: extended-full;
   }
+
+  .homepage-section {
+    h2 {
+      font-size: var(--font-size-large);
+      font-weight: 500;
+    }
+  }
 }
