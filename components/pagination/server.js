@@ -4,13 +4,13 @@ import { ServerComponent } from "../server/index.js";
 
 export class Pagination extends ServerComponent {
   /**
-   * @param {Fred.Context} context
+   * @param {import("@fred").Context} context
    * @param {object} params
    * @param {number} [params.currentPage]
    * @param {number} [params.numPages]
    * @param {(page: number | string) => string} params.pageUrl
    * @param {number} [params.surroundingPages]
-   * @returns {Lit.TemplateResult | nothing}
+   * @returns {import("@lit").TemplateResult | nothing}
    */
   render(
     context,
@@ -96,8 +96,8 @@ export class Pagination extends ServerComponent {
    * @param {number} prevNextPage
    * @param {boolean} disabled
    * @param {(page: number) => string} pageUrl
-   * @param {Fred.Context} context
-   * @returns {Lit.TemplateResult}
+   * @param {import("@fred").Context} context
+   * @returns {import("@lit").TemplateResult}
    */
   renderPrevNextButton(prevNext, prevNextPage, disabled, pageUrl, context) {
     const url = disabled ? "#" : pageUrl(prevNextPage);
@@ -119,11 +119,11 @@ export class Pagination extends ServerComponent {
   }
 
   /**
-   * @param {Fred.Context} context
+   * @param {import("@fred").Context} context
    * @param {Array<number|string>} pageNumbers
    * @param {number} currentPage
    * @param {(page: number | string) => string} pageUrl
-   * @returns {Lit.TemplateResult[]}
+   * @returns {import("@lit").TemplateResult[]}
    */
   renderPageNumbers(context, pageNumbers, currentPage, pageUrl) {
     return pageNumbers.map((pageNumber) => {
