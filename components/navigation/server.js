@@ -7,7 +7,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class Navigation extends ServerComponent {
   /**
-   * @param {Fred.Context} context
+   * @param {import("@fred").Context} context
    */
   render(context) {
     const colorScheme = context.renderer === "Homepage" ? "dark" : "";

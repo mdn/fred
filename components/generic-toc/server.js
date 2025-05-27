@@ -4,7 +4,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class GenericToc extends ServerComponent {
   /**
-   * @param {Fred.Context<Rari.GenericPage>} context
+   * @param {import("@fred").Context<import("@rari").GenericPage>} context
    */
   render(context) {
     return html`<nav class="generic-toc">

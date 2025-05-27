@@ -1,5 +1,9 @@
+import { Task } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
 import { createRef, ref } from "lit/directives/ref.js";
+
+import { gleanClick } from "../../utils/glean.js";
+import { globalUser } from "../user/context.js";
 
 import styles from "./element.css?lit";
 import { decompressFromBase64 } from "./utils.js";
@@ -9,6 +13,8 @@ import "../button/element.js";
 import "../play-editor/element.js";
 import "../play-runner/element.js";
 import "../play-console/element.js";
+import "../modal/element.js";
+import "../login-button/element.js";
 
 /**
  * @import { MDNPlayController } from "../play-controller/element.js";
@@ -20,8 +26,19 @@ const SESSION_KEY = "playground-session-code";
 export class MDNPlayground extends LitElement {
   static styles = styles;
 
+  constructor() {
+    super();
+    this._permalink = "";
+  }
+
   /** @type {Ref<MDNPlayController>} */
   _controller = createRef();
+
+  _user = new Task(this, {
+    task: async () => {
+      return await globalUser();
+    },
+  });
 
   _format() {
     this._controller.value?.format();
@@ -35,12 +52,19 @@ export class MDNPlayground extends LitElement {
     }
   }
 
+  _share() {
+    this.shadowRoot?.querySelector("mdn-modal")?.showModal();
+  }
+
   _clear() {
     const controller = this._controller.value;
     if (confirm("Do you really want to clear everything?") && controller) {
       controller.clear();
       this._storeSession();
       this.requestUpdate();
+      const urlWithoutSearch = new URL(location.href);
+      urlWithoutSearch.search = "";
+      history.replaceState(undefined, "", urlWithoutSearch);
     }
   }
 
@@ -50,6 +74,50 @@ export class MDNPlayground extends LitElement {
       controller.reset();
       this._storeSession();
       this.requestUpdate();
+    }
+  }
+
+  async _copyMarkdown() {
+    const controller = this._controller.value;
+    if (controller) {
+      const markdown = Object.entries(controller.code)
+        .map(
+          ([lang, code]) =>
+            code &&
+            `${"```"}${lang}
+${code}
+${"```"}`,
+        )
+        .filter(Boolean)
+        .join("\n\n");
+      await navigator.clipboard.writeText(markdown);
+    }
+  }
+
+  async _createPermalink() {
+    const controller = this._controller.value;
+    if (controller) {
+      const res = await fetch("/api/v1/play/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(controller.code),
+      });
+      const { id } = await res.json();
+      const permalink = new URL(location.href);
+      permalink.search = new URLSearchParams({ id }).toString();
+
+      controller.initialCode = controller.code;
+      this._permalink = permalink.toString();
+      history.replaceState(undefined, "", permalink);
+      this.requestUpdate();
+    }
+  }
+
+  async _copyPermalink() {
+    if (this._permalink) {
+      await navigator.clipboard.writeText(this._permalink);
     }
   }
 
@@ -81,30 +149,66 @@ export class MDNPlayground extends LitElement {
   }
 
   async _loadFromUrl() {
-    const stateParam = new URLSearchParams(location.search).get("state");
     const controller = this._controller.value;
-    if (stateParam && controller) {
-      const { state } = await decompressFromBase64(stateParam);
-      const { srcPrefix, code } = stateToSession(JSON.parse(state || "{}"));
+    if (controller) {
+      const params = new URLSearchParams(location.search);
+      const idParam = params.get("id");
+      const stateParam = params.get("state");
+
+      const { srcPrefix, code } =
+        (await (idParam
+          ? this._sessionFromApi(idParam)
+          : stateParam
+            ? this._sessionFromState(stateParam)
+            : undefined)) || {};
+
       if (
-        controller.srcPrefix !== srcPrefix ||
-        !compareCode(controller.initialCode, code)
+        srcPrefix !== undefined &&
+        code !== undefined &&
+        (controller.srcPrefix !== srcPrefix ||
+          !compareCode(controller.initialCode, code))
       ) {
         controller.srcPrefix = srcPrefix;
         controller.initialCode = code;
         controller.code = code;
         this._storeSession();
-        this.requestUpdate();
       }
-      const urlWithoutSearch = new URL(location.href);
-      urlWithoutSearch.search = "";
-      history.replaceState(undefined, "", urlWithoutSearch);
+
+      this.requestUpdate();
     }
+  }
+
+  /** @param {string} id */
+  async _sessionFromApi(id) {
+    const response = await fetch(`/api/v1/play/${encodeURIComponent(id)}`);
+    if (!response.ok) {
+      console.error(response.statusText);
+      return;
+    }
+
+    const permalink = new URL(location.href);
+    permalink.search = new URLSearchParams({ id }).toString();
+    this._permalink = permalink.toString();
+
+    gleanClick("playground", { type: "load-shared" });
+    const code = await response.json();
+    return stateToSession(code);
+  }
+
+  /** @param {string} stateParam */
+  async _sessionFromState(stateParam) {
+    const { state } = await decompressFromBase64(stateParam);
+    return stateToSession(JSON.parse(state || "{}"));
   }
 
   _editorUpdate() {
     this._storeSession();
     this.requestUpdate();
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._user.run();
   }
 
   render() {
@@ -131,6 +235,12 @@ export class MDNPlayground extends LitElement {
                   @click=${this._run}
                   ?disabled=${!hasCode}
                   >Run</mdn-button
+                >
+                <mdn-button
+                  variant="secondary"
+                  @click=${this._share}
+                  ?disabled=${!hasCode}
+                  >Share</mdn-button
                 >
                 <mdn-button
                   variant="secondary"
@@ -179,6 +289,36 @@ export class MDNPlayground extends LitElement {
           </section>
         </mdn-play-controller>
       </div>
+      <mdn-modal>
+        <section>
+          <h2>Share Markdown</h2>
+          <mdn-button variant="secondary" @click=${this._copyMarkdown}
+            >Copy markdown to clipboard</mdn-button
+          >
+        </section>
+        <section>
+          <h2>Share your code via Permalink</h2>
+          ${this._user.render({
+            initial: () => html`<mdn-login-button></mdn-login-button>`,
+            pending: () => html`<mdn-login-button></mdn-login-button>`,
+            complete: (user) =>
+              user.isAuthenticated
+                ? this._permalink && !isResettable
+                  ? html`
+                      <input .value=${this._permalink} />
+                      <mdn-button
+                        variant="secondary"
+                        @click=${this._copyPermalink}
+                        >Copy to clipboard</mdn-button
+                      >
+                    `
+                  : html`<mdn-button @click=${this._createPermalink}
+                      >Create link</mdn-button
+                    >`
+                : html`<mdn-login-button></mdn-login-button>`,
+          })}
+        </section>
+      </mdn-modal>
     `;
   }
 

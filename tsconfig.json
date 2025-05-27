@@ -10,6 +10,10 @@
     "moduleResolution": "nodenext",
     // fix for badly-formed types in dependencies:
     "skipLibCheck": true,
+    // alias for imports:
+    "paths": {
+      "@*": ["./types/*.js"]
+    },
     // rules:
     "strict": true,
     "noUncheckedIndexedAccess": true,
@@ -17,8 +21,6 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
-    // temporary, while migrating:
-    // "noImplicitAny": false
   },
   "exclude": ["node_modules", "dist", "legacy", "vendor"]
 }

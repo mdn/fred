@@ -4,8 +4,8 @@ import { formatDateTime, formatMinus } from "../observatory/utils.js";
 
 /**
  *
- * @param {{result: Observatory.Result}} props
- * @returns { Lit.TemplateResult | nothing }
+ * @param {{result: import("@observatory").Result}} props
+ * @returns { import("@lit").TemplateResult | nothing }
  */
 export function History({ result }) {
   if (result.history.length === 0) {

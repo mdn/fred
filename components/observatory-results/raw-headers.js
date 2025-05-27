@@ -4,8 +4,8 @@ import { HeaderLink } from "../observatory/utils.js";
 
 /**
  *
- * @param {{result: Observatory.Result}} props
- * @returns { Lit.TemplateResult }
+ * @param {{result: import("@observatory").Result}} props
+ * @returns { import("@lit").TemplateResult }
  */
 export function RawHeaders({ result }) {
   if (!result.scan.response_headers) {

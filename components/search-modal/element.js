@@ -17,7 +17,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
 
   constructor() {
     super();
-    /** @type {import("./types.js").SearchIndex | undefined} */
+    /** @type {Promise<import("./types.js").SearchIndex> | undefined} */
     this._index = undefined;
     this._query = "";
     this._selected = 0;
@@ -25,6 +25,14 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
   }
 
   async _loadIndex() {
+    if (this._index) {
+      return;
+    }
+
+    this._index = this._fetchIndex();
+  }
+
+  async _fetchIndex() {
     const res = await fetch(`/${this.locale}/search-index.json`);
     /** @type {import("./types.js").SearchIndexItem[]} */
     const items = await res.json();
@@ -34,15 +42,17 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
       title: title.toLowerCase(),
       slugTail: url.split("/").pop()?.toLowerCase() || "",
     }));
-    this._index = {
+
+    return {
       flex,
       items,
     };
   }
 
-  _click() {
+  _showModal() {
     this._loadIndex();
     this.shadowRoot?.querySelector("dialog")?.showModal();
+    this.shadowRoot?.querySelector("input")?.select();
   }
 
   /** @param {InputEvent} event */
@@ -96,20 +106,65 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     }
   }
 
+  /** @param {KeyboardEvent} event */
+  _globalKeydown(event) {
+    const target = event.composedPath()?.[0] || event.target;
+    const isTextField =
+      target instanceof HTMLElement &&
+      (["TEXTAREA", "INPUT"].includes(target.tagName) ||
+        target.isContentEditable);
+
+    if (isTextField) {
+      return;
+    }
+
+    const selection = globalThis.getSelection()?.toString();
+    const keyPressed = event.key;
+    const ctrlOrMetaPressed = event.ctrlKey || event.metaKey;
+    const isSlash = keyPressed === "/" && !ctrlOrMetaPressed;
+    const isCtrlK = keyPressed === "k" && ctrlOrMetaPressed && !event.shiftKey;
+
+    if (isSlash || isCtrlK) {
+      event.preventDefault();
+      this._showModal();
+      if (selection) {
+        this._query = selection;
+      }
+    }
+  }
+
   _queryIndex = new Task(this, {
     args: () => [this._index, this._query],
     task: async ([index, query]) => {
       if (!index || !query) {
         return;
       }
-      return quickSearch(query, index);
+      return quickSearch(query, await index);
     },
   });
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._globalKeydown = this._globalKeydown.bind(this);
+    document.addEventListener("keydown", this._globalKeydown);
+    this._loadIndex = this._loadIndex.bind(this);
+    this.renderRoot.addEventListener("mouseover", this._loadIndex);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.renderRoot.removeEventListener("mouseover", this._loadIndex);
+    document.removeEventListener("keydown", this._globalKeydown);
+  }
 
   render() {
     const siteSearchIndex = this._queryIndex.value?.length || 0;
     return html`
-      <button class="mdn-search" title="Search the site" @click=${this._click}>
+      <button
+        class="mdn-search"
+        title=${this.l10n`Search the site`}
+        @click=${this._showModal}
+      >
         <svg viewBox="0 -960 960 960" width="24" height="24">
           <path
             d="M381.66-326q-106.13 0-179.65-73.45-73.51-73.46-73.51-179.5 0-106.05 73.45-179.55 73.46-73.5 179.5-73.5Q487.5-832 561-758.49q73.5 73.52 73.5 179.65 0 42.84-13.5 81.59T584-429l221.62 221.14Q816.5-197 816.5-181.5t-11 26.5q-11 11-26.5 11t-26.38-10.87L531.16-376.5q-29.66 24-68.16 37.25T381.66-326Zm-.16-75q74.5 0 126.25-51.75T559.5-579q0-74.5-51.75-126.25T381.5-757q-74.5 0-126.25 51.75T203.5-579q0 74.5 51.75 126.25T381.5-401Z"
@@ -118,10 +173,17 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
       </button>
       <dialog @keydown=${this._keydown} @focusin=${this._focus}>
         <form @submit=${this._submit}>
-          <input type="text" autofocus @input=${this._input} />
+          <input
+            type="text"
+            .value=${this._query}
+            autofocus
+            @input=${this._input}
+          />
         </form>
         <ul>
           ${this._queryIndex.render({
+            initial: () => html`<progress></progress>`,
+            pending: () => html`<progress></progress>`,
             complete: (results) =>
               results?.map(
                 ({ title, url }, i) => html`
@@ -145,7 +207,15 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
               >
                 <a
                   href=${`/${this.locale}/search?${new URLSearchParams({ q: this._query })}`}
-                  >Site search for <code>${this._query}</code></a
+                  >${this.l10n.raw({
+                    id: "search-modal_site-search",
+                    args: {
+                      query: this._query,
+                    },
+                    elements: {
+                      query: { tag: "code" },
+                    },
+                  })}</a
                 >
               </li>`
             : nothing}

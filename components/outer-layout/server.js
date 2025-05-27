@@ -8,9 +8,9 @@ import { ServerComponent } from "../server/index.js";
 
 export class OuterLayout extends ServerComponent {
   /**
-   * @param {Fred.Context} context
+   * @param {import("@fred").Context} context
    * @param {import("lit-html").TemplateResult} markup
-   * @param {Fred.CompilationStats} compilationStats
+   * @param {import("@fred").CompilationStats} compilationStats
    * @param {Set<string>} components
    */
   render(context, markup, compilationStats, components) {

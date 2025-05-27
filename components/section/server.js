@@ -8,9 +8,9 @@ import { SpecificationsList } from "../specifications-list/index.js";
 
 export class Section extends ServerComponent {
   /**
-   * @param {Fred.Context} context
-   * @param {Rari.Section} section
-   * @returns {Lit.TemplateResult}
+   * @param {import("@fred").Context} context
+   * @param {import("@rari").Section} section
+   * @returns {import("@lit").TemplateResult}
    */
   render(context, { type, value }) {
     switch (type) {
@@ -28,8 +28,8 @@ export class Section extends ServerComponent {
 }
 
 /**
- * @param {Rari.Prose} section
- * @returns {Lit.TemplateResult}
+ * @param {import("@rari").Prose} section
+ * @returns {import("@lit").TemplateResult}
  */
 function Prose({ id, title, content, isH3 }) {
   const level = isH3 ? 3 : 2;
@@ -44,8 +44,8 @@ function Prose({ id, title, content, isH3 }) {
 }
 
 /**
- * @param {Rari.Compat} section
- * @returns {Lit.TemplateResult}
+ * @param {import("@rari").Compat} section
+ * @returns {import("@lit").TemplateResult}
  */
 function BCD({ id, title, query, isH3 }) {
   const level = isH3 ? 3 : 2;
@@ -59,8 +59,8 @@ function BCD({ id, title, query, isH3 }) {
 }
 
 /**
- * @param {Fred.Context} context
- * @param {Rari.SpecificationSection} section
+ * @param {import("@fred").Context} context
+ * @param {import("@rari").SpecificationSection} section
  */
 function SpecificationsSection(context, { id, title, specifications, isH3 }) {
   const level = isH3 ? 3 : 2;

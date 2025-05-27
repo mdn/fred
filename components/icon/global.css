@@ -1,0 +1,41 @@
+/*
+  Icon legacy.
+
+  To be removed when rari no longer renders these.
+
+  Note: The selectors are intentionally explicit to discourage use.
+*/
+.icon {
+  &.icon-deprecated,
+  &.icon-experimental,
+  &.icon-nonstandard {
+    display: inline-block;
+
+    flex-shrink: 0;
+
+    width: 1em;
+    height: 1em;
+
+    vertical-align: middle;
+
+    background-color: var(--color-border-secondary);
+
+    mask-repeat: no-repeat;
+    mask-position: center;
+  }
+
+  /* See https://github.com/mdn/rari/blob/927fac7cb89c7f7e49dd3ff265c3d74ad89d6490/crates/rari-doc/src/templ/templs/badges.rs#L43-L47 */
+  &.icon-deprecated {
+    mask-image: url("../notecard/icons/deprecated.svg");
+  }
+
+  /* See https://github.com/mdn/rari/blob/927fac7cb89c7f7e49dd3ff265c3d74ad89d6490/crates/rari-doc/src/templ/templs/badges.rs#L36-L41 */
+  &.icon-experimental {
+    mask-image: url("../notecard/icons/experimental.svg");
+  }
+
+  /* See https://github.com/mdn/rari/blob/927fac7cb89c7f7e49dd3ff265c3d74ad89d6490/crates/rari-doc/src/templ/templs/badges.rs#L43-L47 */
+  &.icon-nonstandard {
+    mask-image: url("../notecard/icons/warning.svg");
+  }
+}

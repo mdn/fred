@@ -17,6 +17,8 @@ footer_copyright = Portions of this content are ©1998–2024 by individual mozi
 search_title = Search results for: <em>{ $query }</em>
 search_stats = Found { $results } matches in { $time } milliseconds.
 
+search-modal_site-search = Site search for <em>{ $query }</em>
+
 blog_time_to_read = { $minutes ->
     [one]   { $minutes } minute read
    *[other] { $minutes } minutes read

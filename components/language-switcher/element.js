@@ -18,7 +18,7 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
 
   constructor() {
     super();
-    /** @type {Rari.Translation[]} */
+    /** @type {import("@rari").Translation[]} */
     this.translations = [];
     this.locale = "en-US";
     this.url = "/";

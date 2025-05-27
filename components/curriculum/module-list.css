@@ -1,0 +1,276 @@
+.curriculum-content-container.curriculum-overview,
+.curriculum-content-container {
+  .curriculum-content {
+    .modules {
+      input[type="radio"]:not(:checked) ~ a.lets-begin,
+      input[type="radio"]:not(:checked) ~ ol.modules-list {
+        display: none;
+      }
+    }
+
+    ol.modules-list-list {
+      display: grid;
+
+      grid-template-areas:
+        "started core  extensions"
+        "hr      hr    hr"
+        "mod     mod   mod"
+        "cta     cta   cta";
+      grid-template-columns: auto;
+
+      padding: 0;
+      margin: 0;
+
+      @media (--screen-small-and-wider) {
+        grid-template-areas:
+          "started core  extensions spacer"
+          "hr      hr    hr         hr"
+          "mod     mod   mod        mod"
+          "cta     cta   cta        cta";
+        grid-template-columns: auto auto auto 1fr;
+      }
+
+      &::before {
+        grid-area: hr;
+
+        width: 100%;
+
+        margin: 0 0 1.5rem;
+
+        content: "";
+
+        border: none;
+        border-top: 1px solid var(--text-inactive);
+      }
+
+      li.modules-list-list-item {
+        display: contents;
+
+        > input:checked + label {
+          color: var(--text-primary);
+
+          &::before {
+            position: absolute;
+
+            width: 0;
+            height: 0;
+
+            transform: translate3d(-0.75rem, 0.75rem, 0);
+          }
+        }
+
+        > input:checked:focus-visible + label {
+          outline-style: auto;
+          outline-color: var(--accent-primary);
+          outline-offset: 1px;
+        }
+
+        > input:not(:checked) + label {
+          color: var(--text-secondary);
+          opacity: 0.775;
+        }
+
+        > label {
+          width: max-content;
+          cursor: pointer;
+        }
+
+        &#modules-0 {
+          > label,
+          > input {
+            grid-area: started;
+          }
+
+          > input:checked + label::before {
+            content: url("./assets/curriculum-modules-underline.svg#1");
+          }
+        }
+
+        &#modules-1 {
+          > label,
+          > input {
+            grid-area: core;
+
+            @media (--screen-small-and-wider) {
+              margin-left: 2rem;
+            }
+          }
+
+          > input:checked + label::before {
+            content: url("./assets/curriculum-modules-underline.svg#2");
+          }
+        }
+
+        &#modules-2 {
+          > label,
+          > input {
+            grid-area: extensions;
+
+            @media (--screen-small-and-wider) {
+              margin-left: 2rem;
+            }
+          }
+
+          > input:checked + label::before {
+            content: url("./assets/curriculum-modules-underline.svg#3");
+          }
+        }
+
+        > ol.modules-list {
+          grid-area: mod;
+          margin: 0;
+        }
+
+        > a.lets-begin {
+          grid-area: cta;
+
+          width: fit-content;
+
+          margin-top: 2rem;
+          margin-left: 0.5rem;
+
+          @media (--screen-medium-and-wider) {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+
+    ol.modules-list {
+      display: grid;
+
+      flex-wrap: wrap;
+
+      grid-template-columns: 1fr 1fr 1fr;
+
+      gap: 1rem;
+
+      padding: 0.5rem;
+      margin: 0;
+
+      overflow: scroll;
+
+      scroll-snap-type: inline mandatory;
+
+      @media (--screen-medium-and-wider) {
+        padding: 0;
+        overflow: inherit;
+      }
+
+      :focus-visible {
+        outline-offset: -2px;
+      }
+
+      li.module-list-item {
+        --spacing: 1rem;
+        --icon-size: 4rem;
+        display: block;
+
+        > a {
+          display: flex;
+
+          flex-direction: column;
+
+          justify-self: center;
+
+          width: 100%;
+          min-width: 15rem;
+          max-width: 20rem;
+
+          padding: 0;
+
+          overflow: auto;
+
+          text-decoration: none;
+
+          scroll-snap-align: center;
+
+          background-color: var(--curriculum-bg-color-list-item-body);
+          border: 1px solid var(--curriculum-border-color);
+          border-radius: var(--elem-radius);
+          box-shadow: var(--curriculum-shadow);
+
+          &:hover {
+            text-decoration: none;
+            border-color: var(--curriculum-border-color-hover);
+          }
+
+          @media (--screen-medium-and-wider) {
+            min-width: initial;
+          }
+
+          > header {
+            display: flex;
+
+            flex-direction: column;
+
+            row-gap: var(--spacing);
+            align-items: center;
+
+            height: 10.5rem;
+            height: calc(3 * var(--spacing) + var(--icon-size) + 2lh);
+
+            padding: var(--spacing);
+
+            font-weight: var(--font-body-strong-weight);
+
+            background-color: var(--curriculum-bg-color-list-item-header);
+
+            svg.topic-icon {
+              width: var(--icon-size);
+              height: var(--icon-size);
+
+              circle {
+                fill: var(--curriculum-bg-color-list-item-icon);
+              }
+
+              path {
+                fill: var(--curriculum-color-list-item-icon);
+              }
+            }
+
+            > span {
+              margin: 0 auto;
+              color: var(--text-primary);
+              text-align: center;
+            }
+          }
+
+          > section {
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: space-between;
+
+            height: 11rem;
+
+            padding: var(--spacing);
+
+            font-size: var(--type-smaller-font-size);
+
+            p {
+              margin: 0;
+              color: var(--text-secondary);
+              text-align: center;
+            }
+
+            p:last-child {
+              font-weight: 600;
+              color: var(--curriculum-color-topic);
+            }
+          }
+        }
+      }
+
+      @media (--screen-small-and-wider) {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      @media (--screen-xxlarge) {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+  }
+}

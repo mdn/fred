@@ -5,7 +5,11 @@ import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 import { BlogIndex } from "./components/blog-index/server.js";
 import { BlogPost } from "./components/blog-post/server.js";
 import { ContributorSpotlight } from "./components/contributor-spotlight/server.js";
-import { Curriculum } from "./components/curriculum/server.js";
+import { CurriculumAbout } from "./components/curriculum-about/server.js";
+import { CurriculumDefault } from "./components/curriculum-default/server.js";
+import { CurriculumLanding } from "./components/curriculum-landing/server.js";
+import { CurriculumModule } from "./components/curriculum-module/server.js";
+import { CurriculumOverview } from "./components/curriculum-overview/server.js";
 import { Doc } from "./components/doc/server.js";
 import { GenericAbout } from "./components/generic-about/server.js";
 import { GenericCommunity } from "./components/generic-community/server.js";
@@ -34,8 +38,8 @@ for (const [name, def] of customElements.__definitions) {
 
 /**
  * @param {string} path
- * @param {Rari.BuiltPage} page
- * @param {Fred.CompilationStats} compilationStats
+ * @param {import("@rari").BuiltPage} page
+ * @param {import("@fred").CompilationStats} compilationStats
  */
 export async function render(path, page, compilationStats) {
   const locale = path.split("/")[1] || "en-US";
@@ -60,11 +64,15 @@ export async function render(path, page, compilationStats) {
           case "ContributorSpotlight":
             return ContributorSpotlight.render(context);
           case "CurriculumAbout":
+            return CurriculumAbout.render(context);
           case "CurriculumDefault":
+            return CurriculumDefault.render(context);
           case "CurriculumLanding":
+            return CurriculumLanding.render(context);
           case "CurriculumModule":
+            return CurriculumModule.render(context);
           case "CurriculumOverview":
-            return Curriculum.render(context);
+            return CurriculumOverview.render(context);
           case "Doc":
             return Doc.render(context);
           case "GenericAbout":

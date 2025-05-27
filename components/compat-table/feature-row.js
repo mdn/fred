@@ -4,9 +4,9 @@ import { getCurrentSupport, versionIsPreview } from "./utils.js";
 
 /**
  * Returns a CSS class name based on support data and the browser.
- * @param {Compat.SupportStatementExtended|undefined} support - The extended support statement.
- * @param {BCD.BrowserStatement} browser - The browser statement.
- * @returns {Compat.SupportClassName}
+ * @param {import("@compat").SupportStatementExtended|undefined} support - The extended support statement.
+ * @param {import("@bcd").BrowserStatement} browser - The browser statement.
+ * @returns {import("@compat").SupportClassName}
  */
 export function getSupportClassName(support, browser) {
   if (!support) {
@@ -20,7 +20,7 @@ export function getSupportClassName(support, browser) {
   const { flags, version_added, version_removed, partial_implementation } =
     currentSupport;
 
-  /** @type {Compat.SupportClassName} */
+  /** @type {import("@compat").SupportClassName} */
   let className;
   if (version_added === null) {
     className = "unknown";
@@ -44,7 +44,7 @@ export function getSupportClassName(support, browser) {
 /**
  * Returns a label string derived from a version value.
  * @param {string|boolean|null|undefined} version - The version value.
- * @param {BCD.BrowserStatement} browser - The browser statement.
+ * @param {import("@bcd").BrowserStatement} browser - The browser statement.
  * @returns {string} The resulting label.
  */
 export function labelFromString(version, browser) {
@@ -69,7 +69,7 @@ export function labelFromString(version, browser) {
  * Generates a version label from added and removed support data.
  * @param {string|boolean|null|undefined} added - The added version.
  * @param {string|boolean|null|undefined} removed - The removed version.
- * @param {BCD.BrowserStatement} browser - The browser statement.
+ * @param {import("@bcd").BrowserStatement} browser - The browser statement.
  * @returns {import("lit").TemplateResult} A lit-html template result representing the version label.
  */
 export function versionLabelFromSupport(added, removed, browser) {
@@ -84,7 +84,7 @@ export function versionLabelFromSupport(added, removed, browser) {
 
 /**
  * Retrieves the browser release date from a support statement.
- * @param {Compat.SupportStatementExtended|undefined} support - The extended support statement.
+ * @param {import("@compat").SupportStatementExtended|undefined} support - The extended support statement.
  * @returns {string|undefined} The release date if available.
  */
 export function getSupportBrowserReleaseDate(support) {

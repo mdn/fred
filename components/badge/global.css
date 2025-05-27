@@ -1,0 +1,28 @@
+/*
+  Badge legacy.
+
+  To be removed when rari no longer renders these.
+
+  Note: The selectors are intentionally explicit to discourage use.
+*/
+.badge.inline {
+  /* See https://github.com/mdn/rari/blob/5a2ead64bb8d4f46f9c548b942072838fb686281/crates/rari-doc/src/templ/templs/inline_labels.rs#L16-L21 */
+  &.optional,
+  /* See https://github.com/mdn/rari/blob/5a2ead64bb8d4f46f9c548b942072838fb686281/crates/rari-doc/src/templ/templs/inline_labels.rs#L16-L21 */
+  &.readonly,
+  /* See https://github.com/mdn/rari/blob/5a2ead64bb8d4f46f9c548b942072838fb686281/crates/rari-doc/src/templ/templs/inline_labels.rs#L8-L13 */
+  &.secure {
+    padding: 0.25em 0.5em;
+
+    font-size: var(--font-size-small);
+
+    vertical-align: text-top;
+
+    color: var(--color-text-secondary);
+
+    white-space: nowrap;
+
+    border: 1px solid var(--color-border-secondary);
+    border-radius: 1em;
+  }
+}

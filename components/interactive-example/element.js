@@ -1,6 +1,7 @@
 import { LitElement } from "lit";
 import { createRef } from "lit/directives/ref.js";
 
+import { gleanClick } from "../../utils/glean.js";
 import { upgradePre } from "../code-example/element.js";
 
 import styles from "./element.css?lit";
@@ -14,7 +15,7 @@ import { InteractiveExampleWithTabs } from "./with-tabs.js";
  * @import { MDNPlayRunner } from "../play-runner/element.js";
  */
 
-// const GLEAN_EVENT_TYPES = ["focus", "copy", "cut", "paste", "click"];
+const GLEAN_EVENT_TYPES = ["focus", "copy", "cut", "paste", "click"];
 
 // eslint-disable-next-line fred/custom-element-name
 export class InteractiveExampleBase extends LitElement {
@@ -91,25 +92,25 @@ export class InteractiveExampleBase extends LitElement {
     }
   }
 
-  // /** @param {Event} ev  */
-  // _telemetryHandler(ev) {
-  //   let action = ev.type;
-  //   if (
-  //     ev.type === "click" &&
-  //     ev.target instanceof HTMLElement &&
-  //     ev.target.id
-  //   ) {
-  //     action = `click@${ev.target.id}`;
-  //   }
-  //   this._gleanClick(`interactive-examples-lit: ${action}`);
-  // }
+  /** @param {Event} ev  */
+  _telemetryHandler(ev) {
+    let action = ev.type;
+    if (
+      ev.type === "click" &&
+      ev.target instanceof HTMLElement &&
+      ev.target.id
+    ) {
+      action = `click@${ev.target.id}`;
+    }
+    gleanClick("interactive-example", { type: "action", label: action });
+  }
 
   connectedCallback() {
     super.connectedCallback();
-    // this._telemetryHandler = this._telemetryHandler.bind(this);
-    // for (const type of GLEAN_EVENT_TYPES) {
-    //   this.renderRoot.addEventListener(type, this._telemetryHandler);
-    // }
+    this._telemetryHandler = this._telemetryHandler.bind(this);
+    for (const type of GLEAN_EVENT_TYPES) {
+      this.renderRoot.addEventListener(type, this._telemetryHandler);
+    }
     this._code = this._initialCode();
   }
 
@@ -121,9 +122,9 @@ export class InteractiveExampleBase extends LitElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    // for (const type of GLEAN_EVENT_TYPES) {
-    //   this.renderRoot.removeEventListener(type, this._telemetryHandler);
-    // }
+    for (const type of GLEAN_EVENT_TYPES) {
+      this.renderRoot.removeEventListener(type, this._telemetryHandler);
+    }
   }
 }
 

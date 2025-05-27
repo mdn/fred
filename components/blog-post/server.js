@@ -8,12 +8,12 @@ import { Section } from "../section/server.js";
 import { ServerComponent } from "../server/index.js";
 
 /**
- * @param {Fred.Context} _context
+ * @param {import("@fred").Context} _context
  * @param {object} params
- * @param {Rari.BlogImage} params.image
+ * @param {import("@rari").BlogImage} params.image
  * @param {number} params.width
  * @param {number} params.height
- * @returns {Lit.TemplateResult}
+ * @returns {import("@lit").TemplateResult}
  */
 function BlogTitleImageFigure(_context, { image, width, height }) {
   // In post view, image paths are relative to the post's directory sibling
@@ -24,20 +24,20 @@ function BlogTitleImageFigure(_context, { image, width, height }) {
 }
 
 /**
- * @param {Fred.Context} context
+ * @param {import("@fred").Context} context
  * @param {object} params
- * @param {Rari.BlogPostDoc} params.doc
- * @returns {Lit.TemplateResult}
+ * @param {import("@rari").BlogPostDoc} params.doc
+ * @returns {import("@lit").TemplateResult}
  */
 function RenderBlogContent(context, { doc }) {
   return html` ${doc.body.map((section) => Section.render(context, section))} `;
 }
 
 /**
- * @param {Fred.Context} context
+ * @param {import("@fred").Context} context
  * @param {object} params
- * @param {Rari.BlogMeta} params.blogMeta
- * @returns {Lit.TemplateResult | nothing}
+ * @param {import("@rari").BlogMeta} params.blogMeta
+ * @returns {import("@lit").TemplateResult | nothing}
  */
 function PrevNextLinks(context, { blogMeta }) {
   if (!blogMeta.links) {
@@ -72,8 +72,8 @@ function PrevNextLinks(context, { blogMeta }) {
 export class BlogPost extends ServerComponent {
   /**
    *
-   * @param {Fred.Context<Rari.BlogPage>} context
-   * @returns {Lit.TemplateResult}
+   * @param {import("@fred").Context<import("@rari").BlogPage>} context
+   * @returns {import("@lit").TemplateResult}
    */
   render(context) {
     const { blogMeta, doc } = context;

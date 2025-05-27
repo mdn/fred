@@ -5,7 +5,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class Search extends ServerComponent {
   /**
-   * @param {Fred.Context} context
+   * @param {import("@fred").Context} context
    */
   render(context) {
     return PageLayout.render(

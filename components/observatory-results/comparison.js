@@ -2,8 +2,8 @@ import { html } from "lit";
 
 /**
  *
- * @param {{result: Observatory.Result}} result
- * @returns { Lit.TemplateResult }
+ * @param {{result: import("@observatory").Result}} result
+ * @returns { import("@lit").TemplateResult }
  */
 export function Comparison({ result }) {
   return html`

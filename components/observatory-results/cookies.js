@@ -9,8 +9,8 @@ import {
 
 /**
  *
- * @param {{result: Observatory.Result}} props
- * @returns { Lit.TemplateResult }
+ * @param {{result: import("@observatory").Result}} props
+ * @returns { import("@lit").TemplateResult }
  */
 export function Cookies({ result }) {
   const cookies = result.tests["cookies"]?.data;

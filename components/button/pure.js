@@ -3,8 +3,8 @@ import { ifDefined } from "lit/directives/if-defined.js";
 
 /**
  * @param {object} options
- * @param {string | Lit.TemplateResult} options.label
- * @param {Lit.TemplateResult} [options.icon]
+ * @param {string | import("@lit").TemplateResult} options.label
+ * @param {import("@lit").TemplateResult} [options.icon]
  * @param {boolean} [options.iconOnly]
  * @param {boolean} [options.disabled]
  * @param {string} [options.href]

@@ -4,8 +4,9 @@ import { LitElement, html } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
-import thumbsDown from "../icon/thumbs_down.svg?lit";
-import thumbsUp from "../icon/thumbs_up.svg?lit";
+import { gleanClick } from "../../utils/glean.js";
+import thumbsDown from "../icon/thumbs-down.svg?lit";
+import thumbsUp from "../icon/thumbs-up.svg?lit";
 
 import styles from "./element.css?lit";
 
@@ -60,13 +61,16 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
         this._view = "feedback";
       }
       // Reusing Thumbs' key to be able to reuse queries.
-      // FIXME gleanClick(`${THUMBS}: ${ARTICLE_FOOTER} -> ${Number(value)}`);
+      gleanClick("thumbs", {
+        type: "article-footer",
+        label: vote === "yes" ? "1" : "0",
+      });
     }
   }
 
   _handleFeedback() {
     this._view = "thanks";
-    // FIXME gleanClick(`${ARTICLE_FOOTER}: feedback -> ${reason}`);
+    gleanClick("article-footer", { type: "feedback", label: this._reason });
   }
 
   _renderVote() {

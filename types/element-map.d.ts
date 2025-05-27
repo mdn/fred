@@ -12,6 +12,7 @@ declare global {
     "mdn-content-feedback": import("../components/content-feedback/element.js").MDNContentFeedback;
     "mdn-contributor-list": import("../components/contributor-list/element.js").MDNContributorList;
     "mdn-copy-button": import("../components/copy-button/element.js").MDNCopyButton;
+    "mdn-curriculum-tabs": import("../components/curriculum-tabs/element.js").MDNCurriculumTabs;
     "mdn-dropdown": import("../components/dropdown/element.js").MDNDropdown;
     "mdn-image-history": import("../components/image-history/element.js").MDNImageHistory;
     "mdn-interactive-example": import("../components/interactive-example/element.js").MDNInteractiveExample;
@@ -21,6 +22,8 @@ declare global {
     "mdn-ix-tab-wrapper": import("../components/ix-tab-wrapper/element.js").MDNIXTabWrapper;
     "mdn-language-switcher": import("../components/language-switcher/element.js").MDNLanguageSwitcher;
     "mdn-live-sample-result": import("../components/live-sample-result/element.js").MDNLiveSampleResult;
+    "mdn-login-button": import("../components/login-button/element.js").MDNLoginButton;
+    "mdn-modal": import("../components/modal/element.js").MDNModal;
     "mdn-observatory-comparison-table": import("../components/observatory-comparison-table/element.js").MDNObservatoryComparisonTable;
     "mdn-observatory-form": import("../components/observatory-form/element.js").MDNObservatoryForm;
     "mdn-observatory-human-duration": import("../components/observatory-human-duration/element.js").MDNObservatoryHumanDuration;
@@ -38,9 +41,12 @@ declare global {
     "mdn-play-runner": import("../components/play-runner/element.js").MDNPlayRunner;
     "mdn-playground": import("../components/playground/element.js").MDNPlayground;
     "mdn-progress-bar": import("../components/progress-bar/element.js").MDNProgressBar;
+    "mdn-scrim-inline": import("../components/scrim-inline/element.js").MDNScrimInline;
     "mdn-search-modal": import("../components/search-modal/element.js").MDNSearchModal;
     "mdn-sidebar-filter": import("../components/sidebar-filter/element.js").MDNSidebarFilter;
     "mdn-site-search": import("../components/site-search/element.js").MDNSiteSearch;
+    "mdn-survey": import("../components/survey/element.js").MDNSurvey;
+    "mdn-themed-image": import("../components/themed-image/element.js").MDNThemedImage;
     "mdn-toggle-sidebar": import("../components/toggle-sidebar/element.js").MDNToggleSidebar;
   }
 }

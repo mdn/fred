@@ -6,6 +6,7 @@
   position: relative;
 
   padding-block: 1px;
+  padding-inline: 1em;
   padding-inline-start: 3em;
   margin-block: 1em;
 
@@ -45,7 +46,7 @@
   &.worker {
     &::before {
       position: absolute;
-      top: 1.35em;
+      top: 1.45em;
       left: 1em;
 
       display: block;

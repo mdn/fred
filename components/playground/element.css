@@ -106,3 +106,24 @@
     flex-direction: column;
   }
 }
+
+mdn-modal {
+  section {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.5rem;
+    align-items: center;
+
+    &:first-child {
+      margin-bottom: 1rem;
+    }
+  }
+
+  h2 {
+    margin: 0;
+    font-size: var(--font-size-normal);
+    font-weight: normal;
+  }
+}

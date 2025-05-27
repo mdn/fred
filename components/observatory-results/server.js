@@ -6,8 +6,8 @@ import { ServerComponent } from "../server/index.js";
 
 export class ObservatoryResults extends ServerComponent {
   /**
-   * @param {Fred.Context<Rari.SpaPage>} context
-   * @returns {Lit.TemplateResult}
+   * @param {import("@fred").Context<import("@rari").SpaPage>} context
+   * @returns {import("@lit").TemplateResult}
    */
   render(context) {
     return PageLayout.render(

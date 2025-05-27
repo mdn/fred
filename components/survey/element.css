@@ -1,0 +1,103 @@
+:host {
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.survey {
+  --margin-vertical: 0.75rem;
+  --margin-left: 4rem;
+  position: relative;
+
+  padding: 1rem;
+
+  color: var(--color-black);
+
+  background-color: hsl(252deg 100% 97%);
+  border-radius: 0.5rem;
+
+  &::before {
+    position: absolute;
+
+    display: inline-block;
+
+    width: 53px;
+    height: 49px;
+
+    content: "";
+
+    background: url("./assets/survey.svg");
+    background-size: cover;
+  }
+
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .header,
+  summary,
+  .footer {
+    margin-left: var(--margin-left);
+  }
+
+  .footer {
+    margin-top: var(--margin-vertical);
+    font-size: var(--font-size-small);
+    font-style: italic;
+  }
+
+  .dismiss {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.25rem;
+
+    color: var(--color-gray-60);
+
+    cursor: pointer;
+
+    background: none;
+    border: none;
+    border-radius: 0.25rem;
+
+    &:hover {
+      color: #1a1a1a;
+      background-color: hsl(0deg 0% 0% / 10%);
+    }
+
+    .icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  iframe {
+    width: 100%;
+
+    margin-top: var(--margin-vertical);
+
+    border: 0;
+    border-radius: 0.5rem;
+  }
+
+  summary {
+    margin-top: var(--margin-vertical);
+
+    color: hsl(270deg 100% 41%);
+
+    text-decoration: underline;
+
+    cursor: pointer;
+
+    &:focus,
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

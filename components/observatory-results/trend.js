@@ -2,8 +2,8 @@ import { html, nothing } from "lit";
 
 /**
  *
- * @param {{result: Observatory.Result}} props
- * @returns {Lit.TemplateResult | nothing}
+ * @param {{result: import("@observatory").Result}} props
+ * @returns {import("@lit").TemplateResult | nothing}
  */
 export function Trend({ result }) {
   switch (arrowState(result)) {
@@ -31,7 +31,7 @@ export function Trend({ result }) {
 
 /**
  *
- * @param {Observatory.Result} result
+ * @param {import("@observatory").Result} result
  * @returns {"up" | "down" | "none"}
  */
 function arrowState(result) {

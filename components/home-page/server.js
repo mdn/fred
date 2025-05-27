@@ -5,7 +5,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class HomePage extends ServerComponent {
   /**
-   * @param {Fred.Context<Rari.HomePage>} context
+   * @param {import("@fred").Context<import("@rari").HomePage>} context
    */
   render(context) {
     return PageLayout.render(

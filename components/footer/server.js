@@ -1,10 +1,10 @@
 import { html } from "lit";
 
-import bluesky from "../icon/bluesky.svg?lit";
-import github from "../icon/github.svg?lit";
-import mastodon from "../icon/mastodon.svg?lit";
 import rss from "../icon/rss.svg?lit";
-import x from "../icon/x.svg?lit";
+import bluesky from "../icon/social/bluesky.svg?lit";
+import github from "../icon/social/github.svg?lit";
+import mastodon from "../icon/social/mastodon.svg?lit";
+import x from "../icon/social/x.svg?lit";
 
 import { ServerComponent } from "../server/index.js";
 
@@ -13,7 +13,7 @@ import mozilla from "./mozilla.svg?lit";
 
 export class Footer extends ServerComponent {
   /**
-   * @param {Fred.Context} context
+   * @param {import("@fred").Context} context
    */
   render(context) {
     return html`

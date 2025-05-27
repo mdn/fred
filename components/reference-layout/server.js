@@ -9,7 +9,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class ReferenceLayout extends ServerComponent {
   /**
-   * @param {Fred.Context<Rari.DocPage>} context
+   * @param {import("@fred").Context<import("@rari").DocPage>} context
    */
   render(context) {
     const { doc } = context;
@@ -29,6 +29,7 @@ export class ReferenceLayout extends ServerComponent {
             <mdn-placement-sidebar></mdn-placement-sidebar>
           </aside>
           <div class="reference-layout__content__body">
+            <mdn-survey></mdn-survey>
             ${sections} ${ArticleFooter.render(context)}
           </div>
         </main>
