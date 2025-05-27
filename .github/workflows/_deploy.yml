@@ -126,6 +126,8 @@ jobs:
           INTERACTIVE_EXAMPLES_BASE_URL: https://interactive-examples.mdn.allizom.net
 
           ADDITIONAL_LOCALES_FOR_GENERICS_AND_SPAS: de
+
+          BLOG_PAGINATION: true
         run: |
           set -eo pipefail
 
