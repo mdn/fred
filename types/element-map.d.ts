@@ -14,6 +14,7 @@ declare global {
     "mdn-copy-button": import("../components/copy-button/element.js").MDNCopyButton;
     "mdn-curriculum-tabs": import("../components/curriculum-tabs/element.js").MDNCurriculumTabs;
     "mdn-dropdown": import("../components/dropdown/element.js").MDNDropdown;
+    "mdn-homepage-search": import("../components/homepage-search/element.js").MDNHomepageSearch;
     "mdn-image-history": import("../components/image-history/element.js").MDNImageHistory;
     "mdn-interactive-example": import("../components/interactive-example/element.js").MDNInteractiveExample;
     "mdn-issues-table": import("../components/issues-table/element.js").MDNIssuesTable;

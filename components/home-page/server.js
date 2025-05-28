@@ -17,6 +17,7 @@ export class HomePage extends ServerComponent {
       html`
         <div class="homepage homepage--dark">
           ${HomepageHero.render(context)}
+          <mdn-homepage-search></mdn-homepage-search>
         </div>
         <div class="homepage">
           <mdn-placement-hp-main></mdn-placement-hp-main>

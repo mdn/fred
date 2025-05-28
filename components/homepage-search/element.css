@@ -1,0 +1,35 @@
+.mdn-homepage-search {
+  display: flex;
+
+  gap: 0.5ch;
+  justify-content: center;
+
+  padding: 1em;
+  margin: 0 auto;
+
+  font-size: var(--font-size-large);
+
+  border-color: var(--border-primary);
+  border-radius: 2em;
+
+  &::after {
+    display: inline-block;
+
+    flex-shrink: 0;
+
+    width: 1.1em;
+    height: 1.1em;
+
+    content: "";
+
+    background-color: var(--color-text-primary);
+
+    mask-image: url("../icon/search.svg");
+    mask-repeat: no-repeat;
+    mask-size: contain;
+  }
+}
+
+button {
+  cursor: pointer;
+}
