@@ -49,7 +49,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     };
   }
 
-  _showModal() {
+  showModal() {
     this._loadIndex();
     this.shadowRoot?.querySelector("dialog")?.showModal();
     this.shadowRoot?.querySelector("input")?.select();
@@ -126,7 +126,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
 
     if (isSlash || isCtrlK) {
       event.preventDefault();
-      this._showModal();
+      this.showModal();
       if (selection) {
         this._query = selection;
       }

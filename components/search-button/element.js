@@ -12,7 +12,7 @@ export class MDNSearchButton extends L10nMixin(LitElement) {
   _showModal() {
     const search = document.querySelector("#search");
     if (search instanceof MDNSearchModal) {
-      search._showModal();
+      search.showModal();
     }
   }
 
