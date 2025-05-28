@@ -1,0 +1,32 @@
+.mdn-search-button {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  width: 5rem;
+
+  padding: 0.25rem;
+  padding-left: 0.75rem;
+  margin: 0;
+
+  cursor: pointer;
+
+  background-color: var(--color-background-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: calc(infinity * 1px);
+
+  &::before {
+    width: 15px;
+    height: 18px;
+
+    content: "";
+
+    border-bottom: 2px solid
+      light-dark(var(--color-blue-50), var(--color-blue-80));
+  }
+
+  svg {
+    fill: var(--color-text-primary);
+  }
+}

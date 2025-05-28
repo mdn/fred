@@ -3,8 +3,6 @@ import { LitElement, html, nothing } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
-import searchIcon from "../icon/search.svg?lit";
-
 import styles from "./element.css?lit";
 
 export class MDNSearchModal extends L10nMixin(LitElement) {
@@ -162,13 +160,6 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
   render() {
     const siteSearchIndex = this._queryIndex.value?.length || 0;
     return html`
-      <button
-        class="mdn-search"
-        title=${this.l10n`Search the site`}
-        @click=${this._showModal}
-      >
-        ${searchIcon}
-      </button>
       <dialog @keydown=${this._keydown} @focusin=${this._focus}>
         <form @submit=${this._submit}>
           <input
