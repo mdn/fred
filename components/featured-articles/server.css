@@ -18,6 +18,20 @@
   > li {
     display: contents;
   }
+
+  a {
+    &:link {
+      color: var(--color-text-primary);
+    }
+
+    &:visited {
+      color: var(--color-text-secondary);
+    }
+
+    &:not(:hover) {
+      text-decoration: none;
+    }
+  }
 }
 
 .featured-articles__article {
