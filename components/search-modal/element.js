@@ -3,6 +3,8 @@ import { LitElement, html, nothing } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
+import searchIcon from "../icon/search.svg?lit";
+
 import styles from "./element.css?lit";
 
 export class MDNSearchModal extends L10nMixin(LitElement) {
@@ -165,11 +167,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
         title=${this.l10n`Search the site`}
         @click=${this._showModal}
       >
-        <svg viewBox="0 -960 960 960" width="24" height="24">
-          <path
-            d="M381.66-326q-106.13 0-179.65-73.45-73.51-73.46-73.51-179.5 0-106.05 73.45-179.55 73.46-73.5 179.5-73.5Q487.5-832 561-758.49q73.5 73.52 73.5 179.65 0 42.84-13.5 81.59T584-429l221.62 221.14Q816.5-197 816.5-181.5t-11 26.5q-11 11-26.5 11t-26.38-10.87L531.16-376.5q-29.66 24-68.16 37.25T381.66-326Zm-.16-75q74.5 0 126.25-51.75T559.5-579q0-74.5-51.75-126.25T381.5-757q-74.5 0-126.25 51.75T203.5-579q0 74.5 51.75 126.25T381.5-401Z"
-          />
-        </svg>
+        ${searchIcon}
       </button>
       <dialog @keydown=${this._keydown} @focusin=${this._focus}>
         <form @submit=${this._submit}>
