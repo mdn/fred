@@ -9,28 +9,14 @@ import landingStairwaySVG2 from "../curriculum/assets/curriculum-landing-stairwa
 import landingSVG from "../curriculum/assets/curriculum-landing-top.svg?lit";
 import partnerBannerDark from "../curriculum/assets/curriculum-partner-banner-illustration-large-dark.svg";
 import partnerBannerLight from "../curriculum/assets/curriculum-partner-banner-illustration-large-light.svg";
-import practicesSVG from "../curriculum/assets/curriculum-topic-practices.svg?lit";
-import scriptingSVG from "../curriculum/assets/curriculum-topic-scripting.svg?lit";
-import standardsSVG from "../curriculum/assets/curriculum-topic-standards.svg?lit";
-import stylingSVG from "../curriculum/assets/curriculum-topic-styling.svg?lit";
-import toolingSVG from "../curriculum/assets/curriculum-topic-tooling.svg?lit";
 import scrimBg from "../curriculum/assets/landing-scrim.png?url";
+import { addAttrs, renderTopicIcon, topic2css } from "../curriculum/utils.js";
 import { HeadingAnchor } from "../heading-anchor/server.js";
 import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
 
 const SCRIM_URL = "https://v2.scrimba.com/s06icdv?via=mdn";
 const SCRIM_TITLE = "MDN + Scrimba partnership announcement scrim";
-
-/** @enum {string} */
-const Topic = {
-  WebStandards: "Web Standards & Semantics",
-  Styling: "Styling",
-  Scripting: "Scripting",
-  BestPractices: "Best Practices",
-  Tooling: "Tooling",
-  None: "",
-};
 
 export class CurriculumLanding extends ServerComponent {
   /**
@@ -304,12 +290,12 @@ export class CurriculumLanding extends ServerComponent {
           (module, j) => html`
             <li
               key="ml-${j}"
-              class="module-list-item topic-${this.topic2css(module.topic)}"
+              class="module-list-item topic-${topic2css(module.topic)}"
             >
               <a href=${module.url}>
                 <header>
                   ${module.topic
-                    ? this.renderTopicIcon(context, module.topic)
+                    ? renderTopicIcon(context, module.topic)
                     : nothing}
                   <span>${module.title}</span>
                 </header>
@@ -375,93 +361,4 @@ export class CurriculumLanding extends ServerComponent {
       </section>
     `;
   }
-
-  /**
-   * Renders a placeholder SVG structure for the TopicIcon.
-   * In a real server-rendering setup, the SVG content would ideally be embedded or referenced correctly.
-   * This placeholder includes basic circle and path elements styled by CSS.
-   * @param {import("@fred").Context<import("@rari").CurriculumPage>} _context
-   * @param {string} topic - The topic string.
-   * @returns {import("@lit").TemplateResult | nothing} The Lit HTML template for the topic icon SVG.
-   */
-  renderTopicIcon(_context, topic) {
-    const className = `topic-icon topic-${this.topic2css(topic)}`;
-    // Simplified placeholder SVG content, using currentColor for fill where CSS vars apply.
-    switch (topic) {
-      case "Web Standards & Semantics":
-        return addAttrs(standardsSVG, {
-          role: "none",
-          class: className,
-        });
-      case "Styling":
-        return addAttrs(stylingSVG, {
-          role: "none",
-          class: className,
-        });
-      case "Scripting":
-        return addAttrs(scriptingSVG, {
-          role: "none",
-          class: className,
-        });
-      case "Tooling":
-        return addAttrs(toolingSVG, {
-          role: "none",
-          class: className,
-        });
-      case "Best Practices":
-        return addAttrs(practicesSVG, {
-          role: "none",
-          class: className,
-        });
-      default:
-        return nothing;
-    }
-  }
-
-  /**
-   * Maps a topic enum value to a CSS class string.
-   * @param {Topic | undefined} topic
-   * @returns {string} The corresponding CSS class name.
-   */
-  topic2css(topic) {
-    switch (topic) {
-      case Topic.WebStandards:
-        return "standards";
-      case Topic.Styling:
-        return "styling";
-      case Topic.Scripting:
-        return "scripting";
-      case Topic.Tooling:
-        return "tooling";
-      case Topic.BestPractices:
-        return "practices";
-      default:
-        return "none";
-    }
-  }
-}
-
-/**
- *
- * @param {import("@lit").SVGTemplateResult} original
- * @param {{[key: string]: string}} attrs
- * @returns {import("@lit").SVGTemplateResult}
- */
-
-function addAttrs(original, attrs) {
-  // turn { role: 'img', 'aria-label': 'Foo' } into: role="img" aria-label="Foo"
-  const attrString = Object.entries(attrs)
-    .map(([k, v]) => `${k}="${v}"`)
-    .join(" ");
-  const [head, ...restStrings] = original.strings;
-  if (!head) {
-    return original;
-  }
-  const newHead = head.replace(/<svg([\s\S]*?)>/, `<svg$1 ${attrString}>`);
-  const newStrings = [newHead, ...restStrings];
-  // @ts-expect-error
-  newStrings.raw = [newHead, ...restStrings];
-  // @ts-expect-error
-  original.strings = newStrings;
-  return original;
 }

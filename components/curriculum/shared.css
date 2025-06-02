@@ -297,7 +297,7 @@
 }
 
 .curriculum-content-container {
-  > .curriculum-content {
+  .curriculum-content {
     max-width: 100%;
 
     :target {
@@ -334,7 +334,9 @@
         background-color: transparent;
       }
 
-      a[href^="#"] {
+      a[href^="#"]:not(.button) {
+        text-decoration: none;
+
         &::before {
           display: inline-block;
           visibility: hidden;
@@ -347,7 +349,7 @@
 
           line-height: 1;
 
-          color: var(--text-inactive);
+          color: var(--color-text-secondary);
 
           text-decoration: none;
 
@@ -355,6 +357,8 @@
         }
 
         &:hover {
+          text-decoration: underline;
+
           &::before {
             visibility: visible;
           }
@@ -376,6 +380,28 @@
   }
 
   .curriculum-content {
+    a:not(.button) {
+      color: var(--text-link);
+
+      &:link,
+      &:visited {
+        text-decoration: underline;
+
+        &.button {
+          text-decoration: none;
+        }
+      }
+
+      &:hover,
+      &:focus {
+        text-decoration: none;
+      }
+
+      &:visited:not([href^="#"]) {
+        color: var(--text-visited);
+      }
+    }
+
     ol,
     ul {
       padding: 0;
@@ -387,27 +413,18 @@
     }
   }
 
-  &.with-sidebar {
-    > .sidebar-container {
-      padding-top: 4rem;
-    }
+  &.curriculum-overview,
+  > header > h1 {
+    margin-bottom: 2rem;
 
-    .curriculum-content {
-      grid-area: main;
+    > span {
+      color: var(--curriculum-color);
     }
   }
 
   &.curriculum-overview,
   &.curriculum-module {
     .curriculum-content {
-      > header > h1 {
-        margin-bottom: 2rem;
-
-        > span {
-          color: var(--curriculum-color);
-        }
-      }
-
       .module-contents {
         > h2 {
           margin-top: 4rem;
@@ -484,7 +501,7 @@
         list-style-type: disc;
       }
 
-      scrim-inline {
+      mdn-scrim-inline {
         display: block;
 
         width: 100%;
@@ -498,5 +515,18 @@
         margin: 1rem 0;
       }
     }
+  }
+
+  .curriculum-prev-next {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 0 1rem;
+    justify-content: space-between;
+
+    width: 100%;
+
+    margin-top: 2rem;
   }
 }
