@@ -3,6 +3,7 @@ import { html } from "lit";
 import { FeaturedArticles } from "../featured-articles/server.js";
 import { HomepageHero } from "../homepage-hero/server.js";
 import { LatestNews } from "../latest-news/server.js";
+import { Mandala } from "../mandala/server.js";
 import { PageLayout } from "../page-layout/server.js";
 import { RecentContributions } from "../recent-contributions/server.js";
 import { ServerComponent } from "../server/index.js";
@@ -16,8 +17,13 @@ export class HomePage extends ServerComponent {
       context,
       html`
         <div class="homepage homepage--dark">
-          ${HomepageHero.render(context)}
-          <mdn-homepage-search></mdn-homepage-search>
+          <div class="homepage__header">
+            <section class="homepage__header--start">
+              ${HomepageHero.render(context)}
+              <mdn-homepage-search></mdn-homepage-search>
+            </section>
+            <section class="homepage__header--end">${Mandala.render()}</section>
+          </div>
         </div>
         <div class="homepage">
           <mdn-placement-hp-main></mdn-placement-hp-main>

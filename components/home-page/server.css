@@ -13,7 +13,7 @@
   }
 
   mdn-placement-hp-main {
-    grid-column: extended-full;
+    grid-column: full;
   }
 
   .homepage-section {
@@ -21,5 +21,30 @@
       font-size: var(--font-size-large);
       font-weight: 500;
     }
+  }
+}
+
+.homepage__header {
+  display: flex;
+  flex-direction: row;
+  grid-column-end: full-end; /* Make space for Mandala. */
+
+  .homepage__header-start {
+    flex: 2 0;
+  }
+
+  .homepage__header--end {
+    flex: 0 1;
+  }
+
+  .mandala svg {
+    width: 18rem;
+    height: 100%;
+  }
+}
+
+@media (--screen-medium-and-narrower) {
+  .homepage__header--end {
+    display: none;
   }
 }
