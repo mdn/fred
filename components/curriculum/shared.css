@@ -376,6 +376,28 @@
   }
 
   .curriculum-content {
+    a:not(.button) {
+      color: var(--text-link);
+
+      &:link,
+      &:visited {
+        text-decoration: underline;
+
+        &.button {
+          text-decoration: none;
+        }
+      }
+
+      &:hover,
+      &:focus {
+        text-decoration: none;
+      }
+
+      &:visited:not([href^="#"]) {
+        color: var(--text-visited);
+      }
+    }
+
     ol,
     ul {
       padding: 0;

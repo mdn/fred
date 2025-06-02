@@ -11,10 +11,9 @@ export class BreadcrumbsBar extends ServerComponent {
    */
   render(context) {
     const colorScheme = context.renderer === "Homepage" ? "dark" : "";
-    const toggleSidebar =
-      context.renderer === "Doc"
-        ? html`<mdn-toggle-sidebar></mdn-toggle-sidebar>`
-        : nothing;
+    const toggleSidebar = ["Doc", "CurriculumModule"].includes(context.renderer)
+      ? html`<mdn-toggle-sidebar></mdn-toggle-sidebar>`
+      : nothing;
 
     return html`
       <div class="breadcrumbs-bar" data-scheme=${colorScheme}>

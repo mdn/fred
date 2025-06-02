@@ -56,6 +56,7 @@ export async function render(path, page, compilationStats) {
   return asyncLocalStorage.run({ componentsUsed: new Set() }, () =>
     runWithContext({ locale }, async () => {
       const component = (() => {
+        console.log("renderer", context.renderer);
         switch (context.renderer) {
           case "BlogIndex":
             return BlogIndex.render(context);
