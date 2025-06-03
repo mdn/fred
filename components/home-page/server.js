@@ -18,11 +18,15 @@ export class HomePage extends ServerComponent {
       html`
         <div class="homepage homepage--dark">
           <div class="homepage__header">
-            <section class="homepage__header--start">
+            <section class="homepage__header__copy">
               ${HomepageHero.render(context)}
+            </section>
+            <section class="homepage__header__search">
               <mdn-homepage-search></mdn-homepage-search>
             </section>
-            <section class="homepage__header--end">${Mandala.render()}</section>
+            <section class="homepage__header__mandala">
+              ${Mandala.render()}
+            </section>
           </div>
         </div>
         <div class="homepage">
