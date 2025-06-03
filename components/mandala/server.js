@@ -6,9 +6,9 @@ export class Mandala extends ServerComponent {
   render() {
     return html`<div class="mandala" aria-hidden="true">
       <svg
-        width="675"
-        height="675"
-        viewBox="0 0 675 675"
+        width="64"
+        height="64"
+        viewBox="50 50 575 575"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         class="mandala"
