@@ -1,5 +1,7 @@
 .homepage-hero {
   h1 {
+    margin-top: unset; /* Reset */
+
     /* Same as `.content h1` (generic-content) */
     font-size: var(--font-size-largest);
     font-weight: normal;
