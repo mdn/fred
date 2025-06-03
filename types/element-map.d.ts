@@ -6,6 +6,7 @@ declare global {
     "mdn-about-team-member": import("../components/about-team-member/element.js").MDNAboutTeamMember;
     "mdn-button": import("../components/button/element.js").MDNButton;
     "mdn-code-example": import("../components/code-example/element.js").MDNCodeExample;
+    "mdn-collection-save-button": import("../components/collection-save-button/element.js").MDNCollectionSaveButton;
     "mdn-color-theme": import("../components/color-theme/element.js").MDNColorTheme;
     "mdn-compat-table": import("../components/compat-table/element.js").MDNCompatTable;
     "mdn-compat-table-lazy": import("../components/compat-table-lazy/element.js").MDNCompatTableLazy;

@@ -110,7 +110,7 @@
 
     content: "";
 
-    background: var(--color-background-primary);
+    background: var(--color-background-page);
 
     mask-image: linear-gradient(90deg, #00000000, #000000 75%);
   }

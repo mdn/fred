@@ -1,0 +1,31 @@
+.mandala {
+  svg {
+    font-size: 1.5rem;
+    font-weight: 300;
+    user-select: none;
+  }
+
+  svg > text {
+    fill: var(--color-text-secondary);
+  }
+
+  textPath[href="#circle1"] {
+    font-size: 1.5rem;
+  }
+
+  textPath[href="#circle2"] {
+    font-size: 1.3rem;
+  }
+
+  textPath[href="#circle3"] {
+    font-size: 1.2rem;
+  }
+
+  textPath[href="#circle4"] {
+    font-size: 1.1rem;
+  }
+
+  textPath[href="#circle5"] {
+    font-size: 1rem;
+  }
+}

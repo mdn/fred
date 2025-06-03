@@ -13,7 +13,7 @@
   }
 
   mdn-placement-hp-main {
-    grid-column: extended-full;
+    grid-column: full;
   }
 
   .homepage-section {
@@ -21,5 +21,47 @@
       font-size: var(--font-size-large);
       font-weight: 500;
     }
+  }
+}
+
+.homepage__header {
+  display: grid;
+
+  grid-template-areas: "copy mandala" "search mandala";
+
+  column-gap: 1rem;
+  justify-content: space-between; /* Move Mandala to the right. */
+
+  padding: 1rem 0;
+
+  .homepage__header__copy {
+    grid-area: copy;
+  }
+
+  .homepage__header__search {
+    grid-area: search;
+  }
+
+  .homepage__header__mandala {
+    grid-area: mandala;
+  }
+
+  .mandala svg {
+    display: block;
+    width: auto;
+    height: 17rem; /* FIXME: Auto-align with left side */
+  }
+
+  @media (--screen-medium-and-narrower) {
+    /* Hide Mandala on smaller screens. */
+    grid-template-areas: "copy" "search";
+
+    .homepage__header__mandala {
+      display: none;
+    }
+  }
+
+  @media (--screen-large-and-wider) {
+    grid-column-end: full-end; /* Make space for Mandala. */
   }
 }

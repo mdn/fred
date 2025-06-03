@@ -46,34 +46,3 @@
     column-gap: 0.25rem;
   }
 }
-
-/* Component */
-
-/* Temporary, until we have actual components */
-
-.breadcrumbs-bar__component {
-  display: flex;
-
-  column-gap: 0.25rem;
-  align-items: center;
-
-  padding: 0 0.5rem;
-  margin: 0;
-
-  background-color: transparent;
-  border: none;
-
-  &:hover {
-    background-color: var(--color-background-secondary);
-  }
-
-  svg {
-    fill: var(--color-text-primary);
-  }
-
-  @media (--screen-small-and-narrower) {
-    > span {
-      display: none;
-    }
-  }
-}
