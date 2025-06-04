@@ -21,6 +21,10 @@ export class CurriculumModule extends ServerComponent {
     const topicCssClass = doc.topic ? topic2css(doc.topic) : "";
 
     const sidebar = withSidebar ? this.renderSidebar(context, doc) : nothing;
+    const toc =
+      doc.toc && doc.toc.length > 0
+        ? this.renderToc(context, doc.toc, "In this module")
+        : nothing;
 
     return PageLayout.render(
       context,
@@ -46,6 +50,12 @@ export class CurriculumModule extends ServerComponent {
             ${this.renderCurriculumBody(context, doc)}
             ${this.renderPrevNext(context, doc)}
           </article>
+          <div class="toc-container">
+            <aside class="toc">
+              <nav>${toc}</nav>
+            </aside>
+            <mdn-placement-sidebar></mdn-placement-sidebar>
+          </div>
         </main>
       `,
     );
@@ -95,11 +105,11 @@ export class CurriculumModule extends ServerComponent {
   }
 
   /**
-   * @param {import("@fred").Context<import("@rari").CurriculumPage>} _context
+   * @param {import("@fred").Context<import("@rari").CurriculumPage>} context
    * @param {import("@rari").CurriculumDoc} doc
    * @returns {import("lit").TemplateResult | import("lit").nothing}
    */
-  renderSidebar(_context, doc) {
+  renderSidebar(context, doc) {
     if (!doc.sidebar) return nothing;
 
     return html`
@@ -115,15 +125,19 @@ export class CurriculumModule extends ServerComponent {
                         ${entry.children?.length
                           ? html`
                               <details
-                                open=${entry.children.some(
-                                  (c) => c.url === doc.mdn_url,
-                                ) || entry.url === doc.mdn_url}
+                                open=${ifDefined(
+                                  entry.children.some(
+                                    (c) => c.url === doc.mdn_url,
+                                  ) ||
+                                    entry.url === doc.mdn_url ||
+                                    undefined,
+                                )}
                               >
                                 <summary>${entry.title}</summary>
                                 <ol>
                                   <li>
                                     ${this.renderSidebarLink(
-                                      _context,
+                                      context,
                                       doc.mdn_url,
                                       entry.url,
                                       `${entry.title.replace(/ modules$/, "")} overview`,
@@ -133,7 +147,7 @@ export class CurriculumModule extends ServerComponent {
                                     (subEntry) => html`
                                       <li>
                                         ${this.renderSidebarLink(
-                                          _context,
+                                          context,
                                           doc.mdn_url,
                                           subEntry.url,
                                           subEntry.title,
@@ -145,7 +159,7 @@ export class CurriculumModule extends ServerComponent {
                               </details>
                             `
                           : this.renderSidebarLink(
-                              _context,
+                              context,
                               doc.mdn_url,
                               entry.url,
                               entry.title,
@@ -158,12 +172,6 @@ export class CurriculumModule extends ServerComponent {
             </div>
           </nav>
         </aside>
-        <div class="toc-container">
-          <aside class="toc">
-            <nav></nav>
-          </aside>
-          <mdn-placement-sidebar></mdn-placement-sidebar>
-        </div>
       </div>
     `;
   }
@@ -186,6 +194,47 @@ export class CurriculumModule extends ServerComponent {
           </em>
         `
       : html`<a href=${url}>${title}</a>`;
+  }
+
+  /**
+   * @param {import("@fred").Context<import("@rari").CurriculumPage>} context
+   * @param {import("@rari").TocEntry[]} toc
+   * @param {string} [title]
+   * @returns {import("lit").TemplateResult | import("lit").nothing}
+   */
+  renderToc(context, toc, title) {
+    if (!toc || toc.length === 0) return nothing;
+
+    const tocTitle = title;
+
+    return html`
+      <div class="document-toc-container">
+        <section class="document-toc">
+          <header>
+            <h2 class="document-toc-heading">${tocTitle}</h2>
+          </header>
+          <ul class="document-toc-list">
+            ${toc.map((item) => this.renderTocItem(context, item))}
+          </ul>
+        </section>
+      </div>
+    `;
+  }
+
+  /**
+   * @param {import("@fred").Context<import("@rari").CurriculumPage>} _context
+   * @param {import("@rari").TocEntry} item
+   * @returns {import("lit").TemplateResult}
+   */
+  renderTocItem(_context, item) {
+    const href = item.id ? `#${item.id.toLowerCase()}` : undefined;
+    return html`
+      <li class="document-toc-item">
+        <a class="document-toc-link" href=${ifDefined(href)}
+          >${unsafeHTML(item.text)}</a
+        >
+      </li>
+    `;
   }
 
   /**

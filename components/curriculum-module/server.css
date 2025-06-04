@@ -15,7 +15,7 @@
     grid-column: left-sidebar;
   }
 
-  .toc {
+  .toc-container {
     grid-column: right-sidebar;
   }
 
