@@ -315,8 +315,15 @@
     }
 
     h2 {
+      margin: 4rem 0 0.5rem;
       font-size: var(--font-size-larger);
       font-weight: 500;
+    }
+
+    h3 {
+      margin: 2rem 0 0.5rem;
+      font-size: var(--font-size-large);
+      font-weight: 300;
     }
 
     h1,

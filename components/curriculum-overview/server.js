@@ -112,12 +112,7 @@ export class CurriculumOverview extends ServerComponent {
           </div>`;
         }
 
-        const heading = hh`
-          <${unsafeStatic("h" + level)} id=${ifDefined(id)}>
-            <a class="heading-anchor" href="#${id}">
-              ${title}
-            </a>
-            </${unsafeStatic("h" + level)}>`;
+        const heading = hh`<${unsafeStatic("h" + level)} id=${ifDefined(id)}><a class="heading-anchor" href="#${id}">${title}</a></${unsafeStatic("h" + level)}>`;
 
         return html`
           <section aria-labelledby=${ifDefined(id ?? undefined)}>

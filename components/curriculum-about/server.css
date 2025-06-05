@@ -1,0 +1,105 @@
+@import url("../curriculum/shared.css");
+@import url("../curriculum/sidebar.css");
+@import url("../curriculum/layout.css");
+
+.curriculum-content-container.curriculum-about {
+  .curriculum-content {
+    margin-bottom: 5rem;
+
+    h2#motivation + div {
+      li {
+        list-style-image: var(--curriculum-bullet);
+      }
+    }
+
+    h3 {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+
+      &::before {
+        display: inline-block;
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+
+      &#students::before {
+        content: var(--curriculum-about-students);
+      }
+
+      &#educators::before {
+        content: var(--curriculum-about-educators);
+      }
+
+      &#whats_covered::before {
+        content: var(--curriculum-about-covered);
+      }
+
+      &#level_of_detail::before {
+        content: var(--curriculum-about-detail);
+      }
+
+      &#what_is_not_covered::before {
+        content: var(--curriculum-about-not);
+      }
+    }
+
+    h3#educators + .section-content blockquote:not(.curriculum-notes) {
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 1rem;
+      align-items: center;
+
+      padding: 1rem;
+      margin: 1rem;
+
+      background-color: var(--curriculum-bg-color-note);
+      border: 0;
+      border-radius: var(--elem-radius);
+
+      p:last-child a:only-child {
+        --button-bg: var(--color-background-primary);
+        --button-border-color: var(--color-border-primary);
+        --button-color: var(--color-text-secondary);
+        --button-bg-hover: var(--color-background-secondary);
+        --button-bg-active: var(--color-background-secondary);
+
+        /* --button-font: var(--type-emphasis-m); */
+        --button-padding: 0.43rem 1rem;
+        --button-radius: 0.25rem;
+        display: inline-block;
+
+        padding: var(--button-padding);
+
+        font-size: var(--font-size-small);
+        font-weight: 600;
+
+        color: var(--button-color);
+
+        text-align: center;
+        letter-spacing: normal;
+
+        text-decoration: none;
+
+        background-color: var(--button-bg);
+        border: 1px solid var(--button-border-color);
+        border-radius: var(--button-radius);
+
+        &.external::after {
+          display: none;
+        }
+
+        &:hover {
+          --button-border-color: var(--button-bg-hover);
+          --button-bg: var(--button-bg-hover);
+        }
+
+        &:active {
+          --button-bg: var(--button-bg-active);
+        }
+      }
+    }
+  }
+}
