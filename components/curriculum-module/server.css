@@ -1,40 +1,6 @@
 @import url("../curriculum/shared.css");
 @import url("../curriculum/sidebar.css");
-
-/* layout */
-.curriculum-module {
-  display: grid;
-  grid-template-columns: var(--layout-2-sidebars);
-  padding-inline: var(--layout-side-padding);
-
-  .curriculum-content {
-    grid-column: content;
-  }
-
-  .sidebar-container {
-    grid-column: left-sidebar;
-  }
-
-  .toc-container {
-    grid-column: right-sidebar;
-  }
-
-  @media (--screen-layout-1-sidebar-or-less) {
-    grid-template-columns: var(--layout-1-sidebar-left);
-
-    .toc {
-      display: none;
-    }
-  }
-
-  @media (--screen-layout-no-sidebar) {
-    grid-template-columns: var(--layout-no-sidebar);
-
-    .sidebar-container {
-      display: none;
-    }
-  }
-}
+@import url("../curriculum/layout.css");
 
 .curriculum-content {
   > header {

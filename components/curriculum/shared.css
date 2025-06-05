@@ -306,7 +306,12 @@
     }
 
     h1 {
+      margin-bottom: 2rem;
+
+      font-size: var(--font-size-largest);
       font-weight: 600;
+
+      line-height: 1.2;
     }
 
     h2 {
@@ -537,17 +542,16 @@
   }
 
   &.curriculum-overview,
-  > header > h1 {
-    margin-bottom: 2rem;
-
-    > span {
-      color: var(--curriculum-color);
-    }
-  }
-
-  &.curriculum-overview,
   &.curriculum-module {
     .curriculum-content {
+      > header > h1 {
+        margin-bottom: 2rem;
+
+        > span {
+          color: var(--curriculum-color);
+        }
+      }
+
       .module-contents {
         > h2 {
           margin-top: 4rem;
