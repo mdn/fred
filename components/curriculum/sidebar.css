@@ -1,4 +1,11 @@
 .curriculum-content-container .sidebar {
+  position: sticky;
+  top: var(--sticky-header-height);
+
+  max-height: calc(100vh - var(--sticky-header-height));
+
+  overflow-y: auto;
+
   color: var(--text-secondary);
 
   .backdrop {
@@ -310,7 +317,10 @@
 
   @media (--screen-xlarge-and-narrower) {
     position: sticky;
-    top: var(--offset);
-    max-height: var(--max-height);
+    top: var(--sticky-header-height);
+
+    max-height: calc(100vh - var(--sticky-header-height));
+
+    overflow-y: auto;
   }
 }
