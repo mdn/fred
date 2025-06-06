@@ -8,6 +8,7 @@ import scriptingSVG from "../curriculum/assets/curriculum-topic-scripting.svg?li
 import standardsSVG from "../curriculum/assets/curriculum-topic-standards.svg?lit";
 import stylingSVG from "../curriculum/assets/curriculum-topic-styling.svg?lit";
 import toolingSVG from "../curriculum/assets/curriculum-topic-tooling.svg?lit";
+import { HeadingAnchor } from "../heading-anchor/server.js";
 
 /** @enum {string} */
 const Topic = {
@@ -235,5 +236,106 @@ export function renderTocItem(_context, item) {
         >${unsafeHTML(item.text)}</a
       >
     </li>
+  `;
+}
+
+/**
+ * Pre-process section content for proper custom element naming.
+ * After yari has been sunset, change in generic-content
+ * and remove these replacements.
+ * @param {string | null | undefined} content
+ * @returns {string | null | undefined}
+ */
+export function replaceCustomElementNames(content) {
+  if (!content) return content;
+  let ret = content;
+  ret = ret.replaceAll("<scrim-inline", "<mdn-scrim-inline");
+  ret = ret.replaceAll("</scrim-inline", "</mdn-scrim-inline");
+
+  return ret;
+}
+
+/**
+ * @param {import("@fred").Context<import("@rari").CurriculumPage>} context
+ * @param {import("@rari").CurriculumDoc} doc
+ * @returns {import("lit").TemplateResult | import("lit").nothing}
+ */
+export function renderCurriculumBody(context, doc) {
+  if (!doc?.body) return nothing;
+
+  return html` ${doc.body.map((section) => renderSection(context, section))} `;
+}
+
+/**
+ * @param {import("@fred").Context<import("@rari").CurriculumPage>} _context
+ * @param {import("@rari").Section} section - The section object containing about data.
+ * @returns {import("@lit").TemplateResult | nothing} The Lit HTML template for the about section.
+ */
+export function renderSection(_context, section) {
+  const { id, title, isH3 } = section.value;
+  let { content } = section.value;
+
+  content = replaceCustomElementNames(content);
+
+  switch (section.type) {
+    case "browser_compatibility": {
+      return nothing;
+    }
+    case "specifications": {
+      return nothing;
+    }
+    default: {
+      const level = isH3 ? 3 : 2;
+      if (!id) {
+        return html`<div className="section-content">
+          ${unsafeHTML(content)}
+        </div>`;
+      }
+
+      return html`
+        <section aria-labelledby=${ifDefined(id ?? undefined)}>
+          ${HeadingAnchor.render(level, id ? String(id) : null, String(title))}
+          <div class="section-content">${unsafeHTML(content)}</div>
+        </section>
+      `;
+    }
+  }
+}
+
+/**
+ * Renders a single list of modules.
+ * Corresponds to the inner ModulesList component in the React version.
+ * @param {import("@fred").Context<import("@rari").CurriculumPage>} context
+ * @param {import("@rari").CurriculumIndexEntry[]} modules - Array of module entries within a group.
+ * @returns {import("@lit").TemplateResult | import("@lit").nothing} The Lit HTML template for the module list.
+ */
+export function renderModulesList(context, modules) {
+  if (!modules || modules.length === 0) {
+    return nothing;
+  }
+  return html`
+    <ol class="modules-list">
+      ${modules.map(
+        (module, j) => html`
+          <li
+            key="ml-${j}"
+            class="module-list-item topic-${topic2css(module.topic)}"
+          >
+            <a href=${module.url}>
+              <header>
+                ${module.topic
+                  ? renderTopicIcon(context, module.topic)
+                  : nothing}
+                <span>${module.title}</span>
+              </header>
+              <section>
+                <p>${module.summary}</p>
+                <p>${module.topic}</p>
+              </section>
+            </a>
+          </li>
+        `,
+      )}
+    </ol>
   `;
 }

@@ -1,6 +1,5 @@
 import { html, nothing } from "lit";
 
-import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import landingStairwaySVG1 from "../curriculum/assets/curriculum-landing-stairway-1.svg?lit";
@@ -10,8 +9,11 @@ import landingSVG from "../curriculum/assets/curriculum-landing-top.svg?lit";
 import partnerBannerDark from "../curriculum/assets/curriculum-partner-banner-illustration-large-dark.svg";
 import partnerBannerLight from "../curriculum/assets/curriculum-partner-banner-illustration-large-light.svg";
 import scrimBg from "../curriculum/assets/landing-scrim.png?url";
-import { addAttrs, renderTopicIcon, topic2css } from "../curriculum/utils.js";
-import { HeadingAnchor } from "../heading-anchor/server.js";
+import {
+  addAttrs,
+  renderModulesList,
+  renderSection,
+} from "../curriculum/utils.js";
 import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
 
@@ -40,7 +42,7 @@ export class CurriculumLanding extends ServerComponent {
         content.push(this.renderModules(context, section));
       } else {
         // Use the default Section renderer for other sections
-        content.push(this.renderSection(context, section));
+        content.push(renderSection(context, section));
       }
     }
 
@@ -81,36 +83,6 @@ export class CurriculumLanding extends ServerComponent {
         ${landingSVG}
       </header>
     `;
-  }
-
-  /**
-   * @param {import("@fred").Context<import("@rari").CurriculumPage>} _context
-   * @param {import("@rari").Section} section - The section object containing about data.
-   * @returns {import("@lit").TemplateResult | nothing} The Lit HTML template for the about section.
-   */
-  renderSection(_context, section) {
-    const { id, title, content, isH3 } = section.value;
-    switch (section.type) {
-      case "browser_compatibility": {
-        return nothing;
-      }
-      case "specifications": {
-        return nothing;
-      }
-      default: {
-        const level = isH3 ? 3 : 2;
-        return html`
-          <section aria-labelledby=${ifDefined(id ?? undefined)}>
-            ${HeadingAnchor.render(
-              level,
-              id ? String(id) : null,
-              String(title),
-            )}
-            <div class="section-content">${unsafeHTML(content)}</div>
-          </section>
-        `;
-      }
-    }
   }
 
   /**
@@ -236,7 +208,7 @@ export class CurriculumLanding extends ServerComponent {
             // Recursively render children if they exist
             const nestedChildrenHtml =
               modulesList.children && modulesList.children.length > 0
-                ? html`${this.renderModulesList(context, modulesList.children)}
+                ? html`${renderModulesList(context, modulesList.children)}
                     <a
                       href=${modulesList.children[0]?.url || "#"}
                       target="_self"
@@ -270,44 +242,6 @@ export class CurriculumLanding extends ServerComponent {
           })}
         </ol>
       </mdn-curriculum-tabs>
-    `;
-  }
-
-  /**
-   * Renders a single list of modules.
-   * Corresponds to the inner ModulesList component in the React version.
-   * @param {import("@fred").Context<import("@rari").CurriculumPage>} context
-   * @param {import("@rari").CurriculumIndexEntry[]} modules - Array of module entries within a group.
-   * @returns {import("@lit").TemplateResult | import("@lit").nothing} The Lit HTML template for the module list.
-   */
-  renderModulesList(context, modules) {
-    if (!modules || modules.length === 0) {
-      return nothing;
-    }
-    return html`
-      <ol class="modules-list">
-        ${modules.map(
-          (module, j) => html`
-            <li
-              key="ml-${j}"
-              class="module-list-item topic-${topic2css(module.topic)}"
-            >
-              <a href=${module.url}>
-                <header>
-                  ${module.topic
-                    ? renderTopicIcon(context, module.topic)
-                    : nothing}
-                  <span>${module.title}</span>
-                </header>
-                <section>
-                  <p>${module.summary}</p>
-                  <p>${module.topic}</p>
-                </section>
-              </a>
-            </li>
-          `,
-        )}
-      </ol>
     `;
   }
 
