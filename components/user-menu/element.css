@@ -1,0 +1,62 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+:host {
+  height: 100%;
+}
+
+.login-container {
+  display: flex;
+  height: 100%;
+
+  .login {
+    display: block;
+
+    align-self: center;
+    justify-self: center;
+
+    width: 34px;
+    height: 34px;
+
+    padding: 0.25rem 0.5rem;
+
+    text-wrap: nowrap;
+
+    text-decoration: none;
+
+    background-color: var(--color-background-secondary);
+    border: 1px solid var(--color-border-primary);
+    border-radius: 100%;
+  }
+}
+
+.user-menu-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  height: 100%;
+
+  border: none;
+  border-radius: 100%;
+
+  img {
+    border: 1px solid var(--color-border-primary);
+    border-radius: 100%;
+  }
+}
+
+.user-menu {
+  position: absolute;
+  padding: 1rem;
+  background: var(--color-background-primary);
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+}

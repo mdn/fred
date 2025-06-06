@@ -14,7 +14,7 @@ import { Doc } from "./components/doc/server.js";
 import { GenericAbout } from "./components/generic-about/server.js";
 import { GenericCommunity } from "./components/generic-community/server.js";
 import { GenericDoc } from "./components/generic-doc/server.js";
-import { HomePage } from "./components/home-page/server.js";
+import { Homepage } from "./components/homepage/server.js";
 import { NotFound } from "./components/not-found/server.js";
 import { ObservatoryLanding } from "./components/observatory-landing/server.js";
 import { ObservatoryResults } from "./components/observatory-results/server.js";
@@ -83,7 +83,7 @@ export async function render(path, page, compilationStats) {
           case "GenericDoc":
             return GenericDoc.render(context);
           case "Homepage":
-            return HomePage.render(context);
+            return Homepage.render(context);
           case "SpaAdvertise":
             return PageLayout.render(context, "TODO: Advertise");
           case "SpaObservatoryAnalyze":

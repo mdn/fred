@@ -7,9 +7,15 @@ export class HomepageHero extends ServerComponent {
    * @param {import("@fred").Context} context
    */
   render(context) {
-    return html`<div class="homepage-hero">
-        <section><h1>${context.l10n.raw({ id: "homepage-hero_title", elements: { developers: { tag: "u" } } })}</h1>
-        <p>${context.l10n.raw({
+    return html`<section class="homepage-hero">
+      <h1>
+        ${context.l10n.raw({
+          id: "homepage-hero_title",
+          elements: { developers: { tag: "u" } },
+        })}
+      </h1>
+      <p>
+        ${context.l10n.raw({
           id: "homepage-hero_description",
           elements: {
             css: {
@@ -28,7 +34,8 @@ export class HomepageHero extends ServerComponent {
               "data-glean": "homepage_hero: js",
             },
           },
-        })}</p>
-      </div>`;
+        })}
+      </p>
+    </section>`;
   }
 }

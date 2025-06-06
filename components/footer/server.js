@@ -11,6 +11,135 @@ import { ServerComponent } from "../server/index.js";
 import mdn from "./mdn.svg?lit";
 import mozilla from "./mozilla.svg?lit";
 
+/**
+ *
+ * @param {import("@fred").L10nContext} context
+ */
+const socials = (context) => [
+  {
+    icon: github,
+    href: "https://github.com/mdn/",
+    ariaLabel: context.l10n`MDN on GitHub`,
+  },
+  {
+    icon: bluesky,
+    href: "https://bsky.app/profile/developer.mozilla.org",
+    ariaLabel: context.l10n`MDN on Bluesky`,
+  },
+  {
+    icon: x,
+    href: "https://x.com/mozdevnet",
+    ariaLabel: context.l10n`MDN on X`,
+  },
+  {
+    icon: mastodon,
+    href: "https://mastodon.social/@mdn",
+    ariaLabel: context.l10n`MDN on Mastodon`,
+  },
+  {
+    icon: rss,
+    href: "/en-US/blog/rss.xml",
+    ariaLabel: context.l10n`MDN blog RSS feed`,
+  },
+];
+
+/**
+ *
+ * @param {import("@fred").L10nContext} context
+ */
+const links = (context) => [
+  {
+    title: context.l10n`MDN`,
+    links: [
+      { text: context.l10n`About`, href: "/en-US/about" },
+      { text: context.l10n`Blog`, href: "/en-US/blog/" },
+      {
+        text: context.l10n`Careers`,
+        href: "https://www.mozilla.org/en-US/careers/listings/",
+        external: true,
+      },
+      {
+        text: context.l10n`Advertise with us`,
+        href: "/en-US/advertising",
+      },
+    ],
+  },
+  {
+    title: context.l10n`Support`,
+    links: [
+      {
+        text: context.l10n`Product help`,
+        href: "https://support.mozilla.org/products/mdn-plus",
+        external: true,
+      },
+      {
+        text: context.l10n`Report an issue`,
+        href: "/en-US/docs/MDN/Community/Issues",
+      },
+    ],
+  },
+  {
+    title: context.l10n`Our communities`,
+    links: [
+      {
+        text: context.l10n`MDN Community`,
+        href: "/en-US/community",
+      },
+      {
+        text: context.l10n`MDN Forum`,
+        href: "https://discourse.mozilla.org/c/mdn/236",
+        external: true,
+      },
+      { text: context.l10n`MDN Chat`, href: "/discord", external: true },
+    ],
+  },
+  {
+    title: context.l10n`Developers`,
+    links: [
+      {
+        text: context.l10n`Web Technologies`,
+        href: "/en-US/docs/Web",
+      },
+      {
+        text: context.l10n`Learn Web Development`,
+        href: "/en-US/docs/Learn",
+      },
+      { text: context.l10n`MDN Plus`, href: "/en-US/plus" },
+      {
+        text: context.l10n`Hacks Blog`,
+        href: "https://hacks.mozilla.org/",
+        external: true,
+      },
+    ],
+  },
+];
+
+/**
+ * @param {import("@fred").L10nContext} context
+ */
+const mozillaLinks = (context) => [
+  {
+    text: context.l10n`Website Privacy Notice`,
+    href: "https://www.mozilla.org/privacy/websites/",
+    external: true,
+  },
+  {
+    text: context.l10n`Cookies`,
+    href: "https://www.mozilla.org/privacy/websites/cookie-settings/",
+    external: true,
+  },
+  {
+    text: context.l10n`Legal`,
+    href: "https://www.mozilla.org/about/legal/terms/mozilla",
+    external: true,
+  },
+  {
+    text: context.l10n`Community Participation Guidelines`,
+    href: "https://www.mozilla.org/about/governance/policies/participation/",
+    external: true,
+  },
+];
+
 export class Footer extends ServerComponent {
   /**
    * @param {import("@fred").Context} context
@@ -28,159 +157,55 @@ export class Footer extends ServerComponent {
               )`Your blueprint for a better internet.`}
             </p>
           </div>
+
           <ul class="footer__socials">
-            <li>
-              <a
-                href="https://github.com/mdn/"
-                aria-label=${context.l10n`MDN on GitHub`}
-              >
-                ${github}
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://bsky.app/profile/developer.mozilla.org"
-                aria-label=${context.l10n`MDN on Bluesky`}
-              >
-                ${bluesky}
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://x.com/mozdevnet"
-                aria-label=${context.l10n`MDN on X`}
-              >
-                ${x}
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://mastodon.social/@mdn"
-                aria-label=${context.l10n`MDN on Mastodon`}
-              >
-                ${mastodon}
-              </a>
-            </li>
-            <li>
-              <a
-                href="/en-US/blog/rss.xml"
-                aria-label=${context.l10n`MDN blog RSS feed`}
-              >
-                ${rss}
-              </a>
-            </li>
+            ${socials(context).map(
+              (item) => html`
+                <li>
+                  <a href=${item.href} aria-label=${item.ariaLabel}>
+                    ${item.icon}
+                  </a>
+                </li>
+              `,
+            )}
           </ul>
-          <dl class="footer__links">
-            <dt>${context.l10n`MDN`}</dt>
-            <dd>
-              <ul>
-                <li><a href="/en-US/about">${context.l10n`About`}</a></li>
-                <li><a href="/en-US/blog/">${context.l10n`Blog`}</a></li>
-                <li>
-                  <a
-                    class="external"
-                    href="https://www.mozilla.org/en-US/careers/listings/"
-                    >${context.l10n`Careers`}</a
-                  >
-                </li>
-                <li>
-                  <a href="/en-US/advertising"
-                    >${context.l10n`Advertise with us`}</a
-                  >
-                </li>
-              </ul>
-            </dd>
-          </dl>
-          <dl class="footer__links">
-            <dt>${context.l10n`Support`}</dt>
-            <dd>
-              <ul>
-                <li>
-                  <a
-                    class="external"
-                    href="https://support.mozilla.org/products/mdn-plus"
-                    >${context.l10n`Product help`}</a
-                  >
-                </li>
-                <li>
-                  <a href="/en-US/docs/MDN/Community/Issues"
-                    >${context.l10n`Report an issue`}</a
-                  >
-                </li>
-              </ul>
-            </dd>
-          </dl>
-          <dl class="footer__links">
-            <dt>${context.l10n`Our communities`}</dt>
-            <dd>
-              <ul>
-                <li>
-                  <a href="/en-US/community">${context.l10n`MDN Community`}</a>
-                </li>
-                <li>
-                  <a
-                    class="external"
-                    href="https://discourse.mozilla.org/c/mdn/236"
-                    >${context.l10n`MDN Forum`}</a
-                  >
-                </li>
-                <li>
-                  <a class="external" href="/discord"
-                    >${context.l10n`MDN Chat`}</a
-                  >
-                </li>
-              </ul>
-            </dd>
-          </dl>
-          <dl class="footer__links">
-            <dt>${context.l10n`Developers`}</dt>
-            <dd>
-              <ul>
-                <li>
-                  <a href="/en-US/docs/Web"
-                    >${context.l10n`Web Technologies`}</a
-                  >
-                </li>
-                <li>
-                  <a href="/en-US/docs/Learn"
-                    >${context.l10n`Learn Web Development`}</a
-                  >
-                </li>
-                <li><a href="/en-US/plus">${context.l10n`MDN Plus`}</a></li>
-                <li>
-                  <a class="external" href="https://hacks.mozilla.org/"
-                    >${context.l10n`Hacks Blog`}</a
-                  >
-                </li>
-              </ul>
-            </dd>
-          </dl>
+
+          ${links(context).map(
+            (group) => html`
+              <dl class="footer__links">
+                <dt>${group.title}</dt>
+                <dd>
+                  <ul>
+                    ${group.links.map(
+                      (link) => html`
+                        <li>
+                          <a
+                            href=${link.href}
+                            class=${link.external ? "external" : ""}
+                            >${link.text}</a
+                          >
+                        </li>
+                      `,
+                    )}
+                  </ul>
+                </dd>
+              </dl>
+            `,
+          )}
         </div>
+
         <div class="footer__mozilla">
           <a class="footer__logo" href="https://www.mozilla.org/">${mozilla}</a>
           <ul>
-            <li>
-              <a href="https://www.mozilla.org/privacy/websites/"
-                >${context.l10n`Website Privacy Notice`}</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://www.mozilla.org/privacy/websites/cookie-settings/"
-                >${context.l10n`Cookies`}</a
-              >
-            </li>
-            <li>
-              <a href="https://www.mozilla.org/about/legal/terms/mozilla"
-                >${context.l10n`Legal`}</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://www.mozilla.org/about/governance/policies/participation/"
-                >${context.l10n`Community Participation Guidelines`}</a
-              >
-            </li>
+            ${mozillaLinks(context).map(
+              (item) => html`
+                <li>
+                  <a href=${item.href} class=${item.external ? "external" : ""}
+                    >${item.text}</a
+                  >
+                </li>
+              `,
+            )}
           </ul>
           <p>
             ${context.l10n.raw({

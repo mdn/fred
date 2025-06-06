@@ -9,7 +9,8 @@
 
   font-size: var(--font-size-large);
 
-  border-color: var(--border-primary);
+  border-color: var(--color-border-primary);
+  border-style: solid;
   border-radius: 2em;
 
   &::after {

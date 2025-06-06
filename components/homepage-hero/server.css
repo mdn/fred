@@ -1,4 +1,6 @@
 .homepage-hero {
+  font-size: 1.25rem; /** FIXME: Add global --font-size var. */
+
   h1 {
     margin-top: unset; /* Reset */
 

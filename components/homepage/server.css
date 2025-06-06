@@ -1,0 +1,18 @@
+.homepage {
+  display: grid;
+  grid-template-columns: var(--layout-no-sidebar-extended);
+
+  > * {
+    grid-column: content;
+  }
+
+  mdn-placement-hp-main {
+    grid-column: extended-full;
+  }
+}
+
+.homepage--dark {
+  color: var(--color-text-primary);
+  color-scheme: dark;
+  background-color: var(--color-background-primary);
+}

@@ -10,7 +10,7 @@ baseline_unsupported_in = Not widely supported in { $browsers }
 baseline_supported_and_unsupported_in = Supported in { $supported }, but not widely supported in { $unsupported }
 
 homepage-hero_title = Resources for <u data-l10n-name="developers">Developers</u>,<br> by Developers
-homepage-hero_description = Documenting web technologies, including <a data-l10n-name="css">CSS</a>, <a data-l10n-name="html">HTML</a>, and <a data-l10n-name="js">JavaScript</a>, since 2005.
+homepage-hero_description = Documenting <a data-l10n-name="css">CSS</a>, <a data-l10n-name="html">HTML</a>, and <a data-l10n-name="js">JavaScript</a>, since 2005.
 
 reference_toc_header = In this article
 
@@ -96,3 +96,7 @@ pagination_next = Next page
 pagination_prev = Previous page
 pagination_current = Current page
 pagination_goto = Go to page { $page }
+
+logout = Log-out
+login = Log-in
+settings = Settings

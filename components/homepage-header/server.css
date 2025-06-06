@@ -1,0 +1,31 @@
+.homepage-header {
+  display: grid;
+
+  grid-template-areas: "copy mandala" "search mandala";
+  grid-column-end: extended-full-end; /* Make space for Mandala. */
+
+  column-gap: 1rem;
+}
+
+.homepage-header__copy {
+  grid-area: copy;
+  padding-top: 1rem;
+}
+
+.homepage-header__search {
+  grid-area: search;
+  padding-bottom: 1rem;
+}
+
+.homepage-header__mandala {
+  grid-area: mandala;
+  max-height: 20rem;
+  overflow: hidden;
+
+  .mandala svg {
+    --height: 35rem;
+    display: block;
+    height: var(--height);
+    margin-top: calc(-1 * var(--height) / 4);
+  }
+}

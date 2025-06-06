@@ -51,6 +51,7 @@ declare global {
     "mdn-survey": import("../components/survey/element.js").MDNSurvey;
     "mdn-themed-image": import("../components/themed-image/element.js").MDNThemedImage;
     "mdn-toggle-sidebar": import("../components/toggle-sidebar/element.js").MDNToggleSidebar;
+    "mdn-user-menu": import("../components/user-menu/element.js").MDNUserMenu;
   }
 }
 

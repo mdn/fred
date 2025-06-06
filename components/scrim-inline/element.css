@@ -57,13 +57,13 @@ dialog {
 
   span {
     margin-right: auto;
-    font-size: var(--type-tiny-font-size);
+    font-size: var(--font-size-small);
     color: #ffffff;
   }
 }
 
-.toggle,
-.external {
+.scrim-fullscreen,
+.scrim-link {
   width: 1rem;
   height: 1rem;
 
@@ -79,12 +79,6 @@ dialog {
     background-color: var(--curriculum-color);
   }
 
-  &:focus-visible {
-    outline-style: auto;
-    outline-color: var(--accent-primary);
-    outline-offset: 1px;
-  }
-
   &.enter {
     mask-image: url("../icon/fullscreen-enter.svg");
   }
@@ -92,11 +86,11 @@ dialog {
   &.exit {
     mask-image: url("../icon/cancel.svg");
   }
-}
 
-.external {
-  mask-image: url("../icon/external.svg");
-  mask-size: 75%;
+  &.scrim-link {
+    mask-image: url("../icon/external.svg");
+    mask-size: 75%;
+  }
 }
 
 .body {

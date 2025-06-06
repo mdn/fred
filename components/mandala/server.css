@@ -6,7 +6,7 @@
   }
 
   svg > text {
-    fill: var(--color-text-secondary);
+    fill: var(--color-border-secondary);
   }
 
   textPath[href="#circle1"] {

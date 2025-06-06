@@ -37,7 +37,6 @@
 
 .color-theme__dropdown {
   position: absolute;
-  left: 0;
   z-index: 1;
 
   width: max-content;
@@ -47,6 +46,14 @@
 
   background-color: var(--color-background-primary);
   border: 1px solid var(--color-text-secondary);
+
+  @media (--screen-medium-and-wider) {
+    left: calc(-0.5rem - 1px); /* Align icons. */
+  }
+
+  @media (--screen-small-and-narrower) {
+    right: 0;
+  }
 }
 
 .color-theme__list {
@@ -83,6 +90,11 @@
   }
 
   svg {
+    pointer-events: none;
     fill: var(--color-text-primary);
   }
+}
+
+button {
+  cursor: pointer;
 }
