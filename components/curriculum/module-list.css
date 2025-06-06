@@ -144,6 +144,7 @@
       grid-template-columns: 1fr 1fr 1fr;
 
       gap: 1rem;
+      justify-items: center;
 
       padding: 0.5rem;
       margin: 0;

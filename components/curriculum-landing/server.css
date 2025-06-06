@@ -28,16 +28,23 @@
   .curriculum-content {
     padding-top: 0;
 
+    /* number of columns in module list depending on screen width */
     ol.modules-list {
-      @media (width >= 426px) {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+
+      @media (--screen-xsmall) {
+        grid-template-columns: 1fr;
+      }
+
+      @media (--screen-small-and-wider) {
         grid-template-columns: 1fr 1fr;
       }
 
-      @media (width >= 769px) {
+      @media (--screen-large-and-wider) {
         grid-template-columns: 1fr 1fr 1fr;
       }
 
-      @media (width >= 992px) {
+      @media (--screen-xlarge-and-wider) {
         grid-template-columns: 1fr 1fr 1fr 1fr;
       }
     }
@@ -47,7 +54,7 @@
     display: grid;
     grid-template-areas: "copy" "svg";
 
-    @media (width >= 769px) {
+    @media (--screen-medium-and-wider) {
       grid-template-areas: "copy svg";
       grid-template-columns: 30rem auto;
     }
@@ -65,7 +72,7 @@
 
       margin-bottom: 3rem;
 
-      @media (width >= 769px) {
+      @media (--screen-medium-and-wider) {
         margin-bottom: 0;
       }
 
@@ -87,28 +94,28 @@
       margin-top: 3rem;
       margin-right: auto;
 
-      @media (width >= 769px) {
+      @media (--screen-medium-and-wider) {
         margin-bottom: 4rem;
       }
 
       h1 {
         margin-bottom: 0.5rem;
-        font-size: 2rem;
+        font-size: var(--font-size-larger);
         color: var(--curriculum-color-topic);
 
-        @media (width >= 769px) {
-          font-size: 2.5rem;
+        @media (--screen-medium-and-wider) {
+          font-size: var(--font-size-largest);
         }
       }
 
       h2 {
         margin-top: 0.5rem;
         margin-bottom: 1.5rem;
-        font-size: 1.25rem;
+        font-size: var(--font-size-large);
 
-        @media (width >= 769px) {
+        @media (--screen-medium-and-wider) {
           margin-bottom: 2rem;
-          font-size: 2rem;
+          font-size: var(--font-size-larger);
         }
       }
 
@@ -143,7 +150,7 @@
 
       margin: 0 auto 3rem;
 
-      @media (width >= 992px) {
+      @media (--screen-large-and-wider) {
         grid-template-areas:
           "li li    li "
           "h2 .     scrim"
@@ -186,16 +193,16 @@
 
           transform: translateY(-1rem);
 
-          @media (width >= 426px) {
+          @media (--screen-small-and-wider) {
             gap: 1rem;
             align-items: center;
           }
 
-          @media (width >= 769px) {
+          @media (--screen-medium-and-wider) {
             justify-content: start;
           }
 
-          @media (width >= 992px) {
+          @media (--screen-large-and-wider) {
             justify-content: center;
           }
 
@@ -203,12 +210,12 @@
             margin: 0 0.5rem;
             text-align: center;
 
-            @media (width >= 426px) {
+            @media (--screen-small-and-wider) {
               width: max-content;
               margin: 0 1rem;
             }
 
-            @media (width >= 769px) {
+            @media (--screen-medium-and-wider) {
               display: inline-flex;
               gap: 1rem;
               align-items: center;
@@ -222,7 +229,7 @@
 
               margin: 0 auto;
 
-              @media (width >= 769px) {
+              @media (--screen-medium-and-wider) {
                 display: initial;
                 margin: 0;
               }
@@ -330,7 +337,7 @@
 
         margin-top: 1rem;
 
-        @media (width >= 992px) {
+        @media (--screen-large-and-wider) {
           justify-self: end;
           margin-top: 0;
         }
@@ -386,11 +393,11 @@
 
       color: var(--text-secondary);
 
-      @media (width >= 769px) {
+      @media (--screen-medium-and-wider) {
         grid-template-columns: min(100%, 34rem);
       }
 
-      @media (width >= 992px) {
+      @media (--screen-large-and-wider) {
         grid-template-areas: "a b";
         grid-template-columns: 1fr 1.4fr;
       }
@@ -411,7 +418,7 @@
 
         transform: translateX(2vw);
 
-        @media (width >= 992px) {
+        @media (--screen-large-and-wider) {
           --fs: clamp(1rem, calc(2 * calc(100vw / 100)), 1.75rem);
         }
 
@@ -444,7 +451,7 @@
         grid-area: b;
         transform: translateX(-5vw);
 
-        @media (width >= 769px) {
+        @media (--screen-medium-and-wider) {
           --fs: clamp(0.75rem, calc(100vw / 100), 0.825rem);
         }
 
@@ -471,7 +478,7 @@
 
             text-wrap: wrap;
 
-            @media (width >= 769px) {
+            @media (--screen-medium-and-wider) {
               max-width: initial;
               text-wrap: nowrap;
             }
@@ -497,7 +504,7 @@
             left: 8%;
           }
 
-          @media (width >= 769px) {
+          @media (--screen-medium-and-wider) {
             #stair-1 {
               top: 53%;
               left: 35%;
@@ -525,7 +532,7 @@
             display: none;
             grid-area: b;
 
-            @media (width >= 769px) {
+            @media (--screen-medium-and-wider) {
               display: initial;
             }
           }
@@ -534,7 +541,7 @@
             grid-area: b;
             max-width: 100%;
 
-            @media (width >= 769px) {
+            @media (--screen-medium-and-wider) {
               display: none;
             }
           }
@@ -578,7 +585,7 @@
 
         scroll-snap-type: inline mandatory;
 
-        @media (width >= 769px) {
+        @media (--screen-medium-and-wider) {
           grid-template-areas:
             "beginner advanced"
             "employ educator";
@@ -586,7 +593,7 @@
           gap: 5rem 4rem;
         }
 
-        @media (width >= 992px) {
+        @media (--screen-large-and-wider) {
           gap: 5rem 8rem;
         }
 
@@ -615,7 +622,7 @@
           background-color: var(--curriculum-bg-large-color);
           border-radius: var(--elem-radius);
 
-          @media (width >= 769px) {
+          @media (--screen-medium-and-wider) {
             grid-template-areas:
               "i h"
               "i p"
@@ -642,7 +649,7 @@
             width: 3rem;
             height: 3rem;
 
-            @media (width >= 769px) {
+            @media (--screen-medium-and-wider) {
               grid-area: i;
               width: 5rem;
               height: 5rem;
@@ -667,7 +674,7 @@
 
           h3 {
             margin-top: 0;
-            font-weight: var(--font-body-strong-weight);
+            font-weight: 600;
             color: var(--text-primary);
           }
 
@@ -723,7 +730,7 @@
             border: 1px solid var(--button-border-color);
             border-radius: var(--button-radius);
 
-            @media (width >= 769px) {
+            @media (--screen-medium-and-wider) {
               justify-self: start;
             }
 
