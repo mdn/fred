@@ -69,6 +69,12 @@ jobs:
           repository: mdn/content
           path: mdn/content
 
+      - name: Checkout (translated-content)
+        uses: actions/checkout@v4
+        with:
+          repository: mdn/translated-content
+          path: mdn/translated-content
+
       - name: Checkout (curriculum)
         uses: actions/checkout@v4
         with:
@@ -117,6 +123,7 @@ jobs:
         working-directory: mdn/fred
         env:
           CONTENT_ROOT: ${{ github.workspace }}/mdn/content/files
+          CONTENT_TRANSLATED_ROOT: ${{ github.workspace }}/mdn/translated-content/files
           CONTRIBUTOR_SPOTLIGHT_ROOT: ${{ github.workspace }}/mdn/mdn-contributor-spotlight/contributors
           BLOG_ROOT: ${{ github.workspace }}/mdn/mdn-studio/content/posts
           CURRICULUM_ROOT: ${{ github.workspace }}/mdn/curriculum
@@ -189,8 +196,11 @@ jobs:
 
             FILE_LIST="--file-list ${{ github.workspace }}/files.txt"
           else
-            # Full build.
-            FILE_LIST=""
+            # Full build (en-US + fr).
+            find $CONTENT_ROOT -type f -name 'index.md' >> ${{ github.workspace }}/files.txt
+            find $CONTENT_TRANSLATED_ROOT/fr -type f -name 'index.md' >> ${{ github.workspace }}/files.txt
+
+            FILE_LIST="--file-list ${{ github.workspace }}/files.txt"
           fi
 
           npm run rari build -- --all $FILE_LIST --templ-stats
