@@ -2,6 +2,8 @@
 @import url("./toc.css");
 
 .curriculum-content-container {
+  line-height: var(--font-line-content);
+
   /* space above all 3 columns */
   .curriculum-sidebar,
   .toc,
