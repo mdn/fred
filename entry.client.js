@@ -7,3 +7,4 @@ import "./hooks/load-elements.js";
 import "./components/navigation/hook.js";
 import "./hooks/code-examples.js";
 import "./hooks/live-samples.js";
+import "./hooks/css-formal-syntax.js";
