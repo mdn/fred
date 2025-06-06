@@ -8,6 +8,21 @@
 
   color: var(--text-secondary);
 
+  /* li > em {
+    display: inline-block;
+
+    padding: 0.25rem 0.5rem;
+
+    font-variation-settings: normal;
+    font-style: normal;
+    font-weight: 600;
+
+    background-color: var(--background-toc-active);
+    border-left: 2px solid var(--category-color);
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+  } */
+
   .backdrop {
     display: none;
   }
@@ -23,7 +38,8 @@
     letter-spacing: 1.5px;
   }
 
-  em {
+  /* highlight of current page in sidebar */
+  li > em {
     display: inline-block;
 
     padding: 0.25rem 0.5rem;

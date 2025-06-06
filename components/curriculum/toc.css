@@ -1,0 +1,116 @@
+.curriculum-content-container {
+  .toc {
+    position: sticky;
+    top: var(--sticky-header-height);
+
+    max-height: calc(100vh - var(--sticky-header-height));
+
+    overflow-y: auto;
+
+    .document-toc {
+      padding: 0;
+      margin-bottom: 2rem;
+
+      .document-toc-heading {
+        margin: 0 0 1rem;
+
+        font-size: var(--font-size-normal);
+        font-weight: 400;
+
+        line-height: var(--font-line-content);
+
+        letter-spacing: 1.5px;
+      }
+
+      .document-toc-list {
+        --toc-header-font-size: var(--font-size-small);
+        padding-left: 0;
+        font-size: var(--font-size-small);
+        list-style: none;
+
+        li {
+          margin: 0;
+        }
+      }
+
+      .document-toc-link {
+        display: inline-block;
+
+        padding: 0.5rem 1rem;
+
+        color: var(--color-text-secondary);
+
+        text-decoration: none;
+
+        border-left: 2px solid var(--color-border-secondary);
+
+        &:hover {
+          color: var(--text-link);
+        }
+
+        &[aria-current]:not([aria-current=""], [aria-current="false"]) {
+          font-weight: 600;
+
+          color: var(--text-primary);
+
+          background-color: var(--background-toc-active);
+          border-left: 2px solid var(--category-color);
+          border-top-right-radius: 0.25rem;
+          border-bottom-right-radius: 0.25rem;
+        }
+      }
+
+      .document-toc-item-sub > .document-toc-link:not(.button) {
+        padding-left: 2rem;
+      }
+
+      h2 {
+        padding: 0;
+        margin: 0;
+
+        font-size: var(--toc-header-font-size, var(--font-size-large));
+        font-weight: normal;
+      }
+
+      ul {
+        display: grid;
+
+        padding: 0;
+        margin: 0;
+
+        list-style: none;
+
+        ul {
+          padding-left: 1rem;
+        }
+      }
+
+      a {
+        display: block;
+
+        padding: 0.5rem;
+
+        color: inherit;
+
+        text-decoration: none;
+
+        &:hover:not([aria-current="true"]) {
+          color: var(--color-link-normal);
+        }
+
+        &[aria-current="true"] {
+          background-color: var(--color-background-blue);
+          box-shadow: -2px 0 0 var(--color-blue-50);
+        }
+      }
+
+      @media (--screen-small-and-narrower) {
+        padding: 0 1rem;
+      }
+
+      .show-toc {
+        display: block;
+      }
+    }
+  }
+}
