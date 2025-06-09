@@ -21,7 +21,7 @@ const Topic = {
 };
 
 /**
- * Maps a topic enum value to a CSS class string.
+ * Maps a topic enum value to a CSS class name.
  * @param {Topic | undefined} topic
  * @returns {string} The corresponding CSS class name.
  */
