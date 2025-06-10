@@ -111,7 +111,6 @@ export async function render(path, page, compilationStats) {
           case "SpaSearch":
             return Search.render(context);
           case "SpaUnknown": {
-            console.log("Unknown page:", context);
             switch (context.slug) {
               case "advertising":
                 return Advertising.render(context);

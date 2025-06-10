@@ -1,5 +1,6 @@
 .advertising {
   --mdn-color-ads: hsl(169deg 100% 41%);
+  line-height: var(--font-line-content);
 }
 
 /* Full-width dark container */
@@ -25,9 +26,13 @@
 }
 
 .advertising-content {
-  display: grid;
-  grid-template-columns: var(--layout-2-sidebars);
   padding-inline: var(--layout-side-padding);
+
+  /* display: grid; */
+
+  /* grid-template-columns: var(--layout-2-sidebars); */
+
+  /* padding-inline: var(--layout-side-padding); */
 }
 
 .advertising {
@@ -66,7 +71,7 @@
   margin-top: 8rem;
 
   font-size: var(--font-size-largest);
-  font-weight: 600;
+  font-weight: 500;
 
   line-height: 1.2;
 
@@ -79,7 +84,7 @@
   width: 1.2em;
   height: 1.2em;
 
-  margin-right: 0.1em;
+  margin-right: 0;
 
   vertical-align: middle;
 
@@ -92,6 +97,8 @@
 }
 
 .advertising__stats-header h1::after {
+  margin-left: -0.3rem;
+
   text-decoration: underline;
   text-decoration-thickness: 0.1em;
   text-decoration-color: var(--mdn-color-ads);
@@ -112,6 +119,8 @@ h2 {
   grid-template-columns: 1fr;
 
   gap: 0.3em;
+
+  width: 100%;
 
   padding: 0;
   margin: 0;
@@ -138,7 +147,7 @@ h2 {
 
   align-items: center;
 
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 2rem 1rem;
 
   color: #212121;
 
