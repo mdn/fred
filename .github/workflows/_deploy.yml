@@ -203,7 +203,7 @@ jobs:
             # Full build.
             FILE_LIST=""
 
-            # Only build fr, remove other locales.
+            # Build French, but not other locales.
             ignore_locales='es ja ko pt-br ru zh-cn zh-tw'
             for locale in $ignore_locales
             do
