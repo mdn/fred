@@ -382,6 +382,10 @@ const legacyConfig = merge(common, clientAndLegacyCommon, {
           },
         },
       },
+      {
+        resourceQuery: /raw/,
+        type: "asset/source",
+      },
     ],
   },
 });
