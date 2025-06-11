@@ -70,6 +70,13 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
           detail: this._mode,
         }),
       );
+      // legacy react compatibility:
+      this._mode == "light"
+        ? document.documentElement.classList.add("light")
+        : document.documentElement.classList.remove("light");
+      this._mode == "dark"
+        ? document.documentElement.classList.add("dark")
+        : document.documentElement.classList.remove("dark");
     }
   }
 
