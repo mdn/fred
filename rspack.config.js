@@ -262,7 +262,7 @@ const legacyConfig = merge(common, clientAndLegacyCommon, {
       ),
     }),
     new rspack.ProvidePlugin({
-      React: path.resolve(__dirname, "legacy/yari/node_modules/react"),
+      React: "react",
     }),
     new rspack.CssExtractRspackPlugin({
       filename: isProd ? "[name].[contenthash].css" : "[name].css",

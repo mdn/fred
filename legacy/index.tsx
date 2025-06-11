@@ -1,16 +1,12 @@
-import React from "./yari/node_modules/react";
-import ReactDOM from "./yari/node_modules/react-dom/client";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "./yari/node_modules/react-router-dom";
-import { UserDataProvider } from "./yari/client/src/user-context";
-import { UIProvider } from "./yari/client/src/ui-context";
-import { Plus } from "./yari/client/src/plus";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { UserDataProvider } from "@mdn/yari/client/src/user-context";
+import { UIProvider } from "@mdn/yari/client/src/ui-context";
+import { Plus } from "@mdn/yari/client/src/plus";
 
-import "./yari/client/src/app.scss";
-import "./yari/client/src/document/index.scss";
+import "@mdn/yari/client/src/app.scss";
+import "@mdn/yari/client/src/document/index.scss";
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(
