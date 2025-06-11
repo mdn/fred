@@ -196,11 +196,15 @@ jobs:
 
             FILE_LIST="--file-list ${{ github.workspace }}/files.txt"
           else
-            # Full build (en-US + fr).
-            find $CONTENT_ROOT -type f -name 'index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_TRANSLATED_ROOT/fr -type f -name 'index.md' >> ${{ github.workspace }}/files.txt
+            # Full build.
+            FILE_LIST=""
 
-            FILE_LIST="--file-list ${{ github.workspace }}/files.txt"
+            # Only build fr, remove other locales.
+            ignore_locales='es ja ko pt-br ru zh-cn zh-tw'
+            for locale in $ignore_locales
+            do
+              rm -rf $CONTENT_TRANSLATED_ROOT/$locale
+            done
           fi
 
           npm run rari build -- --all $FILE_LIST --templ-stats
