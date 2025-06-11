@@ -3,6 +3,10 @@ name: Deploy Reusable Workflow
 on:
   workflow_call:
     inputs:
+      cancel-in-progress:
+        description: "To cancel any currently running job or workflow in the same concurrency group, specify cancel-in-progress: true."
+        type: boolean
+        default: false
       prefix:
         description: "Deployment prefix"
         required: true
@@ -16,7 +20,7 @@ permissions:
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ inputs.prefix }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ inputs.cancel-in-progress }}
 
 env:
   BUILD_OUT_ROOT: ${{ github.workspace }}/mdn/fred/out
