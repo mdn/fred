@@ -9,7 +9,11 @@ export class BreadcrumbsBar extends ServerComponent {
    * @param {import("@fred").Context} context
    */
   render(context) {
-    const colorScheme = context.renderer === "Homepage" ? "dark" : "";
+    const colorScheme = ["Homepage", "SpaPlusLanding"].includes(
+      context.renderer,
+    )
+      ? "dark"
+      : "";
     const toggleSidebar =
       context.renderer === "Doc"
         ? html`<mdn-toggle-sidebar></mdn-toggle-sidebar>`

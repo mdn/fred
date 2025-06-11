@@ -8,6 +8,8 @@ import { Plus } from "@mdn/yari/client/src/plus";
 import "@mdn/yari/client/src/app.scss";
 import "@mdn/yari/client/src/document/index.scss";
 
+import "../hooks/legacy-theme-controller.js";
+
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(
   <UserDataProvider>
