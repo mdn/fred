@@ -1,6 +1,5 @@
 import { html, nothing } from "lit";
 
-import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import landingStairwaySVG1 from "../curriculum/assets/curriculum-landing-stairway-1.svg?lit";
@@ -9,28 +8,17 @@ import landingStairwaySVG2 from "../curriculum/assets/curriculum-landing-stairwa
 import landingSVG from "../curriculum/assets/curriculum-landing-top.svg?lit";
 import partnerBannerDark from "../curriculum/assets/curriculum-partner-banner-illustration-large-dark.svg";
 import partnerBannerLight from "../curriculum/assets/curriculum-partner-banner-illustration-large-light.svg";
-import practicesSVG from "../curriculum/assets/curriculum-topic-practices.svg?lit";
-import scriptingSVG from "../curriculum/assets/curriculum-topic-scripting.svg?lit";
-import standardsSVG from "../curriculum/assets/curriculum-topic-standards.svg?lit";
-import stylingSVG from "../curriculum/assets/curriculum-topic-styling.svg?lit";
-import toolingSVG from "../curriculum/assets/curriculum-topic-tooling.svg?lit";
 import scrimBg from "../curriculum/assets/landing-scrim.png?url";
-import { HeadingAnchor } from "../heading-anchor/server.js";
+import {
+  addAttrs,
+  renderModulesList,
+  renderSection,
+} from "../curriculum/utils.js";
 import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
 
 const SCRIM_URL = "https://v2.scrimba.com/s06icdv?via=mdn";
 const SCRIM_TITLE = "MDN + Scrimba partnership announcement scrim";
-
-/** @enum {string} */
-const Topic = {
-  WebStandards: "Web Standards & Semantics",
-  Styling: "Styling",
-  Scripting: "Scripting",
-  BestPractices: "Best Practices",
-  Tooling: "Tooling",
-  None: "",
-};
 
 export class CurriculumLanding extends ServerComponent {
   /**
@@ -54,7 +42,7 @@ export class CurriculumLanding extends ServerComponent {
         content.push(this.renderModules(context, section));
       } else {
         // Use the default Section renderer for other sections
-        content.push(this.renderSection(context, section));
+        content.push(renderSection(context, section));
       }
     }
 
@@ -95,36 +83,6 @@ export class CurriculumLanding extends ServerComponent {
         ${landingSVG}
       </header>
     `;
-  }
-
-  /**
-   * @param {import("@fred").Context<import("@rari").CurriculumPage>} _context
-   * @param {import("@rari").Section} section - The section object containing about data.
-   * @returns {import("@lit").TemplateResult | nothing} The Lit HTML template for the about section.
-   */
-  renderSection(_context, section) {
-    const { id, title, content, isH3 } = section.value;
-    switch (section.type) {
-      case "browser_compatibility": {
-        return nothing;
-      }
-      case "specifications": {
-        return nothing;
-      }
-      default: {
-        const level = isH3 ? 3 : 2;
-        return html`
-          <section aria-labelledby=${ifDefined(id ?? undefined)}>
-            ${HeadingAnchor.render(
-              level,
-              id ? String(id) : null,
-              String(title),
-            )}
-            <div class="section-content">${unsafeHTML(content)}</div>
-          </section>
-        `;
-      }
-    }
   }
 
   /**
@@ -250,7 +208,7 @@ export class CurriculumLanding extends ServerComponent {
             // Recursively render children if they exist
             const nestedChildrenHtml =
               modulesList.children && modulesList.children.length > 0
-                ? html`${this.renderModulesList(context, modulesList.children)}
+                ? html`${renderModulesList(context, modulesList.children)}
                     <a
                       href=${modulesList.children[0]?.url || "#"}
                       target="_self"
@@ -284,44 +242,6 @@ export class CurriculumLanding extends ServerComponent {
           })}
         </ol>
       </mdn-curriculum-tabs>
-    `;
-  }
-
-  /**
-   * Renders a single list of modules.
-   * Corresponds to the inner ModulesList component in the React version.
-   * @param {import("@fred").Context<import("@rari").CurriculumPage>} context
-   * @param {import("@rari").CurriculumIndexEntry[]} modules - Array of module entries within a group.
-   * @returns {import("@lit").TemplateResult | import("@lit").nothing} The Lit HTML template for the module list.
-   */
-  renderModulesList(context, modules) {
-    if (!modules || modules.length === 0) {
-      return nothing;
-    }
-    return html`
-      <ol class="modules-list">
-        ${modules.map(
-          (module, j) => html`
-            <li
-              key="ml-${j}"
-              class="module-list-item topic-${this.topic2css(module.topic)}"
-            >
-              <a href=${module.url}>
-                <header>
-                  ${module.topic
-                    ? this.renderTopicIcon(context, module.topic)
-                    : nothing}
-                  <span>${module.title}</span>
-                </header>
-                <section>
-                  <p>${module.summary}</p>
-                  <p>${module.topic}</p>
-                </section>
-              </a>
-            </li>
-          `,
-        )}
-      </ol>
     `;
   }
 
@@ -375,93 +295,4 @@ export class CurriculumLanding extends ServerComponent {
       </section>
     `;
   }
-
-  /**
-   * Renders a placeholder SVG structure for the TopicIcon.
-   * In a real server-rendering setup, the SVG content would ideally be embedded or referenced correctly.
-   * This placeholder includes basic circle and path elements styled by CSS.
-   * @param {import("@fred").Context<import("@rari").CurriculumPage>} _context
-   * @param {string} topic - The topic string.
-   * @returns {import("@lit").TemplateResult | nothing} The Lit HTML template for the topic icon SVG.
-   */
-  renderTopicIcon(_context, topic) {
-    const className = `topic-icon topic-${this.topic2css(topic)}`;
-    // Simplified placeholder SVG content, using currentColor for fill where CSS vars apply.
-    switch (topic) {
-      case "Web Standards & Semantics":
-        return addAttrs(standardsSVG, {
-          role: "none",
-          class: className,
-        });
-      case "Styling":
-        return addAttrs(stylingSVG, {
-          role: "none",
-          class: className,
-        });
-      case "Scripting":
-        return addAttrs(scriptingSVG, {
-          role: "none",
-          class: className,
-        });
-      case "Tooling":
-        return addAttrs(toolingSVG, {
-          role: "none",
-          class: className,
-        });
-      case "Best Practices":
-        return addAttrs(practicesSVG, {
-          role: "none",
-          class: className,
-        });
-      default:
-        return nothing;
-    }
-  }
-
-  /**
-   * Maps a topic enum value to a CSS class string.
-   * @param {Topic | undefined} topic
-   * @returns {string} The corresponding CSS class name.
-   */
-  topic2css(topic) {
-    switch (topic) {
-      case Topic.WebStandards:
-        return "standards";
-      case Topic.Styling:
-        return "styling";
-      case Topic.Scripting:
-        return "scripting";
-      case Topic.Tooling:
-        return "tooling";
-      case Topic.BestPractices:
-        return "practices";
-      default:
-        return "none";
-    }
-  }
-}
-
-/**
- *
- * @param {import("@lit").SVGTemplateResult} original
- * @param {{[key: string]: string}} attrs
- * @returns {import("@lit").SVGTemplateResult}
- */
-
-function addAttrs(original, attrs) {
-  // turn { role: 'img', 'aria-label': 'Foo' } into: role="img" aria-label="Foo"
-  const attrString = Object.entries(attrs)
-    .map(([k, v]) => `${k}="${v}"`)
-    .join(" ");
-  const [head, ...restStrings] = original.strings;
-  if (!head) {
-    return original;
-  }
-  const newHead = head.replace(/<svg([\s\S]*?)>/, `<svg$1 ${attrString}>`);
-  const newStrings = [newHead, ...restStrings];
-  // @ts-expect-error
-  newStrings.raw = [newHead, ...restStrings];
-  // @ts-expect-error
-  original.strings = newStrings;
-  return original;
 }

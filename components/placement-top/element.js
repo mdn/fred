@@ -14,6 +14,8 @@ import styles from "./element.css?lit";
  * @import { TemplateResult } from "lit";
  */
 
+const EMPTY = html`<div class="top-placement"></div>`;
+
 export class MDNPlacementTop extends PlacementMixin(LitElement) {
   static styles = styles;
 
@@ -22,7 +24,7 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
    * @returns {TemplateResult | symbol}
    */
   renderInitial() {
-    return html`<div class="top-placement"></div>`;
+    return EMPTY;
   }
 
   /**
@@ -31,14 +33,17 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
    * @returns
    */
   renderComplete(placementContext) {
+    if (placementContext.status === "noads") {
+      return nothing;
+    }
     const data = placementContext?.hpTop || placementContext?.top;
     if (!data) {
-      return nothing;
+      return EMPTY;
     }
     const { status, click, view, copy, image, alt, cta, colors, version } =
       data;
     if (status !== "success") {
-      return nothing;
+      return EMPTY;
     }
     if (!this._viewedUrl) {
       this._viewedUrl = view;

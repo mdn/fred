@@ -1,0 +1,24 @@
+.site-search__options {
+  ul,
+  li {
+    display: inline-block;
+  }
+
+  li:not(:last-child)::after {
+    display: inline;
+    margin-right: 0.5ch;
+    content: " | ";
+  }
+}
+
+.site-search__locale-indicator {
+  float: left;
+
+  padding: 0.25em 0.5em;
+  margin: 0.5em;
+
+  font-size: var(--font-size-small);
+
+  background-color: var(--color-background-secondary);
+  border-radius: 1em;
+}

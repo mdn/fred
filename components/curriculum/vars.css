@@ -1,0 +1,311 @@
+.curriculum-content-container {
+  --max-width: 74rem;
+  --gutter: 1rem;
+  --inner-width: calc(min(var(--max-width), 100vw) - 2 * var(--gutter));
+
+  --curriculum-bg-color-landing-about-ul: light-dark(
+    hsl(0deg 0% 100%),
+    hsl(0deg 0% 0%)
+  );
+  --curriculum-bg-color-landing-stairway-floor: light-dark(
+    hsl(30deg 77% 95%),
+    hsl(28deg 46% 37%)
+  );
+  --curriculum-bg-color-landing-top-icon: light-dark(
+    hsl(30deg 77% 95%),
+    hsl(22deg 44% 10%)
+  );
+  --curriculum-bg-color-landing: light-dark(
+    hsl(0deg 0% 100%),
+    hsl(18deg 13% 5%)
+  );
+  --curriculum-bg-color-list-item-body: light-dark(
+    hsl(0deg 0% 100%),
+    hsl(0deg 0% 0%)
+  );
+  --curriculum-bg-color-list-item-icon-topic-practices: light-dark(
+    hsl(0deg 0% 100%),
+    hsl(265deg 31% 38%)
+  );
+  --curriculum-bg-color-list-item-icon-topic-scripting: light-dark(
+    hsl(0deg 0% 100%),
+    hsl(42deg 33% 38%)
+  );
+  --curriculum-bg-color-list-item-icon-topic-standards: light-dark(
+    hsl(0deg 0% 100%),
+    hsl(357deg 31% 38%)
+  );
+  --curriculum-bg-color-list-item-icon-topic-styling: light-dark(
+    hsl(0deg 0% 100%),
+    hsl(224deg 31% 38%)
+  );
+  --curriculum-bg-color-list-item-icon-topic-tooling: light-dark(
+    hsl(0deg 0% 100%),
+    hsl(142deg 31% 38%)
+  );
+  --curriculum-bg-color-list-item-topic-practices: light-dark(
+    hsl(265deg 100% 70% / 19%),
+    hsl(0deg 0% 20%)
+  );
+  --curriculum-bg-color-list-item-topic-scripting: light-dark(
+    hsl(54deg 100% 29% / 19%),
+    hsl(0deg 0% 20%)
+  );
+  --curriculum-bg-color-list-item-topic-standards: light-dark(
+    hsl(344deg 100% 58% / 19%),
+    hsl(0deg 0% 20%)
+  );
+  --curriculum-bg-color-list-item-topic-styling: light-dark(
+    hsl(205deg 100% 47% / 19%),
+    hsl(0deg 0% 20%)
+  );
+  --curriculum-bg-color-list-item-topic-tooling: light-dark(
+    hsl(146deg 100% 30% / 19%),
+    hsl(0deg 0% 20%)
+  );
+  --curriculum-bg-color-note: light-dark(
+    hsl(30deg 77% 95% / 50%),
+    hsl(26deg 10% 18%)
+  );
+  --curriculum-bg-color-partner: light-dark(
+    hsl(0deg 0% 100%),
+    hsl(30deg 7% 12%)
+  );
+  --curriculum-bg-color-topic-practices: light-dark(
+    hsl(265deg 100% 70% / 19%),
+    hsl(265deg 31% 38%)
+  );
+  --curriculum-bg-color-topic-scripting: light-dark(
+    hsl(54deg 100% 29% / 19%),
+    hsl(44deg 29% 36%)
+  );
+  --curriculum-bg-color-topic-standards: light-dark(
+    hsl(344deg 100% 58% / 19%),
+    hsl(355deg 34% 45%)
+  );
+  --curriculum-bg-color-topic-styling: light-dark(
+    hsl(205deg 100% 47% / 19%),
+    hsl(225deg 34% 46%)
+  );
+  --curriculum-bg-color-topic-tooling: light-dark(
+    hsl(146deg 100% 30% / 19%),
+    hsl(137deg 36% 37%)
+  );
+  --curriculum-bg-color: light-dark(hsl(30deg 77% 95%), hsl(22deg 44% 10%));
+  --curriculum-bg-large-color: light-dark(hsl(30deg 77% 95%), hsl(0deg 0% 20%));
+  --curriculum-border-color-hover: light-dark(
+    hsl(0deg 0% 100%),
+    hsl(0deg 0% 80% / 65%)
+  );
+  --curriculum-border-color: light-dark(hsl(0deg 4% 95%), hsl(0deg 0% 31%));
+  --curriculum-category-color: light-dark(
+    hsl(18deg 76% 53%),
+    hsl(18deg 76% 53%)
+  );
+  --curriculum-color-landing-laptop: light-dark(
+    hsl(18deg 76% 53%),
+    hsl(22deg 54% 45%)
+  );
+  --curriculum-color-list-item-icon-topic-practices: light-dark(
+    hsl(270deg 100% 59%),
+    hsl(276deg 72% 76%)
+  );
+  --curriculum-color-list-item-icon-topic-scripting: light-dark(
+    hsl(54deg 100% 23%),
+    hsl(44deg 81% 75%)
+  );
+  --curriculum-color-list-item-icon-topic-standards: light-dark(
+    hsl(344deg 100% 41%),
+    hsl(355deg 81% 75%)
+  );
+  --curriculum-color-list-item-icon-topic-styling: light-dark(
+    hsl(210deg 100% 38%),
+    hsl(225deg 72% 76%)
+  );
+  --curriculum-color-list-item-icon-topic-tooling: light-dark(
+    hsl(146deg 100% 24%),
+    hsl(146deg 81% 75%)
+  );
+  --curriculum-color-topic-practices: light-dark(
+    hsl(270deg 100% 59%),
+    hsl(276deg 72% 76%)
+  );
+  --curriculum-color-topic-scripting: light-dark(
+    hsl(54deg 100% 23%),
+    hsl(44deg 81% 75%)
+  );
+  --curriculum-color-topic-standards: light-dark(
+    hsl(344deg 100% 41%),
+    hsl(355deg 81% 75%)
+  );
+  --curriculum-color-topic-styling: light-dark(
+    hsl(210deg 100% 38%),
+    hsl(225deg 72% 76%)
+  );
+  --curriculum-color-topic-tooling: light-dark(
+    hsl(146deg 100% 24%),
+    hsl(146deg 81% 75%)
+  );
+  --curriculum-color: light-dark(hsl(19deg 63% 59%), hsl(18deg 76% 53%));
+  --curriculum-module-label-bg-color: light-dark(
+    hsl(30deg 77% 98%),
+    hsl(22deg 44% 10%)
+  );
+  --curriculum-module-label-color: light-dark(
+    hsl(18deg 71% 42%),
+    hsl(18deg 76% 53%)
+  );
+  --curriculum-shadow-landing-about-ul:
+    0 4px 10px 0 light-dark(hsl(18deg 76% 53% / 6%), hsl(30deg 54% 45% / 15%)),
+    0 -2px 4px 0 light-dark(hsl(22deg 54% 45% / 6%), hsl(22deg 54% 45% / 6%));
+  --curriculum-shadow:
+    4px 4px 8px 0 light-dark(hsl(18deg 76% 53% / 6%), hsl(0deg 0% 14% / 15%)),
+    -4px 4px 8px 0 light-dark(hsl(0deg 0% 70% / 15%), hsl(0deg 0% 34% / 15%));
+
+  --curriculum-landing-about-beginner: url("./assets/curriculum-landing-about-beginner.svg#light");
+  --curriculum-landing-about-pace: url("./assets/curriculum-landing-about-pace.svg#light");
+  --curriculum-landing-about-free: url("./assets/curriculum-landing-about-free.svg#light");
+  --curriculum-landing-about-bullet: url("./assets/curriculum-landing-about-bullet.svg#light");
+  --curriculum-landing-started-beginner: url("./assets/curriculum-landing-started-beginner.svg#light");
+  --curriculum-landing-started-advanced: url("./assets/curriculum-landing-started-advanced.svg#light");
+  --curriculum-landing-started-employment: url("./assets/curriculum-landing-started-employment.svg#light");
+  --curriculum-landing-started-educator: url("./assets/curriculum-landing-started-educator.svg#light");
+  --curriculum-module-mdn-resource: url("./assets/curriculum-mdn-resource.svg#light");
+  --curriculum-bullet: url("./assets/curriculum-bullet.svg#light");
+  --curriculum-about-covered: url("./assets/curriculum-about-covered.svg#light");
+  --curriculum-about-detail: url("./assets/curriculum-about-detail.svg#light");
+  --curriculum-about-educators: url("./assets/curriculum-about-educators.svg#light");
+  --curriculum-about-not: url("./assets/curriculum-about-not.svg#light");
+  --curriculum-about-students: url("./assets/curriculum-about-students.svg#light");
+  --curriculum-bg-image-partner: url("./assets/curriculum-partner-bg.svg#light");
+  --curriculum-scrim-bg: url("./assets/curriculum-scrim-bg.svg#light");
+  --curriculum-landing-arrow: url("./assets/curriculum-landing-arrow.svg#light");
+
+  --text-primary: var(--color-text-primary);
+  --text-secondary: var(--color-text-secondary);
+}
+
+/* theme support for swapping out assets: check the root-level data-theme property, fall back to the os-level preference */
+:root[data-theme="dark"] {
+  .curriculum-content-container {
+    --curriculum-landing-about-beginner: url("./assets/curriculum-landing-about-beginner.svg#dark");
+    --curriculum-landing-about-pace: url("./assets/curriculum-landing-about-pace.svg#dark");
+    --curriculum-landing-about-free: url("./assets/curriculum-landing-about-free.svg#dark");
+    --curriculum-landing-about-bullet: url("./assets/curriculum-landing-about-bullet.svg#dark");
+    --curriculum-landing-started-beginner: url("./assets/curriculum-landing-started-beginner.svg#dark");
+    --curriculum-landing-started-advanced: url("./assets/curriculum-landing-started-advanced.svg#dark");
+    --curriculum-landing-started-employment: url("./assets/curriculum-landing-started-employment.svg#dark");
+    --curriculum-landing-started-educator: url("./assets/curriculum-landing-started-educator.svg#dark");
+    --curriculum-module-mdn-resource: url("./assets/curriculum-mdn-resource.svg#dark");
+    --curriculum-bullet: url("./assets/curriculum-bullet.svg#dark");
+    --curriculum-about-covered: url("./assets/curriculum-about-covered.svg#dark");
+    --curriculum-about-detail: url("./assets/curriculum-about-detail.svg#dark");
+    --curriculum-about-educators: url("./assets/curriculum-about-educators.svg#dark");
+    --curriculum-about-not: url("./assets/curriculum-about-not.svg#dark");
+    --curriculum-about-students: url("./assets/curriculum-about-students.svg#dark");
+    --curriculum-bg-image-partner: url("./assets/curriculum-partner-bg.svg#dark");
+    --curriculum-scrim-bg: url("./assets/curriculum-scrim-bg.svg#dark");
+    --curriculum-landing-arrow: url("./assets/curriculum-landing-arrow.svg#dark");
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .curriculum-content-container {
+    --curriculum-landing-about-beginner: url("./assets/curriculum-landing-about-beginner.svg#dark");
+    --curriculum-landing-about-pace: url("./assets/curriculum-landing-about-pace.svg#dark");
+    --curriculum-landing-about-free: url("./assets/curriculum-landing-about-free.svg#dark");
+    --curriculum-landing-about-bullet: url("./assets/curriculum-landing-about-bullet.svg#dark");
+    --curriculum-landing-started-beginner: url("./assets/curriculum-landing-started-beginner.svg#dark");
+    --curriculum-landing-started-advanced: url("./assets/curriculum-landing-started-advanced.svg#dark");
+    --curriculum-landing-started-employment: url("./assets/curriculum-landing-started-employment.svg#dark");
+    --curriculum-landing-started-educator: url("./assets/curriculum-landing-started-educator.svg#dark");
+    --curriculum-module-mdn-resource: url("./assets/curriculum-mdn-resource.svg#dark");
+    --curriculum-bullet: url("./assets/curriculum-bullet.svg#dark");
+    --curriculum-about-covered: url("./assets/curriculum-about-covered.svg#dark");
+    --curriculum-about-detail: url("./assets/curriculum-about-detail.svg#dark");
+    --curriculum-about-educators: url("./assets/curriculum-about-educators.svg#dark");
+    --curriculum-about-not: url("./assets/curriculum-about-not.svg#dark");
+    --curriculum-about-students: url("./assets/curriculum-about-students.svg#dark");
+    --curriculum-bg-image-partner: url("./assets/curriculum-partner-bg.svg#dark");
+    --curriculum-scrim-bg: url("./assets/curriculum-scrim-bg.svg#dark");
+    --curriculum-landing-arrow: url("./assets/curriculum-landing-arrow.svg#dark");
+  }
+}
+
+.curriculum-content-container {
+  --background-toc-active: var(--curriculum-bg-color);
+  --category-color: var(--curriculum-category-color);
+
+  --curriculum-bg-color-topic: var(--curriculum-bg-color);
+  --curriculum-color-topic: var(--curriculum-color);
+
+  .topic-standards {
+    --curriculum-bg-color-topic: var(--curriculum-bg-color-topic-standards);
+    --curriculum-color-topic: var(--curriculum-color-topic-standards);
+    --curriculum-bg-color-list-item-header: var(
+      --curriculum-bg-color-list-item-topic-standards
+    );
+    --curriculum-color-list-item-icon: var(
+      --curriculum-color-list-item-icon-topic-standards
+    );
+    --curriculum-bg-color-list-item-icon: var(
+      --curriculum-bg-color-list-item-icon-topic-standards
+    );
+  }
+
+  .topic-styling {
+    --curriculum-bg-color-topic: var(--curriculum-bg-color-topic-styling);
+    --curriculum-color-topic: var(--curriculum-color-topic-styling);
+    --curriculum-bg-color-list-item-header: var(
+      --curriculum-bg-color-list-item-topic-styling
+    );
+    --curriculum-color-list-item-icon: var(
+      --curriculum-color-list-item-icon-topic-styling
+    );
+    --curriculum-bg-color-list-item-icon: var(
+      --curriculum-bg-color-list-item-icon-topic-styling
+    );
+  }
+
+  .topic-scripting {
+    --curriculum-bg-color-topic: var(--curriculum-bg-color-topic-scripting);
+    --curriculum-color-topic: var(--curriculum-color-topic-scripting);
+    --curriculum-bg-color-list-item-header: var(
+      --curriculum-bg-color-list-item-topic-scripting
+    );
+    --curriculum-color-list-item-icon: var(
+      --curriculum-color-list-item-icon-topic-scripting
+    );
+    --curriculum-bg-color-list-item-icon: var(
+      --curriculum-bg-color-list-item-icon-topic-scripting
+    );
+  }
+
+  .topic-tooling {
+    --curriculum-bg-color-topic: var(--curriculum-bg-color-topic-tooling);
+    --curriculum-color-topic: var(--curriculum-color-topic-tooling);
+    --curriculum-bg-color-list-item-header: var(
+      --curriculum-bg-color-list-item-topic-tooling
+    );
+    --curriculum-color-list-item-icon: var(
+      --curriculum-color-list-item-icon-topic-tooling
+    );
+    --curriculum-bg-color-list-item-icon: var(
+      --curriculum-bg-color-list-item-icon-topic-tooling
+    );
+  }
+
+  .topic-practices {
+    --curriculum-bg-color-topic: var(--curriculum-bg-color-topic-practices);
+    --curriculum-color-topic: var(--curriculum-color-topic-practices);
+    --curriculum-bg-color-list-item-header: var(
+      --curriculum-bg-color-list-item-topic-practices
+    );
+    --curriculum-color-list-item-icon: var(
+      --curriculum-color-list-item-icon-topic-practices
+    );
+    --curriculum-bg-color-list-item-icon: var(
+      --curriculum-bg-color-list-item-icon-topic-practices
+    );
+  }
+}
