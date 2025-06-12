@@ -3,7 +3,7 @@ import { html } from "lit";
 import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
 
-export class Settings extends ServerComponent {
+export class Plus extends ServerComponent {
   static legacy = true;
 
   /**

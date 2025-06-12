@@ -11,4 +11,5 @@ jobs:
     uses: ./.github/workflows/_deploy.yml
     secrets: inherit
     with:
+      cancel-in-progress: true
       prefix: fred-pr${{ github.event.pull_request.number }}

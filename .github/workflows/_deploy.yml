@@ -3,6 +3,10 @@ name: Deploy Reusable Workflow
 on:
   workflow_call:
     inputs:
+      cancel-in-progress:
+        description: "To cancel any currently running job or workflow in the same concurrency group, specify cancel-in-progress: true."
+        type: boolean
+        default: false
       prefix:
         description: "Deployment prefix"
         required: true
@@ -16,7 +20,7 @@ permissions:
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ inputs.prefix }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ inputs.cancel-in-progress }}
 
 env:
   BUILD_OUT_ROOT: ${{ github.workspace }}/mdn/fred/out
@@ -69,6 +73,12 @@ jobs:
           repository: mdn/content
           path: mdn/content
 
+      - name: Checkout (translated-content)
+        uses: actions/checkout@v4
+        with:
+          repository: mdn/translated-content
+          path: mdn/translated-content
+
       - name: Checkout (curriculum)
         uses: actions/checkout@v4
         with:
@@ -117,6 +127,7 @@ jobs:
         working-directory: mdn/fred
         env:
           CONTENT_ROOT: ${{ github.workspace }}/mdn/content/files
+          CONTENT_TRANSLATED_ROOT: ${{ github.workspace }}/mdn/translated-content/files
           CONTRIBUTOR_SPOTLIGHT_ROOT: ${{ github.workspace }}/mdn/mdn-contributor-spotlight/contributors
           BLOG_ROOT: ${{ github.workspace }}/mdn/mdn-studio/content/posts
           CURRICULUM_ROOT: ${{ github.workspace }}/mdn/curriculum
@@ -191,6 +202,13 @@ jobs:
           else
             # Full build.
             FILE_LIST=""
+
+            # Build French, but not other locales.
+            ignore_locales='es ja ko pt-br ru zh-cn zh-tw'
+            for locale in $ignore_locales
+            do
+              rm -rf $CONTENT_TRANSLATED_ROOT/$locale
+            done
           fi
 
           npm run rari build -- --all $FILE_LIST --templ-stats

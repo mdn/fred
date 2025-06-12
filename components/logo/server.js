@@ -4,11 +4,11 @@ import { ServerComponent } from "../server/index.js";
 
 export class Logo extends ServerComponent {
   /**
-   * @param {import("@fred").Context} _context
+   * @param {import("@fred").Context} context
    */
-  render(_context) {
+  render(context) {
     return html`
-      <a href="/" class="logo">
+      <a href=${`/${context.locale}/`} class="logo">
         <svg
           class="logo__image"
           width="83"

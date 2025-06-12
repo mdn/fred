@@ -25,3 +25,9 @@
     display: none;
   }
 }
+
+:root[data-noads="enabled"] {
+  .page-layout__banner {
+    display: none;
+  }
+}

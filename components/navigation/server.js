@@ -10,7 +10,11 @@ export class Navigation extends ServerComponent {
    * @param {import("@fred").Context} context
    */
   render(context) {
-    const colorScheme = context.renderer === "Homepage" ? "dark" : "";
+    const colorScheme = ["Homepage", "SpaPlusLanding"].includes(
+      context.renderer,
+    )
+      ? "dark"
+      : "";
 
     return html`
       <nav class="navigation" data-scheme=${colorScheme} data-open="false">

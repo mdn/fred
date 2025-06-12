@@ -46,4 +46,5 @@ export type Status =
   | "geo_unsupported"
   | "cap_reached"
   | "loading"
-  | "empty";
+  | "empty"
+  | "noads";
