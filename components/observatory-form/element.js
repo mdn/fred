@@ -41,8 +41,15 @@ export class MDNObservatoryForm extends LitElement {
       this._errorMessage = "Please enter a valid hostname";
       return;
     }
-    this._hostname = input.value.trim();
-    if (!this._hostname) return; // Optionally, ignore if empty
+
+    const host = input.value.trim();
+    try {
+      // tolerate url-style host values and pick out the hostname part
+      const url = new URL(host);
+      this._hostname = url.hostname.trim() || host;
+    } catch {
+      this._hostname = host;
+    }
     this._queryRunning = true;
     try {
       const apiUrl = `https://observatory-api.mdn.mozilla.net/api/v2/analyze?host=${encodeURIComponent(
