@@ -86,7 +86,7 @@ export async function render(path, page, compilationStats) {
           case "Homepage":
             return Homepage.render(context);
           case "SpaAdvertise":
-            return PageLayout.render(context, "TODO: Advertise");
+            return Advertising.render(context);
           case "SpaObservatoryAnalyze":
             return ObservatoryResults.render(context);
           case "SpaObservatoryLanding":
@@ -111,15 +111,10 @@ export async function render(path, page, compilationStats) {
           case "SpaSearch":
             return Search.render(context);
           case "SpaUnknown": {
-            switch (context.slug) {
-              case "advertising":
-                return Advertising.render(context);
-              default:
-                return PageLayout.render(
-                  context,
-                  `Unknown Spa Page title=${context.pageTitle}, slug=${context.slug}`,
-                );
-            }
+            return PageLayout.render(
+              context,
+              `Unknown Spa Page title=${context.pageTitle}, slug=${context.slug}`,
+            );
           }
           case "SpaNotFound":
           default:
