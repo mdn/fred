@@ -1,4 +1,7 @@
 .generic-sidebar {
+  position: sticky;
+  top: var(--sticky-header-height);
+
   h4 {
     margin: 0;
     font-size: 1.5rem;

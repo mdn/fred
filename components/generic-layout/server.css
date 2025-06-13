@@ -3,78 +3,49 @@
 @import url("../formal-syntax/index.css");
 @import url("../prev-next/index.css");
 
-/* Reference Layout */
-
+/* Generic Layout */
 .generic-layout {
   display: grid;
 
-  grid-template-rows: auto;
-  grid-template-columns: 1fr minmax(0, 2.5fr) 15rem;
+  grid-template-columns: var(--layout-2-sidebars);
+  grid-auto-flow: dense;
 
-  column-gap: 3rem;
+  padding-inline: var(--layout-side-padding);
 
-  padding-block: 0.5rem 3rem;
+  @media (--screen-layout-1-sidebar-or-less) {
+    grid-template-columns: var(--layout-1-sidebar-left);
 
-  @media (--screen-small-and-narrower) {
-    grid-template-rows: auto;
-    grid-template-columns: auto;
+    .generic-layout__toc {
+      display: none;
+    }
   }
 
-  @media (--screen-large-and-narrower) {
-    grid-template-rows: min-content 1fr;
-    grid-template-columns: 1fr 2fr;
-  }
+  @media (--screen-layout-no-sidebar) {
+    grid-template-columns: var(--layout-no-sidebar);
 
-  @media (--screen-xxlarge) {
-    padding-inline: calc((100% - 1440px) / 2);
+    .generic-layout__sidebar {
+      display: none;
+    }
   }
 }
 
 /* Sidebar */
-
 .generic-layout__sidebar {
-  grid-row: 1 / 2;
-  grid-column: 1 / 2;
-  padding-inline: 1rem;
+  grid-column: left-sidebar;
 
-  @media (--screen-large-and-narrower) {
-    grid-row: 2 / 3;
-    grid-column: 1 / 2;
-  }
-
-  @media (--screen-small-and-narrower) {
-    grid-row: 2 / 3;
-    grid-column: 1 / 2;
-  }
+  /* grid-row: 1; */
 }
 
 /* Content */
-
 .generic-layout__content {
-  grid-row: 1 / 2;
-  grid-column: 2 / 3;
-  padding-inline: 1rem;
+  grid-column: content;
 
-  @media (--screen-large-and-narrower) {
-    grid-row: 1 / span 2;
-    grid-column: 2 / 3;
-  }
-
-  @media (--screen-small-and-narrower) {
-    grid-row: 3 / 4;
-    grid-column: 1 / 2;
-  }
+  /* grid-row: 1; */
 }
 
 /* TOC */
-
 .generic-layout__toc {
-  grid-row: 1 / 2;
-  grid-column: 3 / 4;
-  padding-inline: 1rem;
+  grid-column: right-sidebar;
 
-  @media (--screen-large-and-narrower) {
-    grid-row: 1 / 2;
-    grid-column: 1 / 2;
-  }
+  /* grid-row: 1; */
 }

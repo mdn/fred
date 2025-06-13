@@ -90,3 +90,20 @@ export interface CSPPolicy {
   unsafeInlineStyle: PolicyItem;
   unsafeObjects: PolicyItem;
 }
+
+// test + scoring documentation response
+export interface ScoringCategory {
+  name: string;
+  title: string;
+  mdnLink: string;
+  results: ScoringResultDefinition[];
+}
+
+export interface ScoringResultDefinition {
+  name: string;
+  scoreModifier: number;
+  description: string;
+  recommendation: string;
+}
+
+export type ScoringResponse = ScoringCategory[];
