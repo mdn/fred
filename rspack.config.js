@@ -15,6 +15,9 @@ import { GenerateElementMapPlugin } from "./build/plugins/generate-element-map.j
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const isProd = process.env.NODE_ENV === "production";
+const buildLegacy = Boolean(
+  JSON.parse(process.env.FRED_LEGACY || "null") ?? isProd,
+);
 
 /** @type {import("@rspack/core").RspackOptions} */
 const common = {
@@ -253,13 +256,14 @@ const legacyConfig = merge(common, clientAndLegacyCommon, {
   },
   plugins: [
     new rspack.DefinePlugin({
-      "process.env": JSON.stringify(
-        Object.fromEntries(
+      "process.env": JSON.stringify({
+        ...Object.fromEntries(
           Object.entries(process.env).filter(([key]) =>
             key.startsWith("REACT_APP_"),
           ),
         ),
-      ),
+        REACT_APP_FRED: "true",
+      }),
     }),
     new rspack.ProvidePlugin({
       React: "react",
@@ -391,4 +395,8 @@ const legacyConfig = merge(common, clientAndLegacyCommon, {
 });
 
 /** @type {import("@rspack/core").MultiRspackOptions} */
-export default [ssrConfig, clientConfig, legacyConfig];
+export default [
+  ssrConfig,
+  clientConfig,
+  ...(buildLegacy ? [legacyConfig] : []),
+];
