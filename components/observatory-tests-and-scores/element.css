@@ -1,0 +1,62 @@
+:host {
+  display: block;
+}
+
+.error {
+  padding: 1rem;
+  margin: 1rem 0;
+
+  color: var(--error-color, #dd3333);
+
+  background-color: var(--error-bg, #ffeeee);
+  border-radius: 0.25rem;
+}
+
+section {
+  margin-bottom: 3rem;
+}
+
+h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+
+  font-size: var(--font-size-large);
+  font-weight: 400;
+
+  line-height: var(--font-line-content);
+}
+
+.table-container {
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border: 1px solid var(--color-border-primary);
+}
+
+th {
+  font-weight: bold;
+  background-color: var(--color-background-secondary, #f5f5f5);
+}
+
+th[align="center"] {
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: var(--color-background-secondary);
+}
+
+td:last-child {
+  text-align: center;
+}
