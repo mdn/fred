@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit";
+import { LitElement, html, nothing } from "lit";
 
 import exitIcon from "../icon/cancel.svg?lit";
 
@@ -7,6 +7,15 @@ import styles from "./element.css?lit";
 
 export class MDNModal extends LitElement {
   static styles = styles;
+
+  static properties = {
+    modalTitle: { type: String, attribute: "modal-title" },
+  };
+
+  constructor() {
+    super();
+    this.modalTitle = "";
+  }
 
   showModal() {
     this.shadowRoot?.querySelector("dialog")?.showModal();
@@ -20,6 +29,7 @@ export class MDNModal extends LitElement {
     return html`
       <dialog>
         <header>
+          ${this.modalTitle ? html`<h2>${this.modalTitle}</h2>` : nothing}
           <mdn-button
             variant="invisible"
             icon-only
