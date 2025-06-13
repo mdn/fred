@@ -2,18 +2,37 @@ import { FluentBundle, FluentResource } from "@fluent/bundle";
 import insane from "insane";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
-import DEStrings from "../l10n/de.flt";
-import USStrings from "../l10n/en-us.flt";
+import de_ftl from "../l10n/de.ftl";
+import enUS_ftl from "../l10n/en-us.ftl";
+import es_ftl from "../l10n/es.ftl";
+import fr_ftl from "../l10n/fr.ftl";
+import ja_ftl from "../l10n/ja.ftl";
+import ko_ftl from "../l10n/ko.ftl";
+import ptBR_ftl from "../l10n/pt-br.ftl";
+import ru_ftl from "../l10n/ru.ftl";
+import zhCN_ftl from "../l10n/zh-cn.ftl";
+import zhTW_ftl from "../l10n/zh-tw.ftl";
 
 /**
  * @import { AllowedTags } from "insane";
  */
 
 /** @type {Record<string, string>} */
-const fltMap = { "en-US": USStrings, de: DEStrings };
+const ftlMap = {
+  "en-US": enUS_ftl,
+  de: de_ftl,
+  es: es_ftl,
+  fr: fr_ftl,
+  ja: ja_ftl,
+  ko: ko_ftl,
+  "pt-BR": ptBR_ftl,
+  ru: ru_ftl,
+  "zh-CN": zhCN_ftl,
+  "zh-TW": zhTW_ftl,
+};
 
-const whitelistedTags = ["i", "strong", "br", "em"];
-const whitelistedAttributes = ["title", "aria-label"];
+const ALLOWED_TAGS = ["i", "strong", "br", "em"];
+const ALLOWED_ATTRIBUTES = ["title", "aria-label"];
 
 export class Fluent {
   /**
@@ -24,12 +43,12 @@ export class Fluent {
     this.locale = locale;
 
     this.usBundle = Fluent.constructBundle(new FluentBundle(locale), [
-      USStrings,
+      enUS_ftl,
     ]);
 
     if (resources.length > 0) {
       this.bundle = Fluent.constructBundle(new FluentBundle(locale), [
-        USStrings,
+        enUS_ftl,
         ...resources,
       ]);
     }
@@ -77,13 +96,13 @@ export class Fluent {
     for (const t of Object.values(elements)) {
       allowedAttributes[t.tag] = [
         ...Object.keys(t).filter((x) => x !== "tag"),
-        ...whitelistedAttributes,
+        ...ALLOWED_ATTRIBUTES,
       ];
     }
 
     const allowedTags = [
       ...Object.values(elements).map((t) => t.tag),
-      ...whitelistedTags,
+      ...ALLOWED_TAGS,
     ];
 
     let safe = true;
@@ -102,7 +121,7 @@ export class Fluent {
             }
           }
           if (
-            whitelistedTags.includes(token.tag) ||
+            ALLOWED_TAGS.includes(token.tag) ||
             (name &&
               Object.keys(elements).includes(name) &&
               elements[name]?.tag === token.tag)
@@ -182,8 +201,8 @@ function getLocale(locale) {
     return;
   }
   if (!fluent.has(locale)) {
-    const flt = fltMap[locale];
-    const localeF = new Fluent(locale, flt ? [flt] : undefined);
+    const ftl = ftlMap[locale];
+    const localeF = new Fluent(locale, ftl ? [ftl] : undefined);
     fluent.set(locale, localeF);
   }
   return fluent.get(locale);

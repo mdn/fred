@@ -8,6 +8,7 @@ import "../play-runner/element.js";
 import "../ix-tab/element.js";
 import "../ix-tab-panel/element.js";
 import "../ix-tab-wrapper/element.js";
+import { L10nMixin } from "../../l10n/mixin.js";
 
 /**
  * @import { InteractiveExampleBase } from "./element.js";
@@ -18,7 +19,7 @@ import "../ix-tab-wrapper/element.js";
  * @param {TBase} Base
  */
 export const InteractiveExampleWithTabs = (Base) =>
-  class extends Base {
+  class extends L10nMixin(Base) {
     #render() {
       return html`
         <mdn-play-controller
@@ -30,7 +31,7 @@ export const InteractiveExampleWithTabs = (Base) =>
             <header>
               <h4>${decode(this.name)}</h4>
               <mdn-button id="reset" @click=${this._reset} variant="secondary"
-                >Reset</mdn-button
+                >${this.l10n`Reset`}</mdn-button
               >
             </header>
             <mdn-ix-tab-wrapper>
@@ -44,7 +45,7 @@ export const InteractiveExampleWithTabs = (Base) =>
               )}
             </mdn-ix-tab-wrapper>
             <div class="output-wrapper">
-              <h4>Output</h4>
+              <h4>${this.l10n`Output`}</h4>
               <mdn-play-runner
                 ${ref(this._runner)}
                 sandbox="allow-top-navigation-by-user-activation"

@@ -97,6 +97,6 @@ pagination_prev = Previous page
 pagination_current = Current page
 pagination_goto = Go to page { $page }
 
-logout = Log-out
-login = Log-in
-settings = Settings
+logout = Sign out
+login = Log in
+settings = My Settings

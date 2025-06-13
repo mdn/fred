@@ -1,0 +1,51 @@
+html a.only-in-en-us::after {
+  display: inline-block;
+
+  margin-left: 0.5ch;
+
+  font-size: 0.7rem;
+
+  vertical-align: super;
+
+  content: "(en-US)";
+}
+
+html[lang="de"] a.only-in-en-us::after {
+  content: "(engl.)";
+}
+
+html[lang="es"] a.only-in-en-us::after {
+  content: "(inglés)";
+}
+
+html[lang="fr"] a.only-in-en-us::after {
+  content: "(angl.)";
+}
+
+html[lang="ja"] a.only-in-en-us::after {
+  content: "(英語)";
+}
+
+html[lang="ko"] a.only-in-en-us::after {
+  content: "(영어)";
+}
+
+html[lang="ru"] a.only-in-en-us::after {
+  content: "(англ.)";
+}
+
+html[lang="pt-BR"] a.only-in-en-us::after {
+  content: "(inglês)";
+}
+
+html[lang="zh-CN"] a.only-in-en-us::after {
+  margin-left: unset;
+  vertical-align: baseline;
+  content: "（英语）";
+}
+
+html[lang="zh-TW"] a.only-in-en-us::after {
+  margin-left: unset;
+  vertical-align: baseline;
+  content: "（英語）";
+}

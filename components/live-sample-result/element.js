@@ -2,11 +2,14 @@ import { LitElement, html, nothing } from "lit";
 
 import { styleMap } from "lit/directives/style-map.js";
 
+import { L10nMixin } from "../../l10n/mixin.js";
+
 import styles from "./element.css?lit";
+
 import "../play-runner/element.js";
 import "../button/element.js";
 
-export class MDNLiveSampleResult extends LitElement {
+export class MDNLiveSampleResult extends L10nMixin(LitElement) {
   static styles = styles;
 
   static properties = {
@@ -90,7 +93,7 @@ export class MDNLiveSampleResult extends LitElement {
         <div class="example-header">
           ${this.breakoutLink
             ? html`<mdn-button variant="secondary" href=${this.breakoutLink}
-                >Play</mdn-button
+                >${this.l10n`Play`}</mdn-button
               >`
             : nothing}
         </div>

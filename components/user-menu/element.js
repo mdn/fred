@@ -8,12 +8,17 @@ import { globalUser } from "../user/context.js";
 
 import styles from "./element.css?lit";
 
-export class MNDUserMenu extends L10nMixin(LitElement) {
+export class MDNUserMenu extends L10nMixin(LitElement) {
   static styles = styles;
 
   static properties = {
     locale: { type: String },
   };
+
+  constructor() {
+    super();
+    this.locale = "en-US";
+  }
 
   #loginUrl() {
     const base = globalThis.location.origin;
@@ -36,10 +41,6 @@ export class MNDUserMenu extends L10nMixin(LitElement) {
     return url.toString();
   }
 
-  #settingsUrl() {
-    return `/${this.locale || "en-US"}/plus/settings`;
-  }
-
   _user = new Task(this, {
     task: async () => {
       return await globalUser();
@@ -57,46 +58,82 @@ export class MNDUserMenu extends L10nMixin(LitElement) {
       pending: () => nothing,
 
       complete:
-        /*
-         * @param {User.User} user
+        /**
+         * @param {import("../user/types.js").User} user
          */
         (user) => {
+          const links = [
+            {
+              href: `/${this.locale}/plus/ai-help`,
+              label: this.l10n`AI Help`,
+            },
+            {
+              href: `/${this.locale}/plus/collections`,
+              label: this.l10n`Collections`,
+            },
+            {
+              href: `/${this.locale}/plus/updates`,
+              label: this.l10n`Updates`,
+            },
+            {
+              href: `/${this.locale}/plus/settings`,
+              label: this.l10n("settings"),
+            },
+            {
+              href: "https://support.mozilla.org/products/mdn-plus",
+              label: this.l10n`Help`,
+              external: true,
+            },
+            {
+              href: "https://github.com/mdn/MDN-feedback",
+              label: this.l10n`Feedback`,
+              external: true,
+            },
+          ];
+
           return user.isAuthenticated
-            ? html`<mdn-dropdown>
-              <button
-                slot="button"
-                class="user-menu-button"
-                title=${this.l10n("user_menu")}
-                  ><img width="34" height="34" src=${user.avatarUrl}
-                /></button>
-                <div slot="dropdown" class="user-menu" id="user-menu">
-                  <ul>
-                    <li class="settings">
-                      <a href=${this.#settingsUrl()}>${this.l10n("settings")}</a>
-                    </li>
-                    <li class="logout">
-                      <form
-                        class="logout-form"
-                        method="post"
-                        action=${this.#logoutUrl()}
-                      >
-                        <input
-                          type="hidden"
-                          name="next"
-                          .value=${this.#next()}
-                        /><button
-                          type="submit"
-                          class="lognout-button"
-                        >
-                          <mdn-button class="button-wrap"
-                            >${this.l10n("logout")}</span
-                          >
-                            </mdn-button>
-                      </form>
-                    </li>
-                  </ul>
-                </div>
-              </mdn-dropdown>`
+            ? html`<div class="user-menu">
+                <mdn-dropdown>
+                  <button
+                    slot="button"
+                    class="user-menu__button"
+                    title=${this.l10n("user_menu")}
+                  >
+                    <img width="34" height="34" src=${user.avatarUrl} />
+                  </button>
+                  <div slot="dropdown" class="user-menu__dropdown">
+                    <ul>
+                      <li>
+                        <div class="user-menu__item">${user.email}</div>
+                      </li>
+                      <li class="user-menu__divider"></li>
+                      ${links.map(
+                        (link) =>
+                          html`<li>
+                            <a
+                              class=${link.external
+                                ? "user-menu__item external"
+                                : "user-menu__item"}
+                              href=${link.href}
+                              >${link.label}</a
+                            >
+                          </li>`,
+                      )}
+                      <li class="user-menu__divider"></li>
+                      <li>
+                        <form method="post" action=${this.#logoutUrl()}>
+                          <input
+                            type="hidden"
+                            name="next"
+                            .value=${this.#next()}
+                          />
+                          <button type="submit">${this.l10n("logout")}</button>
+                        </form>
+                      </li>
+                    </ul>
+                  </div>
+                </mdn-dropdown>
+              </div>`
             : html`<div class="login-container">
                 <a
                   class="login"
@@ -110,4 +147,4 @@ export class MNDUserMenu extends L10nMixin(LitElement) {
   }
 }
 
-customElements.define("mdn-user-menu", MNDUserMenu);
+customElements.define("mdn-user-menu", MDNUserMenu);

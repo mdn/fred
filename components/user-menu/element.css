@@ -1,3 +1,6 @@
+@import url("../button/element.css");
+@import url("../external-link/global.css");
+
 *,
 ::before,
 ::after {
@@ -6,6 +9,10 @@
 
 :host {
   height: 100%;
+}
+
+.user-menu {
+  position: relative;
 }
 
 .login-container {
@@ -33,12 +40,14 @@
   }
 }
 
-.user-menu-button {
+.user-menu__button {
   display: inline-flex;
 
   align-items: center;
 
   height: 100%;
+
+  cursor: pointer;
 
   border: none;
   border-radius: 100%;
@@ -49,14 +58,55 @@
   }
 }
 
-.user-menu {
+.user-menu__dropdown {
   position: absolute;
-  padding: 1rem;
-  background: var(--color-background-primary);
+  right: 0;
+  z-index: 1;
+
+  width: max-content;
+
+  padding: 0.75rem;
+  margin: 0;
+
+  font-size: var(--font-size-small);
+
+  background-color: var(--color-background-primary);
+  border: 1px solid var(--color-text-secondary);
 
   ul {
     padding: 0;
     margin: 0;
     list-style: none;
   }
+
+  a {
+    display: flex;
+
+    color: var(--color-text-primary);
+
+    text-decoration: none;
+
+    border: 1px solid transparent;
+
+    &:hover {
+      background-color: var(--color-background-secondary);
+      border-color: var(--color-border-secondary);
+    }
+  }
+
+  button {
+    width: 100%;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+}
+
+.user-menu__item {
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+}
+
+.user-menu__divider {
+  margin: 0.75rem 0;
+  border-bottom: 1px solid var(--color-border-primary);
 }

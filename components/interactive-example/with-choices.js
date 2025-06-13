@@ -2,9 +2,11 @@ import { decode } from "he";
 import { html } from "lit";
 import { ref } from "lit/directives/ref.js";
 
+import { L10nMixin } from "../../l10n/mixin.js";
 import { MDNPlayEditor } from "../play-editor/element.js";
 
 import { isCSSSupported } from "./utils.js";
+
 import "../play-controller/element.js";
 import "../play-runner/element.js";
 
@@ -17,7 +19,7 @@ import "../play-runner/element.js";
  * @param {TBase} Base
  */
 export const InteractiveExampleWithChoices = (Base) =>
-  class extends Base {
+  class extends L10nMixin(Base) {
     static properties = {
       __choiceSelected: { state: true },
       __choiceUnsupported: { state: true },
@@ -107,7 +109,7 @@ export const InteractiveExampleWithChoices = (Base) =>
           <header>
             <h4>${decode(this.name)}</h4>
             <mdn-button id="reset" @click=${this._reset} variant="secondary"
-              >Reset</mdn-button
+              >${this.l10n`Reset`}</mdn-button
             >
           </header>
           <div

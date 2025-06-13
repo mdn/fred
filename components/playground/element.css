@@ -1,7 +1,8 @@
 .wrapper {
   display: grid;
 
-  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "left runner" "left place";
+  grid-template-rows: 1fr min-content;
 
   gap: 1rem;
 
@@ -9,7 +10,11 @@
 
   section {
     display: flex;
+
     flex-direction: column;
+
+    grid-area: left;
+
     gap: 1rem;
 
     aside {
@@ -76,7 +81,10 @@
     }
 
     &.playground__runner-console {
+      grid-area: runner;
+
       overflow: hidden;
+
       border: var(--border);
       border-radius: 0.25rem;
 
@@ -99,6 +107,11 @@
         }
       }
     }
+  }
+
+  mdn-placement-sidebar {
+    grid-area: place;
+    justify-self: center;
   }
 
   @media (--screen-small-and-narrower) {
