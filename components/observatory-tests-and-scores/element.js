@@ -1,5 +1,5 @@
 import { Task } from "@lit/task";
-import { LitElement, html, nothing } from "lit";
+import { LitElement, html } from "lit";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { OBSERVATORY_API_URL } from "../observatory/constants.js";
@@ -8,11 +8,7 @@ import styles from "./element.css?lit";
 
 export class MDNObservatoryTestsAndScores extends LitElement {
   static styles = styles;
-
-  constructor() {
-    super();
-    this._hasHydrated = false;
-  }
+  static ssr = false;
 
   _fetchMatrixTask = new Task(this, {
     task: async () => {
@@ -39,19 +35,9 @@ export class MDNObservatoryTestsAndScores extends LitElement {
       return ret;
     },
     args: () => [],
-    autoRun: false,
   });
 
-  firstUpdated() {
-    // Mark as hydrated and start the task
-    this._hasHydrated = true;
-    this._fetchMatrixTask.run();
-  }
-
   render() {
-    if (!this._hasHydrated) {
-      return nothing;
-    }
     return this._fetchMatrixTask.render({
       pending: () =>
         html`<div class="loading">Loading tests and scoring data...</div>`,
