@@ -37,7 +37,13 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
   }
 
   _user = new Task(this, {
-    task: async () => globalUser(),
+    task: async () => {
+      const user = await globalUser();
+      if (user.isAuthenticated) {
+        this._bookmarks.run();
+      }
+      return user;
+    },
   });
 
   _collections = new Task(this, {
@@ -53,6 +59,7 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
   });
 
   _bookmarks = new Task(this, {
+    autoRun: false,
     args: () => [this.docUrl],
     task: async ([docUrl]) => {
       const res = await fetch(
