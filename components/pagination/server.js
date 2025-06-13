@@ -97,25 +97,24 @@ export class Pagination extends ServerComponent {
    * @param {boolean} disabled
    * @param {(page: number) => string} pageUrl
    * @param {import("@fred").Context} context
-   * @returns {import("@lit").TemplateResult}
+   * @returns {import("@lit").TemplateResult | typeof nothing}
    */
   renderPrevNextButton(prevNext, prevNextPage, disabled, pageUrl, context) {
-    const url = disabled ? "#" : pageUrl(prevNextPage);
+    const url = pageUrl(prevNextPage);
 
-    return html`
-      <li class=${`pagination__item pagination__item--${prevNext}`}>
-        <a
-          href=${url}
-          class="pagination__link ${disabled
-            ? "pagination__link--disabled"
-            : ""}"
-          aria-label=${context.l10n(`pagination_${prevNext}`)}
-          ${disabled ? 'aria-disabled="true"' : ""}
-        >
-          ${prevNext === "next" ? "→" : "←"}
-        </a>
-      </li>
-    `;
+    return disabled
+      ? html`
+          <li class=${`pagination__item pagination__item--${prevNext}`}>
+            <a
+              class="pagination__link"
+              href=${url}
+              aria-label=${context.l10n(`pagination_${prevNext}`)}
+            >
+              ${prevNext === "next" ? "→" : "←"}
+            </a>
+          </li>
+        `
+      : nothing;
   }
 
   /**
