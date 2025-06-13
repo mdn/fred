@@ -2,6 +2,7 @@ import { Task } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
 import { createRef, ref } from "lit/directives/ref.js";
 
+import { L10nMixin } from "../../l10n/mixin.js";
 import { gleanClick } from "../../utils/glean.js";
 import { globalUser } from "../user/context.js";
 
@@ -15,6 +16,7 @@ import "../play-runner/element.js";
 import "../play-console/element.js";
 import "../modal/element.js";
 import "../login-button/element.js";
+import "../placement-sidebar/element.js";
 
 /**
  * @import { MDNPlayController } from "../play-controller/element.js";
@@ -23,7 +25,7 @@ import "../login-button/element.js";
 
 const SESSION_KEY = "playground-session-code";
 
-export class MDNPlayground extends LitElement {
+export class MDNPlayground extends L10nMixin(LitElement) {
   static styles = styles;
 
   constructor() {
@@ -58,7 +60,10 @@ export class MDNPlayground extends LitElement {
 
   _clear() {
     const controller = this._controller.value;
-    if (confirm("Do you really want to clear everything?") && controller) {
+    if (
+      confirm(this.l10n`Do you really want to clear everything?`) &&
+      controller
+    ) {
       controller.clear();
       this._storeSession();
       this.requestUpdate();
@@ -70,7 +75,10 @@ export class MDNPlayground extends LitElement {
 
   _reset() {
     const controller = this._controller.value;
-    if (confirm("Do you really want to revert your changes?") && controller) {
+    if (
+      confirm(this.l10n`Do you really want to revert your changes?`) &&
+      controller
+    ) {
       controller.reset();
       this._storeSession();
       this.requestUpdate();
@@ -222,38 +230,38 @@ ${"```"}`,
         <mdn-play-controller ${ref(this._controller)}>
           <section>
             <aside>
-              <h1>Playground</h1>
+              <h1>${this.l10n`Playground`}</h1>
               <menu>
                 <mdn-button
                   variant="secondary"
                   @click=${this._format}
                   ?disabled=${!hasCode}
-                  >Format</mdn-button
+                  >${this.l10n`Format`}</mdn-button
                 >
                 <mdn-button
                   variant="secondary"
                   @click=${this._run}
                   ?disabled=${!hasCode}
-                  >Run</mdn-button
+                  >${this.l10n`Run`}</mdn-button
                 >
                 <mdn-button
                   variant="secondary"
                   @click=${this._share}
                   ?disabled=${!hasCode}
-                  >Share</mdn-button
+                  >${this.l10n`Share`}</mdn-button
                 >
                 <mdn-button
                   variant="secondary"
                   @click=${this._clear}
                   ?disabled=${!(hasCode || isResettable)}
-                  >Clear</mdn-button
+                  >${this.l10n`Clear`}</mdn-button
                 >
                 ${hasInitialCode
                   ? html`<mdn-button
                       variant="secondary"
                       @click=${this._reset}
                       ?disabled=${!isResettable}
-                      >Reset</mdn-button
+                      >${this.l10n`Reset`}</mdn-button
                     >`
                   : nothing}
               </menu>
@@ -283,21 +291,22 @@ ${"```"}`,
           <section class="playground__runner-console">
             <mdn-play-runner></mdn-play-runner>
             <div class="playground__console">
-              <div>Console</div>
+              <div>${this.l10n`Console`}</div>
               <mdn-play-console></mdn-play-console>
             </div>
           </section>
+          <mdn-placement-sidebar horizontal></mdn-placement-sidebar>
         </mdn-play-controller>
       </div>
       <mdn-modal>
         <section>
-          <h2>Share Markdown</h2>
+          <h2>${this.l10n`Share Markdown`}</h2>
           <mdn-button variant="secondary" @click=${this._copyMarkdown}
-            >Copy markdown to clipboard</mdn-button
+            >${this.l10n`Copy markdown to clipboard`}</mdn-button
           >
         </section>
         <section>
-          <h2>Share your code via Permalink</h2>
+          <h2>${this.l10n`Share your code via Permalink`}</h2>
           ${this._user.render({
             initial: () => html`<mdn-login-button></mdn-login-button>`,
             pending: () => html`<mdn-login-button></mdn-login-button>`,
@@ -309,11 +318,11 @@ ${"```"}`,
                       <mdn-button
                         variant="secondary"
                         @click=${this._copyPermalink}
-                        >Copy to clipboard</mdn-button
+                        >${this.l10n`Copy to clipboard`}</mdn-button
                       >
                     `
                   : html`<mdn-button @click=${this._createPermalink}
-                      >Create link</mdn-button
+                      >${this.l10n`Create link`}</mdn-button
                     >`
                 : html`<mdn-login-button></mdn-login-button>`,
           })}

@@ -17,6 +17,12 @@ MDN's next fr(ont)e(n)d.
 
 ## Development principles
 
+### Inline JS
+
+We need to run some JS as soon as possible at page load, to avoid layout shifts and flashes.
+We place this JS in `entry.inline.js`, and it's inlined on page load.
+Rspack also generates the necessary CSP hash when doing a prod build with `npm run build`.
+
 ### Layout
 
 See [the layout README](./components/layout/README.md).

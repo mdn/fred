@@ -161,7 +161,7 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                   )}
                 </ul>
                 </div>`
-          : "No results!",
+          : this.l10n`No results!`,
       error: (e) => html`Error: ${e}`,
     });
   }

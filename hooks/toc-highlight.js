@@ -10,7 +10,7 @@ function highlightTOC(toc) {
   /** @type {Map<HTMLElement, HTMLAnchorElement>} */
   const tocItemBySection = new Map();
   for (const item of tocItems.reverse()) {
-    const target = document.querySelector(item.hash);
+    const target = document.querySelector(decodeURIComponent(item.hash));
 
     if (!target) {
       continue;

@@ -31,6 +31,8 @@ export class OuterLayout extends ServerComponent {
         ).styleTags,
     );
 
+    // if you want to put some script inline, put it in entry.inline.js
+    // and you'll get CSP generation: see the README
     return html`
       <!doctype html>
       <html
@@ -44,11 +46,6 @@ export class OuterLayout extends ServerComponent {
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          <script>
-            if (globalThis.sessionStorage.getItem("noads") === "enabled") {
-              document.documentElement.dataset["noads"] = "enabled";
-            }
-          </script>
           ${Favicon()} ${unsafeHTML(`<script>${inlineScript}</script>`)}
           ${styleTags} ${scriptTags} ${legacyTags}
           <title>${context.pageTitle || "MDN"}</title>

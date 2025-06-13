@@ -132,4 +132,44 @@
     top: 0;
     right: 0;
   }
+
+  @media (width >= 31rem) {
+    &.horizontal {
+      align-self: flex-end;
+      max-width: 30rem;
+      min-height: 12rem;
+
+      .placement-container {
+        width: 25rem;
+        height: 10rem;
+        min-height: 0;
+
+        .placement-link {
+          > img {
+            position: absolute;
+            z-index: 1;
+
+            width: auto;
+            height: 100%;
+          }
+
+          .placement-content {
+            left: 0;
+
+            flex-direction: column;
+
+            align-items: end;
+            justify-content: end;
+
+            width: auto;
+            height: 100%;
+
+            padding-left: 10rem;
+
+            background: var(--side-background);
+          }
+        }
+      }
+    }
+  }
 }

@@ -90,7 +90,7 @@ const common = {
         type: "asset/source",
       },
       {
-        test: /\.flt$/i,
+        test: /\.ftl$/i,
         loader: "./build/loaders/fluent.js",
       },
       {

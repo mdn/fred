@@ -6,15 +6,11 @@
   }
 
   summary {
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 0;
     cursor: pointer;
 
     &:hover {
       background-color: var(--color-background-secondary);
-    }
-
-    a {
-      padding: 0;
     }
   }
 
@@ -24,13 +20,18 @@
     list-style: none;
   }
 
+  details ol {
+    padding-left: 0.75rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
   a {
-    display: inline flex;
+    display: inline-block;
 
-    column-gap: 0.5rem;
-    align-items: baseline;
-
-    padding: 0.75rem 1rem;
+    padding: 0.25rem;
 
     color: var(--color-text-primary);
 
@@ -39,12 +40,17 @@
     &:hover {
       color: var(--color-link-normal);
     }
+  }
 
-    &[aria-current="true"] {
-      display: flex;
-      background-color: var(--color-background-blue);
-      border-left: 2px solid var(--color-blue-50);
-    }
+  em {
+    display: inline-block;
+
+    align-items: baseline;
+
+    padding: 0.25rem;
+
+    background-color: var(--color-background-blue);
+    border-left: 2px solid var(--color-blue-50);
   }
 
   svg {

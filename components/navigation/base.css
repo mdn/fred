@@ -20,6 +20,6 @@
 
 .navigation__popup {
   mdn-user-menu {
-    min-width: 2.125rem; /* 34px */
+    min-width: 2.625rem; /* 42px when logged in */
   }
 }

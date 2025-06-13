@@ -21,8 +21,13 @@ export class BreadcrumbsBar extends ServerComponent {
     return html`
       <div class="breadcrumbs-bar" data-scheme=${colorScheme}>
         ${toggleSidebar} ${Breadcrumbs.render(context)}
+        ${context.renderer === "Doc"
+          ? html`<mdn-collection-save-button
+              doc-url=${context.doc.mdn_url}
+              doc-title=${context.doc.title}
+            ></mdn-collection-save-button>`
+          : nothing}
         <mdn-color-theme></mdn-color-theme>
-        <mdn-collection-save-button></mdn-collection-save-button>
         ${"doc" in context
           ? html`<mdn-language-switcher
               locale=${context.locale}

@@ -16,6 +16,15 @@ import styles from "./element.css?lit";
 export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
   static styles = styles;
 
+  static properties = {
+    horizontal: { type: Boolean },
+  };
+
+  constructor() {
+    super();
+    this.horizontal = false;
+  }
+
   /**
    *
    * @param {Placements.PlacementContextData} placementContext
@@ -56,7 +65,9 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
       ].filter(([_, v]) => Boolean(v)),
     );
 
-    return html`<section class="sidebar-placement">
+    return html`<section
+      class=${`sidebar-placement ${this.horizontal ? "horizontal" : ""}`}
+    >
       <div
         ${ref(this._placementRef)}
         class="placement-container"
