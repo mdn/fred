@@ -132,10 +132,11 @@ export async function startDevServer() {
           const contentType = proxyRes.headers["content-type"] || "";
           const statusCode = proxyRes.statusCode || 500;
 
-          if (statusCode === 500 && req.path.endsWith("sandbox")) {
+          if (req.path === "/sandbox") {
             return serverRenderMiddleware(req, res, {
               // @ts-expect-error
               renderer: "Sandbox",
+              pageTitle: "Fred sandbox",
             });
           }
 
