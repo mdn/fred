@@ -284,7 +284,7 @@ mdn-ix-tab-wrapper {
 
           content: "";
 
-          background-image: url("../icon/warning.svg");
+          background-image: url("../icon/triangle-alert.svg");
           background-repeat: no-repeat;
           background-position: center center;
           background-size: 1rem;

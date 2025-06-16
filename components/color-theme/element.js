@@ -2,9 +2,9 @@ import { LitElement, html } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
+import osDefault from "../icon/contrast.svg?lit";
 import dark from "../icon/moon.svg?lit";
 import light from "../icon/sun.svg?lit";
-import osDefault from "../icon/theme.svg?lit";
 
 import styles from "./element.css?lit";
 

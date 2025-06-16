@@ -1,6 +1,6 @@
 import { LitElement, html } from "lit";
 
-import sidebarIcon from "../icon/sidebar.svg?lit";
+import panelIcon from "../icon/panel-left.svg?lit";
 
 import styles from "./element.css?lit";
 
@@ -45,7 +45,7 @@ export class MDNToggleSidebar extends LitElement {
     return html`<mdn-button
       @click=${this._click}
       aria-controls=${MAIN_SIDEBAR_ID}
-      .icon=${sidebarIcon}
+      .icon=${panelIcon}
       icon-only
       variant="invisible"
     >
