@@ -56,8 +56,7 @@ export async function render(path, page, compilationStats) {
 
   return asyncLocalStorage.run({ componentsUsed: new Set() }, () =>
     runWithContext({ locale }, async () => {
-      const component = (() => {
-        console.log("renderer", context.renderer);
+      const component = await (async () => {
         switch (context.renderer) {
           case "BlogIndex":
             return BlogIndex.render(context);
@@ -112,6 +111,11 @@ export async function render(path, page, compilationStats) {
               context,
               `Unknown Spa Page title=${context.pageTitle}, slug=${context.slug}`,
             );
+          }
+          // @ts-expect-error
+          case "Sandbox": {
+            const { Sandbox } = await import("./components/sandbox/server.js");
+            return Sandbox.render();
           }
           case "SpaNotFound":
           default:
