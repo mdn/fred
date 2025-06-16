@@ -24,6 +24,7 @@
     display: block;
 
     padding: 0.5rem;
+    margin-left: 2px; /* for box-shadow */
 
     color: inherit;
 

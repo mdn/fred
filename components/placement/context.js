@@ -2,6 +2,8 @@
  * @import * as Placements from "../placement/types.js";
  */
 
+import { globalUser } from "../user/context.js";
+
 /**
  * @type {Placements.PlacementMap}
  */
@@ -63,7 +65,11 @@ let PLACEMENT_CONTEXT;
  */
 export function globalPlacementContext() {
   if (!PLACEMENT_CONTEXT) {
-    PLACEMENT_CONTEXT = fetchPlacementData();
+    PLACEMENT_CONTEXT = globalUser().then((user) =>
+      user.settings?.noAds
+        ? Promise.resolve({ status: "noads" })
+        : fetchPlacementData(),
+    );
   }
   return PLACEMENT_CONTEXT;
 }

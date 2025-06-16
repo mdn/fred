@@ -31,6 +31,8 @@ export class OuterLayout extends ServerComponent {
         ).styleTags,
     );
 
+    // if you want to put some script inline, put it in entry.inline.js
+    // and you'll get CSP generation: see the README
     return html`
       <!doctype html>
       <html

@@ -61,6 +61,7 @@ async function fetchUserData() {
           noAds: data.settings?.no_ads ?? null,
         }
       : DEFAULT_USER.settings;
+    Settings.noAds = settings?.noAds || false;
     return {
       username: data.username ?? DEFAULT_USER.username,
       isAuthenticated: data.is_authenticated ?? DEFAULT_USER.isAuthenticated,
@@ -82,3 +83,17 @@ async function fetchUserData() {
     throw new Error(response.statusText);
   }
 }
+
+export const Settings = {
+  set noAds(value) {
+    if (value) {
+      globalThis.localStorage.setItem("noads", "enabled");
+    } else {
+      globalThis.localStorage.removeItem("noads");
+    }
+  },
+
+  get noAds() {
+    return globalThis.localStorage?.getItem?.("noads") === "enabled";
+  },
+};

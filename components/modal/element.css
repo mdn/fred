@@ -8,6 +8,10 @@ header {
   display: flex;
   padding: 0.5rem;
 
+  h2 {
+    margin: 0;
+  }
+
   mdn-button {
     margin-left: auto;
   }

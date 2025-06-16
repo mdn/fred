@@ -2,6 +2,7 @@
 import { render as r } from "@lit-labs/ssr";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 
+import { Advertising } from "./components/advertising/server.js";
 import { BlogIndex } from "./components/blog-index/server.js";
 import { BlogPost } from "./components/blog-post/server.js";
 import { ContributorSpotlight } from "./components/contributor-spotlight/server.js";
@@ -21,9 +22,9 @@ import { ObservatoryResults } from "./components/observatory-results/server.js";
 import { OuterLayout } from "./components/outer-layout/server.js";
 import { PageLayout } from "./components/page-layout/server.js";
 import { Playground } from "./components/playground/server.js";
+import { Plus } from "./components/plus/server.js";
 import { Search } from "./components/search/server.js";
 import { asyncLocalStorage } from "./components/server/async-local-storage.js";
-import { Settings } from "./components/settings/server.js";
 import { addFluent } from "./l10n/context.js";
 import { runWithContext } from "./symmetric-context/server.js";
 
@@ -85,7 +86,7 @@ export async function render(path, page, compilationStats) {
           case "Homepage":
             return Homepage.render(context);
           case "SpaAdvertise":
-            return PageLayout.render(context, "TODO: Advertise");
+            return Advertising.render(context);
           case "SpaObservatoryAnalyze":
             return ObservatoryResults.render(context);
           case "SpaObservatoryLanding":
@@ -93,24 +94,25 @@ export async function render(path, page, compilationStats) {
           case "SpaPlay":
             return Playground.render(context);
           case "SpaPlusAiHelp":
-            return PageLayout.render(context, "TODO: AI Help");
+            return Plus.render(context);
           case "SpaPlusCollections":
-            return PageLayout.render(context, "TODO: Collections");
+            return Plus.render(context);
           case "SpaPlusCollectionsFrequentlyViewed":
-            return PageLayout.render(
-              context,
-              "TODO: Collections frequently viewed",
-            );
+            return Plus.render(context);
           case "SpaPlusLanding":
-            return PageLayout.render(context, "TODO: Plus landing");
+            return Plus.render(context);
           case "SpaPlusSettings":
-            return Settings.render(context);
+            return Plus.render(context);
           case "SpaPlusUpdates":
-            return PageLayout.render(context, "TODO: BUpdates");
+            return Plus.render(context);
           case "SpaSearch":
             return Search.render(context);
-          case "SpaUnknown":
-            return PageLayout.render(context, `Unknown: ${context.pageTitle}`);
+          case "SpaUnknown": {
+            return PageLayout.render(
+              context,
+              `Unknown Spa Page title=${context.pageTitle}, slug=${context.slug}`,
+            );
+          }
           case "SpaNotFound":
           default:
             return NotFound.render(context);

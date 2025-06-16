@@ -13,9 +13,9 @@ declare module "*.svg" {
   export default url;
 }
 
-declare module "*.flt" {
-  const flt: string;
-  export default flt;
+declare module "*.ftl" {
+  const ftl: string;
+  export default ftl;
 }
 
 declare module "*?url" {

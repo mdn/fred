@@ -15,6 +15,9 @@ import { GenerateElementMapPlugin } from "./build/plugins/generate-element-map.j
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const isProd = process.env.NODE_ENV === "production";
+const buildLegacy = Boolean(
+  JSON.parse(process.env.FRED_LEGACY || "null") ?? isProd,
+);
 
 /** @type {import("@rspack/core").RspackOptions} */
 const common = {
@@ -90,7 +93,7 @@ const common = {
         type: "asset/source",
       },
       {
-        test: /\.flt$/i,
+        test: /\.ftl$/i,
         loader: "./build/loaders/fluent.js",
       },
       {
@@ -115,6 +118,14 @@ const common = {
           "postcss-loader",
         ],
       },
+    ],
+  },
+};
+
+/** @type {import("@rspack/core").RspackOptions} */
+const clientAndSsrCommon = {
+  module: {
+    rules: [
       {
         test: /\.svg$/i,
         loader: "svgo-loader",
@@ -132,7 +143,7 @@ const common = {
   },
 };
 
-const ssrConfig = merge(common, {
+const ssrConfig = merge(common, clientAndSsrCommon, {
   name: "ssr",
   target: "node22",
   async entry() {
@@ -166,13 +177,6 @@ const ssrConfig = merge(common, {
 /** @type {import("@rspack/core").RspackOptions} */
 const clientAndLegacyCommon = {
   target: ["web", "browserslist"],
-  plugins: [
-    new rspack.CssExtractRspackPlugin({
-      filename: isProd ? "[name].[contenthash].css" : "[name].css",
-      // chunkFilename: "[name].[contenthash].css",
-      runtime: false,
-    }),
-  ],
   output: {
     filename: isProd ? "[name].[contenthash].js" : "[name].js",
     clean: true,
@@ -197,7 +201,7 @@ const clientAndLegacyCommon = {
   },
 };
 
-const clientConfig = merge(common, clientAndLegacyCommon, {
+const clientConfig = merge(common, clientAndSsrCommon, clientAndLegacyCommon, {
   name: "client",
   async entry() {
     return {
@@ -224,7 +228,14 @@ const clientConfig = merge(common, clientAndLegacyCommon, {
       ),
     };
   },
-  plugins: [!isProd && new GenerateElementMapPlugin()],
+  plugins: [
+    !isProd && new GenerateElementMapPlugin(),
+    new rspack.CssExtractRspackPlugin({
+      filename: isProd ? "[name].[contenthash].css" : "[name].css",
+      // chunkFilename: "[name].[contenthash].css",
+      runtime: false,
+    }),
+  ],
   output: {
     path: path.resolve(__dirname, "dist/client"),
     publicPath: "/static/client/",
@@ -243,6 +254,26 @@ const legacyConfig = merge(common, clientAndLegacyCommon, {
   resolve: {
     extensions: ["...", ".tsx", ".ts", ".jsx"],
   },
+  plugins: [
+    new rspack.DefinePlugin({
+      "process.env": JSON.stringify({
+        ...Object.fromEntries(
+          Object.entries(process.env).filter(([key]) =>
+            key.startsWith("REACT_APP_"),
+          ),
+        ),
+        REACT_APP_FRED: "true",
+      }),
+    }),
+    new rspack.ProvidePlugin({
+      React: "react",
+    }),
+    new rspack.CssExtractRspackPlugin({
+      filename: isProd ? "[name].[contenthash].css" : "[name].css",
+      // chunkFilename: "[name].[contenthash].css",
+      runtime: true,
+    }),
+  ],
   module: {
     rules: [
       {
@@ -275,9 +306,97 @@ const legacyConfig = merge(common, clientAndLegacyCommon, {
         },
         type: "javascript/auto",
       },
+      {
+        test: /\.ts$/,
+        use: {
+          loader: "builtin:swc-loader",
+          options: {
+            jsc: {
+              parser: {
+                syntax: "typescript",
+                tsx: false,
+              },
+            },
+          },
+        },
+        type: "javascript/auto",
+      },
+      {
+        test: /\.(sass|scss)$/,
+        with: { type: "css" },
+        use: [
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 3,
+              exportType: "css-style-sheet",
+            },
+          },
+          "postcss-loader",
+          "resolve-url-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+        type: "javascript/auto",
+      },
+      {
+        test: /\.(sass|scss)$/,
+        resourceQuery: /^$/,
+        use: [
+          rspack.CssExtractRspackPlugin.loader,
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 3,
+            },
+          },
+          "postcss-loader",
+          "resolve-url-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+        type: "javascript/auto",
+      },
+      {
+        test: /\.(png)$/,
+        type: "asset/resource",
+      },
+      {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: {
+          loader: "@svgr/webpack",
+          options: {
+            prettier: false,
+            svgo: false,
+            svgoConfig: {
+              plugins: [{ removeViewBox: false }],
+            },
+            titleProp: true,
+            ref: true,
+            exportType: "named",
+          },
+        },
+      },
+      {
+        resourceQuery: /raw/,
+        type: "asset/source",
+      },
     ],
   },
 });
 
 /** @type {import("@rspack/core").MultiRspackOptions} */
-export default [ssrConfig, clientConfig, legacyConfig];
+export default [
+  ssrConfig,
+  clientConfig,
+  ...(buildLegacy ? [legacyConfig] : []),
+];

@@ -12,6 +12,7 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
 
   static properties = {
     locale: { type: String },
+    native: { type: String },
     translations: { type: Array },
     url: { type: String },
   };
@@ -20,12 +21,13 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
     super();
     /** @type {import("@rari").Translation[]} */
     this.translations = [];
+    this.native = "";
     this.locale = "en-US";
     this.url = "/";
   }
 
   render() {
-    const { translations, locale, url } = this;
+    const { translations, native, locale, url } = this;
 
     if (translations.length === 0) {
       return nothing;
@@ -35,10 +37,7 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
       <mdn-dropdown>
         <button slot="button" class="language-switcher__button dropdown">
           ${globeSvg}
-          <span
-            >${translations.find((translation) => locale === translation.locale)
-              ?.native}</span
-          >
+          <span>${native ?? locale}</span>
         </button>
         <div
           slot="dropdown"

@@ -10,6 +10,7 @@ import "../play-console/element.js";
 import "../ix-tab/element.js";
 import "../ix-tab-panel/element.js";
 import "../ix-tab-wrapper/element.js";
+import { L10nMixin } from "../../l10n/mixin.js";
 
 /**
  * @import { InteractiveExampleBase } from "./element.js";
@@ -20,7 +21,7 @@ import "../ix-tab-wrapper/element.js";
  * @param {TBase} Base
  */
 export const InteractiveExampleWithConsole = (Base) =>
-  class extends Base {
+  class extends L10nMixin(Base) {
     #render() {
       return html`
         <mdn-play-controller ${ref(this._controller)}>
@@ -47,10 +48,10 @@ export const InteractiveExampleWithConsole = (Base) =>
                 </mdn-ix-tab-wrapper>`}
             <div class="buttons">
               <mdn-button id="execute" @click=${this._run} variant="secondary"
-                >Run</mdn-button
+                >${this.l10n`Run`}</mdn-button
               >
               <mdn-button id="reset" @click=${this._reset} variant="secondary"
-                >Reset</mdn-button
+                >${this.l10n`Reset`}</mdn-button
               >
             </div>
             <mdn-play-console id="console"></mdn-play-console>
