@@ -26,16 +26,16 @@
 
   /* See https://github.com/mdn/rari/blob/927fac7cb89c7f7e49dd3ff265c3d74ad89d6490/crates/rari-doc/src/templ/templs/badges.rs#L43-L47 */
   &.icon-deprecated {
-    mask-image: url("../notecard/icons/deprecated.svg");
+    mask-image: url("../icon/trash-2.svg");
   }
 
   /* See https://github.com/mdn/rari/blob/927fac7cb89c7f7e49dd3ff265c3d74ad89d6490/crates/rari-doc/src/templ/templs/badges.rs#L36-L41 */
   &.icon-experimental {
-    mask-image: url("../notecard/icons/experimental.svg");
+    mask-image: url("../icon/flask-conical.svg");
   }
 
   /* See https://github.com/mdn/rari/blob/927fac7cb89c7f7e49dd3ff265c3d74ad89d6490/crates/rari-doc/src/templ/templs/badges.rs#L43-L47 */
   &.icon-nonstandard {
-    mask-image: url("../notecard/icons/triangle-alert.svg");
+    mask-image: url("../icon/triangle-alert.svg");
   }
 }
