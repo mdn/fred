@@ -76,7 +76,7 @@
 
   &.nonstandard::before {
     /* e.g. Document: caretRangeFromPoint() method */
-    mask-image: url("./icons/warning.svg");
+    mask-image: url("./icons/triangle-alert.svg");
   }
 
   &.note::before {
@@ -96,7 +96,7 @@
 
   &.warning::before {
     /* e.g. Navigator: scheduling property */
-    mask-image: url("./icons/warning.svg");
+    mask-image: url("./icons/triangle-alert.svg");
   }
 
   &.worker::before {
