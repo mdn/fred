@@ -31,7 +31,7 @@ export class Menu extends ServerComponent {
               </p>
               <div class="menu__panel-content">
                 <dl>
-                  <dt>HTML References</dt>
+                  <dt>HTML reference</dt>
                   <dd>
                     <ul>
                       <li>
@@ -63,7 +63,7 @@ export class Menu extends ServerComponent {
                   </dd>
                 </dl>
                 <dl>
-                  <dt>HTML Guides</dt>
+                  <dt>HTML guides</dt>
                   <dd>
                     <ul>
                       <li>
@@ -138,12 +138,9 @@ export class Menu extends ServerComponent {
               </p>
               <div class="menu__panel-content">
                 <dl>
-                  <dt>References</dt>
+                  <dt>CSS reference</dt>
                   <dd>
                     <ul>
-                      <li>
-                        <a href="/en-US/docs/Web/CSS/Modules">Modules</a>
-                      </li>
                       <li>
                         <a href="/en-US/docs/Web/CSS/Properties">Properties</a>
                       </li>
@@ -158,7 +155,9 @@ export class Menu extends ServerComponent {
                         </a>
                       </li>
                       <li>
-                        <a href="/en-US/docs/Web/CSS/Functions">Functions</a>
+                        <a href="/en-US/docs/Web/CSS/CSS_Values_and_Units"
+                          >Values & units</a
+                        >
                       </li>
                       <li>
                         <a
@@ -172,7 +171,7 @@ export class Menu extends ServerComponent {
                   </dd>
                 </dl>
                 <dl>
-                  <dt>Guides</dt>
+                  <dt>CSS guides</dt>
                   <dd>
                     <ul>
                       <li>
@@ -211,35 +210,31 @@ export class Menu extends ServerComponent {
                   </dd>
                 </dl>
                 <dl>
-                  <dt>Tools</dt>
+                  <dt>Layout cookbook</dt>
                   <dd>
                     <ul>
                       <li>
                         <a
-                          href="/en-US/docs/Web/CSS/CSS_colors/Color_picker_tool"
+                          href="/en-US/docs/Web/CSS/Layout_cookbook/Column_layouts"
                         >
-                          Color picker
+                          Column layouts
                         </a>
                       </li>
                       <li>
                         <a
-                          href="/en-US/docs/Web/CSS/CSS_backgrounds_and_borders/Box-shadow_generator"
+                          href="/en-US/docs/Web/CSS/Layout_cookbook/Center_an_element"
                         >
-                          Box-shadow generator
+                          Centering an element
                         </a>
                       </li>
                       <li>
-                        <a
-                          href="/en-US/docs/Web/CSS/CSS_backgrounds_and_borders/Border-image_generator"
-                        >
-                          Border-image generator
+                        <a href="/en-US/docs/Web/CSS/Layout_cookbook/Card">
+                          Card component
                         </a>
                       </li>
                       <li>
-                        <a
-                          href="/en-US/docs/Web/CSS/CSS_backgrounds_and_borders/Border-radius_generator"
-                        >
-                          Border-radius generator
+                        <a href="/en-US/docs/Web/CSS/Layout_cookbook">
+                          See all…
                         </a>
                       </li>
                     </ul>
@@ -274,7 +269,7 @@ export class Menu extends ServerComponent {
               </p>
               <div class="menu__panel-content">
                 <dl>
-                  <dt>References</dt>
+                  <dt>JS reference</dt>
                   <dd>
                     <ul>
                       <li>
@@ -317,33 +312,40 @@ export class Menu extends ServerComponent {
                   </dd>
                 </dl>
                 <dl>
-                  <dt>Guides</dt>
+                  <dt>JS guides</dt>
                   <dd>
                     <ul>
                       <li>
                         <a
-                          href="/en-US/docs/Learn_web_development/Core/Scripting"
+                          href="/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling"
                         >
-                          Complete beginners
+                          Control flow & error handing
                         </a>
                       </li>
                       <li>
                         <a
-                          href="/en-US/docs/Learn_web_development/Extensions/Advanced_JavaScript_objects"
+                          href="/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration"
                         >
-                          Intermediate
+                          Loops and iteration
                         </a>
                       </li>
                       <li>
                         <a
-                          href="/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain"
+                          href="/en-US/docs/Web/JavaScript/Guide/Working_with_objects"
                         >
-                          Advanced
+                          Working with objects
                         </a>
                       </li>
                       <li>
                         <a
-                          href="/en-US/docs/Web/JavaScript#javascript_guides"
+                          href="/en-US/docs/Web/JavaScript/Guide/Using_classes"
+                        >
+                          Using classes
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="/en-US/docs/Web/JavaScript/Guide"
                           aria-label="See all JavaScript guides"
                         >
                           See all…
@@ -380,14 +382,16 @@ export class Menu extends ServerComponent {
               </p>
               <div class="menu__panel-content">
                 <dl>
-                  <dt>References</dt>
+                  <dt>Web API reference</dt>
                   <dd>
                     <ul>
                       <li>
-                        <a href="/en-US/docs/Web/API/Fetch_API">Fetch API</a>
+                        <a href="/en-US/docs/Web/API/File_System_API"
+                          >File system API</a
+                        >
                       </li>
                       <li>
-                        <a href="/en-US/docs/Web/API/Canvas_API">Canvas API</a>
+                        <a href="/en-US/docs/Web/API/Fetch_API">Fetch API</a>
                       </li>
                       <li>
                         <a href="/en-US/docs/Web/API/Geolocation_API">
@@ -395,8 +399,16 @@ export class Menu extends ServerComponent {
                         </a>
                       </li>
                       <li>
-                        <a href="/en-US/docs/Web/API/View_Transition_API">
-                          View Transition API
+                        <a href="/en-US/docs/Web/API/HTML_DOM_API">
+                          HTML DOM API
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/en-US/docs/Web/API/Push_API"> Push API </a>
+                      </li>
+                      <li>
+                        <a href="/en-US/docs/Web/API/Service_Worker_API">
+                          Service worker API
                         </a>
                       </li>
                       <li>
@@ -411,28 +423,41 @@ export class Menu extends ServerComponent {
                   </dd>
                 </dl>
                 <dl>
-                  <dt>Guides</dt>
+                  <dt>Web API guides</dt>
                   <dd>
                     <ul>
                       <li>
                         <a
-                          href="/en-US/docs/Web/API/Web_Audio_API/Using_Web_Audio_API"
-                        >
-                          Using the web audio API
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="/en-US/docs/Web/API/Canvas_API/Manipulating_video_using_canvas"
-                        >
-                          Manipulating video with canvas
-                        </a>
-                      </li>
-                      <li>
-                        <a
                           href="/en-US/docs/Web/API/Web_Animations_API/Using_the_Web_Animations_API"
                         >
-                          Using the web animation API
+                          Using the Web animation API
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/en-US/docs/Web/API/Fetch_API/Using_Fetch">
+                          Using the Fetch API
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="/en-US/docs/Web/API/History_API/Working_with_the_History_API"
+                        >
+                          Working with the History API
+                        </a>
+                      </li>
+
+                      <li>
+                        <a
+                          href="/en-US/docs/Web/API/Web_Speech_API/Using_the_Web_Speech_API"
+                        >
+                          Using the Web speech API
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="/en-US/docs/Web/API/Web_Workers_API/Using_web_workers"
+                        >
+                          Using web workers
                         </a>
                       </li>
                     </ul>
@@ -464,7 +489,7 @@ export class Menu extends ServerComponent {
               </p>
               <div class="menu__panel-content">
                 <dl>
-                  <dt>References</dt>
+                  <dt>Technologies</dt>
                   <dd>
                     <ul>
                       <li>
@@ -474,6 +499,9 @@ export class Menu extends ServerComponent {
                       </li>
                       <li>
                         <a href="/en-US/docs/Web/HTTP">HTTP</a>
+                      </li>
+                      <li>
+                        <a href="/en-US/docs/Web/URI">URI</a>
                       </li>
                       <li>
                         <a href="/en-US/docs/Mozilla/Add-ons/WebExtensions">
@@ -501,6 +529,9 @@ export class Menu extends ServerComponent {
                   <dt>Topics</dt>
                   <dd>
                     <ul>
+                      <li>
+                        <a href="/en-US/docs/Web/Media">Media</a>
+                      </li>
                       <li>
                         <a href="/en-US/docs/Web/API/Performance"
                           >Performance</a
@@ -698,24 +729,32 @@ export class Menu extends ServerComponent {
                       HTTP Observatory
                     </a>
                   </li>
+                </ul>
+                <ul>
                   <li>
-                    <a href="/en-US/plus/ai-help">
-                      <svg viewBox="0 -960 960 960" width="24" height="24">
-                        <path
-                          d="M479-247q19.74 0 33.37-13.63Q526-274.26 526-294q0-19.74-13.63-33.37Q498.74-341 479-341q-19.74 0-33.37 13.63Q432-313.74 432-294q0 19.74 13.63 33.37Q459.26-247 479-247Zm1 157q-80.91 0-152.07-30.76-71.15-30.77-123.79-83.5Q151.5-257 120.75-328.09 90-399.17 90-480q0-80.91 30.76-152.07 30.77-71.15 83.5-123.79Q257-808.5 328.09-839.25 399.17-870 480-870q80.91 0 152.07 30.76 71.15 30.77 123.79 83.5Q808.5-703 839.25-631.91 870-560.83 870-480q0 80.91-30.76 152.07-30.77 71.15-83.5 123.79Q703-151.5 631.91-120.75 560.83-90 480-90Zm0-75q131.5 0 223.25-91.75T795-480q0-131.5-91.75-223.25T480-795q-131.5 0-223.25 91.75T165-480q0 131.5 91.75 223.25T480-165Zm0-315Zm4-169q25.4 0 44.2 16 18.8 16 18.8 40 0 21.61-12.75 38.3Q521.5-538 505-523.5q-23 20-41.5 43.25t-18 53.25q0 13.5 9.98 22.25 9.97 8.75 23.27 8.75 14.25 0 24.31-9.43Q513.13-414.86 516-429q3.94-20.61 17.72-36.81Q547.5-482 563-497q22.5-21 38.25-46.75T617-600q0-49.68-39.5-81.34Q538-713 484.87-713q-36.71 0-70.04 15.75Q381.5-681.5 362.5-650q-7 11.5-4.58 24.01 2.42 12.5 13.08 18.99 13 8 27.5 4.75T422-618.5q11-14.76 27.5-22.63Q466-649 484-649Z"
-                        />
-                      </svg>
-                      AI Help
+                    <a href="/en-US/docs/Web/CSS/CSS_colors/Color_picker_tool">
+                      Color picker
                     </a>
                   </li>
                   <li>
-                    <a href="/en-US/plus/updates">
-                      <svg viewBox="0 -960 960 960" width="24" height="24">
-                        <path
-                          d="M521-635v-159q0-15.72 10.64-26.36Q542.28-831 558-831h236q15.72 0 26.36 10.64Q831-809.72 831-794v159q0 15.72-10.64 26.36Q809.72-598 794-598H558q-15.72 0-26.36-10.64Q521-619.28 521-635ZM129-481v-313q0-15.72 10.64-26.36Q150.27-831 166-831h236q15.73 0 26.36 10.64Q439-809.72 439-794v313q0 15.73-10.64 26.36Q417.73-444 402-444H166q-15.73 0-26.36-10.64Q129-465.27 129-481Zm392 315v-313q0-15.73 10.64-26.36Q542.28-516 558-516h236q15.72 0 26.36 10.64Q831-494.73 831-479v313q0 15.73-10.64 26.36Q809.72-129 794-129H558q-15.72 0-26.36-10.64Q521-150.27 521-166Zm-392 0v-159q0-15.73 10.64-26.36Q150.27-362 166-362h236q15.73 0 26.36 10.64Q439-340.73 439-325v159q0 15.73-10.64 26.36Q417.73-129 402-129H166q-15.73 0-26.36-10.64Q129-150.27 129-166Zm75-353h160v-237H204v237Zm392 315h160v-237H596v237Zm0-469h160v-83H596v83ZM204-204h160v-83H204v83Zm160-315Zm232-154Zm0 232ZM364-287Z"
-                        />
-                      </svg>
-                      Browser release dashboard
+                    <a
+                      href="/en-US/docs/Web/CSS/CSS_backgrounds_and_borders/Box-shadow_generator"
+                    >
+                      Box-shadow generator
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/en-US/docs/Web/CSS/CSS_backgrounds_and_borders/Border-image_generator"
+                    >
+                      Border-image generator
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/en-US/docs/Web/CSS/CSS_backgrounds_and_borders/Border-radius_generator"
+                    >
+                      Border-radius generator
                     </a>
                   </li>
                 </ul>
@@ -771,6 +810,16 @@ export class Menu extends ServerComponent {
                         />
                       </svg>
                       Advertise with us
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/mdn">
+                      <svg viewBox="0 -960 960 960" width="24" height="24">
+                        <path
+                          d="M160-122.5q-15.5 0-26.5-11t-11-26.5v-39q0-15.5 11-26.5t26.5-11q15.5 0 26.5 11t11 26.5v39q0 15.5-11 26.5t-26.5 11Zm160 0q-15.5 0-26.5-11t-11-26.5v-219q0-15.5 11-26.5t26.5-11q15.5 0 26.5 11t11 26.5v219q0 15.5-11 26.5t-26.5 11Zm160 0q-15.5 0-26.5-11t-11-26.5v-139q0-15.5 11-26.25T480-336q15.5 0 26.5 10.75t11 26.25v139q0 15.5-11 26.5t-26.5 11Zm160 0q-15.5 0-26.5-11t-11-26.5v-199q0-15.5 11-26.5t26.5-11q15.5 0 26.5 11t11 26.5v199q0 15.5-11 26.5t-26.5 11Zm160 0q-15.5 0-26.5-11t-11-26.5v-359q0-15.5 11-26.5t26.5-11q15.5 0 26.5 11t11 26.5v359q0 15.5-11 26.5t-26.5 11ZM560-482q-15 0-28.25-5.5t-24.75-16l-107-107L186.5-397q-11.5 11.5-26.75 11T133-398q-10.5-11.5-10.25-26.5T133.5-450L347-663.5q11.5-11.5 24.75-16.5t28.25-5q15 0 28.75 5T453-663.5l107 107L773.5-770q11.5-11.5 26.75-11T827-769q10.5 11.5 10.25 26.5T826.5-717L613-503.5q-10.5 10.5-24.25 16T560-482Z"
+                        />
+                      </svg>
+                      MDN on GitHub
                     </a>
                   </li>
                 </ul>
