@@ -1,6 +1,5 @@
 import { LitElement, html } from "lit";
 
-import styles from "./element.css?lit";
 import "../button/element.js";
 
 export class MDNObservatoryRescanButton extends LitElement {
@@ -9,8 +8,6 @@ export class MDNObservatoryRescanButton extends LitElement {
     duration: { type: Number },
     _remainingTime: { state: true },
   };
-
-  static styles = styles;
 
   constructor() {
     super();
@@ -48,7 +45,7 @@ export class MDNObservatoryRescanButton extends LitElement {
   _icon(progressPercent) {
     return html`<span
       class="progress"
-      style="background: conic-gradient(light-dark(var(--color-gray-40), var(--color-gray-60)) 0grad, ${progressPercent}%, rgba(0,0,0,0) ${progressPercent}% 100%)"
+      style="  display: inline-block; width: 0.9rem; height: 0.9rem; border-radius: 50%; background: conic-gradient(light-dark(var(--color-gray-40), var(--color-gray-60)) 0grad, ${progressPercent}%, rgba(0,0,0,0) ${progressPercent}% 100%)"
     ></span>`;
   }
 
@@ -60,7 +57,7 @@ export class MDNObservatoryRescanButton extends LitElement {
     return isExpired
       ? html`<mdn-button>Rescan</mdn-button>`
       : html` <mdn-button disabled .icon=${this._icon(progressPercent)}
-          >Wait ${remainingSecs}s to rescan</mdn-button
+          >Please wait to rescan</mdn-button
         >`;
   }
 }

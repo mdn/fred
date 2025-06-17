@@ -1,16 +1,6 @@
 /* Observatory main layout */
 
 .obs-layout {
-  --color-gray-1: #f9f9fb;
-  --color-gray-2: #e9e9e9;
-  --color-gray-3: #d9d9d9;
-  --color-gray-4: #c9c9c9;
-  --color-gray-5: #b9b9b9;
-  --color-gray-6: #a9a9a9;
-  --color-gray-7: #696969;
-  --color-gray-8: #2f2f2f;
-  --color-gray-9: #1b1b1b;
-
   --spacing: 2rem;
 
   --progress-color: var(--observatory-accent);
@@ -41,14 +31,14 @@
     var(--color-red-80)
   );
 
-  --observatory-table-bg: light-dark(var(--color-white), var(--color-gray-9));
+  --observatory-table-bg: light-dark(var(--color-white), var(--color-gray-10));
   --observatory-table-bg-alternate: light-dark(
-    var(--color-gray-1),
-    var(--color-gray-8)
+    var(--color-gray-90),
+    var(--color-gray-10)
   );
   --observatory-table-header-bg: light-dark(
-    var(--color-gray-1),
-    var(--color-gray-9)
+    var(--color-gray-90),
+    var(--color-gray-10)
   );
 
   --observatory-grade-a-bg: light-dark(#d2fadd, #265c3d);
@@ -76,6 +66,8 @@
 
   /* icons */
   --alert-circle-img: url("./assets/alert-circle.svg");
+
+  /* Draw a top border in our color */
 }
 
 /* landing */
@@ -147,7 +139,7 @@
 
   color: var(--color-text-secondary);
 
-  background: var(--color-background-secondary);
+  background-color: light-dark(var(--color-gray-90), var(--color-gray-05));
 
   p {
     color: var(--color-text-secondary);
@@ -314,7 +306,7 @@
 
   color: var(--color-text-primary);
 
-  background: var(--color-background-secondary);
+  background-color: light-dark(var(--color-gray-90), var(--color-gray-05));
 
   @media (--screen-xxlarge) {
     padding-inline: calc((100% - 1440px + (1rem * 2)) / 2);

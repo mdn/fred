@@ -19,14 +19,8 @@ export class ObservatoryLanding extends ServerComponent {
    * @returns {import("@lit").TemplateResult}
    */
   render(context) {
-    const extendedContext = {
-      ...context,
-      doc: {
-        parents: [{ uri: "/en-US/observatory", title: "HTTP Observatory" }],
-      },
-    };
     return PageLayout.render(
-      extendedContext,
+      context,
       html`
     <div class="obs-layout obs-layout--landing">
       <div class="obs-layout__content obs-layout__content--landing">

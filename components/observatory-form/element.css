@@ -30,7 +30,7 @@
 
     font: inherit;
 
-    background-color: var(--color-background-secondary);
+    background-color: light-dark(var(--color-gray-90), var(--color-gray-05));
     border: 1px solid var(--color-border-secondary);
     border-top-left-radius: var(--border-radius);
     border-bottom-left-radius: var(--border-radius);

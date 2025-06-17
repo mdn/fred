@@ -239,7 +239,7 @@ a {
 
     tr {
       font-size: 0.875rem;
-      color: var(--color-tootip);
+      color: var(--color-tooltip);
 
       &.current {
         color: var(--color-tooltip-highlight);
@@ -350,9 +350,13 @@ a {
     color: var(--color-text-secondary);
 
     background: var(--observatory-table-header-bg);
+
+    tr {
+      background-color: unset;
+    }
   }
 
-  tr:nth-child(odd) {
+  tr:nth-child(even) {
     background-color: var(--observatory-table-bg-alternate);
   }
 
