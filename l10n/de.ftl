@@ -26,7 +26,7 @@ Yes = Ja
 Report = Report
 
 obs_title = HTTP Observatory
-obs_landing_intro = Das 2016 gestartete HTTP Observatory verbessert die Sicherheit durch Analyse der Einhaltung bewährter Sicherheitspraktiken. Es hat durch 47 Millionen Scans Einblicke in über 6,9 Millionen Websites geliefert.
+obs_landing_intro = Sei 2016 verbessert HTTP Observatory die Sicherheit durch Analyse der Einhaltung bewährter Sicherheitspraktiken. Es hat durch 47 Millionen Scans Einblicke in über 6,9 Millionen Websites geliefert.
 obs_assessment = Das von Mozilla entwickelte HTTP Observatory führt eine umfassende Bewertung der HTTP-Header und weiterer zentraler Sicherheitskonfigurationen einer Website durch.
 obs_scanning = Der automatisierte Scan-Prozess liefert Entwicklern und Website-Administratoren detailliertes, handlungsorientiertes Feedback und konzentriert sich darauf, potenzielle Sicherheitslücken zu erkennen und zu beheben.
 obs_security = Das Tool unterstützt Entwickler und Website-Administratoren maßgeblich dabei, ihre Websites in einem sich stetig weiterentwickelnden digitalen Umfeld gegen häufige Sicherheitsbedrohungen abzusichern.

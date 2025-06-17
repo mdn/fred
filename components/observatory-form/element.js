@@ -1,6 +1,7 @@
 import { LitElement, html, nothing } from "lit";
 import { createRef, ref } from "lit/directives/ref.js";
 import "../../components/progress-bar/element.js";
+import "../../components/button/element.js";
 
 import styles from "./element.css?lit";
 
@@ -98,6 +99,7 @@ export class MDNObservatoryForm extends LitElement {
                 class="button observatory-form__submit"
                 type="submit"
                 ?disabled=${this._queryRunning}
+                data-variant="primary"
               >
                 Scan
               </button>
