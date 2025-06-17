@@ -8,7 +8,6 @@ import styles from "./element.css?lit";
 
 export class MDNObservatoryTestsAndScores extends LitElement {
   static styles = styles;
-  // static ssr = false;
 
   _fetchMatrixTask = new Task(this, {
     task: async () => {

@@ -10,8 +10,20 @@ export class ObservatoryResults extends ServerComponent {
    * @returns {import("@lit").TemplateResult}
    */
   render(context) {
+    const extendedContext = {
+      ...context,
+      doc: {
+        parents: [
+          { uri: "/en-US/observatory", title: "HTTP Observatory" },
+          {
+            title: "Report",
+          },
+        ],
+      },
+    };
+
     return PageLayout.render(
-      context,
+      extendedContext,
       html`
         <div class="obs-layout obs-layout--results">
           <div class="obs-layout__content obs-layout__content--results">

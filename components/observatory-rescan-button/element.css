@@ -1,7 +1,7 @@
 /* TODO */
 @import url("../../components/button/server.css");
 
-button {
+.button {
   position: relative;
 
   display: flex;
@@ -16,7 +16,8 @@ button {
   padding-right: 0.5rem;
   padding-left: 0.5rem;
 
-  font: var(--type-emphasis-m);
+  font-size: var(--font-size-small);
+  font-weight: 600;
 }
 
 .progress {

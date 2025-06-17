@@ -51,46 +51,16 @@
     var(--color-gray-9)
   );
 
-  --observatory-grade-a-bg: light-dark(
-    var(--color-green-90),
-    var(--color-green-10)
-  );
-  --observatory-grade-a-border: light-dark(
-    var(--color-green-50),
-    var(--color-green-80)
-  );
-  --observatory-grade-b-bg: light-dark(
-    var(--color-yellow-90),
-    var(--color-yellow-10)
-  );
-  --observatory-grade-b-border: light-dark(
-    var(--color-yellow-50),
-    var(--color-yellow-80)
-  );
-  --observatory-grade-c-bg: light-dark(
-    var(--color-yellow-90),
-    var(--color-yellow-10)
-  );
-  --observatory-grade-c-border: light-dark(
-    var(--color-yellow-20),
-    var(--color-yellow-50)
-  );
-  --observatory-grade-d-bg: light-dark(
-    var(--color-orange-90),
-    var(--color-orange-10)
-  );
-  --observatory-grade-d-border: light-dark(
-    var(--color-orange-50),
-    var(--color-orange-50)
-  );
-  --observatory-grade-f-bg: light-dark(
-    var(--color-red-90),
-    var(--color-red-10)
-  );
-  --observatory-grade-f-border: light-dark(
-    var(--color-red-50),
-    var(--color-red-80)
-  );
+  --observatory-grade-a-bg: light-dark(#d2fadd, #265c3d);
+  --observatory-grade-a-border: light-dark(#017a37, #89fca1);
+  --observatory-grade-b-bg: light-dark(#e8fad2, #52662a);
+  --observatory-grade-b-border: light-dark(#547a01, #d5fc88);
+  --observatory-grade-c-bg: light-dark(#faf8d2, #66602a);
+  --observatory-grade-c-border: light-dark(#7a7001, #fcf988);
+  --observatory-grade-d-bg: light-dark(#fae8d2, #5c3d26);
+  --observatory-grade-d-border: light-dark(#a65001, #ff6a00);
+  --observatory-grade-f-bg: light-dark(#fad2d2, #5c2626);
+  --observatory-grade-f-border: light-dark(#aa0000, #fc8888);
   --observatory-arrow-down-color: light-dark(
     var(--color-red-20),
     var(--color-red-80)
@@ -387,6 +357,7 @@
 .obs-results__feedback {
   .obs-links__link {
     margin-top: 1.5rem;
+    font-size: var(--font-size-small);
   }
 }
 
@@ -437,11 +408,6 @@ h2.obs-toc__heading {
     text-decoration: none;
   }
 }
-
-/*
-.obs-results__title {
-}
-*/
 
 .obs-results__title-accent {
   color: var(--observatory-accent);

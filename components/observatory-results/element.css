@@ -38,6 +38,22 @@
   }
 }
 
+:host {
+  line-height: var(--font-line-content);
+}
+
+.trend {
+  margin-top: 1rem;
+}
+
+.arrow-down {
+  color: var(--observatory-arrow-down-color);
+}
+
+.arrow-up {
+  color: var(--observatory-arrow-up-color);
+}
+
 h2 {
   margin-top: 1.5rem;
   margin-bottom: 1rem;
@@ -104,7 +120,7 @@ code {
 
 .scan-another {
   margin-top: 1.2rem;
-  font-size: var(--type-smaller-font-size);
+  font-size: var(--font-size-small);
   font-weight: 400;
 }
 
@@ -169,9 +185,13 @@ a {
 
 .tooltip-popup {
   --tooltip-offset: -6.3rem;
+
+  --color-tootip: light-dark(#b3b3b3, #696969);
+  --color-tooltip-highlight: light-dark(#ffffff, #1b1b1b);
+  --color-bg-tooltip: light-dark(#1b1b1b, #ffffff);
+
   position: relative;
   inset: unset;
-  left: 50%;
   z-index: 1;
 
   width: max-content;
@@ -182,11 +202,13 @@ a {
 
   overflow: visible;
 
-  color: var(--observatory-inverse-color-secondary);
+  line-height: var(--font-line-content);
+
+  color: var(--color-tootip);
 
   text-align: center;
 
-  background-color: var(--button-primary-default);
+  background-color: var(--color-bg-tooltip);
   border-width: 0;
   border-radius: var(--border-radius);
 
@@ -199,7 +221,7 @@ a {
     margin-top: -2rem;
     margin-left: -1rem;
 
-    fill: var(--button-primary-default);
+    fill: var(--color-bg-tooltip);
   }
 
   table {
@@ -213,10 +235,10 @@ a {
 
     tr {
       font-size: 0.875rem;
-      color: var(--observatory-inverse-color-secondary);
+      color: var(--color-tootip);
 
       &.current {
-        color: var(--observatory-inverse-color);
+        color: var(--color-tooltip-highlight);
       }
     }
 
@@ -308,6 +330,7 @@ a {
 }
 
 .scan-results table {
+  width: 100%;
   min-width: calc(992px - 2rem - 12rem);
 
   border-collapse: collapse;

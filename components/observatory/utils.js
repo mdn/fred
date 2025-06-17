@@ -160,13 +160,16 @@ export function CookiePrefix({ cookieName }) {
  * @returns {import("@lit").TemplateResult}
  */
 export function HeaderLink({ header }) {
+  // try a HEAD fetch for /en-US/docs/Web/HTTP/Headers/<HEADERNAME>/metadata.json
+  // if successful, link to /en-US/docs/Web/HTTP/Headers/<HEADERNAME>
+
   const displayHeaderName = upperCaseHeaderName(header);
-  const headerPath = `/en-US/docs/Web/HTTP/Headers/${encodeURIComponent(
+  const headerPath = `/en-US/docs/Web/HTTP/Reference/Headers/${encodeURIComponent(
     displayHeaderName,
   )}`;
 
-  // Simple approach: always show the link, it will 404 if the page doesn't exist
-  // Alternative: you could maintain a list of known valid headers
+  // const res = fetch(`${headerPath}/metadata.json`, { method: "HEAD" });
+
   return html`
     <a href=${headerPath} target="_blank" rel="noreferrer">
       ${displayHeaderName}

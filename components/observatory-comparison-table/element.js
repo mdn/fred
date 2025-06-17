@@ -1,124 +1,17 @@
 import { Task } from "@lit/task";
-import { LitElement, css, html, nothing, svg } from "lit";
+import { LitElement, html, nothing, svg } from "lit";
 
 import { OBSERVATORY_API_URL } from "../observatory/constants.js";
 import { formatMinus } from "../observatory/utils.js";
+
+import styles from "./element.css?lit";
 
 export class MDNObservatoryComparisonTable extends LitElement {
   static properties = {
     result: { type: Object },
   };
 
-  static styles = css`
-    .visually-hidden {
-      border: 0 !important;
-      clip: rect(1px, 1px, 1px, 1px) !important;
-      -webkit-clip-path: inset(50%) !important;
-      clip-path: inset(50%) !important;
-      height: 1px !important;
-      margin: -1px !important;
-      overflow: hidden !important;
-      padding: 0 !important;
-      position: absolute !important;
-      white-space: nowrap !important;
-      width: 1px !important;
-    }
-    .grade {
-      background: var(--grade-bg);
-      border: 1px solid var(--grade-border);
-      border-radius: 0.2em;
-      color: var(--grade-border);
-      display: inline-block;
-      font-size: 1.7rem;
-      font-weight: 600;
-      height: 5rem;
-      line-height: 5rem;
-      text-align: center;
-      width: 5rem;
-    }
-
-    .grade-a {
-      --grade-bg: var(--observatory-grade-a-bg);
-      --grade-border: var(--observatory-grade-a-border);
-    }
-
-    .grade-b {
-      --grade-bg: var(--observatory-grade-b-bg);
-      --grade-border: var(--observatory-grade-b-border);
-    }
-
-    .grade-c {
-      --grade-bg: var(--observatory-grade-c-bg);
-      --grade-border: var(--observatory-grade-c-border);
-    }
-
-    .grade-d {
-      --grade-bg: var(--observatory-grade-d-bg);
-      --grade-border: var(--observatory-grade-d-border);
-    }
-
-    .grade-f {
-      --grade-bg: var(--observatory-grade-f-bg);
-      --grade-border: var(--observatory-grade-f-border);
-    }
-
-    .chart {
-      background-color: var(--color-background-primary);
-      border-radius: var(--border-radius);
-    }
-
-    .tick text {
-      fill: var(--color-text-secondary);
-      font-family: var(--font-body);
-      font-size: 1rem;
-      font-weight: 300;
-      transform: scale(1);
-    }
-    .tick text.x-labels {
-      text-anchor: middle;
-
-      &.current {
-        fill: var(--grade-border);
-      }
-    }
-
-    .tick text.y-labels {
-      text-anchor: end;
-    }
-
-    .tick line {
-      color: var(--color-text-secondary);
-      opacity: 0.9;
-      stroke: var(--color-border-primary);
-      stroke-dasharray: 5, 5;
-      stroke-width: 1px;
-    }
-
-    .bar {
-      fill: var(--grade-bg);
-      stroke: var(--grade-bg);
-      stroke-width: 1;
-
-      &.current-grade {
-        stroke: var(--grade-border);
-      }
-    }
-
-    .you-are-here {
-      & polyline {
-        fill: var(--color-background-primary);
-        filter: drop-shadow(0 0 3px rgb(170 170 170));
-        z-index: 9;
-      }
-
-      & text {
-        fill: var(--color-text-primary);
-        font-family: var(--font-body);
-        font-size: 0.85rem;
-        font-weight: 300;
-      }
-    }
-  `;
+  static styles = styles;
 
   constructor() {
     super();
