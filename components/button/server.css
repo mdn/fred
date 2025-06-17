@@ -3,15 +3,19 @@
 .button {
   display: inline-flex;
 
-  column-gap: 0.5rem;
+  column-gap: 0.3125em;
   align-items: center;
+  justify-content: center;
 
-  padding: 0.5rem;
+  padding: 0.5em;
   margin: 0;
 
-  font-weight: bold;
+  font-family: var(--font-family-text);
+  font-size: 0.875em;
+  font-weight: 450;
 
   line-height: var(--font-line-ui);
+  vertical-align: middle;
 
   color: var(--color-text-primary);
 
@@ -130,12 +134,20 @@
 
   /* Icon */
 
+  .icon {
+    /* fix whitespace messing with layout */
+    display: flex;
+  }
+
   svg {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1.25em;
+    height: 1.25em;
+  }
 
-    margin: -2px;
+  /* Label */
 
-    fill: currentcolor;
+  .label {
+    padding-block: 0.125em;
+    padding-inline: 0.0625em;
   }
 }
