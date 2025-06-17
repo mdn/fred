@@ -127,18 +127,6 @@ export function Timestamp({ expires }) {
 }
 
 /**
- * Capitalizes header names, i.e. `content-type` -> `Content-Type`
- * @param {string} input
- * @returns {string}
- */
-export function upperCaseHeaderName(input) {
-  return input
-    .split("-")
-    .map((p) => (p && p[0] ? p[0].toUpperCase() + p.slice(1) : ""))
-    .join("-");
-}
-
-/**
  * Returns the cookie prefix, either "Host" or "Secure" if prefixed accordingly (`__host` & `__secure`),
  * or "-" if no prefix is present.
  * @param {{cookieName: string}} props
@@ -155,24 +143,31 @@ export function CookiePrefix({ cookieName }) {
 }
 
 /**
- * Link to a header documentation page inside MDN content
- * @param {{header: string}} props
+ * Link to a header documentation page inside MDN content, no checking
+ * @param {string} header
  * @returns {import("@lit").TemplateResult}
  */
-export function HeaderLink({ header }) {
-  // try a HEAD fetch for /en-US/docs/Web/HTTP/Headers/<HEADERNAME>/metadata.json
-  // if successful, link to /en-US/docs/Web/HTTP/Headers/<HEADERNAME>
-
+export function headerLink(header) {
   const displayHeaderName = upperCaseHeaderName(header);
   const headerPath = `/en-US/docs/Web/HTTP/Reference/Headers/${encodeURIComponent(
     displayHeaderName,
   )}`;
-
-  // const res = fetch(`${headerPath}/metadata.json`, { method: "HEAD" });
 
   return html`
     <a href=${headerPath} target="_blank" rel="noreferrer">
       ${displayHeaderName}
     </a>
   `;
+}
+
+/**
+ * Capitalizes header names, i.e. `content-type` -> `Content-Type`
+ * @param {string} header
+ * @returns {string}
+ */
+export function upperCaseHeaderName(header) {
+  return header
+    .split("-")
+    .map((p) => (p ? p.charAt(0).toUpperCase() + p.slice(1) : ""))
+    .join("-");
 }

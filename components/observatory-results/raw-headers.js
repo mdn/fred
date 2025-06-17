@@ -1,6 +1,8 @@
 import { html } from "lit";
 
-import { HeaderLink } from "../observatory/utils.js";
+import { headerLink } from "../observatory/utils.js";
+
+import "../observatory-header-link/element.js";
 
 /**
  *
@@ -23,7 +25,11 @@ export function RawHeaders({ result }) {
   const rows = Object.entries(result.scan.response_headers).map(
     ([header, value]) => html`
       <tr>
-        <td data-header="Header">${HeaderLink({ header })}</td>
+        <td data-header="Header">
+          <mdn-observatory-header-link header=${header}>
+            ${headerLink(header)}
+          </mdn-observatory-header-link>
+        </td>
         <td data-header="Value">${value}</td>
       </tr>
     `,
