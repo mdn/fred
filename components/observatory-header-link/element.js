@@ -7,6 +7,7 @@ import styles from "./element.css?lit";
 
 export class MDNObservatoryHeaderLink extends LitElement {
   static styles = styles;
+  static ssr = false;
 
   static properties = {
     header: { type: String },
