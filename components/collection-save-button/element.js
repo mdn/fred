@@ -272,7 +272,7 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
                         ${bookmarks?.length
                           ? html`<mdn-button
                               @click=${this._delete}
-                              variant="invisible"
+                              variant="plain"
                               id="bookmark-delete"
                               ?disabled=${this._pending ||
                               !isCurrentInCollection}

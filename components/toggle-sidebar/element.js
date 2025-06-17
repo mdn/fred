@@ -47,7 +47,7 @@ export class MDNToggleSidebar extends LitElement {
       aria-controls=${MAIN_SIDEBAR_ID}
       .icon=${panelIcon}
       icon-only
-      variant="invisible"
+      variant="plain"
     >
       Toggle sidebar
     </mdn-button>`;

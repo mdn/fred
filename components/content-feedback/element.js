@@ -84,6 +84,7 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
           data-vote="yes"
           @click=${this._handleVote}
           .icon=${thumbsUp}
+          action="positive"
         >
           ${this.l10n`Yes`}
         </mdn-button>
@@ -91,6 +92,7 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
           data-vote="no"
           @click=${this._handleVote}
           .icon=${thumbsDown}
+          action="negative"
         >
           ${this.l10n`No`}
         </mdn-button>
@@ -128,11 +130,7 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
           </div>`,
       )}
       <div class="button-container">
-        <mdn-button
-          class="primary"
-          @click=${this._handleFeedback}
-          ?disabled=${!this._reason}
-        >
+        <mdn-button @click=${this._handleFeedback} ?disabled=${!this._reason}>
           ${this.l10n`Submit`}
         </mdn-button>
       </div>`;

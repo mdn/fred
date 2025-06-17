@@ -1,122 +1,141 @@
-/** Button. */
+/* Button */
 
 .button {
-  /* Reset. */
-  appearance: none;
-  background: none;
-  border: none;
-}
+  display: inline-flex;
 
-.button {
-  /* Defaults. */
-  --button-focus-border-color--default: #0085f2;
-  --button-focus-effect--default: var(
-    --focus-effect,
-    0 0 0 3px var(--accent-primary-engage, #0085f21a)
-  );
-  --button-gap--default: 0.25rem;
-  --button-height--default: var(--form-elem-height, 2rem);
-  --button-padding--default: 0.5rem;
-  --button-radius--default: var(--elem-radius, 0.25rem);
+  column-gap: 0.5rem;
+  align-items: center;
 
-  /* Layout. */
-  display: flex;
+  padding: 0.5rem;
+  margin: 0;
 
-  gap: var(--button-gap, var(--button-gap--default));
-  place-items: center;
-  justify-content: center;
-
-  width: fit-content;
-  height: var(--button-height, var(--button-height--default));
-
-  padding: var(--button-padding, var(--button-padding--default));
-
-  font-family: var(--font-family-text);
-  font-size: var(--font-size-small);
+  font-weight: bold;
 
   line-height: var(--font-line-ui);
 
-  color: var(--button-color, var(--button-color--default));
+  color: var(--color-text-primary);
 
   text-decoration: none;
 
-  /* Interactivity. */
   cursor: pointer;
 
-  /* Visual. */
-  background-color: var(--button-bg, var(--button-bg--default));
-  border: 1px solid
-    var(--button-border-color, var(--button-border-color--default));
-  border-radius: var(--button-radius, var(--button-radius--default));
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
 
-  &,
+  /* Primary */
+
   &[data-variant="primary"] {
-    --button-bg--default: light-dark(#1b1b1b, #ffffff);
-    --button-bg-hover--default: light-dark(#696969, #cdcdcd);
-    --button-bg-active--default: light-dark(#9e9e9e, #9e9e9e);
-    --button-border-color--default: light-dark(#1d1d1d, #ffffff);
-    --button-color--default: var(--color-background-primary);
+    color: light-dark(var(--color-white), var(--color-black));
+    background-color: light-dark(var(--color-black), var(--color-white));
+
+    &:hover {
+      background-color: light-dark(var(--color-gray-20), var(--color-gray-80));
+    }
+
+    &[data-action="positive"] {
+      color: var(--color-white);
+      background-color: light-dark(
+        var(--color-green-50),
+        var(--color-green-20)
+      );
+
+      &:hover {
+        background-color: light-dark(
+          var(--color-green-20),
+          var(--color-green-50)
+        );
+      }
+    }
+
+    &[data-action="negative"] {
+      color: var(--color-white);
+      background-color: light-dark(var(--color-red-50), var(--color-red-20));
+
+      &:hover {
+        background-color: light-dark(var(--color-red-20), var(--color-red-50));
+      }
+    }
   }
+
+  /* Secondary */
 
   &[data-variant="secondary"] {
-    --button-bg--default: var(--color-background-primary);
-    --button-bg-hover--default: var(--color-border-secondary);
-    --button-bg-active--default: var(--color-border-secondary);
-    --button-border-color--default: var(--color-border-primary);
-    --button-color--default: var(--color-border-primary);
+    border-color: currentcolor;
+
+    &:hover {
+      background-color: light-dark(var(--color-gray-80), var(--color-gray-20));
+    }
+
+    &[data-action="positive"] {
+      color: light-dark(var(--color-green-50), var(--color-green-80));
+
+      &:hover {
+        background-color: light-dark(
+          var(--color-green-90),
+          var(--color-green-10)
+        );
+      }
+    }
+
+    &[data-action="negative"] {
+      color: light-dark(var(--color-red-50), var(--color-red-80));
+
+      &:hover {
+        background-color: light-dark(var(--color-red-90), var(--color-red-10));
+      }
+    }
   }
 
-  &[data-variant="invisible"] {
-    --button-bg--default: transparent;
-    --button-bg-hover--default: transparent;
-    --button-bg-active--default: transparent;
-    --button-border-color--default: transparent;
-    --button-color--default: var(--color-text-primary);
-  }
-}
+  /* Plain */
 
-/* Button States */
+  &[data-variant="plain"] {
+    &:hover {
+      background-color: light-dark(var(--color-gray-80), var(--color-gray-20));
+    }
 
-.button:active,
-.button.active {
-  background-color: var(
-    --button-bg-active,
-    var(--button-bg, var(--button-bg-active--default))
-  );
-}
+    &[data-action="positive"] {
+      color: light-dark(var(--color-green-50), var(--color-green-80));
 
-.button:focus,
-.button.focus {
-  outline: none;
-  border: 1px solid
-    var(--button-focus-border-color, var(--button-focus-border-color--default));
-  box-shadow: var(--button-focus-effect, var(--button-focus-effect--default));
-}
+      &:hover {
+        background-color: light-dark(
+          var(--color-green-90),
+          var(--color-green-10)
+        );
+      }
+    }
 
-.button:hover,
-.button.hover {
-  /* In most cases, we want the border to be the same color as the background. */
-  --button-border-color: var(
-    --button-bg-hover,
-    var(--button-bg, var(--button-bg-hover--default))
-  );
+    &[data-action="negative"] {
+      color: light-dark(var(--color-red-50), var(--color-red-80));
 
-  background-color: var(
-    --button-bg-hover,
-    var(--button-bg, var(--button-bg-hover--default))
-  );
-}
-
-.button[disabled],
-.button.disabled {
-  cursor: default;
-  opacity: 0.65;
-
-  &:hover {
-    --button-bg-hover: unset;
+      &:hover {
+        background-color: light-dark(var(--color-red-90), var(--color-red-10));
+      }
+    }
   }
 
-  &:active {
-    --button-bg-active: unset;
+  /* Disabled */
+
+  &[disabled] {
+    color: light-dark(var(--color-gray-40), var(--color-gray-60)) !important;
+
+    cursor: default;
+
+    background-color: light-dark(
+      var(--color-gray-80),
+      var(--color-gray-20)
+    ) !important;
+    border-color: transparent;
+  }
+
+  /* Icon */
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+
+    margin: -2px;
+
+    fill: currentcolor;
   }
 }

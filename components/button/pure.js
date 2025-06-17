@@ -9,6 +9,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
  * @param {boolean} [options.disabled]
  * @param {string} [options.href]
  * @param {import("./types.js").ButtonVariants} [options.variant]
+ * @param {import("./types.js").ButtonActions} [options.action]
  */
 export default function Button({
   label,
@@ -16,7 +17,8 @@ export default function Button({
   iconOnly,
   disabled = false,
   href,
-  variant,
+  variant = "primary",
+  action,
 }) {
   const inner = [
     icon ? html`<span class="icon">${icon}</span>` : nothing,
@@ -24,18 +26,20 @@ export default function Button({
   ];
   return href
     ? html`<a
-        class="button"
-        data-variant=${ifDefined(variant)}
         href=${href}
+        class="button"
         aria-labelledby="label"
+        data-variant=${ifDefined(variant)}
+        data-action=${ifDefined(action)}
       >
         ${inner}
       </a>`
     : html`<button
-        ?disabled=${disabled}
         class="button"
-        data-variant=${ifDefined(variant)}
         aria-labelledby="label"
+        ?disabled=${disabled}
+        data-variant=${ifDefined(variant)}
+        data-action=${ifDefined(action)}
       >
         ${inner}
       </button>`;
