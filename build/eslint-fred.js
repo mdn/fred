@@ -74,6 +74,46 @@ export default {
         };
       },
     },
+    "sandbox-component-name": {
+      meta: {
+        type: "problem",
+      },
+      create(context) {
+        return {
+          /**
+           * @param {import("estree").ClassDeclaration} node
+           */
+          ClassDeclaration(node) {
+            const filename = context.filename;
+            const [className, superClassName] = getClassNames(node);
+
+            if (superClassName === "SandboxComponent") {
+              if (!className.endsWith("Sandbox")) {
+                context.report({
+                  node,
+                  message: `Class '${className}' extends SandboxComponent and should have a 'Sandbox' suffix.`,
+                });
+              }
+
+              const expectedDir = toCamelCase(
+                className.replace(/Sandbox$/, ""),
+              );
+              const expectedPath = path.join(
+                "components",
+                expectedDir,
+                "sandbox.js",
+              );
+              if (!filename.endsWith(expectedPath)) {
+                context.report({
+                  node,
+                  message: `Class '${className}' extends SandboxComponent and should be in a file named './components/${expectedDir}/sandbox.js'.`,
+                });
+              }
+            }
+          },
+        };
+      },
+    },
   },
 };
 

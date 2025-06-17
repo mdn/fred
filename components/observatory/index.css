@@ -284,13 +284,13 @@
 
 .obs-links__link--faq {
   &::before {
-    mask-image: url("../icon/message-question.svg");
+    mask-image: url("../icon/circle-help.svg");
   }
 }
 
 .obs-links__link--feedback {
   &::before {
-    mask-image: url("../icon/feedback.svg");
+    mask-image: url("../icon/circle-alert.svg");
   }
 }
 

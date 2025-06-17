@@ -31,7 +31,7 @@ export class MDNModal extends LitElement {
         <header>
           ${this.modalTitle ? html`<h2>${this.modalTitle}</h2>` : nothing}
           <mdn-button
-            variant="invisible"
+            variant="plain"
             icon-only
             .icon=${exitIcon}
             @click=${this.close}

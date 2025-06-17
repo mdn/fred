@@ -31,6 +31,12 @@ See [the layout README](./components/layout/README.md).
 
 See [the media queries README](./components/media/README.md).
 
+### Sandbox
+
+We have a basic sandbox for testing and styling components in isolation at http://localhost:3000/sandbox
+
+To add a component to the sandbox, add a `sandbox.js` file to the component, which exports a class named like `MyComponentSandbox` which extends the `SandboxComponent` exported from `components/sandbox/class.js`.
+
 ### Components and Elements
 
 - Components should live in the `components/` folder, with reserved names which cause certain behavior, explained further below:

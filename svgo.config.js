@@ -2,8 +2,12 @@ export default {
   multipass: true,
   plugins: [
     {
-      name: "removeViewBox",
-      active: false,
+      name: "preset-default",
+      params: {
+        overrides: {
+          removeViewBox: false,
+        },
+      },
     },
   ],
 };

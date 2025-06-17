@@ -132,6 +132,14 @@ export async function startDevServer() {
           const contentType = proxyRes.headers["content-type"] || "";
           const statusCode = proxyRes.statusCode || 500;
 
+          if (req.path === "/sandbox") {
+            return serverRenderMiddleware(req, res, {
+              // @ts-expect-error
+              renderer: "Sandbox",
+              pageTitle: "Fred sandbox",
+            });
+          }
+
           if (!contentType && statusCode === 404) {
             // render 404 page
             res.statusCode = 404;

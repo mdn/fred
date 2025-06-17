@@ -11,7 +11,7 @@
 
     background-color: currentcolor;
 
-    mask-image: url("../icon/external.svg");
+    mask-image: url("../icon/external-link.svg");
     mask-size: cover;
   }
 }

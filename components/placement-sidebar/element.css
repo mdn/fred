@@ -119,7 +119,7 @@
 
             background-color: var(--color);
 
-            mask-image: url("../icon/external.svg");
+            mask-image: url("../icon/external-link.svg");
             mask-size: cover;
           }
         }

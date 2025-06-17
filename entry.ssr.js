@@ -23,6 +23,7 @@ import { OuterLayout } from "./components/outer-layout/server.js";
 import { PageLayout } from "./components/page-layout/server.js";
 import { Playground } from "./components/playground/server.js";
 import { Plus } from "./components/plus/server.js";
+import { Sandbox } from "./components/sandbox/server.js";
 import { Search } from "./components/search/server.js";
 import { asyncLocalStorage } from "./components/server/async-local-storage.js";
 import { addFluent } from "./l10n/context.js";
@@ -56,8 +57,7 @@ export async function render(path, page, compilationStats) {
 
   return asyncLocalStorage.run({ componentsUsed: new Set() }, () =>
     runWithContext({ locale }, async () => {
-      const component = (() => {
-        console.log("renderer", context.renderer);
+      const component = await (async () => {
         switch (context.renderer) {
           case "BlogIndex":
             return BlogIndex.render(context);
@@ -113,6 +113,9 @@ export async function render(path, page, compilationStats) {
               `Unknown Spa Page title=${context.pageTitle}, slug=${context.slug}`,
             );
           }
+          // @ts-expect-error
+          case "Sandbox":
+            return Sandbox.render();
           case "SpaNotFound":
           default:
             return NotFound.render(context);

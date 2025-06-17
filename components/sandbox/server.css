@@ -1,0 +1,28 @@
+.sandbox {
+  display: grid;
+
+  grid-template-rows: 100vh;
+  grid-template-columns: 200px 1fr;
+
+  margin: 0;
+
+  > * {
+    overflow: auto;
+  }
+}
+
+.sandbox__section {
+  display: none;
+
+  &:target {
+    display: block;
+  }
+}
+
+.sandbox__list {
+  padding: 0;
+
+  > li {
+    margin-block: 1rem;
+  }
+}

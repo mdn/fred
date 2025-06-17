@@ -62,35 +62,35 @@ const links = (context) => [
         text: context.l10n`Advertise with us`,
         href: "/en-US/advertising",
       },
-    ],
-  },
-  {
-    title: context.l10n`Support`,
-    links: [
+      { text: context.l10n`MDN Plus`, href: "/en-US/plus" },
       {
         text: context.l10n`Product help`,
         href: "https://support.mozilla.org/products/mdn-plus",
         external: true,
       },
-      {
-        text: context.l10n`Report an issue`,
-        href: "/en-US/docs/MDN/Community/Issues",
-      },
     ],
   },
   {
-    title: context.l10n`Our communities`,
+    title: context.l10n`Contribute`,
     links: [
       {
         text: context.l10n`MDN Community`,
         href: "/en-US/community",
       },
       {
-        text: context.l10n`MDN Forum`,
-        href: "https://discourse.mozilla.org/c/mdn/236",
+        text: context.l10n`Community resources`,
+        href: "/en-US/docs/MDN/Community",
+      },
+      {
+        text: context.l10n`Writing guidelines`,
+        href: "/en-US/docs/MDN/Writing_guidelines",
+      },
+      { text: context.l10n`MDN Discord`, href: "/discord", external: true },
+      {
+        text: context.l10n`MDN on GitHub`,
+        href: "https://github.com/mdn",
         external: true,
       },
-      { text: context.l10n`MDN Chat`, href: "/discord", external: true },
     ],
   },
   {
@@ -102,9 +102,20 @@ const links = (context) => [
       },
       {
         text: context.l10n`Learn Web Development`,
-        href: "/en-US/docs/Learn",
+        href: "/en-US/docs/Learn_web_development",
       },
-      { text: context.l10n`MDN Plus`, href: "/en-US/plus" },
+      {
+        text: context.l10n`Guides`,
+        href: "/en-US/docs/MDN/Guides",
+      },
+      {
+        text: context.l10n`Tutorials`,
+        href: "/en-US/docs/MDN/Tutorials",
+      },
+      {
+        text: context.l10n`Glossary`,
+        href: "/en-US/docs/Glossary",
+      },
       {
         text: context.l10n`Hacks Blog`,
         href: "https://hacks.mozilla.org/",

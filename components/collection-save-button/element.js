@@ -2,7 +2,7 @@ import { Task } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
-import bookmarkFilledSvg from "../icon/bookmark-filled.svg?lit";
+import bookmarkCheckSvg from "../icon/bookmark-check.svg?lit";
 import bookmarkSvg from "../icon/bookmark.svg?lit";
 import { globalUser } from "../user/context.js";
 
@@ -204,7 +204,7 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
                 @click=${this._open}
               >
                 ${this._bookmarks.value?.length
-                  ? bookmarkFilledSvg
+                  ? bookmarkCheckSvg
                   : bookmarkSvg} <span>${this.l10n`Save`}</span>
               </button>
               <mdn-modal modal-title="Add to collection">
@@ -272,7 +272,7 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
                         ${bookmarks?.length
                           ? html`<mdn-button
                               @click=${this._delete}
-                              variant="invisible"
+                              variant="plain"
                               id="bookmark-delete"
                               ?disabled=${this._pending ||
                               !isCurrentInCollection}
