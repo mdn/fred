@@ -8,7 +8,7 @@
   display: grid;
 
   grid-template-areas: "grade data actions";
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 3fr 1fr;
 
   column-gap: var(--spacing);
   justify-content: space-between;
@@ -105,6 +105,10 @@ code {
 
 .actions {
   grid-area: actions;
+}
+
+mdn-observatory-rescan-button {
+  min-width: 30rem;
 }
 
 .info-tooltip {

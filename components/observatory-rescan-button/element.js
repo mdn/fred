@@ -1,6 +1,7 @@
 import { LitElement, html } from "lit";
 
 import styles from "./element.css?lit";
+import "../button/element.js";
 
 export class MDNObservatoryRescanButton extends LitElement {
   static properties = {
@@ -40,24 +41,27 @@ export class MDNObservatoryRescanButton extends LitElement {
     return Math.max(0, endTime - Date.now());
   }
 
+  /**
+   *
+   * @param {number} progressPercent
+   */
+  _icon(progressPercent) {
+    return html`<span
+      class="progress"
+      style="background: conic-gradient(light-dark(var(--color-gray-40), var(--color-gray-60)) 0grad, ${progressPercent}%, rgba(0,0,0,0) ${progressPercent}% 100%)"
+    ></span>`;
+  }
+
   render() {
     const isExpired = this._remainingTime <= 0;
     const remainingSecs = Math.floor(this._remainingTime / 1000) + 1;
     const progressPercent = (remainingSecs * 100) / 60;
 
-    return html`
-      ${isExpired
-        ? html`<button class="button">Rescan</button>`
-        : html` <button disabled class="button">
-            <div
-              class="progress"
-              role="progressbar"
-              aria-labelledby="wait-secs"
-              style="background: conic-gradient(var(--color-white) 0grad, ${progressPercent}%, rgba(0,0,0,0) ${progressPercent}% 100%)"
-            ></div>
-            <small id="wait-secs">Wait ${remainingSecs}s to rescan</small>
-          </button>`}
-    `;
+    return isExpired
+      ? html`<mdn-button>Rescan</mdn-button>`
+      : html` <mdn-button disabled .icon=${this._icon(progressPercent)}
+          >Wait ${remainingSecs}s to rescan</mdn-button
+        >`;
   }
 }
 
