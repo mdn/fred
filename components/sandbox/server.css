@@ -11,6 +11,13 @@
   }
 }
 
+.sandbox__sidebar {
+  mdn-color-theme {
+    display: block;
+    margin: 1rem;
+  }
+}
+
 .sandbox__section {
   display: none;
 

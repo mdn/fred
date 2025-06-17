@@ -29,6 +29,7 @@ export class Sandbox extends ServerComponent {
     return html`
       <body class="sandbox">
         <div class="sandbox__sidebar">
+          <mdn-color-theme></mdn-color-theme>
           <ul>
             ${Object.keys(componentMap).map(
               (name) => html`<li><a href=${`#${name}`}>${name}</a></li>`,
