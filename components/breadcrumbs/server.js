@@ -7,27 +7,46 @@ export class Breadcrumbs extends ServerComponent {
    * @param {import("@fred").Context} context
    */
   render(context) {
+    console.log("CONTEXT", context);
+
+    let parents;
     if (
-      !["Doc", "CurriculumModule", "CurriculumLanding"].includes(
-        context.renderer,
-      )
+      [
+        "Doc",
+        "CurriculumModule",
+        "CurriculumLanding",
+        "CurriculumOverview",
+        "CurriculumAbout",
+        "CurriculumDefault",
+      ].includes(context.renderer)
     ) {
+      // @ts-expect-error
+      parents = context.doc.parents;
+    } else if (
+      [
+        "GenericDoc",
+        "SpaObservatoryLanding",
+        "SpaObservatoryAnalyze",
+        "GenericAbout",
+        "GenericCommunity",
+      ].includes(context.renderer)
+    ) {
+      // @ts-expect-error
+      parents = context.parents;
+    } else {
       return nothing;
     }
 
     return html`
       <ul class="breadcrumbs">
-        ${
+        ${parents.map(
           // @ts-expect-error
-          context.doc.parents.map(
-            // @ts-expect-error
-            ({ uri, title }) => html`
-              <li>
-                <a href=${uri}>${title}</a>
-              </li>
-            `,
-          )
-        }
+          ({ uri, title }) => html`
+            <li>
+              <a href=${uri}>${title}</a>
+            </li>
+          `,
+        )}
       </ul>
     `;
   }
