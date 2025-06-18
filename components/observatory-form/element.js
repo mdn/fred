@@ -15,7 +15,7 @@ export class MDNObservatoryForm extends LitElement {
   static properties = {
     _queryRunning: { type: Boolean, state: true },
     _hostname: { type: String, state: true },
-    _errorMessage: { typoe: String, state: true },
+    _errorMessage: { type: String, state: true },
   };
 
   constructor() {

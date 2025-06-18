@@ -60,7 +60,7 @@ export function formatObject(input) {
   }
 
   if (input === JSON) {
-    // console.log(JSON) is outputed as "JSON {}" in browser console
+    // console.log(JSON) is output as "JSON {}" in browser console
     return `JSON {}`;
   }
 

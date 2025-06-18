@@ -190,7 +190,7 @@ a {
 .tooltip-popup {
   --tooltip-offset: -6.3rem;
 
-  --color-tootip: light-dark(#b3b3b3, #696969);
+  --color-tooltip: light-dark(#b3b3b3, #696969);
   --color-tooltip-highlight: light-dark(#ffffff, #1b1b1b);
   --color-bg-tooltip: light-dark(#1b1b1b, #ffffff);
 
@@ -208,7 +208,7 @@ a {
 
   line-height: var(--font-line-content);
 
-  color: var(--color-tootip);
+  color: var(--color-tooltip);
 
   text-align: center;
 

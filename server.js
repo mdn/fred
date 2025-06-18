@@ -34,8 +34,8 @@ async function serverRenderMiddleware(req, res, page) {
     /** @type {Stats} */
     const stats = res.locals.webpack.devMiddleware.stats;
 
-    const compliationStats = stats.toJson().children;
-    if (!compliationStats) {
+    const compilationStats = stats.toJson().children;
+    if (!compilationStats) {
       throw new Error("cannot parse the rspack config, did you modify it?");
     }
 
@@ -48,7 +48,7 @@ async function serverRenderMiddleware(req, res, page) {
           workerData: {
             reqPath: req.path,
             page,
-            compliationStats,
+            compilationStats,
           },
         },
       );
