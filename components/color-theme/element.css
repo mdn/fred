@@ -84,10 +84,6 @@
   &:hover {
     background-color: var(--color-background-secondary);
   }
-
-  svg {
-    pointer-events: none;
-  }
 }
 
 button {
