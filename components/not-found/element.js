@@ -6,10 +6,12 @@ import { L10nMixin } from "../../l10n/mixin.js";
 import styles from "./element.css?lit";
 
 export class MDNNotFound extends L10nMixin(LitElement) {
+  // Need location (not available server-side).
   static ssr = false;
 
   static styles = styles;
 
+  /** @type {Task<?,import("@rari").Doc|null>} */
   _fallback = new Task(this, {
     task: async () => {
       const url = location.pathname;
@@ -38,15 +40,23 @@ export class MDNNotFound extends L10nMixin(LitElement) {
     const url = location.pathname;
 
     return html`
-      <p>Sorry, the page <code>${url}</code> could not be found.</p>
+      <p>
+        ${this.l10n.raw({
+          id: "not_found_description",
+          args: { url },
+          elements: { url: { tag: "code" } },
+        })}
+      </p>
 
       ${this._fallback.render({
         complete: (doc) => {
           if (doc) {
             return html`<div class="notecard tip">
               <p>
-                <strong>Good news:</strong> The page you requested exists in
-                <em>English</em>.
+                ${this.l10n.raw({
+                  id: "not_found_fallback_english",
+                  elements: { strong: { tag: "strong" }, em: { tag: "em" } },
+                })}
               </p>
               <p>
                 <a href=${doc.mdn_url}>
@@ -66,8 +76,7 @@ export class MDNNotFound extends L10nMixin(LitElement) {
               .reverse();
 
             return html`<div class="notecard note">
-              <p>The page you requested doesn't exist, but you could try a site search
-              for:
+              <p>${this.l10n("not_found_fallback_search")}
               <ul>
                 ${normalizedLocationParts.map(
                   (part) =>
@@ -86,7 +95,7 @@ export class MDNNotFound extends L10nMixin(LitElement) {
       })}
 
       <p>
-        <a href="/">Go back to the home page</a>
+        <a href="/">${this.l10n("not_found_back")}</a>
       </p>
     `;
   }
