@@ -7,8 +7,6 @@ export class Breadcrumbs extends ServerComponent {
    * @param {import("@fred").Context} context
    */
   render(context) {
-    console.log("CONTEXT", context);
-
     let parents;
     if (
       [
