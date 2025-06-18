@@ -10,7 +10,11 @@ export class NotFound extends ServerComponent {
   render(context) {
     return PageLayout.render(
       context,
-      html` <h1>${context.l10n`Page not found`}</h1> `,
+      html`<main id="content" class="not-found">
+        <h1>${context.l10n`Page not found`}</h1>
+
+        <mdn-not-found></mdn-not-found>
+      </main>`,
     );
   }
 }
