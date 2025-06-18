@@ -75,6 +75,12 @@
   .icon {
     margin-left: 0.5ch;
   }
+
+  mark {
+    /* Sidebar filter highlight */
+    color: unset;
+    background-color: var(--color-background-blue);
+  }
 }
 
 .left-sidebar__header {

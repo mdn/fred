@@ -9,7 +9,7 @@ export class GenericContent extends ServerComponent {
    * @returns {import("@lit").TemplateResult}
    */
   render(context) {
-    return html`<div id="content" class="content">
+    return html`<div id="content" class="generic-content">
       ${context.hyData.sections.map((section) =>
         ContentSection.render(context, section),
       )}
