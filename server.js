@@ -140,7 +140,10 @@ export async function startDevServer() {
             });
           }
 
-          if (!contentType && statusCode === 404) {
+          if (
+            (!contentType || contentType.includes("text/plain")) &&
+            statusCode === 404
+          ) {
             // render 404 page
             res.statusCode = 404;
             const notFoundRes = await fetch(
