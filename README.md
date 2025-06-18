@@ -15,6 +15,19 @@ MDN's next fr(ont)e(n)d.
 > [!NOTE]
 > If you already have another local server running on port 3000, fred will use the next available port (e.g. 3001).
 
+## Commands
+
+- `node --env-file=.env --run rari -- serve`
+  - runs the rari server
+  - necessary for `npm run dev` and `npm run preview`
+- `npm run dev`
+  - brings up the live-reloading development server, likely what you want for doing local development
+- `npm run build`
+  - builds the production js/css/asset bundles
+  - must be run at least once for `npm run preview` to work
+- `npm run preview`
+  - runs the preview server: using the production bundles with the rari server: useful for testing our prod rspack config
+
 ## Development principles
 
 ### Inline JS
