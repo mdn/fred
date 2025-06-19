@@ -22,6 +22,12 @@
       position: relative;
       z-index: 1;
     }
+
+    /* Arrow */
+
+    &::after {
+      margin-right: -4px;
+    }
   }
 
   /* Label */
@@ -42,12 +48,6 @@
     }
   }
 
-  /* Arrow */
-
-  .menu__tab-arrow {
-    margin-right: -7px;
-  }
-
   /* Panel */
 
   .menu__panel {
@@ -58,8 +58,8 @@
 
     margin-top: -1px;
 
-    background-color: var(--color-background-primary);
-    border: 1px solid var(--color-border-secondary);
+    background-color: var(--color-background-page);
+    border: 1px solid var(--color-border-primary);
   }
 
   /* Title */

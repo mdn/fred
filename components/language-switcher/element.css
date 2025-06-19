@@ -29,6 +29,18 @@
       display: none;
     }
   }
+
+  &::before {
+    width: 1.25rem;
+    height: 1.25rem;
+
+    content: "";
+
+    background-color: currentcolor;
+
+    mask-image: url("../icon/languages.svg");
+    mask-size: cover;
+  }
 }
 
 .language-switcher__dropdown {
@@ -42,7 +54,7 @@
   margin: 0;
 
   background-color: var(--color-background-primary);
-  border: 1px solid var(--color-text-secondary);
+  border: 1px solid var(--color-border-primary);
 }
 
 .language-switcher__list {
@@ -70,6 +82,8 @@
   font: inherit;
 
   color: var(--color-text-primary);
+
+  text-decoration: none;
 
   background-color: transparent;
   border: none;

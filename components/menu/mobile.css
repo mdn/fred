@@ -5,7 +5,7 @@
 
   .menu__tab {
     display: grid;
-    border-top: 1px solid var(--color-border-secondary);
+    border-top: 1px solid var(--color-border-primary);
   }
 
   /* Button */
@@ -17,6 +17,12 @@
     align-items: center;
 
     border: none;
+
+    /* Arrow */
+
+    &::after {
+      margin-left: auto;
+    }
   }
 
   /* Label */
@@ -29,15 +35,9 @@
     }
   }
 
-  /* Arrow */
-
-  .menu__tab-arrow {
-    margin-left: auto;
-  }
-
   /* Title */
 
   .menu__panel-title {
-    border-bottom: 1px solid var(--color-border-secondary);
+    border-bottom: 1px solid var(--color-border-primary);
   }
 }

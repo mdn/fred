@@ -16,6 +16,12 @@ baseline_supported_and_unsupported_in = Supported in { $supported }, but not wid
 homepage-hero_title = Resources for <u data-l10n-name="developers">Developers</u>,<br> by Developers
 homepage-hero_description = Documenting <a data-l10n-name="css">CSS</a>, <a data-l10n-name="html">HTML</a>, and <a data-l10n-name="js">JavaScript</a>, since 2005.
 
+not_found_title = Page not found
+not_found_description = Sorry, the page <code data-l10n-name="url">{ $url }</code> could not be found.
+not_found_fallback_english = <strong data-l10n-name="strong">Good news:</strong> The page you requested exists in <em data-l10n-name="em">English</em>.
+not_found_fallback_search = The page you requested doesn't exist, but you could try a site search for:
+not_found_back = Go back to the home page
+
 reference_toc_header = In this article
 
 footer_mofo = Visit <a data-l10n-name="moco">Mozilla Corporation’s</a> not-for-profit parent, the <a data-l10n-name="mofo">Mozilla Foundation</a>.

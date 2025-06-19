@@ -1,0 +1,22 @@
+name: "PR conflicts"
+
+on:
+  push:
+  pull_request_target:
+    types: [synchronize]
+
+permissions:
+  # Label pull requests.
+  pull-requests: write
+
+concurrency:
+  group: pr-rebase-needed-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  labeler:
+    uses: mdn/workflows/.github/workflows/pr-rebase-needed.yml@main
+    with:
+      target-repo: "mdn/content"
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

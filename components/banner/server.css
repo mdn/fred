@@ -7,5 +7,5 @@
     var(--color-background-primary) 0 24px,
     var(--color-background-secondary) 24px 48px
   );
-  border-block-end: 1px solid var(--color-border-secondary);
+  border-block-end: 1px solid var(--color-border-primary);
 }

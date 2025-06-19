@@ -1,0 +1,11 @@
+@import url("../notecard/index.css");
+
+code {
+  padding: 0.125em 0.25em;
+
+  font-family: var(--font-family-code);
+  font-size-adjust: 0.5;
+
+  background-color: var(--color-background-secondary);
+  border-radius: 0.25em;
+}

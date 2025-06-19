@@ -26,6 +26,7 @@ declare global {
     "mdn-live-sample-result": import("../components/live-sample-result/element.js").MDNLiveSampleResult;
     "mdn-login-button": import("../components/login-button/element.js").MDNLoginButton;
     "mdn-modal": import("../components/modal/element.js").MDNModal;
+    "mdn-not-found": import("../components/not-found/element.js").MDNNotFound;
     "mdn-observatory-comparison-table": import("../components/observatory-comparison-table/element.js").MDNObservatoryComparisonTable;
     "mdn-observatory-form": import("../components/observatory-form/element.js").MDNObservatoryForm;
     "mdn-observatory-header-link": import("../components/observatory-header-link/element.js").MDNObservatoryHeaderLink;
