@@ -78,10 +78,12 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
       <mdn-dropdown>
         <button
           slot="button"
-          class="color-theme__button dropdown"
-          title=${this.l10n`Switch color theme`}
+          class="color-theme__button"
+          data-mode=${this._mode}
+          type="button"
+          aria-label=${this.l10n`Switch color theme`}
         >
-          ${this._icon} <span>${this.l10n`Theme`}</span>
+          <span>${this.l10n`Theme`}</span>
         </button>
         <div
           slot="dropdown"
@@ -93,27 +95,30 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
               <button
                 class="color-theme__option"
                 data-mode="light dark"
+                type="button"
                 @click=${this._setMode}
               >
-                ${osDefault} ${this.l10n("theme_default")`OS default`}
+                ${this.l10n("theme_default")`OS default`}
               </button>
             </li>
             <li>
               <button
                 class="color-theme__option"
                 data-mode="light"
+                type="button"
                 @click=${this._setMode}
               >
-                ${light} ${this.l10n`Light`}
+                ${this.l10n`Light`}
               </button>
             </li>
             <li>
               <button
                 class="color-theme__option"
                 data-mode="dark"
+                type="button"
                 @click=${this._setMode}
               >
-                ${dark} ${this.l10n`Dark`}
+                ${this.l10n`Dark`}
               </button>
             </li>
           </ul>

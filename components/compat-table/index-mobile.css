@@ -12,10 +12,10 @@
       td.bc-support {
         display: block;
         border: none;
-        border-top: 1px solid var(--color-border-secondary);
+        border-top: 1px solid var(--color-border-primary);
 
         &:last-child {
-          border-bottom: 1px solid var(--color-border-secondary);
+          border-bottom: 1px solid var(--color-border-primary);
         }
       }
     }
@@ -27,7 +27,7 @@
 
     tr:not(:first-of-type) .bc-feature {
       /* Feature separator. */
-      border-top: 2px solid var(--color-border-secondary);
+      border-top: 2px solid var(--color-border-primary);
     }
 
     .bc-feature,

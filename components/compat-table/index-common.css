@@ -51,7 +51,7 @@ table {
   border-spacing: 0;
   border-collapse: separate;
 
-  border: 1px solid var(--color-border-secondary);
+  border: 1px solid var(--color-border-primary);
   border-radius: 0.25rem;
 
   td,
@@ -62,7 +62,7 @@ table {
     font-size: var(--font-size-small);
     font-weight: 500;
 
-    border: 1px solid var(--color-border-secondary);
+    border: 1px solid var(--color-border-primary);
     border-width: 0 0 1px 1px;
 
     code {
@@ -209,11 +209,11 @@ table {
   }
 
   .bc-feature-depth-2 {
-    border-left: 7px solid var(--color-border-secondary);
+    border-left: 7px solid var(--color-border-primary);
   }
 
   .bc-feature-depth-3 {
-    border-left: 15px solid var(--color-border-secondary);
+    border-left: 15px solid var(--color-border-primary);
   }
 
   .timeline {
@@ -284,7 +284,7 @@ table {
   display: flex;
 
   .icon {
-    background-color: var(--color-border-primary);
+    background-color: var(--color-border-secondary);
   }
 }
 
@@ -341,7 +341,7 @@ table {
 
     content: "";
 
-    background: var(--color-border-secondary);
+    background: var(--color-border-primary);
   }
 
   /* complicated selector to cover the last bit of the grey line above. */
@@ -371,8 +371,8 @@ table {
 
   .bc-supports-dd {
     .icon {
-      background: var(--color-border-secondary);
-      border: 3px solid var(--color-background-primary);
+      background: var(--color-background-secondary);
+      border: 3px solid var(--color-border-secondary);
       border-radius: 50%;
 
       mask-image: none;
@@ -401,7 +401,7 @@ table {
 
 .bc-notes-wrapper {
   margin-bottom: 1rem;
-  color: var(--color-border-primary);
+  color: var(--color-border-secondary);
 
   &:last-child {
     margin-bottom: 0;
@@ -465,10 +465,10 @@ dl.bc-notes-list {
     vertical-align: text-top;
 
     .icon {
-      background-color: var(--color-border-secondary);
+      background-color: var(--color-border-primary);
 
       &:hover {
-        background-color: var(--color-border-primary);
+        background-color: var(--color-border-secondary);
       }
     }
   }

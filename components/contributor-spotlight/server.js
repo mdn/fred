@@ -1,7 +1,7 @@
 import { html } from "lit";
 
+import { ContentSection } from "../content-section/server.js";
 import { PageLayout } from "../page-layout/server.js";
-import { Section } from "../section/server.js";
 import { ServerComponent } from "../server/index.js";
 
 export class ContributorSpotlight extends ServerComponent {
@@ -21,7 +21,7 @@ export class ContributorSpotlight extends ServerComponent {
           >@${context.hyData.usernames.github}</a
         >
         ${context.hyData.sections.map((section) =>
-          Section.render(context, section),
+          ContentSection.render(context, section),
         )}
       `,
     );

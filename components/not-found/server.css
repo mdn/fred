@@ -1,0 +1,17 @@
+.not-found {
+  display: grid;
+  grid-template-columns: var(--layout-no-sidebar-extended);
+
+  > * {
+    grid-column: content;
+  }
+
+  h1 {
+    margin-top: 0;
+
+    font-size: var(--font-size-largest);
+    font-weight: normal;
+
+    line-height: var(--font-line-content);
+  }
+}

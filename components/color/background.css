@@ -5,7 +5,7 @@
 :root {
   --color-background-page: light-dark(var(--color-white), var(--color-gray-05));
   --color-background-primary: light-dark(
-    var(--color-white),
+    var(--color-gray-90),
     var(--color-gray-10)
   );
   --color-background-secondary: light-dark(

@@ -25,8 +25,4 @@
     border-bottom: 2px solid
       light-dark(var(--color-blue-50), var(--color-blue-80));
   }
-
-  svg {
-    fill: var(--color-text-primary);
-  }
 }

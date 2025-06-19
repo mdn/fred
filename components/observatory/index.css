@@ -388,7 +388,7 @@ h2.obs-toc__heading {
 
   list-style: none;
 
-  border-left: 2px solid var(--color-border-secondary);
+  border-left: 2px solid var(--color-border-primary);
 }
 
 .obs-toc__item {
