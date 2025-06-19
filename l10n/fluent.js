@@ -3,15 +3,15 @@ import insane from "insane";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import de_ftl from "../l10n/de.ftl";
-import enUS_ftl from "../l10n/en-us.ftl";
+import enUS_ftl from "../l10n/en-US.ftl";
 import es_ftl from "../l10n/es.ftl";
 import fr_ftl from "../l10n/fr.ftl";
 import ja_ftl from "../l10n/ja.ftl";
 import ko_ftl from "../l10n/ko.ftl";
-import ptBR_ftl from "../l10n/pt-br.ftl";
+import ptBR_ftl from "../l10n/pt-BR.ftl";
 import ru_ftl from "../l10n/ru.ftl";
-import zhCN_ftl from "../l10n/zh-cn.ftl";
-import zhTW_ftl from "../l10n/zh-tw.ftl";
+import zhCN_ftl from "../l10n/zh-CN.ftl";
+import zhTW_ftl from "../l10n/zh-TW.ftl";
 
 /**
  * @import { AllowedTags } from "insane";

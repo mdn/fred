@@ -15,6 +15,19 @@ MDN's next fr(ont)e(n)d.
 > [!NOTE]
 > If you already have another local server running on port 3000, fred will use the next available port (e.g. 3001).
 
+## Commands
+
+- `node --env-file=.env --run rari -- serve`
+  - runs the rari server
+  - necessary for `npm run dev` and `npm run preview`
+- `npm run dev`
+  - brings up the live-reloading development server, likely what you want for doing local development
+- `npm run build`
+  - builds the production js/css/asset bundles
+  - must be run at least once for `npm run preview` to work
+- `npm run preview`
+  - runs the preview server: using the production bundles with the rari server: useful for testing our prod rspack config
+
 ## Development principles
 
 ### Inline JS
@@ -70,3 +83,11 @@ To add a component to the sandbox, add a `sandbox.js` file to the component, whi
 - We occasionally use TypeScript files directly for writing types/interface which are too complex to easily write in JSDoc
 - Eventually we'll have a fully typed codebase, with no errors: while we're in active development we can ignore errors in the interest of development speed/pragmatism:
   - If we do so, we should use `// @ts-expect-error` so we get an error when we fix the error and don't leave unnecessary `// @ts-ignore` comments lying around. While we're in active development these can lack a comment, but eventually we'll require an explanatory comment on each.
+
+### Hydration errors
+
+If our server side rendered custom elements are different to the initial state of our custom elements when rendered client side, Lit will error out during hydration, stopping the execution of our client side JS.
+
+To avoid this, don't compute things that are server/client dependent in `connectedCallback` (or run functions which do this). Instead you must run these in `firstUpdated` (despite the warning lit will raise in development about the element scheduling an update after an update completed).
+
+This issue is tracked upstream: https://github.com/lit/lit/issues/1434

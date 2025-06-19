@@ -1,7 +1,7 @@
 import { LitElement, html, nothing } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
-import globeSvg from "../icon/globe.svg?lit";
+import languagesSvg from "../icon/languages.svg?lit";
 
 import styles from "./element.css?lit";
 
@@ -36,7 +36,7 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
     return html`<div class="language-switcher">
       <mdn-dropdown>
         <button slot="button" class="language-switcher__button dropdown">
-          ${globeSvg}
+          ${languagesSvg}
           <span>${native ?? locale}</span>
         </button>
         <div

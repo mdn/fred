@@ -1,6 +1,6 @@
-.sidebar {
+.left-sidebar {
   mark {
     color: unset;
-    background-color: var(--mark-color);
+    background-color: var(--color-background-blue);
   }
 }

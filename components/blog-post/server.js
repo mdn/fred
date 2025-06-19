@@ -1,9 +1,9 @@
 import { html, nothing } from "lit";
 
 import { AuthorDateReadTime, BlogContainer } from "../blog/index.js";
+import { ContentSection } from "../content-section/server.js";
 import { PageLayout } from "../page-layout/server.js";
 import { ReferenceToc } from "../reference-toc/server.js";
-import { Section } from "../section/server.js";
 
 import { ServerComponent } from "../server/index.js";
 
@@ -30,7 +30,9 @@ function BlogTitleImageFigure(_context, { image, width, height }) {
  * @returns {import("@lit").TemplateResult}
  */
 function RenderBlogContent(context, { doc }) {
-  return html` ${doc.body.map((section) => Section.render(context, section))} `;
+  return html`
+    ${doc.body.map((section) => ContentSection.render(context, section))}
+  `;
 }
 
 /**

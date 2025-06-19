@@ -1,6 +1,6 @@
 @import url("../code-example/common.css");
 
-.section {
+.content-section {
   line-height: var(--font-line-content);
 
   h1,
@@ -37,6 +37,20 @@
 
     text-transform: uppercase;
     letter-spacing: 0.025em;
+  }
+
+  a:not([href^="#"]) {
+    &:link {
+      color: var(--color-link-normal);
+    }
+
+    &:visited {
+      color: var(--color-link-visited);
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   code {

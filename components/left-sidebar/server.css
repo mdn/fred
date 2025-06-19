@@ -1,16 +1,23 @@
 .left-sidebar {
+  position: sticky;
+  top: var(--sticky-header-height);
+
   h4 {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: var(--font-size-large);
     font-weight: normal;
   }
 
   summary {
-    padding: 0.5rem 0;
     cursor: pointer;
 
     &:hover {
       background-color: var(--color-background-secondary);
+
+      &:has(a:hover) {
+        /* Don't highlight, as link click doesn't toggle. */
+        background-color: unset;
+      }
     }
   }
 
@@ -21,39 +28,67 @@
   }
 
   details ol {
-    padding-left: 0.75rem;
+    padding-left: calc(0.75em + 2px); /* 2px to align with regular li. */
   }
 
   li {
     margin-bottom: 0.5rem;
+
+    &.section {
+      font-size: 1.25rem;
+      font-weight: 400;
+
+      &:not(:first-child) {
+        margin-top: 1em;
+      }
+    }
+  }
+
+  a,
+  em,
+  span {
+    display: inline-block;
+    padding: 0.25em 0;
   }
 
   a {
-    display: inline-block;
-
-    padding: 0.25rem;
-
     color: var(--color-text-primary);
-
-    text-decoration: none;
 
     &:hover {
       color: var(--color-link-normal);
     }
+
+    &:not(:hover) {
+      text-decoration: none;
+    }
   }
 
   em {
-    display: inline-block;
-
     align-items: baseline;
 
-    padding: 0.25rem;
+    padding: 0.25em 0.5em; /* Keep in sync with `.reference-toc a` */
 
     background-color: var(--color-background-blue);
     border-left: 2px solid var(--color-blue-50);
   }
 
-  svg {
-    flex-shrink: 0;
+  .icon {
+    margin-left: 0.5ch;
   }
+}
+
+.left-sidebar__header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  padding-top: 0.5rem;
+  padding-right: 0.5rem;
+  padding-bottom: 2rem;
+
+  background: linear-gradient(
+    to bottom,
+    var(--color-background-primary) 0 calc(100% - 2rem),
+    transparent 100%
+  );
 }

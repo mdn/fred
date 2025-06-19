@@ -24,10 +24,6 @@
     background-color: var(--color-background-secondary);
   }
 
-  svg {
-    fill: var(--color-text-primary);
-  }
-
   @media (--screen-small-and-narrower) {
     > span {
       display: none;
@@ -91,7 +87,6 @@
 
   svg {
     pointer-events: none;
-    fill: var(--color-text-primary);
   }
 }
 

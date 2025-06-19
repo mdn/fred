@@ -52,7 +52,7 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
     if (this._quicklinks) {
       this._sidebarInnerNav =
         /** @type {HTMLElement|null} */ (
-          this._quicklinks.querySelector(".left-sidebar--content")
+          this._quicklinks.querySelector(".left-sidebar__content")
         ) || null;
     }
   }
@@ -100,7 +100,7 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
       if (this._quicklinks) {
         // Initialize the filterer if it has not yet been created.
         if (!this._filterer) {
-          const root = this._quicklinks.querySelector(".left-sidebar--content");
+          const root = this._quicklinks.querySelector(".left-sidebar__content");
           if (root instanceof HTMLElement) {
             this._filterer = new SidebarFilterer(root);
           }
@@ -186,11 +186,12 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
             `}
         <mdn-button
           class="clear-sidebar-filter-button"
+          variant="plain"
+          label=${this.l10n`Clear filter input`}
           .icon=${cancelIcon}
+          icon-only
           @click=${this._clearFilter}
-        >
-          <span class="visually-hidden">${this.l10n`Clear filter input`}</span>
-        </mdn-button>
+        ></mdn-button>
       </div>
     `;
   }

@@ -2,9 +2,9 @@ import { html } from "lit";
 
 import { ArticleFooter } from "../article-footer/server.js";
 import { BaselineIndicator } from "../baseline-indicator/server.js";
+import { ContentSection } from "../content-section/server.js";
 import { LeftSidebar } from "../left-sidebar/server.js";
 import { ReferenceToc } from "../reference-toc/server.js";
-import { Section } from "../section/server.js";
 import { ServerComponent } from "../server/index.js";
 
 export class ReferenceLayout extends ServerComponent {
@@ -14,7 +14,7 @@ export class ReferenceLayout extends ServerComponent {
   render(context) {
     const { doc } = context;
     const [description, ...sections] = doc.body.map((section) =>
-      Section.render(context, section),
+      ContentSection.render(context, section),
     );
 
     return html`
