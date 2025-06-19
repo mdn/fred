@@ -22,6 +22,12 @@
       position: relative;
       z-index: 1;
     }
+
+    /* Arrow */
+
+    &::after {
+      margin-right: -4px;
+    }
   }
 
   /* Label */
@@ -40,12 +46,6 @@
         display: block;
       }
     }
-  }
-
-  /* Arrow */
-
-  .menu__tab-arrow {
-    margin-right: -7px;
   }
 
   /* Panel */

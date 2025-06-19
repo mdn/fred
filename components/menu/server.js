@@ -13,17 +13,6 @@ export class Menu extends ServerComponent {
           <mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">HTML</span>
-              <svg
-                class="menu__tab-arrow"
-                width="24"
-                height="24"
-                viewBox="0 -960 960 960"
-                aria-hidden="true"
-              >
-                <path
-                  d="M459-381 314-526q-3-3-4.5-6.5T308-540q0-8 5.5-14t14.5-6h304q9 0 14.5 6t5.5 14q0 2-6 14L501-381q-5 5-10 7t-11 2q-6 0-11-2t-10-7Z"
-                />
-              </svg>
             </button>
             <section class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
@@ -128,17 +117,6 @@ export class Menu extends ServerComponent {
           <mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">CSS</span>
-              <svg
-                class="menu__tab-arrow"
-                width="24"
-                height="24"
-                viewBox="0 -960 960 960"
-                aria-hidden="true"
-              >
-                <path
-                  d="M459-381 314-526q-3-3-4.5-6.5T308-540q0-8 5.5-14t14.5-6h304q9 0 14.5 6t5.5 14q0 2-6 14L501-381q-5 5-10 7t-11 2q-6 0-11-2t-10-7Z"
-                />
-              </svg>
             </button>
             <section class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
@@ -262,17 +240,6 @@ export class Menu extends ServerComponent {
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label" data-type="long">JavaScript</span>
               <span class="menu__tab-label" data-type="short">JS</span>
-              <svg
-                class="menu__tab-arrow"
-                width="24"
-                height="24"
-                viewBox="0 -960 960 960"
-                aria-hidden="true"
-              >
-                <path
-                  d="M459-381 314-526q-3-3-4.5-6.5T308-540q0-8 5.5-14t14.5-6h304q9 0 14.5 6t5.5 14q0 2-6 14L501-381q-5 5-10 7t-11 2q-6 0-11-2t-10-7Z"
-                />
-              </svg>
             </button>
             <section class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
@@ -375,17 +342,6 @@ export class Menu extends ServerComponent {
           <mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">Web APIs</span>
-              <svg
-                class="menu__tab-arrow"
-                width="24"
-                height="24"
-                viewBox="0 -960 960 960"
-                aria-hidden="true"
-              >
-                <path
-                  d="M459-381 314-526q-3-3-4.5-6.5T308-540q0-8 5.5-14t14.5-6h304q9 0 14.5 6t5.5 14q0 2-6 14L501-381q-5 5-10 7t-11 2q-6 0-11-2t-10-7Z"
-                />
-              </svg>
             </button>
             <section class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
@@ -487,17 +443,6 @@ export class Menu extends ServerComponent {
           <mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">All</span>
-              <svg
-                class="menu__tab-arrow"
-                width="24"
-                height="24"
-                viewBox="0 -960 960 960"
-                aria-hidden="true"
-              >
-                <path
-                  d="M459-381 314-526q-3-3-4.5-6.5T308-540q0-8 5.5-14t14.5-6h304q9 0 14.5 6t5.5 14q0 2-6 14L501-381q-5 5-10 7t-11 2q-6 0-11-2t-10-7Z"
-                />
-              </svg>
             </button>
             <section class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
@@ -585,29 +530,7 @@ export class Menu extends ServerComponent {
         <div class="menu__tab" data-section="learn">
           <mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
-              <svg
-                class="menu__tab-icon"
-                width="20"
-                height="20"
-                viewBox="0 -960 960 960"
-                aria-hidden="true"
-              >
-                <path
-                  d="M247-261.5q-18.57-10.3-28.79-27.63Q208-306.46 208-328v-186.91l-94-51.59q-10-5.5-14.75-14.25T94.5-599.5q0-10 4.75-18.75T114-632.5L444.5-812q8.5-5 17.5-7t18-2q9 0 18 2t17.5 7l371 202q9 5 14.25 13.71T906-577.5v250q0 15.5-11 26.5t-26.5 11q-15.5 0-26.5-11t-11-26.5V-558l-79 42.88V-328q0 21.54-10.21 38.87Q731.57-271.8 713-261.5l-197 107q-8.5 5-17.51 7.25-9.02 2.25-18.5 2.25-9.49 0-18.49-2.25-9-2.25-17.5-7.25l-197-107ZM480-453l270-146.5-270-146-269.5 146L480-453Zm0 232.5 197-106.33V-475.5L516.5-387q-8.5 5-17.87 7.25-9.38 2.25-18.75 2.25-9.38 0-18.63-2.25Q452-382 443.5-387L283-475.5v148.67L480-220.5Zm.5-232.5Zm-.5 113Zm0 0Z"
-                />
-              </svg>
               <span class="menu__tab-label">Learn</span>
-              <svg
-                class="menu__tab-arrow"
-                width="24"
-                height="24"
-                viewBox="0 -960 960 960"
-                aria-hidden="true"
-              >
-                <path
-                  d="M459-381 314-526q-3-3-4.5-6.5T308-540q0-8 5.5-14t14.5-6h304q9 0 14.5 6t5.5 14q0 2-6 14L501-381q-5 5-10 7t-11 2q-6 0-11-2t-10-7Z"
-                />
-              </svg>
             </button>
             <section class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
@@ -712,29 +635,7 @@ export class Menu extends ServerComponent {
         <div class="menu__tab" data-section="tools">
           <mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
-              <svg
-                class="menu__tab-icon"
-                width="20"
-                height="20"
-                viewBox="0 -960 960 960"
-                aria-hidden="true"
-              >
-                <path
-                  d="M361-364q-97.5 0-165.75-68.25T127-598q0-19.5 2.75-38.75t10.75-36.75q4.5-9 11.66-14.18t15.75-7.25q8.59-2.07 17.39.33 8.79 2.41 16.2 10.1L306-580l74-73-105-105q-7.27-7.44-9.64-16.28-2.36-8.85-.36-17.22 1.92-8.44 6.71-15.47 4.79-7.03 13.79-11.53 17.5-8 36.83-11.25Q341.67-833 361-833q97.5 0 166.25 68.75T596-598q0 22.96-4 43.42-4 20.47-12 40.43L781.5-314.5q28 27.97 28 68.49 0 40.51-28.25 68.51Q753-149.5 713-150t-68-29L445-380q-20 8-40.5 12t-43.5 4Zm-.15-75q25.72 0 51.43-8.25Q438-455.5 459-472l240.5 241q5.5 5.5 14 5.5t14.5-6q6-6 6-14.5t-6-14.5l-241-240q17.5-20.5 25.75-45.75T521-598q0-60-40-105.75T381-756.5l78.5 78.5q11.5 11.5 11.25 26.5T459-625L331.5-501Q320-490 305-490.25t-26-11.25L203.5-577q7 59.5 52.5 98.75T360.85-439ZM470-490Z"
-                />
-              </svg>
               <span class="menu__tab-label">Tools</span>
-              <svg
-                class="menu__tab-arrow"
-                width="24"
-                height="24"
-                viewBox="0 -960 960 960"
-                aria-hidden="true"
-              >
-                <path
-                  d="M459-381 314-526q-3-3-4.5-6.5T308-540q0-8 5.5-14t14.5-6h304q9 0 14.5 6t5.5 14q0 2-6 14L501-381q-5 5-10 7t-11 2q-6 0-11-2t-10-7Z"
-                />
-              </svg>
             </button>
             <section class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">Discover our tools</p>
@@ -797,17 +698,6 @@ export class Menu extends ServerComponent {
           <mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">About</span>
-              <svg
-                class="menu__tab-arrow"
-                width="24"
-                height="24"
-                viewBox="0 -960 960 960"
-                aria-hidden="true"
-              >
-                <path
-                  d="M459-381 314-526q-3-3-4.5-6.5T308-540q0-8 5.5-14t14.5-6h304q9 0 14.5 6t5.5 14q0 2-6 14L501-381q-5 5-10 7t-11 2q-6 0-11-2t-10-7Z"
-                />
-              </svg>
             </button>
             <section class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">Get to know MDN better</p>

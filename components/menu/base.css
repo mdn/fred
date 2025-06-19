@@ -7,11 +7,13 @@
   --menu-tab-text: var(--color-text-blue);
 
   &[data-section="learn"] {
+    --menu-tab-icon: url("../icon/graduation-cap.svg");
     --menu-tab-background: var(--color-background-orange);
     --menu-tab-text: var(--color-text-orange);
   }
 
   &[data-section="tools"] {
+    --menu-tab-icon: url("../icon/wrench.svg");
     --menu-tab-background: var(--color-background-purple);
     --menu-tab-text: var(--color-text-purple);
   }
@@ -44,21 +46,37 @@
     color: var(--menu-tab-text);
     background-color: var(--menu-tab-background);
   }
-}
 
-/* Tab Icon */
+  /* Arrow & Icon */
 
-.menu__tab-icon {
-  fill: currentcolor;
-}
+  &::before,
+  &::after {
+    width: 1.25rem;
+    height: 1.25rem;
 
-/* Tab Arrow */
+    background-color: currentcolor;
 
-.menu__tab-arrow {
-  fill: currentcolor;
+    mask-size: cover;
+  }
 
-  [aria-expanded="true"] & {
+  /* Arrow */
+
+  &::after {
+    content: "";
+    mask-image: url("../icon/chevron-down.svg");
+  }
+
+  &[aria-expanded="true"]::after {
     scale: -1;
+  }
+
+  /* Icon */
+
+  :is([data-section="learn"], [data-section="tools"]) & {
+    &::before {
+      content: "";
+      mask-image: var(--menu-tab-icon);
+    }
   }
 }
 
@@ -70,7 +88,7 @@
   padding: 0.5rem 0.7rem;
 
   /* Custom, to match the icon height */
-  line-height: 24px;
+  line-height: 1.25rem;
 
   color: var(--color-text-primary);
 

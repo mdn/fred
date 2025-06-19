@@ -17,6 +17,12 @@
     align-items: center;
 
     border: none;
+
+    /* Arrow */
+
+    &::after {
+      margin-left: auto;
+    }
   }
 
   /* Label */
@@ -27,12 +33,6 @@
     &[data-type="short"] {
       display: none;
     }
-  }
-
-  /* Arrow */
-
-  .menu__tab-arrow {
-    margin-left: auto;
   }
 
   /* Title */
