@@ -6,6 +6,8 @@ import panelIcon from "../icon/panel-left.svg?lit";
 
 import styles from "./element.css?lit";
 
+import "../button/element.js";
+
 const MAIN_SIDEBAR_ID = "main-sidebar";
 
 export class MDNToggleSidebar extends L10nMixin(LitElement) {
@@ -57,7 +59,6 @@ export class MDNToggleSidebar extends L10nMixin(LitElement) {
     this._matchMedia = matchMedia("(width < 769px)");
     this._mediaChange = this._mediaChange.bind(this);
     this._matchMedia.addEventListener("change", this._mediaChange);
-    this._canClose = !this._isHidden(this._sidebar);
   }
 
   render() {
@@ -70,6 +71,13 @@ export class MDNToggleSidebar extends L10nMixin(LitElement) {
     >
       ${this.l10n`Toggle sidebar`}
     </mdn-button>`;
+  }
+
+  firstUpdated() {
+    // we have to do this here and immediately cause a re-render
+    // as doing so in connectedCallback causes a hydration error:
+    // https://github.com/lit/lit/issues/1434
+    this._canClose = !this._isHidden(this._sidebar);
   }
 }
 

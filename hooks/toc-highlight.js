@@ -10,7 +10,9 @@ function highlightTOC(toc) {
   /** @type {Map<HTMLElement, HTMLAnchorElement>} */
   const tocItemBySection = new Map();
   for (const item of tocItems.reverse()) {
-    const target = document.querySelector(decodeURIComponent(item.hash));
+    const target = document.querySelector(
+      `[id="${decodeURIComponent(item.hash).slice(1)}"]`,
+    );
 
     if (!target) {
       continue;
@@ -84,7 +86,9 @@ function highlightTOC(toc) {
   }
 }
 
-for (const toc of document.querySelectorAll(".generic-toc, .reference-toc")) {
+for (const toc of document.querySelectorAll(
+  ".generic-toc, .reference-toc, .document-toc",
+)) {
   if (toc instanceof HTMLElement) {
     highlightTOC(toc);
   }

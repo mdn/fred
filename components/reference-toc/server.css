@@ -1,6 +1,6 @@
 .reference-toc {
   h2 {
-    padding: 0.75rem 0;
+    padding: 0.75em 0;
     margin: 0;
 
     font-size: var(--toc-header-font-size, var(--font-size-large));
@@ -16,19 +16,23 @@
     list-style: none;
 
     ul {
-      padding-left: 1rem;
+      padding-left: 1em;
     }
   }
 
   a {
-    display: block;
+    display: inline-block;
 
-    padding: 0.5rem;
+    padding: 0.25em 0.5em; /* Keep in sync with `.left-sidebar em` */
     margin-left: 2px; /* for box-shadow */
 
     color: inherit;
 
-    text-decoration: none;
+    box-shadow: -2px 0 0 var(--color-border-secondary);
+
+    &:not(:hover) {
+      text-decoration: none;
+    }
 
     &:hover:not([aria-current="true"]) {
       color: var(--color-link-normal);

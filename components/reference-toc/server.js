@@ -1,5 +1,7 @@
 import { html } from "lit";
 
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
+
 import { ServerComponent } from "../server/index.js";
 
 export class ReferenceToc extends ServerComponent {
@@ -11,7 +13,8 @@ export class ReferenceToc extends ServerComponent {
       <h2>${context.l10n("reference_toc_header")`In this article`}</h2>
       <ul>
         ${context?.doc?.toc?.map(
-          ({ id, text }) => html`<li><a href="#${id}">${text}</a></li>`,
+          ({ id, text }) =>
+            html`<li><a href="#${id}">${unsafeHTML(text)}</a></li>`,
         )}
       </ul>
     </nav>`;

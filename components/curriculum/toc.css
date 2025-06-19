@@ -42,7 +42,7 @@
 
         text-decoration: none;
 
-        border-left: 2px solid var(--color-border-secondary);
+        border-left: 2px solid var(--color-border-primary);
 
         &:hover {
           color: var(--text-link);

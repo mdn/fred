@@ -2,18 +2,9 @@ import { readFile, writeFile } from "node:fs/promises";
 
 import { fdir } from "fdir";
 
-import { render } from "../dist/ssr/index.js";
+import { render } from "./render.js";
 
 const BUILD_OUT_ROOT = "./out";
-
-/** @type {import("@rspack/core").StatsCompilation} */
-const clientManifest = JSON.parse(
-  await readFile("./dist/client/stats.json", "utf8"),
-);
-/** @type {import("@rspack/core").StatsCompilation} */
-const legacyManifest = JSON.parse(
-  await readFile("./dist/legacy/stats.json", "utf8"),
-);
 
 /**
  * @template T
@@ -22,7 +13,7 @@ const legacyManifest = JSON.parse(
  * @yields {T[]}
  * @returns {Generator<T[]>}
  */
-export function* chunks(array, size) {
+function* chunks(array, size) {
   for (let i = 0; i < array.length; i += size) {
     yield array.slice(i, i + size);
   }
@@ -32,13 +23,13 @@ export function* chunks(array, size) {
  * @param {number} seconds
  * @returns {string}
  */
-export function formatDuration(seconds) {
+function formatDuration(seconds) {
   return seconds > 60
     ? `${(seconds / 60).toFixed(1)} minutes`
     : `${seconds.toFixed(1)} seconds`;
 }
 
-export async function ssrAllDocuments() {
+async function ssrAllDocuments() {
   const files = await findDocuments();
 
   const start = Date.now();
@@ -87,10 +78,7 @@ async function ssrSingleDocument(file) {
     return;
   }
   try {
-    const html = await render(context.url, context, {
-      client: clientManifest,
-      legacy: legacyManifest,
-    });
+    const html = await render(context);
     const outputFile = file.replace(/.json$/, ".html");
     await writeFile(outputFile, html);
     return outputFile;

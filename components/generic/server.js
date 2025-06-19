@@ -1,7 +1,7 @@
 import { html } from "lit";
 
+import { ContentSection } from "../content-section/server.js";
 import { PageLayout } from "../page-layout/server.js";
-import { Section } from "../section/server.js";
 import { ServerComponent } from "../server/index.js";
 
 export class Generic extends ServerComponent {
@@ -13,7 +13,7 @@ export class Generic extends ServerComponent {
       context,
       html`
         ${context.hyData.sections.map((section) =>
-          Section.render(context, section),
+          ContentSection.render(context, section),
         )}
       `,
     );
