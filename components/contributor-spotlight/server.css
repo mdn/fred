@@ -1,0 +1,188 @@
+.contributor-spotlight-container {
+  display: grid;
+  grid-template-columns: var(--layout-no-sidebar-extended);
+}
+
+.contributor-spotlight {
+  --color-accent: #0085f2;
+  --color-username: light-dark(var(--color-gray-90), var(--color-gray-90));
+  --color-bg-quote: light-dark(#0085f210, #8cb4ff70);
+
+  grid-column: content;
+  padding-bottom: 2rem;
+  line-height: var(--font-line-content);
+
+  li {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    list-style-type: disc;
+  }
+
+  h1 {
+    margin: 0 0 2rem;
+    font-size: var(--font-size-largest);
+    font-weight: 600;
+
+    &.trailing-underscore::after {
+      text-decoration: underline;
+      text-decoration-thickness: 0.1em;
+      text-decoration-color: var(--color-accent);
+      text-underline-offset: 0.1em;
+
+      content: "\2002";
+    }
+  }
+
+  h1 ul {
+    padding-left: 1rem;
+  }
+
+  .quote {
+    display: flex;
+
+    flex-direction: column-reverse;
+
+    gap: 2rem;
+
+    padding: 2rem;
+    margin: 2rem 0;
+
+    color: var(--color-text-primary);
+
+    background-color: var(--color-bg-quote);
+    border: none;
+    border-radius: 0.5rem;
+
+    @media (width <= 40rem) {
+      flex-wrap: wrap-reverse;
+    }
+
+    .text {
+      display: flex;
+
+      margin: 0;
+
+      font-variation-settings: "slnt" -10;
+      font-style: italic;
+
+      /* TODO: Obsolete legacy icon setup. replace with new icon component when it is ready. */
+      .icon {
+        display: inline-block;
+
+        flex-shrink: 0;
+
+        width: 1.5em;
+        height: 1.5em;
+
+        margin-top: 0.2rem;
+        margin-right: 1rem;
+
+        vertical-align: middle;
+
+        background-color: var(--color-text-primary);
+
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: contain;
+
+        &.icon-quote {
+          mask-image: url("../icon/quote.svg");
+        }
+      }
+    }
+
+    .name {
+      display: inline;
+
+      margin: 0;
+
+      font-size: var(--font-size-normal);
+      font-weight: 400;
+    }
+  }
+
+  .profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+  }
+
+  .profile-header {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1rem;
+    align-items: center;
+
+    width: 100%;
+
+    padding: 1rem;
+
+    border-radius: var(--elem-radius);
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 0;
+      color: var(--text-primary);
+    }
+
+    .username {
+      padding: 0.2rem 0.4rem;
+
+      font-size: var(--font-size-larger);
+
+      color: var(--color-username);
+
+      text-decoration: none;
+
+      background-color: var(--color-accent);
+    }
+  }
+
+  h2 {
+    a {
+      color: var(--color-text-primary);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.get-involved-container {
+  --color-bg-get-involved: light-dark(
+    var(--color-gray-20),
+    var(--color-gray-80)
+  );
+  --color-text-get-involved: light-dark(var(--color-white), var(--color-black));
+  display: grid;
+
+  grid-template-columns: var(--layout-no-sidebar);
+  grid-column: extended-full;
+
+  padding-bottom: 2rem;
+
+  line-height: var(--font-line-content);
+
+  color: var(--color-text-get-involved);
+
+  background-color: var(--color-bg-get-involved);
+}
+
+.get-involved {
+  grid-column: content;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+  h2 {
+    margin: 0;
+
+    font-size: var(--font-size-large);
+    font-weight: 600;
+
+    line-height: 1.2;
+  }
+}
