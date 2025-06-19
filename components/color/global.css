@@ -25,11 +25,11 @@
 
 :root {
   --color-gray-90: hsl(212deg 7% 97%);
-  --color-gray-80: hsl(212deg 7% 91%);
+  --color-gray-80: hsl(212deg 7% 92%);
   --color-gray-60: hsl(212deg 7% 78%);
   --color-gray-40: hsl(212deg 7% 34%);
-  --color-gray-20: hsl(212deg 7% 22%);
-  --color-gray-10: hsl(212deg 7% 15%);
+  --color-gray-20: hsl(212deg 7% 19%);
+  --color-gray-10: hsl(212deg 7% 14%);
   --color-gray-05: hsl(212deg 7% 10%);
 }
 

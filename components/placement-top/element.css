@@ -36,7 +36,7 @@
   padding-inline: var(--layout-side-padding);
 
   background-color: var(--place-top-background);
-  border-bottom: 1px solid var(--color-border-secondary);
+  border-bottom: 1px solid var(--color-border-primary);
 
   .placement-container {
     display: grid;
