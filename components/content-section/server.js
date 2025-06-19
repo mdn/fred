@@ -6,7 +6,7 @@ import { HeadingAnchor } from "../heading-anchor/server.js";
 import { ServerComponent } from "../server/index.js";
 import { SpecificationsList } from "../specifications-list/index.js";
 
-export class Section extends ServerComponent {
+export class ContentSection extends ServerComponent {
   /**
    * @param {import("@fred").Context} context
    * @param {import("@rari").Section} section
@@ -35,7 +35,7 @@ function Prose({ id, title, content, isH3 }) {
   const level = isH3 ? 3 : 2;
   // @ts-nocheck
   return html`<section
-    class="section"
+    class="content-section"
     aria-labelledby=${ifDefined(id ?? undefined)}
   >
     ${HeadingAnchor.render(level, id ? String(id) : null, String(title))}
@@ -50,7 +50,7 @@ function Prose({ id, title, content, isH3 }) {
 function BCD({ id, title, query, isH3 }) {
   const level = isH3 ? 3 : 2;
   return html`<section
-    class="section"
+    class="content-section"
     aria-labelledby=${ifDefined(id ?? undefined)}
   >
     ${HeadingAnchor.render(level, id ? String(id) : null, String(title))}
@@ -68,7 +68,7 @@ function BCD({ id, title, query, isH3 }) {
 function SpecificationsSection(context, { id, title, specifications, isH3 }) {
   const level = isH3 ? 3 : 2;
   return html`<section
-    class="section"
+    class="content-section"
     aria-labelledby=${ifDefined(id ?? undefined)}
   >
     ${HeadingAnchor.render(level, id ? String(id) : null, String(title))}

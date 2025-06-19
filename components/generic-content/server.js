@@ -1,6 +1,6 @@
 import { html } from "lit";
 
-import { Section } from "../section/server.js";
+import { ContentSection } from "../content-section/server.js";
 import { ServerComponent } from "../server/index.js";
 
 export class GenericContent extends ServerComponent {
@@ -9,9 +9,9 @@ export class GenericContent extends ServerComponent {
    * @returns {import("@lit").TemplateResult}
    */
   render(context) {
-    return html`<div id="content" class="content">
+    return html`<div id="content" class="generic-content">
       ${context.hyData.sections.map((section) =>
-        Section.render(context, section),
+        ContentSection.render(context, section),
       )}
     </div>`;
   }

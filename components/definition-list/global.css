@@ -1,8 +1,0 @@
-dl dd {
-  margin-left: 1rem;
-
-  dl {
-    padding-left: 1rem;
-    border-left: 1px solid var(--color-border-primary);
-  }
-}

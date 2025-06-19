@@ -1,6 +1,9 @@
 @import url("../code-example/common.css");
+@import url("../prev-next/index.css");
+@import url("../notecard/index.css");
+@import url("../css-formal-syntax/index.css");
 
-.section {
+.content-section {
   line-height: var(--font-line-content);
 
   h1,
@@ -37,6 +40,20 @@
 
     text-transform: uppercase;
     letter-spacing: 0.025em;
+  }
+
+  a:not([href^="#"]) {
+    &:link {
+      color: var(--color-link-normal);
+    }
+
+    &:visited {
+      color: var(--color-link-visited);
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   code {
@@ -132,6 +149,17 @@
       &[height="tabbed-taller"] {
         height: 774px;
       }
+    }
+  }
+
+  /* Definition list */
+
+  dl dd {
+    margin-left: 1rem;
+
+    dl {
+      padding-left: 1rem;
+      border-left: 1px solid var(--color-border-primary);
     }
   }
 }

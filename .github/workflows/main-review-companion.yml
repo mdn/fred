@@ -11,7 +11,7 @@ on:
 
 jobs:
   deploy:
-    if: github.event_name == 'schedule' || github.actor != 'dependabot[bot]'
+    if: github.repository_owner == 'mdn' && (github.event_name == 'schedule' || github.actor != 'dependabot[bot]')
     uses: ./.github/workflows/_deploy.yml
     secrets: inherit
     with:

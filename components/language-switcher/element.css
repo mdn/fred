@@ -24,10 +24,6 @@
     background-color: var(--color-background-secondary);
   }
 
-  svg {
-    fill: var(--color-text-primary);
-  }
-
   @media screen and (width <= 480px) {
     > span {
       display: none;
@@ -80,9 +76,5 @@
 
   &:hover {
     background-color: var(--color-background-secondary);
-  }
-
-  svg {
-    fill: var(--color-text-primary);
   }
 }

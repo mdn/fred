@@ -66,20 +66,22 @@
     &:focus,
     &.is-active {
       /** Filter is focused or active. */
-      padding-right: 7em;
+      padding-right: 7.5em;
     }
 
     ~ .sidebar-filter-count {
       position: absolute;
       right: 2.5em;
 
-      font-size: var(--type-tiny-font-size);
+      padding: 0 0.5em;
+
+      font-size: 0.7rem;
 
       color: var(--color-text-secondary);
 
       white-space: nowrap;
 
-      background: var(--mark-color);
+      background: var(--color-background-blue);
       border-radius: 1em;
     }
   }

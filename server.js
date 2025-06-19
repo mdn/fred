@@ -1,6 +1,7 @@
 import { Worker } from "node:worker_threads";
 
 import { rspack } from "@rspack/core";
+import compression from "compression";
 import cookieParser from "cookie-parser";
 import express from "express";
 
@@ -11,17 +12,32 @@ import webpackHotMiddleware from "webpack-hot-middleware";
 import rspackConfig from "./rspack.config.js";
 import { handleRunner } from "./vendor/yari/libs/play/index.js";
 
+import "source-map-support/register.js";
+
 /**
  * @import { Request, Response } from "express";
  * @import { Stats } from "@rspack/core";
  */
 
+let devMode = true;
+/** @type {import("./build/render.js").render | undefined} */
+let prodRender;
+
 if (process.env.NODE_ENV === "production") {
-  throw new Error(
-    "dev server doesn't support running with NODE_ENV=production",
-  );
-  // this is because when NODE_ENV=production we don't add a hash to the ssr output file
-  // we need it to cachebust importing it in dev, but in prod we want a common name across builds
+  devMode = false;
+  try {
+    const { render } = await import("./build/render.js");
+    prodRender = render;
+  } catch (error) {
+    throw typeof error === "object" &&
+      error !== null &&
+      "code" in error &&
+      error.code === "ERR_MODULE_NOT_FOUND"
+      ? new Error(
+          "can't find `dist/ssr/index.js`: did you forget to `npm run build`?",
+        )
+      : error;
+  }
 }
 
 /**
@@ -31,32 +47,38 @@ if (process.env.NODE_ENV === "production") {
  */
 async function serverRenderMiddleware(req, res, page) {
   try {
-    /** @type {Stats} */
-    const stats = res.locals.webpack.devMiddleware.stats;
+    let html;
+    if (prodRender) {
+      // implies devMode === false
+      html = await prodRender(page);
+    } else {
+      /** @type {Stats} */
+      const stats = res.locals.webpack.devMiddleware.stats;
 
-    const compliationStats = stats.toJson().children;
-    if (!compliationStats) {
-      throw new Error("cannot parse the rspack config, did you modify it?");
-    }
+      const compliationStats = stats.toJson().children;
+      if (!compliationStats) {
+        throw new Error("cannot parse the rspack config, did you modify it?");
+      }
 
-    const html = await new Promise((resolve, reject) => {
-      // use worker so we have a fresh esm cache each page load
-      const worker = new Worker(
-        new URL("build/server-worker.js", import.meta.url),
-        {
-          /** @type {import("./build/types.js").WorkerData} */
-          workerData: {
-            reqPath: req.path,
-            page,
-            compliationStats,
+      html = await new Promise((resolve, reject) => {
+        // use worker so we have a fresh esm cache each page load
+        const worker = new Worker(
+          new URL("build/server-worker.js", import.meta.url),
+          {
+            /** @type {import("./build/types.js").WorkerData} */
+            workerData: {
+              reqPath: req.path,
+              page,
+              compliationStats,
+            },
           },
-        },
-      );
+        );
 
-      worker.on("message", ({ html, error }) => {
-        error ? reject(error) : resolve(html);
+        worker.on("message", ({ html, error }) => {
+          error ? reject(error) : resolve(html);
+        });
       });
-    });
+    }
 
     res.writeHead(res.statusCode, {
       "Content-Type": "text/html",
@@ -81,21 +103,26 @@ const streamToBuffer = (stream) =>
     stream.on("error", reject);
   });
 
-export async function startDevServer() {
+export async function startServer() {
   const app = express();
 
-  const rspackCompiler = rspack(rspackConfig);
+  if (devMode) {
+    const rspackCompiler = rspack(rspackConfig);
 
-  app.use(
+    app.use(
+      // @ts-expect-error
+      webpackDevMiddleware(rspackCompiler, {
+        serverSideRender: true,
+        writeToDisk: true,
+      }),
+    );
+
     // @ts-expect-error
-    webpackDevMiddleware(rspackCompiler, {
-      serverSideRender: true,
-      writeToDisk: true,
-    }),
-  );
-
-  // @ts-expect-error
-  app.use(webpackHotMiddleware(rspackCompiler));
+    app.use(webpackHotMiddleware(rspackCompiler));
+  } else {
+    app.use(compression());
+    app.use("/static", express.static("dist"));
+  }
 
   app.get("/", async (_req, res, _next) => {
     res.writeHead(302, {
@@ -211,4 +238,4 @@ export async function startDevServer() {
   };
 }
 
-await startDevServer();
+await startServer();

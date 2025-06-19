@@ -22,6 +22,20 @@ dd {
   margin: 0;
 }
 
+a {
+  &:link {
+    color: var(--color-link-normal);
+  }
+
+  &:visited {
+    color: var(--color-link-visited);
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 code {
   width: fit-content;
   padding: 0.125rem 0.25rem;
