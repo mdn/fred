@@ -1,7 +1,3 @@
-@import url("../definition-list/index.css");
-@import url("../formal-definition/index.css");
-@import url("../prev-next/index.css");
-
 /* Generic Layout */
 .generic-layout {
   display: grid;

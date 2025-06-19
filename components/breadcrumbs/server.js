@@ -47,7 +47,6 @@ export class Breadcrumbs extends ServerComponent {
    * @param {BreadcrumbContext} context
    */
   render(context) {
-    console.log("CONTEXT", context);
     /** @type {Parent[]} */
     let parents;
     if (hasDocParents(context)) {

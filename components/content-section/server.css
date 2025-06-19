@@ -1,4 +1,7 @@
 @import url("../code-example/common.css");
+@import url("../prev-next/index.css");
+@import url("../notecard/index.css");
+@import url("../css-formal-syntax/index.css");
 
 .content-section {
   line-height: var(--font-line-content);
@@ -146,6 +149,17 @@
       &[height="tabbed-taller"] {
         height: 774px;
       }
+    }
+  }
+
+  /* Definition list */
+
+  dl dd {
+    margin-left: 1rem;
+
+    dl {
+      padding-left: 1rem;
+      border-left: 1px solid var(--color-border-secondary);
     }
   }
 }
