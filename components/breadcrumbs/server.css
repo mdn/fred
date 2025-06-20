@@ -1,7 +1,4 @@
 .breadcrumbs {
-  --breadcrumbs-divider-color: var(--color-text-secondary);
-  --breadcrumbs-link-color: var(--color-text-primary);
-
   display: flex;
 
   align-items: center;
@@ -22,7 +19,7 @@
     place-items: center;
 
     a {
-      color: var(--breadcrumbs-link-color);
+      color: var(--color-text-primary);
 
       &:not(:hover) {
         text-decoration: none;
@@ -30,21 +27,19 @@
     }
 
     &:not(:last-child)::after {
-      width: 1em;
-      height: 1em;
+      width: 1.25rem;
+      height: 1.25rem;
 
-      margin-inline: 0.75em;
+      margin-inline: 0.25rem;
 
       vertical-align: middle;
 
       content: "";
 
-      background-color: var(--breadcrumbs-divider-color);
+      background-color: var(--color-text-secondary);
 
-      mask-image: url("./divider.svg");
-      mask-repeat: no-repeat;
-      mask-position: center;
-      mask-size: auto;
+      mask-image: url("../icon/chevron-right.svg");
+      mask-size: cover;
     }
   }
 
