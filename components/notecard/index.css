@@ -1,8 +1,5 @@
 .notecard,
 .callout {
-  --notecard-color-link: light-dark(var(--color-gray-10), var(--color-gray-90));
-  --notecard-color-text: var(--color-text-secondary);
-
   position: relative;
 
   padding-block: 1px;
@@ -10,15 +7,11 @@
   padding-inline-start: 3em;
   margin-block: 1em;
 
-  color: var(--notecard-color-text);
+  color: var(--color-text-primary);
 
   background-color: var(--color-background-secondary);
   border-inline-start: 2px solid var(--color-text-secondary);
   border-radius: 0.25em;
-
-  a {
-    color: var(--notecard-color-link);
-  }
 
   &.note,
   &.secure,
@@ -56,11 +49,9 @@
 
       content: "";
 
-      background-color: var(--notecard-color-text);
+      background-color: var(--color-text-primary);
 
-      mask-repeat: no-repeat;
-      mask-position: center center;
-      mask-size: contain;
+      mask-size: cover;
     }
   }
 
