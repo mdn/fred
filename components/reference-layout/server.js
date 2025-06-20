@@ -6,6 +6,7 @@ import { ContentSection } from "../content-section/server.js";
 import { LeftSidebar } from "../left-sidebar/server.js";
 import { ReferenceToc } from "../reference-toc/server.js";
 import { ServerComponent } from "../server/index.js";
+import { TranslationBanner } from "../translation-banner/server.js";
 
 export class ReferenceLayout extends ServerComponent {
   /**
@@ -21,6 +22,7 @@ export class ReferenceLayout extends ServerComponent {
       <div class="reference-layout">
         <main id="content" class="reference-layout__content">
           <div class="reference-layout__content__header">
+            ${TranslationBanner.render(context)}
             <h1>${doc.title}</h1>
             ${BaselineIndicator.render(context)} ${description}
           </div>
