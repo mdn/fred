@@ -18,7 +18,7 @@ export interface Survey {
   /** Survey URL (static string or function that generates URL based on document) */
   src: string | ((mdn_url: string) => string);
   /** Brief HTML shown in the survey header */
-  teaser: TemplateResault | string;
+  teaser: TemplateResult | string;
   /** HTML in the clickable summary element */
   question: TemplateResult | string;
   /** Optional footer HTML displayed below the survey */

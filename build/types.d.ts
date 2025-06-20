@@ -4,5 +4,5 @@ import { StatsCompilation } from "@rspack/core";
 export interface WorkerData {
   reqPath: string;
   page: BuiltPage;
-  compliationStats: StatsCompilation[];
+  compilationStats: StatsCompilation[];
 }

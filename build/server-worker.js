@@ -4,9 +4,9 @@ import { parentPort, workerData } from "node:worker_threads";
 import "source-map-support/register.js";
 
 /** @type {import("./types.js").WorkerData} */
-const { reqPath, page, compliationStats } = workerData;
+const { reqPath, page, compilationStats } = workerData;
 
-const ssrStats = compliationStats.find((x) => x.name === "ssr");
+const ssrStats = compilationStats.find((x) => x.name === "ssr");
 if (!ssrStats) {
   throw new Error(
     "cannot find the ssr rspack config, did you change its name?",
@@ -28,8 +28,8 @@ try {
   /** @type {import("../entry.ssr.js")} */
   const indexModule = await import(indexModulePath);
   const html = await indexModule?.render(reqPath, page, {
-    client: compliationStats.find((x) => x.name === "client") || {},
-    legacy: compliationStats.find((x) => x.name === "legacy") || {},
+    client: compilationStats.find((x) => x.name === "client") || {},
+    legacy: compilationStats.find((x) => x.name === "legacy") || {},
   });
   parentPort?.postMessage({ html });
 } catch (error) {

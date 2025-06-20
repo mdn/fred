@@ -22,7 +22,7 @@ const PLACEMENT_MAP = {
   },
   hpTop: {
     typ: "top-banner",
-    renderer: /Homepag/gi,
+    renderer: /Homepage/gi,
     pattern: /^\/[^/]+\/($|_homepage$)/i,
   },
   hpMain: {

@@ -1,6 +1,5 @@
 import { html, nothing } from "lit";
 
-import { LoremIpsum } from "../lorem-ipsum/pure.js";
 import { ServerComponent } from "../server/index.js";
 
 export class LatestNews extends ServerComponent {
@@ -32,7 +31,7 @@ export class LatestNews extends ServerComponent {
                   ),
                 )}
               </time>
-              <p class="latest-news__summary">${LoremIpsum()}</p>
+              <p class="latest-news__summary">${item.summary}</p>
             </article>
           </li>`,
       )}
