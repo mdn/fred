@@ -229,11 +229,11 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         target="_blank"
         rel="noopener noreferrer"
         title=${this.l10n(
-          "compat_link_report_issue_title",
+          "compat-link-report-issue-title",
         )`Report an issue with this compatibility data`}
       >
         ${this.l10n(
-          "compat_link_report_issue",
+          "compat-link-report-issue",
         )`Report problems with this compatibility data`}</a
       >${source_file
         ? html` •
@@ -243,13 +243,13 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
               target="_blank"
               rel="noopener noreferrer"
               title=${this.l10n.raw({
-                id: "compat_link_source_title",
+                id: "compat-link-source-title",
                 args: {
                   filename: source_file,
                 },
               })}
             >
-              ${this.l10n("compat_link_source")`View data on GitHub`}
+              ${this.l10n("compat-link-source")`View data on GitHub`}
             </a>`
         : undefined}
     </div>`;
@@ -500,7 +500,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
    * @returns {import("@lit").TemplateResult}
    */
   _renderIcon(name) {
-    const title = this.l10n.raw({ id: `compat_legend_${name}` });
+    const title = this.l10n.raw({ id: `compat-legend-${name}` });
 
     return html`<abbr class="only-icon" title=${ifDefined(title)}>
       <span>${name}</span>
@@ -520,9 +520,9 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     if (status.experimental) {
       icons.push({
         title: this.l10n(
-          "compat_legend_experimental",
+          "compat-legend-experimental",
         )`Experimental. Expect behavior to change in the future.`,
-        text: this.l10n("compat_experimental")`Experimental`,
+        text: this.l10n("compat-experimental")`Experimental`,
         iconClassName: "icon-experimental",
       });
     }
@@ -530,9 +530,9 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     if (status.deprecated) {
       icons.push({
         title: this.l10n(
-          "compat_legend_deprecated",
+          "compat-legend-deprecated",
         )`Deprecated. Not for use in new websites.`,
-        text: this.l10n("compat_deprecated")`Experimental`,
+        text: this.l10n("compat-deprecated")`Experimental`,
         iconClassName: "icon-deprecated",
       });
     }
@@ -540,9 +540,9 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     if (!status.standard_track) {
       icons.push({
         title: this.l10n(
-          "compat_legend_nonstandard",
+          "compat-legend-nonstandard",
         )`Non-standard. Expect poor cross-browser support.`,
-        text: this.l10n("compat_nonstandard")`Non-standard`,
+        text: this.l10n("compat-nonstandard")`Non-standard`,
         iconClassName: "icon-nonstandard",
       });
     }
@@ -582,7 +582,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
             ? {
                 iconName: "footnote",
                 label: this.l10n.raw({
-                  id: "compat_support_removed",
+                  id: "compat-support-removed",
                   args: {
                     version: labelFromString(item.version_removed, browser),
                   },
@@ -592,14 +592,14 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           item.partial_implementation
             ? {
                 iconName: "footnote",
-                label: this.l10n("compat_support_partial")`Partial support`,
+                label: this.l10n("compat-support-partial")`Partial support`,
               }
             : undefined,
           item.prefix
             ? {
                 iconName: "prefix",
                 label: this.l10n.raw({
-                  id: "compat_support_prefix",
+                  id: "compat-support-prefix",
                   args: {
                     prefix: item.prefix,
                   },
@@ -610,7 +610,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
             ? {
                 iconName: "altname",
                 label: this.l10n.raw({
-                  id: "compat_support_altname",
+                  id: "compat-support-altname",
                   args: {
                     altname: item.alternative_name,
                   },
@@ -686,7 +686,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
                 /** @param {string} impl_url */ (impl_url) => ({
                   iconName: "footnote",
                   label: this.l10n.raw({
-                    id: "compat_support_see_impl_url",
+                    id: "compat-support-see-impl-url",
                     args: {
                       label: bugURLToString(impl_url),
                     },
@@ -704,7 +704,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
             ? {
                 iconName: "footnote",
                 label: this.l10n(
-                  "compat_support_preview",
+                  "compat-support-preview",
                 )`Preview browser support`,
               }
             : undefined,
@@ -715,12 +715,12 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           !versionIsPreview(item.version_added, browser)
             ? {
                 iconName: "footnote",
-                label: this.l10n("compat_support_full")`Full support`,
+                label: this.l10n("compat-support-full")`Full support`,
               }
             : isNotSupportedAtAll(item)
               ? {
                   iconName: "footnote",
-                  label: this.l10n("compat_support_no")`No support`,
+                  label: this.l10n("compat-support-no")`No support`,
                 }
               : undefined,
         ]
@@ -730,7 +730,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         if (supportNotes.length === 0) {
           supportNotes.push({
             iconName: "unknown",
-            label: this.l10n("compat_support_unknown")`Support unknown`,
+            label: this.l10n("compat-support-unknown")`Support unknown`,
           });
         }
 
@@ -816,42 +816,42 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
     switch (status.isSupported) {
       case "yes": {
-        title = this.l10n("compat_support_full")`Full support`;
+        title = this.l10n("compat-support-full")`Full support`;
         label = status.label || this.l10n("compat_yes")`Yes`;
         break;
       }
 
       case "partial": {
-        title = this.l10n("compat_support_partial")`Partial support`;
+        title = this.l10n("compat-support-partial")`Partial support`;
         label = status.label || this.l10n("compat_partial")`Partial`;
         break;
       }
 
       case "removed-partial": {
         if (timeline) {
-          title = this.l10n("compat_support_partial")`Partial support`;
+          title = this.l10n("compat-support-partial")`Partial support`;
           label = status.label || this.l10n("compat_partial")`Partial`;
         } else {
-          title = this.l10n("compat_support_no")`No support`;
-          label = status.label || this.l10n("compat_no")`No`;
+          title = this.l10n("compat-support-no")`No support`;
+          label = status.label || this.l10n("compat-no")`No`;
         }
         break;
       }
 
       case "no": {
-        title = this.l10n("compat_support_no")`No support`;
-        label = status.label || this.l10n("compat_no")`No`;
+        title = this.l10n("compat-support-no")`No support`;
+        label = status.label || this.l10n("compat-no")`No`;
         break;
       }
 
       case "preview": {
-        title = this.l10n("compat_support_preview")`Preview support`;
+        title = this.l10n("compat-support-preview")`Preview support`;
         label = status.label || browser.preview_name;
         break;
       }
 
       case "unknown": {
-        title = this.l10n("compat_support_unknown")`Support unknown`;
+        title = this.l10n("compat-support-unknown")`Support unknown`;
         label = "?";
         break;
       }
@@ -883,7 +883,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           class="bc-version-label"
           title=${browserReleaseDate && !timeline
             ? this.l10n.raw({
-                id: "compat_browser_version_date",
+                id: "compat-browser-version-date",
                 args: {
                   browser: browser.name,
                   version: added,
@@ -916,7 +916,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       browserInfo,
       browsers,
     ).map((key) => {
-      const label = this.l10n(`compat_legend_${key}`);
+      const label = this.l10n(`compat-legend-${key}`);
       return ["yes", "partial", "no", "unknown", "preview"].includes(key)
         ? html`<div class="bc-legend-item">
             <dt class="bc-legend-item-dt">
@@ -941,11 +941,11 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
     return html`<section class="bc-legend">
       <h3 class="visually-hidden" id="Legend">
-        ${this.l10n("compat_legend")`Legend`}
+        ${this.l10n("compat-legend")`Legend`}
       </h3>
       <p class="bc-legend-tip">
         ${this.l10n(
-          "compat_legend_tip",
+          "compat-legend-tip",
         )`Tip: you can click/tap on a cell for more information.`}
       </p>
       <dl class="bc-legend-items-container">${items}</dl>

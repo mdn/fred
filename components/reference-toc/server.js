@@ -10,7 +10,7 @@ export class ReferenceToc extends ServerComponent {
    */
   render(context) {
     return html`<nav class="reference-toc">
-      <h2>${context.l10n("reference_toc_header")`In this article`}</h2>
+      <h2>${context.l10n("reference-toc-header")`In this article`}</h2>
       <ul>
         ${context?.doc?.toc?.map(
           ({ id, text }) =>

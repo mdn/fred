@@ -31,7 +31,7 @@ export class ObservatoryResults extends ServerComponent {
               <section class="obs-results__header">
                 <h1 class="obs-results__title">
                   <span class="obs-results__title-accent"
-                    >${context.l10n("obs_title")}</span
+                    >${context.l10n("obs-title")}</span
                   >
                   ${context.l10n("Report")}
                 </h1>
@@ -39,7 +39,7 @@ export class ObservatoryResults extends ServerComponent {
               </section>
 
               <aside class="obs-toc">
-                <h2 class="obs-toc__heading">${context.l10n("obs_title")}</h2>
+                <h2 class="obs-toc__heading">${context.l10n("obs-title")}</h2>
                 <ul class="obs-toc__list">
                   <li class="obs-toc__item">
                     <a

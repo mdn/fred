@@ -1,2 +1,2 @@
-blog_toc_title = En este artículo
+blog-toc-title = En este artículo
 

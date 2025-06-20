@@ -1,2 +1,2 @@
-blog_toc_title = この記事では
+blog-toc-title = この記事では
 

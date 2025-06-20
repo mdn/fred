@@ -98,7 +98,7 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
                 type="button"
                 @click=${this._setMode}
               >
-                ${this.l10n("theme_default")`OS default`}
+                ${this.l10n("theme-default")`OS default`}
               </button>
             </li>
             <li>

@@ -197,7 +197,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
                 <a
                   href=${`/${this.locale}/search?${new URLSearchParams({ q: this._query })}`}
                   >${this.l10n.raw({
-                    id: "search-modal_site-search",
+                    id: "search-modal-site-search",
                     args: {
                       query: this._query,
                     },

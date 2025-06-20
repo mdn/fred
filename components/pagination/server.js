@@ -109,7 +109,7 @@ export class Pagination extends ServerComponent {
           class="pagination__link ${disabled
             ? "pagination__link--disabled"
             : ""}"
-          aria-label=${context.l10n(`pagination_${prevNext}`)}
+          aria-label=${context.l10n(`pagination-${prevNext}`)}
           ${disabled ? 'aria-disabled="true"' : ""}
         >
           ${prevNext === "next" ? "→" : "←"}
@@ -147,9 +147,9 @@ export class Pagination extends ServerComponent {
               : ""}"
             aria-current=${isCurrentPage ? "page" : "false"}
             aria-label=${isCurrentPage
-              ? context.l10n("pagination_current")
+              ? context.l10n("pagination-current")
               : context.l10n.raw({
-                  id: "pagination_goto",
+                  id: "pagination-goto",
                   args: { page: pageNumber },
                 })}
           >

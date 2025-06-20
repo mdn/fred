@@ -43,7 +43,7 @@ export class MDNNotFound extends L10nMixin(LitElement) {
     return html`
       <p>
         ${this.l10n.raw({
-          id: "not_found_description",
+          id: "not-found-description",
           args: { url },
           elements: { url: { tag: "code" } },
         })}
@@ -55,7 +55,7 @@ export class MDNNotFound extends L10nMixin(LitElement) {
             return html`<div class="notecard tip">
               <p>
                 ${this.l10n.raw({
-                  id: "not_found_fallback_english",
+                  id: "not-found-fallback-english",
                   elements: { strong: { tag: "strong" }, em: { tag: "em" } },
                 })}
               </p>
@@ -77,7 +77,7 @@ export class MDNNotFound extends L10nMixin(LitElement) {
               .reverse();
 
             return html`<div class="notecard note">
-              <p>${this.l10n("not_found_fallback_search")}
+              <p>${this.l10n("not-found-fallback-search")}
               <ul>
                 ${normalizedLocationParts.map(
                   (part) =>

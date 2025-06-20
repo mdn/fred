@@ -1,1 +1,1 @@
-blog_toc_title = 목차
+blog-toc-title = 목차

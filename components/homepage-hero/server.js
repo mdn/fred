@@ -10,13 +10,13 @@ export class HomepageHero extends ServerComponent {
     return html`<section class="homepage-hero">
       <h1>
         ${context.l10n.raw({
-          id: "homepage-hero_title",
+          id: "homepage-hero-title",
           elements: { developers: { tag: "u" } },
         })}
       </h1>
       <p>
         ${context.l10n.raw({
-          id: "homepage-hero_description",
+          id: "homepage-hero-description",
           elements: {
             css: {
               tag: "a",

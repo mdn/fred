@@ -164,7 +164,7 @@ export class Footer extends ServerComponent {
             <a class="footer__logo" href="/">${mdn}</a>
             <p>
               ${context.l10n(
-                "footer_tagline",
+                "footer-tagline",
               )`Your blueprint for a better internet.`}
             </p>
           </div>
@@ -220,14 +220,14 @@ export class Footer extends ServerComponent {
           </ul>
           <p>
             ${context.l10n.raw({
-              id: "footer_mofo",
+              id: "footer-mofo",
               elements: {
                 moco: { tag: "a", href: "https://www.mozilla.org/" },
                 mofo: { tag: "a", href: "https://foundation.mozilla.org/" },
               },
             })}<br />
             ${context.l10n.raw({
-              id: "footer_copyright",
+              id: "footer-copyright",
               elements: {
                 cc: {
                   tag: "a",

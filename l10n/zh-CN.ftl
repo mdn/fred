@@ -1,1 +1,1 @@
-blog_toc_title = 在本文中
+blog-toc-title = 在本文中

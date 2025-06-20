@@ -1,1 +1,1 @@
-blog_toc_title = В этой статье
+blog-toc-title = В этой статье

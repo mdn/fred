@@ -59,7 +59,7 @@ function LastModified(context) {
 
   return html`<p class="article-footer__last-modified">
     ${context.l10n.raw({
-      id: "article-footer_last-modified",
+      id: "article-footer-last-modified",
       args: {
         date: formattedDate,
       },
@@ -101,7 +101,7 @@ function GitHubSourceLink(context) {
     class="external"
     href=${`${github_url}?plain=1`}
     title=${context.l10n.raw({
-      id: "article-footer_source_title",
+      id: "article-footer-source-title",
       args: {
         folder,
       },

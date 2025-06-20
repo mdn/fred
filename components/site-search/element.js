@@ -85,7 +85,7 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
         results
           ? html`<h1>
                 ${this.l10n.raw({
-                  id: "search_title",
+                  id: "search-title",
                   args: {
                     query: this._query,
                   },
@@ -131,7 +131,7 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
               <section class="site-search__results">
                 <h2>${this.l10n`Results`}</h2>
                 ${this.l10n.raw({
-                  id: "search_stats",
+                  id: "search-stats",
                   args: {
                     results: results.metadata.total.value,
                     time: results.metadata.took_ms,

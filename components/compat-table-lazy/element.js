@@ -62,9 +62,9 @@ export class MDNCompatTableLazy extends L10nMixin(LitElement) {
       target="_blank"
       rel="noopener noreferrer"
       title=${this.l10n(
-        "compat_link_report_missing_title",
+        "compat-link-report-missing-title",
       )`Report missing compatibility data`}
-      >${this.l10n("compat_link_report_missing")`Report this issue`}</a
+      >${this.l10n("compat-link-report-missing")`Report this issue`}</a
     >`;
   }
 
@@ -92,8 +92,8 @@ export class MDNCompatTableLazy extends L10nMixin(LitElement) {
 
   render() {
     return this._dataTask.render({
-      initial: () => html`<p>${this.l10n("compat_loading")`Loading…`}</p>`,
-      pending: () => html`<p>${this.l10n("compat_loading")`Loading…`}</p>`,
+      initial: () => html`<p>${this.l10n("compat-loading")`Loading…`}</p>`,
+      pending: () => html`<p>${this.l10n("compat-loading")`Loading…`}</p>`,
 
       complete:
         /**

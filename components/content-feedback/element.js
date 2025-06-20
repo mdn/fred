@@ -76,7 +76,7 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
   _renderVote() {
     return html`<label
         >${this.l10n(
-          "content-feedback_question",
+          "content-feedback-question",
         )`Was this page helpful to you?`}
       </label>
       <div class="content-feedback--buttons">
@@ -110,7 +110,7 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
 
     return html`<label
         >${this.l10n(
-          "content-feedback_reason",
+          "content-feedback-reason",
         )`Why was this page not helpful to you?`}</label
       >
       ${Object.entries(
@@ -138,7 +138,7 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
 
   _renderThanks() {
     return html`<span class="thank-you">
-      ${this.l10n("content-feedback_thanks")`Thank you for your feedback!`}
+      ${this.l10n("content-feedback-thanks")`Thank you for your feedback!`}
       <span class="emoji">❤️</span>
     </span>`;
   }

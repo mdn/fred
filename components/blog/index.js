@@ -66,7 +66,7 @@ export function TimeToRead(context, { readTime }) {
   }
   return html`<span className="read-time"
     >${context.l10n.raw({
-      id: "blog_time_to_read",
+      id: "blog-time-to-read",
       args: { minutes: readTime },
     })}
   </span>`;

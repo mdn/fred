@@ -27,10 +27,10 @@ export class ObservatoryLanding extends ServerComponent {
         <section class="obs-landing-top">
           <section class="obs-landing-top__form">
             <h1>
-              <span class="accent">${context.l10n("obs_title")}</span>
+              <span class="accent">${context.l10n("obs-title")}</span>
             </h1>
             <p>
-              ${context.l10n("obs_landing_intro")}
+              ${context.l10n("obs-landing-intro")}
             </p>
             <mdn-observatory-form></mdn-observatory-form>
           </section>
@@ -46,7 +46,7 @@ export class ObservatoryLanding extends ServerComponent {
                 ${assessmentSvg}
                 <figcaption>
                   <p>
-                    ${context.l10n("obs_assessment")}
+                    ${context.l10n("obs-assessment")}
                   </p>
                 </figcaption>
               </figure>
@@ -55,7 +55,7 @@ export class ObservatoryLanding extends ServerComponent {
                 ${scanningSvg}
                 <figcaption>
                   <p>
-                    ${context.l10n("obs_scanning")}
+                    ${context.l10n("obs-scanning")}
                   </p>
                 </figcaption>
               </figure>
@@ -64,7 +64,7 @@ export class ObservatoryLanding extends ServerComponent {
                 ${securitySvg}
                 <figcaption>
                   <p>
-                    ${context.l10n("obs_security")}
+                    ${context.l10n("obs-security")}
                   </p>
                 </figcaption>
               </figure>
@@ -73,7 +73,7 @@ export class ObservatoryLanding extends ServerComponent {
                 ${mdnSvg}
                 <figcaption>
                   <p>
-                    ${context.l10n("obs_mdn")}
+                    ${context.l10n("obs-mdn")}
                   </p>
                 </figcaption>
               </figure>

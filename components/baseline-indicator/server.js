@@ -102,7 +102,7 @@ export class BaselineIndicator extends ServerComponent {
 
         if (supported.length > 0 && unsupported.length > 0) {
           return context.l10n.raw({
-            id: "baseline_supported_and_unsupported_in",
+            id: "baseline-supported-and-unsupported-in",
             args: {
               supported: formatter.format(supported),
               unsupported: formatter.format(unsupported),
@@ -110,12 +110,12 @@ export class BaselineIndicator extends ServerComponent {
           });
         } else if (supported.length > 0) {
           return context.l10n.raw({
-            id: "baseline_supported_in",
+            id: "baseline-supported-in",
             args: { browsers: formatter.format(supported) },
           });
         } else if (unsupported.length > 0) {
           return context.l10n.raw({
-            id: "baseline_unsupported_in",
+            id: "baseline-unsupported-in",
             args: { browsers: formatter.format(unsupported) },
           });
         } else {
@@ -181,7 +181,7 @@ export class BaselineIndicator extends ServerComponent {
         ${level === "high" && low_date
           ? html`<p>
               ${context.l10n.raw({
-                id: "baseline_high_extra",
+                id: "baseline-high-extra",
                 args: {
                   date: low_date.toLocaleDateString(context.locale, {
                     year: "numeric",
@@ -193,7 +193,7 @@ export class BaselineIndicator extends ServerComponent {
           : level === "low" && low_date
             ? html`<p>
                 ${context.l10n.raw({
-                  id: "baseline_low_extra",
+                  id: "baseline-low-extra",
                   args: {
                     date: low_date.toLocaleDateString(DEFAULT_LOCALE, {
                       year: "numeric",
@@ -202,11 +202,11 @@ export class BaselineIndicator extends ServerComponent {
                   },
                 })}
               </p>`
-            : html`<p>${context.l10n("baseline_not_extra")}</p>`}
+            : html`<p>${context.l10n("baseline-not-extra")}</p>`}
         ${status.asterisk
           ? html`<p>
               ${context.l10n.raw({
-                id: "baseline_asterisk",
+                id: "baseline-asterisk",
                 args: { asterisk: "*" },
               })}
             </p>`

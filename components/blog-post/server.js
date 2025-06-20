@@ -53,7 +53,7 @@ function PrevNextLinks(context, { blogMeta }) {
     ? html`
         <a href="../${blogMeta.links.previous.slug}/">
           <article>
-            ${context.l10n("blog_previous")`Previous Post`}
+            ${context.l10n("blog-previous")`Previous Post`}
             ${blogMeta.links.previous.title}
           </article>
         </a>
@@ -63,7 +63,7 @@ function PrevNextLinks(context, { blogMeta }) {
     ? html`
         <a href="../${blogMeta.links.next.slug}/">
           <article>
-            ${context.l10n("blog_next")`Next post`} ${blogMeta.links.next.title}
+            ${context.l10n("blog-next")`Next post`} ${blogMeta.links.next.title}
           </article>
         </a>
       `
@@ -84,7 +84,7 @@ export class BlogPost extends ServerComponent {
       return PageLayout.render(
         context,
         html`<p>
-          ${context.l10n("blog_post_not_found")`Blog post not found`}
+          ${context.l10n("blog-post-not-found")`Blog post not found`}
         </p>`,
       );
     }
