@@ -9,10 +9,29 @@ export class GenericContent extends ServerComponent {
    * @returns {import("@lit").TemplateResult}
    */
   render(context) {
-    return html`<div id="content" class="generic-content">
-      ${context.hyData.sections.map((section) =>
-        ContentSection.render(context, section),
-      )}
+    console.log("CONTEXT", context.hyData.sections);
+    const className = [
+      "features/ai-help",
+      "features/collection",
+      "features/offline",
+      "features/overview",
+      "features/playground",
+      "features/updates",
+    ].includes(context.id)
+      ? "generic-content generic-content__plus-docs-content"
+      : "generic-content";
+
+    return html`<main id="content" class=${className}>
+      ${context.hyData.sections.map((section) => {
+        if (section.type === "prose") {
+          // Map assets path to a relative one
+          section.value.content = section.value.content.replaceAll(
+            '"/assets/',
+            '"./assets/',
+          );
+        }
+        return ContentSection.render(context, section);
+      })}
     </div>`;
   }
 }

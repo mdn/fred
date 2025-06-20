@@ -1,0 +1,41 @@
+.generic-content {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.generic-content__plus-docs-content {
+  --plus-accent-color: light-dark(#d30038, #ff97a0);
+
+  .content-section {
+    h1 {
+      font-size: var(--font-size-small);
+      font-weight: 700;
+
+      line-height: 1.2;
+
+      color: var(--plus-accent-color);
+
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    h1 + blockquote {
+      padding: revert;
+      margin: 1rem 0 2rem;
+
+      color: var(--text-primary);
+
+      border: revert;
+      border-radius: var(--elem-radius);
+
+      p:first-child {
+        margin-bottom: 2rem;
+
+        font-size: var(--font-size-largest);
+        font-weight: 600;
+
+        line-height: 1.2;
+      }
+    }
+  }
+}
