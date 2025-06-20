@@ -90,8 +90,8 @@ export class ContributorSpotlight extends ServerComponent {
                   .map((section) => ContentSection.render(context, section))
               : nothing}
           </main>
-          ${renderGetInvolved()}
         </div>
+        ${renderGetInvolved()}
       `,
     );
   }

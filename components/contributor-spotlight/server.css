@@ -1,6 +1,7 @@
 .contributor-spotlight-container {
   display: grid;
   grid-template-columns: var(--layout-no-sidebar-extended);
+  margin-top: 3rem;
 }
 
 .contributor-spotlight {
@@ -176,6 +177,10 @@
   grid-column: content;
   padding-top: 2rem;
   padding-bottom: 2rem;
+
+  @media (--screen-small-and-narrower) {
+    padding-inline: var(--layout-side-padding);
+  }
 
   h2 {
     margin: 0;
