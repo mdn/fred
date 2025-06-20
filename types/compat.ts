@@ -10,7 +10,7 @@ export interface Feature {
   depth: number;
 }
 
-export type LegendKey =
+export type IconName =
   | "yes"
   | "partial"
   | "preview"
