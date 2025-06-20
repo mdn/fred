@@ -101,6 +101,10 @@ export class Pagination extends ServerComponent {
    */
   renderPrevNextButton(prevNext, prevNextPage, disabled, pageUrl, context) {
     const url = disabled ? "#" : pageUrl(prevNextPage);
+    const label = {
+      next: () => context.l10n(`pagination-next`),
+      prev: () => context.l10n(`pagination-prev`),
+    }[prevNext]();
 
     return html`
       <li class=${`pagination__item pagination__item--${prevNext}`}>
@@ -109,7 +113,7 @@ export class Pagination extends ServerComponent {
           class="pagination__link ${disabled
             ? "pagination__link--disabled"
             : ""}"
-          aria-label=${context.l10n(`pagination-${prevNext}`)}
+          aria-label=${label}
           ${disabled ? 'aria-disabled="true"' : ""}
         >
           ${prevNext === "next" ? "→" : "←"}
