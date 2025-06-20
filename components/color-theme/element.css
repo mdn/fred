@@ -60,6 +60,7 @@
 
 .color-theme__dropdown {
   position: absolute;
+  right: 0;
   z-index: 1;
 
   width: max-content;
@@ -68,15 +69,7 @@
   margin: 0;
 
   background-color: var(--color-background-primary);
-  border: 1px solid var(--color-border-secondary);
-
-  @media (--screen-medium-and-wider) {
-    left: calc(-0.5rem - 1px); /* Align icons. */
-  }
-
-  @media (--screen-small-and-narrower) {
-    right: 0;
-  }
+  border: 1px solid var(--color-border-primary);
 }
 
 .color-theme__list {
