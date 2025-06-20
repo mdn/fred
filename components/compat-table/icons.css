@@ -108,7 +108,7 @@
   }
 
   &.icon-prefix {
-    mask-image: url("../icon/prefix.svg");
+    mask-image: url("../icon/mdn-prefix.svg");
   }
 
   &.icon-altname {

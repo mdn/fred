@@ -339,13 +339,29 @@ table {
 
     width: 3px;
 
-    /* height: calc(100% - 0.25rem); */
-
     margin-top: 0.25rem;
 
     content: "";
 
     background: var(--color-border-primary);
+  }
+
+  .bc-notes-wrapper:last-child dd:last-child {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      top: 3px;
+      bottom: 0;
+      left: 7px;
+      z-index: -1;
+
+      width: 3px;
+
+      content: "";
+
+      background: var(--color-background-page);
+    }
   }
 
   .bc-level-yes.icon.icon-yes {
@@ -356,13 +372,13 @@ table {
 
   .bc-supports-dd {
     .icon {
-      background: var(--color-text-secondary);
+      background-color: var(--color-text-secondary);
       mask-image: url("../icon/circle.svg");
     }
 
     .icon-wrap {
       padding-bottom: 2px;
-      background: var(--color-background-page);
+      background-color: var(--color-background-page);
     }
   }
 
