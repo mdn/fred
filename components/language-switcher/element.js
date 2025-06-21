@@ -1,6 +1,8 @@
 import { LitElement, html, nothing } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
+import pinIcon from "../icon/pin.svg?lit";
+import { PreferredLocaleController } from "../preferred-locale/controller.js";
 
 import styles from "./element.css?lit";
 
@@ -18,6 +20,8 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
 
   constructor() {
     super();
+    /** @type {PreferredLocaleController} */
+    this.preferredLocale = new PreferredLocaleController(this);
     /** @type {import("@rari").Translation[]} */
     this.translations = [];
     this.native = "";
@@ -26,7 +30,7 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
   }
 
   render() {
-    const { translations, native, locale, url } = this;
+    const { translations, native, locale, preferredLocale, url } = this;
 
     if (translations.length === 0) {
       return nothing;
@@ -48,13 +52,18 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
               .map(
                 (translation) => html`
                   <li>
-                    <a
+                    <mdn-button
+                      .icon=${preferredLocale.value === translation.locale
+                        ? pinIcon
+                        : undefined}
                       class="language-switcher__option"
+                      variant="plain"
                       href=${url.replace(
                         `/${locale}/`,
                         `/${translation.locale}/`,
                       )}
-                      >${translation.native}</a
+                      @click=${preferredLocale.reset}
+                      >${translation.native}</mdn-button
                     >
                   </li>
                 `,

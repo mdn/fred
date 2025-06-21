@@ -1,6 +1,12 @@
 import { LitElement, html, nothing } from "lit";
+import { join } from "lit/directives/join.js";
+
+import pinOffIcon from "../icon/pin-off.svg?lit";
+import pinIcon from "../icon/pin.svg?lit";
+import { PreferredLocaleController } from "../preferred-locale/controller.js";
 
 import styles from "./element.css?lit";
+
 export class MDNLanguageHint extends LitElement {
   static ssr = false;
   static styles = styles;
@@ -14,6 +20,8 @@ export class MDNLanguageHint extends LitElement {
 
   constructor() {
     super();
+    /** @type {PreferredLocaleController} */
+    this.preferredLocale = new PreferredLocaleController(this);
     /** @type {string} */
     this.locale = "";
     /** @type {string[]} */
@@ -23,23 +31,34 @@ export class MDNLanguageHint extends LitElement {
     this._url = location.pathname;
   }
 
+  /** @param {string} locale */
+  _updatePreferredLocale(locale) {
+    this._preferredLocale = locale;
+  }
+
   render() {
     const currentLocale = this.locale;
+    const preferredLocale = this.preferredLocale.value;
+
+    if (currentLocale === preferredLocale) {
+      return nothing;
+    }
+
     const acceptedLanguages = this._acceptedLanguages;
     const allLocales = this.locales;
 
-    const acceptedLocales = [];
+    const acceptedLocales = new Set();
     for (const language of acceptedLanguages) {
       if (language.includes("-")) {
         // e.g. en-US, de-DE
         if (allLocales.includes(language)) {
           // e.g. en-US
-          acceptedLocales.push(language);
+          acceptedLocales.add(language);
         } else {
           // e.g. de-DE
           const locale = language.split("-").at(0);
           if (locale && allLocales.includes(locale)) {
-            acceptedLocales.push(locale);
+            acceptedLocales.add(locale);
           }
         }
       } else {
@@ -47,12 +66,14 @@ export class MDNLanguageHint extends LitElement {
         const matches = allLocales.filter((locale) =>
           locale.startsWith(language),
         );
-        acceptedLocales.push(...matches);
+        for (const match of matches) {
+          acceptedLocales.add(match);
+        }
       }
     }
 
     /** @type {string[]} */
-    const offerLocales = acceptedLocales.filter(
+    const offerLocales = [...acceptedLocales].filter(
       (locale) => locale !== currentLocale,
     );
     const firstOfferedLocale = offerLocales.at(0);
@@ -61,21 +82,51 @@ export class MDNLanguageHint extends LitElement {
       return nothing;
     }
 
-    if (offerLocales.length > 1) {
+    if (preferredLocale && offerLocales.includes(preferredLocale)) {
       return html`<div class="notecard tip">
         <p>
           This page is also available in
-          ${this._renderLocaleLink(firstOfferedLocale)}.
+          ${this._renderLocaleLink(preferredLocale)}.
+        </p>
+        <p>
+          <mdn-button
+            .icon=${pinOffIcon}
+            variant="secondary"
+            action="negative"
+            @click=${this.preferredLocale.reset}
+            >Reset preferred language
+            (${this._getLocaleName(preferredLocale)})</mdn-button
+          >
         </p>
       </div>`;
     }
 
+    if (offerLocales.length > 1) {
+      return html`<div class="notecard tip">
+        <p>
+          This page is also available in:
+          ${join(
+            offerLocales.map((locale) => this._renderLocaleLink(locale)),
+            html`, `,
+          )}
+        </p>
+      </div>`;
+    }
+
+    const rememberLocale = () => this.preferredLocale.set(currentLocale);
     return html`<div class="notecard tip">
       <p>
-        This page is also available in:
-        <ul>
-          ${offerLocales.map((locale) => html`<li>${this._renderLocaleLink(locale)}</li>`)}
-        </ul>
+        This page is also available in
+        ${this._renderLocaleLink(firstOfferedLocale)}.
+      </p>
+      <p>
+        <mdn-button
+          .icon=${pinIcon}
+          variant="secondary"
+          @click=${rememberLocale}
+          >Set <em>${this._getLocaleName(currentLocale)}</em> as preferred
+          language</mdn-button
+        >
       </p>
     </div>`;
   }
@@ -98,7 +149,7 @@ export class MDNLanguageHint extends LitElement {
       case "de":
         return "German";
       case "en-US":
-        return "English";
+        return "English (US)";
       case "es":
         return "Spanish";
       case "fr":
