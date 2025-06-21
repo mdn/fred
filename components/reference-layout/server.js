@@ -22,6 +22,12 @@ export class ReferenceLayout extends ServerComponent {
       <div class="reference-layout">
         <main id="content" class="reference-layout__content">
           <div class="reference-layout__content__header">
+            <mdn-language-hint
+              locale=${context.locale}
+              locales=${JSON.stringify(
+                context.doc.other_translations.map(({ locale }) => locale),
+              )}
+            ></mdn-language-hint>
             ${TranslationBanner.render(context)}
             <h1>${doc.title}</h1>
             ${BaselineIndicator.render(context)} ${description}
