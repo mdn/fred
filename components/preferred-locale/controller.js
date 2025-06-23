@@ -10,6 +10,7 @@ import {
 
 const PREFERRED_LOCALE_COOKIE_NAME = "preferredlocale";
 const PREFERRED_LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365 * 3; // 3 years.
+const PREFERRED_LOCALE_CHANGED_EVENT = "preferred-locale-changed";
 
 export class PreferredLocaleController {
   #host;
@@ -37,17 +38,13 @@ export class PreferredLocaleController {
       deleteCookie(PREFERRED_LOCALE_COOKIE_NAME);
     }
 
-    const event = new CustomEvent("preferred-locale-changed", {
-      detail: { locale: locale },
+    const event = new CustomEvent(PREFERRED_LOCALE_CHANGED_EVENT, {
+      detail: { locale },
       bubbles: true,
       cancelable: false,
     });
 
     globalThis.dispatchEvent(event);
-  }
-
-  reset() {
-    this.set(undefined);
   }
 
   /** @param {Event} [event] */
@@ -56,15 +53,14 @@ export class PreferredLocaleController {
       event instanceof CustomEvent && event.detail
         ? event.detail.locale
         : this.get();
-    const oldValue = this.value;
     this.value = value;
-    this.#host.requestUpdate("PreferredLocale.value", oldValue);
+    this.#host.requestUpdate();
   }
 
   hostConnected() {
     this._updatePreferredLocale = this._updatePreferredLocale.bind(this);
     globalThis.addEventListener(
-      "preferred-locale-changed",
+      PREFERRED_LOCALE_CHANGED_EVENT,
       this._updatePreferredLocale,
     );
     this._updatePreferredLocale();
@@ -73,7 +69,7 @@ export class PreferredLocaleController {
 
   hostDisconnected() {
     globalThis.removeEventListener(
-      "preferred-locale-changed",
+      PREFERRED_LOCALE_CHANGED_EVENT,
       this._updatePreferredLocale,
     );
   }

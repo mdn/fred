@@ -83,32 +83,18 @@ export class MDNLanguageHint extends LitElement {
     }
 
     if (preferredLocale && offerLocales.includes(preferredLocale)) {
+      const resetLocale = () => this.preferredLocale.set(undefined);
       return html`<div class="notecard tip">
-        <p>
-          This page is also available in
-          ${this._renderLocaleLink(preferredLocale)}.
-        </p>
+        <p>Also available in: ${this._renderLocaleLink(preferredLocale)}.</p>
         <p>
           <mdn-button
             .icon=${pinOffIcon}
             variant="secondary"
             action="negative"
-            @click=${this.preferredLocale.reset}
-            >Reset preferred language
-            (${this._getLocaleName(preferredLocale)})</mdn-button
+            @click=${resetLocale}
+            >Stop redirecting to:
+            ${this._getLocaleName(preferredLocale)}</mdn-button
           >
-        </p>
-      </div>`;
-    }
-
-    if (offerLocales.length > 1) {
-      return html`<div class="notecard tip">
-        <p>
-          This page is also available in:
-          ${join(
-            offerLocales.map((locale) => this._renderLocaleLink(locale)),
-            html`, `,
-          )}
         </p>
       </div>`;
     }
@@ -116,16 +102,20 @@ export class MDNLanguageHint extends LitElement {
     const rememberLocale = () => this.preferredLocale.set(currentLocale);
     return html`<div class="notecard tip">
       <p>
-        This page is also available in
-        ${this._renderLocaleLink(firstOfferedLocale)}.
+        Also available in:
+        ${join(
+          offerLocales.map((locale) => this._renderLocaleLink(locale)),
+          html`, `,
+        )}
       </p>
       <p>
         <mdn-button
           .icon=${pinIcon}
           variant="secondary"
           @click=${rememberLocale}
-          >Set <em>${this._getLocaleName(currentLocale)}</em> as preferred
-          language</mdn-button
+          >Always redirect to:
+          <em>${this._getLocaleName(currentLocale)}</em> (when
+          available)</mdn-button
         >
       </p>
     </div>`;

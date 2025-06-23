@@ -36,6 +36,8 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
       return nothing;
     }
 
+    const resetPreferredLocale = () => preferredLocale.set(undefined);
+
     return html`<div class="language-switcher">
       <mdn-dropdown>
         <button slot="button" class="language-switcher__button" type="button">
@@ -53,7 +55,8 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
                 (translation) => html`
                   <li>
                     <mdn-button
-                      .icon=${preferredLocale.value === translation.locale
+                      .icon=${preferredLocale.initialValue ===
+                      translation.locale
                         ? pinIcon
                         : undefined}
                       class="language-switcher__option"
@@ -62,7 +65,7 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
                         `/${locale}/`,
                         `/${translation.locale}/`,
                       )}
-                      @click=${preferredLocale.reset}
+                      @click=${resetPreferredLocale}
                       >${translation.native}</mdn-button
                     >
                   </li>
