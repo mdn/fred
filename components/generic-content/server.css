@@ -1,6 +1,16 @@
 .generic-content {
   padding-top: 3rem;
   padding-bottom: 3rem;
+
+  .content-section {
+    h2 {
+      margin: 4rem 0 0.5rem;
+
+      &:first-of-type {
+        margin-top: 2rem;
+      }
+    }
+  }
 }
 
 .generic-content__plus-docs-content {
@@ -18,9 +28,19 @@
 
       color: #1b1b1b;
 
-      background: #ffffff;
+      background: var(--color-white);
       border: 1px solid var(--color-border-primary);
       border-radius: 0.25rem;
+    }
+
+    em {
+      font-variation-settings: normal;
+      font-style: normal;
+
+      text-decoration: underline;
+      text-decoration-thickness: auto;
+      text-decoration-color: var(--plus-accent-color);
+      text-underline-offset: 0.1em;
     }
 
     h1 {

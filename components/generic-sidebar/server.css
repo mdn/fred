@@ -2,8 +2,21 @@
   position: sticky;
   top: var(--sticky-header-height);
 
+  em {
+    align-items: baseline;
+
+    padding: 0.25em 0;
+
+    font-style: normal;
+
+    background-color: var(--color-background-blue);
+    border-left: 2px solid var(--color-blue-50);
+  }
+
   h4 {
+    padding: 0.75em 0;
     margin: 0;
+
     font-size: 1.5rem;
     font-weight: normal;
   }

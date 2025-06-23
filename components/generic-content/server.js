@@ -79,7 +79,6 @@ export class GenericContent extends ServerComponent {
    * @returns {import("@lit").TemplateResult}
    */
   render(context) {
-    console.log("CONTEXT", context.hyData.sections);
     const className = [
       "features/ai-help",
       "features/collection",
@@ -102,7 +101,7 @@ export class GenericContent extends ServerComponent {
         }
         return ContentSection.render(context, section);
       })}
-    </div>`;
+    </main>`;
   }
 }
 
