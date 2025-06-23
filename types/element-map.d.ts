@@ -52,6 +52,7 @@ declare global {
     "mdn-sidebar-filter": import("../components/sidebar-filter/element.js").MDNSidebarFilter;
     "mdn-site-search": import("../components/site-search/element.js").MDNSiteSearch;
     "mdn-survey": import("../components/survey/element.js").MDNSurvey;
+    "mdn-switch": import("../components/switch/element.js").MDNSwitch;
     "mdn-themed-image": import("../components/themed-image/element.js").MDNThemedImage;
     "mdn-toggle-sidebar": import("../components/toggle-sidebar/element.js").MDNToggleSidebar;
     "mdn-user-menu": import("../components/user-menu/element.js").MDNUserMenu;
