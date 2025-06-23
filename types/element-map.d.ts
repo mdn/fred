@@ -22,6 +22,7 @@ declare global {
     "mdn-ix-tab": import("../components/ix-tab/element.js").MDNIXTab;
     "mdn-ix-tab-panel": import("../components/ix-tab-panel/element.js").MDNIXTabPanel;
     "mdn-ix-tab-wrapper": import("../components/ix-tab-wrapper/element.js").MDNIXTabWrapper;
+    "mdn-language-always-redirect-button": import("../components/language-always-redirect-button/element.js").MDNLanguageAlwaysRedirectButton;
     "mdn-language-switcher": import("../components/language-switcher/element.js").MDNLanguageSwitcher;
     "mdn-live-sample-result": import("../components/live-sample-result/element.js").MDNLiveSampleResult;
     "mdn-login-button": import("../components/login-button/element.js").MDNLoginButton;
