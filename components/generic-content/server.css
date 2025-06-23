@@ -7,6 +7,22 @@
   --plus-accent-color: light-dark(#d30038, #ff97a0);
 
   .content-section {
+    img {
+      box-sizing: initial;
+      display: inline-block;
+      display: flex;
+
+      height: auto;
+
+      margin: 2rem auto;
+
+      color: #1b1b1b;
+
+      background: #ffffff;
+      border: 1px solid var(--color-border-primary);
+      border-radius: 0.25rem;
+    }
+
     h1 {
       font-size: var(--font-size-small);
       font-weight: 700;
