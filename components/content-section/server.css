@@ -42,7 +42,7 @@
     letter-spacing: 0.025em;
   }
 
-  a:not([href^="#"]) {
+  a {
     &:link {
       color: var(--color-link-normal);
     }
