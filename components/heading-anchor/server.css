@@ -3,13 +3,13 @@
 }
 
 .heading-anchor {
-  color: inherit;
+  color: inherit !important;
 
   &::before {
     position: absolute;
 
-    padding-inline-end: 0.4em;
-    margin-inline-start: -0.8em;
+    padding-right: 0.4em;
+    margin-left: -0.8em;
 
     color: var(--color-text-secondary);
 

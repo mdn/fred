@@ -42,7 +42,7 @@
     letter-spacing: 0.025em;
   }
 
-  a:not([href^="#"]) {
+  a {
     &:link {
       color: var(--color-link-normal);
     }
@@ -64,12 +64,6 @@
 
     background-color: var(--color-background-secondary);
     border-radius: 0.25em;
-  }
-
-  .table-container {
-    width: 100%;
-    margin: 0;
-    overflow-x: auto;
   }
 
   table {

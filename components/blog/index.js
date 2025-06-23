@@ -7,30 +7,26 @@ import { html, nothing } from "lit";
  * @returns {import("@lit").TemplateResult}
  */
 export function BlogContainer(_context, content) {
-  return html`<div className="page-layout__blog-container">${content}</div>`;
+  return html`<div class="page-layout__blog-container">${content}</div>`;
 }
 
 /**
  *
  * @param {import("@fred").Context} _context
  * @param {object} params
+ * @param {string} [params.className]
  * @param {string | null | undefined} params.link
  * @param {import("@lit").TemplateResult} params.content
  * @returns
  */
-export function MaybeLink(_context, { link, content }) {
+export function MaybeLink(_context, { className = "", link, content }) {
   return link
     ? link.startsWith("https://")
-      ? html` <a
-          href=${link}
-          className="external"
-          target="_blank"
-          rel="noreferrer"
-        >
+      ? html` <a href=${link} class="external" target="_blank" rel="noreferrer">
           ${content}
         </a>`
-      : html`<a href=${link} className="{className}"> ${content} </a>`
-    : html`<span className="{className}">${content}</span>`;
+      : html`<a href=${link} class=${className}> ${content} </a>`
+    : html`<span class=${className}>${content}</span>`;
 }
 
 /**
@@ -64,7 +60,7 @@ export function TimeToRead(context, { readTime }) {
   if (!readTime) {
     return nothing;
   }
-  return html`<span className="read-time"
+  return html`<span class="read-time"
     >${context.l10n.raw({
       id: "blog-time-to-read",
       args: { minutes: readTime },
@@ -86,7 +82,6 @@ export function Author(context, { blogMeta }) {
   }
   return MaybeLink(context, {
     link: author.link,
-    // @ts-expect-error
     className: "author",
     content: html`<img
         src=${author.avatar_url ?? "/assets/avatar.png"}

@@ -73,8 +73,37 @@ export class TranslationBanner extends ServerComponent {
       return nothing;
     }
 
-    return html`<div class="notecard note">
+    const switchToEnglish = this._renderSwitchToEnglish(context);
+
+    return html`<div class="translation-banner notecard note">
       <p>${this._renderBody(locale)}</p>
+      ${switchToEnglish ? html`<p>${switchToEnglish}</p>` : nothing}
     </div>`;
+  }
+
+  /**
+   * @param {import("@fred").Context<import("@rari").DocPage>} context
+   */
+  _renderSwitchToEnglish(context) {
+    const { locale } = context;
+    if (
+      locale === "en-US" ||
+      !context.doc.other_translations.some(({ locale }) => locale === "en-US")
+    ) {
+      return nothing;
+    }
+
+    const url = context.doc.mdn_url.replace(`/${locale}/`, `/en-US/`);
+
+    // Note: Do not translate, this is intentionally in English.
+
+    return html`<p class="translation-banner__switch" lang="en-US">
+      <mdn-button data-variant="secondary" href=${url}
+        >View in English</mdn-button
+      >
+      <mdn-language-always-redirect-button locale=${context.locale} to="en-US"
+        >Always switch to English</mdn-language-always-redirect-button
+      >
+    </p>`;
   }
 }

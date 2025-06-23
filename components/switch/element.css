@@ -1,0 +1,59 @@
+@property --switch-position {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
+.switch {
+  display: flex;
+
+  gap: 0.5em;
+  place-items: center;
+
+  cursor: pointer;
+}
+
+.switch__input {
+  --switch-size: 1.25em;
+
+  display: inline-block;
+
+  width: calc(var(--switch-size) * 1.6);
+  height: var(--switch-size);
+
+  margin: 0;
+
+  appearance: none;
+
+  background-color: var(--color-text-secondary);
+  background-image: radial-gradient(
+    circle at calc(var(--switch-size) / 2),
+    var(--color-background-primary) calc((var(--switch-size) / 2) * 0.8),
+    transparent calc((var(--switch-size) / 2) * 0.8 + 1px)
+  );
+  background-repeat: no-repeat;
+  background-position: var(--switch-position) 0%;
+  background-size: var(--switch-size);
+  border-radius: calc(infinity * 1px);
+
+  transition: --switch-position 0.2s;
+
+  &:checked {
+    --switch-position: 100%;
+
+    background-color: var(--color-link-normal);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-link-normal);
+    outline-offset: 2px;
+  }
+
+  &:active:not(:disabled) {
+    filter: brightness(1.2);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+  }
+}

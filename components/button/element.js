@@ -13,6 +13,7 @@ export class MDNButton extends LitElement {
     icon: { state: true },
     iconOnly: { type: Boolean, attribute: "icon-only" },
     href: { type: String },
+    target: { type: String },
   };
 
   constructor() {
@@ -27,6 +28,8 @@ export class MDNButton extends LitElement {
     this.action = undefined;
     /** @type {string | undefined} */
     this.href = undefined;
+    /** @type {string | undefined} */
+    this.target = undefined;
   }
 
   render() {
@@ -38,6 +41,7 @@ export class MDNButton extends LitElement {
       variant: this.variant,
       action: this.action,
       href: this.href,
+      target: this.target,
     });
   }
 }
