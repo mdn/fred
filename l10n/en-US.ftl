@@ -37,8 +37,8 @@ blog-time-to-read = { $minutes ->
 }
 blog-post-not-found = Blog post not found.
 
-blog-previous = Previous Post
-blog-next = Next Post
+blog-previous = Previous post
+blog-next = Next post
 
 Report = Report
 
@@ -108,4 +108,4 @@ pagination-goto = Go to page { $page }
 
 logout = Sign out
 login = Log in
-settings = My Settings
+settings = My settings
