@@ -289,9 +289,7 @@ export function renderSection(_context, section) {
     default: {
       const level = isH3 ? 3 : 2;
       if (!id) {
-        return html`<div className="section-content">
-          ${unsafeHTML(content)}
-        </div>`;
+        return html`<div class="section-content">${unsafeHTML(content)}</div>`;
       }
 
       return html`

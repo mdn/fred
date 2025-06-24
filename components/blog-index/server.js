@@ -16,7 +16,7 @@ import { ServerComponent } from "../server/index.js";
  */
 export function BlogIndexImageFigure(_context, { image, slug, width, height }) {
   const src = `./${slug}/${image.file}`;
-  return html`<figure className="blog-image">
+  return html`<figure class="blog-image">
     <a href="./${slug}/">
       <img alt=${image.alt || ""} src=${src} height=${height} width=${width} />
     </a>
@@ -47,7 +47,7 @@ function PostPreview(context, blogMeta) {
     <p>${blogMeta.description}</p>
     <footer>
       ${blogMeta.sponsored
-        ? html`<span className="sponsored">Sponsored</span>`
+        ? html`<span class="sponsored">Sponsored</span>`
         : nothing}
       ${Button.render(context, {
         label: "Read more →",
