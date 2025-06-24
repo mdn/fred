@@ -58,15 +58,22 @@ export class Breadcrumbs extends ServerComponent {
     }
 
     return html`
-      <ul class="breadcrumbs">
+      <ol
+        class="breadcrumbs"
+        vocab="https://schema.org/"
+        typeof="BreadcrumbList"
+      >
         ${parents.map(
-          ({ uri, title }) => html`
-            <li>
-              <a href=${uri}>${title}</a>
+          ({ uri, title }, index) => html`
+            <li property="itemListElement" typeof="ListItem">
+              <a href=${uri} property="item" typeof="WebPage"
+                ><span property="name">${title}</span></a
+              >
+              <meta property="position" content=${index + 1} />
             </li>
           `,
         )}
-      </ul>
+      </ol>
     `;
   }
 }
