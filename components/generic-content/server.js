@@ -81,7 +81,7 @@ export class GenericContent extends ServerComponent {
   render(context) {
     const className = [
       "features/ai-help",
-      "features/collection",
+      "features/collections",
       "features/offline",
       "features/overview",
       "features/playground",

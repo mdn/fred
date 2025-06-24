@@ -8,10 +8,13 @@ export class GenericToc extends ServerComponent {
    */
   render(context) {
     return html`<nav class="generic-toc">
-      <h2>${context.l10n("generic-toc-header")`In this article`}</h2>
-      <ul>
+      <h2>${context.l10n("generic-toc__header")`In this article`}</h2>
+      <ul class="generic-toc__list">
         ${context.hyData.toc.map(
-          ({ id, text }) => html`<li><a href="#${id}">${text}</a></li>`,
+          ({ id, text }) =>
+            html`<li class="generic-toc__item">
+              <a class="generic-toc__link" href="#${id}">${text}</a>
+            </li>`,
         )}
       </ul>
     </nav>`;

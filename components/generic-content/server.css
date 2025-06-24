@@ -14,13 +14,12 @@
 }
 
 .generic-content__plus-docs-content {
-  --plus-accent-color: light-dark(#d30038, #ff97a0);
+  --plus-accent-color: var(--color-text-red);
 
   .content-section {
     img {
       box-sizing: initial;
       display: inline-block;
-      display: flex;
 
       height: auto;
 

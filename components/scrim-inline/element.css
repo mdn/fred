@@ -133,7 +133,7 @@ dialog {
 
     line-height: 1;
 
-    color: #ffffff;
+    color: var(--color-white);
 
     text-transform: uppercase;
     text-wrap: balance;

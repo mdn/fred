@@ -33,12 +33,19 @@
     text-decoration: none;
 
     &:hover:not([aria-current="true"]) {
-      color: var(--color-link-normal);
+      display: inline-block;
+
+      padding: 0.5rem 1rem;
+      color: var(--text-secondary);
+
+      text-decoration: none;
+
+      border-left: 2px solid var(--border-secondary);
     }
 
     &[aria-current="true"] {
       background-color: var(--color-background-blue);
-      box-shadow: -2px 0 0 var(--color-blue-50);
+      border-left: 2px solid var(--color-blue-50);
     }
   }
 }
