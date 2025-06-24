@@ -11,7 +11,6 @@ export class HomepageHero extends ServerComponent {
       <h1>
         ${context.l10n.raw({
           id: "homepage-hero-title",
-          elements: { developers: { tag: "u" } },
         })}
       </h1>
       <p>
