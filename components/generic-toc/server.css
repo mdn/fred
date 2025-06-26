@@ -1,52 +1,75 @@
 .generic-toc {
   position: sticky;
   top: var(--sticky-header-height);
+  padding-top: 3rem;
 
-  h2 {
-    padding: 0.75rem 0;
-    margin: 0;
+  .generic-toc__header {
+    margin: 0 0 1rem;
 
-    font-size: 1.5rem;
-    font-weight: normal;
+    font-size: var(--font-size-large);
+    font-weight: 400;
+
+    line-height: 1.2;
+
+    color: var(--color-text-secondary);
+
+    letter-spacing: 1.5px;
   }
 
-  ul {
-    display: grid;
-
-    padding: 0;
-    margin: 0;
-
+  .generic-toc__list {
+    padding-left: 0;
+    font-size: var(--font-size-small);
     list-style: none;
-
-    ul {
-      padding-left: 1rem;
-    }
   }
 
-  a {
-    display: block;
+  .generic-toc__item {
+    margin: 0;
+  }
 
-    padding: 0.5rem;
+  .generic-toc__link {
+    display: inline-block;
 
-    color: inherit;
+    padding: 0.5rem 1rem;
+
+    color: var(--color-text-secondary);
 
     text-decoration: none;
 
-    &:hover:not([aria-current="true"]) {
-      display: inline-block;
+    border-left: 2px solid var(--color-border-items);
 
-      padding: 0.5rem 1rem;
-
-      color: var(--text-secondary);
-
-      text-decoration: none;
-
-      border-left: 2px solid var(--border-secondary);
+    &:hover,
+    &:active {
+      color: var(--color-accent);
     }
 
     &[aria-current="true"] {
-      background-color: var(--color-background-blue);
-      border-left: 2px solid var(--color-blue-50);
+      font-weight: 600;
+
+      background-color: var(--color-background-accent);
+      border-left: 2px solid var(--color-accent);
+      border-top-right-radius: 0.25rem;
+      border-bottom-right-radius: 0.25rem;
     }
   }
+
+  em {
+    align-items: baseline;
+
+    padding: 0.25em 0;
+
+    font-style: normal;
+
+    background-color: var(--color-background-accent);
+    border-left: 2px solid var(--color-accent);
+  }
+}
+
+.generic-toc--plus {
+  --color-accent: var(--color-text-red);
+  --color-background-accent: var(--color-background-red);
+}
+
+.generic-toc--observatory {
+  --color-accent: var(--color-text-purple);
+  --color-background-accent: var(--color-background-purple);
 }
