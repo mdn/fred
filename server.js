@@ -227,14 +227,18 @@ export async function startServer() {
   );
 
   let http2 = false;
-  if (process.env.FRED_HTTP2 === "true") {
+  if (process.env.HTTPS === "true") {
     http2 = true;
     // @ts-expect-error
     const { default: spdy } = await import("spdy");
     app = spdy.createServer(
       {
-        key: await readFile("build/localhost-privkey.pem"),
-        cert: await readFile("build/localhost-cert.pem"),
+        key: await readFile(
+          process.env.HTTPS_CERT_FILE || "build/localhost-privkey.pem",
+        ),
+        cert: await readFile(
+          process.env.HTTPS_KEY_FILE || "build/localhost-cert.pem",
+        ),
       },
       app,
     );
