@@ -12,7 +12,7 @@ baseline-supported-in = Supported in { $browsers }
 baseline-unsupported-in = Not widely supported in { $browsers }
 baseline-supported-and-unsupported-in = Supported in { $supported }, but not widely supported in { $unsupported }
 
-homepage-hero-title = Resources for <u data-l10n-name="developers">Developers</u>,<br> by Developers
+homepage-hero-title = Resources for Developers,<br /> by Developers
 homepage-hero-description = Documenting <a data-l10n-name="css">CSS</a>, <a data-l10n-name="html">HTML</a>, and <a data-l10n-name="js">JavaScript</a>, since 2005.
 
 not-found-title = Page not found
