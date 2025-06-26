@@ -37,12 +37,28 @@
       }
     }
 
+    &.prev a::before,
+    &.next a::after {
+      display: inline-block;
+
+      width: 1em;
+      height: 1em;
+
+      vertical-align: middle;
+
+      content: "";
+
+      background-color: currentcolor;
+
+      mask-size: cover;
+    }
+
     &.prev {
       grid-column: 1;
       justify-self: start;
 
       a::before {
-        content: "<";
+        mask-image: url("../icon/arrow-left.svg");
       }
     }
 
@@ -56,7 +72,7 @@
       justify-self: end;
 
       a::after {
-        content: ">";
+        mask-image: url("../icon/arrow-right.svg");
       }
     }
   }

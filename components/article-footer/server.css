@@ -19,6 +19,10 @@
     margin-right: 1rem;
     margin-left: 1rem;
   }
+
+  .heading-anchor::before {
+    display: none;
+  }
 }
 
 .article-footer__inner {
@@ -48,6 +52,8 @@
 
     width: 20%;
     height: auto;
+
+    color: var(--color-background-secondary);
   }
 }
 

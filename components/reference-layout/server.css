@@ -32,6 +32,7 @@
 
   .reference-layout__content__body {
     grid-area: body;
+    padding-bottom: 3rem;
   }
 
   .reference-layout__sidebar {

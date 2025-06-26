@@ -1,5 +1,8 @@
 import { html, nothing } from "lit";
 
+
+import arrowLeftIcon from "../icon/arrow-left.svg?lit";
+import arrowRightIcon from "../icon/arrow-right.svg?lit";
 import { ServerComponent } from "../server/index.js";
 
 export class Pagination extends ServerComponent {
@@ -97,10 +100,14 @@ export class Pagination extends ServerComponent {
    * @param {boolean} disabled
    * @param {(page: number) => string} pageUrl
    * @param {import("@fred").Context} context
-   * @returns {import("@lit").TemplateResult}
+   * @returns {import("@lit").TemplateResult | typeof nothing}
    */
   renderPrevNextButton(prevNext, prevNextPage, disabled, pageUrl, context) {
-    const url = disabled ? "#" : pageUrl(prevNextPage);
+    if (disabled) {
+      return nothing;
+    }
+
+    const url = pageUrl(prevNextPage);
     const label = {
       next: () => context.l10n(`pagination-next`),
       prev: () => context.l10n(`pagination-prev`),
@@ -108,16 +115,9 @@ export class Pagination extends ServerComponent {
 
     return html`
       <li class=${`pagination__item pagination__item--${prevNext}`}>
-        <a
-          href=${url}
-          class="pagination__link ${disabled
-            ? "pagination__link--disabled"
-            : ""}"
-          aria-label=${label}
-          ${disabled ? 'aria-disabled="true"' : ""}
+        <a href=${url} class="pagination__link" aria-label=${label}
+          >${prevNext === "prev" ? arrowLeftIcon : arrowRightIcon}</a
         >
-          ${prevNext === "next" ? "→" : "←"}
-        </a>
       </li>
     `;
   }

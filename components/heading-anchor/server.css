@@ -6,21 +6,26 @@
   color: inherit !important;
 
   &::before {
-    position: absolute;
+    display: inline-block;
 
-    padding-right: 0.4em;
+    padding-right: 0.2em;
     margin-left: -0.8em;
+
+    font-size: 0.75em;
 
     color: var(--color-text-secondary);
 
     content: "#";
+
+    @media (--screen-small-and-narrower) {
+      padding-right: 0.1em;
+
+      /** Avoid viewport overflow. */
+      font-size: 0.5em;
+    }
   }
 
-  &:not(:hover, :focus) {
-    text-decoration: none;
-
-    &::before {
-      visibility: hidden;
-    }
+  &:not(:hover, :focus)::before {
+    visibility: hidden;
   }
 }

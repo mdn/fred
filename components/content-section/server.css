@@ -51,8 +51,22 @@
       color: var(--color-link-visited);
     }
 
-    &:hover {
+    /* Regular links. */
+    &:not([href^="#"]) {
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    /* Anchor links. */
+    &[href^="#"] {
       text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 

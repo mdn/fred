@@ -84,6 +84,7 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
           data-vote="yes"
           @click=${this._handleVote}
           .icon=${thumbsUp}
+          variant="secondary"
           action="positive"
         >
           ${this.l10n`Yes`}
@@ -92,6 +93,7 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
           data-vote="no"
           @click=${this._handleVote}
           .icon=${thumbsDown}
+          variant="secondary"
           action="negative"
         >
           ${this.l10n`No`}

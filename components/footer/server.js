@@ -1,15 +1,15 @@
 import { html } from "lit";
 
-import rss from "../icon/rss.svg?lit";
-import bluesky from "../icon/social/bluesky.svg?lit";
-import github from "../icon/social/github.svg?lit";
-import mastodon from "../icon/social/mastodon.svg?lit";
-import x from "../icon/social/x.svg?lit";
+import rssIcon from "../icon/rss.svg?lit";
+import blueskyIcon from "../icon/social/bluesky.svg?lit";
+import githubIcon from "../icon/social/github.svg?lit";
+import mastodonIcon from "../icon/social/mastodon.svg?lit";
+import xIcon from "../icon/social/x.svg?lit";
 
 import { ServerComponent } from "../server/index.js";
 
-import mdn from "./mdn.svg?lit";
-import mozilla from "./mozilla.svg?lit";
+import mdnLogo from "./mdn.svg?lit";
+import mozillaLogo from "./mozilla.svg?lit";
 
 /**
  *
@@ -17,27 +17,27 @@ import mozilla from "./mozilla.svg?lit";
  */
 const socials = (context) => [
   {
-    icon: github,
+    icon: githubIcon,
     href: "https://github.com/mdn/",
     ariaLabel: context.l10n`MDN on GitHub`,
   },
   {
-    icon: bluesky,
+    icon: blueskyIcon,
     href: "https://bsky.app/profile/developer.mozilla.org",
     ariaLabel: context.l10n`MDN on Bluesky`,
   },
   {
-    icon: x,
+    icon: xIcon,
     href: "https://x.com/mozdevnet",
     ariaLabel: context.l10n`MDN on X`,
   },
   {
-    icon: mastodon,
+    icon: mastodonIcon,
     href: "https://mastodon.social/@mdn",
     ariaLabel: context.l10n`MDN on Mastodon`,
   },
   {
-    icon: rss,
+    icon: rssIcon,
     href: "/en-US/blog/rss.xml",
     ariaLabel: context.l10n`MDN blog RSS feed`,
   },
@@ -161,7 +161,12 @@ export class Footer extends ServerComponent {
       <footer class="footer">
         <div class="footer__mdn">
           <div class="footer__intro">
-            <a class="footer__logo" href="/">${mdn}</a>
+            <a
+              class="footer__logo"
+              href="/"
+              aria-label=${context.l10n`MDN logo`}
+              >${mdnLogo}</a
+            >
             <p>
               ${context.l10n(
                 "footer-tagline",
@@ -206,7 +211,12 @@ export class Footer extends ServerComponent {
         </div>
 
         <div class="footer__mozilla">
-          <a class="footer__logo" href="https://www.mozilla.org/">${mozilla}</a>
+          <a
+            class="footer__logo"
+            href="https://www.mozilla.org/"
+            aria-label=${context.l10n`Mozilla logo`}
+            >${mozillaLogo}</a
+          >
           <ul>
             ${mozillaLinks(context).map(
               (item) => html`
