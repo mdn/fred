@@ -1,6 +1,5 @@
 import { html, nothing } from "lit";
 
-
 import arrowLeftIcon from "../icon/arrow-left.svg?lit";
 import arrowRightIcon from "../icon/arrow-right.svg?lit";
 import { ServerComponent } from "../server/index.js";
