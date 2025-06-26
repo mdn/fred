@@ -231,9 +231,9 @@ table {
   white-space: nowrap;
 
   writing-mode: vertical-rl;
+  text-orientation: sideways;
 
   transform: rotate(180deg);
-  text-orientation: sideways;
 }
 
 .bc-support {
