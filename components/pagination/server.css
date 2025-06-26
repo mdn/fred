@@ -42,10 +42,10 @@
 
     @media (width <= 768px) {
       .pagination__item:not(
-          .pagination__item--prev,
-          .pagination__item--next,
-          :has(.pagination__link--active)
-        ) {
+        .pagination__item--prev,
+        .pagination__item--next,
+        :has(.pagination__link--active)
+      ) {
         display: none;
       }
     }
