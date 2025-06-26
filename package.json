@@ -24,21 +24,6 @@
     "Firefox ESR",
     "not dead"
   ],
-  "postcss": {
-    "plugins": {
-      "@csstools/postcss-global-data": {
-        "files": [
-          "./components/media/index.css",
-          "./components/layout/global.css"
-        ]
-      },
-      "postcss-custom-media": {},
-      "postcss-preset-env": {
-        "stage": 2,
-        "minimumVendorImplementations": 2
-      }
-    }
-  },
   "dependencies": {
     "@codemirror/lang-css": "^6.3.1",
     "@codemirror/lang-html": "^6.4.9",
@@ -77,6 +62,7 @@
     "@mdn/browser-compat-data": "^6.0.1",
     "@mdn/rari": "0.1.44",
     "@mdn/yari": "^4.12.1",
+    "@rsdoctor/rspack-plugin": "^1.1.4",
     "@rspack/cli": "^1.3.4",
     "@rspack/core": "^1.3.4",
     "@svgr/webpack": "^8.1.0",
@@ -109,6 +95,7 @@
     "sass-embedded": "^1.89.1",
     "sass-loader": "^16.0.5",
     "source-map-support": "^0.5.21",
+    "spdy": "^4.0.2",
     "stylelint": "^16.17.0",
     "stylelint-config-recess-order": "^6.0.0",
     "stylelint-config-standard": "^38.0.0",

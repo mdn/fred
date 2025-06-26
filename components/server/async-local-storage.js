@@ -1,4 +1,4 @@
 import { AsyncLocalStorage } from "node:async_hooks";
 
-/** @type {AsyncLocalStorage<{ componentsUsed: Set<string> }>} */
+/** @type {AsyncLocalStorage<import("./types.js").AsyncLocalStorageContents>} */
 export const asyncLocalStorage = new AsyncLocalStorage();

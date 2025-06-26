@@ -55,7 +55,13 @@ export async function render(path, page, compilationStats) {
     ...page,
   };
 
-  return asyncLocalStorage.run({ componentsUsed: new Set() }, () =>
+  /** @type {import("./components/server/types.js").AsyncLocalStorageContents} */
+  const storageContents = {
+    componentsUsed: new Set(),
+    componentsWithStylesInHead: new Set(),
+    compilationStats,
+  };
+  return asyncLocalStorage.run(storageContents, () =>
     runWithContext({ locale }, async () => {
       const component = await (async () => {
         switch (context.renderer) {
@@ -121,17 +127,7 @@ export async function render(path, page, compilationStats) {
             return NotFound.render(context);
         }
       })();
-      const { componentsUsed = new Set() } = asyncLocalStorage.getStore() || {};
-      return await collectResult(
-        r(
-          OuterLayout.render(
-            context,
-            component,
-            compilationStats,
-            componentsUsed,
-          ),
-        ),
-      );
+      return await collectResult(r(OuterLayout.render(context, component)));
     }),
   );
 }

@@ -2,6 +2,7 @@ import path from "node:path";
 
 import { fileURLToPath } from "node:url";
 
+import { RsdoctorRspackPlugin } from "@rsdoctor/rspack-plugin";
 import { rspack } from "@rspack/core";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import { fdir } from "fdir";
@@ -19,6 +20,47 @@ const buildLegacy = Boolean(
   JSON.parse(process.env.FRED_LEGACY || "null") ?? isProd,
 );
 
+const OPTIMIZATIONS = {
+  MIN_CHUNK_SIZE: 1000,
+  MAX_CHUNK_SIZE: 300_000,
+  /** @type {Record<string, string[]>} */
+  CHUNKED_STYLES: {
+    // foo: ["navigation", "logo"],
+    // bar: ["global", "reference-layout"],
+  },
+};
+
+/**
+ * @param {boolean} lit
+ */
+const postcssLoader = (lit = false) => ({
+  loader: "postcss-loader",
+  options: {
+    postcssOptions: {
+      plugins: [
+        [
+          "@csstools/postcss-global-data",
+          {
+            files: [
+              "./components/media/index.css",
+              "./components/layout/global.css",
+            ],
+          },
+        ],
+        ["postcss-custom-media"],
+        [
+          "postcss-preset-env",
+          {
+            stage: 2,
+            minimumVendorImplementations: 2,
+          },
+        ],
+        ...(isProd && lit ? [["cssnano"]] : []),
+      ],
+    },
+  },
+});
+
 /** @type {import("@rspack/core").RspackOptions} */
 const common = {
   mode: isProd ? "production" : "development",
@@ -27,6 +69,7 @@ const common = {
   output: {
     module: true,
     chunkFormat: "module",
+    assetModuleFilename: "[name].[hash][ext]",
   },
   experiments: {
     outputModule: true,
@@ -59,23 +102,6 @@ const common = {
       // so use cssnano instead:
       new CssMinimizerPlugin(),
     ],
-    // TODO: ensure common chunks across entrypoints get deduped
-    // splitChunks: {
-    //   cacheGroups: {
-    //     styles: {
-    //       // name(module, chunks, cacheGroupKey) {
-    //       //   // console.log(module, chunks, cacheGroupKey)
-    //       //   return module.identifier().split("/").at(-2)
-    //       // },
-    //       test: /\.css$/,
-    //       // type: "css/mini-extract",
-    //       chunks: "all",
-    //       // minChunks: 1,
-    //       reuseExistingChunk: false,
-    //       enforce: true,
-    //     },
-    //   },
-    // },
   },
   module: {
     parser: {
@@ -113,9 +139,11 @@ const common = {
             options: {
               exportType: "string",
               importLoaders: 1,
+              // TODO: extract inline source map into external .map file in prod
+              sourceMap: !isProd,
             },
           },
-          "postcss-loader",
+          postcssLoader(true),
         ],
       },
     ],
@@ -194,7 +222,7 @@ const clientAndLegacyCommon = {
               importLoaders: 1,
             },
           },
-          "postcss-loader",
+          postcssLoader(),
         ],
       },
     ],
@@ -205,15 +233,21 @@ const clientConfig = merge(common, clientAndSsrCommon, clientAndLegacyCommon, {
   name: "client",
   async entry() {
     return {
-      index: [!isProd && "./build/hmr.js", "./entry.client.js"].filter(
-        (x) => typeof x === "string",
-      ),
+      index: {
+        runtime: "runtime",
+        import: [!isProd && "./build/hmr.js", "./entry.client.js"].filter(
+          (x) => typeof x === "string",
+        ),
+      },
       // load `components/*/global.css` files into global style entrypoint
-      "styles-global": await new fdir()
-        .withFullPaths()
-        .filter((filePath) => filePath.endsWith("/global.css"))
-        .crawl(path.join(__dirname, "components"))
-        .withPromise(),
+      "styles-global": {
+        runtime: "styles",
+        import: await new fdir()
+          .withFullPaths()
+          .filter((filePath) => filePath.endsWith("/global.css"))
+          .crawl(path.join(__dirname, "components"))
+          .withPromise(),
+      },
       // load `components/*/server.css` files into per-component style entrypoints
       ...Object.fromEntries(
         (
@@ -224,11 +258,25 @@ const clientConfig = merge(common, clientAndSsrCommon, clientAndLegacyCommon, {
             .withPromise()
         )
           // eslint-disable-next-line unicorn/no-await-expression-member
-          .map((file) => ["styles-" + file.split("/").at(-2), file]),
+          .map((file) => [
+            "styles-" + file.split("/").at(-2),
+            { runtime: "styles", import: file },
+          ]),
       ),
     };
   },
   plugins: [
+    process.env.RSDOCTOR &&
+      new RsdoctorRspackPlugin(
+        process.env.RSDOCTOR_PORT
+          ? {
+              port: Number.parseInt(process.env.RSDOCTOR_PORT, 10),
+            }
+          : {
+              disableClientServer: true,
+              mode: "brief",
+            },
+      ),
     !isProd && new GenerateElementMapPlugin(),
     new rspack.CssExtractRspackPlugin({
       filename: isProd ? "[name].[contenthash].css" : "[name].css",
@@ -239,6 +287,36 @@ const clientConfig = merge(common, clientAndSsrCommon, clientAndLegacyCommon, {
   output: {
     path: path.resolve(__dirname, "dist/client"),
     publicPath: "/static/client/",
+  },
+  optimization: {
+    splitChunks: {
+      minSize: OPTIMIZATIONS.MIN_CHUNK_SIZE,
+      maxSize: OPTIMIZATIONS.MAX_CHUNK_SIZE,
+      chunks: "all",
+      cacheGroups: {
+        ...Object.fromEntries(
+          Object.entries(OPTIMIZATIONS.CHUNKED_STYLES).map(
+            ([name, components]) => [
+              `styles-${name}`,
+              {
+                type: "css/mini-extract",
+                name: `styles-${name}`,
+                chunks:
+                  /** @param {import("@rspack/core").Chunk} chunk */
+                  (chunk) =>
+                    Boolean(
+                      chunk.name &&
+                        components
+                          .map((component) => `styles-${component}`)
+                          .includes(chunk.name),
+                    ),
+                enforce: true,
+              },
+            ],
+          ),
+        ),
+      },
+    },
   },
 });
 
@@ -332,7 +410,7 @@ const legacyConfig = merge(common, clientAndLegacyCommon, {
               exportType: "css-style-sheet",
             },
           },
-          "postcss-loader",
+          postcssLoader(),
           "resolve-url-loader",
           {
             loader: "sass-loader",
@@ -354,7 +432,7 @@ const legacyConfig = merge(common, clientAndLegacyCommon, {
               importLoaders: 3,
             },
           },
-          "postcss-loader",
+          postcssLoader(),
           "resolve-url-loader",
           {
             loader: "sass-loader",

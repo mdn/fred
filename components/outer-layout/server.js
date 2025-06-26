@@ -1,35 +1,61 @@
 import { html } from "@lit-labs/ssr";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
-import { toCamelCase } from "../../build/utils.js";
 import inlineScript from "../../entry.inline.js?source&csp=true";
 import Favicon from "../favicon/pure.js";
+import { asyncLocalStorage } from "../server/async-local-storage.js";
 import { ServerComponent } from "../server/index.js";
+
+import {
+  assetsForEntry,
+  styleEntryForComponent,
+  stylesForComponents,
+} from "./utils.js";
 
 export class OuterLayout extends ServerComponent {
   /**
    * @param {import("@fred").Context} context
    * @param {import("lit-html").TemplateResult} markup
-   * @param {import("@fred").CompilationStats} compilationStats
-   * @param {Set<string>} components
    */
-  render(context, markup, compilationStats, components) {
-    let legacyTags;
-    if (components.has("legacy")) {
-      components.delete("legacy");
-      legacyTags = Object.values(
-        this.tagsFromManifest(compilationStats.legacy),
-      ).flat();
+  render(context, markup) {
+    const {
+      componentsUsed = /** @type {Set<string>} */ (new Set()),
+      componentsWithStylesInHead = /** @type {Set<string>} */ (new Set()),
+      compilationStats,
+    } = asyncLocalStorage.getStore() || {};
+
+    if (!compilationStats) {
+      throw new Error("compilation stats missing");
     }
 
-    const { scriptTags } = this.tagsFromManifest(compilationStats.client);
-    const styleTags = ["global", ...components].flatMap(
-      (component) =>
-        this.tagsFromManifest(
+    let legacyAssets;
+    if (componentsUsed.has("legacy")) {
+      componentsUsed.delete("legacy");
+      legacyAssets = assetsForEntry(compilationStats.legacy).assets;
+    }
+
+    const scripts = [
+      ...(assetsForEntry(compilationStats.client).assets?.js ?? []),
+      ...(legacyAssets?.js ?? []),
+    ];
+    const styles = [
+      ...(stylesForComponents(
+        ["global", ...componentsWithStylesInHead],
+        compilationStats.client,
+      ) ?? []),
+      ...(legacyAssets?.css ?? []),
+    ];
+
+    const preloadFonts = ["global"]
+      .flatMap((component) =>
+        assetsForEntry(
           compilationStats.client,
-          `styles-${toCamelCase(component)}`,
-        ).styleTags,
-    );
+          styleEntryForComponent(component),
+        ).auxiliaryAssets?.woff2?.filter((path) =>
+          path.toLowerCase().includes("inter"),
+        ),
+      )
+      .filter((x) => x !== undefined);
 
     // if you want to put some script inline, put it in entry.inline.js
     // and you'll get CSP generation: see the README
@@ -46,40 +72,29 @@ export class OuterLayout extends ServerComponent {
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          ${Favicon()} ${unsafeHTML(`<script>${inlineScript}</script>`)}
-          ${styleTags} ${scriptTags} ${legacyTags}
           <title>${context.pageTitle || "MDN"}</title>
+          ${Favicon()} ${unsafeHTML(`<script>${inlineScript}</script>`)}
+          ${styles.map(
+            (path) =>
+              html`<link rel="stylesheet" href=${path} fetchpriority="high" />`,
+          )}
+          ${preloadFonts.map(
+            (path) =>
+              html`<link
+                rel="preload"
+                href=${path}
+                as="font"
+                type="font/woff2"
+                crossorigin="anonymous"
+                fetchpriority="low"
+              />`,
+          )}
+          ${scripts?.map(
+            (path) => html`<script src=${path} type="module"></script>`,
+          )}
         </head>
         ${markup}
       </html>
     `;
-  }
-
-  /**
-   * @param {import("@rspack/core").StatsCompilation} manifest
-   * @param {string} [entry]
-   */
-  tagsFromManifest(manifest, entry = "index") {
-    const publicPath = manifest.publicPath;
-    if (!publicPath) {
-      throw new Error("publicPath is not defined in manifest");
-    }
-
-    const scriptTags = [];
-    const styleTags = [];
-
-    for (const { name } of manifest.entrypoints?.[entry]?.assets || []) {
-      if (name.endsWith(".js")) {
-        scriptTags.push(
-          html`<script src=${publicPath + name} type="module"></script>`,
-        );
-      } else if (name.endsWith(".css")) {
-        styleTags.push(
-          html`<link rel="stylesheet" href=${publicPath + name} />`,
-        );
-      }
-    }
-
-    return { scriptTags, styleTags };
   }
 }

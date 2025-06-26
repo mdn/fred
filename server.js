@@ -1,3 +1,4 @@
+import { readFile } from "node:fs/promises";
 import { Worker } from "node:worker_threads";
 
 import { rspack } from "@rspack/core";
@@ -104,7 +105,7 @@ const streamToBuffer = (stream) =>
   });
 
 export async function startServer() {
-  const app = express();
+  let app = express();
 
   if (devMode) {
     const rspackCompiler = rspack(rspackConfig);
@@ -225,8 +226,28 @@ export async function startServer() {
     }),
   );
 
+  let http2 = false;
+  if (process.env.HTTPS === "true") {
+    http2 = true;
+    // @ts-expect-error
+    const { default: spdy } = await import("spdy");
+    app = spdy.createServer(
+      {
+        key: await readFile(
+          process.env.HTTPS_CERT_FILE || "build/localhost-privkey.pem",
+        ),
+        cert: await readFile(
+          process.env.HTTPS_KEY_FILE || "build/localhost-cert.pem",
+        ),
+      },
+      app,
+    );
+  }
+
   const httpServer = app.listen(3000, () => {
-    console.log(`Server started at http://localhost:3000`);
+    console.log(
+      `Server started at ${http2 ? "https" : "http"}://localhost:3000`,
+    );
   });
 
   const playServer = play.listen(3001, () => {
