@@ -20,7 +20,6 @@ jobs:
           cache: npm
 
       - name: Install
-        working-directory: mdn/fred
         run: npm ci
 
       - name: Publish
