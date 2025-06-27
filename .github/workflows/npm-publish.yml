@@ -1,0 +1,32 @@
+name: NPM Publish
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  build:
+    if: github.repository == 'mdn/fred'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: npm
+
+      - name: Install
+        working-directory: mdn/fred
+        run: npm ci
+
+      - name: Publish
+        if: steps.release.outputs.release_created
+        run: npm publish
+        env:
+          FRED_WRITER_MODE: true
+          FRED_LEGACY: false
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
