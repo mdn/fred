@@ -18,12 +18,13 @@ jobs:
         with:
           node-version-file: ".nvmrc"
           cache: npm
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install
         run: npm ci
 
       - name: Publish
-        run: npm publish
+        run: npm publish --access public
         env:
           FRED_WRITER_MODE: true
           FRED_LEGACY: false
