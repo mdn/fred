@@ -135,7 +135,8 @@ table {
     margin-bottom: 1rem;
 
     .icon-wrap {
-      background: var(--color-background-primary);
+      padding-bottom: 2px;
+      background: var(--color-background-page);
     }
   }
 
@@ -176,12 +177,12 @@ table {
       background-color: var(--color-text-red);
 
       /* override icon */
-      mask-image: url("./icons/status/no.svg");
+      mask-image: url("../icon/circle-x.svg");
     }
 
     .timeline .icon.icon-removed-partial {
       background-color: var(--color-text-yellow);
-      mask-image: url("./icons/status/partial.svg");
+      mask-image: url("../icon/circle-slash.svg");
     }
   }
 
@@ -231,9 +232,9 @@ table {
   white-space: nowrap;
 
   writing-mode: vertical-rl;
+  text-orientation: sideways;
 
   transform: rotate(180deg);
-  text-orientation: sideways;
 }
 
 .bc-support {
@@ -331,11 +332,12 @@ table {
 
   &::before {
     position: absolute;
+    top: 0;
+    bottom: 4px;
     left: 7px;
     z-index: -1;
 
-    width: 2px;
-    height: calc(100% - 0.25rem);
+    width: 3px;
 
     margin-top: 0.25rem;
 
@@ -344,38 +346,39 @@ table {
     background: var(--color-border-primary);
   }
 
-  /* complicated selector to cover the last bit of the grey line above. */
   .bc-notes-wrapper:last-child dd:last-child {
     position: relative;
 
     &::before {
       position: absolute;
+      top: 3px;
       bottom: 0;
       left: 7px;
       z-index: -1;
 
-      width: 2px;
-      height: calc(100% - 6px);
+      width: 3px;
 
       content: "";
 
-      background: var(--color-background-primary);
+      background: var(--color-background-page);
     }
   }
 
   .bc-level-yes.icon.icon-yes {
     /* override icon */
     background-color: var(--color-text-green);
-    mask-image: url("./icons/status/yes-circle.svg");
+    mask-image: url("../icon/circle-check.svg");
   }
 
   .bc-supports-dd {
     .icon {
-      background: var(--color-background-secondary);
-      border: 3px solid var(--color-border-secondary);
-      border-radius: 50%;
+      background-color: var(--color-text-secondary);
+      mask-image: url("../icon/circle.svg");
+    }
 
-      mask-image: none;
+    .icon-wrap {
+      padding-bottom: 2px;
+      background-color: var(--color-background-page);
     }
   }
 
@@ -465,17 +468,13 @@ dl.bc-notes-list {
     vertical-align: text-top;
 
     .icon {
-      background-color: var(--color-border-primary);
-
-      &:hover {
-        background-color: var(--color-border-secondary);
-      }
+      background-color: var(--color-text-secondary);
     }
   }
 }
 
 .bc-github-link {
-  font: var(--font-size-small);
+  font-size: var(--font-size-small);
 }
 
 .main-page-content {

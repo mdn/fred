@@ -502,10 +502,14 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   _renderIcon(name) {
     const title = this._getLegendLabel(name);
 
-    return html`<abbr class="only-icon" title=${ifDefined(title)}>
-      <span>${name}</span>
-      <i class=${`icon icon-${name}`}></i>
-    </abbr>`;
+    return html`
+      <span class="icon-wrap">
+        <abbr class="only-icon" title=${ifDefined(title)}>
+          <span>${name}</span>
+          <i class=${`icon icon-${name}`}></i>
+        </abbr>
+      </span>
+    `;
   }
 
   /**

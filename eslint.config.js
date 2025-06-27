@@ -6,7 +6,6 @@ import js from "@eslint/js";
 import tseslint from "@typescript-eslint/eslint-plugin";
 import { defineConfig } from "eslint/config";
 import prettierConfig from "eslint-config-prettier/flat";
-// @ts-expect-error
 import importPlugin from "eslint-plugin-import";
 import jsdoc from "eslint-plugin-jsdoc";
 import * as lit from "eslint-plugin-lit";

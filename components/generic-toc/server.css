@@ -1,6 +1,7 @@
 .generic-toc {
   position: sticky;
   top: var(--sticky-header-height);
+  padding-top: 3rem;
 
   .generic-toc__header {
     margin: 0 0 1rem;
