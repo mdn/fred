@@ -14,7 +14,9 @@ export class BreadcrumbsBar extends ServerComponent {
     )
       ? "dark"
       : "";
-    const toggleSidebar = ["Doc", "CurriculumModule"].includes(context.renderer)
+    const toggleSidebar = ["Doc", "CurriculumModule", "GenericDoc"].includes(
+      context.renderer,
+    )
       ? html`<mdn-toggle-sidebar></mdn-toggle-sidebar>`
       : nothing;
 

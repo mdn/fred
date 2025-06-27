@@ -16,7 +16,7 @@ export class GenericLayout extends ServerComponent {
         <div class="generic-layout__content">
           ${GenericContent.render(context)}
         </div>
-        <aside class="generic-layout__sidebar">
+        <aside class="generic-layout__sidebar" id="main-sidebar">
           ${GenericSidebar.render(context)}
         </aside>
       </div>
