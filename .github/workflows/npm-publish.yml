@@ -27,5 +27,6 @@ jobs:
         run: npm publish --access public
         env:
           FRED_WRITER_MODE: true
-          FRED_LEGACY: false
+          # TODO: probably want to disable this, but it doesn't seem to work in content at the moment:
+          FRED_LEGACY: true
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
