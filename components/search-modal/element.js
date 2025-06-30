@@ -157,34 +157,46 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     document.removeEventListener("keydown", this._globalKeydown);
   }
 
+  _renderLoadingSearchIndex() {
+    return html`<progress
+      aria-label=${this.l10n`Loading search index…`}
+    ></progress>`;
+  }
+
   render() {
     const siteSearchIndex = this._queryIndex.value?.length || 0;
     return html`
       <dialog @keydown=${this._keydown} @focusin=${this._focus} closedby="any">
         <form @submit=${this._submit}>
+          <span class="search-icon"></span>
           <input
             type="text"
             .value=${this._query}
             autofocus
             @input=${this._input}
+            placeholder=${this.l10n`Search`}
           />
         </form>
         <ul>
           ${this._queryIndex.render({
-            initial: () => html`<progress></progress>`,
-            pending: () => html`<progress></progress>`,
+            initial: this._renderLoadingSearchIndex.bind(this),
+            pending: this._renderLoadingSearchIndex.bind(this),
             complete: (results) =>
               results?.map(
                 ({ title, url }, i) => html`
                   <li ?data-selected=${this._selected === i} data-result=${i}>
-                    <a href=${url}>${HighlightMatch(title, this._query)}</a>
-                    <small>
-                      ${url
-                        .split("/")
-                        .slice(1)
-                        .filter((p) => !["docs", this.locale].includes(p))
-                        .join(" / ")}
-                    </small>
+                    <a href=${url}
+                      ><span class="title"
+                        >${HighlightMatch(title, this._query)}</span
+                      >
+                      <span class="slug"
+                        >${url
+                          .split("/")
+                          .slice(1)
+                          .filter((p) => !["docs", this.locale].includes(p))
+                          .join(" / ")}</span
+                      >
+                    </a>
                   </li>
                 `,
               ),
@@ -196,15 +208,17 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
               >
                 <a
                   href=${`/${this.locale}/search?${new URLSearchParams({ q: this._query })}`}
-                  >${this.l10n.raw({
-                    id: "search-modal-site-search",
-                    args: {
-                      query: this._query,
-                    },
-                    elements: {
-                      query: { tag: "code" },
-                    },
-                  })}</a
+                  ><span class="title"
+                    >${this.l10n.raw({
+                      id: "search-modal-site-search",
+                      args: {
+                        query: this._query,
+                      },
+                      elements: {
+                        query: { tag: "code" },
+                      },
+                    })}</span
+                  ></a
                 >
               </li>`
             : nothing}
