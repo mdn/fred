@@ -15,7 +15,7 @@ import { ServerComponent } from "../server/index.js";
  * @param {number} params.height
  */
 export function BlogIndexImageFigure(_context, { image, slug, width, height }) {
-  const src = `./${slug}/${image.file}`;
+  const src = `/en-US/blog/${slug}/${image.file}`;
   return html`<figure class="blog-post-preview__figure">
     <a href="./${slug}/">
       <img alt=${image.alt || ""} src=${src} height=${height} width=${width} />
