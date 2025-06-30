@@ -64,27 +64,46 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
 
   /** @param {KeyboardEvent} event */
   _keydown(event) {
-    const results = (this._queryIndex.value?.length || 0) + 1;
     switch (event.key) {
       case "ArrowUp": {
         event.preventDefault();
-        const value = (this._selected - 1) % results;
-        this._selected = value < 0 ? results + value : value;
+        this._select(this._selected - 1);
         break;
       }
       case "ArrowDown":
         event.preventDefault();
-        this._selected = (this._selected + 1) % results;
+        this._select(this._selected + 1);
         break;
       default:
         return;
     }
   }
 
+  /** @returns {HTMLElement|null} */
+  _getSelectedItem() {
+    return this.shadowRoot?.querySelector("[data-selected] a") ?? null;
+  }
+
+  /** @param {number} index */
+  _select(index) {
+    const results = (this._queryIndex.value?.length || 0) + 1;
+    const value = index % results;
+    this._selected = value < 0 ? results + index : value;
+    setTimeout(() => {
+      const item = this._getSelectedItem();
+      if (item instanceof HTMLElement) {
+        item.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+      }
+    }, 0);
+  }
+
   /** @param {SubmitEvent} event */
   _submit(event) {
     event.preventDefault();
-    const item = this.shadowRoot?.querySelector("[data-selected] a");
+    const item = this._getSelectedItem();
     if (item instanceof HTMLElement) {
       item.click();
     }
@@ -229,7 +248,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
 
   updated() {
     if (this._shiftFocus) {
-      const selected = this.shadowRoot?.querySelector("[data-selected] a");
+      const selected = this._getSelectedItem();
       if (selected instanceof HTMLElement) {
         selected.focus();
       }
