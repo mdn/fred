@@ -1,6 +1,6 @@
 import { html, nothing } from "lit";
 
-import { AuthorDateReadTime, BlogContainer } from "../blog/index.js";
+import { AuthorDateReadTime } from "../blog/utils.js";
 import { ContentSection } from "../content-section/server.js";
 import { PageLayout } from "../page-layout/server.js";
 import { ReferenceToc } from "../reference-toc/server.js";
@@ -107,7 +107,7 @@ export class BlogPost extends ServerComponent {
               : nothing}
             <h1>${blogMeta.title}</h1>
             <div class="blog-post__author-read-time">
-              ${AuthorDateReadTime(context, { blogMeta })}
+              ${AuthorDateReadTime(context, blogMeta)}
             </div>
           </header>
           <main class="blog-post__content">
@@ -120,6 +120,6 @@ export class BlogPost extends ServerComponent {
       </article>
     `;
 
-    return PageLayout.render(context, BlogContainer(context, postContent));
+    return PageLayout.render(context, postContent);
   }
 }
