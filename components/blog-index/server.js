@@ -60,7 +60,7 @@ function PostPreview(context, blogMeta) {
 export class BlogIndex extends ServerComponent {
   /**
    *
-   * @param {import("@fred").Context<import("@rari").BlogPage>} context
+   * @param {import("@fred").Context<import("@rari").BlogPostPage>} context
    * @returns {import("@lit").TemplateResult}
    */
   render(context) {

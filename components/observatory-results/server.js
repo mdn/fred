@@ -6,7 +6,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class ObservatoryResults extends ServerComponent {
   /**
-   * @param {import("@fred").Context<import("@rari").SpaPage>} context
+   * @param {import("@fred").Context<import("@rari").SPAPage>} context
    * @returns {import("@lit").TemplateResult}
    */
   render(context) {
