@@ -1,5 +1,6 @@
+node_modules
 eslint.config.js
 rsbuild.config.js
-server.js
 .eslintcache
 .stylelintcache
+*.tgz

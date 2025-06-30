@@ -9,3 +9,4 @@ out/
 .stylelintcache
 .DS_Store
 .env
+*.tgz

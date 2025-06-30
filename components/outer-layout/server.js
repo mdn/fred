@@ -1,7 +1,9 @@
 import { html } from "@lit-labs/ssr";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import inlineScript from "../../entry.inline.js?source&csp=true";
+import { WRITER_MODE } from "../env/index.js";
 import Favicon from "../favicon/pure.js";
 import { asyncLocalStorage } from "../server/async-local-storage.js";
 import { ServerComponent } from "../server/index.js";
@@ -65,6 +67,7 @@ export class OuterLayout extends ServerComponent {
         lang="en"
         style="color-scheme: light dark;"
         data-renderer=${context.renderer}
+        data-noads=${ifDefined(WRITER_MODE ? "enabled" : undefined)}
       >
         <head>
           <meta charset="UTF-8" />

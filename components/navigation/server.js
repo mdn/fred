@@ -1,5 +1,6 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 
+import { WRITER_MODE } from "../env/index.js";
 import { Logo } from "../logo/server.js";
 import { Menu } from "../menu/server.js";
 
@@ -53,7 +54,9 @@ export class Navigation extends ServerComponent {
           <div class="navigation__search">
             <mdn-search-button></mdn-search-button>
           </div>
-          <mdn-user-menu locale=${context.locale}></mdn-user-menu>
+          ${WRITER_MODE
+            ? nothing
+            : html`<mdn-user-menu locale=${context.locale}></mdn-user-menu>`}
         </div>
         <mdn-search-modal id="search"></mdn-search-modal>
       </nav>

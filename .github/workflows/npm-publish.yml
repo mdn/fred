@@ -1,0 +1,32 @@
+name: NPM Publish
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  build:
+    if: github.repository == 'mdn/fred'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: npm
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install
+        run: npm ci
+
+      - name: Publish
+        run: npm publish --access public
+        env:
+          FRED_WRITER_MODE: true
+          # TODO: probably want to disable this, but it doesn't seem to work in content at the moment:
+          FRED_LEGACY: true
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

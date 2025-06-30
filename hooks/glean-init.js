@@ -1,8 +1,7 @@
 // @ts-expect-error "Could not find declaration file"
 import Glean from "@mozilla/glean/web";
 
-const GLEAN_ENABLED = Boolean(JSON.parse(process.env.GLEAN_ENABLED || "false"));
-const GLEAN_CHANNEL = process.env.GLEAN_CHANNEL || "dev";
+import { GLEAN_CHANNEL, GLEAN_ENABLED } from "../components/env/index.js";
 
 const FIRST_PARTY_DATA_OPT_OUT_COOKIE_NAME = "moz-1st-party-data-opt-out";
 const GLEAN_APP_ID = "mdn-fred";

@@ -1,16 +1,12 @@
 import { readFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 import { Worker } from "node:worker_threads";
 
-import { rspack } from "@rspack/core";
-import compression from "compression";
 import cookieParser from "cookie-parser";
 import express from "express";
 
 import { createProxyMiddleware } from "http-proxy-middleware";
-import webpackDevMiddleware from "webpack-dev-middleware";
-import webpackHotMiddleware from "webpack-hot-middleware";
 
-import rspackConfig from "./rspack.config.js";
 import { handleRunner } from "./vendor/yari/libs/play/index.js";
 
 import "source-map-support/register.js";
@@ -108,6 +104,15 @@ export async function startServer() {
   let app = express();
 
   if (devMode) {
+    const { rspack } = await import("@rspack/core");
+    const { default: rspackConfig } = await import("./rspack.config.js");
+    const { default: webpackDevMiddleware } = await import(
+      "webpack-dev-middleware"
+    );
+    const { default: webpackHotMiddleware } = await import(
+      "webpack-hot-middleware"
+    );
+
     const rspackCompiler = rspack(rspackConfig);
 
     app.use(
@@ -121,8 +126,12 @@ export async function startServer() {
     // @ts-expect-error
     app.use(webpackHotMiddleware(rspackCompiler));
   } else {
+    const { default: compression } = await import("compression");
+
     app.use(compression());
-    app.use("/static", express.static("dist"));
+
+    const dist = fileURLToPath(import.meta.resolve("./dist"));
+    app.use("/static", express.static(dist));
   }
 
   app.get("/", async (_req, res, _next) => {
@@ -132,22 +141,46 @@ export async function startServer() {
     res.end();
   });
 
+  const RUMBA_URL = process.env.RUMBA_URL;
   app.all(
-    ["/api/*_", "/users/*_", "/pong/*_", "/pimg/*_"],
-    createProxyMiddleware({
-      target: `https://developer.allizom.org`,
-      changeOrigin: true,
-      proxyTimeout: 20_000,
-      timeout: 20_000,
-      headers: {
-        Connection: "keep-alive",
-      },
-    }),
+    ["/api/*_", "/users/*_"],
+    RUMBA_URL
+      ? createProxyMiddleware({
+          target: RUMBA_URL,
+          changeOrigin: true,
+          proxyTimeout: 20_000,
+          timeout: 20_000,
+          headers: {
+            Connection: "keep-alive",
+          },
+        })
+      : (_req, res) => {
+          res.writeHead(502).end();
+        },
   );
 
+  const CF_URL = process.env.CF_URL;
+  app.all(
+    ["/pong/*_", "/pimg/*_"],
+    CF_URL
+      ? createProxyMiddleware({
+          target: CF_URL,
+          changeOrigin: true,
+          proxyTimeout: 20_000,
+          timeout: 20_000,
+          headers: {
+            Connection: "keep-alive",
+          },
+        })
+      : (_req, res) => {
+          res.writeHead(502).end();
+        },
+  );
+
+  const RARI_URL = process.env.RARI_URL || "http://localhost:8083";
   app.use(
     createProxyMiddleware({
-      target: `http://localhost:8083`,
+      target: RARI_URL,
       changeOrigin: true,
       proxyTimeout: 20_000,
       timeout: 20_000,

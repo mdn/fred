@@ -80,10 +80,14 @@ const common = {
     new StatsWriterPlugin({
       fields: ["publicPath", "entrypoints"],
     }),
-    new rspack.EnvironmentPlugin({
-      FRED_PLAYGROUND_BASE_HOST: "mdnplay.dev",
-      GLEAN_ENABLED: "false",
-      GLEAN_CHANNEL: "dev",
+    new rspack.DefinePlugin({
+      "process.env": JSON.stringify({
+        ...Object.fromEntries(
+          Object.entries(process.env).filter(([key]) =>
+            key.startsWith("FRED_"),
+          ),
+        ),
+      }),
     }),
   ],
   optimization: {

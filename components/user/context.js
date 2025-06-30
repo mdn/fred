@@ -2,6 +2,8 @@
  * @import * as User from "../user/types.js";
  */
 
+import { WRITER_MODE } from "../env/index.js";
+
 const DEFAULT_GEO = { country: "United States", country_iso: "US" };
 
 /**
@@ -28,6 +30,9 @@ let USER;
  * @returns {Promise<User.User>}
  */
 export function globalUser() {
+  if (WRITER_MODE) {
+    return new Promise(() => {});
+  }
   if (!USER) {
     USER = fetchUserData().catch((error) => {
       console.error(error);
