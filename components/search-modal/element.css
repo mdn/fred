@@ -5,25 +5,34 @@
 }
 
 dialog {
-  max-height: 90vh;
-
   padding: 0;
-  margin: 5vh auto;
-
   border: 1px solid var(--color-border-primary);
   border-radius: 0.5rem;
 
-  @media (--screen-medium-and-wider) {
-    width: 50vw;
+  @media (width > 1006px) {
+    width: calc(var(--layout-content-max) + 1rem);
+
+    /* Desktop menu */
+    max-height: calc(100% - var(--sticky-header-height) - 1rem);
+    margin: calc(var(--sticky-header-height) + 0.5rem) auto 0.5rem;
   }
 
-  @media (--screen-small-and-narrower) {
-    width: calc(100% - 2rem);
+  @media (width <= 1006px) {
+    /* Mobile menu */
+    width: 100%;
+    max-height: calc(100% - 1rem);
+    margin: 0.5rem;
   }
 
   &[open] {
     display: flex;
     flex-direction: column;
+  }
+
+  &::backdrop {
+    background-color: var(--color-background-page);
+    opacity: 0.75;
+    backdrop-filter: blur(5px);
   }
 }
 
@@ -45,6 +54,8 @@ input {
   flex-shrink: 1;
 
   font-size: inherit;
+
+  outline: none;
 
   border: none;
 }
