@@ -199,12 +199,9 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
         ${this._queryIndex.render({
           initial: this._renderLoadingSearchIndex.bind(this),
           pending: this._renderLoadingSearchIndex.bind(this),
-          complete: () => nothing,
         })}
         <ul>
           ${this._queryIndex.render({
-            initial: () => nothing,
-            pending: () => nothing,
             complete: (results) =>
               results?.map(
                 ({ title, url }, i) => html`
