@@ -187,19 +187,24 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     return html`
       <dialog @keydown=${this._keydown} @focusin=${this._focus} closedby="any">
         <form @submit=${this._submit}>
-          <span class="search-icon"></span>
           <input
             type="text"
             .value=${this._query}
             autofocus
             @input=${this._input}
             placeholder=${this.l10n`Search`}
+            aria-label=${this.l10n`Search`}
           />
         </form>
+        ${this._queryIndex.render({
+          initial: this._renderLoadingSearchIndex.bind(this),
+          pending: this._renderLoadingSearchIndex.bind(this),
+          complete: () => nothing,
+        })}
         <ul>
           ${this._queryIndex.render({
-            initial: this._renderLoadingSearchIndex.bind(this),
-            pending: this._renderLoadingSearchIndex.bind(this),
+            initial: () => nothing,
+            pending: () => nothing,
             complete: (results) =>
               results?.map(
                 ({ title, url }, i) => html`

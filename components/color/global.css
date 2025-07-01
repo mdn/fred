@@ -16,9 +16,11 @@
 :root {
   --color-white: hsl(0deg 0% 100%);
   --color-white-alpha-25: hsl(0deg 0% 100% / 25%);
+  --color-white-alpha-75: hsl(0deg 0% 100% / 75%);
 
   --color-black: hsl(0deg 0% 0%);
   --color-black-alpha-25: hsl(0deg 0% 0% / 25%);
+  --color-black-alpha-75: hsl(0deg 0% 0% / 75%);
 }
 
 /* Gray */
