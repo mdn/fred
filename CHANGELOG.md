@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.0.5](https://github.com/mdn/fred/compare/v0.0.4...v0.0.5) (2025-07-01)
+
+
+### Bug Fixes
+
+* **homepage-hero:** avoid non-link underline ([#287](https://github.com/mdn/fred/issues/287)) ([919f789](https://github.com/mdn/fred/commit/919f789b89e1afdb3610a509aa2e70c665616704))
+* **placement:** add focus-visible to sidebar ([#280](https://github.com/mdn/fred/issues/280)) ([7381c00](https://github.com/mdn/fred/commit/7381c00b1fb9ca769d902da8bd7c76f1f6b33d76))
+
+
+### Enhancements
+
+* **search-modal:** update blur, mark, links ([#309](https://github.com/mdn/fred/issues/309)) ([8ce49b3](https://github.com/mdn/fred/commit/8ce49b3b4f508ce0ba735e4c9d0b3f4155234b3c))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump the dev group with 2 updates ([#307](https://github.com/mdn/fred/issues/307)) ([48f89f3](https://github.com/mdn/fred/commit/48f89f3b1410bf7cb8d18d73a00cad6c396a012a))
+* **search-modal:** add styles ([#304](https://github.com/mdn/fred/issues/304)) ([4e08eff](https://github.com/mdn/fred/commit/4e08effaf9a8080cea33c0b61ce44f509facee64))
+
 ## [0.0.4](https://github.com/mdn/fred/compare/v0.0.3...v0.0.4) (2025-06-30)
 
 
