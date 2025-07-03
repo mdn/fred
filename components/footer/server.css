@@ -97,6 +97,39 @@
     &:hover {
       color: var(--color-text-primary);
     }
+
+    &::before {
+      display: block;
+
+      width: 1.5rem;
+      height: 1.5rem;
+
+      content: "";
+
+      background-color: currentcolor;
+
+      mask-size: cover;
+    }
+
+    &[data-icon="github"]::before {
+      mask-image: url("../icon/social/github.svg");
+    }
+
+    &[data-icon="bluesky"]::before {
+      mask-image: url("../icon/social/bluesky.svg");
+    }
+
+    &[data-icon="x"]::before {
+      mask-image: url("../icon/social/x.svg");
+    }
+
+    &[data-icon="mastodon"]::before {
+      mask-image: url("../icon/social/mastodon.svg");
+    }
+
+    &[data-icon="rss"]::before {
+      mask-image: url("../icon/rss.svg");
+    }
   }
 
   svg {
