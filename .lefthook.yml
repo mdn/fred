@@ -14,6 +14,10 @@ pre-commit:
       glob: eslint.config.js
       stage_fixed: true
 
+    - name: lit-analyzer
+      run: npx @jackolope/lit-analyzer {staged_files}
+      glob: "components/**/*.js"
+
     - name: stylelint
       run: npx stylelint --fix --cache {staged_files}
       glob: "*.css"
@@ -35,6 +39,8 @@ pre-push:
         jobs:
           - name: eslint
             run: npx eslint --cache
+          - name: lit-analyzer
+            run: npx @jackolope/lit-analyzer components
           - name: stylelint
             run: npx stylelint '**/*.css' --cache --ignore-path .gitignore
           - name: tsc
