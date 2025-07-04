@@ -17,7 +17,7 @@ import { ServerComponent } from "../server/index.js";
 export function BlogIndexImageFigure(_context, { image, slug, width, height }) {
   const src = `/en-US/blog/${slug}/${image.file}`;
   return html`<figure class="blog-post-preview__figure">
-    <a href="./${slug}/">
+    <a href="/en-US/blog/${slug}/">
       <img alt=${image.alt || ""} src=${src} height=${height} width=${width} />
     </a>
   </figure>`;
@@ -38,7 +38,7 @@ function PostPreview(context, blogMeta) {
         height: 200,
       })}
       <h2>
-        <a href="./${blogMeta.slug}/">${blogMeta.title}</a>
+        <a href="/en-US/blog/${blogMeta.slug}/">${blogMeta.title}</a>
       </h2>
       <div class="blog-post-preview__author-read-time">
         ${AuthorDateReadTime(context, blogMeta)}
@@ -51,7 +51,7 @@ function PostPreview(context, blogMeta) {
         : nothing}
       ${Button.render(context, {
         label: "Read more →",
-        href: `./${blogMeta.slug}/`,
+        href: `/en-US/blog/${blogMeta.slug}/`,
       })}
     </footer>
   </article>`;

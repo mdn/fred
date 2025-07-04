@@ -102,3 +102,50 @@ export function AuthorDateReadTime(context, blogMeta) {
     ${TimeToRead(context, blogMeta)}
   `;
 }
+
+/**
+ * @param {import("@fred").Context} context
+ * @param {object} params
+ * @param {import("@rari").BlogMeta} params.blogMeta
+ * @returns {import("@lit").TemplateResult | nothing}
+ */
+export function PrevNextLinks(context, { blogMeta }) {
+  if (!blogMeta.links) {
+    return nothing;
+  }
+  if (!blogMeta.links.previous && !blogMeta.links.next) {
+    return nothing;
+  }
+
+  const previous = blogMeta.links.previous
+    ? html`
+        <a
+          href="/en-US/blog/${blogMeta.links.previous.slug}/"
+          class="blog-post-previous-next__previous"
+        >
+          <article>
+            <h2>
+              <strong>${context.l10n("blog-previous")`Previous Post`}</strong>
+              ${blogMeta.links.previous.title}
+            </h2>
+          </article>
+        </a>
+      `
+    : nothing;
+  const next = blogMeta.links.next
+    ? html`
+        <a
+          href="/en-US/blog/${blogMeta.links.next.slug}/"
+          class="blog-post-previous-next__next"
+        >
+          <article>
+            <h2>
+              <strong>${context.l10n("blog-next")`Next post`}</strong>
+              ${blogMeta.links.next.title}
+            </h2>
+          </article>
+        </a>
+      `
+    : nothing;
+  return html`<div class="blog-post-previous-next">${previous} ${next}</div>`;
+}

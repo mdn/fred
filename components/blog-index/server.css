@@ -175,21 +175,6 @@
 
     mask-image: url("../icon/info.svg");
     mask-size: cover;
-
-    /*
-
-    content: "";
-    background-color: var(--color-text-secondary);
-    width: 1.2em;
-    height: 1.2em;
-    mask-position: 0 0.2em;
-    margin-right: 0.5rem;
-    mask-image: url("../icon/info.svg");
-    */
-
-    /* mask-size: contain; */
-
-    /* mask-repeat: no-repeat; */
   }
 }
 
