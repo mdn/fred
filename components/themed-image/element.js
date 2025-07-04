@@ -15,10 +15,10 @@ export class MDNThemedImage extends LitElement {
 
   constructor() {
     super();
-    /** @type {string | undefined} */
-    this.srcLight = undefined;
-    /** @type {string | undefined} */
-    this.srcDark = undefined;
+    /** @type {string} */
+    this.srcLight = "";
+    /** @type {string} */
+    this.srcDark = "";
     /** @type {string} */
     this.alt = "";
     /** @type {string} */

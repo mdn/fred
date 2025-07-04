@@ -92,40 +92,42 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                 })}
               </h1>
               <section class="site-search__options">
-                ${
-                  LOCALE_OPTIONS.length > 0
-                    ? html` <h2>${this.l10n`Language`}</h2>
-                        <ul>
-                          ${LOCALE_OPTIONS.map((locales) => {
-                            const label =
-                              locales.length == 1
-                                ? locales.at(0)
-                                : this.l10n`Both`;
-                            if (this._locales.join(",") === locales.join(",")) {
-                              return html`<li><em>${label}</em></li>`;
-                            } else {
-                              const url = new URL(location.href);
-                              url.searchParams.delete("locale");
-                              for (const locale of locales) {
-                                url.searchParams.append("locale", locale);
-                              }
-                              return html`<li><a href=${url}>${label}</a></li>`;
+                ${LOCALE_OPTIONS.length > 0
+                  ? html` <h2>${this.l10n`Language`}</h2>
+                      <ul>
+                        ${LOCALE_OPTIONS.map((locales) => {
+                          const label =
+                            locales.length == 1
+                              ? locales.at(0)
+                              : this.l10n`Both`;
+                          if (this._locales.join(",") === locales.join(",")) {
+                            return html`<li><em>${label}</em></li>`;
+                          } else {
+                            const url = new URL(location.href);
+                            url.searchParams.delete("locale");
+                            for (const locale of locales) {
+                              url.searchParams.append("locale", locale);
                             }
-                          })}
-                        </ul>`
-                    : nothing
-                }
+                            return html`<li>
+                              <a href=${url.toString()}>${label}</a>
+                            </li>`;
+                          }
+                        })}
+                      </ul>`
+                  : nothing}
                 <h2>${this.l10n`Sort by`}</h2>
                 <ul>
-                ${SORT_OPTIONS.map(([sort, label]) => {
-                  if (this._sort === sort) {
-                    return html`<li><em>${label}</em></li>`;
-                  } else {
-                    const url = new URL(location.href);
-                    url.searchParams.set("sort", sort);
-                    return html`<li><a href=${url}>${label}</a></li>`;
-                  }
-                })}
+                  ${SORT_OPTIONS.map(([sort, label]) => {
+                    if (this._sort === sort) {
+                      return html`<li><em>${label}</em></li>`;
+                    } else {
+                      const url = new URL(location.href);
+                      url.searchParams.set("sort", sort);
+                      return html`<li>
+                        <a href=${url.toString()}>${label}</a>
+                      </li>`;
+                    }
+                  })}
                 </ul>
               </section>
               <section class="site-search__results">
@@ -160,7 +162,7 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                       </li>`,
                   )}
                 </ul>
-                </div>`
+              </section>`
           : this.l10n`No results!`,
       error: (e) => html`Error: ${e}`,
     });
