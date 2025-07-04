@@ -87,7 +87,7 @@ function highlightTOC(toc) {
 }
 
 for (const toc of document.querySelectorAll(
-  ".generic-toc, .reference-toc, .document-toc",
+  ".generic-toc, .reference-toc, .document-toc, .blog-toc",
 )) {
   if (toc instanceof HTMLElement) {
     highlightTOC(toc);

@@ -1,9 +1,10 @@
 import { html, nothing } from "lit";
 
-import { AuthorDateReadTime, BlogContainer } from "../blog/index.js";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
+
+import { AuthorDateReadTime, PrevNextLinks } from "../blog/utils.js";
 import { ContentSection } from "../content-section/server.js";
 import { PageLayout } from "../page-layout/server.js";
-import { ReferenceToc } from "../reference-toc/server.js";
 
 import { ServerComponent } from "../server/index.js";
 
@@ -17,10 +18,25 @@ import { ServerComponent } from "../server/index.js";
  */
 function BlogTitleImageFigure(_context, { image, width, height }) {
   // In post view, image paths are relative to the post's directory sibling
-  const src = `../${image.file}`;
-  return html`<figure class="blog-post__image">
+  const src = `./${image.file}`;
+  return html`<figure class="blog-post-header__image">
     <img alt=${image.alt || ""} src=${src} height=${height} width=${width} />
   </figure>`;
+}
+
+/**
+ * @param {import("@fred").Context<import("@rari").BlogPostPage>} context
+ */
+function RenderToc(context) {
+  return html`<nav class="blog-toc">
+    <h2>${context.l10n("reference-toc-header")`In this article`}</h2>
+    <ul>
+      ${context?.doc?.toc?.map(
+        ({ id, text }) =>
+          html`<li><a href="#${id}">${unsafeHTML(text)}</a></li>`,
+      )}
+    </ul>
+  </nav>`;
 }
 
 /**
@@ -33,42 +49,6 @@ function RenderBlogContent(context, { doc }) {
   return html`
     ${doc.body.map((section) => ContentSection.render(context, section))}
   `;
-}
-
-/**
- * @param {import("@fred").Context} context
- * @param {object} params
- * @param {import("@rari").BlogMeta} params.blogMeta
- * @returns {import("@lit").TemplateResult | nothing}
- */
-function PrevNextLinks(context, { blogMeta }) {
-  if (!blogMeta.links) {
-    return nothing;
-  }
-  if (!blogMeta.links.previous && !blogMeta.links.next) {
-    return nothing;
-  }
-
-  const previous = blogMeta.links.previous
-    ? html`
-        <a href="../${blogMeta.links.previous.slug}/">
-          <article>
-            ${context.l10n("blog-previous")`Previous Post`}
-            ${blogMeta.links.previous.title}
-          </article>
-        </a>
-      `
-    : nothing;
-  const next = blogMeta.links.next
-    ? html`
-        <a href="../${blogMeta.links.next.slug}/">
-          <article>
-            ${context.l10n("blog-next")`Next post`} ${blogMeta.links.next.title}
-          </article>
-        </a>
-      `
-    : nothing;
-  return html`<div class="blog-post__previous-next">${previous} ${next}</div>`;
 }
 
 export class BlogPost extends ServerComponent {
@@ -90,13 +70,13 @@ export class BlogPost extends ServerComponent {
     }
 
     const postContent = html`
-      <article class="blog-post__main">
-        <aside class="blog-post__sidebar">
-          ${ReferenceToc.render(context)}
+      <article class="blog-post">
+        <aside class="blog-post__toc">
+          ${RenderToc(context)}
           <mdn-placement-sidebar></mdn-placement-sidebar>
         </aside>
-        <div class="blog-post__content">
-          <header class="blog-post__header">
+        <div class="blog-post__content blog-post-content">
+          <header class="blog-post-content__header">
             ${BlogTitleImageFigure(context, {
               image: blogMeta.image,
               width: 800,
@@ -105,21 +85,21 @@ export class BlogPost extends ServerComponent {
             ${blogMeta.sponsored
               ? html`<span class="blog-post__sponsored">Sponsored</span>`
               : nothing}
-            <h1>${blogMeta.title}</h1>
-            <div class="blog-post__author-read-time">
-              ${AuthorDateReadTime(context, { blogMeta })}
+            <h1 class="blog-post-header__heading">${blogMeta.title}</h1>
+            <div class="blog-post-header__author-read-time">
+              ${AuthorDateReadTime(context, blogMeta)}
             </div>
           </header>
-          <main class="blog-post__content">
+          <main class="blog-post-content__content">
             ${RenderBlogContent(context, { doc })}
           </main>
-          <footer class="blog-post__footer">
+          <footer class="blog-post-content__footer">
             ${PrevNextLinks(context, { blogMeta })}
           </footer>
         </div>
       </article>
     `;
 
-    return PageLayout.render(context, BlogContainer(context, postContent));
+    return PageLayout.render(context, postContent);
   }
 }

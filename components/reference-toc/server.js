@@ -6,7 +6,7 @@ import { ServerComponent } from "../server/index.js";
 
 export class ReferenceToc extends ServerComponent {
   /**
-   * @param {import("@fred").Context<import("@rari").DocPage | import("@rari").BlogPostPage>} context
+   * @param {import("@fred").Context<import("@rari").DocPage>} context
    */
   render(context) {
     return html`<nav class="reference-toc">
