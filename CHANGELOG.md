@@ -1,5 +1,38 @@
 # Changelog
 
+## [0.1.0](https://github.com/mdn/fred/compare/v0.0.5...v0.1.0) (2025-07-04)
+
+
+### Features
+
+* **user-menu:** add mobile styles ([#318](https://github.com/mdn/fred/issues/318)) ([69181f2](https://github.com/mdn/fred/commit/69181f21b47563932a77c158523aa3e2cb3d6f47))
+
+
+### Bug Fixes
+
+* **left-sidebar:** use code font family ([#321](https://github.com/mdn/fred/issues/321)) ([38fa12e](https://github.com/mdn/fred/commit/38fa12eefc31ad3f228447b13e28b26e40ef3a43))
+* **menu, homepage:** fix validation errors ([#315](https://github.com/mdn/fred/issues/315)) ([5c5dcc8](https://github.com/mdn/fred/commit/5c5dcc81a29510009841ba1b6307cc00e2a4514b))
+
+
+### Enhancements
+
+* **search-modal:** hide "Web" in slug ([0857331](https://github.com/mdn/fred/commit/0857331b43b6fd7700728ca68ce2d9ec5a42e465))
+* **search-modal:** replace underscore in slugs ([890e37c](https://github.com/mdn/fred/commit/890e37c726b99ce61b6e82bc6c146e6e06b6354f))
+* **specifications-list:** group by specification + collapse if necessary ([dcb5134](https://github.com/mdn/fred/commit/dcb51346aac9eb34a3bf954976aada7f944f2ac5))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 6.0.27 to 6.0.28 ([#313](https://github.com/mdn/fred/issues/313)) ([e4dd3ce](https://github.com/mdn/fred/commit/e4dd3cee86f947788a680d2b2735571bf9785158))
+* **deps-dev:** bump @mdn/yari from 4.12.3 to 4.12.4 ([#314](https://github.com/mdn/fred/issues/314)) ([fd0ee06](https://github.com/mdn/fred/commit/fd0ee0690d9ba306bf8a3e547c393ebfa4a74bf2))
+* **deps-dev:** bump @mdn/yari from 4.12.4 to 4.12.5 ([#317](https://github.com/mdn/fred/issues/317)) ([cfb87e0](https://github.com/mdn/fred/commit/cfb87e0a808306499443445664a86e66873963aa))
+* **deps-dev:** bump the dev group with 2 updates ([#316](https://github.com/mdn/fred/issues/316)) ([dae8639](https://github.com/mdn/fred/commit/dae8639651aabcc08472be8a304721a7333d9f3a))
+* **deps-dev:** bump the dev group with 5 updates ([#322](https://github.com/mdn/fred/issues/322)) ([0f50dcf](https://github.com/mdn/fred/commit/0f50dcfe3f713f61c8487f79bcbfe193f37ef061))
+* **deps-dev:** bump the dev group with 6 updates ([#312](https://github.com/mdn/fred/issues/312)) ([ddfabe2](https://github.com/mdn/fred/commit/ddfabe23e34b2751d48b585824656290119fb6f6))
+* **language-switcher:** show current language ([2934053](https://github.com/mdn/fred/commit/2934053b9ddc18ccd70d4c8556718a6a674bfb1f))
+* **package.json:** add repository, move license/author up ([a5a0f7d](https://github.com/mdn/fred/commit/a5a0f7d6dd8f059a2f8c171c7e5828875a5822d8))
+* **scripts:** add test script ([88f6d89](https://github.com/mdn/fred/commit/88f6d8983b7879b33e74f5167870e8669bec6f8b))
+
 ## [0.0.5](https://github.com/mdn/fred/compare/v0.0.4...v0.0.5) (2025-07-01)
 
 
