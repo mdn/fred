@@ -72,12 +72,14 @@ export class MDNUserMenu extends L10nMixin(LitElement) {
                 <div class="user-menu">
                   <mdn-dropdown>
                     <button slot="button" class="user-menu__button">
-                      <img
-                        src=${user.avatarUrl}
-                        width="32"
-                        height="32"
-                        alt=""
-                      />
+                      ${user.avatarUrl
+                        ? html`<img
+                            src=${user.avatarUrl}
+                            width="32"
+                            height="32"
+                            alt=""
+                          />`
+                        : this.l10n`User`}
                     </button>
                     <div slot="dropdown" class="user-menu__dropdown">
                       <p>${user.email}</p>
