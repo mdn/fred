@@ -1,0 +1,133 @@
+/*
+  Based on GitHub’s VS Code Light/Dark Default theme
+  https://github.com/primer/github-vscode-theme
+*/
+
+code[class*="language-"],
+pre[class*="language-"] {
+  color: light-dark(#1f2328, #e6edf3);
+}
+
+pre[class*="language-"] {
+  background: light-dark(#ffffff, #0d1117);
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: light-dark(#ffffff, #0d1117);
+}
+
+/* Comments */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: light-dark(#6e7781, #8b949e);
+}
+
+/* Punctuation */
+.token.punctuation {
+  color: light-dark(#1f2328, #e6edf3);
+}
+
+/* Property, tag, boolean, number, constant, symbol, deleted */
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: light-dark(#0550ae, #79c0ff);
+}
+
+/* Selector, attr-name, string, char, builtin, inserted */
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: light-dark(#0a3069, #a5d6ff);
+}
+
+/* Operator, entity, url, language-css .token.string, style .token.string */
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: light-dark(#1f2328, #e6edf3);
+}
+
+/* Keywords */
+.token.keyword,
+.token.atrule,
+.token.attr-value {
+  color: light-dark(#cf222e, #ff7b72);
+}
+
+/* Functions */
+.token.function,
+.token.class-name {
+  color: light-dark(#8250df, #d2a8ff);
+}
+
+/* Variables */
+.token.variable {
+  color: light-dark(#953800, #ffa657);
+}
+
+/* Regex, important */
+.token.regex,
+.token.important {
+  color: light-dark(#0a3069, #a5d6ff);
+}
+
+/* Important, bold */
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+/* Italic */
+.token.italic {
+  font-style: italic;
+}
+
+/* Entity */
+.token.entity {
+  cursor: help;
+}
+
+/* Namespace */
+.token.namespace {
+  color: light-dark(#953800, #ffa657);
+}
+
+/* HTML/XML tags */
+.language-markup .token.tag,
+.language-markup .token.attr-name,
+.language-markup .token.punctuation {
+  color: light-dark(#116329, #7ee787);
+}
+
+/* JSON property names */
+.language-json .token.property {
+  color: light-dark(#116329, #7ee787);
+}
+
+/* Selection highlighting */
+pre[class*="language-"]::selection,
+pre[class*="language-"] ::selection,
+code[class*="language-"]::selection,
+code[class*="language-"] ::selection {
+  background: light-dark(#afb8c133, #6e768166);
+}
+
+pre[class*="language-"]::selection,
+pre[class*="language-"] ::selection,
+code[class*="language-"]::selection,
+code[class*="language-"] ::selection {
+  background: light-dark(#afb8c133, #6e768166);
+}
