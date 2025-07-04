@@ -115,6 +115,9 @@ jobs:
       - name: Install (fred)
         working-directory: mdn/fred
         run: npm ci
+        env:
+          # Increase GitHub API limit.
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Build (fred)
         working-directory: mdn/fred
@@ -139,6 +142,9 @@ jobs:
           ADDITIONAL_LOCALES_FOR_GENERICS_AND_SPAS: de
 
           BLOG_PAGINATION: true
+
+          # Increase GitHub API limit.
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           set -eo pipefail
 

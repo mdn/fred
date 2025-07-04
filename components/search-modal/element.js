@@ -64,27 +64,46 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
 
   /** @param {KeyboardEvent} event */
   _keydown(event) {
-    const results = (this._queryIndex.value?.length || 0) + 1;
     switch (event.key) {
       case "ArrowUp": {
         event.preventDefault();
-        const value = (this._selected - 1) % results;
-        this._selected = value < 0 ? results + value : value;
+        this._select(this._selected - 1);
         break;
       }
       case "ArrowDown":
         event.preventDefault();
-        this._selected = (this._selected + 1) % results;
+        this._select(this._selected + 1);
         break;
       default:
         return;
     }
   }
 
+  /** @returns {HTMLElement|null} */
+  _getSelectedItem() {
+    return this.shadowRoot?.querySelector("[data-selected] a") ?? null;
+  }
+
+  /** @param {number} index */
+  _select(index) {
+    const results = (this._queryIndex.value?.length || 0) + 1;
+    const value = index % results;
+    this._selected = value < 0 ? results + index : value;
+    setTimeout(() => {
+      const item = this._getSelectedItem();
+      if (item instanceof HTMLElement) {
+        item.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+      }
+    }, 0);
+  }
+
   /** @param {SubmitEvent} event */
   _submit(event) {
     event.preventDefault();
-    const item = this.shadowRoot?.querySelector("[data-selected] a");
+    const item = this._getSelectedItem();
     if (item instanceof HTMLElement) {
       item.click();
     }
@@ -157,6 +176,12 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     document.removeEventListener("keydown", this._globalKeydown);
   }
 
+  _renderLoadingSearchIndex() {
+    return html`<progress
+      aria-label=${this.l10n`Loading search index…`}
+    ></progress>`;
+  }
+
   render() {
     const siteSearchIndex = this._queryIndex.value?.length || 0;
     return html`
@@ -167,24 +192,35 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
             .value=${this._query}
             autofocus
             @input=${this._input}
+            placeholder=${this.l10n`Search`}
+            aria-label=${this.l10n`Search`}
           />
         </form>
+        ${this._queryIndex.render({
+          initial: this._renderLoadingSearchIndex.bind(this),
+          pending: this._renderLoadingSearchIndex.bind(this),
+        })}
         <ul>
           ${this._queryIndex.render({
-            initial: () => html`<progress></progress>`,
-            pending: () => html`<progress></progress>`,
             complete: (results) =>
               results?.map(
                 ({ title, url }, i) => html`
                   <li ?data-selected=${this._selected === i} data-result=${i}>
-                    <a href=${url}>${HighlightMatch(title, this._query)}</a>
-                    <small>
-                      ${url
-                        .split("/")
-                        .slice(1)
-                        .filter((p) => !["docs", this.locale].includes(p))
-                        .join(" / ")}
-                    </small>
+                    <a href=${url}
+                      ><span class="title"
+                        >${HighlightMatch(title, this._query)}</span
+                      >
+                      <span class="slug"
+                        >${url
+                          .replaceAll("_", " ")
+                          .split("/")
+                          .slice(1)
+                          .filter(
+                            (p) => ![this.locale, "docs", "Web"].includes(p),
+                          )
+                          .join(" / ")}</span
+                      >
+                    </a>
                   </li>
                 `,
               ),
@@ -196,15 +232,17 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
               >
                 <a
                   href=${`/${this.locale}/search?${new URLSearchParams({ q: this._query })}`}
-                  >${this.l10n.raw({
-                    id: "search-modal-site-search",
-                    args: {
-                      query: this._query,
-                    },
-                    elements: {
-                      query: { tag: "code" },
-                    },
-                  })}</a
+                  ><span class="title"
+                    >${this.l10n.raw({
+                      id: "search-modal-site-search",
+                      args: {
+                        query: this._query,
+                      },
+                      elements: {
+                        query: { tag: "code" },
+                      },
+                    })}</span
+                  ></a
                 >
               </li>`
             : nothing}
@@ -215,7 +253,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
 
   updated() {
     if (this._shiftFocus) {
-      const selected = this.shadowRoot?.querySelector("[data-selected] a");
+      const selected = this._getSelectedItem();
       if (selected instanceof HTMLElement) {
         selected.focus();
       }

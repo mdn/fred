@@ -64,6 +64,10 @@
     }
   }
 
+  code {
+    font-family: var(--font-family-code);
+  }
+
   em {
     align-items: baseline;
 

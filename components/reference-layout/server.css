@@ -59,6 +59,8 @@
 
     max-height: calc(100vh - var(--sticky-header-height));
 
+    padding-left: 2px;
+
     overflow-y: auto;
   }
 

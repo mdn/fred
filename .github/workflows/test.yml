@@ -6,7 +6,7 @@ on:
       - main
   pull_request:
 
-# No GITHUB_TOKEN permissions, as we don't use it.
+# No GITHUB_TOKEN permissions, as we only use it to increase API limit.
 permissions: {}
 
 jobs:
@@ -25,6 +25,9 @@ jobs:
 
       - name: Install
         run: npm ci
+        env:
+          # Increase GitHub API limit.
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Run prettier
         run: npx prettier --check . || (exit_code=$? && npx prettier --write . && git diff --color && exit $exit_code)

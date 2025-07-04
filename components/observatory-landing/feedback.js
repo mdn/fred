@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 /**
- * @param {import("@fred").Context<import("@rari").SpaPage>} _context
+ * @param {import("@fred").Context<import("@rari").SPAPage>} _context
  * @returns {import("@lit").TemplateResult}
  */
 export function Feedback(_context) {

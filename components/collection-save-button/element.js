@@ -2,8 +2,6 @@ import { Task } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
-import bookmarkCheckSvg from "../icon/bookmark-check.svg?lit";
-import bookmarkSvg from "../icon/bookmark.svg?lit";
 import { globalUser } from "../user/context.js";
 
 import styles from "./element.css?lit";
@@ -200,12 +198,15 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
           ? html`
               <button
                 class="collection-save-button"
-                title=${this.l10n`Save in Collection`}
+                data-state=${this._bookmarks.value?.length ? "remove" : "save"}
+                title=${this.l10n`Save in collection`}
                 @click=${this._open}
               >
-                ${this._bookmarks.value?.length
-                  ? bookmarkCheckSvg
-                  : bookmarkSvg} <span>${this.l10n`Save`}</span>
+                <span
+                  >${this._bookmarks.value?.length
+                    ? this.l10n`Remove`
+                    : this.l10n`Save`}</span
+                >
               </button>
               <mdn-modal modal-title="Add to collection">
                 ${this._bookmarks.render({
@@ -236,7 +237,7 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
                                     ? "★"
                                     : "☆"}
                                   ${collection.name === "Default"
-                                    ? "Saved Articles"
+                                    ? "Saved articles"
                                     : collection.name}
                                 </option>
                               `,
@@ -244,7 +245,7 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
                             <option disabled role="separator">
                               ——————————
                             </option>
-                            <option value=${ADD_VALUE}>+ New Collection</option>
+                            <option value=${ADD_VALUE}>+ New collection</option>
                           </select>
                         </label>
                         <label>
@@ -259,7 +260,7 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
                         </label>
                         <mdn-button @click=${this._submit}>
                           ${this._pending && this._lastAction === "save"
-                            ? "Saving..."
+                            ? "Saving…"
                             : "Save"}
                         </mdn-button>
                         <mdn-button
@@ -272,13 +273,14 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
                         ${bookmarks?.length
                           ? html`<mdn-button
                               @click=${this._delete}
-                              variant="plain"
+                              variant="secondary"
+                              action="negative"
                               id="bookmark-delete"
                               ?disabled=${this._pending ||
                               !isCurrentInCollection}
                             >
                               ${this._pending && this._lastAction === "delete"
-                                ? "Deleting..."
+                                ? "Deleting…"
                                 : "Delete"}
                             </mdn-button>`
                           : nothing}

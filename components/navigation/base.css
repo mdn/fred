@@ -16,9 +16,3 @@
   column-gap: 1rem;
   align-items: center;
 }
-
-.navigation__popup {
-  mdn-user-menu {
-    min-width: 2.625rem; /* 42px when logged in */
-  }
-}

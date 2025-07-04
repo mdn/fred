@@ -9,14 +9,14 @@ export class HomepageHeader extends ServerComponent {
    * @param {import("@fred").Context<import("@rari").HomePage>} context
    */
   render(context) {
-    return html`<div class="homepage-header">
-      <section class="homepage-header__copy">
-        ${HomepageHero.render(context)}
-      </section>
-      <section class="homepage-header__search">
-        <mdn-homepage-search></mdn-homepage-search>
-      </section>
-      <section class="homepage-header__mandala">${Mandala.render()}</section>
-    </div>`;
+    return html`
+      <div class="homepage-header">
+        <div class="homepage-header__copy">${HomepageHero.render(context)}</div>
+        <div class="homepage-header__search">
+          <mdn-homepage-search></mdn-homepage-search>
+        </div>
+        <div class="homepage-header__mandala">${Mandala.render()}</div>
+      </div>
+    `;
   }
 }

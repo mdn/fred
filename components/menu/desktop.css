@@ -2,6 +2,8 @@
 
 @media (width > 1006px) {
   .menu {
+    --menu-button-padding: 0.5rem 0.7rem;
+
     position: relative;
     display: flex;
     align-items: center;
@@ -14,6 +16,8 @@
 
     column-gap: 0.125rem;
     align-items: center;
+
+    padding: var(--menu-button-padding);
 
     border: 1px solid transparent;
     border-bottom: none;
@@ -28,6 +32,12 @@
     &::after {
       margin-right: -4px;
     }
+  }
+
+  /* Link */
+
+  .menu__tab-link {
+    padding: var(--menu-button-padding);
   }
 
   /* Label */

@@ -54,7 +54,7 @@ function RenderBlogContent(context, { doc }) {
 export class BlogPost extends ServerComponent {
   /**
    *
-   * @param {import("@fred").Context<import("@rari").BlogPage>} context
+   * @param {import("@fred").Context<import("@rari").BlogPostPage>} context
    * @returns {import("@lit").TemplateResult}
    */
   render(context) {

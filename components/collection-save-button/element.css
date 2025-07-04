@@ -9,6 +9,8 @@
 
   font: inherit;
 
+  cursor: pointer;
+
   background-color: transparent;
   border: none;
 
@@ -16,8 +18,29 @@
     background-color: var(--color-background-secondary);
   }
 
+  &::before {
+    display: inline-block;
+
+    width: 1.25rem;
+    height: 1.25rem;
+
+    content: "";
+
+    background-color: currentcolor;
+
+    mask-size: cover;
+  }
+
+  &[data-state="save"]::before {
+    mask-image: url("../icon/bookmark.svg");
+  }
+
+  &[data-state="remove"]::before {
+    mask-image: url("../icon/bookmark-check.svg");
+  }
+
   @media (--screen-small-and-narrower) {
-    > span {
+    span {
       display: none;
     }
   }

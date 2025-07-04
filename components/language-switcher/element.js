@@ -90,7 +90,6 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
           </div>
           <ul class="language-switcher__list">
             ${translations
-              .filter((x) => x.locale !== locale)
               .sort((a, b) => a.locale.localeCompare(b.locale))
               .map(
                 (translation) => html`

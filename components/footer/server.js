@@ -1,11 +1,5 @@
 import { html } from "lit";
 
-import rssIcon from "../icon/rss.svg?lit";
-import blueskyIcon from "../icon/social/bluesky.svg?lit";
-import githubIcon from "../icon/social/github.svg?lit";
-import mastodonIcon from "../icon/social/mastodon.svg?lit";
-import xIcon from "../icon/social/x.svg?lit";
-
 import { ServerComponent } from "../server/index.js";
 
 import mdnLogo from "./mdn.svg?lit";
@@ -17,27 +11,27 @@ import mozillaLogo from "./mozilla.svg?lit";
  */
 const socials = (context) => [
   {
-    icon: githubIcon,
+    icon: "github",
     href: "https://github.com/mdn/",
     ariaLabel: context.l10n`MDN on GitHub`,
   },
   {
-    icon: blueskyIcon,
+    icon: "bluesky",
     href: "https://bsky.app/profile/developer.mozilla.org",
     ariaLabel: context.l10n`MDN on Bluesky`,
   },
   {
-    icon: xIcon,
+    icon: "x",
     href: "https://x.com/mozdevnet",
     ariaLabel: context.l10n`MDN on X`,
   },
   {
-    icon: mastodonIcon,
+    icon: "mastodon",
     href: "https://mastodon.social/@mdn",
     ariaLabel: context.l10n`MDN on Mastodon`,
   },
   {
-    icon: rssIcon,
+    icon: "rss",
     href: "/en-US/blog/rss.xml",
     ariaLabel: context.l10n`MDN blog RSS feed`,
   },
@@ -178,9 +172,11 @@ export class Footer extends ServerComponent {
             ${socials(context).map(
               (item) => html`
                 <li>
-                  <a href=${item.href} aria-label=${item.ariaLabel}>
-                    ${item.icon}
-                  </a>
+                  <a
+                    href=${item.href}
+                    aria-label=${item.ariaLabel}
+                    data-icon=${item.icon}
+                  ></a>
                 </li>
               `,
             )}

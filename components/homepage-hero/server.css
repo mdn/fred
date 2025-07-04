@@ -14,5 +14,11 @@
 
   a {
     color: var(--color-link-normal);
+    text-decoration: underline;
+
+    &:focus,
+    &:hover {
+      text-decoration: none;
+    }
   }
 }

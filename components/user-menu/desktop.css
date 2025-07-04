@@ -1,0 +1,31 @@
+/* Desktop */
+
+@media (width > 1006px) {
+  .user-menu {
+    position: relative;
+    width: 34px;
+    height: 34px;
+  }
+
+  .user-menu__button {
+    border: 1px solid var(--color-border-primary);
+    border-radius: 50%;
+  }
+
+  .user-menu__login {
+    color: inherit;
+    white-space: nowrap;
+  }
+
+  .user-menu__dropdown {
+    position: absolute;
+    right: 0;
+    z-index: 1;
+
+    padding: 0.75rem;
+    margin: 0;
+
+    background-color: var(--color-background-primary);
+    border: 1px solid var(--color-border-primary);
+  }
+}
