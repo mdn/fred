@@ -1,6 +1,14 @@
-node_modules
+.github/
+node_modules/
+
 eslint.config.js
 rsbuild.config.js
 .eslintcache
+.lefthook.yml
+.prettierignore
+.release-please-manifest.json
 .stylelintcache
+.stylelintignore
+release-please-config.json
+
 *.tgz
