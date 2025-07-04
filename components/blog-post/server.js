@@ -25,7 +25,7 @@ function BlogTitleImageFigure(_context, { image, width, height }) {
 }
 
 /**
- * @param {import("@fred").Context<import("@rari").BlogPage>} context
+ * @param {import("@fred").Context<import("@rari").BlogPostPage>} context
  */
 function RenderToc(context) {
   return html`<nav class="blog-toc">
