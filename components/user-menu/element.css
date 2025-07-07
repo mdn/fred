@@ -1,110 +1,11 @@
-@import url("../button/element.css");
+@import url("../button/server.css");
 @import url("../external-link/global.css");
+@import url("base.css");
+@import url("mobile.css");
+@import url("desktop.css");
 
 *,
 ::before,
 ::after {
   box-sizing: border-box;
-}
-
-:host {
-  height: 100%;
-}
-
-.user-menu {
-  position: relative;
-}
-
-.login-container {
-  display: flex;
-  height: 100%;
-
-  .login {
-    display: block;
-
-    align-self: center;
-    justify-self: center;
-
-    width: 34px;
-    height: 34px;
-
-    padding: 0.25rem 0.5rem;
-
-    text-wrap: nowrap;
-
-    text-decoration: none;
-
-    background-color: var(--color-background-secondary);
-    border: 1px solid var(--color-border-secondary);
-    border-radius: 100%;
-  }
-}
-
-.user-menu__button {
-  display: inline-flex;
-
-  align-items: center;
-
-  height: 100%;
-
-  cursor: pointer;
-
-  border: none;
-  border-radius: 100%;
-
-  img {
-    border: 1px solid var(--color-border-secondary);
-    border-radius: 100%;
-  }
-}
-
-.user-menu__dropdown {
-  position: absolute;
-  right: 0;
-  z-index: 1;
-
-  width: max-content;
-
-  padding: 0.75rem;
-  margin: 0;
-
-  background-color: var(--color-background-primary);
-  border: 1px solid var(--color-border-primary);
-
-  ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-
-  a {
-    display: flex;
-
-    color: var(--color-text-primary);
-
-    text-decoration: none;
-
-    border: 1px solid transparent;
-
-    &:hover {
-      background-color: var(--color-background-secondary);
-      border-color: var(--color-border-primary);
-    }
-  }
-
-  button {
-    width: 100%;
-    padding: 0.5rem;
-    cursor: pointer;
-  }
-}
-
-.user-menu__item {
-  padding: 0.75rem;
-  border-radius: 0.25rem;
-}
-
-.user-menu__divider {
-  margin: 0.75rem 0;
-  border-bottom: 1px solid var(--color-border-primary);
 }

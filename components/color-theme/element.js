@@ -2,10 +2,6 @@ import { LitElement, html } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
-import osDefault from "../icon/contrast.svg?lit";
-import dark from "../icon/moon.svg?lit";
-import light from "../icon/sun.svg?lit";
-
 import styles from "./element.css?lit";
 
 import "../dropdown/element.js";
@@ -38,20 +34,6 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
         if (dropdown) {
           dropdown.open = false;
         }
-      }
-    }
-  }
-
-  get _icon() {
-    switch (this._mode) {
-      case "light": {
-        return light;
-      }
-      case "dark": {
-        return dark;
-      }
-      default: {
-        return osDefault;
       }
     }
   }

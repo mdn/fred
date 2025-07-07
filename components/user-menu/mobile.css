@@ -1,0 +1,50 @@
+/* Mobile */
+
+@media (width <= 1006px) {
+  .user-menu__button {
+    display: flex;
+
+    align-items: center;
+
+    width: 100%;
+
+    padding: 0.5rem 0.7rem;
+
+    background-color: transparent;
+    border: none;
+    border-top: 1px solid var(--color-border-primary);
+
+    &::before,
+    &::after {
+      width: 1.25rem;
+      height: 1.25rem;
+
+      margin-left: auto;
+
+      background-color: currentcolor;
+
+      mask-size: cover;
+    }
+
+    /* Arrow */
+
+    &::after {
+      content: "";
+      mask-image: url("../icon/chevron-down.svg");
+    }
+
+    /* Opened */
+
+    &[aria-expanded="true"] {
+      background-color: var(--color-background-blue);
+
+      &::after {
+        scale: -1;
+      }
+    }
+  }
+
+  .user-menu__dropdown {
+    padding: 0.5rem 0.7rem;
+  }
+}

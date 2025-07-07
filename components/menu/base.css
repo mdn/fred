@@ -27,7 +27,6 @@
 /* Tab Button */
 
 .menu__tab-button {
-  padding: 0.5rem 0.7rem;
   margin: 0;
 
   font: inherit;
@@ -85,11 +84,8 @@
 .menu__tab-link {
   display: block;
 
-  padding: 0.5rem 0.7rem;
-
   /* Custom, to match the icon height */
   line-height: 1.25rem;
-
   color: var(--color-text-primary);
 
   &:hover {

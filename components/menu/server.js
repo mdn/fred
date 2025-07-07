@@ -14,7 +14,7 @@ export class Menu extends ServerComponent {
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">HTML</span>
             </button>
-            <section class="menu__panel" slot="dropdown">
+            <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
                 <a href=${`/${context.locale}/docs/Web/HTML`}
                   >HTML: Markup language</a
@@ -110,7 +110,7 @@ export class Menu extends ServerComponent {
                   </dd>
                 </dl>
               </div>
-            </section>
+            </div>
           </mdn-dropdown>
         </div>
         <div class="menu__tab" data-section="css">
@@ -118,7 +118,7 @@ export class Menu extends ServerComponent {
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">CSS</span>
             </button>
-            <section class="menu__panel" slot="dropdown">
+            <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
                 <a href=${`/${context.locale}/docs/Web/CSS`}
                   >CSS: Styling language</a
@@ -147,7 +147,10 @@ export class Menu extends ServerComponent {
                         >
                       </li>
                       <li>
-                        <a href=${`/${context.locale}/docs/Web/CSS/CSS_Values_and_Units`}>Values & units</a>
+                        <a
+                          href=${`/${context.locale}/docs/Web/CSS/CSS_Values_and_Units`}
+                          >Values & units</a
+                        >
                       </li>
                       <li>
                         <a
@@ -219,12 +222,16 @@ export class Menu extends ServerComponent {
                         </a>
                       </li>
                       <li>
-                        <a href=${`/${context.locale}/docs/Web/CSS/Layout_cookbook/Card`}>
+                        <a
+                          href=${`/${context.locale}/docs/Web/CSS/Layout_cookbook/Card`}
+                        >
                           Card component
                         </a>
                       </li>
                       <li>
-                        <a href=${`/${context.locale}/docs/Web/CSS/Layout_cookbook`}>
+                        <a
+                          href=${`/${context.locale}/docs/Web/CSS/Layout_cookbook`}
+                        >
                           See all…
                         </a>
                       </li>
@@ -232,7 +239,7 @@ export class Menu extends ServerComponent {
                   </dd>
                 </dl>
               </div>
-            </section>
+            </div>
           </mdn-dropdown>
         </div>
         <div class="menu__tab" data-section="javascript">
@@ -241,7 +248,7 @@ export class Menu extends ServerComponent {
               <span class="menu__tab-label" data-type="long">JavaScript</span>
               <span class="menu__tab-label" data-type="short">JS</span>
             </button>
-            <section class="menu__panel" slot="dropdown">
+            <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
                 <a href=${`/${context.locale}/docs/Web/JavaScript`}>
                   JavaScript: Scripting language
@@ -335,7 +342,7 @@ export class Menu extends ServerComponent {
                   </dd>
                 </dl>
               </div>
-            </section>
+            </div>
           </mdn-dropdown>
         </div>
         <div class="menu__tab" data-section="webapis">
@@ -343,7 +350,7 @@ export class Menu extends ServerComponent {
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">Web APIs</span>
             </button>
-            <section class="menu__panel" slot="dropdown">
+            <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
                 <a href=${`/${context.locale}/docs/Web/API`}
                   >Web APIs: Programming interfaces</a
@@ -355,7 +362,8 @@ export class Menu extends ServerComponent {
                   <dd>
                     <ul>
                       <li>
-                        <a href=${`/${context.locale}/docs/Web/API/File_System_API`}
+                        <a
+                          href=${`/${context.locale}/docs/Web/API/File_System_API`}
                           >File system API</a
                         >
                       </li>
@@ -372,15 +380,21 @@ export class Menu extends ServerComponent {
                         </a>
                       </li>
                       <li>
-                        <a href=${`/${context.locale}/docs/Web/API/HTML_DOM_API`}>
+                        <a
+                          href=${`/${context.locale}/docs/Web/API/HTML_DOM_API`}
+                        >
                           HTML DOM API
                         </a>
                       </li>
                       <li>
-                        <a href=${`/${context.locale}/docs/Web/API/Push_API`}> Push API </a>
+                        <a href=${`/${context.locale}/docs/Web/API/Push_API`}>
+                          Push API
+                        </a>
                       </li>
                       <li>
-                        <a href=${`/${context.locale}/docs/Web/API/Service_Worker_API`}>
+                        <a
+                          href=${`/${context.locale}/docs/Web/API/Service_Worker_API`}
+                        >
                           Service worker API
                         </a>
                       </li>
@@ -407,7 +421,9 @@ export class Menu extends ServerComponent {
                         </a>
                       </li>
                       <li>
-                        <a href=${`/${context.locale}/docs/Web/API/Fetch_API/Using_Fetch`}>
+                        <a
+                          href=${`/${context.locale}/docs/Web/API/Fetch_API/Using_Fetch`}
+                        >
                           Using the Fetch API
                         </a>
                       </li>
@@ -436,7 +452,7 @@ export class Menu extends ServerComponent {
                   </dd>
                 </dl>
               </div>
-            </section>
+            </div>
           </mdn-dropdown>
         </div>
         <div class="menu__tab" data-section="all">
@@ -444,7 +460,7 @@ export class Menu extends ServerComponent {
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">All</span>
             </button>
-            <section class="menu__panel" slot="dropdown">
+            <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
                 <a href=${`/${context.locale}/docs/Web`}>All web technology</a>
               </p>
@@ -499,6 +515,7 @@ export class Menu extends ServerComponent {
                       <li>
                         <a href=${`/${context.locale}/docs/Web/Media`}>Media</a>
                       </li>
+                      <li>
                         <a href=${`/${context.locale}/docs/Web/API/Performance`}
                           >Performance</a
                         >
@@ -524,7 +541,7 @@ export class Menu extends ServerComponent {
                   </dd>
                 </dl>
               </div>
-            </section>
+            </div>
           </mdn-dropdown>
         </div>
         <div class="menu__tab" data-section="learn">
@@ -532,7 +549,7 @@ export class Menu extends ServerComponent {
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">Learn</span>
             </button>
-            <section class="menu__panel" slot="dropdown">
+            <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
                 <a href=${`/${context.locale}/docs/Learn_web_development`}>
                   Learn web development
@@ -629,7 +646,7 @@ export class Menu extends ServerComponent {
                   </dd>
                 </dl>
               </div>
-            </section>
+            </div>
           </mdn-dropdown>
         </div>
         <div class="menu__tab" data-section="tools">
@@ -637,7 +654,7 @@ export class Menu extends ServerComponent {
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">Tools</span>
             </button>
-            <section class="menu__panel" slot="dropdown">
+            <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">Discover our tools</p>
               <div class="menu__panel-content">
                 <ul class="menu__panel-featured">
@@ -664,7 +681,9 @@ export class Menu extends ServerComponent {
                 </ul>
                 <ul>
                   <li>
-                    <a href=${`/${context.locale}/docs/Web/CSS/CSS_colors/Color_picker_tool`}>
+                    <a
+                      href=${`/${context.locale}/docs/Web/CSS/CSS_colors/Color_picker_tool`}
+                    >
                       Color picker
                     </a>
                   </li>
@@ -691,7 +710,7 @@ export class Menu extends ServerComponent {
                   </li>
                 </ul>
               </div>
-            </section>
+            </div>
           </mdn-dropdown>
         </div>
         <div class="menu__tab" data-section="about">
@@ -699,7 +718,7 @@ export class Menu extends ServerComponent {
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">About</span>
             </button>
-            <section class="menu__panel" slot="dropdown">
+            <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">Get to know MDN better</p>
               <div class="menu__panel-content">
                 <ul class="menu__panel-featured">
@@ -745,7 +764,7 @@ export class Menu extends ServerComponent {
                   </li>
                 </ul>
               </div>
-            </section>
+            </div>
           </mdn-dropdown>
         </div>
         <div class="menu__tab" data-section="blog">

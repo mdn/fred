@@ -1,0 +1,51 @@
+/* Base */
+
+.user-menu__button {
+  padding: 0;
+  margin: 0;
+
+  cursor: pointer;
+
+  background-color: var(--color-background-primary);
+
+  img {
+    display: block;
+
+    width: 2rem;
+    height: 2rem;
+
+    border-radius: 50%;
+  }
+}
+
+.user-menu__dropdown {
+  display: grid;
+  row-gap: 1rem;
+
+  p {
+    margin: 0;
+  }
+
+  ul {
+    display: grid;
+
+    row-gap: 0.25rem;
+
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
+  }
+
+  a {
+    color: var(--color-text-primary);
+
+    &:hover {
+      color: var(--color-text-secondary);
+    }
+  }
+
+  form {
+    display: contents;
+  }
+}
