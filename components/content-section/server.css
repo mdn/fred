@@ -95,6 +95,26 @@
       text-align: left;
       background-color: var(--color-background-secondary);
     }
+
+    &.properties {
+      tr {
+        background-color: var(--color-background-primary);
+      }
+
+      tr:nth-of-type(2n) {
+        background-color: var(--color-background-page);
+      }
+
+      th,
+      td {
+        border-width: 1px 0;
+      }
+
+      th {
+        font-weight: bold;
+        background-color: transparent;
+      }
+    }
   }
 
   .code-example,
