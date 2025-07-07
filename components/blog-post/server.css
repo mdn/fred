@@ -3,10 +3,11 @@
   --accent-background: var(--color-background-purple);
   --avatar-size: 3rem;
   --author-gap: 1rem;
+  --toc-header-font-size: var(--font-size-large);
 
   display: grid;
 
-  grid-template-columns: var(--layout-1-sidebar-right);
+  grid-template-columns: var(--layout-1-sidebar-left);
   grid-auto-flow: dense;
 
   row-gap: 3rem;
@@ -106,10 +107,10 @@
 
 .blog-toc {
   h2 {
-    padding: 0.75em 0;
+    padding: 0 0 0.75em;
     margin: 0;
 
-    font-size: var(--toc-header-font-size, var(--font-size-large));
+    font-size: var(--toc-header-font-size);
     font-weight: normal;
   }
 
