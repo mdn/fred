@@ -208,7 +208,7 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
                     : this.l10n`Save`}</span
                 >
               </button>
-              <mdn-modal modal-title="Add to collection">
+              <mdn-modal modal-title=${this.l10n`Add to collection`}>
                 ${this._bookmarks.render({
                   initial: () => html`<progress></progress>`,
                   pending: () => html`<progress></progress>`,
@@ -218,7 +218,7 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
                       pending: () => html`<progress></progress>`,
                       complete: (collections) => html`
                         <label>
-                          Collection:
+                          ${this.l10n`Collection:`}
                           <select
                             .value=${this._item?.collection_id}
                             @change=${this._selectChange}
@@ -237,7 +237,7 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
                                     ? "★"
                                     : "☆"}
                                   ${collection.name === "Default"
-                                    ? "Saved articles"
+                                    ? this.l10n`Saved articles`
                                     : collection.name}
                                 </option>
                               `,
@@ -245,30 +245,32 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
                             <option disabled role="separator">
                               ——————————
                             </option>
-                            <option value=${ADD_VALUE}>+ New collection</option>
+                            <option value=${ADD_VALUE}>
+                              + ${this.l10n`New collection`}
+                            </option>
                           </select>
                         </label>
                         <label>
-                          Name:
+                          ${this.l10n`Name:`}
                           <input .value=${this._item?.title || this.docTitle} />
                         </label>
                         <label>
-                          Note:
+                          ${this.l10n`Note:`}
                           <textarea
                             .value=${this._item?.notes || ""}
                           ></textarea>
                         </label>
                         <mdn-button @click=${this._submit}>
                           ${this._pending && this._lastAction === "save"
-                            ? "Saving…"
-                            : "Save"}
+                            ? this.l10n`Saving…`
+                            : this.l10n`Save`}
                         </mdn-button>
                         <mdn-button
                           @click=${this._cancel}
                           ?disabled=${this._pending}
                           variant="secondary"
                         >
-                          Cancel
+                          ${this.l10n`Cancel`}
                         </mdn-button>
                         ${bookmarks?.length
                           ? html`<mdn-button
@@ -280,8 +282,8 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
                               !isCurrentInCollection}
                             >
                               ${this._pending && this._lastAction === "delete"
-                                ? "Deleting…"
-                                : "Delete"}
+                                ? this.l10n`Deleting…`
+                                : this.l10n`Delete`}
                             </mdn-button>`
                           : nothing}
                       `,

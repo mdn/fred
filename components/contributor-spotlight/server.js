@@ -33,14 +33,12 @@ export class ContributorSpotlight extends ServerComponent {
     const renderGetInvolved = () => html`
       <div class="get-involved-container">
         <section class="get-involved">
-          <h2>Want to be part of the journey?</h2>
+          <h2>${context.l10n`Want to be part of the journey?`}</h2>
           <p>
-            Our constant quest for innovation starts here, with you. Every part
-            of MDN (docs, demos and the site itself) springs from our incredible
-            open community of developers. Please join us!
+            ${context.l10n`Our constant quest for innovation starts here, with you. Every part of MDN (docs, demos and the site itself) springs from our incredible open community of developers. Please join us!`}
           </p>
           ${Button.render(context, {
-            label: "Get involved",
+            label: "${context.l10n}",
             href: `/${context.locale}/community/`,
             icon: arrowRightIcon,
             iconPosition: "after",

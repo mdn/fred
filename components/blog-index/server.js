@@ -1,6 +1,6 @@
 import { html, nothing } from "lit";
 
-import { AuthorDateReadTime, BlogContainer } from "../blog/index.js";
+import { AuthorDateReadTime } from "../blog/utils.js";
 import { Button } from "../button/server.js";
 import arrowRightIcon from "../icon/arrow-right.svg?lit";
 import { PageLayout } from "../page-layout/server.js";
@@ -16,9 +16,9 @@ import { ServerComponent } from "../server/index.js";
  * @param {number} params.height
  */
 export function BlogIndexImageFigure(_context, { image, slug, width, height }) {
-  const src = `./${slug}/${image.file}`;
-  return html`<figure class="blog-image">
-    <a href="./${slug}/">
+  const src = `/en-US/blog/${slug}/${image.file}`;
+  return html`<figure class="blog-post-preview__figure">
+    <a href="/en-US/blog/${slug}/">
       <img alt=${image.alt || ""} src=${src} height=${height} width=${width} />
     </a>
   </figure>`;
@@ -30,8 +30,8 @@ export function BlogIndexImageFigure(_context, { image, slug, width, height }) {
  * @param {import("@rari").BlogMeta} blogMeta
  */
 function PostPreview(context, blogMeta) {
-  return html`<article class="blog-index__article">
-    <header>
+  return html`<article class="blog-post-preview">
+    <header data-x="bla" class="blog-post-preview__header">
       ${BlogIndexImageFigure(context, {
         image: blogMeta.image,
         slug: blogMeta.slug,
@@ -39,20 +39,20 @@ function PostPreview(context, blogMeta) {
         height: 200,
       })}
       <h2>
-        <a href="./${blogMeta.slug}/">${blogMeta.title}</a>
+        <a href="/en-US/blog/${blogMeta.slug}/">${blogMeta.title}</a>
       </h2>
-      <div class="blog-index__author-read-time">
-        ${AuthorDateReadTime(context, { blogMeta })}
+      <div class="blog-post-preview__author-read-time">
+        ${AuthorDateReadTime(context, blogMeta)}
       </div>
     </header>
-    <p>${blogMeta.description}</p>
-    <footer>
+    <p class="blog-post-preview__description">${blogMeta.description}</p>
+    <footer class="blog-post-preview__footer">
       ${blogMeta.sponsored
-        ? html`<span class="sponsored">Sponsored</span>`
+        ? html`<span class="blog-post-preview__sponsored">Sponsored</span>`
         : nothing}
       ${Button.render(context, {
         label: "Read more",
-        href: `./${blogMeta.slug}/`,
+        href: `/en-US/blog/${blogMeta.slug}/`,
         icon: arrowRightIcon,
         iconPosition: "after",
       })}
@@ -67,28 +67,29 @@ export class BlogIndex extends ServerComponent {
    * @returns {import("@lit").TemplateResult}
    */
   render(context) {
-    const content = BlogContainer(
+    return PageLayout.render(
       context,
       html`
-        <div class="blog-index__main">
+        <div class="blog-index">
           <header class="blog-index__header">
-            <h1 class="mify">${context.l10n`Blog it better`}</h1>
+            <h1>${context.l10n`Blog it better`}</h1>
           </header>
-          <section class="blog-index__articles">
-            ${context.hyData?.posts.map((blogMeta) => {
-              return PostPreview(context, blogMeta);
+          <div class="blog-index__main">
+            <section class="blog-index__articles">
+              ${context.hyData?.posts.map((blogMeta) =>
+                PostPreview(context, blogMeta),
+              )}
+            </section>
+            ${Pagination.render(context, {
+              ...context.hyData?.pagination,
+              pageUrl: (page) =>
+                page === 1
+                  ? `/${context.locale}/blog/`
+                  : `/${context.locale}/blog/${page}/`,
             })}
-          </section>
-          ${Pagination.render(context, {
-            ...context.hyData?.pagination,
-            pageUrl: (page) =>
-              page === 1
-                ? `/${context.locale}/blog/`
-                : `/${context.locale}/blog/${page}/`,
-          })}
+          </div>
         </div>
       `,
     );
-    return PageLayout.render(context, content);
   }
 }
