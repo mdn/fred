@@ -10,7 +10,7 @@ import styles from "./element.css?lit";
  * @import { MDNLiveSampleResult } from "../live-sample-result/element.js";
  */
 
-const LANGUAGE_CLASSES = new Set(["html", "js", "css", "wat"]);
+const LANGUAGE_CLASSES = new Set(["html", "js", "css", "plain", "wat"]);
 
 export class MDNCodeExample extends LitElement {
   static styles = styles;
