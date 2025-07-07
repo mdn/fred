@@ -30,7 +30,7 @@ export default function Button({
   >`;
 
   const inner =
-    icon && iconPosition === "after"
+    iconPosition === "after"
       ? [labelElement, iconElement]
       : [iconElement, labelElement];
 
