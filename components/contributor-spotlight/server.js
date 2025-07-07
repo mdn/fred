@@ -38,7 +38,7 @@ export class ContributorSpotlight extends ServerComponent {
             ${context.l10n`Our constant quest for innovation starts here, with you. Every part of MDN (docs, demos and the site itself) springs from our incredible open community of developers. Please join us!`}
           </p>
           ${Button.render(context, {
-            label: "${context.l10n}",
+            label: `${context.l10n}`,
             href: `/${context.locale}/community/`,
             icon: arrowRightIcon,
             iconPosition: "after",
