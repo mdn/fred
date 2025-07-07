@@ -6,12 +6,12 @@ import { ifDefined } from "lit/directives/if-defined.js";
  * @param {string | import("@lit").TemplateResult} options.label
  * @param {import("@lit").TemplateResult} [options.icon]
  * @param {boolean} [options.iconOnly]
+ * @param {import("./types.js").ButtonIconPositions} [options.iconPosition]
  * @param {boolean} [options.disabled]
  * @param {string} [options.href]
  * @param {string} [options.target]
  * @param {import("./types.js").ButtonVariants} [options.variant]
  * @param {import("./types.js").ButtonActions} [options.action]
- * @param {import("./types.js").ButtonIconPositions} [options.iconPosition]
  */
 export default function Button({
   label,
