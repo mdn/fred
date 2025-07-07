@@ -98,14 +98,15 @@ customElements.define("mdn-code-example", MDNCodeExample);
  */
 export function upgradePre(pre) {
   if (pre instanceof HTMLPreElement) {
-    const example = pre.closest("div.code-example");
+    const example = pre.closest("div.code-example") || pre;
     const language =
       [...pre.classList].find((c) => LANGUAGE_CLASSES.has(c)) ||
       example?.querySelector(".language-name")?.textContent?.trim();
     const hidden = [...pre.classList].some(
       (c) => c === "hidden" || c.startsWith("interactive-example"),
     );
-    const code = pre.querySelector("code")?.textContent;
+    const codeEl = pre.querySelector("code");
+    const code = codeEl ? codeEl.textContent : pre.textContent;
     if (example && language && code) {
       const newExample = document.createElement("mdn-code-example");
       newExample.language = language;
