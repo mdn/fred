@@ -12,6 +12,7 @@ export class MDNButton extends LitElement {
     action: { type: String },
     icon: { state: true },
     iconOnly: { type: Boolean, attribute: "icon-only" },
+    iconPosition: { type: String, attribute: "icon-position" },
     href: { type: String },
     target: { type: String },
   };
@@ -22,6 +23,8 @@ export class MDNButton extends LitElement {
     /** @type {import("@lit").TemplateResult | undefined} */
     this.icon = undefined;
     this.iconOnly = false;
+    /** @type {import("./types.js").ButtonIconPositions} */
+    this.iconPosition = "before";
     /** @type {import("./types.js").ButtonVariants} */
     this.variant = "primary";
     /** @type {import("./types.js").ButtonActions} */
@@ -38,6 +41,7 @@ export class MDNButton extends LitElement {
       disabled: this.disabled,
       icon: this.icon,
       iconOnly: this.iconOnly,
+      iconPosition: this.iconPosition,
       variant: this.variant,
       action: this.action,
       href: this.href,

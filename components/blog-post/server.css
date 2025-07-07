@@ -107,10 +107,10 @@
 
 .blog-toc {
   h2 {
-    padding: 0 0 0.75em;
+    padding: 0.75em 0;
     margin: 0;
 
-    font-size: var(--toc-header-font-size);
+    font-size: var(--toc-header-font-size, var(--font-size-large));
     font-weight: normal;
   }
 

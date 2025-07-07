@@ -2,17 +2,17 @@ import { LitElement, html, nothing } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { createRef, ref } from "lit/directives/ref.js";
 
+import { L10nMixin } from "../../l10n/mixin.js";
+
 import styles from "./element.css?lit";
 import { SURVEYS } from "./surveys.js";
 import { getSurveyState, writeSurveyState } from "./utils.js";
 
 /**
- * @import { TemplateResult } from "lit";
- * @import { Ref } from "lit/directives/ref.js";
  * @import * as Survey from "./types.js";
  */
 
-export class MDNSurvey extends LitElement {
+export class MDNSurvey extends L10nMixin(LitElement) {
   static styles = styles;
 
   static ssr = false;
@@ -30,7 +30,7 @@ export class MDNSurvey extends LitElement {
     /** @type {string | undefined} */
     this._source = undefined;
 
-    /** @type {Ref<HTMLDetailsElement>} */
+    /** @type {import("@lit").Ref<HTMLDetailsElement>} */
     this._detailsRef = createRef();
   }
 
@@ -177,7 +177,7 @@ export class MDNSurvey extends LitElement {
   }
 
   /**
-   * @returns {TemplateResult | nothing}
+   * @returns {import("@lit").TemplateResult | nothing}
    */
   render() {
     if (!this._survey || !this._surveyState) {
@@ -191,6 +191,8 @@ export class MDNSurvey extends LitElement {
       return nothing;
     }
 
+    const title = this.l10n`Hide this survey`;
+
     return html`
       <div class="survey">
         <div class="header">
@@ -198,9 +200,9 @@ export class MDNSurvey extends LitElement {
           <button
             class="dismiss"
             type="button"
-            aria-label="Hide this survey"
+            aria-label=${title}
             @click=${this.#dismiss}
-            title="Hide this survey"
+            title=${title}
           >
             <svg class="icon" width="16" height="16" viewBox="0 0 16 16">
               <path

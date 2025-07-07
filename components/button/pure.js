@@ -6,6 +6,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
  * @param {string | import("@lit").TemplateResult} options.label
  * @param {import("@lit").TemplateResult} [options.icon]
  * @param {boolean} [options.iconOnly]
+ * @param {import("./types.js").ButtonIconPositions} [options.iconPosition]
  * @param {boolean} [options.disabled]
  * @param {string} [options.href]
  * @param {string} [options.target]
@@ -16,16 +17,23 @@ export default function Button({
   label,
   icon,
   iconOnly,
+  iconPosition,
   disabled = false,
   href,
   target,
   variant = "primary",
   action,
 }) {
-  const inner = [
-    icon ? html`<span class="icon">${icon}</span>` : nothing,
-    html`<span id="label" class="label" ?hidden=${iconOnly}>${label}</span>`,
-  ];
+  const iconElement = icon ? html`<span class="icon">${icon}</span>` : nothing;
+  const labelElement = html`<span id="label" class="label" ?hidden=${iconOnly}
+    >${label}</span
+  >`;
+
+  const inner =
+    iconPosition === "after"
+      ? [labelElement, iconElement]
+      : [iconElement, labelElement];
+
   return href
     ? html`<a
         href=${href}

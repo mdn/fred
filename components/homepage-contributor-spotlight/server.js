@@ -1,6 +1,7 @@
 import { html, nothing } from "lit";
 
 import Button from "../button/pure.js";
+import arrowRightIcon from "../icon/arrow-right.svg?lit";
 import { ServerComponent } from "../server/index.js";
 
 import contributorPng from "./mdn_contributor.png?url";
@@ -27,8 +28,10 @@ export class HomepageContributorSpotlight extends ServerComponent {
         </blockquote>
 
         ${Button({
-          label: context.l10n`Get involved →`,
+          label: context.l10n`Get involved`,
           href: `/${context.locale}/community`,
+          icon: arrowRightIcon,
+          iconPosition: "after",
         })}
       </div>
 

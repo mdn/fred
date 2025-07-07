@@ -2,6 +2,7 @@ import { html, nothing } from "lit";
 
 import { AuthorDateReadTime } from "../blog/utils.js";
 import { Button } from "../button/server.js";
+import arrowRightIcon from "../icon/arrow-right.svg?lit";
 import { PageLayout } from "../page-layout/server.js";
 import { Pagination } from "../pagination/server.js";
 import { ServerComponent } from "../server/index.js";
@@ -50,8 +51,10 @@ function PostPreview(context, blogMeta) {
         ? html`<span class="blog-post-preview__sponsored">Sponsored</span>`
         : nothing}
       ${Button.render(context, {
-        label: "Read more →",
+        label: "Read more",
         href: `/en-US/blog/${blogMeta.slug}/`,
+        icon: arrowRightIcon,
+        iconPosition: "after",
       })}
     </footer>
   </article>`;
