@@ -23,12 +23,12 @@ export class MDNButton extends LitElement {
     /** @type {import("@lit").TemplateResult | undefined} */
     this.icon = undefined;
     this.iconOnly = false;
+    /** @type {import("./types.js").ButtonIconPositions} */
+    this.iconPosition = "before";
     /** @type {import("./types.js").ButtonVariants} */
     this.variant = "primary";
     /** @type {import("./types.js").ButtonActions} */
     this.action = undefined;
-    /** @type {import("./types.js").ButtonIconPositions} */
-    this.iconPosition = "before";
     /** @type {string | undefined} */
     this.href = undefined;
     /** @type {string | undefined} */
