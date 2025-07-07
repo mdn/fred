@@ -62,6 +62,14 @@ td > div {
   align-items: baseline;
 }
 
+a {
+  color: var(--color-link-normal);
+}
+
+a:visited {
+  color: var(--color-link-visited);
+}
+
 .label {
   padding: 0.5rem 1rem;
 
