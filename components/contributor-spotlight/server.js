@@ -4,6 +4,7 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { Button } from "../button/server.js";
 import { ContentSection } from "../content-section/server.js";
+import arrowRightIcon from "../icon/arrow-right.svg?lit";
 import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
 
@@ -39,8 +40,10 @@ export class ContributorSpotlight extends ServerComponent {
             open community of developers. Please join us!
           </p>
           ${Button.render(context, {
-            label: "Get Involved →",
+            label: "Get involved",
             href: `/${context.locale}/community/`,
+            icon: arrowRightIcon,
+            iconPosition: "after",
             variant: "primary",
             action: "positive",
           })}
