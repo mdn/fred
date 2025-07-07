@@ -1,7 +1,7 @@
 import { LitElement, html, nothing } from "lit";
 import { createRef, ref } from "lit/directives/ref.js";
-import "../../components/progress-bar/element.js";
-import "../../components/button/element.js";
+import "../progress-bar/element.js";
+import "../button/element.js";
 
 import styles from "./element.css?lit";
 

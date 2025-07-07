@@ -10,7 +10,9 @@ export class Search extends ServerComponent {
   render(context) {
     return PageLayout.render(
       context,
-      html`<mdn-site-search></mdn-site-search>`,
+      html`<div class="site-search">
+        <mdn-site-search></mdn-site-search>
+      </div>`,
     );
   }
 }

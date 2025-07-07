@@ -11,7 +11,35 @@
   }
 }
 
-.site-search__locale-indicator {
+.site-search-form {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  padding: 0;
+}
+
+.site-search-form__form {
+  display: inline-block;
+
+  width: fit-content;
+
+  padding: 0;
+
+  background-color: var(--color-background-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: 0.5rem;
+}
+
+/* .site-search-form__input {
+} */
+
+/* .site-search-form__submit {
+} */
+
+.site-search-results__locale-indicator {
   float: left;
 
   padding: 0.25em 0.5em;
