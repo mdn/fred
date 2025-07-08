@@ -53,6 +53,7 @@ obs-mdn = The HTTP Observatory provides effective security insights, guided by M
 compat-loading = Loading…
 
 compat-browser-version-date = { $browser } { $version } – Released { $date }
+compat-browser-version-released = Released { $date }
 
 compat-link-report-issue = Report problems with this compatibility data
 compat-link-report-issue-title = Report an issue with this compatibility data
@@ -75,6 +76,32 @@ compat-support-prefix = Implemented with the vendor prefix: { $prefix }
 compat-support-altname = Alternate name: { $altname }
 compat-support-removed = Removed in { $version } and later
 compat-support-see-impl-url = See <a data-l10n-name="impl_url">{ $label }</a>
+compat-support-flags =
+  { NUMBER($has_added) ->
+    [one] From version { $version_added }
+    *[other] {""}
+  }{ $has_last ->
+    [one] { NUMBER($has_added) -> 
+          *[zero] Until { $versionLast } users
+          [one] {" "}until { $versionLast } users
+      }
+    *[zero] { NUMBER($has_added) -> 
+          *[zero] Users
+          [one] {" "}users
+      }
+  }
+  {" "}must explicitly set the <code data-l10n-name="name">{ $flag_name }</code>{" "}
+  { $flag_type ->
+    *[preference] preference
+    [runtime_flag] runtime flag
+  }{ NUMBER($has_value) ->
+    [one] {" "}to <code data-l10n-name="value">{ $flag_value }</code>
+    *[other] {""}
+  }{"."}
+  { NUMBER($flag_type) ->
+    [preference] To change preferences in { $browser_name }, visit { $browser_pref_url }.
+    *[other] {""}
+  }
 
 compat-legend = Legend
 compat-legend-tip = Tip: you can click/tap on a cell for more information.

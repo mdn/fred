@@ -186,7 +186,6 @@
   align-content: flex-start;
   align-items: center;
 
-  /* gap: var(--author-gap); */
   margin-left: calc((var(--avatar-size) + var(--author-gap)) * -1);
 
   font-weight: 600;

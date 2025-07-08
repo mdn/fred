@@ -32,7 +32,9 @@
   }
 
   @media (--screen-layout-1-sidebar-or-less) {
-    padding-left: 0;
+    &:has(mdn-toggle-sidebar) {
+      padding-left: 0;
+    }
 
     mdn-toggle-sidebar {
       display: block;

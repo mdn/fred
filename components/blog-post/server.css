@@ -73,7 +73,6 @@
 
   flex-wrap: wrap;
 
-  gap: var(--author-gap);
   align-content: flex-start;
   align-items: center;
 

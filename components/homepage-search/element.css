@@ -13,7 +13,7 @@
   border-style: solid;
   border-radius: 2em;
 
-  &::after {
+  &::before {
     display: inline-block;
 
     flex-shrink: 0;

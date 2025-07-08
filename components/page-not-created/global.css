@@ -1,0 +1,4 @@
+.page-not-created {
+  color: var(--color-text-red);
+  text-decoration: underline wavy !important;
+}

@@ -1,32 +1,11 @@
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 100 900;
+@import url("inter.css");
+@import url("jetbrains-mono.css");
 
-  src: url("fonts/inter.woff2") format("woff2");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Inter";
-  font-style: italic;
-  font-weight: 100 900;
-
-  src: url("fonts/inter-italic.woff2") format("woff2");
-  font-display: swap;
-}
-
-@font-feature-values "Inter" {
-  @styleset {
-    disambiguation: 2;
-  }
-}
+/* Font size */
 
 :root {
   --font-family-text: "Inter", sans-serif;
-  --font-family-code:
-    "Menlo", "Consolas", "Monaco", "Liberation Mono", "Lucida Console",
-    monospace;
+  --font-family-code: "JetBrains Mono", monospace;
 
   --font-line-content: 1.75;
   --font-line-normal: 1.5;

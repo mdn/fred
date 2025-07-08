@@ -64,7 +64,7 @@ export class OuterLayout extends ServerComponent {
     return html`
       <!doctype html>
       <html
-        lang="en"
+        lang=${context.locale}
         style="color-scheme: light dark;"
         data-renderer=${context.renderer}
         data-noads=${ifDefined(WRITER_MODE ? "enabled" : undefined)}
@@ -95,9 +95,68 @@ export class OuterLayout extends ServerComponent {
           ${scripts?.map(
             (path) => html`<script src=${path} type="module"></script>`,
           )}
+          ${this._renderMeta(context)}
+          <link
+            rel="canonical"
+            href=${`https://developer.mozilla.org${context.url}`}
+          />
         </head>
         ${markup}
       </html>
     `;
+  }
+
+  /**
+   * @param {import("@fred").Context} context
+   */
+  _renderMeta(context) {
+    const title =
+      ("doc" in context ? context.doc.pageTitle : context.pageTitle) ||
+      "MDN Web Docs";
+    const description =
+      ("pageDescription" in context
+        ? context.pageDescription
+        : "doc" in context && "summary" in context.doc
+          ? context.doc.summary
+          : "") ||
+      "The MDN Web Docs site provides information about Open Web technologies including HTML, CSS, and APIs for both Web sites and progressive web apps.";
+
+    const names = {
+      description,
+    };
+
+    const og = {
+      "og:url": `https://developer.mozilla.org${context.url}`,
+      "og:title": title,
+      "og:locale": context.locale.replace("-", "_"),
+      "og:description": description,
+      "og:image":
+        "https://developer.mozilla.org/mdn-social-share.d893525a4fb5fb1f67a2.png",
+      "og:image:type": "image/png",
+      "og:image:height": "1080",
+      "og:image:width": "1920",
+      "og:image:alt":
+        "The MDN Web Docs logo, featuring a blue accent color, displayed on a solid black background.",
+      "og:site_name": "MDN Web Docs",
+    };
+
+    const twitter = {
+      "twitter:card": "summary_large_image",
+      "twitter:creator": "MozDevNet",
+    };
+
+    const tags = [
+      ...Object.entries(names).map(
+        ([key, value]) => html`<meta name=${key} content=${value} />`,
+      ),
+      ...Object.entries(og).map(
+        ([key, value]) => html`<meta name=${key} content=${value} />`,
+      ),
+      ...Object.entries(twitter).map(
+        ([key, value]) => html`<meta name=${key} content=${value} />`,
+      ),
+    ];
+
+    return html`${tags}`;
   }
 }

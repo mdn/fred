@@ -28,10 +28,16 @@ function BlogTitleImageFigure(_context, { image, width, height }) {
  * @param {import("@fred").Context<import("@rari").BlogPostPage>} context
  */
 function RenderToc(context) {
+  const toc = context?.doc?.toc;
+
+  if (!toc || toc.length === 0) {
+    return nothing;
+  }
+
   return html`<nav class="blog-toc">
     <h2>${context.l10n("reference-toc-header")`In this article`}</h2>
     <ul>
-      ${context?.doc?.toc?.map(
+      ${toc?.map(
         ({ id, text }) =>
           html`<li><a href="#${id}">${unsafeHTML(text)}</a></li>`,
       )}

@@ -682,53 +682,37 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     }
 
     if (item.flags) {
-      supportNotes.push({
-        iconName: "disabled",
-        label: (() => {
-          const hasAddedVersion = typeof item.version_added === "string";
-          const hasRemovedVersion = typeof item.version_removed === "string";
-          const flags = item.flags || [];
-
-          // TODO l10n
-          const items = [
-            hasAddedVersion && `From version ${item.version_added}`,
-            hasRemovedVersion &&
-              `${hasAddedVersion ? " until" : "Until"} ${item.version_removed} (exclusive)`,
-            hasAddedVersion || hasRemovedVersion ? ": this" : "This",
-            " feature is behind the",
-            ...flags.map(
-              /**
-               * @param {import("@bcd").FlagStatement} flag
-               * @param {number} i
-               */ (flag, i) => {
-                const valueToSet = flag.value_to_set
-                  ? html` (needs to be set to
-                      <code>${flag.value_to_set}</code>)`
-                  : "";
-
-                return [
-                  html`<code>${flag.name}</code>`,
-                  flag.type === "preference" && html` preference${valueToSet}`,
-                  flag.type === "runtime_flag" &&
-                    html` runtime flag${valueToSet}`,
-                  i < flags.length - 1 && " and the ",
-                ].filter(Boolean);
+      for (const { type, name, value_to_set } of item.flags) {
+        supportNotes.push({
+          iconName: "disabled",
+          label: this.l10n.raw({
+            id: "compat-support-flags",
+            args: {
+              has_added: Number(
+                typeof item.version_added === "string" &&
+                  item.version_added !== "preview",
+              ),
+              version_added: item.version_added,
+              has_last: Number(typeof item.version_last === "string"),
+              versionLast: item.version_last,
+              flag_type: type,
+              flag_name: name,
+              has_value: Number(typeof value_to_set === "string"),
+              flag_value: value_to_set,
+              browser_name: browser.name,
+              browser_pref_url: browser.pref_url,
+            },
+            elements: {
+              name: {
+                tag: "code",
               },
-            ),
-            ".",
-            browser.pref_url &&
-              flags.some(
-                /** @param {import("@bcd").FlagStatement} flag */ (flag) =>
-                  flag.type === "preference",
-              ) &&
-              ` To change preferences in ${browser.name}, visit ${browser.pref_url}.`,
-          ]
-            .filter(Boolean)
-            .map((value) => html`${value}`);
-
-          return html` ${items} `;
-        })(),
-      });
+              value: {
+                tag: "code",
+              },
+            },
+          }),
+        });
+      }
     }
 
     if (item.notes) {
@@ -926,8 +910,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         >
           ${!timeline || added ? label : undefined}
           ${browserReleaseDate && timeline
-            ? // TODO l10n
-              ` (Released ${browserReleaseDate})`
+            ? ` (${this.l10n.raw({ id: "compat-browser-version-released", args: { date: browserReleaseDate } })})`
             : ""}
         </span>
       </div>

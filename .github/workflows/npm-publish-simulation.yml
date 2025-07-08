@@ -1,0 +1,83 @@
+name: NPM Publish simulation
+
+on:
+  pull_request:
+
+# No GITHUB_TOKEN permissions, as we only use it to increase API limit.
+permissions: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: (mdn/fred) Checkout
+        uses: actions/checkout@v4
+        with:
+          path: mdn/fred
+
+      - name: (mdn/fred) Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: mdn/fred/.nvmrc
+          cache: npm
+          cache-dependency-path: mdn/fred/package-lock.json
+
+      - name: (mdn/fred) Install all npm packages
+        working-directory: mdn/fred
+        run: npm ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: (mdn/fred) Build tarball
+        id: build
+        working-directory: mdn/fred
+        run: |
+          npm pack
+          TARBALL=`ls mdn-fred-*.tgz`
+          echo $TARBALL
+          ls -lh $TARBALL
+          echo "tarball=$(realpath $TARBALL)" >> "$GITHUB_OUTPUT"
+
+      - name: (mdn/content) Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: mdn/content
+          path: mdn/content
+
+      - name: (mdn/content) Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: mdn/content/.nvmrc
+          cache: yarn
+          cache-dependency-path: mdn/content/yarn.lock
+
+      - name: (mdn/content) Install tarball
+        working-directory: mdn/content
+        env:
+          TARBALL: ${{ steps.build.outputs.tarball }}
+        run: |
+          yarn cache clean --all
+          yarn add file:$TARBALL
+          yarn install
+
+      - name: (mdn/content) yarn start:fred
+        working-directory: mdn/content
+        run: yarn start:fred > /tmp/stdout.log 2> /tmp/stderr.log &
+
+      - name: View some URLs on localhost:3000
+        run: |
+          curl --retry-connrefused --retry 5 -I http://localhost:3000
+
+          # Basically, test if it 200 OKs. If not, this'll exit non-zero.
+          curl --fail http://localhost:3000/en-US/ > /dev/null
+          curl --fail http://localhost:3000/en-US/docs/MDN/Kitchensink > /dev/null
+
+      - name: Debug server's stdout and stderr if tests failed
+        if: failure()
+        run: |
+          echo "STDOUT..................................................."
+          cat /tmp/stdout.log
+          echo ""
+          echo "STDERR..................................................."
+          cat /tmp/stderr.log
