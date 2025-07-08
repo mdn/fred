@@ -84,6 +84,15 @@
     width: 100%;
     border-collapse: collapse;
 
+    tr {
+      background-color: var(--color-background-primary);
+    }
+
+    thead tr,
+    tr:nth-of-type(2n) {
+      background-color: var(--color-background-page);
+    }
+
     th,
     td {
       padding: 0.5rem 0.75rem;
@@ -93,18 +102,9 @@
     th {
       font-weight: normal;
       text-align: left;
-      background-color: var(--color-background-secondary);
     }
 
     &.properties {
-      tr {
-        background-color: var(--color-background-primary);
-      }
-
-      tr:nth-of-type(2n) {
-        background-color: var(--color-background-page);
-      }
-
       th,
       td {
         border-width: 1px 0;
