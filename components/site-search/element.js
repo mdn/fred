@@ -2,17 +2,62 @@ import { Task } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
 
 import { ifDefined } from "lit/directives/if-defined.js";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
 import "../button/element.js";
 
+// import chevronLeftIcon from "../icon/chevron-left.svg?lit";
+// import chevronRightIcon from "../icon/chevron-right.svg?lit";
 import searchIcon from "../icon/search.svg?lit";
 
 import styles from "./element.css?lit";
 
+/**
+ * @type {{[key: string]: string}}
+ */
+const localeMap = {
+  "en-us": "English (US)",
+  de: "Deutsch",
+  fr: "Français",
+  es: "Español",
+  it: "Italiano",
+  ja: "日本語",
+  ko: "한국어",
+  "pt-br": "Português (BR)",
+  ru: "Русский",
+  "zh-cn": "简体中文",
+  "zh-tw": "繁體中文",
+};
+
+/**
+ *
+ * @param {string} code
+ * @returns {string}
+ */
+function readableLocaleCode(code) {
+  return localeMap[code.toLowerCase()] || code;
+}
+
+/**
+ *
+ * @param {string} url
+ * @param {string} locale
+ * @returns {string}
+ */
+function mdnUrl2Breadcrumb(url, locale) {
+  return url
+    .replaceAll("_", " ")
+    .split("/")
+    .slice(1)
+    .filter((p) => ![locale, "docs", "Web"].includes(p))
+    .join(" / ");
+}
+
 export class MDNSiteSearch extends L10nMixin(LitElement) {
   static styles = styles;
+  static ssr = false;
 
   static properties = {
     _inputValue: { state: true },
@@ -54,6 +99,7 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
       if (!res.ok) {
         throw new Error(`${res.status}: ${res.statusText}`);
       }
+
       return /** @type {Promise<import("./types.js").SearchResponse>} */ (
         res.json()
       );
@@ -119,7 +165,7 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
       globalThis.history.pushState({}, "", url);
 
       this._page = 1;
-      this._query = trimmedQuery; // This triggers the search task
+      this._query = trimmedQuery; // this triggers the search
     }
   }
 
@@ -136,6 +182,9 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
             @keydown=${this._handleKeyDown}
           />
           <mdn-button
+            icon-only="true"
+            .icon=${searchIcon}
+            variant="plain"
             class="site-search-form__submit"
             @click=${this._handleSearch}
             .disabled=${ifDefined(
@@ -143,12 +192,92 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                 ? true
                 : undefined,
             )}
+            >${this.l10n`Search`}</mdn-button
           >
-            ${searchIcon}
-          </mdn-button>
         </div>
       </div>
     `;
+  }
+
+  /**
+   *
+   * @param {number} currentPage
+   * @param {number} hitCount
+   * @param {number} pageSize
+   */
+  renderPagination(currentPage, hitCount, pageSize) {
+    let maxPage = Math.ceil(hitCount / pageSize);
+    if (hitCount <= pageSize) {
+      return nothing;
+    }
+    let previousPage = null;
+    let previousURL = null;
+    let nextPage = null;
+    let nextURL = null;
+
+    if (hitCount > currentPage * pageSize && currentPage < maxPage) {
+      nextPage = currentPage + 1;
+    }
+    if (currentPage > 1) {
+      previousPage = currentPage - 1;
+    }
+
+    if (nextPage || previousPage !== null) {
+      if (previousPage) {
+        previousURL = new URL(globalThis.location.href);
+        if (previousPage === 1) {
+          previousURL.searchParams.delete("page");
+        } else {
+          previousURL.searchParams.set("page", previousPage.toString());
+        }
+      }
+
+      if (nextPage) {
+        nextURL = new URL(globalThis.location.href);
+        nextURL.searchParams.set("page", nextPage.toString());
+      }
+
+      return html` <ul>
+        ${previousURL
+          ? html` <li>
+              <mdn-button variant="secondary" href=${previousURL}
+                >${this.l10n`Previous`}</mdn-button
+              >
+            </li>`
+          : html`<li></li>`}
+        ${nextPage
+          ? html` <li>
+              <mdn-button variant="secondary" href=${nextURL}
+                >${this.l10n`Next`}</mdn-button
+              >
+            </li>`
+          : html`<li></li>`}
+      </ul>`;
+    }
+    return nothing;
+
+    // return html`
+    //   <div class="site-search__pagination">
+    //     <mdn-button
+    //       icon-only="true"
+    //       .icon=${chevronLeftIcon}
+    //       variant="plain"
+    //       class="site-search__pagination__prev"
+    //       @click=${this._handlePrevPage}
+    //       .disabled=${ifDefined(this._currentPage === 1 ? true : undefined)}
+    //       >${this.l10n`Previous`}</mdn-button
+    //     >
+    //     <mdn-button
+    //       icon-only="true"
+    //       .icon=${chevronRightIcon}
+    //       variant="plain"
+    //       class="site-search__pagination__next"
+    //       @click=${this._handleNextPage}
+    //       .disabled=${ifDefined(this._currentPage === this._totalPages ? true : undefined)}
+    //       >${this.l10n`Next`}</mdn-button
+    //     >
+    //   </div>
+    // `;
   }
 
   render() {
@@ -165,24 +294,14 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
       ["popularity", this.l10n`Popularity`],
     ];
 
-    /*
-    this.disabled = false;
-    this.icon = undefined;
-    this.iconOnly = false;
-    this.iconPosition = "before";
-    this.variant = "primary";
-    this.action = undefined;
-    this.href = undefined;
-    this.target = undefined;
-    */
-
     return this._searchTask.render({
       pending: () => html`
         ${this.renderInputs()}
         <div class="site-search__searching">${this.l10n`Searching…`}</div>
       `,
-      complete: (results) =>
-        results
+      complete: (results) => {
+        console.log("results", results);
+        return results
           ? html`
             ${this.renderInputs()}
 
@@ -202,7 +321,7 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                         ${LOCALE_OPTIONS.map((locales) => {
                           const label =
                             locales.length == 1
-                              ? locales.at(0)
+                              ? readableLocaleCode(locales.at(0) || "en-US")
                               : this.l10n`Both`;
                           if (this._locales.join(",") === locales.join(",")) {
                             return html`<li><em>${label}</em></li>`;
@@ -233,43 +352,53 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
             </section>
             <section class="site-search__results">
               <h2>${this.l10n`Results`}</h2>
-              ${this.l10n.raw({
+              <p class="site-search__results-stats">${this.l10n.raw({
                 id: "search-stats",
                 args: {
                   results: results.metadata.total.value,
                   time: results.metadata.took_ms,
                 },
-              })}
+              })}</p>
               <ul class="site-search-results">
                 ${results.documents.map(
                   (result) =>
                     html`<li class="site-search-results__item">
                       <article>
-                        ${result.locale.toLowerCase() ===
-                        this.locale.toLowerCase()
-                          ? nothing
-                          : html`<span
-                              class="site-search-results__locale-indicator"
-                              >${result.locale
-                                .split("-")
-                                .map((value, index) =>
-                                  index > 0 ? value.toUpperCase() : value,
-                                )
-                                .join("-")}</span
-                            >`}
                         <h2 class="site-search-results__title">
-                          <a href=${result.mdn_url}>${result.title}</a>
+                          <a href=${result.mdn_url}
+                            >${result.highlight.title &&
+                            result.highlight.title.length > 0
+                              ? unsafeHTML(result.highlight.title[0])
+                              : result.title}</a
+                          >
+                          ${result.locale.toLowerCase() ===
+                          this.locale.toLowerCase()
+                            ? nothing
+                            : html`<sup
+                                class="site-search-results__locale-indicator"
+                                >${readableLocaleCode(result.locale)}</sup
+                              >`}
                         </h2>
-
-                        <p class="site-search-results__summary">
-                          ${result.summary}
+                        <p class="site-search-results__path">
+                          ${mdnUrl2Breadcrumb(result.mdn_url, this.locale)}
+                        </p>
+                        <p class="site-search-results__description">
+                          ${result.highlight.body &&
+                          result.highlight.body.length > 0
+                            ? unsafeHTML(result.highlight.body[0])
+                            : result.summary}
                         </p>
                       </article>
                     </li>`,
                 )}
               </ul>
-              </div>`
-          : this.l10n`No results!`,
+              </div>
+              </section>
+              <nav class="site-search__results-pagination">
+                ${this.renderPagination(results.metadata.page, results.metadata.total.value, results.metadata.size)}
+              </nav>`
+          : html`${this.renderInputs()}`;
+      },
       error: (e) => html`Error: ${e}`,
     });
   }
