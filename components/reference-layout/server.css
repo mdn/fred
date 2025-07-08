@@ -37,6 +37,13 @@
 
   .reference-layout__sidebar {
     grid-area: sidebar;
+
+    @media (--screen-layout-2-sidebars) {
+      .left-sidebar {
+        padding-right: calc(var(--layout-sidebar-gap) / 2);
+        margin-right: calc(var(--layout-sidebar-gap) / -2);
+      }
+    }
   }
 
   .reference-layout__toc {
@@ -58,8 +65,6 @@
     top: var(--sticky-header-height);
 
     max-height: calc(100vh - var(--sticky-header-height));
-
-    padding-left: 2px;
 
     overflow-y: auto;
   }
