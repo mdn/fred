@@ -42,34 +42,6 @@
     letter-spacing: 0.025em;
   }
 
-  a {
-    &:link {
-      color: var(--color-link-normal);
-    }
-
-    &:visited {
-      color: var(--color-link-visited);
-    }
-
-    /* Regular links. */
-    &:not([href^="#"]) {
-      text-decoration: underline;
-
-      &:hover {
-        text-decoration: none;
-      }
-    }
-
-    /* Anchor links. */
-    &[href^="#"] {
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-
   code {
     padding: 0.125em 0.25em;
 
@@ -84,9 +56,7 @@
 
     margin: 2rem auto;
 
-    color: #1b1b1b;
-
-    background-color: #ffffff;
+    background-color: var(--color-background-secondary);
     border: 1px solid var(--color-border-primary);
     border-radius: 0.25rem;
   }
