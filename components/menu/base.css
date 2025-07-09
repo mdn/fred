@@ -82,8 +82,6 @@
 /* Tab Link */
 
 .menu__tab-link {
-  display: block;
-
   /* Custom, to match the icon height */
   line-height: 1.25rem;
   color: var(--color-text-primary);

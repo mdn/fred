@@ -1,5 +1,14 @@
 /* Base */
 
+/* Login link */
+
+.user-menu__login {
+  color: inherit;
+  white-space: nowrap;
+}
+
+/* User menu dropdown */
+
 .user-menu__button {
   padding: 0;
   margin: 0;
