@@ -3,6 +3,8 @@ import { LitElement, html, nothing } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
+import { mdnUrl2Breadcrumb } from "../../utils/mdn-url2breadcrumb.js";
+
 import styles from "./element.css?lit";
 
 export class MDNSearchModal extends L10nMixin(LitElement) {
@@ -211,14 +213,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
                         >${HighlightMatch(title, this._query)}</span
                       >
                       <span class="slug"
-                        >${url
-                          .replaceAll("_", " ")
-                          .split("/")
-                          .slice(1)
-                          .filter(
-                            (p) => ![this.locale, "docs", "Web"].includes(p),
-                          )
-                          .join(" / ")}</span
+                        >${mdnUrl2Breadcrumb(url, this.locale)}</span
                       >
                     </a>
                   </li>

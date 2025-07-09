@@ -10,6 +10,7 @@ import "../button/element.js";
 
 // import chevronLeftIcon from "../icon/chevron-left.svg?lit";
 // import chevronRightIcon from "../icon/chevron-right.svg?lit";
+import { mdnUrl2Breadcrumb } from "../../utils/mdn-url2breadcrumb.js";
 import searchIcon from "../icon/search.svg?lit";
 
 import styles from "./element.css?lit";
@@ -38,21 +39,6 @@ const localeMap = {
  */
 function readableLocaleCode(code) {
   return localeMap[code.toLowerCase()] || code;
-}
-
-/**
- *
- * @param {string} url
- * @param {string} locale
- * @returns {string}
- */
-function mdnUrl2Breadcrumb(url, locale) {
-  return url
-    .replaceAll("_", " ")
-    .split("/")
-    .slice(1)
-    .filter((p) => ![locale, "docs", "Web"].includes(p))
-    .join(" / ");
 }
 
 export class MDNSiteSearch extends L10nMixin(LitElement) {
