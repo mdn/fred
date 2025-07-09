@@ -9,6 +9,5 @@
 }
 
 mdn-site-search {
-  display: grid;
   grid-column: content;
 }
