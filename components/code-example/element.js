@@ -105,12 +105,16 @@ export function upgradePre(pre) {
     const hidden = [...pre.classList].some(
       (c) => c === "hidden" || c.startsWith("interactive-example"),
     );
+    const liveSampleClasses = [...pre.classList].filter(
+      (c) => c.startsWith("live-sample___") || c.startsWith("live-sample---"),
+    );
     const code = pre.querySelector("code")?.textContent;
     if (example && language && code) {
       const newExample = document.createElement("mdn-code-example");
       newExample.language = language;
       newExample.code = code;
       newExample.hidden = hidden;
+      newExample.classList = [...liveSampleClasses].join(" ");
       example.replaceWith(newExample);
       return newExample;
     }

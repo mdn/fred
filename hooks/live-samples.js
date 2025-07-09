@@ -11,13 +11,14 @@ for (const iframe of document.querySelectorAll("iframe[data-live-id]")) {
       /** @type {MDNCodeExample[]} */
       const codeExamples = [];
 
-      for (const pre of document.querySelectorAll(
+      for (const element of document.querySelectorAll(
         `.live-sample___${liveId}, .live-sample---${liveId}`,
       )) {
-        const { upgradePre } = await import(
+        const { MDNCodeExample, upgradePre } = await import(
           "../components/code-example/element.js"
         );
-        const codeExample = upgradePre(pre);
+        const codeExample =
+          element instanceof MDNCodeExample ? element : upgradePre(element);
         if (codeExample) {
           codeExamples.push(codeExample);
           const { language, code } = codeExample;
@@ -38,7 +39,7 @@ for (const iframe of document.querySelectorAll("iframe[data-live-id]")) {
       iframe.closest(".code-example")?.replaceWith(result);
 
       for (const codeExample of codeExamples) {
-        codeExample.liveSample = result;
+        codeExample.liveSample ||= result;
       }
     }
   }

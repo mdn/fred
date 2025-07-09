@@ -43,7 +43,8 @@
 
   @media (--screen-small-and-narrower) {
     column-gap: 0.5rem;
-    padding-inline: 0;
+    padding-right: 0;
+    padding-left: 0.5rem;
   }
 
   @media screen and (width <= 480px) {

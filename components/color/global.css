@@ -6,11 +6,6 @@
 @import url("link.css");
 @import url("scrollbar.css");
 
-/* Light/dark */
-:root {
-  color-scheme: light dark;
-}
-
 /* Basic */
 
 :root {
