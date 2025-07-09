@@ -24,10 +24,6 @@ img {
 
 a {
   color: var(--color-link-normal);
-
-  &:visited {
-    color: var(--color-link-visited);
-  }
 }
 
 [hidden] {
