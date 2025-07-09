@@ -351,7 +351,6 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
               </ul>
             </section>
             <section class="site-search__results">
-              <h2>${this.l10n`Results`}</h2>
               <p class="site-search__results-stats">${this.l10n.raw({
                 id: "search-stats",
                 args: {
@@ -364,24 +363,24 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                   (result) =>
                     html`<li class="site-search-results__item">
                       <article>
-                        <h2 class="site-search-results__title">
-                          <a href=${result.mdn_url}
-                            >${result.highlight.title &&
+                        <a href=${result.mdn_url}>
+                          <h2 class="site-search-results__title">
+                            ${result.highlight.title &&
                             result.highlight.title.length > 0
                               ? unsafeHTML(result.highlight.title[0])
-                              : result.title}</a
-                          >
-                          ${result.locale.toLowerCase() ===
-                          this.locale.toLowerCase()
-                            ? nothing
-                            : html`<sup
-                                class="site-search-results__locale-indicator"
-                                >${readableLocaleCode(result.locale)}</sup
-                              >`}
-                        </h2>
-                        <p class="site-search-results__path">
-                          ${mdnUrl2Breadcrumb(result.mdn_url, this.locale)}
-                        </p>
+                              : result.title}
+                            ${result.locale.toLowerCase() ===
+                            this.locale.toLowerCase()
+                              ? nothing
+                              : html`<sup
+                                  class="site-search-results__locale-indicator"
+                                  >${readableLocaleCode(result.locale)}</sup
+                                >`}
+                          </h2>
+                          <p class="site-search-results__path">
+                            ${mdnUrl2Breadcrumb(result.mdn_url, this.locale)}
+                          </p>
+                        </a>
                         <p class="site-search-results__description">
                           ${result.highlight.body &&
                           result.highlight.body.length > 0
