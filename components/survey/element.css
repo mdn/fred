@@ -39,6 +39,15 @@ p {
   margin: 0;
 }
 
+mdn-button::part(button):hover {
+  background-color: transparent;
+  border: 1px solid var(--color-text-purple);
+}
+
+mdn-button::part(icon) {
+  color: var(--color-text-purple);
+}
+
 summary {
   color: var(--color-text-purple);
   cursor: pointer;
