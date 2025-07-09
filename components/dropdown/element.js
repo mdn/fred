@@ -55,7 +55,7 @@ export class MDNDropdown extends LitElement {
   }
 
   /** @param {KeyboardEvent} event */
-  _handleKeyDown(event) {
+  _globalKeyDown(event) {
     if (this.open && event.key === "Escape") {
       this._toggleDropDown();
     }
@@ -83,20 +83,14 @@ export class MDNDropdown extends LitElement {
     super.connectedCallback();
     this._globalClick = this._globalClick.bind(this);
     document.addEventListener("click", this._globalClick);
+    this._globalKeyDown = this._globalKeyDown.bind(this);
+    document.addEventListener("keydown", this._globalKeyDown);
   }
 
   render() {
     return html`
-      <slot
-        name="button"
-        @click=${this._toggleDropDown}
-        @keydown=${this._handleKeyDown}
-      ></slot>
-      <slot
-        name="dropdown"
-        @keydown=${this._handleKeyDown}
-        ?hidden=${!this.open && this.loaded}
-      ></slot>
+      <slot name="button" @click=${this._toggleDropDown}></slot>
+      <slot name="dropdown" ?hidden=${!this.open && this.loaded}></slot>
     `;
   }
 
@@ -111,6 +105,7 @@ export class MDNDropdown extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     document.removeEventListener("click", this._globalClick);
+    document.removeEventListener("keydown", this._globalKeyDown);
   }
 }
 
