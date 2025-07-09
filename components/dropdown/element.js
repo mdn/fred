@@ -54,6 +54,13 @@ export class MDNDropdown extends LitElement {
     }
   }
 
+  /** @param {KeyboardEvent} event */
+  _handleKeyDown(event) {
+    if (this.open && event.key === "Escape") {
+      this._toggleDropDown();
+    }
+  }
+
   _toggleDropDown() {
     this.open = !this.open;
   }
@@ -80,8 +87,16 @@ export class MDNDropdown extends LitElement {
 
   render() {
     return html`
-      <slot name="button" @click=${this._toggleDropDown}></slot>
-      <slot name="dropdown" ?hidden=${!this.open && this.loaded}></slot>
+      <slot
+        name="button"
+        @click=${this._toggleDropDown}
+        @keydown=${this._handleKeyDown}
+      ></slot>
+      <slot
+        name="dropdown"
+        @keydown=${this._handleKeyDown}
+        ?hidden=${!this.open && this.loaded}
+      ></slot>
     `;
   }
 
