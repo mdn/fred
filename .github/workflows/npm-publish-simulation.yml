@@ -65,7 +65,10 @@ jobs:
         working-directory: mdn/content
         run: yarn start:fred > /tmp/stdout.log 2> /tmp/stderr.log &
 
-      - name: View some URLs on localhost:3000
+      - name: Wait for Rari (localhost:8083)
+        run: curl --retry-connrefused --retry 5 -I http://localhost:8083/en-US/
+
+      - name: Test Fred (localhost:3000)
         run: |
           curl --retry-connrefused --retry 5 -I http://localhost:3000
 
