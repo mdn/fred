@@ -300,7 +300,6 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
         <div class="site-search__searching">${this.l10n`Searching…`}</div>
       `,
       complete: (results) => {
-        console.log("results", results);
         return results
           ? html`
             ${this.renderInputs()}
