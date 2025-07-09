@@ -54,7 +54,7 @@ export const SURVEYS = [
       url.searchParams.set("referrer", mdn_url);
       return url.toString();
     },
-    teaser: html`Fred is <strong>MDN</strong>'s shiny now front-end!`,
+    teaser: html`Fred is <strong>MDN</strong>'s shiny new front-end!`,
     question: "Would you be so kind to answer some questions about fred?",
     footnote: "fred = Fr(ont)e(n)d",
     rateFrom: 0,
