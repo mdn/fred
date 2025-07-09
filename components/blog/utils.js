@@ -67,9 +67,10 @@ export function TimeToRead(context, { readTime }) {
  *
  * @param {import("@fred").Context} context
  * @param {import("@rari").BlogMeta} blogMeta
+ * @param {boolean} lazyLoad
  * @returns {import("@lit").TemplateResult | nothing}
  */
-export function Author(context, blogMeta) {
+export function Author(context, blogMeta, lazyLoad) {
   const author = blogMeta.author;
   if (!author) {
     return nothing;
@@ -81,6 +82,7 @@ export function Author(context, blogMeta) {
         class="blog-post-author__avatar"
         src=${author.avatar_url ?? "/assets/avatar.png"}
         alt="Author avatar"
+        loading=${lazyLoad ? "lazy" : "eager"}
       />
       ${author.name || "The MDN Team"} `,
   });
@@ -90,15 +92,16 @@ export function Author(context, blogMeta) {
  *
  * @param {import("@fred").Context} context
  * @param {import("@rari").BlogMeta} blogMeta
+ * @param {boolean} lazyLoad
  * @returns {import("@lit").TemplateResult | nothing}
  */
-export function AuthorDateReadTime(context, blogMeta) {
+export function AuthorDateReadTime(context, blogMeta, lazyLoad) {
   if (!blogMeta.author) {
     return nothing;
   }
 
   return html`
-    ${Author(context, blogMeta)} ${PublishDate(context, blogMeta)}
+    ${Author(context, blogMeta, lazyLoad)} ${PublishDate(context, blogMeta)}
     ${TimeToRead(context, blogMeta)}
   `;
 }
