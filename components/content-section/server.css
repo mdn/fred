@@ -42,8 +42,28 @@
     letter-spacing: 0.025em;
   }
 
-  a:visited {
-    color: var(--color-link-visited);
+  a {
+    &:visited {
+      color: var(--color-link-visited);
+    }
+
+    /* Regular links */
+    &:not([href^="#"]) {
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    /* Anchor links */
+    &[href^="#"] {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   code {
