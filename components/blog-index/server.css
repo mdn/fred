@@ -59,6 +59,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 2rem;
+
+  @media (--screen-large-and-narrower) {
+    grid-template-columns: auto;
+  }
 }
 
 .blog-post-preview {
@@ -113,7 +117,7 @@
     display: flex;
 
     width: auto;
-    height: 200px;
+    max-height: 200px;
 
     margin: 0 0 0.125rem;
     margin-bottom: 0;
