@@ -3,14 +3,10 @@
 
   a {
     color: var(--color-link-normal);
-
-    /* text-decoration: none; */
   }
 
   a:visited {
     color: var(--color-link-visited);
-
-    /* text-decoration: none; */
   }
 
   a:hover,
