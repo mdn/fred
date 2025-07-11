@@ -1,7 +1,6 @@
 import { Task } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
 
-import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
@@ -171,11 +170,7 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
             variant="plain"
             class="site-search-form__submit"
             @click=${this._handleSearch}
-            .disabled=${ifDefined(
-              !this._inputValue || this._inputValue.trim() === ""
-                ? true
-                : undefined,
-            )}
+            ?disabled=${!this._inputValue || this._inputValue.trim() === ""}
             >${this.l10n`Search`}</mdn-button
           >
         </div>
@@ -224,7 +219,7 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
       return html` <ul>
         ${previousURL
           ? html` <li>
-              <mdn-button variant="secondary" href=${previousURL}
+              <mdn-button variant="secondary" href=${previousURL.toString()}
                 >${this.l10n`Previous`}</mdn-button
               >
             </li>`
@@ -305,7 +300,8 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
         return results
           ? html`
               ${this.renderInputs()}
-              ${this.renderSuggestions(results)}
+
+                ${this.renderSuggestions(results)}
               <section class="site-search__options">
                 ${
                   LOCALE_OPTIONS.length > 0
@@ -324,7 +320,9 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                               for (const locale of locales) {
                                 url.searchParams.append("locale", locale);
                               }
-                              return html`<li><a href=${url}>${label}</a></li>`;
+                              return html`<li>
+                                <a href=${url.toString()}>${label}</a>
+                              </li>`;
                             }
                           })}
                         </ul>`
@@ -332,15 +330,17 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                 }
                 <h2>${this.l10n`Sort by`}</h2>
                 <ul>
-                ${SORT_OPTIONS.map(([sort, label]) => {
-                  if (this._sort === sort) {
-                    return html`<li><em>${label}</em></li>`;
-                  } else {
-                    const url = new URL(location.href);
-                    url.searchParams.set("sort", sort);
-                    return html`<li><a href=${url}>${label}</a></li>`;
-                  }
-                })}
+                  ${SORT_OPTIONS.map(([sort, label]) => {
+                    if (this._sort === sort) {
+                      return html`<li><em>${label}</em></li>`;
+                    } else {
+                      const url = new URL(location.href);
+                      url.searchParams.set("sort", sort);
+                      return html`<li>
+                        <a href=${url.toString()}>${label}</a>
+                      </li>`;
+                    }
+                  })}
                 </ul>
               </section>
               <section class="site-search__results">
@@ -350,40 +350,40 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                     results: results.metadata.total.value,
                   },
                 })}</p>
-                <ul class="site-search-results">
-                  ${results.documents.map(
-                    (result) =>
-                      html`<li class="site-search-results__item">
-                        <article>
-                          <p class="site-search-results__path">
-                            ${mdnUrl2Breadcrumb(result.mdn_url, this.locale)}
-                          </p>
-                          <h2 class="site-search-results__title">
-                            <a href=${result.mdn_url}>
-                              ${result.highlight.title &&
-                              result.highlight.title.length > 0
-                                ? unsafeHTML(result.highlight.title[0])
-                                : result.title}
-                              ${result.locale.toLowerCase() ===
-                              this.locale.toLowerCase()
-                                ? nothing
-                                : html`<sup
-                                    class="site-search-results__locale-indicator"
-                                    >${readableLocaleCode(result.locale)}</sup
-                                  >`}
-                            </a>
-                          </h2>
-                          <p class="site-search-results__description">
-                            ${result.highlight.body &&
-                            result.highlight.body.length > 0
-                              ? result.highlight.body.map((b) => unsafeHTML(b))
-                              : result.summary}
-                          </p>
-                        </article>
-                      </li>`,
-                  )}
+              <ul class="site-search-results">
+                ${results.documents.map(
+                  (result) =>
+                    html`<li class="site-search-results__item">
+                      <article>
+                        <p class="site-search-results__path">
+                          ${mdnUrl2Breadcrumb(result.mdn_url, this.locale)}
+                        </p>
+                        <h2 class="site-search-results__title">
+                          <a href=${result.mdn_url}>
+                            ${result.highlight.title &&
+                            result.highlight.title.length > 0
+                              ? unsafeHTML(result.highlight.title[0])
+                              : result.title}
+                            ${result.locale.toLowerCase() ===
+                            this.locale.toLowerCase()
+                              ? nothing
+                              : html`<sup
+                                  class="site-search-results__locale-indicator"
+                                  >${readableLocaleCode(result.locale)}</sup
+                                >`}
+                          </a>
+                        </h2>
+                        <p class="site-search-results__description">
+                          ${result.highlight.body &&
+                          result.highlight.body.length > 0
+                            ? result.highlight.body.map((b) => unsafeHTML(b))
+                            : result.summary}
+                        </p>
+                      </article>
+                    </li>`,
+                )}
                 </ul>
-                </div>
+                </section>
                 </section>
                 <nav class="site-search__results-pagination">
                   ${this.renderPagination(results.metadata.page, results.metadata.total.value, results.metadata.size)}

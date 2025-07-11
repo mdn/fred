@@ -45,7 +45,7 @@ export class MDNObservatoryTestsAndScores extends LitElement {
         data.map(
           (entry) => html`
             <section>
-              <h3 id=${entry.name}>${entry.title}</h2>
+              <h3 id=${entry.name}>${entry.title}</h3>
               <p>
                 See <a href=${entry.mdnLink}>${entry.title}</a> for guidance.
               </p>

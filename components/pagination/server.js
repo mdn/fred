@@ -1,7 +1,5 @@
 import { html, nothing } from "lit";
 
-import { ifDefined } from "lit/directives/if-defined.js";
-
 import { ServerComponent } from "../server/index.js";
 
 export class Pagination extends ServerComponent {
@@ -144,14 +142,12 @@ export class Pagination extends ServerComponent {
           <a
             href=${url}
             aria-current=${isCurrentPage ? "page" : "false"}
-            aria-label=${ifDefined(
-              isCurrentPage
-                ? context.l10n("pagination-current")
-                : context.l10n.raw({
-                    id: "pagination-goto",
-                    args: { page: pageNumber },
-                  }),
-            ) ?? undefined}
+            aria-label=${isCurrentPage
+              ? context.l10n("pagination-current")
+              : context.l10n.raw({
+                  id: "pagination-goto",
+                  args: { page: pageNumber },
+                })}
           >
             ${pageNumber}
           </a>

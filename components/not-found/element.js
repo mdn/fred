@@ -77,7 +77,7 @@ export class MDNNotFound extends L10nMixin(LitElement) {
               .reverse();
 
             return html`<div class="notecard note">
-              <p>${this.l10n("not-found-fallback-search")}
+              <p>${this.l10n("not-found-fallback-search")}</p>
               <ul>
                 ${normalizedLocationParts.map(
                   (part) =>
@@ -89,7 +89,7 @@ export class MDNNotFound extends L10nMixin(LitElement) {
                       </a>
                     </li>`,
                 )}
-              </ul></p>
+              </ul>
             </div>`;
           }
         },
