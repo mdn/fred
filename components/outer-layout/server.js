@@ -4,7 +4,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import inlineScript from "../../entry.inline.js?source&csp=true";
-import { WRITER_MODE } from "../env/index.js";
+import { ROBOTS_GLOBAL_ALLOW, WRITER_MODE } from "../env/index.js";
 import Favicon from "../favicon/pure.js";
 import { asyncLocalStorage } from "../server/async-local-storage.js";
 import { ServerComponent } from "../server/index.js";
@@ -111,7 +111,6 @@ export class OuterLayout extends ServerComponent {
    * @param {import("@fred").Context} context
    */
   _renderMeta(context) {
-    const ALWAYS_ALLOW_ROBOTS = false; // FIXME
     const noIndexing =
       "doc" in context
         ? context.doc.noIndexing
@@ -120,7 +119,7 @@ export class OuterLayout extends ServerComponent {
           : false;
     const onlyFollow = "onlyFollow" in context ? context.onlyFollow : false;
     const robots =
-      !ALWAYS_ALLOW_ROBOTS || noIndexing
+      !ROBOTS_GLOBAL_ALLOW || noIndexing
         ? "noindex, nofollow"
         : onlyFollow
           ? "noindex, follow"
