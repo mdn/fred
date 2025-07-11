@@ -59,6 +59,11 @@ export class OuterLayout extends ServerComponent {
       )
       .filter((x) => x !== undefined);
 
+    const section =
+      context.path.split("/")[3]?.toLowerCase() === "learn_web_development"
+        ? "learn"
+        : undefined;
+
     // if you want to put some script inline, put it in entry.inline.js
     // and you'll get CSP generation: see the README
     return html`
@@ -68,6 +73,7 @@ export class OuterLayout extends ServerComponent {
         style="color-scheme: light dark;"
         data-renderer=${context.renderer}
         data-noads=${ifDefined(WRITER_MODE ? "enabled" : undefined)}
+        data-current-section=${ifDefined(section)}
       >
         <head>
           <meta charset="UTF-8" />

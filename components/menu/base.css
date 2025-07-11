@@ -3,13 +3,13 @@
 /* Tab */
 
 .menu__tab {
-  --menu-tab-background: var(--color-background-blue);
-  --menu-tab-text: var(--color-text-blue);
+  --menu-tab-background: var(--color-brand-default-background);
+  --menu-tab-text: var(--color-brand-default-text);
 
   &[data-section="learn"] {
     --menu-tab-icon: url("../icon/graduation-cap.svg");
-    --menu-tab-background: var(--color-background-orange);
-    --menu-tab-text: var(--color-text-orange);
+    --menu-tab-background: var(--color-brand-learn-background);
+    --menu-tab-text: var(--color-brand-learn-text);
   }
 
   &[data-section="tools"] {
