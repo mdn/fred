@@ -60,7 +60,7 @@
   grid-template-columns: 1fr 1fr;
   column-gap: 2rem;
 
-  @media (--screen-large-and-narrower) {
+  @media (--screen-medium-and-narrower) {
     grid-template-columns: auto;
   }
 }
