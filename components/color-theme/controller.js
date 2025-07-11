@@ -23,13 +23,7 @@ export class ThemeController {
   /** @param {Event} [event] */
   _updateTheme(event) {
     let value = event instanceof CustomEvent && this._lightOrDark(event.detail);
-    try {
-      value ||= this._lightOrDark(
-        getComputedStyle(this.#host).getPropertyValue("color-scheme"),
-      );
-    } catch {
-      /* no-op */
-    }
+    value ||= this._lightOrDark(document.documentElement.style.colorScheme);
     value ||= this._matchMedia?.matches ? "dark" : "light";
     const oldValue = this.value;
     this.value = value;
