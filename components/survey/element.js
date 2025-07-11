@@ -2,7 +2,9 @@ import { LitElement, html, nothing } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { createRef, ref } from "lit/directives/ref.js";
 
+import "../button/element.js";
 import { L10nMixin } from "../../l10n/mixin.js";
+import closeIcon from "../icon/cancel.svg?lit";
 
 import styles from "./element.css?lit";
 import { SURVEYS } from "./surveys.js";
@@ -195,23 +197,17 @@ export class MDNSurvey extends L10nMixin(LitElement) {
 
     return html`
       <div class="survey">
-        <div class="header">
-          <div class="teaser">${this._survey.teaser}</div>
-          <button
-            class="dismiss"
-            type="button"
+        <header>
+          <p>${this._survey.teaser}</p>
+          <mdn-button
+            variant="plain"
+            .icon=${closeIcon}
+            icon-only
+            title=${title}
             aria-label=${title}
             @click=${this.#dismiss}
-            title=${title}
-          >
-            <svg class="icon" width="16" height="16" viewBox="0 0 16 16">
-              <path
-                fill="currentColor"
-                d="M8 6.586L13.657 1l1.414 1.414L9.414 8l5.657 5.586-1.414 1.414L8 9.414 2.343 15 .929 13.586 6.586 8 .929 2.414 2.343 1z"
-              />
-            </svg>
-          </button>
-        </div>
+          ></mdn-button>
+        </header>
         <details ${ref(this._detailsRef)} @toggle=${this.#onToggle}>
           <summary>${this._survey.question}</summary>
           ${this._isOpen && this._source
@@ -219,14 +215,12 @@ export class MDNSurvey extends L10nMixin(LitElement) {
                 <iframe
                   title=${ifDefined(this._survey.question)}
                   src=${this._source}
-                  height="500"
-                  style="overflow: hidden;"
                 ></iframe>
               `
             : nothing}
         </details>
         ${this._survey.footnote
-          ? html` <section class="footer">(${this._survey.footnote})</section> `
+          ? html` <footer>(${this._survey.footnote})</footer> `
           : nothing}
       </div>
     `;

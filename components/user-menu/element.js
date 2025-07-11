@@ -73,7 +73,7 @@ export class MDNUserMenu extends L10nMixin(LitElement) {
                   <mdn-dropdown>
                     <button slot="button" class="user-menu__button">
                       <img
-                        src=${user.avatarUrl}
+                        src=${ifDefined(user.avatarUrl ?? undefined)}
                         width="32"
                         height="32"
                         alt=""

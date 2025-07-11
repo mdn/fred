@@ -3,6 +3,7 @@
 
   grid-template-areas: "left runner" "left place";
   grid-template-rows: 1fr min-content;
+  grid-template-columns: 1fr 1fr;
 
   gap: 1rem;
 

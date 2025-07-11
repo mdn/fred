@@ -24,8 +24,8 @@ import { PageLayout } from "./components/page-layout/server.js";
 import { Playground } from "./components/playground/server.js";
 import { Plus } from "./components/plus/server.js";
 import { Sandbox } from "./components/sandbox/server.js";
-import { Search } from "./components/search/server.js";
 import { asyncLocalStorage } from "./components/server/async-local-storage.js";
+import { SiteSearch } from "./components/site-search/server.js";
 import { addFluent } from "./l10n/context.js";
 import { runWithContext } from "./symmetric-context/server.js";
 
@@ -112,7 +112,7 @@ export async function render(path, page, compilationStats) {
           case "SpaPlusUpdates":
             return Plus.render(context);
           case "SpaSearch":
-            return Search.render(context);
+            return SiteSearch.render(context);
           case "SpaUnknown": {
             return PageLayout.render(
               context,

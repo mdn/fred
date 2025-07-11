@@ -5,27 +5,42 @@
 .heading-anchor {
   color: inherit !important;
 
-  &::before {
-    display: inline-block;
+  &:not(:hover) {
+    text-decoration: none;
+  }
 
-    padding-right: 0.2em;
-    margin-left: -0.8em;
+  /* Hash */
+
+  &::before,
+  &::after {
+    position: absolute;
+
+    margin-top: 0.3em;
 
     font-size: 0.75em;
 
     color: var(--color-text-secondary);
+  }
 
-    content: "#";
-
-    @media (--screen-small-and-narrower) {
-      padding-right: 0.1em;
-
-      /** Avoid viewport overflow. */
-      font-size: 0.5em;
+  @media not (--screen-small-and-narrower) {
+    &::before {
+      padding-right: 0.8em;
+      margin-left: -0.8em;
+      content: "#";
     }
   }
 
-  &:not(:hover, :focus)::before {
+  @media (--screen-small-and-narrower) {
+    padding-right: 1.1ch;
+
+    &::after {
+      margin-left: 0.25em;
+      content: "#";
+    }
+  }
+
+  &:not(:hover, :focus)::before,
+  &:not(:hover, :focus)::after {
     visibility: hidden;
   }
 }

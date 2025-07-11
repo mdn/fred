@@ -93,7 +93,7 @@ export class BlogPost extends ServerComponent {
               : nothing}
             <h1 class="blog-post-header__heading">${blogMeta.title}</h1>
             <div class="blog-post-header__author-read-time">
-              ${AuthorDateReadTime(context, blogMeta)}
+              ${AuthorDateReadTime(context, blogMeta, false)}
             </div>
           </header>
           <main class="blog-post-content__content">

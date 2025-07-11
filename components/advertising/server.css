@@ -1,10 +1,10 @@
-.advertising {
+.sing {
   --mdn-color-ads: hsl(169deg 100% 41%);
   line-height: var(--font-line-content);
 }
 
 /* Full-width dark container */
-.advertising__stats-container {
+.sing__stats-container {
   position: relative;
   right: 50%;
   left: 50%;
@@ -20,12 +20,12 @@
   background-color: light-dark(var(--color-gray-10), var(--color-gray-10));
 }
 
-.advertising__stats-container.dark {
+.sing__stats-container.dark {
   color: #ffffff;
   background-color: #212121;
 }
 
-.advertising-content {
+.sing-content {
   padding-inline: var(--layout-side-padding);
 
   /* display: grid; */
@@ -35,20 +35,20 @@
   /* padding-inline: var(--layout-side-padding); */
 }
 
-.advertising {
+.sing {
   grid-column: content;
   width: 100%;
   margin-bottom: 3rem;
 }
 
-.advertising__stats-header,
-.advertising__content {
+.sing__stats-header,
+.sing__content {
   max-width: 52rem;
   padding: 0 1rem;
   margin: 0 auto;
 }
 
-.advertising__stats-header {
+.sing__stats-header {
   display: flex;
 
   flex-direction: column;
@@ -58,7 +58,7 @@
   padding: 0 0.5rem 2rem;
 }
 
-.advertising__stats-header h1 {
+.sing__stats-header h1 {
   position: relative;
 
   display: inline-flex;
@@ -78,7 +78,7 @@
   text-align: center;
 }
 
-.advertising__stats-header h1::before {
+.sing__stats-header h1::before {
   display: inline-block;
 
   width: 1.2em;
@@ -96,7 +96,7 @@
   mask-size: cover;
 }
 
-.advertising__stats-header h1::after {
+.sing__stats-header h1::after {
   margin-left: -0.3rem;
 
   text-decoration: underline;
@@ -113,7 +113,7 @@ h2 {
   line-height: var(--font-line-content);
 }
 
-.advertising__stats {
+.sing__stats {
   display: grid;
 
   grid-template-columns: 1fr;
@@ -129,18 +129,18 @@ h2 {
 }
 
 @media (width >= 480px) {
-  .advertising__stats {
+  .sing__stats {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (width >= 768px) {
-  .advertising__stats {
+  .sing__stats {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 
-.advertising__stats li {
+.sing__stats li {
   display: flex;
 
   flex-direction: column;
@@ -154,32 +154,32 @@ h2 {
   background: var(--mdn-color-ads);
 }
 
-.advertising__number {
+.sing__number {
   font-size: var(--font-size-largest);
   line-height: var(--font-line-content);
 }
 
-.advertising__number svg {
+.sing__number svg {
   transform: translateY(0.125em);
 }
 
-.advertising__legend {
+.sing__legend {
   max-width: 5rem;
   font-size: 0.8rem;
   text-align: center;
 }
 
 /* Links styling */
-.advertising a {
+.sing a {
   color: var(--color-link);
   text-decoration: underline;
 }
 
-.advertising a:hover {
+.sing a:hover {
   text-decoration-thickness: 2px;
 }
 
-.advertising a.external::after {
+.sing a.external::after {
   font-size: 0.8em;
   vertical-align: super;
   content: " ↗";

@@ -2,102 +2,68 @@
   display: block;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 .survey {
-  --margin-vertical: 0.75rem;
-  --margin-left: 4rem;
-  position: relative;
+  display: grid;
+
+  row-gap: 0.75rem;
 
   padding: 1rem;
+  padding-left: 5rem;
 
-  color: var(--color-black);
-
-  background-color: hsl(252deg 100% 97%);
+  background-color: var(--color-background-purple);
   border-radius: 0.5rem;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   &::before {
     position: absolute;
 
-    display: inline-block;
-
     width: 53px;
     height: 49px;
+
+    margin-top: 1rem;
+    margin-left: calc(-53px - 0.5rem);
 
     content: "";
 
     background: url("./assets/survey.svg");
     background-size: cover;
   }
+}
 
-  .header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-  }
+p {
+  margin: 0;
+}
 
-  .header,
-  summary,
-  .footer {
-    margin-left: var(--margin-left);
-  }
+mdn-button::part(button):hover {
+  background-color: transparent;
+  border: 1px solid var(--color-text-purple);
+}
 
-  .footer {
-    margin-top: var(--margin-vertical);
-    font-size: var(--font-size-small);
-    font-style: italic;
-  }
+mdn-button::part(icon) {
+  color: var(--color-text-purple);
+}
 
-  .dismiss {
-    display: flex;
+summary {
+  color: var(--color-text-purple);
+  cursor: pointer;
+}
 
-    align-items: center;
-    justify-content: center;
+iframe {
+  width: 100%;
+  height: 500px;
 
-    padding: 0.25rem;
+  overflow: hidden;
 
-    color: var(--color-gray-60);
+  border: none;
+  border-radius: 0.5rem;
+}
 
-    cursor: pointer;
-
-    background: none;
-    border: none;
-    border-radius: 0.25rem;
-
-    &:hover {
-      color: #1a1a1a;
-      background-color: hsl(0deg 0% 0% / 10%);
-    }
-
-    .icon {
-      width: 16px;
-      height: 16px;
-    }
-  }
-
-  iframe {
-    width: 100%;
-
-    margin-top: var(--margin-vertical);
-
-    border: 0;
-    border-radius: 0.5rem;
-  }
-
-  summary {
-    margin-top: var(--margin-vertical);
-
-    color: hsl(270deg 100% 41%);
-
-    text-decoration: underline;
-
-    cursor: pointer;
-
-    &:focus,
-    &:hover {
-      text-decoration: none;
-    }
-  }
+footer {
+  font-size: var(--font-size-small);
+  font-style: italic;
 }

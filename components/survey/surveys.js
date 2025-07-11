@@ -50,13 +50,15 @@ export const SURVEYS = [
       return /^\/[a-z]{2}(-[A-Z]{2})?\/docs\/Web\/CSS/.test(mdn_url);
     },
     src: (mdn_url) => {
-      const url = new URL("https://www.example.com/");
+      const url = new URL(
+        "https://survey.alchemer.com/s3/8385674/MDN-short-survey-Fred",
+      );
       url.searchParams.set("referrer", mdn_url);
       return url.toString();
     },
-    teaser: html`Fred is <strong>MDN</strong>'s shiny now front-end!`,
-    question: "Would you be so kind to answer some questions about fred?",
-    footnote: "fred = Fr(ont)e(n)d",
+    teaser: html`Fred is <strong>MDN</strong>'s shiny new frontend!`,
+    question: "How satisfied are you with this new MDN frontend?",
+    footnote: "fred = fr(ont)e(n)d",
     rateFrom: 0,
     rateTill: 1,
     start: 0,

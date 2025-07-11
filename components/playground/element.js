@@ -31,6 +31,7 @@ export class MDNPlayground extends L10nMixin(LitElement) {
   constructor() {
     super();
     this._permalink = "";
+    this._autoRun = true;
   }
 
   /** @type {Ref<MDNPlayController>} */
@@ -50,7 +51,11 @@ export class MDNPlayground extends L10nMixin(LitElement) {
     const controller = this._controller.value;
     if (controller) {
       controller.run();
-      controller.runOnChange = true;
+      if (!this._autoRun) {
+        this._autoRun = true;
+        controller.runOnChange = true;
+        this._storeSession();
+      }
     }
   }
 
@@ -138,17 +143,23 @@ ${"```"}`,
         srcPrefix,
         initialCode,
         code,
+        autoRun: this._autoRun,
       };
       sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
     }
   }
 
   _loadSession() {
-    const { srcPrefix, initialCode, code } = stateToSession(
+    const { srcPrefix, initialCode, code, autoRun } = stateToSession(
       JSON.parse(sessionStorage.getItem(SESSION_KEY) || "{}"),
     );
     const controller = this._controller.value;
     if (controller) {
+      if (autoRun === false) {
+        this._autoRun = false;
+        controller.runOnStart = false;
+        controller.runOnChange = false;
+      }
       controller.srcPrefix = srcPrefix;
       controller.initialCode = initialCode;
       controller.code = code;
@@ -176,6 +187,14 @@ ${"```"}`,
         (controller.srcPrefix !== srcPrefix ||
           !compareCode(controller.initialCode, code))
       ) {
+        if (
+          !opener?.location?.origin ||
+          opener?.location?.origin !== location.origin
+        ) {
+          this._autoRun = false;
+          controller.runOnStart = false;
+          controller.runOnChange = false;
+        }
         controller.srcPrefix = srcPrefix;
         controller.initialCode = code;
         controller.code = code;
@@ -227,7 +246,11 @@ ${"```"}`,
 
     return html`
       <div class="wrapper">
-        <mdn-play-controller ${ref(this._controller)}>
+        <mdn-play-controller
+          ${ref(this._controller)}
+          run-on-start
+          run-on-change
+        >
           <section>
             <aside>
               <h1>${this.l10n`Playground`}</h1>
