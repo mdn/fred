@@ -27,9 +27,19 @@ footer-mofo = Visit <a data-l10n-name="moco">Mozilla Corporation’s</a> not-for
 footer-copyright = Portions of this content are ©1998–2024 by individual mozilla.org contributors. Content available under <a data-l10n-name="cc">a Creative Commons license</a>.
 
 search-title = Search results for: <em>{ $query }</em>
-search-stats = Found { $results } matches in { $time } milliseconds.
-
+search-stats = Found { $results } documents.
 search-modal-site-search = Site search for <em>{ $query }</em>
+suggestion-matches =  { $relation ->
+    [gt] more than { $matches ->
+        [one]   { $matches } match
+       *[other] { $matches } matches
+    }
+   *[eq] { $matches ->
+        [one]   { $matches } match
+       *[other] { $matches } matches
+    }
+}
+search-suggestions-text = Your search did not yield any results. Did you mean:
 
 blog-time-to-read = { $minutes ->
     [one]   { $minutes } minute read
@@ -81,11 +91,11 @@ compat-support-flags =
     [one] From version { $version_added }
     *[other] {""}
   }{ $has_last ->
-    [one] { NUMBER($has_added) -> 
+    [one] { NUMBER($has_added) ->
           *[zero] Until { $versionLast } users
           [one] {" "}until { $versionLast } users
       }
-    *[zero] { NUMBER($has_added) -> 
+    *[zero] { NUMBER($has_added) ->
           *[zero] Users
           [one] {" "}users
       }

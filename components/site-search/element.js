@@ -288,99 +288,131 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
       complete: (results) => {
         return results
           ? html`
-            ${this.renderInputs()}
+              ${this.renderInputs()}
 
-            <h1 class="site-search__title">
-              ${this.l10n.raw({
-                id: "search-title",
-                args: {
-                  query: this._query,
-                },
-              })}
-            </h1>
-            <section class="site-search__options">
-              ${
-                LOCALE_OPTIONS.length > 0
-                  ? html` <h2>${this.l10n`Language`}</h2>
-                      <ul>
-                        ${LOCALE_OPTIONS.map((locales) => {
-                          const label =
-                            locales.length == 1
-                              ? readableLocaleCode(locales.at(0) || "en-US")
-                              : this.l10n`Both`;
-                          if (this._locales.join(",") === locales.join(",")) {
-                            return html`<li><em>${label}</em></li>`;
-                          } else {
-                            const url = new URL(location.href);
-                            url.searchParams.delete("locale");
-                            for (const locale of locales) {
-                              url.searchParams.append("locale", locale);
-                            }
-                            return html`<li><a href=${url}>${label}</a></li>`;
-                          }
+              <h1 class="site-search__title">
+                ${this.l10n.raw({
+                  id: "search-title",
+                  args: {
+                    query: this._query,
+                  },
+                })}
+              </h1>
+
+              ${results.suggestions.length > 0 && results.documents.length === 0
+                ? html`
+                    <section class="site-search__suggestions">
+                      <p class="site-search-suggestions__text">
+                        ${this.l10n(
+                          "search-suggestions-text",
+                        )`Your search did not yield any results. Did you mean…`}
+                      </p>
+                      <ul class="site-search-suggestions__list">
+                        ${results.suggestions.map((suggestion) => {
+                          const url = new URL(location.href);
+                          url.searchParams.delete("page");
+                          url.searchParams.set("q", suggestion.text);
+                          return html`
+                            <li class="site-search-suggestions__item">
+                              <a class="site-search-suggestions__link" href=${url.href}> ${suggestion.text} </a>
+                              <span class="site-search-suggestions__matches">
+                              ${this.l10n.raw({
+                                id: "suggestion-matches",
+                                args: {
+                                  matches: suggestion.total.value,
+                                  relation: suggestion.total.relation,
+                                },
+                              })}
+                            </li>
+                          `;
                         })}
-                      </ul>`
-                  : nothing
-              }
-              <h2>${this.l10n`Sort by`}</h2>
-              <ul>
-              ${SORT_OPTIONS.map(([sort, label]) => {
-                if (this._sort === sort) {
-                  return html`<li><em>${label}</em></li>`;
-                } else {
-                  const url = new URL(location.href);
-                  url.searchParams.set("sort", sort);
-                  return html`<li><a href=${url}>${label}</a></li>`;
+                      </ul>
+                    </section>
+                  `
+                : html`
+              <section class="site-search__options">
+                ${
+                  LOCALE_OPTIONS.length > 0
+                    ? html` <h2>${this.l10n`Language`}</h2>
+                        <ul>
+                          ${LOCALE_OPTIONS.map((locales) => {
+                            const label =
+                              locales.length == 1
+                                ? readableLocaleCode(locales.at(0) || "en-US")
+                                : this.l10n`Both`;
+                            if (this._locales.join(",") === locales.join(",")) {
+                              return html`<li><em>${label}</em></li>`;
+                            } else {
+                              const url = new URL(location.href);
+                              url.searchParams.delete("locale");
+                              for (const locale of locales) {
+                                url.searchParams.append("locale", locale);
+                              }
+                              return html`<li><a href=${url}>${label}</a></li>`;
+                            }
+                          })}
+                        </ul>`
+                    : nothing
                 }
-              })}
-              </ul>
-            </section>
-            <section class="site-search__results">
-              <p class="site-search__results-stats">${this.l10n.raw({
-                id: "search-stats",
-                args: {
-                  results: results.metadata.total.value,
-                  time: results.metadata.took_ms,
-                },
-              })}</p>
-              <ul class="site-search-results">
-                ${results.documents.map(
-                  (result) =>
-                    html`<li class="site-search-results__item">
-                      <article>
-                        <a href=${result.mdn_url}>
-                          <h2 class="site-search-results__title">
-                            ${result.highlight.title &&
-                            result.highlight.title.length > 0
-                              ? unsafeHTML(result.highlight.title[0])
-                              : result.title}
-                            ${result.locale.toLowerCase() ===
-                            this.locale.toLowerCase()
-                              ? nothing
-                              : html`<sup
-                                  class="site-search-results__locale-indicator"
-                                  >${readableLocaleCode(result.locale)}</sup
-                                >`}
-                          </h2>
+                <h2>${this.l10n`Sort by`}</h2>
+                <ul>
+                ${SORT_OPTIONS.map(([sort, label]) => {
+                  if (this._sort === sort) {
+                    return html`<li><em>${label}</em></li>`;
+                  } else {
+                    const url = new URL(location.href);
+                    url.searchParams.set("sort", sort);
+                    return html`<li><a href=${url}>${label}</a></li>`;
+                  }
+                })}
+                </ul>
+              </section>
+              <section class="site-search__results">
+                <p class="site-search__results-stats">${this.l10n.raw({
+                  id: "search-stats",
+                  args: {
+                    results: results.metadata.total.value,
+                  },
+                })}</p>
+                <ul class="site-search-results">
+                  ${results.documents.map(
+                    (result) =>
+                      html`<li class="site-search-results__item">
+                        <article>
                           <p class="site-search-results__path">
                             ${mdnUrl2Breadcrumb(result.mdn_url, this.locale)}
                           </p>
-                        </a>
-                        <p class="site-search-results__description">
-                          ${result.highlight.body &&
-                          result.highlight.body.length > 0
-                            ? unsafeHTML(result.highlight.body[0])
-                            : result.summary}
-                        </p>
-                      </article>
-                    </li>`,
-                )}
-              </ul>
-              </div>
-              </section>
-              <nav class="site-search__results-pagination">
-                ${this.renderPagination(results.metadata.page, results.metadata.total.value, results.metadata.size)}
-              </nav>`
+                          <a href=${result.mdn_url}>
+                            <h2 class="site-search-results__title">
+                              ${result.highlight.title &&
+                              result.highlight.title.length > 0
+                                ? unsafeHTML(result.highlight.title[0])
+                                : result.title}
+                              ${result.locale.toLowerCase() ===
+                              this.locale.toLowerCase()
+                                ? nothing
+                                : html`<sup
+                                    class="site-search-results__locale-indicator"
+                                    >${readableLocaleCode(result.locale)}</sup
+                                  >`}
+                            </h2>
+                          </a>
+                          <p class="site-search-results__description">
+                            ${result.highlight.body &&
+                            result.highlight.body.length > 0
+                              ? result.highlight.body.map((b) => unsafeHTML(b))
+                              : result.summary}
+                          </p>
+                        </article>
+                      </li>`,
+                  )}
+                </ul>
+                </div>
+                </section>
+                <nav class="site-search__results-pagination">
+                  ${this.renderPagination(results.metadata.page, results.metadata.total.value, results.metadata.size)}
+                </nav>`}
+            `
           : html`${this.renderInputs()}`;
       },
       error: (e) => html`Error: ${e}`,

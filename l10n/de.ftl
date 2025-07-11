@@ -8,6 +8,22 @@ footer-tagline = Dein Bauplan für ein besseres Internet.
 footer-mofo = Besuche die gemeinnützige Muttergesellschaft der <a data-l10n-name="moco">Mozilla Corporation</a>, die <a data-l10n-name="mofo">Mozilla Foundation</a>.
 footer-copyright = Teile dieses Inhalts sind ©1998–2024 von einzelnen mozilla.org-Mitwirkenden. Inhalte sind verfügbar unter <a data-l10n-name="cc">einer Creative-Commons-Lizenz</a>.
 
+search-title = Suchergebnisse für: <em>{ $query }</em>
+search-stats = { $results } Dokumente gefunden.
+search-modal-site-search = Erweiterte Suche nach <em>{ $query }</em>
+suggestion-matches =  { $relation ->
+    [gt] mehr als{ $matches ->
+        [one]   { $matches } Übereinstimmung
+       *[other] { $matches } Übereinstimmungen
+    }
+   *[eq] { $matches ->
+        [one]   { $matches } Übereinstimmung
+       *[other] { $matches } Übereinstimmungen
+    }
+}
+search-suggestions-text = Your search did not yield any results. Did you mean:
+
+
 theme-default = Systemstandard
 
 blog-time-to-read = { $minutes ->

@@ -1,6 +1,7 @@
 export interface SearchResponse {
   metadata: SearchMetadata;
   documents: SearchDocument[];
+  suggestions: SearchSuggestion[];
 }
 
 export type SearchHighlight = {
