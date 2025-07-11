@@ -1,0 +1,13 @@
+.site-search {
+  display: grid;
+  grid-template-columns: var(--layout-1-sidebar-right);
+  padding-inline: var(--layout-side-padding);
+
+  @media (--screen-layout-no-sidebar) {
+    grid-template-columns: var(--layout-no-sidebar);
+  }
+}
+
+mdn-site-search {
+  grid-column: content;
+}

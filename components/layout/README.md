@@ -48,7 +48,7 @@ If you're using sidebars, you'll probably want to use the [custom media queries]
   }
 
   @media (--screen-layout-no-sidebar) {
-    grid-template-column: var(--layout-no-sidebar);
+    grid-template-columns: var(--layout-no-sidebar);
 
     .example-left-sidebar {
       display: none;

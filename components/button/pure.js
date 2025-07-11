@@ -10,6 +10,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
  * @param {boolean} [options.disabled]
  * @param {string} [options.href]
  * @param {string} [options.target]
+ * @param {string} [options.rel]
  * @param {import("./types.js").ButtonVariants} [options.variant]
  * @param {import("./types.js").ButtonActions} [options.action]
  */
@@ -21,6 +22,7 @@ export default function Button({
   disabled = false,
   href,
   target,
+  rel,
   variant = "primary",
   action,
 }) {
@@ -44,6 +46,7 @@ export default function Button({
           class="button"
           href=${href}
           target=${ifDefined(target)}
+          rel=${ifDefined(rel)}
           aria-labelledby="label"
           data-variant=${ifDefined(variant)}
           data-action=${ifDefined(action)}

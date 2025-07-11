@@ -76,6 +76,8 @@ export class MDNCodeExample extends LitElement {
             ? html`<mdn-button
                 variant="secondary"
                 href=${this.liveSample?.breakoutLink}
+                target="_blank"
+                rel="opener"
                 >Play</mdn-button
               >`
             : nothing}

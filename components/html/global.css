@@ -1,0 +1,20 @@
+/* HTML */
+
+html {
+  font-family: var(--font-family-text);
+  font-size: var(--font-size-normal);
+  font-variant-alternates: styleset(disambiguation);
+
+  line-height: var(--font-line-normal);
+
+  color: var(--color-text-primary);
+
+  color-scheme: light dark;
+
+  background-color: var(--color-background-page);
+  scroll-behavior: smooth;
+
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
+}

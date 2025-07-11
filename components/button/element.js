@@ -15,6 +15,7 @@ export class MDNButton extends LitElement {
     iconPosition: { type: String, attribute: "icon-position" },
     href: { type: String },
     target: { type: String },
+    rel: { type: String },
   };
 
   constructor() {
@@ -33,6 +34,8 @@ export class MDNButton extends LitElement {
     this.href = undefined;
     /** @type {string | undefined} */
     this.target = undefined;
+    /** @type {string | undefined} */
+    this.rel = undefined;
   }
 
   render() {
@@ -46,6 +49,7 @@ export class MDNButton extends LitElement {
       action: this.action,
       href: this.href,
       target: this.target,
+      rel: this.rel,
     });
   }
 }

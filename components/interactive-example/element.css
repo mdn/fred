@@ -234,19 +234,23 @@ mdn-ix-tab-wrapper {
       align-items: center;
 
       &::after {
-        width: 1rem;
+        display: block;
 
-        padding: 0;
-        padding-right: 1rem;
-        padding-left: 0.25rem;
+        width: 1.25rem;
+        height: 1.25rem;
 
-        font-size: 0.5rem;
+        margin: 0 0.75rem;
 
         color: var(--field-focus-border);
 
-        content: "▶";
+        content: "";
+
+        background-color: currentcolor;
 
         opacity: 0;
+
+        mask-image: url("../icon/chevron-right.svg");
+        mask-size: cover;
 
         @media (--screen-medium-and-narrower) {
           display: none;
@@ -261,11 +265,7 @@ mdn-ix-tab-wrapper {
         }
 
         &::after {
-          padding-right: 0.5rem;
-          padding-left: 0.75rem;
-
           opacity: 1;
-
           transition: all 0.2s ease-out;
         }
       }

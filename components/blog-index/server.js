@@ -14,12 +14,22 @@ import { ServerComponent } from "../server/index.js";
  * @param {string} params.slug
  * @param {number} params.width
  * @param {number} params.height
+ * @param {boolean} params.lazyLoad
  */
-export function BlogIndexImageFigure(_context, { image, slug, width, height }) {
+export function BlogIndexImageFigure(
+  _context,
+  { image, slug, width, height, lazyLoad },
+) {
   const src = `/en-US/blog/${slug}/${image.file}`;
   return html`<figure class="blog-post-preview__figure">
     <a href="/en-US/blog/${slug}/">
-      <img alt=${image.alt || ""} src=${src} height=${height} width=${width} />
+      <img
+        alt=${image.alt || ""}
+        src=${src}
+        height=${height}
+        width=${width}
+        loading=${lazyLoad ? "lazy" : "eager"}
+      />
     </a>
   </figure>`;
 }
@@ -28,21 +38,23 @@ export function BlogIndexImageFigure(_context, { image, slug, width, height }) {
  *
  * @param {import("@fred").Context} context
  * @param {import("@rari").BlogMeta} blogMeta
+ * @param {boolean} lazyLoad
  */
-function PostPreview(context, blogMeta) {
+function PostPreview(context, blogMeta, lazyLoad = false) {
   return html`<article class="blog-post-preview">
     <header data-x="bla" class="blog-post-preview__header">
       ${BlogIndexImageFigure(context, {
         image: blogMeta.image,
         slug: blogMeta.slug,
-        width: 200,
-        height: 200,
+        width: 1200,
+        height: 630,
+        lazyLoad,
       })}
       <h2>
         <a href="/en-US/blog/${blogMeta.slug}/">${blogMeta.title}</a>
       </h2>
       <div class="blog-post-preview__author-read-time">
-        ${AuthorDateReadTime(context, blogMeta)}
+        ${AuthorDateReadTime(context, blogMeta, lazyLoad)}
       </div>
     </header>
     <p class="blog-post-preview__description">${blogMeta.description}</p>
@@ -76,8 +88,8 @@ export class BlogIndex extends ServerComponent {
           </header>
           <div class="blog-index__main">
             <section class="blog-index__articles">
-              ${context.hyData?.posts.map((blogMeta) =>
-                PostPreview(context, blogMeta),
+              ${context.hyData?.posts.map((blogMeta, index) =>
+                PostPreview(context, blogMeta, index >= 2),
               )}
             </section>
             ${Pagination.render(context, {

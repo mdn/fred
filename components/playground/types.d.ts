@@ -9,4 +9,5 @@ export interface PlaygroundSession {
   srcPrefix: string;
   code: Record<string, string>;
   initialCode?: Record<string, string>;
+  autoRun?: boolean;
 }

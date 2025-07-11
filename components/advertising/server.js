@@ -45,24 +45,24 @@ export class Advertising extends ServerComponent {
     return PageLayout.render(
       context,
       html`
-        <div id="content" class="advertising-content">
-          <main class="advertising">
-            <div class="advertising__stats-container">
-              <section class="advertising__stats-header">
+        <div id="content" class="sing-content">
+          <main class="sing">
+            <div class="sing__stats-container">
+              <section class="sing__stats-header">
                 <h1>Tell it better</h1>
-                <ul class="advertising__stats">
+                <ul class="sing__stats">
                   ${STATS.map(
                     (s) => html`
                       <li key=${s.id}>
-                        <span class="advertising__number">${s.number}</span>
-                        <span class="advertising__legend">${s.legend}</span>
+                        <span class="sing__number">${s.number}</span>
+                        <span class="sing__legend">${s.legend}</span>
                       </li>
                     `,
                   )}
                 </ul>
               </section>
             </div>
-            <section class="advertising__content">
+            <section class="sing__content">
               <h2>Join MDN's Privacy-First Ad Journey</h2>
               <p>
                 At MDN, we champion user privacy and we stand by

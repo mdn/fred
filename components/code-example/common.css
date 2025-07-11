@@ -5,7 +5,6 @@
   border-radius: 0.25rem;
 
   .example-header {
-    box-sizing: border-box;
     display: flex;
 
     align-items: center;
@@ -33,7 +32,8 @@
 
     code {
       padding: 0;
-      background-color: unset;
+      font-family: var(--font-family-code);
+      background-color: transparent;
     }
 
     &.hidden,

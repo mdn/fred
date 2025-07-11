@@ -113,8 +113,7 @@
     display: flex;
 
     width: auto;
-    height: auto;
-    max-height: 200px;
+    height: 200px;
 
     margin: 0 0 0.125rem;
     margin-bottom: 0;
