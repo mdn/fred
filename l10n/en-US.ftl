@@ -26,10 +26,10 @@ reference-toc-header = In this article
 footer-mofo = Visit <a data-l10n-name="moco">Mozilla Corporation’s</a> not-for-profit parent, the <a data-l10n-name="mofo">Mozilla Foundation</a>.
 footer-copyright = Portions of this content are ©1998–2024 by individual mozilla.org contributors. Content available under <a data-l10n-name="cc">a Creative Commons license</a>.
 
-search-title = Search results for: <em>{ $query }</em>
-search-stats = Found { $results } documents.
 search-modal-site-search = Site search for <em>{ $query }</em>
-suggestion-matches =  { $relation ->
+
+site-search-search-stats = Found { $results } documents.
+site-search-suggestion-matches =  { $relation ->
     [gt] more than { $matches ->
         [one]   { $matches } match
        *[other] { $matches } matches
@@ -39,7 +39,7 @@ suggestion-matches =  { $relation ->
        *[other] { $matches } matches
     }
 }
-search-suggestions-text = Your search did not yield any results. Did you mean:
+site-search-suggestions-text = Did you mean:
 
 blog-time-to-read = { $minutes ->
     [one]   { $minutes } minute read
