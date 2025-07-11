@@ -84,4 +84,28 @@
   .menu__panel-content {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  /* HTML CSS */
+  .menu__tab[data-section="html"],
+  .menu__tab[data-section="css"] {
+    dl:nth-of-type(2) {
+      border-right: 1px solid var(--color-border-primary);
+    }
+  }
+
+  /* Learn */
+  .menu__tab[data-section="learn"] {
+    .menu__panel-content dl:nth-of-type(1) {
+      grid-column: span 3;
+      padding-bottom: 1.4rem;
+      border-bottom: 1px solid var(--color-border-primary);
+    }
+  }
+
+  /* About */
+  .menu__tab[data-section="about"] {
+    .menu__panel-content ul {
+      row-gap: 1.4rem;
+    }
+  }
 }
