@@ -12,12 +12,13 @@ import { ServerComponent } from "../server/index.js";
  * @param {object} params
  * @param {import("@rari").BlogImage} params.image
  * @param {string} params.slug
+ * @param {number} params.width
  * @param {number} params.height
  * @param {boolean} params.lazyLoad
  */
 export function BlogIndexImageFigure(
   _context,
-  { image, slug, height, lazyLoad },
+  { image, slug, width, height, lazyLoad },
 ) {
   const src = `/en-US/blog/${slug}/${image.file}`;
   return html`<figure class="blog-post-preview__figure">
@@ -25,6 +26,7 @@ export function BlogIndexImageFigure(
       <img
         alt=${image.alt || ""}
         src=${src}
+        width=${width}
         height=${height}
         loading=${lazyLoad ? "lazy" : "eager"}
       />
@@ -44,7 +46,8 @@ function PostPreview(context, blogMeta, lazyLoad = false) {
       ${BlogIndexImageFigure(context, {
         image: blogMeta.image,
         slug: blogMeta.slug,
-        height: 200,
+        width: 1200,
+        height: 630,
         lazyLoad,
       })}
       <h2>
