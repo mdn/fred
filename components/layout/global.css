@@ -1,4 +1,5 @@
 /* --layout-side-padding-min * 2 + (--layout-sidebar-min + --layout-sidebar-gap) * 2 + --layout-content-min */
+@custom-media --screen-layout-2-sidebars (width >= calc(1rem * 2 + (14rem + 2rem) * 2 + 31rem));
 @custom-media --screen-layout-1-sidebar-or-less (width < calc(1rem * 2 + (14rem + 2rem) * 2 + 31rem));
 
 /* --layout-side-padding-min * 2 + --layout-sidebar-min + --layout-sidebar-gap + --layout-content-min */

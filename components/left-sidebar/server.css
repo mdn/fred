@@ -1,25 +1,15 @@
 .left-sidebar {
   position: sticky;
   top: var(--sticky-header-height);
+
   padding-bottom: 3rem;
+
+  overflow-wrap: anywhere;
 
   h4 {
     margin: 0;
     font-size: var(--font-size-large);
     font-weight: normal;
-  }
-
-  summary {
-    cursor: pointer;
-
-    &:hover {
-      background-color: var(--color-background-secondary);
-
-      &:has(a:hover) {
-        /* Don't highlight, as link click doesn't toggle. */
-        background-color: unset;
-      }
-    }
   }
 
   ol {
@@ -28,16 +18,68 @@
     list-style: none;
   }
 
-  details ol {
-    padding-left: calc(0.75em + 2px); /* 2px to align with regular li. */
+  details {
+    width: 100%;
+
+    &[open] {
+      > summary {
+        margin-bottom: 0.5rem;
+
+        &::before {
+          transform: rotate(90deg);
+        }
+      }
+    }
+
+    summary {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      &::before {
+        display: inline-block;
+
+        flex-shrink: 0;
+
+        width: 1rem;
+        height: 1rem;
+
+        margin: 0.25rem;
+
+        content: "";
+
+        background-color: currentcolor;
+
+        mask-image: url("../icon/chevron-right.svg");
+        mask-size: cover;
+      }
+
+      &:hover {
+        background-color: var(--color-background-secondary);
+
+        &:has(a:hover) {
+          /* Don't highlight, as link click doesn't toggle. */
+          background-color: unset;
+        }
+      }
+    }
+
+    ol {
+      padding-left: 1.5rem;
+    }
   }
 
   li {
-    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
 
     &.section {
-      font-size: 1.25rem;
-      font-weight: 400;
+      font-weight: 600;
 
       &:not(:first-child) {
         margin-top: 1em;
@@ -46,10 +88,9 @@
   }
 
   a,
-  em,
   span {
-    display: inline-block;
-    padding: 0.25em 0;
+    display: inline-flex;
+    padding-block: 0.25rem;
   }
 
   a {
@@ -70,9 +111,11 @@
   }
 
   em {
-    align-items: baseline;
+    display: inline-flex;
 
-    padding: 0.25em 0.5em; /* Keep in sync with `.reference-toc a` */
+    align-items: center;
+
+    padding-inline: 0.5rem;
 
     font-style: normal;
 
