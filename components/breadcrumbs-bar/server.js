@@ -39,13 +39,13 @@ export class BreadcrumbsBar extends ServerComponent {
    * @param {import("@fred").Context} context
    */
   _renderLanguageSwitcher(context) {
-    const other_translations =
+    const translations =
       "other_translations" in context
         ? context.other_translations
         : "doc" in context && "other_translations" in context.doc
           ? context.doc.other_translations
           : [];
-    const native = other_translations.find(
+    const native = translations.find(
       (t) => t.locale === context.locale,
     )?.native;
 
@@ -56,7 +56,7 @@ export class BreadcrumbsBar extends ServerComponent {
     return html`<mdn-language-switcher
       locale=${context.locale}
       native=${native}
-      translations=${JSON.stringify(other_translations)}
+      translations=${JSON.stringify(translations)}
       url=${context.url}
     ></mdn-language-switcher>`;
   }
