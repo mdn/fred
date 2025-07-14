@@ -12,6 +12,7 @@
   h4,
   h5,
   h6 {
+    margin: 1rem 0 0;
     font-weight: normal;
   }
 
@@ -211,5 +212,10 @@
       padding-left: 1rem;
       border-left: 1px solid var(--color-border-primary);
     }
+  }
+
+  /* Article footer */
+  &.article-footer {
+    margin: 2rem 0;
   }
 }
