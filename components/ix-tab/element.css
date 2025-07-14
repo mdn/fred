@@ -23,7 +23,7 @@
 
 :host(:hover),
 :host(:focus) {
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   background-color: var(--ix-tab-background-active);
 }
 

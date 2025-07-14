@@ -72,24 +72,24 @@
     <path fill-opacity="1"
       d="M422.773 323.446c3.08 1.92 6.698 3.372 7.982 6.79 1.39 3.701 1.362 8.321-1.141 11.426-2.346 2.91-6.686 2.157-10.335 2.812-3.093.555-6.177 1.935-9.03.665-3.099-1.379-5.943-4.092-6.32-7.496-.354-3.208 3.218-5.221 4.59-8.161 1.657-3.553.538-9.011 4.129-10.532 3.568-1.511 6.868 2.466 10.125 4.496" />
   </g>
-  <path fill="var(--text-primary)" stroke="var(--text-primary)"
+  <path fill="var(--color-text-primary)" stroke="var(--color-text-primary)"
     d="m8.686 89.456 5.505 2.892-4.509-4.618s-1.233.03-1.397.605c-.126.442.4 1.12.4 1.12Z" />
-  <circle cx="53.035" cy="358.66" r="1.43" fill="var(--text-primary)" stroke="var(--text-primary)"
+  <circle cx="53.035" cy="358.66" r="1.43" fill="var(--color-text-primary)" stroke="var(--color-text-primary)"
     transform="rotate(-30 53.035 358.66)" />
-  <circle cx="16.963" cy="93.794" r="1.722" fill="var(--text-primary)" transform="rotate(-30 16.963 93.794)" />
-  <circle cx="59.955" cy="353.916" r=".787" fill="var(--text-primary)" stroke="var(--text-primary)"
+  <circle cx="16.963" cy="93.794" r="1.722" fill="var(--color-text-primary)" transform="rotate(-30 16.963 93.794)" />
+  <circle cx="59.955" cy="353.916" r=".787" fill="var(--color-text-primary)" stroke="var(--color-text-primary)"
     transform="rotate(-30 59.955 353.916)" />
-  <path stroke="var(--text-primary)" stroke-opacity=".8"
+  <path stroke="var(--color-text-primary)" stroke-opacity=".8"
     d="M248.108 32.11s.968-2.26 2.252-3.033c1.339-.805 3.909-.525 3.909-.525m-6.161 3.558 2.012 3.484 6.161-3.557-2.012-3.485m-6.161 3.558s-.747-2.09-1.75-3.032c-1.141-1.07-3.721-1.702-3.721-1.702s-2.737-1.063-3.738-2.462c-1.771-2.47-1.556-5.376.457-7.963 1.424-1.83 2.951-2.438 5.213-3.01 2.035-.516 3.428-.71 5.283.03 2.22.883 3.05 2.336 3.866 4.505.957 2.545-.816 4.42-.317 7.113.22 1.191.868 2.964.868 2.964" />
-  <path stroke="var(--text-primary)" stroke-linecap="round" stroke-linejoin="round"
+  <path stroke="var(--color-text-primary)" stroke-linecap="round" stroke-linejoin="round"
     d="M45.494 353.424s-3.383.999-4.457 2.573c-1.898 2.782 5.7 2.526 4.673 5.521-.812 2.368-5.62 4.419-5.62 4.419s3.616-1.789 5.777-1.574c3.447.344 1.31 6.525 4.928 5.962 1.913-.297 4.457-2.573 4.457-2.573m1.639-20.321s2.832-5.891 4.203-3.014l3.51 7.367c1.371 2.877 5.269-2.454 5.269-2.454s-3.512 2.559-3.998 4.656c-.643 2.777 5.55 2.813 3.862 5.403-1.035 1.589-4.457 2.573-4.457 2.573" />
-  <path stroke="var(--text-primary)" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".9"
+  <path stroke="var(--color-text-primary)" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".9"
     d="m5.602 90.443-.565 11.93 12.773-4.186m-6.586-14.009 13.491-3.73-1.283 11.475" />
-  <path stroke="var(--text-primary)" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".8"
+  <path stroke="var(--color-text-primary)" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".8"
     d="m465.941 84.187-4.407 8.377 8.009.148m.999-15.423 3.314 17.176m.008-14.852 8.468.944-3.876 7.01" />
-  <path stroke="var(--text-primary)" stroke-opacity=".8"
+  <path stroke="var(--color-text-primary)" stroke-opacity=".8"
     d="M251.581 26.797c-1.468-3.456-2.278-5.382-.896-6.955s-.515.45-1.637.565c-.766.078-1.558-.61-1.723-1.765-.137-.959.076-1.17 1.038-1.265.229-.022.677.28.843.692.694 1.716-1.899 2.354-3.221 3.167-1.064.655-2.281 1.471-3.39.52-.661-.568-.617-1.225-.183-1.858.498-.727 1.687.354 2.069 1.35.423 1.1 1.681 1.76 1.416 2.572-.264.814-1.982.649-1.48.74.784.14 2-.269 2.773-.283 1.673-.031 1.638 4.109 1.638 4.109m1.982-16.827 3.588-6.464m-11.137 6.43-1.775-5.249m-6.194 11.732-6.499-1.476m10.076-2.471-3.658-4.163m14.013 23.906c.655-.753 1.552-1.193 2.353-1.359m3.336-2.554c-.949.115-2.565-.206-4.374 1.48m5.098-.224s-.458.071-.717.205a1.66 1.66 0 0 0-.694.61" />
-  <path stroke="var(--text-primary)" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".9"
+  <path stroke="var(--color-text-primary)" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".9"
     d="m403.934 330.55-2.136 6.24 7.42.166m-1.337-8.685 7.732.543-2.447 5.864m.952 5.569 7.731.543 2.171-12.38"
     style="display:inline" />
 </svg>

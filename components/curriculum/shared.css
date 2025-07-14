@@ -55,7 +55,7 @@
     h6 {
       a:link,
       a:visited {
-        color: var(--text-primary);
+        color: var(--color-text-primary);
         text-decoration: none;
       }
 
@@ -115,7 +115,7 @@
 
   .curriculum-content {
     a:not(.button) {
-      color: var(--text-link);
+      color: var(--color-link-normal);
 
       &:link,
       &:visited {
@@ -132,7 +132,7 @@
       }
 
       &:visited:not([href^="#"]) {
-        color: var(--text-visited);
+        color: var(--color-link-visited);
       }
     }
 

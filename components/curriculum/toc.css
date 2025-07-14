@@ -45,13 +45,13 @@
         border-left: 2px solid var(--color-border-primary);
 
         &:hover {
-          color: var(--text-link);
+          color: var(--color-link-normal);
         }
 
         &[aria-current]:not([aria-current=""], [aria-current="false"]) {
           font-weight: 600;
 
-          color: var(--text-primary);
+          color: var(--color-text-primary);
 
           background-color: var(--background-toc-active);
           border-left: 2px solid var(--category-color);

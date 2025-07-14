@@ -125,7 +125,7 @@
     h2 {
       margin-top: 0;
       margin-bottom: 0;
-      color: var(--text-primary);
+      color: var(--color-text-primary);
     }
 
     .username {

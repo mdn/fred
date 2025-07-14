@@ -6,7 +6,7 @@
 
   overflow-y: auto;
 
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 
   /* li > em {
     display: inline-block;
@@ -33,7 +33,7 @@
     font-size: var(--font-size-small);
     font-weight: 400;
 
-    color: var(--text-primary);
+    color: var(--color-text-primary);
 
     letter-spacing: 1.5px;
   }
@@ -61,7 +61,7 @@
 
     padding: 0.25rem;
 
-    color: var(--text-secondary);
+    color: var(--color-text-secondary);
 
     hyphens: auto;
 

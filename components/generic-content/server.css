@@ -55,7 +55,7 @@
       padding: revert;
       margin: 1rem 0 2rem;
 
-      color: var(--text-primary);
+      color: var(--color-text-primary);
 
       border: revert;
       border-radius: var(--elem-radius);

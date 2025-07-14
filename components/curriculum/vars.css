@@ -181,8 +181,8 @@
   --curriculum-scrim-bg: url("./assets/curriculum-scrim-bg.svg#light");
   --curriculum-landing-arrow: url("./assets/curriculum-landing-arrow.svg#light");
 
-  --text-primary: var(--color-text-primary);
-  --text-secondary: var(--color-text-secondary);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
 }
 
 /* theme support for swapping out assets: check the root-level data-theme property, fall back to the os-level preference */
