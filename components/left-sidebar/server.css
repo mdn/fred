@@ -97,7 +97,7 @@
     color: var(--color-text-primary);
 
     &:hover {
-      color: var(--color-brand-link);
+      color: var(--color-area-link);
     }
 
     &:not(:hover) {
@@ -119,8 +119,8 @@
 
     font-style: normal;
 
-    background-color: var(--color-brand-background);
-    border-left: 2px solid var(--color-brand-highlight-border);
+    background-color: var(--color-area-background);
+    border-left: 2px solid var(--color-area-highlight-border);
   }
 
   .icon {

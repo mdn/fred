@@ -1,26 +1,13 @@
 :root {
-  --color-brand-default-background: var(--color-background-blue);
-  --color-brand-default-text: var(--color-text-blue);
-  --color-brand-default-highlight-border: var(--color-blue-50);
-
-  --color-brand-learn-background: var(--color-background-orange);
-  --color-brand-learn-text: var(--color-text-orange);
-  --color-brand-learn-highlight-border: var(--color-orange-50);
-
-  --color-brand-background: var(--color-brand-default-background);
-  --color-brand-text: var(--color-brand-default-text);
-  --color-brand-highlight-border: var(--color-brand-default-highlight-border);
-
-  --color-brand-link: var(--color-link-normal);
+  --color-area-background: var(--color-background-blue);
+  --color-area-text: var(--color-text-blue);
+  --color-area-highlight-border: var(--color-blue-50);
+  --color-area-link: var(--color-link-normal);
 }
 
 :root[data-current-section="learn"] {
-  --color-brand-background: var(--color-brand-learn-background);
-  --color-brand-text: var(--color-brand-learn-text);
-  --color-brand-highlight-border: var(--color-brand-learn-highlight-border);
-
-  --color-brand-link: light-dark(
-    var(--color-orange-20),
-    var(--color-orange-80)
-  );
+  --color-area-background: var(--color-background-orange);
+  --color-area-text: var(--color-text-orange);
+  --color-area-highlight-border: var(--color-orange-50);
+  --color-area-link: light-dark(var(--color-orange-20), var(--color-orange-80));
 }
