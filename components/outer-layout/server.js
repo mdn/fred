@@ -1,9 +1,10 @@
 import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import inlineScript from "../../entry.inline.js?source&csp=true";
-import { WRITER_MODE } from "../env/index.js";
+import { ROBOTS_GLOBAL_ALLOW, WRITER_MODE } from "../env/index.js";
 import Favicon from "../favicon/pure.js";
 import { asyncLocalStorage } from "../server/async-local-storage.js";
 import { ServerComponent } from "../server/index.js";
@@ -116,6 +117,20 @@ export class OuterLayout extends ServerComponent {
    * @param {import("@fred").Context} context
    */
   _renderMeta(context) {
+    const noIndexing =
+      "doc" in context
+        ? context.doc.noIndexing
+        : "noIndexing" in context
+          ? context.noIndexing
+          : false;
+    const onlyFollow = "onlyFollow" in context ? context.onlyFollow : false;
+    const robots =
+      !ROBOTS_GLOBAL_ALLOW || noIndexing
+        ? "noindex, nofollow"
+        : onlyFollow
+          ? "noindex, follow"
+          : "";
+
     const title =
       ("doc" in context ? context.doc.pageTitle : context.pageTitle) ||
       "MDN Web Docs";
@@ -127,11 +142,9 @@ export class OuterLayout extends ServerComponent {
           : "") ||
       "The MDN Web Docs site provides information about Open Web technologies including HTML, CSS, and APIs for both Web sites and progressive web apps.";
 
-    const names = {
+    const entries = {
+      robots,
       description,
-    };
-
-    const og = {
       "og:url": `https://developer.mozilla.org${context.url}`,
       "og:title": title,
       "og:locale": context.locale.replace("-", "_"),
@@ -144,25 +157,12 @@ export class OuterLayout extends ServerComponent {
       "og:image:alt":
         "The MDN Web Docs logo, featuring a blue accent color, displayed on a solid black background.",
       "og:site_name": "MDN Web Docs",
-    };
-
-    const twitter = {
       "twitter:card": "summary_large_image",
       "twitter:creator": "MozDevNet",
     };
 
-    const tags = [
-      ...Object.entries(names).map(
-        ([key, value]) => html`<meta name=${key} content=${value} />`,
-      ),
-      ...Object.entries(og).map(
-        ([key, value]) => html`<meta name=${key} content=${value} />`,
-      ),
-      ...Object.entries(twitter).map(
-        ([key, value]) => html`<meta name=${key} content=${value} />`,
-      ),
-    ];
-
-    return html`${tags}`;
+    return Object.entries(entries).map(([key, value]) =>
+      value ? html`<meta name=${key} content=${value} />` : nothing,
+    );
   }
 }

@@ -1,15 +1,12 @@
 import { Task } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
 
-import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
 import "../button/element.js";
 
-// import chevronLeftIcon from "../icon/chevron-left.svg?lit";
-// import chevronRightIcon from "../icon/chevron-right.svg?lit";
 import { mdnUrl2Breadcrumb } from "../../utils/mdn-url2breadcrumb.js";
 import searchIcon from "../icon/search.svg?lit";
 
@@ -173,11 +170,7 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
             variant="plain"
             class="site-search-form__submit"
             @click=${this._handleSearch}
-            .disabled=${ifDefined(
-              !this._inputValue || this._inputValue.trim() === ""
-                ? true
-                : undefined,
-            )}
+            ?disabled=${!this._inputValue || this._inputValue.trim() === ""}
             >${this.l10n`Search`}</mdn-button
           >
         </div>
@@ -226,7 +219,7 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
       return html` <ul>
         ${previousURL
           ? html` <li>
-              <mdn-button variant="secondary" href=${previousURL}
+              <mdn-button variant="secondary" href=${previousURL.toString()}
                 >${this.l10n`Previous`}</mdn-button
               >
             </li>`
@@ -241,29 +234,46 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
       </ul>`;
     }
     return nothing;
+  }
 
-    // return html`
-    //   <div class="site-search__pagination">
-    //     <mdn-button
-    //       icon-only="true"
-    //       .icon=${chevronLeftIcon}
-    //       variant="plain"
-    //       class="site-search__pagination__prev"
-    //       @click=${this._handlePrevPage}
-    //       .disabled=${ifDefined(this._currentPage === 1 ? true : undefined)}
-    //       >${this.l10n`Previous`}</mdn-button
-    //     >
-    //     <mdn-button
-    //       icon-only="true"
-    //       .icon=${chevronRightIcon}
-    //       variant="plain"
-    //       class="site-search__pagination__next"
-    //       @click=${this._handleNextPage}
-    //       .disabled=${ifDefined(this._currentPage === this._totalPages ? true : undefined)}
-    //       >${this.l10n`Next`}</mdn-button
-    //     >
-    //   </div>
-    // `;
+  /**
+   *
+   * @param {import("./types.js").SearchResponse} results
+   */
+  renderSuggestions(results) {
+    if (results.suggestions.length > 0) {
+      return html`
+        <section class="site-search__suggestions">
+          <p class="site-search-suggestions__text">
+            ${this.l10n("site-search-suggestions-text")`Did you mean…`}
+          </p>
+          <ul class="site-search-suggestions__list">
+            ${results.suggestions.map((suggestion) => {
+              const url = new URL(location.href);
+              url.searchParams.delete("page");
+              url.searchParams.set("q", suggestion.text);
+              return html`
+                <li class="site-search-suggestions__item">
+                  <a class="site-search-suggestions__link" href=${url.href}
+                    >${suggestion.text}</a
+                  >
+                  <span class="site-search-suggestions__matches"
+                    >${this.l10n.raw({
+                      id: "site-search-suggestion-matches",
+                      args: {
+                        matches: suggestion.total.value,
+                        relation: suggestion.total.relation,
+                      },
+                    })}</span
+                  >
+                </li>
+              `;
+            })}
+          </ul>
+        </section>
+      `;
+    }
+    return nothing;
   }
 
   render() {
@@ -285,71 +295,71 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
         ${this.renderInputs()}
         <div class="site-search__searching">${this.l10n`Searching…`}</div>
       `,
+
       complete: (results) => {
         return results
           ? html`
-            ${this.renderInputs()}
+              ${this.renderInputs()}
 
-            <h1 class="site-search__title">
-              ${this.l10n.raw({
-                id: "search-title",
-                args: {
-                  query: this._query,
-                },
-              })}
-            </h1>
-            <section class="site-search__options">
-              ${
-                LOCALE_OPTIONS.length > 0
-                  ? html` <h2>${this.l10n`Language`}</h2>
-                      <ul>
-                        ${LOCALE_OPTIONS.map((locales) => {
-                          const label =
-                            locales.length == 1
-                              ? readableLocaleCode(locales.at(0) || "en-US")
-                              : this.l10n`Both`;
-                          if (this._locales.join(",") === locales.join(",")) {
-                            return html`<li><em>${label}</em></li>`;
-                          } else {
-                            const url = new URL(location.href);
-                            url.searchParams.delete("locale");
-                            for (const locale of locales) {
-                              url.searchParams.append("locale", locale);
+                ${this.renderSuggestions(results)}
+              <section class="site-search__options">
+                ${
+                  LOCALE_OPTIONS.length > 0
+                    ? html` <h2>${this.l10n`Language`}</h2>
+                        <ul>
+                          ${LOCALE_OPTIONS.map((locales) => {
+                            const label =
+                              locales.length == 1
+                                ? readableLocaleCode(locales.at(0) || "en-US")
+                                : this.l10n`Both`;
+                            if (this._locales.join(",") === locales.join(",")) {
+                              return html`<li><em>${label}</em></li>`;
+                            } else {
+                              const url = new URL(location.href);
+                              url.searchParams.delete("locale");
+                              for (const locale of locales) {
+                                url.searchParams.append("locale", locale);
+                              }
+                              return html`<li>
+                                <a href=${url.toString()}>${label}</a>
+                              </li>`;
                             }
-                            return html`<li><a href=${url}>${label}</a></li>`;
-                          }
-                        })}
-                      </ul>`
-                  : nothing
-              }
-              <h2>${this.l10n`Sort by`}</h2>
-              <ul>
-              ${SORT_OPTIONS.map(([sort, label]) => {
-                if (this._sort === sort) {
-                  return html`<li><em>${label}</em></li>`;
-                } else {
-                  const url = new URL(location.href);
-                  url.searchParams.set("sort", sort);
-                  return html`<li><a href=${url}>${label}</a></li>`;
+                          })}
+                        </ul>`
+                    : nothing
                 }
-              })}
-              </ul>
-            </section>
-            <section class="site-search__results">
-              <p class="site-search__results-stats">${this.l10n.raw({
-                id: "search-stats",
-                args: {
-                  results: results.metadata.total.value,
-                  time: results.metadata.took_ms,
-                },
-              })}</p>
+                <h2>${this.l10n`Sort by`}</h2>
+                <ul>
+                  ${SORT_OPTIONS.map(([sort, label]) => {
+                    if (this._sort === sort) {
+                      return html`<li><em>${label}</em></li>`;
+                    } else {
+                      const url = new URL(location.href);
+                      url.searchParams.set("sort", sort);
+                      return html`<li>
+                        <a href=${url.toString()}>${label}</a>
+                      </li>`;
+                    }
+                  })}
+                </ul>
+              </section>
+              <section class="site-search__results">
+                <p class="site-search__results-stats">${this.l10n.raw({
+                  id: "site-search-search-stats",
+                  args: {
+                    results: results.metadata.total.value,
+                  },
+                })}</p>
               <ul class="site-search-results">
                 ${results.documents.map(
                   (result) =>
                     html`<li class="site-search-results__item">
                       <article>
-                        <a href=${result.mdn_url}>
-                          <h2 class="site-search-results__title">
+                        <p class="site-search-results__path">
+                          ${mdnUrl2Breadcrumb(result.mdn_url, this.locale)}
+                        </p>
+                        <h2 class="site-search-results__title">
+                          <a href=${result.mdn_url}>
                             ${result.highlight.title &&
                             result.highlight.title.length > 0
                               ? unsafeHTML(result.highlight.title[0])
@@ -361,26 +371,25 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                                   class="site-search-results__locale-indicator"
                                   >${readableLocaleCode(result.locale)}</sup
                                 >`}
-                          </h2>
-                          <p class="site-search-results__path">
-                            ${mdnUrl2Breadcrumb(result.mdn_url, this.locale)}
-                          </p>
-                        </a>
+                          </a>
+                        </h2>
                         <p class="site-search-results__description">
                           ${result.highlight.body &&
                           result.highlight.body.length > 0
-                            ? unsafeHTML(result.highlight.body[0])
+                            ? result.highlight.body.map((b) => unsafeHTML(b))
                             : result.summary}
                         </p>
                       </article>
                     </li>`,
                 )}
-              </ul>
-              </div>
+                </ul>
+                </section>
+                </section>
+                <nav class="site-search__results-pagination">
+                  ${this.renderPagination(results.metadata.page, results.metadata.total.value, results.metadata.size)}
+                </nav>
               </section>
-              <nav class="site-search__results-pagination">
-                ${this.renderPagination(results.metadata.page, results.metadata.total.value, results.metadata.size)}
-              </nav>`
+            `
           : html`${this.renderInputs()}`;
       },
       error: (e) => html`Error: ${e}`,

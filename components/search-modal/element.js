@@ -209,13 +209,13 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
                 ({ title, url }, i) => html`
                   <li ?data-selected=${this._selected === i} data-result=${i}>
                     <a href=${url}
-                      ><span class="title"
-                        >${HighlightMatch(title, this._query)}</span
-                      >
-                      <span class="slug"
+                      ><span class="slug"
                         >${mdnUrl2Breadcrumb(url, this.locale)}</span
                       >
-                    </a>
+                      <span class="title"
+                        >${HighlightMatch(title, this._query)}</span
+                      ></a
+                    >
                   </li>
                 `,
               ),

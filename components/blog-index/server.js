@@ -26,8 +26,8 @@ export function BlogIndexImageFigure(
       <img
         alt=${image.alt || ""}
         src=${src}
-        height=${height}
         width=${width}
+        height=${height}
         loading=${lazyLoad ? "lazy" : "eager"}
       />
     </a>

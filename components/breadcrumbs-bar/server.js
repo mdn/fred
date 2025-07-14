@@ -30,19 +30,34 @@ export class BreadcrumbsBar extends ServerComponent {
             ></mdn-collection-save-button>`
           : nothing}
         <mdn-color-theme></mdn-color-theme>
-        ${"doc" in context
-          ? html`<mdn-language-switcher
-              locale=${context.locale}
-              native=${context.doc.native}
-              translations=${JSON.stringify(
-                "other_translations" in context.doc
-                  ? context.doc.other_translations
-                  : [],
-              )}
-              url=${context.url}
-            ></mdn-language-switcher>`
-          : nothing}
+        ${this._renderLanguageSwitcher(context)}
       </div>
     `;
+  }
+
+  /**
+   * @param {import("@fred").Context} context
+   */
+  _renderLanguageSwitcher(context) {
+    const translations =
+      "other_translations" in context
+        ? context.other_translations
+        : "doc" in context && "other_translations" in context.doc
+          ? context.doc.other_translations
+          : [];
+    const native = translations.find(
+      (t) => t.locale === context.locale,
+    )?.native;
+
+    if (!native) {
+      return nothing;
+    }
+
+    return html`<mdn-language-switcher
+      locale=${context.locale}
+      native=${native}
+      translations=${JSON.stringify(translations)}
+      url=${context.url}
+    ></mdn-language-switcher>`;
   }
 }

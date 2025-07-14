@@ -1,6 +1,6 @@
 .blog-post {
-  --accent-color: var(--color-text-purple);
-  --accent-background: var(--color-background-purple);
+  --accent-color: var(--color-text-blue);
+  --accent-background: var(--color-background-blue);
   --avatar-size: 3rem;
   --author-gap: 1rem;
   --toc-header-font-size: var(--font-size-large);

@@ -76,20 +76,21 @@ export class MDNNotFound extends L10nMixin(LitElement) {
               .map((part) => part.replaceAll("_", " "))
               .reverse();
 
+            const fallback = html`<ul>
+              ${normalizedLocationParts.map(
+                (part) =>
+                  html`<li>
+                    <a
+                      href=${`/${locale}/search?q=${encodeURIComponent(part)}`}
+                    >
+                      <code>${part}</code>
+                    </a>
+                  </li>`,
+              )}
+            </ul>`;
+
             return html`<div class="notecard note">
-              <p>${this.l10n("not-found-fallback-search")}
-              <ul>
-                ${normalizedLocationParts.map(
-                  (part) =>
-                    html`<li>
-                      <a
-                        href=${`/${locale}/search?q=${encodeURIComponent(part)}`}
-                      >
-                        <code>${part}</code>
-                      </a>
-                    </li>`,
-                )}
-              </ul></p>
+              <p>${this.l10n("not-found-fallback-search")} ${fallback}</p>
             </div>`;
           }
         },

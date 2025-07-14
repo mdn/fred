@@ -102,10 +102,12 @@ ul {
 
 li[data-selected] {
   background: var(--color-background-blue);
+  border-color: var(--color-blue-50);
 }
 
 li {
   list-style-type: none;
+  border-inline-start: 2px solid transparent;
 
   &:not([data-selected]):hover {
     background-color: var(--color-background-secondary);

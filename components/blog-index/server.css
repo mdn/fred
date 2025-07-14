@@ -59,6 +59,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 2rem;
+
+  @media (--screen-medium-and-narrower) {
+    grid-template-columns: auto;
+  }
 }
 
 .blog-post-preview {
@@ -121,6 +125,11 @@
     background: transparent;
     border: none !important;
     border-radius: 0.25rem;
+
+    @media (width <= 530px) {
+      width: 100%;
+      height: auto;
+    }
   }
 }
 

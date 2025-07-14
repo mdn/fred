@@ -50,6 +50,26 @@
   /* Title */
 
   .menu__panel-title {
-    border-bottom: 1px solid var(--color-border-primary);
+    &::after {
+      position: relative;
+      top: 1rem;
+
+      display: block;
+
+      height: 1px;
+
+      content: "";
+
+      background-color: var(--color-border-primary);
+    }
+  }
+
+  /* Content */
+
+  /* About */
+  .menu__tab[data-section="about"] {
+    .menu__panel-content ul {
+      row-gap: 1.4rem;
+    }
   }
 }

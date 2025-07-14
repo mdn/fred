@@ -127,13 +127,9 @@ export function renderSidebar(context, doc) {
                       ${entry.children?.length
                         ? html`
                             <details
-                              open=${ifDefined(
-                                entry.children.some(
-                                  (c) => c.url === doc.mdn_url,
-                                ) ||
-                                  entry.url === doc.mdn_url ||
-                                  undefined,
-                              )}
+                              ?open=${entry.children.some(
+                                (c) => c.url === doc.mdn_url,
+                              ) || entry.url === doc.mdn_url}
                             >
                               <summary>${entry.title}</summary>
                               <ol>
