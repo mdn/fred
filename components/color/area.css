@@ -1,13 +1,11 @@
 :root {
   --color-area-background: var(--color-background-blue);
-  --color-area-text: var(--color-text-blue);
   --color-area-highlight-border: var(--color-blue-50);
   --color-area-link: var(--color-link-normal);
 }
 
-:root[data-current-section="learn"] {
+:root[data-current-area="learn"] {
   --color-area-background: var(--color-background-orange);
-  --color-area-text: var(--color-text-orange);
   --color-area-highlight-border: var(--color-orange-50);
   --color-area-link: light-dark(var(--color-orange-20), var(--color-orange-80));
 }
