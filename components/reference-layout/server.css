@@ -21,7 +21,7 @@
     grid-area: header;
 
     h1 {
-      margin-top: 0;
+      margin: 1rem 0;
 
       font-size: var(--font-size-largest);
       font-weight: normal;
