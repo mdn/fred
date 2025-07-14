@@ -53,12 +53,6 @@
     h4,
     h5,
     h6 {
-      a:link,
-      a:visited {
-        color: var(--text-primary);
-        text-decoration: none;
-      }
-
       a:hover,
       a:focus {
         text-decoration: underline;
@@ -115,7 +109,7 @@
 
   .curriculum-content {
     a:not(.button) {
-      color: var(--text-link);
+      /* color: var(--text-link); */
 
       &:link,
       &:visited {
