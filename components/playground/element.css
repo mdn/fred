@@ -1,3 +1,5 @@
+@import url("../global/global.css");
+
 .wrapper {
   display: grid;
 
@@ -50,8 +52,6 @@
     }
 
     details {
-      display: flex;
-
       flex-shrink: 0;
       flex-direction: column;
 
@@ -66,8 +66,14 @@
         min-height: 12rem;
       }
 
+      &::details-content {
+        display: contents;
+      }
+
       summary {
-        padding: 0.5rem;
+        height: 2em;
+
+        padding: 0.5em;
 
         line-height: var(--font-line-ui);
 
@@ -76,8 +82,7 @@
       }
 
       mdn-play-editor {
-        flex-grow: 1;
-        min-height: 0;
+        height: calc(100% - 2em);
       }
     }
 
