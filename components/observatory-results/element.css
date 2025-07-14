@@ -1,5 +1,5 @@
-/* TODO: decide if we import visually hidden where we need it, or if it's auto imported everywhere, like a reset */
-@import url("./../../components/visually-hidden/global.css");
+@import url("../global/global.css");
+@import url("../visually-hidden/global.css");
 
 /* TODO: remove this import, buttons should use the button component directly, not its styles */
 @import url("./../../components/button/server.css");
