@@ -173,13 +173,16 @@ ${"```"}`,
       const params = new URLSearchParams(location.search);
       const idParam = params.get("id");
       const stateParam = params.get("state");
+      const srcPrefixParam = params.get("srcPrefix");
 
-      const { srcPrefix, code } =
+      const { srcPrefix: srcPrefixState, code } =
         (await (idParam
           ? this._sessionFromApi(idParam)
           : stateParam
             ? this._sessionFromState(stateParam)
             : undefined)) || {};
+
+      const srcPrefix = srcPrefixParam || srcPrefixState;
 
       if (
         srcPrefix !== undefined &&
