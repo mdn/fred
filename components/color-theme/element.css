@@ -56,6 +56,12 @@
   &[data-mode="dark"]::before {
     mask-image: var(--color-theme-dark);
   }
+
+  &[data-mode="light dark"] ~ * [data-mode="light dark"],
+  &[data-mode="light"] ~ * [data-mode="light"],
+  &[data-mode="dark"] ~ * [data-mode="dark"] {
+    background: var(--color-background-secondary);
+  }
 }
 
 .color-theme__dropdown {
