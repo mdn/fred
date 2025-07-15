@@ -244,7 +244,7 @@
   margin-top: 2rem;
   margin-right: 1rem;
 
-  font-size: var(--type-tiny-font-size);
+  font-size: var(--font-size-small);
 
   color: var(--color-text-secondary);
 
@@ -367,8 +367,7 @@ h2.obs-toc__heading {
   margin: 0 0 1rem;
   margin-top: 1.5rem;
 
-  font: var(--type-heading-h5);
-  font-size: var(--type-base-font-size-rem);
+  font-size: var(--font-size-normal);
 
   color: var(--color-text-secondary);
 
@@ -380,7 +379,7 @@ h2.obs-toc__heading {
 
   padding: 0.5rem 1rem;
 
-  font-size: var(--type-smaller-font-size);
+  font-size: var(--font-size-normal);
 
   color: var(--color-text-secondary);
 

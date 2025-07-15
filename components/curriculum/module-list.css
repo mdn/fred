@@ -249,7 +249,7 @@
 
             padding: var(--spacing);
 
-            font-size: var(--type-smaller-font-size);
+            font-size: var(--font-size-normal);
 
             p {
               margin: 0;

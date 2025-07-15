@@ -115,7 +115,7 @@
 
   .curriculum-content {
     a:not(.button) {
-      color: var(--color-link-normal);
+      /* color: var(--text-link); */
 
       &:link,
       &:visited {

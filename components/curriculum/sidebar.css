@@ -8,21 +8,6 @@
 
   color: var(--color-text-secondary);
 
-  /* li > em {
-    display: inline-block;
-
-    padding: 0.25rem 0.5rem;
-
-    font-variation-settings: normal;
-    font-style: normal;
-    font-weight: 600;
-
-    background-color: var(--background-toc-active);
-    border-left: 2px solid var(--category-color);
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
-  } */
-
   .backdrop {
     display: none;
   }
@@ -78,8 +63,8 @@
 
     margin-top: 1.5rem;
 
-    font-size: var(--type-base-font-size-rem);
-    font-weight: var(--font-body-strong-weight);
+    font-size: var(--font-size-normal);
+    font-weight: 600;
 
     letter-spacing: 0.02rem;
 
@@ -93,7 +78,7 @@
   }
 
   ol {
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-normal);
 
     ol,
     ul {
@@ -155,7 +140,7 @@
   }
 
   summary {
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-normal);
     cursor: pointer;
   }
 
