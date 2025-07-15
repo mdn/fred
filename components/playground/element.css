@@ -129,11 +129,8 @@
 mdn-modal {
   section {
     display: flex;
-
     flex-direction: column;
-
     gap: 0.5rem;
-    align-items: center;
 
     &:first-child {
       margin-bottom: 1rem;
@@ -144,5 +141,24 @@ mdn-modal {
     margin: 0;
     font-size: var(--font-size-normal);
     font-weight: normal;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  &.share section {
+    align-items: center;
+  }
+
+  &.report section:last-child {
+    flex-direction: row;
+    justify-content: flex-end;
   }
 }

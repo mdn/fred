@@ -263,7 +263,7 @@ export class Menu extends ServerComponent {
                         <a
                           href=${`/${context.locale}/docs/Web/JavaScript/Reference/Global_Objects`}
                         >
-                          Built-in objects
+                          Standard built-in objects
                         </a>
                       </li>
                       <li>
