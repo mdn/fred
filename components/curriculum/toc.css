@@ -43,10 +43,6 @@
 
         border-left: 2px solid var(--color-border-primary);
 
-        &:hover {
-          /* color: var(--text-link); */
-        }
-
         &[aria-current]:not([aria-current=""], [aria-current="false"]) {
           font-weight: var(--font-weight-bold);
 
