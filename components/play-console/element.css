@@ -31,5 +31,6 @@ li {
 
 code {
   font-family: var(--font-family-code);
+  font-feature-settings: "calt" 0;
   tab-size: 4;
 }
