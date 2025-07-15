@@ -25,6 +25,8 @@ header {
     font-weight: normal;
 
     line-height: 1.1876;
+
+    overflow-wrap: anywhere;
   }
 
   mdn-button {

@@ -48,6 +48,8 @@ table {
 
   margin: 0;
 
+  overflow-x: auto;
+
   border-spacing: 0;
   border-collapse: separate;
 

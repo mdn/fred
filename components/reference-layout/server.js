@@ -23,7 +23,7 @@ export class ReferenceLayout extends ServerComponent {
         <main id="content" class="reference-layout__content">
           <div class="reference-layout__content__header">
             ${TranslationBanner.render(context)}
-            <h1>${doc.title}</h1>
+            <h1>${wbrIfy(doc.title)}</h1>
             ${BaselineIndicator.render(context)} ${description}
           </div>
           <aside class="reference-layout__toc">
@@ -41,4 +41,18 @@ export class ReferenceLayout extends ServerComponent {
       </div>
     `;
   }
+}
+
+/**
+ * Insert <wbr>s to wrap code-like strings in a pretty way
+ * NB: don't use in client side code because we use lookbehind assertions
+ * which aren't baseline green (yet)
+ * @param {string} text
+ */
+function wbrIfy(text) {
+  return text
+    .split(
+      /(?=\.)|(?<=[a-z])(?=[A-Z0-9])|(?<=[A-Z])(?=[A-Z][a-z])|(?<=[A-Z])(?=[0-9])/,
+    )
+    .flatMap((part, i) => (i ? [html`<wbr />`, part] : part));
 }
