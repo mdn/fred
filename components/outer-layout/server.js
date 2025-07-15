@@ -77,7 +77,7 @@ export class OuterLayout extends ServerComponent {
             content="width=device-width, initial-scale=1.0"
           />
           <title>${context.pageTitle || "MDN"}</title>
-          ${Favicon()} ${unsafeHTML(`<script>${inlineScript}</script>`)}
+          ${unsafeHTML(`<script>${inlineScript}</script>`)}
           ${styles.map(
             (path) =>
               html`<link rel="stylesheet" href=${path} fetchpriority="high" />`,
@@ -96,7 +96,7 @@ export class OuterLayout extends ServerComponent {
           ${scripts?.map(
             (path) => html`<script src=${path} type="module"></script>`,
           )}
-          ${this._renderMeta(context)}
+          ${Favicon()} ${this._renderMeta(context)}
           <link
             rel="canonical"
             href=${`https://developer.mozilla.org${context.url}`}
