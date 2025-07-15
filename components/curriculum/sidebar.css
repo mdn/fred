@@ -6,8 +6,6 @@
 
   overflow-y: auto;
 
-  font-weight: var(--font-weight-bold);
-
   color: var(--text-secondary);
 
   .backdrop {
