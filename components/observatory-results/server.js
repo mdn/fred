@@ -26,7 +26,10 @@ export class ObservatoryResults extends ServerComponent {
       extendedContext,
       html`
         <div class="obs-layout obs-layout--results">
-          <div class="obs-layout__content obs-layout__content--results">
+          <div
+            id="content"
+            class="obs-layout__content obs-layout__content--results"
+          >
             <section class="obs-results">
               <section class="obs-results__header">
                 <h1 class="obs-results__title">

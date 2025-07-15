@@ -80,15 +80,6 @@ const common = {
     new StatsWriterPlugin({
       fields: ["publicPath", "entrypoints"],
     }),
-    new rspack.DefinePlugin({
-      "process.env": JSON.stringify({
-        ...Object.fromEntries(
-          Object.entries(process.env).filter(([key]) =>
-            key.startsWith("FRED_"),
-          ),
-        ),
-      }),
-    }),
   ],
   optimization: {
     minimizer: [
@@ -156,6 +147,17 @@ const common = {
 
 /** @type {import("@rspack/core").RspackOptions} */
 const clientAndSsrCommon = {
+  plugins: [
+    new rspack.DefinePlugin({
+      "process.env": JSON.stringify({
+        ...Object.fromEntries(
+          Object.entries(process.env).filter(([key]) =>
+            key.startsWith("FRED_"),
+          ),
+        ),
+      }),
+    }),
+  ],
   module: {
     rules: [
       {

@@ -75,6 +75,8 @@ export class MDNLiveSampleResult extends L10nMixin(LitElement) {
     }
     const playUrl = new URL("/en-US/play", location.href);
     playUrl.search = new URL(this._runnerSrc).search;
+    if (this.srcPrefix)
+      playUrl.searchParams.append("srcPrefix", this.srcPrefix);
     this.breakoutLink = playUrl.href;
   }
 
@@ -92,7 +94,11 @@ export class MDNLiveSampleResult extends L10nMixin(LitElement) {
       <div class="code-example">
         <div class="example-header">
           ${this.breakoutLink
-            ? html`<mdn-button variant="secondary" href=${this.breakoutLink}
+            ? html`<mdn-button
+                variant="secondary"
+                href=${this.breakoutLink}
+                target="_blank"
+                rel="opener"
                 >${this.l10n`Play`}</mdn-button
               >`
             : nothing}

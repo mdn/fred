@@ -82,7 +82,9 @@ export class MDNCodeExample extends LitElement {
               >`
             : nothing}
         </div>
-        <pre><code ${ref(this._codeRef)}>${this._highlightTask.render({
+        <pre class=${this.className}><code ${ref(
+          this._codeRef,
+        )}>${this._highlightTask.render({
           initial: () => this.code,
           pending: () => this.code,
           complete: (highlighted) => unsafeHTML(highlighted),
@@ -107,16 +109,13 @@ export function upgradePre(pre) {
     const hidden = [...pre.classList].some(
       (c) => c === "hidden" || c.startsWith("interactive-example"),
     );
-    const liveSampleClasses = [...pre.classList].filter(
-      (c) => c.startsWith("live-sample___") || c.startsWith("live-sample---"),
-    );
     const code = pre.querySelector("code")?.textContent;
     if (example && language && code) {
       const newExample = document.createElement("mdn-code-example");
       newExample.language = language;
       newExample.code = code;
       newExample.hidden = hidden;
-      newExample.classList = [...liveSampleClasses].join(" ");
+      newExample.className = pre.className;
       example.replaceWith(newExample);
       return newExample;
     }

@@ -2,7 +2,7 @@
 @import url("../visually-hidden/global.css");
 
 /* TODO: remove this import, buttons should use the button component directly, not its styles */
-@import url("./../../components/button/server.css");
+@import url("../button/server.css");
 
 .scan-result {
   display: grid;
@@ -284,7 +284,7 @@ a {
 
 .footnote {
   margin-top: 1rem;
-  font-size: var(--type-smaller-font-size);
+  font-size: var(--font-size-small);
 }
 
 .detail-header {
@@ -330,7 +330,7 @@ a {
 
 .footnote {
   margin-top: 1rem;
-  font-size: var(--type-smaller-font-size);
+  font-size: var(--font-size-small);
 }
 
 .scan-results table {

@@ -23,7 +23,7 @@ export class ObservatoryLanding extends ServerComponent {
       context,
       html`
     <div class="obs-layout obs-layout--landing">
-      <div class="obs-layout__content obs-layout__content--landing">
+      <div id="content" class="obs-layout__content obs-layout__content--landing">
         <section class="obs-landing-top">
           <section class="obs-landing-top__form">
             <h1>

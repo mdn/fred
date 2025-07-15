@@ -17,6 +17,11 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
     super();
     /** @type {import("./types.js").ColorScheme} */
     this._mode = "light dark";
+    this._options = Object.entries({
+      "light dark": this.l10n("theme-default")`OS default`,
+      light: this.l10n`Light`,
+      dark: this.l10n`Dark`,
+    });
   }
 
   /** @param {MouseEvent} event */
@@ -73,36 +78,20 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
           id="color-theme__dropdown"
         >
           <ul class="color-theme__list">
-            <li>
-              <button
-                class="color-theme__option"
-                data-mode="light dark"
-                type="button"
-                @click=${this._setMode}
-              >
-                ${this.l10n("theme-default")`OS default`}
-              </button>
-            </li>
-            <li>
-              <button
-                class="color-theme__option"
-                data-mode="light"
-                type="button"
-                @click=${this._setMode}
-              >
-                ${this.l10n`Light`}
-              </button>
-            </li>
-            <li>
-              <button
-                class="color-theme__option"
-                data-mode="dark"
-                type="button"
-                @click=${this._setMode}
-              >
-                ${this.l10n`Dark`}
-              </button>
-            </li>
+            ${this._options.map(
+              ([mode, option]) =>
+                html`<li>
+                  <button
+                    class="color-theme__option"
+                    data-mode=${mode}
+                    ?data-current=${mode === this._mode}
+                    type="button"
+                    @click=${this._setMode}
+                  >
+                    ${option}
+                  </button>
+                </li>`,
+            )}
           </ul>
         </div>
       </mdn-dropdown>

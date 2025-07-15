@@ -20,6 +20,7 @@ import "../placement-sidebar/element.js";
 
 /**
  * @import { MDNPlayController } from "../play-controller/element.js";
+ * @import { MDNModal } from "../modal/element.js";
  * @import { Ref } from "lit/directives/ref.js";
  */
 
@@ -28,14 +29,24 @@ const SESSION_KEY = "playground-session-code";
 export class MDNPlayground extends L10nMixin(LitElement) {
   static styles = styles;
 
+  static properties = {
+    _gistID: { state: true },
+  };
+
   constructor() {
     super();
     this._permalink = "";
     this._autoRun = true;
+    /** @type {string | undefined} */
+    this._gistId = undefined;
   }
 
   /** @type {Ref<MDNPlayController>} */
   _controller = createRef();
+  /** @type {Ref<MDNModal>} */
+  _shareModal = createRef();
+  /** @type {Ref<MDNModal>} */
+  _reportModal = createRef();
 
   _user = new Task(this, {
     task: async () => {
@@ -60,7 +71,7 @@ export class MDNPlayground extends L10nMixin(LitElement) {
   }
 
   _share() {
-    this.shadowRoot?.querySelector("mdn-modal")?.showModal();
+    this._shareModal.value?.showModal();
   }
 
   _clear() {
@@ -173,13 +184,20 @@ ${"```"}`,
       const params = new URLSearchParams(location.search);
       const idParam = params.get("id");
       const stateParam = params.get("state");
+      const srcPrefixParam = params.get("srcPrefix");
 
-      const { srcPrefix, code } =
+      if (idParam) {
+        this._gistId = idParam;
+      }
+
+      const { srcPrefix: srcPrefixState, code } =
         (await (idParam
           ? this._sessionFromApi(idParam)
           : stateParam
             ? this._sessionFromState(stateParam)
             : undefined)) || {};
+
+      const srcPrefix = srcPrefixParam || srcPrefixState;
 
       if (
         srcPrefix !== undefined &&
@@ -231,6 +249,28 @@ ${"```"}`,
   _editorUpdate() {
     this._storeSession();
     this.requestUpdate();
+  }
+
+  _reportOpen() {
+    this._reportModal.value?.showModal();
+  }
+
+  _reportCancel() {
+    this._reportModal.value?.close();
+  }
+
+  async _reportSubmit() {
+    await fetch("/api/v1/play/flag", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: this._gistId,
+        reason: this._reportModal.value?.querySelector("textarea")?.value,
+      }),
+    });
+    this._reportModal.value?.close();
   }
 
   connectedCallback() {
@@ -312,6 +352,11 @@ ${"```"}`,
             </details>
           </section>
           <section class="playground__runner-console">
+            ${this._gistId
+              ? html`<mdn-button @click=${this._reportOpen} variant="plain">
+                  Seeing something inappropriate?
+                </mdn-button>`
+              : nothing}
             <mdn-play-runner></mdn-play-runner>
             <div class="playground__console">
               <div>${this.l10n`Console`}</div>
@@ -321,7 +366,7 @@ ${"```"}`,
           <mdn-placement-sidebar horizontal></mdn-placement-sidebar>
         </mdn-play-controller>
       </div>
-      <mdn-modal>
+      <mdn-modal ${ref(this._shareModal)} class="share">
         <section>
           <h2>${this.l10n`Share Markdown`}</h2>
           <mdn-button variant="secondary" @click=${this._copyMarkdown}
@@ -349,6 +394,21 @@ ${"```"}`,
                     >`
                 : html`<mdn-login-button></mdn-login-button>`,
           })}
+        </section>
+      </mdn-modal>
+      <mdn-modal ${ref(this._reportModal)} class="report">
+        <section>
+          <p>Report this malicious or inappropriate shared playground.</p>
+          <label>
+            Can you please share some details on what's wrong with this content:
+            <textarea></textarea>
+          </label>
+        </section>
+        <section>
+          <mdn-button variant="secondary" @click=${this._reportCancel}
+            >Cancel</mdn-button
+          >
+          <mdn-button @click=${this._reportSubmit}>Report</mdn-button>
         </section>
       </mdn-modal>
     `;
