@@ -300,9 +300,6 @@
             a {
               margin-left: 4rem;
               font-weight: var(--font-weight-bold);
-
-              /* color: var(--text-primary); */
-
               text-decoration: underline;
 
               &:hover,
