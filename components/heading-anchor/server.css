@@ -3,44 +3,9 @@
 }
 
 .heading-anchor {
-  color: inherit !important;
+  color: var(--color-text-primary);
 
   &:not(:hover) {
     text-decoration: none;
-  }
-
-  /* Hash */
-
-  &::before,
-  &::after {
-    position: absolute;
-
-    margin-top: 0.3em;
-
-    font-size: 0.75em;
-
-    color: var(--color-text-secondary);
-  }
-
-  @media not (--screen-small-and-narrower) {
-    &::before {
-      padding-right: 0.8em;
-      margin-left: -0.8em;
-      content: "#";
-    }
-  }
-
-  @media (--screen-small-and-narrower) {
-    padding-right: 1.1ch;
-
-    &::after {
-      margin-left: 0.25em;
-      content: "#";
-    }
-  }
-
-  &:not(:hover, :focus)::before,
-  &:not(:hover, :focus)::after {
-    visibility: hidden;
   }
 }

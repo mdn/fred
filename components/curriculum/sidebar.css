@@ -20,7 +20,7 @@
 
     font-variation-settings: normal;
     font-style: normal;
-    font-weight: 600;
+    font-weight: var(--font-weight-bold);
 
     hyphens: auto;
 
@@ -53,7 +53,7 @@
     margin-top: 1.5rem;
 
     font-size: var(--font-size-normal);
-    font-weight: 600;
+    font-weight: var(--font-weight-bold);
 
     letter-spacing: 0.02rem;
 
@@ -81,7 +81,7 @@
 
       &.no-bullet {
         display: block;
-        font-weight: var(--font-body-strong-weight);
+        font-weight: var(--font-weight-bold);
         list-style-type: none;
       }
     }

@@ -299,10 +299,9 @@
 
             a {
               margin-left: 4rem;
+              font-weight: var(--font-weight-bold);
 
-              font-weight: var(--font-body-strong-weight);
-
-              color: var(--text-primary);
+              /* color: var(--text-primary); */
 
               text-decoration: underline;
 
@@ -674,7 +673,11 @@
 
           h3 {
             margin-top: 0;
-            font-weight: 600;
+
+            font-weight: var(--font-weight-bold);
+
+            line-height: var(--font-line-normal);
+
             color: var(--text-primary);
           }
 
@@ -716,7 +719,7 @@
             padding-left: var(--button-padding);
 
             font-size: var(--font-size-small);
-            font-weight: 600;
+            font-weight: var(--font-weight-bold);
 
             color: var(--button-color);
 

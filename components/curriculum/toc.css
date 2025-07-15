@@ -48,7 +48,7 @@
         }
 
         &[aria-current]:not([aria-current=""], [aria-current="false"]) {
-          font-weight: 600;
+          font-weight: var(--font-weight-bold);
 
           color: var(--text-primary);
 

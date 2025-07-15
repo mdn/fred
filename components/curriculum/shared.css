@@ -30,7 +30,7 @@
       margin-bottom: 2rem;
 
       font-size: var(--font-size-largest);
-      font-weight: 600;
+      font-weight: var(--font-weight-bold);
 
       line-height: 1.2;
     }
@@ -109,8 +109,6 @@
 
   .curriculum-content {
     a:not(.button) {
-      /* color: var(--text-link); */
-
       &:link,
       &:visited {
         text-decoration: underline;
@@ -126,7 +124,7 @@
       }
 
       &:visited:not([href^="#"]) {
-        color: var(--text-visited);
+        color: var(--color-link-visited);
       }
     }
 
@@ -198,7 +196,7 @@
       p.curriculum-outcomes {
         display: flex;
         margin-bottom: 0.5rem;
-        font-weight: var(--font-body-strong-weight);
+        font-weight: var(--font-weight-bold);
 
         &::before {
           display: block;

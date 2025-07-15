@@ -213,7 +213,7 @@
 
             padding: var(--spacing);
 
-            font-weight: var(--font-body-strong-weight);
+            font-weight: var(--font-weight-bold);
 
             background-color: var(--curriculum-bg-color-list-item-header);
 
@@ -258,7 +258,7 @@
             }
 
             p:last-child {
-              font-weight: 600;
+              font-weight: var(--font-weight-bold);
               color: var(--curriculum-color-topic);
             }
           }
