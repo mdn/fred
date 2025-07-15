@@ -30,7 +30,7 @@
       margin-bottom: 2rem;
 
       font-size: var(--font-size-largest);
-      font-weight: 600;
+      font-weight: var(--font-weight-bold);
 
       line-height: 1.2;
     }
@@ -81,7 +81,7 @@
 
           font-size: 0.7em;
 
-          line-height: 1;
+          line-height: var(--font-line-ui);
 
           color: var(--color-text-secondary);
 

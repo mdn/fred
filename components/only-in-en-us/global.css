@@ -3,7 +3,7 @@ html a.only-in-en-us::after {
 
   margin-left: 0.5ch;
 
-  font-size: 0.7rem;
+  font-size: var(--font-size-small);
 
   vertical-align: super;
 

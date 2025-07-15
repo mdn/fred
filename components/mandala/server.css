@@ -1,6 +1,6 @@
 .mandala {
   svg {
-    font-size: 1.5rem;
+    font-size: var(--font-size-large);
     font-weight: 300;
     user-select: none;
   }
@@ -26,6 +26,6 @@
   }
 
   textPath[href="#circle5"] {
-    font-size: 1rem;
+    font-size: var(--font-size-normal);
   }
 }

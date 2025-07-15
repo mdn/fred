@@ -16,4 +16,7 @@
   --font-size-large: 1.5rem;
   --font-size-normal: 1rem;
   --font-size-small: 0.8rem;
+
+  --font-weight-normal: 400;
+  --font-weight-bold: 600;
 }

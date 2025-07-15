@@ -56,7 +56,7 @@
   h2 {
     display: inline;
     font-size: var(--font-size-small);
-    font-weight: 600;
+    font-weight: var(--font-weight-bold);
   }
 
   ul {
@@ -95,7 +95,7 @@
 
 .site-search-results__title {
   font-size: var(--font-size-large);
-  font-weight: 400;
+  font-weight: var(--font-weight-normal);
 }
 
 .site-search-suggestions__list {
@@ -163,7 +163,7 @@
 
 .site-search-form__input {
   font-size: var(--font-size-large);
-  font-weight: 400;
+  font-weight: var(--font-weight-normal);
 
   outline: none;
 

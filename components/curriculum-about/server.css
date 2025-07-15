@@ -74,7 +74,7 @@
         padding: var(--button-padding);
 
         font-size: var(--font-size-small);
-        font-weight: 600;
+        font-weight: var(--font-weight-bold);
 
         color: var(--button-color);
 

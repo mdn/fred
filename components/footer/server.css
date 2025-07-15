@@ -210,7 +210,7 @@
   p {
     grid-column: span 2;
     margin: 0;
-    line-height: 1.5;
+    line-height: var(--font-line-normal);
   }
 
   a {

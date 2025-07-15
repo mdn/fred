@@ -258,7 +258,7 @@
             }
 
             p:last-child {
-              font-weight: 600;
+              font-weight: var(--font-weight-bold);
               color: var(--curriculum-color-topic);
             }
           }

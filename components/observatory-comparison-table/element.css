@@ -1,3 +1,4 @@
+@import url("../global/global.css");
 @import url("../visually-hidden/global.css");
 
 .grade {
@@ -6,8 +7,8 @@
   width: 5rem;
   height: 5rem;
 
-  font-size: 1.7rem;
-  font-weight: 600;
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
 
   line-height: 5rem;
 
@@ -52,7 +53,7 @@
 
 .tick text {
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: var(--font-size-normal);
   font-weight: 300;
 
   fill: var(--color-text-secondary);
@@ -73,7 +74,6 @@
 }
 
 .tick line {
-  /* color: light-dark(var(--color-gray-60), var(--color-gray-40)); */
   opacity: 0.9;
 
   stroke: light-dark(var(--color-gray-60), var(--color-gray-40));
@@ -100,8 +100,8 @@
 
   & text {
     font-family: var(--font-body);
-    font-size: 0.85rem;
-    font-weight: 300;
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-normal);
 
     fill: var(--color-text-primary);
   }

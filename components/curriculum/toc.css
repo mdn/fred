@@ -15,7 +15,7 @@
         margin: 0 0 1rem;
 
         font-size: var(--font-size-normal);
-        font-weight: 400;
+        font-weight: var(--font-weight-normal);
 
         line-height: var(--font-line-content);
 
@@ -49,7 +49,7 @@
         }
 
         &[aria-current]:not([aria-current=""], [aria-current="false"]) {
-          font-weight: 600;
+          font-weight: var(--font-weight-bold);
 
           color: var(--text-primary);
 

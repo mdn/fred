@@ -6,22 +6,9 @@
 
   overflow-y: auto;
 
+  font-weight: var(--font-weight-bold);
+
   color: var(--text-secondary);
-
-  /* li > em {
-    display: inline-block;
-
-    padding: 0.25rem 0.5rem;
-
-    font-variation-settings: normal;
-    font-style: normal;
-    font-weight: 600;
-
-    background-color: var(--background-toc-active);
-    border-left: 2px solid var(--category-color);
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
-  } */
 
   .backdrop {
     display: none;
@@ -31,7 +18,7 @@
     margin: 0;
 
     font-size: var(--font-size-small);
-    font-weight: 400;
+    font-weight: var(--font-weight-normal);
 
     color: var(--text-primary);
 
@@ -46,7 +33,7 @@
 
     font-variation-settings: normal;
     font-style: normal;
-    font-weight: 600;
+    font-weight: var(--font-weight-bold);
 
     hyphens: auto;
 

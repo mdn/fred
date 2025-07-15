@@ -77,7 +77,7 @@ table {
   }
 
   thead {
-    line-height: 1;
+    line-height: var(--font-line-ui);
     white-space: nowrap;
   }
 
@@ -227,7 +227,7 @@ table {
 }
 
 .bc-head-txt-label {
-  line-height: 1;
+  line-height: var(--font-line-ui);
 
   white-space: nowrap;
 
