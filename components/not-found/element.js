@@ -83,7 +83,7 @@ export class MDNNotFound extends L10nMixin(LitElement) {
                     <a
                       href=${`/${locale}/search?q=${encodeURIComponent(part)}`}
                     >
-                      <code>${part}</code>
+                      ${part}
                     </a>
                   </li>`,
               )}
