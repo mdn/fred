@@ -96,6 +96,7 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
                   <li>
                     <a
                       class="language-switcher__option"
+                      ?data-current=${locale === translation.locale}
                       @click=${resetPreferredLocale}
                       href=${url.replace(
                         `/${locale}/`,
