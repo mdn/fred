@@ -129,4 +129,8 @@
   &[data-mode="dark"]::before {
     mask-image: var(--color-theme-dark);
   }
+
+  &[data-current] {
+    background: var(--color-background-secondary);
+  }
 }

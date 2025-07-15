@@ -53,12 +53,6 @@
     h4,
     h5,
     h6 {
-      a:link,
-      a:visited {
-        color: var(--text-primary);
-        text-decoration: none;
-      }
-
       a:hover,
       a:focus {
         text-decoration: underline;
@@ -66,37 +60,6 @@
 
       a:active {
         background-color: transparent;
-      }
-
-      a[href^="#"]:not(.button) {
-        text-decoration: none;
-
-        &::before {
-          display: inline-block;
-          visibility: hidden;
-
-          width: 0.8em;
-
-          margin-left: -0.8em;
-
-          font-size: 0.7em;
-
-          line-height: var(--font-line-ui);
-
-          color: var(--color-text-secondary);
-
-          text-decoration: none;
-
-          content: "#";
-        }
-
-        &:hover {
-          text-decoration: underline;
-
-          &::before {
-            visibility: visible;
-          }
-        }
       }
     }
   }
@@ -115,11 +78,9 @@
 
   .curriculum-content {
     a:not(.button) {
-      color: var(--text-link);
-
       &:link,
       &:visited {
-        text-decoration: underline;
+        /* text-decoration: underline; */
 
         &.button {
           text-decoration: none;
@@ -128,11 +89,11 @@
 
       &:hover,
       &:focus {
-        text-decoration: none;
+        text-decoration: underline;
       }
 
       &:visited:not([href^="#"]) {
-        color: var(--text-visited);
+        color: var(--color-link-visited);
       }
     }
 
@@ -204,7 +165,7 @@
       p.curriculum-outcomes {
         display: flex;
         margin-bottom: 0.5rem;
-        font-weight: var(--font-body-strong-weight);
+        font-weight: var(--font-weight-bold);
 
         &::before {
           display: block;

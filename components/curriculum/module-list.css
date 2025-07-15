@@ -213,7 +213,7 @@
 
             padding: var(--spacing);
 
-            font-weight: var(--font-body-strong-weight);
+            font-weight: var(--font-weight-bold);
 
             background-color: var(--curriculum-bg-color-list-item-header);
 
@@ -249,7 +249,7 @@
 
             padding: var(--spacing);
 
-            font-size: var(--type-smaller-font-size);
+            font-size: var(--font-size-normal);
 
             p {
               margin: 0;

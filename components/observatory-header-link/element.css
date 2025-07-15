@@ -1,9 +1,1 @@
-a {
-  color: var(--color-text-primary);
-  text-decoration: underline;
-  text-decoration-color: var(--color-text-secondary);
-}
-
-a:hover {
-  text-decoration: none;
-}
+@import url("../global/global.css");

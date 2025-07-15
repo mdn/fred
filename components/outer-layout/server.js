@@ -60,6 +60,11 @@ export class OuterLayout extends ServerComponent {
       )
       .filter((x) => x !== undefined);
 
+    const area =
+      context.path.split("/")[3]?.toLowerCase() === "learn_web_development"
+        ? "learn"
+        : undefined;
+
     // if you want to put some script inline, put it in entry.inline.js
     // and you'll get CSP generation: see the README
     return html`
@@ -69,6 +74,7 @@ export class OuterLayout extends ServerComponent {
         style="color-scheme: light dark;"
         data-renderer=${context.renderer}
         data-noads=${ifDefined(WRITER_MODE ? "enabled" : undefined)}
+        data-current-area=${ifDefined(area)}
       >
         <head>
           <meta charset="UTF-8" />
@@ -77,7 +83,7 @@ export class OuterLayout extends ServerComponent {
             content="width=device-width, initial-scale=1.0"
           />
           <title>${context.pageTitle || "MDN"}</title>
-          ${Favicon()} ${unsafeHTML(`<script>${inlineScript}</script>`)}
+          ${unsafeHTML(`<script>${inlineScript}</script>`)}
           ${styles.map(
             (path) =>
               html`<link rel="stylesheet" href=${path} fetchpriority="high" />`,
@@ -96,7 +102,7 @@ export class OuterLayout extends ServerComponent {
           ${scripts?.map(
             (path) => html`<script src=${path} type="module"></script>`,
           )}
-          ${this._renderMeta(context)}
+          ${Favicon()} ${this._renderMeta(context)}
           <link
             rel="canonical"
             href=${`https://developer.mozilla.org${context.url}`}
