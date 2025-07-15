@@ -231,7 +231,7 @@ export class BaselineIndicator extends ServerComponent {
             <a
               href=${feedbackLink}
               data-glean="baseline_link_feedback"
-              class="feedback-link"
+              class="feedback-link external"
               target="_blank"
               rel="noreferrer"
             >
