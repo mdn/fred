@@ -88,7 +88,7 @@
   }
 
   a,
-  span {
+  span:not(.highlight-container) {
     display: inline-flex;
     padding-block: 0.25rem;
   }
