@@ -92,7 +92,6 @@ export class MDNAboutTabs extends LitElement {
         requestAnimationFrame(() => {
           const panel = panels[this.active_index];
           if (panel && panel.getBoundingClientRect().top < 0) {
-            console.log("scrolling");
             panel.scrollIntoView({ block: "start", inline: "nearest" });
           }
         });
