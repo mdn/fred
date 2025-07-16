@@ -73,7 +73,7 @@
   font-size: var(--font-size-largest);
   font-weight: 500;
 
-  line-height: var(--font-line-normal);
+  line-height: 1.2;
 
   text-align: center;
 }
