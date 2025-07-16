@@ -84,7 +84,7 @@
             font-size: 0.5rem;
             font-weight: bold;
 
-            line-height: 1.7;
+            line-height: var(--font-line-content);
             vertical-align: super;
 
             color: var(--text-primary);

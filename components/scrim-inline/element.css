@@ -129,9 +129,9 @@ dialog {
 
     font-family: "BarlowCondensed-SemiBold", "Inter", sans-serif;
     font-size: 3em;
-    font-weight: 600;
+    font-weight: var(--font-weight-bold);
 
-    line-height: 1;
+    line-height: var(--font-line-ui);
 
     color: var(--color-white);
 

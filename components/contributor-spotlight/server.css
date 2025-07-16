@@ -15,14 +15,14 @@
 
   li {
     margin-bottom: 1rem;
-    line-height: 1.5;
+    line-height: var(--font-line-normal);
     list-style-type: disc;
   }
 
   h1 {
     margin: 0 0 2rem;
     font-size: var(--font-size-largest);
-    font-weight: 600;
+    font-weight: var(--font-weight-bold);
 
     &.trailing-underscore::after {
       text-decoration: underline;
@@ -98,7 +98,7 @@
       margin: 0;
 
       font-size: var(--font-size-normal);
-      font-weight: 400;
+      font-weight: var(--font-weight-normal);
     }
   }
 
@@ -186,7 +186,7 @@
     margin: 0;
 
     font-size: var(--font-size-large);
-    font-weight: 600;
+    font-weight: var(--font-weight-bold);
 
     line-height: 1.2;
   }

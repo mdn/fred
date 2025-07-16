@@ -23,7 +23,7 @@ h3 {
   margin-bottom: 1rem;
 
   font-size: var(--font-size-large);
-  font-weight: 400;
+  font-weight: var(--font-weight-normal);
 
   line-height: var(--font-line-content);
 }

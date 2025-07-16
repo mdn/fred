@@ -148,7 +148,7 @@
   h1,
   h2 {
     font-style: normal;
-    font-weight: 600;
+    font-weight: var(--font-weight-bold);
     letter-spacing: var(--heading-letter-spacing);
   }
 

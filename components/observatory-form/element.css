@@ -46,8 +46,8 @@
 
     padding: 0 2rem;
 
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: var(--font-size-normal);
+    font-weight: var(--font-weight-bold);
 
     border: none;
     border-radius: 0 var(--border-radius) var(--border-radius) 0;

@@ -1,6 +1,6 @@
 @font-face {
   font-family: "BarlowCondensed-SemiBold";
-  font-weight: 600;
+  font-weight: var(--font-weight-bold);
 
   src:
     local("BarlowCondensed-SemiBold"),

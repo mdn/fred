@@ -121,7 +121,7 @@
   @media (--screen-medium-and-wider) {
     h1 {
       font-size: var(--font-size-largest);
-      font-weight: 600;
+      font-weight: var(--font-weight-bold);
 
       line-height: 1.2;
 
@@ -167,7 +167,7 @@
         line-height: 120%;
 
         @media (--screen-small-and-narrower) {
-          font-size: 1.25rem;
+          font-size: var(--font-size-large);
         }
       }
     }
@@ -281,7 +281,7 @@
     h2 {
       margin-bottom: 1rem;
       font-size: var(--font-size-larger);
-      font-weight: 600;
+      font-weight: var(--font-weight-bold);
     }
 
     mdn-about-tabs {
@@ -393,16 +393,16 @@
 
         margin: 0;
 
-        font-size: 1.375rem;
-        font-weight: 600;
+        font-size: var(--font-size-large);
+        font-weight: var(--font-weight-bold);
 
-        line-height: 1.5;
+        line-height: var(--font-line-normal);
 
         text-decoration-line: underline;
 
         @media (--screen-medium-and-narrower) {
           margin-bottom: -0.75em;
-          font-size: 1.25rem;
+          font-size: var(--font-size-large);
         }
 
         &::before {
@@ -487,7 +487,7 @@
 
     h4 {
       font-size: var(--font-line-content);
-      font-weight: 600;
+      font-weight: var(--font-weight-bold);
     }
 
     mdn-image-history ul {
@@ -721,7 +721,7 @@
         padding: 1.5rem;
         margin: -1.5rem -1.5rem 0;
 
-        font-size: 1.25rem;
+        font-size: var(--font-size-large);
         font-weight: 500;
 
         color: var(--boxes-header-color);
@@ -767,7 +767,7 @@
         margin-bottom: 0.5rem;
 
         font-size: var(--font-size-normal);
-        font-weight: 600;
+        font-weight: var(--font-weight-bold);
 
         color: var(--about-core-values-color);
 
@@ -923,7 +923,7 @@
     h4,
     h5 {
       font-size: var(--font-line-content);
-      font-weight: 600;
+      font-weight: var(--font-weight-bold);
       text-transform: none;
     }
 
@@ -993,7 +993,7 @@
 
         margin-bottom: 0.75rem;
 
-        font-weight: 600;
+        font-weight: var(--font-weight-bold);
 
         color: var(--about-team-title-color);
       }
