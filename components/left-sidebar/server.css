@@ -117,6 +117,7 @@
     align-items: center;
 
     padding-inline: 0.5rem;
+    margin-left: calc(-0.5rem - 2px);
 
     font-style: normal;
 
