@@ -4,11 +4,11 @@
   .token.prolog,
   .token.doctype,
   .token.cdata {
-    color: light-dark(#858585, #b3b3b3);
+    color: light-dark(#51565d, #b3b3b3);
   }
 
   .token.punctuation {
-    color: light-dark(#858585, #b3b3b3);
+    color: light-dark(#51565d, #b3b3b3);
   }
 
   .token.attr-name,
