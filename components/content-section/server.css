@@ -225,16 +225,31 @@
 
   /* Definition list */
 
-  dl dd {
-    margin-left: 1rem;
-
+  dl {
     dl {
       padding-left: 1rem;
       border-left: 1px solid var(--color-border-primary);
     }
 
+    dd {
+      margin-left: 1rem;
+    }
+
     ul {
       margin: 1rem 0 2rem;
+    }
+
+    a[href^="#"]:hover::before {
+      position: absolute;
+
+      margin-top: 0.3em;
+      margin-left: -0.9em;
+
+      font-size: var(--font-size-small);
+
+      color: var(--color-text-secondary);
+
+      content: "#";
     }
   }
 
