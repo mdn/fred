@@ -88,7 +88,16 @@ export class MDNAboutTabs extends LitElement {
           globalThis.location.hash = tabEl.dataset.panelId;
         }
         this.active_index = i;
+
+        requestAnimationFrame(() => {
+          const panel = panels[this.active_index];
+          if (panel && panel.getBoundingClientRect().top < 0) {
+            console.log("scrolling");
+            panel.scrollIntoView({ block: "start", inline: "nearest" });
+          }
+        });
       };
+
       // @ts-expect-error
       tabEl.removeEventListener("click", tabEl.__handleClick);
       tabEl.addEventListener("click", handleClick);
