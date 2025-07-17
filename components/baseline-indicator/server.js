@@ -145,13 +145,18 @@ export class BaselineIndicator extends ServerComponent {
                 <span class="not-bold">
                   ${level === "high"
                     ? context.l10n`Widely available`
-                    : low_date?.getFullYear()}
+                    : context.l10n`Newly available`}
                 </span>
                 ${status.asterisk && " *"}
               `}
         </div>
-        ${level === "low"
-          ? html`<div class="pill">${context.l10n`Newly available`}</div>`
+        ${low_date
+          ? html`<div class="pill">
+              Baseline
+              ${low_date.toLocaleDateString(context.locale, {
+                year: "numeric",
+              })}
+            </div>`
           : nothing}
         <div class="browsers">
           ${ENGINES.map(
@@ -180,26 +185,16 @@ export class BaselineIndicator extends ServerComponent {
       <div class="extra">
         ${level === "high" && low_date
           ? html`<p>
-                ${context.l10n.raw({
-                  id: "baseline-high-extra",
-                  args: {
-                    date: low_date.toLocaleDateString(context.locale, {
-                      year: "numeric",
-                      month: "long",
-                    }),
-                  },
-                })}
-              </p>
-              <p>
-                ${context.l10n.raw({
-                  id: "baseline-high-extra-year",
-                  args: {
-                    year: low_date.toLocaleDateString(context.locale, {
-                      year: "numeric",
-                    }),
-                  },
-                })}
-              </p>`
+              ${context.l10n.raw({
+                id: "baseline-high-extra",
+                args: {
+                  date: low_date.toLocaleDateString(context.locale, {
+                    year: "numeric",
+                    month: "long",
+                  }),
+                },
+              })}
+            </p>`
           : level === "low" && low_date
             ? html`<p>
                   ${context.l10n.raw({

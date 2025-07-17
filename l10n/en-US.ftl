@@ -6,9 +6,8 @@ article-footer-source-title = Folder: { $folder } (Opens in a new tab)
 
 baseline-asterisk = { $asterisk } Some parts of this feature may have varying levels of support.
 baseline-high-extra = This feature is well established and works across many devices and browser versions. It’s been available across browsers since { $date }.
-baseline-high-extra-year = It's part of the <strong>Baseline { $year }</strong> feature set.
 baseline-low-extra = Since { $date }, this feature works across the latest devices and browser versions. This feature might not work in older devices or browsers.
-baseline-low-extra-widely = This feature will become Widely available in { $date }.
+baseline-low-extra-widely = This feature will become Widely available in <strong>{ $date }</strong>.
 baseline-not-extra = This feature is not Baseline because it does not work in some of the most widely-used browsers.
 baseline-supported-in = Supported in { $browsers }
 baseline-unsupported-in = Not widely supported in { $browsers }
