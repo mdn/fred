@@ -4,7 +4,7 @@
 article-footer-last-modified = This page was last modified on <time data-l10n-name="date">{ $date }</time> by <a data-l10n-name="contributors">MDN contributors</a>.
 article-footer-source-title = Folder: { $folder } (Opens in a new tab)
 
-baseline-asterisk = { $asterisk } Some parts of this feature may have varying levels of support.
+baseline-asterisk = Some parts of this feature may have varying levels of support.
 baseline-high-extra = This feature is well established and works across many devices and browser versions. It’s been available across browsers since { $date }.
 baseline-low-extra = Since { $date }, this feature works across the latest devices and browser versions. This feature might not work in older devices or browsers.
 baseline-not-extra = This feature is not Baseline because it does not work in some of the most widely-used browsers.
