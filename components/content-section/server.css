@@ -266,6 +266,13 @@
     }
   }
 
+  ul.specifications-list {
+    li:has(details) {
+      margin-left: -0.875rem;
+      list-style: none;
+    }
+  }
+
   /* Article footer */
   &.article-footer {
     margin: 2rem 0;
