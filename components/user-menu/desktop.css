@@ -1,6 +1,6 @@
 /* Desktop */
 
-@media (width > 1006px) {
+@media (--screen-menu-full) {
   .user-menu {
     position: relative;
     width: 34px;

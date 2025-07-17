@@ -1,6 +1,6 @@
 /* Mobile */
 
-@media (width <= 1006px) {
+@media (--screen-menu-hamburger) {
   .menu {
     --menu-button-padding: 0.9rem 0.7rem;
   }

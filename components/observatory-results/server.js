@@ -36,7 +36,7 @@ export class ObservatoryResults extends ServerComponent {
                   <span class="obs-results__title-accent"
                     >${context.l10n("obs-title")}</span
                   >
-                  ${context.l10n("Report")}
+                  ${context.l10n("obs-report")}
                 </h1>
                 <div class="obs-results__feedback">${Feedback(context)}</div>
               </section>

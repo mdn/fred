@@ -24,7 +24,11 @@
 
   pre {
     display: flex;
+
     margin: 0;
+
+    white-space: pre-wrap;
+
     background-color: var(--color-background-secondary);
 
     code {

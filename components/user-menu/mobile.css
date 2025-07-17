@@ -1,6 +1,6 @@
 /* Mobile */
 
-@media (width <= 1006px) {
+@media (--screen-menu-hamburger) {
   /* Login link */
 
   .user-menu__login {

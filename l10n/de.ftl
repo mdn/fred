@@ -6,7 +6,7 @@ reference-toc-header = In diesem Artikel
 
 footer-tagline = Dein Bauplan für ein besseres Internet.
 footer-mofo = Besuche die gemeinnützige Muttergesellschaft der <a data-l10n-name="moco">Mozilla Corporation</a>, die <a data-l10n-name="mofo">Mozilla Foundation</a>.
-footer-copyright = Teile dieses Inhalts sind ©1998–2024 von einzelnen mozilla.org-Mitwirkenden. Inhalte sind verfügbar unter <a data-l10n-name="cc">einer Creative-Commons-Lizenz</a>.
+footer-copyright = Teile dieses Inhalts sind ©1998–{ $year } von einzelnen mozilla.org-Mitwirkenden. Inhalte sind verfügbar unter <a data-l10n-name="cc">einer Creative-Commons-Lizenz</a>.
 
 search-modal-site-search = Erweiterte Suche nach <em>{ $query }</em>
 
@@ -39,7 +39,7 @@ No = Nein
 Submit = Abschicken
 Yes = Ja
 
-Report = Report
+obs-report = Report
 
 obs-title = HTTP Observatory
 obs-landing-intro = Seit 2016 verbessert HTTP Observatory die Sicherheit durch Analyse der Einhaltung bewährter Sicherheitspraktiken. Es hat durch 47 Millionen Scans Einblicke in über 6,9 Millionen Websites geliefert.
