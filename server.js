@@ -277,6 +277,19 @@ export async function startServer() {
     );
   }
 
+  // live sample assets
+  play.use(
+    createProxyMiddleware({
+      target: RARI_URL,
+      changeOrigin: true,
+      proxyTimeout: 20_000,
+      timeout: 20_000,
+      headers: {
+        Connection: "keep-alive",
+      },
+    }),
+  );
+
   const httpServer = app.listen(3000, () => {
     console.log(
       `Server started at ${http2 ? "https" : "http"}://localhost:3000`,

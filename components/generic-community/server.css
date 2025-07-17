@@ -118,11 +118,11 @@
 
   h2 {
     margin-bottom: 1rem;
-    font-size: 2rem;
-    font-weight: 600;
+    font-size: var(--font-size-larger);
+    font-weight: var(--font-weight-bold);
 
     @media (--screen-small-and-narrower) {
-      font-size: 1.375rem;
+      font-size: var(--font-size-large);
     }
   }
 
@@ -165,11 +165,11 @@
 
     h1 {
       margin-bottom: 1rem;
-      font-size: 2.5rem;
+      font-size: var(--font-size-largest);
       color: var(--header-text-primary);
 
       @media (--screen-small-and-narrower) {
-        font-size: 2rem;
+        font-size: var(--font-size-larger);
       }
     }
 
@@ -208,7 +208,7 @@
         padding: var(--button-padding);
 
         font-size: var(--font-size-small);
-        font-weight: 600;
+        font-weight: var(--font-weight-bold);
 
         color: var(--button-color);
 
@@ -364,7 +364,7 @@
             padding: var(--button-padding);
 
             font-size: var(--font-size-small);
-            font-weight: 600;
+            font-weight: var(--font-weight-bold);
 
             color: var(--button-color);
 
@@ -671,8 +671,8 @@
             margin: -1.5rem;
             margin-bottom: 0;
 
-            font-size: 1.25rem;
-            font-weight: 500;
+            font-size: var(--font-size-large);
+            font-weight: var(--font-weight-bold);
 
             color: var(--boxes-header-color);
 
@@ -700,7 +700,7 @@
         padding: var(--button-padding);
 
         font: var(--font-size-small);
-        font-weight: 600;
+        font-weight: var(--font-weight-bold);
 
         color: var(--button-color);
 
@@ -784,8 +784,8 @@
       }
 
       th {
-        font-size: 1.25rem;
-        font-weight: 500;
+        font-size: var(--font-size-large);
+        font-weight: var(--font-weight-bold);
         background: none;
 
         @media (--screen-small-and-narrower) {
@@ -878,11 +878,11 @@
         }
 
         h3 {
-          font-size: 1.75rem;
-          font-weight: 600;
+          font-size: var(--font-size-large);
+          font-weight: var(--font-weight-bold);
 
           @media (--screen-small-and-narrower) {
-            font-size: 1.25rem;
+            font-size: var(--font-size-large);
           }
         }
 
@@ -899,7 +899,7 @@
           padding: var(--button-padding);
 
           font-size: var(--font-size-small);
-          font-weight: 600;
+          font-weight: var(--font-weight-bold);
 
           color: var(--button-color);
 

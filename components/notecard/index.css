@@ -10,23 +10,27 @@
   color: var(--color-text-primary);
 
   background-color: var(--color-background-secondary);
-  border-inline-start: 2px solid var(--color-text-secondary);
+  border-inline-start: 2px solid
+    var(--accent-color, var(--color-text-secondary));
   border-radius: 0.25em;
 
   &.note,
   &.secure,
   &.experimental {
     background-color: var(--color-background-blue);
+    --accent-color: var(--color-text-blue);
   }
 
   &.warning,
   &.deprecated,
   &.nonstandard {
     background-color: var(--color-background-red);
+    --accent-color: var(--color-text-red);
   }
 
   &.tip {
     background-color: var(--color-background-green);
+    --accent-color: var(--color-text-green);
   }
 
   &.deprecated,
@@ -49,7 +53,7 @@
 
       content: "";
 
-      background-color: var(--color-text-primary);
+      background-color: var(--accent-color, var(--color-text-secondary));
 
       mask-size: cover;
     }

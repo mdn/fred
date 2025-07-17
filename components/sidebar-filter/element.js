@@ -6,7 +6,6 @@ import { LitElement, html } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 import cancelIcon from "../icon/cancel.svg?lit";
-import filterIcon from "../icon/filter.svg?lit";
 
 import styles from "./element.css?lit";
 import { SidebarFilterer } from "./sidebar-filterer.js";
@@ -159,7 +158,6 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
           class="sidebar-filter-label"
           for="sidebar-filter-input"
         >
-          <span class="icon">${filterIcon}</span>
           <span class="visually-hidden">${this.l10n`Filter sidebar`}</span>
         </label>
         <input

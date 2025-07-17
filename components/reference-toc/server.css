@@ -39,8 +39,8 @@
     }
 
     &[aria-current="true"] {
-      background-color: var(--color-background-blue);
-      box-shadow: -2px 0 0 var(--color-blue-50);
+      background-color: var(--color-area-background);
+      box-shadow: -2px 0 0 var(--color-area-highlight-border);
     }
   }
 }

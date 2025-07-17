@@ -1,7 +1,7 @@
 @import url("../code-example/common.css");
 @import url("../prev-next/index.css");
 @import url("../notecard/index.css");
-@import url("../css-formal-syntax/index.css");
+@import url("../code-example/prism.css");
 
 .content-section {
   line-height: var(--font-line-content);
@@ -12,6 +12,7 @@
   h4,
   h5,
   h6 {
+    margin: 1rem 0 0;
     font-weight: normal;
   }
 
@@ -66,12 +67,43 @@
     }
   }
 
+  pre,
+  code {
+    font-family: var(--font-family-code);
+    font-feature-settings: "calt" 0;
+    background-color: var(--color-background-secondary);
+  }
+
+  pre:not(.code-example pre) {
+    padding: 1rem;
+
+    overflow: auto;
+
+    border: 1px solid var(--color-border-primary);
+    border-radius: 0.25rem;
+
+    &.css-formal-syntax {
+      margin-bottom: 0;
+
+      text-wrap: wrap;
+
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+
+      ~ footer {
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+
+        border: 1px solid var(--color-border-primary);
+        border-top: 0;
+        border-bottom-right-radius: 0.25rem;
+        border-bottom-left-radius: 0.25rem;
+      }
+    }
+  }
+
   code {
     padding: 0.125em 0.25em;
-
-    font-family: var(--font-family-code);
-
-    background-color: var(--color-background-secondary);
     border-radius: 0.25em;
   }
 
@@ -89,6 +121,15 @@
     width: 100%;
     border-collapse: collapse;
 
+    tr {
+      background-color: var(--color-background-primary);
+    }
+
+    thead tr,
+    tr:nth-of-type(2n) {
+      background-color: var(--color-background-page);
+    }
+
     th,
     td {
       padding: 0.5rem 0.75rem;
@@ -98,7 +139,18 @@
     th {
       font-weight: normal;
       text-align: left;
-      background-color: var(--color-background-secondary);
+    }
+
+    &.properties {
+      th,
+      td {
+        border-width: 1px 0;
+      }
+
+      th {
+        font-weight: bold;
+        background-color: transparent;
+      }
     }
   }
 
@@ -173,12 +225,36 @@
 
   /* Definition list */
 
-  dl dd {
-    margin-left: 1rem;
-
+  dl {
     dl {
       padding-left: 1rem;
       border-left: 1px solid var(--color-border-primary);
     }
+
+    dd {
+      margin-left: 1rem;
+    }
+
+    ul {
+      margin: 1rem 0 2rem;
+    }
+
+    a[href^="#"]:hover::before {
+      position: absolute;
+
+      margin-top: 0.3em;
+      margin-left: -0.9em;
+
+      font-size: var(--font-size-small);
+
+      color: var(--color-text-secondary);
+
+      content: "#";
+    }
+  }
+
+  /* Article footer */
+  &.article-footer {
+    margin: 2rem 0;
   }
 }

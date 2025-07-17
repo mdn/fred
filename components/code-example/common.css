@@ -23,22 +23,63 @@
   }
 
   pre {
-    padding: 1rem;
+    display: flex;
     margin: 0;
-
-    overflow: auto;
-
     background-color: var(--color-background-secondary);
 
     code {
-      padding: 0;
+      flex-grow: 1;
+      flex-shrink: 1;
+
+      padding: 1rem;
+
+      overflow: auto;
+
       font-family: var(--font-family-code);
+      font-feature-settings: "calt" 0;
+
       background-color: transparent;
     }
 
     &.hidden,
     &[class*="interactive-example"] {
       display: none;
+    }
+
+    &.example-good,
+    &.example-bad {
+      &::after {
+        display: inline-block;
+
+        flex-shrink: 0;
+
+        width: 1.24rem;
+        height: 1.24rem;
+
+        margin: 1.255rem 1rem;
+
+        content: "";
+
+        mask-size: cover;
+      }
+    }
+
+    &.example-good {
+      background-color: var(--color-background-green);
+
+      &::after {
+        background-color: var(--color-text-green);
+        mask-image: url("../icon/circle-check.svg");
+      }
+    }
+
+    &.example-bad {
+      background-color: var(--color-background-red);
+
+      &::after {
+        background-color: var(--color-text-red);
+        mask-image: url("../icon/circle-x.svg");
+      }
     }
   }
 

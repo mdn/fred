@@ -1,6 +1,6 @@
-/* TODO */
-@import url("../../components/button/server.css");
-@import url("../../components/visually-hidden/global.css");
+@import url("../global/global.css");
+@import url("../button/server.css");
+@import url("../visually-hidden/global.css");
 
 :host {
   font: 400 var(--base-font-size) var(--font-body);
@@ -46,15 +46,9 @@
 
     padding: 0 2rem;
 
-    font: var(--type-emphasis-m);
-    font-size: 1rem;
+    font-size: var(--font-size-normal);
+    font-weight: var(--font-weight-bold);
 
-    /* color: var(--button-color--default); */
-
-    /* appearance: none;
-    cursor: pointer; */
-
-    /* background: var(--button-bg--default); */
     border: none;
     border-radius: 0 var(--border-radius) var(--border-radius) 0;
     border-top-right-radius: var(--border-radius);

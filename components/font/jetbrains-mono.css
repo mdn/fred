@@ -6,6 +6,7 @@
   font-family: "JetBrains Mono";
   font-style: normal;
   font-weight: 100 800;
+  font-feature-settings: "calt" 0;
 
   src: url("fonts/jetbrains-mono-latin.woff2") format("woff2");
   font-display: swap;
@@ -20,6 +21,7 @@
   font-family: "JetBrains Mono";
   font-style: italic;
   font-weight: 100 800;
+  font-feature-settings: "calt" 0;
 
   src: url("fonts/jetbrains-mono-italic-latin.woff2") format("woff2");
   font-display: swap;
@@ -36,6 +38,7 @@
   font-family: "JetBrains Mono";
   font-style: normal;
   font-weight: 100 800;
+  font-feature-settings: "calt" 0;
 
   src: url("fonts/jetbrains-mono-latin-extended.woff2") format("woff2");
   font-display: swap;
@@ -50,6 +53,7 @@
   font-family: "JetBrains Mono";
   font-style: italic;
   font-weight: 100 800;
+  font-feature-settings: "calt" 0;
 
   src: url("fonts/jetbrains-mono-italic-latin-extended.woff2") format("woff2");
   font-display: swap;
@@ -66,6 +70,7 @@
   font-family: "JetBrains Mono";
   font-style: normal;
   font-weight: 100 800;
+  font-feature-settings: "calt" 0;
 
   src: url("fonts/jetbrains-mono-cyrillic.woff2") format("woff2");
   font-display: swap;
@@ -77,6 +82,7 @@
   font-family: "JetBrains Mono";
   font-style: italic;
   font-weight: 100 800;
+  font-feature-settings: "calt" 0;
 
   src: url("fonts/jetbrains-mono-italic-cyrillic.woff2") format("woff2");
   font-display: swap;

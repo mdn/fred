@@ -26,8 +26,8 @@ export function BlogIndexImageFigure(
       <img
         alt=${image.alt || ""}
         src=${src}
-        height=${height}
         width=${width}
+        height=${height}
         loading=${lazyLoad ? "lazy" : "eager"}
       />
     </a>
@@ -46,8 +46,8 @@ function PostPreview(context, blogMeta, lazyLoad = false) {
       ${BlogIndexImageFigure(context, {
         image: blogMeta.image,
         slug: blogMeta.slug,
-        width: 200,
-        height: 200,
+        width: 1200,
+        height: 630,
         lazyLoad,
       })}
       <h2>

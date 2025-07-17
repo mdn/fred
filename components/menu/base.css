@@ -113,14 +113,14 @@
   dl {
     display: grid;
 
-    row-gap: 0.825rem;
+    row-gap: var(--font-size-small);
     align-content: start;
 
     margin: 0;
   }
 
   dt {
-    font-size: 0.825rem;
+    font-size: var(--font-size-small);
 
     color: var(--color-text-secondary);
 
