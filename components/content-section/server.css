@@ -81,6 +81,9 @@
   code {
     font-family: var(--font-family-code);
     font-feature-settings: "calt" 0;
+
+    white-space: pre-wrap;
+
     background-color: var(--color-background-secondary);
   }
 
