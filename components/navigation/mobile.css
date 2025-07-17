@@ -84,4 +84,9 @@
     padding: 0.7rem;
     border-top: 1px solid var(--color-border-primary);
   }
+
+  mdn-user-menu {
+    display: block;
+    border-top: 1px solid var(--color-border-primary);
+  }
 }

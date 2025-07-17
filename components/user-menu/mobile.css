@@ -4,18 +4,7 @@
   /* Login link */
 
   .user-menu__login {
-    display: block;
-
-    padding: 0.9rem 0.7rem;
-
-    line-height: 1.25rem;
-
-    border-top: 1px solid var(--color-border-primary);
-
-    &:hover {
-      color: var(--color-text-blue);
-      background-color: var(--color-background-blue);
-    }
+    margin: 0.9rem 0.7rem;
   }
 
   /* User menu dropdown */
@@ -31,7 +20,6 @@
 
     background-color: transparent;
     border: none;
-    border-top: 1px solid var(--color-border-primary);
 
     &::before,
     &::after {

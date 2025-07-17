@@ -39,4 +39,9 @@
   .navigation__button {
     display: none;
   }
+
+  mdn-user-menu {
+    width: 2.125rem;
+    height: 2.125rem;
+  }
 }
