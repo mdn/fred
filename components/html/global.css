@@ -9,6 +9,8 @@ html {
 
   color: var(--color-text-primary);
 
+  overflow-wrap: break-word;
+
   color-scheme: light dark;
 
   background-color: var(--color-background-page);

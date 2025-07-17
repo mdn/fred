@@ -26,7 +26,7 @@
       font-size: var(--font-size-largest);
       font-weight: normal;
 
-      line-height: var(--font-line-content);
+      line-height: var(--font-line-normal);
     }
   }
 

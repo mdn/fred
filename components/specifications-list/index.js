@@ -1,4 +1,4 @@
-import { html, nothing } from "lit";
+import { html } from "lit";
 import { join } from "lit/directives/join.js";
 
 /**
@@ -21,28 +21,23 @@ export function SpecificationsList(context, specifications) {
   return html`<p>
       ${context.l10n`This feature is defined in the following specifications`}:
     </p>
-    ${specifications.length > 1
-      ? urlsByTitle.entries().map(([title, urls]) => {
-          return html`<details
-            class="specifications-list"
-            ?open=${specifications.length <= 3}
-          >
-            <summary>${title}</summary>
-            <ul>
-              ${urls.map((url) => html`<li>${SpecificationLink(url)}</li>`)}
-            </ul>
-          </details>`;
-        })
-      : specifications[0]
-        ? html`<ul class="specifications-list">
-            <li>
-              ${SpecificationLink(
-                specifications[0].bcdSpecificationURL,
-                specifications[0].title,
-              )}
-            </li>
-          </ul>`
-        : nothing}`;
+    <ul class="specifications-list">
+      ${urlsByTitle.entries().map(([title, urls]) =>
+        urls.length > 1
+          ? html`<li>
+              <details
+                class="specifications-list"
+                ?open=${specifications.length <= 3}
+              >
+                <summary>${title}</summary>
+                <ul>
+                  ${urls.map((url) => html`<li>${SpecificationLink(url)}</li>`)}
+                </ul>
+              </details>
+            </li>`
+          : urls.map((url) => html`<li>${SpecificationLink(url, title)}</li>`),
+      )}
+    </ul>`;
 }
 
 /**
