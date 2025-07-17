@@ -177,6 +177,7 @@
           width: 100%;
           min-width: 15rem;
           max-width: 20rem;
+          height: 100%;
 
           padding: 0;
 
@@ -240,12 +241,11 @@
           > section {
             display: flex;
 
+            flex-grow: 1;
             flex-direction: column;
 
             align-items: center;
             justify-content: space-between;
-
-            height: 13rem;
 
             padding: var(--spacing);
 
