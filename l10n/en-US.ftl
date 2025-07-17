@@ -50,7 +50,7 @@ blog-post-not-found = Blog post not found.
 blog-previous = Previous post
 blog-next = Next post
 
-Report = Report
+obs-report = Report
 
 obs-title = HTTP Observatory
 obs-landing-intro = Launched in 2016, the HTTP Observatory enhances web security by analyzing compliance with best security practices. It has provided insights to over 6.9 million websites through 47 million scans.

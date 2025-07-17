@@ -39,7 +39,7 @@ No = Nein
 Submit = Abschicken
 Yes = Ja
 
-Report = Report
+obs-report = Report
 
 obs-title = HTTP Observatory
 obs-landing-intro = Seit 2016 verbessert HTTP Observatory die Sicherheit durch Analyse der Einhaltung bewährter Sicherheitspraktiken. Es hat durch 47 Millionen Scans Einblicke in über 6,9 Millionen Websites geliefert.
