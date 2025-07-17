@@ -6,6 +6,10 @@
 .content-section {
   line-height: var(--font-line-content);
 
+  :target {
+    scroll-margin-top: var(--sticky-header-height);
+  }
+
   h1,
   h2,
   h3,
