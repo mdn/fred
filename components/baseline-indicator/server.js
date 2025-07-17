@@ -180,28 +180,51 @@ export class BaselineIndicator extends ServerComponent {
       <div class="extra">
         ${level === "high" && low_date
           ? html`<p>
-              ${context.l10n.raw({
-                id: "baseline-high-extra",
-                args: {
-                  date: low_date.toLocaleDateString(context.locale, {
-                    year: "numeric",
-                    month: "long",
-                  }),
-                },
-              })}
-            </p>`
-          : level === "low" && low_date
-            ? html`<p>
                 ${context.l10n.raw({
-                  id: "baseline-low-extra",
+                  id: "baseline-high-extra",
                   args: {
-                    date: low_date.toLocaleDateString(DEFAULT_LOCALE, {
+                    date: low_date.toLocaleDateString(context.locale, {
                       year: "numeric",
                       month: "long",
                     }),
                   },
                 })}
+              </p>
+              <p>
+                ${context.l10n.raw({
+                  id: "baseline-high-extra-year",
+                  args: {
+                    year: low_date.toLocaleDateString(context.locale, {
+                      year: "numeric",
+                    }),
+                  },
+                })}
               </p>`
+          : level === "low" && low_date
+            ? html`<p>
+                  ${context.l10n.raw({
+                    id: "baseline-low-extra",
+                    args: {
+                      date: low_date.toLocaleDateString(DEFAULT_LOCALE, {
+                        year: "numeric",
+                        month: "long",
+                      }),
+                    },
+                  })}
+                </p>
+                <p>
+                  ${context.l10n.raw({
+                    id: "baseline-low-extra-widely",
+                    args: {
+                      date: new Date(
+                        low_date.setMonth(low_date.getMonth() + 30),
+                      ).toLocaleDateString(DEFAULT_LOCALE, {
+                        year: "numeric",
+                        month: "long",
+                      }),
+                    },
+                  })}
+                </p>`
             : html`<p>${context.l10n("baseline-not-extra")}</p>`}
         ${status.asterisk
           ? html`<p>
