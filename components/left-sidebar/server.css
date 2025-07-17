@@ -79,7 +79,7 @@
     }
 
     &.section {
-      font-weight: 600;
+      font-weight: var(--font-weight-bold);
 
       &:not(:first-child) {
         margin-top: 1em;
@@ -88,7 +88,7 @@
   }
 
   a,
-  span {
+  span:not(.highlight-container) {
     display: inline-flex;
     padding-block: 0.25rem;
   }
@@ -108,6 +108,7 @@
   code {
     font-family: var(--font-family-code);
     font-size: var(--font-size-normal);
+    font-feature-settings: "calt" 0;
   }
 
   em {

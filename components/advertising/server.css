@@ -165,7 +165,7 @@ h2 {
 
 .sing__legend {
   max-width: 5rem;
-  font-size: 0.8rem;
+  font-size: var(--font-size-small);
   text-align: center;
 }
 

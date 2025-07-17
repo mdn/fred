@@ -234,6 +234,9 @@ export class Footer extends ServerComponent {
             })}<br />
             ${context.l10n.raw({
               id: "footer-copyright",
+              args: {
+                year: new Date().getUTCFullYear().toString(),
+              },
               elements: {
                 cc: {
                   tag: "a",

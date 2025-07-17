@@ -17,7 +17,7 @@
     display: contents;
   }
 
-  .reference-layout__content__header {
+  .reference-layout__header {
     grid-area: header;
 
     h1 {
@@ -30,7 +30,7 @@
     }
   }
 
-  .reference-layout__content__body {
+  .reference-layout__body {
     grid-area: body;
     padding-bottom: 3rem;
   }

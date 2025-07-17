@@ -21,7 +21,7 @@ export class ReferenceLayout extends ServerComponent {
     return html`
       <div class="reference-layout">
         <main id="content" class="reference-layout__content">
-          <div class="reference-layout__content__header">
+          <div class="reference-layout__header">
             ${TranslationBanner.render(context)}
             <h1>${doc.title}</h1>
             ${BaselineIndicator.render(context)} ${description}
@@ -30,7 +30,7 @@ export class ReferenceLayout extends ServerComponent {
             ${ReferenceToc.render(context)}
             <mdn-placement-sidebar></mdn-placement-sidebar>
           </aside>
-          <div class="reference-layout__content__body">
+          <div class="reference-layout__body">
             <mdn-survey></mdn-survey>
             ${sections} ${ArticleFooter.render(context)}
           </div>

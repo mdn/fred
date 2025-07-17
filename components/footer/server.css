@@ -227,7 +227,7 @@
   p {
     grid-area: legal;
     margin: 0;
-    line-height: 1.5;
+    line-height: var(--font-line-normal);
   }
 
   a {

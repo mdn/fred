@@ -24,7 +24,11 @@
 
   pre {
     display: flex;
+
     margin: 0;
+
+    white-space: pre-wrap;
+
     background-color: var(--color-background-secondary);
 
     code {
@@ -36,6 +40,7 @@
       overflow: auto;
 
       font-family: var(--font-family-code);
+      font-feature-settings: "calt" 0;
 
       background-color: transparent;
     }

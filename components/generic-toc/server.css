@@ -6,7 +6,7 @@
     margin: 0 0 1rem;
 
     font-size: var(--font-size-large);
-    font-weight: 400;
+    font-weight: var(--font-weight-normal);
 
     line-height: 1.2;
 
@@ -42,7 +42,7 @@
     }
 
     &[aria-current="true"] {
-      font-weight: 600;
+      font-weight: var(--font-weight-bold);
 
       background-color: var(--color-background-accent);
       border-left: 2px solid var(--color-accent);
