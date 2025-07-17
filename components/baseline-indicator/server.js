@@ -136,26 +136,23 @@ export class BaselineIndicator extends ServerComponent {
             : context.l10n`Baseline Check`}
         ></span>
         <div class="status-title">
-          ${level === "not"
-            ? html`<span class="not-bold"
-                >${context.l10n`Limited availability`}</span
-              >`
-            : html`
-                ${context.l10n`Baseline`}
+          ${low_date
+            ? html`${context.l10n`Baseline`}
                 <span class="not-bold">
-                  ${level === "high"
-                    ? context.l10n`Widely available`
-                    : context.l10n`Newly available`}
+                  ${low_date.toLocaleDateString(context.locale, {
+                    year: "numeric",
+                  })}
                 </span>
-                ${status.asterisk && " *"}
-              `}
+                ${status.asterisk && " *"} `
+            : html`<span class="not-bold">
+                ${context.l10n`Limited availability`}</span
+              >`}
         </div>
         ${low_date
           ? html`<div class="pill">
-              Baseline
-              ${low_date.toLocaleDateString(context.locale, {
-                year: "numeric",
-              })}
+              ${level === "high"
+                ? context.l10n`Widely available`
+                : context.l10n`Newly available`}
             </div>`
           : nothing}
         <div class="browsers">
