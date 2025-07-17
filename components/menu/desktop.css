@@ -1,6 +1,6 @@
 /* Desktop */
 
-@media (width > 1006px) {
+@media (--screen-menu-full) {
   .menu {
     --menu-button-padding: 0.5rem 0.7rem;
 

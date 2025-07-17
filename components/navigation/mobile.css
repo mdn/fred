@@ -1,6 +1,6 @@
 /* Mobile */
 
-@media (width <= 1006px) {
+@media (--screen-menu-hamburger) {
   :root {
     --top-nav-height: 2.9rem;
   }
