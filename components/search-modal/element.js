@@ -210,7 +210,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
           icon-only
           .icon=${exitIcon}
           @click=${this._close}
-          >Exit search</mdn-button
+          >${this.l10n`Exit search`}</mdn-button
         >
         ${this._queryIndex.render({
           initial: this._renderLoadingSearchIndex.bind(this),
