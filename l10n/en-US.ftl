@@ -1,7 +1,7 @@
 # TODO Use comments, see: https://firefox-source-docs.mozilla.org/l10n/fluent/review.html#comments
 # TODO Consider using terms, see: https://firefox-source-docs.mozilla.org/l10n/fluent/review.html#terms and https://projectfluent.org/fluent/guide/references.html#message-references
 
-article-footer-last-modified = This page was last modified on <time data-l10n-name="date">{ $date }</timestamp> by <a data-l10n-name="contributors">MDN contributors</a>.
+article-footer-last-modified = This page was last modified on <time data-l10n-name="date">{ $date }</time> by <a data-l10n-name="contributors">MDN contributors</a>.
 article-footer-source-title = Folder: { $folder } (Opens in a new tab)
 
 baseline-asterisk = { $asterisk } Some parts of this feature may have varying levels of support.
