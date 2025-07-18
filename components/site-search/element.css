@@ -13,10 +13,7 @@
   a:active {
     text-decoration: none;
   }
-  --color-highlight-background: light-dark(
-    var(--color-yellow-80),
-    var(--color-yellow-20)
-  );
+  --color-highlight-background: var(--color-background-yellow);
 }
 
 .site-search__options {

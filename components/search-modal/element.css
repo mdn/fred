@@ -140,5 +140,5 @@ a {
 
 mark {
   color: var(--color-text-primary);
-  background-color: light-dark(var(--color-yellow-80), var(--color-yellow-20));
+  background-color: var(--color-background-yellow);
 }
