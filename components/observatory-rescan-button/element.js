@@ -1,8 +1,9 @@
 import { LitElement, html } from "lit";
 
 import "../button/element.js";
+import { L10nMixin } from "../../l10n/mixin.js";
 
-export class MDNObservatoryRescanButton extends LitElement {
+export class MDNObservatoryRescanButton extends L10nMixin(LitElement) {
   static properties = {
     from: { type: Object }, // Date object
     duration: { type: Number },
@@ -11,9 +12,13 @@ export class MDNObservatoryRescanButton extends LitElement {
 
   constructor() {
     super();
+    /** @type {Date} */
     this.from = new Date();
+    /** @type {number} */
     this.duration = 60;
+    /** @type {number} */
     this._remainingTime = 0;
+    /** @type {NodeJS.Timer | null} */
     this._interval = null;
   }
 
@@ -57,7 +62,7 @@ export class MDNObservatoryRescanButton extends LitElement {
     return isExpired
       ? html`<mdn-button>Rescan</mdn-button>`
       : html` <mdn-button disabled .icon=${this._icon(progressPercent)}
-          >Please wait to rescan</mdn-button
+          >${this.l10n`Wait a minute to rescan`}</mdn-button
         >`;
   }
 }
