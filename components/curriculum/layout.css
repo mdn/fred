@@ -29,7 +29,18 @@
     grid-template-columns: var(--layout-no-sidebar);
 
     .sidebar-container {
+      position: fixed;
+      inset: 0;
+      top: var(--sticky-header-height);
+      z-index: var(--z-index-sidebar-mobile);
+
       display: none;
+
+      background: var(--color-background-page);
+
+      .sidebar-inner {
+        padding: 1rem;
+      }
     }
   }
 }
