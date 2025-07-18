@@ -8,8 +8,10 @@
   .navigation {
     display: grid;
 
-    grid-template-columns: 1fr min-content;
+    grid-template-columns: 1fr min-content min-content;
 
+    column-gap: 0.25rem;
+    align-items: center;
     justify-items: start;
 
     height: var(--top-nav-height);
@@ -42,7 +44,7 @@
   /* Logo */
 
   .navigation__logo {
-    padding: 0.7rem;
+    padding: 0.2rem;
   }
 
   /* Button */
@@ -52,9 +54,14 @@
     margin: 0;
 
     cursor: pointer;
+    outline-offset: -2px;
 
     background-color: transparent;
     border: none;
+
+    &:hover {
+      background-color: var(--color-background-secondary);
+    }
 
     &::before {
       display: block;
@@ -81,9 +88,16 @@
   /* Search */
 
   .navigation__search {
-    padding: 0.7rem;
-    border-top: 1px solid var(--color-border-primary);
+    &[data-view="mobile"] {
+      display: block;
+    }
+
+    &[data-view="desktop"] {
+      display: none;
+    }
   }
+
+  /* User menu */
 
   mdn-user-menu {
     display: block;
