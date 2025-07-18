@@ -130,6 +130,11 @@
         margin-top: 2rem;
       }
 
+      code {
+        padding: 0.125rem 0.25rem;
+        background: var(--color-background-secondary);
+      }
+
       blockquote.curriculum-notes {
         padding: 1rem;
         margin: 1rem;
