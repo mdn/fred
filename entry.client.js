@@ -3,6 +3,7 @@ import "@lit-labs/ssr-client/lit-element-hydrate-support.js";
 
 // hooks:
 import "./hooks/glean-init.js";
+import "./hooks/dialog-closedby.js";
 import "./hooks/load-elements.js";
 import "./hooks/sidebar-scroll-to-current.js";
 import "./components/navigation/hook.js";
