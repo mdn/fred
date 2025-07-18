@@ -256,17 +256,21 @@
       margin: 1rem 0 2rem;
     }
 
-    a[href^="#"]:hover::before {
-      position: absolute;
+    a[href^="#"] {
+      color: inherit;
 
-      margin-top: 0.3em;
-      margin-left: -0.9em;
+      &:hover::before {
+        position: absolute;
 
-      font-size: var(--font-size-small);
+        margin-top: 0.3em;
+        margin-left: -0.9em;
 
-      color: var(--color-text-secondary);
+        font-size: var(--font-size-small);
 
-      content: "#";
+        color: var(--color-text-secondary);
+
+        content: "#";
+      }
     }
   }
 
