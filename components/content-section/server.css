@@ -1,10 +1,14 @@
 @import url("../code-example/common.css");
 @import url("../prev-next/index.css");
 @import url("../notecard/index.css");
-@import url("../css-formal-syntax/index.css");
+@import url("../code-example/prism.css");
 
 .content-section {
   line-height: var(--font-line-content);
+
+  :target {
+    scroll-margin-top: var(--sticky-header-height);
+  }
 
   h1,
   h2,
@@ -67,25 +71,57 @@
     }
   }
 
-  pre {
+  blockquote {
+    margin-inline: 0;
+    color: var(--color-text-secondary);
+    border-inline-start: 0.25rem solid var(--color-border-primary);
+
+    > p {
+      padding: 1rem 2rem;
+    }
+  }
+
+  pre,
+  code {
+    font-family: var(--font-family-code);
+    font-feature-settings: "calt" 0;
+
+    white-space: pre-wrap;
+
+    background-color: var(--color-background-secondary);
+  }
+
+  pre:not(.code-example pre) {
     padding: 1rem;
+
     overflow: auto;
 
-    &:not(.code-example &) {
-      border: 1px solid var(--color-border-primary);
-      border-radius: 0.25em;
+    border: 1px solid var(--color-border-primary);
+    border-radius: 0.25rem;
+
+    &.css-formal-syntax {
+      margin-bottom: 0;
+
+      text-wrap: wrap;
+
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+
+      ~ footer {
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+
+        border: 1px solid var(--color-border-primary);
+        border-top: 0;
+        border-bottom-right-radius: 0.25rem;
+        border-bottom-left-radius: 0.25rem;
+      }
     }
   }
 
   code {
     padding: 0.125em 0.25em;
     border-radius: 0.25em;
-  }
-
-  pre,
-  code {
-    font-family: var(--font-family-code);
-    background-color: var(--color-background-secondary);
   }
 
   img {
@@ -206,12 +242,85 @@
 
   /* Definition list */
 
-  dl dd {
-    margin-left: 1rem;
-
+  dl {
     dl {
       padding-left: 1rem;
       border-left: 1px solid var(--color-border-primary);
+    }
+
+    dd {
+      margin-left: 1rem;
+    }
+
+    ul {
+      margin: 1rem 0 2rem;
+    }
+
+    a[href^="#"]:hover::before {
+      position: absolute;
+
+      margin-top: 0.3em;
+      margin-left: -0.9em;
+
+      font-size: var(--font-size-small);
+
+      color: var(--color-text-secondary);
+
+      content: "#";
+    }
+  }
+
+  ul.specifications-list {
+    li:has(details) {
+      margin-left: -1.25rem;
+      list-style: none;
+    }
+
+    details {
+      width: 100%;
+
+      &[open] {
+        > summary {
+          margin-bottom: 0.5rem;
+
+          &::before {
+            transform: rotate(90deg);
+          }
+        }
+      }
+
+      summary {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        &::before {
+          display: inline-block;
+
+          flex-shrink: 0;
+
+          width: 1rem;
+          height: 1rem;
+
+          margin: 0.125rem;
+
+          content: "";
+
+          background-color: currentcolor;
+
+          mask-image: url("../icon/chevron-right.svg");
+          mask-size: cover;
+        }
+
+        &:hover {
+          background-color: var(--color-background-secondary);
+
+          &:has(a:hover) {
+            /* Don't highlight, as link click doesn't toggle. */
+            background-color: unset;
+          }
+        }
+      }
     }
   }
 

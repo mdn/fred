@@ -79,7 +79,7 @@
     }
 
     &.section {
-      font-weight: 600;
+      font-weight: var(--font-weight-bold);
 
       &:not(:first-child) {
         margin-top: 1em;
@@ -88,7 +88,7 @@
   }
 
   a,
-  span {
+  span:not(.highlight-container) {
     display: inline-flex;
     padding-block: 0.25rem;
   }
@@ -97,7 +97,7 @@
     color: var(--color-text-primary);
 
     &:hover {
-      color: var(--color-link-normal);
+      color: var(--color-area-link);
     }
 
     &:not(:hover) {
@@ -108,6 +108,7 @@
   code {
     font-family: var(--font-family-code);
     font-size: var(--font-size-normal);
+    font-feature-settings: "calt" 0;
   }
 
   em {
@@ -119,8 +120,8 @@
 
     font-style: normal;
 
-    background-color: var(--color-background-blue);
-    border-left: 2px solid var(--color-blue-50);
+    background-color: var(--color-area-background);
+    border-left: 2px solid var(--color-area-highlight-border);
   }
 
   .icon {

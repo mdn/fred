@@ -32,6 +32,7 @@
       /* codemirror uses `font-family: monospace;` in multiple places
       which causes weird fonts to be used in various locales */
       font-family: var(--font-family-code) !important;
+      font-feature-settings: "calt" 0;
     }
   }
 }

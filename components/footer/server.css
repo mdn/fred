@@ -180,7 +180,11 @@
 .footer__mozilla {
   display: grid;
 
-  grid-template-columns: min-content 1fr;
+  grid-template-areas:
+    "logo"
+    "links"
+    "legal";
+  grid-template-columns: 1fr;
 
   row-gap: 1rem;
   column-gap: 1.5rem;
@@ -192,10 +196,23 @@
 
   border-block-start: 1px solid var(--color-border-primary);
 
+  @media (width > 480px) {
+    grid-template-areas:
+      "logo  links"
+      "legal legal";
+    grid-template-columns: min-content 1fr;
+  }
+
+  .footer__logo {
+    grid-area: logo;
+  }
+
   ul {
     display: flex;
 
     flex-wrap: wrap;
+
+    grid-area: links;
 
     column-gap: 1rem;
 
@@ -208,9 +225,9 @@
   }
 
   p {
-    grid-column: span 2;
+    grid-area: legal;
     margin: 0;
-    line-height: 1.5;
+    line-height: var(--font-line-normal);
   }
 
   a {

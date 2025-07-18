@@ -95,7 +95,7 @@
           margin: 0.5rem auto 1rem 1rem;
 
           font-size: 0.75rem;
-          font-weight: 600;
+          font-weight: var(--font-weight-bold);
 
           color: var(--color);
 

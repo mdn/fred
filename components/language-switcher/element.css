@@ -108,7 +108,8 @@
   background-color: transparent;
   border: none;
 
-  &:hover {
+  &:hover,
+  &[data-current] {
     background-color: var(--color-background-secondary);
   }
 }

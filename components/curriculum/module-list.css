@@ -177,6 +177,7 @@
           width: 100%;
           min-width: 15rem;
           max-width: 20rem;
+          height: 100%;
 
           padding: 0;
 
@@ -213,7 +214,7 @@
 
             padding: var(--spacing);
 
-            font-weight: var(--font-body-strong-weight);
+            font-weight: var(--font-weight-bold);
 
             background-color: var(--curriculum-bg-color-list-item-header);
 
@@ -240,16 +241,15 @@
           > section {
             display: flex;
 
+            flex-grow: 1;
             flex-direction: column;
 
             align-items: center;
             justify-content: space-between;
 
-            height: 11rem;
-
             padding: var(--spacing);
 
-            font-size: var(--type-smaller-font-size);
+            font-size: var(--font-size-normal);
 
             p {
               margin: 0;
@@ -258,7 +258,7 @@
             }
 
             p:last-child {
-              font-weight: 600;
+              font-weight: var(--font-weight-bold);
               color: var(--curriculum-color-topic);
             }
           }

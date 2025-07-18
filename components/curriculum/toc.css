@@ -15,7 +15,7 @@
         margin: 0 0 1rem;
 
         font-size: var(--font-size-normal);
-        font-weight: 400;
+        font-weight: var(--font-weight-normal);
 
         line-height: var(--font-line-content);
 
@@ -23,9 +23,8 @@
       }
 
       .document-toc-list {
-        --toc-header-font-size: var(--font-size-small);
         padding-left: 0;
-        font-size: var(--font-size-small);
+        font-size: var(--font-size-normal);
         list-style: none;
 
         li {
@@ -44,12 +43,8 @@
 
         border-left: 2px solid var(--color-border-primary);
 
-        &:hover {
-          color: var(--text-link);
-        }
-
         &[aria-current]:not([aria-current=""], [aria-current="false"]) {
-          font-weight: 600;
+          font-weight: var(--font-weight-bold);
 
           color: var(--text-primary);
 
@@ -68,7 +63,7 @@
         padding: 0;
         margin: 0;
 
-        font-size: var(--toc-header-font-size, var(--font-size-large));
+        font-size: var(--font-size-normal);
         font-weight: normal;
       }
 

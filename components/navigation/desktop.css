@@ -1,6 +1,6 @@
 /* Desktop */
 
-@media (width > 1006px) {
+@media (--screen-menu-full) {
   :root {
     --top-nav-height: 4.125rem;
   }

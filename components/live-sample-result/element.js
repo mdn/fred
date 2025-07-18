@@ -110,7 +110,9 @@ export class MDNLiveSampleResult extends L10nMixin(LitElement) {
           .sandbox=${this.sandbox}
           .srcPrefix=${this.srcPrefix}
           style=${styleMap({
-            height: this.height ? this.height + "px" : undefined,
+            height: this.height
+              ? `${this.height}${/[0-9]$/.test(this.height) ? "px" : ""}`
+              : undefined,
           })}
         ></mdn-play-runner>
       </div>

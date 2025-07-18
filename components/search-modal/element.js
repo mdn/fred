@@ -5,6 +5,8 @@ import { L10nMixin } from "../../l10n/mixin.js";
 
 import { mdnUrl2Breadcrumb } from "../../utils/mdn-url2breadcrumb.js";
 
+import exitIcon from "../icon/cancel.svg?lit";
+
 import styles from "./element.css?lit";
 
 export class MDNSearchModal extends L10nMixin(LitElement) {
@@ -164,6 +166,10 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     },
   });
 
+  _close() {
+    this.shadowRoot?.querySelector("dialog")?.close();
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this._globalKeydown = this._globalKeydown.bind(this);
@@ -198,6 +204,14 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
             aria-label=${this.l10n`Search`}
           />
         </form>
+        <mdn-button
+          class="close"
+          variant="plain"
+          icon-only
+          .icon=${exitIcon}
+          @click=${this._close}
+          >${this.l10n`Exit search`}</mdn-button
+        >
         ${this._queryIndex.render({
           initial: this._renderLoadingSearchIndex.bind(this),
           pending: this._renderLoadingSearchIndex.bind(this),

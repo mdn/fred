@@ -3,6 +3,7 @@ import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
+import { HeadingAnchor } from "../heading-anchor/server.js";
 import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
 
@@ -41,7 +42,11 @@ export class GenericCommunity extends ServerComponent {
     } else if (section.value.id === "help_us_fix_open_issues") {
       return html`
         <section aria-labelledby=${section.value.id}>
-          <h2 id=${section.value.id}>${section.value.title}</h2>
+          ${HeadingAnchor.render(
+            2,
+            section.value.id ? String(section.value.id) : null,
+            String(section.value.title),
+          )}
           <div class="section-content">
             ${unsafeHTML(section.value.content)}
           </div>
@@ -102,9 +107,11 @@ export class GenericCommunity extends ServerComponent {
     // Default: render prose
     return html`
       <section aria-labelledby=${ifDefined(section.value.id ?? undefined)}>
-        <h2 id=${ifDefined(section.value.id ?? undefined)}>
-          ${section.value.title}
-        </h2>
+        ${HeadingAnchor.render(
+          2,
+          section.value.id ? String(section.value.id) : null,
+          String(section.value.title),
+        )}
         <div class="section-content">${unsafeHTML(section.value.content)}</div>
       </section>
     `;

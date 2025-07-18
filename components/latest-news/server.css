@@ -72,7 +72,7 @@
   font-size: var(--font-size-normal);
   font-weight: 500;
 
-  line-height: 1.5;
+  line-height: var(--font-line-normal);
 }
 
 .latest-news__date {

@@ -10,7 +10,7 @@
 
   overflow: auto;
 
-  font-size: 0.875rem;
+  font-size: var(--font-size-small);
 
   background-color: var(--color-background-secondary);
 }
@@ -31,5 +31,6 @@ li {
 
 code {
   font-family: var(--font-family-code);
+  font-feature-settings: "calt" 0;
   tab-size: 4;
 }
