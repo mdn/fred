@@ -33,13 +33,23 @@ export class GenericSidebar extends ServerComponent {
   /**
    * @param {import("@fred").Context<import("@rari").GenericPage>} context
    */
-  render(context) {
+  static sidebarName(context) {
     if (context.path.startsWith("/en-US/observatory/docs")) {
-      return this.renderSidebar(context, sidebarData.observatory);
+      return "observatory";
     } else if (context.path.startsWith("/en-US/plus/docs")) {
-      return this.renderSidebar(context, sidebarData.mdnPlus);
+      return "mdnPlus";
     }
-    return nothing;
+    return;
+  }
+
+  /**
+   * @param {import("@fred").Context<import("@rari").GenericPage>} context
+   */
+  render(context) {
+    const sidebarName = GenericSidebar.sidebarName(context);
+    return sidebarName
+      ? this.renderSidebar(context, sidebarData[sidebarName])
+      : nothing;
   }
 
   /**
