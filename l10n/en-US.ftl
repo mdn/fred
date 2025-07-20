@@ -108,7 +108,7 @@ compat-support-flags =
     [one] {" "}to <code data-l10n-name="value">{ $flag_value }</code>
     *[other] {""}
   }{"."}
-  { NUMBER($flag_type) ->
+  { $flag_type ->
     [preference] To change preferences in { $browser_name }, visit { $browser_pref_url }.
     *[other] {""}
   }

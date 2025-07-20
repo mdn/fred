@@ -18,26 +18,23 @@ export function SpecificationsList(context, specifications) {
     urlsByTitle.set(title, urls);
   }
 
-  return html`<p>
-      ${context.l10n`This feature is defined in the following specifications`}:
-    </p>
-    <ul class="specifications-list">
+  return html`<table>
+    <thead>
+      <tr>
+        <th scope="col">${context.l10n`Specification`}</th>
+      </tr>
+    </thead>
+    <tbody>
       ${urlsByTitle.entries().map(([title, urls]) =>
-        urls.length > 1
-          ? html`<li>
-              <details
-                class="specifications-list"
-                ?open=${specifications.length <= 3}
-              >
-                <summary>${title}</summary>
-                <ul>
-                  ${urls.map((url) => html`<li>${SpecificationLink(url)}</li>`)}
-                </ul>
-              </details>
-            </li>`
-          : urls.map((url) => html`<li>${SpecificationLink(url, title)}</li>`),
+        urls.map(
+          (url) =>
+            html`<tr>
+              <td>${SpecificationLink(url, title)}</td>
+            </tr>`,
+        ),
       )}
-    </ul>`;
+    </tbody>
+  </table>`;
 }
 
 /**

@@ -20,6 +20,9 @@ export class Navigation extends ServerComponent {
     return html`
       <nav class="navigation" data-scheme=${colorScheme} data-open="false">
         <div class="navigation__logo">${Logo.render(context)}</div>
+        <div class="navigation__search" data-view="mobile">
+          <mdn-search-button></mdn-search-button>
+        </div>
         <button
           class="navigation__button"
           type="button"
@@ -29,15 +32,15 @@ export class Navigation extends ServerComponent {
         ></button>
         <div class="navigation__popup" id="navigation__popup">
           <div class="navigation__menu">${Menu.render(context)}</div>
-          <div class="navigation__search">
+          <div class="navigation__search" data-view="desktop">
             <mdn-search-button></mdn-search-button>
           </div>
           ${WRITER_MODE
             ? nothing
             : html`<mdn-user-menu locale=${context.locale}></mdn-user-menu>`}
         </div>
-        <mdn-search-modal id="search"></mdn-search-modal>
       </nav>
+      <mdn-search-modal id="search"></mdn-search-modal>
     `;
   }
 }
