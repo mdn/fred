@@ -1,5 +1,8 @@
 import { html, svg } from "lit";
 
+import { Button } from "../button/server.js";
+import feedbackIcon from "../icon/circle-alert.svg?lit";
+import faqIcon from "../icon/circle-help.svg?lit";
 import assessmentSvg from "../observatory/assets/assessment.svg?lit";
 import landingSvg from "../observatory/assets/landing-illustration.svg?lit";
 import mdnSvg from "../observatory/assets/mdn.svg?lit";
@@ -10,9 +13,6 @@ import { PageLayout } from "../page-layout/server.js";
 
 import { ServerComponent } from "../server/index.js";
 
-import { FAQ } from "./faq.js";
-import { Feedback } from "./feedback.js";
-
 export class ObservatoryLanding extends ServerComponent {
   /**
    * @param {import("@fred").Context<import("@rari").SPAPage>} context
@@ -22,72 +22,89 @@ export class ObservatoryLanding extends ServerComponent {
     return PageLayout.render(
       context,
       html`
-    <div class="obs-layout obs-layout--landing">
-      <div id="content" class="obs-layout__content obs-layout__content--landing">
-        <section class="obs-landing-top">
-          <section class="obs-landing-top__form">
-            <h1>
-              <span class="accent">${context.l10n("obs-title")}</span>
-            </h1>
-            <p>
-              ${context.l10n("obs-landing-intro")}
-            </p>
-            <mdn-observatory-form></mdn-observatory-form>
-          </section>
-          <section class="obs-landing-top__illustration">
-            ${landingSvg}
-          </section>
-        </section>
-        <section class="obs-landing-about">
-          <section class="obs-landing-about__content">
-            <h2>${context.l10n("obs-about-title")`About the HTTP Observatory`}</h2>
-            <div class="about-copy">
-              <figure class="assessment">
-                ${assessmentSvg}
-                <figcaption>
-                  <p>
-                    ${context.l10n("obs-assessment")}
-                  </p>
-                </figcaption>
-              </figure>
-              ${LinesSVG({ className: "lines assessment" })}
-              <figure class="scanning">
-                ${scanningSvg}
-                <figcaption>
-                  <p>
-                    ${context.l10n("obs-scanning")}
-                  </p>
-                </figcaption>
-              </figure>
-              ${LinesSVG({ className: "lines scanning" })}
-              <figure class="security">
-                ${securitySvg}
-                <figcaption>
-                  <p>
-                    ${context.l10n("obs-security")}
-                  </p>
-                </figcaption>
-              </figure>
-              ${LinesSVG({ className: "lines security" })}
-              <figure class="mdn">
-                ${mdnSvg}
-                <figcaption>
-                  <p>
-                    ${context.l10n("obs-mdn")}
-                  </p>
-                </figcaption>
-              </figure>
+        <main id="content" class="observatory">
+          <section class="observatory-top">
+            <div class="observatory-top__form">
+              <h1 class="observatory-top-form__title">
+                ${context.l10n("obs-title")}
+              </h1>
+              <p class="observatory-top-form__description">
+                ${context.l10n("obs-landing-intro")}
+              </p>
+              <mdn-observatory-form
+                class="observatory-top-form__form"
+              ></mdn-observatory-form>
             </div>
+            <section class="observatory-top__illustration">
+              ${landingSvg}
+            </section>
           </section>
-          <section class="obs-landing-about__links">
-            ${FAQ(context)}
-            ${Feedback(context)}
+          <section class="observatory-about-wrapper">
+            <div class="observatory-about">
+              <h2 class="observatory-about__title">
+                ${context.l10n("obs-about-title")`About the HTTP Observatory`}
+              </h2>
+              <div class="observatory-about__content">
+                <figure class="assessment">
+                  ${assessmentSvg}
+                  <figcaption>
+                    <p>${context.l10n("obs-assessment")}</p>
+                  </figcaption>
+                </figure>
+                ${LinesSVG({ className: "lines assessment" })}
+                <figure class="scanning">
+                  ${scanningSvg}
+                  <figcaption>
+                    <p>${context.l10n("obs-scanning")}</p>
+                  </figcaption>
+                </figure>
+                ${LinesSVG({ className: "lines scanning" })}
+                <figure class="security">
+                  ${securitySvg}
+                  <figcaption>
+                    <p>${context.l10n("obs-security")}</p>
+                  </figcaption>
+                </figure>
+                ${LinesSVG({ className: "lines security" })}
+                <figure class="mdn">
+                  ${mdnSvg}
+                  <figcaption>
+                    <p>${context.l10n("obs-mdn")}</p>
+                  </figcaption>
+                </figure>
+              </div>
+              <aside class="observatory-about__links">
+                <!-- <a
+                  href="/en-US/observatory/docs/faq"
+                  target="_blank"
+                  rel="noopener"
+                  class="obs-links__link obs-links__link--faq"
+                >
+                </a> -->
+                ${Button.render(context, {
+                  label: context.l10n`Read our FAQ`,
+                  variant: "plain",
+                  icon: faqIcon,
+                  rel: "noopener",
+                  target: "_blank",
+                  href: "/en-US/observatory/docs/faq",
+                })}
+                ${Button.render(context, {
+                  label: context.l10n`Report Feedback`,
+                  variant: "plain",
+                  icon: feedbackIcon,
+                  rel: "noopener",
+                  target: "_blank",
+                  href: "https://survey.alchemer.com/s3/7897385/MDN-HTTP-Observatory",
+                })}
+              </aside>
+            </div>
+            <section class="observatory-sidebar">
+              <mdn-placement-sidebar></mdn-placement-sidebar>
+            </section>
           </section>
-        </section>
-        </section>
-      </div>
-    </div>
-  `,
+        </main>
+      `,
     );
   }
 }

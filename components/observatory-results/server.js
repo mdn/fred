@@ -1,6 +1,5 @@
 import { html } from "lit";
 
-import { Feedback } from "../observatory-landing/feedback.js";
 import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
 
@@ -38,7 +37,7 @@ export class ObservatoryResults extends ServerComponent {
                   >
                   ${context.l10n("obs-report")}
                 </h1>
-                <div class="obs-results__feedback">${Feedback(context)}</div>
+                <div class="obs-results__feedback">FEEDBACK</div>
               </section>
 
               <aside class="obs-toc">

@@ -4,6 +4,7 @@
 
 :host {
   font: 400 var(--base-font-size) var(--font-body);
+  --border-radius: 0.3rem;
 }
 
 .observatory-form__input-group {
