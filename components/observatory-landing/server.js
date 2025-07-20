@@ -74,13 +74,6 @@ export class ObservatoryLanding extends ServerComponent {
                 </figure>
               </div>
               <aside class="observatory-about__links">
-                <!-- <a
-                  href="/en-US/observatory/docs/faq"
-                  target="_blank"
-                  rel="noopener"
-                  class="obs-links__link obs-links__link--faq"
-                >
-                </a> -->
                 ${Button.render(context, {
                   label: context.l10n`Read our FAQ`,
                   variant: "plain",

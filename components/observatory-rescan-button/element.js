@@ -3,7 +3,10 @@ import { LitElement, html } from "lit";
 import "../button/element.js";
 import { L10nMixin } from "../../l10n/mixin.js";
 
+import styles from "./element.css?lit";
+
 export class MDNObservatoryRescanButton extends L10nMixin(LitElement) {
+  static styles = styles;
   static properties = {
     from: { type: Object }, // Date object
     duration: { type: Number },

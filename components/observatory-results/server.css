@@ -1,1 +1,109 @@
-@import url("../observatory/index.css");
+@import url("../observatory/colors.css");
+@import url("../observatory/common.css");
+
+.observatory-results-wrapper {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 0)
+    [full-start content-start]
+    minmax(0, 71rem)
+    [content-end]
+    var(--layout-sidebar-gap)
+    [sidebar-start right-sidebar-start]
+    minmax(var(--layout-sidebar-min), 1fr)
+    [full-end sidebar-end right-sidebar-end];
+
+  padding-inline: var(--layout-side-padding);
+  padding-top: 1rem;
+
+  background-color: var(--color-background-secondary);
+
+  @media (--screen-layout-no-sidebar) {
+    display: block;
+  }
+}
+
+.observatory-results {
+  grid-area: content;
+}
+
+.observatory-results-toc {
+  position: sticky;
+  top: var(--sticky-header-height);
+
+  grid-area: sidebar;
+
+  max-height: calc(100vh - var(--sticky-header-height));
+
+  padding: 0 0 2rem;
+  margin-bottom: 0;
+
+  overflow-y: auto;
+}
+
+.observatory-results-toc__heading {
+  margin: 0 0 1rem;
+  margin-top: 1.5rem;
+
+  font-size: var(--font-size-normal);
+  font-weight: 400;
+
+  color: var(--color-text-secondary);
+}
+
+.observatory-results-toc__list {
+  display: inline-block;
+
+  padding: 0 1rem;
+  margin: 0;
+
+  font-size: var(--font-size-normal);
+
+  text-decoration: none;
+
+  list-style: none;
+
+  border-left: 2px solid var(--color-border-primary);
+}
+
+.observatory-results-toc__item {
+  padding: 0.5rem 0;
+
+  a {
+    color: var(--color-text-primary);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.observatory-results__header {
+  display: flex;
+
+  flex-direction: row;
+
+  column-gap: 2rem;
+  justify-content: space-between;
+}
+
+.observatory-results__title {
+  padding: 0;
+  margin: 0;
+
+  font-size: var(--font-size-largest);
+  font-weight: var(--font-weight-bold);
+
+  line-height: var(--font-line-normal);
+
+  .accent {
+    color: var(--observatory-accent);
+  }
+}
+
+.observatory-results__feedback {
+  align-self: flex-end;
+  margin-bottom: 0.3rem;
+}

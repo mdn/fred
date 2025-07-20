@@ -1,9 +1,5 @@
 @import url("../observatory/colors.css");
-
-.observatory {
-  line-height: var(--font-line-content);
-  color: var(--color-text-primary);
-}
+@import url("../observatory/common.css");
 
 /* upper part */
 .observatory-top {
@@ -82,9 +78,9 @@
   grid-template-columns:
     minmax(0, 0)
     [full-start content-start]
-    minmax(0, var(--layout-content-max))
+    minmax(0, 71rem)
     [content-end]
-    minmax(var(--layout-sidebar-gap), 1fr)
+    var(--layout-sidebar-gap)
     [sidebar-start right-sidebar-start]
     minmax(var(--layout-sidebar-min), 1fr)
     [full-end sidebar-end right-sidebar-end];
@@ -105,6 +101,7 @@
 
 .observatory-sidebar {
   grid-area: sidebar;
+  justify-content: end;
 }
 
 .observatory-about__title {

@@ -1,0 +1,5 @@
+/* observatory assets */
+.observatory {
+  line-height: var(--font-line-content);
+  color: var(--color-text-primary);
+}
