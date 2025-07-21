@@ -71,6 +71,10 @@
   }
 }
 
+.observatory-top-form__form {
+  margin-bottom: 2rem;
+}
+
 /* lower parts */
 .observatory-about-wrapper {
   display: grid;

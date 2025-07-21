@@ -87,6 +87,11 @@
 
   column-gap: 2rem;
   justify-content: space-between;
+
+  @media (--screen-small-and-narrower) {
+    flex-direction: column;
+    row-gap: 0.5rem;
+  }
 }
 
 .observatory-results__title {
@@ -106,4 +111,9 @@
 .observatory-results__feedback {
   align-self: flex-end;
   margin-bottom: 0.3rem;
+
+  @media (--screen-small-and-narrower) {
+    align-self: flex-start;
+    margin-bottom: 0;
+  }
 }
