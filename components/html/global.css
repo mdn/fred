@@ -3,11 +3,14 @@
 html {
   font-family: var(--font-family-text);
   font-size: var(--font-size-normal);
+  font-feature-settings: "calt" 0;
   font-variant-alternates: styleset(disambiguation);
 
   line-height: var(--font-line-normal);
 
   color: var(--color-text-primary);
+
+  overflow-wrap: break-word;
 
   color-scheme: light dark;
 

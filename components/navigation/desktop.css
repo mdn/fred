@@ -1,6 +1,6 @@
 /* Desktop */
 
-@media (width > 1006px) {
+@media (--screen-menu-full) {
   :root {
     --top-nav-height: 4.125rem;
   }
@@ -23,8 +23,6 @@
   /* Logo */
 
   .navigation__logo {
-    padding: 0.5rem;
-    padding-right: 0;
     margin-inline-start: -6px;
   }
 
@@ -38,5 +36,24 @@
 
   .navigation__button {
     display: none;
+  }
+
+  /* Search */
+
+  .navigation__search {
+    &[data-view="mobile"] {
+      display: none;
+    }
+
+    &[data-view="desktop"] {
+      display: block;
+    }
+  }
+
+  /* User menu */
+
+  mdn-user-menu {
+    width: 2.125rem;
+    height: 2.125rem;
   }
 }

@@ -291,6 +291,10 @@
     }
   }
 
+  .tabpanel {
+    scroll-margin-top: calc(var(--sticky-header-height) + 4rem);
+  }
+
   ol,
   ul {
     padding: 0;

@@ -1,3 +1,8 @@
+.logo {
+  display: block;
+  padding: 0.5rem;
+}
+
 .logo__image {
   display: block;
 }

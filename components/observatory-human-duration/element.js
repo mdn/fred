@@ -1,17 +1,18 @@
-import { LitElement, css, html } from "lit";
+import { LitElement, html } from "lit";
 
 import {
   formatDateTime,
   humanizedDurationFromNow,
 } from "../observatory/utils.js";
 
+import styles from "./element.css?lit";
+
 export class MDNObservatoryHumanDuration extends LitElement {
+  static styles = styles;
   static properties = {
     date: { type: Date },
     _text: { state: true },
   };
-
-  static styles = css``;
 
   constructor() {
     super();

@@ -19,3 +19,6 @@
 @custom-media --screen-xlarge-and-narrower (width <= 1441px);
 
 @custom-media --screen-xxlarge (1441px < width);
+
+@custom-media --screen-menu-full (width > 1006px);
+@custom-media --screen-menu-hamburger (width <= 1006px);

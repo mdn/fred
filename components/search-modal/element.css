@@ -6,47 +6,74 @@
 
 dialog {
   padding: 0;
+  border: 0;
 
-  background-color: var(--color-background-primary);
-  border: 1px solid var(--color-border-primary);
-  border-radius: 0.5rem;
-
-  /* Desktop menu */
-  @media (width > 1006px) {
+  @media (--screen-menu-full) {
     width: calc(var(--layout-content-max) + 1rem);
     max-height: calc(100% - var(--sticky-header-height) - 2rem);
+
     margin: calc(var(--sticky-header-height) + 1rem) auto 1rem;
+
+    font-size: var(--font-size-large);
+
+    background-color: var(--color-background-primary);
+    border: 1px solid var(--color-border-primary);
+    border-radius: 0.5rem;
+
+    &::backdrop {
+      background-color: light-dark(
+        var(--color-white-alpha-75),
+        var(--color-black-alpha-75)
+      );
+      backdrop-filter: blur(3px);
+    }
   }
 
-  /* Mobile menu */
-  @media (width <= 1006px) {
+  @media (--screen-menu-hamburger) {
     width: 100%;
-    max-height: calc(100% - 2rem);
-    margin: 1rem auto;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+
+    margin: 0;
+
+    font-size: var(--font-size-normal);
   }
 
   &[open] {
-    display: flex;
-    flex-direction: column;
-  }
+    display: grid;
 
-  &::backdrop {
-    background-color: light-dark(
-      var(--color-white-alpha-75),
-      var(--color-black-alpha-75)
-    );
-    backdrop-filter: blur(3px);
+    grid-template-areas:
+      "search   close"
+      "progress progress"
+      "results  results";
+    grid-template-rows: var(--top-nav-height) min-content min-content;
+    grid-template-columns: 1fr min-content;
   }
 }
 
 progress {
-  width: calc(100% - 2rem);
-  margin: 0 auto 0.5rem;
+  grid-area: progress;
+  margin: 0 1rem 0.5rem;
+
+  @media (--screen-menu-hamburger) {
+    margin-inline: 0.3rem;
+  }
+}
+
+.close {
+  grid-area: close;
+  font-size: 1.37rem;
+
+  @media (--screen-menu-full) {
+    display: none;
+  }
 }
 
 form {
   display: grid;
 
+  grid-area: search;
   grid-template-columns: min-content 1fr;
 
   gap: 0.5rem;
@@ -54,7 +81,16 @@ form {
 
   padding: 1rem;
 
-  font-size: var(--font-size-large);
+  @media (--screen-menu-hamburger) {
+    align-self: center;
+
+    padding: 0.5rem;
+    margin-left: 0.3rem;
+
+    background-color: var(--color-background-primary);
+    border: 1px solid var(--color-border-primary);
+    border-radius: 0.5rem;
+  }
 
   &::before {
     width: 1em;
@@ -88,6 +124,8 @@ input {
 }
 
 ul {
+  grid-area: results;
+
   padding: 0;
   margin: 0;
 
@@ -129,10 +167,6 @@ a {
   }
 }
 
-.title {
-  font-size: var(--font-size-large);
-}
-
 .slug {
   font-size: var(--font-size-small);
   color: var(--color-text-secondary);
@@ -140,5 +174,5 @@ a {
 
 mark {
   color: var(--color-text-primary);
-  background-color: light-dark(var(--color-yellow-80), var(--color-yellow-20));
+  background-color: var(--color-background-yellow);
 }

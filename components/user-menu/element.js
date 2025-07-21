@@ -6,10 +6,13 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { L10nMixin } from "../../l10n/mixin.js";
 
 import { FXA_SIGNIN_URL, FXA_SIGNOUT_URL } from "../env/index.js";
+import logInIcon from "../icon/log-in.svg?lit";
 import { globalUser } from "../user/context.js";
 
 import styles from "./element.css?lit";
 import { getLinks } from "./links.js";
+
+import "../button/element.js";
 
 export class MDNUserMenu extends L10nMixin(LitElement) {
   static styles = styles;
@@ -116,9 +119,14 @@ export class MDNUserMenu extends L10nMixin(LitElement) {
                 </div>
               `
             : html`
-                <a class="user-menu__login" href=${this.#loginUrl()}>
+                <mdn-button
+                  class="user-menu__login"
+                  href=${this.#loginUrl()}
+                  .icon=${logInIcon}
+                  variant="plain"
+                >
                   ${this.l10n("login")}
-                </a>
+                </mdn-button>
               `;
         },
     });

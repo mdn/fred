@@ -27,7 +27,7 @@ export class MDNModal extends LitElement {
 
   render() {
     return html`
-      <dialog>
+      <dialog closedby="any">
         <header>
           ${this.modalTitle ? html`<h2>${this.modalTitle}</h2>` : nothing}
           <mdn-button

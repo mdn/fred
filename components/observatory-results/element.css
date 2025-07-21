@@ -1,8 +1,9 @@
 @import url("../global/global.css");
 @import url("../visually-hidden/global.css");
 
-/* TODO: remove this import, buttons should use the button component directly, not its styles */
-@import url("../button/server.css");
+:host {
+  line-height: var(--font-line-content);
+}
 
 .scan-result {
   display: grid;
@@ -10,16 +11,20 @@
   grid-template-areas: "grade data actions";
   grid-template-columns: auto 3fr 1fr;
 
-  column-gap: var(--spacing);
+  column-gap: 2rem;
   justify-content: space-between;
 
   max-width: var(--max-width);
 
-  padding: var(--spacing);
+  a {
+    color: var(--color-text-primary);
+  }
+
+  padding: 2rem;
   margin-bottom: 3rem;
 
   background-color: var(--color-background-primary);
-  border-radius: var(--border-radius);
+  border-radius: 0.3rem;
 
   @media (--screen-large-and-narrower) {
     grid-template-areas: "grade data actions";
@@ -33,13 +38,9 @@
   @media (--screen-medium-and-narrower) {
     grid-template-areas:
       "grade data   "
-      ".     actions";
+      "grade actions";
     grid-template-columns: min-content 1fr;
   }
-}
-
-:host {
-  line-height: var(--font-line-content);
 }
 
 .trend {
@@ -81,13 +82,13 @@ h2 {
 h2.summary::before {
   width: 2rem;
   height: 1.4rem;
-  mask-image: var(--summary-icon);
+  mask-image: url("../observatory/assets/summary-icon.svg");
 }
 
 h2.result::before {
   width: 2rem;
   height: 1.2rem;
-  mask-image: var(--results-icon);
+  mask-image: url("../observatory/assets/results-icon.svg");
 }
 
 code {
@@ -105,6 +106,10 @@ code {
 
 .actions {
   grid-area: actions;
+
+  @media (--screen-medium-and-narrower) {
+    margin-top: 1rem;
+  }
 }
 
 mdn-observatory-rescan-button {
@@ -130,16 +135,6 @@ mdn-observatory-rescan-button {
 
 .label {
   font-weight: var(--font-weight-bold);
-}
-
-a {
-  color: var(--color-text-primary);
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-    text-decoration-color: var(--color-text-secondary);
-  }
 }
 
 .grade {
@@ -242,6 +237,7 @@ a {
       color: var(--color-tooltip);
 
       &.current {
+        font-weight: var(--font-weight-bold);
         color: var(--color-tooltip-highlight);
       }
     }
@@ -668,12 +664,12 @@ ol.tabs-list {
 
       grid-area: mod;
 
+      width: calc(100vw - 14rem - 4rem);
+
       margin: 0;
 
-      @media (--screen-medium-and-narrower) {
-        width: calc(
-          100vw - 12rem - 3rem
-        ); /* 12rem: placement width; 3rem: padding */
+      @media (--screen-xlarge-and-wider) {
+        width: 100%;
       }
 
       @media (--screen-small-and-narrower) {

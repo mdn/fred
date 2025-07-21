@@ -154,18 +154,47 @@
   }
 }
 
-/* Featured */
+/* Icon */
 
-.menu__panel-featured {
-  color: tomato;
+.menu__panel-icon {
+  display: inline-flex;
+  column-gap: 0.5rem;
+  align-items: center;
 
-  a {
-    display: flex;
-    column-gap: 0.25rem;
-    align-items: center;
+  &::before {
+    display: inline-block;
+
+    width: 1.25rem;
+    height: 1.25rem;
+
+    content: "";
+
+    background-color: currentcolor;
+
+    mask-size: cover;
   }
 
-  svg {
-    fill: currentcolor;
+  &[data-icon="circle-play"]::before {
+    mask-image: url("../icon/circle-play.svg");
+  }
+
+  &[data-icon="shield-check"]::before {
+    mask-image: url("../icon/shield-check.svg");
+  }
+
+  &[data-icon="mdn-m"]::before {
+    mask-image: url("../icon/mdn-m.svg");
+  }
+
+  &[data-icon="chart-no-axes-combined"]::before {
+    mask-image: url("../icon/chart-no-axes-combined.svg");
+  }
+
+  &[data-icon="users"]::before {
+    mask-image: url("../icon/users.svg");
+  }
+
+  &[data-icon="github"]::before {
+    mask-image: url("../icon/social/github.svg");
   }
 }

@@ -1,10 +1,10 @@
 # TODO Use comments, see: https://firefox-source-docs.mozilla.org/l10n/fluent/review.html#comments
 # TODO Consider using terms, see: https://firefox-source-docs.mozilla.org/l10n/fluent/review.html#terms and https://projectfluent.org/fluent/guide/references.html#message-references
 
-article-footer-last-modified = This page was last modified on <time data-l10n-name="date">{ $date }</timestamp> by <a data-l10n-name="contributors">MDN contributors</a>.
+article-footer-last-modified = This page was last modified on <time data-l10n-name="date">{ $date }</time> by <a data-l10n-name="contributors">MDN contributors</a>.
 article-footer-source-title = Folder: { $folder } (Opens in a new tab)
 
-baseline-asterisk = { $asterisk } Some parts of this feature may have varying levels of support.
+baseline-asterisk = Some parts of this feature may have varying levels of support.
 baseline-high-extra = This feature is well established and works across many devices and browser versions. It’s been available across browsers since { $date }.
 baseline-low-extra = Since { $date }, this feature works across the latest devices and browser versions. This feature might not work in older devices or browsers.
 baseline-low-extra-widely = This feature will become Widely available in <strong>{ $date }</strong>.
@@ -25,7 +25,7 @@ not-found-back = Go back to the home page
 reference-toc-header = In this article
 
 footer-mofo = Visit <a data-l10n-name="moco">Mozilla Corporation’s</a> not-for-profit parent, the <a data-l10n-name="mofo">Mozilla Foundation</a>.
-footer-copyright = Portions of this content are ©1998–2024 by individual mozilla.org contributors. Content available under <a data-l10n-name="cc">a Creative Commons license</a>.
+footer-copyright = Portions of this content are ©1998–{ $year } by individual mozilla.org contributors. Content available under <a data-l10n-name="cc">a Creative Commons license</a>.
 
 search-modal-site-search = Site search for <em>{ $query }</em>
 
@@ -51,14 +51,14 @@ blog-post-not-found = Blog post not found.
 blog-previous = Previous post
 blog-next = Next post
 
-Report = Report
-
-obs-title = HTTP Observatory
-obs-landing-intro = Launched in 2016, the HTTP Observatory enhances web security by analyzing compliance with best security practices. It has provided insights to over 6.9 million websites through 47 million scans.
-obs-assessment = Developed by Mozilla, the HTTP Observatory performs an in-depth assessment of a site’s HTTP headers and other key security configurations.
+-brand-name-obs = HTTP Observatory
+obs-report = Report
+obs-title = { -brand-name-obs }
+obs-landing-intro = Launched in 2016, the { -brand-name-obs } enhances web security by analyzing compliance with best security practices. It has provided insights to over 6.9 million websites through 47 million scans.
+obs-assessment = Developed by Mozilla, the { -brand-name-obs } performs an in-depth assessment of a site’s HTTP headers and other key security configurations.
 obs-scanning = Its automated scanning process provides developers and website administrators with detailed, actionable feedback, focusing on identifying and addressing potential security vulnerabilities.
 obs-security = The tool is instrumental in helping developers and website administrators strengthen their sites against common security threats in a constantly advancing digital environment.
-obs-mdn = The HTTP Observatory provides effective security insights, guided by Mozilla's expertise and commitment to a safer and more secure internet and based on well-established trends and guidelines.
+obs-mdn = The { -brand-name-obs } provides effective security insights, guided by Mozilla's expertise and commitment to a safer and more secure internet and based on well-established trends and guidelines.
 
 
 compat-loading = Loading…
@@ -109,7 +109,7 @@ compat-support-flags =
     [one] {" "}to <code data-l10n-name="value">{ $flag_value }</code>
     *[other] {""}
   }{"."}
-  { NUMBER($flag_type) ->
+  { $flag_type ->
     [preference] To change preferences in { $browser_name }, visit { $browser_pref_url }.
     *[other] {""}
   }
