@@ -17,7 +17,7 @@
   h5,
   h6 {
     margin: 1rem 0 0;
-    font-weight: normal;
+    font-weight: var(--font-weight-normal);
   }
 
   h1 {
@@ -35,16 +35,14 @@
 
   h4 {
     font-size: var(--font-size-normal);
-    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   h5,
   h6 {
-    font-size: var(--font-size-small);
-    font-weight: 500;
-
-    text-transform: uppercase;
-    letter-spacing: 0.025em;
+    font-size: var(--font-size-normal);
+    font-weight: var(--font-weight-bold);
   }
 
   a {
@@ -154,7 +152,7 @@
     }
 
     th {
-      font-weight: normal;
+      font-weight: var(--font-weight-normal);
       text-align: left;
     }
 
@@ -165,7 +163,7 @@
       }
 
       th {
-        font-weight: bold;
+        font-weight: var(--font-weight-bold);
         background-color: transparent;
       }
     }
