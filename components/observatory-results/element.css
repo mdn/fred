@@ -16,6 +16,10 @@
 
   max-width: var(--max-width);
 
+  a {
+    color: var(--color-text-primary);
+  }
+
   padding: 2rem;
   margin-bottom: 3rem;
 
