@@ -12,6 +12,7 @@
   font-family: "Inter";
   font-style: normal;
   font-weight: 100 900;
+  font-feature-settings: "calt" 0;
 
   src: url("fonts/inter-latin.woff2") format("woff2");
   font-display: swap;
@@ -25,6 +26,7 @@
   font-family: "Inter";
   font-style: italic;
   font-weight: 100 900;
+  font-feature-settings: "calt" 0;
 
   src: url("fonts/inter-italic-latin.woff2") format("woff2");
   font-display: swap;
@@ -40,6 +42,7 @@
   font-family: "Inter";
   font-style: normal;
   font-weight: 100 900;
+  font-feature-settings: "calt" 0;
 
   src: url("fonts/inter-latin-extended.woff2") format("woff2");
   font-display: swap;
@@ -53,6 +56,7 @@
   font-family: "Inter";
   font-style: italic;
   font-weight: 100 900;
+  font-feature-settings: "calt" 0;
 
   src: url("fonts/inter-italic-latin-extended.woff2") format("woff2");
   font-display: swap;
@@ -68,6 +72,7 @@
   font-family: "Inter";
   font-style: normal;
   font-weight: 100 900;
+  font-feature-settings: "calt" 0;
 
   src: url("fonts/inter-cyrillic.woff2") format("woff2");
   font-display: swap;
@@ -78,6 +83,7 @@
   font-family: "Inter";
   font-style: italic;
   font-weight: 100 900;
+  font-feature-settings: "calt" 0;
 
   src: url("fonts/inter-italic-cyrillic.woff2") format("woff2");
   font-display: swap;
