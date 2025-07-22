@@ -1,4 +1,8 @@
 .writer-toolbar {
+  display: flex;
+
+  flex-wrap: wrap;
+
   margin-top: 1.5rem;
 
   background: var(--color-background-primary);
