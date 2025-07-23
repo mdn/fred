@@ -40,7 +40,6 @@
       overflow: auto;
 
       font-family: var(--font-family-code);
-      font-feature-settings: "calt" 0;
 
       background-color: transparent;
     }
