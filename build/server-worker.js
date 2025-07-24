@@ -4,7 +4,7 @@ import { parentPort, workerData } from "node:worker_threads";
 import "source-map-support/register.js";
 
 /** @type {import("./types.js").WorkerData} */
-const { reqPath, page, compilationStats } = workerData;
+const { reqPath, context, compilationStats } = workerData;
 
 const ssrStats = compilationStats.find((x) => x.name === "ssr");
 if (!ssrStats) {
@@ -27,7 +27,7 @@ if (!indexModulePath) {
 try {
   /** @type {import("../entry.ssr.js")} */
   const indexModule = await import(indexModulePath);
-  const html = await indexModule?.render(reqPath, page, {
+  const html = await indexModule?.render(reqPath, context, {
     client: compilationStats.find((x) => x.name === "client") || {},
     legacy: compilationStats.find((x) => x.name === "legacy") || {},
   });

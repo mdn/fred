@@ -1,12 +1,14 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 
 import { ArticleFooter } from "../article-footer/server.js";
 import { BaselineIndicator } from "../baseline-indicator/server.js";
 import { ContentSection } from "../content-section/server.js";
+import { WRITER_MODE } from "../env/index.js";
 import { LeftSidebar } from "../left-sidebar/server.js";
 import { ReferenceToc } from "../reference-toc/server.js";
 import { ServerComponent } from "../server/index.js";
 import { TranslationBanner } from "../translation-banner/server.js";
+import { WriterToolbar } from "../writer-toolbar/server.js";
 
 export class ReferenceLayout extends ServerComponent {
   /**
@@ -22,6 +24,7 @@ export class ReferenceLayout extends ServerComponent {
       <div class="reference-layout">
         <main id="content" class="reference-layout__content">
           <div class="reference-layout__header">
+            ${WRITER_MODE ? WriterToolbar.render(context) : nothing}
             ${TranslationBanner.render(context)}
             <h1>${doc.title}</h1>
             ${BaselineIndicator.render(context)} ${description}
