@@ -22,7 +22,6 @@ const sidebarData = {
       { href: "/en-US/plus/docs/features/playground", title: "Playground" },
       { href: "/en-US/plus/docs/features/updates", title: "Updates" },
       { href: "/en-US/plus/docs/features/collections", title: "Collections" },
-      { href: "/en-US/plus/docs/features/offline", title: "MDN Offline" },
       { href: "/en-US/plus#subscribe", title: "Try MDN Plus" },
     ],
     styleVariant: "plus",
