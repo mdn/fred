@@ -11,6 +11,7 @@ import { merge } from "webpack-merge";
 import { StatsWriterPlugin } from "webpack-stats-plugin";
 
 import { CSPHashPlugin } from "./build/plugins/csp-hash.js";
+import { ExtractL10nPlugin } from "./build/plugins/extract-l10n.js";
 import { GenerateElementMapPlugin } from "./build/plugins/generate-element-map.js";
 import { override as svgoOverride } from "./svgo.config.js";
 
@@ -298,6 +299,7 @@ const clientConfig = merge(common, clientAndSsrCommon, clientAndLegacyCommon, {
             },
       ),
     !isProd && new GenerateElementMapPlugin(),
+    !isProd && new ExtractL10nPlugin(),
     new rspack.CssExtractRspackPlugin({
       filename: isProd ? "[name].[contenthash].css" : "[name].css",
       // chunkFilename: "[name].[contenthash].css",
