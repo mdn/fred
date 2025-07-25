@@ -108,7 +108,6 @@
   code {
     font-family: var(--font-family-code);
     font-size: var(--font-size-normal);
-    font-feature-settings: "calt" 0;
   }
 
   em {
