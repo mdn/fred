@@ -21,10 +21,8 @@ export class PageLayout extends ServerComponent {
     return html`
       <body class="page-layout">
         ${A11yMenu.render(context)}
-        <div class="page-layout__banner">
-          <mdn-placement-top
-            style="--color-scheme: ${colorScheme}"
-          ></mdn-placement-top>
+        <div class="page-layout__banner" style="--color-scheme: ${colorScheme}">
+          <mdn-placement-top></mdn-placement-top>
         </div>
         <header class="page-layout__header">
           ${Navigation.render(context)} ${BreadcrumbsBar.render(context)}

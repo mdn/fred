@@ -41,6 +41,7 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
       view,
       copy,
       image,
+      imageFormat,
       alt,
       cta,
       colors,
@@ -65,37 +66,69 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
       ].filter(([_, v]) => Boolean(v)),
     );
 
-    return html`<section
-      class=${`sidebar-placement ${this.horizontal ? "horizontal" : ""}`}
-    >
-      <div
-        ${ref(this._placementRef)}
-        class="placement-container"
-        style=${styleMap(styles)}
-      >
-        <a
-          class="placement-link"
-          data-glean="pong: pong-&gt;click side"
-          href=${this.clickLink(click, version)}
-          target="_blank"
-          rel="sponsored noreferrer"
-          ><img
-            src=${this.imgLink(image)}
-            aria-hidden=${!alt}
-            alt=${alt || ""}
-            width="125px"
-            height="125px"
-          />
-          <div class="placement-content">
-            <strong class="placement-heading">${heading}</strong>
-            <span class="placement-copy">${copy}</span>
-            <span class="placement-cta external">${cta}</span>
+    return imageFormat === "skyscraper"
+      ? html`<section
+          class=${`sidebar-placement ${this.horizontal ? "horizontal" : ""}`}
+        >
+          <div
+            ${ref(this._placementRef)}
+            class="placement-container"
+            style=${styleMap(styles)}
+          >
+            <a
+              class="placement-link"
+              data-glean="pong: pong-&gt;click side"
+              href=${this.clickLink(click, version)}
+              target="_blank"
+              rel="sponsored noreferrer"
+              ><img
+                src=${this.imgLink(image)}
+                aria-hidden=${!alt}
+                alt=${alt || ""}
+                width="125px"
+                height="125px"
+              />
+              <div class="placement-content">
+                <strong class="placement-heading">${heading}</strong>
+                <span class="placement-copy">${copy}</span>
+                <span class="placement-cta external">${cta}</span>
+              </div>
+            </a>
+            <mdn-placement-note></mdn-placement-note>
           </div>
-        </a>
-        <mdn-placement-note></mdn-placement-note>
-      </div>
-      <mdn-placement-no></mdn-placement-no>
-    </section>`;
+          <mdn-placement-no></mdn-placement-no>
+        </section>`
+      : html`<section
+          class=${`sidebar-placement ${this.horizontal ? "horizontal" : ""}`}
+        >
+          <div
+            ${ref(this._placementRef)}
+            class="placement-container"
+            style=${styleMap(styles)}
+          >
+            <a
+              class="placement-link"
+              data-glean="pong: pong-&gt;click side"
+              href=${this.clickLink(click, version)}
+              target="_blank"
+              rel="sponsored noreferrer"
+              ><img
+                src=${this.imgLink(image)}
+                aria-hidden=${!alt}
+                alt=${alt || ""}
+                width="125px"
+                height="125px"
+              />
+              <div class="placement-content">
+                <strong class="placement-heading">${heading}</strong>
+                <span class="placement-copy">${copy}</span>
+                <span class="placement-cta external">${cta}</span>
+              </div>
+            </a>
+            <mdn-placement-note></mdn-placement-note>
+          </div>
+          <mdn-placement-no></mdn-placement-no>
+        </section>`;
   }
 }
 

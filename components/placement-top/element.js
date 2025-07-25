@@ -14,7 +14,7 @@ import styles from "./element.css?lit";
  * @import { TemplateResult } from "lit";
  */
 
-const EMPTY = html`<div class="top-placement"></div>`;
+const EMPTY = html`<div class="top-placement empty"></div>`;
 
 export class MDNPlacementTop extends PlacementMixin(LitElement) {
   static styles = styles;
@@ -41,7 +41,6 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
     if (!data) {
       return EMPTY;
     }
-    console.log("placementContext data", data);
     const {
       status,
       click,
@@ -109,10 +108,14 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
                     height="90"
                   />
                 </div>
+                <div class="placement-overlay-top">
+                  <mdn-placement-note></mdn-placement-note>
+                </div>
+                <div class="placement-overlay-bottom">
+                  <mdn-placement-no></mdn-placement-no>
+                </div>
               </a>
-              <mdn-placement-note></mdn-placement-note>
             </div>
-            <mdn-placement-no></mdn-placement-no>
           </section>
         </div>`
       : html`<div

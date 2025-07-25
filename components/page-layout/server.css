@@ -21,7 +21,7 @@
 }
 
 .page-layout__banner {
-  height: calc(5.625rem + 0.25rem + 3px);
+  height: calc(5.625rem + 2px + 0.125rem + 0.125rem);
 
   color-scheme: var(--color-scheme, light);
 
