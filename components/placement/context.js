@@ -65,11 +65,11 @@ let PLACEMENT_CONTEXT;
  */
 export function globalPlacementContext() {
   if (!PLACEMENT_CONTEXT) {
-    PLACEMENT_CONTEXT = globalUser().then((user) =>
-      user.settings?.noAds
+    PLACEMENT_CONTEXT = globalUser().then((user) => {
+      return user.settings?.noAds
         ? Promise.resolve({ status: "noads" })
-        : fetchPlacementData(),
-    );
+        : fetchPlacementData();
+    });
   }
   return PLACEMENT_CONTEXT;
 }
