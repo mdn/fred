@@ -2,7 +2,7 @@
 .prev-next {
   display: flex;
 
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 
   gap: 1rem;
   justify-content: space-between;
@@ -24,6 +24,11 @@
     &:visited {
       color: var(--color-link-visited) !important;
     }
+  }
+
+  .prev a,
+  .next a {
+    white-space: nowrap;
   }
 
   li {
