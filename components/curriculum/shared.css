@@ -8,7 +8,7 @@
   .curriculum-sidebar,
   .toc,
   .curriculum-content {
-    padding-top: 3rem;
+    padding-top: 2rem;
     padding-bottom: 3rem;
   }
 
@@ -36,7 +36,7 @@
     }
 
     h2 {
-      margin: 4rem 0 0.5rem;
+      margin: 2rem 0 0.5rem;
       font-size: var(--font-size-larger);
       font-weight: 500;
     }
@@ -111,7 +111,7 @@
   &.curriculum-overview,
   &.curriculum-module {
     .curriculum-content {
-      > header > h1 {
+      > h1 {
         margin-bottom: 2rem;
 
         > span {

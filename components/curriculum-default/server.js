@@ -30,9 +30,8 @@ export class CurriculumDefault extends ServerComponent {
       html`
         <main
           id="content"
-          class="curriculum-content-container container with-sidebar main-wrapper curriculum-about curriculum-module topic-${topicCssClass}"
+          class="curriculum-content-container curriculum-about curriculum-module topic-${topicCssClass}"
         >
-          ${sidebar}
           <article id="content" class="curriculum-content" lang=${doc.locale}>
             <header>
               <h1><span>${coloredTitle}</span> ${restTitle.join(" ")}</h1>
@@ -42,9 +41,10 @@ export class CurriculumDefault extends ServerComponent {
           <div class="toc-container">
             <aside class="toc">
               <nav>${toc}</nav>
-              <mdn-placement-sidebar></mdn-placement-sidebar>
             </aside>
+            <mdn-placement-sidebar></mdn-placement-sidebar>
           </div>
+          ${sidebar}
         </main>
       `,
     );

@@ -1,25 +1,25 @@
 .curriculum-content-container {
-  .toc {
-    position: sticky;
+  .curriculum-layout__toc {
+    /* position: sticky;
     top: var(--sticky-header-height);
 
     max-height: calc(100vh - var(--sticky-header-height));
 
-    overflow-y: auto;
+    overflow-y: auto; */
 
     .document-toc {
       padding: 0;
       margin-bottom: 2rem;
 
       .document-toc-heading {
-        margin: 0 0 1rem;
+        padding: 0.75em 0;
 
-        font-size: var(--font-size-normal);
+        font-size: var(--font-size-large);
         font-weight: var(--font-weight-normal);
 
         line-height: var(--font-line-content);
 
-        letter-spacing: 1.5px;
+        /* letter-spacing: 1.5px; */
       }
 
       .document-toc-list {

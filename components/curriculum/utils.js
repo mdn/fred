@@ -114,64 +114,56 @@ export function addAttrs(original, attrs) {
 export function renderSidebar(context, doc) {
   if (!doc.sidebar) return nothing;
 
-  return html`
-    <div class="sidebar-container" id="main-sidebar">
-      <aside id="sidebar-quicklinks" class="sidebar">
-        <nav class="sidebar-inner" aria-label="Related Topics">
-          <div class="sidebar-inner-nav">
-            <aside class="curriculum-sidebar" data-current=${doc.mdn_url}>
-              <ol>
-                ${doc.sidebar.map(
-                  (entry, _i) => html`
-                    <li class=${entry.children?.length ? "toggle" : ""}>
-                      ${entry.children?.length
-                        ? html`
-                            <details
-                              ?open=${entry.children.some(
-                                (c) => c.url === doc.mdn_url,
-                              ) || entry.url === doc.mdn_url}
-                            >
-                              <summary>${entry.title}</summary>
-                              <ol>
-                                <li>
-                                  ${renderSidebarLink(
-                                    context,
-                                    doc.mdn_url,
-                                    entry.url,
-                                    `${entry.title.replace(/ modules$/, "")} overview`,
-                                  )}
-                                </li>
-                                ${entry.children.map(
-                                  (subEntry) => html`
-                                    <li>
-                                      ${renderSidebarLink(
-                                        context,
-                                        doc.mdn_url,
-                                        subEntry.url,
-                                        subEntry.title,
-                                      )}
-                                    </li>
-                                  `,
-                                )}
-                              </ol>
-                            </details>
-                          `
-                        : renderSidebarLink(
+  return html`<nav class="left-sidebar">
+    <div class="left-sidebar__content">
+      <ol>
+        ${doc.sidebar.map(
+          (entry, _i) => html`
+            <li class=${entry.children?.length ? "toggle" : ""}>
+              ${entry.children?.length
+                ? html`
+                    <details
+                      ?open=${entry.children.some(
+                        (c) => c.url === doc.mdn_url,
+                      ) || entry.url === doc.mdn_url}
+                    >
+                      <summary>${entry.title}</summary>
+                      <ol>
+                        <li>
+                          ${renderSidebarLink(
                             context,
                             doc.mdn_url,
                             entry.url,
-                            entry.title,
+                            `${entry.title.replace(/ modules$/, "")} overview`,
                           )}
-                    </li>
-                  `,
-                )}
-              </ol>
-            </aside>
-          </div>
-        </nav>
-      </aside>
+                        </li>
+                        ${entry.children.map(
+                          (subEntry) => html`
+                            <li>
+                              ${renderSidebarLink(
+                                context,
+                                doc.mdn_url,
+                                subEntry.url,
+                                subEntry.title,
+                              )}
+                            </li>
+                          `,
+                        )}
+                      </ol>
+                    </details>
+                  `
+                : renderSidebarLink(
+                    context,
+                    doc.mdn_url,
+                    entry.url,
+                    entry.title,
+                  )}
+            </li>
+          `,
+        )}
+      </ol>
     </div>
-  `;
+  </nav>`;
 }
 
 /**
