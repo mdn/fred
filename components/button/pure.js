@@ -1,6 +1,8 @@
 import { html, nothing } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 
+import { randomIdString } from "../utils/index.js";
+
 /**
  * @param {object} options
  * @param {string | import("@lit").TemplateResult} options.label
@@ -26,7 +28,7 @@ export default function Button({
   variant = "primary",
   action,
 }) {
-  const labelId = `label-${randomString()}`;
+  const labelId = randomIdString("label-");
   const iconElement = icon
     ? html`<span class="icon" part="icon">${icon}</span>`
     : nothing;
@@ -68,13 +70,4 @@ export default function Button({
           ${inner}
         </button>
       `;
-}
-
-const charSet =
-  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-function randomString() {
-  return Array.from(
-    { length: 6 },
-    () => charSet[Math.floor(Math.random() * charSet.length)],
-  ).join("");
 }
