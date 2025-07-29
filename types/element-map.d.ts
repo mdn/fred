@@ -57,6 +57,7 @@ declare global {
     "mdn-themed-image": import("../components/themed-image/element.js").MDNThemedImage;
     "mdn-toggle-sidebar": import("../components/toggle-sidebar/element.js").MDNToggleSidebar;
     "mdn-user-menu": import("../components/user-menu/element.js").MDNUserMenu;
+    "mdn-writer-open-editor": import("../components/writer-open-editor/element.js").MDNWriterOpenEditor;
   }
 }
 
