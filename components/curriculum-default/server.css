@@ -1,3 +1,14 @@
 @import url("../curriculum/shared.css");
 @import url("../curriculum/sidebar.css");
 @import url("../curriculum/layout.css");
+
+.curriculum-content-container.curriculum-default {
+  .curriculum-layout__header {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .curriculum-layout__body {
+    padding-top: 0;
+  }
+}

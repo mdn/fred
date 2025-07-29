@@ -28,25 +28,46 @@ export class CurriculumDefault extends ServerComponent {
     return PageLayout.render(
       context,
       html`
-        <main
-          id="content"
-          class="curriculum-content-container curriculum-about curriculum-module topic-${topicCssClass}"
-        >
-          <article id="content" class="curriculum-content" lang=${doc.locale}>
-            <header>
+        <div class="curriculum-layout curriculum-content-container">
+          <main
+            id="content"
+            class="curriculum-layout__content curriculum-content-container curriculum-default curriculum-about curriculum-module topic-${topicCssClass}"
+            lang=${doc.locale}
+          >
+            <header class="curriculum-layout__header curriculum-content">
               <h1><span>${coloredTitle}</span> ${restTitle.join(" ")}</h1>
             </header>
-            ${renderCurriculumBody(context, doc)}
-          </article>
-          <div class="toc-container">
-            <aside class="toc">
-              <nav>${toc}</nav>
+            <aside class="curriculum-layout__toc">
+              ${toc}
+              <mdn-placement-sidebar></mdn-placement-sidebar>
             </aside>
-            <mdn-placement-sidebar></mdn-placement-sidebar>
-          </div>
-          ${sidebar}
-        </main>
+            <div class="curriculum-layout__body curriculum-content">
+              ${renderCurriculumBody(context, doc)}
+            </div>
+          </main>
+          <aside class="curriculum-layout__sidebar" id="main-sidebar">
+            ${sidebar}
+          </aside>
+        </div>
       `,
     );
   }
 }
+
+/*
+
+<article id="content" class="curriculum-content" lang=${doc.locale}>
+  <header>
+    <h1><span>${coloredTitle}</span> ${restTitle.join(" ")}</h1>
+  </header>
+  ${renderCurriculumBody(context, doc)}
+</article>
+<div class="toc-container">
+  <aside class="toc">
+    <nav>${toc}</nav>
+  </aside>
+  <mdn-placement-sidebar></mdn-placement-sidebar>
+</div>
+${sidebar}
+
+*/

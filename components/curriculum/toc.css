@@ -35,7 +35,7 @@
       .document-toc-link {
         display: inline-block;
 
-        padding: 0.5rem 1rem;
+        padding: 0.25rem 0.5rem;
 
         color: var(--color-text-primary);
 
