@@ -304,11 +304,8 @@ export function renderModulesList(context, modules) {
   return html`
     <ol class="modules-list">
       ${modules.map(
-        (module, j) => html`
-          <li
-            key="ml-${j}"
-            class="module-list-item topic-${topic2css(module.topic)}"
-          >
+        (module) => html`
+          <li class="module-list-item topic-${topic2css(module.topic)}">
             <a href=${module.url}>
               <header>
                 ${module.topic
