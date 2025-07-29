@@ -54,7 +54,6 @@ export async function render(path, partialContext, compilationStats) {
     ...(await addFluent(locale)),
     ...partialContext,
   };
-  console.log("RENDERER", context.renderer);
   /** @type {import("./components/server/types.js").AsyncLocalStorageContents} */
   const storageContents = {
     componentsUsed: new Set(),
