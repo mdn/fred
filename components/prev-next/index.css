@@ -26,9 +26,33 @@
     }
   }
 
+  @media (--screen-xsmall) {
+    display: grid;
+    grid-template-areas:
+      "title title"
+      "prev next";
+
+    li.menu {
+      grid-area: title;
+      justify-self: center;
+    }
+
+    li.prev {
+      grid-area: prev;
+      justify-self: start;
+    }
+
+    li.next {
+      grid-area: next;
+      justify-self: end;
+    }
+  }
+
   .prev a,
   .next a {
-    white-space: nowrap;
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
   }
 
   li {
