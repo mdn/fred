@@ -23,10 +23,10 @@ const legacyManifest = JSON.parse(
 );
 
 /**
- * @param {import("@rari").BuiltPage} page
+ * @param {import("@fred").PartialContext} context
  */
-export async function render(page) {
-  return await distRender(page.url, page, {
+export async function render(context) {
+  return await distRender(context.url, context, {
     client: clientManifest,
     legacy: legacyManifest,
   });

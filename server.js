@@ -4,9 +4,10 @@ import { Worker } from "node:worker_threads";
 
 import cookieParser from "cookie-parser";
 import express from "express";
-
 import { createProxyMiddleware } from "http-proxy-middleware";
+import openEditor from "open-editor";
 
+import { WRITER_MODE } from "./components/env/index.js";
 import { handleRunner } from "./vendor/yari/libs/play/index.js";
 
 import "source-map-support/register.js";
@@ -45,9 +46,14 @@ if (process.env.NODE_ENV === "production") {
 async function serverRenderMiddleware(req, res, page) {
   try {
     let html;
+    /** @type {import("@fred").PartialContext} */
+    const context = {
+      localServer: true,
+      ...page,
+    };
     if (prodRender) {
       // implies devMode === false
-      html = await prodRender(page);
+      html = await prodRender(context);
     } else {
       /** @type {Stats} */
       const stats = res.locals.webpack.devMiddleware.stats;
@@ -65,7 +71,7 @@ async function serverRenderMiddleware(req, res, page) {
             /** @type {import("./build/types.js").WorkerData} */
             workerData: {
               reqPath: req.path,
-              page,
+              context,
               compilationStats,
             },
           },
@@ -176,6 +182,21 @@ export async function startServer() {
           res.writeHead(502).end();
         },
   );
+
+  if (WRITER_MODE) {
+    app.get("/_open", async (req, _res) => {
+      const { filepath } = req.query;
+      const { CONTENT_ROOT, CONTENT_TRANSLATED_ROOT } = process.env;
+      if (typeof filepath === "string") {
+        const absolutePath = fileURLToPath(
+          import.meta.resolve(
+            `${filepath.startsWith("en-us") ? CONTENT_ROOT : CONTENT_TRANSLATED_ROOT}/${filepath}`,
+          ),
+        );
+        openEditor([absolutePath]);
+      }
+    });
+  }
 
   const RARI_URL = process.env.RARI_URL || "http://localhost:8083";
   app.use(
