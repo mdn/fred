@@ -13,7 +13,7 @@
 
   background-color: transparent;
   border: 2px solid var(--color-border-primary);
-  border-radius: calc(infinity * 1px);
+  border-radius: var(--radius-full);
 
   &:hover {
     background-color: var(--color-background-secondary);
