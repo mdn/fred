@@ -2,7 +2,7 @@
 
 @media (--screen-menu-hamburger) {
   :root {
-    --top-nav-height: 2.9rem;
+    --navigation-height: 2.9rem;
   }
 
   .navigation {
@@ -14,7 +14,7 @@
     align-items: center;
     justify-items: start;
 
-    height: var(--top-nav-height);
+    height: var(--navigation-height);
 
     &[data-open="true"] {
       position: fixed;
