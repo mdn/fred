@@ -40,18 +40,17 @@ for (const [name, def] of customElements.__definitions) {
 
 /**
  * @param {string} path
- * @param {import("@rari").BuiltPage} page
+ * @param {import("@fred").PartialContext} partialContext
  * @param {import("@fred").CompilationStats} compilationStats
  */
-export async function render(path, page, compilationStats) {
+export async function render(path, partialContext, compilationStats) {
   const locale = path.split("/")[1] || "en-US";
 
   const context = {
     path,
     ...(await addFluent(locale)),
-    ...page,
+    ...partialContext,
   };
-
   /** @type {import("./components/server/types.js").AsyncLocalStorageContents} */
   const storageContents = {
     componentsUsed: new Set(),

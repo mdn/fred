@@ -1,25 +1,16 @@
 .curriculum-content-container {
-  .toc {
-    position: sticky;
-    top: var(--sticky-header-height);
-
-    max-height: calc(100vh - var(--sticky-header-height));
-
-    overflow-y: auto;
-
+  .curriculum-layout__toc {
     .document-toc {
       padding: 0;
       margin-bottom: 2rem;
 
       .document-toc-heading {
-        margin: 0 0 1rem;
+        padding: 0.75em 0;
 
-        font-size: var(--font-size-normal);
+        font-size: var(--font-size-large);
         font-weight: var(--font-weight-normal);
 
         line-height: var(--font-line-content);
-
-        letter-spacing: 1.5px;
       }
 
       .document-toc-list {
@@ -35,9 +26,9 @@
       .document-toc-link {
         display: inline-block;
 
-        padding: 0.5rem 1rem;
+        padding: 0.25rem 0.5rem;
 
-        color: var(--color-text-secondary);
+        color: var(--color-text-primary);
 
         text-decoration: none;
 

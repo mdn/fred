@@ -1,7 +1,7 @@
 :root {
   --top-banner-height: 3.375rem;
   --sticky-header-height: calc(
-    var(--top-nav-height) + var(--breadcrumbs-bar-height)
+    var(--navigation-height) + var(--breadcrumbs-bar-height)
   );
 
   --z-index-sticky-header: 100;

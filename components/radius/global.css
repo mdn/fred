@@ -1,0 +1,6 @@
+/* Radius */
+
+:root {
+  --radius-normal: 0.25rem;
+  --radius-full: 9999px;
+}

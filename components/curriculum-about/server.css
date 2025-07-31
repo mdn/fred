@@ -3,8 +3,23 @@
 @import url("../curriculum/layout.css");
 
 .curriculum-content-container.curriculum-about {
+  .curriculum-layout__header {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .curriculum-layout__body {
+    padding-top: 0;
+  }
+
   .curriculum-content {
-    margin-bottom: 5rem;
+    > h1 {
+      margin-bottom: 2rem;
+
+      > span {
+        color: var(--curriculum-color);
+      }
+    }
 
     h2#motivation + div {
       li {

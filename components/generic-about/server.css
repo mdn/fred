@@ -1,7 +1,5 @@
 /* variables local to the about page */
 .about-container {
-  --top-nav-height: var(--sticky-header-height);
-
   --max-width: 74rem;
   --gutter: 1rem;
   --about-stats-height: 5.75rem;

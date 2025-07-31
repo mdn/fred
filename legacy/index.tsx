@@ -8,6 +8,7 @@ import { GleanProvider } from "@mdn/yari/client/src/telemetry/glean-context";
 import "@mdn/yari/client/src/app.scss";
 import "@mdn/yari/client/src/document/index.scss";
 
+import "./legacy.css";
 import "../hooks/legacy-theme-controller.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);

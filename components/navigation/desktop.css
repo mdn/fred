@@ -2,7 +2,7 @@
 
 @media (--screen-menu-full) {
   :root {
-    --top-nav-height: 4.125rem;
+    --navigation-height: 4.125rem;
   }
 
   .navigation {
@@ -14,7 +14,7 @@
     align-items: center;
     justify-items: center;
 
-    height: var(--top-nav-height);
+    height: var(--navigation-height);
 
     padding-block: 0.75rem;
     padding-inline: var(--layout-side-padding);

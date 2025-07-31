@@ -63,16 +63,10 @@
         }
       }
     }
-
-    ol {
-      padding-left: 1.5rem;
-    }
   }
 
   li {
-    display: flex;
-    align-items: center;
-    justify-content: stretch;
+    display: block;
 
     &:not(:last-child) {
       margin-bottom: 0.5rem;
@@ -85,12 +79,17 @@
         margin-top: 1em;
       }
     }
+
+    ol {
+      padding-left: 1.5rem;
+    }
   }
 
   a,
   span:not(.highlight-container) {
     display: inline-flex;
     padding-block: 0.25rem;
+    vertical-align: middle;
   }
 
   a {
@@ -111,9 +110,7 @@
   }
 
   em {
-    display: inline-flex;
-
-    align-items: center;
+    display: block;
 
     padding-inline: 0.5rem;
 

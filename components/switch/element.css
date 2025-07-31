@@ -34,7 +34,7 @@
   background-repeat: no-repeat;
   background-position: var(--switch-position) 0%;
   background-size: var(--switch-size);
-  border-radius: calc(infinity * 1px);
+  border-radius: var(--radius-full);
 
   transition: --switch-position 0.2s;
 

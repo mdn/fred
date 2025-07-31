@@ -35,34 +35,70 @@ export class CurriculumOverview extends ServerComponent {
     return PageLayout.render(
       context,
       html`
-        <main
-          id="content"
-          class="curriculum-content-container container curriculum-overview topic-${topicCssClass}"
-        >
-          ${sidebar}
-          <article id="content" class="curriculum-content" lang=${doc.locale}>
-            <header>
+        <div class="curriculum-layout curriculum-content-container">
+          <main
+            id="content"
+            class="curriculum-layout__content curriculum-content-container curriculum-overview topic-${topicCssClass}"
+            lang=${doc.locale}
+          >
+            <header class="curriculum-layout__header curriculum-content">
               <h1><span>${coloredTitle}</span> ${restTitle}</h1>
             </header>
-            ${renderCurriculumBody(context, doc)}
-            ${doc?.modules && doc.modules.length > 0
-              ? html`
-                  <section class="module-contents">
-                    <h2>Module list</h2>
-                    ${renderModulesList(context, doc.modules)}
-                  </section>
-                `
-              : nothing}
-            ${this.renderPrevNext(context, doc)}
-          </article>
-          <div class="toc-container">
-            <aside class="toc">
-              <nav>${toc}</nav>
+
+            <aside class="curriculum-layout__toc">
+              ${toc}
+              <mdn-placement-sidebar></mdn-placement-sidebar>
             </aside>
-            <mdn-placement-sidebar></mdn-placement-sidebar>
-          </div>
-        </main>
+
+            <div class="curriculum-layout__body curriculum-content">
+              ${renderCurriculumBody(context, doc)}
+              ${doc?.modules && doc.modules.length > 0
+                ? html`
+                    <section class="module-contents">
+                      <h2>Module list</h2>
+                      ${renderModulesList(context, doc.modules)}
+                    </section>
+                  `
+                : nothing}
+              ${this.renderPrevNext(context, doc)}
+            </div>
+          </main>
+
+          <aside class="curriculum-layout__sidebar" id="main-sidebar">
+            ${sidebar}
+          </aside>
+        </div>
       `,
+
+      // html`
+      //   <main
+      //     id="content"
+      //     class="curriculum-content-container container curriculum-overview topic-${topicCssClass}"
+      //   >
+      //     ${sidebar}
+      //     <article id="content" class="curriculum-content" lang=${doc.locale}>
+      //       <header>
+      //         <h1><span>${coloredTitle}</span> ${restTitle}</h1>
+      //       </header>
+      //       ${renderCurriculumBody(context, doc)}
+      //       ${doc?.modules && doc.modules.length > 0
+      //         ? html`
+      //             <section class="module-contents">
+      //               <h2>Module list</h2>
+      //               ${renderModulesList(context, doc.modules)}
+      //             </section>
+      //           `
+      //         : nothing}
+      //       ${this.renderPrevNext(context, doc)}
+      //     </article>
+      //     <div class="toc-container">
+      //       <aside class="toc">
+      //         <nav>${toc}</nav>
+      //       </aside>
+      //       <mdn-placement-sidebar></mdn-placement-sidebar>
+      //     </div>
+      //   </main>
+      // `,
     );
   }
 

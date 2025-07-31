@@ -1,0 +1,5 @@
+:root {
+  --top-nav-height: var(--sticky-header-height);
+  --sticky-header-without-actions-height: var(--sticky-header-height);
+  --z-index-mid: calc(var(--z-index-sticky-header) - 1);
+}

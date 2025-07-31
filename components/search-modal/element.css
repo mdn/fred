@@ -47,7 +47,7 @@ dialog {
       "search   close"
       "progress progress"
       "results  results";
-    grid-template-rows: var(--top-nav-height) min-content min-content;
+    grid-template-rows: var(--navigation-height) min-content min-content;
     grid-template-columns: 1fr min-content;
   }
 }

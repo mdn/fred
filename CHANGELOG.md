@@ -1,5 +1,105 @@
 # Changelog
 
+## [0.2.0](https://github.com/mdn/fred/compare/v0.1.0...v0.2.0) (2025-07-31)
+
+
+### Features
+
+* **content-section:** add # to dl anchors ([#410](https://github.com/mdn/fred/issues/410)) ([bab489b](https://github.com/mdn/fred/commit/bab489b4277f73d8ba114bda1b6793e82f657814))
+* **playground:** add reporting modal for shared examples ([#386](https://github.com/mdn/fred/issues/386)) ([117cb50](https://github.com/mdn/fred/commit/117cb50015538fa408affb1d9fd3be7300c195b4))
+* **radius:** add global radius vars ([#472](https://github.com/mdn/fred/issues/472)) ([3028e41](https://github.com/mdn/fred/commit/3028e415d5f882d46eec45e49099a249992066a5))
+* **writer-mode:** add writer toolbar ([#446](https://github.com/mdn/fred/issues/446)) ([7fed55b](https://github.com/mdn/fred/commit/7fed55b7e9bb0442b7978ea3a04b077f95ebf1bd))
+
+
+### Bug Fixes
+
+* **about:** auto-scroll to top of tab panel when tab is switched ([#409](https://github.com/mdn/fred/issues/409)) ([c56822d](https://github.com/mdn/fred/commit/c56822d7f6182bc52562cc21cb27a77f4247bcfe))
+* **ai-help:** nav and sidebar overlap on mobile ([#474](https://github.com/mdn/fred/issues/474)) ([3f1f7b4](https://github.com/mdn/fred/commit/3f1f7b4b5214b88d2a1793a602c37388fed6674c))
+* **article-footer:** remove link from header ([#392](https://github.com/mdn/fred/issues/392)) ([83700bb](https://github.com/mdn/fred/commit/83700bb7b399f49c747adf33edd650630305468d))
+* **breadcrumbs-bar:** show active value in dropdowns ([#387](https://github.com/mdn/fred/issues/387)) ([079d07b](https://github.com/mdn/fred/commit/079d07bd2e5e20c88414889fdb87c021dde24995))
+* **button:** prevent leaking non-unique element ids ([#455](https://github.com/mdn/fred/issues/455)) ([69ceaad](https://github.com/mdn/fred/commit/69ceaad3e823dfe780806a8a7f1b9c85b8a6fe88))
+* **code-example:** highlight good and bad examples ([#385](https://github.com/mdn/fred/issues/385)) ([79543f3](https://github.com/mdn/fred/commit/79543f3ff723954ca8e5ced9470309bfd32bae4c))
+* **code-examples:** wrap rather than scroll ([#418](https://github.com/mdn/fred/issues/418)) ([f7f63c6](https://github.com/mdn/fred/commit/f7f63c6a4530d7c5a707029430392f42cd2c8e41))
+* **community:** heading anchor links ([#406](https://github.com/mdn/fred/issues/406)) ([9f9680c](https://github.com/mdn/fred/commit/9f9680c5b3353dd4e2f083d3272b631041c0d400))
+* **compat-table:** fluent error from incorrect NUMBER cast ([#434](https://github.com/mdn/fred/issues/434)) ([da805ef](https://github.com/mdn/fred/commit/da805efd3384cea04f25f3547dde0e9d0a7a66d3))
+* **content-section:** add margin to dl &gt; ul ([#398](https://github.com/mdn/fred/issues/398)) ([f40438d](https://github.com/mdn/fred/commit/f40438d96d82ab77adffec72fdeb7eaa4839d5e5))
+* **content-section:** add scroll-margin-top on :target ([#415](https://github.com/mdn/fred/issues/415)) ([fac80de](https://github.com/mdn/fred/commit/fac80de38276ca906ac9e2e5517db6e4b32db729))
+* **content-section:** make anchors text color ([#427](https://github.com/mdn/fred/issues/427)) ([c114919](https://github.com/mdn/fred/commit/c1149196e4180f496cdb392a8d3ef9bf7c3a797e))
+* **css-formal-syntax:** remove js and add consistent styling ([#393](https://github.com/mdn/fred/issues/393)) ([b0f0b53](https://github.com/mdn/fred/commit/b0f0b53411c4b717e4ddc624689a1da9cec08f64))
+* **curriculum:** add `code` element background ([#433](https://github.com/mdn/fred/issues/433)) ([6cafe20](https://github.com/mdn/fred/commit/6cafe20793a945d11df0c246f9aa5d87c944ef9f))
+* **curriculum:** don't remove light/dark ids in svgo ([#429](https://github.com/mdn/fred/issues/429)) ([65d9de0](https://github.com/mdn/fred/commit/65d9de0c9f3863315841b0dcb97e43a017d6fe2a))
+* **curriculum:** increase card height to accommodate for larger font size ([#420](https://github.com/mdn/fred/issues/420)) ([3cbfe33](https://github.com/mdn/fred/commit/3cbfe33de531e6b2cd46de04b57b577e01cb476b))
+* **curriculum:** responsiveness and theme awareness ([#467](https://github.com/mdn/fred/issues/467)) ([35072e5](https://github.com/mdn/fred/commit/35072e5592885c7e9a60dcc5e62432c310bdb816))
+* **curriculum:** sidebar didn't show on mobile ([#432](https://github.com/mdn/fred/issues/432)) ([f9b5cf6](https://github.com/mdn/fred/commit/f9b5cf6c5b0e2863d30b9c694310ec35dd01375a))
+* ensure content can't overflow the page ([#402](https://github.com/mdn/fred/issues/402)) ([dd64ee3](https://github.com/mdn/fred/commit/dd64ee312be50116de463f74423413121b4ccb2f))
+* **font:** disable code ligatures ([#397](https://github.com/mdn/fred/issues/397)) ([8e4166c](https://github.com/mdn/fred/commit/8e4166c4d291ea3f89a8b4d707bbce47bf79f9ee))
+* **font:** link colors, font variables in curriculum, observatory ([#399](https://github.com/mdn/fred/issues/399)) ([865647a](https://github.com/mdn/fred/commit/865647aa6b0039dbb2be383930c4729a98189267))
+* **font:** replaced font-related hardcoded values with variables ([#396](https://github.com/mdn/fred/issues/396)) ([bde6332](https://github.com/mdn/fred/commit/bde6332b0c40389f114c6c1f77f4189a984c2eee))
+* **header:** layout shift due to login link ([#424](https://github.com/mdn/fred/issues/424)) ([d0af7e6](https://github.com/mdn/fred/commit/d0af7e6c97b3de31f0b7c46117e1328bb3e0e43a))
+* **inter:** ligatures causing arrows in titles ([#442](https://github.com/mdn/fred/issues/442)) ([2c83269](https://github.com/mdn/fred/commit/2c83269178e47ae6a043e12b9898c2a6b8c90355))
+* **ix:** not enough contrast in tab text colour ([#383](https://github.com/mdn/fred/issues/383)) ([b8ee1c4](https://github.com/mdn/fred/commit/b8ee1c4303eced0dbb57dfce2dc00f8f4a8e44f1))
+* **left-sidebar:** some items displayed horizontally ([#461](https://github.com/mdn/fred/issues/461)) ([7d811a9](https://github.com/mdn/fred/commit/7d811a9e5a4194de0e0e2c2d6a3e07914ef82c40))
+* **legacy:** environment variables weren't being bundled ([#394](https://github.com/mdn/fred/issues/394)) ([e6ec0dd](https://github.com/mdn/fred/commit/e6ec0ddf254ec8d92567bcf0cafa34c668ff931e))
+* **live-sample:** don't add px to height if it already has it ([#417](https://github.com/mdn/fred/issues/417)) ([d5db94b](https://github.com/mdn/fred/commit/d5db94bce68c42fdc2c6c100bc7671ec97333392))
+* **live-samples:** assets wouldn't load in playground ([#381](https://github.com/mdn/fred/issues/381)) ([1a942f7](https://github.com/mdn/fred/commit/1a942f703699663243b4030c3a3e0a411d783e99))
+* **not-found:** use global link styles ([#395](https://github.com/mdn/fred/issues/395)) ([da36381](https://github.com/mdn/fred/commit/da363817e838fdf0f8744b3c66c12ee30d5bba07))
+* **obs:** add skip links to content ([#384](https://github.com/mdn/fred/issues/384)) ([4a895ef](https://github.com/mdn/fred/commit/4a895efccaf0ee7d98bd7ffa53e2b15d2c42a64d))
+* **observatory:** rescan button text  ([#431](https://github.com/mdn/fred/issues/431)) ([0aeb7bb](https://github.com/mdn/fred/commit/0aeb7bb718824a44c72eec7e8bf1a1924cdd1510))
+* **observatory:** various responsive fixes ([#438](https://github.com/mdn/fred/issues/438)) ([d24e98d](https://github.com/mdn/fred/commit/d24e98dd89acd26d04d4f7dd1900be891627656e))
+* **playground:** code blocks wouldn't scroll in certain browsers ([#382](https://github.com/mdn/fred/issues/382)) ([37eecfd](https://github.com/mdn/fred/commit/37eecfdc3e59869481bb6baefb5a8cce5cd211a2))
+* **playground:** editor not minimizing in some browsers ([#462](https://github.com/mdn/fred/issues/462)) ([9bdd968](https://github.com/mdn/fred/commit/9bdd9685d7b0e19de2c13a4559f8aec2d5cfdd5f))
+* **plus:** removed sidebar entry for offline docs ([#450](https://github.com/mdn/fred/issues/450)) ([f4358fe](https://github.com/mdn/fred/commit/f4358fe16c40b760454d6dee473e1661baec495b))
+* **prev-next:** layout issues on small screens ([#460](https://github.com/mdn/fred/issues/460)) ([634ba1d](https://github.com/mdn/fred/commit/634ba1d6b337f1b04c47cf11f93e2a9d9027aa9d))
+* **reference-layout:** bem naming convention ([#407](https://github.com/mdn/fred/issues/407)) ([37f55bf](https://github.com/mdn/fred/commit/37f55bfffba5daa89ddd1d25986e3932ce386c55))
+* **search:** close when clicking backdrop cross-browser ([#436](https://github.com/mdn/fred/issues/436)) ([5972d79](https://github.com/mdn/fred/commit/5972d79a53a03abb9b6f6aa6dc83ae91dc69cf2f))
+* **sidebar-filter:** highlight was causing weird layouts ([#403](https://github.com/mdn/fred/issues/403)) ([2ac3843](https://github.com/mdn/fred/commit/2ac3843f906e2ce8b1223393535d516eb3c6421a))
+* **specifications-list:** collapse only specs with multiple urls ([#419](https://github.com/mdn/fred/issues/419)) ([4c8c62c](https://github.com/mdn/fred/commit/4c8c62c940c611744dd06d17312f70d6937e15e0))
+* **syntax-highlighting:** ensure comment colour is accessible ([#400](https://github.com/mdn/fred/issues/400)) ([5a0a710](https://github.com/mdn/fred/commit/5a0a710187a3139ba29fd5da2be637e56ac49f5e))
+* **toggle-sidebar:** don't show when there's no sidebar ([#430](https://github.com/mdn/fred/issues/430)) ([45280bd](https://github.com/mdn/fred/commit/45280bd7ef5a2d462d05db2ca86eded3177be7a1))
+
+
+### Enhancements
+
+* **content-section:** adjust h4-h5 styles ([#441](https://github.com/mdn/fred/issues/441)) ([2288a1d](https://github.com/mdn/fred/commit/2288a1d29cbc56163fce10d8686f94c705e76274))
+* **font:** remove ligatures from JB Mono ([#437](https://github.com/mdn/fred/issues/437)) ([dfd318b](https://github.com/mdn/fred/commit/dfd318b6d8725c8c7d5d80cd43efe7d3bc5b1326))
+* **homepage-search:** use design colors ([#456](https://github.com/mdn/fred/issues/456)) ([95159e8](https://github.com/mdn/fred/commit/95159e813a3ff6047e384c07068eb3b45c3139b7))
+* **menu:** use mask icons ([#423](https://github.com/mdn/fred/issues/423)) ([3ed0da0](https://github.com/mdn/fred/commit/3ed0da0c1cd112394220307e535d7a79be5bd4e4))
+* **reference-layout:** improve h1 line-height ([#408](https://github.com/mdn/fred/issues/408)) ([445481c](https://github.com/mdn/fred/commit/445481c2f25b879fe6ecfed59905c7f50ac26bfa))
+* **search-mobile:** restyle on mobile and add close button ([#416](https://github.com/mdn/fred/issues/416)) ([638558f](https://github.com/mdn/fred/commit/638558f53dfd105099ffac7bdd40bc70250c8463))
+* **sidebars:** use learn area colours in learn area ([#369](https://github.com/mdn/fred/issues/369)) ([08bdedf](https://github.com/mdn/fred/commit/08bdedf971d553bb2ce9416fe71ec4694832db31))
+
+
+### Miscellaneous
+
+* **content-section:** style blockquote ([#414](https://github.com/mdn/fred/issues/414)) ([a5838f3](https://github.com/mdn/fred/commit/a5838f344662188eed83505fce9a3cb4158f1088))
+* **deps-dev:** bump @mdn/browser-compat-data from 6.0.30 to 6.0.31 ([#377](https://github.com/mdn/fred/issues/377)) ([15847b3](https://github.com/mdn/fred/commit/15847b3356297ab01a7df6fd9609f936115e8d5e))
+* **deps-dev:** bump @mdn/browser-compat-data from 6.0.31 to 6.0.32 ([#405](https://github.com/mdn/fred/issues/405)) ([e791d70](https://github.com/mdn/fred/commit/e791d70652e8953b4897475675a92770fefc4d3b))
+* **deps-dev:** bump @mdn/browser-compat-data from 6.0.32 to 6.0.33 ([#440](https://github.com/mdn/fred/issues/440)) ([b5cccdc](https://github.com/mdn/fred/commit/b5cccdce0c428709050ac1df90f87762ba97b364))
+* **deps-dev:** bump @mdn/browser-compat-data from 6.0.33 to 6.0.34 ([#448](https://github.com/mdn/fred/issues/448)) ([50f6a9e](https://github.com/mdn/fred/commit/50f6a9eae6dda7854ec7576c945e768af10078a7))
+* **deps-dev:** bump @mdn/browser-compat-data from 6.0.34 to 6.0.35 ([#457](https://github.com/mdn/fred/issues/457)) ([4e9d6fb](https://github.com/mdn/fred/commit/4e9d6fb29fcaa37fd7fb1b59aaa18fe376e948dd))
+* **deps-dev:** bump @mdn/browser-compat-data from 6.0.35 to 6.0.36 ([#469](https://github.com/mdn/fred/issues/469)) ([f87b4fa](https://github.com/mdn/fred/commit/f87b4fab61cc333628862fcf0cc9a58df98582e2))
+* **deps-dev:** bump @mdn/yari from 5.0.1 to 5.0.2 ([#475](https://github.com/mdn/fred/issues/475)) ([bc2199b](https://github.com/mdn/fred/commit/bc2199b44bd64c8986d5be79d9731847650d63d7))
+* **deps-dev:** bump @typescript-eslint/eslint-plugin from 8.36.0 to 8.37.0 in the dev group ([#389](https://github.com/mdn/fred/issues/389)) ([3c73ea5](https://github.com/mdn/fred/commit/3c73ea51d79bc2367b6c092add7dde8339b16e07))
+* **deps-dev:** bump @typescript-eslint/eslint-plugin from 8.37.0 to 8.38.0 in the dev group ([#444](https://github.com/mdn/fred/issues/444)) ([a00f3e1](https://github.com/mdn/fred/commit/a00f3e181ca2adc608005df3fabe83184f531524))
+* **deps-dev:** bump eslint-plugin-jsdoc from 51.4.0 to 51.4.1 in the dev group ([#412](https://github.com/mdn/fred/issues/412)) ([075d9c5](https://github.com/mdn/fred/commit/075d9c550cc37391171bd96caf87f7a719e72321))
+* **deps-dev:** bump eslint-plugin-n from 17.21.2 to 17.21.3 in the dev group ([#464](https://github.com/mdn/fred/issues/464)) ([abf4d52](https://github.com/mdn/fred/commit/abf4d5260c7aaff992009dc63e6793edc6d589d5))
+* **deps-dev:** bump stylelint from 16.22.0 to 16.23.0 in the dev group ([#468](https://github.com/mdn/fred/issues/468)) ([04932d8](https://github.com/mdn/fred/commit/04932d8c3ac50477be54d10425128e9108e56f17))
+* **deps-dev:** bump the dev group across 1 directory with 3 updates ([#449](https://github.com/mdn/fred/issues/449)) ([9438645](https://github.com/mdn/fred/commit/94386452bebb1834bc6f9d1b92666bee49dfb993))
+* **deps-dev:** bump the dev group with 2 updates ([#453](https://github.com/mdn/fred/issues/453)) ([06cfe0e](https://github.com/mdn/fred/commit/06cfe0ee8fa5ef9c7f51ee70f8c39f4fcf316b6c))
+* **deps-dev:** bump the dev group with 3 updates ([#378](https://github.com/mdn/fred/issues/378)) ([c88a352](https://github.com/mdn/fred/commit/c88a35261df71b4ede22ec15f251189d42eb6632))
+* **deps-dev:** bump the dev group with 3 updates ([#439](https://github.com/mdn/fred/issues/439)) ([f9d48c3](https://github.com/mdn/fred/commit/f9d48c3d88a94631ae14093fcb0cb690ae412612))
+* **deps-dev:** bump the dev group with 3 updates ([#458](https://github.com/mdn/fred/issues/458)) ([878c545](https://github.com/mdn/fred/commit/878c545d663619bbf6c71b5ed50315103f181c13))
+* **deps-dev:** bump the dev group with 4 updates ([#404](https://github.com/mdn/fred/issues/404)) ([f326e4b](https://github.com/mdn/fred/commit/f326e4b63a442f1f03e0c364d758d8db7c4390a6))
+* **deps:** bump the prod group with 2 updates ([#425](https://github.com/mdn/fred/issues/425)) ([7c705ea](https://github.com/mdn/fred/commit/7c705eaaeaa381f01b921e714dc6a38b58f5c91b))
+* **deps:** bump the prod group with 3 updates ([#375](https://github.com/mdn/fred/issues/375)) ([0faa9cb](https://github.com/mdn/fred/commit/0faa9cb69bb238738c306f3d7e6d45340d261a55))
+* **github:** add CODEOWNERS ([#422](https://github.com/mdn/fred/issues/422)) ([5cd1885](https://github.com/mdn/fred/commit/5cd18859ce0394a1d27b876e07236ada6ea76def))
+* **l10n:** address some feedback ([#413](https://github.com/mdn/fred/issues/413)) ([480473e](https://github.com/mdn/fred/commit/480473e99ce2cc0e7ae06d829bd0ea27e83484c9))
+* **menu:** Update js link ([#391](https://github.com/mdn/fred/issues/391)) ([2f3e472](https://github.com/mdn/fred/commit/2f3e4723140b0d6fce1e9e4c3be628fe2e641659))
+* **outer-layout:** move favicons below scripts ([#390](https://github.com/mdn/fred/issues/390)) ([ee116af](https://github.com/mdn/fred/commit/ee116af59a72490cfc614adc0f8f262d444c73a8))
+* **specifications:** port table from yari ([#428](https://github.com/mdn/fred/issues/428)) ([d09e63a](https://github.com/mdn/fred/commit/d09e63a814ec99f253d759717b6404da30b6d683))
+* **styling:** prev/next & spacing ([#380](https://github.com/mdn/fred/issues/380)) ([47f9376](https://github.com/mdn/fred/commit/47f937604cd360a1b3b7b9aefb9cef1a51a6b3c8))
+* **styling:** Updating yellow colour for accessibility ([#426](https://github.com/mdn/fred/issues/426)) ([bba9315](https://github.com/mdn/fred/commit/bba931577b4cfc1bd1c6a5d26b21bb641f1e460c))
+
 ## [0.1.0](https://github.com/mdn/fred/compare/v0.0.5...v0.1.0) (2025-07-11)
 
 

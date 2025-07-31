@@ -1,5 +1,7 @@
 import { LitElement, html } from "lit";
 
+import { randomIdString } from "../utils/index.js";
+
 import styles from "./element.css?lit";
 
 /**
@@ -68,7 +70,7 @@ export class MDNDropdown extends LitElement {
   _setAriaAttributes() {
     let id = this._dropdownSlotElements.find((element) => element.id)?.id;
     if (!id) {
-      id = Math.random().toString(36).replace("0.", "uid_");
+      id = randomIdString("uid_");
       this._dropdownSlotElements[0]?.setAttribute("id", id);
     }
     for (const element of this._buttonSlotElements) {

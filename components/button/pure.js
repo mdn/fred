@@ -1,6 +1,8 @@
 import { html, nothing } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 
+import { randomIdString } from "../utils/index.js";
+
 /**
  * @param {object} options
  * @param {string | import("@lit").TemplateResult} options.label
@@ -26,11 +28,12 @@ export default function Button({
   variant = "primary",
   action,
 }) {
+  const labelId = randomIdString("label-");
   const iconElement = icon
     ? html`<span class="icon" part="icon">${icon}</span>`
     : nothing;
   const labelElement = html`
-    <span id="label" class="label" ?hidden=${iconOnly} part="label"
+    <span id=${labelId} class="label" ?hidden=${iconOnly} part="label"
       >${label}</span
     >
   `;
@@ -47,7 +50,7 @@ export default function Button({
           href=${href}
           target=${ifDefined(target)}
           rel=${ifDefined(rel)}
-          aria-labelledby="label"
+          aria-labelledby=${labelId}
           data-variant=${ifDefined(variant)}
           data-action=${ifDefined(action)}
           part="button"
@@ -58,7 +61,7 @@ export default function Button({
     : html`
         <button
           class="button"
-          aria-labelledby="label"
+          aria-labelledby=${labelId}
           ?disabled=${disabled}
           data-variant=${ifDefined(variant)}
           data-action=${ifDefined(action)}
