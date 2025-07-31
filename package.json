@@ -70,7 +70,7 @@
     "@eslint/js": "^9.32.0",
     "@jackolope/lit-analyzer": "^3.2.0",
     "@jackolope/ts-lit-plugin": "^3.1.6",
-    "@mdn/browser-compat-data": "^6.0.35",
+    "@mdn/browser-compat-data": "^6.0.36",
     "@mdn/rari": "0.1.46",
     "@mdn/yari": "^5.0.2",
     "@rsdoctor/rspack-plugin": "^1.1.10",
