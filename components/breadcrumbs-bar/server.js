@@ -40,11 +40,8 @@ export class BreadcrumbsBar extends ServerComponent {
           case "Doc":
             return context.doc.sidebarHTML;
           case "CurriculumModule":
-            return context.doc.sidebar;
           case "CurriculumAbout":
-            return context.doc.sidebar;
           case "CurriculumDefault":
-            return context.doc.sidebar;
           case "CurriculumOverview":
             return context.doc.sidebar;
           case "GenericDoc":

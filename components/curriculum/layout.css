@@ -26,7 +26,7 @@
 
   .curriculum-layout__sidebar {
     grid-area: sidebar;
-    padding-top: 2rem;
+    padding-top: 0;
 
     @media (--screen-layout-2-sidebars) {
       .left-sidebar {
@@ -101,72 +101,3 @@
     }
   }
 }
-
-/* .curriculum-module,
-.curriculum-overview {
-  display: grid;
-  grid-template-columns: var(--layout-2-sidebars);
-  grid-template-areas: "sidebar . body . toc";
-  padding-inline: var(--layout-side-padding);
-
-  justify-content: space-between;
-
-  .curriculum-content {
-    grid-area: body;
-    padding-bottom: 3rem;
-  }
-
-  .sidebar-container {
-    grid-area: sidebar;
-  }
-
-  .toc-container {
-    grid-area: toc;
-  }
-
-  @media (--screen-layout-1-sidebar-or-less) {
-    grid-template-columns: var(--layout-1-sidebar-left);
-    grid-template-areas: "toc . body";
-    grid-template-rows: auto 1fr;
-
-    .sidebar-container {
-      position: sticky;
-      inset: 0;
-      top: var(--sticky-header-height);
-      z-index: var(--z-index-sidebar-mobile);
-      background-color: var(--color-background-page);
-      display: none;
-
-      .sidebar-inner {
-        padding: 0 1rem;
-      }
-    }
-  }
-
-  @media (--screen-layout-no-sidebar) {
-    display: block;
-
-    .sidebar-container {
-      position: unset;
-      inset: 0;
-      top: var(--sticky-header-height);
-      z-index: var(--z-index-sidebar-mobile);
-
-      display: none;
-
-      .sidebar-inner {
-        padding: 1rem;
-      }
-    }
-    .toc-container {
-      grid-area: sidebar;
-      position: unset;
-      top: unset;
-
-
-      max-height: unset;
-
-      overflow-y: unset;
-    }
-  }
-} */

@@ -1,12 +1,5 @@
 .curriculum-content-container {
   .curriculum-layout__toc {
-    /* position: sticky;
-    top: var(--sticky-header-height);
-
-    max-height: calc(100vh - var(--sticky-header-height));
-
-    overflow-y: auto; */
-
     .document-toc {
       padding: 0;
       margin-bottom: 2rem;
@@ -18,8 +11,6 @@
         font-weight: var(--font-weight-normal);
 
         line-height: var(--font-line-content);
-
-        /* letter-spacing: 1.5px; */
       }
 
       .document-toc-list {

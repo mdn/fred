@@ -53,21 +53,3 @@ export class CurriculumDefault extends ServerComponent {
     );
   }
 }
-
-/*
-
-<article id="content" class="curriculum-content" lang=${doc.locale}>
-  <header>
-    <h1><span>${coloredTitle}</span> ${restTitle.join(" ")}</h1>
-  </header>
-  ${renderCurriculumBody(context, doc)}
-</article>
-<div class="toc-container">
-  <aside class="toc">
-    <nav>${toc}</nav>
-  </aside>
-  <mdn-placement-sidebar></mdn-placement-sidebar>
-</div>
-${sidebar}
-
-*/

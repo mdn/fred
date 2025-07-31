@@ -186,14 +186,12 @@
     --curriculum-bg-image-partner: url("./assets/curriculum-partner-bg.svg#light");
     --curriculum-scrim-bg: url("./assets/curriculum-scrim-bg.svg#light");
     --curriculum-landing-arrow: url("./assets/curriculum-landing-arrow.svg#light");
-    --test-theme: #ff0000;
   }
 }
 
 /* theme support for swapping out assets: check the root-level data-theme property, fall back to the os-level preference */
 :root[data-theme="dark"] {
   .curriculum-content-container {
-    --test-theme: #00ff00;
     --curriculum-landing-about-beginner: url("./assets/curriculum-landing-about-beginner.svg#dark");
     --curriculum-landing-about-pace: url("./assets/curriculum-landing-about-pace.svg#dark");
     --curriculum-landing-about-free: url("./assets/curriculum-landing-about-free.svg#dark");
@@ -218,7 +216,6 @@
 :root[data-theme="light dark"] {
   @media (prefers-color-scheme: dark) {
     .curriculum-content-container {
-      --test-theme: #0000ff;
       --curriculum-landing-about-beginner: url("./assets/curriculum-landing-about-beginner.svg#dark");
       --curriculum-landing-about-pace: url("./assets/curriculum-landing-about-pace.svg#dark");
       --curriculum-landing-about-free: url("./assets/curriculum-landing-about-free.svg#dark");
@@ -260,7 +257,6 @@
       --curriculum-bg-image-partner: url("./assets/curriculum-partner-bg.svg#light");
       --curriculum-scrim-bg: url("./assets/curriculum-scrim-bg.svg#light");
       --curriculum-landing-arrow: url("./assets/curriculum-landing-arrow.svg#light");
-      --test-theme: #ff00ff;
     }
   }
 }
