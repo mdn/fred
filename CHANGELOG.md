@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.2.1](https://github.com/mdn/fred/compare/v0.2.0...v0.2.1) (2025-08-01)
+
+
+### Bug Fixes
+
+* **footer:** links casing ([#473](https://github.com/mdn/fred/issues/473)) ([376ba0c](https://github.com/mdn/fred/commit/376ba0cd3820f0383cbbcbc611d6ebdc0f6f5805))
+* **menu:** change curriculum link to en-US ([#466](https://github.com/mdn/fred/issues/466)) ([cf45776](https://github.com/mdn/fred/commit/cf45776584c6f5346be5522db38b9c5cd7502433))
+* **outer-layout:** preload only latin fonts ([#495](https://github.com/mdn/fred/issues/495)) ([e298c4e](https://github.com/mdn/fred/commit/e298c4e763d4bf21d06c176d6d48a2eac8ef988a))
+* **playground:** catch cross origin errors when attempting to check origin ([#463](https://github.com/mdn/fred/issues/463)) ([d57f18a](https://github.com/mdn/fred/commit/d57f18a14bf780f1d2ecf409925ba94624295026))
+
+
+### Miscellaneous
+
+* add active user ping ([#494](https://github.com/mdn/fred/issues/494)) ([e2ad0ca](https://github.com/mdn/fred/commit/e2ad0cabd1bd4b72710f5b48ab9c76da73577e53))
+* **deps-dev:** bump stylelint-config-standard from 38.0.0 to 39.0.0 ([#470](https://github.com/mdn/fred/issues/470)) ([484c9ca](https://github.com/mdn/fred/commit/484c9ca0e3f634af53b0ad01e2fa968e9779d5e1))
+* **env:** set safe defaults, disable survey, add glean debug ([#500](https://github.com/mdn/fred/issues/500)) ([8f9dc04](https://github.com/mdn/fred/commit/8f9dc04aaeb9e35d63eaca0b2d2d5242314efa3a))
+
 ## [0.2.0](https://github.com/mdn/fred/compare/v0.1.0...v0.2.0) (2025-07-31)
 
 
