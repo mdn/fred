@@ -2,7 +2,7 @@ import { Task } from "@lit/task";
 import { LitElement, html } from "lit";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
-import { OBSERVATORY_API_URL } from "../observatory/constants.js";
+import { OBSERVATORY_API_URL } from "../env/index.js";
 
 import styles from "./element.css?lit";
 
