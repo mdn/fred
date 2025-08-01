@@ -165,7 +165,6 @@ table {
       /* visually-hidden */
       border: 0 !important;
 
-      clip: rect(1px, 1px, 1px, 1px) !important;
       clip-path: inset(50%) !important;
     }
   }
@@ -447,7 +446,6 @@ dl.bc-notes-list {
   /* visually-hidden */
   border: 0 !important;
 
-  clip: rect(1px, 1px, 1px, 1px) !important;
   clip-path: inset(50%) !important;
 }
 
