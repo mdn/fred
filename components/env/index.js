@@ -23,6 +23,7 @@ export const FXA_SIGNOUT_URL = parseString(
 export const GLEAN_ENABLED = parseBool("GLEAN_ENABLED", false);
 /** Set to non-prod default, because we don't want glean to run without explicitly enabling. */
 export const GLEAN_CHANNEL = parseString("GLEAN_CHANNEL", "dev");
+export const GLEAN_DEBUG = parseBool("GLEAN_DEBUG", false);
 
 /**
  * While there is a risk from not including the `noindex` meta tag on stage etc, we have a
