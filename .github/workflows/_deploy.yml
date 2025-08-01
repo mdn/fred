@@ -124,7 +124,6 @@ jobs:
         env:
           FRED_GLEAN_ENABLED: true
           FRED_GLEAN_CHANNEL: review
-          FRED_GLEAN_DEBUG: true
           FRED_PLAYGROUND_BASE_HOST: mdnyalp.dev
           FRED_ROBOTS_GLOBAL_ALLOW: false
           FRED_BCD_BASE_URL: https://bcd.developer.allizom.org
