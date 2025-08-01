@@ -11,3 +11,4 @@ import "./hooks/toc-highlight.js";
 import "./hooks/code-examples.js";
 import "./hooks/live-samples.js";
 import "./hooks/skip-to-search.js";
+import "./hooks/user-ping.js";

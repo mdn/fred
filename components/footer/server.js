@@ -48,7 +48,7 @@ const links = (context) => [
       { text: context.l10n`About`, href: "/en-US/about" },
       { text: context.l10n`Blog`, href: "/en-US/blog/" },
       {
-        text: context.l10n`Careers`,
+        text: context.l10n`Mozilla careers`,
         href: "https://www.mozilla.org/en-US/careers/listings/",
         external: true,
       },
@@ -91,11 +91,11 @@ const links = (context) => [
     title: context.l10n`Developers`,
     links: [
       {
-        text: context.l10n`Web Technologies`,
+        text: context.l10n`Web technologies`,
         href: "/en-US/docs/Web",
       },
       {
-        text: context.l10n`Learn Web Development`,
+        text: context.l10n`Learn web development`,
         href: "/en-US/docs/Learn_web_development",
       },
       {
@@ -111,7 +111,7 @@ const links = (context) => [
         href: "/en-US/docs/Glossary",
       },
       {
-        text: context.l10n`Hacks Blog`,
+        text: context.l10n`Hacks blog`,
         href: "https://hacks.mozilla.org/",
         external: true,
       },

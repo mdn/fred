@@ -1,206 +1,114 @@
-.curriculum-content-container .sidebar {
+.curriculum-content-container .left-sidebar {
   position: sticky;
   top: var(--sticky-header-height);
 
-  max-height: calc(100vh - var(--sticky-header-height));
+  padding-bottom: 3rem;
 
-  overflow-y: auto;
-
-  color: var(--text-secondary);
-
-  .backdrop {
-    display: none;
-  }
-
-  /* highlight of current page in sidebar */
-  li > em {
-    display: inline-block;
-
-    padding: 0.25rem 0.5rem;
-
-    font-variation-settings: normal;
-    font-style: normal;
-    font-weight: var(--font-weight-bold);
-
-    hyphens: auto;
-
-    background-color: var(--background-toc-active);
-    border-left: 2px solid var(--category-color);
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
-  }
-
-  a {
-    display: inline-block;
-
-    padding: 0.25rem;
-
-    color: var(--text-secondary);
-
-    hyphens: auto;
-
-    text-decoration: none;
-
-    &:hover,
-    &:focus {
-      text-decoration: underline;
-    }
-  }
-
-  li.section {
-    display: flex;
-
-    margin-top: 1.5rem;
-
-    font-size: var(--font-size-normal);
-    font-weight: var(--font-weight-bold);
-
-    letter-spacing: 0.02rem;
-
-    &.no-link {
-      padding: 0.25rem;
-    }
-  }
-
-  li:first-of-type strong {
-    margin-top: unset;
-  }
+  overflow-wrap: anywhere;
 
   ol {
-    font-size: var(--font-size-normal);
-
-    ol,
-    ul {
-      padding-left: 0.5rem;
-    }
-
-    li {
-      .icon {
-        margin-right: 0.01em;
-      }
-
-      &.no-bullet {
-        display: block;
-        font-weight: var(--font-weight-bold);
-        list-style-type: none;
-      }
-    }
-  }
-
-  .sidebar-actions {
-    position: sticky;
-    top: 0;
-    z-index: var(--z-index-main-header);
-
-    height: 0;
-
-    padding-bottom: 4rem;
-
-    ~ .sidebar-inner-nav {
-      margin-top: 0.5rem;
-    }
-
-    @media (--screen-small-and-narrower) {
-      position: unset;
-      top: unset;
-
-      height: unset;
-
-      padding-bottom: unset;
-      margin-top: unset;
-
-      ~ .sidebar-inner-nav {
-        margin-top: unset;
-      }
-    }
-  }
-
-  /* This is for sidebars where there is no sub-heading
-   * for example: https://developer-mozilla.org/en-US/docs/Web/HTML/Element/progress
-   */
-  .sidebar-heading ~ ol,
-  .sidebar-heading ~ div > ol {
-    margin-top: 1rem;
-  }
-
-  summary,
-  li {
-    margin-bottom: 0.5rem;
-  }
-
-  summary {
-    font-size: var(--font-size-normal);
-    cursor: pointer;
-  }
-
-  code {
-    padding: 0.125rem;
-
-    font-family: var(--font-code);
-    font-size: var(--font-size-small);
-
-    line-height: 1.2;
-
-    overflow-wrap: break-word;
-    white-space: normal;
-
-    background-color: initial;
-    border-radius: var(--elem-radius);
+    padding: 0;
+    margin: 0;
+    list-style: none;
   }
 
   details {
-    margin: 0.75rem 0;
+    width: 100%;
+
+    &[open] {
+      > summary {
+        margin-bottom: 0.5rem;
+
+        &::before {
+          transform: rotate(90deg);
+        }
+      }
+    }
+
+    summary {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      &::before {
+        display: inline-block;
+
+        flex-shrink: 0;
+
+        width: 1rem;
+        height: 1rem;
+
+        margin: 0.25rem;
+
+        content: "";
+
+        background-color: currentcolor;
+
+        mask-image: url("../icon/chevron-right.svg");
+        mask-size: cover;
+      }
+
+      &:hover {
+        background-color: var(--color-background-secondary);
+
+        &:has(a:hover) {
+          /* Don't highlight, as link click doesn't toggle. */
+          background-color: unset;
+        }
+      }
+    }
 
     ol {
-      padding-left: 0.75rem;
+      padding-left: 1.5rem;
     }
   }
 
-  .icon {
-    align-self: center;
-
-    width: 14px;
-    height: 14px;
-
-    margin-right: -0.25rem;
-
-    background-size: 14px;
-
-    mask-size: 14px;
-  }
-
-  /* icons in sidebars */
-  .icon-experimental,
-  .icon-nonstandard {
-    background-color: var(--icon-information);
-  }
-
-  .icon-deprecated {
-    background-color: var(--icon-critical);
-  }
-
-  @media (--screen-small-and-narrower) {
-    .place {
-      display: none;
-    }
-  }
-
-  @media (--screen-small-and-narrower) {
-    position: relative;
+  li {
     display: flex;
+    align-items: center;
+    justify-content: stretch;
+
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+
+    &.section {
+      font-weight: var(--font-weight-bold);
+
+      &:not(:first-child) {
+        margin-top: 1em;
+      }
+    }
   }
 
-  @media (--screen-medium-and-narrower), (height >= 44rem) {
-    display: block;
-    overflow: auto;
+  a,
+  span:not(.highlight-container) {
+    display: inline-flex;
+    padding-block: 0.25rem;
   }
 
-  @media (--screen-xlarge-and-narrower) {
-    position: sticky;
-    top: var(--sticky-header-height);
+  a {
+    color: var(--color-text-primary);
 
-    max-height: calc(100vh - var(--sticky-header-height));
+    &:hover {
+      color: var(--color-area-link);
+    }
 
-    overflow-y: auto;
+    &:not(:hover) {
+      text-decoration: none;
+    }
+  }
+
+  em {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding-inline: 0.5rem;
+
+    font-style: normal;
+
+    background-color: var(--background-toc-active);
+    border-left: 2px solid var(--category-color);
   }
 }
