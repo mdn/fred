@@ -24,6 +24,10 @@ MDN's next fr(ont)e(n)d.
 - `npm run preview`
   - runs the preview server: using the production bundles with the rari server: useful for testing our prod rspack config
 
+## L10n
+
+See [the l10n README](./l10n/README.md).
+
 ## Development principles
 
 ### Inline JS
