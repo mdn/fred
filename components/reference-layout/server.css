@@ -96,7 +96,7 @@
       z-index: var(--z-index-sidebar-mobile);
 
       .left-sidebar {
-        padding: 1rem;
+        padding: 0 1rem;
       }
     }
 
