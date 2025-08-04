@@ -4,10 +4,10 @@ import { LitElement, html } from "lit";
 import "../compat-table/element.js";
 import { L10nMixin } from "../../l10n/mixin.js";
 import {
-  BCD_BASE_URL,
   DEFAULT_LOCALE,
   ISSUE_METADATA_TEMPLATE,
 } from "../compat-table/constants.js";
+import { BCD_BASE_URL } from "../env/index.js";
 
 /**
  * @typedef {{data: import("@bcd").Identifier, browsers: import("@bcd").Browsers}} Compat

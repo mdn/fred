@@ -1,7 +1,7 @@
 import { Task } from "@lit/task";
 import { LitElement, html, nothing, svg } from "lit";
 
-import { OBSERVATORY_API_URL } from "../observatory/constants.js";
+import { OBSERVATORY_API_URL } from "../env/index.js";
 import { formatMinus } from "../observatory/utils.js";
 
 import styles from "./element.css?lit";

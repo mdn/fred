@@ -1,5 +1,3 @@
-export const OBSERVATORY_API_URL = "https://observatory-api.mdn.mozilla.net";
-
 /**
  * Scoring table for Observatory grades
  * @type {Array<{grade: string, scoreText: string, score: number, stars?: boolean}>}
