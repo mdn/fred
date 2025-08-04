@@ -575,9 +575,7 @@ export class Menu extends ServerComponent {
                         </a>
                       </li>
                       <li>
-                        <a href=${`/${context.locale}/curriculum/`}
-                          >Curriculum</a
-                        >
+                        <a href="/en-US/curriculum/">Curriculum</a>
                       </li>
                     </ul>
                   </dd>

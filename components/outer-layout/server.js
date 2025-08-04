@@ -54,9 +54,12 @@ export class OuterLayout extends ServerComponent {
         assetsForEntry(
           compilationStats.client,
           styleEntryForComponent(component),
-        ).auxiliaryAssets?.woff2?.filter((path) =>
-          path.toLowerCase().includes("inter"),
-        ),
+        ).auxiliaryAssets?.woff2?.filter((path) => {
+          const filename = path.split("/").pop() || "";
+          return /^(inter-latin|jetbrains-mono-latin)\..+\.woff2$/i.test(
+            filename,
+          );
+        }),
       )
       .filter((x) => x !== undefined);
 

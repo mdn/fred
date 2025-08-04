@@ -1,5 +1,7 @@
 import { LitElement, html, nothing } from "lit";
 import { createRef, ref } from "lit/directives/ref.js";
+
+import { OBSERVATORY_API_URL } from "../env/index.js";
 import "../progress-bar/element.js";
 import "../button/element.js";
 
@@ -53,9 +55,10 @@ export class MDNObservatoryForm extends LitElement {
     }
     this._queryRunning = true;
     try {
-      const apiUrl = `https://observatory-api.mdn.mozilla.net/api/v2/analyze?host=${encodeURIComponent(
-        this._hostname,
-      )}`;
+      const apiUrl = new URL(
+        OBSERVATORY_API_URL +
+          `/api/v2/analyze?host=${encodeURIComponent(this._hostname)}`,
+      );
       const response = await fetch(apiUrl, { method: "POST" });
       if (!response.ok) {
         const json = await response.json();

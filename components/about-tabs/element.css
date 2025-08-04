@@ -6,7 +6,7 @@
 
 .tablist-wrapper {
   position: sticky;
-  top: var(--top-nav-height);
+  top: var(--sticky-header-height);
   z-index: 2;
 
   padding: 0 var(--center-padding);
