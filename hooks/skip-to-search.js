@@ -21,5 +21,3 @@ if (skipToSearch instanceof HTMLAnchorElement) {
     skipToSearch.hidden = true;
   }
 }
-
-export {};
