@@ -92,13 +92,13 @@ async function fetchUserData() {
 export const Settings = {
   set noAds(value) {
     if (value) {
-      globalThis.localStorage.setItem("noads", "enabled");
+      globalThis.localStorage.setItem("nop", "yes");
     } else {
-      globalThis.localStorage.removeItem("noads");
+      globalThis.localStorage.removeItem("nop");
     }
   },
 
   get noAds() {
-    return globalThis.localStorage?.getItem?.("noads") === "enabled";
+    return globalThis.localStorage?.getItem?.("nop") === "yes";
   },
 };
