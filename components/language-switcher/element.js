@@ -63,8 +63,13 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
 
     return html`<div class="language-switcher">
       <mdn-dropdown>
-        <button slot="button" class="language-switcher__button" type="button">
-          <span>${native ?? locale}</span>
+        <button
+          slot="button"
+          class="language-switcher__button"
+          type="button"
+          aria-labelledby="current-locale"
+        >
+          <span id="current-locale">${native ?? locale}</span>
         </button>
         <div
           slot="dropdown"
