@@ -1,3 +1,5 @@
+@import url("../global/global.css");
+
 .mdn-homepage-search {
   display: flex;
 
@@ -8,8 +10,6 @@
   margin: 0 auto;
 
   font-size: var(--font-size-large);
-
-  cursor: pointer;
 
   background-color: transparent;
   border: 2px solid var(--color-border-primary);
