@@ -1,8 +1,10 @@
+import { Task } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
 import infoIcon from "../icon/info.svg?lit";
+import { getEnglishDoc } from "../not-found/utils.js";
 import {
   getPreferredLocale,
   resetPreferredLocale,
@@ -22,6 +24,7 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
     native: { type: String },
     translations: { type: Array },
     url: { type: String },
+    notFound: { type: Boolean, attribute: "not-found" },
     _preferredLocale: { state: true },
   };
 
@@ -32,9 +35,20 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
     this.native = "";
     this.locale = "en-US";
     this.url = "/";
+    this.notFound = false;
     /** @type {string|undefined} */
     this._preferredLocale = undefined;
   }
+
+  _notFoundFallback = new Task(this, {
+    args: () => [this.notFound],
+    task: async ([notFound]) => {
+      if (notFound) {
+        return await getEnglishDoc(location.pathname);
+      }
+      return;
+    },
+  });
 
   firstUpdated() {
     this._preferredLocale = getPreferredLocale();
@@ -45,6 +59,7 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
   }
 
   _togglePreferredLocale() {
+    if (this.notFound) return;
     if (this._isLocalePreferred) {
       resetPreferredLocale();
       this._preferredLocale = undefined;
@@ -55,7 +70,7 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
   }
 
   render() {
-    const { translations, native, locale, url } = this;
+    const { translations, native, locale, url, notFound } = this;
 
     if (translations.length === 0) {
       return nothing;
@@ -94,28 +109,66 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
             >
           </div>
           <ul class="language-switcher__list">
-            ${translations
-              .sort((a, b) => a.locale.localeCompare(b.locale))
-              .map(
-                (translation) => html`
-                  <li>
-                    <a
-                      class="language-switcher__option"
-                      ?data-current=${locale === translation.locale}
-                      @click=${resetPreferredLocale}
-                      href=${url.replace(
-                        `/${locale}/`,
-                        `/${translation.locale}/`,
-                      )}
-                      >${translation.native}</a
-                    >
-                  </li>
-                `,
-              )}
+            ${notFound
+              ? this._notFoundFallback.render({
+                  initial: () => this._renderCurrentLocale(),
+                  pending: () => this._renderCurrentLocale(),
+                  error: () => this._renderCurrentLocale(),
+                  complete: (doc) =>
+                    doc?.other_translations
+                      ? this._renderDropdownItems(
+                          doc.other_translations,
+                          locale,
+                          doc.mdn_url,
+                          notFound,
+                        )
+                      : this._renderCurrentLocale(),
+                })
+              : this._renderDropdownItems(translations, locale, url)}
           </ul>
         </div>
       </mdn-dropdown>
     </div>`;
+  }
+
+  /**
+   * @param {import("@rari").Translation[]} translations
+   * @param {string} locale
+   * @param {string} url
+   * @param {boolean} notFound
+   */
+  _renderDropdownItems(translations, locale, url, notFound = false) {
+    return translations
+      .sort((a, b) => a.locale.localeCompare(b.locale))
+      .map(
+        (translation) => html`
+          <li>
+            <a
+              class="language-switcher__option"
+              ?data-current=${locale === translation.locale}
+              @click=${resetPreferredLocale}
+              href=${url.replace(
+                `/${notFound ? "en-US" : locale}/`,
+                `/${translation.locale}/`,
+              )}
+              >${translation.native}</a
+            >
+          </li>
+        `,
+      );
+  }
+
+  _renderCurrentLocale() {
+    return html`
+      <li>
+        <a
+          class="language-switcher__option"
+          ?data-current=${true}
+          href=${this.url}
+          >${this.native}</a
+        >
+      </li>
+    `;
   }
 }
 

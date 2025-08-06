@@ -72,11 +72,14 @@ export class BreadcrumbsBar extends ServerComponent {
       return nothing;
     }
 
+    const notFound = context.renderer === "SpaNotFound";
+
     return html`<mdn-language-switcher
       locale=${context.locale}
       native=${native}
       translations=${JSON.stringify(translations)}
-      url=${context.url}
+      url=${notFound ? context.path : context.url}
+      ?not-found=${notFound}
     ></mdn-language-switcher>`;
   }
 }

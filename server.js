@@ -228,8 +228,9 @@ export async function startServer() {
           ) {
             // render 404 page
             res.statusCode = 404;
+            const locale = req.url?.match(/[^/]+/)?.[0] ?? "en-us";
             const notFoundRes = await fetch(
-              `http://localhost:8083/en-US/404/index.json`,
+              `http://localhost:8083/${locale}/404/index.json`,
             );
             const json = await notFoundRes.json();
             return serverRenderMiddleware(req, res, json);
