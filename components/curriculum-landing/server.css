@@ -569,7 +569,7 @@
       > ul {
         display: grid;
 
-        grid-template-areas: "beginner advanced employ educator";
+        grid-template-areas: "beginner" "advanced" "employ" "educator";
 
         gap: 1rem;
 
@@ -600,13 +600,12 @@
             "i h"
             "p p"
             "c c";
-          grid-template-rows: 4rem minmax(7rem, max-content) max-content;
+          grid-template-rows: 4rem minmax(2rem, max-content) max-content;
           grid-template-columns: 3rem 1fr;
 
           gap: 1rem;
           align-items: center;
 
-          width: 80vw;
           height: max-content;
 
           padding: 1rem 0.5rem;
@@ -669,6 +668,8 @@
           }
 
           h3 {
+            grid-area: h;
+
             margin-top: 0;
 
             font-weight: var(--font-weight-bold);
@@ -676,6 +677,14 @@
             line-height: var(--font-line-normal);
 
             color: var(--text-primary);
+          }
+
+          p:nth-child(2) {
+            grid-area: p;
+          }
+
+          p:nth-child(3) {
+            grid-area: c;
           }
 
           em {

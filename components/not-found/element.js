@@ -4,7 +4,7 @@ import { LitElement, html } from "lit";
 import { L10nMixin } from "../../l10n/mixin.js";
 
 import styles from "./element.css?lit";
-import { pathToLocale } from "./utils.js";
+import { getEnglishDoc, pathToLocale } from "./utils.js";
 
 export class MDNNotFound extends L10nMixin(LitElement) {
   // Need location (not available server-side).
@@ -12,24 +12,8 @@ export class MDNNotFound extends L10nMixin(LitElement) {
 
   static styles = styles;
 
-  /** @type {Task<?,import("@rari").Doc|null>} */
   _fallback = new Task(this, {
-    task: async () => {
-      const url = location.pathname;
-      if (url && url.includes("/docs/") && !url.includes("/en-US/")) {
-        const enUSURL =
-          "/en-US/" + url.split("/").slice(2).join("/") + "/index.json";
-
-        const response = await fetch(enUSURL);
-        if (response.ok) {
-          /** @type {{ doc: import("@rari").Doc}} */
-          const { doc } = await response.json();
-          return doc;
-        }
-      }
-
-      return null;
-    },
+    task: async () => getEnglishDoc(location.pathname),
   });
 
   connectedCallback() {

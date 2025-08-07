@@ -4,5 +4,3 @@ for (const pre of document.querySelectorAll(
   const { upgradePre } = await import("../components/code-example/element.js");
   upgradePre(pre);
 }
-
-export {};

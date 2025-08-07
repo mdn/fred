@@ -87,6 +87,8 @@ export default defineConfig([
       "n/no-missing-import": "off",
       "n/no-unsupported-features/node-builtins": ["off"],
       "n/no-unpublished-import": "off",
+      "unicorn/no-array-reverse": "off",
+      "unicorn/no-array-callback-reference": "off",
       "unicorn/no-null": ["off"],
       "unicorn/prevent-abbreviations": ["off"],
       "unicorn/switch-case-braces": "off",

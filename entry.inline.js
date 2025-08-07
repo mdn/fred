@@ -6,9 +6,9 @@ try {
 }
 
 try {
-  if (localStorage.getItem("noads") === "enabled") {
-    document.documentElement.dataset["noads"] = "enabled";
+  if (localStorage.getItem("nop") === "yes") {
+    document.documentElement.dataset["nop"] = "yes";
   }
 } catch (error) {
-  console.warn("Unable to set noads", error);
+  console.warn("Unable to set nop", error);
 }

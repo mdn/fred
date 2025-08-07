@@ -54,9 +54,12 @@ export class OuterLayout extends ServerComponent {
         assetsForEntry(
           compilationStats.client,
           styleEntryForComponent(component),
-        ).auxiliaryAssets?.woff2?.filter((path) =>
-          path.toLowerCase().includes("inter"),
-        ),
+        ).auxiliaryAssets?.woff2?.filter((path) => {
+          const filename = path.split("/").pop() || "";
+          return /^(inter-latin|jetbrains-mono-latin)\..+\.woff2$/i.test(
+            filename,
+          );
+        }),
       )
       .filter((x) => x !== undefined);
 
@@ -73,7 +76,7 @@ export class OuterLayout extends ServerComponent {
         lang=${context.locale}
         style="color-scheme: light dark;"
         data-renderer=${context.renderer}
-        data-noads=${ifDefined(WRITER_MODE ? "enabled" : undefined)}
+        data-nop=${ifDefined(WRITER_MODE ? "yes" : undefined)}
         data-current-area=${ifDefined(area)}
       >
         <head>

@@ -33,7 +33,7 @@
   }
 }
 
-:root[data-noads="enabled"] {
+:root[data-nop="yes"] {
   .page-layout__banner {
     display: none;
   }

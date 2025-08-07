@@ -205,10 +205,14 @@ ${"```"}`,
         (controller.srcPrefix !== srcPrefix ||
           !compareCode(controller.initialCode, code))
       ) {
-        if (
-          !opener?.location?.origin ||
-          opener?.location?.origin !== location.origin
-        ) {
+        try {
+          if (
+            !opener?.location?.origin ||
+            opener?.location?.origin !== location.origin
+          ) {
+            throw new Error("origin doesn't match");
+          }
+        } catch {
           this._autoRun = false;
           controller.runOnStart = false;
           controller.runOnChange = false;
