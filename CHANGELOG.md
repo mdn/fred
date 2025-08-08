@@ -1,5 +1,36 @@
 # Changelog
 
+## [0.2.1](https://github.com/mdn/fred/compare/v0.2.0...v0.2.1) (2025-08-08)
+
+
+### Bug Fixes
+
+* **curriculum:** responsive fix on landing page ([#503](https://github.com/mdn/fred/issues/503)) ([1d73a65](https://github.com/mdn/fred/commit/1d73a6552df12e8a4b10c2955c4338c37b2f141b))
+* **footer:** links casing ([#473](https://github.com/mdn/fred/issues/473)) ([376ba0c](https://github.com/mdn/fred/commit/376ba0cd3820f0383cbbcbc611d6ebdc0f6f5805))
+* **global:** blue buttons in mobile Safari ([#511](https://github.com/mdn/fred/issues/511)) ([55bedc2](https://github.com/mdn/fred/commit/55bedc22841719ebca159781d9b3ca90ef562e10))
+* **lang-switch:** directly point to the label ([#506](https://github.com/mdn/fred/issues/506)) ([6cbcfb8](https://github.com/mdn/fred/commit/6cbcfb86496e7d152ee32378ba057e62836ff99a))
+* **language-switcher:** show locales that exist on 404 ([#512](https://github.com/mdn/fred/issues/512)) ([32b4e42](https://github.com/mdn/fred/commit/32b4e421f2ab0429d2ce81e2bc7017b996e1bf33))
+* **menu:** change curriculum link to en-US ([#466](https://github.com/mdn/fred/issues/466)) ([cf45776](https://github.com/mdn/fred/commit/cf45776584c6f5346be5522db38b9c5cd7502433))
+* **outer-layout:** preload only latin fonts ([#495](https://github.com/mdn/fred/issues/495)) ([e298c4e](https://github.com/mdn/fred/commit/e298c4e763d4bf21d06c176d6d48a2eac8ef988a))
+* **placement:** use same key/value as yari for disabling ([#508](https://github.com/mdn/fred/issues/508)) ([7a76065](https://github.com/mdn/fred/commit/7a7606590e9523beae74e6852f1e411962a98576))
+* **playground:** catch cross origin errors when attempting to check origin ([#463](https://github.com/mdn/fred/issues/463)) ([d57f18a](https://github.com/mdn/fred/commit/d57f18a14bf780f1d2ecf409925ba94624295026))
+* **sidebar:** Remove top padding for mobile views ([#504](https://github.com/mdn/fred/issues/504)) ([3093aa7](https://github.com/mdn/fred/commit/3093aa7f129e8f51f7e7dd519ac42d4077f9530a))
+
+
+### Miscellaneous
+
+* add active user ping ([#494](https://github.com/mdn/fred/issues/494)) ([e2ad0ca](https://github.com/mdn/fred/commit/e2ad0cabd1bd4b72710f5b48ab9c76da73577e53))
+* **deps-dev:** bump @mdn/browser-compat-data from 6.0.36 to 6.0.37 ([#501](https://github.com/mdn/fred/issues/501)) ([242b5ed](https://github.com/mdn/fred/commit/242b5edf03c65b679d380712f3a1f1532f51aa8b))
+* **deps-dev:** bump @mdn/browser-compat-data from 6.0.37 to 6.1.0 ([#510](https://github.com/mdn/fred/issues/510)) ([d8c84f0](https://github.com/mdn/fred/commit/d8c84f0ccb64c00aa7b1a260df118743058501f1))
+* **deps-dev:** bump eslint-plugin-jsdoc from 51.4.1 to 52.0.2 ([#496](https://github.com/mdn/fred/issues/496)) ([3127901](https://github.com/mdn/fred/commit/312790118450b89a161582170a11b5a5e337655b))
+* **deps-dev:** bump eslint-plugin-unicorn from 59.0.1 to 60.0.0 ([#445](https://github.com/mdn/fred/issues/445)) ([fb91e6f](https://github.com/mdn/fred/commit/fb91e6f607b4f95357439f0afaac384674397277))
+* **deps-dev:** bump stylelint-config-standard from 38.0.0 to 39.0.0 ([#470](https://github.com/mdn/fred/issues/470)) ([484c9ca](https://github.com/mdn/fred/commit/484c9ca0e3f634af53b0ad01e2fa968e9779d5e1))
+* **deps-dev:** bump the dev group with 2 updates ([#509](https://github.com/mdn/fred/issues/509)) ([83c5287](https://github.com/mdn/fred/commit/83c52871f048059d5c0574ed29b9fb3672f04ed5))
+* **deps-dev:** bump the dev group with 2 updates ([#513](https://github.com/mdn/fred/issues/513)) ([f842f4e](https://github.com/mdn/fred/commit/f842f4e022a5a676ef25800d1692ca2c6595d148))
+* **deps-dev:** bump the dev group with 2 updates ([#514](https://github.com/mdn/fred/issues/514)) ([cfe1847](https://github.com/mdn/fred/commit/cfe1847c0538edfd18209e77baf0914b014fa9ed))
+* **deps-dev:** bump the dev group with 4 updates ([#505](https://github.com/mdn/fred/issues/505)) ([ad33028](https://github.com/mdn/fred/commit/ad3302872d4974585e03b14bcb7defcb43e91962))
+* **env:** set safe defaults, disable survey, add glean debug ([#500](https://github.com/mdn/fred/issues/500)) ([8f9dc04](https://github.com/mdn/fred/commit/8f9dc04aaeb9e35d63eaca0b2d2d5242314efa3a))
+
 ## [0.2.0](https://github.com/mdn/fred/compare/v0.1.0...v0.2.0) (2025-07-31)
 
 
