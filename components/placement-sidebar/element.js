@@ -66,9 +66,14 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
       ].filter(([_, v]) => Boolean(v)),
     );
 
+    // skyscraper format is not suitable for horizontal layout
+    if (imageFormat === "skyscraper" && this.horizontal) {
+      return nothing;
+    }
+
     return imageFormat === "skyscraper"
       ? html`<section
-          class=${`sidebar-placement ${this.horizontal ? "horizontal" : ""}`}
+          class=${`sidebar-placement-skyscraper ${this.horizontal ? "horizontal" : ""}`}
         >
           <div
             ${ref(this._placementRef)}
@@ -85,18 +90,13 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
                 src=${this.imgLink(image)}
                 aria-hidden=${!alt}
                 alt=${alt || ""}
-                width="125px"
-                height="125px"
+                width="160px"
+                height="600px"
               />
-              <div class="placement-content">
-                <strong class="placement-heading">${heading}</strong>
-                <span class="placement-copy">${copy}</span>
-                <span class="placement-cta external">${cta}</span>
-              </div>
             </a>
-            <mdn-placement-note></mdn-placement-note>
           </div>
           <mdn-placement-no></mdn-placement-no>
+          <mdn-placement-note></mdn-placement-note>
         </section>`
       : html`<section
           class=${`sidebar-placement ${this.horizontal ? "horizontal" : ""}`}

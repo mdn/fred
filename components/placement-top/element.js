@@ -27,6 +27,25 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
     return EMPTY;
   }
 
+  renderFallback() {
+    return html`
+      <div class="fallback">
+        <p class="fallback__copy">
+          Learn front-end development with high quality, interactive courses
+          from
+          <a
+            href="https://scrimba.com/learn/frontend?via=mdn"
+            target="_blank"
+            rel="noreferrer"
+            data-glean="pong: pong-&gt;click fallback-scrimba"
+          >
+            Scrimba
+          </a>
+        </p>
+      </div>
+    `;
+  }
+
   /**
    *
    * @param {Placements.PlacementContextData} placementContext
@@ -36,6 +55,8 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
     if (placementContext.status === "noads") {
       return nothing;
     }
+
+    // console.log("placementContext", placementContext);
 
     const data = placementContext?.hpTop || placementContext?.top;
     if (!data) {
@@ -108,14 +129,10 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
                     height="90"
                   />
                 </div>
-                <div class="placement-overlay-top">
-                  <mdn-placement-note></mdn-placement-note>
-                </div>
-                <div class="placement-overlay-bottom">
-                  <mdn-placement-no></mdn-placement-no>
-                </div>
               </a>
             </div>
+            <mdn-placement-note></mdn-placement-note>
+            <mdn-placement-no></mdn-placement-no>
           </section>
         </div>`
       : html`<div
