@@ -72,7 +72,7 @@ export async function respond(e): Promise<Response> {
     } else if (url.pathname.startsWith("/examples/") && url.search) {
       url.search = "";
     } else if (!url.pathname.split("/").pop().includes(".")) {
-      url.pathname = "/index.html";
+      url.pathname = "/static/legacy/index.html";
     } else if (url.pathname === "/index.json") {
       url.pathname = "/en-us/index.json";
     } else if (url.pathname.startsWith("/en-US/")) {

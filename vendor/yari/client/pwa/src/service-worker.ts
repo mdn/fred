@@ -13,15 +13,16 @@ import {
 } from "./db.js";
 import { fetchWithExampleOverride } from "./fetcher.js";
 
+declare var __UPDATES_BASE_URL__: string | undefined;
+
 export const INTERACTIVE_EXAMPLES_URL = new URL(
   "https://interactive-examples.mdn.mozilla.net",
 );
 export const LIVE_SAMPLES_URL = new URL("https://live-samples.mdn.mozilla.net");
 export const USER_CONTENT_URL = new URL("https://mozillausercontent.com");
 
-const UPDATES_BASE_URL = `https://updates.${
-  location.hostname === "localhost" ? "developer.allizom.org" : location.host
-}`;
+const UPDATES_BASE_URL =
+  __UPDATES_BASE_URL__ || "https://updates.developer.mozilla.org";
 
 const SW_TYPE: SwType =
   SwType[new URLSearchParams(location.search).get("type")] ||
@@ -37,11 +38,13 @@ self.addEventListener("install", (e) => {
   e.waitUntil(
     (async () => {
       const cache = await openCache();
-      const { files = {} }: { files: object } =
+      const files: string[] =
         (await (
-          await fetch("/asset-manifest.json", { cache: "no-cache" })
-        ).json()) || {};
-      const assets = [...Object.values(files)].filter(
+          await fetch("/static/legacy/asset-manifest.json", {
+            cache: "no-cache",
+          })
+        ).json()) || [];
+      const assets = files.filter(
         (asset) => !(asset as string).endsWith(".map"),
       );
       let keys = new Set(
@@ -49,6 +52,14 @@ self.addEventListener("install", (e) => {
       );
       const toCache = assets.filter((file) => !keys.has(file));
       await cache.addAll(toCache as string[]);
+      const index = toCache.find(
+        (file) =>
+          file.startsWith("/static/legacy/index.") && file.endsWith(".html"),
+      );
+      if (index) {
+        const indexResponse = await fetch(index);
+        await cache.put("/static/legacy/index.html", indexResponse);
+      }
     })().then(() => self.skipWaiting()),
   );
 
@@ -64,10 +75,12 @@ self.addEventListener("fetch", async (e) => {
   ) {
     e.respondWith(
       (async () => {
-        const res = await fetchWithExampleOverride(e.request);
-        if (res.ok) {
-          return res;
-        }
+        try {
+          const res = await fetchWithExampleOverride(e.request.clone());
+          if (res.ok) {
+            return res;
+          }
+        } catch {}
         return respond(e);
       })(),
     );

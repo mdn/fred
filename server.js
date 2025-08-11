@@ -109,6 +109,11 @@ const streamToBuffer = (stream) =>
 export async function startServer() {
   let app = express();
 
+  const sw = fileURLToPath(
+    import.meta.resolve("./dist/service-worker/index.js"),
+  );
+  app.use("/service-worker.js", express.static(sw));
+
   if (devMode) {
     const { rspack } = await import("@rspack/core");
     const { default: rspackConfig } = await import("./rspack.config.js");
