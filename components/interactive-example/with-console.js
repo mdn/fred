@@ -47,7 +47,11 @@ export const InteractiveExampleWithConsole = (Base) =>
                   )}
                 </mdn-ix-tab-wrapper>`}
             <div class="buttons">
-              <mdn-button id="execute" @click=${this._run} variant="secondary"
+              <mdn-button
+                id="execute"
+                @click=${this._run}
+                variant="secondary"
+                aria-controls="console,runner"
                 >${this.l10n`Run`}</mdn-button
               >
               <mdn-button id="reset" @click=${this._reset} variant="secondary"
@@ -56,6 +60,7 @@ export const InteractiveExampleWithConsole = (Base) =>
             </div>
             <mdn-play-console id="console"></mdn-play-console>
             <mdn-play-runner
+              id="runner"
               defaults=${ifDefined(
                 this._languages.includes("wat") ? "ix-wat" : undefined,
               )}
