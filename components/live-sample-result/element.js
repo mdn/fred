@@ -99,7 +99,9 @@ export class MDNLiveSampleResult extends L10nMixin(LitElement) {
                 href=${this.breakoutLink}
                 target="_blank"
                 rel="opener"
-                >${this.l10n`Play`}</mdn-button
+                aria-label=${this.l10n("example-play-button-title")}
+                title=${this.l10n("example-play-button-title")}
+                >${this.l10n("example-play-button-label")}</mdn-button
               >`
             : nothing}
         </div>

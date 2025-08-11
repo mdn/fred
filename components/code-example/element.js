@@ -4,6 +4,8 @@ import { createRef, ref } from "lit/directives/ref.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import "../copy-button/element.js";
+import { L10nMixin } from "../../l10n/mixin.js";
+
 import styles from "./element.css?lit";
 
 /**
@@ -12,7 +14,7 @@ import styles from "./element.css?lit";
 
 const LANGUAGE_CLASSES = new Set(["html", "js", "css", "wat"]);
 
-export class MDNCodeExample extends LitElement {
+export class MDNCodeExample extends L10nMixin(LitElement) {
   static styles = styles;
 
   static properties = {
@@ -78,7 +80,9 @@ export class MDNCodeExample extends LitElement {
                 href=${this.liveSample?.breakoutLink}
                 target="_blank"
                 rel="opener"
-                >Play</mdn-button
+                aria-label=${this.l10n("example-play-button-title")}
+                title=${this.l10n("example-play-button-title")}
+                >${this.l10n("example-play-button-label")}</mdn-button
               >`
             : nothing}
         </div>

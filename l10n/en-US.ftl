@@ -146,3 +146,6 @@ pagination-goto = Go to page { $page }
 logout = Sign out
 login = Log in
 settings = My settings
+
+example-play-button-label = Play
+example-play-button-title = Run example in MDN Playground (opens in new tab)
