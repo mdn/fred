@@ -67,9 +67,9 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
     );
 
     // skyscraper format is not suitable for horizontal layout
-    if (imageFormat === "skyscraper" && this.horizontal) {
-      return nothing;
-    }
+    // if (imageFormat === "skyscraper" && this.horizontal) {
+    //   return nothing;
+    // }
 
     return imageFormat === "skyscraper"
       ? html`<section

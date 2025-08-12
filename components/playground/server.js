@@ -11,6 +11,7 @@ export class Playground extends ServerComponent {
       html`
         <main class="playground">
           <mdn-playground></mdn-playground>
+          <mdn-placement-sidebar></mdn-placement-sidebar>
         </main>
       `,
     );
