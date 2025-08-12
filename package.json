@@ -90,7 +90,7 @@
     "eslint": "^9.33.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-jsdoc": "^52.0.4",
+    "eslint-plugin-jsdoc": "^53.0.1",
     "eslint-plugin-lit": "^2.0.0",
     "eslint-plugin-n": "^17.21.3",
     "eslint-plugin-unicorn": "^60.0.0",
