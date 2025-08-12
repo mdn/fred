@@ -115,13 +115,9 @@ export class MDNPlayConsole extends LitElement {
   render() {
     return html`
       <ul>
-        ${this._messages.map((message) => {
-          return html`
-            <li>
-              <code>${message}</code>
-            </li>
-          `;
-        })}
+        ${this._messages.map(
+          (message) => html`<li><code tabindex="0">${message}</code></li>`,
+        )}
       </ul>
     `;
   }

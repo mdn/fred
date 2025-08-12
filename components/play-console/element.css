@@ -25,7 +25,7 @@ li {
   padding: 0 0.5em;
 
   &::before {
-    content: ">";
+    content: "> ";
   }
 }
 
