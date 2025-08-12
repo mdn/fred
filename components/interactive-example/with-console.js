@@ -67,7 +67,6 @@ export const InteractiveExampleWithConsole = (Base) =>
               title=${this.l10n`Console output`}
             ></mdn-play-console>
             <mdn-play-runner
-              id="runner"
               defaults=${ifDefined(
                 this._languages.includes("wat") ? "ix-wat" : undefined,
               )}
