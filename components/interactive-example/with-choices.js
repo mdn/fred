@@ -112,7 +112,7 @@ export const InteractiveExampleWithChoices = (Base) =>
               >${this.l10n`Reset`}</mdn-button
             >
           </header>
-          <div
+          <ul
             class="choice-wrapper"
             @click=${this.#choiceFocus}
             @focus=${this.#choiceSelect}
@@ -120,7 +120,7 @@ export const InteractiveExampleWithChoices = (Base) =>
           >
             ${this._choices?.map(
               (code, index) => html`
-                <div
+                <li
                   class=${[
                     "choice",
                     ...(index === this.__choiceSelected ? ["selected"] : []),
@@ -134,10 +134,10 @@ export const InteractiveExampleWithChoices = (Base) =>
                     .delay=${100}
                     .value=${code?.trim()}
                   ></mdn-play-editor>
-                </div>
+                </li>
               `,
             )}
-          </div>
+          </ul>
           <div class="output-wrapper">
             <mdn-play-controller ${ref(this._controller)} run-on-start>
               <mdn-play-runner
