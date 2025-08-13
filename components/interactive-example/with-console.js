@@ -47,14 +47,25 @@ export const InteractiveExampleWithConsole = (Base) =>
                   )}
                 </mdn-ix-tab-wrapper>`}
             <div class="buttons">
-              <mdn-button id="execute" @click=${this._run} variant="secondary"
+              <mdn-button
+                id="execute"
+                @click=${this._run}
+                variant="secondary"
+                title=${this.l10n`Run example, and show console output`}
                 >${this.l10n`Run`}</mdn-button
               >
-              <mdn-button id="reset" @click=${this._reset} variant="secondary"
+              <mdn-button
+                id="reset"
+                @click=${this._reset}
+                variant="secondary"
+                title=${this.l10n`Reset example, and clear console output`}
                 >${this.l10n`Reset`}</mdn-button
               >
             </div>
-            <mdn-play-console id="console"></mdn-play-console>
+            <mdn-play-console
+              id="console"
+              title=${this.l10n`Console output`}
+            ></mdn-play-console>
             <mdn-play-runner
               defaults=${ifDefined(
                 this._languages.includes("wat") ? "ix-wat" : undefined,

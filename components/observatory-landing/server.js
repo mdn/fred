@@ -109,7 +109,7 @@ export class ObservatoryLanding extends ServerComponent {
  */
 function LinesSVG({ className = "" }) {
   return svg`
-  <svg width="75" class="${className}" role="none" height="75" viewBox="-25 0 75 75" version="1.1" id="svg1">
+  <svg width="75" class="${className}" height="75" viewBox="-25 0 75 75" version="1.1" role="presentation">
    <path d="M 1,0 V 35 H 48 V 75" stroke="url(#gradient)" stroke-width="2" stroke-dasharray="4, 4" fill="none"
       style="stroke-linejoin:miter;stroke-linecap:butt;stroke-width:2;stroke-dasharray:4, 3.992;stroke-dashoffset:0;stroke:url(#gradient)"
       id="path1" />

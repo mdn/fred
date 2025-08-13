@@ -166,13 +166,29 @@ const clientAndSsrCommon = {
         oneOf: [
           {
             resourceQuery: /lit/,
-            use: ["./build/loaders/lit-svg.js", "svgo-loader"],
+            use: [
+              "./build/loaders/lit-svg.js",
+              {
+                loader: "svgo-loader",
+                options: svgoOverride({
+                  cleanupIds: false,
+                  removeUnknownsAndDefaults: {
+                    keepRoleAttr: true,
+                    keepAriaAttrs: true,
+                  },
+                }),
+              },
+            ],
           },
           {
             loader: "svgo-loader",
             options: svgoOverride(
               {
                 cleanupIds: false,
+                removeUnknownsAndDefaults: {
+                  keepRoleAttr: true,
+                  keepAriaAttrs: true,
+                },
               },
               [
                 {
