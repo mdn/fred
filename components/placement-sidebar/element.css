@@ -1,3 +1,7 @@
+:host {
+  padding-left: 2px;
+}
+
 .sidebar-placement {
   display: flex;
 
