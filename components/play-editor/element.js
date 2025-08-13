@@ -59,7 +59,6 @@ export class MDNPlayEditor extends LitElement {
       });
       this._editor.setState(state);
     }
-    this.dispatchEvent(new Event("update", { bubbles: true, composed: true }));
   }
 
   get value() {
