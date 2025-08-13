@@ -1,5 +1,6 @@
 import { decode } from "he";
 import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { ref } from "lit/directives/ref.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
@@ -145,6 +146,12 @@ export const InteractiveExampleWithChoices = (Base) =>
                     minimal="true"
                     .delay=${100}
                     .value=${code?.trim()}
+                    aria-label=${ifDefined(
+                      this.__choiceUnsupported[index]
+                        ? this
+                            .l10n`The current value is not supported by your browser.`
+                        : undefined,
+                    )}
                   ></mdn-play-editor>
                 </li>
               `,
