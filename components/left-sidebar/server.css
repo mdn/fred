@@ -131,6 +131,12 @@
   }
 }
 
+.left-sidebar__content {
+  > ol {
+    padding-left: 2px;
+  }
+}
+
 .left-sidebar__header {
   position: sticky;
   top: 0;
