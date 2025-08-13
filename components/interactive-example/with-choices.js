@@ -4,6 +4,7 @@ import { ref } from "lit/directives/ref.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 import { MDNPlayEditor } from "../play-editor/element.js";
+import { randomIdString } from "../utils/index.js";
 
 import { isCSSSupported } from "./utils.js";
 
@@ -104,10 +105,12 @@ export const InteractiveExampleWithChoices = (Base) =>
     }
 
     #render() {
+      const id = randomIdString();
+
       return html`
-        <div class="template-choices">
+        <div class="template-choices" aria-labelledby=${id}>
           <header>
-            <h4>${decode(this.name)}</h4>
+            <h4 id=${id}>${decode(this.name)}</h4>
             <mdn-button id="reset" @click=${this._reset} variant="secondary"
               >${this.l10n`Reset`}</mdn-button
             >
