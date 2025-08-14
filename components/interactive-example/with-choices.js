@@ -130,6 +130,7 @@ export const InteractiveExampleWithChoices = (Base) =>
             @click=${this.#choiceFocus}
             @focus=${this.#choiceSelect}
             @update=${this.#choiceUpdate}
+            aria-label=${this.l10n`Value select`}
           >
             ${this._choices?.map(
               (code, index) => html`
