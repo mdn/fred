@@ -1,5 +1,7 @@
 import { html } from "lit";
 
+import { ifDefined } from "lit/directives/if-defined.js";
+
 import { ServerComponent } from "../server/index.js";
 
 import { MISSING_DOCS } from "./constants.js";
@@ -25,6 +27,22 @@ export class Menu extends ServerComponent {
       return `/${locale}/docs/${slug}`;
     };
 
+    /**
+     * Renders a link to a page.
+     *
+     * @param {string} slug
+     * @param {string} text
+     * @param {string} [label]
+     * @returns
+     */
+    const link = (slug, text, label) =>
+      html`<a
+        href=${resolve(slug)}
+        aria-label=${ifDefined(label)}
+        title=${ifDefined(label)}
+        >${text}</a
+      >`;
+
     return html`
       <nav class="menu">
         <div class="menu__tab" data-section="html">
@@ -34,7 +52,7 @@ export class Menu extends ServerComponent {
             </button>
             <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
-                <a href=${resolve("Web/HTML")}>HTML: Markup language</a>
+                ${link("Web/HTML", "HTML: Markup language")}
               </p>
               <div class="menu__panel-content">
                 <dl>
@@ -42,31 +60,23 @@ export class Menu extends ServerComponent {
                   <dd>
                     <ul>
                       <li>
-                        <a href=${resolve("Web/HTML/Reference/Elements")}
-                          >Elements</a
-                        >
+                        ${link("Web/HTML/Reference/Elements", "Elements")}
                       </li>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Web/HTML/Reference/Global_attributes",
-                          )}
-                        >
-                          Global attributes
-                        </a>
+                        ${link(
+                          "Web/HTML/Reference/Global_attributes",
+                          "Global attributes",
+                        )}
                       </li>
                       <li>
-                        <a href=${resolve("Web/HTML/Reference/Attributes")}
-                          >Attributes</a
-                        >
+                        ${link("Web/HTML/Reference/Attributes", "Attributes")}
                       </li>
                       <li>
-                        <a
-                          href=${resolve("Web/HTML/Reference")}
-                          aria-label="See all HTML references"
-                        >
-                          See all…
-                        </a>
+                        ${link(
+                          "Web/HTML/Reference",
+                          "See all…",
+                          "See all HTML references",
+                        )}
                       </li>
                     </ul>
                   </dd>
@@ -76,35 +86,29 @@ export class Menu extends ServerComponent {
                   <dd>
                     <ul>
                       <li>
-                        <a href=${resolve("Web/HTML/Guides/Responsive_images")}>
-                          Responsive images
-                        </a>
+                        ${link(
+                          "Web/HTML/Guides/Responsive_images",
+                          "Responsive images",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Learn_web_development/Core/Structuring_content/HTML_video_and_audio",
-                          )}
-                        >
-                          Video & audio content
-                        </a>
+                        ${link(
+                          "Learn_web_development/Core/Structuring_content/HTML_video_and_audio",
+                          "Video & audio content",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Web/HTML/Guides/Date_and_time_formats",
-                          )}
-                        >
-                          Date & time formats
-                        </a>
+                        ${link(
+                          "Web/HTML/Guides/Date_and_time_formats",
+                          "Date & time formats",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve("Web/HTML/Guides")}
-                          aria-label="See all HTML guides"
-                        >
-                          See all…
-                        </a>
+                        ${link(
+                          "Web/HTML/Guides",
+                          "See all…",
+                          "See all HTML guides",
+                        )}
                       </li>
                     </ul>
                   </dd>
@@ -113,15 +117,9 @@ export class Menu extends ServerComponent {
                   <dt>Markup languages</dt>
                   <dd>
                     <ul>
-                      <li>
-                        <a href=${resolve("Web/SVG")}>SVG</a>
-                      </li>
-                      <li>
-                        <a href=${resolve("Web/MathML")}>MathML</a>
-                      </li>
-                      <li>
-                        <a href=${resolve("Web/XML")}>XML</a>
-                      </li>
+                      <li>${link("Web/SVG", "SVG")}</li>
+                      <li>${link("Web/MathML", "MathML")}</li>
+                      <li>${link("Web/XML", "XML")}</li>
                     </ul>
                   </dd>
                 </dl>
@@ -136,37 +134,28 @@ export class Menu extends ServerComponent {
             </button>
             <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
-                <a href=${resolve("Web/CSS")}>CSS: Styling language</a>
+                ${link("Web/CSS", "CSS: Styling language")}
               </p>
               <div class="menu__panel-content">
                 <dl>
                   <dt>CSS reference</dt>
                   <dd>
                     <ul>
+                      <li>${link("Web/CSS/Properties", "Properties")}</li>
+                      <li>${link("Web/CSS/CSS_selectors", "Selectors")}</li>
+                      <li>${link("Web/CSS/CSS_syntax/At-rule", "At-rules")}</li>
                       <li>
-                        <a href=${resolve("Web/CSS/Properties")}>Properties</a>
+                        ${link(
+                          "Web/CSS/CSS_Values_and_Units",
+                          "Values & units",
+                        )}
                       </li>
                       <li>
-                        <a href=${resolve("Web/CSS/CSS_selectors")}
-                          >Selectors</a
-                        >
-                      </li>
-                      <li>
-                        <a href=${resolve("Web/CSS/CSS_syntax/At-rule")}
-                          >At-rules</a
-                        >
-                      </li>
-                      <li>
-                        <a href=${resolve("Web/CSS/CSS_Values_and_Units")}
-                          >Values & units</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href=${resolve("Web/CSS/Reference")}
-                          aria-label="See all CSS references"
-                          >See all…</a
-                        >
+                        ${link(
+                          "Web/CSS/Reference",
+                          "See all…",
+                          "See all CSS references",
+                        )}
                       </li>
                     </ul>
                   </dd>
@@ -176,42 +165,30 @@ export class Menu extends ServerComponent {
                   <dd>
                     <ul>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Learn_web_development/Core/Styling_basics/Box_model",
-                          )}
-                        >
-                          Box model
-                        </a>
+                        ${link(
+                          "Learn_web_development/Core/Styling_basics/Box_model",
+                          "Box model",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Web/CSS/CSS_animations/Using_CSS_animations",
-                          )}
-                        >
-                          Animations
-                        </a>
+                        ${link(
+                          "Web/CSS/CSS_animations/Using_CSS_animations",
+                          "Animations",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Learn_web_development/Core/CSS_layout/Flexbox",
-                          )}
-                        >
-                          Flexbox
-                        </a>
+                        ${link(
+                          "Learn_web_development/Core/CSS_layout/Flexbox",
+                          "Flexbox",
+                        )}
                       </li>
+                      <li>${link("Web/CSS/CSS_colors", "Colors")}</li>
                       <li>
-                        <a href=${resolve("Web/CSS/CSS_colors")}>Colors</a>
-                      </li>
-                      <li>
-                        <a
-                          href=${resolve("Web/CSS/Guides")}
-                          aria-label="See all CSS guides"
-                        >
-                          See all…
-                        </a>
+                        ${link(
+                          "Web/CSS/Guides",
+                          "See all…",
+                          "See all CSS guides",
+                        )}
                       </li>
                     </ul>
                   </dd>
@@ -221,33 +198,24 @@ export class Menu extends ServerComponent {
                   <dd>
                     <ul>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Web/CSS/Layout_cookbook/Column_layouts",
-                          )}
-                        >
-                          Column layouts
-                        </a>
+                        ${link(
+                          "Web/CSS/Layout_cookbook/Column_layouts",
+                          "Column layouts",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Web/CSS/Layout_cookbook/Center_an_element",
-                          )}
-                        >
-                          Centering an element
-                        </a>
+                        ${link(
+                          "Web/CSS/Layout_cookbook/Center_an_element",
+                          "Centering an element",
+                        )}
                       </li>
                       <li>
-                        <a href=${resolve("Web/CSS/Layout_cookbook/Card")}>
-                          Card component
-                        </a>
+                        ${link(
+                          "Web/CSS/Layout_cookbook/Card",
+                          "Card component",
+                        )}
                       </li>
-                      <li>
-                        <a href=${resolve("Web/CSS/Layout_cookbook")}>
-                          See all…
-                        </a>
-                      </li>
+                      <li>${link("Web/CSS/Layout_cookbook", "See all…")}</li>
                     </ul>
                   </dd>
                 </dl>
@@ -263,9 +231,7 @@ export class Menu extends ServerComponent {
             </button>
             <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
-                <a href=${resolve("Web/JavaScript")}>
-                  JavaScript: Scripting language
-                </a>
+                ${link("Web/JavaScript", "JavaScript: Scripting language")}
               </p>
               <div class="menu__panel-content">
                 <dl>
@@ -273,42 +239,35 @@ export class Menu extends ServerComponent {
                   <dd>
                     <ul>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Web/JavaScript/Reference/Global_Objects",
-                          )}
-                        >
-                          Standard built-in objects
-                        </a>
+                        ${link(
+                          "Web/JavaScript/Reference/Global_Objects",
+                          "Standard built-in objects",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve("Web/JavaScript/Reference/Operators")}
-                        >
-                          Expressions & operators
-                        </a>
+                        ${link(
+                          "Web/JavaScript/Reference/Operators",
+                          "Expressions & operators",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve("Web/JavaScript/Reference/Statements")}
-                        >
-                          Statements & declarations
-                        </a>
+                        ${link(
+                          "Web/JavaScript/Reference/Statements",
+                          "Statements & declarations",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve("Web/JavaScript/Reference/Functions")}
-                        >
-                          Functions
-                        </a>
+                        ${link(
+                          "Web/JavaScript/Reference/Functions",
+                          "Functions",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve("Web/JavaScript/Reference")}
-                          aria-label="See all JavaScript references"
-                        >
-                          See all…
-                        </a>
+                        ${link(
+                          "Web/JavaScript/Reference",
+                          "See all…",
+                          "See all JavaScript references",
+                        )}
                       </li>
                     </ul>
                   </dd>
@@ -318,46 +277,35 @@ export class Menu extends ServerComponent {
                   <dd>
                     <ul>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Web/JavaScript/Guide/Control_flow_and_error_handling",
-                          )}
-                        >
-                          Control flow & error handing
-                        </a>
+                        ${link(
+                          "Web/JavaScript/Guide/Control_flow_and_error_handling",
+                          "Control flow & error handing",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Web/JavaScript/Guide/Loops_and_iteration",
-                          )}
-                        >
-                          Loops and iteration
-                        </a>
+                        ${link(
+                          "Web/JavaScript/Guide/Loops_and_iteration",
+                          "Loops and iteration",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Web/JavaScript/Guide/Working_with_objects",
-                          )}
-                        >
-                          Working with objects
-                        </a>
+                        ${link(
+                          "Web/JavaScript/Guide/Working_with_objects",
+                          "Working with objects",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve("Web/JavaScript/Guide/Using_classes")}
-                        >
-                          Using classes
-                        </a>
+                        ${link(
+                          "Web/JavaScript/Guide/Using_classes",
+                          "Using classes",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve("Web/JavaScript/Guide")}
-                          aria-label="See all JavaScript guides"
-                        >
-                          See all…
-                        </a>
+                        ${link(
+                          "Web/JavaScript/Guide",
+                          "See all…",
+                          "See all JavaScript guides",
+                        )}
                       </li>
                     </ul>
                   </dd>
@@ -373,9 +321,7 @@ export class Menu extends ServerComponent {
             </button>
             <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
-                <a href=${resolve("Web/API")}
-                  >Web APIs: Programming interfaces</a
-                >
+                ${link("Web/API", "Web APIs: Programming interfaces")}
               </p>
               <div class="menu__panel-content">
                 <dl>
@@ -383,38 +329,22 @@ export class Menu extends ServerComponent {
                   <dd>
                     <ul>
                       <li>
-                        <a href=${resolve("Web/API/File_System_API")}
-                          >File system API</a
-                        >
+                        ${link("Web/API/File_System_API", "File system API")}
+                      </li>
+                      <li>${link("Web/API/Fetch_API", "Fetch API")}</li>
+                      <li>
+                        ${link("Web/API/Geolocation_API", "Geolocation API")}
+                      </li>
+                      <li>${link("Web/API/HTML_DOM_API", "HTML DOM API")}</li>
+                      <li>${link("Web/API/Push_API", " Push API ")}</li>
+                      <li>
+                        ${link(
+                          "Web/API/Service_Worker_API",
+                          "Service worker API",
+                        )}
                       </li>
                       <li>
-                        <a href=${resolve("Web/API/Fetch_API")}>Fetch API</a>
-                      </li>
-                      <li>
-                        <a href=${resolve("Web/API/Geolocation_API")}>
-                          Geolocation API
-                        </a>
-                      </li>
-                      <li>
-                        <a href=${resolve("Web/API/HTML_DOM_API")}>
-                          HTML DOM API
-                        </a>
-                      </li>
-                      <li>
-                        <a href=${resolve("Web/API/Push_API")}> Push API </a>
-                      </li>
-                      <li>
-                        <a href=${resolve("Web/API/Service_Worker_API")}>
-                          Service worker API
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href=${resolve("Web/API")}
-                          aria-label="See all Web API references"
-                        >
-                          See all…
-                        </a>
+                        ${link("Web/API", "See all…", "See all Web API guides")}
                       </li>
                     </ul>
                   </dd>
@@ -424,45 +354,34 @@ export class Menu extends ServerComponent {
                   <dd>
                     <ul>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Web/API/Web_Animations_API/Using_the_Web_Animations_API",
-                          )}
-                        >
-                          Using the Web animation API
-                        </a>
+                        ${link(
+                          "Web/API/Web_Animations_API/Using_the_Web_Animations_API",
+                          "Using the Web animation API",
+                        )}
                       </li>
                       <li>
-                        <a href=${resolve("Web/API/Fetch_API/Using_Fetch")}>
-                          Using the Fetch API
-                        </a>
+                        ${link(
+                          "Web/API/Fetch_API/Using_Fetch",
+                          "Using the Fetch API",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Web/API/History_API/Working_with_the_History_API",
-                          )}
-                        >
-                          Working with the History API
-                        </a>
+                        ${link(
+                          "Web/API/History_API/Working_with_the_History_API",
+                          "Working with the History API",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Web/API/Web_Speech_API/Using_the_Web_Speech_API",
-                          )}
-                        >
-                          Using the Web speech API
-                        </a>
+                        ${link(
+                          "Web/API/Web_Speech_API/Using_the_Web_Speech_API",
+                          "Using the Web speech API",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Web/API/Web_Workers_API/Using_web_workers",
-                          )}
-                        >
-                          Using web workers
-                        </a>
+                        ${link(
+                          "Web/API/Web_Workers_API/Using_web_workers",
+                          "Using web workers",
+                        )}
                       </li>
                     </ul>
                   </dd>
@@ -478,42 +397,30 @@ export class Menu extends ServerComponent {
             </button>
             <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
-                <a href=${resolve("Web")}>All web technology</a>
+                ${link("Web", "All web technology")}
               </p>
               <div class="menu__panel-content">
                 <dl>
                   <dt>Technologies</dt>
                   <dd>
                     <ul>
+                      <li>${link("Web/Accessibility", "Accessibility")}</li>
+                      <li>${link("Web/HTTP", "HTTP")}</li>
+                      <li>${link("Web/URI", "URI")}</li>
                       <li>
-                        <a href=${resolve("Web/Accessibility")}
-                          >Accessibility</a
-                        >
+                        ${link(
+                          "Mozilla/Add-ons/WebExtensions",
+                          "Web extensions",
+                        )}
                       </li>
+                      <li>${link("WebAssembly", "WebAssembly")}</li>
+                      <li>${link("Web/WebDriver", "WebDriver")}</li>
                       <li>
-                        <a href=${resolve("Web/HTTP")}>HTTP</a>
-                      </li>
-                      <li>
-                        <a href=${resolve("Web/URI")}>URI</a>
-                      </li>
-                      <li>
-                        <a href=${resolve("Mozilla/Add-ons/WebExtensions")}>
-                          Web extensions
-                        </a>
-                      </li>
-                      <li>
-                        <a href=${resolve("WebAssembly")}>WebAssembly</a>
-                      </li>
-                      <li>
-                        <a href=${resolve("Web/WebDriver")}>WebDriver</a>
-                      </li>
-                      <li>
-                        <a
-                          href=${resolve("Web")}
-                          aria-label="See all web technology references"
-                        >
-                          See all…
-                        </a>
+                        ${link(
+                          "Web",
+                          "See all…",
+                          "See all web technology references",
+                        )}
                       </li>
                     </ul>
                   </dd>
@@ -522,24 +429,15 @@ export class Menu extends ServerComponent {
                   <dt>Topics</dt>
                   <dd>
                     <ul>
+                      <li>${link("Web/Media", "Media")}</li>
+                      <li>${link("Web/API/Performance", "Performance")}</li>
+                      <li>${link("Web/Privacy", "Privacy")}</li>
+                      <li>${link("Web/Security", "Security")}</li>
                       <li>
-                        <a href=${resolve("Web/Media")}>Media</a>
-                      </li>
-                      <li>
-                        <a href=${resolve("Web/API/Performance")}
-                          >Performance</a
-                        >
-                      </li>
-                      <li>
-                        <a href=${resolve("Web/Privacy")}>Privacy</a>
-                      </li>
-                      <li>
-                        <a href=${resolve("Web/Security")}>Security</a>
-                      </li>
-                      <li>
-                        <a href=${resolve("Web/Progressive_web_apps")}>
-                          Progressive web apps
-                        </a>
+                        ${link(
+                          "Web/Progressive_web_apps",
+                          "Progressive web apps",
+                        )}
                       </li>
                     </ul>
                   </dd>
@@ -555,9 +453,7 @@ export class Menu extends ServerComponent {
             </button>
             <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
-                <a href=${resolve("Learn_web_development")}>
-                  Learn web development
-                </a>
+                ${link("Learn_web_development", "Learn web development")}
               </p>
               <div class="menu__panel-content">
                 <dl>
@@ -565,22 +461,18 @@ export class Menu extends ServerComponent {
                   <dd>
                     <ul>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Learn_web_development/Getting_started",
-                          )}
-                        >
-                          Getting started
-                        </a>
+                        ${link(
+                          "Learn_web_development/Getting_started",
+                          "Getting started",
+                        )}
                       </li>
                       <li>
-                        <a href=${resolve("Learn_web_development/Howto")}>
-                          Common questions
-                        </a>
+                        ${link(
+                          "Learn_web_development/Howto",
+                          "Common questions",
+                        )}
                       </li>
-                      <li>
-                        <a href="/en-US/curriculum/">Curriculum</a>
-                      </li>
+                      <li><a href="/en-US/curriculum/">Curriculum</a></li>
                     </ul>
                   </dd>
                 </dl>
@@ -589,22 +481,16 @@ export class Menu extends ServerComponent {
                   <dd>
                     <ul>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Learn_web_development/Core/Structuring_content",
-                          )}
-                        >
-                          Introduction to HTML
-                        </a>
+                        ${link(
+                          "Learn_web_development/Core/Structuring_content",
+                          "Introduction to HTML",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Learn_web_development/Core/Structuring_content/Basic_HTML_syntax",
-                          )}
-                        >
-                          Getting started with HTML
-                        </a>
+                        ${link(
+                          "Learn_web_development/Core/Structuring_content/Basic_HTML_syntax",
+                          "Getting started with HTML",
+                        )}
                       </li>
                     </ul>
                   </dd>
@@ -614,22 +500,16 @@ export class Menu extends ServerComponent {
                   <dd>
                     <ul>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Learn_web_development/Core/Styling_basics/What_is_CSS",
-                          )}
-                        >
-                          What is CSS
-                        </a>
+                        ${link(
+                          "Learn_web_development/Core/Styling_basics/What_is_CSS",
+                          "What is CSS",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Learn_web_development/Core/Styling_basics/Getting_started",
-                          )}
-                        >
-                          Getting started with CSS
-                        </a>
+                        ${link(
+                          "Learn_web_development/Core/Styling_basics/Getting_started",
+                          "Getting started with CSS",
+                        )}
                       </li>
                     </ul>
                   </dd>
@@ -639,20 +519,16 @@ export class Menu extends ServerComponent {
                   <dd>
                     <ul>
                       <li>
-                        <a
-                          href=${resolve("Web/HTML/How_to/Use_data_attributes")}
-                        >
-                          How to use data attributes
-                        </a>
+                        ${link(
+                          "Web/HTML/How_to/Use_data_attributes",
+                          "How to use data attributes",
+                        )}
                       </li>
                       <li>
-                        <a
-                          href=${resolve(
-                            "Web/HTML/How_to/Add_JavaScript_to_your_web_page",
-                          )}
-                        >
-                          Add JavaScript to your web page
-                        </a>
+                        ${link(
+                          "Web/HTML/How_to/Add_JavaScript_to_your_web_page",
+                          "Add JavaScript to your web page",
+                        )}
                       </li>
                     </ul>
                   </dd>
@@ -691,36 +567,28 @@ export class Menu extends ServerComponent {
                 </ul>
                 <ul>
                   <li>
-                    <a href=${resolve("Web/CSS/CSS_colors/Color_picker_tool")}>
-                      Color picker
-                    </a>
+                    ${link(
+                      "Web/CSS/CSS_colors/Color_picker_tool",
+                      "Color picker",
+                    )}
                   </li>
                   <li>
-                    <a
-                      href=${resolve(
-                        "Web/CSS/CSS_backgrounds_and_borders/Box-shadow_generator",
-                      )}
-                    >
-                      Box-shadow generator
-                    </a>
+                    ${link(
+                      "Web/CSS/CSS_backgrounds_and_borders/Box-shadow_generator",
+                      "Box-shadow generator",
+                    )}
                   </li>
                   <li>
-                    <a
-                      href=${resolve(
-                        "Web/CSS/CSS_backgrounds_and_borders/Border-image_generator",
-                      )}
-                    >
-                      Border-image generator
-                    </a>
+                    ${link(
+                      "Web/CSS/CSS_backgrounds_and_borders/Border-image_generator",
+                      "Border-image generator",
+                    )}
                   </li>
                   <li>
-                    <a
-                      href=${resolve(
-                        "Web/CSS/CSS_backgrounds_and_borders/Border-radius_generator",
-                      )}
-                    >
-                      Border-radius generator
-                    </a>
+                    ${link(
+                      "Web/CSS/CSS_backgrounds_and_borders/Border-radius_generator",
+                      "Border-radius generator",
+                    )}
                   </li>
                 </ul>
               </div>
