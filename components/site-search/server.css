@@ -6,19 +6,8 @@
   @media (--screen-layout-no-sidebar) {
     grid-template-columns: var(--layout-no-sidebar);
   }
+}
 
-  h1,
-  mdn-site-search {
-    grid-column: content;
-  }
-
-  /* Same as: `.not-found h1` */
-  h1 {
-    margin-top: 0;
-
-    font-size: var(--font-size-largest);
-    font-weight: normal;
-
-    line-height: var(--font-line-content);
-  }
+mdn-site-search {
+  grid-column: content;
 }

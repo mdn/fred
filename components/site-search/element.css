@@ -137,6 +137,10 @@
 .site-search-form {
   display: flex;
   flex-direction: column;
+
+  /* align-items: center; */
+
+  margin-top: 2rem;
 }
 
 .site-search-form__form {

@@ -11,7 +11,7 @@ export class SiteSearch extends ServerComponent {
     return PageLayout.render(
       context,
       html`<div class="site-search">
-        <h1>${context.l10n`Search`}</h1>
+        <h1 class="visually-hidden">${context.l10n`Search`}</h1>
         <mdn-site-search></mdn-site-search>
       </div>`,
     );
