@@ -136,6 +136,7 @@ jobs:
           REACT_APP_MDN_PLUS_10Y_SP3_ID: mdnsupporter10ystage
           REACT_APP_GLEAN_CHANNEL: review
           REACT_APP_GLEAN_ENABLED: true
+          REACT_APP_UPDATES_BASE_URL: https://updates.developer.allizom.org
         run: npm run build
 
       - name: Build (rari)
@@ -236,6 +237,7 @@ jobs:
         run: |
           npm run ssr
           cp -r dist $BUILD_OUT_ROOT/static
+          cp dist/service-worker/service-worker.js* $BUILD_OUT_ROOT/
 
       - name: Authenticate with GCP
         uses: google-github-actions/auth@v2
