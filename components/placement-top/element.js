@@ -56,7 +56,6 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
       return nothing;
     }
 
-
     const data = placementContext?.hpTop || placementContext?.top;
     if (!data) {
       return EMPTY;
