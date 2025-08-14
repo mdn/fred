@@ -17,7 +17,6 @@ export class Menu extends ServerComponent {
      * @param {string} slug
      * @param {string} text
      * @param {string} [label]
-     * @returns
      */
     const link = (slug, text, label) => {
       const locale =
@@ -332,7 +331,7 @@ export class Menu extends ServerComponent {
                         ${link("Web/API/Geolocation_API", "Geolocation API")}
                       </li>
                       <li>${link("Web/API/HTML_DOM_API", "HTML DOM API")}</li>
-                      <li>${link("Web/API/Push_API", " Push API ")}</li>
+                      <li>${link("Web/API/Push_API", "Push API")}</li>
                       <li>
                         ${link(
                           "Web/API/Service_Worker_API",
