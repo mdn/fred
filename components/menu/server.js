@@ -12,22 +12,6 @@ export class Menu extends ServerComponent {
    */
   render(context) {
     /**
-     * Resolves a menu item to the current locale (if available), or en-US otherwise.
-     *
-     * @param {string} slug - Slug, e.g. "Web/HTML"
-     * @returns
-     */
-    const resolve = (slug) => {
-      const locale =
-        context.locale in MISSING_DOCS &&
-        MISSING_DOCS[context.locale]?.includes(slug)
-          ? "en-US"
-          : context.locale;
-
-      return `/${locale}/docs/${slug}`;
-    };
-
-    /**
      * Renders a link to a page.
      *
      * @param {string} slug
@@ -35,13 +19,25 @@ export class Menu extends ServerComponent {
      * @param {string} [label]
      * @returns
      */
-    const link = (slug, text, label) =>
-      html`<a
-        href=${resolve(slug)}
+    const link = (slug, text, label) => {
+      const locale =
+        context.locale in MISSING_DOCS &&
+        MISSING_DOCS[context.locale]?.includes(slug)
+          ? "en-US"
+          : context.locale;
+
+      const href = `/${locale}/docs/${slug}`;
+
+      return html`<a
+        class=${ifDefined(
+          locale === context.locale ? undefined : "only-in-en-us",
+        )}
+        href=${href}
         aria-label=${ifDefined(label)}
         title=${ifDefined(label)}
         >${text}</a
       >`;
+    };
 
     return html`
       <nav class="menu">
