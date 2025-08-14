@@ -468,7 +468,17 @@ export class Menu extends ServerComponent {
                           "Common questions",
                         )}
                       </li>
-                      <li><a href="/en-US/curriculum/">Curriculum</a></li>
+                      <li>
+                        <a
+                          class=${ifDefined(
+                            context.locale === "en-US"
+                              ? undefined
+                              : "only-in-en-us",
+                          )}
+                          href="/en-US/curriculum/"
+                          >Curriculum</a
+                        >
+                      </li>
                     </ul>
                   </dd>
                 </dl>
