@@ -1,6 +1,5 @@
 :host {
   display: block;
-  color-scheme: var(--color-scheme, light);
   background-color: var(--color-background-primary);
 }
 
@@ -28,8 +27,6 @@
     var(--place-top-cta-color-light),
     var(--place-top-cta-color-dark)
   );
-
-  --top-placement-inner-padding: 0.125rem;
 
   min-height: calc(
     var(--top-placement-inner-height) + 2 * var(--top-placement-inner-padding)
@@ -147,6 +144,9 @@
 
 .top-placement-leaderboard {
   --place-top-background: transparent;
+  --top-placement-inner-height: 5.625rem;
+  --top-placement-inner-padding: 0rem;
+
   padding-bottom: 0;
 
   .placement-container {
