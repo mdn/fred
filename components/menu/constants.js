@@ -1,6 +1,8 @@
 /**
  * Lists untranslated menu pages per locale.
  *
+ * Tip: Run `node check-missing-docs.js` to check.
+ *
  * @type {Record<string, string[]>}
  */
 export const MISSING_DOCS = {
