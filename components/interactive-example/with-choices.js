@@ -25,7 +25,6 @@ export const InteractiveExampleWithChoices = (Base) =>
     static properties = {
       __choiceSelected: { state: true },
       __choiceUnsupported: { state: true },
-      __choiceUpdated: { state: true },
     };
 
     /** @param {any[]} _args  */
@@ -35,8 +34,6 @@ export const InteractiveExampleWithChoices = (Base) =>
       this.__choiceSelected = -1;
       /** @type {boolean[]} */
       this.__choiceUnsupported = [];
-      /** @type {boolean} */
-      this.__choiceUpdated = false;
     }
 
     /** @param {MouseEvent} event  */
@@ -61,13 +58,11 @@ export const InteractiveExampleWithChoices = (Base) =>
         if (this.__choiceSelected === this.#getIndex(target)) {
           this.#selectChoice(target);
         }
-        this.__choiceUpdated = true;
       }
     }
 
     #resetChoices() {
       this.__choiceSelected = -1;
-      this.__choiceUpdated = false;
 
       const editorNodes = [
         ...(this.shadowRoot?.querySelectorAll("mdn-play-editor") || []),
@@ -117,11 +112,7 @@ export const InteractiveExampleWithChoices = (Base) =>
         <div class="template-choices" aria-labelledby=${id}>
           <header>
             <h4 id=${id}>${decode(this.name)}</h4>
-            <mdn-button
-              id="reset"
-              @click=${this._reset}
-              variant="secondary"
-              .disabled=${!this.__choiceUpdated}
+            <mdn-button id="reset" @click=${this._reset} variant="secondary"
               >${this.l10n`Reset`}</mdn-button
             >
           </header>
