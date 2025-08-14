@@ -129,7 +129,7 @@ jobs:
           FRED_BCD_BASE_URL: https://bcd.developer.allizom.org
           FRED_OBSERVATORY_API_URL: https://observatory-api.mdn.allizom.net
           REACT_APP_FXA_SETTINGS_URL: https://accounts.stage.mozaws.net/settings/
-          REACT_APP_MDN_PLUS_SUBSCRIBE_URL_SP3_BASE: https://payments-next.stage.fxa.nonprod.webservices.mozgcp.net
+          REACT_APP_MDN_PLUS_SUBSCRIBE_URL_SP3_BASE: https://payments-next.allizom.org
           REACT_APP_MDN_PLUS_5M_SP3_ID: mdnplus5mstage
           REACT_APP_MDN_PLUS_5Y_SP3_ID: mdnplus5ystage
           REACT_APP_MDN_PLUS_10M_SP3_ID: mdnsupporter10mstage
