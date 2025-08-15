@@ -1,6 +1,5 @@
 :host {
   display: block;
-  color-scheme: var(--color-scheme, light);
   background-color: var(--color-background-primary);
 }
 
@@ -147,6 +146,9 @@
 
 .top-placement-leaderboard {
   --place-top-background: transparent;
+  --top-placement-inner-height: 5.625rem;
+  --top-placement-inner-padding: 0rem;
+
   padding-bottom: 0;
 
   .placement-container {

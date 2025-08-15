@@ -22,11 +22,12 @@
 
 .page-layout__banner {
   height: calc(5.625rem + 1px);
-
-  color-scheme: var(--color-scheme, light);
-
   background-color: var(--color-background-primary);
   border-bottom: 1px solid var(--color-border-primary);
+
+  &[data-scheme="dark"] {
+    color-scheme: dark;
+  }
 
   @media (--screen-small-and-narrower) {
     display: none;

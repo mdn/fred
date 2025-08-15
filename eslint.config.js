@@ -51,7 +51,6 @@ export default defineConfig([
   },
   {
     files: ["**/*.{js,mjs,cjs}"],
-    // @ts-expect-error
     plugins: { "@typescript-eslint": tseslint },
     rules: {
       "@typescript-eslint/ban-ts-comment": [
