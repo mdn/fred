@@ -16,7 +16,6 @@ import "../play-runner/element.js";
 import "../play-console/element.js";
 import "../modal/element.js";
 import "../login-button/element.js";
-import "../placement-sidebar/element.js";
 
 /**
  * @import { MDNPlayController } from "../play-controller/element.js";
@@ -367,7 +366,6 @@ ${"```"}`,
               <mdn-play-console></mdn-play-console>
             </div>
           </section>
-          <mdn-placement-sidebar horizontal></mdn-placement-sidebar>
         </mdn-play-controller>
       </div>
       <mdn-modal ${ref(this._shareModal)} class="share">
