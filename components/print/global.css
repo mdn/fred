@@ -1,0 +1,125 @@
+@media print {
+  * {
+    print-color-adjust: exact;
+  }
+
+  :root {
+    color-scheme: light;
+
+    /* Force desktop layout for print by overriding layout variables */
+    --layout-2-sidebars: minmax(0, 1fr) !important;
+    --layout-1-sidebar-left: minmax(0, 1fr) !important;
+    --layout-no-sidebar: minmax(0, 1fr) !important;
+  }
+
+  body {
+    padding: 0;
+    margin: 0;
+
+    font-size: 9pt;
+
+    line-height: 1.5;
+  }
+
+  .page-layout {
+    display: block !important;
+
+    grid-template-rows: none !important;
+
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  /* Fix sticky header positioning */
+  .page-layout__header {
+    position: static !important;
+    top: auto !important;
+    z-index: auto !important;
+  }
+
+  /* Reset sticky header height variable */
+  :root {
+    --sticky-header-height: 0 !important;
+  }
+
+  .page-layout__banner,
+  .reference-layout__toc,
+  .reference-layout__sidebar,
+  .footer__socials,
+  .footer__links,
+  .footer__mozilla,
+  .article-footer,
+  .navigation__button,
+  .navigation__menu,
+  .content-section.article-footer,
+  mdn-toggle-sidebar,
+  mdn-collection-save-button,
+  mdn-color-theme,
+  mdn-search-button,
+  mdn-user-menu,
+  mdn-placement-bottom {
+    display: none !important;
+  }
+
+  .reference-layout {
+    grid-template-areas:
+      "header"
+      "body" !important;
+    grid-template-rows: auto !important;
+    grid-template-columns: auto !important;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+
+  details.baseline-indicator > *:not(summary) {
+    display: none !important;
+  }
+
+  details.baseline-indicator[open] > *:not(summary) {
+    display: none !important;
+  }
+
+  details.baseline-indicator > summary::marker {
+    display: none !important;
+  }
+
+  /* Fix overlapping elements in print */
+  .example-container,
+  .default-example,
+  [class*="example"],
+  .interactive,
+  .code-example {
+    position: static !important;
+    float: none !important;
+
+    display: block !important;
+
+    width: 100% !important;
+    height: auto !important;
+
+    margin-bottom: 1rem !important;
+    break-inside: avoid !important;
+
+    overflow: visible !important;
+  }
+
+  /* Ensure proper spacing for content sections */
+  section,
+  interactive-example {
+    position: static !important;
+    clear: both !important;
+    display: block !important;
+  }
+
+  interactive-example {
+    break-inside: avoid !important;
+  }
+
+  /* Fix any absolutely positioned elements */
+  [style*="position: absolute"],
+  [style*="position: fixed"] {
+    position: static !important;
+  }
+}

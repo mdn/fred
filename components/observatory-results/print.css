@@ -1,20 +1,5 @@
 /* Print styles for Observatory Results */
 @media print {
-  /* Basic print color adjustment */
-  * {
-    print-color-adjust: exact;
-  }
-
-  /* Reset margins and paddings for cleaner layout */
-  body {
-    padding: 0;
-    margin: 0;
-
-    font-size: 11pt;
-
-    line-height: 1.4;
-  }
-
   .observatory-results-wrapper {
     background-color: white !important;
   }

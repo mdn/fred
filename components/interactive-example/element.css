@@ -313,3 +313,9 @@ mdn-ix-tab-wrapper {
     overflow: hidden;
   }
 }
+
+@media print {
+  mdn-button {
+    display: none !important;
+  }
+}
