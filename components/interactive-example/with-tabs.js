@@ -9,6 +9,7 @@ import "../ix-tab/element.js";
 import "../ix-tab-panel/element.js";
 import "../ix-tab-wrapper/element.js";
 import { L10nMixin } from "../../l10n/mixin.js";
+import { randomIdString } from "../utils/index.js";
 
 /**
  * @import { InteractiveExampleBase } from "./element.js";
@@ -21,15 +22,17 @@ import { L10nMixin } from "../../l10n/mixin.js";
 export const InteractiveExampleWithTabs = (Base) =>
   class extends L10nMixin(Base) {
     #render() {
+      const id = randomIdString();
+
       return html`
         <mdn-play-controller
           ${ref(this._controller)}
           run-on-start
           run-on-change
         >
-          <div class="template-tabbed">
+          <div class="template-tabbed" aria-labelledby=${id}>
             <header>
-              <h4>${decode(this.name)}</h4>
+              <h4 id=${id}>${decode(this.name)}</h4>
               <mdn-button id="reset" @click=${this._reset} variant="secondary"
                 >${this.l10n`Reset`}</mdn-button
               >

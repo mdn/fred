@@ -160,6 +160,7 @@ export class MDNPlayRunner extends LitElement {
             ...(this.sandbox?.split(" ") || []),
           ]),
         ].join(" ")}
+        aria-live="polite"
       ></iframe>
     `;
   }

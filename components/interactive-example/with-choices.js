@@ -1,9 +1,11 @@
 import { decode } from "he";
 import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { ref } from "lit/directives/ref.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 import { MDNPlayEditor } from "../play-editor/element.js";
+import { randomIdString } from "../utils/index.js";
 
 import { isCSSSupported } from "./utils.js";
 
@@ -104,23 +106,26 @@ export const InteractiveExampleWithChoices = (Base) =>
     }
 
     #render() {
+      const id = randomIdString();
+
       return html`
-        <div class="template-choices">
+        <div class="template-choices" aria-labelledby=${id}>
           <header>
-            <h4>${decode(this.name)}</h4>
+            <h4 id=${id}>${decode(this.name)}</h4>
             <mdn-button id="reset" @click=${this._reset} variant="secondary"
               >${this.l10n`Reset`}</mdn-button
             >
           </header>
-          <div
+          <ul
             class="choice-wrapper"
             @click=${this.#choiceFocus}
             @focus=${this.#choiceSelect}
             @update=${this.#choiceUpdate}
+            aria-label=${this.l10n`Value select`}
           >
             ${this._choices?.map(
               (code, index) => html`
-                <div
+                <li
                   class=${[
                     "choice",
                     ...(index === this.__choiceSelected ? ["selected"] : []),
@@ -133,11 +138,17 @@ export const InteractiveExampleWithChoices = (Base) =>
                     minimal="true"
                     .delay=${100}
                     .value=${code?.trim()}
+                    aria-label=${ifDefined(
+                      this.__choiceUnsupported[index]
+                        ? this
+                            .l10n`The current value is not supported by your browser.`
+                        : undefined,
+                    )}
                   ></mdn-play-editor>
-                </div>
+                </li>
               `,
             )}
-          </div>
+          </ul>
           <div class="output-wrapper">
             <mdn-play-controller ${ref(this._controller)} run-on-start>
               <mdn-play-runner

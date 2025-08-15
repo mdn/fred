@@ -11,6 +11,7 @@ import "../ix-tab/element.js";
 import "../ix-tab-panel/element.js";
 import "../ix-tab-wrapper/element.js";
 import { L10nMixin } from "../../l10n/mixin.js";
+import { randomIdString } from "../utils/index.js";
 
 /**
  * @import { InteractiveExampleBase } from "./element.js";
@@ -23,11 +24,13 @@ import { L10nMixin } from "../../l10n/mixin.js";
 export const InteractiveExampleWithConsole = (Base) =>
   class extends L10nMixin(Base) {
     #render() {
+      const id = randomIdString();
+
       return html`
         <mdn-play-controller ${ref(this._controller)}>
-          <div class="template-console">
+          <div class="template-console" aria-labelledby=${id}>
             <header>
-              <h4>${decode(this.name)}</h4>
+              <h4 id=${id}>${decode(this.name)}</h4>
             </header>
             ${this._languages.length === 1
               ? html`<mdn-play-editor
