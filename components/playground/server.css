@@ -34,6 +34,7 @@
   mdn-placement-sidebar {
     display: block;
     grid-column: right-sidebar;
+    justify-self: left;
 
     @media (--screen-layout-no-sidebar) {
       grid-column: content;
