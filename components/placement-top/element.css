@@ -28,8 +28,6 @@
     var(--place-top-cta-color-dark)
   );
 
-  --top-placement-inner-padding: 0.125rem;
-
   min-height: calc(
     var(--top-placement-inner-height) + 2 * var(--top-placement-inner-padding)
   );
