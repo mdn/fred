@@ -1,3 +1,78 @@
+.sidebar-placement-skyscraper {
+  display: grid;
+
+  grid-template-areas: "pong pong" "note no";
+  grid-template-rows: auto auto;
+  grid-template-columns: auto 1fr;
+
+  max-width: 12rem;
+  height: fit-content;
+  min-height: 37.5rem;
+
+  margin: 1rem 0;
+
+  .placement-container {
+    --side-background-light: #111111;
+    --side-color-light: #ffffff;
+
+    --side-background-dark: #111111;
+    --side-color-dark: #ffffff;
+
+    --side-background: light-dark(
+      var(--side-background-light),
+      var(--side-background-dark)
+    );
+    --side-color: light-dark(var(--side-color-light), var(--side-color-dark));
+
+    grid-area: pong;
+
+    width: 10rem;
+    height: 37.5rem;
+
+    margin: 0;
+
+    overflow: hidden;
+
+    .placement-link {
+      display: block;
+
+      width: 100%;
+      height: 100%;
+
+      padding: 0;
+
+      > img {
+        width: 100%;
+        height: auto;
+      }
+
+      > .placement-content {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+        height: 100%;
+
+        color: var(--side-color);
+      }
+    }
+  }
+
+  mdn-placement-note {
+    grid-area: note;
+    margin: 0 auto 0 0;
+  }
+
+  mdn-placement-no {
+    grid-area: no;
+    margin: 0 0 0 auto;
+  }
+}
+
 .sidebar-placement {
   display: flex;
 

@@ -1,3 +1,4 @@
+import { execSync } from "node:child_process";
 import path from "node:path";
 
 import { fileURLToPath } from "node:url";
@@ -6,6 +7,7 @@ import { RsdoctorRspackPlugin } from "@rsdoctor/rspack-plugin";
 import { rspack } from "@rspack/core";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import { fdir } from "fdir";
+import { RspackManifestPlugin } from "rspack-manifest-plugin";
 import { merge } from "webpack-merge";
 // @ts-expect-error
 import { StatsWriterPlugin } from "webpack-stats-plugin";
@@ -15,6 +17,7 @@ import { GenerateElementMapPlugin } from "./build/plugins/generate-element-map.j
 import { override as svgoOverride } from "./svgo.config.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const commitHash = execSync("git rev-parse --short HEAD").toString().trim();
 
 const isProd = process.env.NODE_ENV === "production";
 const buildLegacy = Boolean(
@@ -360,13 +363,21 @@ const legacyConfig = merge(common, clientAndLegacyCommon, {
   name: "legacy",
   entry: {
     index: "./legacy/index.tsx",
+    yari: "./node_modules/@mdn/yari/client/src/index.tsx",
   },
   output: {
+    filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "dist/legacy"),
     publicPath: "/static/legacy/",
   },
   resolve: {
     extensions: ["...", ".tsx", ".ts", ".jsx"],
+    alias: {
+      [path.resolve(
+        __dirname,
+        "node_modules/@mdn/yari/client/src/document/toolbar/index.tsx",
+      )]: false,
+    },
   },
   plugins: [
     new rspack.DefinePlugin({
@@ -377,15 +388,28 @@ const legacyConfig = merge(common, clientAndLegacyCommon, {
           ),
         ),
         REACT_APP_FRED: "true",
+        REACT_APP_WRITER_MODE: "false",
+        REACT_APP_DEV_MODE: "false",
+        REACT_APP_ENABLE_PLUS: "true",
       }),
     }),
     new rspack.ProvidePlugin({
       React: "react",
     }),
     new rspack.CssExtractRspackPlugin({
-      filename: isProd ? "[name].[contenthash].css" : "[name].css",
-      // chunkFilename: "[name].[contenthash].css",
+      filename: "[name].[contenthash].css",
       runtime: true,
+    }),
+    new rspack.HtmlRspackPlugin({
+      inject: true,
+      chunks: ["yari"],
+      filename: "index.[contenthash].html",
+      template: "node_modules/@mdn/yari/client/public/index.html",
+    }),
+    new RspackManifestPlugin({
+      fileName: "asset-manifest.json",
+      generate: (_seed, files) =>
+        files.map((file) => file.path).filter((path) => !path.endsWith(".map")),
     }),
   ],
   module: {
@@ -508,9 +532,55 @@ const legacyConfig = merge(common, clientAndLegacyCommon, {
   },
 });
 
+const serviceWorkerConfig = merge(common, {
+  name: "service-worker",
+  entry: {
+    "service-worker": "./vendor/yari/client/pwa/src/service-worker.ts",
+  },
+  output: {
+    filename: "[name].js",
+    path: path.resolve(__dirname, "dist/service-worker"),
+    publicPath: "/",
+    clean: true,
+  },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".json"],
+    extensionAlias: {
+      ".js": [".ts", ".js"],
+    },
+  },
+  module: {
+    rules: [
+      {
+        test: /\.[jt]s$/,
+        use: {
+          loader: "builtin:swc-loader",
+          options: {
+            jsc: {
+              parser: {
+                syntax: "typescript",
+                tsx: false,
+              },
+            },
+          },
+        },
+        type: "javascript/auto",
+      },
+    ],
+  },
+  plugins: [
+    new rspack.DefinePlugin({
+      __COMMIT_HASH__: JSON.stringify(commitHash),
+      __UPDATES_BASE_URL__: JSON.stringify(
+        process.env.REACT_APP_UPDATES_BASE_URL,
+      ),
+    }),
+  ],
+});
+
 /** @type {import("@rspack/core").MultiRspackOptions} */
 export default [
   ssrConfig,
   clientConfig,
-  ...(buildLegacy ? [legacyConfig] : []),
+  ...(buildLegacy ? [legacyConfig, serviceWorkerConfig] : []),
 ];
