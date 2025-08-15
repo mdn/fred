@@ -1,5 +1,60 @@
 # Changelog
 
+## [0.3.0](https://github.com/mdn/fred/compare/v0.2.0...v0.3.0) (2025-08-15)
+
+
+### Features
+
+* **menu:** link to en-US if page not available in current locale ([#547](https://github.com/mdn/fred/issues/547)) ([24a81b7](https://github.com/mdn/fred/commit/24a81b79534330ba1fcbb352577771e7b90817fd))
+* **placement:** new leaderboard format ([#454](https://github.com/mdn/fred/issues/454)) ([7e8476f](https://github.com/mdn/fred/commit/7e8476febaf71bdd2af83b0f62363ca61dd53739))
+* **plus/offline:** add offline mode using yari client ([#531](https://github.com/mdn/fred/issues/531)) ([bbe86c5](https://github.com/mdn/fred/commit/bbe86c5244d02d2f17471ab8bbdc18e865841794))
+
+
+### Bug Fixes
+
+* **a11y:** add breadcrumb & sidebar padding ([#541](https://github.com/mdn/fred/issues/541)) ([dff52a5](https://github.com/mdn/fred/commit/dff52a5c02563499e93e83b3e356fcb3e0cd9ee6))
+* **code-example:** add aria-label to "Play" button ([#527](https://github.com/mdn/fred/issues/527)) ([de4a404](https://github.com/mdn/fred/commit/de4a404f0723775110c9143d6bfce24f6eddd0c6))
+* **curriculum:** responsive fix on landing page ([#503](https://github.com/mdn/fred/issues/503)) ([1d73a65](https://github.com/mdn/fred/commit/1d73a6552df12e8a4b10c2955c4338c37b2f141b))
+* **footer:** links casing ([#473](https://github.com/mdn/fred/issues/473)) ([376ba0c](https://github.com/mdn/fred/commit/376ba0cd3820f0383cbbcbc611d6ebdc0f6f5805))
+* **global:** blue buttons in mobile Safari ([#511](https://github.com/mdn/fred/issues/511)) ([55bedc2](https://github.com/mdn/fred/commit/55bedc22841719ebca159781d9b3ca90ef562e10))
+* **interactive-example:** add title to Run/Reset + console ([#532](https://github.com/mdn/fred/issues/532)) ([6ff0142](https://github.com/mdn/fred/commit/6ff0142dad18cdf3ccc33e261720de0c178e63cf))
+* **lang-switch:** directly point to the label ([#506](https://github.com/mdn/fred/issues/506)) ([6cbcfb8](https://github.com/mdn/fred/commit/6cbcfb86496e7d152ee32378ba057e62836ff99a))
+* **language-switcher:** show locales that exist on 404 ([#512](https://github.com/mdn/fred/issues/512)) ([32b4e42](https://github.com/mdn/fred/commit/32b4e421f2ab0429d2ce81e2bc7017b996e1bf33))
+* **menu:** change curriculum link to en-US ([#466](https://github.com/mdn/fred/issues/466)) ([cf45776](https://github.com/mdn/fred/commit/cf45776584c6f5346be5522db38b9c5cd7502433))
+* **observatory:** mark illustrative SVGs with `presentation` role ([#524](https://github.com/mdn/fred/issues/524)) ([4b313c3](https://github.com/mdn/fred/commit/4b313c30e82dabfcb7387e96c1f8ec6db0631ca5))
+* **outer-layout:** preload only latin fonts ([#495](https://github.com/mdn/fred/issues/495)) ([e298c4e](https://github.com/mdn/fred/commit/e298c4e763d4bf21d06c176d6d48a2eac8ef988a))
+* **placement:** use same key/value as yari for disabling ([#508](https://github.com/mdn/fred/issues/508)) ([7a76065](https://github.com/mdn/fred/commit/7a7606590e9523beae74e6852f1e411962a98576))
+* **playground:** catch cross origin errors when attempting to check origin ([#463](https://github.com/mdn/fred/issues/463)) ([d57f18a](https://github.com/mdn/fred/commit/d57f18a14bf780f1d2ecf409925ba94624295026))
+* **plus:** update staging/test base URLs for subscription platform ([#551](https://github.com/mdn/fred/issues/551)) ([9b011e7](https://github.com/mdn/fred/commit/9b011e7b3ff9d790b05f68ce80fe564a13507229))
+* **sidebar:** Remove top padding for mobile views ([#504](https://github.com/mdn/fred/issues/504)) ([3093aa7](https://github.com/mdn/fred/commit/3093aa7f129e8f51f7e7dd519ac42d4077f9530a))
+* **site-search:** add h1 for a11y ([#544](https://github.com/mdn/fred/issues/544)) ([43c7274](https://github.com/mdn/fred/commit/43c7274dc9e5141a9cc9468201b36ee3fa032c0d))
+
+
+### Miscellaneous
+
+* add active user ping ([#494](https://github.com/mdn/fred/issues/494)) ([e2ad0ca](https://github.com/mdn/fred/commit/e2ad0cabd1bd4b72710f5b48ab9c76da73577e53))
+* **deps-dev:** bump @mdn/browser-compat-data from 6.0.36 to 6.0.37 ([#501](https://github.com/mdn/fred/issues/501)) ([242b5ed](https://github.com/mdn/fred/commit/242b5edf03c65b679d380712f3a1f1532f51aa8b))
+* **deps-dev:** bump @mdn/browser-compat-data from 6.0.37 to 6.1.0 ([#510](https://github.com/mdn/fred/issues/510)) ([d8c84f0](https://github.com/mdn/fred/commit/d8c84f0ccb64c00aa7b1a260df118743058501f1))
+* **deps-dev:** bump @mdn/browser-compat-data from 6.1.0 to 6.1.1 ([#517](https://github.com/mdn/fred/issues/517)) ([e58eb8f](https://github.com/mdn/fred/commit/e58eb8f36dcac61cfe70b6d2b0f111417b23ee25))
+* **deps-dev:** bump @mdn/browser-compat-data from 6.1.1 to 6.1.2 ([#538](https://github.com/mdn/fred/issues/538)) ([7f88432](https://github.com/mdn/fred/commit/7f88432ecd2f31426c9d3eb00d048d747227b7d5))
+* **deps-dev:** bump @mdn/rari from 0.1.46 to 0.1.47 ([#530](https://github.com/mdn/fred/issues/530)) ([50890ec](https://github.com/mdn/fred/commit/50890ecc8ff201a193dbb73efc31152f1b807a41))
+* **deps-dev:** bump @mdn/rari from 0.1.47 to 0.1.48 ([#537](https://github.com/mdn/fred/issues/537)) ([df56d74](https://github.com/mdn/fred/commit/df56d74677d9e8808bc0d7854b2d67c6d9d73398))
+* **deps-dev:** bump @mdn/yari from 5.0.2 to 5.0.3 ([#529](https://github.com/mdn/fred/issues/529)) ([094652b](https://github.com/mdn/fred/commit/094652b8878fee85fa93d602ca517ae86b6cd602))
+* **deps-dev:** bump @typescript-eslint/eslint-plugin from 8.39.0 to 8.39.1 in the dev group ([#533](https://github.com/mdn/fred/issues/533)) ([adc3276](https://github.com/mdn/fred/commit/adc327681f57a0414a9378d8f89a9e44bc1f67b9))
+* **deps-dev:** bump eslint-plugin-jsdoc from 51.4.1 to 52.0.2 ([#496](https://github.com/mdn/fred/issues/496)) ([3127901](https://github.com/mdn/fred/commit/312790118450b89a161582170a11b5a5e337655b))
+* **deps-dev:** bump eslint-plugin-jsdoc from 52.0.4 to 53.0.1 ([#534](https://github.com/mdn/fred/issues/534)) ([12b0915](https://github.com/mdn/fred/commit/12b0915ddddcf0f7552cbc22cf73f41e06135f0b))
+* **deps-dev:** bump eslint-plugin-unicorn from 59.0.1 to 60.0.0 ([#445](https://github.com/mdn/fred/issues/445)) ([fb91e6f](https://github.com/mdn/fred/commit/fb91e6f607b4f95357439f0afaac384674397277))
+* **deps-dev:** bump stylelint-config-recess-order from 7.1.0 to 7.2.0 in the dev group ([#528](https://github.com/mdn/fred/issues/528)) ([e0392be](https://github.com/mdn/fred/commit/e0392be299a4690e03d48cf229c3dfd257a97a6e))
+* **deps-dev:** bump stylelint-config-standard from 38.0.0 to 39.0.0 ([#470](https://github.com/mdn/fred/issues/470)) ([484c9ca](https://github.com/mdn/fred/commit/484c9ca0e3f634af53b0ad01e2fa968e9779d5e1))
+* **deps-dev:** bump the dev group with 2 updates ([#509](https://github.com/mdn/fred/issues/509)) ([83c5287](https://github.com/mdn/fred/commit/83c52871f048059d5c0574ed29b9fb3672f04ed5))
+* **deps-dev:** bump the dev group with 2 updates ([#513](https://github.com/mdn/fred/issues/513)) ([f842f4e](https://github.com/mdn/fred/commit/f842f4e022a5a676ef25800d1692ca2c6595d148))
+* **deps-dev:** bump the dev group with 2 updates ([#514](https://github.com/mdn/fred/issues/514)) ([cfe1847](https://github.com/mdn/fred/commit/cfe1847c0538edfd18209e77baf0914b014fa9ed))
+* **deps-dev:** bump the dev group with 2 updates ([#539](https://github.com/mdn/fred/issues/539)) ([581e230](https://github.com/mdn/fred/commit/581e230c2e0c74894ae7081b817c07d3f0cf01ed))
+* **deps-dev:** bump the dev group with 4 updates ([#505](https://github.com/mdn/fred/issues/505)) ([ad33028](https://github.com/mdn/fred/commit/ad3302872d4974585e03b14bcb7defcb43e91962))
+* **deps-dev:** bump the dev group with 5 updates ([#518](https://github.com/mdn/fred/issues/518)) ([ca6b854](https://github.com/mdn/fred/commit/ca6b854d4eed8390b469176b906b0501cef909e7))
+* **deps:** bump fdir from 6.4.6 to 6.5.0 in the prod group ([#552](https://github.com/mdn/fred/issues/552)) ([2aa957e](https://github.com/mdn/fred/commit/2aa957e2e5b91f013ee5dc44c7fb2f5f46b47d5a))
+* **env:** set safe defaults, disable survey, add glean debug ([#500](https://github.com/mdn/fred/issues/500)) ([8f9dc04](https://github.com/mdn/fred/commit/8f9dc04aaeb9e35d63eaca0b2d2d5242314efa3a))
+
 ## [0.2.0](https://github.com/mdn/fred/compare/v0.1.0...v0.2.0) (2025-07-31)
 
 
