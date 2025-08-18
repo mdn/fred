@@ -692,6 +692,10 @@ ol.tabs-list {
     height: 1.5em !important;
   }
 
+  .scroll-container {
+    overflow: hidden !important;
+  }
+
   /* Show all tab content in print */
   ol.tabs-list input[type="radio"]:not(:checked) ~ .tab-content {
     display: block !important;
