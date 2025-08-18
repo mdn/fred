@@ -63,30 +63,30 @@ jobs:
           fi
 
       - name: Checkout (fred)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           path: mdn/fred
 
       - name: Checkout (content)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: mdn/content
           path: mdn/content
 
       - name: Checkout (translated-content)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: mdn/translated-content
           path: mdn/translated-content
 
       - name: Checkout (curriculum)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: mdn/curriculum
           path: mdn/curriculum
 
       - name: Checkout (mdn-studio)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: mdn/mdn-studio
           path: mdn/mdn-studio
@@ -94,13 +94,13 @@ jobs:
           token: ${{ secrets.MDN_STUDIO_PAT }}
 
       - name: Checkout (generic-content)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: mdn/generic-content
           path: mdn/generic-content
 
       - name: Checkout (mdn-contributor-spotlight)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: mdn/mdn-contributor-spotlight
           path: mdn/mdn-contributor-spotlight
