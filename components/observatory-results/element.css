@@ -466,38 +466,40 @@ mdn-observatory-rescan-button {
     }
   }
 
-  @media (--screen-medium-and-narrower) {
-    /* responsive table */
-    min-width: 0;
+  @media not print {
+    @media (--screen-medium-and-narrower) {
+      /* responsive table */
+      min-width: 0;
 
-    thead {
-      display: none;
-    }
-
-    tbody {
-      display: block;
-    }
-
-    tr {
-      display: grid;
-      grid-template-columns: max-content auto;
-    }
-
-    tr:nth-of-type(odd) {
-      background: var(--observatory-table-header-bg);
-    }
-
-    td {
-      display: grid;
-
-      grid-template-columns: subgrid;
-      grid-column: span 2;
-      grid-auto-flow: column;
-
-      column-gap: 2em;
-
-      .humanized-duration {
+      thead {
         display: none;
+      }
+
+      tbody {
+        display: block;
+      }
+
+      tr {
+        display: grid;
+        grid-template-columns: max-content auto;
+      }
+
+      tr:nth-of-type(odd) {
+        background: var(--observatory-table-header-bg);
+      }
+
+      td {
+        display: grid;
+
+        grid-template-columns: subgrid;
+        grid-column: span 2;
+        grid-auto-flow: column;
+
+        column-gap: 2em;
+
+        .humanized-duration {
+          display: none;
+        }
       }
     }
 
@@ -676,5 +678,62 @@ ol.tabs-list {
         width: calc(100vw - 2rem);
       }
     }
+  }
+}
+
+@media print {
+  .scan-result {
+    grid-template-columns: 1fr 3fr !important;
+    padding: 0.5rem !important;
+  }
+
+  .obs-pass-icon svg {
+    width: 1.5em !important;
+    height: 1.5em !important;
+  }
+
+  /* Show all tab content in print */
+  ol.tabs-list input[type="radio"]:not(:checked) ~ .tab-content {
+    display: block !important;
+  }
+
+  ol.tabs-list input[type="radio"]:not(:checked) ~ .tab-content {
+    display: block !important;
+  }
+
+  /* Hide the radio inputs but show labels as headings */
+  ol.tabs-list input[type="radio"] {
+    display: none !important;
+  }
+
+  li.tabs-list-item {
+    input:checked + label,
+    input:checked + label:hover,
+    input:checked:focus-visible + label,
+    input:not(:checked) + label,
+    input:not(:checked) + label:hover {
+      display: block !important;
+
+      font-size: 1.5rem !important;
+      font-weight: bold !important;
+
+      color: var(--color-text-primary) !important;
+
+      text-decoration: none !important;
+    }
+  }
+
+  /* Stack tab content vertically */
+  ol.tabs-list {
+    display: block !important;
+  }
+
+  ol.tabs-list li.tabs-list-item {
+    display: block !important;
+  }
+
+  th,
+  td {
+    padding: 0.5rem !important;
   }
 }

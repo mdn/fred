@@ -30,7 +30,6 @@
     min-height: auto !important;
   }
 
-  /* Fix sticky header positioning */
   .page-layout__header {
     position: static !important;
     top: auto !important;
@@ -85,7 +84,6 @@
     display: none !important;
   }
 
-  /* Fix overlapping elements in print */
   .example-container,
   .default-example,
   [class*="example"],
@@ -106,7 +104,10 @@
     break-inside: avoid !important;
   }
 
-  /* Ensure proper spacing for content sections */
+  .footer__mdn {
+    row-gap: 0 !important;
+  }
+
   section,
   interactive-example {
     position: static !important;
@@ -118,7 +119,6 @@
     break-inside: avoid !important;
   }
 
-  /* Fix any absolutely positioned elements */
   [style*="position: absolute"],
   [style*="position: fixed"] {
     position: static !important;
