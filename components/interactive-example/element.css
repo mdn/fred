@@ -155,7 +155,7 @@ mdn-ix-tab-wrapper {
 
       font: var(--tabbed-font-heading);
 
-      color: var(--text-secondary);
+      color: var(--color-text-secondary);
 
       text-transform: uppercase;
 
