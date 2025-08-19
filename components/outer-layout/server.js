@@ -74,7 +74,7 @@ export class OuterLayout extends ServerComponent {
       <!doctype html>
       <html
         lang=${context.locale}
-        style="color-scheme: light dark;"
+        data-theme="light dark"
         data-renderer=${context.renderer}
         data-nop=${ifDefined(WRITER_MODE ? "yes" : undefined)}
         data-current-area=${ifDefined(area)}
