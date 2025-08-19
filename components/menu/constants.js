@@ -100,7 +100,7 @@ export const MISSING_DOCS = {
     "Web/Privacy",
     "Web/WebDriver",
   ],
-  "zh-CN": ["Web/CSS/Properties", "Web/HTML/Guides"],
+  "zh-CN": ["Web/CSS/Properties"],
   "zh-TW": [
     "Learn_web_development/Core/CSS_layout/Flexbox",
     "Learn_web_development/Core/Structuring_content/HTML_video_and_audio",
