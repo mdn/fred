@@ -1,6 +1,8 @@
 import crypto from "node:crypto";
 
 /**
+ * Adds a per-file identifier to the CSS variables used by the light-dark polyfill,
+ * to avoid conflicts between CSS files.
  * @this {import("@rspack/core").LoaderContext}
  * @param {string} source
  */

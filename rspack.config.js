@@ -39,6 +39,9 @@ const OPTIMIZATIONS = {
  */
 const postcssLoaders = (lit = false) => [
   {
+    // the light-dark polyfill incorrectly assumes
+    // it's operating on all css in the page,
+    // so requires fixing
     loader: "./build/loaders/fix-light-dark.js",
   },
   {
