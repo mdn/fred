@@ -11,7 +11,7 @@
 
   font-size: 0.6rem;
 
-  color: var(--color-text-secondary);
+  color: inherit;
 
   &:focus,
   &:hover {

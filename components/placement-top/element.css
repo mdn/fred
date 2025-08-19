@@ -204,7 +204,7 @@
     mdn-placement-no {
       grid-area: no;
       margin: auto 0 0.25rem auto;
-      color: var(--place-top-color);
+      color: var(--color-text-secondary);
 
       @media (--screen-medium-and-narrower) {
         display: none;
