@@ -129,12 +129,6 @@ compat-legend-altname = Uses a non-standard name.
 compat-legend-prefix = Requires a vendor prefix or different name for use.
 compat-legend-more = Has more compatibility info.
 
-sidebar-filter-matches = { $matches ->
-  [0] No matches
-  [1] { $matches } match
-   *[other] { $matches } matches
-}
-
 placement-note = Ad
 placement-no = Don't want to see ads?
 

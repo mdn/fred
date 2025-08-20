@@ -1,61 +1,42 @@
 @import url("../visually-hidden/global.css");
+@import url("../global/global.css");
 
 :host {
-  position: relative;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+
+  grid-template-areas: "icon input button";
+  grid-template-columns: 2.2rem 1fr min-content;
+
+  align-items: center;
 }
 
-.sidebar-filter {
-  display: flex;
-  place-items: center;
+.icon {
+  grid-area: icon;
+
+  justify-self: center;
+
+  width: 1.25rem;
+  height: 1.25rem;
+
+  margin-left: 0.4rem;
+
+  content: "";
+
+  background-color: var(--color-text-secondary);
+
+  mask-image: url("../icon/filter.svg");
+  mask-size: cover;
 }
 
-.sidebar-filter-label {
-  position: absolute;
-  top: 0.4em;
-  left: 0.6em; /* Move icon inside field. */
+.input {
+  grid-area: 1 / 1 / -1 / -1;
 
-  &::before {
-    display: inline-block;
-
-    width: 1.25em;
-    height: 1.25em;
-
-    content: "";
-
-    background-color: var(--color-text-secondary);
-
-    mask-image: url("../icon/filter.svg");
-    mask-size: cover;
-  }
-}
-
-.clear-sidebar-filter-button {
-  --button-bg: none;
-  --button-color: var(--color-text-primary);
-  --button-border-color: none;
-  position: absolute;
-  right: 0;
-
-  &::part(button) {
-    border-radius: 50%;
-  }
-
-  &::part(button):hover {
-    background-color: transparent;
-  }
-}
-
-.sidebar-filter-input-field {
   width: 100%;
 
-  padding-top: 0.6em;
-  padding-bottom: 0.6em;
-  padding-left: 2.5em;
+  padding: 0.3rem 4.2rem 0.3rem 2.2rem;
+  margin: 0;
 
-  color: var(--color-text-primary);
-
+  background-color: transparent;
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-full);
 
@@ -65,41 +46,38 @@
 
   &:focus {
     border-color: transparent;
+  }
+}
 
-    .icon {
-      color: var(--color-border-primary);
-    }
+.counter {
+  grid-area: input;
+
+  justify-self: end;
+
+  padding: 0.25rem;
+
+  font-size: var(--font-size-small);
+
+  line-height: var(--font-line-ui);
+
+  white-space: nowrap;
+
+  background: var(--color-background-blue);
+  border-radius: var(--radius-normal);
+}
+
+.button {
+  grid-area: button;
+
+  &::part(button) {
+    border-radius: 50%;
   }
 
-  &[value=""]:not(:focus, .is-active) {
-    /** Filter collapsed. */
-    width: 5em;
-
-    ~ .sidebar-filter-count,
-    ~ .clear-sidebar-filter-button {
-      display: none;
-    }
+  &::part(button):hover {
+    background-color: transparent;
   }
 
-  &:focus,
-  &.is-active {
-    /** Filter is focused or active. */
-    padding-right: 7.5em;
-  }
-
-  ~ .sidebar-filter-count {
-    position: absolute;
-    right: 2.5em;
-
-    padding: 0 0.5em;
-
-    font-size: 0.7rem;
-
-    color: var(--color-text-secondary);
-
-    white-space: nowrap;
-
-    background: var(--color-background-blue);
-    border-radius: 1em;
+  :placeholder-shown ~ & {
+    visibility: hidden;
   }
 }
