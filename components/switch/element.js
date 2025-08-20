@@ -30,7 +30,7 @@ export class MDNSwitch extends LitElement {
         ?checked=${this.checked}
         ?disabled=${this.disabled}
         @change=${this._toggle}
-      ></input>
+      />
       <slot></slot>
     </label>`;
   }
