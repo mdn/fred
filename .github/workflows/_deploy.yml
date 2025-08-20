@@ -234,8 +234,7 @@ jobs:
 
       - name: Render (fred)
         working-directory: mdn/fred
-        run: |
-          npm run ssr
+        run: npm run ssr
 
       - name: Authenticate with GCP
         uses: google-github-actions/auth@v2

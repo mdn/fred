@@ -21,7 +21,7 @@ export class MDNObservatoryRescanButton extends L10nMixin(LitElement) {
     this.duration = 60;
     /** @type {number} */
     this._remainingTime = 0;
-    /** @type {NodeJS.Timer | null} */
+    /** @type {NodeJS.Timeout | null} */
     this._interval = null;
   }
 

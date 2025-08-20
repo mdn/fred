@@ -10,4 +10,4 @@ npm install
 export BUILD_OUT_ROOT=out
 npm run rari build
 npm run build
-node build/ssr.js
+npm run ssr
