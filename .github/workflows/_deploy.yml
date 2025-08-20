@@ -236,8 +236,6 @@ jobs:
         working-directory: mdn/fred
         run: |
           npm run ssr
-          cp -r dist $BUILD_OUT_ROOT/static
-          cp dist/service-worker/service-worker.js* $BUILD_OUT_ROOT/
 
       - name: Authenticate with GCP
         uses: google-github-actions/auth@v2

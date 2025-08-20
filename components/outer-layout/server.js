@@ -110,6 +110,20 @@ export class OuterLayout extends ServerComponent {
             rel="canonical"
             href=${`https://developer.mozilla.org${context.url}`}
           />
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+          <link rel="manifest" href="/manifest.json" />
+          <link
+            rel="search"
+            type="application/opensearchdescription+xml"
+            href="/opensearch.xml"
+            title="MDN Web Docs"
+          />
+          <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="MDN Blog RSS Feed"
+            href="https://developer.mozilla.org/en-US/blog/rss.xml"
+          />
         </head>
         ${markup}
       </html>

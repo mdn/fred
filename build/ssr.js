@@ -2,9 +2,8 @@ import { readFile, writeFile } from "node:fs/promises";
 
 import { fdir } from "fdir";
 
+import { BUILD_OUT_ROOT } from "./env.js";
 import { render } from "./render.js";
-
-const BUILD_OUT_ROOT = "./out";
 
 /**
  * @template T

@@ -1,23 +1,24 @@
 import { readFile } from "node:fs/promises";
 
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 
-import { render as distRender } from "../dist/ssr/index.js";
+import { BUILD_OUT_ROOT } from "./env.js";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const { render: distRender } = /** @type {import("../entry.ssr.js")} */ (
+  await import(path.resolve(BUILD_OUT_ROOT, "static", "ssr", "index.js"))
+);
 
 /** @type {import("@rspack/core").StatsCompilation} */
 const clientManifest = JSON.parse(
   await readFile(
-    path.join(__dirname, "..", "dist", "client", "stats.json"),
+    path.join(BUILD_OUT_ROOT, "static", "client", "stats.json"),
     "utf8",
   ),
 );
 /** @type {import("@rspack/core").StatsCompilation} */
 const legacyManifest = JSON.parse(
   await readFile(
-    path.join(__dirname, "..", "dist", "legacy", "stats.json"),
+    path.join(BUILD_OUT_ROOT, "static", "legacy", "stats.json"),
     "utf8",
   ),
 );
