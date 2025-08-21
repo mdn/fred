@@ -126,8 +126,8 @@
 
   mark {
     /* Sidebar filter highlight */
-    color: var(--color-area-link);
-    background-color: var(--color-background-blue);
+    color: unset;
+    background-color: var(--color-background-yellow);
   }
 }
 

@@ -95,11 +95,11 @@
 
     font-size: 0.7rem;
 
-    color: var(--color-area-link);
+    color: var(--color-text-secondary);
 
     white-space: nowrap;
 
-    background: var(--color-background-blue);
+    background: var(--color-background-yellow);
     border-radius: 1em;
   }
 }
