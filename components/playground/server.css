@@ -10,7 +10,7 @@
     [content-end]
     var(--layout-sidebar-gap)
     [sidebar-start right-sidebar-start]
-    var(--layout-sidebar-min)
+    12rem
     [full-end sidebar-end right-sidebar-end];
 
   height: 100%;
