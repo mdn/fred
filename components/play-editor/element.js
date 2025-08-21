@@ -53,13 +53,14 @@ export class MDNPlayEditor extends LitElement {
   set value(value) {
     this._value = value;
     if (this._editor) {
-      let state = EditorState.create({
-        doc: value,
-        extensions: this._extensions(),
+      this._editor.dispatch({
+        changes: {
+          from: 0,
+          to: this._editor.state.doc.length,
+          insert: value,
+        },
       });
-      this._editor.setState(state);
     }
-    this.dispatchEvent(new Event("update", { bubbles: true, composed: true }));
   }
 
   get value() {
