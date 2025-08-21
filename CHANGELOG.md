@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.0.0](https://github.com/mdn/fred/compare/v0.3.0...v1.0.0) (2025-08-20)
+
+
+### Bug Fixes
+
+* **blog:** layout distortion on wider viewports ([#563](https://github.com/mdn/fred/issues/563)) ([dfaa8ba](https://github.com/mdn/fred/commit/dfaa8ba338347cb4cad1e0dd721c0189c235004a))
+* **light-dark:** fix colors and theme switcher when polyfilled ([#568](https://github.com/mdn/fred/issues/568)) ([e0794cc](https://github.com/mdn/fred/commit/e0794cc57177b3ded5e39ac40f1c78b24c46529d))
+* **switch:** remove closing input tag ([#585](https://github.com/mdn/fred/issues/585)) ([9f22c40](https://github.com/mdn/fred/commit/9f22c409475453f48631a6dcbd32929d751ea3f5))
+* various components were using old text color vars ([#566](https://github.com/mdn/fred/issues/566)) ([8fbaad9](https://github.com/mdn/fred/commit/8fbaad9ed29b256d923087573795095814bb28f7))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @codemirror/language from 6.11.2 to 6.11.3 in the dev group ([#555](https://github.com/mdn/fred/issues/555)) ([901b803](https://github.com/mdn/fred/commit/901b80367ff946df9fd7a4649d7f35112a14752b))
+* **deps-dev:** bump @mdn/browser-compat-data from 6.1.2 to 6.1.3 ([#556](https://github.com/mdn/fred/issues/556)) ([a68ee58](https://github.com/mdn/fred/commit/a68ee58720009c2972ea1bb605b246781f5d16ed))
+* **deps-dev:** bump @mdn/browser-compat-data from 6.1.3 to 6.1.4 ([#582](https://github.com/mdn/fred/issues/582)) ([c94f8b2](https://github.com/mdn/fred/commit/c94f8b2da3b297c826ebafda1db7957c74e8ac1e))
+* **deps-dev:** bump the dev group with 2 updates ([#581](https://github.com/mdn/fred/issues/581)) ([607b72f](https://github.com/mdn/fred/commit/607b72fb86653d0ecc733b7810fedb560ce8c747))
+* **menu:** update missing docs ([#567](https://github.com/mdn/fred/issues/567)) ([d8693ee](https://github.com/mdn/fred/commit/d8693ee2ab8ca592d50278d81480aa8de39c114d))
+* release 1.0.0 ([#584](https://github.com/mdn/fred/issues/584)) ([df1460b](https://github.com/mdn/fred/commit/df1460be485117c9e22d957d09279ddc1d2c0f99))
+
 ## [0.3.0](https://github.com/mdn/fred/compare/v0.2.0...v0.3.0) (2025-08-15)
 
 

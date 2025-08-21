@@ -39,7 +39,7 @@
         &[aria-current]:not([aria-current=""], [aria-current="false"]) {
           font-weight: var(--font-weight-bold);
 
-          color: var(--text-primary);
+          color: var(--color-text-primary);
 
           background-color: var(--background-toc-active);
           border-left: 2px solid var(--category-color);

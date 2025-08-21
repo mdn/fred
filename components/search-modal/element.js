@@ -78,6 +78,27 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
         event.preventDefault();
         this._select(this._selected + 1);
         break;
+
+      case "Enter": {
+        const { ctrlKey, shiftKey, altKey, metaKey } = event;
+        const item = this._getSelectedItem();
+        if (item instanceof HTMLElement) {
+          event.preventDefault();
+          item.dispatchEvent(
+            new MouseEvent("click", {
+              bubbles: true,
+              // we attempt to pass modifier keys through
+              // but browser support is incredibly varied:
+              ctrlKey,
+              shiftKey,
+              altKey,
+              metaKey,
+            }),
+          );
+        }
+        break;
+      }
+
       default:
         return;
     }

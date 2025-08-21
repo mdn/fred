@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: (mdn/fred) Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           path: mdn/fred
 
@@ -40,7 +40,7 @@ jobs:
           echo "tarball=$(realpath $TARBALL)" >> "$GITHUB_OUTPUT"
 
       - name: (mdn/content) Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: mdn/content
           path: mdn/content

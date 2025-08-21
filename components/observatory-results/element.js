@@ -5,6 +5,7 @@ import { nothing } from "lit";
 import { OBSERVATORY_API_URL } from "../env/index.js";
 
 import styles from "./element.css?lit";
+import printStyles from "./print.css?lit";
 import { Rating } from "./rating.js";
 import { Tabs } from "./tabs.js";
 
@@ -13,7 +14,7 @@ import "../../components/observatory-comparison-table/element.js";
 import "../../components/observatory-human-duration/element.js";
 
 export class MDNObservatoryResults extends LitElement {
-  static styles = styles;
+  static styles = [styles, printStyles];
 
   constructor() {
     super();

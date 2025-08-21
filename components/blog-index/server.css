@@ -2,7 +2,6 @@
   --accent-color: var(--color-text-purple);
   --avatar-size: 3rem;
   --author-gap: 1rem;
-  max-width: min(80vw + 4rem, 1440px);
   padding-inline: var(--layout-side-padding);
   margin: 0 auto;
 }

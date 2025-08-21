@@ -222,8 +222,6 @@
 
   h2:first-of-type {
     margin: 0;
-
-    /* color: var(--text-link); */
     font-size: var(--font-size-normal);
     text-align: center;
 

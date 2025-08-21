@@ -252,7 +252,7 @@
           &,
           &:active,
           &:visited {
-            color: var(--text-primary);
+            color: var(--color-text-primary);
             background: none;
           }
         }

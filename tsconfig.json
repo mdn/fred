@@ -28,5 +28,5 @@
       }
     ]
   },
-  "exclude": ["node_modules", "dist", "legacy", "vendor"]
+  "exclude": ["node_modules", "dist", "out", "legacy", "vendor"]
 }

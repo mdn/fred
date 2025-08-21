@@ -972,7 +972,7 @@
       }
 
       &:hover {
-        border-color: var(--text-inactive);
+        border-color: var(--color-border-primary);
       }
 
       h4,

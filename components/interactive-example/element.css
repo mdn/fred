@@ -155,7 +155,7 @@ mdn-ix-tab-wrapper {
 
       font: var(--tabbed-font-heading);
 
-      color: var(--text-secondary);
+      color: var(--color-text-secondary);
 
       text-transform: uppercase;
 
@@ -311,5 +311,11 @@ mdn-ix-tab-wrapper {
   .output-wrapper {
     height: 300px;
     overflow: hidden;
+  }
+}
+
+@media print {
+  mdn-button {
+    display: none !important;
   }
 }

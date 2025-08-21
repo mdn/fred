@@ -204,7 +204,7 @@ export class BaselineIndicator extends ServerComponent {
               </p>`
             : html`<p>${context.l10n("baseline-not-extra")}</p>`}
         ${status.asterisk
-          ? html`<p>{"* "}${context.l10n("baseline-asterisk")}</p>`
+          ? html`<p>* ${context.l10n("baseline-asterisk")}</p>`
           : nothing}
         <ul>
           <li>

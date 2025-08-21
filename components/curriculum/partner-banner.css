@@ -101,7 +101,7 @@
       > a {
         grid-area: a;
         margin: 1rem;
-        color: var(--text-primary);
+        color: var(--color-text-primary);
 
         @media screen and (--screen-medium-and-wider) {
           margin: 1rem 0 0;

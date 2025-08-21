@@ -23,7 +23,7 @@ export class ThemeController {
   /** @param {Event} [event] */
   _updateTheme(event) {
     let value = event instanceof CustomEvent && this._lightOrDark(event.detail);
-    value ||= this._lightOrDark(document.documentElement.style.colorScheme);
+    value ||= this._lightOrDark(document.documentElement.dataset.theme);
     value ||= this._matchMedia?.matches ? "dark" : "light";
     const oldValue = this.value;
     this.value = value;

@@ -40,14 +40,14 @@
         content: "";
 
         border: none;
-        border-top: 1px solid var(--text-inactive);
+        border-top: 1px solid var(--color-border-primary);
       }
 
       li.modules-list-list-item {
         display: contents;
 
         > input:checked + label {
-          color: var(--text-primary);
+          color: var(--color-text-primary);
 
           &::before {
             position: absolute;
@@ -66,7 +66,7 @@
         }
 
         > input:not(:checked) + label {
-          color: var(--text-secondary);
+          color: var(--color-text-secondary);
           opacity: 0.775;
         }
 
@@ -233,7 +233,7 @@
 
             > span {
               margin: 0 auto;
-              color: var(--text-primary);
+              color: var(--color-text-primary);
               text-align: center;
             }
           }
@@ -253,7 +253,7 @@
 
             p {
               margin: 0;
-              color: var(--text-secondary);
+              color: var(--color-text-secondary);
               text-align: center;
             }
 
