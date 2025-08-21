@@ -6,11 +6,11 @@
   grid-template-columns:
     0
     [full-start content-start]
-    minmax(0, 71rem)
+    1fr
     [content-end]
     var(--layout-sidebar-gap)
     [sidebar-start right-sidebar-start]
-    minmax(var(--layout-sidebar-min), 1fr)
+    var(--layout-sidebar-min)
     [full-end sidebar-end right-sidebar-end];
 
   height: 100%;
@@ -19,7 +19,6 @@
   );
 
   padding: 1rem;
-  padding-inline: var(--layout-side-padding);
 
   @media (--screen-layout-no-sidebar) {
     grid-template-columns: var(--layout-no-sidebar);
