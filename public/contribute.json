@@ -1,0 +1,24 @@
+{
+  "name": "Fred",
+  "description": "MDN's fr(ont)e(n)d",
+  "repository": {
+    "url": "https://github.com/mdn/fred",
+    "license": "MPL-2.0",
+    "tests": "https://github.com/mdn/fred/actions"
+  },
+  "participate": {
+    "home": "https://developer.mozilla.org/en-US/community",
+    "docs": "https://github.com/mdn/fred/blob/main/README.md",
+    "chat": {
+      "url": "https://mdn.dev/discord"
+    }
+  },
+  "bugs": {
+    "list": "https://github.com/mdn/fred/issues",
+    "report": "https://github.com/mdn/fred/issues/new"
+  },
+  "urls": {
+    "prod": "https://developer.mozilla.org/",
+    "stage": "https://developer.allizom.org/"
+  }
+}

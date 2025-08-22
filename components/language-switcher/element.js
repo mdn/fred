@@ -52,6 +52,9 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
 
   firstUpdated() {
     this._preferredLocale = getPreferredLocale();
+    if (location.search) {
+      this.url += location.search;
+    }
   }
 
   get _isLocalePreferred() {

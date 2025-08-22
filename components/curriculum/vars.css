@@ -161,9 +161,6 @@
   --curriculum-shadow:
     4px 4px 8px 0 light-dark(hsl(18deg 76% 53% / 6%), hsl(0deg 0% 14% / 15%)),
     -4px 4px 8px 0 light-dark(hsl(0deg 0% 70% / 15%), hsl(0deg 0% 34% / 15%));
-
-  --text-primary: var(--color-text-primary);
-  --text-secondary: var(--color-text-secondary);
 }
 
 :root[data-theme="light"] {

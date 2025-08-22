@@ -12,3 +12,10 @@
     }
   }
 }
+
+@media print {
+  mdn-copy-button,
+  mdn-button {
+    display: none !important;
+  }
+}

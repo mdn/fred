@@ -7,9 +7,7 @@ if [ -z "$CONTENT_ROOT" ]; then
 fi
 
 npm install
-mkdir -p out/static
 export BUILD_OUT_ROOT=out
 npm run rari build
 npm run build
-node build/ssr.js
-cp -r dist/* out/static/
+npm run ssr
