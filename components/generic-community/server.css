@@ -20,30 +20,18 @@
   --community-table-row: light-dark(#f9f9fb, #1b1b1b);
   --community-label-bg: light-dark(#dff7e3, #354039);
 
-  --community-header-bg: url("./assets/people.svg");
-  --community-quote-start: url("./assets/quote-start.svg");
-  --community-quote-end: url("./assets/quote-end.svg");
-  --community-video-bg: url("./assets/video-bg.svg");
-  --community-discord-bg: url("./assets/discord.svg");
-  --community-calls-bg: url("./assets/community-calls.svg");
-
-  @media (prefers-color-scheme: dark) {
-    --community-header-bg: url("./assets/people-dark.svg");
-    --community-quote-start: url("./assets/quote-start-dark.svg");
-    --community-quote-end: url("./assets/quote-end-dark.svg");
-    --community-video-bg: url("./assets/video-bg-dark.svg");
-    --community-discord-bg: url("./assets/discord-dark.svg");
-    --community-calls-bg: url("./assets/community-calls-dark.svg");
-  }
-
-  :root[data-theme="dark"] & {
-    --community-header-bg: url("./assets/people-dark.svg");
-    --community-quote-start: url("./assets/quote-start-dark.svg");
-    --community-quote-end: url("./assets/quote-end-dark.svg");
-    --community-video-bg: url("./assets/video-bg-dark.svg");
-    --community-discord-bg: url("./assets/discord-dark.svg");
-    --community-calls-bg: url("./assets/community-calls-dark.svg");
-  }
+  @mixin light-dark --community-header-bg, url("./assets/people.svg"),
+    url("./assets/people-dark.svg");
+  @mixin light-dark --community-quote-start, url("./assets/quote-start.svg"),
+    url("./assets/quote-start-dark.svg");
+  @mixin light-dark --community-quote-end, url("./assets/quote-end.svg"),
+    url("./assets/quote-end-dark.svg");
+  @mixin light-dark --community-video-bg, url("./assets/video-bg.svg"),
+    url("./assets/video-bg-dark.svg");
+  @mixin light-dark --community-discord-bg, url("./assets/discord.svg"),
+    url("./assets/discord-dark.svg");
+  @mixin light-dark --community-calls-bg, url("./assets/community-calls.svg"),
+    url("./assets/community-calls-dark.svg");
 
   --button-bg--default: light-dark(#1b1b1b, #ffffff);
   --button-bg-hover--default: light-dark(#696969, #cdcdcd);

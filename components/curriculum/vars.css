@@ -161,104 +161,62 @@
   --curriculum-shadow:
     4px 4px 8px 0 light-dark(hsl(18deg 76% 53% / 6%), hsl(0deg 0% 14% / 15%)),
     -4px 4px 8px 0 light-dark(hsl(0deg 0% 70% / 15%), hsl(0deg 0% 34% / 15%));
-}
 
-:root[data-theme="light"] {
-  .curriculum-content-container {
-    --curriculum-landing-about-beginner: url("./assets/curriculum-landing-about-beginner.svg#light");
-    --curriculum-landing-about-pace: url("./assets/curriculum-landing-about-pace.svg#light");
-    --curriculum-landing-about-free: url("./assets/curriculum-landing-about-free.svg#light");
-    --curriculum-landing-about-bullet: url("./assets/curriculum-landing-about-bullet.svg#light");
-    --curriculum-landing-started-beginner: url("./assets/curriculum-landing-started-beginner.svg#light");
-    --curriculum-landing-started-advanced: url("./assets/curriculum-landing-started-advanced.svg#light");
-    --curriculum-landing-started-employment: url("./assets/curriculum-landing-started-employment.svg#light");
-    --curriculum-landing-started-educator: url("./assets/curriculum-landing-started-educator.svg#light");
-    --curriculum-module-mdn-resource: url("./assets/curriculum-mdn-resource.svg#light");
-    --curriculum-bullet: url("./assets/curriculum-bullet.svg#light");
-    --curriculum-about-covered: url("./assets/curriculum-about-covered.svg#light");
-    --curriculum-about-detail: url("./assets/curriculum-about-detail.svg#light");
-    --curriculum-about-educators: url("./assets/curriculum-about-educators.svg#light");
-    --curriculum-about-not: url("./assets/curriculum-about-not.svg#light");
-    --curriculum-about-students: url("./assets/curriculum-about-students.svg#light");
-    --curriculum-bg-image-partner: url("./assets/curriculum-partner-bg.svg#light");
-    --curriculum-scrim-bg: url("./assets/curriculum-scrim-bg.svg#light");
-    --curriculum-landing-arrow: url("./assets/curriculum-landing-arrow.svg#light");
-  }
-}
+  @mixin light-dark --curriculum-landing-about-beginner,
+    url("./assets/curriculum-landing-about-beginner.svg#light"),
+    url("./assets/curriculum-landing-about-beginner.svg#dark");
+  @mixin light-dark --curriculum-landing-about-pace,
+    url("./assets/curriculum-landing-about-pace.svg#light"),
+    url("./assets/curriculum-landing-about-pace.svg#dark");
+  @mixin light-dark --curriculum-landing-about-free,
+    url("./assets/curriculum-landing-about-free.svg#light"),
+    url("./assets/curriculum-landing-about-free.svg#dark");
+  @mixin light-dark --curriculum-landing-about-bullet,
+    url("./assets/curriculum-landing-about-bullet.svg#light"),
+    url("./assets/curriculum-landing-about-bullet.svg#dark");
+  @mixin light-dark --curriculum-landing-started-beginner,
+    url("./assets/curriculum-landing-started-beginner.svg#light"),
+    url("./assets/curriculum-landing-started-beginner.svg#dark");
+  @mixin light-dark --curriculum-landing-started-advanced,
+    url("./assets/curriculum-landing-started-advanced.svg#light"),
+    url("./assets/curriculum-landing-started-advanced.svg#dark");
+  @mixin light-dark --curriculum-landing-started-employment,
+    url("./assets/curriculum-landing-started-employment.svg#light"),
+    url("./assets/curriculum-landing-started-employment.svg#dark");
+  @mixin light-dark --curriculum-landing-started-educator,
+    url("./assets/curriculum-landing-started-educator.svg#light"),
+    url("./assets/curriculum-landing-started-educator.svg#dark");
+  @mixin light-dark --curriculum-module-mdn-resource,
+    url("./assets/curriculum-mdn-resource.svg#light"),
+    url("./assets/curriculum-mdn-resource.svg#dark");
+  @mixin light-dark --curriculum-bullet,
+    url("./assets/curriculum-bullet.svg#light"),
+    url("./assets/curriculum-bullet.svg#dark");
+  @mixin light-dark --curriculum-about-covered,
+    url("./assets/curriculum-about-covered.svg#light"),
+    url("./assets/curriculum-about-covered.svg#dark");
+  @mixin light-dark --curriculum-about-detail,
+    url("./assets/curriculum-about-detail.svg#light"),
+    url("./assets/curriculum-about-detail.svg#dark");
+  @mixin light-dark --curriculum-about-educators,
+    url("./assets/curriculum-about-educators.svg#light"),
+    url("./assets/curriculum-about-educators.svg#dark");
+  @mixin light-dark --curriculum-about-not,
+    url("./assets/curriculum-about-not.svg#light"),
+    url("./assets/curriculum-about-not.svg#dark");
+  @mixin light-dark --curriculum-about-students,
+    url("./assets/curriculum-about-students.svg#light"),
+    url("./assets/curriculum-about-students.svg#dark");
+  @mixin light-dark --curriculum-bg-image-partner,
+    url("./assets/curriculum-partner-bg.svg#light"),
+    url("./assets/curriculum-partner-bg.svg#dark");
+  @mixin light-dark --curriculum-scrim-bg,
+    url("./assets/curriculum-scrim-bg.svg#light"),
+    url("./assets/curriculum-scrim-bg.svg#dark");
+  @mixin light-dark --curriculum-landing-arrow,
+    url("./assets/curriculum-landing-arrow.svg#light"),
+    url("./assets/curriculum-landing-arrow.svg#dark");
 
-/* theme support for swapping out assets: check the root-level data-theme property, fall back to the os-level preference */
-:root[data-theme="dark"] {
-  .curriculum-content-container {
-    --curriculum-landing-about-beginner: url("./assets/curriculum-landing-about-beginner.svg#dark");
-    --curriculum-landing-about-pace: url("./assets/curriculum-landing-about-pace.svg#dark");
-    --curriculum-landing-about-free: url("./assets/curriculum-landing-about-free.svg#dark");
-    --curriculum-landing-about-bullet: url("./assets/curriculum-landing-about-bullet.svg#dark");
-    --curriculum-landing-started-beginner: url("./assets/curriculum-landing-started-beginner.svg#dark");
-    --curriculum-landing-started-advanced: url("./assets/curriculum-landing-started-advanced.svg#dark");
-    --curriculum-landing-started-employment: url("./assets/curriculum-landing-started-employment.svg#dark");
-    --curriculum-landing-started-educator: url("./assets/curriculum-landing-started-educator.svg#dark");
-    --curriculum-module-mdn-resource: url("./assets/curriculum-mdn-resource.svg#dark");
-    --curriculum-bullet: url("./assets/curriculum-bullet.svg#dark");
-    --curriculum-about-covered: url("./assets/curriculum-about-covered.svg#dark");
-    --curriculum-about-detail: url("./assets/curriculum-about-detail.svg#dark");
-    --curriculum-about-educators: url("./assets/curriculum-about-educators.svg#dark");
-    --curriculum-about-not: url("./assets/curriculum-about-not.svg#dark");
-    --curriculum-about-students: url("./assets/curriculum-about-students.svg#dark");
-    --curriculum-bg-image-partner: url("./assets/curriculum-partner-bg.svg#dark");
-    --curriculum-scrim-bg: url("./assets/curriculum-scrim-bg.svg#dark");
-    --curriculum-landing-arrow: url("./assets/curriculum-landing-arrow.svg#dark");
-  }
-}
-
-:root[data-theme="light dark"] {
-  @media (prefers-color-scheme: dark) {
-    .curriculum-content-container {
-      --curriculum-landing-about-beginner: url("./assets/curriculum-landing-about-beginner.svg#dark");
-      --curriculum-landing-about-pace: url("./assets/curriculum-landing-about-pace.svg#dark");
-      --curriculum-landing-about-free: url("./assets/curriculum-landing-about-free.svg#dark");
-      --curriculum-landing-about-bullet: url("./assets/curriculum-landing-about-bullet.svg#dark");
-      --curriculum-landing-started-beginner: url("./assets/curriculum-landing-started-beginner.svg#dark");
-      --curriculum-landing-started-advanced: url("./assets/curriculum-landing-started-advanced.svg#dark");
-      --curriculum-landing-started-employment: url("./assets/curriculum-landing-started-employment.svg#dark");
-      --curriculum-landing-started-educator: url("./assets/curriculum-landing-started-educator.svg#dark");
-      --curriculum-module-mdn-resource: url("./assets/curriculum-mdn-resource.svg#dark");
-      --curriculum-bullet: url("./assets/curriculum-bullet.svg#dark");
-      --curriculum-about-covered: url("./assets/curriculum-about-covered.svg#dark");
-      --curriculum-about-detail: url("./assets/curriculum-about-detail.svg#dark");
-      --curriculum-about-educators: url("./assets/curriculum-about-educators.svg#dark");
-      --curriculum-about-not: url("./assets/curriculum-about-not.svg#dark");
-      --curriculum-about-students: url("./assets/curriculum-about-students.svg#dark");
-      --curriculum-bg-image-partner: url("./assets/curriculum-partner-bg.svg#dark");
-      --curriculum-scrim-bg: url("./assets/curriculum-scrim-bg.svg#dark");
-      --curriculum-landing-arrow: url("./assets/curriculum-landing-arrow.svg#dark");
-    }
-  }
-
-  @media (prefers-color-scheme: light) {
-    .curriculum-content-container {
-      --curriculum-landing-about-beginner: url("./assets/curriculum-landing-about-beginner.svg#light");
-      --curriculum-landing-about-pace: url("./assets/curriculum-landing-about-pace.svg#light");
-      --curriculum-landing-about-free: url("./assets/curriculum-landing-about-free.svg#light");
-      --curriculum-landing-about-bullet: url("./assets/curriculum-landing-about-bullet.svg#light");
-      --curriculum-landing-started-beginner: url("./assets/curriculum-landing-started-beginner.svg#light");
-      --curriculum-landing-started-advanced: url("./assets/curriculum-landing-started-advanced.svg#light");
-      --curriculum-landing-started-employment: url("./assets/curriculum-landing-started-employment.svg#light");
-      --curriculum-landing-started-educator: url("./assets/curriculum-landing-started-educator.svg#light");
-      --curriculum-module-mdn-resource: url("./assets/curriculum-mdn-resource.svg#light");
-      --curriculum-bullet: url("./assets/curriculum-bullet.svg#light");
-      --curriculum-about-covered: url("./assets/curriculum-about-covered.svg#light");
-      --curriculum-about-detail: url("./assets/curriculum-about-detail.svg#light");
-      --curriculum-about-educators: url("./assets/curriculum-about-educators.svg#light");
-      --curriculum-about-not: url("./assets/curriculum-about-not.svg#light");
-      --curriculum-about-students: url("./assets/curriculum-about-students.svg#light");
-      --curriculum-bg-image-partner: url("./assets/curriculum-partner-bg.svg#light");
-      --curriculum-scrim-bg: url("./assets/curriculum-scrim-bg.svg#light");
-      --curriculum-landing-arrow: url("./assets/curriculum-landing-arrow.svg#light");
-    }
-  }
-}
-
-.curriculum-content-container {
   --background-toc-active: var(--curriculum-bg-color);
   --category-color: var(--curriculum-category-color);
 

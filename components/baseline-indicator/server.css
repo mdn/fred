@@ -3,7 +3,9 @@
 .baseline-indicator {
   --baseline-bg: light-dark(#f1f3f4, #282a2c);
   --baseline-engine-bg: light-dark(#e3e6e8, #1d1e1f);
-  --baseline-img: url("./icons/status/limited.svg");
+
+  @mixin light-dark --baseline-img, url("./icons/status/limited.svg"),
+    url("./icons/status/limited-dark.svg");
   --baseline-check: #1e8e3e;
   --baseline-cross: #ea8600;
   --feedback-link-icon: var(--icon-primary, light-dark(#696969, #ffffff));
@@ -14,32 +16,24 @@
   background: var(--baseline-bg);
   border-radius: 0.25rem;
 
-  @media (prefers-color-scheme: dark) {
-    --baseline-img: url("./icons/status/limited-dark.svg");
-  }
-
   &.high {
     --baseline-bg: light-dark(#e6f4ea, #0e2a10);
     --baseline-engine-bg: light-dark(#ceead6, #031b05);
-    --baseline-img: url("./icons/status/high.svg");
-    --baseline-check: #099949;
 
-    @media (prefers-color-scheme: dark) {
-      --baseline-img: url("./icons/status/high-dark.svg");
-    }
+    @mixin light-dark --baseline-img, url("./icons/status/high.svg"),
+      url("./icons/status/high-dark.svg");
+    --baseline-check: #099949;
   }
 
   &.low {
     --baseline-bg: light-dark(#e8f0fe, #041e49);
     --baseline-engine-bg: light-dark(#d2e3fc, #020d20);
-    --baseline-img: url("./icons/status/low.svg");
+
+    @mixin light-dark --baseline-img, url("./icons/status/low.svg"),
+      url("./icons/status/low-dark.svg");
     --baseline-check: #1a73e8;
     --baseline-pill-bg: #3367d6;
     --baseline-pill-color: #f1f3f4;
-
-    @media (prefers-color-scheme: dark) {
-      --baseline-img: url("./icons/status/low-dark.svg");
-    }
   }
 
   &[open] {

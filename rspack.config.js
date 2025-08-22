@@ -59,6 +59,32 @@ const postcssLoaders = (lit = false) => [
               ],
             },
           ],
+          [
+            "postcss-mixins",
+            {
+              mixins: {
+                "light-dark":
+                  /**
+                   * @param {any} _mixin
+                   * @param {string} property
+                   * @param {string} light
+                   * @param {string} dark
+                   */
+                  (_mixin, property, light, dark) => ({
+                    [property]: light,
+                    "@media (prefers-color-scheme: dark)": {
+                      [property]: dark,
+                    },
+                    '[data-theme="light"] &': {
+                      [property]: light,
+                    },
+                    '[data-theme="dark"] &': {
+                      [property]: dark,
+                    },
+                  }),
+              },
+            },
+          ],
           ["postcss-custom-media"],
           [
             "postcss-preset-env",
