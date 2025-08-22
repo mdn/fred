@@ -67,6 +67,16 @@ export const PlacementMixin = (Base) =>
 
     /**
      *
+     * @abstract
+     * @returns {TemplateResult | nothing}
+     */
+    renderFallback() {
+      // default: nothing, subclasses can override a default
+      return nothing;
+    }
+
+    /**
+     *
      * @returns {TemplateResult | symbol}
      */
     renderInitial() {
@@ -77,7 +87,7 @@ export const PlacementMixin = (Base) =>
       return this._dataTask.render({
         initial: () => this.renderInitial(),
         pending: () => this.renderInitial(),
-
+        error: () => this.renderFallback(),
         complete: (placementContext) => {
           return this.renderComplete(placementContext);
         },

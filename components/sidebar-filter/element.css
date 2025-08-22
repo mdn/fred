@@ -99,7 +99,7 @@
 
     white-space: nowrap;
 
-    background: var(--color-background-blue);
+    background-color: var(--color-background-yellow);
     border-radius: 1em;
   }
 }

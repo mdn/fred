@@ -7,6 +7,7 @@ import express from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
 import openEditor from "open-editor";
 
+import { BUILD_OUT_ROOT } from "./build/env.js";
 import { WRITER_MODE } from "./components/env/index.js";
 import { handleRunner } from "./vendor/yari/libs/play/index.js";
 
@@ -32,7 +33,7 @@ if (process.env.NODE_ENV === "production") {
       "code" in error &&
       error.code === "ERR_MODULE_NOT_FOUND"
       ? new Error(
-          "can't find `dist/ssr/index.js`: did you forget to `npm run build`?",
+          `can't find ${BUILD_OUT_ROOT}/ssr/index.js: did you forget to \`npm run build\`?`,
         )
       : error;
   }
@@ -133,12 +134,10 @@ export async function startServer() {
     app.use(webpackHotMiddleware(rspackCompiler));
   } else {
     const { default: compression } = await import("compression");
-
     app.use(compression());
-
-    const dist = fileURLToPath(import.meta.resolve("./dist"));
-    app.use("/static", express.static(dist));
   }
+
+  app.use("/", express.static(BUILD_OUT_ROOT));
 
   app.get("/", async (_req, res, _next) => {
     res.writeHead(302, {

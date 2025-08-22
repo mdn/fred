@@ -276,6 +276,12 @@ table {
   font-style: italic;
 }
 
+@media print {
+  .bc-legend-tip {
+    display: none !important;
+  }
+}
+
 .bc-legend-item {
   display: flex;
   gap: 0.5rem;

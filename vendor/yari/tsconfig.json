@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": true,
+    "noImplicitAny": false,
+    "paths": {
+      "front-matter": ["./type-fixes/front-matter.js"],
+      "@mdn/browser-compat-data/types": [
+        "./node_modules/@mdn/browser-compat-data/types.d.ts"
+      ]
+    },
+    "preserveWatchOutput": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictNullChecks": false,
+    "target": "ES2020"
+  },
+  "ts-node": {
+    "esm": true,
+    "swc": true
+  },
+  "exclude": ["client", "ssr"]
+}

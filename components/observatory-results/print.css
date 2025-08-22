@@ -1,0 +1,21 @@
+/* Print styles for Observatory Results */
+@media print {
+  .observatory-results-wrapper {
+    grid-template-columns: [full-start] minmax(0, 1fr) [full-end] !important;
+    background-color: white !important;
+  }
+
+  .observatory-results {
+    grid-area: full !important;
+  }
+
+  /* Hide non-essential elements */
+  .observatory-results-toc,
+  .actions,
+  .rescan-button,
+  .page_layout__banner,
+  .page-layout__header,
+  .button-wrap {
+    display: none !important;
+  }
+}

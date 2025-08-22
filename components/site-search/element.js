@@ -56,21 +56,18 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
     this._query = undefined;
     /** @type {string[]} */
     this._locales = [this.locale];
-    /** @type {string} */
-    this._sort = "";
     this._page = 1;
   }
 
   _searchTask = new Task(this, {
-    args: () => [this._query, this._locales, this._sort, this._page],
-    task: async ([query, locales, sort, page], { signal }) => {
+    args: () => [this._query, this._locales, this._page],
+    task: async ([query, locales, page], { signal }) => {
       if (!query) {
         return;
       }
 
       const params = new URLSearchParams({
         q: query,
-        sort,
         page: page.toString(),
       });
 
@@ -100,7 +97,6 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
     this._locales = params.has("locale")
       ? params.getAll("locale").sort()
       : [this.locale];
-    this._sort = params.get("sort") || "best";
 
     const page = params.get("page");
 
@@ -283,13 +279,6 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
         ? []
         : [[this.locale], ["en-US"], [this.locale, "en-US"].sort()];
 
-    /** @type {[string, string][]} */
-    const SORT_OPTIONS = [
-      ["best", this.l10n`Best`],
-      ["relevance", this.l10n`Relevance`],
-      ["popularity", this.l10n`Popularity`],
-    ];
-
     return this._searchTask.render({
       pending: () => html`
         ${this.renderInputs()}
@@ -328,20 +317,6 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                         </ul>`
                     : nothing
                 }
-                <h2>${this.l10n`Sort by`}</h2>
-                <ul>
-                  ${SORT_OPTIONS.map(([sort, label]) => {
-                    if (this._sort === sort) {
-                      return html`<li><em>${label}</em></li>`;
-                    } else {
-                      const url = new URL(location.href);
-                      url.searchParams.set("sort", sort);
-                      return html`<li>
-                        <a href=${url.toString()}>${label}</a>
-                      </li>`;
-                    }
-                  })}
-                </ul>
               </section>
               <section class="site-search__results">
                 <p class="site-search__results-stats">${this.l10n.raw({

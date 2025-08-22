@@ -127,7 +127,13 @@
   mark {
     /* Sidebar filter highlight */
     color: unset;
-    background-color: var(--color-background-blue);
+    background-color: var(--color-background-yellow);
+  }
+}
+
+.left-sidebar__content {
+  > ol {
+    padding-left: 2px;
   }
 }
 
@@ -139,6 +145,7 @@
   padding-top: 0.5rem;
   padding-right: 0.5rem;
   padding-bottom: 2rem;
+  padding-left: 2px;
 
   background: linear-gradient(
     to bottom,

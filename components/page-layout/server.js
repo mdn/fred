@@ -12,10 +12,16 @@ export class PageLayout extends ServerComponent {
    * @param {import("@lit").TemplateResult | string | import("@lit").nothing} child
    */
   render(context, child) {
+    const colorScheme = ["Homepage", "SpaPlusLanding"].includes(
+      context.renderer,
+    )
+      ? "dark"
+      : "";
+
     return html`
       <body class="page-layout">
         ${A11yMenu.render(context)}
-        <div class="page-layout__banner">
+        <div class="page-layout__banner" data-scheme=${colorScheme}>
           <mdn-placement-top></mdn-placement-top>
         </div>
         <header class="page-layout__header">

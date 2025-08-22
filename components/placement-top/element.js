@@ -14,7 +14,7 @@ import styles from "./element.css?lit";
  * @import { TemplateResult } from "lit";
  */
 
-const EMPTY = html`<div class="top-placement"></div>`;
+const EMPTY = html`<div class="top-placement empty"></div>`;
 
 export class MDNPlacementTop extends PlacementMixin(LitElement) {
   static styles = styles;
@@ -27,6 +27,25 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
     return EMPTY;
   }
 
+  renderFallback() {
+    return html`
+      <div class="fallback">
+        <p class="fallback__copy">
+          Learn front-end development with high quality, interactive courses
+          from
+          <a
+            href="https://scrimba.com/learn/frontend?via=mdn"
+            target="_blank"
+            rel="noreferrer"
+            data-glean="pong: pong-&gt;click fallback-scrimba"
+          >
+            Scrimba
+          </a>
+        </p>
+      </div>
+    `;
+  }
+
   /**
    *
    * @param {Placements.PlacementContextData} placementContext
@@ -36,12 +55,23 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
     if (placementContext.status === "noads") {
       return nothing;
     }
+
     const data = placementContext?.hpTop || placementContext?.top;
     if (!data) {
       return EMPTY;
     }
-    const { status, click, view, copy, image, alt, cta, colors, version } =
-      data;
+    const {
+      status,
+      click,
+      view,
+      copy,
+      image,
+      imageFormat,
+      alt,
+      cta,
+      colors,
+      version,
+    } = data;
     if (status !== "success") {
       return EMPTY;
     }
@@ -75,34 +105,62 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
       ].filter(([_, v]) => Boolean(v)),
     );
 
-    return html`<div
-      ${ref(this._placementRef)}
-      class="top-placement"
-      style=${styleMap(styles)}
-    >
-      <section class="placement-container">
-        <div class="placement-inner">
-          <a
-            class="placement-link"
-            data-glean="pong: pong-&gt;click top-banner"
-            href=${this.clickLink(click, version)}
-            target="_blank"
-            rel="sponsored noreferrer"
-            ><div class="placement-content">
-              <img
-                src=${this.imgLink(image)}
-                aria-hidden=${!alt}
-                alt=${alt || ""}
-                height="50"
-              /><span>${copy}</span>
+    return imageFormat === "leaderboard"
+      ? html`<div
+          ${ref(this._placementRef)}
+          class="top-placement-leaderboard"
+          style=${styleMap(styles)}
+        >
+          <section class="placement-container">
+            <div class="placement-inner">
+              <a
+                class="placement-link"
+                data-glean="pong: pong-&gt;click top-banner"
+                href=${this.clickLink(click, version)}
+                target="_blank"
+                rel="sponsored noreferrer"
+                ><div class="placement-content">
+                  <img
+                    src=${this.imgLink(image)}
+                    aria-hidden=${!alt}
+                    alt=${alt || ""}
+                    height="90"
+                  />
+                </div>
+              </a>
             </div>
-            <span class="placement-cta">${cta}</span></a
-          >
-          <mdn-placement-note></mdn-placement-note>
-        </div>
-        <mdn-placement-no></mdn-placement-no>
-      </section>
-    </div>`;
+            <mdn-placement-note></mdn-placement-note>
+            <mdn-placement-no></mdn-placement-no>
+          </section>
+        </div>`
+      : html`<div
+          ${ref(this._placementRef)}
+          class="top-placement"
+          style=${styleMap(styles)}
+        >
+          <section class="placement-container">
+            <div class="placement-inner">
+              <a
+                class="placement-link"
+                data-glean="pong: pong-&gt;click top-banner"
+                href=${this.clickLink(click, version)}
+                target="_blank"
+                rel="sponsored noreferrer"
+                ><div class="placement-content">
+                  <img
+                    src=${this.imgLink(image)}
+                    aria-hidden=${!alt}
+                    alt=${alt || ""}
+                    height="50"
+                  /><span>${copy}</span>
+                </div>
+                <span class="placement-cta">${cta}</span></a
+              >
+              <mdn-placement-note></mdn-placement-note>
+            </div>
+            <mdn-placement-no></mdn-placement-no>
+          </section>
+        </div>`;
   }
 }
 

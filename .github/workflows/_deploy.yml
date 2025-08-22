@@ -63,30 +63,30 @@ jobs:
           fi
 
       - name: Checkout (fred)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           path: mdn/fred
 
       - name: Checkout (content)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: mdn/content
           path: mdn/content
 
       - name: Checkout (translated-content)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: mdn/translated-content
           path: mdn/translated-content
 
       - name: Checkout (curriculum)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: mdn/curriculum
           path: mdn/curriculum
 
       - name: Checkout (mdn-studio)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: mdn/mdn-studio
           path: mdn/mdn-studio
@@ -94,13 +94,13 @@ jobs:
           token: ${{ secrets.MDN_STUDIO_PAT }}
 
       - name: Checkout (generic-content)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: mdn/generic-content
           path: mdn/generic-content
 
       - name: Checkout (mdn-contributor-spotlight)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: mdn/mdn-contributor-spotlight
           path: mdn/mdn-contributor-spotlight
@@ -129,13 +129,14 @@ jobs:
           FRED_BCD_BASE_URL: https://bcd.developer.allizom.org
           FRED_OBSERVATORY_API_URL: https://observatory-api.mdn.allizom.net
           REACT_APP_FXA_SETTINGS_URL: https://accounts.stage.mozaws.net/settings/
-          REACT_APP_MDN_PLUS_SUBSCRIBE_URL_SP3_BASE: https://payments-next.stage.fxa.nonprod.webservices.mozgcp.net
+          REACT_APP_MDN_PLUS_SUBSCRIBE_URL_SP3_BASE: https://payments-next.allizom.org
           REACT_APP_MDN_PLUS_5M_SP3_ID: mdnplus5mstage
           REACT_APP_MDN_PLUS_5Y_SP3_ID: mdnplus5ystage
           REACT_APP_MDN_PLUS_10M_SP3_ID: mdnsupporter10mstage
           REACT_APP_MDN_PLUS_10Y_SP3_ID: mdnsupporter10ystage
           REACT_APP_GLEAN_CHANNEL: review
           REACT_APP_GLEAN_ENABLED: true
+          REACT_APP_UPDATES_BASE_URL: https://updates.developer.allizom.org
         run: npm run build
 
       - name: Build (rari)
@@ -233,9 +234,7 @@ jobs:
 
       - name: Render (fred)
         working-directory: mdn/fred
-        run: |
-          npm run ssr
-          cp -r dist $BUILD_OUT_ROOT/static
+        run: npm run ssr
 
       - name: Authenticate with GCP
         uses: google-github-actions/auth@v2
