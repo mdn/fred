@@ -1,6 +1,14 @@
 import { LitElement, nothing } from "lit";
 
+/**
+ * Custom element which reloads the page when the document has changed.
+ */
 export default class MDNWriterReload extends LitElement {
+  constructor() {
+    super();
+    this._state = "";
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this._pollForChanges();
@@ -33,7 +41,7 @@ export default class MDNWriterReload extends LitElement {
       if (document.visibilityState === "visible") {
         await this._reloadIfChanged();
       }
-      await wait(1000);
+      await timeout(1000);
     }
   }
 }
@@ -41,7 +49,7 @@ export default class MDNWriterReload extends LitElement {
 /**
  * @param {number} ms
  */
-async function wait(ms) {
+async function timeout(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
