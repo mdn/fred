@@ -1,13 +1,47 @@
 .playground {
   --border: 1px solid var(--color-border-primary);
+
+  display: grid;
+
+  grid-template-columns:
+    [content-start]
+    1fr
+    [content-end sidebar-start]
+    min-content
+    [sidebar-end];
+
   height: 100%;
   min-height: calc(
     100vh - var(--top-banner-height) - var(--sticky-header-height)
   );
+
   padding: 1rem;
 
   mdn-playground {
     display: block;
+    grid-column: content;
     height: 100%;
+  }
+
+  .sidebar {
+    display: flex;
+
+    grid-column: sidebar;
+
+    justify-content: center;
+
+    min-width: 12rem;
+
+    margin-left: 1rem;
+
+    @media (--screen-small-and-narrower) {
+      grid-column: content;
+    }
+  }
+}
+
+:root[data-nop="yes"] .playground {
+  .sidebar {
+    display: none;
   }
 }

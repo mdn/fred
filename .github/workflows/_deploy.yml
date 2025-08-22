@@ -234,10 +234,7 @@ jobs:
 
       - name: Render (fred)
         working-directory: mdn/fred
-        run: |
-          npm run ssr
-          cp -r dist $BUILD_OUT_ROOT/static
-          cp dist/service-worker/service-worker.js* $BUILD_OUT_ROOT/
+        run: npm run ssr
 
       - name: Authenticate with GCP
         uses: google-github-actions/auth@v2

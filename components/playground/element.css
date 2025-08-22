@@ -3,8 +3,8 @@
 .wrapper {
   display: grid;
 
-  grid-template-areas: "left runner" "left place";
-  grid-template-rows: 1fr min-content;
+  grid-template-areas: "left runner";
+  grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr;
 
   gap: 1rem;
@@ -14,6 +14,7 @@
   section {
     display: flex;
 
+    flex-grow: 1;
     flex-direction: column;
 
     grid-area: left;
@@ -125,7 +126,7 @@
     justify-self: center;
   }
 
-  @media (--screen-small-and-narrower) {
+  @media (--screen-medium-and-narrower) {
     display: flex;
     flex-direction: column;
   }

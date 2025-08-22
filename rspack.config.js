@@ -12,6 +12,7 @@ import { merge } from "webpack-merge";
 // @ts-expect-error
 import { StatsWriterPlugin } from "webpack-stats-plugin";
 
+import { BUILD_OUT_ROOT } from "./build/env.js";
 import { CSPHashPlugin } from "./build/plugins/csp-hash.js";
 import { GenerateElementMapPlugin } from "./build/plugins/generate-element-map.js";
 import { override as svgoOverride } from "./svgo.config.js";
@@ -87,12 +88,6 @@ const common = {
     outputModule: true,
     futureDefaults: true,
   },
-  plugins: [
-    /** @type {import("@rspack/core").Plugin} */
-    new StatsWriterPlugin({
-      fields: ["publicPath", "entrypoints"],
-    }),
-  ],
   optimization: {
     minimizer: [
       // TODO: do we need to minimize ssr bundle at all?
@@ -158,6 +153,16 @@ const common = {
 };
 
 /** @type {import("@rspack/core").RspackOptions} */
+const notServiceWorkerCommon = {
+  plugins: [
+    /** @type {import("@rspack/core").Plugin} */
+    new StatsWriterPlugin({
+      fields: ["publicPath", "entrypoints"],
+    }),
+  ],
+};
+
+/** @type {import("@rspack/core").RspackOptions} */
 const clientAndSsrCommon = {
   plugins: [
     new rspack.DefinePlugin({
@@ -218,7 +223,7 @@ const clientAndSsrCommon = {
   },
 };
 
-const ssrConfig = merge(common, clientAndSsrCommon, {
+const ssrConfig = merge(common, notServiceWorkerCommon, clientAndSsrCommon, {
   name: "ssr",
   target: "node22",
   async entry() {
@@ -234,9 +239,19 @@ const ssrConfig = merge(common, clientAndSsrCommon, {
       ],
     };
   },
-  plugins: [isProd && new CSPHashPlugin()],
+  plugins: [
+    isProd && new CSPHashPlugin(),
+    new rspack.CopyRspackPlugin({
+      patterns: [
+        {
+          from: "public",
+          to: path.resolve(BUILD_OUT_ROOT),
+        },
+      ],
+    }),
+  ],
   output: {
-    path: path.resolve(__dirname, "dist/ssr"),
+    path: path.resolve(BUILD_OUT_ROOT, "static", "ssr"),
     filename: "[name].js",
     // use proper file names in sourcemaps:
     devtoolModuleFilenameTemplate: (info) =>
@@ -276,269 +291,282 @@ const clientAndLegacyCommon = {
   },
 };
 
-const clientConfig = merge(common, clientAndSsrCommon, clientAndLegacyCommon, {
-  name: "client",
-  async entry() {
-    return {
-      index: {
-        runtime: "runtime",
-        import: [!isProd && "./build/hmr.js", "./entry.client.js"].filter(
-          (x) => typeof x === "string",
-        ),
-      },
-      // load `components/*/global.css` files into global style entrypoint
-      "styles-global": {
-        runtime: "styles",
-        import: await new fdir()
-          .withFullPaths()
-          .filter((filePath) => filePath.endsWith("/global.css"))
-          .crawl(path.join(__dirname, "components"))
-          .withPromise(),
-      },
-      // load `components/*/server.css` files into per-component style entrypoints
-      ...Object.fromEntries(
-        (
-          await new fdir()
+const clientConfig = merge(
+  common,
+  notServiceWorkerCommon,
+  clientAndSsrCommon,
+  clientAndLegacyCommon,
+  {
+    name: "client",
+    async entry() {
+      return {
+        index: {
+          runtime: "runtime",
+          import: [!isProd && "./build/hmr.js", "./entry.client.js"].filter(
+            (x) => typeof x === "string",
+          ),
+        },
+        // load `components/*/global.css` files into global style entrypoint
+        "styles-global": {
+          runtime: "styles",
+          import: await new fdir()
             .withFullPaths()
-            .filter((filePath) => filePath.endsWith("/server.css"))
+            .filter((filePath) => filePath.endsWith("/global.css"))
             .crawl(path.join(__dirname, "components"))
-            .withPromise()
-        )
-          // eslint-disable-next-line unicorn/no-await-expression-member
-          .map((file) => [
-            "styles-" + file.split("/").at(-2),
-            { runtime: "styles", import: file },
-          ]),
-      ),
-    };
-  },
-  plugins: [
-    process.env.RSDOCTOR &&
-      new RsdoctorRspackPlugin(
-        process.env.RSDOCTOR_PORT
-          ? {
-              port: Number.parseInt(process.env.RSDOCTOR_PORT, 10),
-            }
-          : {
-              disableClientServer: true,
-              mode: "brief",
-            },
-      ),
-    !isProd && new GenerateElementMapPlugin(),
-    new rspack.CssExtractRspackPlugin({
-      filename: isProd ? "[name].[contenthash].css" : "[name].css",
-      // chunkFilename: "[name].[contenthash].css",
-      runtime: false,
-    }),
-  ],
-  output: {
-    path: path.resolve(__dirname, "dist/client"),
-    publicPath: "/static/client/",
-  },
-  optimization: {
-    splitChunks: {
-      minSize: OPTIMIZATIONS.MIN_CHUNK_SIZE,
-      maxSize: OPTIMIZATIONS.MAX_CHUNK_SIZE,
-      chunks: "all",
-      cacheGroups: {
+            .withPromise(),
+        },
+        // load `components/*/server.css` files into per-component style entrypoints
         ...Object.fromEntries(
-          Object.entries(OPTIMIZATIONS.CHUNKED_STYLES).map(
-            ([name, components]) => [
-              `styles-${name}`,
-              {
-                type: "css/mini-extract",
-                name: `styles-${name}`,
-                chunks:
-                  /** @param {import("@rspack/core").Chunk} chunk */
-                  (chunk) =>
-                    Boolean(
-                      chunk.name &&
-                        components
-                          .map((component) => `styles-${component}`)
-                          .includes(chunk.name),
-                    ),
-                enforce: true,
+          (
+            await new fdir()
+              .withFullPaths()
+              .filter((filePath) => filePath.endsWith("/server.css"))
+              .crawl(path.join(__dirname, "components"))
+              .withPromise()
+          )
+            // eslint-disable-next-line unicorn/no-await-expression-member
+            .map((file) => [
+              "styles-" + file.split("/").at(-2),
+              { runtime: "styles", import: file },
+            ]),
+        ),
+      };
+    },
+    plugins: [
+      process.env.RSDOCTOR &&
+        new RsdoctorRspackPlugin(
+          process.env.RSDOCTOR_PORT
+            ? {
+                port: Number.parseInt(process.env.RSDOCTOR_PORT, 10),
+              }
+            : {
+                disableClientServer: true,
+                mode: "brief",
               },
-            ],
-          ),
         ),
-      },
-    },
-  },
-});
-
-const legacyConfig = merge(common, clientAndLegacyCommon, {
-  name: "legacy",
-  entry: {
-    index: "./legacy/index.tsx",
-    yari: "./node_modules/@mdn/yari/client/src/index.tsx",
-  },
-  output: {
-    filename: "[name].[contenthash].js",
-    path: path.resolve(__dirname, "dist/legacy"),
-    publicPath: "/static/legacy/",
-  },
-  resolve: {
-    extensions: ["...", ".tsx", ".ts", ".jsx"],
-    alias: {
-      [path.resolve(
-        __dirname,
-        "node_modules/@mdn/yari/client/src/document/toolbar/index.tsx",
-      )]: false,
-    },
-  },
-  plugins: [
-    new rspack.DefinePlugin({
-      "process.env": JSON.stringify({
-        ...Object.fromEntries(
-          Object.entries(process.env).filter(([key]) =>
-            key.startsWith("REACT_APP_"),
-          ),
-        ),
-        REACT_APP_FRED: "true",
-        REACT_APP_WRITER_MODE: "false",
-        REACT_APP_DEV_MODE: "false",
-        REACT_APP_ENABLE_PLUS: "true",
+      !isProd && new GenerateElementMapPlugin(),
+      new rspack.CssExtractRspackPlugin({
+        filename: isProd ? "[name].[contenthash].css" : "[name].css",
+        // chunkFilename: "[name].[contenthash].css",
+        runtime: false,
       }),
-    }),
-    new rspack.ProvidePlugin({
-      React: "react",
-    }),
-    new rspack.CssExtractRspackPlugin({
-      filename: "[name].[contenthash].css",
-      runtime: true,
-    }),
-    new rspack.HtmlRspackPlugin({
-      inject: true,
-      chunks: ["yari"],
-      filename: "index.[contenthash].html",
-      template: "node_modules/@mdn/yari/client/public/index.html",
-    }),
-    new RspackManifestPlugin({
-      fileName: "asset-manifest.json",
-      generate: (_seed, files) =>
-        files.map((file) => file.path).filter((path) => !path.endsWith(".map")),
-    }),
-  ],
-  module: {
-    rules: [
-      {
-        test: /\.jsx$/,
-        use: {
-          loader: "builtin:swc-loader",
-          options: {
-            jsc: {
-              parser: {
-                syntax: "ecmascript",
-                jsx: true,
-              },
-            },
-          },
-        },
-        type: "javascript/auto",
-      },
-      {
-        test: /\.tsx$/,
-        use: {
-          loader: "builtin:swc-loader",
-          options: {
-            jsc: {
-              parser: {
-                syntax: "typescript",
-                tsx: true,
-              },
-            },
-          },
-        },
-        type: "javascript/auto",
-      },
-      {
-        test: /\.ts$/,
-        use: {
-          loader: "builtin:swc-loader",
-          options: {
-            jsc: {
-              parser: {
-                syntax: "typescript",
-                tsx: false,
-              },
-            },
-          },
-        },
-        type: "javascript/auto",
-      },
-      {
-        test: /\.(sass|scss)$/,
-        with: { type: "css" },
-        use: [
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 4,
-              exportType: "css-style-sheet",
-            },
-          },
-          ...postcssLoaders(),
-          "resolve-url-loader",
-          {
-            loader: "sass-loader",
-            options: {
-              sourceMap: true,
-            },
-          },
-        ],
-        type: "javascript/auto",
-      },
-      {
-        test: /\.(sass|scss)$/,
-        resourceQuery: /^$/,
-        use: [
-          rspack.CssExtractRspackPlugin.loader,
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 4,
-            },
-          },
-          ...postcssLoaders(),
-          "resolve-url-loader",
-          {
-            loader: "sass-loader",
-            options: {
-              sourceMap: true,
-            },
-          },
-        ],
-        type: "javascript/auto",
-      },
-      {
-        test: /\.(png)$/,
-        type: "asset/resource",
-      },
-      {
-        test: /\.svg$/i,
-        issuer: /\.[jt]sx?$/,
-        use: {
-          loader: "@svgr/webpack",
-          options: {
-            prettier: false,
-            svgo: false,
-            svgoConfig: {
-              plugins: [{ removeViewBox: false }],
-            },
-            titleProp: true,
-            ref: true,
-            exportType: "named",
-          },
-        },
-      },
-      {
-        resourceQuery: /raw/,
-        type: "asset/source",
-      },
     ],
+    output: {
+      path: path.resolve(BUILD_OUT_ROOT, "static", "client"),
+      publicPath: "/static/client/",
+    },
+    optimization: {
+      splitChunks: {
+        minSize: OPTIMIZATIONS.MIN_CHUNK_SIZE,
+        maxSize: OPTIMIZATIONS.MAX_CHUNK_SIZE,
+        chunks: "all",
+        cacheGroups: {
+          ...Object.fromEntries(
+            Object.entries(OPTIMIZATIONS.CHUNKED_STYLES).map(
+              ([name, components]) => [
+                `styles-${name}`,
+                {
+                  type: "css/mini-extract",
+                  name: `styles-${name}`,
+                  chunks:
+                    /** @param {import("@rspack/core").Chunk} chunk */
+                    (chunk) =>
+                      Boolean(
+                        chunk.name &&
+                          components
+                            .map((component) => `styles-${component}`)
+                            .includes(chunk.name),
+                      ),
+                  enforce: true,
+                },
+              ],
+            ),
+          ),
+        },
+      },
+    },
   },
-});
+);
+
+const legacyConfig = merge(
+  common,
+  notServiceWorkerCommon,
+  clientAndLegacyCommon,
+  {
+    name: "legacy",
+    entry: {
+      index: "./legacy/index.tsx",
+      yari: "./node_modules/@mdn/yari/client/src/index.tsx",
+    },
+    output: {
+      filename: "[name].[contenthash].js",
+      path: path.resolve(BUILD_OUT_ROOT, "static", "legacy"),
+      publicPath: "/static/legacy/",
+    },
+    resolve: {
+      extensions: ["...", ".tsx", ".ts", ".jsx"],
+      alias: {
+        [path.resolve(
+          __dirname,
+          "node_modules/@mdn/yari/client/src/document/toolbar/index.tsx",
+        )]: false,
+      },
+    },
+    plugins: [
+      new rspack.DefinePlugin({
+        "process.env": JSON.stringify({
+          ...Object.fromEntries(
+            Object.entries(process.env).filter(([key]) =>
+              key.startsWith("REACT_APP_"),
+            ),
+          ),
+          REACT_APP_FRED: "true",
+          REACT_APP_WRITER_MODE: "false",
+          REACT_APP_DEV_MODE: "false",
+          REACT_APP_ENABLE_PLUS: "true",
+        }),
+      }),
+      new rspack.ProvidePlugin({
+        React: "react",
+      }),
+      new rspack.CssExtractRspackPlugin({
+        filename: "[name].[contenthash].css",
+        runtime: true,
+      }),
+      new rspack.HtmlRspackPlugin({
+        inject: true,
+        chunks: ["yari"],
+        filename: "index.[contenthash].html",
+        template: "node_modules/@mdn/yari/client/public/index.html",
+      }),
+      new RspackManifestPlugin({
+        fileName: "asset-manifest.json",
+        generate: (_seed, files) =>
+          files
+            .map((file) => file.path)
+            .filter((path) => !path.endsWith(".map")),
+      }),
+    ],
+    module: {
+      rules: [
+        {
+          test: /\.jsx$/,
+          use: {
+            loader: "builtin:swc-loader",
+            options: {
+              jsc: {
+                parser: {
+                  syntax: "ecmascript",
+                  jsx: true,
+                },
+              },
+            },
+          },
+          type: "javascript/auto",
+        },
+        {
+          test: /\.tsx$/,
+          use: {
+            loader: "builtin:swc-loader",
+            options: {
+              jsc: {
+                parser: {
+                  syntax: "typescript",
+                  tsx: true,
+                },
+              },
+            },
+          },
+          type: "javascript/auto",
+        },
+        {
+          test: /\.ts$/,
+          use: {
+            loader: "builtin:swc-loader",
+            options: {
+              jsc: {
+                parser: {
+                  syntax: "typescript",
+                  tsx: false,
+                },
+              },
+            },
+          },
+          type: "javascript/auto",
+        },
+        {
+          test: /\.(sass|scss)$/,
+          with: { type: "css" },
+          use: [
+            {
+              loader: "css-loader",
+              options: {
+                importLoaders: 4,
+                exportType: "css-style-sheet",
+              },
+            },
+            ...postcssLoaders(),
+            "resolve-url-loader",
+            {
+              loader: "sass-loader",
+              options: {
+                sourceMap: true,
+              },
+            },
+          ],
+          type: "javascript/auto",
+        },
+        {
+          test: /\.(sass|scss)$/,
+          resourceQuery: /^$/,
+          use: [
+            rspack.CssExtractRspackPlugin.loader,
+            {
+              loader: "css-loader",
+              options: {
+                importLoaders: 4,
+              },
+            },
+            ...postcssLoaders(),
+            "resolve-url-loader",
+            {
+              loader: "sass-loader",
+              options: {
+                sourceMap: true,
+              },
+            },
+          ],
+          type: "javascript/auto",
+        },
+        {
+          test: /\.(png)$/,
+          type: "asset/resource",
+        },
+        {
+          test: /\.svg$/i,
+          issuer: /\.[jt]sx?$/,
+          use: {
+            loader: "@svgr/webpack",
+            options: {
+              prettier: false,
+              svgo: false,
+              svgoConfig: {
+                plugins: [{ removeViewBox: false }],
+              },
+              titleProp: true,
+              ref: true,
+              exportType: "named",
+            },
+          },
+        },
+        {
+          resourceQuery: /raw/,
+          type: "asset/source",
+        },
+      ],
+    },
+  },
+);
 
 const serviceWorkerConfig = merge(common, {
   name: "service-worker",
@@ -547,9 +575,9 @@ const serviceWorkerConfig = merge(common, {
   },
   output: {
     filename: "[name].js",
-    path: path.resolve(__dirname, "dist/service-worker"),
+    path: path.resolve(BUILD_OUT_ROOT),
     publicPath: "/",
-    clean: true,
+    clean: false,
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json"],

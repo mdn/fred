@@ -127,7 +127,7 @@
   mark {
     /* Sidebar filter highlight */
     color: unset;
-    background-color: var(--color-background-blue);
+    background-color: var(--color-background-yellow);
   }
 }
 

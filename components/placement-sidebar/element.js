@@ -66,15 +66,8 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
       ].filter(([_, v]) => Boolean(v)),
     );
 
-    // skyscraper format is not suitable for horizontal layout
-    if (imageFormat === "skyscraper" && this.horizontal) {
-      return nothing;
-    }
-
     return imageFormat === "skyscraper"
-      ? html`<section
-          class=${`sidebar-placement-skyscraper ${this.horizontal ? "horizontal" : ""}`}
-        >
+      ? html`<section class="sidebar-placement-skyscraper">
           <div
             ${ref(this._placementRef)}
             class="placement-container"

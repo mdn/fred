@@ -1,5 +1,6 @@
 @import url("../observatory/colors.css");
 @import url("../observatory/common.css");
+@import url("./print.css");
 
 .observatory-results-wrapper {
   display: grid;
