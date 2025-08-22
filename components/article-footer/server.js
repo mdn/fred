@@ -37,7 +37,7 @@ export class ArticleFooter extends ServerComponent {
 function Contribute(context) {
   return html`<a
     class="article-footer__contribute"
-    href="/en-US/docs/MDN/Community/Getting_started"
+    href=${`/{context.locale}/docs/MDN/Community/Getting_started`}
     title=${context.l10n`This will take you to our contribution documentation.`}
     target="_blank"
     >${context.l10n`Learn how to contribute`}</a
