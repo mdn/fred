@@ -18,9 +18,12 @@ export class WriterToolbar extends ServerComponent {
         variant: "plain",
       })}
       ${context.localServer
-        ? html`<mdn-writer-open-editor
-            filepath=${`${folder}/${filename}`}
-          ></mdn-writer-open-editor>`
+        ? html`
+            <mdn-writer-open-editor
+              filepath=${`${folder}/${filename}`}
+            ></mdn-writer-open-editor>
+            <mdn-writer-reload></mdn-writer-reload>
+          `
         : nothing}
     </div>`;
   }

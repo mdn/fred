@@ -58,6 +58,7 @@ declare global {
     "mdn-toggle-sidebar": import("../components/toggle-sidebar/element.js").MDNToggleSidebar;
     "mdn-user-menu": import("../components/user-menu/element.js").MDNUserMenu;
     "mdn-writer-open-editor": import("../components/writer-open-editor/element.js").MDNWriterOpenEditor;
+    "mdn-writer-reload": import("../components/writer-reload/element.js").MDNWriterReload;
   }
 }
 
