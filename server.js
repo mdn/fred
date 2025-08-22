@@ -259,7 +259,7 @@ export async function startServer() {
     }),
   );
 
-  const play = express();
+  let play = express();
 
   play.use(cookieParser());
 
@@ -280,6 +280,19 @@ export async function startServer() {
     }),
   );
 
+  // live sample assets
+  play.use(
+    createProxyMiddleware({
+      target: RARI_URL,
+      changeOrigin: true,
+      proxyTimeout: 20_000,
+      timeout: 20_000,
+      headers: {
+        Connection: "keep-alive",
+      },
+    }),
+  );
+
   let http2 = false;
   if (process.env.HTTPS === "true") {
     http2 = true;
@@ -296,20 +309,18 @@ export async function startServer() {
       },
       app,
     );
-  }
-
-  // live sample assets
-  play.use(
-    createProxyMiddleware({
-      target: RARI_URL,
-      changeOrigin: true,
-      proxyTimeout: 20_000,
-      timeout: 20_000,
-      headers: {
-        Connection: "keep-alive",
+    play = spdy.createServer(
+      {
+        key: await readFile(
+          process.env.HTTPS_CERT_FILE || "build/localhost-privkey.pem",
+        ),
+        cert: await readFile(
+          process.env.HTTPS_KEY_FILE || "build/localhost-cert.pem",
+        ),
       },
-    }),
-  );
+      play,
+    );
+  }
 
   const httpServer = app.listen(3000, () => {
     console.log(
