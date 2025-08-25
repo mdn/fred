@@ -1,5 +1,39 @@
 # Changelog
 
+## [1.1.0](https://github.com/mdn/fred/compare/v1.0.0...v1.1.0) (2025-08-25)
+
+
+### Features
+
+* better print/pdf support for docs and observatory ([#561](https://github.com/mdn/fred/issues/561)) ([aa37d1d](https://github.com/mdn/fred/commit/aa37d1d4411413403ed386afbf4be4f5803ef5ca))
+* **placement:** playground placement on right side ([#554](https://github.com/mdn/fred/issues/554)) ([5cc2e69](https://github.com/mdn/fred/commit/5cc2e69b6681d51b0a86a6b46d4e62c6e39673b2))
+* **sidebar-filter:** refactor, always expand, increase font-size ([#588](https://github.com/mdn/fred/issues/588)) ([01c6f12](https://github.com/mdn/fred/commit/01c6f127287742b0ae431ae2c8c04faa72125a91))
+* **writer-mode:** reload when content edited ([#620](https://github.com/mdn/fred/issues/620)) ([06854ca](https://github.com/mdn/fred/commit/06854caec5894df74ca181ac0fc85b73a4f488fd))
+
+
+### Bug Fixes
+
+* **baseline-indicator:** remove asterisk artifact ([#596](https://github.com/mdn/fred/issues/596)) ([dee9843](https://github.com/mdn/fred/commit/dee9843ff7ee9b531807f6388585b89ebe80b0cc))
+* **build:** add public assets, respect BUILD_OUT_ROOT ([#592](https://github.com/mdn/fred/issues/592)) ([f98e655](https://github.com/mdn/fred/commit/f98e6557072171945afc4abfdd850b18cc5f5156))
+* **interactive-examples:** improve a11y + fix unsupported icon ([#542](https://github.com/mdn/fred/issues/542)) ([dbab195](https://github.com/mdn/fred/commit/dbab1955ea13c19763e99de44f040632f4732505))
+* **language-switcher:** add query string ([#618](https://github.com/mdn/fred/issues/618)) ([8427ea2](https://github.com/mdn/fred/commit/8427ea23c253eda95a571016c132b93a33b44524))
+* **placement:** fallback rendering on home page ([#589](https://github.com/mdn/fred/issues/589)) ([c999265](https://github.com/mdn/fred/commit/c9992656d38bd9ae038a06c1576b61ce25043d40))
+* **play-runner:** internal state could clobber runner state ([#625](https://github.com/mdn/fred/issues/625)) ([8ed1c89](https://github.com/mdn/fred/commit/8ed1c890f366d713fa394670582773c589e21524))
+* **play:** add aria-live to runner/console ([dbab195](https://github.com/mdn/fred/commit/dbab1955ea13c19763e99de44f040632f4732505))
+* **playground:** couldn't undo after formatting ([30efd45](https://github.com/mdn/fred/commit/30efd45eb377152ce5d3d9173372e3851b614118))
+* **playground:** dispatch editor changes to support undo ([#607](https://github.com/mdn/fred/issues/607)) ([30efd45](https://github.com/mdn/fred/commit/30efd45eb377152ce5d3d9173372e3851b614118))
+* **search-modal:** handle modifier keys ([#597](https://github.com/mdn/fred/issues/597)) ([8b3e7d4](https://github.com/mdn/fred/commit/8b3e7d4483f14e87c0265b3c5d3f2d4bd7cf772c))
+* **search:** remove broken sort by options ([#615](https://github.com/mdn/fred/issues/615)) ([1b6d4aa](https://github.com/mdn/fred/commit/1b6d4aa89e97963af4760f86ac2f3004bc5b25ee))
+* **sidebar-filter:** increase contrast of matches ([#598](https://github.com/mdn/fred/issues/598)) ([872bc47](https://github.com/mdn/fred/commit/872bc47420353ef2ce732fd5ce272e7aebdbc6d8))
+
+
+### Miscellaneous
+
+* **article-footer:** point "Learn how to contribute" link to "Getting started" page ([#564](https://github.com/mdn/fred/issues/564)) ([4fa9da7](https://github.com/mdn/fred/commit/4fa9da77f9ae064c4e41d81f23b1cc1b4b075637))
+* **deps-dev:** bump @mdn/browser-compat-data from 6.1.4 to 7.0.0 ([#629](https://github.com/mdn/fred/issues/629)) ([10dee0b](https://github.com/mdn/fred/commit/10dee0b05d10ce162760379152c8b9d15d873ab3))
+* **deps-dev:** bump @rsdoctor/rspack-plugin from 1.2.2 to 1.2.3 in the dev group ([#600](https://github.com/mdn/fred/issues/600)) ([ebd1fc1](https://github.com/mdn/fred/commit/ebd1fc1ecca81091e5136efbee3a51a7a002cedd))
+* **deps-dev:** bump the dev group with 4 updates ([#628](https://github.com/mdn/fred/issues/628)) ([9e01660](https://github.com/mdn/fred/commit/9e01660b205caa4697029b3d99c4dde98a70d08c))
+
 ## [1.0.0](https://github.com/mdn/fred/compare/v0.3.0...v1.0.0) (2025-08-20)
 
 
