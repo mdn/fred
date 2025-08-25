@@ -19,17 +19,17 @@ export class HomepageHero extends ServerComponent {
           elements: {
             css: {
               tag: "a",
-              href: "/en-US/docs/Web/CSS",
+              href: `/${context.locale}/docs/Web/CSS`,
               "data-glean": "homepage_hero: css",
             },
             html: {
               tag: "a",
-              href: "/en-US/docs/Web/HTML",
+              href: `/${context.locale}/docs/Web/HTML`,
               "data-glean": "homepage_hero: html",
             },
             js: {
               tag: "a",
-              href: "/en-US/docs/Web/JavaScript",
+              href: `/${context.locale}/docs/Web/JavaScript`,
               "data-glean": "homepage_hero: js",
             },
           },
