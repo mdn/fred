@@ -77,8 +77,11 @@
 
   img {
     place-self: center;
+
     width: max-content;
     max-height: 8rem;
+
+    object-fit: contain;
   }
 }
 
