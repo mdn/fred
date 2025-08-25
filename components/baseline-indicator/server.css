@@ -23,6 +23,7 @@
     --baseline-engine-bg: light-dark(#ceead6, #031b05);
     --baseline-img: url("./icons/status/high.svg");
     --baseline-check: #099949;
+    --baseline-pill-bg: #23a446;
 
     @media (prefers-color-scheme: dark) {
       --baseline-img: url("./icons/status/high-dark.svg");
