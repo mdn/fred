@@ -215,9 +215,15 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     const siteSearchIndex = this._queryIndex.value?.length || 0;
     return html`
       <dialog @keydown=${this._keydown} @focusin=${this._focus} closedby="any">
-        <form @submit=${this._submit}>
+        <form
+          @submit=${this._submit}
+          method="get"
+          action=${`/${this.locale}/search`}
+        >
           <input
-            type="text"
+            type="search"
+            name="q"
+            title="MDN Web Docs"
             .value=${this._query}
             autofocus
             @input=${this._input}
