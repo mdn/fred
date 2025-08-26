@@ -1,10 +1,11 @@
 import { Task } from "@lit/task";
 import { LitElement, html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { keyed } from "lit/directives/keyed.js";
 import { createRef, ref } from "lit/directives/ref.js";
 
 import { ThemeController } from "../color-theme/controller.js";
-import { PLAYGROUND_BASE_HOST } from "../env/index.js";
+import { PLAYGROUND_BASE_HOST, PLAYGROUND_LOCAL } from "../env/index.js";
 import { compressAndBase64Encode } from "../playground/utils.js";
 
 import styles from "./element.css?lit";
@@ -24,7 +25,7 @@ export class MDNPlayRunner extends LitElement {
     srcPrefix: { type: String, attribute: "src-prefix" },
     allow: { type: String },
     sandbox: { type: String },
-    src: { reflect: true },
+    _src: { state: true },
   };
 
   static styles = styles;
@@ -47,6 +48,7 @@ export class MDNPlayRunner extends LitElement {
     this.ready = new Promise((resolve) => {
       this._resolveReady = () => resolve(true);
     });
+    this._src = "about:blank";
   }
 
   /** @type {Ref<HTMLIFrameElement>} */
@@ -69,21 +71,6 @@ export class MDNPlayRunner extends LitElement {
     } else if (typ === "ready") {
       this._resolveReady();
     }
-  }
-
-  _constructUrl() {
-    // TODO: set this properly, when we have proper env var support
-    const url = new URL(
-      globalThis.location.hostname.endsWith("localhost")
-        ? globalThis.location.origin.replace("3000", "3001")
-        : `${globalThis.location.protocol}//${
-            PLAYGROUND_BASE_HOST.startsWith("localhost")
-              ? ""
-              : `${this._subdomain}.`
-          }${PLAYGROUND_BASE_HOST}`,
-    );
-    url.pathname = "runner.html";
-    return url;
   }
 
   _updateSrc = new Task(this, {
@@ -111,20 +98,21 @@ export class MDNPlayRunner extends LitElement {
       const prefix = (srcPrefix || "").replace(/\/$/, "");
       signal.throwIfAborted();
       // We're using a random subdomain for origin isolation.
-      const url = this._constructUrl();
+      const url = new URL(
+        `${prefix}/runner.html`,
+        PLAYGROUND_LOCAL
+          ? location.origin.replace("3000", "3001")
+          : `${location.protocol}//${this._subdomain}.${PLAYGROUND_BASE_HOST}`,
+      );
       // pass the uuid for postMessage isolation
       url.searchParams.set("uuid", this._subdomain);
       url.searchParams.set("state", state);
-      url.pathname = `${prefix}/runner.html`;
-      const src = url.href;
-      // update iframe src without adding to browser history
-      this._iframe.value?.contentWindow?.location.replace(src);
-      this.src = src;
+      this._src = url.href;
       this.dispatchEvent(
         new CustomEvent("mdn-play-runner-src", {
           bubbles: true,
           composed: true,
-          detail: src,
+          detail: url.href,
         }),
       );
     },
@@ -143,26 +131,28 @@ export class MDNPlayRunner extends LitElement {
   }
 
   render() {
-    const url = this._constructUrl();
-    url.searchParams.set("blank", "");
-    url.searchParams.set("theme", this.theme.initialValue);
-    return html`
-      <iframe
-        ${ref(this._iframe)}
-        src=${url.href}
-        title="runner"
-        allow=${ifDefined(this.allow)}
-        sandbox=${[
-          ...new Set([
-            "allow-scripts",
-            "allow-same-origin",
-            "allow-forms",
-            ...(this.sandbox?.split(" ") || []),
-          ]),
-        ].join(" ")}
-        aria-live="polite"
-      ></iframe>
-    `;
+    // use `keyed` to replace the iframe when src updates
+    // this ensures we don't add to browser history
+    return keyed(
+      this._src,
+      html`
+        <iframe
+          ${ref(this._iframe)}
+          src=${this._src}
+          title="runner"
+          allow=${ifDefined(this.allow)}
+          sandbox=${[
+            ...new Set([
+              "allow-scripts",
+              "allow-same-origin",
+              "allow-forms",
+              ...(this.sandbox?.split(" ") || []),
+            ]),
+          ].join(" ")}
+          aria-live="polite"
+        ></iframe>
+      `,
+    );
   }
 
   disconnectedCallback() {

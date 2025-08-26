@@ -132,7 +132,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
       for (const browser of browsers) {
         const browserSupport = feature.compat.support[browser] ?? {
-          version_added: null,
+          version_added: false,
         };
 
         if (HIDDEN_BROWSERS.includes(browser)) {
@@ -435,7 +435,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           return nothing;
         }
         const support = compat.support[browserName] ?? {
-          version_added: null,
+          version_added: false,
         };
 
         const supportClassName = getSupportClassName(support, browser);
@@ -803,10 +803,6 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     switch (added) {
       case undefined: {
         status = { isSupported: "unknown" };
-        break;
-      }
-      case true: {
-        status = { isSupported: lastVersion ? "no" : "yes" };
         break;
       }
       case false: {

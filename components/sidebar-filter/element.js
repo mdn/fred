@@ -16,7 +16,6 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
   static properties = {
     query: { type: String },
     matchCount: { state: true, type: Number },
-    _active: { state: true, type: Boolean },
   };
 
   /**
@@ -28,8 +27,6 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
     this.query = "";
     /** @type {number|undefined} */
     this.matchCount = undefined;
-    /** @type {boolean} */
-    this._active = false;
     /** @type {boolean} */
     this.hasTyped = false;
     /**
@@ -120,14 +117,6 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
   }
 
   /**
-   * Event handler for when the input field receives focus.
-   * @private
-   */
-  _onFocus() {
-    this._active = true;
-  }
-
-  /**
    * Event handler for input events on the text field.
    * @param {Event} event The input event.
    * @private
@@ -143,7 +132,6 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
    */
   _clearFilter() {
     this.query = "";
-    this._active = false;
   }
 
   /**
@@ -152,45 +140,29 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
    */
   render() {
     return html`
-      <div class="sidebar-filter ${this.query ? "has-input" : ""}">
-        <label
-          id="sidebar-filter-label"
-          class="sidebar-filter-label"
-          for="sidebar-filter-input"
-        >
-          <span class="visually-hidden">${this.l10n`Filter sidebar`}</span>
-        </label>
-        <input
-          id="sidebar-filter-input"
-          autocomplete="off"
-          class="sidebar-filter-input-field ${this._active ? "is-active" : ""}"
-          type="text"
-          placeholder=${this.l10n`Filter`}
-          .value=${this.query}
-          @focus=${this._onFocus}
-          @input=${this._onInput}
-        />
-        ${this.matchCount === undefined
-          ? ""
-          : html`
-              <span class="sidebar-filter-count">
-                ${this.l10n.raw({
-                  id: "sidebar-filter-matches",
-                  args: {
-                    matches: this.matchCount,
-                  },
-                })}
-              </span>
-            `}
-        <mdn-button
-          class="clear-sidebar-filter-button"
-          variant="plain"
-          label=${this.l10n`Clear filter input`}
-          .icon=${cancelIcon}
-          icon-only
-          @click=${this._clearFilter}
-        ></mdn-button>
-      </div>
+      <label class="icon" for="input">
+        <span class="visually-hidden">${this.l10n`Filter sidebar`}</span>
+      </label>
+      <input
+        id="input"
+        autocomplete="off"
+        class="input"
+        type="text"
+        placeholder=${this.l10n`Filter`}
+        .value=${this.query}
+        @input=${this._onInput}
+      />
+      ${this.matchCount === undefined
+        ? ""
+        : html` <span class="counter"> ${this.matchCount} </span> `}
+      <mdn-button
+        class="button"
+        variant="plain"
+        label=${this.l10n`Clear filter input`}
+        .icon=${cancelIcon}
+        icon-only
+        @click=${this._clearFilter}
+      ></mdn-button>
     `;
   }
 }

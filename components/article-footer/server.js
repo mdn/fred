@@ -36,11 +36,8 @@ export class ArticleFooter extends ServerComponent {
  */
 function Contribute(context) {
   return html`<a
-    class="article-footer__contribute external"
-    href="https://github.com/mdn/content/blob/main/CONTRIBUTING.md"
-    title=${context.l10n`This will take you to our contribution guidelines on GitHub.`}
-    target="_blank"
-    rel="noopener noreferrer"
+    class="article-footer__contribute"
+    href=${`/${context.locale}/docs/MDN/Community/Getting_started`}
     >${context.l10n`Learn how to contribute`}</a
   >`;
 }
