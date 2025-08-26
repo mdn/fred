@@ -46,7 +46,7 @@
     "@mozilla/glean": "^5.0.5",
     "codemirror": "^6.0.1",
     "compression": "^1.8.1",
-    "concurrently": "^9.2.0",
+    "concurrently": "^9.2.1",
     "cookie-parser": "^1.4.7",
     "express": "^5.0.1",
     "fdir": "^6.5.0",
