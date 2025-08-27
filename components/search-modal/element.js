@@ -216,14 +216,13 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     return html`
       <dialog @keydown=${this._keydown} @focusin=${this._focus} closedby="any">
         <form
-          @submit=${this._submit}
           method="get"
           action=${`/${this.locale}/search`}
+          @submit=${this._submit}
         >
           <input
             type="search"
             name="q"
-            title="MDN Web Docs"
             .value=${this._query}
             autofocus
             @input=${this._input}
