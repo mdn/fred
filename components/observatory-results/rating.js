@@ -6,6 +6,7 @@ import { Tooltip } from "./tooltip.js";
 import { Trend } from "./trend.js";
 
 import "../observatory-rescan-button/element.js";
+import "../dropdown/element.js";
 
 /**
  *
@@ -21,19 +22,21 @@ export function Rating({ result, host, rescan }) {
     <section class="scan-result">
       <section class="grade-trend">
         <div class="overall">
-          <button
-            popovertarget="grade-popover"
-            aria-label="show info tooltip"
-            class="info-tooltip"
-            tabindex="0"
-          >
-            <div
-              class=${`grade grade-${result.scan.grade?.[0]?.toLowerCase()}`}
+          <mdn-dropdown>
+            <button
+              slot="button"
+              aria-label="show info tooltip"
+              class="info-tooltip"
+              tabindex="0"
             >
-              ${formatMinus(result.scan.grade)}
-            </div>
+              <div
+                class=${`grade grade-${result.scan.grade?.[0]?.toLowerCase()}`}
+              >
+                ${formatMinus(result.scan.grade)}
+              </div>
+            </button>
             ${Tooltip(result)}
-          </button>
+          </mdn-dropdown>
         </div>
         ${Trend({ result })}
       </section>

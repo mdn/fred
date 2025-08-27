@@ -98,6 +98,10 @@ code {
 .grade-trend {
   grid-area: grade;
   justify-self: start;
+
+  .overall {
+    position: relative;
+  }
 }
 
 .data {
@@ -117,8 +121,6 @@ mdn-observatory-rescan-button {
 }
 
 .info-tooltip {
-  position: relative;
-
   display: inline-block;
 
   cursor: pointer;
@@ -183,14 +185,13 @@ mdn-observatory-rescan-button {
 }
 
 .tooltip-popup {
-  --tooltip-offset: -6.3rem;
-
   --color-tooltip: light-dark(#b3b3b3, #696969);
   --color-tooltip-highlight: light-dark(#ffffff, #1b1b1b);
   --color-bg-tooltip: light-dark(#1b1b1b, #ffffff);
 
-  position: relative;
+  position: absolute;
   inset: unset;
+  left: 50%;
   z-index: 1;
 
   width: max-content;
@@ -211,7 +212,7 @@ mdn-observatory-rescan-button {
   border-width: 0;
   border-radius: var(--border-radius);
 
-  transform: translateX(var(--tooltip-offset));
+  transform: translateX(-50%);
 
   .arrow {
     position: absolute;

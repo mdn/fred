@@ -26,8 +26,8 @@ export function Tooltip(result) {
   });
 
   return html`
-    <span
-      popover
+    <div
+      slot="dropdown"
       id="grade-popover"
       aria-describedby="grade-table"
       class="tooltip-popup"
@@ -44,6 +44,6 @@ export function Tooltip(result) {
           ${rows}
         </tbody>
       </table>
-    </span>
+    </div>
   `;
 }
