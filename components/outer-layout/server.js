@@ -5,6 +5,7 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import inlineScript from "../../entry.inline.js?source&csp=true";
 import { ROBOTS_GLOBAL_ALLOW, WRITER_MODE } from "../env/index.js";
+import { ALLOW_RUNTIME, runtimeVariables } from "../env/runtime.js";
 import Favicon from "../favicon/pure.js";
 import { asyncLocalStorage } from "../server/async-local-storage.js";
 import { ServerComponent } from "../server/index.js";
@@ -68,6 +69,12 @@ export class OuterLayout extends ServerComponent {
         ? "learn"
         : undefined;
 
+    const env = Object.fromEntries(
+      Object.entries(process.env).filter(([key]) =>
+        runtimeVariables.includes(key),
+      ),
+    );
+
     // if you want to put some script inline, put it in entry.inline.js
     // and you'll get CSP generation: see the README
     return html`
@@ -86,6 +93,11 @@ export class OuterLayout extends ServerComponent {
             content="width=device-width, initial-scale=1.0"
           />
           <title>${context.pageTitle || "MDN"}</title>
+          ${ALLOW_RUNTIME
+            ? unsafeHTML(`<script>process = {
+  env: ${JSON.stringify(env)}
+};</script>`)
+            : nothing}
           ${unsafeHTML(`<script>${inlineScript}</script>`)}
           ${styles.map(
             (path) =>

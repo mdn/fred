@@ -192,7 +192,8 @@ const notServiceWorkerCommon = {
 const clientAndSsrCommon = {
   plugins: [
     new rspack.DefinePlugin({
-      "process.env": JSON.stringify({
+      "globalThis.__MDNEnv": JSON.stringify({
+        FRED_ALLOW_RUNTIME: String(!isProd),
         FRED_PLAYGROUND_LOCAL: String(!isProd),
         ...Object.fromEntries(
           Object.entries(process.env).filter(([key]) =>
