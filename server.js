@@ -1,5 +1,5 @@
 import { readFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
+import path from "node:path";
 import { Worker } from "node:worker_threads";
 
 import cookieParser from "cookie-parser";
@@ -12,7 +12,6 @@ import { WRITER_MODE } from "./components/env/index.js";
 import { handleRunner } from "./vendor/yari/libs/play/index.js";
 
 import "source-map-support/register.js";
-
 /**
  * @import { Request, Response } from "express";
  * @import { Stats } from "@rspack/core";
@@ -187,10 +186,11 @@ export async function startServer() {
       const { filepath } = req.query;
       const { CONTENT_ROOT, CONTENT_TRANSLATED_ROOT } = process.env;
       if (typeof filepath === "string") {
-        const absolutePath = fileURLToPath(
-          import.meta.resolve(
-            `${filepath.startsWith("en-us") ? CONTENT_ROOT : CONTENT_TRANSLATED_ROOT}/${filepath}`,
-          ),
+        const absolutePath = path.resolve(
+          (filepath.startsWith("en-us")
+            ? CONTENT_ROOT
+            : CONTENT_TRANSLATED_ROOT) || "",
+          filepath,
         );
         openEditor([absolutePath]);
       }
