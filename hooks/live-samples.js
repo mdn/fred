@@ -11,8 +11,9 @@ for (const iframe of document.querySelectorAll("iframe[data-live-id]")) {
       /** @type {MDNCodeExample[]} */
       const codeExamples = [];
 
+      const escapedId = liveId.replaceAll(".", String.raw`\.`);
       for (const element of document.querySelectorAll(
-        `.live-sample___${liveId}, .live-sample---${liveId}`,
+        `.live-sample___${escapedId}, .live-sample---${escapedId}`,
       )) {
         const { MDNCodeExample, upgradePre } = await import(
           "../components/code-example/element.js"
