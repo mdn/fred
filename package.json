@@ -105,7 +105,7 @@
     "postcss-custom-media": "^11.0.5",
     "postcss-loader": "^8.1.1",
     "postcss-mixins": "^12.1.2",
-    "postcss-preset-env": "^10.3.0",
+    "postcss-preset-env": "^10.3.1",
     "prettier": "^3.5.3",
     "resolve-url-loader": "^5.0.0",
     "rspack-manifest-plugin": "^5.0.3",
