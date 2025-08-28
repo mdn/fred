@@ -1,10 +1,3 @@
-/**
- * @file Retrieves environment variables, setting defaults, for other areas of the app.
- *
- * We set safe defaults for prod, unless the risk from doing - and having this set
- * everywhere, across local dev etc. - outweighs the risk of it not being set on prod.
- */
-
 import { parseBool, parseString } from "./utils.js";
 
 export const PLAYGROUND_BASE_HOST = parseString(
@@ -35,7 +28,7 @@ export const GLEAN_DEBUG = parseBool("GLEAN_DEBUG", false);
  */
 export const ROBOTS_GLOBAL_ALLOW = parseBool("ROBOTS_GLOBAL_ALLOW", true);
 
-export const WRITER_MODE = parseBool("WRITER_MODE", false, true);
+export const WRITER_MODE = parseBool("WRITER_MODE", false, { runtime: true });
 
 export const BCD_BASE_URL = parseString(
   "BCD_BASE_URL",

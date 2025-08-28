@@ -26,6 +26,10 @@ MDN's next fr(ont)e(n)d.
 
 ## Development principles
 
+### Environment variables
+
+See [the environment variables README](./components/env/README.md).
+
 ### Inline JS
 
 We need to run some JS as soon as possible at page load, to avoid layout shifts and flashes.
