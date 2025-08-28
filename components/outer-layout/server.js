@@ -5,7 +5,7 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import inlineScript from "../../entry.inline.js?source&csp=true";
 import { ROBOTS_GLOBAL_ALLOW, WRITER_MODE } from "../env/index.js";
-import { ALLOW_RUNTIME_ENV, runtimeVariables } from "../env/runtime.js";
+import { RUNTIME_ENV, runtimeVariables } from "../env/runtime.js";
 import Favicon from "../favicon/pure.js";
 import { asyncLocalStorage } from "../server/async-local-storage.js";
 import { ServerComponent } from "../server/index.js";
@@ -93,7 +93,7 @@ export class OuterLayout extends ServerComponent {
             content="width=device-width, initial-scale=1.0"
           />
           <title>${context.pageTitle || "MDN"}</title>
-          ${ALLOW_RUNTIME_ENV
+          ${RUNTIME_ENV
             ? unsafeHTML(`<script>process = {
   env: ${JSON.stringify(env)}
 };</script>`)

@@ -1,4 +1,4 @@
-import { ALLOW_RUNTIME_ENV, runtimeVariables } from "./runtime.js";
+import { RUNTIME_ENV, runtimeVariables } from "./runtime.js";
 
 /**
  * @typedef {object} Options
@@ -37,7 +37,7 @@ export function parseString(name, fallback, options) {
 function getEnv(name, options = {}) {
   const { runtime } = { runtime: false, ...options };
   name = `FRED_${name}`;
-  if (runtime && ALLOW_RUNTIME_ENV) {
+  if (runtime && RUNTIME_ENV) {
     runtimeVariables.push(name);
     return process.env[name] || getEnv(name);
   }

@@ -14,12 +14,15 @@ Within Fred, variables are unprefixed, however the environment variable name is 
 
 ## Secrets
 
-Rspack will bundle all environment variables prefixed with `FRED_` into the bundle, which is exposed client side. Therefore you should never set secrets through `FRED_` environment variables.
+Rspack will bundle **all** environment variables prefixed with `FRED_` into the bundle, which is exposed client side.
 
-As secrets can only be used in server-side components, you should simply set them through a non-`FRED_`-prefixed environment variable, and access them using the `process.env` object.
+> [!WARNING]
+> **Never set secrets** through `FRED_` environment variables.
+>
+> As secrets can only be used in server-side components, you should simply set them through a non-`FRED_`-prefixed environment variable, and access them using the `process.env` object.
 
 ## Build-time vs runtime
 
-By default, variables are baked into our bundle at build time. However, you can define variables as runtime environment variables, which can be changed when running a pre-built version of Fred.
+By default, variables are baked into our bundle at build time. However, you can define variables as runtime environment variables, which can be changed when running a version of Fred built with `FRED_RUNTIME_ENV=true`.
 
 This is used in our npm package, so we can e.g. set `FRED_WRITER_MODE=true` in the `content` repo, without having to bake that into the npm package for all consumers.

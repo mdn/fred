@@ -193,7 +193,7 @@ const clientAndSsrCommon = {
   plugins: [
     new rspack.DefinePlugin({
       "globalThis.__MDNEnv": JSON.stringify({
-        FRED_ALLOW_RUNTIME_ENV: String(!isProd),
+        FRED_RUNTIME_ENV: String(!isProd),
         FRED_PLAYGROUND_LOCAL: String(!isProd),
         ...Object.fromEntries(
           Object.entries(process.env).filter(([key]) =>
