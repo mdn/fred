@@ -2,23 +2,23 @@ import { readFile } from "node:fs/promises";
 
 import path from "node:path";
 
-import { BUILD_OUT_ROOT } from "./env.js";
+import { FRED_BUILD_ROOT } from "./env.js";
 
 const { render: distRender } = /** @type {import("../entry.ssr.js")} */ (
-  await import(path.resolve(BUILD_OUT_ROOT, "static", "ssr", "index.js"))
+  await import(path.resolve(FRED_BUILD_ROOT, "static", "ssr", "index.js"))
 );
 
 /** @type {import("@rspack/core").StatsCompilation} */
 const clientManifest = JSON.parse(
   await readFile(
-    path.join(BUILD_OUT_ROOT, "static", "client", "stats.json"),
+    path.join(FRED_BUILD_ROOT, "static", "client", "stats.json"),
     "utf8",
   ),
 );
 /** @type {import("@rspack/core").StatsCompilation} */
 const legacyManifest = JSON.parse(
   await readFile(
-    path.join(BUILD_OUT_ROOT, "static", "legacy", "stats.json"),
+    path.join(FRED_BUILD_ROOT, "static", "legacy", "stats.json"),
     "utf8",
   ),
 );

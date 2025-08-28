@@ -12,7 +12,7 @@ import { merge } from "webpack-merge";
 // @ts-expect-error
 import { StatsWriterPlugin } from "webpack-stats-plugin";
 
-import { BUILD_OUT_ROOT } from "./build/env.js";
+import { FRED_BUILD_ROOT } from "./build/env.js";
 import { CSPHashPlugin } from "./build/plugins/csp-hash.js";
 import { GenerateElementMapPlugin } from "./build/plugins/generate-element-map.js";
 import { override as svgoOverride } from "./svgo.config.js";
@@ -272,13 +272,13 @@ const ssrConfig = merge(common, notServiceWorkerCommon, clientAndSsrCommon, {
       patterns: [
         {
           from: "public",
-          to: path.resolve(BUILD_OUT_ROOT),
+          to: path.resolve(FRED_BUILD_ROOT),
         },
       ],
     }),
   ],
   output: {
-    path: path.resolve(BUILD_OUT_ROOT, "static", "ssr"),
+    path: path.resolve(FRED_BUILD_ROOT, "static", "ssr"),
     filename: "[name].js",
     // use proper file names in sourcemaps:
     devtoolModuleFilenameTemplate: (info) =>
@@ -379,7 +379,7 @@ const clientConfig = merge(
       }),
     ],
     output: {
-      path: path.resolve(BUILD_OUT_ROOT, "static", "client"),
+      path: path.resolve(FRED_BUILD_ROOT, "static", "client"),
       publicPath: "/static/client/",
     },
     optimization: {
@@ -427,7 +427,7 @@ const legacyConfig = merge(
     },
     output: {
       filename: "[name].[contenthash].js",
-      path: path.resolve(BUILD_OUT_ROOT, "static", "legacy"),
+      path: path.resolve(FRED_BUILD_ROOT, "static", "legacy"),
       publicPath: "/static/legacy/",
     },
     resolve: {
@@ -602,7 +602,7 @@ const serviceWorkerConfig = merge(common, {
   },
   output: {
     filename: "[name].js",
-    path: path.resolve(BUILD_OUT_ROOT),
+    path: path.resolve(FRED_BUILD_ROOT),
     publicPath: "/",
     clean: false,
   },

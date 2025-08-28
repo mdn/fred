@@ -2,7 +2,7 @@ import { readFile, writeFile } from "node:fs/promises";
 
 import { fdir } from "fdir";
 
-import { BUILD_OUT_ROOT } from "./env.js";
+import { RARI_BUILD_ROOT } from "./env.js";
 import { render } from "./render.js";
 
 /**
@@ -59,7 +59,7 @@ async function findDocuments() {
     .withFullPaths()
     .withErrors()
     .filter((filePath) => filePath.endsWith("/index.json"))
-    .crawl(BUILD_OUT_ROOT);
+    .crawl(RARI_BUILD_ROOT);
   const docs = await api.withPromise();
   return docs;
 }
