@@ -1,5 +1,35 @@
 # Changelog
 
+## [1.1.1](https://github.com/mdn/fred/compare/v1.1.0...v1.1.1) (2025-08-28)
+
+
+### Bug Fixes
+
+* **contributor-spotlight:** pass real label to button ([#635](https://github.com/mdn/fred/issues/635)) ([872e280](https://github.com/mdn/fred/commit/872e280471ec05bea1072841119270c90509224d))
+* ensure css images respect user theme choice ([#623](https://github.com/mdn/fred/issues/623)) ([a539b3a](https://github.com/mdn/fred/commit/a539b3a93c0db8e680653d702ab305cbedd19904))
+* **homepage-contributor-spotlight:** preserve image aspect ratio ([#627](https://github.com/mdn/fred/issues/627)) ([d33485f](https://github.com/mdn/fred/commit/d33485f52d30218ab0e2837156be18641b3e2e55)), closes [#613](https://github.com/mdn/fred/issues/613)
+* **homepage-hero:** link to current locale ([#631](https://github.com/mdn/fred/issues/631)) ([cba8acb](https://github.com/mdn/fred/commit/cba8acb40eb803556f9ec4cad3f0af4f23c9e087))
+* **live-samples:** avoid handling code examples twice ([#652](https://github.com/mdn/fred/issues/652)) ([5fb74aa](https://github.com/mdn/fred/commit/5fb74aab4fe1176b52e3d38375e5b059cf7541a5))
+* **live-samples:** id can contain dots ([#637](https://github.com/mdn/fred/issues/637)) ([116324b](https://github.com/mdn/fred/commit/116324bb997408fb62f54a77ebc915cd3a90576d))
+* **observatory:** score tooltip broken on chrome/safari ([#643](https://github.com/mdn/fred/issues/643)) ([96d7d47](https://github.com/mdn/fred/commit/96d7d47e0129f6e378e1c8e20939634046761908))
+* **search-modal:** support adding from context menu in Firefox ([#636](https://github.com/mdn/fred/issues/636)) ([58dd323](https://github.com/mdn/fred/commit/58dd323defb88c5147de2be4f9c024a4484339b1))
+* **writer-mode:** path to file wrong when running as package ([#640](https://github.com/mdn/fred/issues/640)) ([6bf4d2f](https://github.com/mdn/fred/commit/6bf4d2f76c8588f165886bfde32673494c6b0a9d))
+
+
+### Enhancements
+
+* **play-runner:** set allow-modals by default ([#634](https://github.com/mdn/fred/issues/634)) ([d7cc5d7](https://github.com/mdn/fred/commit/d7cc5d7d3c69c7eb2d645a73f19f8c4bbb11aa78))
+
+
+### Miscellaneous
+
+* **compat-table:** hide Bun for now ([#645](https://github.com/mdn/fred/issues/645)) ([92c55b8](https://github.com/mdn/fred/commit/92c55b849769bc8e520e13c7f1cb349b41245943))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.0.0 to 7.1.0 ([#644](https://github.com/mdn/fred/issues/644)) ([5de409a](https://github.com/mdn/fred/commit/5de409a61bebd673125d13c7d238333a1d679912))
+* **deps-dev:** bump postcss-preset-env from 10.3.0 to 10.3.1 in the dev group ([#650](https://github.com/mdn/fred/issues/650)) ([7b20432](https://github.com/mdn/fred/commit/7b2043296789afe610cebd79d806c9f4bd68fad8))
+* **deps-dev:** bump the dev group with 2 updates ([#646](https://github.com/mdn/fred/issues/646)) ([a366acd](https://github.com/mdn/fred/commit/a366acd64731213255c58f5989f1102f584a3443))
+* **deps-dev:** bump the dev group with 3 updates ([#639](https://github.com/mdn/fred/issues/639)) ([da85a57](https://github.com/mdn/fred/commit/da85a579608806ba38b131f5e5fc2fbe63c356cf))
+* **deps:** bump concurrently from 9.2.0 to 9.2.1 in the prod group ([#638](https://github.com/mdn/fred/issues/638)) ([0fb6305](https://github.com/mdn/fred/commit/0fb630501f75601d4905636e4ae695abae7dacec))
+
 ## [1.1.0](https://github.com/mdn/fred/compare/v1.0.0...v1.1.0) (2025-08-25)
 
 
