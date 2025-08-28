@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/mdn/fred/compare/v1.1.1...v1.2.0) (2025-08-28)
+
+
+### Features
+
+* **env:** add runtime variables ([#642](https://github.com/mdn/fred/issues/642)) ([ab504ef](https://github.com/mdn/fred/commit/ab504effc762002df03d709e9ed605f58b6b2b22))
+
+
+### Bug Fixes
+
+* **npm:** js/styles/assets weren't being found ([#641](https://github.com/mdn/fred/issues/641)) ([1c4e02a](https://github.com/mdn/fred/commit/1c4e02a2ea20da72e8a43b9362c8a285f060af5c))
+
 ## [1.1.1](https://github.com/mdn/fred/compare/v1.1.0...v1.1.1) (2025-08-28)
 
 
