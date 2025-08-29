@@ -75,6 +75,7 @@
       color: light-dark(var(--color-green-50), var(--color-green-80));
 
       &:hover {
+        color: light-dark(var(--color-green-20), var(--color-green-80));
         background-color: light-dark(
           var(--color-green-90),
           var(--color-green-10)
@@ -86,6 +87,7 @@
       color: light-dark(var(--color-red-50), var(--color-red-80));
 
       &:hover {
+        color: light-dark(var(--color-red-20), var(--color-red-80));
         background-color: light-dark(var(--color-red-90), var(--color-red-10));
       }
     }
@@ -102,6 +104,7 @@
       color: light-dark(var(--color-green-50), var(--color-green-80));
 
       &:hover {
+        color: light-dark(var(--color-green-20), var(--color-green-80));
         background-color: light-dark(
           var(--color-green-90),
           var(--color-green-10)
@@ -113,6 +116,7 @@
       color: light-dark(var(--color-red-50), var(--color-red-80));
 
       &:hover {
+        color: light-dark(var(--color-red-20), var(--color-red-80));
         background-color: light-dark(var(--color-red-90), var(--color-red-10));
       }
     }
