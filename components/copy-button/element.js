@@ -36,7 +36,7 @@ export class MDNCopyButton extends L10nMixin(LitElement) {
       }
 
       this._message = copiedSuccessfully
-        ? this.l10n`Copied`
+        ? this.l10n`Copied ✔️`
         : this.l10n`Copy failed!`;
 
       setTimeout(
