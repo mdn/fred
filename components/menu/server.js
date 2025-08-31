@@ -601,6 +601,12 @@ export class Menu extends ServerComponent {
                       "Shape generator",
                     )}
                   </li>
+                  <li>
+                    ${link(
+                      "Web/CSS/color_value/color-mix/color-mixer-tool",
+                      "Color mixer",
+                    )}
+                  </li>
                 </ul>
               </div>
             </div>
