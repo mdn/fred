@@ -19,6 +19,7 @@
 
   .reference-layout__header {
     grid-area: header;
+    padding-left: 1rem;
 
     h1 {
       margin: 1rem 0;
@@ -33,6 +34,7 @@
   .reference-layout__body {
     grid-area: body;
     padding-bottom: 3rem;
+    padding-left: 1rem;
   }
 
   .reference-layout__sidebar {
