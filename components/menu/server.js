@@ -623,6 +623,12 @@ export class Menu extends ServerComponent {
                       "Border-radius generator",
                     )}
                   </li>
+                  <li>
+                    ${link(
+                      "Web/CSS/CSS_shapes/Shape_generator",
+                      "Shape generator",
+                    )}
+                  </li>
                 </ul>
               </div>
             </div>
