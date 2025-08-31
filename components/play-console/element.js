@@ -115,9 +115,7 @@ export class MDNPlayConsole extends LitElement {
   render() {
     return html`
       <ul aria-live="polite">
-        ${this._messages.map(
-          (message) => html`<li><code>${message}</code></li>`,
-        )}
+        ${this._messages.map((message) => html`<li><pre>${message}</pre></li>`)}
       </ul>
     `;
   }
