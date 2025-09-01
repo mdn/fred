@@ -8,7 +8,7 @@ import { ThemeController } from "../color-theme/controller.js";
 import {
   PLAYGROUND_BASE_HOST,
   PLAYGROUND_LOCAL,
-  PLAY_PORT,
+  PLAYGROUND_PORT,
   PORT,
 } from "../env/index.js";
 import { compressAndBase64Encode } from "../playground/utils.js";
@@ -106,7 +106,7 @@ export class MDNPlayRunner extends LitElement {
       const url = new URL(
         `${prefix}/runner.html`,
         PLAYGROUND_LOCAL
-          ? location.origin.replace(PORT, PLAY_PORT)
+          ? location.origin.replace(PORT.toString(), PLAYGROUND_PORT.toString())
           : `${location.protocol}//${this._subdomain}.${PLAYGROUND_BASE_HOST}`,
       );
       // pass the uuid for postMessage isolation

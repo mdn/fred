@@ -8,7 +8,7 @@ import { createProxyMiddleware } from "http-proxy-middleware";
 import openEditor from "open-editor";
 
 import { FRED_BUILD_ROOT } from "./build/env.js";
-import { PLAY_PORT, PORT, WRITER_MODE } from "./components/env/index.js";
+import { PLAYGROUND_PORT, PORT, WRITER_MODE } from "./components/env/index.js";
 import { handleRunner } from "./vendor/yari/libs/play/index.js";
 
 import "source-map-support/register.js";
@@ -328,8 +328,8 @@ export async function startServer() {
     );
   });
 
-  const playServer = play.listen(PLAY_PORT, () => {
-    console.log(`Playground server started on port ${PLAY_PORT}`);
+  const playServer = play.listen(PLAYGROUND_PORT, () => {
+    console.log(`Playground backend started on port ${PLAYGROUND_PORT}`);
   });
 
   return {
