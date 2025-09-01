@@ -6,7 +6,8 @@
   "author": "MDN Web Docs",
   "type": "module",
   "bin": {
-    "fred-server": "scripts/server.js"
+    "fred-server": "scripts/server.js",
+    "fred-ssr": "build/ssr.js"
   },
   "scripts": {
     "start": "node --env-file=.env scripts/server.js",

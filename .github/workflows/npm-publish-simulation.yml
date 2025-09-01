@@ -61,6 +61,10 @@ jobs:
           yarn add file:$TARBALL
           yarn install
 
+      - name: (mdn/content) yarn fred-ssr
+        working-directory: mdn/content
+        run: yarn fred-ssr
+
       - name: (mdn/content) yarn start:fred
         working-directory: mdn/content
         run: yarn start:fred > /tmp/stdout.log 2> /tmp/stderr.log &
