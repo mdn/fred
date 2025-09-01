@@ -631,7 +631,7 @@ export class Menu extends ServerComponent {
                   </li>
                   <li>
                     ${link(
-                      "Web/CSS/color_value/color-mix/color-mixer-tool",
+                      "Web/CSS/color_value/Color_mixer_tool",
                       "Color mixer",
                     )}
                   </li>
