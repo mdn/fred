@@ -5,7 +5,12 @@ import { keyed } from "lit/directives/keyed.js";
 import { createRef, ref } from "lit/directives/ref.js";
 
 import { ThemeController } from "../color-theme/controller.js";
-import { PLAYGROUND_BASE_HOST, PLAYGROUND_LOCAL } from "../env/index.js";
+import {
+  PLAYGROUND_BASE_HOST,
+  PLAYGROUND_LOCAL,
+  PLAY_PORT,
+  PORT,
+} from "../env/index.js";
 import { compressAndBase64Encode } from "../playground/utils.js";
 
 import styles from "./element.css?lit";
@@ -101,7 +106,7 @@ export class MDNPlayRunner extends LitElement {
       const url = new URL(
         `${prefix}/runner.html`,
         PLAYGROUND_LOCAL
-          ? location.origin.replace("3000", "3001")
+          ? location.origin.replace(PORT, PLAY_PORT)
           : `${location.protocol}//${this._subdomain}.${PLAYGROUND_BASE_HOST}`,
       );
       // pass the uuid for postMessage isolation

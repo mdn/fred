@@ -36,10 +36,10 @@ export function parseString(name, fallback, options) {
  */
 function getEnv(name, options = {}) {
   const { runtime } = { runtime: false, ...options };
-  name = `FRED_${name}`;
+  const envName = `FRED_${name}`;
   if (runtime && RUNTIME_ENV) {
-    runtimeVariables.push(name);
-    return process.env[name] || getEnv(name);
+    runtimeVariables.push(envName);
+    return process.env[envName] || getEnv(name);
   }
-  return globalThis.__MDNEnv?.[name];
+  return globalThis.__MDNEnv?.[envName];
 }

@@ -4,7 +4,13 @@ export const PLAYGROUND_BASE_HOST = parseString(
   "PLAYGROUND_BASE_HOST",
   "mdnplay.dev",
 );
-export const PLAYGROUND_LOCAL = parseBool("PLAYGROUND_LOCAL", false);
+export const PLAYGROUND_LOCAL = parseBool("PLAYGROUND_LOCAL", false, {
+  runtime: true,
+});
+export const PORT = parseString("PORT", "3000", { runtime: true });
+export const PLAY_PORT = parseString("PLAY_PORT", "3001", {
+  runtime: true,
+});
 
 export const FXA_SIGNIN_URL = parseString(
   "FXA_SIGNIN_URL",

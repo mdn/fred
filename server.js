@@ -8,7 +8,7 @@ import { createProxyMiddleware } from "http-proxy-middleware";
 import openEditor from "open-editor";
 
 import { FRED_BUILD_ROOT } from "./build/env.js";
-import { WRITER_MODE } from "./components/env/index.js";
+import { PLAY_PORT, PORT, WRITER_MODE } from "./components/env/index.js";
 import { handleRunner } from "./vendor/yari/libs/play/index.js";
 
 import "source-map-support/register.js";
@@ -322,14 +322,14 @@ export async function startServer() {
     );
   }
 
-  const httpServer = app.listen(3000, () => {
+  const httpServer = app.listen(PORT, () => {
     console.log(
-      `Server started at ${http2 ? "https" : "http"}://localhost:3000`,
+      `Server started at ${http2 ? "https" : "http"}://localhost:${PORT}`,
     );
   });
 
-  const playServer = play.listen(3001, () => {
-    console.log(`Play server started at http://localhost:3001`);
+  const playServer = play.listen(PLAY_PORT, () => {
+    console.log(`Playground server started on port ${PLAY_PORT}`);
   });
 
   return {
