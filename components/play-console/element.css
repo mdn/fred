@@ -16,25 +16,16 @@
 }
 
 ul {
-  padding: 0;
+  padding-left: 1rem;
   margin: 0;
-  list-style: none;
 }
 
-li {
-  padding: 0 0.5em;
-
-  &::before {
-    content: "> ";
-  }
+li::marker {
+  content: "> ";
 }
 
 pre {
-  display: inline-block;
-
   margin: 0;
-
   font-family: var(--font-family-code);
-
   tab-size: 4;
 }
