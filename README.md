@@ -24,6 +24,19 @@ MDN's next fr(ont)e(n)d.
 - `npm run preview`
   - runs the preview server: using the production bundles with the rari server: useful for testing our prod rspack config
 
+### Accessing from non-localhost
+
+If you want to access fred from a different machine, you'll need to run with certain options:
+
+- `HTTPS=true` to enable HTTPS with a self-signed certificate, allowing Web APIs requiring a secure context to work
+- `ORIGIN_MAIN=your.local.ip.address` to allowlist your address in the playground
+
+So a full command might look like:
+
+```
+HTTPS=true ORIGIN_MAIN=192.168.0.99 npm run start
+```
+
 ## Development principles
 
 ### Environment variables
