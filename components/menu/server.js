@@ -601,18 +601,6 @@ export class Menu extends ServerComponent {
                 <ul>
                   <li>
                     ${link(
-                      "Web/CSS/CSS_colors/Color_picker_tool",
-                      "Color picker",
-                    )}
-                  </li>
-                  <li>
-                    ${link(
-                      "Web/CSS/CSS_backgrounds_and_borders/Box-shadow_generator",
-                      "Box-shadow generator",
-                    )}
-                  </li>
-                  <li>
-                    ${link(
                       "Web/CSS/CSS_backgrounds_and_borders/Border-image_generator",
                       "Border-image generator",
                     )}
@@ -625,14 +613,20 @@ export class Menu extends ServerComponent {
                   </li>
                   <li>
                     ${link(
-                      "Web/CSS/CSS_shapes/Shape_generator",
-                      "Shape generator",
+                      "Web/CSS/CSS_backgrounds_and_borders/Box-shadow_generator",
+                      "Box-shadow generator",
                     )}
                   </li>
                   <li>
+                    ${link("Web/CSS/CSS_colors/Color_mixer", "Color mixer")}
+                  </li>
+                  <li>
+                    ${link("Web/CSS/CSS_colors/Color_picker", "Color picker")}
+                  </li>
+                  <li>
                     ${link(
-                      "Web/CSS/color_value/Color_mixer_tool",
-                      "Color mixer",
+                      "Web/CSS/CSS_shapes/Shape_generator",
+                      "Shape generator",
                     )}
                   </li>
                 </ul>
