@@ -85,11 +85,11 @@ jobs:
           repository: mdn/curriculum
           path: mdn/curriculum
 
-      - name: Checkout (mdn-studio)
+      - name: Checkout (blog)
         uses: actions/checkout@v5
         with:
-          repository: mdn/mdn-studio
-          path: mdn/mdn-studio
+          repository: mdn/blog
+          path: mdn/blog
           lfs: true
           token: ${{ secrets.MDN_STUDIO_PAT }}
 
@@ -145,7 +145,7 @@ jobs:
           CONTENT_ROOT: ${{ github.workspace }}/mdn/content/files
           CONTENT_TRANSLATED_ROOT: ${{ github.workspace }}/mdn/translated-content/files
           CONTRIBUTOR_SPOTLIGHT_ROOT: ${{ github.workspace }}/mdn/mdn-contributor-spotlight/contributors
-          BLOG_ROOT: ${{ github.workspace }}/mdn/mdn-studio/content/posts
+          BLOG_ROOT: ${{ github.workspace }}/mdn/blog/content/posts
           CURRICULUM_ROOT: ${{ github.workspace }}/mdn/curriculum
           GENERIC_CONTENT_ROOT: ${{ github.workspace }}/mdn/generic-content/files
 
@@ -237,14 +237,14 @@ jobs:
         run: npm run ssr
 
       - name: Authenticate with GCP
-        uses: google-github-actions/auth@v2
+        uses: google-github-actions/auth@v3
         with:
           token_format: access_token
           service_account: deploy-mdn-review-content@${{ secrets.GCP_PROJECT_NAME }}.iam.gserviceaccount.com
           workload_identity_provider: projects/${{ secrets.WIP_PROJECT_ID }}/locations/global/workloadIdentityPools/github-actions/providers/github-actions
 
       - name: Setup gcloud
-        uses: google-github-actions/setup-gcloud@v2
+        uses: google-github-actions/setup-gcloud@v3
 
       - name: Upload to GCS
         uses: google-github-actions/upload-cloud-storage@v2

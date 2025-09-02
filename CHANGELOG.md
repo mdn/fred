@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.3.0](https://github.com/mdn/fred/compare/v1.2.0...v1.3.0) (2025-09-01)
+
+
+### Features
+
+* **package/bin:** add fred-ssr executable ([#678](https://github.com/mdn/fred/issues/678)) ([faa175d](https://github.com/mdn/fred/commit/faa175dbf31d5cc715bccbcb9673572e8323e340))
+* **server:** allow specifiying port from env var ([#679](https://github.com/mdn/fred/issues/679)) ([eea7274](https://github.com/mdn/fred/commit/eea72742ed07d3e2230cc33c30a2f3a1fcc9b4d3))
+
+
+### Bug Fixes
+
+* **env:** prefix runtime var fallback only once ([eea7274](https://github.com/mdn/fred/commit/eea72742ed07d3e2230cc33c30a2f3a1fcc9b4d3))
+* **server:** omit Playground server link in output ([eea7274](https://github.com/mdn/fred/commit/eea72742ed07d3e2230cc33c30a2f3a1fcc9b4d3))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.0 to 7.1.1 ([#677](https://github.com/mdn/fred/issues/677)) ([2a90bc2](https://github.com/mdn/fred/commit/2a90bc213785c778481299ae6fad996d3c5fe890))
+* **deps-dev:** bump the dev group with 2 updates ([#660](https://github.com/mdn/fred/issues/660)) ([08c2d3d](https://github.com/mdn/fred/commit/08c2d3d465ad31dcac9f0722856822d5da8f833c))
+* rename {mdn-studio =&gt; blog} ([#681](https://github.com/mdn/fred/issues/681)) ([39ab241](https://github.com/mdn/fred/commit/39ab241bf912f0f395634029d9fd11b784f28be1))
+
 ## [1.2.0](https://github.com/mdn/fred/compare/v1.1.1...v1.2.0) (2025-08-28)
 
 

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { readFile, writeFile } from "node:fs/promises";
 
 import { fdir } from "fdir";

@@ -22,6 +22,17 @@ export function parseBool(name, fallback, options) {
 
 /**
  * @param {string} name
+ * @param {number} fallback
+ * @param {Options} [options]
+ */
+export function parseInt(name, fallback, options) {
+  const stringValue = getEnv(name, options);
+  const numberValue = stringValue ? Number.parseInt(stringValue, 10) : fallback;
+  return Number.isNaN(numberValue) ? fallback : numberValue;
+}
+
+/**
+ * @param {string} name
  * @param {string} fallback
  * @param {Options} [options]
  */
@@ -36,10 +47,10 @@ export function parseString(name, fallback, options) {
  */
 function getEnv(name, options = {}) {
   const { runtime } = { runtime: false, ...options };
-  name = `FRED_${name}`;
+  const fullName = `FRED_${name}`;
   if (runtime && RUNTIME_ENV) {
-    runtimeVariables.push(name);
-    return process.env[name] || getEnv(name);
+    runtimeVariables.push(fullName);
+    return process.env[fullName] || getEnv(name);
   }
-  return globalThis.__MDNEnv?.[name];
+  return globalThis.__MDNEnv?.[fullName];
 }
