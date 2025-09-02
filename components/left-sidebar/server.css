@@ -88,13 +88,7 @@
   a,
   span:not(.highlight-container) {
     display: inline-flex;
-
-    justify-content: space-between;
-
-    width: 100%;
-
     padding-block: 0.25rem;
-
     vertical-align: middle;
   }
 
