@@ -25,7 +25,7 @@
   @media not (--screen-small-and-narrower) {
     &::before {
       padding-right: 0.8em;
-      margin-left: -0.8em;
+      margin-left: -0.6em;
       content: "#";
     }
   }
