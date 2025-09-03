@@ -37,6 +37,8 @@ So a full command might look like:
 HTTPS=true ORIGIN_MAIN=192.168.0.99 npm run start
 ```
 
+This is useful to test changes on mobile, tablets and other platforms.
+
 ## Development principles
 
 ### Environment variables
