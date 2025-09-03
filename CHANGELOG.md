@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.3.1](https://github.com/mdn/fred/compare/v1.3.0...v1.3.1) (2025-09-03)
+
+
+### Bug Fixes
+
+* **env:** remove inline script if no runtime variables are set ([#691](https://github.com/mdn/fred/issues/691)) ([771737e](https://github.com/mdn/fred/commit/771737eb0ccf60eab9af54bb011f4099af475e17))
+
+
+### Miscellaneous
+
+* **compat-table:** Port release label fix from yari ([#687](https://github.com/mdn/fred/issues/687)) ([3391cc4](https://github.com/mdn/fred/commit/3391cc4079cf9e6fed5c5b096d361793055fa94e))
+* **deps-dev:** bump the dev group with 5 updates ([#688](https://github.com/mdn/fred/issues/688)) ([bdff859](https://github.com/mdn/fred/commit/bdff8590ce1127286f9d0788ff60c5aa67afc9c8))
+
 ## [1.3.0](https://github.com/mdn/fred/compare/v1.2.0...v1.3.0) (2025-09-01)
 
 
