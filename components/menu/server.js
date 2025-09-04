@@ -87,10 +87,7 @@ export class Menu extends ServerComponent {
                         )}
                       </li>
                       <li>
-                        ${link(
-                          "Learn_web_development/Core/Structuring_content/HTML_video_and_audio",
-                          "Video & audio content",
-                        )}
+                        ${link("Web/HTML/Guides/Cheatsheet", "HTML cheatsheet")}
                       </li>
                       <li>
                         ${link(
@@ -161,7 +158,7 @@ export class Menu extends ServerComponent {
                     <ul>
                       <li>
                         ${link(
-                          "Learn_web_development/Core/Styling_basics/Box_model",
+                          "Web/CSS/CSS_box_model/Introduction_to_the_CSS_box_model",
                           "Box model",
                         )}
                       </li>
@@ -173,7 +170,7 @@ export class Menu extends ServerComponent {
                       </li>
                       <li>
                         ${link(
-                          "Learn_web_development/Core/CSS_layout/Flexbox",
+                          "Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox",
                           "Flexbox",
                         )}
                       </li>
