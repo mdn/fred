@@ -23,6 +23,7 @@ ul {
 
 li {
   padding: 0 0.5em;
+  white-space: nowrap;
 
   &::before {
     vertical-align: top;
@@ -30,12 +31,15 @@ li {
   }
 }
 
-pre {
+code {
   display: inline-block;
+
+  width: 98%;
 
   margin: 0;
 
   font-family: var(--font-family-code);
 
   tab-size: 4;
+  white-space: pre-wrap;
 }
