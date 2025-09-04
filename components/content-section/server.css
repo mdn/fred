@@ -245,6 +245,11 @@
 
     dd {
       margin-left: 1rem;
+
+      /* Move description closer to term. */
+      p:first-child {
+        margin-top: 0.5rem;
+      }
     }
 
     ul {
