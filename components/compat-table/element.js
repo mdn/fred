@@ -982,11 +982,12 @@ customElements.define("mdn-compat-table", MDNCompatTable);
  * @returns {[string[], import("@bcd").BrowserName[]]}
  */
 export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
+  const hasBunData = data.__compat && "bun" in data.__compat.support;
   const hasNodeJSData = data.__compat && "nodejs" in data.__compat.support;
   const hasDenoData = data.__compat && "deno" in data.__compat.support;
 
   let platforms = ["desktop", "mobile"];
-  if (category === "javascript" || hasNodeJSData || hasDenoData) {
+  if (category === "javascript" || hasBunData || hasNodeJSData || hasDenoData) {
     platforms.push("server");
   }
 
@@ -1013,8 +1014,11 @@ export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
     );
   }
 
-  // If there is no Node.js data for a category outside "javascript", don't
+  // If there is no Bun/Node.js data for a category outside "javascript", don't
   // show it. It ended up in the browser list because there is data for Deno.
+  if (category !== "javascript" && !hasBunData) {
+    browsers = browsers.filter((browser) => browser !== "bun");
+  }
   if (category !== "javascript" && !hasNodeJSData) {
     browsers = browsers.filter((browser) => browser !== "nodejs");
   }
