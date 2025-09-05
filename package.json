@@ -73,7 +73,7 @@
     "@jackolope/ts-lit-plugin": "^3.1.6",
     "@mdn/browser-compat-data": "^7.1.2",
     "@mdn/rari": "0.1.48",
-    "@mdn/yari": "^5.0.3",
+    "@mdn/yari": "^5.1.0",
     "@rsdoctor/rspack-plugin": "^1.2.3",
     "@rspack/cli": "^1.5.2",
     "@rspack/core": "^1.5.2",
