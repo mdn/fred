@@ -93,6 +93,8 @@
     }
 
     &.playground__runner-console {
+      position: relative;
+
       grid-area: runner;
 
       overflow: hidden;
@@ -167,4 +169,14 @@ mdn-modal {
     flex-direction: row;
     justify-content: flex-end;
   }
+}
+
+.overlay-run-button {
+  position: absolute;
+  inset: 4rem 1rem 9rem;
+  z-index: 1;
+
+  background-color: var(--color-gray-40);
+  border: 1px dashed gray;
+  border-radius: 0.5rem;
 }
