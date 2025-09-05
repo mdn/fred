@@ -699,6 +699,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
               flag_name: name,
               has_value: Number(typeof value_to_set === "string"),
               flag_value: value_to_set,
+              has_pref_url: Number(typeof browser.pref_url === "string"),
               browser_name: browser.name,
               browser_pref_url: browser.pref_url,
             },

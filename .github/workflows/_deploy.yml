@@ -181,6 +181,7 @@ jobs:
               -o -path '*/en-us/mozilla/add-ons/webextensions/index.md' \
               -o -path '*/en-us/web/api/canvas_api/index.md' \
               -o -path '*/en-us/web/api/canvas_api/manipulating_video_using_canvas/index.md' \
+              -o -path '*/en-us/web/api/contactsmanager/index.md' \
               -o -path '*/en-us/web/api/fetch_api/index.md' \
               -o -path '*/en-us/web/api/geolocation_api/index.md' \
               -o -path '*/en-us/web/api/performance/index.md' \
