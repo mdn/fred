@@ -17,7 +17,7 @@ jobs:
           path: mdn/fred
 
       - name: (mdn/fred) Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version-file: mdn/fred/.nvmrc
           cache: npm
@@ -46,7 +46,7 @@ jobs:
           path: mdn/content
 
       - name: (mdn/content) Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version-file: mdn/content/.nvmrc
           cache: yarn

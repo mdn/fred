@@ -106,7 +106,7 @@ jobs:
           path: mdn/mdn-contributor-spotlight
 
       - name: Setup (fred)
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version-file: "mdn/fred/.nvmrc"
           cache: npm
