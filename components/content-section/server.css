@@ -256,7 +256,7 @@
       margin: 1rem 0 2rem;
     }
 
-    a[href^="#"] {
+    dt a[href^="#"] {
       color: inherit;
 
       &:hover::before {
