@@ -7,6 +7,8 @@ html a.only-in-en-us::after {
 
   vertical-align: super;
 
+  white-space: nowrap;
+
   content: "(en-US)";
 }
 
