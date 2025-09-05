@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.3.3](https://github.com/mdn/fred/compare/v1.3.2...v1.3.3) (2025-09-05)
+
+
+### Bug Fixes
+
+* **playground:** set auto run on clear ([#669](https://github.com/mdn/fred/issues/669)) ([2fd268b](https://github.com/mdn/fred/commit/2fd268b2be98fba1dbaf982ad214598755071840))
+* **playground:** set autorun on clear ([2fd268b](https://github.com/mdn/fred/commit/2fd268b2be98fba1dbaf982ad214598755071840))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.2 to 7.1.3 ([#722](https://github.com/mdn/fred/issues/722)) ([b855407](https://github.com/mdn/fred/commit/b85540789b395a719ca73a327712a25b0fdbfe3b))
+* **deps-dev:** bump @mdn/yari from 5.0.3 to 5.1.0 ([#720](https://github.com/mdn/fred/issues/720)) ([6b4da86](https://github.com/mdn/fred/commit/6b4da86a6d7e9df5f8cbd34dde864613ce51fd30))
+* **menu:** update items ([#706](https://github.com/mdn/fred/issues/706)) ([472a129](https://github.com/mdn/fred/commit/472a1299692ae9bff70da70698c31a9e6ca01d34))
+
 ## [1.3.2](https://github.com/mdn/fred/compare/v1.3.1...v1.3.2) (2025-09-05)
 
 
