@@ -29,6 +29,10 @@
 
   /** Browser icons. */
 
+  &.icon-bun {
+    mask-image: url("../icon/browser/bun.svg");
+  }
+
   &.icon-chrome {
     mask-image: url("../icon/browser/chrome.svg");
   }

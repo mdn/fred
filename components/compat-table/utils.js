@@ -2,7 +2,7 @@
  * A list of browsers to be hidden.
  * @constant {string[]}
  */
-export const HIDDEN_BROWSERS = ["bun", "ie"];
+export const HIDDEN_BROWSERS = ["ie"];
 
 /**
  * Gets the first element of an array or returns the value itself.
