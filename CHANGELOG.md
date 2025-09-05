@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.3.2](https://github.com/mdn/fred/compare/v1.3.1...v1.3.2) (2025-09-05)
+
+
+### Bug Fixes
+
+* **content-section:** move dt/dd in dt closer together ([#704](https://github.com/mdn/fred/issues/704)) ([b93e613](https://github.com/mdn/fred/commit/b93e6136f16c21c8ca956f3db112785429caf18c))
+* **doc:** use pageTitle as `<title>` ([#693](https://github.com/mdn/fred/issues/693)) ([4d0756e](https://github.com/mdn/fred/commit/4d0756e5e22b95fc7a5802f892ac9b7204cf8fee))
+* **scrim-inline:** add missing style ([#700](https://github.com/mdn/fred/issues/700)) ([2d8e30a](https://github.com/mdn/fred/commit/2d8e30a0caf7b487f03aadfaefb4450395517c37))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.1 to 7.1.2 ([#699](https://github.com/mdn/fred/issues/699)) ([382c653](https://github.com/mdn/fred/commit/382c653c00146e06586f699d714c728d078e5715))
+* **deps-dev:** bump @types/node from 22.18.0 to 22.18.1 in the dev group ([#707](https://github.com/mdn/fred/issues/707)) ([89244ab](https://github.com/mdn/fred/commit/89244ab6f0c022efe12cced7bfbfe792143dedba))
+* **deps-dev:** bump the dev group with 3 updates ([#695](https://github.com/mdn/fred/issues/695)) ([5031a68](https://github.com/mdn/fred/commit/5031a688326d0bd973746b7251c51693a1b4dfa0))
+
 ## [1.3.1](https://github.com/mdn/fred/compare/v1.3.0...v1.3.1) (2025-09-03)
 
 
