@@ -26,7 +26,12 @@ li {
   white-space: nowrap;
 
   &::before {
+    display: inline-block;
+
+    width: 0.75rem;
+
     vertical-align: top;
+
     content: "> ";
   }
 }
@@ -34,7 +39,7 @@ li {
 code {
   display: inline-block;
 
-  width: 98%;
+  width: calc(100% - 0.75rem);
 
   margin: 0;
 
