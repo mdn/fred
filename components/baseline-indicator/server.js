@@ -210,7 +210,7 @@ export class BaselineIndicator extends ServerComponent {
           <li>
             <a
               href=${`/${context.locale}/docs/Glossary/Baseline/Compatibility`}
-              data-glean="baseline_link_learn_more"
+              data-glean-id="baseline_link_learn_more"
               target="_blank"
               class="learn-more"
             >
@@ -218,14 +218,14 @@ export class BaselineIndicator extends ServerComponent {
             </a>
           </li>
           <li>
-            <a href=${bcdLink} data-glean="baseline_link_bcd_table">
+            <a href=${bcdLink} data-glean-id="baseline_link_bcd_table">
               ${context.l10n`See full compatibility`}
             </a>
           </li>
           <li>
             <a
               href=${feedbackLink}
-              data-glean="baseline_link_feedback"
+              data-glean-id="baseline_link_feedback"
               class="feedback-link"
               target="_blank"
               rel="noreferrer"

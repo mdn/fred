@@ -11,7 +11,7 @@ class MDNPlacementNote extends L10nMixin(LitElement) {
     return html`<a
       href="/en-US/advertising"
       class="placement-note"
-      data-glean="pong: pong-&gt;about"
+      data-glean-id="pong: pong-&gt;about"
       target="_blank"
       rel="noreferrer"
       >${this.l10n("placement-note")}</a

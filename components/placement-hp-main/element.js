@@ -50,7 +50,7 @@ export class MDNPlacementHpMain extends PlacementMixin(LitElement) {
       <section class="placement-container">
         <a
           class="placement-link"
-          data-glean="pong: pong-&gt;click top-banner"
+          data-glean-id="pong: pong-&gt;click top-banner"
           href=${this.clickLink(click, version)}
           target="_blank"
           rel="sponsored noreferrer"
