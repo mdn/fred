@@ -12,6 +12,16 @@ export class Menu extends ServerComponent {
    */
   render(context) {
     /**
+     * Generates a Glean ID for a submenu click.
+     *
+     * @param {string} href - The href of the link.
+     * @param {string} [section] - The name of the menu, if known.
+     * @returns {string} the Glean ID.
+     */
+    const gleanId = (href, section = "fred") =>
+      `menu_click_submenu: ${section} -> ${href}`;
+
+    /**
      * Renders a link to a page.
      *
      * @param {string} slug
@@ -34,6 +44,7 @@ export class Menu extends ServerComponent {
         href=${href}
         aria-label=${ifDefined(label)}
         title=${ifDefined(label)}
+        data-glean-id=${gleanId(href)}
         >${text}</a
       >`;
     };
@@ -472,6 +483,7 @@ export class Menu extends ServerComponent {
                               : "only-in-en-us",
                           )}
                           href="/en-US/curriculum/"
+                          data-glean-id=${gleanId("/en-US/curriculum/")}
                           >Curriculum</a
                         >
                       </li>
@@ -553,6 +565,7 @@ export class Menu extends ServerComponent {
                       class="menu__panel-icon"
                       data-icon="circle-play"
                       href=${`/en-US/play`}
+                      data-glean-id=${gleanId("/en-US/play/", "tools")}
                     >
                       Playground
                     </a>
@@ -562,6 +575,7 @@ export class Menu extends ServerComponent {
                       class="menu__panel-icon"
                       data-icon="shield-check"
                       href=${`/en-US/observatory`}
+                      data-glean-id=${gleanId("/en-US/observatory/", "tools")}
                     >
                       HTTP Observatory
                     </a>
@@ -611,6 +625,7 @@ export class Menu extends ServerComponent {
                       class="menu__panel-icon"
                       data-icon="mdn-m"
                       href=${`/en-US/about`}
+                      data-glean-id=${gleanId("/en-US/about", "about")}
                     >
                       About MDN
                     </a>
@@ -620,6 +635,7 @@ export class Menu extends ServerComponent {
                       class="menu__panel-icon"
                       data-icon="chart-no-axes-combined"
                       href=${`/en-US/advertising`}
+                      data-glean-id=${gleanId("/en-US/advertising", "about")}
                     >
                       Advertise with us
                     </a>
@@ -631,6 +647,7 @@ export class Menu extends ServerComponent {
                       class="menu__panel-icon"
                       data-icon="users"
                       href=${`/en-US/community`}
+                      data-glean-id=${gleanId("/en-US/community", "about")}
                     >
                       Community
                     </a>
@@ -640,6 +657,10 @@ export class Menu extends ServerComponent {
                       class="menu__panel-icon"
                       data-icon="github"
                       href="https://github.com/mdn"
+                      data-glean-id=${gleanId(
+                        "https://github.com/mdn",
+                        "about",
+                      )}
                     >
                       MDN on GitHub
                     </a>
@@ -650,7 +671,12 @@ export class Menu extends ServerComponent {
           </mdn-dropdown>
         </div>
         <div class="menu__tab" data-section="blog">
-          <a class="menu__tab-link" href=${`/en-US/blog/`}>Blog</a>
+          <a
+            class="menu__tab-link"
+            href=${`/en-US/blog/`}
+            data-glean-id=${`menu_click_link: top-level -> /en-US/blog/`}
+            >Blog</a
+          >
         </div>
       </nav>
     `;
