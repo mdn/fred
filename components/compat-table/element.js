@@ -4,11 +4,7 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
-import {
-  BCD_TABLE,
-  DEFAULT_LOCALE,
-  ISSUE_METADATA_TEMPLATE,
-} from "./constants.js";
+import { DEFAULT_LOCALE, ISSUE_METADATA_TEMPLATE } from "./constants.js";
 import styles from "./element.css?lit";
 import {
   getSupportBrowserReleaseDate,
@@ -393,7 +389,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         titleNode = html`<a
           href=${href}
           class="bc-table-row-header"
-          data-glean-id=${`${BCD_TABLE}: link -> ${href}`}
+          data-glean-id=${`bcd: link -> ${href}`}
         >
           ${titleContent}
         </a>`;
