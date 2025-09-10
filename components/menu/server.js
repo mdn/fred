@@ -12,14 +12,19 @@ export class Menu extends ServerComponent {
    */
   render(context) {
     /**
+     * Holds the id of the section being rendered.
+     * @type {string|null}
+     */
+    let currentSection = null;
+
+    /**
      * Generates a Glean ID for a submenu click.
      *
      * @param {string} href - The href of the link.
-     * @param {string} [section] - The name of the menu, if known.
      * @returns {string} the Glean ID.
      */
-    const gleanId = (href, section = "fred") =>
-      `menu_click_submenu: ${section} -> ${href}`;
+    const gleanId = (href) =>
+      `menu_click_submenu: ${currentSection ?? "?"} -> ${href}`;
 
     /**
      * Renders a link to a page.
@@ -49,10 +54,11 @@ export class Menu extends ServerComponent {
       >`;
     };
 
-    return html`
-      <nav class="menu">
-        <div class="menu__tab" data-section="html">
-          <mdn-dropdown>
+    const sections = [
+      {
+        id: "html",
+        render: () =>
+          html`<mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">HTML</span>
             </button>
@@ -128,10 +134,12 @@ export class Menu extends ServerComponent {
                 </dl>
               </div>
             </div>
-          </mdn-dropdown>
-        </div>
-        <div class="menu__tab" data-section="css">
-          <mdn-dropdown>
+          </mdn-dropdown>`,
+      },
+      {
+        id: "css",
+        render: () =>
+          html`<mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">CSS</span>
             </button>
@@ -224,10 +232,12 @@ export class Menu extends ServerComponent {
                 </dl>
               </div>
             </div>
-          </mdn-dropdown>
-        </div>
-        <div class="menu__tab" data-section="javascript">
-          <mdn-dropdown>
+          </mdn-dropdown>`,
+      },
+      {
+        id: "javascript",
+        render: () =>
+          html`<mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label" data-type="long">JavaScript</span>
               <span class="menu__tab-label" data-type="short">JS</span>
@@ -315,10 +325,12 @@ export class Menu extends ServerComponent {
                 </dl>
               </div>
             </div>
-          </mdn-dropdown>
-        </div>
-        <div class="menu__tab" data-section="webapis">
-          <mdn-dropdown>
+          </mdn-dropdown>`,
+      },
+      {
+        id: "webapis",
+        render: () =>
+          html`<mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">Web APIs</span>
             </button>
@@ -391,10 +403,12 @@ export class Menu extends ServerComponent {
                 </dl>
               </div>
             </div>
-          </mdn-dropdown>
-        </div>
-        <div class="menu__tab" data-section="all">
-          <mdn-dropdown>
+          </mdn-dropdown>`,
+      },
+      {
+        id: "all",
+        render: () =>
+          html`<mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">All</span>
             </button>
@@ -447,10 +461,12 @@ export class Menu extends ServerComponent {
                 </dl>
               </div>
             </div>
-          </mdn-dropdown>
-        </div>
-        <div class="menu__tab" data-section="learn">
-          <mdn-dropdown>
+          </mdn-dropdown>`,
+      },
+      {
+        id: "learn",
+        render: () =>
+          html`<mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">Learn</span>
             </button>
@@ -549,10 +565,12 @@ export class Menu extends ServerComponent {
                 </dl>
               </div>
             </div>
-          </mdn-dropdown>
-        </div>
-        <div class="menu__tab" data-section="tools">
-          <mdn-dropdown>
+          </mdn-dropdown>`,
+      },
+      {
+        id: "tools",
+        render: () =>
+          html`<mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">Tools</span>
             </button>
@@ -565,7 +583,7 @@ export class Menu extends ServerComponent {
                       class="menu__panel-icon"
                       data-icon="circle-play"
                       href=${`/en-US/play`}
-                      data-glean-id=${gleanId("/en-US/play/", "tools")}
+                      data-glean-id=${gleanId("/en-US/play/")}
                     >
                       Playground
                     </a>
@@ -575,7 +593,7 @@ export class Menu extends ServerComponent {
                       class="menu__panel-icon"
                       data-icon="shield-check"
                       href=${`/en-US/observatory`}
-                      data-glean-id=${gleanId("/en-US/observatory/", "tools")}
+                      data-glean-id=${gleanId("/en-US/observatory/")}
                     >
                       HTTP Observatory
                     </a>
@@ -609,10 +627,12 @@ export class Menu extends ServerComponent {
                 </ul>
               </div>
             </div>
-          </mdn-dropdown>
-        </div>
-        <div class="menu__tab" data-section="about">
-          <mdn-dropdown>
+          </mdn-dropdown>`,
+      },
+      {
+        id: "about",
+        render: () =>
+          html`<mdn-dropdown>
             <button class="menu__tab-button" type="button" slot="button">
               <span class="menu__tab-label">About</span>
             </button>
@@ -625,7 +645,7 @@ export class Menu extends ServerComponent {
                       class="menu__panel-icon"
                       data-icon="mdn-m"
                       href=${`/en-US/about`}
-                      data-glean-id=${gleanId("/en-US/about", "about")}
+                      data-glean-id=${gleanId("/en-US/about")}
                     >
                       About MDN
                     </a>
@@ -635,7 +655,7 @@ export class Menu extends ServerComponent {
                       class="menu__panel-icon"
                       data-icon="chart-no-axes-combined"
                       href=${`/en-US/advertising`}
-                      data-glean-id=${gleanId("/en-US/advertising", "about")}
+                      data-glean-id=${gleanId("/en-US/advertising")}
                     >
                       Advertise with us
                     </a>
@@ -647,7 +667,7 @@ export class Menu extends ServerComponent {
                       class="menu__panel-icon"
                       data-icon="users"
                       href=${`/en-US/community`}
-                      data-glean-id=${gleanId("/en-US/community", "about")}
+                      data-glean-id=${gleanId("/en-US/community")}
                     >
                       Community
                     </a>
@@ -657,10 +677,7 @@ export class Menu extends ServerComponent {
                       class="menu__panel-icon"
                       data-icon="github"
                       href="https://github.com/mdn"
-                      data-glean-id=${gleanId(
-                        "https://github.com/mdn",
-                        "about",
-                      )}
+                      data-glean-id=${gleanId("https://github.com/mdn")}
                     >
                       MDN on GitHub
                     </a>
@@ -668,16 +685,30 @@ export class Menu extends ServerComponent {
                 </ul>
               </div>
             </div>
-          </mdn-dropdown>
-        </div>
-        <div class="menu__tab" data-section="blog">
-          <a
+          </mdn-dropdown>`,
+      },
+      {
+        id: "blog",
+        render: () =>
+          html`<a
             class="menu__tab-link"
             href=${`/en-US/blog/`}
             data-glean-id=${`menu_click_link: top-level -> /en-US/blog/`}
             >Blog</a
-          >
-        </div>
+          >`,
+      },
+    ];
+
+    return html`
+      <nav class="menu">
+        ${sections.map((section) => {
+          currentSection = section.id;
+          const result = html`<div class="menu__tab" data-section=${section.id}>
+            ${section.render()}
+          </div>`;
+          currentSection = null;
+          return result;
+        })}
       </nav>
     `;
   }
