@@ -50,7 +50,8 @@ function getEnv(name, options = {}) {
   const fullName = `FRED_${name}`;
   if (runtime && RUNTIME_ENV) {
     runtimeVariables.push(fullName);
-    return process.env[fullName] || getEnv(name);
+    // safely navigate if process is not defined
+    return globalThis.process?.env[fullName] || getEnv(name);
   }
   return globalThis.__MDNEnv?.[fullName];
 }

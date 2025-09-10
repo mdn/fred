@@ -80,6 +80,7 @@ export class MDNPlayground extends L10nMixin(LitElement) {
       controller
     ) {
       controller.clear();
+      this._autoRun = true;
       this._storeSession();
       this.requestUpdate();
       const urlWithoutSearch = new URL(location.href);

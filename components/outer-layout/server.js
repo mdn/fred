@@ -69,10 +69,8 @@ export class OuterLayout extends ServerComponent {
         ? "learn"
         : undefined;
 
-    const env = Object.fromEntries(
-      Object.entries(process.env).filter(([key]) =>
-        runtimeVariables.includes(key),
-      ),
+    const runtimeEnvEntries = Object.entries(process.env).filter(
+      ([key]) => key.startsWith("FRED_") && runtimeVariables.includes(key),
     );
 
     // if you want to put some script inline, put it in entry.inline.js
@@ -93,9 +91,9 @@ export class OuterLayout extends ServerComponent {
             content="width=device-width, initial-scale=1.0"
           />
           <title>${context.pageTitle || "MDN"}</title>
-          ${RUNTIME_ENV
+          ${RUNTIME_ENV && runtimeEnvEntries.length > 0
             ? unsafeHTML(`<script>process = {
-  env: ${JSON.stringify(env)}
+  env: ${JSON.stringify(Object.fromEntries(runtimeEnvEntries))}
 };</script>`)
             : nothing}
           ${unsafeHTML(`<script>${inlineScript}</script>`)}

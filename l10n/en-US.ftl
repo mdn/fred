@@ -62,8 +62,8 @@ obs-mdn = The { -brand-name-obs } provides effective security insights, guided b
 
 compat-loading = Loading…
 
-compat-browser-version-date = { $browser } { $version } – Released { $date }
-compat-browser-version-released = Released { $date }
+compat-browser-version-date = { $browser } { $version } – Release date: { $date }
+compat-browser-version-released = Release date: { $date }
 
 compat-link-report-issue = Report problems with this compatibility data
 compat-link-report-issue-title = Report an issue with this compatibility data
