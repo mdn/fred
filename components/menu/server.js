@@ -31,9 +31,10 @@ export class Menu extends ServerComponent {
      *
      * @param {string} slug
      * @param {string} text
-     * @param {string} [label]
+     * @param {object} [options]
+     * @param {string} [options.label]
      */
-    const link = (slug, text, label) => {
+    const link = (slug, text, { label } = {}) => {
       const locale =
         context.locale in MISSING_DOCS &&
         MISSING_DOCS[context.locale]?.includes(slug)
@@ -84,11 +85,9 @@ export class Menu extends ServerComponent {
                         ${link("Web/HTML/Reference/Attributes", "Attributes")}
                       </li>
                       <li>
-                        ${link(
-                          "Web/HTML/Reference",
-                          "See all…",
-                          "See all HTML references",
-                        )}
+                        ${link("Web/HTML/Reference", "See all…", {
+                          label: "See all HTML references",
+                        })}
                       </li>
                     </ul>
                   </dd>
@@ -113,11 +112,9 @@ export class Menu extends ServerComponent {
                         )}
                       </li>
                       <li>
-                        ${link(
-                          "Web/HTML/Guides",
-                          "See all…",
-                          "See all HTML guides",
-                        )}
+                        ${link("Web/HTML/Guides", "See all…", {
+                          label: "See all HTML guides",
+                        })}
                       </li>
                     </ul>
                   </dd>
@@ -162,11 +159,9 @@ export class Menu extends ServerComponent {
                         )}
                       </li>
                       <li>
-                        ${link(
-                          "Web/CSS/Reference",
-                          "See all…",
-                          "See all CSS references",
-                        )}
+                        ${link("Web/CSS/Reference", "See all…", {
+                          label: "See all CSS references",
+                        })}
                       </li>
                     </ul>
                   </dd>
@@ -195,11 +190,9 @@ export class Menu extends ServerComponent {
                       </li>
                       <li>${link("Web/CSS/CSS_colors", "Colors")}</li>
                       <li>
-                        ${link(
-                          "Web/CSS/Guides",
-                          "See all…",
-                          "See all CSS guides",
-                        )}
+                        ${link("Web/CSS/Guides", "See all…", {
+                          label: "See all CSS guides",
+                        })}
                       </li>
                     </ul>
                   </dd>
@@ -276,11 +269,9 @@ export class Menu extends ServerComponent {
                         )}
                       </li>
                       <li>
-                        ${link(
-                          "Web/JavaScript/Reference",
-                          "See all…",
-                          "See all JavaScript references",
-                        )}
+                        ${link("Web/JavaScript/Reference", "See all…", {
+                          label: "See all JavaScript references",
+                        })}
                       </li>
                     </ul>
                   </dd>
@@ -314,11 +305,9 @@ export class Menu extends ServerComponent {
                         )}
                       </li>
                       <li>
-                        ${link(
-                          "Web/JavaScript/Guide",
-                          "See all…",
-                          "See all JavaScript guides",
-                        )}
+                        ${link("Web/JavaScript/Guide", "See all…", {
+                          label: "See all JavaScript guides",
+                        })}
                       </li>
                     </ul>
                   </dd>
@@ -359,7 +348,9 @@ export class Menu extends ServerComponent {
                         )}
                       </li>
                       <li>
-                        ${link("Web/API", "See all…", "See all Web API guides")}
+                        ${link("Web/API", "See all…", {
+                          label: "See all Web API guides",
+                        })}
                       </li>
                     </ul>
                   </dd>
@@ -433,11 +424,9 @@ export class Menu extends ServerComponent {
                       <li>${link("WebAssembly", "WebAssembly")}</li>
                       <li>${link("Web/WebDriver", "WebDriver")}</li>
                       <li>
-                        ${link(
-                          "Web",
-                          "See all…",
-                          "See all web technology references",
-                        )}
+                        ${link("Web", "See all…", {
+                          label: "See all web technology references",
+                        })}
                       </li>
                     </ul>
                   </dd>
