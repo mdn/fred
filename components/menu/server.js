@@ -13,16 +13,17 @@ export class Menu extends ServerComponent {
   render(context) {
     /**
      * Holds the id of the section being rendered.
+     *
      * @type {string|null}
      */
     let currentSection = null;
 
     /**
-     * Generates a Glean ID for a submenu click.
+     * Generates a Glean ID for menu/submenu links.
      *
      * @param {string} href - The href of the link.
      * @param {object} [options]
-     * @param {boolean} [options.primary]
+     * @param {boolean} [options.primary] - Whether this is the primary link (in the panel title).
      * @returns {string} the Glean ID.
      */
     const gleanId = (href, { primary = false } = {}) =>
@@ -31,11 +32,11 @@ export class Menu extends ServerComponent {
     /**
      * Renders a link to a page.
      *
-     * @param {string} slug
-     * @param {string} text
+     * @param {string} slug - The link slug (the part after `/en-US/docs/`!).
+     * @param {string} text - The link text.
      * @param {object} [options]
-     * @param {string} [options.label]
-     * @param {boolean} [options.primary]
+     * @param {string} [options.label] - The title and aria-label of the link.
+     * @param {boolean} [options.primary] - Whether this is the primary link (in the panel title).
      */
     const link = (slug, text, { label, primary = false } = {}) => {
       const locale =
