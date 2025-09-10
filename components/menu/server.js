@@ -21,10 +21,12 @@ export class Menu extends ServerComponent {
      * Generates a Glean ID for a submenu click.
      *
      * @param {string} href - The href of the link.
+     * @param {object} [options]
+     * @param {boolean} [options.primary]
      * @returns {string} the Glean ID.
      */
-    const gleanId = (href) =>
-      `menu_click_submenu: ${currentSection ?? "?"} -> ${href}`;
+    const gleanId = (href, { primary = false } = {}) =>
+      `${primary ? "menu_click_menu" : "menu_click_submenu"}: ${currentSection ?? "?"} -> ${href}`;
 
     /**
      * Renders a link to a page.
@@ -33,8 +35,9 @@ export class Menu extends ServerComponent {
      * @param {string} text
      * @param {object} [options]
      * @param {string} [options.label]
+     * @param {boolean} [options.primary]
      */
-    const link = (slug, text, { label } = {}) => {
+    const link = (slug, text, { label, primary = false } = {}) => {
       const locale =
         context.locale in MISSING_DOCS &&
         MISSING_DOCS[context.locale]?.includes(slug)
@@ -50,7 +53,7 @@ export class Menu extends ServerComponent {
         href=${href}
         aria-label=${ifDefined(label)}
         title=${ifDefined(label)}
-        data-glean-id=${gleanId(href)}
+        data-glean-id=${gleanId(href, { primary })}
         >${text}</a
       >`;
     };
@@ -65,7 +68,7 @@ export class Menu extends ServerComponent {
             </button>
             <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
-                ${link("Web/HTML", "HTML: Markup language")}
+                ${link("Web/HTML", "HTML: Markup language", { primary: true })}
               </p>
               <div class="menu__panel-content">
                 <dl>
@@ -142,7 +145,7 @@ export class Menu extends ServerComponent {
             </button>
             <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
-                ${link("Web/CSS", "CSS: Styling language")}
+                ${link("Web/CSS", "CSS: Styling language", { primary: true })}
               </p>
               <div class="menu__panel-content">
                 <dl>
@@ -237,7 +240,9 @@ export class Menu extends ServerComponent {
             </button>
             <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
-                ${link("Web/JavaScript", "JavaScript: Scripting language")}
+                ${link("Web/JavaScript", "JavaScript: Scripting language", {
+                  primary: true,
+                })}
               </p>
               <div class="menu__panel-content">
                 <dl>
@@ -325,7 +330,9 @@ export class Menu extends ServerComponent {
             </button>
             <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
-                ${link("Web/API", "Web APIs: Programming interfaces")}
+                ${link("Web/API", "Web APIs: Programming interfaces", {
+                  primary: true,
+                })}
               </p>
               <div class="menu__panel-content">
                 <dl>
@@ -405,7 +412,7 @@ export class Menu extends ServerComponent {
             </button>
             <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
-                ${link("Web", "All web technology")}
+                ${link("Web", "All web technology", { primary: true })}
               </p>
               <div class="menu__panel-content">
                 <dl>
@@ -461,7 +468,9 @@ export class Menu extends ServerComponent {
             </button>
             <div class="menu__panel" slot="dropdown">
               <p class="menu__panel-title">
-                ${link("Learn_web_development", "Learn web development")}
+                ${link("Learn_web_development", "Learn web development", {
+                  primary: true,
+                })}
               </p>
               <div class="menu__panel-content">
                 <dl>
