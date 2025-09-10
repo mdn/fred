@@ -37,7 +37,7 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
             href="https://scrimba.com/learn/frontend?via=mdn"
             target="_blank"
             rel="noreferrer"
-            data-glean-id="pong: pong-&gt;click fallback-scrimba"
+            data-glean-id=${`pong: pong->click fallback-scrimba`}
           >
             Scrimba
           </a>
@@ -115,7 +115,7 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
             <div class="placement-inner">
               <a
                 class="placement-link"
-                data-glean-id="pong: pong-&gt;click top-banner"
+                data-glean-id=${`pong: pong->click top-banner`}
                 href=${this.clickLink(click, version)}
                 target="_blank"
                 rel="sponsored noreferrer"
@@ -142,7 +142,7 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
             <div class="placement-inner">
               <a
                 class="placement-link"
-                data-glean-id="pong: pong-&gt;click top-banner"
+                data-glean-id=${`pong: pong->click top-banner`}
                 href=${this.clickLink(click, version)}
                 target="_blank"
                 rel="sponsored noreferrer"

@@ -75,7 +75,7 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
           >
             <a
               class="placement-link"
-              data-glean-id="pong: pong-&gt;click side"
+              data-glean-id=${`pong: pong->click side`}
               href=${this.clickLink(click, version)}
               target="_blank"
               rel="sponsored noreferrer"
@@ -101,7 +101,7 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
           >
             <a
               class="placement-link"
-              data-glean-id="pong: pong-&gt;click side"
+              data-glean-id=${`pong: pong->click side`}
               href=${this.clickLink(click, version)}
               target="_blank"
               rel="sponsored noreferrer"
