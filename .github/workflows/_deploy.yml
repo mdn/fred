@@ -235,6 +235,9 @@ jobs:
 
       - name: Render (fred)
         working-directory: mdn/fred
+        env:
+          FRED_GLEAN_ENABLED: true
+          FRED_GLEAN_DEBUG: true
         run: npm run ssr
 
       - name: Authenticate with GCP
