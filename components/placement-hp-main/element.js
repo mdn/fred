@@ -53,7 +53,7 @@ export class MDNPlacementHpMain extends PlacementMixin(LitElement) {
           data-glean-id=${`pong: pong->click top-banner`}
           href=${this.clickLink(click, version)}
           target="_blank"
-          rel="sponsored noreferrer"
+          rel="sponsored"
         >
           <img
             src=${this.imgLink(image)}
