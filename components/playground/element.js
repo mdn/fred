@@ -65,6 +65,7 @@ export class MDNPlayground extends L10nMixin(LitElement) {
         this._autoRun = true;
         controller.runOnChange = true;
         this._storeSession();
+        this.requestUpdate();
       }
     }
   }
@@ -361,6 +362,15 @@ ${"```"}`,
                   Seeing something inappropriate?
                 </mdn-button>`
               : nothing}
+            ${this._autoRun
+              ? nothing
+              : html`<mdn-button
+                  class="overlay-run-button"
+                  @click=${this._run}
+                  variant="plain"
+                >
+                  Run
+                </mdn-button>`}
             <mdn-play-runner></mdn-play-runner>
             <div class="playground__console">
               <div>${this.l10n`Console`}</div>
