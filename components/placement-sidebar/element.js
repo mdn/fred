@@ -78,7 +78,7 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
               data-glean-id=${`pong: pong->click side`}
               href=${this.clickLink(click, version)}
               target="_blank"
-              rel="sponsored noreferrer"
+              rel="sponsored"
               ><img
                 src=${this.imgLink(image)}
                 aria-hidden=${!alt}
@@ -104,7 +104,7 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
               data-glean-id=${`pong: pong->click side`}
               href=${this.clickLink(click, version)}
               target="_blank"
-              rel="sponsored noreferrer"
+              rel="sponsored"
               ><img
                 src=${this.imgLink(image)}
                 aria-hidden=${!alt}

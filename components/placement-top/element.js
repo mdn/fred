@@ -118,7 +118,7 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
                 data-glean-id=${`pong: pong->click top-banner`}
                 href=${this.clickLink(click, version)}
                 target="_blank"
-                rel="sponsored noreferrer"
+                rel="sponsored"
                 ><div class="placement-content">
                   <img
                     src=${this.imgLink(image)}
@@ -145,7 +145,7 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
                 data-glean-id=${`pong: pong->click top-banner`}
                 href=${this.clickLink(click, version)}
                 target="_blank"
-                rel="sponsored noreferrer"
+                rel="sponsored"
                 ><div class="placement-content">
                   <img
                     src=${this.imgLink(image)}

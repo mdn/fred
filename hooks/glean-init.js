@@ -6,6 +6,7 @@ import {
   GLEAN_DEBUG,
   GLEAN_ENABLED,
 } from "../components/env/index.js";
+import { gleanClick } from "../utils/glean.js";
 
 const FIRST_PARTY_DATA_OPT_OUT_COOKIE_NAME = "moz-1st-party-data-opt-out";
 const GLEAN_APP_ID = "mdn-fred";
@@ -25,4 +26,17 @@ Glean.initialize(GLEAN_APP_ID, uploadEnabled, {
   enableAutoPageLoadEvents: true,
   enableAutoElementClickEvents: true,
   channel: GLEAN_CHANNEL,
+});
+
+document.addEventListener("click", (event) => {
+  const composedTarget = event.composedPath()?.[0];
+  if (composedTarget !== event.target && composedTarget instanceof Element) {
+    const taggedElement = composedTarget.closest("[data-glean-id]");
+    if (taggedElement instanceof HTMLElement) {
+      const gleanId = taggedElement.dataset.gleanId;
+      if (gleanId) {
+        gleanClick(gleanId);
+      }
+    }
+  }
 });
