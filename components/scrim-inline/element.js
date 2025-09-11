@@ -142,8 +142,7 @@ export class MDNScrimInline extends LitElement {
    */
   #toggle(e) {
     if (e.target instanceof HTMLElement) {
-      e.target.dataset["glean-id"] =
-        `curriculum: scrim fullscreen -> ${this._fullscreen ? 0 : 1} id:${this._scrimId}`;
+      e.target.dataset.gleanId = `curriculum: scrim fullscreen -> ${this._fullscreen ? 0 : 1} id:${this._scrimId}`;
     }
     if (this._fullscreen) {
       this.#close();
