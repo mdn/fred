@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.1](https://github.com/mdn/fred/compare/v1.4.0...v1.4.1) (2025-09-11)
+
+
+### Bug Fixes
+
+* **glean:** trigger gleanClick for clicks in Shadow DOMs ([#753](https://github.com/mdn/fred/issues/753)) ([3976038](https://github.com/mdn/fred/commit/397603821a821be0435d4bb84b5f5efdb52e2137))
+* **scrim-inline:** use `data-glean-id`, not `data-glean` ([#751](https://github.com/mdn/fred/issues/751)) ([e2b3444](https://github.com/mdn/fred/commit/e2b3444452fecf7ef823d0637ed3a9670c1399a8))
+
 ## [1.4.0](https://github.com/mdn/fred/compare/v1.3.2...v1.4.0) (2025-09-11)
 
 
