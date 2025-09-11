@@ -1,5 +1,37 @@
 # Changelog
 
+## [1.4.0](https://github.com/mdn/fred/compare/v1.3.2...v1.4.0) (2025-09-11)
+
+
+### Features
+
+* **menu:** measure clicks ([#739](https://github.com/mdn/fred/issues/739)) ([fbb16e0](https://github.com/mdn/fred/commit/fbb16e08d7728d26a48f8cdfe20bf0755dc9cc0a))
+
+
+### Bug Fixes
+
+* **build:** correctly parse the import path on Windows ([#729](https://github.com/mdn/fred/issues/729)) ([9808738](https://github.com/mdn/fred/commit/98087383ecb9a50e43cd1da746ea8aa591e19939))
+* **compat-table:** hide preferences hint if browser has no pref_url ([#715](https://github.com/mdn/fred/issues/715)) ([9415000](https://github.com/mdn/fred/commit/9415000d40b1de827acc99d9c299592e0b21ca73))
+* **content-section:** restrict fragment link style to dt ([#703](https://github.com/mdn/fred/issues/703)) ([737114a](https://github.com/mdn/fred/commit/737114a469b5d9eac5199c676ade90be4c0637f7))
+* **deps:** move @mdn/rari dependency ([#737](https://github.com/mdn/fred/issues/737)) ([d66f91e](https://github.com/mdn/fred/commit/d66f91e8fbfb0e33e5cbb7d1166a33bcf1d14227))
+* **glean:** make click measurements backward compatible ([#743](https://github.com/mdn/fred/issues/743)) ([e9843c6](https://github.com/mdn/fred/commit/e9843c65844c3a82a774170aa7ea14c5929ace0c))
+* **playground:** set auto run on clear ([#669](https://github.com/mdn/fred/issues/669)) ([2fd268b](https://github.com/mdn/fred/commit/2fd268b2be98fba1dbaf982ad214598755071840))
+* **playground:** set autorun on clear ([2fd268b](https://github.com/mdn/fred/commit/2fd268b2be98fba1dbaf982ad214598755071840))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.2 to 7.1.3 ([#722](https://github.com/mdn/fred/issues/722)) ([b855407](https://github.com/mdn/fred/commit/b85540789b395a719ca73a327712a25b0fdbfe3b))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.3 to 7.1.4 ([#734](https://github.com/mdn/fred/issues/734)) ([4a5c807](https://github.com/mdn/fred/commit/4a5c807645a993e3158b79058e24e6c04e56390c))
+* **deps-dev:** bump @mdn/rari from 0.1.48 to 0.1.49 ([#733](https://github.com/mdn/fred/issues/733)) ([53d7adb](https://github.com/mdn/fred/commit/53d7adba41feadaf15055e986c344271576b4ff1))
+* **deps-dev:** bump @mdn/yari from 5.0.3 to 5.1.0 ([#720](https://github.com/mdn/fred/issues/720)) ([6b4da86](https://github.com/mdn/fred/commit/6b4da86a6d7e9df5f8cbd34dde864613ce51fd30))
+* **deps-dev:** bump @mdn/yari from 5.1.0 to 5.1.1 ([#735](https://github.com/mdn/fred/issues/735)) ([c48d2bc](https://github.com/mdn/fred/commit/c48d2bc21ad69c086031e2433c786caf2f04594b))
+* **deps-dev:** bump eslint-plugin-jsdoc from 53.0.1 to 55.0.3 ([#727](https://github.com/mdn/fred/issues/727)) ([3e9f15c](https://github.com/mdn/fred/commit/3e9f15c1b936717ef334412459455a43577179de))
+* **deps-dev:** bump the dev group across 1 directory with 6 updates ([#723](https://github.com/mdn/fred/issues/723)) ([a9e2136](https://github.com/mdn/fred/commit/a9e2136dfa63620133a80259ac93c3d7adc86e45))
+* **deps-dev:** bump the dev group with 3 updates ([#726](https://github.com/mdn/fred/issues/726)) ([2b59743](https://github.com/mdn/fred/commit/2b597439a7ae85d4d63c3f9d5347d998a8ae82da))
+* **menu:** update items ([#706](https://github.com/mdn/fred/issues/706)) ([472a129](https://github.com/mdn/fred/commit/472a1299692ae9bff70da70698c31a9e6ca01d34))
+* **placement:** remove `rel="noreferrer"` ([#749](https://github.com/mdn/fred/issues/749)) ([f36e5e1](https://github.com/mdn/fred/commit/f36e5e1b54974fa85e3b16e635e01f0a49846ca1))
+
 ## [1.3.2](https://github.com/mdn/fred/compare/v1.3.1...v1.3.2) (2025-09-05)
 
 
