@@ -71,7 +71,9 @@ export class BaselineIndicator extends ServerComponent {
       ? new Date(status.baseline_low_date.slice(low_date_range ? 1 : 0))
       : undefined;
 
-    const level = status.baseline || "not";
+    const level = status.feature.discouraged
+      ? "discouraged"
+      : status.baseline || "not";
 
     const feedbackLink = `${SURVEY_URL}?page=${encodeURIComponent(context.url)}&level=${level}`;
 
@@ -126,29 +128,34 @@ export class BaselineIndicator extends ServerComponent {
     return html`<details
       class="baseline-indicator ${level}"
       data-glean-toggle-open="baseline_toggle_open"
+      ?open=${level === "discouraged"}
     >
       <summary>
         <span
           class="indicator"
           role="img"
-          aria-label=${level === "not"
-            ? context.l10n`Baseline Cross`
-            : context.l10n`Baseline Check`}
+          aria-label=${level === "discouraged"
+            ? context.l10n`Baseline Discouraged Mark`
+            : level === "not"
+              ? context.l10n`Baseline Cross`
+              : context.l10n`Baseline Check`}
         ></span>
         <div class="status-title">
-          ${level === "not"
-            ? html`<span class="not-bold"
-                >${context.l10n`Limited availability`}</span
-              >`
-            : html`
-                ${context.l10n`Baseline`}
-                <span class="not-bold">
-                  ${level === "high"
-                    ? context.l10n`Widely available`
-                    : low_date?.getFullYear()}
-                </span>
-                ${status.asterisk && " *"}
-              `}
+          ${level === "discouraged"
+            ? html`<span class="not-bold">${context.l10n`Deprecated`}</span>`
+            : level === "not"
+              ? html`<span class="not-bold"
+                  >${context.l10n`Limited availability`}</span
+                >`
+              : html`
+                  ${context.l10n`Baseline`}
+                  <span class="not-bold">
+                    ${level === "high"
+                      ? context.l10n`Widely available`
+                      : low_date?.getFullYear()}
+                  </span>
+                  ${status.asterisk && " *"}
+                `}
         </div>
         ${level === "low"
           ? html`<div class="pill">${context.l10n`Newly available`}</div>`
@@ -178,34 +185,36 @@ export class BaselineIndicator extends ServerComponent {
         <span class="icon icon-chevron"></span>
       </summary>
       <div class="extra">
-        ${level === "high" && low_date
+        ${(level === "high" || level === "low") && low_date
           ? html`<p>
-              ${context.l10n.raw({
-                id: "baseline-high-extra",
-                args: {
-                  date: low_date.toLocaleDateString(context.locale, {
-                    year: "numeric",
-                    month: "long",
-                  }),
-                },
-              })}
-            </p>`
-          : level === "low" && low_date
+                ${level === "high"
+                  ? context.l10n.raw({
+                      id: "baseline-high-extra",
+                      args: {
+                        date: low_date.toLocaleDateString(context.locale, {
+                          year: "numeric",
+                          month: "long",
+                        }),
+                      },
+                    })
+                  : context.l10n.raw({
+                      id: "baseline-low-extra",
+                      args: {
+                        date: low_date.toLocaleDateString(DEFAULT_LOCALE, {
+                          year: "numeric",
+                          month: "long",
+                        }),
+                      },
+                    })}
+              </p>
+              ${status.asterisk
+                ? html`<p>* ${context.l10n("baseline-asterisk")}</p>`
+                : nothing}`
+          : level === "discouraged"
             ? html`<p>
-                ${context.l10n.raw({
-                  id: "baseline-low-extra",
-                  args: {
-                    date: low_date.toLocaleDateString(DEFAULT_LOCALE, {
-                      year: "numeric",
-                      month: "long",
-                    }),
-                  },
-                })}
+                ${context.l10n`Avoid using this feature in new projects. This feature may be a candidate for removal from web standards or browsers.`}
               </p>`
             : html`<p>${context.l10n("baseline-not-extra")}</p>`}
-        ${status.asterisk
-          ? html`<p>* ${context.l10n("baseline-asterisk")}</p>`
-          : nothing}
         <ul>
           <li>
             <a

@@ -7,7 +7,9 @@
   @mixin light-dark --baseline-img, url("./icons/status/limited.svg"),
     url("./icons/status/limited-dark.svg");
   --baseline-check: #1e8e3e;
+  --baseline-check-img: url("./icons/browser-check.svg");
   --baseline-cross: #ea8600;
+  --baseline-cross-img: url("./icons/browser-cross.svg");
   --feedback-link-icon: var(--icon-primary, light-dark(#696969, #ffffff));
 
   padding-left: 3.8125rem;
@@ -34,6 +36,16 @@
     --baseline-check: #1a73e8;
     --baseline-pill-bg: #3367d6;
     --baseline-pill-color: #f1f3f4;
+  }
+
+  &.discouraged {
+    --baseline-check: light-dark(#707070, #868686);
+    --baseline-check-img: url("./icons/browser-check-obsolete.svg");
+    --baseline-cross: light-dark(#707070, #868686);
+    --baseline-cross-img: url("./icons/browser-cross-obsolete.svg");
+
+    @mixin light-dark --baseline-img, url("./icons/status/obsolete.svg"),
+      url("./icons/status/obsolete-dark.svg");
   }
 
   &[open] {
@@ -177,14 +189,14 @@
 
             background-color: var(--baseline-cross);
 
-            mask-image: url("./icons/browser-cross.svg");
+            mask-image: var(--baseline-cross-img);
             mask-repeat: no-repeat;
             mask-size: contain;
           }
 
           &.supported::after {
             background-color: var(--baseline-check);
-            mask-image: url("./icons/browser-check.svg");
+            mask-image: var(--baseline-check-img);
           }
         }
       }
