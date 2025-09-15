@@ -8,12 +8,13 @@ export class MDNCopyButton extends L10nMixin(LitElement) {
   static properties = {
     variant: {},
     _message: { state: true },
+    _copiedSuccessfully: { state: true },
   };
 
   constructor() {
     super();
     this.variant = "primary";
-    this.copiedSuccessfully = false;
+    this._copiedSuccessfully = false;
     /** @type {Element | undefined} */
     this.copiesFrom = undefined;
   }
@@ -23,7 +24,7 @@ export class MDNCopyButton extends L10nMixin(LitElement) {
    */
   async _copy({ target }) {
     if (target instanceof MDNButton) {
-      this.copiedSuccessfully = true;
+      this._copiedSuccessfully = true;
       try {
         const text = this.copiesFrom?.textContent?.trim();
         if (text) {
@@ -34,19 +35,19 @@ export class MDNCopyButton extends L10nMixin(LitElement) {
           "Error when trying to use navigator.clipboard.writeText()",
           error,
         );
-        this.copiedSuccessfully = false;
+        this._copiedSuccessfully = false;
       }
 
-      this._message = this.copiedSuccessfully
+      this._message = this._copiedSuccessfully
         ? this.l10n`Copied`
         : this.l10n`Copy failed!`;
 
       setTimeout(
         () => {
           this._message = undefined;
-          this.copiedSuccessfully = false;
+          this._copiedSuccessfully = false;
         },
-        this.copiedSuccessfully ? 1000 : 3000,
+        this._copiedSuccessfully ? 1000 : 3000,
       );
     }
   }
@@ -54,7 +55,7 @@ export class MDNCopyButton extends L10nMixin(LitElement) {
   render() {
     return html`<mdn-button
       @click=${this._copy}
-      .icon=${this.copiedSuccessfully ? check : undefined}
+      .icon=${this._copiedSuccessfully ? check : undefined}
       variant=${this.variant}
       >${this._message ?? this.l10n`Copy`}</mdn-button
     >`;
