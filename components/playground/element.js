@@ -4,6 +4,7 @@ import { createRef, ref } from "lit/directives/ref.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 import { gleanClick } from "../../utils/glean.js";
+import circlePlay from "../icon/circle-play.svg?lit";
 import { globalUser } from "../user/context.js";
 
 import styles from "./element.css?lit";
@@ -367,6 +368,7 @@ ${"```"}`,
               : html`<mdn-button
                   class="overlay-run-button"
                   @click=${this._run}
+                  .icon=${circlePlay}
                   variant="plain"
                 >
                   Run

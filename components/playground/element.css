@@ -176,6 +176,8 @@ mdn-modal {
   inset: 4rem 1rem 9rem;
   z-index: 1;
 
+  font-size: clamp(1.5rem, 3vw, 3rem);
+
   background-color: var(--color-border-primary);
   border-radius: 0.5rem;
 }
