@@ -13,7 +13,7 @@ import {
   versionLabelFromSupport,
 } from "./feature-row.js";
 import {
-  HIDDEN_BROWSERS,
+  SHOW_BROWSERS,
   asList,
   bugURLToString,
   getCurrentSupport,
@@ -131,7 +131,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           version_added: false,
         };
 
-        if (HIDDEN_BROWSERS.includes(browser)) {
+        if (!SHOW_BROWSERS.includes(browser)) {
           continue;
         }
 
@@ -1028,8 +1028,7 @@ export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
     }
   }
 
-  // Hide Internet Explorer compatibility data
-  browsers = browsers.filter((browser) => !HIDDEN_BROWSERS.includes(browser));
+  browsers = browsers.filter((browser) => SHOW_BROWSERS.includes(browser));
 
   return [platforms, [...browsers]];
 }

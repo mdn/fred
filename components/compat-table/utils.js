@@ -2,7 +2,23 @@
  * A list of browsers to be hidden.
  * @constant {string[]}
  */
-export const HIDDEN_BROWSERS = ["ie"];
+export const SHOW_BROWSERS = [
+  "chrome",
+  "edge",
+  "firefox",
+  "opera",
+  "safari",
+  "chrome_android",
+  "firefox_android",
+  "opera_android",
+  "safari_ios",
+  "samsunginternet_android",
+  "webview_android",
+  "webview_ios",
+  "bun",
+  "deno",
+  "nodejs",
+];
 
 /**
  * Gets the first element of an array or returns the value itself.
