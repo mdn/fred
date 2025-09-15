@@ -982,12 +982,17 @@ customElements.define("mdn-compat-table", MDNCompatTable);
  * @returns {[string[], import("@bcd").BrowserName[]]}
  */
 export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
-  const hasBunData = data.__compat && "bun" in data.__compat.support;
-  const hasNodeJSData = data.__compat && "nodejs" in data.__compat.support;
-  const hasDenoData = data.__compat && "deno" in data.__compat.support;
+  const runtimes = Object.entries(browserInfo)
+    .filter(([, { type }]) => type == "server")
+    .map(([key]) => key);
 
   let platforms = ["desktop", "mobile"];
-  if (category === "javascript" || hasBunData || hasNodeJSData || hasDenoData) {
+  if (
+    category === "javascript" ||
+    runtimes.some(
+      (runtime) => data.__compat && runtime in data.__compat.support,
+    )
+  ) {
     platforms.push("server");
   }
 
@@ -1014,13 +1019,13 @@ export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
     );
   }
 
-  // If there is no Bun/Node.js data for a category outside "javascript", don't
-  // show it. It ended up in the browser list because there is data for Deno.
-  if (category !== "javascript" && !hasBunData) {
-    browsers = browsers.filter((browser) => browser !== "bun");
-  }
-  if (category !== "javascript" && !hasNodeJSData) {
-    browsers = browsers.filter((browser) => browser !== "nodejs");
+  // If there is no data for a runtime in a category outside "javascript", hide it.
+  if (category !== "javascript") {
+    for (const runtime of runtimes) {
+      if (data.__compat && !(runtime in data.__compat.support)) {
+        browsers = browsers.filter((browser) => browser !== runtime);
+      }
+    }
   }
 
   // Hide Internet Explorer compatibility data
