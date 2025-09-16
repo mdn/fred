@@ -16,7 +16,6 @@ import { ServerComponent } from "../server/index.js";
 export class ObservatoryLanding extends ServerComponent {
   /**
    * @param {import("@fred").Context<import("@rari").SPAPage>} context
-   * @returns {import("@lit").TemplateResult}
    */
   render(context) {
     return PageLayout.render(

@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 
 import { stylesForComponents } from "../outer-layout/utils.js";
 
@@ -12,11 +12,12 @@ export class ServerComponent {
    * @template {typeof ServerComponent} T
    * @this {T}
    * @param {Parameters<InstanceType<T>["render"]>} args
-   * @returns {ReturnType<InstanceType<T>["render"]> | import("@lit").TemplateResult}
+   * @returns {ReturnType<InstanceType<T>["render"]> | import("@lit").TemplateResult | import("@lit").nothing }
    */
   static render(...args) {
     const { componentsUsed, componentsWithStylesInHead, compilationStats } =
       asyncLocalStorage.getStore() || {};
+    const componentUsedBefore = componentsUsed?.has(this.name);
     componentsUsed?.add(this.name);
     if (this.stylesInHead) {
       componentsWithStylesInHead?.add(this.name);
@@ -26,6 +27,14 @@ export class ServerComponent {
     }
 
     const res = new this().render(...args);
+
+    if (!res || res === nothing) {
+      if (!componentUsedBefore) {
+        componentsUsed?.delete(this.name);
+        componentsWithStylesInHead?.delete(this.name);
+      }
+      return nothing;
+    }
 
     if (!this.stylesInHead && compilationStats) {
       const styles = stylesForComponents([this.name], compilationStats.client);

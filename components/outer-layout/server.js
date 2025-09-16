@@ -19,7 +19,7 @@ import {
 export class OuterLayout extends ServerComponent {
   /**
    * @param {import("@fred").Context} context
-   * @param {import("lit-html").TemplateResult} markup
+   * @param {import("lit-html").TemplateResult | import("lit").nothing} markup
    */
   render(context, markup) {
     const {

@@ -36,7 +36,6 @@ const STATS = [
 export class Advertising extends ServerComponent {
   /**
    * @param {import("@fred").Context<import("@rari").SPAPage>} context
-   * @returns {import("@lit").TemplateResult}
    */
   render(context) {
     // Set the document title
