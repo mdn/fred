@@ -33,7 +33,11 @@
 
     summary {
       display: flex;
+
       align-items: center;
+
+      padding-block: 0.25rem;
+
       cursor: pointer;
 
       &::before {
@@ -67,9 +71,9 @@
 
   li {
     display: block;
+    padding-block: 0.25rem;
 
     &:not(:last-child) {
-      padding-block: 0.25rem;
       margin-bottom: 0.5rem;
     }
 
@@ -111,6 +115,7 @@
   em {
     display: block;
 
+    padding-block: 0.25rem;
     padding-inline: 0.5rem;
 
     font-style: normal;
