@@ -46,6 +46,17 @@
 
     @mixin light-dark --baseline-img, url("./icons/status/obsolete.svg"),
       url("./icons/status/obsolete-dark.svg");
+
+    &.to-be-removed {
+      --baseline-bg: #fceeee;
+      --baseline-engine-bg: #f3dddd;
+      --baseline-pill-bg: #b3261e;
+      --baseline-pill-color: #f1f3f4;
+
+      @mixin light-dark --baseline-img,
+        url("./icons/status/pending-removal.svg"),
+        url("./icons/status/pending-removal-dark.svg");
+    }
   }
 
   &[open] {
