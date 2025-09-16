@@ -69,6 +69,7 @@
     display: block;
 
     &:not(:last-child) {
+      padding-block: 0.25rem;
       margin-bottom: 0.5rem;
     }
 
@@ -87,7 +88,6 @@
 
   a,
   span:not(.highlight-container) {
-    padding-block: 0.25rem;
     vertical-align: middle;
   }
 
