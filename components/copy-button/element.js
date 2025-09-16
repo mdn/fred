@@ -24,11 +24,11 @@ export class MDNCopyButton extends L10nMixin(LitElement) {
    */
   async _copy({ target }) {
     if (target instanceof MDNButton) {
-      this._copiedSuccessfully = true;
       try {
         const text = this.copiesFrom?.textContent?.trim();
         if (text) {
           await navigator.clipboard.writeText(text);
+          this._copiedSuccessfully = true;
         }
       } catch (error) {
         console.error(
