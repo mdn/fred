@@ -15,28 +15,32 @@ export class ServerComponent {
    * @returns {ReturnType<InstanceType<T>["render"]> | import("@lit").TemplateResult | import("@lit").nothing }
    */
   static render(...args) {
+    const asyncStore = asyncLocalStorage.getStore();
+    if (!asyncStore) {
+      throw new Error("asyncLocalStorage missing");
+    }
     const { componentsUsed, componentsWithStylesInHead, compilationStats } =
-      asyncLocalStorage.getStore() || {};
-    const componentUsedBefore = componentsUsed?.has(this.name);
-    componentsUsed?.add(this.name);
+      asyncStore;
+    const componentUsedBefore = componentsUsed.has(this.name);
+    componentsUsed.add(this.name);
     if (this.stylesInHead) {
-      componentsWithStylesInHead?.add(this.name);
+      componentsWithStylesInHead.add(this.name);
     }
     if (this.legacy) {
-      componentsUsed?.add("legacy");
+      componentsUsed.add("legacy");
     }
 
     const res = new this().render(...args);
 
     if (!res || res === nothing) {
       if (!componentUsedBefore) {
-        componentsUsed?.delete(this.name);
-        componentsWithStylesInHead?.delete(this.name);
+        componentsUsed.delete(this.name);
+        componentsWithStylesInHead.delete(this.name);
       }
       return nothing;
     }
 
-    if (!this.stylesInHead && compilationStats) {
+    if (!this.stylesInHead) {
       const styles = stylesForComponents([this.name], compilationStats.client);
       if (styles.length > 0) {
         // render block in Gecko and WebKit with empty script tag following link

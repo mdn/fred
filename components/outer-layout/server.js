@@ -22,15 +22,12 @@ export class OuterLayout extends ServerComponent {
    * @param {import("lit-html").TemplateResult | import("lit").nothing} markup
    */
   render(context, markup) {
-    const {
-      componentsUsed = /** @type {Set<string>} */ (new Set()),
-      componentsWithStylesInHead = /** @type {Set<string>} */ (new Set()),
-      compilationStats,
-    } = asyncLocalStorage.getStore() || {};
-
-    if (!compilationStats) {
-      throw new Error("compilation stats missing");
+    const asyncStore = asyncLocalStorage.getStore();
+    if (!asyncStore) {
+      throw new Error("asyncLocalStorage missing");
     }
+    const { componentsUsed, componentsWithStylesInHead, compilationStats } =
+      asyncStore;
 
     let legacyAssets;
     if (componentsUsed.has("legacy")) {
