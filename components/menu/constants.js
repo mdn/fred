@@ -47,7 +47,7 @@ export const MISSING_DOCS = {
     "Web/URI",
     "Web/WebDriver",
   ],
-  ja: ["Web/CSS/CSS_shapes/Shape_generator"],
+  ja: ["Web/CSS/CSS_colors/Color_mixer", "Web/CSS/CSS_shapes/Shape_generator"],
   ko: [
     "Web/API/Performance",
     "Web/API/Web_Animations_API/Using_the_Web_Animations_API",
