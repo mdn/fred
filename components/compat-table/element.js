@@ -402,6 +402,11 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       }
 
       const handleMousedown = (/** @type {MouseEvent} */ event) => {
+        if (event.button !== 0) {
+          // Ignore middle/right button.
+          return;
+        }
+
         // Blur active element if already focused.
         const activeElement = this.shadowRoot?.activeElement;
         const { currentTarget } = event;
@@ -477,14 +482,19 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
             type="button"
             aria-controls=${timelineId}
             title=${ifDefined(notes && "Toggle history")}
+            @mousedown=${handleMousedown}
             @focus=${handleFocus}
             @blur=${handleBlur}
-            @mousedown=${handleMousedown}
           >
             ${this._renderCellText(support, browser)}
           </button>
           ${notes &&
-          html`<div id=${timelineId} class="timeline" aria-expanded="false">
+          html`<div
+            id=${timelineId}
+            class="timeline"
+            tabindex="0"
+            aria-expanded="false"
+          >
             <dl class="bc-notes-list">${notes}</dl>
           </div>`}
         </td>`;
