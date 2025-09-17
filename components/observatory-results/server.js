@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html } from "@lit-labs/ssr";
 
 import { Button } from "../button/server.js";
 import feedbackIcon from "../icon/circle-alert.svg?lit";

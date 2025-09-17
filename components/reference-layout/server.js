@@ -1,4 +1,5 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import { ArticleFooter } from "../article-footer/server.js";
 import { BaselineIndicator } from "../baseline-indicator/server.js";

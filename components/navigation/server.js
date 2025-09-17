@@ -1,4 +1,5 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import { WRITER_MODE } from "../env/index.js";
 import { Logo } from "../logo/server.js";

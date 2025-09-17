@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html } from "@lit-labs/ssr";
 
 import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
