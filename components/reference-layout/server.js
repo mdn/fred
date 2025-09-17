@@ -16,9 +16,8 @@ export class ReferenceLayout extends ServerComponent {
    */
   render(context) {
     const { doc } = context;
-    const [description, ...sections] = doc.body.map((section) =>
-      ContentSection.render(context, section),
-    );
+    const [description, ...sections] =
+      doc.body?.map((section) => ContentSection.render(context, section)) || [];
 
     return html`
       <div class="reference-layout">

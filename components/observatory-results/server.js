@@ -10,7 +10,7 @@ export class ObservatoryResults extends ServerComponent {
    * @param {import("@fred").Context<import("@rari").SPAPage>} context
    */
   render(context) {
-    if (context.parents.length > 0) {
+    if (context.parents !== undefined && context.parents.length > 0) {
       const lastParent = context.parents.at(-1);
       if (lastParent) {
         lastParent.uri = "#";

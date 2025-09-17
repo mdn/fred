@@ -64,7 +64,7 @@ export class BreadcrumbsBar extends ServerComponent {
         : "doc" in context && "other_translations" in context.doc
           ? context.doc.other_translations
           : [];
-    const native = translations.find(
+    const native = translations?.find(
       (t) => t.locale === context.locale,
     )?.native;
 

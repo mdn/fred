@@ -29,7 +29,7 @@ export class CurriculumLanding extends ServerComponent {
 
     /** @type {(import("@lit").TemplateResult | nothing)[]} */
     const content = [];
-    for (const [i, section] of doc.body.entries()) {
+    for (const [i, section] of doc.body?.entries() || []) {
       if (i === 0) {
         // Render the header section
         content.push(this.renderHeader(context, section));
@@ -188,7 +188,7 @@ export class CurriculumLanding extends ServerComponent {
    * Renders the ModulesListList structure, including the tab labels and the selected modules list.
    * On the server, this defaults to rendering the 'Core modules' list (index 1) content.
    * @param {import("@fred").Context<import("@rari").CurriculumPage>} context
-   * @param {import("@rari").CurriculumIndexEntry[]} modules - Array of module list groups (e.g., Started, Core, Extensions).
+   * @param {import("@rari").CurriculumIndexEntry[]} [modules] - Array of module list groups (e.g., Started, Core, Extensions).
    * @returns {import("@lit").TemplateResult | import("@lit").nothing} The Lit HTML template for the module list list, or undefined if no modules.
    */
   renderModulesListList(context, modules) {
