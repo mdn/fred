@@ -109,7 +109,9 @@ export class MDNLiveSampleResult extends L10nMixin(LitElement) {
           @mdn-play-runner-src=${this._runnerSrcUpdated}
           .code=${this.code}
           .allow=${this.allow}
-          .sandbox=${this.sandbox}
+          .sandbox=${[
+            ...new Set(["allow-modals", ...(this.sandbox?.split(" ") || [])]),
+          ].join(" ")}
           .srcPrefix=${this.srcPrefix}
           style=${styleMap({
             height: this.height

@@ -151,7 +151,6 @@ export class MDNPlayRunner extends LitElement {
               "allow-scripts",
               "allow-same-origin",
               "allow-forms",
-              "allow-modals",
               ...(this.sandbox?.split(" ") || []),
             ]),
           ].join(" ")}
