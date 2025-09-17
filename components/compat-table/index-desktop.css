@@ -117,8 +117,6 @@
   }
 
   .bc-has-history {
-    cursor: pointer;
-
     > button:hover {
       background: var(--color-background-secondary);
     }
