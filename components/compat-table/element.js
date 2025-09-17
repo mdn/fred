@@ -13,7 +13,7 @@ import {
   versionLabelFromSupport,
 } from "./feature-row.js";
 import {
-  HIDDEN_BROWSERS,
+  SHOW_BROWSERS,
   asList,
   bugURLToString,
   getCurrentSupport,
@@ -131,7 +131,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           version_added: false,
         };
 
-        if (HIDDEN_BROWSERS.includes(browser)) {
+        if (!SHOW_BROWSERS.includes(browser)) {
           continue;
         }
 
@@ -982,11 +982,17 @@ customElements.define("mdn-compat-table", MDNCompatTable);
  * @returns {[string[], import("@bcd").BrowserName[]]}
  */
 export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
-  const hasNodeJSData = data.__compat && "nodejs" in data.__compat.support;
-  const hasDenoData = data.__compat && "deno" in data.__compat.support;
+  const runtimes = Object.entries(browserInfo)
+    .filter(([, { type }]) => type == "server")
+    .map(([key]) => key);
 
   let platforms = ["desktop", "mobile"];
-  if (category === "javascript" || hasNodeJSData || hasDenoData) {
+  if (
+    category === "javascript" ||
+    runtimes.some(
+      (runtime) => data.__compat && runtime in data.__compat.support,
+    )
+  ) {
     platforms.push("server");
   }
 
@@ -1013,14 +1019,16 @@ export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
     );
   }
 
-  // If there is no Node.js data for a category outside "javascript", don't
-  // show it. It ended up in the browser list because there is data for Deno.
-  if (category !== "javascript" && !hasNodeJSData) {
-    browsers = browsers.filter((browser) => browser !== "nodejs");
+  // If there is no data for a runtime in a category outside "javascript", hide it.
+  if (category !== "javascript") {
+    for (const runtime of runtimes) {
+      if (data.__compat && !(runtime in data.__compat.support)) {
+        browsers = browsers.filter((browser) => browser !== runtime);
+      }
+    }
   }
 
-  // Hide Internet Explorer compatibility data
-  browsers = browsers.filter((browser) => !HIDDEN_BROWSERS.includes(browser));
+  browsers = browsers.filter((browser) => SHOW_BROWSERS.includes(browser));
 
   return [platforms, [...browsers]];
 }

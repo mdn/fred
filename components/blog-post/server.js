@@ -61,7 +61,6 @@ export class BlogPost extends ServerComponent {
   /**
    *
    * @param {import("@fred").Context<import("@rari").BlogPostPage>} context
-   * @returns {import("@lit").TemplateResult}
    */
   render(context) {
     const { blogMeta, doc } = context;

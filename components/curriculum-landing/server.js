@@ -23,7 +23,6 @@ const SCRIM_TITLE = "MDN + Scrimba partnership announcement scrim";
 export class CurriculumLanding extends ServerComponent {
   /**
    * @param {import("@fred").Context<import("@rari").CurriculumPage>} context
-   * @returns {import("@lit").TemplateResult}
    */
   render(context) {
     const doc = context.doc;

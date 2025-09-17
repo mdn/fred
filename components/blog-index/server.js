@@ -76,7 +76,6 @@ export class BlogIndex extends ServerComponent {
   /**
    *
    * @param {import("@fred").Context<import("@rari").BlogPostPage>} context
-   * @returns {import("@lit").TemplateResult}
    */
   render(context) {
     return PageLayout.render(
