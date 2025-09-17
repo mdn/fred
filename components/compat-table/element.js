@@ -4,6 +4,8 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
+import { randomIdString } from "../utils/index.js";
+
 import { DEFAULT_LOCALE, ISSUE_METADATA_TEMPLATE } from "./constants.js";
 import styles from "./element.css?lit";
 import {
@@ -424,6 +426,34 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         }
       };
 
+      const toggleAriaExpanded =
+        /**
+         * @param {Event} event
+         * @param {boolean} expanded
+         */
+        (event, expanded) => {
+          const target = event.composedPath()?.[0] || event.target;
+          if (target instanceof HTMLElement) {
+            const controls = target.getAttribute("aria-controls");
+            if (controls) {
+              const controlsElement = this.shadowRoot?.querySelector(
+                `#${controls}`,
+              );
+              if (controlsElement instanceof HTMLElement) {
+                controlsElement.setAttribute(
+                  "aria-expanded",
+                  expanded ? "true" : "false",
+                );
+              }
+            }
+          }
+        };
+
+      const handleFocus = /** @param {Event} event */ (event) =>
+        toggleAriaExpanded(event, true);
+      const handleBlur = /** @param {Event} event */ (event) =>
+        toggleAriaExpanded(event, false);
+
       const browserCells = browsers.map((browserName) => {
         // <CompatCell>
         const browser = browserInfo[browserName];
@@ -434,6 +464,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           version_added: false,
         };
 
+        const timelineId = randomIdString("timeline-");
         const supportClassName = getSupportClassName(support, browser);
         const notes = this._renderNotes(browser, support);
 
@@ -444,13 +475,16 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         >
           <button
             type="button"
+            aria-controls=${timelineId}
             title=${ifDefined(notes && "Toggle history")}
+            @focus=${handleFocus}
+            @blur=${handleBlur}
             @mousedown=${handleMousedown}
           >
             ${this._renderCellText(support, browser)}
           </button>
           ${notes &&
-          html`<div class="timeline" tabindex="0">
+          html`<div id=${timelineId} class="timeline" aria-expanded="false">
             <dl class="bc-notes-list">${notes}</dl>
           </div>`}
         </td>`;
