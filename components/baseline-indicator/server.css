@@ -230,7 +230,7 @@
       margin-bottom: 1rem;
     }
 
-    ul {
+    ul:not(.alternatives) {
       display: flex;
 
       flex-wrap: wrap;
@@ -263,6 +263,12 @@
           }
         }
       }
+    }
+
+    ul.alternatives {
+      padding-left: 1.4rem;
+      margin-top: -1rem;
+      margin-bottom: 1rem;
     }
   }
 }

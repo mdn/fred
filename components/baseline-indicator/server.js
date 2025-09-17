@@ -212,8 +212,28 @@ export class BaselineIndicator extends ServerComponent {
                 : nothing}`
           : level === "discouraged"
             ? html`<p>
-                ${context.l10n`Avoid using this feature in new projects. This feature may be a candidate for removal from web standards or browsers.`}
-              </p>`
+                  ${context.l10n`Avoid using this feature in new projects. This feature may be a candidate for removal from web standards or browsers.`}
+                </p>
+                ${status.alternatives?.length > 0
+                  ? html`<p>
+                        ${context.l10n`Consider using the following features instead:`}
+                      </p>
+                      <ul class="alternatives">
+                        ${status.alternatives.map(
+                          ({ name, description, mdn_url }) =>
+                            html`<li>
+                              <a
+                                href=${mdn_url.replace(
+                                  "/docs",
+                                  `/${context.locale}/docs`,
+                                )}
+                                title=${description}
+                                >${name}</a
+                              >
+                            </li>`,
+                        )}
+                      </ul>`
+                  : nothing}`
             : html`<p>${context.l10n("baseline-not-extra")}</p>`}
         <ul>
           <li>
