@@ -19,6 +19,7 @@ import "../placement-no/element.js";
  */
 export const PlacementMixin = (Base) =>
   class PlacementElement extends Base {
+    static ssr = false;
     _placementRef = createRef();
 
     _dataTask = new Task(this, {
