@@ -1,4 +1,5 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
@@ -53,7 +54,8 @@ function RenderToc(context) {
  */
 function RenderBlogContent(context, { doc }) {
   return html`
-    ${doc.body.map((section) => ContentSection.render(context, section))}
+    ${doc.body?.map((section) => ContentSection.render(context, section)) ??
+    nothing}
   `;
 }
 

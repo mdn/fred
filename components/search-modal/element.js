@@ -10,6 +10,7 @@ import exitIcon from "../icon/cancel.svg?lit";
 import styles from "./element.css?lit";
 
 export class MDNSearchModal extends L10nMixin(LitElement) {
+  static ssr = false;
   static styles = styles;
 
   static properties = {

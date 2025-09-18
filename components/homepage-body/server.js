@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html } from "@lit-labs/ssr";
 
 import { FeaturedArticles } from "../featured-articles/server.js";
 

@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html } from "@lit-labs/ssr";
 
 import { HomepageHero } from "../homepage-hero/server.js";
 import { Mandala } from "../mandala/server.js";

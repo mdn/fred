@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html } from "@lit-labs/ssr";
 
 import { HomepageBody } from "../homepage-body/server.js";
 import { HomepageFooter } from "../homepage-footer/server.js";

@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html } from "@lit-labs/ssr";
 
 import { ifDefined } from "lit/directives/if-defined.js";
 
@@ -601,8 +601,14 @@ export class Menu extends ServerComponent {
                 <ul>
                   <li>
                     ${link(
-                      "Web/CSS/CSS_colors/Color_picker_tool",
-                      "Color picker",
+                      "Web/CSS/CSS_backgrounds_and_borders/Border-image_generator",
+                      "Border-image generator",
+                    )}
+                  </li>
+                  <li>
+                    ${link(
+                      "Web/CSS/CSS_backgrounds_and_borders/Border-radius_generator",
+                      "Border-radius generator",
                     )}
                   </li>
                   <li>
@@ -612,15 +618,15 @@ export class Menu extends ServerComponent {
                     )}
                   </li>
                   <li>
-                    ${link(
-                      "Web/CSS/CSS_backgrounds_and_borders/Border-image_generator",
-                      "Border-image generator",
-                    )}
+                    ${link("Web/CSS/CSS_colors/Color_mixer", "Color mixer")}
+                  </li>
+                  <li>
+                    ${link("Web/CSS/CSS_colors/Color_picker", "Color picker")}
                   </li>
                   <li>
                     ${link(
-                      "Web/CSS/CSS_backgrounds_and_borders/Border-radius_generator",
-                      "Border-radius generator",
+                      "Web/CSS/CSS_shapes/Shape_generator",
+                      "Shape generator",
                     )}
                   </li>
                 </ul>

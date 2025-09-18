@@ -1,4 +1,5 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import Button from "../button/pure.js";
 import arrowRightIcon from "../icon/arrow-right.svg?lit";

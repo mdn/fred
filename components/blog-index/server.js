@@ -1,4 +1,5 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import { AuthorDateReadTime } from "../blog/utils.js";
 import { Button } from "../button/server.js";
