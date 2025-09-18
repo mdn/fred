@@ -104,18 +104,20 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
         ["--place-top-cta-color-dark", ctaTextColorDark || ctaBackgroundColor],
       ].filter(([_, v]) => Boolean(v)),
     );
+    const type = "top-banner";
 
     return imageFormat === "leaderboard"
       ? html`<div
           ${ref(this._placementRef)}
           class="top-placement-leaderboard"
           style=${styleMap(styles)}
+          data-type=${type}
         >
           <section class="placement-container">
             <div class="placement-inner">
               <a
                 class="placement-link"
-                data-glean-id=${`pong: pong->click top-banner`}
+                data-glean-id=${`pong: pong->click ${type}`}
                 href=${this.clickLink(click, version)}
                 target="_blank"
                 rel="sponsored"
@@ -137,12 +139,13 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
           ${ref(this._placementRef)}
           class="top-placement"
           style=${styleMap(styles)}
+          data-type=${type}
         >
           <section class="placement-container">
             <div class="placement-inner">
               <a
                 class="placement-link"
-                data-glean-id=${`pong: pong->click top-banner`}
+                data-glean-id=${`pong: pong->click ${type}`}
                 href=${this.clickLink(click, version)}
                 target="_blank"
                 rel="sponsored"

@@ -2,6 +2,7 @@ import { Task } from "@lit/task";
 import { nothing } from "lit";
 import { createRef } from "lit/directives/ref.js";
 
+import { gleanClick } from "../../utils/glean.js";
 import { ViewedController } from "../viewed-controller/viewed-controller.js";
 
 import { globalPlacementContext } from "./context.js";
@@ -20,6 +21,7 @@ import "../placement-no/element.js";
 export const PlacementMixin = (Base) =>
   class PlacementElement extends Base {
     static ssr = false;
+    /** @type {import('lit/directives/ref.js').Ref<HTMLElement>} */
     _placementRef = createRef();
 
     _dataTask = new Task(this, {
@@ -48,6 +50,8 @@ export const PlacementMixin = (Base) =>
           navigator.sendBeacon?.(
             this.viewedLink(this._viewedUrl, this._version),
           );
+          const type = this._placementRef.value?.dataset.type ?? "unknown";
+          gleanClick(`pong: pong->viewed ${type}`);
         }
       });
     }

@@ -41,16 +41,18 @@ export class MDNPlacementBottom extends PlacementMixin(LitElement) {
         ["--bottom-color", textColor],
       ].filter(([_, v]) => Boolean(v)),
     );
+    const type = placementContext?.hpFooter ? "hp-footer" : "bottom-banner";
 
     return html`<div
       ${ref(this._placementRef)}
       class="bottom-placement"
       style=${styleMap(styles)}
+      data-type=${type}
     >
       <section class="placement-container">
         <a
           class="placement-link"
-          data-glean-id=${`pong: pong->click hp-footer`}
+          data-glean-id=${`pong: pong->click ${type}`}
           href=${this.clickLink(click, version)}
           target="_blank"
           rel="sponsored"
