@@ -51,6 +51,9 @@ We need to run some JS as soon as possible at page load, to avoid layout shifts 
 We place this JS in `entry.inline.js`, and it's inlined on page load.
 Rspack also generates the necessary CSP hash when doing a prod build with `npm run build`.
 
+If this code is component-specific, it can be imported with `?source&csp=true` and used to set the value of `static inlineScript` in a Server Component.
+Remebmer to add an additional entry to the CSP hashes in yari when doing so.
+
 ### Layout
 
 See [the layout README](./components/layout/README.md).

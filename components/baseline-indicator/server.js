@@ -3,6 +3,8 @@ import { nothing } from "lit";
 
 import { ServerComponent } from "../server/index.js";
 
+import inlineScript from "./inline.js?source&csp=true";
+
 /**
  * @type {{ name: string, browsers: import("./types.js").BrowserGroup[] }[]}
  */
@@ -46,6 +48,8 @@ const SURVEY_URL =
   "https://survey.alchemer.com/s3/7634825/MDN-baseline-feedback";
 
 export class BaselineIndicator extends ServerComponent {
+  static inlineScript = inlineScript;
+
   /**
    *
    * @param {import("@fred").Context<import("@rari").DocPage>} context
