@@ -15,7 +15,6 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
   static styles = styles;
 
   static properties = {
-    _hasChanged: { state: true },
     _index: { state: true },
     _query: { state: true },
     _selected: { state: true },
@@ -29,6 +28,8 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     this._query = "";
     this._selected = 0;
     this._shiftFocus = false;
+    /** Capture whether user has engaged with the search. */
+    this._hasEngaged = false;
   }
 
   async _loadIndex() {
@@ -66,8 +67,8 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
   _input({ inputType, target }) {
     if (target instanceof HTMLInputElement) {
       this._query = target.value;
-      if (!this._hasChanged && inputType.startsWith("insert")) {
-        this._hasChanged = true;
+      if (!this._hasEngaged && inputType.startsWith("insert")) {
+        this._hasEngaged = true;
         gleanClick(
           `quick-search-change: ${inputType === "insertFromPaste" ? "paste" : "type"}`,
         );
