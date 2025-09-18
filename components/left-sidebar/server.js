@@ -1,4 +1,5 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { ServerComponent } from "../server/index.js";

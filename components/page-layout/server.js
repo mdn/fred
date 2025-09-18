@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html } from "@lit-labs/ssr";
 
 import { A11yMenu } from "../a11y-menu/server.js";
 import { BreadcrumbsBar } from "../breadcrumbs-bar/server.js";

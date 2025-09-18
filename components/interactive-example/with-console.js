@@ -73,6 +73,7 @@ export const InteractiveExampleWithConsole = (Base) =>
               defaults=${ifDefined(
                 this._languages.includes("wat") ? "ix-wat" : undefined,
               )}
+              sandbox="allow-modals"
             ></mdn-play-runner>
           </div>
         </mdn-play-controller>

@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html } from "@lit-labs/ssr";
 
 import { GenericContent } from "../generic-content/server.js";
 import { GenericSidebar } from "../generic-sidebar/server.js";

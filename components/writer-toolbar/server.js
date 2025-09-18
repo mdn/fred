@@ -1,4 +1,5 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import { Button } from "../button/server.js";
 import { ServerComponent } from "../server/index.js";

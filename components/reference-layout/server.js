@@ -1,4 +1,5 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import { ArticleFooter } from "../article-footer/server.js";
 import { BaselineIndicator } from "../baseline-indicator/server.js";
@@ -16,9 +17,8 @@ export class ReferenceLayout extends ServerComponent {
    */
   render(context) {
     const { doc } = context;
-    const [description, ...sections] = doc.body.map((section) =>
-      ContentSection.render(context, section),
-    );
+    const [description, ...sections] =
+      doc.body?.map((section) => ContentSection.render(context, section)) || [];
 
     return html`
       <div class="reference-layout">
