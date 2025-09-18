@@ -3,6 +3,7 @@ import { LitElement, html, nothing } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
+import { gleanClick } from "../../utils/glean.js";
 import { mdnUrl2Breadcrumb } from "../../utils/mdn-url2breadcrumb.js";
 
 import exitIcon from "../icon/cancel.svg?lit";
@@ -14,6 +15,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
   static styles = styles;
 
   static properties = {
+    _hasChanged: { state: true },
     _index: { state: true },
     _query: { state: true },
     _selected: { state: true },
@@ -61,9 +63,15 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
   }
 
   /** @param {InputEvent} event */
-  _input({ target }) {
+  _input({ inputType, target }) {
     if (target instanceof HTMLInputElement) {
       this._query = target.value;
+      if (!this._hasChanged && inputType.startsWith("insert")) {
+        this._hasChanged = true;
+        gleanClick(
+          `quick-search-change: ${inputType === "insertFromPaste" ? "paste" : "type"}`,
+        );
+      }
     }
   }
 
@@ -171,6 +179,9 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
 
     if (isSlash || isCtrlK) {
       event.preventDefault();
+      gleanClick(
+        `quick-search-open: keyboard -> ${isSlash ? "slash" : "ctrl-k"}`,
+      );
       this.showModal();
       if (selection) {
         this._query = selection;
@@ -249,7 +260,9 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
               results?.map(
                 ({ title, url }, i) => html`
                   <li ?data-selected=${this._selected === i} data-result=${i}>
-                    <a href=${url}
+                    <a
+                      href=${url}
+                      data-glean-id=${`quick-search: modal -> ${this._query}`}
                       ><span class="slug"
                         >${mdnUrl2Breadcrumb(url, this.locale)}</span
                       >
