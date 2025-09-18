@@ -222,7 +222,7 @@ export class BaselineIndicator extends ServerComponent {
             ? html`<p>
                   ${context.l10n`Avoid using this feature in new projects. This feature may be a candidate for removal from web standards or browsers.`}
                 </p>
-                ${status.alternatives?.length > 0
+                ${status.alternatives && status.alternatives.length > 0
                   ? html`<p>
                         ${context.l10n`Consider using the following features instead:`}
                       </p>
