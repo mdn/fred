@@ -187,6 +187,10 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
       this.showModal();
       if (selection) {
         this._query = selection;
+        if (!this._hasEngaged) {
+          this._hasEngaged = true;
+          gleanClick("quick-search-change: selection");
+        }
       }
     }
   }
