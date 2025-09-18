@@ -37,7 +37,7 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
             href="https://scrimba.com/learn/frontend?via=mdn"
             target="_blank"
             rel="noreferrer"
-            data-glean-id=${`pong: pong->click fallback-scrimba`}
+            data-glean-id="banner_scrimba_click"
           >
             Scrimba
           </a>
