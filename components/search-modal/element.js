@@ -97,6 +97,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
           item.dispatchEvent(
             new MouseEvent("click", {
               bubbles: true,
+              composed: true,
               // we attempt to pass modifier keys through
               // but browser support is incredibly varied:
               ctrlKey,
@@ -105,11 +106,6 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
               metaKey,
             }),
           );
-          // Workaround: For some reason, the dispatched click
-          // does not cause Glean.js to capture it via `data-glean-id`.
-          if (item.dataset.gleanId) {
-            gleanClick(item.dataset.gleanId);
-          }
         }
         break;
       }
