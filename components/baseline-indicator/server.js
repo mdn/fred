@@ -142,9 +142,13 @@ export class BaselineIndicator extends ServerComponent {
         }
       };
 
+    const openByDefault = Boolean(signalsLink);
+
     return html`<details
       class="baseline-indicator ${level}"
       data-glean-toggle-open="baseline_toggle_open"
+      ?open=${openByDefault}
+      ?data-open-by-default=${openByDefault}
     >
       <summary>
         <span
