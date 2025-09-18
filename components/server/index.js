@@ -35,8 +35,9 @@ export class ServerComponent {
       componentsUsed.add("legacy");
     }
 
-    const renderResult = new this().render(...args);
-    if (!renderResult || renderResult === nothing) {
+    let res = new this().render(...args);
+
+    if (!res || res === nothing) {
       if (!componentUsedBefore) {
         componentsUsed.delete(this.name);
         componentsWithStylesInHead.delete(this.name);
@@ -44,10 +45,10 @@ export class ServerComponent {
       return nothing;
     }
 
-    const inline = this.inlineScript;
-    const res = inline
-      ? html`${renderResult}${unsafeHTML(`<script>${inline}</script>`)}`
-      : renderResult;
+    const { inlineScript } = this;
+    if (inlineScript) {
+      res = html`${res}${unsafeHTML(`<script>${inlineScript}</script>`)}`;
+    }
 
     if (!this.stylesInHead) {
       const styles = stylesForComponents([this.name], compilationStats.client);
