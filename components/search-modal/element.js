@@ -104,6 +104,9 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
               metaKey,
             }),
           );
+          // Workaround: For some reason, the dispatched click
+          // does not cause Glean.js to capture it via `data-glean-id`.
+          gleanClick(`quick-search: keyboard -> ${this._query}`);
         }
         break;
       }
@@ -262,7 +265,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
                   <li ?data-selected=${this._selected === i} data-result=${i}>
                     <a
                       href=${url}
-                      data-glean-id=${`quick-search: modal -> ${this._query}`}
+                      data-glean-id=${`quick-search: click -> ${this._query}`}
                       ><span class="slug"
                         >${mdnUrl2Breadcrumb(url, this.locale)}</span
                       >
