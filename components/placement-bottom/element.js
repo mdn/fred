@@ -50,7 +50,7 @@ export class MDNPlacementBottom extends PlacementMixin(LitElement) {
       <section class="placement-container">
         <a
           class="placement-link"
-          data-glean-id=${`pong: pong->click top-banner`}
+          data-glean-id=${`pong: pong->click hp-footer`}
           href=${this.clickLink(click, version)}
           target="_blank"
           rel="sponsored"
