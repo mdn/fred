@@ -343,7 +343,7 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                         <h2 class="site-search-results__title">
                           <a
                             href=${result.mdn_url}
-                            data-glean-id=${`site-search: click -> ${1 + (results.metadata.page - 1) * results.metadata.size + index}`}
+                            data-glean-id=${`site-search: results[${1 + index + (results.metadata.page - 1) * results.metadata.size}] -> ${this._query} -> ${result.mdn_url}`}
                           >
                             ${result.highlight.title &&
                             result.highlight.title.length > 0

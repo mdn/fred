@@ -107,7 +107,9 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
           );
           // Workaround: For some reason, the dispatched click
           // does not cause Glean.js to capture it via `data-glean-id`.
-          gleanClick(`quick-search: keyboard -> ${this._query}`);
+          if (item.dataset.gleanId) {
+            gleanClick(item.dataset.gleanId);
+          }
         }
         break;
       }
@@ -229,6 +231,9 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
 
   render() {
     const siteSearchIndex = this._queryIndex.value?.length || 0;
+    const searchUrl = this._query
+      ? `/${this.locale}/search?${new URLSearchParams({ q: this._query })}`
+      : null;
     return html`
       <dialog @keydown=${this._keydown} @focusin=${this._focus} closedby="any">
         <form
@@ -266,7 +271,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
                   <li ?data-selected=${this._selected === i} data-result=${i}>
                     <a
                       href=${url}
-                      data-glean-id=${`quick-search: click -> ${this._query}`}
+                      data-glean-id=${`quick-search: results[${1 + i}] -> ${this._query} -> ${url}`}
                       ><span class="slug"
                         >${mdnUrl2Breadcrumb(url, this.locale)}</span
                       >
@@ -278,13 +283,14 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
                 `,
               ),
           })}
-          ${this._query
+          ${searchUrl
             ? html`<li
                 ?data-selected=${this._selected === siteSearchIndex}
                 data-result=${siteSearchIndex}
               >
                 <a
-                  href=${`/${this.locale}/search?${new URLSearchParams({ q: this._query })}`}
+                  href=${searchUrl}
+                  data-glean-id=${`quick-search: site-search -> ${this._query}`}
                   ><span class="title"
                     >${this.l10n.raw({
                       id: "search-modal-site-search",
