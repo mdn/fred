@@ -47,6 +47,7 @@ export default defineConfig([
       "fred/custom-element-name": "error",
       "fred/server-component-name": "error",
       "fred/sandbox-component-name": "error",
+      "fred/server-html-import": "error",
     },
   },
   {
