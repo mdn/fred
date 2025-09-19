@@ -44,7 +44,7 @@ jobs:
       - name: Run tsc
         run: npx tsc --noEmit
 
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -62,3 +62,17 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Run
+        run: |
+          npm run rari serve &
+          npm run preview &
+
+      - name: Wait for Rari (localhost:8083)
+        run: curl --retry-connrefused --retry 5 -I http://localhost:8083/en-US/
+
+      - name: Wait for Fred (localhost:3000)
+        run: curl --retry-connrefused --retry 5 -I http://localhost:3000
+
+      - name: Run tests
+        run: npm run wdio

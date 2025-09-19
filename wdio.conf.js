@@ -5,9 +5,12 @@ export const config = {
   capabilities: [
     {
       browserName: "firefox",
+      "moz:firefoxOptions": {
+        args: ["-headless"],
+      },
     },
   ],
-  logLevel: "info",
+  logLevel: "error",
   framework: "mocha",
   reporters: ["spec"],
   mochaOpts: {
