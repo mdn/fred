@@ -1,6 +1,7 @@
 import { html } from "@lit-labs/ssr";
 import { nothing } from "lit";
 
+import { gleanClick } from "../../utils/glean.js";
 import { ServerComponent } from "../server/index.js";
 
 import inlineScript from "./inline.js?source&csp=true";
@@ -46,6 +47,12 @@ const LOCALIZED_BCD_IDS = {
 
 const SURVEY_URL =
   "https://survey.alchemer.com/s3/7634825/MDN-baseline-feedback";
+
+const handleToggle = (/** @type {Event} */ { currentTarget: target }) => {
+  if (target instanceof HTMLDetailsElement && target.open) {
+    gleanClick("baseline_toggle_open");
+  }
+};
 
 export class BaselineIndicator extends ServerComponent {
   static inlineScript = inlineScript;
@@ -130,7 +137,7 @@ export class BaselineIndicator extends ServerComponent {
 
     return html`<details
       class="baseline-indicator ${level}"
-      data-glean-toggle-open="baseline_toggle_open"
+      @toggle=${handleToggle}
     >
       <summary>
         <span
