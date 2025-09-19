@@ -1,3 +1,4 @@
+/** @type {WebdriverIO.Config} */
 export const config = {
   runner: "local",
   specs: ["./test/specs/**/*.js"],
@@ -16,5 +17,24 @@ export const config = {
   mochaOpts: {
     ui: "bdd",
     timeout: 60_000,
+  },
+  before: async function (_, __, browser) {
+    console.log("waiting for servers to start");
+    await browser.waitUntil(
+      async () => {
+        try {
+          await browser.url("http://localhost:3000");
+          await browser.url("http://localhost:8083");
+          return true;
+        } catch {
+          return false;
+        }
+      },
+      {
+        timeout: 30_000,
+        timeoutMsg: "Server not available after 30 seconds",
+        interval: 1000,
+      },
+    );
   },
 };

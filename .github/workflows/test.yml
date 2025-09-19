@@ -46,16 +46,28 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: fred
 
     steps:
-      - name: Checkout
+      - name: Checkout (fred)
         uses: actions/checkout@v5
+        with:
+          path: fred
+
+      - name: Checkout (content)
+        uses: actions/checkout@v5
+        with:
+          repository: mdn/content
+          path: content
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version-file: ".nvmrc"
+          node-version-file: "fred/.nvmrc"
+          cache-dependency-path: "fred/package-lock.json"
 
       - name: Install
         run: npm ci
@@ -64,15 +76,6 @@ jobs:
         run: npm run build
 
       - name: Run
-        run: |
-          npm run rari serve &
-          npm run preview &
-
-      - name: Wait for Rari (localhost:8083)
-        run: curl --retry-connrefused --retry 5 -I http://localhost:8083/en-US/
-
-      - name: Wait for Fred (localhost:3000)
-        run: curl --retry-connrefused --retry 5 -I http://localhost:3000
-
-      - name: Run tests
-        run: npm run wdio
+        env:
+          CONTENT_ROOT: ../content/files
+        run: node scripts/tests.js
