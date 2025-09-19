@@ -82,7 +82,7 @@ export class BlogIndex extends ServerComponent {
     return PageLayout.render(
       context,
       html`
-        <div class="blog-index">
+        <div id="content" class="blog-index">
           <header class="blog-index__header">
             <h1>${context.l10n`Blog it better`}</h1>
           </header>
