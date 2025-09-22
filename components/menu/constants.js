@@ -36,7 +36,7 @@ export const MISSING_DOCS = {
     "Web/API/Web_Animations_API/Using_the_Web_Animations_API",
     "Web/CSS/CSS_box_model/Introduction_to_the_CSS_box_model",
     "Web/CSS/CSS_colors/Color_mixer",
-    "Web/CSS/CSS_colors/Color_picker",
+    "Web/CSS/CSS_colors/Color_format_converter",
     "Web/CSS/CSS_shapes/Shape_generator",
     "Web/CSS/Guides",
     "Web/CSS/Properties",
