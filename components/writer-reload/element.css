@@ -1,0 +1,9 @@
+div {
+  display: flex;
+
+  align-items: center;
+
+  height: 100%;
+
+  padding-inline: 0.5em;
+}
