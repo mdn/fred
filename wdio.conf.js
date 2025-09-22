@@ -19,7 +19,7 @@ export const config = {
     timeout: 60_000,
   },
   baseUrl: "http://localhost:3000/",
-  before: async function (_, __, browser) {
+  async before(_, __, browser) {
     console.log("waiting for servers to start");
     await browser.waitUntil(
       async () => {
