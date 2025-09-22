@@ -9,6 +9,7 @@ import openEditor from "open-editor";
 
 import { FRED_BUILD_ROOT } from "./build/env.js";
 import { PLAYGROUND_PORT, PORT, WRITER_MODE } from "./components/env/index.js";
+import redirects from "./redirects.json" with { type: "json" };
 import { handleRunner } from "./vendor/yari/libs/play/index.js";
 
 import "source-map-support/register.js";
@@ -131,6 +132,21 @@ export async function startServer() {
 
     // @ts-expect-error
     app.use(webpackHotMiddleware(rspackCompiler));
+
+    // redirects middleware
+    app.use((req, res, next) => {
+      if (!redirects || Object.keys(redirects).length === 0) next();
+
+      const redirectsMap = /** @type {Record<string, string>} */ (redirects);
+      const reqPath = req.path.toLowerCase();
+      const targetPath = redirectsMap[reqPath];
+
+      if (targetPath) {
+        return res.redirect(301, targetPath);
+      }
+
+      next();
+    });
   } else {
     const { default: compression } = await import("compression");
     app.use(compression());

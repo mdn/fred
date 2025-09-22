@@ -13,6 +13,7 @@
     "start": "node --env-file=.env scripts/server.js",
     "dev": "node --env-file=.env ./server.js",
     "build": "rspack build",
+    "build:redirects": "node --env-file=.env scripts/build-redirects.js",
     "preview": "NODE_ENV=production node ./server.js",
     "ssr": "node build/ssr.js",
     "lit-analyzer": "npx @jackolope/lit-analyzer --rules.no-incompatible-type-binding off",
