@@ -130,7 +130,7 @@ const mozillaLinks = (context) => [
   },
   {
     text: context.l10n`Cookies`,
-    href: "https://www.mozilla.org/privacy/websites/cookie-settings/",
+    href: "https://www.mozilla.org/en-US/privacy/websites/data-preferences/",
     external: true,
   },
   {
