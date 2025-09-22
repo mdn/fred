@@ -8,12 +8,13 @@ describe("Kitchensink", () => {
     const { messages } = await captureLogs();
     await DocPage.open("en-US/docs/MDN/Kitchensink");
     await expect(
-      messages.filter((message) => {
-        !(
-          message.includes("Bad Gateway") ||
-          message.includes('Permission denied to access property "length"')
-        );
-      }),
+      messages.filter(
+        (message) =>
+          !(
+            message.includes("Bad Gateway") ||
+            message.includes('Permission denied to access property "length"')
+          ),
+      ),
     ).toEqual([]);
   });
 
