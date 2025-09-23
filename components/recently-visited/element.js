@@ -4,7 +4,6 @@ import styles from "./element.css?lit";
 
 import { RecentlyVisitedPages } from "./index.js";
 
-
 export class MDNRecentlyVisited extends LitElement {
   static ssr = false;
   static styles = styles;
