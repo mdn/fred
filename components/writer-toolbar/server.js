@@ -26,6 +26,7 @@ export class WriterToolbar extends ServerComponent {
             <mdn-writer-reload></mdn-writer-reload>
           `
         : nothing}
+      <mdn-record-visit page-title=${context.doc.title}></mdn-record-visit>
     </div>`;
   }
 }
