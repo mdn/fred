@@ -26,7 +26,7 @@ export class ReferenceLayout extends ServerComponent {
           <div class="reference-layout__header">
             ${WRITER_MODE ? WriterToolbar.render(context) : nothing}
             ${TranslationBanner.render(context)}
-            <h1>${doc.title}</h1>
+            <h1>${wbrify(doc.title)}</h1>
             ${BaselineIndicator.render(context)} ${description}
           </div>
           <aside class="reference-layout__toc">
@@ -44,4 +44,18 @@ export class ReferenceLayout extends ServerComponent {
       </div>
     `;
   }
+}
+
+/**
+ * Insert <wbr>s to wrap code-like strings in a pretty way
+ * NB: don't use in client side code because we use lookbehind assertions
+ * which aren't baseline green (yet)
+ * @param {string} text
+ */
+function wbrify(text) {
+  return text
+    .split(
+      /(?=\.)|(?<=[a-z])(?=[A-Z0-9])|(?<=[A-Z])(?=[A-Z][a-z])|(?<=[A-Z])(?=[0-9])/,
+    )
+    .flatMap((part, i) => (i ? [html`<wbr />`, part] : part));
 }
