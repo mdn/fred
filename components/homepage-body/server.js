@@ -14,7 +14,7 @@ export class HomepageBody extends ServerComponent {
    */
   render(context) {
     return html`<div class="homepage-body">
-      ${WRITER_MODE
+      ${WRITER_MODE && context.localServer
         ? html`<mdn-recently-visited></mdn-recently-visited>`
         : nothing}
       <section>

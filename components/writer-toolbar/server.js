@@ -24,9 +24,11 @@ export class WriterToolbar extends ServerComponent {
               filepath=${`${folder}/${filename}`}
             ></mdn-writer-open-editor>
             <mdn-writer-reload></mdn-writer-reload>
+            <mdn-record-visit
+              page-title=${context.doc.title}
+            ></mdn-record-visit>
           `
         : nothing}
-      <mdn-record-visit page-title=${context.doc.title}></mdn-record-visit>
     </div>`;
   }
 }
