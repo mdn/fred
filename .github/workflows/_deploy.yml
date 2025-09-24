@@ -196,7 +196,7 @@ jobs:
               -o -path '*/en-us/web/css/css_backgrounds_and_borders/border-radius_generator/index.md' \
               -o -path '*/en-us/web/css/css_backgrounds_and_borders/box-shadow_generator/index.md' \
               -o -path '*/en-us/web/css/css_colors/index.md' \
-              -o -path '*/en-us/web/css/css_colors/color_picker_tool/index.md' \
+              -o -path '*/en-us/web/css/css_colors/color_format_converter/index.md' \
               -o -path '*/en-us/web/css/css_selectors/index.md' \
               -o -path '*/en-us/web/css/css_syntax/at-rule/index.md' \
               -o -path '*/en-us/web/css/functions/index.md' \
