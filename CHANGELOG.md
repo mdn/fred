@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.6.0](https://github.com/mdn/fred/compare/v1.5.0...v1.6.0) (2025-09-25)
+
+
+### Features
+
+* **writer-mode:** add recently visited list to homepage ([#821](https://github.com/mdn/fred/issues/821)) ([19d36f2](https://github.com/mdn/fred/commit/19d36f2748f735e838c6825f505ededa6c0db167))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump the dev group with 3 updates ([#824](https://github.com/mdn/fred/issues/824)) ([50bc063](https://github.com/mdn/fred/commit/50bc063d14612c78c2800701fa1268427cd4eb2d))
+
 ## [1.5.0](https://github.com/mdn/fred/compare/v1.4.0...v1.5.0) (2025-09-24)
 
 
