@@ -679,7 +679,7 @@ export class Menu extends ServerComponent {
                   </li>
                   <li>
                     <a
-                      class="menu__panel-icon"
+                      class="menu__panel-icon external"
                       data-icon="github"
                       href="https://github.com/mdn"
                       data-glean-id=${gleanId("https://github.com/mdn")}
