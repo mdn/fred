@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { rariBin } from "@mdn/rari";
 import { concurrently } from "concurrently";
 
-export const server = fileURLToPath(import.meta.resolve("../server.js"));
+export const server = `"${fileURLToPath(import.meta.resolve("../server.js"))}"`;
 
 const { commands, result } = concurrently(
   [
