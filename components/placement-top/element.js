@@ -14,8 +14,6 @@ import styles from "./element.css?lit";
  * @import { TemplateResult } from "lit";
  */
 
-const EMPTY = html`<div class="top-placement empty"></div>`;
-
 export class MDNPlacementTop extends PlacementMixin(LitElement) {
   static styles = styles;
 
@@ -24,7 +22,7 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
    * @returns {TemplateResult | symbol}
    */
   renderInitial() {
-    return EMPTY;
+    return html`<div class="top-placement empty"></div>`;
   }
 
   renderFallback() {
