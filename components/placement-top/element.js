@@ -58,7 +58,7 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
 
     const data = placementContext?.hpTop || placementContext?.top;
     if (!data) {
-      return EMPTY;
+      return this.renderFallback();
     }
     const {
       status,
@@ -73,7 +73,7 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
       version,
     } = data;
     if (status !== "success") {
-      return EMPTY;
+      return this.renderFallback();
     }
     if (!this._viewedUrl) {
       this._viewedUrl = view;
