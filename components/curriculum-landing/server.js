@@ -1,4 +1,5 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
@@ -23,14 +24,13 @@ const SCRIM_TITLE = "MDN + Scrimba partnership announcement scrim";
 export class CurriculumLanding extends ServerComponent {
   /**
    * @param {import("@fred").Context<import("@rari").CurriculumPage>} context
-   * @returns {import("@lit").TemplateResult}
    */
   render(context) {
     const doc = context.doc;
 
     /** @type {(import("@lit").TemplateResult | nothing)[]} */
     const content = [];
-    for (const [i, section] of doc.body.entries()) {
+    for (const [i, section] of doc.body?.entries() || []) {
       if (i === 0) {
         // Render the header section
         content.push(this.renderHeader(context, section));
@@ -189,7 +189,7 @@ export class CurriculumLanding extends ServerComponent {
    * Renders the ModulesListList structure, including the tab labels and the selected modules list.
    * On the server, this defaults to rendering the 'Core modules' list (index 1) content.
    * @param {import("@fred").Context<import("@rari").CurriculumPage>} context
-   * @param {import("@rari").CurriculumIndexEntry[]} modules - Array of module list groups (e.g., Started, Core, Extensions).
+   * @param {import("@rari").CurriculumIndexEntry[]} [modules] - Array of module list groups (e.g., Started, Core, Extensions).
    * @returns {import("@lit").TemplateResult | import("@lit").nothing} The Lit HTML template for the module list list, or undefined if no modules.
    */
   renderModulesListList(context, modules) {
@@ -267,6 +267,7 @@ export class CurriculumLanding extends ServerComponent {
                 target="_blank"
                 rel="origin noreferrer"
                 class="external"
+                data-glean-id="curriculum: partner banner click"
               >
                 Scrimba's Frontend Developer Career Path
               </a>
@@ -279,6 +280,7 @@ export class CurriculumLanding extends ServerComponent {
               target="_blank"
               rel="origin noreferrer"
               class="external"
+              data-glean-id="curriculum: partner banner click"
             >
               Find out more
             </a>

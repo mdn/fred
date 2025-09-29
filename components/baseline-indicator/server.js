@@ -1,9 +1,12 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import { ServerComponent } from "../server/index.js";
 
+import inlineScript from "./inline.js?source&csp=true";
+
 /**
- * @type {{ name: string, browsers: import("@baseline").BrowserGroup[] }[]}
+ * @type {{ name: string, browsers: import("./types.js").BrowserGroup[] }[]}
  */
 const ENGINES = [
   {
@@ -26,7 +29,7 @@ const ENGINES = [
 const DEFAULT_LOCALE = "en-US";
 
 /**
- * @type {Record<string, string> & Record<typeof DEFAULT_LOCALE, string>}}
+ * @type {Record<string, string>}
  */
 const LOCALIZED_BCD_IDS = {
   de: "browser-kompatibilität",
@@ -45,6 +48,8 @@ const SURVEY_URL =
   "https://survey.alchemer.com/s3/7634825/MDN-baseline-feedback";
 
 export class BaselineIndicator extends ServerComponent {
+  static inlineScript = inlineScript;
+
   /**
    *
    * @param {import("@fred").Context<import("@rari").DocPage>} context
@@ -76,12 +81,12 @@ export class BaselineIndicator extends ServerComponent {
     const feedbackLink = `${SURVEY_URL}?page=${encodeURIComponent(context.url)}&level=${level}`;
 
     const isBrowserSupported =
-      /** @param {import("@baseline").BrowserGroup} browser */ (browser) => {
+      /** @param {import("./types.js").BrowserGroup} browser */ (browser) => {
         return browser.ids.map((id) => status.support?.[id]).every(Boolean);
       };
 
     const engineTitle =
-      /** @param {import("@baseline").BrowserGroup[]} browsers */ (
+      /** @param {import("./types.js").BrowserGroup[]} browsers */ (
         browsers,
       ) => {
         const supported = [];

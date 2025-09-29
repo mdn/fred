@@ -114,6 +114,39 @@ export default {
         };
       },
     },
+    "server-html-import": {
+      meta: {
+        type: "problem",
+      },
+      create(context) {
+        return {
+          /**
+           * @param {import("estree").ImportDeclaration} node
+           */
+          ImportDeclaration(node) {
+            const filename = context.filename;
+            if (!/\/components\/.*\/server\.js$/.test(filename)) {
+              return;
+            }
+
+            if (node.source.value === "lit") {
+              const htmlSpecifier = node.specifiers.find(
+                (spec) =>
+                  spec.type === "ImportSpecifier" &&
+                  spec.imported.type === "Identifier" &&
+                  spec.imported.name === "html",
+              );
+              if (htmlSpecifier) {
+                context.report({
+                  node,
+                  message: `Import "html" from "@lit-labs/ssr" instead of "lit" in server.js files.`,
+                });
+              }
+            }
+          },
+        };
+      },
+    },
   },
 };
 
