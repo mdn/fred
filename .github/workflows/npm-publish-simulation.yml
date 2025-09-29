@@ -68,6 +68,8 @@ jobs:
       - name: (mdn/content) yarn start
         working-directory: mdn/content
         run: yarn start > /tmp/stdout.log 2> /tmp/stderr.log &
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Wait for Rari (localhost:8083)
         run: curl --retry-connrefused --retry 5 -I http://localhost:8083/en-US/
