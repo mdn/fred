@@ -60,7 +60,7 @@ export class ContributorSpotlight extends ServerComponent {
       context,
       html`
         <div class="contributor-spotlight-container">
-          <main class="contributor-spotlight">
+          <main id="content" class="contributor-spotlight">
             ${header}
             <section class="profile-header">
               <img

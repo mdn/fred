@@ -267,6 +267,7 @@ export class CurriculumLanding extends ServerComponent {
                 target="_blank"
                 rel="origin noreferrer"
                 class="external"
+                data-glean-id="curriculum: partner banner click"
               >
                 Scrimba's Frontend Developer Career Path
               </a>
@@ -279,6 +280,7 @@ export class CurriculumLanding extends ServerComponent {
               target="_blank"
               rel="origin noreferrer"
               class="external"
+              data-glean-id="curriculum: partner banner click"
             >
               Find out more
             </a>

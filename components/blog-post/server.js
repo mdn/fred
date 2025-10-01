@@ -70,14 +70,14 @@ export class BlogPost extends ServerComponent {
     if (!blogMeta || !doc) {
       return PageLayout.render(
         context,
-        html`<p>
+        html`<p id="content">
           ${context.l10n("blog-post-not-found")`Blog post not found`}
         </p>`,
       );
     }
 
     const postContent = html`
-      <article class="blog-post">
+      <article id="content" class="blog-post">
         <aside class="blog-post__toc">
           ${RenderToc(context)}
           <mdn-placement-sidebar></mdn-placement-sidebar>

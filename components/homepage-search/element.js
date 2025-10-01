@@ -22,6 +22,7 @@ export class MDNHomepageSearch extends L10nMixin(LitElement) {
       class="mdn-homepage-search"
       title=${this.l10n`Search the site`}
       @click=${this._showModal}
+      data-glean-id="quick-search-open: homepage"
     >
       ${this.l10n`Search`}
     </button>`;
