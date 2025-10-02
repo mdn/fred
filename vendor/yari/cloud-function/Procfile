@@ -1,2 +1,0 @@
-proxy: npm run proxy
-server: npm run server:watch

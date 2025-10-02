@@ -28,15 +28,11 @@ tsconfig.tsbuildinfo
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-/kumascript/coverage/
-/kumascript/node_modules/
 /testing/node_modules/
 /build/*.js.map
 /client/build
 /client/src/**/*.js.map
 /content/*.js.map
-/filecheck/*.js.map
-/kumascript/*.js.map
 /markdown/*.js.map
 /server/*.js.map
 /ssr/dist/

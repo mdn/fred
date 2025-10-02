@@ -9,7 +9,6 @@
 /node_modules/
 client/node_modules/
 ssr/node_modules/
-kumascript/node_modules/
 content/node_modules/
 server/node_modules/
 
@@ -17,8 +16,6 @@ server/node_modules/
 /content/files/en-us/
 
 /client/venv/
-/deployer
-kumascript/tests
 testing/
 import/
 /mdn-web-docs.svg
