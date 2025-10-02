@@ -1,0 +1,113 @@
+{
+  "Methods": {
+    "en-US": "Methods",
+    "fr": "Méthodes",
+    "ja": "メソッド",
+    "es": "Métodos"
+  },
+
+  "Properties": {
+    "en-US": "Properties",
+    "fr": "Propriétés",
+    "ja": "プロパティ",
+    "es": "Propiedades"
+  },
+
+  "Static_methods": {
+    "en-US": "Static methods",
+    "fr": "Méthodes",
+    "ja": "メソッド",
+    "es": "Métodos estáticos"
+  },
+
+  "Static_properties": {
+    "en-US": "Static properties",
+    "fr": "Propriétés",
+    "ja": "プロパティ",
+    "es": "Propiedades estáticas"
+  },
+
+  "Instance_methods": {
+    "en-US": "Instance methods",
+    "fr": "Méthodes",
+    "ja": "メソッド",
+    "es": "Métodos de instancia"
+  },
+
+  "Instance_properties": {
+    "en-US": "Instance properties",
+    "fr": "Propriétés",
+    "ja": "プロパティ",
+    "es": "Propiedades de instancia"
+  },
+
+  "Constructor": {
+    "en-US": "Constructor",
+    "fr": "Constructeur",
+    "ja": "コンストラクター",
+    "es": "Constructor"
+  },
+
+  "Inheritance": {
+    "en-US": "Inheritance:",
+    "fr": "Héritage :",
+    "ja": "継承",
+    "es": "Herencia:"
+  },
+
+  "Implemented_by": {
+    "en-US": "Implemented by:",
+    "fr": "Implémenté par :",
+    "ja": "Implemented by:",
+    "es": "Implementado por:"
+  },
+
+  "Related_pages": {
+    "en-US": "Related pages for $1",
+    "fr": "Pages liées à $1",
+    "ja": "$1 に関連するページ",
+    "es": "Páginas relacionadas con $1"
+  },
+
+  "Related_pages_wo_group": {
+    "en-US": "Related pages:",
+    "fr": "Pages similaires :",
+    "ja": "関連するページ",
+    "es": "Páginas relacionadas:"
+  },
+
+  "[Translate]": {
+    "en-US": "[Translate]",
+    "fr": "[Traduire]",
+    "ja": "[翻訳する]",
+    "es": "[Traducir]"
+  },
+
+  "TranslationCTA": {
+    "en-US": "Our volunteers haven't translated this article into your language yet. Join us and help get the job done!",
+    "fr": "Nos volontaires n'ont pas encore traduit cet article en français. Rejoignez-nous et aidez-nous à le faire&nbsp;!",
+    "ja": "まだボランティアによって日本語に翻訳されていない記事です。MDNに参加して、翻訳してみませんか？",
+    "es": "Nuestros voluntarios aún no han traducido este artículo en su idioma. ¡Únete a nosotros y ayúdanos a completar el trabajo!"
+  },
+
+  "Events": {
+    "en-US": "Events",
+    "fr": "Événements",
+    "ja": "イベント",
+    "es": "Eventos"
+  },
+
+  "Interfaces": {
+    "en-US": "Interfaces",
+    "fr": "Interfaces",
+    "ja": "インターフェイス",
+    "es": "Interfaces"
+  },
+
+  "summary": {
+    "en-US": "The documentation about this has not yet been written; please consider contributing!",
+    "fr": "Cette documentation n'a pas encore été rédigée, vous pouvez aider en contribuant!",
+    "ja": "この項目についての文書はまだ書かれていません。書いてみませんか？",
+    "es": "La documentación acerca de este tema no ha sido escrita todavía. ¡Por favor considera contribuir!"
+  }
+}

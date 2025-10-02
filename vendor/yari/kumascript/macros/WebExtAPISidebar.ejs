@@ -1,0 +1,167 @@
+<%
+
+var output = "";
+var pageModule = page;
+var slug = env.slug;
+var locale = env.locale;
+var baseURL = "/" + locale + "/docs/";
+var baseAPIPage = baseURL + "Mozilla/Add-ons/WebExtensions/API";
+
+var htmlEscape = mdn.htmlEscape;
+var rtlLocales = ["ar", "he", "fa"];
+
+let commonl10n = web.getJSONData("L10n-Common");
+
+let text = {
+  translate: mdn.getLocalString(commonl10n, "[Translate]"),
+  title: mdn.getLocalString(commonl10n, "TranslationCTA"),
+  Methods: mdn.getLocalString(commonl10n, "Methods"),
+  Properties: mdn.getLocalString(commonl10n, "Properties"),
+  Types: mdn.getLocalString(commonl10n, "Types"),
+  Events: mdn.getLocalString(commonl10n, "Events"),
+};
+
+async function buildSublist(pages, title, ignoreBadges) {
+  var result =
+    '<li class="section"><a href="#">' +
+    title +
+    "</strong></a><ol>";
+
+  for (var i in pages) {
+    var aPage = pages[i];
+    var url = aPage.url.replace("en-US", locale);
+    var title = htmlEscape(aPage.title);
+
+    var apiComponentName = title;
+    var titlePieces = title.split(".");
+    if (titlePieces.length > 1) {
+      apiComponentName = titlePieces[titlePieces.length - 1];
+    }
+
+    if (locale !== "en-US") {
+      for (const translation of aPage.translations()) {
+        if (translation.locale === locale) {
+          title = htmlEscape(translation.title);
+        }
+      }
+    }
+
+    result += "<li>";
+
+    let pageBadges = "";
+    if (!ignoreBadges) {
+      pageBadges = (await page.badges(aPage)).join("");
+    }
+
+    if (rtlLocales.indexOf(locale) != -1) {
+      result += "<bdi>";
+    }
+
+    if (slug == aPage.slug) {
+      result += `<em><code>${apiComponentName}</code> ${pageBadges}</em>`;
+    } else {
+      result += `<a href="${url}"><code>${apiComponentName}</code></a>${pageBadges}`;
+    }
+
+    if (rtlLocales.indexOf(locale) != -1) {
+      result += "</bdi>";
+    }
+
+    result += "</li>";
+  }
+
+  result += "</ol></li>";
+
+  return result;
+}
+
+function classifyPages(subpages) {
+  const collection = {
+    properties: [],
+    methods: [],
+    events: [],
+    types: [],
+  };
+
+  for (const subpage of subpages) {
+    switch (subpage.pageType) {
+      case "webextension-api-property":
+        collection.properties.push(subpage);
+        break;
+      case "webextension-api-function":
+        collection.methods.push(subpage);
+        break;
+      case "webextension-api-type":
+        collection.types.push(subpage);
+        break;
+      case "webextension-api-event":
+        collection.events.push(subpage);
+        break;
+    }
+  }
+
+  return collection;
+}
+
+async function buildSidebarForSingleAPI(apiPath) {
+  output += "<ol>";
+
+  var subpages = await pageModule.subpagesExpand(apiPath);
+
+  var pageCollection = classifyPages(subpages);
+
+  if (pageCollection.methods.length > 0) {
+    output += await buildSublist(pageCollection.methods, text["Methods"], true);
+  }
+  if (pageCollection.properties.length > 0) {
+    output += await buildSublist(
+      pageCollection.properties,
+      text["Properties"],
+      true
+    );
+  }
+  if (pageCollection.types.length > 0) {
+    output += await buildSublist(pageCollection.types, text["Types"], true);
+  }
+  if (pageCollection.events.length > 0) {
+    output += await buildSublist(pageCollection.events, text["Events"], true);
+  }
+
+  output += "</ol>";
+}
+
+async function buildSidebarForAllAPIs() {
+  output = "<ol>";
+  var browserSupportURL =
+    baseURL +
+    "Mozilla/Add-ons/WebExtensions/Browser_support_for_JavaScript_APIs";
+  var browserSupportTitle = "Browser support for JavaScript APIs";
+  output +=
+    '<li><a href="' + browserSupportURL + '">' + browserSupportTitle + "</a>";
+
+  var subpages = await pageModule.subpagesExpand(baseAPIPage);
+  for (var i = 0; i < subpages.length; i++) {
+    var apiPage = subpages[i];
+    var pieces = apiPage.url.split("/");
+    var apiName = pieces.slice(-1);
+    if (slug.indexOf(apiPage.slug) != -1) {
+      output +=
+        '<li class="webextension-api-sidebar"><a href="' +
+        apiPage.url +
+        '">' +
+        apiName +
+        "</a>";
+      await buildSidebarForSingleAPI(baseURL + apiPage.slug);
+    } else {
+      output += '<li><a href="' + apiPage.url + '">' + apiName + "</a>";
+    }
+    output += "</li>";
+  }
+
+  output += "</ol>";
+}
+
+await buildSidebarForAllAPIs(baseURL);
+%>
+
+<%-output%>

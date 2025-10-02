@@ -1,0 +1,10 @@
+<%
+/* one parameter: attribute name */
+var slug = mdn.localString({
+    "de": "Attribut",
+    "en-US": "Attribute",
+});
+
+var URL = "/" + env.locale + "/docs/Web/SVG/" + slug + "/" + $0;
+%>
+<a href="<%- URL %>"><code><%= $0 %></code></a>

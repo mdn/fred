@@ -1,0 +1,25 @@
+<%
+// Macro for inserting an inline secure context notice, i.e. to mark a
+// feature as only available in secure contexts. See the following page:
+// https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts
+
+var str_title = mdn.localString({
+  "en-US": "Secure context",
+  "es"   : "Contexto seguro",
+  "fr"   : "Contexte sécurisé",
+  "ja"   : "安全なコンテキスト用",
+  "ko"   : "보안 컨텍스트",
+  "zh-CN": "安全上下文"
+});
+
+var str_tooltip = mdn.localString({
+  "en-US": "This feature is available only in secure contexts (HTTPS)",
+  "es"   : "Esta función está disponible solo en contextos seguros (HTTPS)",
+  "fr"   : "Cette fonctionnalité est uniquement disponible dans des contextes sécurisés (HTTPS)",
+  "ja"   : "この機能は安全なコンテキスト (HTTPS) でのみ利用できます",
+  "ko"   : "이 기능은 보안 컨텍스트 (HTTPS)에서만 사용할 수 있습니다",
+  "zh-CN": "此功能仅在安全上下文（HTTPS）中可用"
+});
+%>
+
+<span class="badge inline secure" title="<%= str_tooltip %>"><%= str_title %></span>

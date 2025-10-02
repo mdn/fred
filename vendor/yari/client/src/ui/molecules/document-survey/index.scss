@@ -1,0 +1,80 @@
+@use "../../vars" as *;
+
+.document-survey {
+  --margin-vertical: 0.75rem;
+  // Same color for light and dark theme.
+  background-color: $mdn-color-light-theme-violet-10;
+  border-radius: 0.5rem;
+  color: $mdn-color-neutral-90;
+  padding: 1rem;
+
+  &::before {
+    background: transparent url("../../../assets/icons/survey.svg") center
+      center no-repeat;
+    background-size: cover;
+    content: "";
+    display: inline-block;
+    height: 49px;
+    position: absolute;
+    width: 53px;
+  }
+
+  iframe {
+    border: 0;
+    border-radius: 0.5rem;
+  }
+
+  button[type="button"],
+  summary {
+    cursor: pointer;
+  }
+
+  details {
+    iframe {
+      margin-top: var(--margin-vertical);
+    }
+  }
+
+  summary {
+    // Same color for light and dark theme.
+    color: #6800cf;
+    margin-top: var(--margin-vertical);
+    text-decoration: underline;
+
+    &:focus,
+    &:hover {
+      text-decoration: inherit;
+    }
+  }
+
+  .survey-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .survey-header,
+  .survey-container summary,
+  .survey-footer {
+    margin-left: 4rem;
+  }
+
+  .survey-footer {
+    font-size: var(--type-smaller-font-size);
+    font-style: italic;
+    font-variation-settings: "slnt" -10;
+    margin-top: var(--margin-vertical);
+  }
+
+  .survey-dismiss {
+    // Avoid the parent container to grow from 28px to 30px.
+    margin-top: -2px;
+
+    .icon {
+      background-color: $mdn-color-neutral-60;
+
+      &:hover {
+        background-color: $mdn-color-neutral-90;
+      }
+    }
+  }
+}

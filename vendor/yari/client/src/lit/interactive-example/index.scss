@@ -1,0 +1,280 @@
+@use "../../ui/vars" as *;
+@use "../../ui/atoms/button/mixins" as button;
+
+:host {
+  --border: 1px solid var(--border-secondary);
+  --tabbed-font-heading: 600 0.625rem/1.2 var(--font-heading);
+}
+
+header {
+  align-items: center;
+  border-bottom: var(--border);
+  border-top-left-radius: var(--elem-radius);
+  border-top-right-radius: var(--elem-radius);
+  display: flex;
+  grid-area: header;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+
+  h4 {
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1.1876;
+    margin: 0;
+  }
+
+  #reset {
+    background-color: transparent;
+    border: 0;
+    border-radius: var(--elem-radius);
+    color: var(--text-primary);
+    cursor: pointer;
+    font: var(--tabbed-font-heading);
+    height: 2rem;
+    letter-spacing: 1.5px;
+    margin: 0;
+    max-width: 100px;
+    padding: 0.7em 0.9em;
+    text-transform: uppercase;
+
+    &:hover {
+      background-color: var(--button-secondary-hover);
+    }
+  }
+}
+
+play-editor {
+  grid-area: editor;
+  height: 100%;
+  overflow: auto;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  grid-area: buttons;
+
+  button {
+    @include button.secondary;
+  }
+}
+
+play-console {
+  border: var(--border);
+  border-radius: var(--elem-radius);
+  grid-area: console;
+}
+
+ix-tab-wrapper {
+  grid-area: tabs;
+}
+
+// -------------------
+// JavaScript/WAT examples
+// -------------------
+
+.template-console {
+  align-content: start;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-areas:
+    "header  header"
+    "editor  editor"
+    "buttons console";
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: max-content 1fr 8rem;
+  height: 100%;
+
+  header {
+    border: var(--border);
+  }
+
+  play-runner {
+    display: none;
+  }
+
+  > play-editor,
+  ix-tab-wrapper {
+    border: var(--border);
+    border-bottom-left-radius: var(--elem-radius);
+    border-bottom-right-radius: var(--elem-radius);
+    border-top: 0;
+    grid-area: editor;
+    margin-top: -0.5rem;
+  }
+
+  @media (max-width: $screen-sm) {
+    grid-template-areas:
+      "header"
+      "editor"
+      "buttons"
+      "console";
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content 1fr max-content 8rem;
+
+    .buttons {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}
+
+// ---------------
+// Tabbed examples
+// ---------------
+
+.template-tabbed {
+  border: var(--border);
+  border-radius: var(--elem-radius);
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "tabs   runner";
+  grid-template-columns: 6fr 4fr;
+  grid-template-rows: max-content 1fr;
+  height: 100%;
+  overflow: hidden;
+
+  .output-wrapper {
+    border-left: var(--border);
+    grid-area: runner;
+    overflow: hidden;
+    position: relative;
+
+    h4 {
+      background-color: var(--background-secondary);
+      border-bottom-left-radius: var(--elem-radius);
+      color: var(--text-secondary);
+      font: var(--tabbed-font-heading);
+      margin: 0;
+      padding: 0.5rem 1.6rem;
+      position: absolute;
+      right: 0;
+      text-transform: uppercase;
+      top: 0;
+      z-index: 2;
+    }
+  }
+
+  @media (max-width: $screen-lg) {
+    grid-template-areas:
+      "header"
+      "tabs"
+      "runner";
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content 1fr 1fr;
+
+    .output-wrapper {
+      border-left: 0;
+      border-top: var(--border);
+    }
+  }
+}
+
+// ---------------
+// Choice examples
+// ---------------
+
+.template-choices {
+  border: var(--border);
+  border-radius: var(--elem-radius);
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "choice runner";
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: max-content 1fr;
+  height: 100%;
+
+  @media (max-width: $screen-lg) {
+    grid-template-areas: "header" "choice" "runner";
+    grid-template-columns: 1fr;
+  }
+
+  .choice-wrapper {
+    border-right: var(--border);
+    display: flex;
+    flex-direction: column;
+    grid-area: choice;
+    overflow-y: auto;
+    padding: 1rem;
+    padding-right: 0;
+    row-gap: 0.4rem;
+
+    @media (max-width: $screen-lg) {
+      border-bottom: var(--border);
+      border-right: none;
+      padding-right: 1em;
+    }
+
+    .choice {
+      --field-focus-border: #0085f2;
+      --focus-01: 0 0 0 3px rgba(0, 144, 237, 0.4);
+
+      align-items: center;
+      display: flex;
+      flex-grow: 1;
+
+      &::after {
+        color: var(--field-focus-border);
+        content: "▶";
+        font-size: 0.5rem;
+        opacity: 0;
+        padding: 0;
+        padding-left: 0.25rem;
+        padding-right: 1rem;
+        width: 1rem;
+
+        @media (max-width: $screen-lg) {
+          display: none;
+        }
+      }
+
+      &.selected {
+        play-editor {
+          border-color: var(--field-focus-border);
+          box-shadow: var(--focus-01);
+          cursor: text;
+        }
+
+        &::after {
+          opacity: 1;
+          padding-left: 0.75rem;
+          padding-right: 0.5rem;
+          transition: all 0.2s ease-out;
+        }
+      }
+
+      &.unsupported {
+        play-editor {
+          border-color: #ffb800;
+        }
+
+        &::after {
+          background-image: url("../../assets/icons/warning.svg");
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: 1rem;
+          content: "";
+          height: 1rem;
+          opacity: 1;
+          transition: none;
+          width: 1rem;
+        }
+      }
+
+      play-editor {
+        border: var(--border);
+        border-radius: var(--elem-radius);
+        cursor: pointer;
+        width: 100%;
+      }
+    }
+  }
+
+  .output-wrapper {
+    height: 300px;
+    overflow: hidden;
+  }
+}

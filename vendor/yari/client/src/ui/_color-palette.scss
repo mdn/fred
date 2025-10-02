@@ -1,0 +1,19 @@
+@use "sass:color";
+
+@function tint($color, $percentage) {
+  @return color.mix(white, $color, $percentage);
+}
+
+@function shade($color, $percentage) {
+  @return color.mix(black, $color, $percentage);
+}
+
+@function mdn-color($color, $value) {
+  @if $value < 50 {
+    @return tint($color, 100 - ($value * 2));
+  }
+  @if $value > 50 {
+    @return shade($color, ($value * 2) - 100);
+  }
+  @return $color;
+}

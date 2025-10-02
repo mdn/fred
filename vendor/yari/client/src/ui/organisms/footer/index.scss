@@ -1,0 +1,220 @@
+@use "../../vars" as *;
+
+.page-footer {
+  background-color: var(--background-secondary);
+  padding: (1rem * 2) 1rem;
+  position: relative;
+
+  &-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 0 auto;
+    max-width: 1440px;
+  }
+
+  &,
+  a {
+    color: var(--text-secondary);
+  }
+
+  &-logo-col {
+    p {
+      margin-top: 0;
+      max-width: 55ch;
+    }
+  }
+
+  &-app-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &-app-dl {
+    display: block;
+    max-width: 130px;
+
+    svg,
+    img {
+      width: 100%;
+    }
+
+    &.is-ms {
+      max-width: 110px;
+    }
+  }
+
+  &-moz {
+    align-items: center;
+    border-top: 1px solid var(--border-primary);
+    display: flex;
+    flex-flow: row wrap;
+    gap: 2rem;
+
+    padding-top: 1.5rem;
+  }
+
+  &-legal-text {
+    font-size: var(--type-tiny-font-size);
+    margin: 0;
+
+    a {
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.footer-moz {
+  &-list {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: var(--type-tiny-font-size);
+    gap: 1rem;
+  }
+
+  &-logo-link {
+    display: flex;
+  }
+
+  &-link {
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.mdn-footer-logo {
+  display: block;
+  width: 50px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+
+  li {
+    flex: 0 0 auto;
+  }
+
+  .icon {
+    display: block;
+    height: 21px;
+    width: 21px;
+  }
+}
+
+.footer-nav {
+  &-heading {
+    font: var(--type-smaller-font-size);
+    margin: 0 0 0.5rem;
+  }
+
+  &-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &-item {
+    font-size: var(--type-smaller-font-size);
+  }
+}
+
+@media (min-width: $screen-sm) {
+  .page-footer {
+    &-grid {
+      display: grid;
+      gap: 2.5rem;
+      grid-template-areas:
+        "logo  . "
+        "nav1  nav2"
+        "nav3  nav4"
+        "moz   moz"
+        "legal legal";
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &-logo-col {
+      grid-area: logo;
+    }
+
+    &-nav-col-1 {
+      grid-area: nav1;
+    }
+
+    &-nav-col-2 {
+      grid-area: nav2;
+    }
+
+    &-nav-col-3 {
+      grid-area: nav3;
+    }
+
+    &-nav-col-4 {
+      grid-area: nav4;
+    }
+
+    &-app-col {
+      grid-area: app;
+    }
+
+    &-moz {
+      grid-area: moz;
+    }
+
+    &-legal {
+      grid-area: legal;
+    }
+
+    &-app-list {
+      flex-direction: row;
+    }
+
+    &-app-dl {
+      img,
+      svg {
+        height: 38px;
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-md) {
+  .page-footer {
+    &-grid {
+      gap: 1rem;
+      grid-template-areas:
+        "logo  nav1  nav2  nav3  nav4"
+        "moz   moz   moz   moz   moz"
+        "legal legal legal legal  . ";
+      grid-template-columns: minmax(260px, 2fr) repeat(4, minmax(0, 1fr));
+    }
+
+    &-app-list {
+      flex-direction: column;
+    }
+
+    &-app-dl {
+      img,
+      svg {
+        height: auto;
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-xxl) {
+  .page-footer {
+    &-grid {
+      gap: 2.5rem;
+    }
+  }
+}

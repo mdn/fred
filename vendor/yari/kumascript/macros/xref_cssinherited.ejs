@@ -1,0 +1,14 @@
+<%
+let linkText = mdn.localString({
+    "de"   : "Vererbt",
+    "en-US": "Inherited",
+    "es"   : "Heredable",
+    "fr"   : "Héritée",
+    "ja"   : "継承",
+    "ko"   : "상속",
+    "ru"   : "Наследуется",
+    "zh-CN": "是否是继承属性",
+    "zh-TW": "繼承與否"
+});
+%>
+<%- web.smartLink(`/${env.locale}/docs/Web/CSS/inheritance`, null, linkText) %>

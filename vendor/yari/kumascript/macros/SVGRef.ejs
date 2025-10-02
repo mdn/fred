@@ -1,0 +1,118 @@
+<%
+const locale = env.locale;
+
+const text = mdn.localStringMap({
+  'de': {
+    'Tutorials': 'Tutorials',
+    'Reference': 'Referenz',
+    'Elements': 'Elemente',
+    'Attributes': 'Attribute',
+    'Guides': 'Leitfäden',
+    'Introducing SVG from scratch': 'Einführung in SVG von Anfang an'
+  },
+  'en-US': {
+    'Tutorials': 'Tutorials',
+    'Reference': 'Reference',
+    'Elements': 'Elements',
+    'Attributes': 'Attributes',
+    'Guides': 'Guides',
+    'Introducing SVG from scratch': 'Introducing SVG from scratch'
+  },
+  'fr': {
+    'Tutorials': 'Tutoriels',
+    'Reference': 'Références',
+    'Elements': 'Éléments',
+    'Attributes': 'Attributs',
+    'Guides': 'Guides',
+  },
+  'ja': {
+    'Tutorials': 'チュートリアル',
+    'Reference': 'リファレンス',
+    'Elements': '要素',
+  },
+  'ko': {
+    'Tutorials': '자습서:',
+    'Reference': '참고서:',
+    'Elements': '요소',
+    'Attributes': '속성',
+    'Guides': '안내서:',
+  },
+  'pt-BR': {
+    'Tutorials': 'Tutoriais',
+    'Reference': 'Referências',
+    'Elements': 'Elementos',
+    'Attributes': 'Atributos',
+    'Guides': 'Guides',
+  },
+  'ru': {
+    'Tutorials': 'Уроки',
+    'Reference': 'Справочники',
+    'Elements': 'Элементы',
+    'Attributes': 'Aтрибуты',
+    'Guides': 'Путеводитель',
+  },
+  'zh-CN': {
+    'Tutorials': '教程',
+    'Reference': '参考',
+    'Elements': '元素',
+    'Attributes': '属性',
+    'Guides': '指南',
+    'Introducing SVG from scratch': '从零开始介绍 SVG'
+  },
+});
+
+%>
+<section id="Quick_links" data-macro="SVGRef">
+ <ol>
+  <li class="section"><%-web.smartLink(`/${locale}/docs/Web/SVG`)%></li>
+  <li class="section no-link"><%=text['Tutorials']%></li>
+  <li class="toggle">
+    <details>
+      <summary><%=text['Introducing SVG from scratch']%></summary>
+      <ol>
+          <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Tutorial/Introduction`)%></li>
+          <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Tutorial/Getting_Started`)%></li>
+          <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Tutorial/Positions`)%></li>
+          <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Tutorial/Basic_Shapes`)%></li>
+          <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Tutorial/Paths`)%></li>
+          <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Tutorial/Fills_and_Strokes`)%></li>
+          <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Tutorial/Gradients`)%></li>
+          <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Tutorial/Patterns`)%></li>
+          <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Tutorial/Texts`)%></li>
+          <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Tutorial/Basic_Transformations`)%></li>
+          <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Tutorial/Clipping_and_masking`)%></li>
+          <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Tutorial/Other_content_in_SVG`)%></li>
+          <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Tutorial/Filter_effects`)%></li>
+          <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Tutorial/SVG_fonts`)%></li>
+          <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Tutorial/SVG_Image_Tag`)%></li>
+          <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Tutorial/Tools_for_SVG`)%></li>
+          <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Tutorial/SVG_and_CSS`)%></li>
+      </ol>
+    </details>
+  </li>
+  <li class="section no-link"><%=text['Reference']%></li>
+  <li class="toggle">
+    <details>
+      <summary><%=text['Elements']%></summary>
+      <%-await template("ListSubpagesForSidebar", ['/en-US/docs/Web/SVG/Element'])%>
+    </details>
+  </li>
+  <li class="toggle">
+    <details>
+      <summary><%=text['Attributes']%></summary>
+      <%-await template("ListSubpagesForSidebar", ['/en-US/docs/Web/SVG/Attribute'])%>
+    </details>
+  </li>
+  <li class="section no-link"><%=text['Guides']%></li>
+  <li>
+    <ol>
+    <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Applying_SVG_effects_to_HTML_content`)%></li>
+    <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Content_type`)%></li>
+    <li><%-web.smartLink(`/${locale}/docs/Web/SVG/Namespaces_Crash_Course`)%></li>
+    <li><%-web.smartLink(`/${locale}/docs/Web/SVG/SVG_animation_with_SMIL`)%></li>
+    <li><%-web.smartLink(`/${locale}/docs/Web/SVG/SVG_as_an_Image`)%></li>
+    </ol>
+  </li>
+ </ol>
+</section>
+

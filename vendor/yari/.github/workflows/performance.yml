@@ -1,0 +1,86 @@
+name: Performance
+
+on:
+  pull_request:
+    paths:
+      - client/src/**
+      - .github/workflows/performance.yml
+      - package.json
+      - yarn.lock
+
+# No GITHUB_TOKEN permissions, as we only use it to increase API limit.
+permissions: {}
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          # Needed because of
+          # https://github.com/GoogleChrome/lighthouse-ci/issues/172
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: mdn/yari
+
+      - name: Checkout (content)
+        uses: actions/checkout@v5
+        with:
+          repository: mdn/content
+          path: mdn/content
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: mdn/yari/.nvmrc
+          cache: yarn
+          cache-dependency-path: mdn/yari/yarn.lock
+
+      - name: Install all yarn packages
+        working-directory: mdn/yari
+        run: yarn --frozen-lockfile
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build select important pages
+        working-directory: mdn/yari
+        env:
+          # Remember, the mdn/content repo got cloned into `pwd` into a
+          # sub-folder called "mdn/content"
+          CONTENT_ROOT: "${{ github.workspace }}/mdn/content/files"
+
+          # Make sure it's set to something so that the build uses the
+          # Google Analytics tag which is most realistic.
+          BUILD_GOOGLE_ANALYTICS_MEASUREMENT_ID: G-XXXXXXXX
+        run: |
+          yarn build:prepare
+          yarn build -f $CONTENT_ROOT/en-us/web/javascript/reference/global_objects/array/foreach -f $CONTENT_ROOT/en-us/mdn/kitchensink
+          yarn render:html
+
+      - name: Serve and lhci
+        working-directory: mdn/yari
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+        run: |
+          yarn start:static-server &
+          sleep 1
+          curl --retry-connrefused --retry 5 \
+            http://localhost:5042/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach/ > /dev/null
+
+          npm install -g @lhci/cli@next
+
+          # Note, we can supply multiple `--collect.url=...` to have lhci test
+          # a variety of URLs and then assume a average (or median?) across them.
+
+          # All options for "collect" here:
+          # https://github.com/GoogleChrome/lighthouse-ci/blob/master/docs/configuration.md#collect
+
+          lhci autorun \
+            --upload.target=temporary-public-storage \
+            --collect.url="http://localhost:5042/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach/"
+
+          # TODO (as of Oct 2020)
+          # Once our Lighthouse score starts to not be so terrible, we can start
+          # adding assertions here.
+          # See https://github.com/GoogleChrome/lighthouse-ci/blob/master/docs/configuration.md#categories

@@ -1,0 +1,89 @@
+blog:
+  - changed-files:
+      - any-glob-to-any-file: "**/blog/**/*"
+
+browser-compat:
+  - changed-files:
+      - any-glob-to-any-file: "**/browser-compatability-table/**/*"
+
+macros:
+  - changed-files:
+      - any-glob-to-any-file: "kumascript/**/*"
+
+cloud-function:
+  - changed-files:
+      - any-glob-to-any-file: "cloud-function/**/*"
+
+copy:
+  - changed-files:
+      - any-glob-to-any-file: "copy/**/*"
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/poetry.lock"
+          - "**/yarn.lock"
+
+deployer:
+  - changed-files:
+      - any-glob-to-any-file: "deployer/**/*"
+
+filecheck:
+  - changed-files:
+      - any-glob-to-any-file: "filecheck/**/*"
+
+flaw-system:
+  - changed-files:
+      - any-glob-to-any-file: "build/flaws/**/*"
+
+github-actions:
+  - changed-files:
+      - any-glob-to-any-file: ".github/workflows/**/*"
+
+markdown:
+  - changed-files:
+      - any-glob-to-any-file: "markdown/**/*"
+
+metrics:
+  - changed-files:
+      - any-glob-to-any-file: "**/telemetry/**/*"
+
+placement:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/placement/**/*"
+          - "**/pong/**/*"
+
+plus:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/plus/**/*"
+          - "**/plus-docs/**/*"
+
+plus:ai-help:
+  - changed-files:
+      - any-glob-to-any-file: "**/ai-help/**/*"
+
+plus:offline:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "client/pwa/src/**/*"
+          - "client/src/offline-settings/**/*"
+
+plus:playground:
+  - changed-files:
+      - any-glob-to-any-file: "**/playground/**/*"
+
+plus:updates:
+  - changed-files:
+      - any-glob-to-any-file: "client/src/plus/updates/**/*"
+
+python:
+  - changed-files:
+      - any-glob-to-any-file: "**/*.py"
+
+redirects:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "cloud-function/src/middlewares/redirect-*"
+          - "libs/fundamental-redirects/**/*"

@@ -1,0 +1,32 @@
+@use "../../vars" as *;
+
+/*
+Keyboard & screen reader skip link menu
+********************************************************************** */
+
+.a11y-nav {
+  position: absolute;
+  top: -20em;
+  width: 100%;
+  z-index: var(--z-index-a11y);
+
+  a {
+    background-color: var(--background-primary);
+    font-weight: var(--font-body-strong-weight);
+    left: 0;
+    padding: 0.8rem;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    @media (max-width: #{$screen-md - 1}) {
+      padding: 1.125rem;
+    }
+
+    &:hover,
+    &:focus {
+      box-shadow: var(--shadow-01);
+      text-decoration: none;
+      top: 20em;
+    }
+  }
+}

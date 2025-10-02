@@ -1,0 +1,54 @@
+@use "../../vars" as *;
+
+.article-actions-container {
+  align-items: center;
+  background-color: var(--background-secondary);
+  border-bottom: 1px solid var(--border-primary);
+  margin: 0;
+  min-height: var(--article-actions-container-height);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-low);
+
+  .container {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+  }
+
+  // sidebar button for tablet sizes only
+  .sidebar-button {
+    display: none;
+  }
+
+  @media (max-width: $screen-md) {
+    .sidebar-button {
+      align-items: center;
+      align-self: stretch;
+      display: flex;
+      margin: 0 0 0 -1rem;
+
+      .button-wrap {
+        border-radius: 0;
+        border-right: 1px solid var(--border-primary);
+      }
+    }
+  }
+
+  @media (min-width: $screen-md) {
+    position: static;
+
+    .bookmark-button-container {
+      flex: 0 0 40px;
+    }
+  }
+
+  @media (min-width: $screen-xxl) {
+    .container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@use "../../vars" as *;
+
+.page-wrapper {
+  grid-template-columns: 100%;
+}
+
+.standard-page {
+  max-width: inherit;
+}

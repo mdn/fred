@@ -1,0 +1,91 @@
+.all-flaws {
+  .search-error {
+    background-color: var(--background-warning);
+  }
+
+  h3 span.page {
+    color: var(--text-inactive);
+  }
+
+  td {
+    a .url-prefix,
+    .document-title-preview {
+      color: var(--text-inactive);
+      font-size: 80%;
+      margin-right: 2px;
+    }
+
+    a,
+    .document-title-preview {
+      display: block;
+    }
+  }
+
+  .documents {
+    overflow-x: scroll;
+    width: 100%;
+
+    .no-popularity {
+      color: var(--text-inactive);
+    }
+
+    .document-flaws-fixable {
+      display: block;
+      font-size: 80%;
+    }
+  }
+
+  .search-times {
+    margin-top: 60px;
+
+    p {
+      font-size: 70%;
+    }
+  }
+
+  .pagination {
+    margin: 20px;
+    text-align: center;
+
+    a.disabled {
+      color: var(--text-inactive);
+    }
+
+    a,
+    .current-page {
+      padding: 10px;
+    }
+  }
+
+  div.filter-documents {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 300px 1fr;
+    margin: auto;
+
+    .filters {
+      h4 {
+        border-bottom: 1px solid #efefef;
+        margin-bottom: 10px;
+      }
+
+      ul.search-flaws-rows {
+        padding-left: 0;
+
+        li {
+          list-style: none;
+        }
+      }
+    }
+
+    .documents {
+      h4.subheader {
+        margin-top: 2px;
+      }
+
+      th.sortable {
+        cursor: ns-resize;
+      }
+    }
+  }
+}

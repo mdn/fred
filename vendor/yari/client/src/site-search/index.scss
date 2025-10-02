@@ -1,0 +1,32 @@
+@use "../ui/vars" as *;
+
+.query-string {
+  font-style: italic;
+  font-variation-settings: "slnt" -10;
+}
+
+.site-search {
+  display: block;
+
+  .main-content {
+    @media (max-width: $screen-md) {
+      display: flex;
+      flex-direction: column;
+      padding: 3rem 3rem 0;
+    }
+
+    article {
+      display: contents;
+    }
+
+    .place {
+      float: right;
+      padding: 1rem;
+      @media (max-width: $screen-md) {
+        align-self: center;
+        float: none;
+        order: 4;
+      }
+    }
+  }
+}

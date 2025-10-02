@@ -1,0 +1,110 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Testing Yari
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+# No GITHUB_TOKEN permissions, as we only use it to increase API limit.
+permissions: {}
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: yarn
+          cache-dependency-path: |
+            yarn.lock
+            client/pwa/yarn.lock
+            libs/**/*.js
+
+      - name: Install all yarn packages (ROOT)
+        run: yarn --frozen-lockfile
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install all yarn packages (pwa)
+        working-directory: client/pwa
+        run: yarn --frozen-lockfile
+
+      - name: Lint prettier
+        run: yarn prettier-check
+
+      - name: Lint ESLint
+        run: yarn eslint
+
+      - name: Lint stylelint
+        run: yarn stylelint
+
+      - name: Check TypeScript
+        run: yarn check:tsc
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: yarn
+
+      - name: Install all yarn packages
+        run: yarn --frozen-lockfile
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Unit testing client
+        run: yarn test:client
+
+      - name: Unit testing libs
+        run: yarn test:libs
+
+      - name: Build and start server
+        id: server
+        env:
+          ENV_FILE: .env.testing
+        run: |
+          yarn build:legacy:prepare
+          yarn build:legacy
+          yarn render:html
+
+          yarn start:static-server > /tmp/stdout.log 2> /tmp/stderr.log &
+          sleep 1
+          curl --fail --retry-connrefused --retry 5 http://localhost:5042 > /dev/null
+
+      - name: Functional testing
+        run: |
+          yarn test:testing
+          yarn test:headless
+
+      - name: Basic m2h tool testing
+        env:
+          ENV_FILE: .env.testing
+        run: |
+          yarn m2h markdown/tool/m2h --locale en-US
+          diff -s testing/content/files/en-us/markdown/tool/m2h/index.html testing/content/files/en-us/markdown/tool/m2h/expected.html
+
+      - name: Debug server's stdout and stderr if tests failed
+        if: failure() && steps.server.outcome != 'skipped'
+        run: |
+          echo "STDOUT..................................................."
+          cat /tmp/stdout.log
+          echo ""
+          echo "STDERR..................................................."
+          cat /tmp/stderr.log

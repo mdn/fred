@@ -1,0 +1,15 @@
+name: Glean probe-scraper
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+# No GITHUB_TOKEN permissions, as we don't use it.
+permissions: {}
+
+jobs:
+  glean-probe-scraper:
+    if: github.repository == 'mdn/yari'
+    uses: mozilla/probe-scraper/.github/workflows/glean.yaml@main

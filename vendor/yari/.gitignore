@@ -1,0 +1,106 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+/mdn/content/
+
+# pwa
+/client/public/service-worker.js
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+/.env
+/client/.env
+__pycache__/
+.idea/
+tsconfig.tsbuildinfo
+
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/kumascript/coverage/
+/kumascript/node_modules/
+/testing/node_modules/
+/build/*.js.map
+/client/build
+/client/src/**/*.js.map
+/content/*.js.map
+/filecheck/*.js.map
+/kumascript/*.js.map
+/markdown/*.js.map
+/server/*.js.map
+/ssr/dist/
+/ssr/*.js.map
+/tool/*.js.map
+
+# These are an effect of the dumper still producing all locales
+# We haven't decided what to do with them but for now we're *not*
+# going to check them into git.
+/content/files/ar/
+/content/files/bg/
+/content/files/bn/
+/content/files/ca/
+/content/files/de/
+/content/files/el/
+/content/files/es/
+/content/files/fa/
+/content/files/fi/
+/content/files/fr/
+/content/files/he/
+/content/files/hi-in/
+/content/files/hu/
+/content/files/id/
+/content/files/it/
+/content/files/ja/
+/content/files/kab/
+/content/files/ko/
+/content/files/ms/
+/content/files/my/
+/content/files/nl/
+/content/files/pl/
+/content/files/pt-br/
+/content/files/pt-pt/
+/content/files/ru/
+/content/files/sv-se/
+/content/files/th/
+/content/files/tr/
+/content/files/uk/
+/content/files/vi/
+/content/files/zh-cn/
+/content/files/zh-tw/
+
+/deployer/upload.log
+/deployer/src/deployer.egg-info/
+fake-v1-api/
+mdn-yari-*.tgz
+function.zip
+md-conversion-problems-report*.md
+
+testing/content/files/en-us/_githistory.json
+testing/translated-content/files/**/_githistory.json
+
+testing/content/files/en-us/markdown/tool/h2m/index.md
+testing/content/files/en-us/markdown/tool/m2h/index.html
+# eslintcache
+client/.eslintcache
+popularities.json
+source-commit.json
+source-commit-invalid-report.txt
+
+client/src/.linaria_cache
+ssr/.linaria-cache/
+
+client/venv
+
+.eslintcache
+.stylelintcache

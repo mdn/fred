@@ -1,0 +1,144 @@
+@use "sass:color";
+@use "sass:math";
+@use "../ui/vars" as *;
+
+.search-results {
+  .highlight,
+  .summary {
+    color: var(--text-primary);
+    display: block;
+  }
+
+  .highlight {
+    font-style: italic;
+    font-variation-settings: "slnt" -10;
+  }
+
+  .nerd-data {
+    font-size: 0.8125rem;
+    margin-left: 1rem;
+  }
+}
+
+.pagination {
+  @media (min-width: $screen-md) {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  li {
+    display: inline;
+  }
+
+  a {
+    display: inline-block;
+  }
+}
+
+.search-results-list {
+  margin-bottom: 1rem;
+
+  .title {
+    background-color: inherit;
+    color: var(--text-primary);
+    display: inline-block;
+    margin: 0;
+    margin-bottom: 0.25rem;
+    padding: 0;
+    word-break: break-word;
+
+    a {
+      &:link,
+      &:visited {
+        color: var(--text-primary);
+      }
+    }
+  }
+
+  .search-result-url {
+    margin-bottom: 0.25rem;
+  }
+
+  // Used to indicate that a search result link is in a different locale
+  .locale-indicator {
+    background-color: var(--background-secondary);
+    cursor: help;
+    display: block;
+    font-size: 0.8125rem;
+    margin-top: 1rem;
+    max-width: max-content;
+    padding: 0.5rem 1rem;
+    position: relative;
+    top: -3px;
+
+    @media (max-width: $screen-sm) {
+      display: inline-block;
+      margin: 0;
+      margin-left: 0.25rem;
+      padding: 1rem;
+    }
+  }
+
+  mark {
+    background: var(--background-mark-yellow);
+    border-radius: var(--elem-radius);
+    color: var(--text-primary);
+    font-style: italic;
+    font-variation-settings: "slnt" -10;
+  }
+}
+
+.search-result-entry {
+  margin: 4rem 0;
+  word-wrap: break-word;
+
+  @media (max-width: $screen-sm) {
+    margin-bottom: 2.5rem;
+  }
+}
+
+.language-options,
+.sort-options {
+  margin-top: 0.5rem;
+
+  h2 {
+    font-size: 1rem;
+    margin: 0;
+
+    @media (max-width: $screen-sm) {
+      display: inline;
+    }
+  }
+
+  .language-option-list,
+  .sort-option-list {
+    display: inline-block;
+
+    @media (max-width: $screen-sm) {
+      margin-left: 1rem;
+    }
+
+    li {
+      display: inline-block;
+      padding: 0;
+      padding-right: 0.25rem;
+
+      &::after {
+        content: " | ";
+        display: inline;
+      }
+
+      &:last-child::after {
+        display: none;
+      }
+    }
+  }
+}
+
+.search-suggestions {
+  margin-bottom: 1rem;
+
+  p {
+    margin-bottom: 0.5rem;
+  }
+}

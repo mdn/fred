@@ -1,0 +1,1661 @@
+<%
+
+const text = mdn.localStringMap({
+  'de': {
+    'Tutorials': 'Tutorials',
+    'CSS_basics': 'CSS Grundlagen',
+    'CSS_first_steps': 'CSS erste Schritte',
+       'CSS_first_steps_overview': 'CSS erste Schritte (Übersicht)',
+       'What_is_CSS':  'Was ist CSS?',
+       'Getting_started_with_CSS': 'Erste Schritte mit CSS',
+       'How_CSS_is_structured': 'Wie CSS aufgebaut ist',
+       'How_CSS_works': 'Wie CSS funktioniert',
+       'Assessment_Styling_a_biography_page': 'Aufgabe: Gestaltung einer Biografie-Seite',
+     'CSS_building_blocks': 'CSS Bausteine',
+       'CSS_building_blocks_overview': 'CSS Bausteine (Übersicht)',
+       'CSS_selectors': 'CSS Selektoren',
+       'Type_Class_and_ID_Selectors': 'Typ-, Klassen- und ID-Selektoren',
+       'Attribute_selectors': 'Attribut-Selektoren',
+       'Pseudo-classes_and_pseudo-elements': 'Pseudo-Klassen und Pseudo-Elemente',
+       'Combinators': 'Kombinatoren',
+       'Cascade_and_inheritance': 'Kaskade und Vererbung',
+       'Cascade_layers': 'Kaskadenschichten',
+       'The_box_model': 'Das Box-Modell',
+       'Backgrounds_and_borders': 'Hintergründe und Rahmen',
+       'Handling_different_text_directions': 'Umgang mit verschiedenen Textrichtungen',
+       'Overflowing_content': 'Überlaufender Inhalt',
+       'CSS_values_and_units': 'CSS-Werte und -Einheiten',
+       'Sizing_items_in_CSS': 'Größenanpassung von Elementen in CSS',
+       'Images_media_and_form_elements': 'Bilder, Medien und Formularelemente',
+       'Styling_tables': 'Tabellen gestalten',
+       'Debugging_CSS': 'CSS debuggen',
+       'Organizing_your_CSS': 'CSS organisieren',
+       'Assessment_Fundamental_CSS_comprehension': 'Aufgabe: Grundlegendes CSS-Verständnis',
+       'Assessment_Creating_fancy_letterheaded_paper': 'Aufgabe: Erstellung von schickem Briefpapier',
+       'Assessment_A_cool_looking_box': 'Aufgabe: Eine cool aussehende Box',
+     'Styling_text': 'Textgestaltung',
+       'Styling_text_overview': 'Textgestaltung (Übersicht)',
+       'Fundamental_text_and_font_styling': 'Grundlegende Text- und Schriftgestaltung',
+       'Styling_lists': 'Listen gestalten',
+       'Styling_links': 'Links gestalten',
+       'Web_fonts': 'Web-Schriftarten',
+       'Assessment_Typesetting_a_community_school_homepage': 'Aufgabe: Satz einer Community-Schulhomepage',
+     'CSS_layout': 'CSS-Layout',
+       'CSS_layout_overview': 'CSS-Layout (Übersicht)',
+       'Introduction_to_CSS_layout' : 'Einführung in CSS-Layout',
+       'Normal_Flow' : 'Normaler Fluss',
+       'Flexbox': 'Flexbox',
+       'Grids' : 'Raster',
+       'Floats': 'Floats',
+       'Positioning': 'Positionierung',
+       'Multiple-column_layout': 'Mehrspalten-Layout',
+       'Responsive_design': 'Responsives Design',
+       'Beginners_guide_to_media_queries': 'Anfängerkurs zu Media-Queries',
+       'Legacy_layout_methods': 'Veraltete Layout-Methoden',
+       'Supporting_older_browsers': 'Unterstützung älterer Browser',
+       'Assessment_Fundamental_Layout_Comprehension' : 'Aufgabe: Grundlegendes Layout-Verständnis',
+    'Reference': 'Referenz',
+    'Guides': 'Leitfäden',
+      'Animations': 'Animationen',
+        'Using_CSS_animations': 'CSS-Animationen verwenden',
+      'Backgrounds_and_Borders': 'Hintergründe und Rahmen',
+        'Using_multiple_backgrounds': 'Mehrere Hintergründe verwenden',
+        'Resizing_background_images': 'Hintergrundbilder skalieren',
+      'Box_alignment': 'Box-Ausrichtung',
+        'Box_alignment_in_block_layout': 'Box-Ausrichtung im Block-Layout',
+        'Box_alignment_in_flexbox': 'Box-Ausrichtung in Flexbox',
+        'Box_alignment_in_grid_layout': 'Box-Ausrichtung im Raster-Layout',
+        'Box_alignment_in_multi-column_layout': 'Box-Ausrichtung im Mehrspalten-Layout',
+      'Box_model': 'Box-Modell',
+        'Introduction_to_the_CSS_basic_box_model': 'Einführung in das grundlegende CSS-Box-Modell',
+        'Mastering_margin_collapsing': 'Beherrschung des Margin-Zusammenbruchs',
+      'Colors': 'Farben',
+        'Applying_color_to_HTML_elements_using_CSS': 'Farbe auf HTML-Elemente anwenden',
+        'Web_Accessibility_Understanding_Colors_and_Luminance': 'Barrierefreiheit: Farben und Helligkeit verstehen',
+        'Color_contrast': 'Barrierefreiheit: Farbkontrast',
+      'Columns': 'Spalten',
+        'Basic_concepts_of_Multicol': 'Grundlagen von Multicol',
+        'Styling_columns': 'Spalten gestalten',
+        'Spanning_and_balancing': 'Spannen und Ausgleichen',
+        'Handling_overflow_in_Multicol': 'Überlauf in Multicol handhaben',
+        'Content_breaks_in_Multicol': 'Inhaltsumbrüche in Multicol',
+      'Conditional_rules': 'Bedingte Regeln',
+        'Using_feature_queries': 'Feature-Abfragen verwenden',
+      'Containment' : 'Containment',
+        'Using_CSS_containment' : 'CSS-Containment verwenden',
+        'Container_queries' : 'Container-Abfragen',
+        'Container_size_and_style_queries' : 'Containergrößen- und Stilabfragen',
+      'CSSOM_view': 'CSSOM-Ansicht',
+        'Coordinate_systems': 'Koordinatensysteme',
+      'Flexbox': 'Flexbox',
+        'Basic_concepts_of_Flexbox': 'Grundlagen von Flexbox',
+        'Comparison_with_other_layout_methods': 'Vergleich mit anderen Layout-Methoden',
+        'Aligning_items_in_a_flex_container': 'Elemente in einem Flex-Container ausrichten',
+        'Ordering_flex_items': 'Flex-Elemente anordnen',
+        'Controlling_flex_item_ratios': 'Verhältnis von Flex-Elementen steuern',
+        'Mastering_wrapping_of_flex_items': 'Beherrschung des Flex-Item-Wraps',
+        'Typical_use_cases_of_Flexbox': 'Typische Anwendungsfälle von Flexbox',
+      'Flow_layout': 'Fluss-Layout',
+        'Block_and_Inline_layout_in_normal_flow': 'Block- und Inline-Layout im normalen Fluss',
+        'In_flow_and_Out_of_flow': 'Im Fluss und außerhalb des Flusses',
+        'Formatting_contexts_explained': 'Formatierungskontexte erklärt',
+        'Flow_layout_and_writing_modes': 'Fluss-Layout und Schreibmodi',
+        'Flow_layout_and_overflow': 'Fluss-Layout und Überlauf',
+      'Fonts': 'Schriftarten',
+        'OpenType_font_features_guide': 'Leitfaden zu OpenType-Schriftarten',
+        'Variable_fonts_guide': 'Leitfaden zu variablen Schriftarten',
+      'Grid': 'Raster',
+        'Basics_concepts_of_grid_layout': 'Grundlagen des Raster-Layouts',
+        'Relationship_to_other_layout_methods': 'Beziehung zu anderen Layout-Methoden',
+        'Line-based_placement': 'Linienbasierte Platzierung',
+        'Grid_template_areas': 'Raster-Template-Bereiche',
+        'Layout_using_named_grid_lines': 'Layout mit benannten Raster-Linien',
+        'Auto-placement_in_grid_layout': 'Automatische Platzierung im Raster-Layout',
+        'Box_alignment_in_grid_layout': 'Box-Ausrichtung im Raster-Layout',
+        'Grids_logical_values_and_writing_modes': 'Raster, logische Werte und Schreibmodi',
+        'Grid_layout_and_accessibility': 'Raster-Layout und Barrierefreiheit',
+        'Grid_Layout_and_progressive_enhancement': 'Raster-Layout und progressive Verbesserung',
+        'Realizing_common_layouts_using_grids': 'Umsetzung häufiger Layouts mit Rastern',
+        'Subgrid': 'Unter-Raster',
+        'Masonry_layout': 'Masonry-Layout',
+      'Images': 'Bilder',
+        'Using_CSS_gradients': 'CSS-Verläufe verwenden',
+      'Lists_and_counters': 'Listen und Zähler',
+        'Using_CSS_counters': 'CSS-Zähler verwenden',
+        'Consistent_list_indentation': 'Konsistente Listen-Einrückung',
+      'Logical_properties': 'Logische Eigenschaften',
+        'Basic_concepts': 'Grundkonzepte',
+        'Floating_and_positioning': 'Floaten und Positionieren',
+        'Margins_borders_and_padding': 'Ränder, Rahmen und Abstände',
+        'Sizing': 'Größenanpassung',
+      'Math_functions': 'Mathematische Funktionen',
+        'Using_CSS_math_functions': 'CSS-Mathematikfunktionen verwenden',
+      'Media_queries': 'Media-Abfragen',
+        'Using_media_queries': 'Media-Abfragen verwenden',
+        'Using_media_queries_for_accessibility': 'Media-Abfragen für Barrierefreiheit verwenden',
+        'Testing_media_queries_programmatically': 'Media-Abfragen programmatisch testen',
+        'Printing': 'Drucken',
+      'Nesting': 'Verschachteln von Stilregeln',
+        'Using_CSS_nesting': 'CSS-Verschachtelung verwenden',
+        'Nesting_and_specificity': 'Verschachtelung und Spezifität',
+        'Nesting_at-rules': 'Verschachtelung von @-Regeln',
+      'Positioning': 'Positionierung',
+        'Understanding_CSS_z-index': 'CSS z-Index verstehen',
+      'Scroll_snap': 'Scroll-Snap',
+        'Basic_concepts_of_scroll_snap': 'Grundkonzepte von Scroll-Snap',
+      'Shapes': 'Formen',
+        'Overview_of_shapes': 'Übersicht der Formen',
+        'Shapes_from_box_values': 'Formen aus Box-Werten',
+        'Basic_shapes': 'Grundlegende Formen',
+        'Shapes_from_images': 'Formen aus Bildern',
+      'Text': 'Text',
+        'Wrapping_and_breaking_text': 'Text umfließen und umbrechen',
+      'Transforms': 'Transformationen',
+        'Using_transforms': 'Transformationen verwenden',
+      'Transitions': 'Übergänge',
+        'Using_transitions': 'Übergänge verwenden',
+    'Layout_cookbook': 'Layout-Kochbuch',
+      'Media_objects': 'Medienobjekte',
+      'Columns': 'Spalten',
+      'Center_an_element': 'Ein Element zentrieren',
+      'Sticky_footers': 'Sticky-Footer',
+      'Split_navigation': 'Geteilte Navigation',
+      'Breadcrumb_navigation': 'Breadcrumb-Navigation',
+      'List_group_with_badges': 'Listengruppe mit Abzeichen',
+      'Pagination': 'Seitennummerierung',
+      'Card': 'Karte',
+      'Grid_wrapper': 'Raster-Wrapper',
+    'Tools': 'Werkzeuge',
+      'Color_picker_tool': 'Farbwähler',
+      'Box-shadow_generator': 'Box-Schatten-Generator',
+      'Border-radius_generator': 'Border-Radius-Generator',
+      'Border-image_generator' : 'Border-Image-Generator',
+  },
+  'en-US': {
+    'Tutorials': 'Tutorials',
+    'CSS_basics': 'CSS basics',
+    'CSS_first_steps': 'CSS first steps',
+       'CSS_first_steps_overview': 'CSS first steps overview',
+       'What_is_CSS':  'What is CSS?',
+       'Getting_started_with_CSS': 'Getting started with CSS',
+       'How_CSS_is_structured': 'How CSS is structured',
+       'How_CSS_works': 'How CSS works',
+       'Assessment_Styling_a_biography_page': 'Assessment: Styling a biography page',
+     'CSS_building_blocks': 'CSS building blocks',
+       'CSS_building_blocks_overview': 'CSS building blocks overview',
+       'CSS_selectors': 'CSS selectors',
+       'Type_Class_and_ID_Selectors': 'Type, class, and ID selectors',
+       'Attribute_selectors': 'Attribute selectors',
+       'Pseudo-classes_and_pseudo-elements': 'Pseudo-classes and pseudo-elements',
+       'Combinators': 'Combinators',
+       'Cascade_and_inheritance': 'Cascade, specificity, and inheritance',
+       'Cascade_layers': 'Cascade layers',
+       'The_box_model': 'The box model',
+       'Backgrounds_and_borders': 'Backgrounds and borders',
+       'Handling_different_text_directions': 'Handling different text directions',
+       'Overflowing_content': 'Overflowing content',
+       'CSS_values_and_units': 'CSS values and units',
+       'Sizing_items_in_CSS': 'Sizing items in CSS',
+       'Images_media_and_form_elements': 'Images, media, and form elements',
+       'Styling_tables': 'Styling tables',
+       'Debugging_CSS': 'Debugging CSS',
+       'Organizing_your_CSS': 'Organizing your CSS',
+       'Assessment_Fundamental_CSS_comprehension': 'Assessment: Fundamental CSS comprehension',
+       'Assessment_Creating_fancy_letterheaded_paper': 'Assessment: Creating fancy letterheaded paper',
+       'Assessment_A_cool_looking_box': 'Assessment: A cool-looking box',
+     'Styling_text': 'Styling text',
+       'Styling_text_overview': 'Styling text overview',
+       'Fundamental_text_and_font_styling': 'Fundamental text and font styling',
+       'Styling_lists': 'Styling lists',
+       'Styling_links': 'Styling links',
+       'Web_fonts': 'Web fonts',
+       'Assessment_Typesetting_a_community_school_homepage': 'Assessment: Typesetting a community school homepage',
+     'CSS_layout': 'CSS layout',
+       'CSS_layout_overview': 'CSS layout overview',
+       'Introduction_to_CSS_layout' : 'Introduction to CSS layout',
+       'Normal_Flow' : 'Normal Flow',
+       'Flexbox': 'Flexbox',
+       'Grids' : 'Grids',
+       'Floats': 'Floats',
+       'Positioning': 'Positioning',
+       'Multiple-column_layout': 'Multiple-column layout',
+       'Responsive_design': 'Responsive design',
+       'Beginners_guide_to_media_queries': 'Beginner\'s guide to media queries',
+       'Legacy_layout_methods': 'Legacy layout methods',
+       'Supporting_older_browsers': 'Supporting older browsers',
+       'Assessment_Fundamental_Layout_Comprehension' : 'Assessment: Fundamental layout comprehension',
+    'Reference': 'Reference',
+    'Guides': 'Guides',
+      'Animations': 'Animations',
+        'Using_CSS_animations': 'Using CSS animations',
+      'Backgrounds_and_Borders': 'Backgrounds and Borders',
+        'Using_multiple_backgrounds': 'Using multiple backgrounds',
+        'Resizing_background_images': 'Resizing background images',
+      'Box_alignment': 'Box alignment',
+        'Box_alignment_in_block_layout': 'Box alignment in block layout',
+        'Box_alignment_in_flexbox': 'Box alignment in flexbox',
+        'Box_alignment_in_grid_layout': 'Box alignment in grid layout',
+        'Box_alignment_in_multi-column_layout': 'Box alignment in multi-column layout',
+      'Box_model': 'Box model',
+        'Introduction_to_the_CSS_basic_box_model': 'Introduction to the CSS basic box model',
+        'Mastering_margin_collapsing': 'Mastering margin collapsing',
+      'Colors': 'Colors',
+        'Applying_color_to_HTML_elements_using_CSS': 'Applying color to HTML elements',
+        'Web_Accessibility_Understanding_Colors_and_Luminance': 'Accessibility: Understanding colors and luminance',
+        'Color_contrast': 'Accessibility: Color contrast',
+      'Columns': 'Columns',
+        'Basic_concepts_of_Multicol': 'Basic concepts of Multicol',
+        'Styling_columns': 'Styling columns',
+        'Spanning_and_balancing': 'Spanning and balancing',
+        'Handling_overflow_in_Multicol': 'Handling overflow in Multicol',
+        'Content_breaks_in_Multicol': 'Content breaks in Multicol',
+      'Conditional_rules': 'Conditional rules',
+        'Using_feature_queries': 'Using feature queries',
+      'Containment' : 'Containment',
+        'Using_CSS_containment' : 'Using CSS containment',
+        'Container_queries' : 'CSS container queries',
+        'Container_size_and_style_queries' : 'Using container size and style queries',
+      'CSSOM_view': 'CSSOM view',
+        'Coordinate_systems': 'Coordinate systems',
+      'Flexbox': 'Flexbox',
+        'Basic_concepts_of_Flexbox': 'Basic concepts of Flexbox',
+        'Comparison_with_other_layout_methods': 'Comparison with other layout methods',
+        'Aligning_items_in_a_flex_container': 'Aligning items in a flex container',
+        'Ordering_flex_items': 'Ordering flex items',
+        'Controlling_flex_item_ratios': 'Controlling flex item ratios',
+        'Mastering_wrapping_of_flex_items': 'Mastering wrapping of flex items',
+        'Typical_use_cases_of_Flexbox': 'Typical use cases of Flexbox',
+      'Flow_layout': 'Flow layout',
+        'Block_and_Inline_layout_in_normal_flow': 'Block and Inline layout in normal flow',
+        'In_flow_and_Out_of_flow': 'In flow and Out of flow',
+        'Formatting_contexts_explained': 'Formatting contexts explained',
+        'Flow_layout_and_writing_modes': 'Flow layout and writing modes',
+        'Flow_layout_and_overflow': 'Flow layout and overflow',
+      'Fonts': 'Fonts',
+        'OpenType_font_features_guide': 'OpenType font features guide',
+        'Variable_fonts_guide': 'Variable fonts guide',
+      'Grid': 'Grid',
+        'Basics_concepts_of_grid_layout': 'Basics concepts of grid layout',
+        'Relationship_to_other_layout_methods': 'Relationship to other layout methods',
+        'Line-based_placement': 'Line-based placement',
+        'Grid_template_areas': 'Grid template areas',
+        'Layout_using_named_grid_lines': 'Layout using named grid lines',
+        'Auto-placement_in_grid_layout': 'Auto-placement in grid layout',
+        'Box_alignment_in_grid_layout': 'Box alignment in grid layout',
+        'Grids_logical_values_and_writing_modes': 'Grids, logical values and writing modes',
+        'Grid_layout_and_accessibility': 'Grid layout and accessibility',
+        'Grid_Layout_and_progressive_enhancement': 'Grid Layout and progressive enhancement',
+        'Realizing_common_layouts_using_grids': 'Realizing common layouts using grids',
+        'Subgrid': 'Subgrid',
+        'Masonry_layout': 'Masonry layout',
+      'Images': 'Images',
+        'Using_CSS_gradients': 'Using CSS gradients',
+      'Lists_and_counters': 'Lists and counters',
+        'Using_CSS_counters': 'Using CSS counters',
+        'Consistent_list_indentation': 'Consistent list indentation',
+      'Logical_properties': 'Logical properties',
+        'Basic_concepts': 'Basic concepts',
+        'Floating_and_positioning': 'Floating and positioning',
+        'Margins_borders_and_padding': 'Margins, borders and padding',
+        'Sizing': 'Sizing',
+      'Math_functions': 'Math functions',
+        'Using_CSS_math_functions': 'Using CSS math functions',
+      'Media_queries': 'Media queries',
+        'Using_media_queries': 'Using media queries',
+        'Using_media_queries_for_accessibility': 'Using media queries for accessibility',
+        'Testing_media_queries_programmatically': 'Testing media queries programmatically',
+        'Printing': 'Printing',
+      'Nesting': 'Nesting style rules',
+        'Using_CSS_nesting': 'Using CSS nesting',
+        'Nesting_and_specificity': 'Nesting and specificity',
+        'Nesting_at-rules': 'Nesting at-rules',
+      'Positioning': 'Positioning',
+        'Understanding_CSS_z-index': 'Understanding CSS z-index',
+      'Scroll_snap': 'Scroll snap',
+        'Basic_concepts_of_scroll_snap': 'Basic concepts of scroll snap',
+      'Shapes': 'Shapes',
+        'Overview_of_shapes': 'Overview of shapes',
+        'Shapes_from_box_values': 'Shapes from box values',
+        'Basic_shapes': 'Basic shapes',
+        'Shapes_from_images': 'Shapes from images',
+      'Text': 'Text',
+        'Wrapping_and_breaking_text': 'Wrapping and breaking text',
+      'Transforms': 'Transforms',
+        'Using_transforms': 'Using transforms',
+      'Transitions': 'Transitions',
+        'Using_transitions': 'Using transitions',
+    'Layout_cookbook': 'Layout cookbook',
+      'Media_objects': 'Media objects',
+      'Columns': 'Columns',
+      'Center_an_element': 'Center an element',
+      'Sticky_footers': 'Sticky footers',
+      'Split_navigation': 'Split navigation',
+      'Breadcrumb_navigation': 'Breadcrumb navigation',
+      'List_group_with_badges': 'List group with badges',
+      'Pagination': 'Pagination',
+      'Card': 'Card',
+      'Grid_wrapper': 'Grid wrapper',
+    'Tools': 'Tools',
+      'Color_picker_tool': 'Color picker',
+      'Box-shadow_generator': 'Box shadow generator',
+      'Border-radius_generator': 'Border radius generator',
+      'Border-image_generator' : 'Border image generator',
+  },
+  'fr': {
+    'Learn_CSS': 'Apprendre CSS',
+    'CSS_first_steps': 'Premiers pas en CSS',
+       'CSS_first_steps_overview': 'Aperçu des premiers pas en CSS',
+       'What_is_CSS':  'Qu\'est-ce que CSS\xa0?',
+       'Getting_started_with_CSS': 'Démarrer avec CSS',
+       'How_CSS_is_structured': 'Comment CSS est structuré',
+       'How_CSS_works': 'Comment CSS fonctionne',
+       'Using_your_new_knowledge': 'Utiliser ces nouvelles notions',
+     'CSS_building_blocks': 'Les briques composant CSS',
+       'CSS_building_blocks_overview': 'Aperçu des briques composant CSS',
+       'Cascade_and_inheritance': 'Cascade et héritage',
+       'CSS_selectors': 'Sélecteurs CSS',
+       'The_box_model': 'Le modèle de boîte',
+       'Backgrounds_and_borders': 'Arrière-plans et bordures',
+       'Handling_different_text_directions': 'Gérer les différentes directions du texte',
+       'Overflowing_content': 'Dépassement du contenu',
+       'Values_and_units': 'Valeurs et unités',
+       'Sizing_items_in_CSS': 'Dimensionner des objets en CSS',
+       'Images_media_and_form_elements': 'Images, média, et éléments de formulaire',
+       'Styling_tables': 'Mettre en forme les tableaux',
+       'Debugging_CSS': 'Déboguer du CSS',
+       'Organizing_your_CSS': 'Organiser votre CSS',
+     'Styling_text': 'Mettre en forme du texte',
+       'Styling_text_overview': 'Aperçu de la mise en forme du texte',
+       'Fundamental_text_and_font_styling': 'Notions fondamentales pour la mise en forme du texte et des polices',
+       'Styling_lists': 'Mettre en forme les listes',
+       'Styling_links': 'Mettre en forme les liens',
+       'Web_fonts': 'Polices web',
+       'Assessment_typesetting_a_community_school_homepage': 'Évaluation\xa0: composer la page d\'accueil d\'une école',
+     'CSS_layout': 'Dispositions CSS',
+       'CSS_layout_overview': 'Aperçu des dispositions CSS',
+       'Layout_introduction' : 'Introduction aux dispositions CSS',
+       'Normal_Flow' : 'Flux normal',
+       'Flexbox': 'Boîtes flexibles',
+       'Grids' : 'Grilles',
+       'Floats': 'Flottements',
+       'Positioning': 'Positionnement',
+       'Multiple-column_Layout': 'Disposition en colonnes',
+       'Responsive_design': 'Conception adaptative',
+       'Media_queries': 'Guide d\'initiation aux requêtes média',
+       'Legacy_Layout_Methods': 'Méthodes de disposition historiques',
+       'Supporting_Older_Browsers': 'Prendre en charge les anciens navigateurs',
+       'Fundamental_Layout_Comprehension' : 'Compréhension des fondamentaux sur la disposition',
+    'Reference': 'Référence',
+    'Guides': 'Guides',
+      'Animations': 'Animations',
+        'Using_CSS_animations': 'Utiliser les animations CSS',
+      'Backgrounds_and_Borders': 'Arrière-plans et bordures',
+        'Using_multiple_backgrounds': 'Utiliser plusieurs arrière-plans',
+        'Resizing_background_images': 'Redimensionner les images d\'arrière-plan',
+      'Box_alignment': 'Alignement des boîtes',
+        'Box_alignment_in_block_layout': 'Alignement des boîtes avec la disposition en bloc',
+        'Box_alignment_in_flexbox': 'Alignement des boîtes avec les boîtes flexibles',
+        'Box_alignment_in_grid_layout': 'Alignement des boîtes avec les grilles',
+        'Box_alignment_in_multi-column_layout': 'Alignement des boîtes avec la disposition en colonnes',
+      'Box_model': 'Modèle de boîte',
+        'Introduction_to_the_CSS_basic_box_model': 'Introduction aux bases du modèle de boîte CSS',
+        'Mastering_margin_collapsing': 'Maîtriser la fusion des marges',
+      'Columns': 'Colonnes',
+        'Basic_concepts_of_Multicol': 'Concepts de base de la disposition en colonnes',
+        'Styling_columns': 'Mettre en forme les colonnes',
+        'Spanning_and_balancing': 'Étendre et équilibrer',
+        'Handling_overflow_in_Multicol': 'Gérer le dépassement avec les colonnes',
+        'Content_breaks_in_Multicol': 'Ruptures du contenu avec les colonnes',
+      'Conditional_rules': 'Règles conditionnelles',
+        'Using_feature_queries': 'Utiliser les requêtes de fonctionnalité',
+      'CSSOM_view': 'Vue CSSOM',
+        'Coordinate_systems': 'Systèmes de coordonnées',
+      'Flexbox': 'Boîtes flexibles',
+        'Basic_concepts_of_Flexbox': 'Concepts de base pour les boîtes flexibles',
+        'Comparison_with_other_layout_methods': 'Comparaison avec les autres méthodes de disposition',
+        'Aligning_items_in_a_flex_container': 'Aligner des objets dans un conteneur flexible',
+        'Ordering_flex_items': 'Ordonner des objets flexibles',
+        'Controlling_flex_item_ratios': 'Contrôler les proportions des objets flexibles',
+        'Mastering_wrapping_of_flex_items': 'Maîtriser le retour à la ligne des objets flexibles',
+        'Typical_use_cases_of_Flexbox': 'Cas d\'usage caractéristiques des boîtes flexibles',
+      'Flow_layout': 'Disposition de flux',
+        'Block_and_Inline_layout_in_normal_flow': 'Disposition de bloc et en ligne avec le flux normal',
+        'In_flow_and_Out_of_flow': 'Dans le flux et en dehors',
+        'Formatting_contexts_explained': 'Explication des contextes de formatage',
+        'Flow_layout_and_writing_modes': 'Disposition de flux et modes d\'écriture',
+        'Flow_layout_and_overflow': 'Disposition de flux et dépassement',
+      'Fonts': 'Polices',
+        'OpenType_font_features_guide': 'Guide des fonctionnalités des polices OpenType',
+        'Variable_fonts_guide': 'Guide des polices variables',
+      'Grid': 'Grille',
+        'Basics_concepts_of_grid_layout': 'Concepts de base de la disposition en grille',
+        'Relationship_to_other_layout_methods': 'Relations avec les autres méthodes de disposition',
+        'Line-based_placement': 'Placement basé sur les lignes',
+        'Grid_template_areas': 'Gabarits de zones de grille',
+        'Layout_using_named_grid_lines': 'Disposition en utilisant les lignes de grille nommées',
+        'Auto-placement_in_grid_layout': 'Placement automatique dans une disposition en grille',
+        'Box_alignment_in_grid_layout': 'Alignement des boîtes dans une disposition en grille',
+        'Grids_logical_values_and_writing_modes': 'Grilles, valeurs logiques et modes d\'écriture',
+        'Grid_layout_and_accessibility': 'Disposition en grille et accessibilité',
+        'Grid_Layout_and_progressive_enhancement': 'Disposition en grille et amélioration progressive',
+        'Realizing_common_layouts_using_grids': 'Réaliser des dispositions usuelles avec les grilles',
+        'Subgrid': 'Sous-grilles',
+        'Masonry_layout': 'Disposition en briques',
+      'Images': 'Images',
+        'Using_CSS_gradients': 'Utiliser les dégradés CSS',
+      'Lists_and_counters': 'Listes et compteurs',
+        'Using_CSS_counters': 'Utiliser les compteurs CSS',
+        'Consistent_list_indentation': 'Indentation cohérente des listes',
+      'Logical_properties': 'Propriétés logiques',
+        'Basic_concepts': 'Concepts de base',
+        'Floating_and_positioning': 'Flottement et positionnement',
+        'Margins_borders_and_padding': 'Marges, bordures et remplissage',
+        'Sizing': 'Dimensionnement',
+      'Media_queries': 'Requêtes média',
+        'Using_media_queries': 'Utiliser les requêtes média',
+        'Using_media_queries_for_accessibility': 'Utiliser les requêtes média pour l\'accessibilité',
+        'Testing_media_queries_programmatically': 'Tester les requêtes média de façon programmatique',
+      'Positioning': 'Positionnement',
+        'Understanding_CSS_z-index': 'Comprendre le z-index CSS',
+      'Scroll_snap': 'Ancrage du défilement',
+        'Basic_concepts_of_scroll_snap': 'Concepts de base pour l\'ancrage du défilement',
+      'Shapes': 'Formes',
+        'Overview_of_shapes': 'Aperçu des formes',
+        'Shapes_from_box_values': 'Formes à partir des valeurs de boîtes',
+        'Basic_shapes': 'Formes basiques',
+        'Shapes_from_images': 'Formes à partir d\'images',
+      'Text': 'Texte',
+        'Wrapping_and_breaking_text': 'Retour à la ligne et rupture du texte',
+      'Transforms': 'Transformations',
+        'Using_transforms': 'Utiliser les transformations',
+      'Transitions': 'Transitions',
+        'Using_transitions': 'Utiliser les transitions',
+    'Layout_cookbook': 'Livre de recettes pour la disposition',
+      'Media_objects': 'Objets média',
+      'Columns': 'Colonnes',
+      'Center_an_element': 'Centrer un élément',
+      'Sticky_footers': 'Pieds de page ancrés',
+      'Split_navigation': 'Navigation séparée',
+      'Breadcrumb_navigation': 'Navigation avec un fil d\'Ariane',
+      'List_group_with_badges': 'Listes de groupe avec des badges',
+      'Pagination': 'Pagination',
+      'Card': 'Carte',
+      'Grid_wrapper': 'Conteneur de grille',
+    'Tools': 'Outils',
+      'Color_picker_tool': 'Sélecteur de couleurs',
+      'Border-radius_generator': 'Générateur de border-radius',
+      'Box-shadow_generator': 'Générateur d\'ombre de boîte',
+      'Border-image_generator' : 'Générateur d\'image de bordure',
+  },
+  'ja': {
+    'Tutorials': 'チュートリアル',
+    'CSS_basics': 'CSS の基本',
+      'CSS_first_steps': 'CSS の第一歩',
+        'CSS_first_steps_overview': 'CSS の第一歩の概要',
+        'What_is_CSS':  'CSS とは何か',
+        'Getting_started_with_CSS': 'CSS 入門',
+        'How_CSS_is_structured': 'CSS の全体像',
+        'How_CSS_works': 'CSS の働き',
+        'Assessment_Styling_a_biography_page': '評価課題: 経歴ページのスタイル設定',
+      'CSS_building_blocks': 'CSS の構成要素',
+        'CSS_building_blocks_overview': 'CSS の構成要素の概要',
+        'Cascade_and_inheritance': 'カスケードと継承',
+        'CSS_selectors': 'CSS セレクター',
+        'The_box_model': 'ボックスモデル',
+        'Backgrounds_and_borders': '背景と境界',
+        'Handling_different_text_directions': '書字方向の操作',
+        'Overflowing_content': '内容のはみ出し',
+        'CSS_values_and_units': 'CSS の値と単位',
+        'Sizing_items_in_CSS': 'CSS における大きさの指定',
+        'Images_media_and_form_elements': '画像、メディア、フォームの要素',
+        'Styling_tables': '表のスタイル付け',
+        'Debugging_CSS': 'CSS のデバッグ',
+        'Organizing_your_CSS': 'CSS の整理',
+        'Assessment_Fundamental_CSS_comprehension': '評価課題: CSS の基本的な理解度',
+        'Assessment_Creating_fancy_letterheaded_paper': '評価課題: 素敵なレターヘッドの便箋の作成',
+        'Assessment_A_cool_looking_box': '評価課題: かっこいいボックス',
+      'Styling_text': 'テキストの装飾',
+        'Styling_text_overview': 'テキストの装飾の概要',
+        'Fundamental_text_and_font_styling': '基本的なテキストとフォントの装飾',
+        'Styling_lists': 'リストの装飾',
+        'Styling_links': 'リンクの装飾',
+        'Web_fonts': 'ウェブフォント',
+        'Assessment_Typesetting_a_community_school_homepage': '評価課題: コミュニティスクールのホームページの組版',
+      'CSS_layout': 'CSS レイアウト',
+        'CSS_layout_overview': 'CSS レイアウトの概要',
+        'Introduction_to_CSS_layout' : 'CSS レイアウト入門',
+        'Normal_Flow' : '通常フロー',
+        'Flexbox': 'フレックスボックス',
+        'Grids' : 'グリッド',
+        'Floats': '浮動',
+        'Positioning': '位置指定',
+        'Multiple-column_layout': '段組みレイアウト',
+        'Responsive_design': 'レスポンシブデザイン',
+        'Beginners_guide_to_media_queries': 'メディアクエリーの初心者向けガイド',
+        'Legacy_layout_methods': '古いレイアウト方法',
+        'Supporting_older_browsers': '古いブラウザーの対応',
+        'Assessment_Fundamental_Layout_Comprehension': '評価課題: 基礎的なレイアウトの理解',
+  },
+  'ko': {
+    'Tutorials': '자습서',
+    'CSS_basics': 'CSS 기초',
+    'CSS_first_steps': 'CSS 첫 번째 단계',
+       'CSS_first_steps_overview': 'CSS 첫 번째 단계',
+       'What_is_CSS':  'CSS란 무엇인가?',
+       'Getting_started_with_CSS': 'CSS 시작하기',
+       'How_CSS_is_structured': 'CSS의 구조',
+       'How_CSS_works': 'CSS 작동 방식',
+       'Assessment_Styling_a_biography_page': '과제: 프로필 페이지 만들기',
+     'CSS_building_blocks': 'CSS 구성요소',
+       'CSS_building_blocks_overview': 'CSS 구성요소',
+       'Cascade_and_inheritance': '계단식 및 상속',
+       'CSS_selectors': 'CSS 선택자',
+       'The_box_model': '박스 모델',
+       'Backgrounds_and_borders': '배경 및 테두리',
+       'Handling_different_text_directions': '텍스트 표시 방향 제어하기',
+       'Overflowing_content': '콘텐츠 overflow',
+       'CSS_values_and_units': 'CSS 값과 단위',
+       'Sizing_items_in_CSS': 'CSS에서 항목 크기 조정',
+       'Images_media_and_form_elements': '이미지, 미디어 및 양식 요소',
+       'Styling_tables': '표 꾸미기',
+       'Debugging_CSS': 'CSS 디버깅',
+       'Organizing_your_CSS': 'CSS 구성',
+       'Assessment_Fundamental_CSS_comprehension': '과제: 기본적인 CSS 이해',
+       'Assessment_Creating_fancy_letterheaded_paper': '과제: 이쁜 레터 모양 종이 만들기',
+       'Assessment_A_cool_looking_box': '과제: 멋진 박스 만들기 ',
+     'Styling_text': '텍스트 꾸미기',
+       'Styling_text_overview': '텍스트 꾸미기',
+       'Fundamental_text_and_font_styling': '기본적인 텍스트 및 글꼴 꾸미기',
+       'Styling_lists': '목록 꾸미기',
+       'Styling_links': '링크 꾸미기',
+       'Web_fonts': '웹 글꼴',
+       'Assessment_Typesetting_a_community_school_homepage': '과제: 학교 홈페이지 만들기',
+     'CSS_layout': 'CSS 레이아웃',
+       'CSS_layout_overview': 'CSS 레이아웃',
+       'Introduction_to_CSS_layout' : 'CSS 레이아웃 입문서',
+       'Normal_Flow' : '일반 대열',
+       'Flexbox': '플렉스박스',
+       'Grids' : '그리드',
+       'Floats': 'Floats',
+       'Positioning': '위치잡기',
+       'Multiple-column_layout': '다단 레이아웃',
+       'Responsive_design': '반응형 디자인',
+       'Beginners_guide_to_media_queries': '초보자를 위한 미디어 쿼리 안내서',
+       'Legacy_layout_methods': '레거시 레이아웃 메서드',
+       'Supporting_older_browsers': '이전 브라우저 지원',
+       'Assessment_Fundamental_Layout_Comprehension' : '과제 기본적인 레이아웃 사용하기',
+    'Reference': 'CSS 참고서',
+    'Guides': '안내서',
+      'Animations': '애니메이션',
+        'Using_CSS_animations': 'CSS 애니메이션 사용하기',
+      'Backgrounds_and_Borders': '배경과 보더',
+        'Using_multiple_backgrounds': '한 번에 여러 배경 사용하기',
+        'Resizing_background_images': '배경 이미지 크기 조정하기',
+      'Box_alignment': '박스 정렬',
+        'Box_alignment_in_block_layout': '블록 레이아웃 박스 정렬하기',
+        'Box_alignment_in_flexbox': '플렉스박스 박스 정렬하기',
+        'Box_alignment_in_grid_layout': '그리드 레이아웃 박스 정렬하기',
+        'Box_alignment_in_multi-column_layout': '다단 레이아웃 박스 정렬하기',
+      'Box_model': '박스 모델',
+        'Introduction_to_the_CSS_basic_box_model': 'CSS 기본 박스 모델 입문',
+        'Mastering_margin_collapsing': '여백 상쇄 정복',
+      'Columns': '다단 레이아웃',
+        'Basic_concepts_of_Multicol': '다단 레이아웃의 기본 개념',
+        'Styling_columns': '다단 레이아웃 꾸미기',
+        'Spanning_and_balancing': 'Spanning 과 balancing',
+        'Handling_overflow_in_Multicol': '다단 레이아웃에서 overflow 처리하기',
+        'Content_breaks_in_Multicol': '다단 레이아웃에서 컨텐츠 나누기',
+      'Conditional_rules': 'CSS에서 규칙 정의하기',
+        'Using_feature_queries': '기능 쿼리 사용하기',
+      'CSSOM_view': 'CSSOM view',
+        'Coordinate_systems': '좌표 시스템',
+      'Flexbox': '플렉스박스',
+        'Basic_concepts_of_Flexbox': '플렉스박스의 기본 개념',
+        'Comparison_with_other_layout_methods': '다른 레이아웃과 비교해보기',
+        'Aligning_items_in_a_flex_container': '항목 정렬하기',
+        'Ordering_flex_items': '항목 순서 정하기',
+        'Controlling_flex_item_ratios': '항목 비율 설정하기',
+        'Mastering_wrapping_of_flex_items': '항목 wrapping 정복하기',
+        'Typical_use_cases_of_Flexbox': '플렉스박스 적용 사례',
+      'Flow_layout': '플로 레이아웃',
+        'Block_and_Inline_layout_in_normal_flow': '일반 대열 속 블록 및 인라인 레이아웃',
+        'In_flow_and_Out_of_flow': '대열과 탈대열',
+        'Formatting_contexts_explained': '서식 상황 입문서',
+        'Flow_layout_and_writing_modes': '플로 레이아웃과 쓰기 모드',
+        'Flow_layout_and_overflow': '플로 레이아웃과 overflow',
+      'Fonts': '글꼴',
+        'OpenType_font_features_guide': '오픈타입 글꼴 기능 안내서',
+        'Variable_fonts_guide': '다양한 글꼴 안내서',
+      'Grid': '그리드',
+        'Basics_concepts_of_grid_layout': '그리드 레이아웃 기본 개념',
+        'Relationship_to_other_layout_methods': '그리드 레이아웃과 다른 레이아웃과의 관계성',
+        'Line-based_placement': '라인을 이용한 그리드 배치',
+        'Grid_template_areas': '그리드 템플릿 영역',
+        'Layout_using_named_grid_lines': '이름으로 레이아웃 정하기',
+        'Auto-placement_in_grid_layout': '그리드 레이아웃의 자동 배치',
+        'Box_alignment_in_grid_layout': '그리드 레이아웃의 박스 정렬',
+        'Grids_logical_values_and_writing_modes': '그리드, logical 값, 쓰기 모드',
+        'Grid_layout_and_accessibility': '그리드 레이아웃과 접근성',
+        'Grid_Layout_and_progressive_enhancement': '그리드 레이아웃과 꾸준한 발전 ',
+        'Realizing_common_layouts_using_grids': '자주 사용되는 레이아웃',
+        'Subgrid': '하위 그리드',
+        'Masonry_layout': 'Masonry 레이아웃',
+      'Images': '이미지',
+        'Using_CSS_gradients': 'CSS 그레이디언트 사용하기',
+      'Lists_and_counters': '리스트와 카운터',
+        'Using_CSS_counters': 'CSS 카운터 사용하기',
+        'Consistent_list_indentation': '리스트 들여쓰기',
+      'Logical_properties': 'Logical 속성',
+        'Basic_concepts': '기본 개념',
+        'Floating_and_positioning': 'Floating 과 positioning',
+        'Margins_borders_and_padding': '바깥여백(마진), 테두리(보더) 그리고 안쪽여백(패딩)',
+        'Sizing': '크기 조절하기',
+      'Media_queries': '미디어 쿼리',
+        'Using_media_queries': '미디어 쿼리 사용하기',
+        'Using_media_queries_for_accessibility': '접근성을 위한 미디어 쿼리 사용하기',
+        'Testing_media_queries_programmatically': '미디어 쿼리 테스트하기',
+      'Positioning': '위치 잡기',
+        'Understanding_CSS_z-index': 'CSS z-index 이해하기',
+      'Scroll_snap': '스크롤 스냅',
+        'Basic_concepts_of_scroll_snap': '스크롤 스냅 기본 개념',
+      'Shapes': '도형',
+        'Overview_of_shapes': '도형의 기본 개념',
+        'Shapes_from_box_values': 'CSS 박스 모델로 도형 만들기',
+        'Basic_shapes': '기본 도형들',
+        'Shapes_from_images': '이미지로 도형 만들기',
+      'Text': '텍스트',
+        'Wrapping_and_breaking_text': '텍스 포장하기 및 나누기',
+      'Transforms': '변형',
+        'Using_transforms': 'CSS 변형 사용하기',
+      'Transitions': '트랜지션',
+        'Using_transitions': 'CSS 트랜지션 사용하기',
+    'Layout_cookbook': '레이아웃 비법서',
+      'Media_objects': '미디어 객체',
+      'Columns': '열',
+      'Center_an_element': '아이템 중앙 정렬 하기',
+      'Sticky_footers': '바닥글 sticky 설정하기',
+      'Split_navigation': '네비게이션 나누기',
+      'Breadcrumb_navigation': '네비게이션 breadcrumb 설정하기',
+      'List_group_with_badges': '뱃지로 리스트 그룹화하기',
+      'Pagination': 'Pagination',
+      'Card': '카드',
+      'Grid_wrapper': '그리드 wrapper',
+    'Tools': '도구',
+      'Color_picker_tool': '색상 선택 도구',
+      'Border-radius_generator': 'Border-radius 생성기',
+      'Box-shadow_generator': '박스에 그림자 생성기',
+      'Border-image_generator' : '보더 이미지 생성기',
+  },
+  'pt-BR': {
+    'Tutorials': 'Tutoriais',
+    'CSS_basics': 'O básico de CSS',
+      'CSS_first_steps': 'CSS - primeiros passos',
+        'CSS_first_steps_overview': 'Visão geral das primeiras etapas com CSS',
+        'What_is_CSS':  'O que é CSS?',
+        'Getting_started_with_CSS': 'Iniciando com CSS',
+        'How_CSS_is_structured': 'como CSS é estruturado',
+        'How_CSS_works': 'Como CSS funciona',
+        'Assessment_Styling_a_biography_page': 'Avaliação: Estilizando uma página biográfica',
+      'CSS_building_blocks': 'CSS building blocks',
+        'CSS_building_blocks_overview': 'CSS building blocks overview',
+        'Cascade_and_inheritance': 'Cascade and inheritance',
+        'CSS_selectors': 'seletores CSS',
+        'The_box_model': 'The box model',
+        'Backgrounds_and_borders': 'Backgrounds and borders',
+        'Handling_different_text_directions': 'Tratamento de diferentes direções de texto',
+        'Overflowing_content': 'Overflowing content',
+        'CSS_values_and_units': 'Valores e unidades CSS',
+        'Sizing_items_in_CSS': 'Dimensionando itens em CSS',
+        'Images_media_and_form_elements': 'Images, media, and form elements',
+        'Styling_tables': 'Estilização de tabelas',
+        'Debugging_CSS': 'Debugging CSS',
+        'Organizing_your_CSS': 'Organize seu CSS',
+        'Assessment_Fundamental_CSS_comprehension': 'Assessment: Fundamental CSS comprehension',
+        'Assessment_Creating_fancy_letterheaded_paper': 'Assessment: Creating fancy letterheaded paper',
+        'Assessment_A_cool_looking_box': 'Assessment: A cool-looking box',
+      'Styling_text': 'Estilização de textos',
+        'Styling_text_overview': 'Visão geral da Estilização de textos',
+        'Fundamental_text_and_font_styling': 'Fundamentos da estilização de textos e fontes',
+        'Styling_lists': 'Estilização de listas',
+        'Styling_links': 'Estilização de links',
+        'Web_fonts': 'Fontes Web',
+        'Assessment_Typesetting_a_community_school_homepage': 'Avaliação: Tipografia para a página inicial da escola pública local',
+      'CSS_layout': 'Esquemas CSS',
+        'CSS_layout_overview': 'Visão geral de esquemas CSS',
+        'Introduction_to_CSS_layout' : 'Introdução a esquemas CSS',
+        'Normal_Flow': 'Normal Flow',
+        'Flexbox': 'Flexbox',
+        'Grids' : 'Grids',
+        'Floats': '"Floats" - Flutuando elementos',
+        'Positioning': 'Posicionamento',
+        'Multiple-column_layout': 'Multiple-column layout',
+        'Responsive_design': 'Responsive design',
+        'Beginners_guide_to_media_queries': 'Beginner\'s guide to media queries',
+        'Legacy_layout_methods': 'Legacy layout methods',
+        'Supporting_older_browsers': 'Supporting older browsers',
+        'Assessment_Fundamental_Layout_Comprehension': 'Assessment: Fundamental Layout Comprehension',
+  },
+  'ru': {
+    'Tutorials': 'Уроки',
+    'CSS_basics': 'Основы CSS',
+      'CSS_first_steps': 'Введение в CSS',
+        'CSS_first_steps_overview': 'Введение в CSS',
+        'What_is_CSS':  'Что такое CSS?',
+        'Getting_started_with_CSS': 'Начало работы с CSS',
+        'How_CSS_is_structured': 'Как структурирован CSS',
+        'How_CSS_works': 'Как работает CSS',
+        'Assessment_Styling_a_biography_page': 'Assessment: Styling a biography page',
+      'CSS_building_blocks': 'Устройство CSS',
+        'CSS_building_blocks_overview': 'Устройство CSS',
+        'Cascade_and_inheritance': 'Каскад и наследование',
+        'CSS_selectors': 'Селекторы CSS',
+        'The_box_model': 'Блочная модель',
+        'Backgrounds_and_borders': 'Фон и границы',
+        'Handling_different_text_directions': 'Изменение направления текста',
+        'Overflowing_content': 'Переполнение содержимого',
+        'CSS_values_and_units': 'Значения свойств CSS',
+        'Sizing_items_in_CSS': 'Изменение размеров в CSS',
+        'Images_media_and_form_elements': 'Элементы изображений, медиа и форм',
+        'Styling_tables': 'Стилизация таблиц',
+        'Debugging_CSS': 'Отладка CSS',
+        'Organizing_your_CSS': 'Организация CSS-кода',
+        'Assessment_Fundamental_CSS_comprehension': 'Assessment: Fundamental CSS comprehension',
+        'Assessment_Creating_fancy_letterheaded_paper': 'Assessment: Creating fancy letterheaded paper',
+        'Assessment_A_cool_looking_box': 'Assessment: A cool-looking box',
+      'Styling_text': 'Стилизация текста',
+        'Styling_text_overview': 'Стилизация текста',
+        'Fundamental_text_and_font_styling': 'Основы стилизирования текста и шрифта',
+        'Styling_lists': 'Стилизация списков',
+        'Styling_links': 'Стилизация ссылок',
+        'Web_fonts': 'Веб-шрифты',
+        'Assessment_Typesetting_a_community_school_homepage': 'Задание: Стилизирование школьного сайта',
+      'CSS_layout': 'CSS макет',
+        'CSS_layout_overview': 'CSS макет',
+        'Layout_introduction' : 'Введение в CSS вёрстку',
+        'Normal_Flow': 'Базовый поток',
+        'Flexbox': 'Flexbox',
+        'Grids' : 'Сетки',
+        'Floats': 'Float',
+        'Positioning': 'Позиционирование',
+        'Multiple-column_layout': 'Многоколоночная раскладка',
+        'Responsive_design': 'Отзывчивый дизайн',
+        'Beginners_guide_to_media_queries': 'Руководство для начинающих по медиа-запросам',
+        'Legacy_layout_methods': 'Устаревшие способы раскладки',
+        'Supporting_Older_Browsers': 'Поддержка старых браузеров',
+        'Assessment_Fundamental_Layout_Comprehension': 'Задание: Фундаментальное понимание раскладки',
+    'Reference': 'Справочники',
+    'Guides': 'Руководства',
+      'Animations': 'Анимации',
+        'Using_CSS_animations': 'Использование CSS-анимации',
+      'Backgrounds_and_Borders': 'Фоны и границы',
+        'Using_multiple_backgrounds': 'Множественные фоны',
+        'Resizing_background_images': 'Изменение размера фоновых изображений',
+      'Box_alignment': 'Выравнивание блоков',
+        'Box_alignment_in_block_layout': 'Выравнивание в блочной раскладке',
+        'Box_alignment_in_flexbox': 'Выравнивание в флексбокс-раскладке',
+        'Box_alignment_in_grid_layout': 'Выравнивание в грид-раскладке',
+        'Box_alignment_in_multi-column_layout': 'Выравнивание в мультиколоночной раскладке',
+      'Box_model': 'Блочная модель',
+        'Introduction_to_the_CSS_basic_box_model': 'Введение в блочную модель',
+        'Mastering_margin_collapsing': 'Схлопывание внешних отступов',
+      'Columns': 'Колонки',
+        'Basic_concepts_of_Multicol': 'Основные понятие мультиколонок',
+        'Styling_columns': 'Стилизация колонок',
+        'Spanning_and_balancing': 'Распределение и балансировка',
+        'Handling_overflow_in_Multicol': 'Обработка переполнения в мультиколонках',
+        'Content_breaks_in_Multicol': 'Разрывы содержимого в мультиколонках',
+      'Conditional_rules': 'Условные конструкции',
+        'Using_feature_queries': 'Использование feature queries (директива @supports)',
+      'CSSOM_view': 'CSSOM View',
+        'Coordinate_systems': 'Системы координат',
+      'Flexbox': 'Флексбокс',
+        'Basic_concepts_of_Flexbox': 'Основные понятия флексбокс',
+        'Comparison_with_other_layout_methods': 'Сравнение с другими способами раскладки',
+        'Aligning_items_in_a_flex_container': 'Выравнивание элементов во флекс-контейнере',
+        'Ordering_flex_items': 'Упорядочение флекс-элементов',
+        'Controlling_flex_item_ratios': 'Управление соотношением элементов вдоль главной оси',
+        'Mastering_wrapping_of_flex_items': 'Разбираемся с обёртыванием флекс-элементов',
+        'Typical_use_cases_of_Flexbox': 'Типовые варианты использования флексбокса',
+      'Flow_layout': 'Потоковая раскладка',
+        'Block_and_Inline_layout_in_normal_flow': 'Блочная и последовательная раскладка в базовом потоке',
+        'In_flow_and_Out_of_flow': 'В потоке и вне потока',
+        'Formatting_contexts_explained': 'Введение в контексты форматирования',
+        'Flow_layout_and_writing_modes': 'Потоковая раскладка и режимы записи',
+        'Flow_layout_and_overflow': 'Потоковая раскладка и переполнение',
+      'Fonts': 'Шрифты',
+        'OpenType_font_features_guide': 'Руководство по возможностям OpenType-шрифтов',
+        'Variable_fonts_guide': 'Руководство по переменным шрифтам',
+      'Grid': 'Грид',
+        'Basics_concepts_of_grid_layout': 'Основные понятия грид-раскладки',
+        'Relationship_to_other_layout_methods': 'Связь грид-раскладки с другими методами позиционирования',
+        'Line-based_placement': 'Расположение элементов по линиям с помощью сеток',
+        'Grid_template_areas': 'Шаблоны грид-областей',
+        'Layout_using_named_grid_lines': 'Раскладка с использованием именованных грид-линий',
+        'Auto-placement_in_grid_layout': 'Автоматическое расположение элементов в грид-раскладке',
+        'Box_alignment_in_grid_layout': 'Выравнивание блоков в грид-раскладке',
+        'Grids_logical_values_and_writing_modes': 'Сетки, логические значения и режимы записи',
+        'Grid_layout_and_accessibility': 'Грид-раскладка и доступность',
+        'Grid_Layout_and_progressive_enhancement': 'Расположение сетки и постепенное улучшение',
+        'Realizing_common_layouts_using_grids': 'Реализация общих макетов с использованием грид-раскладки',
+        'Subgrid': 'Subgrid',
+        'Masonry_layout': 'Masonry-раскладка',
+      'Images': 'Изображения',
+        'Using_CSS_gradients': 'Использование CSS-градиентов',
+      'Lists_and_counters': 'Списки и счетчики',
+        'Using_CSS_counters': 'CSS счётчики',
+        'Consistent_list_indentation': 'Последовательный отступ в списке',
+      'Logical_properties': 'Логические свойства',
+        'Basic_concepts': 'Базовые понятие',
+        'Floating_and_positioning': 'Обтекание и позиционирование',
+        'Margins_borders_and_padding': 'Рамки, внешние и внутренние отступы',
+        'Sizing': 'Определение размеров',
+      'Media_queries': 'Медиа-запросы',
+        'Using_media_queries': 'Использование медиавыражений',
+        'Using_media_queries_for_accessibility': 'Использование медиавыражений для доступности',
+        'Testing_media_queries_programmatically': 'Тестирование медиавыражений программно',
+      'Positioning': 'Позиционирование',
+        'Understanding_CSS_z-index': 'Понимание CSS z-index',
+      'Scroll_snap': 'Scroll snap',
+        'Basic_concepts_of_scroll_snap': 'Базовые концепции CSS Scroll Snap',
+      'Shapes': 'Фигуры',
+        'Overview_of_shapes': 'Обзор фигур',
+        'Shapes_from_box_values': 'Фигуры из блочных значений',
+        'Basic_shapes': 'Основные фигуры',
+        'Shapes_from_images': 'Фигуры из изображений',
+      'Text': 'Текст',
+        'Wrapping_and_breaking_text': 'Перенос и разрыв текста',
+      'Transforms': 'Трансформации',
+        'Using_transforms': 'Использование трансформаций',
+      'Transitions': 'Переходы',
+        'Using_transitions': 'Использование CSS переходов',
+    'Layout_cookbook': 'Рецепты по раскладке',
+      'Media_objects': 'Медиа-объекты',
+      'Columns': 'Колонки',
+      'Center_an_element': 'Центрирование элемента',
+      'Sticky_footers': 'Липкий подвал',
+      'Split_navigation': 'Раздельная навигация',
+      'Breadcrumb_navigation': 'Хлебные крошки',
+      'List_group_with_badges': 'Группа списка со значками',
+      'Pagination': 'Постраничная навигация',
+      'Card': 'Карточка',
+      'Grid_wrapper': 'Обёртка сетки',
+    'Tools': 'Инструменты',
+      'Color_picker_tool': 'Инструмент выбора цвета',
+      'Border-radius_generator': 'Border-radius генератор',
+      'Box-shadow_generator': 'Генератор теней',
+      'Border-image_generator' : 'Генератор Border-image',
+  },
+  'zh-CN': {
+    'Tutorials': '教程',
+    'CSS_basics': 'CSS 基础',
+      'CSS_first_steps': 'CSS 第一步',
+        'CSS_first_steps_overview': 'CSS 第一步概述',
+        'What_is_CSS':  '什么是 CSS',
+        'Getting_started_with_CSS': 'CSS 入门',
+        'How_CSS_is_structured': 'CSS 的结构是怎样的',
+        'How_CSS_works': 'CSS 是如何工作的',
+        'Assessment_Styling_a_biography_page': '测验：为传记页面添加样式',
+      'CSS_building_blocks': 'CSS 构建',
+        'CSS_building_blocks_overview': 'CSS 构建基础概述',
+        'CSS_selectors': 'CSS 选择器',
+        'Type_Class_and_ID_Selectors': '类型、类和 ID 选择器',
+        'Attribute_selectors': '属性选择器',
+        'Pseudo-classes_and_pseudo-elements': '伪类与伪元素',
+        'Combinators': '关系选择器',
+        'Cascade_and_inheritance': '层叠、优先级与继承',
+        'Cascade_layers': '层叠层',
+        'The_box_model': '盒子模型',
+        'Backgrounds_and_borders': '背景和边框',
+        'Handling_different_text_directions': '处理不同方向的文本',
+        'Overflowing_content': '溢出的内容',
+        'CSS_values_and_units': 'CSS 的值和单位',
+        'Sizing_items_in_CSS': '在 CSS 中调整大小',
+        'Images_media_and_form_elements': '图像、媒体和表单元素',
+        'Styling_tables': '样式化表格',
+        'Debugging_CSS': '调试 CSS',
+        'Organizing_your_CSS': '组织你的 CSS',
+        'Assessment_Fundamental_CSS_comprehension': '测验：基本的 CSS 理解',
+        'Assessment_Creating_fancy_letterheaded_paper': '测验：创建精美的信纸',
+        'Assessment_A_cool_looking_box': '测验：一个漂亮的盒子',
+      'Styling_text': '样式化文本',
+        'Styling_text_overview': '样式化文本概述',
+        'Fundamental_text_and_font_styling': '基础文本与字体样式化',
+        'Styling_lists': '样式化列表',
+        'Styling_links': '样式化链接',
+        'Web_fonts': 'Web 字体',
+        'Assessment_Typesetting_a_community_school_homepage': '测验：排版社区大学首页',
+      'CSS_layout': 'CSS 布局概述',
+        'CSS_layout_overview': 'CSS 布局概述',
+        'Introduction_to_CSS_layout' : 'CSS 布局简介',
+        'Normal_Flow': '一般的流布局',
+        'Flexbox': '弹性盒布局',
+        'Grids' : '网格布局',
+        'Floats': '浮动布局',
+        'Positioning': '定位',
+        'Multiple-column_layout': '多栏式布局',
+        'Responsive_design': '响应式布局',
+        'Beginners_guide_to_media_queries': '媒体查询入门指南',
+        'Legacy_layout_methods': '传统的布局方法',
+        'Supporting_older_browsers': '支持旧版浏览器',
+        'Assessment_Fundamental_Layout_Comprehension': '测验：对布局基础知识的理解',
+    'Reference': '参考',
+    'Guides': '指南',
+      'Animations': '动画',
+        'Using_CSS_animations': '运用 CSS 动画',
+      'Backgrounds_and_Borders': '背景和边框',
+        'Using_multiple_backgrounds': '多个背景的应用',
+        'Resizing_background_images': '重设背景图片的大小',
+      'Box_alignment': '盒子的对齐方式',
+        'Box_alignment_in_block_layout': '块布局中的盒对齐方式',
+        'Box_alignment_in_flexbox': '弹性盒布局中的盒对齐方式',
+        'Box_alignment_in_grid_layout': '网格布局中的盒对齐方式',
+        'Box_alignment_in_multi-column_layout': '多栏式布局中的盒对齐方式',
+      'Box_model': '盒模型',
+        'Introduction_to_the_CSS_basic_box_model': 'CSS 基本盒模型简介',
+        'Mastering_margin_collapsing': '外边距重叠',
+      'Colors': '颜色',
+        'Applying_color_to_HTML_elements_using_CSS': '使用 CSS 为 HTML 元素添加颜色',
+        'Web_Accessibility_Understanding_Colors_and_Luminance': 'Web 无障碍：理解颜色和亮度',
+        'Color_contrast': 'Web 无障碍：色彩对比度',
+      'Columns': '多栏式布局',
+        'Basic_concepts_of_Multicol': '多栏式布局的基础概念',
+        'Styling_columns': '多栏式布局的样式',
+        'Spanning_and_balancing': '多栏式布局中的跨列与平衡',
+        'Handling_overflow_in_Multicol': '处理多栏式布局的溢出',
+        'Content_breaks_in_Multicol': '多栏式布局中的内容换行',
+      'Conditional_rules': '条件规则',
+        'Using_feature_queries': '运用特性查询',
+      'CSSOM_view': 'CSS 对象模型视图',
+        'Coordinate_systems': '坐标系',
+      'Flexbox': '弹性盒布局',
+        'Basic_concepts_of_Flexbox': '弹性盒布局基础',
+        'Comparison_with_other_layout_methods': '与其他布局的比较',
+        'Aligning_items_in_a_flex_container': '弹性盒容器中的对齐方式',
+        'Ordering_flex_items': '弹性盒布局中的排序方式',
+        'Controlling_flex_item_ratios': '控制弹性盒子元素在主轴上的比例',
+        'Mastering_wrapping_of_flex_items': '包装弹性盒布局中的元素',
+        'Typical_use_cases_of_Flexbox': '经典的弹性盒布局示例',
+      'Flow_layout': '流式布局',
+        'Block_and_Inline_layout_in_normal_flow': '一般的流式布局中的块式和行式布局',
+        'In_flow_and_Out_of_flow': '应用或脱离流式布局',
+        'Formatting_contexts_explained': '格式化上下文简介',
+        'Flow_layout_and_writing_modes': '流式布局和书写模式',
+        'Flow_layout_and_overflow': '流式布局和溢出',
+      'Fonts': '字体',
+        'OpenType_font_features_guide': 'OpenType 字体特性指南',
+        'Variable_fonts_guide': '可变字体指南',
+      'Grid': '网格布局',
+        'Basics_concepts_of_grid_layout': '网格布局基础概念',
+        'Relationship_to_other_layout_methods': '和其他布局方法的联系',
+        'Line-based_placement': '基于网格线的定位',
+        'Grid_template_areas': '网格模板区域',
+        'Layout_using_named_grid_lines': '使用命名线布局',
+        'Auto-placement_in_grid_layout': '网格布局中的自动定位',
+        'Box_alignment_in_grid_layout': '网格布局中的盒模型对齐',
+        'Grids_logical_values_and_writing_modes': '网格、逻辑值和书写模式',
+        'Grid_layout_and_accessibility': '网格布局和无障碍',
+        'Grid_Layout_and_progressive_enhancement': '网格布局和渐进增强',
+        'Realizing_common_layouts_using_grids': '运用网格布局实现常见布局',
+        'Subgrid': '子网格',
+        'Masonry_layout': 'Masonry 布局',
+      'Images': '图片',
+        'Using_CSS_gradients': '使用 CSS 渐变',
+      'Lists_and_counters': '列表和计数器',
+        'Using_CSS_counters': '使用 CSS 计数器',
+        'Consistent_list_indentation': '使列表缩进一致',
+      'Logical_properties': '逻辑属性',
+        'Basic_concepts': '基础概念',
+        'Floating_and_positioning': '浮动和定位',
+        'Margins_borders_and_padding': '内外边距和边框',
+        'Sizing': '调整尺寸',
+      'Math_functions': '数学函数',
+        'Using_CSS_math_functions': '使用 CSS 数学函数',
+      'Media_queries': '媒体查询',
+        'Using_media_queries': '使用媒体查询',
+        'Using_media_queries_for_accessibility': '无障碍相关的媒体查询',
+        'Testing_media_queries_programmatically': '运用编程方法测试媒体查询',
+      'Nesting': '嵌套样式规则',
+        'Using_CSS_nesting': '使用 CSS 嵌套',
+        'Nesting_and_specificity': '嵌套与优先级',
+        'Nesting_at-rules': '嵌套 @ 规则',
+      'Positioning': '定位',
+        'Understanding_CSS_z-index': '理解 CSS z-index',
+      'Scroll_snap': '滚动吸附',
+        'Basic_concepts_of_scroll_snap': '滚动吸附的基本概念',
+      'Shapes': '形状',
+        'Overview_of_shapes': '形状概述',
+        'Shapes_from_box_values': '使用 box 值指定形状',
+        'Basic_shapes': '基本形状',
+        'Shapes_from_images': '从图片中指定形状',
+      'Text': '文本',
+        'Wrapping_and_breaking_text': '包装文本和文本断行',
+      'Transforms': '变换',
+        'Using_transforms': '使用变换',
+      'Transitions': '过渡',
+        'Using_transitions': '使用过渡',
+    'Layout_cookbook': '布局手册',
+      'Media_objects': '媒体对象',
+      'Columns': '多列',
+      'Center_an_element': '居中一个元素',
+      'Sticky_footers': '粘性页脚',
+      'Split_navigation': '分离式导航',
+      'Breadcrumb_navigation': '面包屑导航',
+      'List_group_with_badges': '带有图标的列表',
+      'Pagination': '分页',
+      'Card': '卡片',
+      'Grid_wrapper': '网格布局包装器',
+    'Tools': '工具',
+      'Color_picker_tool': '取色器',
+      'Border-radius_generator': '圆角边框生成器',
+      'Box-shadow_generator': 'Box shadow 生成器',
+      'Border-image_generator' : '图片边框生成器',
+  },
+  'zh-TW': {
+    'Tutorials': '教程',
+    'CSS_basics': 'CSS 基礎',
+      'CSS_first_steps': 'CSS first steps',
+        'CSS_first_steps_overview': 'CSS first steps overview',
+        'What_is_CSS':  'What is CSS?',
+        'Getting_started_with_CSS': 'Getting started with CSS',
+        'How_CSS_is_structured': 'How CSS is structured',
+        'How_CSS_works': 'How CSS works',
+        'Assessment_Styling_a_biography_page': 'Assessment: Styling a biography page',
+      'CSS_building_blocks': 'CSS building blocks',
+        'CSS_building_blocks_overview': 'CSS building blocks overview',
+        'Cascade_and_inheritance': 'Cascade and inheritance',
+        'CSS_selectors': 'CSS selectors',
+        'The_box_model': 'The box model',
+        'Backgrounds_and_borders': 'Backgrounds and borders',
+        'Handling_different_text_directions': 'Handling different text directions',
+        'Overflowing_content': 'Overflowing content',
+        'CSS_values_and_units': 'CSS values and units',
+        'Sizing_items_in_CSS': 'Sizing items in CSS',
+        'Images_media_and_form_elements': 'Images, media, and form elements',
+        'Styling_tables': 'Styling tables',
+        'Debugging_CSS': 'Debugging CSS',
+        'Organizing_your_CSS': 'Organizing your CSS',
+        'Assessment_Fundamental_CSS_comprehension': 'Assessment: Fundamental CSS comprehension',
+        'Assessment_Creating_fancy_letterheaded_paper': 'Assessment: Creating fancy letterheaded paper',
+        'Assessment_A_cool_looking_box': 'Assessment: A cool-looking box',
+      'Styling_text': '樣式化文字',
+        'Styling_text_overview': '樣式化文字概述',
+        'Fundamental_text_and_font_styling': '基礎的文字與字型樣式化',
+        'Styling_lists': '樣式化列表',
+        'Styling_links': '樣式化連結',
+        'Web_fonts': 'Web 字型',
+        'Assessment_Typesetting_a_community_school_homepage': '練習：設定社區大學首頁的版面',
+      'CSS_layout': 'CSS 版面配置',
+        'CSS_layout_overview': 'CSS 版面配置概述',
+        'Normal_Flow': 'Normal Flow',
+        'Flexbox': '彈性區塊',
+        'Grids' : '格線',
+        'Floats': '浮動',
+        'Positioning': '定位',
+        'Multiple-column_layout': 'Multiple-column layout',
+        'Responsive_design': 'Responsive design',
+        'Beginners_guide_to_media_queries': 'Beginner\'s guide to media queries',
+        'Legacy_layout_methods': 'Legacy layout methods',
+        'Supporting_older_browsers': 'Supporting older browsers',
+        'Assessment_Fundamental_Layout_Comprehension': 'Assessment: Fundamental Layout Comprehension',
+  }
+});
+
+
+const locale = env.locale;
+const learnURL = `/${locale}/docs/Learn/`;
+const cssURL = `/${locale}/docs/Web/CSS/`;
+const accessibilityURL = `/${locale}/docs/Web/Accessibility/`;
+
+const htmlEscape = mdn.htmlEscape;
+const hasTag = page.hasTag;
+const rtlLocales = ['ar', 'he', 'fa'];
+
+const pageList = await page.subpagesExpand('/en-US/docs/Web/CSS');
+
+// Some functions are at depth two.
+// Example: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/hsl
+pageList.push(...pageList.map((page) => page.subpages).flat());
+
+const standardPages = pageList.filter(page => !hasTag(page, "Non-standard"));
+
+const groups = [];
+let properties = [];
+const selectors = [];
+const combinators = [];
+const pseudoClasses = [];
+const pseudoElements = [];
+const atRules = [];
+const functions = [];
+const types = [];
+
+for (const page of standardPages) {
+  switch(page.pageType) {
+    case "css-module":
+      groups.push(page);
+      break;
+    case "css-shorthand-property":
+    case "css-property":
+      properties.push(page);
+      break;
+    case "css-selector":
+      selectors.push(page);
+      break;
+    case "css-combinator":
+      combinators.push(page);
+      break;
+    case "css-pseudo-class":
+      pseudoClasses.push(page);
+      break;
+    case "css-pseudo-element":
+      pseudoElements.push(page);
+      break;
+    case "css-at-rule":
+      atRules.push(page);
+      break;
+    case "css-function":
+      functions.push(page);
+      break;
+    case "css-type":
+      types.push(page);
+      break;
+  }
+}
+
+const sortByTitle = (a, b) => a.title.localeCompare(b.title);
+properties.sort(sortByTitle);
+functions.sort(sortByTitle);
+
+function smartLink(href, title, content, subpath) {
+  let basepath = subpath;
+  let ignoreFlawMacro = "CSSRef";
+  return web.smartLink(href, title, content, subpath, basepath, ignoreFlawMacro);
+}
+
+/**
+ * Create an entry in the sidebar for a single CSS page.
+ *
+ * @param aPage : an object containing information about a page, including title, url etc
+ * @returns : a string containing markup for that page's entry in the sidebar
+ */
+async function makePageLink(aPage) {
+  const url = aPage.url.replace('en-US', locale);
+  let title = htmlEscape(aPage.title);
+
+  if (locale !== 'en-US') {
+    for (const translation of aPage.translations()) {
+      if (translation.locale === locale) {
+        title = htmlEscape(translation.title);
+      }
+    }
+  }
+
+  const pageBadges = (await page.badges(aPage)).join("");
+
+  let result = '<li>';
+
+  if (rtlLocales.indexOf(locale) != -1) {
+    result += '<bdi>';
+  }
+
+  result += smartLink(url, null, title, cssURL);
+  result += pageBadges;
+
+  if (rtlLocales.indexOf(locale) != -1) {
+    result += '</bdi>';
+  }
+
+  result += '</li>';
+
+  return result;
+}
+
+async function buildSublist(pages, title) {
+  let result = `<li class="toggle"><details><summary>${title}</summary><ol>`;
+
+  for (const page of pages) {
+     result += await makePageLink(page);
+  }
+
+  result += '</ol></details></li>';
+
+  return result;
+}
+
+/**
+ * Special case behavior for CSS properties. Instead of just listing them all,
+ * put properties with common prefixes (like `border-`) in collapsible groups.
+ *
+ * @param propertyGroups : an object returned by a call to groupProperties
+ * @param pages : an array of page objects
+ * @param title : the title of this section of the sidebar
+ * @returns : markup for the complete CSS property section
+ */
+async function buildPropertylist(pages, title) {
+
+  let result = `<li class="toggle"><details><summary>${title}</summary><ol>`;
+
+  // Go through the array of property pages, splitting off the "first part"
+  // of each property name, where "parts" are demarcated by "-".
+  // For example, split "border" off "border-style".
+  //
+  // Make an object:
+  // - with a key for every distinct "first part"
+  // - whose value is an array of all CSS property names which start with that part.
+  //
+  // For example, it has a key "border" whose value is an array of all
+  // the CSS properties that start with "border".
+  const groups = {};
+
+  for (const page of pages) {
+    // The regex is: match at "-" but not at the start of the string,
+    // because of properties like -webkit-line-clamp, where we want the
+    // "first part" to be "-webkit"
+    const prefix = page.title.split(/(?<!^)-/).shift();
+    if (Object.keys(groups).includes(prefix)) {
+      groups[prefix].push(page);
+    } else {
+      groups[prefix] = [page];
+    }
+  }
+
+  for (const prefix of Object.keys(groups)) {
+    const group = groups[prefix];
+    if (group.length < 3) {
+      // if a group contains fewer than 3 entries (that is, there are fewer than 3
+      // properties with the given prefix) then just write them out as a list
+      // of links
+      for (const page of group) {
+        result += await makePageLink(page);
+      }
+    } else {
+      // otherwise, make a collapsible section for this group, and write
+      // the page links out inside it.
+      result += `<li class="toggle"><details><summary>${prefix}-*</summary><ol>`;
+      for (const page of group) {
+        result += await makePageLink(page);
+      }
+      result += "</ol></details></li>";
+    }
+  }
+
+  result += '</ol></details></li>';
+
+  return result;
+}
+
+%>
+
+<section id="Quick_links" data-macro="CSSRef">
+
+<ol>
+  <li class="section"><%-smartLink(`/${locale}/docs/Web/CSS`, null, 'CSS')%></li>
+  <li class="section"><%-smartLink(`${learnURL}CSS`, null, text['Tutorials'])%></li>
+  <li><%-smartLink(`${learnURL}Getting_started_with_the_web/CSS_basics`, null, text['CSS_basics'])%></li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['CSS_first_steps']%></summary>
+          <ol>
+            <li><%-smartLink(`${learnURL}CSS/First_steps`, null, text['CSS_first_steps_overview'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/First_steps/What_is_CSS`, null, text['What_is_CSS'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/First_steps/Getting_started`, null, text['Getting_started_with_CSS'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/First_steps/How_CSS_is_structured`, null, text['How_CSS_is_structured'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/First_steps/How_CSS_works`, null, text['How_CSS_works'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/First_steps/styling_a_biography_page`, null, text['Assessment_Styling_a_biography_page'], learnURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['CSS_building_blocks']%></summary>
+          <ol>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks`, null, text['CSS_building_blocks_overview'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/Selectors`, null, text['CSS_selectors'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/Selectors/Type_Class_and_ID_Selectors`, null, text['Type_Class_and_ID_Selectors'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/Selectors/Attribute_selectors`, null, text['Attribute_selectors'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/Selectors/Pseudo-classes_and_pseudo-elements`, null, text['Pseudo-classes_and_pseudo-elements'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/Selectors/Combinators`, null, text['Combinators'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/Cascade_and_inheritance`, null, text['Cascade_and_inheritance'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/Cascade_layers`, null, text['Cascade_layers'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/The_box_model`, null, text['The_box_model'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/Backgrounds_and_borders`, null, text['Backgrounds_and_borders'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/Handling_different_text_directions`, null, text['Handling_different_text_directions'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/Overflowing_content`, null, text['Overflowing_content'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/Values_and_units`, null, text['CSS_values_and_units'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/Sizing_items_in_CSS`, null, text['Sizing_items_in_CSS'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/Images_media_form_elements`, null, text['Images_media_and_form_elements'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/Styling_tables`, null, text['Styling_tables'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/Debugging_CSS`, null, text['Debugging_CSS'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/Organizing`, null, text['Organizing_your_CSS'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/Fundamental_CSS_comprehension`, null, text['Assessment_Fundamental_CSS_comprehension'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/Creating_fancy_letterheaded_paper`, null, text['Assessment_Creating_fancy_letterheaded_paper'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Building_blocks/A_cool_looking_box`, null, text['Assessment_A_cool_looking_box'], learnURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Styling_text']%></summary>
+          <ol>
+            <li><%-smartLink(`${learnURL}CSS/Styling_text`, null, text['Styling_text_overview'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Styling_text/Fundamentals`, null, text['Fundamental_text_and_font_styling'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Styling_text/Styling_lists`, null, text['Styling_lists'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Styling_text/Styling_links`, null, text['Styling_links'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Styling_text/Web_fonts`, null, text['Web_fonts'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/Styling_text/Typesetting_a_homepage`, null, text['Assessment_Typesetting_a_community_school_homepage'], learnURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['CSS_layout']%></summary>
+          <ol>
+            <li><%-smartLink(`${learnURL}CSS/CSS_layout`, null, text['CSS_layout_overview'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/CSS_layout/Introduction`, null, text['Introduction_to_CSS_layout'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/CSS_layout/Normal_Flow`, null, text['Normal_Flow'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/CSS_layout/Flexbox`, null, text['Flexbox'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/CSS_layout/Grids`, null, text['Grids'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/CSS_layout/Floats`, null, text['Floats'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/CSS_layout/Positioning`, null, text['Positioning'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/CSS_layout/Multiple-column_Layout`, null, text['Multiple-column_layout'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/CSS_layout/Responsive_Design`, null, text['Responsive_design'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/CSS_layout/Media_queries`, null, text['Beginners_guide_to_media_queries'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/CSS_layout/Legacy_Layout_Methods`, null, text['Legacy_layout_methods'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/CSS_layout/Supporting_Older_Browsers`, null, text['Supporting_older_browsers'], learnURL)%></li>
+            <li><%-smartLink(`${learnURL}CSS/CSS_layout/Fundamental_Layout_Comprehension`, null, text['Assessment_Fundamental_Layout_Comprehension'], learnURL)%></li>
+          </ol>
+      </details>
+  </li>
+
+  <li class="section"><%-smartLink(`/${locale}/docs/Web/CSS/Reference`, null, text['Reference'])%></a></li>
+  <%-await buildSublist(groups, 'Modules');%>
+  <%-await buildPropertylist(properties, 'Properties');%>
+  <%-await buildSublist(selectors, 'Selectors');%>
+  <%-await buildSublist(combinators, 'Combinators');%>
+  <%-await buildSublist(pseudoClasses, 'Pseudo-classes');%>
+  <%-await buildSublist(pseudoElements, 'Pseudo-elements');%>
+  <%-await buildSublist(atRules, 'At-rules');%>
+  <%-await buildSublist(functions, 'Functions');%>
+  <%-await buildSublist(types, 'Types');%>
+
+  <li class="section no-link"><%=text['Guides']%></li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Animations']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Animations/Using_CSS_animations`, null, text['Using_CSS_animations'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Backgrounds_and_Borders']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Backgrounds_and_Borders/Using_multiple_backgrounds`, null, text['Using_multiple_backgrounds'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Backgrounds_and_Borders/Resizing_background_images`, null, text['Resizing_background_images'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Box_alignment']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Box_Alignment/Box_Alignment_In_Block_Abspos_Tables`, null, text['Box_alignment_in_block_layout'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Box_Alignment/Box_Alignment_in_Flexbox`, null, text['Box_alignment_in_flexbox'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Box_Alignment/Box_Alignment_In_Grid_Layout`, null, text['Box_alignment_in_grid_layout'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Box_Alignment/Box_Alignment_in_Multi-column_Layout`, null, text['Box_alignment_in_multi-column_layout'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Box_model']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Box_Model/Introduction_to_the_CSS_box_model`, null, text['Introduction_to_the_CSS_basic_box_model'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Box_Model/Mastering_margin_collapsing`, null, text['Mastering_margin_collapsing'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Colors']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_colors/Applying_color`, null, text['Applying_color_to_HTML_elements_using_CSS'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_colors/Color_values`)%></li>
+            <li><%-smartLink(`${cssURL}CSS_colors/Relative_colors`)%></li>
+            <li><%-smartLink(`${cssURL}CSS_colors/Using_color_wisely`)%></li>
+            <li><%-smartLink(`${accessibilityURL}Understanding_Colors_and_Luminance`, null, text['Web_Accessibility_Understanding_Colors_and_Luminance'], accessibilityURL)%></li>
+            <li><%-smartLink(`${accessibilityURL}Understanding_WCAG/Perceivable/Color_contrast`, null, text['Color_contrast'], accessibilityURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Columns']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Multicol_Layout/Basic_concepts`, null, text['Basic_concepts_of_Multicol'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Multicol_Layout/Styling_columns`, null, text['Styling_columns'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Multicol_Layout/Spanning_balancing_columns`, null, text['Spanning_and_balancing'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Multicol_Layout/Handling_overflow_in_multicol_layout`, null, text['Handling_overflow_in_Multicol'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Multicol_Layout/Handling_content_breaks_in_multicol_layout`, null, text['Content_breaks_in_Multicol'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Conditional_rules']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Conditional_Rules/Using_Feature_Queries`, null, text['Using_feature_queries'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+    <details>
+        <summary><%=text['Containment']%></summary>
+        <ol>
+          <li><%-smartLink(`${cssURL}CSS_Containment/Using_CSS_containment`)%></li>
+          <li><%-smartLink(`${cssURL}CSS_Containment/Container_queries`)%></li>
+          <li><%-smartLink(`${cssURL}CSS_Containment/Container_size_and_style_queries`)%></li>
+        </ol>
+    </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['CSSOM_view']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSSOM_View/Coordinate_systems`, null, text['Coordinate_systems'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Flexbox']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox`, null, text['Basic_concepts_of_Flexbox'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Flexible_Box_Layout/Relationship_of_Flexbox_to_Other_Layout_Methods`, null, text['Comparison_with_other_layout_methods'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container`, null, text['Aligning_items_in_a_flex_container'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Flexible_Box_Layout/Ordering_Flex_Items`, null, text['Ordering_flex_items'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Flexible_Box_Layout/Controlling_ratios_of_flex_items_along_the_main_axis`, null, text['Controlling_flex_item_ratios'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Flexible_Box_Layout/Mastering_Wrapping_of_Flex_Items`, null, text['Mastering_wrapping_of_flex_items'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Flexible_Box_Layout/Typical_Use_Cases_of_Flexbox`, null, text['Typical_use_cases_of_Flexbox'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Flow_layout']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Flow_Layout/Block_and_Inline_Layout_in_Normal_Flow`, null, text['Block_and_Inline_layout_in_normal_flow'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Flow_Layout/In_Flow_and_Out_of_Flow`, null, text['In_flow_and_Out_of_flow'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Flow_Layout/Introduction_to_formatting_contexts`, null, text['Formatting_contexts_explained'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Flow_Layout/Flow_Layout_and_Writing_Modes`, null, text['Flow_layout_and_writing_modes'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Flow_Layout/Flow_Layout_and_Overflow`, null, text['Flow_layout_and_overflow'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Fonts']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Fonts/OpenType_fonts_guide`, null, text['OpenType_font_features_guide'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Fonts/Variable_Fonts_Guide`, null, text['Variable_fonts_guide'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Grid']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout`, null, text['Basics_concepts_of_grid_layout'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Grid_Layout/Relationship_of_grid_layout_with_other_layout_methods`, null, text['Relationship_to_other_layout_methods'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Grid_Layout/Grid_layout_using_line-based_placement`, null, text['Line-based_placement'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Grid_Layout/Grid_Template_Areas`, null, text['Grid_template_areas'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Grid_Layout/Grid_layout_using_named_grid_lines`, null, text['Layout_using_named_grid_lines'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Grid_Layout/Auto-placement_in_grid_layout`, null, text['Auto-placement_in_grid_layout'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Grid_Layout/Box_alignment_in_grid_layout`, null, text['Box_alignment_in_grid_layout'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Grid_Layout/Grids_logical_values_and_writing_modes`, null, text['Grids_logical_values_and_writing_modes'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Grid_Layout/Grid_layout_and_accessibility`, null, text['Grid_layout_and_accessibility'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Grid_Layout/Grid_layout_and_progressive_enhancement`, null, text['Grid_Layout_and_progressive_enhancement'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Grid_Layout/Realizing_common_layouts_using_grids`, null, text['Realizing_common_layouts_using_grids'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Grid_Layout/Subgrid`, null, text['Subgrid'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Grid_Layout/Masonry_Layout`, null, text['Masonry_layout'], cssURL)%></li>
+         </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Images']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Images/Using_CSS_gradients`, null, text['Using_CSS_gradients'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Lists_and_counters']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Counter_Styles/Using_CSS_counters`, null, text['Using_CSS_counters'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Lists/Consistent_list_indentation`, null, text['Consistent_list_indentation'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Logical_properties']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Logical_Properties_and_Values/Basic_concepts_of_logical_properties_and_values`, null, text['Basic_concepts'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Logical_Properties_and_Values/Floating_and_positioning`, null, text['Floating_and_positioning'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Logical_Properties_and_Values/Margins_borders_padding`, null, text['Margins_borders_and_padding'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Logical_Properties_and_Values/Sizing`, null, text['Sizing'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Math_functions']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Functions/Using_CSS_math_functions`, null, text['Using_CSS_math_functions'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Media_queries']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Media_Queries/Using_media_queries`, null, text['Using_media_queries'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Media_Queries/Using_Media_Queries_for_Accessibility`, null, text['Using_media_queries_for_accessibility'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Media_Queries/Testing_media_queries`, null, text['Testing_media_queries_programmatically'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Media_Queries/Printing`, null, text['Printing'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Nesting']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Nesting/Using_CSS_nesting`, null, text['Using_CSS_nesting'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Nesting/Nesting_at-rules`, null, text['Nesting_at-rules'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Nesting/Nesting_and_specificity`, null, text['Nesting_and_specificity'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Positioning']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Positioned_Layout/Understanding_z-index`, null, text['Understanding_CSS_z-index'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Scroll_snap']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Scroll_Snap/Basic_concepts`, null, text['Basic_concepts_of_scroll_snap'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Shapes']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Shapes/Overview_of_Shapes`, null, text['Overview_of_shapes'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Shapes/From_box_values`, null, text['Shapes_from_box_values'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Shapes/Basic_Shapes`, null, text['Basic_shapes'], cssURL)%></li>
+            <li><%-smartLink(`${cssURL}CSS_Shapes/Shapes_From_Images`, null, text['Shapes_from_images'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Text']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Text/Wrapping_Breaking_Text`, null, text['Wrapping_and_breaking_text'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Transforms']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Transforms/Using_CSS_transforms`, null, text['Using_transforms'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+  <li class="toggle">
+      <details>
+          <summary><%=text['Transitions']%></summary>
+          <ol>
+            <li><%-smartLink(`${cssURL}CSS_Transitions/Using_CSS_transitions`, null, text['Using_transitions'], cssURL)%></li>
+          </ol>
+      </details>
+  </li>
+
+  <li class="section"><%-smartLink(`/${locale}/docs/Web/CSS/Layout_cookbook`, null, text['Layout_cookbook'])%></a></li>
+  <li class="toggle">
+    <ol>
+      <li><%-smartLink(`${cssURL}Layout_cookbook/Media_objects`, null, text['Media_objects'], cssURL)%></li>
+      <li><%-smartLink(`${cssURL}Layout_cookbook/Column_layouts`, null, text['Columns'], cssURL)%></li>
+      <li><%-smartLink(`${cssURL}Layout_cookbook/Center_an_element`, null, text['Center_an_element'], cssURL)%></li>
+      <li><%-smartLink(`${cssURL}Layout_cookbook/Sticky_footers`, null, text['Sticky_footers'], cssURL)%></li>
+      <li><%-smartLink(`${cssURL}Layout_cookbook/Split_Navigation`, null, text['Split_navigation'], cssURL)%></li>
+      <li><%-smartLink(`${cssURL}Layout_cookbook/Breadcrumb_Navigation`, null, text['Breadcrumb_navigation'], cssURL)%></li>
+      <li><%-smartLink(`${cssURL}Layout_cookbook/List_group_with_badges`, null, text['List_group_with_badges'], cssURL)%></li>
+      <li><%-smartLink(`${cssURL}Layout_cookbook/Pagination`, null, text['Pagination'], cssURL)%></li>
+      <li><%-smartLink(`${cssURL}Layout_cookbook/Card`, null, text['Card'], cssURL)%></li>
+      <li><%-smartLink(`${cssURL}Layout_cookbook/Grid_wrapper`, null, text['Grid_wrapper'], cssURL)%></li>
+    </ol>
+  </li>
+
+  <li class="section no-link"><%=text['Tools']%></li>
+  <li class="toggle">
+    <ol>
+      <li><%-smartLink(`${cssURL}CSS_Colors/Color_picker_tool`, null, text['Color_picker_tool'], cssURL)%></li>
+      <li><%-smartLink(`${cssURL}CSS_Backgrounds_and_Borders/Box-shadow_generator`, null, text['Box-shadow_generator'], cssURL)%></li>
+      <li><%-smartLink(`${cssURL}CSS_Backgrounds_and_Borders/Border-image_generator`, null, text['Border-image_generator'], cssURL)%></li>
+      <li><%-smartLink(`${cssURL}CSS_Backgrounds_and_Borders/Border-radius_generator`, null, text['Border-radius_generator'], cssURL)%></li>
+    </ol>
+  </li>
+
+</ol>
+
+</section>
