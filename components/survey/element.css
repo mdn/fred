@@ -48,7 +48,8 @@ mdn-button::part(icon) {
   color: var(--color-text-purple);
 }
 
-summary {
+summary,
+a {
   color: var(--color-text-purple);
   cursor: pointer;
 }

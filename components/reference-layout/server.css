@@ -6,7 +6,7 @@
   grid-template-areas:
     "sidebar . header . toc"
     "sidebar . body   . toc";
-  grid-template-rows: min-content auto;
+  grid-template-rows: min-content 1fr;
   grid-template-columns: var(--layout-2-sidebars);
 
   justify-content: space-between;

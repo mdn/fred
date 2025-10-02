@@ -7,7 +7,7 @@ import { L10nMixin } from "../../l10n/mixin.js";
 import closeIcon from "../icon/cancel.svg?lit";
 
 import styles from "./element.css?lit";
-import { SURVEYS } from "./surveys.js";
+import { SURVEYS, SurveyBucket } from "./surveys.js";
 import { getSurveyState, writeSurveyState } from "./utils.js";
 
 /**
@@ -27,8 +27,8 @@ export class MDNSurvey extends L10nMixin(LitElement) {
     this._surveyState = undefined;
     /** @type {boolean} */
     this._isOpen = false;
-    /** @type {boolean}  */
-    this._force = false;
+    /** @type {string | null}  */
+    this._force = null;
     /** @type {string | undefined} */
     this._source = undefined;
 
@@ -48,18 +48,13 @@ export class MDNSurvey extends L10nMixin(LitElement) {
   }
 
   #checkForSurvey() {
-    if (globalThis.window === undefined) return;
-
-    const FORCE_SURVEY_PREFIX = "#FORCE_SURVEY=";
-    this._force = globalThis.location.hash.startsWith(FORCE_SURVEY_PREFIX);
-
     this._survey = this.#findSurvey();
 
     if (this._survey) {
       this._surveyState = getSurveyState(this._survey.bucket);
       this._source =
         typeof this._survey.src === "function"
-          ? this._survey.src(globalThis.location.pathname)
+          ? this._survey.src(location.pathname)
           : this._survey.src;
 
       this.#markAsSeen();
@@ -70,20 +65,15 @@ export class MDNSurvey extends L10nMixin(LitElement) {
    * @returns {Survey.Survey | undefined}
    */
   #findSurvey() {
+    this._force = new URLSearchParams(location.search).get("force_survey");
     return SURVEYS.find((survey) => {
       if (this._force) {
-        const FORCE_SURVEY_PREFIX = "#FORCE_SURVEY=";
-        return (
-          survey.key ===
-          globalThis.location.hash.slice(FORCE_SURVEY_PREFIX.length)
-        );
+        return this._force in SurveyBucket
+          ? survey.key === this._force
+          : this._force;
       }
 
-      if (globalThis.window === undefined) {
-        return false;
-      }
-
-      if (!survey.show(globalThis.location.pathname)) {
+      if (!survey.show(location.pathname)) {
         return false;
       }
 
@@ -208,17 +198,19 @@ export class MDNSurvey extends L10nMixin(LitElement) {
             @click=${this.#dismiss}
           ></mdn-button>
         </header>
-        <details ${ref(this._detailsRef)} @toggle=${this.#onToggle}>
-          <summary>${this._survey.question}</summary>
-          ${this._isOpen && this._source
-            ? html`
-                <iframe
-                  title=${ifDefined(this._survey.question)}
-                  src=${this._source}
-                ></iframe>
-              `
-            : nothing}
-        </details>
+        ${this._survey.link
+          ? html`<a href=${this._source}>${this._survey.question}</a>`
+          : html`<details ${ref(this._detailsRef)} @toggle=${this.#onToggle}>
+              <summary>${this._survey.question}</summary>
+              ${this._isOpen && this._source
+                ? html`
+                    <iframe
+                      title=${ifDefined(this._survey.question)}
+                      src=${this._source}
+                    ></iframe>
+                  `
+                : nothing}
+            </details>`}
         ${this._survey.footnote
           ? html` <footer>(${this._survey.footnote})</footer> `
           : nothing}
