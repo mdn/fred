@@ -243,6 +243,7 @@ app.use("/users/*", proxy);
 app.use(express.json());
 
 // Needed because we read cookies in the code that mimics what we do in Lambda@Edge.
+// @ts-expect-error Yari uses Express v4, but Fred uses v5.
 app.use(cookieParser());
 
 app.use(originRequestMiddleware);

@@ -10,6 +10,7 @@ import { BUILD_OUT_ROOT } from "../libs/env/index.js";
 
 const app = express();
 app.use(express.json());
+// @ts-expect-error Yari uses Express v4, but Fred uses v5.
 app.use(compression());
 
 app.use(express.urlencoded({ extended: true }));
@@ -29,6 +30,7 @@ app.get("/", async (req, res) => {
 
 app.use(staticMiddlewares);
 
+// @ts-expect-error Yari uses Express v4, but Fred uses v5.
 app.use(cookieParser());
 
 // This endpoint exists solely to accompany the headless tests.
