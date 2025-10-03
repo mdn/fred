@@ -12,11 +12,11 @@ export class Menu extends ServerComponent {
    */
   render(context) {
     /**
-     * Holds the id of the section being rendered.
+     * Holds the id of the tab being rendered.
      *
      * @type {string|null}
      */
-    let currentSection = null;
+    let currentTab = null;
 
     /**
      * Generates a Glean ID for menu/submenu links.
@@ -27,7 +27,7 @@ export class Menu extends ServerComponent {
      * @returns {string} the Glean ID.
      */
     const gleanId = (href, { primary = false } = {}) =>
-      `${primary ? "menu_click_menu" : "menu_click_submenu"}: ${currentSection ?? "?"} -> ${href}`;
+      `${primary ? "menu_click_menu" : "menu_click_submenu"}: ${currentTab ?? "?"} -> ${href}`;
 
     /**
      * Renders a link to a page.
@@ -61,7 +61,7 @@ export class Menu extends ServerComponent {
         >`;
       };
 
-    const sections = [
+    const tabs = [
       {
         id: "html",
         buttonText: "HTML",
@@ -463,33 +463,33 @@ export class Menu extends ServerComponent {
 
     return html`
       <nav class="menu">
-        ${sections.map((section) => {
-          currentSection = section.id;
-          const result = html`<div class="menu__tab" data-section=${section.id}>
-            ${typeof section.render == "function"
-              ? section.render()
+        ${tabs.map((tab) => {
+          currentTab = tab.id;
+          const result = html`<div class="menu__tab" data-section=${tab.id}>
+            ${typeof tab.render == "function"
+              ? tab.render()
               : html`<mdn-dropdown>
                   <button class="menu__tab-button" type="button" slot="button">
-                    ${typeof section.buttonText === "string"
+                    ${typeof tab.buttonText === "string"
                       ? html`<span class="menu__tab-label"
-                          >${section.buttonText}</span
+                          >${tab.buttonText}</span
                         >`
                       : html`<span class="menu__tab-label" data-type="long"
-                            >${section.buttonText.long}</span
+                            >${tab.buttonText.long}</span
                           ><span class="menu__tab-label" data-type="short"
-                            >${section.buttonText.short}</span
+                            >${tab.buttonText.short}</span
                           >`}
                   </button>
                   <div class="menu__panel" slot="dropdown">
                     <p class="menu__panel-title">
-                      ${typeof section.panelTitle === "function"
-                        ? section.panelTitle()
-                        : section.panelTitle}
+                      ${typeof tab.panelTitle === "function"
+                        ? tab.panelTitle()
+                        : tab.panelTitle}
                     </p>
                     <div class="menu__panel-content">
-                      ${section.panelGroups === undefined
+                      ${tab.panelGroups === undefined
                         ? ""
-                        : section.panelGroups.map((group) => {
+                        : tab.panelGroups.map((group) => {
                             const items = html`<ul>
                               ${group.items.map(
                                 (render) => html`<li>${render()}</li>`,
@@ -507,7 +507,7 @@ export class Menu extends ServerComponent {
                   </div>
                 </mdn-dropdown>`}
           </div>`;
-          currentSection = null;
+          currentTab = null;
           return result;
         })}
       </nav>
