@@ -352,15 +352,8 @@ export class Menu extends ServerComponent {
               },
               { slug: "Learn_web_development/Howto", text: "Common questions" },
               {
-                render: () =>
-                  html`<a
-                    class=${ifDefined(
-                      context.locale === "en-US" ? undefined : "only-in-en-us",
-                    )}
-                    href="/en-US/curriculum/"
-                    data-glean-id=${gleanId("/en-US/curriculum/")}
-                    >Curriculum</a
-                  >`,
+                href: "/en-US/curriculum/",
+                text: "Curriculum",
               },
             ],
           },
@@ -573,9 +566,22 @@ export class Menu extends ServerComponent {
                               html`<li>
                                 ${"render" in item
                                   ? item.render()
-                                  : link(item.slug, item.text, {
-                                      label: item.label,
-                                    })}
+                                  : "slug" in item
+                                    ? link(item.slug, item.text, {
+                                        label: item.label,
+                                      })
+                                    : html`<a
+                                        class=${ifDefined(
+                                          context.locale === "en-US"
+                                            ? undefined
+                                            : "only-in-en-us",
+                                        )}
+                                        href=${item.href}
+                                        aria-label=${ifDefined(item.label)}
+                                        title=${ifDefined(item.label)}
+                                        data-glean-id=${gleanId(item.href)}
+                                        >${item.text}</a
+                                      >`}
                               </li>`,
                           )}
                         </ul>`;
