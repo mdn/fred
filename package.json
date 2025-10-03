@@ -34,7 +34,7 @@
   ],
   "dependencies": {
     "@codemirror/lang-css": "^6.3.1",
-    "@codemirror/lang-html": "^6.4.10",
+    "@codemirror/lang-html": "^6.4.11",
     "@codemirror/lang-javascript": "^6.2.3",
     "@codemirror/lang-wast": "^6.0.2",
     "@codemirror/state": "^6.5.2",
