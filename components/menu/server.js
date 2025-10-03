@@ -42,28 +42,26 @@ export class Menu extends ServerComponent {
      * @param {string} [options.label] - The title and aria-label of the link.
      * @param {boolean} [options.primary] - Whether this is the primary link (in the panel title).
      */
-    const link =
-      (slug, text, { label, primary = false } = {}) =>
-      () => {
-        const locale =
-          context.locale in MISSING_DOCS &&
-          MISSING_DOCS[context.locale]?.includes(slug)
-            ? "en-US"
-            : context.locale;
+    const link = (slug, text, { label, primary = false } = {}) => {
+      const locale =
+        context.locale in MISSING_DOCS &&
+        MISSING_DOCS[context.locale]?.includes(slug)
+          ? "en-US"
+          : context.locale;
 
-        const href = `/${locale}/docs/${slug}`;
+      const href = `/${locale}/docs/${slug}`;
 
-        return html`<a
-          class=${ifDefined(
-            locale === context.locale ? undefined : "only-in-en-us",
-          )}
-          href=${href}
-          aria-label=${ifDefined(label)}
-          title=${ifDefined(label)}
-          data-glean-id=${gleanId(href, { primary })}
-          >${text}</a
-        >`;
-      };
+      return html`<a
+        class=${ifDefined(
+          locale === context.locale ? undefined : "only-in-en-us",
+        )}
+        href=${href}
+        aria-label=${ifDefined(label)}
+        title=${ifDefined(label)}
+        data-glean-id=${gleanId(href, { primary })}
+        >${text}</a
+      >`;
+    };
 
     /** @type {MenuTab[]} */
     const tabs = [
@@ -564,7 +562,7 @@ export class Menu extends ServerComponent {
                       ${tab.panelTitle.slug
                         ? link(tab.panelTitle.slug, tab.panelTitle.text, {
                             primary: true,
-                          })()
+                          })
                         : tab.panelTitle.text}
                     </p>
                     <div class="menu__panel-content">
