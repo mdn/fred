@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.2](https://github.com/mdn/fred/compare/v1.6.1...v1.6.2) (2025-10-03)
+
+
+### Miscellaneous
+
+* **deps-dev:** bump the dev group across 1 directory with 15 updates ([#862](https://github.com/mdn/fred/issues/862)) ([12dcccb](https://github.com/mdn/fred/commit/12dcccba45c7699107cf46aa3dc2ba273db0d80d))
+
 ## [1.6.1](https://github.com/mdn/fred/compare/v1.6.0...v1.6.1) (2025-10-03)
 
 
