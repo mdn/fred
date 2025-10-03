@@ -6,6 +6,10 @@ import { ServerComponent } from "../server/index.js";
 
 import { MISSING_DOCS } from "./constants.js";
 
+/**
+ * @import { MenuTab } from "./types.js";
+ */
+
 export class Menu extends ServerComponent {
   /**
    * @param {import("@fred").Context} context
@@ -61,6 +65,7 @@ export class Menu extends ServerComponent {
         >`;
       };
 
+    /** @type {MenuTab[]} */
     const tabs = [
       {
         id: "html",
@@ -73,34 +78,44 @@ export class Menu extends ServerComponent {
           {
             title: "HTML reference",
             items: [
-              link("Web/HTML/Reference/Elements", "Elements"),
-              link("Web/HTML/Reference/Global_attributes", "Global attributes"),
-              link("Web/HTML/Reference/Attributes", "Attributes"),
-              link("Web/HTML/Reference", "See all…", {
+              { slug: "Web/HTML/Reference/Elements", text: "Elements" },
+              {
+                slug: "Web/HTML/Reference/Global_attributes",
+                text: "Global attributes",
+              },
+              { slug: "Web/HTML/Reference/Attributes", text: "Attributes" },
+              {
+                slug: "Web/HTML/Reference",
+                text: "See all…",
                 label: "See all HTML references",
-              }),
+              },
             ],
           },
           {
             title: "HTML guides",
             items: [
-              link("Web/HTML/Guides/Responsive_images", "Responsive images"),
-              link("Web/HTML/Guides/Cheatsheet", "HTML cheatsheet"),
-              link(
-                "Web/HTML/Guides/Date_and_time_formats",
-                "Date & time formats",
-              ),
-              link("Web/HTML/Guides", "See all…", {
+              {
+                slug: "Web/HTML/Guides/Responsive_images",
+                text: "Responsive images",
+              },
+              { slug: "Web/HTML/Guides/Cheatsheet", text: "HTML cheatsheet" },
+              {
+                slug: "Web/HTML/Guides/Date_and_time_formats",
+                text: "Date & time formats",
+              },
+              {
+                slug: "Web/HTML/Guides",
+                text: "See all…",
                 label: "See all HTML guides",
-              }),
+              },
             ],
           },
           {
             title: "Markup languages",
             items: [
-              link("Web/SVG", "SVG"),
-              link("Web/MathML", "MathML"),
-              link("Web/XML", "XML"),
+              { slug: "Web/SVG", text: "SVG" },
+              { slug: "Web/MathML", text: "MathML" },
+              { slug: "Web/XML", text: "XML" },
             ],
           },
         ],
@@ -116,43 +131,53 @@ export class Menu extends ServerComponent {
           {
             title: "CSS reference",
             items: [
-              link("Web/CSS/Properties", "Properties"),
-              link("Web/CSS/CSS_selectors", "Selectors"),
-              link("Web/CSS/CSS_syntax/At-rule", "At-rules"),
-              link("Web/CSS/CSS_values_and_units", "Values & units"),
-              link("Web/CSS/Reference", "See all…", {
+              { slug: "Web/CSS/Properties", text: "Properties" },
+              { slug: "Web/CSS/CSS_selectors", text: "Selectors" },
+              { slug: "Web/CSS/CSS_syntax/At-rule", text: "At-rules" },
+              { slug: "Web/CSS/CSS_values_and_units", text: "Values & units" },
+              {
+                slug: "Web/CSS/Reference",
+                text: "See all…",
                 label: "See all CSS references",
-              }),
+              },
             ],
           },
           {
             title: "CSS guides",
             items: [
-              link(
-                "Web/CSS/CSS_box_model/Introduction_to_the_CSS_box_model",
-                "Box model",
-              ),
-              link("Web/CSS/CSS_animations/Using_CSS_animations", "Animations"),
-              link(
-                "Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox",
-                "Flexbox",
-              ),
-              link("Web/CSS/CSS_colors", "Colors"),
-              link("Web/CSS/Guides", "See all…", {
+              {
+                slug: "Web/CSS/CSS_box_model/Introduction_to_the_CSS_box_model",
+                text: "Box model",
+              },
+              {
+                slug: "Web/CSS/CSS_animations/Using_CSS_animations",
+                text: "Animations",
+              },
+              {
+                slug: "Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox",
+                text: "Flexbox",
+              },
+              { slug: "Web/CSS/CSS_colors", text: "Colors" },
+              {
+                slug: "Web/CSS/Guides",
+                text: "See all…",
                 label: "See all CSS guides",
-              }),
+              },
             ],
           },
           {
             title: "Layout cookbook",
             items: [
-              link("Web/CSS/Layout_cookbook/Column_layouts", "Column layouts"),
-              link(
-                "Web/CSS/Layout_cookbook/Center_an_element",
-                "Centering an element",
-              ),
-              link("Web/CSS/Layout_cookbook/Card", "Card component"),
-              link("Web/CSS/Layout_cookbook", "See all…"),
+              {
+                slug: "Web/CSS/Layout_cookbook/Column_layouts",
+                text: "Column layouts",
+              },
+              {
+                slug: "Web/CSS/Layout_cookbook/Center_an_element",
+                text: "Centering an element",
+              },
+              { slug: "Web/CSS/Layout_cookbook/Card", text: "Card component" },
+              { slug: "Web/CSS/Layout_cookbook", text: "See all…" },
             ],
           },
         ],
@@ -171,43 +196,50 @@ export class Menu extends ServerComponent {
           {
             title: "JS reference",
             items: [
-              link(
-                "Web/JavaScript/Reference/Global_Objects",
-                "Standard built-in objects",
-              ),
-              link(
-                "Web/JavaScript/Reference/Operators",
-                "Expressions & operators",
-              ),
-              link(
-                "Web/JavaScript/Reference/Statements",
-                "Statements & declarations",
-              ),
-              link("Web/JavaScript/Reference/Functions", "Functions"),
-              link("Web/JavaScript/Reference", "See all…", {
+              {
+                slug: "Web/JavaScript/Reference/Global_Objects",
+                text: "Standard built-in objects",
+              },
+              {
+                slug: "Web/JavaScript/Reference/Operators",
+                text: "Expressions & operators",
+              },
+              {
+                slug: "Web/JavaScript/Reference/Statements",
+                text: "Statements & declarations",
+              },
+              { slug: "Web/JavaScript/Reference/Functions", text: "Functions" },
+              {
+                slug: "Web/JavaScript/Reference",
+                text: "See all…",
                 label: "See all JavaScript references",
-              }),
+              },
             ],
           },
           {
             title: "JS guides",
             items: [
-              link(
-                "Web/JavaScript/Guide/Control_flow_and_error_handling",
-                "Control flow & error handing",
-              ),
-              link(
-                "Web/JavaScript/Guide/Loops_and_iteration",
-                "Loops and iteration",
-              ),
-              link(
-                "Web/JavaScript/Guide/Working_with_objects",
-                "Working with objects",
-              ),
-              link("Web/JavaScript/Guide/Using_classes", "Using classes"),
-              link("Web/JavaScript/Guide", "See all…", {
+              {
+                slug: "Web/JavaScript/Guide/Control_flow_and_error_handling",
+                text: "Control flow & error handing",
+              },
+              {
+                slug: "Web/JavaScript/Guide/Loops_and_iteration",
+                text: "Loops and iteration",
+              },
+              {
+                slug: "Web/JavaScript/Guide/Working_with_objects",
+                text: "Working with objects",
+              },
+              {
+                slug: "Web/JavaScript/Guide/Using_classes",
+                text: "Using classes",
+              },
+              {
+                slug: "Web/JavaScript/Guide",
+                text: "See all…",
                 label: "See all JavaScript guides",
-              }),
+              },
             ],
           },
         ],
@@ -223,37 +255,45 @@ export class Menu extends ServerComponent {
           {
             title: "Web API reference",
             items: [
-              link("Web/API/File_System_API", "File system API"),
-              link("Web/API/Fetch_API", "Fetch API"),
-              link("Web/API/Geolocation_API", "Geolocation API"),
-              link("Web/API/HTML_DOM_API", "HTML DOM API"),
-              link("Web/API/Push_API", "Push API"),
-              link("Web/API/Service_Worker_API", "Service worker API"),
-              link("Web/API", "See all…", {
+              { slug: "Web/API/File_System_API", text: "File system API" },
+              { slug: "Web/API/Fetch_API", text: "Fetch API" },
+              { slug: "Web/API/Geolocation_API", text: "Geolocation API" },
+              { slug: "Web/API/HTML_DOM_API", text: "HTML DOM API" },
+              { slug: "Web/API/Push_API", text: "Push API" },
+              {
+                slug: "Web/API/Service_Worker_API",
+                text: "Service worker API",
+              },
+              {
+                slug: "Web/API",
+                text: "See all…",
                 label: "See all Web API guides",
-              }),
+              },
             ],
           },
           {
             title: "Web API guides",
             items: [
-              link(
-                "Web/API/Web_Animations_API/Using_the_Web_Animations_API",
-                "Using the Web animation API",
-              ),
-              link("Web/API/Fetch_API/Using_Fetch", "Using the Fetch API"),
-              link(
-                "Web/API/History_API/Working_with_the_History_API",
-                "Working with the History API",
-              ),
-              link(
-                "Web/API/Web_Speech_API/Using_the_Web_Speech_API",
-                "Using the Web speech API",
-              ),
-              link(
-                "Web/API/Web_Workers_API/Using_web_workers",
-                "Using web workers",
-              ),
+              {
+                slug: "Web/API/Web_Animations_API/Using_the_Web_Animations_API",
+                text: "Using the Web animation API",
+              },
+              {
+                slug: "Web/API/Fetch_API/Using_Fetch",
+                text: "Using the Fetch API",
+              },
+              {
+                slug: "Web/API/History_API/Working_with_the_History_API",
+                text: "Working with the History API",
+              },
+              {
+                slug: "Web/API/Web_Speech_API/Using_the_Web_Speech_API",
+                text: "Using the Web speech API",
+              },
+              {
+                slug: "Web/API/Web_Workers_API/Using_web_workers",
+                text: "Using web workers",
+              },
             ],
           },
         ],
@@ -269,25 +309,30 @@ export class Menu extends ServerComponent {
           {
             title: "Technologies",
             items: [
-              link("Web/Accessibility", "Accessibility"),
-              link("Web/HTTP", "HTTP"),
-              link("Web/URI", "URI"),
-              link("Mozilla/Add-ons/WebExtensions", "Web extensions"),
-              link("WebAssembly", "WebAssembly"),
-              link("Web/WebDriver", "WebDriver"),
-              link("Web", "See all…", {
+              { slug: "Web/Accessibility", text: "Accessibility" },
+              { slug: "Web/HTTP", text: "HTTP" },
+              { slug: "Web/URI", text: "URI" },
+              { slug: "Mozilla/Add-ons/WebExtensions", text: "Web extensions" },
+              { slug: "WebAssembly", text: "WebAssembly" },
+              { slug: "Web/WebDriver", text: "WebDriver" },
+              {
+                slug: "Web",
+                text: "See all…",
                 label: "See all web technology references",
-              }),
+              },
             ],
           },
           {
             title: "Topics",
             items: [
-              link("Web/Media", "Media"),
-              link("Web/API/Performance", "Performance"),
-              link("Web/Privacy", "Privacy"),
-              link("Web/Security", "Security"),
-              link("Web/Progressive_web_apps", "Progressive web apps"),
+              { slug: "Web/Media", text: "Media" },
+              { slug: "Web/API/Performance", text: "Performance" },
+              { slug: "Web/Privacy", text: "Privacy" },
+              { slug: "Web/Security", text: "Security" },
+              {
+                slug: "Web/Progressive_web_apps",
+                text: "Progressive web apps",
+              },
             ],
           },
         ],
@@ -303,56 +348,61 @@ export class Menu extends ServerComponent {
           {
             title: "Frontend developer course",
             items: [
-              link("Learn_web_development/Getting_started", "Getting started"),
-              link("Learn_web_development/Howto", "Common questions"),
-              () =>
-                html`<a
-                  class=${ifDefined(
-                    context.locale === "en-US" ? undefined : "only-in-en-us",
-                  )}
-                  href="/en-US/curriculum/"
-                  data-glean-id=${gleanId("/en-US/curriculum/")}
-                  >Curriculum</a
-                >`,
+              {
+                slug: "Learn_web_development/Getting_started",
+                text: "Getting started",
+              },
+              { slug: "Learn_web_development/Howto", text: "Common questions" },
+              {
+                render: () =>
+                  html`<a
+                    class=${ifDefined(
+                      context.locale === "en-US" ? undefined : "only-in-en-us",
+                    )}
+                    href="/en-US/curriculum/"
+                    data-glean-id=${gleanId("/en-US/curriculum/")}
+                    >Curriculum</a
+                  >`,
+              },
             ],
           },
           {
             title: "Learn HTML",
             items: [
-              link(
-                "Learn_web_development/Core/Structuring_content",
-                "Introduction to HTML",
-              ),
-              link(
-                "Learn_web_development/Core/Structuring_content/Basic_HTML_syntax",
-                "Getting started with HTML",
-              ),
+              {
+                slug: "Learn_web_development/Core/Structuring_content",
+                text: "Introduction to HTML",
+              },
+              {
+                slug: "Learn_web_development/Core/Structuring_content/Basic_HTML_syntax",
+                text: "Getting started with HTML",
+              },
             ],
           },
           {
             title: "Learn CSS",
             items: [
-              link(
-                "Learn_web_development/Core/Styling_basics/What_is_CSS",
-                "What is CSS",
-              ),
-              link(
-                "Learn_web_development/Core/Styling_basics/Getting_started",
-                "Getting started with CSS",
-              ),
+              {
+                slug: "Learn_web_development/Core/Styling_basics/What_is_CSS",
+                text: "What is CSS",
+              },
+              {
+                slug: "Learn_web_development/Core/Styling_basics/Getting_started",
+                text: "Getting started with CSS",
+              },
             ],
           },
           {
             title: "Learn JavaScript",
             items: [
-              link(
-                "Web/HTML/How_to/Use_data_attributes",
-                "How to use data attributes",
-              ),
-              link(
-                "Web/HTML/How_to/Add_JavaScript_to_your_web_page",
-                "Add JavaScript to your web page",
-              ),
+              {
+                slug: "Web/HTML/How_to/Use_data_attributes",
+                text: "How to use data attributes",
+              },
+              {
+                slug: "Web/HTML/How_to/Add_JavaScript_to_your_web_page",
+                text: "Add JavaScript to your web page",
+              },
             ],
           },
         ],
@@ -366,46 +416,53 @@ export class Menu extends ServerComponent {
         panelGroups: [
           {
             items: [
-              () =>
-                html`<a
-                  class="menu__panel-icon"
-                  data-icon="circle-play"
-                  href=${`/en-US/play`}
-                  data-glean-id=${gleanId("/en-US/play/")}
-                >
-                  Playground
-                </a>`,
-              () =>
-                html`<a
-                  class="menu__panel-icon"
-                  data-icon="shield-check"
-                  href=${`/en-US/observatory`}
-                  data-glean-id=${gleanId("/en-US/observatory/")}
-                >
-                  HTTP Observatory
-                </a>`,
+              {
+                render: () =>
+                  html`<a
+                    class="menu__panel-icon"
+                    data-icon="circle-play"
+                    href=${`/en-US/play`}
+                    data-glean-id=${gleanId("/en-US/play/")}
+                  >
+                    Playground
+                  </a>`,
+              },
+              {
+                render: () =>
+                  html`<a
+                    class="menu__panel-icon"
+                    data-icon="shield-check"
+                    href=${`/en-US/observatory`}
+                    data-glean-id=${gleanId("/en-US/observatory/")}
+                  >
+                    HTTP Observatory
+                  </a>`,
+              },
             ],
           },
           {
             items: [
-              link(
-                "Web/CSS/CSS_backgrounds_and_borders/Border-image_generator",
-                "Border-image generator",
-              ),
-              link(
-                "Web/CSS/CSS_backgrounds_and_borders/Border-radius_generator",
-                "Border-radius generator",
-              ),
-              link(
-                "Web/CSS/CSS_backgrounds_and_borders/Box-shadow_generator",
-                "Box-shadow generator",
-              ),
-              link(
-                "Web/CSS/CSS_colors/Color_format_converter",
-                "Color format converter",
-              ),
-              link("Web/CSS/CSS_colors/Color_mixer", "Color mixer"),
-              link("Web/CSS/CSS_shapes/Shape_generator", "Shape generator"),
+              {
+                slug: "Web/CSS/CSS_backgrounds_and_borders/Border-image_generator",
+                text: "Border-image generator",
+              },
+              {
+                slug: "Web/CSS/CSS_backgrounds_and_borders/Border-radius_generator",
+                text: "Border-radius generator",
+              },
+              {
+                slug: "Web/CSS/CSS_backgrounds_and_borders/Box-shadow_generator",
+                text: "Box-shadow generator",
+              },
+              {
+                slug: "Web/CSS/CSS_colors/Color_format_converter",
+                text: "Color format converter",
+              },
+              { slug: "Web/CSS/CSS_colors/Color_mixer", text: "Color mixer" },
+              {
+                slug: "Web/CSS/CSS_shapes/Shape_generator",
+                text: "Shape generator",
+              },
             ],
           },
         ],
@@ -419,46 +476,54 @@ export class Menu extends ServerComponent {
         panelGroups: [
           {
             items: [
-              () =>
-                html`<a
-                  class="menu__panel-icon"
-                  data-icon="mdn-m"
-                  href=${`/en-US/about`}
-                  data-glean-id=${gleanId("/en-US/about")}
-                >
-                  About MDN
-                </a>`,
-              () =>
-                html`<a
-                  class="menu__panel-icon"
-                  data-icon="chart-no-axes-combined"
-                  href=${`/en-US/advertising`}
-                  data-glean-id=${gleanId("/en-US/advertising")}
-                >
-                  Advertise with us
-                </a>`,
+              {
+                render: () =>
+                  html`<a
+                    class="menu__panel-icon"
+                    data-icon="mdn-m"
+                    href=${`/en-US/about`}
+                    data-glean-id=${gleanId("/en-US/about")}
+                  >
+                    About MDN
+                  </a>`,
+              },
+              {
+                render: () =>
+                  html`<a
+                    class="menu__panel-icon"
+                    data-icon="chart-no-axes-combined"
+                    href=${`/en-US/advertising`}
+                    data-glean-id=${gleanId("/en-US/advertising")}
+                  >
+                    Advertise with us
+                  </a>`,
+              },
             ],
           },
           {
             items: [
-              () =>
-                html`<a
-                  class="menu__panel-icon"
-                  data-icon="users"
-                  href=${`/en-US/community`}
-                  data-glean-id=${gleanId("/en-US/community")}
-                >
-                  Community
-                </a>`,
-              () =>
-                html`<a
-                  class="menu__panel-icon"
-                  data-icon="github"
-                  href="https://github.com/mdn"
-                  data-glean-id=${gleanId("https://github.com/mdn")}
-                >
-                  MDN on GitHub
-                </a>`,
+              {
+                render: () =>
+                  html`<a
+                    class="menu__panel-icon"
+                    data-icon="users"
+                    href=${`/en-US/community`}
+                    data-glean-id=${gleanId("/en-US/community")}
+                  >
+                    Community
+                  </a>`,
+              },
+              {
+                render: () =>
+                  html`<a
+                    class="menu__panel-icon"
+                    data-icon="github"
+                    href="https://github.com/mdn"
+                    data-glean-id=${gleanId("https://github.com/mdn")}
+                  >
+                    MDN on GitHub
+                  </a>`,
+              },
             ],
           },
         ],
@@ -480,7 +545,7 @@ export class Menu extends ServerComponent {
         ${tabs.map((tab) => {
           currentTab = tab.id;
           const result = html`<div class="menu__tab" data-section=${tab.id}>
-            ${typeof tab.render == "function"
+            ${"render" in tab
               ? tab.render()
               : html`<mdn-dropdown>
                   <button class="menu__tab-button" type="button" slot="button">
@@ -503,22 +568,27 @@ export class Menu extends ServerComponent {
                         : tab.panelTitle.text}
                     </p>
                     <div class="menu__panel-content">
-                      ${tab.panelGroups === undefined
-                        ? ""
-                        : tab.panelGroups.map((group) => {
-                            const items = html`<ul>
-                              ${group.items.map(
-                                (render) => html`<li>${render()}</li>`,
-                              )}
-                            </ul>`;
+                      ${tab.panelGroups.map((group) => {
+                        const items = html`<ul>
+                          ${group.items.map(
+                            (item) =>
+                              html`<li>
+                                ${"render" in item
+                                  ? item.render()
+                                  : link(item.slug, item.text, {
+                                      label: item.label,
+                                    })}
+                              </li>`,
+                          )}
+                        </ul>`;
 
-                            return "title" in group
-                              ? html`<dl>
-                                  <dt>${group.title}</dt>
-                                  <dd>${items}</dd>
-                                </dl>`
-                              : items;
-                          })}
+                        return "title" in group
+                          ? html`<dl>
+                              <dt>${group.title}</dt>
+                              <dd>${items}</dd>
+                            </dl>`
+                          : items;
+                      })}
                     </div>
                   </div>
                 </mdn-dropdown>`}
