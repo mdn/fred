@@ -11,7 +11,7 @@
  * @param {ServerResponse<IncomingMessage>} res
  */
 export function withRunnerResponseHeaders(
-  res: ServerResponse<IncomingMessage>,
+  res: ServerResponse<IncomingMessage>
 ): void;
 /**
  * @param {State | null} state
@@ -21,7 +21,7 @@ export function withRunnerResponseHeaders(
 export function renderWarning(
   state: State | null,
   hrefWithCode: string,
-  searchWithState: string,
+  searchWithState: string
 ): string;
 /**
  * @param {State | null} [state=null]
@@ -46,7 +46,7 @@ export function decompressFromBase64(base64String: string | null): Promise<
  */
 export function handleRunner(
   req: express.Request,
-  res: express.Response,
+  res: express.Response
 ): Promise<express.Response<any, Record<string, any>>>;
 export const ORIGIN_PLAY: string;
 export const ORIGIN_MAIN: string;

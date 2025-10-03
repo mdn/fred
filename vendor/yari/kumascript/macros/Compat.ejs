@@ -1,0 +1,49 @@
+<%
+/*
+
+Retrieves MDN compat data for a given feature
+
+Parameters
+
+$0 – A query string indicating for which feature to retrieve compat data for.
+$1 – A depth setting indicating how deep sub features should be added to the table
+(flattened, default: 1, first level of sub feature data will be included).
+
+Example calls
+
+{{compat("webextensions.api.alarms")}}
+{{compat("webextensions.api.alarms.Alarm")}}
+{{compat("webextensions.manifest")}}
+{{compat("webextensions.manifest.applications")}}
+{{compat("css.properties.background-attachment")}}
+{{compat("css.selectors.any-link")}}
+{{compat("css.at-rules.font-face")}}
+{{compat("http.headers.Cache-Control")}}
+{{compat("http.status.404")}}
+{{compat("http.method.CONNECT")}}
+{{compat("api.WebGL2RenderingContext")}}
+{{compat("api.WebGL2RenderingContext.beginQuery")}}
+{{compat("html.elements.input")}}
+
+{{compat("html.elements.link", 2)}}
+{{compat("webextensions.api.alarms", 3)}}
+
+*/
+
+if ($0) {
+  mdn.deprecatedParams(`Calling the Compat macro with any arguments is
+  deprecated; instead use the 'browser-compat' front-matter key.`);
+}
+
+var query = $0 || env['browser-compat'];
+if (!query) {
+  throw new Error("No first query argument or 'browser-compat' front-matter value passed");
+}
+var depth = $1 || 1;
+var queries = Array.isArray(query) ? query : [query];
+var output = queries.map(query => `<div class="bc-data" data-query="${query}" data-depth="${depth}" data-multiple="${queries.length > 1}">
+  If you're able to see this, something went wrong on this page.
+</div>`).join("\n");
+%>
+
+<%-output%>

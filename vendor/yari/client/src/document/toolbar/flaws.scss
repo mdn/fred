@@ -1,0 +1,57 @@
+.toggle-show-flaws {
+  p {
+    font: var(--type-smaller-font-size);
+    margin: 0;
+  }
+
+  button.button {
+    display: inline-block;
+  }
+}
+
+#document-flaws {
+  margin: 20px;
+
+  button.toggle-show-flaws {
+    display: inline;
+  }
+
+  details {
+    margin-bottom: 20px;
+  }
+
+  .flaw .fetch-error {
+    p {
+      font-weight: var(--font-body-strong-weight);
+    }
+  }
+
+  .flaw {
+    li {
+      margin-bottom: 15px;
+    }
+
+    ins {
+      background-color: var(--background-ins);
+    }
+
+    del {
+      background-color: var(--background-del);
+    }
+
+    .explanation-notes li {
+      margin-bottom: 1px;
+    }
+  }
+
+  .macro-filepath-in-prerequisite {
+    background-color: #ffa500;
+    font-size: 80%;
+    padding: 1px 5px;
+  }
+
+  details.fixed_flaw summary,
+  li.fixed_flaw {
+    text-decoration: line-through;
+  }
+}

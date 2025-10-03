@@ -1,0 +1,86 @@
+<%
+const locale = env.locale;
+
+const text = mdn.localStringMap({
+  'de': {
+    'Reference': 'Referenz',
+    'Elements': 'Elemente',
+    'Global attributes': 'Globale Attribute',
+    'Guides': 'Anleitungen',
+    'Examples': 'Beispiele',
+  },
+  'en-US': {
+    'Reference': 'Reference',
+    'Elements': 'Elements',
+    'Global attributes': 'Global attributes',
+    'Guides': 'Guides',
+    'Examples': 'Examples',
+  },
+  'fr': {
+    'Reference': 'Références',
+    'Elements': 'Éléments',
+    'Guides': 'Guides',
+  },
+  'ja': {
+    'Reference': 'リファレンス',
+    'Elements': '要素',
+  },
+  'ko': {
+    'Reference': '참고서:',
+    'Elements': '요소',
+    'Guides': '안내서:',
+  },
+  'pt-BR': {
+    'Reference': 'Referências',
+    'Elements': 'Elementos',
+    'Guides': 'Guides',
+  },
+  'ru': {
+    'Reference': 'Справочники',
+    'Elements': 'Элементы',
+    'Guides': 'Путеводитель',
+  },
+  'zh-CN': {
+    'Reference': '参考',
+    'Elements': '元素',
+    'Global attributes': '全局属性',
+    'Guides': '指南',
+    'Examples': '示例',    
+  },
+});
+
+%>
+<section id="Quick_links" data-macro="MathMLRef">
+ <ol>
+  <li class="section"><%-web.smartLink(`/${locale}/docs/Web/MathML`)%></li>
+  <li class="section no-link"><%=text['Guides']%></li>
+  <li>
+    <ol>
+    <li><%-web.smartLink(`/${locale}/docs/Web/MathML/Authoring`)%></li>
+    <li><%-web.smartLink(`/${locale}/docs/Web/MathML/Fonts`)%></li>
+    <li><%-web.smartLink(`/${locale}/docs/Web/MathML/Values`)%></li>
+    </ol>
+  </li>
+  <li class="section no-link"><%=text['Reference']%></li>
+  <li class="toggle">
+    <details>
+      <summary><%=text['Elements']%></summary>
+      <%-await template("ListSubpagesForSidebar", ['/en-US/docs/Web/MathML/Element'])%>
+    </details>
+  </li>
+  <li class="toggle">
+    <details>
+      <summary><%=text['Global attributes']%></summary>
+      <%-await template("ListSubpagesForSidebar", ['/en-US/docs/Web/MathML/Global_attributes'])%>
+    </details>
+  </li>
+  <li><%-web.smartLink(`/${locale}/docs/Web/MathML/Attribute`)%></li>
+  <li class="section no-link"><%=text['Examples']%></li>
+  <li>
+    <ol>
+    <li><%-web.smartLink(`/${locale}/docs/Web/MathML/Examples/Deriving_the_Quadratic_Formula`)%></li>
+    <li><%-web.smartLink(`/${locale}/docs/Web/MathML/Examples/MathML_Pythagorean_Theorem`)%></li>
+    </ol>
+  </li>
+ </ol>
+</section>

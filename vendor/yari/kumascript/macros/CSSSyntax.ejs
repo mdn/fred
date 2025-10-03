@@ -1,0 +1,11 @@
+<%
+/*
+ * Displays the formal syntax for a CSS property, using the values found in
+ * the https://github.com/w3c/webref package.
+ *
+ * The property name is taken from the page slug.
+ *
+ * The syntax is pretty-printed and syntax-highlighted.
+ */
+%>
+<%-await page.cssSyntax($0)%>

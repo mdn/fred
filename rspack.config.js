@@ -424,7 +424,7 @@ const legacyConfig = merge(
     name: "legacy",
     entry: {
       index: "./legacy/index.tsx",
-      yari: "./node_modules/@mdn/yari/client/src/index.tsx",
+      yari: "./vendor/yari/client/src/index.tsx",
     },
     output: {
       filename: "[name].[contenthash].js",
@@ -436,7 +436,7 @@ const legacyConfig = merge(
       alias: {
         [path.resolve(
           __dirname,
-          "node_modules/@mdn/yari/client/src/document/toolbar/index.tsx",
+          "vendor/yari/client/src/document/toolbar/index.tsx",
         )]: false,
       },
     },
@@ -465,7 +465,7 @@ const legacyConfig = merge(
         inject: true,
         chunks: ["yari"],
         filename: "index.[contenthash].html",
-        template: "node_modules/@mdn/yari/client/public/index.html",
+        template: "vendor/yari/client/public/index.html",
       }),
       new RspackManifestPlugin({
         fileName: "asset-manifest.json",

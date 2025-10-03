@@ -1,0 +1,940 @@
+<%
+
+const l10nStrings = mdn.localStringMap({
+  'de': {
+    'Complete_beginners_start_here': 'Komplette Anfänger beginnen hier!',
+    'Getting_started_with_the_web': 'Erste Schritte mit dem Web',
+    'HTML_Structuring_the_web': 'HTML — Strukturierung des Webs',
+    'Introduction_to_HTML': 'Einführung in HTML',
+    'Multimedia_and_embedding': 'Multimedia und Einbettung',
+    'HTML_tables': 'HTML-Tabellen',
+    'CSS_Styling_the_web': 'CSS — Gestaltung des Webs',
+    'CSS_first_steps': 'CSS erste Schritte',
+    'CSS_building_blocks': 'CSS-Bausteine',
+    'Styling_text': 'Textgestaltung',
+    'CSS_layout': 'CSS-Layout',
+    'JavaScript_dynamic_client-side_scripting': 'JavaScript — Dynamisches clientseitiges Skripting',
+    'JavaScript_first_steps': 'JavaScript erste Schritte',
+    'JavaScript_building_blocks': 'JavaScript-Bausteine',
+    'Introducing_JavaScript_objects': 'Einführung in JavaScript-Objekte',
+    'Asynchronous_JavaScript': 'Asynchrones JavaScript',
+    'Client-side_web_APIs': 'Client-seitige Web-APIs',
+    'Web_forms': 'Webformulare — Arbeiten mit Benutzerdaten',
+    'Web_forms_core': 'Grundlagen der Webformulare',
+    'Web_forms_advanced': 'Erweiterte Techniken für Webformulare',
+    'Accessibility_—_Make_the_web_usable_by_everyone': 'Barrierefreiheit — Das Web für alle nutzbar machen',
+    'Accessibility_guides': 'Barrierefreiheitsleitfäden',
+    'Accessibility_assessment': 'Barrierefreiheitseinschätzung',
+    'Performance': 'Leistung — Websites schnell und reaktionsschnell machen',
+    'Performance_guides': 'Leitfäden zur Leistung',
+    'MathML_Writing_mathematics': 'MathML — Schreiben von Mathematik mit MathML',
+    'MathML_first_steps': 'MathML erste Schritte',
+    'Games_Developing_for_web': 'Spiele — Entwicklung von Spielen für das Web',
+    'Guides_and_tutorials': 'Anleitungen und Tutorials',
+    'Tools_and_testing': 'Werkzeuge und Tests',
+    'Cross_browser_testing': 'Cross-Browser-Tests',
+    'Git_and_GitHub': 'Git und GitHub',
+    'Client-side_web_development_tools': 'Client-seitige Webentwicklungstools',
+    'Introduction_to_client-side_frameworks': 'Einführung in client-seitige Frameworks',
+    'React': 'React',
+    'Ember': 'Ember',
+    'Vue': 'Vue',
+    'Svelte': 'Svelte',
+    'Angular': 'Angular',
+    'Server-side_website_programming': 'Server-seitige Webprogrammierung',
+    'First_steps': 'Erste Schritte',
+    'Django_web_framework_(Python)': 'Django Web-Framework (Python)',
+    'Express_Web_Framework_(Node.js_JavaScript)': 'Express Web-Framework (Node.js/JavaScript)',
+    'Further_resources': 'Weitere Ressourcen',
+    'Common_questions': 'Häufige Fragen',
+  },
+  'en-US': {
+    'Complete_beginners_start_here': 'Complete beginners start here!',
+      'Getting_started_with_the_web': 'Getting started with the web',
+    'HTML_Structuring_the_web': 'HTML — Structuring the web',
+      'Introduction_to_HTML': 'Introduction to HTML',
+      'Multimedia_and_embedding': 'Multimedia and embedding',
+      'HTML_tables' : 'HTML tables',
+    'CSS_Styling_the_web': 'CSS — Styling the web',
+      'CSS_first_steps': 'CSS first steps',
+      'CSS_building_blocks': 'CSS building blocks',
+      'Styling_text': 'Styling text',
+      'CSS_layout': 'CSS layout',
+    'JavaScript_dynamic_client-side_scripting': 'JavaScript — Dynamic client-side scripting',
+      'JavaScript_first_steps': 'JavaScript first steps',
+      'JavaScript_building_blocks': 'JavaScript building blocks',
+      'Introducing_JavaScript_objects' :  'Introducing JavaScript objects',
+      'Asynchronous_JavaScript': 'Asynchronous JavaScript',
+      'Client-side_web_APIs': 'Client-side web APIs',
+    'Web_forms' : 'Web forms — Working with user data',
+      'Web_forms_core' : 'Web form building blocks',
+      'Web_forms_advanced': 'Advanced web form techniques',
+    'Accessibility_—_Make_the_web_usable_by_everyone' : 'Accessibility — Make the web usable by everyone',
+      'Accessibility_guides' : 'Accessibility guides',
+      'Accessibility_assessment' : 'Accessibility assessment',
+    'Performance' : 'Performance — Making websites fast and responsive',
+      'Performance_guides' : 'Performance guides',
+    'MathML_Writing_mathematics' : 'MathML — Writing mathematics with MathML',
+      'MathML_first_steps': 'MathML first steps',
+    'Games_Developing_for_web' : 'Games — Developing games for the web',
+      'Guides_and_tutorials': 'Guides and tutorials',
+    'Tools_and_testing' : 'Tools and testing',
+      'Cross_browser_testing' : 'Cross browser testing',
+      'Git_and_GitHub' : 'Git and GitHub',
+      'Client-side_web_development_tools' : 'Client-side web development tools',
+      'Introduction_to_client-side_frameworks': 'Introduction to client-side frameworks',
+      'React': 'React',
+      'Ember': 'Ember',
+      'Vue': 'Vue',
+      'Svelte': 'Svelte',
+      'Angular': 'Angular',
+    'Server-side_website_programming' : 'Server-side website programming',
+      'First_steps' : 'First steps',
+      'Django_web_framework_(Python)' : 'Django web framework (Python)',
+      'Express_Web_Framework_(Node.js_JavaScript)' : 'Express Web Framework (Node.js/JavaScript)',
+    'Further_resources': 'Further resources',
+      'Common_questions': 'Common questions',
+  },
+  'pt-BR': {
+    'Complete_beginners_start_here': 'Completos iniciantes, comecem por aqui!',
+      'Getting_started_with_the_web': 'Iniciando na Internet',
+    'HTML_Structuring_the_web': 'HTML — Estruturando a Web',
+      'Introduction_to_HTML': 'Introdução ao HTML',
+      'Multimedia_and_embedding': 'Multimídia e incorporação',
+      'HTML_tables' : 'Tabelas HTML',
+    'CSS_Styling_the_web': 'CSS — Estilizando a Web',
+      'CSS_first_steps': 'CSS - primeiros passos',
+      'CSS_building_blocks': 'CSS building blocks',
+      'Styling_text': 'Estilização de textos',
+      'CSS_layout': 'Esquemas CSS',
+    'JavaScript_dynamic_client-side_scripting': 'JavaScript — Uma linguagem de script dinâmica para aplicações cliente',
+      'JavaScript_first_steps': 'Primeiros passos com JavaScript',
+      'JavaScript_building_blocks': 'Programando em JavaScript',
+      'Introducing_JavaScript_objects' :  'Introdução Objetos em JavaScript',
+      'Asynchronous_JavaScript': 'Asynchronous JavaScript',
+      'Client-side_web_APIs': 'APIs Web na aplicação Cliente',
+    'Web_forms' : 'Web forms — Working with user data',
+      'Web_forms_core' : 'Web form building blocks',
+      'Web_forms_advanced': 'Advanced web form techniques',
+    'Accessibility_—_Make_the_web_usable_by_everyone' : 'Acessibilidade — Faça a Internet usável por qualquer pessoa',
+      'Accessibility_guides' : 'Guias de acessibilidade',
+      'Accessibility_assessment' : 'Avaliando a acessibilidade',
+    'Tools_and_testing' : 'Ferramentas e teste',
+      'Cross_browser_testing' : 'Testes entre navegadores',
+      'Git_and_GitHub' : 'Git and GitHub',
+      'Client-side_web_development_tools' : 'Client-side web development tools',
+      'Introduction_to_client-side_frameworks': 'Introduction to client-side frameworks',
+      'React': 'React',
+      'Ember': 'Ember',
+      'Vue': 'Vue',
+      'Svelte': 'Svelte',
+    'Server-side_website_programming' : 'Programação de servidores de Aplicação',
+      'First_steps' : 'Primeiros passos',
+      'Django_web_framework_(Python)' : 'Framework Web Django (Python)',
+      'Express_Web_Framework_(Node.js_JavaScript)' : 'Framework Web Express (Node.js/JavaScript)',
+    'Further_resources': 'Mais recursos',
+      'Common_questions': 'Questões gerais',
+  },
+  'ru': {
+    'Complete_beginners_start_here': 'Новички начинают здесь!',
+      'Getting_started_with_the_web': 'Начало работы с Вебом',
+    'HTML_Structuring_the_web': 'HTML — структура Веба',
+      'Introduction_to_HTML': 'Введение в HTML',
+      'Multimedia_and_embedding': 'Мультимедиа и встраивание',
+      'HTML_tables' : 'HTML таблицы',
+    'CSS_Styling_the_web': 'CSS — стилизирование Веба',
+      'CSS_first_steps': 'Введение в CSS',
+      'CSS_building_blocks': 'Устройство CSS',
+      'Styling_text': 'Стилизирование текста',
+      'CSS_layout': 'CSS макет',
+    'JavaScript_dynamic_client-side_scripting': 'JavaScript — динамический клиентский скриптинг',
+      'JavaScript_first_steps': 'Первые шаги в JavaScript',
+      'JavaScript_building_blocks': 'Блоки в JavaScript',
+      'Introducing_JavaScript_objects' :  'Введение в объекты JavaScript',
+      'Asynchronous_JavaScript': 'Асинхронный JavaScript',
+      'Client-side_web_APIs': 'Клиентский веб API',
+    'Web_forms' : 'HTML-формы — работа с пользовательскими данными',
+      'Web_forms_core' : 'Руководство по HTML-формам',
+      'Web_forms_advanced': 'Advanced web form techniques',
+    'Accessibility_—_Make_the_web_usable_by_everyone' : 'Доступность — сделайте веб удобным для всех',
+      'Accessibility_guides' : 'Руководства по обеспечению доступности',
+      'Accessibility_assessment' : 'Задание: Доступность',
+    'Tools_and_testing' : 'Инструменты и тестирование',
+      'Cross_browser_testing' : 'Кроссбраузерное тестирование',
+      'Git_and_GitHub' : 'Git и GitHub',
+      'Client-side_web_development_tools' : 'Client-side web development tools',
+      'Introduction_to_client-side_frameworks': 'Introduction to client-side frameworks',
+      'React': 'React',
+      'Ember': 'Ember',
+      'Vue': 'Vue',
+      'Svelte': 'Svelte',
+      'Angular': 'Angular',
+    'Server-side_website_programming' : 'Программирование серверной части сайта',
+      'First_steps' : 'Первые шаги',
+      'Django_web_framework_(Python)' : 'Веб-фреймворк Django (Python)',
+      'Express_Web_Framework_(Node.js_JavaScript)' : 'Веб-фреймворк Express (Node.js/JavaScript)',
+    'Further_resources': 'Дальнейшее чтение',
+      'Common_questions': 'Общие вопросы',
+  },
+  'zh-CN': {
+    'Complete_beginners_start_here': '新手请从这开始！',
+      'Getting_started_with_the_web': 'Web 入门',
+    'HTML_Structuring_the_web': 'HTML——构建 Web',
+      'Introduction_to_HTML': 'HTML 介绍',
+      'Multimedia_and_embedding': '多媒体与嵌入',
+      'HTML_tables' : 'HTML 表格',
+    'CSS_Styling_the_web': 'CSS——设计 Web',
+      'CSS_first_steps': 'CSS 第一步',
+      'CSS_building_blocks': 'CSS 基础',
+      'Styling_text': '样式化文本',
+      'CSS_layout': 'CSS 排版',
+    'JavaScript_dynamic_client-side_scripting': 'JavaScript——用户端动态脚本',
+      'JavaScript_first_steps': 'JavaScript 第一步',
+      'JavaScript_building_blocks': 'JavaScript 基础',
+      'Introducing_JavaScript_objects' :  'JavaScript 对象介绍',
+      'Asynchronous_JavaScript': '异步 JavaScript',
+      'Client-side_web_APIs': '客户端 Web API',
+    'Web_forms' : 'Web 表单——与用户数据打交道',
+      'Web_forms_core' : 'Web 表单核心',
+      'Web_forms_advanced': 'Web 表单进阶',
+    'Accessibility_—_Make_the_web_usable_by_everyone' : '无障碍——使每个人都能使用 Web',
+      'Accessibility_guides' : '无障碍指南',
+      'Accessibility_assessment' : '无障碍测评',
+    'Performance' : '性能——使网站快速响应',
+      'Performance_guides' : '性能指南',
+    'MathML_Writing_mathematics' : 'MathML——使用 MathML 语言撰写数学表达式',
+      'MathML_first_steps': 'MathML 第一步',
+    'Games_Developing_for_web' : '游戏——开发 Web 游戏',
+      'Guides_and_tutorials': '指南和基础教程',
+    'Tools_and_testing' : '工具与测试',
+      'Cross_browser_testing' : '跨浏览器测试',
+      'Git_and_GitHub' : 'Git 和 GitHub',
+      'Client-side_web_development_tools' : '客户端 web 开发工具',
+      'Introduction_to_client-side_frameworks': '客户端框架介绍',
+      'React': 'React',
+      'Ember': 'Ember',
+      'Vue': 'Vue',
+      'Svelte': 'Svelte',
+      'Angular': 'Angular',
+    'Server-side_website_programming' : '服务端网页编程',
+      'First_steps' : '第一步',
+      'Django_web_framework_(Python)' : 'Django Web 框架（Python）',
+      'Express_Web_Framework_(Node.js_JavaScript)' : 'Express Web 框架（Node.js/JavaScript）',
+    'Further_resources': '更多资源',
+      'Common_questions': '常见问题',
+  },
+  'zh-TW': {
+    'Complete_beginners_start_here': '全新手請從這開始！',
+      'Getting_started_with_the_web': 'Web 入門',
+    'HTML_Structuring_the_web': 'HTML — 架構 Web',
+      'Introduction_to_HTML': 'HTML 介紹',
+      'Multimedia_and_embedding': '多媒體與嵌入',
+      'HTML_tables' : 'HTML 表格',
+    'CSS_Styling_the_web': 'CSS — 設計 Web 的風格',
+      'CSS_first_steps': '初探 CSS',
+      'CSS_building_blocks': 'CSS 組件',
+      'Styling_text': '樣式化文字',
+      'CSS_layout': 'CSS 版面配置',
+    'JavaScript_dynamic_client-side_scripting': 'JavaScript — 動態的用戶端指令',
+      'JavaScript_first_steps': 'JavaScript 第一步',
+      'JavaScript_building_blocks': 'JavaScript 基礎要件',
+      'Introducing_JavaScript_objects' :  'JavaScript 物件介紹',
+      'Asynchronous_JavaScript': '非同步的 JavaScript',
+      'Client-side_web_APIs': '客戶端 web APIs',
+    'Web_forms' : '網頁表單-與使用者資料合作',
+      'Web_forms_core' : '核心的表單學習途徑',
+      'Web_forms_advanced': '深入網頁表單',
+    'Accessibility_—_Make_the_web_usable_by_everyone' : '無障礙網頁 — 每個人都可以使用的網頁',
+      'Accessibility_guides' : '無障礙網頁指南',
+      'Accessibility_assessment' : '無障礙網頁評估',
+    'Tools_and_testing' : '工具與測試',
+      'Cross_browser_testing' : '跨瀏覽器測試',
+      'Git_and_GitHub' : 'Git and GitHub',
+      'Client-side_web_development_tools' : 'Client-side web development tools',
+      'Introduction_to_client-side_frameworks': '介紹前端框架',
+      'React': 'React',
+      'Ember': 'Ember',
+      'Vue': 'Vue',
+      'Svelte': 'Svelte',
+      'Angular': 'Angular',
+    'Server-side_website_programming' : '伺服端網站程式設計',
+      'First_steps' : '第一步',
+      'Django_web_framework_(Python)' : 'Django 網站框架 (Python)',
+      'Express_Web_Framework_(Node.js_JavaScript)' : 'Express 網站框架 (Node.js/JavaScript)',
+    'Further_resources': '更多資源',
+      'Common_questions': '常見問題',
+  },
+  'fr': {
+    'Complete_beginners_start_here': 'Vous débutez\xa0? Commencez ici\xa0!',
+      'Getting_started_with_the_web': 'Démarrer avec le Web',
+    'HTML_Structuring_the_web': 'HTML — Structurer le Web',
+      'Introduction_to_HTML': 'Introduction à HTML',
+      'Multimedia_and_embedding': 'Multimédia et contenu embarqué',
+      'HTML_tables' : 'Tableaux HTML',
+    'CSS_Styling_the_web': 'CSS — Mettre en forme le Web',
+      'CSS_first_steps': 'Premiers pas en CSS',
+      'CSS_building_blocks': 'Blocs de construction CSS',
+      'Styling_text': 'Mise en forme du texte',
+      'CSS_layout': 'Disposition en CSS',
+    'JavaScript_dynamic_client-side_scripting': 'JavaScript — Scripts et dynamisme côté client',
+      'JavaScript_first_steps': 'Premiers pas en JavaScript',
+      'JavaScript_building_blocks': 'Blocs de construction JavaScript',
+      'Introducing_JavaScript_objects' :  'Introduction aux objets JavaScript',
+      'Asynchronous_JavaScript': 'JavaScript asynchrone',
+      'Client-side_web_APIs': 'Les API web côté client',
+    'Web_forms' : 'Formulaires web — Travailler avec les données des utilisateur\u00b7rice\u00b7s',
+      'Web_forms_core' : 'Parcours sur les fondamentaux des formulaires web',
+      'Web_forms_advanced': 'Fonctionnalités avancées des formulaires',
+    'Accessibility_—_Make_the_web_usable_by_everyone' : 'Accessibilité — Rendre le Web utilisable par toutes et tous',
+      'Accessibility_guides' : 'Guides sur l\'accessibilité',
+      'Accessibility_assessment' : 'Évaluation de l\'accessibilité',
+    'MathML_Writing_mathematics' : 'MathML — Écrire des formules mathématiques sur le Web',
+      'MathML_first_steps': 'Premiers pas en MathML',
+    'Tools_and_testing' : 'Outils et tests',
+      'Cross_browser_testing' : 'Tests entre les différents navigateurs',
+      'Git_and_GitHub' : 'Git et GitHub',
+      'Client-side_web_development_tools' : 'Outils pour le développement web côté client',
+      'Introduction_to_client-side_frameworks': 'Introduction aux frameworks côté client',
+      'React': 'React',
+      'Ember': 'Ember',
+      'Vue': 'Vue',
+      'Svelte': 'Svelte',
+      'Angular': 'Angular',
+    'Server-side_website_programming' : 'Programmation web côté serveur',
+      'First_steps' : 'Premiers pas',
+      'Django_web_framework_(Python)' : 'Django (Python)',
+      'Express_Web_Framework_(Node.js_JavaScript)' : 'Express (Node.js/JavaScript)',
+    'Further_resources': 'Ressources complémentaires',
+      'Common_questions': 'Questions fréquentes',
+  },
+  'ja': {
+    'Complete_beginners_start_here': '完全な初心者はこちらから!',
+      'Getting_started_with_the_web': 'ウェブ入門',
+    'HTML_Structuring_the_web': 'HTML — ウェブの構造化',
+      'Introduction_to_HTML': 'HTML概論',
+      'Multimedia_and_embedding': 'マルチメディアと埋め込み',
+      'HTML_tables' : 'HTML 表',
+    'CSS_Styling_the_web': 'CSS — ウェブのスタイル設定',
+      'CSS_first_steps': 'CSS の第一歩',
+      'CSS_building_blocks': 'CSS の構成要素',
+      'Styling_text': 'テキストの装飾',
+      'CSS_layout': 'CSS レイアウト',
+    'JavaScript_dynamic_client-side_scripting': 'JavaScript — 動的クライアントサイドスクリプト',
+      'JavaScript_first_steps': 'JavaScript の第一歩',
+      'JavaScript_building_blocks': 'JavaScript の構成要素',
+      'Introducing_JavaScript_objects' : 'JavaScript オブジェクトの紹介',
+      'Asynchronous_JavaScript': '非同期 JavaScript',
+      'Client-side_web_APIs': 'クライアントサイド Web API',
+    'Web_forms' : 'ウェブフォーム — ユーザーデータの操作',
+      'Web_forms_core' : 'ウェブフォームの構成要素',
+      'Web_forms_advanced': '高度なウェブフォームテクニック',
+    'Accessibility_—_Make_the_web_usable_by_everyone' : 'アクセシビリティ — 誰もウェブを利用できるようにする',
+      'Accessibility_guides' : 'アクセシビリティガイド',
+      'Accessibility_assessment' : 'Accessibility assessment',
+    'Performance' : 'パフォーマンス — ウェブサイトを高速かつ応答性の高いものにする',
+      'Performance_guides' : 'パフォーマンスガイド',
+    'MathML_Writing_mathematics' : 'MathML — MathML を使用して数学を記述する',
+      'MathML_first_steps': 'MathML の最初のステップ',
+    'Games_Developing_for_web' : 'ゲーム — ウェブ用ゲームの開発',
+      'Guides_and_tutorials': 'ガイドとチュートリアル',
+    'Tools_and_testing' : 'ツールとテスト',
+      'Cross_browser_testing' : 'ブラウザー横断テスト',
+      'Git_and_GitHub' : 'Git と GitHub',
+      'Client-side_web_development_tools' : 'クライアントサイドウェブ開発ツール',
+      'Introduction_to_client-side_frameworks': 'クライアントサイドフレームワークの概要',
+      'React': 'React',
+      'Ember': 'Ember',
+      'Vue': 'Vue',
+      'Svelte': 'Svelte',
+      'Angular': 'Angular',
+    'Server-side_website_programming' : 'サーバーサイドウェブサイトプログラミング',
+      'First_steps' : 'サーバーサイドのウェブサイトプログラミングの第一歩',
+      'Django_web_framework_(Python)' : 'Django ウェブフレームワーク (Python)',
+      'Express_Web_Framework_(Node.js_JavaScript)' : 'Express ウェブフレームワーク (Node.js/JavaScript)',
+    'Further_resources': 'その他のリソース',
+      'Common_questions': 'よくある質問',
+  },
+  'ko': {
+    'Complete_beginners_start_here': '입문자들은 여기서부터 시작하세요!',
+      'Getting_started_with_the_web': 'Web과 함께 시작하기',
+    'HTML_Structuring_the_web': 'HTML — 웹 구성',
+      'Introduction_to_HTML': 'HTML 입문서',
+      'Multimedia_and_embedding': '멀티미디어와 임베딩',
+      'HTML_tables' : 'HTML 테이블',
+    'CSS_Styling_the_web': 'CSS — 웹 꾸미기',
+      'CSS_first_steps': 'CSS 첫 번째 단계',
+      'CSS_building_blocks': 'CSS 구성요소',
+      'Styling_text': '텍스트 꾸미기',
+      'CSS_layout': 'CSS 레이아웃',
+    'JavaScript_dynamic_client-side_scripting': 'JavaScript — 동적 클라이언트 사이드 스크립트 언어',
+      'JavaScript_first_steps': 'JavaScript 첫걸음',
+      'JavaScript_building_blocks': 'JavaScript 구성요소',
+      'Introducing_JavaScript_objects' :  'JavaScript 객체',
+      'Asynchronous_JavaScript': 'JavaScript의 비동기성',
+      'Client-side_web_APIs': '클라이언트 사이드 웹 API',
+    'Web_forms' : '웹 Form — 사용자 데이터 사용하기',
+      'Web_forms_core' : '웹 form 핵심',
+      'Web_forms_advanced': '고급 form',
+    'Accessibility_—_Make_the_web_usable_by_everyone' : '접근성 - 모두를 위한 웹 만들기',
+      'Accessibility_guides' : '접근성 안내서',
+      'Accessibility_assessment' : '과제: 접근성 평가',
+    'MathML_Writing_mathematics' : 'MathML — MathML을 이용해 수학 쓰기',
+      'MathML_first_steps': 'MathML 첫 걸음',
+    'Tools_and_testing' : '도구과 테스트',
+      'Cross_browser_testing' : '크로스 브라우저 테스팅',
+      'Git_and_GitHub' : 'Git과 GitHub',
+      'Client-side_web_development_tools' : '클라이언트 사이드 웹 개발 도구',
+      'Introduction_to_client-side_frameworks': '클라이언트 사이드 프레임워크 소개',
+      'React': 'React',
+      'Ember': 'Ember',
+      'Vue': 'Vue',
+      'Svelte': 'Svelte',
+      'Angular': 'Angular',
+    'Server-side_website_programming' : '서버 사이드 웹사이트 프로그래밍',
+      'First_steps' : '첫 걸음',
+      'Django_web_framework_(Python)' : 'Django 웹 프레임워크 (Python)',
+      'Express_Web_Framework_(Node.js_JavaScript)' : 'Express 웹 프레임워크 (Node.js/JavaScript)',
+    'Further_resources': '추가 자료',
+      'Common_questions': '자주 묻는 질문',
+  },
+});
+
+const sections = [
+  {
+    name: "Complete_beginners_start_here",
+    link: "Getting_started_with_the_web",
+    subsections: [
+      {
+        name: "Getting_started_with_the_web",
+        pages: [
+          "Getting_started_with_the_web",
+          "Getting_started_with_the_web/Installing_basic_software",
+          "Getting_started_with_the_web/What_will_your_website_look_like",
+          "Getting_started_with_the_web/Dealing_with_files",
+          "Getting_started_with_the_web/HTML_basics",
+          "Getting_started_with_the_web/CSS_basics",
+          "Getting_started_with_the_web/JavaScript_basics",
+          "Getting_started_with_the_web/Publishing_your_website",
+          "Getting_started_with_the_web/How_the_Web_works",
+        ]
+      }
+    ]
+  },
+  {
+    name: "HTML_Structuring_the_web",
+    link: "HTML",
+    subsections: [
+      {
+        name: "Introduction_to_HTML",
+        pages: [
+          "HTML/Introduction_to_HTML",
+          "HTML/Introduction_to_HTML/Getting_started",
+          "HTML/Introduction_to_HTML/The_head_metadata_in_HTML",
+          "HTML/Introduction_to_HTML/HTML_text_fundamentals",
+          "HTML/Introduction_to_HTML/Creating_hyperlinks",
+          "HTML/Introduction_to_HTML/Advanced_text_formatting",
+          "HTML/Introduction_to_HTML/Document_and_website_structure",
+          "HTML/Introduction_to_HTML/Debugging_HTML",
+          "HTML/Introduction_to_HTML/Marking_up_a_letter",
+          "HTML/Introduction_to_HTML/Structuring_a_page_of_content",
+        ]
+      },
+      {
+        name: "Multimedia_and_embedding",
+        pages: [
+          "HTML/Multimedia_and_embedding",
+          "HTML/Multimedia_and_embedding/Images_in_HTML",
+          "HTML/Multimedia_and_embedding/Video_and_audio_content",
+          "HTML/Multimedia_and_embedding/Other_embedding_technologies",
+          "HTML/Multimedia_and_embedding/Adding_vector_graphics_to_the_Web",
+          "HTML/Multimedia_and_embedding/Responsive_images",
+          "HTML/Multimedia_and_embedding/Mozilla_splash_page",
+        ]
+      },
+      {
+        name: "HTML_tables",
+        pages: [
+          "HTML/Tables",
+          "HTML/Tables/Basics",
+          "HTML/Tables/Advanced",
+          "HTML/Tables/Structuring_planet_data",
+        ]
+      }
+    ]
+  },
+  {
+    name: "CSS_Styling_the_web",
+    link: "CSS",
+    subsections: [
+      {
+        name: "CSS_first_steps",
+        pages: [
+          "CSS/First_steps",
+          "CSS/First_steps/What_is_CSS",
+          "CSS/First_steps/Getting_started",
+          "CSS/First_steps/How_CSS_is_structured",
+          "CSS/First_steps/How_CSS_works",
+          "CSS/First_steps/Styling_a_biography_page",
+        ]
+      },
+      {
+        name: "CSS_building_blocks",
+        pages: [
+          "CSS/Building_blocks",
+          "CSS/Building_blocks/Selectors",
+          "CSS/Building_blocks/Selectors/Type_Class_and_ID_Selectors",
+          "CSS/Building_blocks/Selectors/Attribute_selectors",
+          "CSS/Building_blocks/Selectors/Pseudo-classes_and_pseudo-elements",
+          "CSS/Building_blocks/Selectors/Combinators",
+          "CSS/Building_blocks/Cascade_and_inheritance",
+          "CSS/Building_blocks/Cascade_layers",
+          "CSS/Building_blocks/The_box_model",
+          "CSS/Building_blocks/Backgrounds_and_borders",
+          "CSS/Building_blocks/Handling_different_text_directions",
+          "CSS/Building_blocks/Overflowing_content",
+          "CSS/Building_blocks/Values_and_units",
+          "CSS/Building_blocks/Sizing_items_in_CSS",
+          "CSS/Building_blocks/Images_media_form_elements",
+          "CSS/Building_blocks/Styling_tables",
+          "CSS/Building_blocks/Advanced_styling_effects",
+          "CSS/Building_blocks/Debugging_CSS",
+          "CSS/Building_blocks/Organizing",
+          "CSS/Building_blocks/Fundamental_CSS_comprehension",
+          "CSS/Building_blocks/Creating_fancy_letterheaded_paper",
+          "CSS/Building_blocks/A_cool_looking_box",
+        ]
+      },
+      {
+        name: "Styling_text",
+        pages: [
+          "CSS/Styling_text",
+          "CSS/Styling_text/Fundamentals",
+          "CSS/Styling_text/Styling_lists",
+          "CSS/Styling_text/Styling_links",
+          "CSS/Styling_text/Web_fonts",
+          "CSS/Styling_text/Typesetting_a_homepage",
+        ]
+      },
+      {
+        name: "CSS_layout",
+        pages: [
+          "CSS/CSS_layout",
+          "CSS/CSS_layout/Introduction",
+          "CSS/CSS_layout/Normal_Flow",
+          "CSS/CSS_layout/Flexbox",
+          "CSS/CSS_layout/Grids",
+          "CSS/CSS_layout/Floats",
+          "CSS/CSS_layout/Positioning",
+          "CSS/CSS_layout/Multiple-column_Layout",
+          "CSS/CSS_layout/Responsive_Design",
+          "CSS/CSS_layout/Media_queries",
+          "CSS/CSS_layout/Legacy_Layout_Methods",
+          "CSS/CSS_layout/Supporting_Older_Browsers",
+          "CSS/CSS_layout/Fundamental_Layout_Comprehension",
+        ]
+      },
+    ]
+  },
+  {
+    name: "JavaScript_dynamic_client-side_scripting",
+    link: "JavaScript",
+    subsections: [
+      {
+        name: "JavaScript_first_steps",
+        pages: [
+          "JavaScript/First_steps",
+          "JavaScript/First_steps/What_is_JavaScript",
+          "JavaScript/First_steps/A_first_splash",
+          "JavaScript/First_steps/What_went_wrong",
+          "JavaScript/First_steps/Variables",
+          "JavaScript/First_steps/Math",
+          "JavaScript/First_steps/Strings",
+          "JavaScript/First_steps/Useful_string_methods",
+          "JavaScript/First_steps/Arrays",
+          "JavaScript/First_steps/Silly_story_generator",
+        ]
+      },
+      {
+        name: "JavaScript_building_blocks",
+        pages: [
+          "JavaScript/Building_blocks",
+          "JavaScript/Building_blocks/Conditionals",
+          "JavaScript/Building_blocks/Looping_code",
+          "JavaScript/Building_blocks/Functions",
+          "JavaScript/Building_blocks/Build_your_own_function",
+          "JavaScript/Building_blocks/Return_values",
+          "JavaScript/Building_blocks/Events",
+          "JavaScript/Building_blocks/Event_bubbling",
+          "JavaScript/Building_blocks/Image_gallery",
+        ]
+      },
+      {
+        name: "Introducing_JavaScript_objects",
+        pages: [
+          "JavaScript/Objects",
+          "JavaScript/Objects/Basics",
+          "JavaScript/Objects/Object_prototypes",
+          "JavaScript/Objects/Object-oriented_programming",
+          "JavaScript/Objects/Classes_in_JavaScript",
+          "JavaScript/Objects/JSON",
+          "JavaScript/Objects/Object_building_practice",
+          "JavaScript/Objects/Adding_bouncing_balls_features",
+        ]
+      },
+      {
+        name: "Asynchronous_JavaScript",
+        pages: [
+          "JavaScript/Asynchronous",
+          "JavaScript/Asynchronous/Introducing",
+          "JavaScript/Asynchronous/Promises",
+          "JavaScript/Asynchronous/Implementing_a_promise-based_API",
+          "JavaScript/Asynchronous/Introducing_workers",
+          "JavaScript/Asynchronous/Sequencing_animations",
+        ]
+      },
+      {
+        name: "Client-side_web_APIs",
+        pages: [
+          "JavaScript/Client-side_web_APIs",
+          "JavaScript/Client-side_web_APIs/Introduction",
+          "JavaScript/Client-side_web_APIs/Manipulating_documents",
+          "JavaScript/Client-side_web_APIs/Fetching_data",
+          "JavaScript/Client-side_web_APIs/Third_party_APIs",
+          "JavaScript/Client-side_web_APIs/Drawing_graphics",
+          "JavaScript/Client-side_web_APIs/Video_and_audio_APIs",
+          "JavaScript/Client-side_web_APIs/Client-side_storage",
+        ]
+      },
+    ]
+  },
+  {
+    name: "Web_forms",
+    link: "Forms",
+    subsections: [
+      {
+        name: "Web_forms_core",
+        pages: [
+          "Forms/",
+          "Forms/Your_first_form",
+          "Forms/How_to_structure_a_web_form",
+          "Forms/Basic_native_form_controls",
+          "Forms/HTML5_input_types",
+          "Forms/Other_form_controls",
+          "Forms/Styling_web_forms",
+          "Forms/Advanced_form_styling",
+          "Forms/UI_pseudo-classes",
+          "Forms/Form_validation",
+          "Forms/Sending_and_retrieving_form_data",
+        ]
+      },
+      {
+        name: "Web_forms_advanced",
+        pages: [
+          "Forms/How_to_build_custom_form_controls",
+          "Forms/Sending_forms_through_JavaScript",
+          "Forms/Property_compatibility_table_for_form_controls",
+          "Forms/HTML_forms_in_legacy_browsers"
+        ]
+      }
+    ]
+  },
+  {
+    name: "Accessibility_—_Make_the_web_usable_by_everyone",
+    link: "Accessibility",
+    subsections: [
+      {
+        name: "Accessibility_guides",
+        pages: [
+          "Accessibility/",
+          "Accessibility/What_is_accessibility",
+          "Accessibility/HTML",
+          "Accessibility/CSS_and_JavaScript",
+          "Accessibility/WAI-ARIA_basics",
+          "Accessibility/Multimedia",
+          "Accessibility/Mobile",
+          "Accessibility/Accessibility_troubleshooting",
+        ]
+      }
+    ]
+  },
+  {
+    name: "Performance",
+    link: "Performance",
+    subsections: [
+      {
+        name: "Performance_guides",
+        pages: [
+          "Performance/",
+          "Performance/why_web_performance",
+          "Performance/What_is_web_performance",
+          "Performance/Perceived_performance",
+          "Performance/Measuring_performance",
+          "Performance/Multimedia",
+          "Performance/video",
+          "Performance/JavaScript",
+          "Performance/HTML",
+          "Performance/CSS",
+          "Performance/business_case_for_performance",
+        ]
+      }
+    ]
+  },
+  {
+    name: "MathML_Writing_mathematics",
+    link: "MathML",
+    subsections: [
+      {
+        name: "MathML_first_steps",
+        pages: [
+          "MathML/First_steps/",
+          "MathML/First_steps/Getting_started",
+          "MathML/First_steps/Text_containers",
+          "MathML/First_steps/Fractions_and_roots",
+          "MathML/First_steps/Scripts",
+          "MathML/First_steps/Tables",
+          "MathML/First_steps/Three_famous_mathematical_formulas",
+        ]
+      }
+    ]
+  },
+  {
+    name: "Games_Developing_for_web",
+    link: "../Games",
+    subsections: [
+      {
+        name: "Guides_and_tutorials",
+        pages: [
+          "../Games/Introduction",
+          "../Games/Techniques",
+          "../Games/Tutorials",
+          "../Games/Publishing_games",
+        ]
+      }
+    ]
+  },
+  {
+    name: "Tools_and_testing",
+    link: "Tools_and_testing",
+    subsections: [
+      {
+        name: "Client-side_web_development_tools",
+        pages: [
+          "Tools_and_testing/Understanding_client-side_tools",
+          "Tools_and_testing/Understanding_client-side_tools/Overview",
+          "Tools_and_testing/Understanding_client-side_tools/Command_line",
+          "Tools_and_testing/Understanding_client-side_tools/Package_management",
+          "Tools_and_testing/Understanding_client-side_tools/Introducing_complete_toolchain",
+          "Tools_and_testing/Understanding_client-side_tools/Deployment",
+        ]
+      },
+      {
+        name: "Introduction_to_client-side_frameworks",
+        pages: [
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Introduction",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Main_features",
+        ]
+      },
+      {
+        name: "React",
+        pages: [
+          "Tools_and_testing/Client-side_JavaScript_frameworks/React_getting_started",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/React_todo_list_beginning",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/React_components",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/React_interactivity_events_state",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/React_interactivity_filtering_conditional_rendering",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/React_accessibility",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/React_resources",
+        ]
+      },
+      {
+        name: "Ember",
+        pages: [
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Ember_getting_started",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Ember_structure_componentization",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Ember_interactivity_events_state",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Ember_conditional_footer",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Ember_routing",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Ember_resources",
+        ]
+      },
+      {
+        name: "Vue",
+        pages: [
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Vue_getting_started",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Vue_first_component",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Vue_rendering_lists",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Vue_methods_events_models",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Vue_styling",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Vue_computed_properties",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Vue_conditional_rendering",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Vue_refs_focus_management",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Vue_resources",
+        ]
+      },
+      {
+        name: "Svelte",
+        pages: [
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Svelte_getting_started",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Svelte_Todo_list_beginning",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Svelte_variables_props",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Svelte_components",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Svelte_reactivity_lifecycle_accessibility",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Svelte_stores",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Svelte_TypeScript",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Svelte_deployment_next",
+        ]
+      },
+      {
+        name: "Angular",
+        pages: [
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Angular_getting_started",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Angular_todo_list_beginning",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Angular_styling",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Angular_item_component",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Angular_filtering",
+          "Tools_and_testing/Client-side_JavaScript_frameworks/Angular_building",
+        ]
+      },
+      {
+        name: "Git_and_GitHub",
+        pages: [
+          "Tools_and_testing/GitHub",
+        ]
+      },
+      {
+        name: "Cross_browser_testing",
+        pages: [
+          "Tools_and_testing/Cross_browser_testing",
+          "Tools_and_testing/Cross_browser_testing/Introduction",
+          "Tools_and_testing/Cross_browser_testing/Testing_strategies",
+          "Tools_and_testing/Cross_browser_testing/HTML_and_CSS",
+          "Tools_and_testing/Cross_browser_testing/JavaScript",
+          "Tools_and_testing/Cross_browser_testing/Accessibility",
+          "Tools_and_testing/Cross_browser_testing/Feature_detection",
+          "Tools_and_testing/Cross_browser_testing/Automated_testing",
+          "Tools_and_testing/Cross_browser_testing/Your_own_automation_environment",
+        ]
+      }
+    ]
+  },
+  {
+    name: "Server-side_website_programming",
+    link: "Server-side",
+    subsections: [
+      {
+        name: "First_steps",
+        pages: [
+          "Server-side/First_steps",
+          "Server-side/First_steps/Introduction",
+          "Server-side/First_steps/Client-Server_overview",
+          "Server-side/First_steps/Web_frameworks",
+          "Server-side/First_steps/Website_security",
+        ]
+      },
+      {
+        name: "Django_web_framework_(Python)",
+        pages: [
+          "Server-side/Django",
+          "Server-side/Django/Introduction",
+          "Server-side/Django/development_environment",
+          "Server-side/Django/Tutorial_local_library_website",
+          "Server-side/Django/skeleton_website",
+          "Server-side/Django/Models",
+          "Server-side/Django/Admin_site",
+          "Server-side/Django/Home_page",
+          "Server-side/Django/Generic_views",
+          "Server-side/Django/Sessions",
+          "Server-side/Django/Authentication",
+          "Server-side/Django/Forms",
+          "Server-side/Django/Testing",
+          "Server-side/Django/Deployment",
+          "Server-side/Django/web_application_security",
+          "Server-side/Django/django_assessment_blog",
+        ]
+      },
+      {
+        name: "Express_Web_Framework_(Node.js_JavaScript)",
+        pages: [
+          "Server-side/Express_Nodejs",
+          "Server-side/Express_Nodejs/Introduction",
+          "Server-side/Express_Nodejs/development_environment",
+          "Server-side/Express_Nodejs/Tutorial_local_library_website",
+          "Server-side/Express_Nodejs/skeleton_website",
+          "Server-side/Express_Nodejs/mongoose",
+          "Server-side/Express_Nodejs/routes",
+          "Server-side/Express_Nodejs/Displaying_data",
+          "Server-side/Express_Nodejs/forms",
+          "Server-side/Express_Nodejs/deployment",
+        ]
+      }
+    ]
+  },
+  {
+    name: "Further_resources",
+    link: "Common_questions",
+    subsections: [
+      {
+        name: "Common_questions",
+        pages: [
+          "Common_questions",
+          "HTML/Howto",
+          "CSS/Howto",
+          "JavaScript/Howto",
+          "Common_questions/Web_mechanics",
+          "Common_questions/Tools_and_setup",
+          "Common_questions/Design_and_accessibility",
+        ]
+      }
+    ]
+  },
+];
+
+const sidebarURL = `/docs/Learn/`;
+const baseURL = `/${env.locale}${sidebarURL}`;
+
+async function getTitle(pageSlug) {
+  let page = await wiki.getPage(`${baseURL}${pageSlug}`);
+  if (!page.title) {
+    page = await wiki.getPage(`/en-US${sidebarURL}${pageSlug}`);
+  }
+  return mdn.htmlEscape(page.title);
+}
+
+async function renderSubsection(subsection) {
+  let output = `<li><details><summary>${l10nStrings[subsection.name]}</summary><ol>`;
+
+  for (const page of subsection.pages) {
+    const link = web.smartLink(`${baseURL}${page}`, null, await getTitle(page));
+    output += `<li>${link}</li>`;
+  }
+  output += "</ol></details></li>";
+
+  return output;
+}
+
+async function renderSection(section) {
+  let output = `<li class="section"><a href="${baseURL}${section.link}">${l10nStrings[section.name]}</a></li>`;
+
+  for (const subsection of section.subsections) {
+    output += await renderSubsection(subsection);
+  }
+
+  return output;
+}
+
+async function renderSidebar() {
+  let output = '<section id="Quick_links" data-macro="LearnSidebar"><ol>';
+
+  for (const section of sections) {
+    output += await renderSection(section);
+  }
+  output += "</ol></section>";
+
+  return output;
+}
+
+const output = await renderSidebar();
+
+%>
+
+<%-output%>

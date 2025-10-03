@@ -1,0 +1,15 @@
+<%
+let linkText = mdn.localString({
+    "de"   : "Initialer Wert",
+    "en-US": "Initial value",
+    "es"   : "Valor inicial",
+    "fr"   : "Valeur initiale",
+    "ja"   : "初期値",
+    "ko"   : "초기값",
+    "ru"   : "Начальное значение",
+    "zh-CN": "初始值",
+    "zh-TW": "預設值"
+    
+});
+%>
+<%- web.smartLink(`${env.locale}/docs/Web/CSS/initial_value`, null, linkText) %>

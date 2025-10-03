@@ -1,0 +1,373 @@
+@use "./ui/vars" as *;
+@use "./ui/base/mdn";
+@use "./ui/base/typography";
+@use "./ui/base/reset";
+@use "./ui/base/themes";
+@use "./ui/base/prism";
+
+// These classes are used across several components.
+@use "./ui/molecules/notecards";
+@use "./ui/molecules/pagination";
+@use "./ui/atoms/button";
+@use "./ui/atoms/form";
+
+/*
+  Global :root variables, for those independent of themes
+*/
+:root {
+  /* Typography */
+  --font-fallback:
+    BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+  --font-body: Inter, var(--font-fallback);
+  --font-heading: Inter, var(--font-fallback);
+  --font-code:
+    Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+
+  --base-font-size: 100%;
+  --base-line-height: 1.2;
+  --intermediate-line-height: 1.5;
+  --heading-line-height: var(--base-line-height);
+  --heading-letter-spacing: -0.031rem;
+  --font-content-line-height: 1.75;
+  --font-body-strong-weight: 600;
+
+  /* based on the following type-scale https://type-scale.com/?size=16&scale=1.200&text=MDN%20Web%20Docs&font=Inter&fontweight=400&bodyfont=body_font_default&bodyfontweight=400&lineheight=1.75&backgroundcolor=%23ffffff&fontcolor=%23000000&preview=false */
+  --type-heading-h1-font-size: 2.488rem;
+  --type-heading-h2-font-size: 2.074rem;
+  --type-heading-h3-font-size: 1.728rem;
+  --type-heading-h4-font-size: 1.44rem;
+  --type-heading-h5-font-size: 1.2rem;
+  --type-base-font-size-rem: 1rem;
+  --type-smaller-font-size: 0.833rem;
+  --type-tiny-font-size: 0.694rem;
+
+  /* based on the following type-scale https://type-scale.com/?size=16&scale=1.125&text=MDN%20Web%20Docs&font=Inter&fontweight=400&bodyfont=body_font_default&bodyfontweight=400&lineheight=1.75&backgroundcolor=%23ffffff&fontcolor=%23000000&preview=false */
+  --type-heading-h1-font-size-mobile: 1.802rem;
+  --type-heading-h2-font-size-mobile: 1.602rem;
+  --type-heading-h3-font-size-mobile: 1.424rem;
+  --type-heading-h4-font-size-mobile: 1.266rem;
+
+  --type-emphasis-m: var(--font-body-strong-weight)
+    var(--type-smaller-font-size) / 1.23 var(--font-body);
+  --type-label-s: 600 var(--type-tiny-font-size) / 1.2 var(--font-heading);
+
+  --type-heading-h1: 600 var(--type-heading-h1-font-size-mobile) /
+    var(--heading-line-height) var(--font-heading);
+  --type-heading-h2: 500 var(--type-heading-h2-font-size-mobile) /
+    var(--heading-line-height) var(--font-heading);
+  --type-heading-h3: 300 var(--type-heading-h3-font-size-mobile) /
+    var(--heading-line-height) var(--font-heading);
+  --type-heading-h4: 400 var(--type-heading-h4-font-size-mobile) /
+    var(--heading-line-height) var(--font-heading);
+  --type-heading-h5: 400 var(--type-heading-h5-font-size) /
+    var(--heading-line-height) var(--font-heading);
+  --type-heading-h6: 400 var(--type-base-font-size-rem) /
+    var(--heading-line-height) var(--font-heading);
+  --type-article-p: 400 var(--type-base-font-size-rem) /
+    var(--font-content-line-height) var(--font-body);
+
+  /* Grid and Layout */
+  --max-width: 1440px;
+  --gutter: 1rem; /* Space between content and browser window */
+  --top-navigation-height: 4rem;
+  --top-navigation-offset: -4rem;
+  --top-banner-inner-height: 3.125rem;
+  // top-banner-inner-height + 2 * padding;
+  --top-banner-height: calc(var(--top-banner-inner-height) + 2 * 0.125rem);
+  // + border
+  --top-banner-outer-height: calc(var(--top-banner-height) + 2 * 1px);
+
+  /* Z-Indexes
+     Keep this in order, and avoid reusing variables so elements each
+     exist on a distinct layer - we hit a lot of bugs if they don't */
+  --z-index-a11y: 10000;
+  --z-index-modal-content: 801;
+  --z-index-modal-overlay: 800;
+  --z-index-main-header: 700;
+  --z-index-sidebar-mobile: 600;
+  --z-index-mid: 500;
+  --z-index-nav-menu: 200;
+  --z-index-search-results: 101;
+  --z-index-low: 100;
+  --z-index-search-results-home: 99;
+  --z-index-back: -1;
+
+  /* Features */
+  --elem-radius: 0.25rem;
+  --focus-effect: 0 0 0 3px var(--accent-primary-engage);
+  --form-elem-height: 2rem;
+
+  /* Major Components */
+  --top-nav-height: 4rem;
+  --article-actions-container-height: 2rem;
+  --icon-size: 1rem;
+  --sticky-header-without-actions-height: calc(var(--top-nav-height) + 1px);
+  --sticky-header-with-actions-height: calc(
+    var(--sticky-header-without-actions-height) +
+      var(--article-actions-container-height) + 1px
+  );
+}
+
+@media (min-width: $screen-md) {
+  :root {
+    --type-heading-h1: 600 var(--type-heading-h1-font-size) /
+      var(--heading-line-height) var(--font-heading);
+    --type-heading-h2: 500 var(--type-heading-h2-font-size) /
+      var(--heading-line-height) var(--font-heading);
+    --type-heading-h3: 300 var(--type-heading-h3-font-size) /
+      var(--heading-line-height) var(--font-heading);
+    --type-heading-h4: 400 var(--type-heading-h4-font-size) /
+      var(--heading-line-height) var(--font-heading);
+  }
+}
+
+:target,
+section[id] {
+  scroll-margin-top: var(--sticky-header-with-actions-height);
+}
+
+.sticky-header-container.without-actions ~ * :target,
+.sticky-header-container.without-actions ~ * section[id] {
+  scroll-margin-top: var(--sticky-header-without-actions-height);
+}
+
+body {
+  accent-color: var(--accent-primary); // for checkboxes, radios, etc.
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  scrollbar-color: var(--scrollbar-color) var(--scrollbar-bg);
+
+  &.mobile-overlay-active {
+    @media (max-width: $screen-md) {
+      overflow: hidden;
+    }
+  }
+}
+
+:focus-visible {
+  outline-color: var(--accent-primary);
+  outline-offset: 1px;
+  outline-style: auto;
+}
+
+main {
+  // prevent margin-collapse for child elements
+  display: flow-root;
+  min-height: 80vh;
+}
+
+.main-page-content {
+  a {
+    &:link,
+    &:visited {
+      text-decoration: underline;
+    }
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+}
+
+.visually-hidden {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
+}
+
+.contents {
+  display: contents;
+}
+
+.hidden {
+  display: none;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+pre {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+a {
+  color: var(--text-link);
+}
+
+.external:after {
+  background-color: var(--icon-primary);
+  content: "";
+  display: inline-flex;
+  height: 10px;
+  margin-left: 4px;
+  mask-image: url("./assets/icons/external.svg");
+  mask-size: cover;
+  width: 10px;
+}
+
+button.button[disabled],
+input[disabled] {
+  cursor: not-allowed;
+}
+
+.expand-this-link:after {
+  bottom: 0;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+[type="search"] {
+  /* clears the ‘X’ from Internet Explorer */
+  &::-ms-clear {
+    display: none;
+    height: 0;
+    width: 0;
+  }
+
+  &::-ms-reveal {
+    display: none;
+    height: 0;
+    width: 0;
+  }
+  /* clears the ‘X’ from Chrome */
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    display: none;
+  }
+}
+
+u {
+  text-decoration-color: var(--text-link);
+  text-decoration-thickness: 0.15rem;
+  text-underline-offset: 0.1em;
+}
+
+.plus .dark,
+.plus {
+  --background-toc-active: var(--plus-accent-background-color);
+  --text-link: var(--plus-accent-color);
+  --category-color: var(--plus-accent-color);
+  --category-color-engage: var(--plus-accent-engage);
+  --category-color-background: var(--plus-accent-background-color);
+  --code-color: var(--plus-code-color);
+  --mark-color: var(--plus-mark-color);
+}
+
+.category-html {
+  --background-toc-active: var(--html-accent-background-color);
+  --category-color: var(--html-accent-color);
+  --category-color-engage: var(--html-accent-engage);
+  --category-color-background: var(--html-accent-background-color);
+  --mark-color: var(--html-mark-color);
+}
+
+.category-css {
+  --background-toc-active: var(--css-accent-background-color);
+  --category-color: var(--css-accent-color);
+  --category-color-engage: var(--css-accent-engage);
+  --category-color-background: var(--css-accent-background-color);
+  --mark-color: var(--css-mark-color);
+}
+
+.category-javascript {
+  --background-toc-active: var(--js-accent-background-color);
+  --category-color: var(--js-accent-color);
+  --category-color-engage: var(--js-accent-engage);
+  --category-color-background: var(--js-accent-background-color);
+  --mark-color: var(--js-mark-color);
+}
+
+.category-http {
+  --background-toc-active: var(--http-accent-background-color);
+  --category-color: var(--http-accent-color);
+  --category-color-engage: var(--http-accent-engage);
+  --category-color-background: var(--http-accent-background-color);
+  --mark-color: var(--http-mark-color);
+}
+
+.category-api {
+  --background-toc-active: var(--apis-accent-background-color);
+  --category-color: var(--apis-accent-color);
+  --category-color-engage: var(--apis-accent-engage);
+  --category-color-background: var(--apis-accent-background-color);
+  --mark-color: var(--apis-mark-color);
+}
+
+.category-learn {
+  --background-toc-active: var(--learn-accent-background-color);
+  --category-color: var(--learn-accent-color);
+  --category-color-engage: var(--learn-accent-engage);
+  --category-color-background: var(--learn-accent-background-color);
+  --mark-color: var(--api-mark-color);
+}
+
+.mify {
+  @include mdn.mify;
+}
+
+._ify {
+  @include mdn.uify;
+}
+
+@media (forced-colors: active) {
+  .icon {
+    background-color: CanvasText !important;
+  }
+}
+
+sup.new {
+  background: var(--new-background);
+  border-radius: 1em;
+  color: var(--new-color);
+  display: inline-block;
+  font-size: 0.45rem;
+  font-weight: bold;
+  line-height: 1.7;
+  padding: 0 0.4em;
+  text-rendering: optimizeLegibility;
+  text-transform: uppercase;
+
+  &.beta {
+    background: var(--new-background-beta, var(--new-background));
+  }
+}
+
+.sticky-header-container {
+  position: sticky;
+  // Avoid gap on certain zoom levels.
+  top: -1px;
+  z-index: var(--z-index-main-header);
+}
+
+.feedback-link::before {
+  background-color: var(--feedback-link-icon, var(--text-link));
+  content: "";
+  display: inline-flex;
+  height: 1em;
+  margin-right: 0.4em;
+  mask-image: url("./assets/icons/feedback.svg");
+  mask-size: cover;
+  vertical-align: middle;
+  width: 1em;
+}

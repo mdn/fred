@@ -1,0 +1,54 @@
+<%
+/*
+ * first parameter: inline/header/method
+ * second parameter: (optional) bug number
+ * third parameter: additional information required for the type specified by the first parameter
+ *   method requires the method name
+ * fourth parameter: (optional) Product bug eg. Mozilla(default), WebKit
+*/
+
+var product = ($3 || "Mozilla");
+
+var s_str = mdn.localString({
+    "en-US" : ["Unimplemented", "see"],
+    "es" : ["No implementado", "mira"],
+    "fr" : ["Non implémenté", "voir"],
+    "ja" : ["未実装", "参照"],
+    "ko" : ["Unimplemented", "see"],
+    "ru" : ["Не реализовано", "смотрите"],
+    "pt-BR" : ["Unimplemented", "see"],
+    "zh-CN" : ["未实现", "查看"],
+    "zh-TW" : ["Unimplemented", "see"],
+});
+
+var str = s_str[0];
+
+if ($1 && $0 != 'method') {
+  switch(product.toLowerCase()) {
+    case 'mozilla':
+      str += ` (${s_str[1]} <a href="https://bugzil.la/${$1}">Firefox bug ${$1}</a>)`;
+    break;
+    case 'webkit':
+      str += ` (${s_str[1]} <a href="https://webkit.org/b/${$1}">WebKit bug ${$1}</a>)`;
+    break;
+  }
+}
+
+switch($0) {
+  case 'inline':
+    %><span class="notecard inline warning"><%-str%></span><%
+    break;
+  case 'header':
+    %><div class="notecard warning">
+      <h4>Warning</h4>
+      <p><%-str%></p>
+      </div><%
+    break;
+  case 'method':
+    %><div>
+      <span class="notecard inline warning"><%- str %></span>
+      <h4><%= $2 %>()</h4>
+      </div><%
+    break;
+}
+%>

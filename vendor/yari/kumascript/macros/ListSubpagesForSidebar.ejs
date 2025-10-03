@@ -1,0 +1,103 @@
+<%
+// Inserts a tree of subpages of the specified page to be used in the sidebar (quicklinks)
+// Displays common flags/icons
+// Includes the parent page at the top of the list.
+//
+// Parameters:
+//  $0 - The path of the page whose subpages should be listed.
+//  $1 - If true, do not put the text in <code></code>.
+//  $2 - If true, do add the parent page to the list
+//  $3 - Open delimiter: only text after (including) this in the title will be used
+//  $4 - Close delimiter: only text before (including) this is used
+//
+// Examples:
+//
+// {{ListSubpagesForSidebar("/en-US/docs/Web/API/WebRTC_API", 1)}}
+// {{ListSubpagesForSidebar("/en-US/docs/Web/HTML/Element", 0, 0, "<", ">")}}
+
+// If the path ends with a slash, remove it.
+const path = $0.replace(/\/$/, '');
+const locale = env.locale;
+const wrapInCode = !$1;
+const includeParent = $2 ? true : false;
+const startDelim = $3;
+const endDelim = $4;
+
+const overview = mdn.localString({
+    'de': 'Überblick',
+    'en-US': 'Overview',
+    'es': 'Generalidades',
+    'fr': 'Aperçu',
+    'ja': 'の概要',
+    'ko': '개요',
+    'ru': 'Обзор',
+    'zh-CN': '概述',
+    'zh-TW': '概述'
+});
+
+const parent = await wiki.getPage(path);
+const pages = parent.subpages;
+
+// Trim english title for sorting.
+for (const page of pages) {
+    page.title = trimTitle(page.title);
+}
+// sorted by english title for subpages
+pages.sort((a, b) => a.title.localeCompare(b.title));
+
+// always keep the parent page on top, so insert it after sorting
+if (includeParent) {
+    pages.unshift({
+        ...parent,
+        title: overview
+    });
+}
+
+const containsTag = page.hasTag;
+const htmlEscape = mdn.htmlEscape;
+
+// Trims the title, returning only the text
+// between the start and end delimiter characters.
+// Does nothing if both are null or empty.
+function trimTitle(title) {
+    const startIndex = startDelim ? Math.max(title.indexOf(startDelim), 0) : 0;
+
+    // if endIndex is 0 (not found), then use title.length
+    const endIndex = (endDelim ? title.indexOf(endDelim) + 1 : title.length) ||
+        title.length;
+
+    return title.substring(startIndex, endIndex);
+}
+
+async function createLink(aPage) {
+    const url = aPage.url.replace('en-US', locale);
+    let title = htmlEscape(aPage.title);
+
+    if (locale !== 'en-US') {
+        for (const translation of aPage.translations()) {
+            if (translation.locale === locale) {
+                title = htmlEscape(trimTitle(translation.title));
+            }
+        }
+    }
+
+    let linkContent = title;
+    if (wrapInCode) {
+      linkContent = `<code>${linkContent}</code>`;
+    }
+
+    const pageBadges = (await page.badges(aPage)).join("");
+
+    const result = `<li><a href="${url}">${linkContent}</a>${pageBadges}</li>`;
+    return result;
+}
+
+let output = ''
+if(pages.length) {
+    const linkArray = await Promise.all(pages.map(createLink));
+    const links = linkArray.join('');
+    output = `<ol>${links}</ol>`;
+}
+
+%>
+<%- output %>

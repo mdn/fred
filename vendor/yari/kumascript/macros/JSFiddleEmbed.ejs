@@ -1,0 +1,17 @@
+<%
+// Embeds a JSFiddle.
+//
+// Parameters:
+//  $0 - jsfiddle.net url
+//  $1 - which tabs to display (optional); this is a string such as "html,css" or "html,js"
+//  $2 - height of the iframe (optional)
+
+var options = $1 || "";
+
+if (options.length != 0) {
+    options += "/";
+}
+
+var s_result = '<p><iframe allowfullscreen="allowfullscreen" width="756" height="' + $2 + '" src="' + $0 + 'embedded/' + options + '"></iframe></p>';
+
+%><%- s_result %>

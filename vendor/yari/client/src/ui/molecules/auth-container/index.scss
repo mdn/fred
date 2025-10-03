@@ -1,0 +1,29 @@
+@use "../../vars" as *;
+
+.auth-container {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  font-family: var(--font-body);
+  font-size: var(--type-smaller-font-size);
+  font-weight: var(--font-body-strong-weight);
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+
+  li {
+    flex-shrink: 0;
+  }
+}
+
+.top-navigation-main {
+  .auth-container {
+    @media (max-width: #{$screen-lg - 1}) {
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+  }
+}

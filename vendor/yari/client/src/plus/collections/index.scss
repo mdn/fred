@@ -1,0 +1,113 @@
+@use "../../ui/vars" as *;
+@use "../../ui/mixins" as *;
+
+.collections {
+  color: var(--text-secondary);
+  font-weight: 500;
+  letter-spacing: var(--heading-letter-spacing);
+
+  h1,
+  h2 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+
+    a {
+      color: inherit;
+    }
+  }
+}
+
+.collections-overview {
+  > .container {
+    display: grid;
+    gap: 1rem;
+    padding: 1rem;
+
+    @media (min-width: $screen-md) {
+      grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    }
+  }
+
+  .notecard,
+  .generic-loading {
+    grid-column: 1/-1;
+  }
+
+  article {
+    background-color: var(--background-primary);
+    border: 1px solid var(--background-secondary);
+    border-radius: var(--elem-radius);
+    box-shadow: var(--shadow-02);
+    color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+
+    .dropdown-list {
+      color: var(--text-primary);
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    &.default {
+      background-color: var(--background-secondary);
+    }
+
+    header {
+      align-items: start;
+      display: grid;
+      grid-template-columns: auto min-content;
+    }
+
+    h2 {
+      align-self: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      // vertically centre first line of title, without increasing line height:
+      margin: 0.25rem 0;
+      margin-right: 1rem;
+      overflow-wrap: anywhere;
+
+      a {
+        color: var(--text-primary);
+      }
+    }
+
+    p {
+      margin: 0;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+      @include line-clamp(
+        4,
+        var(--font-content-line-height),
+        var(--background-primary)
+      );
+    }
+
+    footer {
+      align-items: baseline;
+      color: var(--text-secondary);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: auto;
+      overflow-wrap: anywhere;
+      padding-top: 1rem;
+
+      a {
+        color: var(--collections-link);
+      }
+    }
+
+    time {
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: $screen-md) {
+      .count {
+        display: none;
+      }
+    }
+  }
+}

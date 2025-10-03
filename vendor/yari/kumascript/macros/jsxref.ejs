@@ -1,0 +1,65 @@
+<%
+// Inserts a link to a JS API's documentation in the JS Reference.
+// Appropriate styling is applied.
+//
+// Parameters:
+//
+//  $0 - API name
+//  $1 - name to display (optional)
+//  $2 - anchor (#xyz) (optional)
+//  $3 - If set, do not put the text in <code></code>
+//
+// Examples:
+//
+//  {{jsxref("Date")}}
+//  {{jsxref("Date.prototype.toString()")}}
+//  {{jsxref("Global_Objects/Date/toString", "Date.prototype.toString()")}}
+//
+
+// Constants.
+const baseSlug = 'Web/JavaScript/Reference/';
+const localUrl = `/${env.locale}/docs/${baseSlug}`;
+const defaultUrl = `/en-US/docs/${baseSlug}`;
+const globalObjects = 'Global_Objects';
+
+// Parameters.
+const apiName = $0;
+const displayName = $1 || '';
+const anchor = $2 || '';
+const wrap = !$3;
+
+let slug = apiName.replace('()', '').replace('.prototype.', '.');
+if (apiName.includes(".") && !apiName.includes("/")) {
+    // E.g. "Array.filter", but not "Statements/try...catch".
+    slug = slug.replace('.', '/');
+}
+
+let basePath;
+if (wiki.hasPage(defaultUrl + slug)) {
+    // Page exists as is.
+    basePath = localUrl;
+} else if (wiki.hasPage(defaultUrl + globalObjects + '/' + slug)) {
+    // Page exists in "Global_Objects" section.
+    basePath = localUrl + globalObjects + '/';
+} else {
+    // Page does not exist.
+    basePath = localUrl;
+}
+
+let href = basePath + web.safeDecodeURIComponent(slug);
+if (anchor) {
+    if (anchor[0].startsWith('#')) {
+        href += anchor;
+    } else {
+        href += "#" + anchor;
+    }
+}
+
+let content = displayName || apiName;
+if (wrap) {
+  content = `<code>${content}</code>`;
+}
+
+const link = web.smartLink(href, null, content, apiName, basePath);
+
+%><%- link %>

@@ -13,16 +13,15 @@ import {
 } from "./db.js";
 import { fetchWithExampleOverride } from "./fetcher.js";
 
-declare var __UPDATES_BASE_URL__: string | undefined;
-
 export const INTERACTIVE_EXAMPLES_URL = new URL(
-  "https://interactive-examples.mdn.mozilla.net",
+  "https://interactive-examples.mdn.mozilla.net"
 );
 export const LIVE_SAMPLES_URL = new URL("https://live-samples.mdn.mozilla.net");
 export const USER_CONTENT_URL = new URL("https://mozillausercontent.com");
 
-const UPDATES_BASE_URL =
-  __UPDATES_BASE_URL__ || "https://updates.developer.mozilla.org";
+const UPDATES_BASE_URL = `https://updates.${
+  location.hostname === "localhost" ? "developer.allizom.org" : location.host
+}`;
 
 const SW_TYPE: SwType =
   SwType[new URLSearchParams(location.search).get("type")] ||
@@ -38,29 +37,19 @@ self.addEventListener("install", (e) => {
   e.waitUntil(
     (async () => {
       const cache = await openCache();
-      const files: string[] =
+      const { files = {} }: { files: object } =
         (await (
-          await fetch("/static/legacy/asset-manifest.json", {
-            cache: "no-cache",
-          })
-        ).json()) || [];
-      const assets = files.filter(
-        (asset) => !(asset as string).endsWith(".map"),
+          await fetch("/asset-manifest.json", { cache: "no-cache" })
+        ).json()) || {};
+      const assets = [...Object.values(files)].filter(
+        (asset) => !(asset as string).endsWith(".map")
       );
       let keys = new Set(
-        (await cache.keys()).map((r) => r.url.replace(location.origin, "")),
+        (await cache.keys()).map((r) => r.url.replace(location.origin, ""))
       );
       const toCache = assets.filter((file) => !keys.has(file));
       await cache.addAll(toCache as string[]);
-      const index = toCache.find(
-        (file) =>
-          file.startsWith("/static/legacy/index.") && file.endsWith(".html"),
-      );
-      if (index) {
-        const indexResponse = await fetch(index);
-        await cache.put("/static/legacy/index.html", indexResponse);
-      }
-    })().then(() => self.skipWaiting()),
+    })().then(() => self.skipWaiting())
   );
 
   initOncePerRun(self);
@@ -75,14 +64,12 @@ self.addEventListener("fetch", async (e) => {
   ) {
     e.respondWith(
       (async () => {
-        try {
-          const res = await fetchWithExampleOverride(e.request.clone());
-          if (res.ok) {
-            return res;
-          }
-        } catch {}
+        const res = await fetchWithExampleOverride(e.request);
+        if (res.ok) {
+          return res;
+        }
         return respond(e);
-      })(),
+      })()
     );
   } else {
     e.respondWith(respond(e));
@@ -116,7 +103,7 @@ self.addEventListener("message", (e: ExtendableMessageEvent) => {
           console.log(`unknown msg type: ${e?.data?.type}`);
           return Promise.resolve();
       }
-    })(),
+    })()
   );
 });
 
@@ -145,16 +132,16 @@ self.addEventListener("activate", (e: ExtendableEvent) => {
               return Promise.resolve(true);
             }
             return caches.delete(key);
-          }),
+          })
         );
       });
-    })(),
+    })()
   );
 });
 
 export async function messageAllClients(
   self: ServiceWorkerGlobalScope,
-  payload,
+  payload
 ) {
   try {
     const allClients = await self.clients.matchAll({
@@ -229,7 +216,7 @@ export async function updateContent(self: ServiceWorkerGlobalScope) {
       useDiff
         ? `/packages/${remote.latest}-${local.version}-update.zip`
         : `/packages/${remote.latest}-content.zip`,
-      UPDATES_BASE_URL,
+      UPDATES_BASE_URL
     );
 
     console.log(`[update] downloading: ${url}`);

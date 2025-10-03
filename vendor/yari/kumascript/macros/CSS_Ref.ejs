@@ -1,0 +1,622 @@
+<%
+/*
+  Inserts an index of all CSS properties, selectors, types, functions and
+  at-rules plus their descriptors.
+
+  $0 - Array of strings used to filter the displayed items by type
+       (valid values: 'properties', 'selectors', 'types', 'functions',
+       'at-rules', 'descriptors'; defaults to showing all)
+  $1 - Item grouping type
+       (valid values: 'alphabetically', 'no'; defaults to 'alphabetically')
+  $2 - Array of strings used to filter the items by their status
+       (valid values: 'standard', 'experimental', "nonstandard';
+       defaults to ['standard', 'experimental'])
+*/
+
+const data = require('mdn-data/css');
+
+let types = ["properties", "selectors", "types", "syntaxes", "at-rules",
+             "descriptors", "units"];
+let groupingType = "alphabetically";
+let outputStatuses = ["standard", "experimental"];
+
+if ($0) {
+    types = JSON.parse($0);
+}
+
+if ($1 === "category" || $1 === "no") {
+    groupingType = $1;
+}
+
+if ($2) {
+    outputStatuses = JSON.parse($2);
+}
+
+function htmlEscape(str) {
+    return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function normalize(str) {
+    return str.replace(/ \(@[\w-]+\)$/, "").replace(/@[\w-]+\/|[^a-z0-9()-]/gi, "");
+}
+
+function compareItems(itemA, itemB) {
+    let normalizedItemA = normalize(itemA.label);
+    let normalizedItemB = normalize(itemB.label);
+    if (normalizedItemA === normalizedItemB) {
+        if (itemA.label === itemB.label) {
+            return 0;
+        }
+
+        return itemA.label > itemB.label ? 1 : -1;
+    }
+
+    return normalizedItemA > normalizedItemB ? 1 : -1;
+}
+
+function getItemsFromSyntax(syntax) {
+    let items = syntax.match(/[\w-]+\([\w\-<>,#+*?[\]| ]*\)|@[\w-]+/g) || [];
+    for (let i = 0; i < items.length; i++) {
+        // Remove parameters
+        items[i] = items[i].replace(/\(.*?\)/, "()");
+    }
+    return items;
+}
+
+let index = {};
+
+if (types.some(type => type === "properties")) {
+    // Add properties to index
+    for (let prop in data.properties) {
+        // Exclude properties that don't have the right status
+        if (outputStatuses.indexOf(data.properties[prop].status) === -1) {
+            continue;
+        }
+
+        let initial = prop[0].toUpperCase();
+
+        if (!Object.prototype.hasOwnProperty.call(index, initial)) {
+            index[initial] = [];
+        }
+
+        index[initial].push({
+            urlPath: prop,
+            label: prop
+        });
+    }
+}
+
+if (types.some(type => type === "types")) {
+    // Add types to index
+    for (let type in data.types) {
+        // Exclude types that don't have the right status
+        if (outputStatuses.indexOf(data.types[type].status) === -1) {
+            continue;
+        }
+
+        let normalizedType = normalize(type);
+        let initial = normalizedType[0].toUpperCase();
+
+        if (!Object.prototype.hasOwnProperty.call(index, initial)) {
+            index[initial] = [];
+        }
+
+        let label = type;
+        if (label.charAt(0) != "<") {
+            // https://github.com/mdn/data/pull/81 was merged
+            label = `<${type}>`;
+        }
+
+        // Generate URL path regarding some special cases
+        switch (normalizedType) {
+            case "color":
+                normalizedType = "color_value";
+                break;
+
+            case "flex":
+                normalizedType = "flex_value";
+                break;
+
+            case "position":
+                normalizedType = "position_value";
+                break;
+        }
+
+        index[initial].push({
+            urlPath: normalizedType,
+            label: label
+        });
+    }
+}
+
+if (types.some(type => type === "syntaxes")) {
+    // Add value syntaxes to index
+
+    let syntaxes = data.syntaxes;
+    for (let syntax of Object.keys(syntaxes)) {
+        if (syntax.match(/\(\)$/)) {
+            let initial = normalize(syntax)[0].toUpperCase();
+
+            if (!Object.prototype.hasOwnProperty.call(index, initial)) {
+                index[initial] = [];
+            }
+
+            index[initial].push({
+                urlPath: syntax.replace("()", ""),
+                label: syntax
+            });
+        }
+
+        // Add items within at-rule syntax (e.g. "@annotation")
+        // check whether https://github.com/mdn/data/pull/66 was merged
+        let items = getItemsFromSyntax(syntaxes[syntax].syntax || syntaxes[syntax]);
+
+        for (let i = 0; i < items.length; i++) {
+            if (syntaxes[items[i]] && outputStatuses.indexOf(syntaxes[items[i]]) === -1) {
+                continue;
+            }
+
+            let initial = normalize(items[i])[0].toUpperCase();
+
+            if (!Object.prototype.hasOwnProperty.call(index, initial)) {
+                index[initial] = [];
+            }
+
+            index[initial].push({
+                urlPath: items[i].replace("()", ""),
+                label: items[i]
+            });
+        }
+    }
+}
+
+if (types.some(type => type === "at-rules")) {
+    // Add at-rules to index
+    for (let atRule in data.atRules) {
+        // Exclude at-rules that don't have the right status
+        if (outputStatuses.indexOf(data.atRules[atRule].status) === -1) {
+            continue;
+        }
+
+        let initial = normalize(atRule)[0].toUpperCase();
+
+        if (!Object.prototype.hasOwnProperty.call(index, initial)) {
+            index[initial] = [];
+        }
+
+        index[initial].push({
+            urlPath: atRule,
+            label: atRule
+        });
+
+        // Add items within at-rule syntax
+        if (data.atRules[atRule].syntax) {
+            let items = getItemsFromSyntax(data.atRules[atRule].syntax);
+
+            for (let i = 0; i < items.length; i++) {
+                // Exclude the at-rule itself when its inside the syntax
+                if (items[i] === atRule) {
+                    continue;
+                }
+
+                let initial = normalize(items[i])[0].toUpperCase();
+
+                if (!Object.prototype.hasOwnProperty.call(index, initial)) {
+                    index[initial] = [];
+                }
+
+                index[initial].push({
+                    urlPath: `${atRule}/${items[i]}`,
+                    label: `${items[i]} (${atRule})`
+                });
+            }
+        }
+
+        if (types.some(type => type === "descriptors")) {
+            // Add the at-rule's descriptors
+            for (let descriptor in data.atRules[atRule].descriptors) {
+                // Exclude descriptors that don't have the right status
+                if (outputStatuses.indexOf(data.atRules[atRule].
+                    descriptors[descriptor].status) === -1) {
+                    continue;
+                }
+
+                let initial = descriptor[0].toUpperCase();
+
+                if (!Object.prototype.hasOwnProperty.call(index, initial)) {
+                    index[initial] = [];
+                }
+
+                index[initial].push({
+                    urlPath: `${atRule}/${descriptor}`,
+                    label: `${descriptor} (${atRule})`
+                });
+
+                // Add items within descriptor syntax
+                let items = getItemsFromSyntax(
+                    data.atRules[atRule].descriptors[descriptor].syntax);
+
+                for (let i = 0; i < items.length; i++) {
+                    let initial = normalize(items[i])[0].toUpperCase();
+
+                    if (!Object.prototype.hasOwnProperty.call(index, initial)) {
+                        index[initial] = [];
+                    }
+
+                    index[initial].push({
+                        urlPath: `${atRule}/${descriptor}#${items[i]}`,
+                        label: items[i]
+                    });
+                }
+            }
+        }
+    }
+}
+
+if (types.some(type => type === "selectors")) {
+    // Add selectors to index
+    for (let selector in data.selectors) {
+        // Exclude selectors that don't have the right status
+        if (outputStatuses.indexOf(data.selectors[selector].status) === -1) {
+            continue;
+        }
+
+        // Exclude basic selectors
+        if (selector.indexOf(" ") !== -1) {
+            continue;
+        }
+
+        let initial = normalize(selector)[0].toUpperCase();
+
+        if (!Object.prototype.hasOwnProperty.call(index, initial)) {
+            index[initial] = [];
+        }
+
+        index[initial].push({
+            urlPath: selector,
+            label: selector
+        });
+    }
+}
+
+if (types.some(type => type === "units")) {
+    // Add units to index
+    for (let unit in data.units) {
+        // Exclude units that don't have the right status
+        if (outputStatuses.indexOf(data.units[unit].status) === -1) {
+            continue;
+        }
+
+        let initial = unit[0].toUpperCase();
+
+        if (!Object.prototype.hasOwnProperty.call(index, initial)) {
+            index[initial] = [];
+        }
+
+        switch (data.units[unit].groups[1]) {
+            case "CSS Lengths":
+                unit = `length#${unit}`;
+                break;
+
+            case "CSS Angles":
+                unit = `angle#${unit}`;
+                break;
+
+            case "CSS Flexible Lengths":
+                unit = `flex_value#${unit}`;
+                break;
+
+            case "CSS Frequencies":
+                unit = `frequency#${unit}`;
+                break;
+
+            case "CSS Times":
+                unit = `time#${unit}`;
+                break;
+
+            case "CSS Resolutions":
+                unit = `resolution#${unit}`;
+                break;
+        }
+
+        index[initial].push({
+            urlPath: unit,
+            label: unit
+        });
+    }
+}
+
+let characters = Object.keys(index).sort();
+
+// Add missing items
+if (types.indexOf("types") !== -1) {
+    if (!index.C) {
+        index.C = [];
+    }
+    index.C.push({
+        urlPath: "counter",
+        label: "<counter>"
+    });
+
+    index.U.push({
+        urlPath: "url#The_url()_functional_notation",
+        label: "url()"
+    });
+}
+
+if (types.indexOf("syntaxes") !== -1) {
+    if (!index.I) {
+        index.I = [];
+    }
+    index.I.push({
+        urlPath: "inherit",
+        label: "inherit"
+    });
+    index.I.push({
+        urlPath: "initial",
+        label: "initial"
+    });
+    if (!index.R) {
+        index.R = [];
+    }
+    index.R.push({
+        urlPath: "revert",
+        label: "revert"
+    });
+    if (!index.U) {
+        index.U = [];
+    }
+    index.U.push({
+        urlPath: "unset",
+        label: "unset"
+    });
+
+    if (!index.V) {
+        index.V = [];
+    }
+    index.V.push({
+        urlPath: "var",
+        label: "var()"
+    });
+}
+
+if (types.indexOf("properties") !== -1) {
+    index.Others = [{
+        urlPath: "--*",
+        label: "--*"
+    }];
+    characters.push("Others");
+}
+
+// Adjust data for output
+for (let i in characters) {
+    for (let j = index[characters[i]].length - 1; j >= 0; j--) {
+        let item = index[characters[i]][j];
+
+        switch (item.label) {
+            // Add alternate name for pseudo-elements (one colon)
+            case "::after":
+            case "::before":
+            case "::first-letter":
+            case "::first-line":
+                item.label += ` (${item.label.replace(/^:/, "")})`;
+                break;
+
+            // Font-feature-values
+            case "@annotation":
+            case "@character-variant":
+            case "@historical-forms":
+            case "@ornaments":
+            case "@styleset":
+            case "@stylistic":
+            case "@swash":
+                item.urlPath = `@font-feature-values#${item.label}`;
+                break;
+
+            // Font-variant-alternates
+            case "annotation()":
+            case "character-variant()":
+            case "ornaments()":
+            case "styleset()":
+            case "stylistic()":
+            case "swash()":
+                item.urlPath = `font-variant-alternates#${item.label}`;
+                break;
+
+
+            // Image
+            case "image()":
+                item.urlPath = "image#The_image()_functional_notation";
+                break;
+            case "image-set()":
+            case "paint()":
+                item.urlPath = `image/${item.label.replace("()", "")}`;
+                break;
+
+            // Filter
+            case "blur()":
+            case "brightness()":
+            case "contrast()":
+            case "drop-shadow()":
+            case "grayscale()":
+            case "hue-rotate()":
+            case "invert()":
+            case "opacity()":
+            case "saturate()":
+            case "sepia()":
+                item.urlPath = `filter-function/${item.label.replace("()", "")}`;
+                break;
+
+            // Transforms
+            case "matrix()":
+            case "matrix3d()":
+            case "perspective()":
+            case "rotate()":
+            case "rotate3d()":
+            case "rotateX()":
+            case "rotateY()":
+            case "rotateZ()":
+            case "scale()":
+            case "scale3d()":
+            case "scaleX()":
+            case "scaleY()":
+            case "scaleZ()":
+            case "skew()":
+            case "skewX()":
+            case "skewY()":
+            case "translate()":
+            case "translate3d()":
+            case "translateX()":
+            case "translateY()":
+            case "translateZ()":
+                item.urlPath = `transform-function/${item.label.replace("()", "")}`;
+                break;
+
+            // Colors
+            case "rgba()": // Still valid but alternative name for rgb()
+                item.urlPath = "color_value/rgb";
+                break;
+            case "hsla()": // Still valid but alternative name for hsl()
+                item.urlPath = "color_value/hsl";
+                break;
+            case "rgb()":
+            case "hsl()":
+            case "hwb()":
+            case "lab()":
+            case "lch()":
+            case "light-dark()":
+            case "oklab()":
+            case "oklch()":
+                item.urlPath = `color_value/${item.label.replace("()", "")}`;
+                break;
+
+            // Gradients
+            case "conic-gradient()":
+            case "linear-gradient()":
+            case "radial-gradient()":
+            case "repeating-conic-gradient()":
+            case "repeating-linear-gradient()":
+            case "repeating-radial-gradient()":
+                item.urlPath = `gradient/${item.label.replace("()", "")}`;
+                break;
+
+            // Shapes
+            case "inset()":
+            case "polygon()":
+            case "circle()":
+            case "ellipse()":
+                item.urlPath = `basic-shape#${item.label}`;
+                break;
+            case "rect()":
+                item.urlPath = `shape#${item.label}`;
+                break;
+
+            // @page
+            case "@top-left-corner":
+            case "@top-left":
+            case "@top-center":
+            case "@top-right":
+            case "@top-right-corner":
+            case "@bottom-left-corner":
+            case "@bottom-left":
+            case "@bottom-center":
+            case "@bottom-right":
+            case "@bottom-right-corner":
+            case "@left-top":
+            case "@left-middle":
+            case "@left-bottom":
+            case "@right-top":
+            case "@right-middle":
+            case "@right-bottom":
+                item.urlPath = "@page#page-margin-box-type";
+                break;
+
+            // Easing functions
+            case "cubic-bezier()":
+                item.urlPath = "easing-function#cubic_bézier_easing_function";
+                break;
+            case "linear()":
+                item.urlPath = "easing-function#linear_easing_function";
+                break;
+            case "steps()":
+                item.urlPath = `easing-function#steps_easing_function`;
+                break;
+
+            // Alternate name
+            case "word-wrap":
+                item.urlPath = "overflow-wrap";
+                break;
+            case "line-clamp": // Nobody implements it under this name
+                item.urlPath = "-webkit-line-clamp"
+                break;
+
+            // Misc
+            case "view()":
+                item.urlPath = "animation-timeline/view";
+                break;
+            case ":host()":
+                item.urlPath = ":host_function"
+                break;
+            case "format()":
+                item.urlPath = "@font-face/src#format()";
+                break;
+            case "url()":
+                item.urlPath = "url#The_url()_functional_notation";
+                break;
+        }
+    }
+}
+
+// Removed duplicates
+for (let i in characters) {
+    index[characters[i]].sort(compareItems);
+
+    for (let j = index[characters[i]].length - 1; j >= 0; j--) {
+        let item = index[characters[i]][j];
+
+        if (j !== 0 && item.urlPath === index[characters[i]][j - 1].urlPath) {
+            index[characters[i]].splice(j, 1);
+        }
+    }
+}
+
+let output = "";
+
+if (groupingType === "no") {
+    output = "<ul>";
+}
+
+let baseURL = `/${env.locale}/docs/Web/CSS/`;
+
+for (let characterIndex in characters) {
+    let character = characters[characterIndex];
+
+    if (groupingType === "alphabetically") {
+        output += `<h3>${character}</h3>`;
+        output += '<ul>';
+    }
+
+    for (let i = 0; i < index[character].length; i++) {
+        let url = baseURL + index[character][i].urlPath;
+        output += `<li>${web.smartLink(
+            url,
+            null,
+            `<code>${htmlEscape(index[character][i].label)}</code>`,
+            index[character][i].urlPath,
+            baseURL,
+            "CSS_Ref"
+        )}</li>`;
+    }
+
+    if (groupingType === "alphabetically") {
+        output += "</ul>";
+    }
+}
+
+if (groupingType === "no") {
+    output += "</ul>";
+}
+%>
+<div class="index">
+    <%- output %>
+</div>

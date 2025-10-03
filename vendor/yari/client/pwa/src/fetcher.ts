@@ -18,7 +18,7 @@ export async function fetchWithExampleOverride(request) {
   const examplesPrefix = `${location.origin}/examples`;
   if (request.url.startsWith(examplesPrefix)) {
     const res = await fetch(
-      request.url.replace(examplesPrefix, INTERACTIVE_EXAMPLES_URL.origin),
+      request.url.replace(examplesPrefix, INTERACTIVE_EXAMPLES_URL.origin)
     );
     if (res.ok) {
       return res;
@@ -72,7 +72,7 @@ export async function respond(e): Promise<Response> {
     } else if (url.pathname.startsWith("/examples/") && url.search) {
       url.search = "";
     } else if (!url.pathname.split("/").pop().includes(".")) {
-      url.pathname = "/static/legacy/index.html";
+      url.pathname = "/index.html";
     } else if (url.pathname === "/index.json") {
       url.pathname = "/en-us/index.json";
     } else if (url.pathname.startsWith("/en-US/")) {

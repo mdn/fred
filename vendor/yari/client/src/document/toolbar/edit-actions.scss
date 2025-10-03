@@ -1,0 +1,20 @@
+.edit-actions {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  // width: 100%;
+
+  li {
+    .button {
+      max-width: unset;
+    }
+  }
+
+  a {
+    color: var(--text-link);
+  }
+
+  p.editor-opening-error {
+    font-weight: var(--font-body-strong-weight);
+  }
+}

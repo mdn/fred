@@ -1,0 +1,17 @@
+{
+  "trailingComma": "es5",
+  "overrides": [
+    {
+      "files": ["**/package.json"],
+      "options": {
+        "plugins": ["prettier-plugin-packagejson"]
+      }
+    },
+    {
+      "files": ["**/*.md"],
+      "options": {
+        "proseWrap": "always"
+      }
+    }
+  ]
+}

@@ -19,7 +19,7 @@ pre-commit:
       glob: "components/**/*.js"
 
     - name: stylelint
-      run: npx stylelint --fix --cache {staged_files}
+      run: npx stylelint --fix --cache --allow-empty-input {staged_files}
       glob: "*.css"
       stage_fixed: true
 
@@ -42,7 +42,7 @@ pre-push:
           - name: lit-analyzer
             run: npm run lit-analyzer -- components
           - name: stylelint
-            run: npx stylelint '**/*.css' --cache --ignore-path .gitignore
+            run: npx stylelint '**/*.css' --cache --ignore-path .stylelintignore --ignore-path .gitignore
           - name: tsc
             run: npx tsc
 

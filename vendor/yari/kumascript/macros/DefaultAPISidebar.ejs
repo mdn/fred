@@ -1,0 +1,139 @@
+<%
+// API Sidebar for overview pages
+//
+// Parameters:
+//  $0  Name of the API group in GroupData
+
+// Variables and data
+var slug = env.slug;
+var locale = env.locale;
+var APIHref = '/' + locale + '/docs/Web/API';
+var output = "";
+var group = $0;
+var htmlEscape = mdn.htmlEscape;
+// slug is not available in preview mode.
+if (slug && group) {
+
+var webAPIGroups = web.getJSONData("GroupData");
+
+var commonl10n = web.getJSONData("L10n-Common");
+
+var text = {
+    'Methods': mdn.getLocalString(commonl10n, 'Methods'),
+    'Properties': mdn.getLocalString(commonl10n, 'Properties'),
+    'Events': mdn.getLocalString(commonl10n, 'Events'),
+    'Interfaces': mdn.getLocalString(commonl10n, 'Interfaces'),
+    'Guides': mdn.getLocalString(commonl10n, 'Guides'),
+    'Tutorial': mdn.getLocalString(commonl10n, 'Tutorial'),
+    'translate': mdn.getLocalString(commonl10n, '[Translate]'),
+    'title': mdn.getLocalString(commonl10n, 'TranslationCTA'),
+};
+
+if (webAPIGroups[0][group]) {
+
+var interfaces = webAPIGroups[0][group].interfaces || [];
+var methods = webAPIGroups[0][group].methods || [];
+var properties = webAPIGroups[0][group].properties || [];
+var events = webAPIGroups[0][group].events || [];
+var groupGuides = webAPIGroups[0][group].guides || [];
+var groupTutorial = webAPIGroups[0][group].tutorial || [];
+
+var guides = await wiki.getPages(...groupGuides);
+var tutorial = await wiki.getPages(...groupTutorial);
+
+function buildSublist(pages, title) {
+  var result = '<li class="toggle"><details open><summary>' + title + '</summary><ol>';
+
+  for (var i in pages) {
+    var aPage = pages[i];
+    var url = aPage.url.replace('en-US', locale);
+    var title = htmlEscape(aPage.title);
+
+    if (locale !== 'en-US') {
+      for (const translation of aPage.translations()) {
+        if (translation.locale === locale) {
+          title = htmlEscape(translation.title);
+        }
+      }
+    }
+
+    result += '<li>';
+    result += '<a href="' + url + '">' + title + '</a>';
+    result += '</li>';
+  }
+
+  result += '</ol></details></li>';
+
+  return result;
+}
+
+function buildIFList(interfaces, title) {
+  var result = '<li class="toggle"><details open><summary>' + title + '</summary><ol>';
+
+  for (let interface of interfaces) {
+    result += '<li><a href="' + APIHref + '/' + interface.target + '">' + interface.text + '</a></li>';
+  }
+
+  result += '</ol></details></li>';
+
+  return result;
+}
+
+function convert(itemName) {
+    return {
+      text: `<code>${itemName}</code>`,
+      target: itemName.replace('()', '').replace('.', '/')
+    }
+}
+
+function convertEvent(eventName) {
+    const eventComponents = eventName.split(': ');
+    if (eventComponents.length !== 2) {
+      return null;
+    }
+    return {
+      text: `<code>${eventComponents[0]}</code>: <code>${eventComponents[1]}</code>`,
+      target: `${eventComponents[0]}/${eventComponents[1]}_event`
+    }
+}
+
+// output
+output = '<section id="Quick_links" data-macro="DefaultAPISidebar"><ol>';
+
+if (webAPIGroups[0][group].overview) {
+  output += '<li class="section"><a href="' +  APIHref + '/' + webAPIGroups[0][group].overview[0].replace(/ /g, '_') + '">' + webAPIGroups[0][group].overview[0] + '</a></li>';
+}
+
+if (guides.length > 0) {
+  output += buildSublist(guides, text['Guides']);
+}
+
+if (tutorial.length > 0) {
+  output += buildSublist(tutorial, text['Tutorial']);
+}
+
+interfaces = interfaces.map(convert);
+if (interfaces.length > 0) {
+  output += buildIFList(interfaces, text['Interfaces']);
+}
+
+properties = properties.map(convert);
+if (properties.length > 0) {
+  output += buildIFList(properties, text['Properties']);
+}
+
+methods = methods.map(convert);
+if (methods.length > 0) {
+  output += buildIFList(methods, text['Methods']);
+}
+
+events = events.sort().map(convertEvent).filter( e => e !== null );
+if (events.length > 0) {
+  output += buildIFList(events, text['Events']);
+}
+
+output += '</ol></section>';
+}}
+%>
+
+<%-output%>

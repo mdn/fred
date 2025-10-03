@@ -1,0 +1,14 @@
+<%
+// Inserts a link to a term's entry in our glossary.
+//
+// Parameters:
+//
+//  $0 - Term name
+//  $1 - name to display (optional)
+
+let str = $1 || $0;
+
+const basePath = `/${env.locale}/docs/Glossary/`;
+const subPath = $0.replace(/\s+/g,'_');
+const link = web.smartLink(basePath + subPath, null, str, subPath, basePath);
+%><%- link %>

@@ -1,0 +1,108 @@
+<%
+// Creates a list of API Interfaces sorted alphabeticlly
+
+var APIHref = $0 || '/en-US/docs/Web/API';
+
+// Prepares the title of the link. This includes wrapping the appropriate
+// portion of the title with <code>. Returns null if the page should not
+// be included in the index.
+
+function buildTitle(base) {
+    var spaceIndex = base.indexOf(' ');
+
+    // If there are no spaces in the page's title, the entire base
+    // string is the title, so we just wrap the whole thing in <code> and
+    // return it.
+
+    if ((spaceIndex == -1) && (base != "Reference")) {
+        return "<code>" + base + "</code>";
+    }
+
+    // If the character after the space is '(', then this is assumed to be an
+    // interface with a qualifier after its name (such as "(Firefox OS)").
+    // These are allowed to appear in the index, but we end the <code> block
+    // before the first space
+
+    if ((spaceIndex < base.length-1) && (base[spaceIndex+1] == '(')) {
+        return "<code>" + base.substring(0, spaceIndex) + "</code>" + base.substring(spaceIndex);
+    }
+
+    // It's not an interface, so return null.
+
+    return null;
+}
+
+function containsTag(tagList, tag) {
+    if (!tagList || tagList == undefined) return 0;
+    tag = tag.toLowerCase();
+    for (var i = 0, len = tagList.length; i < len; i++) {
+        if (tagList[i].toLowerCase() == tag) return 1;
+    }
+    return 0;
+}
+
+var pages = await page.subpagesExpand(APIHref); // get subpages, including tags
+
+// The result of `subpagesExpand()` does not guarantee the order to be
+// alphabetical. Most of the time it is because of how the OS is iterating over
+// files on disk. So sort it first, because the rendering loop (see far below)
+// depends on it.
+pages.sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()));
+
+var locale = env.locale;
+var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var html = "";
+
+var numLetters = letters.length;
+var numPages = pages.length;
+var p = 0;
+
+
+for (var i = 0; i < numLetters; i++) {
+    var curLetter = letters[i];
+    var insertedHeading = false; // Haven't done this letter's heading yet
+
+    if (p < numPages) {
+        do {
+            const aPage = pages[p];
+            var tags = aPage.tags;
+            var url = aPage.url;
+            var title = aPage.title;
+
+            // Build the formatted title string; skip this page if it's not
+            // an interface.
+
+            var builtTitle = buildTitle(title);
+            if (builtTitle == null) {
+                p++;
+                continue;
+            }
+
+            let pageBadges = (await page.badges(aPage)).join(" ");
+
+            // Wrap the badges in another span
+
+            if (pageBadges.length)
+                pageBadges = `<span class="indexListBadges"> ${pageBadges}</span>`;
+
+            if (title[0].toUpperCase() == curLetter) {
+                if (!containsTag(tags, "junk")) {
+                    if (!insertedHeading) {
+                        html += "<h3>" + curLetter + "</h3><ul>";
+                        insertedHeading = true;
+                    }
+                    html += `\n<li><span class="indexListRow"><span class="indexListTerm"><a href="${url.replace("en-US", locale)}">${builtTitle}</a></span>${pageBadges}</span></li>`;
+                }
+                p++;
+            } else {
+                break;
+            }
+        } while (p < pages.length);
+    }
+    html += "\n</ul>\n";
+}
+
+
+%><div class="index">
+<%-html%>
+</div>

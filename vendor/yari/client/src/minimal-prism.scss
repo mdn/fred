@@ -1,0 +1,80 @@
+/*
+This is based on node_modules/prismjs/themes/prism.css as of Mar 26, 2021.
+
+The reason we're not importing all of their CSS is because it contains a lot of
+selectors that we never use. In particular, it has (lots!) CSS for selectors
+like `pre[class*="language-"]` and `code[class*="language-"]` but because we
+don't use any of that, we can safely ignore it.
+*/
+
+@use "./ui/theme/color-palette/index.scss" as palette;
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata,
+.token.punctuation {
+  color: palette.$mdn-neutral600;
+}
+
+.token.namespace {
+  opacity: 0.7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: var(--icon-critical);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: palette.$mdn-green700;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: palette.$mdn-color-neutral-90;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: palette.$mdn-blue700;
+}
+
+.token.function,
+.token.class-name {
+  color: palette.$mdn-red600;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: palette.$mdn-yellow600;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+  font-variation-settings: "slnt" -10;
+}
+
+.token.entity {
+  cursor: help;
+}
