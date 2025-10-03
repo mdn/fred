@@ -4,6 +4,7 @@ import { createRef, ref } from "lit/directives/ref.js";
 
 import "../button/element.js";
 import { L10nMixin } from "../../l10n/mixin.js";
+import { gleanClick } from "../../utils/glean.js";
 import closeIcon from "../icon/cancel.svg?lit";
 
 import styles from "./element.css?lit";
@@ -146,8 +147,7 @@ export class MDNSurvey extends L10nMixin(LitElement) {
   #measure(action) {
     if (!this._survey) return;
 
-    // TODO: GLEAN
-    console.log(`Survey: ${action} ${this._survey.bucket}`);
+    gleanClick(`survey: ${action} ${this._survey.bucket}`);
   }
 
   #setupMessageListener() {
