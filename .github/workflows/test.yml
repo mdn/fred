@@ -23,6 +23,27 @@ jobs:
           cache: npm
           node-version-file: ".nvmrc"
 
+      - name: Checkout base package-lock.json
+        uses: actions/checkout@v5
+        with:
+          path: base
+          ref: ${{ github.base_ref }}
+          sparse-checkout: |
+            package-lock.json
+          sparse-checkout-cone-mode: false
+
+      - name: Check package-lock.json is correct
+        run: |
+          if ! diff -q package-lock.json base/package-lock.json; then
+            mv package-lock.json package-lock.json.branch
+            mv base/package-lock.json .
+            rm -rf node_modules
+            npm install
+            diff package-lock.json package-lock.json.branch
+          else
+            echo "package-lock.json doesn't differ, skipping"
+          fi
+
       - name: Install
         run: npm ci
         env:
