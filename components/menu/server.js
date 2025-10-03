@@ -63,153 +63,147 @@ export class Menu extends ServerComponent {
       {
         id: "html",
         buttonText: "HTML",
-        renderPanel: () =>
-          html`<p class="menu__panel-title">
-              ${link("Web/HTML", "HTML: Markup language", { primary: true })}
-            </p>
-            <div class="menu__panel-content">
-              <dl>
-                <dt>HTML reference</dt>
-                <dd>
-                  <ul>
-                    <li>${link("Web/HTML/Reference/Elements", "Elements")}</li>
-                    <li>
-                      ${link(
-                        "Web/HTML/Reference/Global_attributes",
-                        "Global attributes",
-                      )}
-                    </li>
-                    <li>
-                      ${link("Web/HTML/Reference/Attributes", "Attributes")}
-                    </li>
-                    <li>
-                      ${link("Web/HTML/Reference", "See all…", {
-                        label: "See all HTML references",
-                      })}
-                    </li>
-                  </ul>
-                </dd>
-              </dl>
-              <dl>
-                <dt>HTML guides</dt>
-                <dd>
-                  <ul>
-                    <li>
-                      ${link(
-                        "Web/HTML/Guides/Responsive_images",
-                        "Responsive images",
-                      )}
-                    </li>
-                    <li>
-                      ${link("Web/HTML/Guides/Cheatsheet", "HTML cheatsheet")}
-                    </li>
-                    <li>
-                      ${link(
-                        "Web/HTML/Guides/Date_and_time_formats",
-                        "Date & time formats",
-                      )}
-                    </li>
-                    <li>
-                      ${link("Web/HTML/Guides", "See all…", {
-                        label: "See all HTML guides",
-                      })}
-                    </li>
-                  </ul>
-                </dd>
-              </dl>
-              <dl>
-                <dt>Markup languages</dt>
-                <dd>
-                  <ul>
-                    <li>${link("Web/SVG", "SVG")}</li>
-                    <li>${link("Web/MathML", "MathML")}</li>
-                    <li>${link("Web/XML", "XML")}</li>
-                  </ul>
-                </dd>
-              </dl>
-            </div>`,
+        panelTitle: () =>
+          link("Web/HTML", "HTML: Markup language", { primary: true }),
+        renderPanelContent: () =>
+          html`<dl>
+              <dt>HTML reference</dt>
+              <dd>
+                <ul>
+                  <li>${link("Web/HTML/Reference/Elements", "Elements")}</li>
+                  <li>
+                    ${link(
+                      "Web/HTML/Reference/Global_attributes",
+                      "Global attributes",
+                    )}
+                  </li>
+                  <li>
+                    ${link("Web/HTML/Reference/Attributes", "Attributes")}
+                  </li>
+                  <li>
+                    ${link("Web/HTML/Reference", "See all…", {
+                      label: "See all HTML references",
+                    })}
+                  </li>
+                </ul>
+              </dd>
+            </dl>
+            <dl>
+              <dt>HTML guides</dt>
+              <dd>
+                <ul>
+                  <li>
+                    ${link(
+                      "Web/HTML/Guides/Responsive_images",
+                      "Responsive images",
+                    )}
+                  </li>
+                  <li>
+                    ${link("Web/HTML/Guides/Cheatsheet", "HTML cheatsheet")}
+                  </li>
+                  <li>
+                    ${link(
+                      "Web/HTML/Guides/Date_and_time_formats",
+                      "Date & time formats",
+                    )}
+                  </li>
+                  <li>
+                    ${link("Web/HTML/Guides", "See all…", {
+                      label: "See all HTML guides",
+                    })}
+                  </li>
+                </ul>
+              </dd>
+            </dl>
+            <dl>
+              <dt>Markup languages</dt>
+              <dd>
+                <ul>
+                  <li>${link("Web/SVG", "SVG")}</li>
+                  <li>${link("Web/MathML", "MathML")}</li>
+                  <li>${link("Web/XML", "XML")}</li>
+                </ul>
+              </dd>
+            </dl>`,
       },
       {
         id: "css",
         buttonText: "CSS",
-        renderPanel: () =>
-          html`<p class="menu__panel-title">
-              ${link("Web/CSS", "CSS: Styling language", { primary: true })}
-            </p>
-            <div class="menu__panel-content">
-              <dl>
-                <dt>CSS reference</dt>
-                <dd>
-                  <ul>
-                    <li>${link("Web/CSS/Properties", "Properties")}</li>
-                    <li>${link("Web/CSS/CSS_selectors", "Selectors")}</li>
-                    <li>${link("Web/CSS/CSS_syntax/At-rule", "At-rules")}</li>
-                    <li>
-                      ${link("Web/CSS/CSS_values_and_units", "Values & units")}
-                    </li>
-                    <li>
-                      ${link("Web/CSS/Reference", "See all…", {
-                        label: "See all CSS references",
-                      })}
-                    </li>
-                  </ul>
-                </dd>
-              </dl>
-              <dl>
-                <dt>CSS guides</dt>
-                <dd>
-                  <ul>
-                    <li>
-                      ${link(
-                        "Web/CSS/CSS_box_model/Introduction_to_the_CSS_box_model",
-                        "Box model",
-                      )}
-                    </li>
-                    <li>
-                      ${link(
-                        "Web/CSS/CSS_animations/Using_CSS_animations",
-                        "Animations",
-                      )}
-                    </li>
-                    <li>
-                      ${link(
-                        "Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox",
-                        "Flexbox",
-                      )}
-                    </li>
-                    <li>${link("Web/CSS/CSS_colors", "Colors")}</li>
-                    <li>
-                      ${link("Web/CSS/Guides", "See all…", {
-                        label: "See all CSS guides",
-                      })}
-                    </li>
-                  </ul>
-                </dd>
-              </dl>
-              <dl>
-                <dt>Layout cookbook</dt>
-                <dd>
-                  <ul>
-                    <li>
-                      ${link(
-                        "Web/CSS/Layout_cookbook/Column_layouts",
-                        "Column layouts",
-                      )}
-                    </li>
-                    <li>
-                      ${link(
-                        "Web/CSS/Layout_cookbook/Center_an_element",
-                        "Centering an element",
-                      )}
-                    </li>
-                    <li>
-                      ${link("Web/CSS/Layout_cookbook/Card", "Card component")}
-                    </li>
-                    <li>${link("Web/CSS/Layout_cookbook", "See all…")}</li>
-                  </ul>
-                </dd>
-              </dl>
-            </div>`,
+        panelTitle: () =>
+          link("Web/CSS", "CSS: Styling language", { primary: true }),
+        renderPanelContent: () =>
+          html` <dl>
+              <dt>CSS reference</dt>
+              <dd>
+                <ul>
+                  <li>${link("Web/CSS/Properties", "Properties")}</li>
+                  <li>${link("Web/CSS/CSS_selectors", "Selectors")}</li>
+                  <li>${link("Web/CSS/CSS_syntax/At-rule", "At-rules")}</li>
+                  <li>
+                    ${link("Web/CSS/CSS_values_and_units", "Values & units")}
+                  </li>
+                  <li>
+                    ${link("Web/CSS/Reference", "See all…", {
+                      label: "See all CSS references",
+                    })}
+                  </li>
+                </ul>
+              </dd>
+            </dl>
+            <dl>
+              <dt>CSS guides</dt>
+              <dd>
+                <ul>
+                  <li>
+                    ${link(
+                      "Web/CSS/CSS_box_model/Introduction_to_the_CSS_box_model",
+                      "Box model",
+                    )}
+                  </li>
+                  <li>
+                    ${link(
+                      "Web/CSS/CSS_animations/Using_CSS_animations",
+                      "Animations",
+                    )}
+                  </li>
+                  <li>
+                    ${link(
+                      "Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox",
+                      "Flexbox",
+                    )}
+                  </li>
+                  <li>${link("Web/CSS/CSS_colors", "Colors")}</li>
+                  <li>
+                    ${link("Web/CSS/Guides", "See all…", {
+                      label: "See all CSS guides",
+                    })}
+                  </li>
+                </ul>
+              </dd>
+            </dl>
+            <dl>
+              <dt>Layout cookbook</dt>
+              <dd>
+                <ul>
+                  <li>
+                    ${link(
+                      "Web/CSS/Layout_cookbook/Column_layouts",
+                      "Column layouts",
+                    )}
+                  </li>
+                  <li>
+                    ${link(
+                      "Web/CSS/Layout_cookbook/Center_an_element",
+                      "Centering an element",
+                    )}
+                  </li>
+                  <li>
+                    ${link("Web/CSS/Layout_cookbook/Card", "Card component")}
+                  </li>
+                  <li>${link("Web/CSS/Layout_cookbook", "See all…")}</li>
+                </ul>
+              </dd>
+            </dl>`,
       },
       {
         id: "javascript",
@@ -217,420 +211,388 @@ export class Menu extends ServerComponent {
           long: "JavaScript",
           short: "JS",
         },
-        renderPanel: () =>
-          html`<p class="menu__panel-title">
-              ${link("Web/JavaScript", "JavaScript: Scripting language", {
-                primary: true,
-              })}
-            </p>
-            <div class="menu__panel-content">
-              <dl>
-                <dt>JS reference</dt>
-                <dd>
-                  <ul>
-                    <li>
-                      ${link(
-                        "Web/JavaScript/Reference/Global_Objects",
-                        "Standard built-in objects",
-                      )}
-                    </li>
-                    <li>
-                      ${link(
-                        "Web/JavaScript/Reference/Operators",
-                        "Expressions & operators",
-                      )}
-                    </li>
-                    <li>
-                      ${link(
-                        "Web/JavaScript/Reference/Statements",
-                        "Statements & declarations",
-                      )}
-                    </li>
-                    <li>
-                      ${link("Web/JavaScript/Reference/Functions", "Functions")}
-                    </li>
-                    <li>
-                      ${link("Web/JavaScript/Reference", "See all…", {
-                        label: "See all JavaScript references",
-                      })}
-                    </li>
-                  </ul>
-                </dd>
-              </dl>
-              <dl>
-                <dt>JS guides</dt>
-                <dd>
-                  <ul>
-                    <li>
-                      ${link(
-                        "Web/JavaScript/Guide/Control_flow_and_error_handling",
-                        "Control flow & error handing",
-                      )}
-                    </li>
-                    <li>
-                      ${link(
-                        "Web/JavaScript/Guide/Loops_and_iteration",
-                        "Loops and iteration",
-                      )}
-                    </li>
-                    <li>
-                      ${link(
-                        "Web/JavaScript/Guide/Working_with_objects",
-                        "Working with objects",
-                      )}
-                    </li>
-                    <li>
-                      ${link(
-                        "Web/JavaScript/Guide/Using_classes",
-                        "Using classes",
-                      )}
-                    </li>
-                    <li>
-                      ${link("Web/JavaScript/Guide", "See all…", {
-                        label: "See all JavaScript guides",
-                      })}
-                    </li>
-                  </ul>
-                </dd>
-              </dl>
-            </div>`,
+        panelTitle: () =>
+          link("Web/JavaScript", "JavaScript: Scripting language", {
+            primary: true,
+          }),
+        renderPanelContent: () =>
+          html`<dl>
+              <dt>JS reference</dt>
+              <dd>
+                <ul>
+                  <li>
+                    ${link(
+                      "Web/JavaScript/Reference/Global_Objects",
+                      "Standard built-in objects",
+                    )}
+                  </li>
+                  <li>
+                    ${link(
+                      "Web/JavaScript/Reference/Operators",
+                      "Expressions & operators",
+                    )}
+                  </li>
+                  <li>
+                    ${link(
+                      "Web/JavaScript/Reference/Statements",
+                      "Statements & declarations",
+                    )}
+                  </li>
+                  <li>
+                    ${link("Web/JavaScript/Reference/Functions", "Functions")}
+                  </li>
+                  <li>
+                    ${link("Web/JavaScript/Reference", "See all…", {
+                      label: "See all JavaScript references",
+                    })}
+                  </li>
+                </ul>
+              </dd>
+            </dl>
+            <dl>
+              <dt>JS guides</dt>
+              <dd>
+                <ul>
+                  <li>
+                    ${link(
+                      "Web/JavaScript/Guide/Control_flow_and_error_handling",
+                      "Control flow & error handing",
+                    )}
+                  </li>
+                  <li>
+                    ${link(
+                      "Web/JavaScript/Guide/Loops_and_iteration",
+                      "Loops and iteration",
+                    )}
+                  </li>
+                  <li>
+                    ${link(
+                      "Web/JavaScript/Guide/Working_with_objects",
+                      "Working with objects",
+                    )}
+                  </li>
+                  <li>
+                    ${link(
+                      "Web/JavaScript/Guide/Using_classes",
+                      "Using classes",
+                    )}
+                  </li>
+                  <li>
+                    ${link("Web/JavaScript/Guide", "See all…", {
+                      label: "See all JavaScript guides",
+                    })}
+                  </li>
+                </ul>
+              </dd>
+            </dl>`,
       },
       {
         id: "webapis",
         buttonText: "Web APIs",
-        renderPanel: () =>
-          html`<p class="menu__panel-title">
-              ${link("Web/API", "Web APIs: Programming interfaces", {
-                primary: true,
-              })}
-            </p>
-            <div class="menu__panel-content">
-              <dl>
-                <dt>Web API reference</dt>
-                <dd>
-                  <ul>
-                    <li>
-                      ${link("Web/API/File_System_API", "File system API")}
-                    </li>
-                    <li>${link("Web/API/Fetch_API", "Fetch API")}</li>
-                    <li>
-                      ${link("Web/API/Geolocation_API", "Geolocation API")}
-                    </li>
-                    <li>${link("Web/API/HTML_DOM_API", "HTML DOM API")}</li>
-                    <li>${link("Web/API/Push_API", "Push API")}</li>
-                    <li>
-                      ${link(
-                        "Web/API/Service_Worker_API",
-                        "Service worker API",
-                      )}
-                    </li>
-                    <li>
-                      ${link("Web/API", "See all…", {
-                        label: "See all Web API guides",
-                      })}
-                    </li>
-                  </ul>
-                </dd>
-              </dl>
-              <dl>
-                <dt>Web API guides</dt>
-                <dd>
-                  <ul>
-                    <li>
-                      ${link(
-                        "Web/API/Web_Animations_API/Using_the_Web_Animations_API",
-                        "Using the Web animation API",
-                      )}
-                    </li>
-                    <li>
-                      ${link(
-                        "Web/API/Fetch_API/Using_Fetch",
-                        "Using the Fetch API",
-                      )}
-                    </li>
-                    <li>
-                      ${link(
-                        "Web/API/History_API/Working_with_the_History_API",
-                        "Working with the History API",
-                      )}
-                    </li>
-                    <li>
-                      ${link(
-                        "Web/API/Web_Speech_API/Using_the_Web_Speech_API",
-                        "Using the Web speech API",
-                      )}
-                    </li>
-                    <li>
-                      ${link(
-                        "Web/API/Web_Workers_API/Using_web_workers",
-                        "Using web workers",
-                      )}
-                    </li>
-                  </ul>
-                </dd>
-              </dl>
-            </div>`,
+        panelTitle: () =>
+          link("Web/API", "Web APIs: Programming interfaces", {
+            primary: true,
+          }),
+        renderPanelContent: () =>
+          html`<dl>
+              <dt>Web API reference</dt>
+              <dd>
+                <ul>
+                  <li>${link("Web/API/File_System_API", "File system API")}</li>
+                  <li>${link("Web/API/Fetch_API", "Fetch API")}</li>
+                  <li>${link("Web/API/Geolocation_API", "Geolocation API")}</li>
+                  <li>${link("Web/API/HTML_DOM_API", "HTML DOM API")}</li>
+                  <li>${link("Web/API/Push_API", "Push API")}</li>
+                  <li>
+                    ${link("Web/API/Service_Worker_API", "Service worker API")}
+                  </li>
+                  <li>
+                    ${link("Web/API", "See all…", {
+                      label: "See all Web API guides",
+                    })}
+                  </li>
+                </ul>
+              </dd>
+            </dl>
+            <dl>
+              <dt>Web API guides</dt>
+              <dd>
+                <ul>
+                  <li>
+                    ${link(
+                      "Web/API/Web_Animations_API/Using_the_Web_Animations_API",
+                      "Using the Web animation API",
+                    )}
+                  </li>
+                  <li>
+                    ${link(
+                      "Web/API/Fetch_API/Using_Fetch",
+                      "Using the Fetch API",
+                    )}
+                  </li>
+                  <li>
+                    ${link(
+                      "Web/API/History_API/Working_with_the_History_API",
+                      "Working with the History API",
+                    )}
+                  </li>
+                  <li>
+                    ${link(
+                      "Web/API/Web_Speech_API/Using_the_Web_Speech_API",
+                      "Using the Web speech API",
+                    )}
+                  </li>
+                  <li>
+                    ${link(
+                      "Web/API/Web_Workers_API/Using_web_workers",
+                      "Using web workers",
+                    )}
+                  </li>
+                </ul>
+              </dd>
+            </dl>`,
       },
       {
         id: "all",
         buttonText: "All",
-        renderPanel: () =>
-          html`<p class="menu__panel-title">
-              ${link("Web", "All web technology", { primary: true })}
-            </p>
-            <div class="menu__panel-content">
-              <dl>
-                <dt>Technologies</dt>
-                <dd>
-                  <ul>
-                    <li>${link("Web/Accessibility", "Accessibility")}</li>
-                    <li>${link("Web/HTTP", "HTTP")}</li>
-                    <li>${link("Web/URI", "URI")}</li>
-                    <li>
-                      ${link("Mozilla/Add-ons/WebExtensions", "Web extensions")}
-                    </li>
-                    <li>${link("WebAssembly", "WebAssembly")}</li>
-                    <li>${link("Web/WebDriver", "WebDriver")}</li>
-                    <li>
-                      ${link("Web", "See all…", {
-                        label: "See all web technology references",
-                      })}
-                    </li>
-                  </ul>
-                </dd>
-              </dl>
-              <dl>
-                <dt>Topics</dt>
-                <dd>
-                  <ul>
-                    <li>${link("Web/Media", "Media")}</li>
-                    <li>${link("Web/API/Performance", "Performance")}</li>
-                    <li>${link("Web/Privacy", "Privacy")}</li>
-                    <li>${link("Web/Security", "Security")}</li>
-                    <li>
-                      ${link(
-                        "Web/Progressive_web_apps",
-                        "Progressive web apps",
-                      )}
-                    </li>
-                  </ul>
-                </dd>
-              </dl>
-            </div>`,
+        panelTitle: () => link("Web", "All web technology", { primary: true }),
+        renderPanelContent: () =>
+          html`<dl>
+              <dt>Technologies</dt>
+              <dd>
+                <ul>
+                  <li>${link("Web/Accessibility", "Accessibility")}</li>
+                  <li>${link("Web/HTTP", "HTTP")}</li>
+                  <li>${link("Web/URI", "URI")}</li>
+                  <li>
+                    ${link("Mozilla/Add-ons/WebExtensions", "Web extensions")}
+                  </li>
+                  <li>${link("WebAssembly", "WebAssembly")}</li>
+                  <li>${link("Web/WebDriver", "WebDriver")}</li>
+                  <li>
+                    ${link("Web", "See all…", {
+                      label: "See all web technology references",
+                    })}
+                  </li>
+                </ul>
+              </dd>
+            </dl>
+            <dl>
+              <dt>Topics</dt>
+              <dd>
+                <ul>
+                  <li>${link("Web/Media", "Media")}</li>
+                  <li>${link("Web/API/Performance", "Performance")}</li>
+                  <li>${link("Web/Privacy", "Privacy")}</li>
+                  <li>${link("Web/Security", "Security")}</li>
+                  <li>
+                    ${link("Web/Progressive_web_apps", "Progressive web apps")}
+                  </li>
+                </ul>
+              </dd>
+            </dl>`,
       },
       {
         id: "learn",
         buttonText: "Learn",
-        renderPanel: () =>
-          html`<p class="menu__panel-title">
-              ${link("Learn_web_development", "Learn web development", {
-                primary: true,
-              })}
-            </p>
-            <div class="menu__panel-content">
-              <dl>
-                <dt>Frontend developer course</dt>
-                <dd>
-                  <ul>
-                    <li>
-                      ${link(
-                        "Learn_web_development/Getting_started",
-                        "Getting started",
+        panelTitle: () =>
+          link("Learn_web_development", "Learn web development", {
+            primary: true,
+          }),
+        renderPanelContent: () =>
+          html`<dl>
+              <dt>Frontend developer course</dt>
+              <dd>
+                <ul>
+                  <li>
+                    ${link(
+                      "Learn_web_development/Getting_started",
+                      "Getting started",
+                    )}
+                  </li>
+                  <li>
+                    ${link("Learn_web_development/Howto", "Common questions")}
+                  </li>
+                  <li>
+                    <a
+                      class=${ifDefined(
+                        context.locale === "en-US"
+                          ? undefined
+                          : "only-in-en-us",
                       )}
-                    </li>
-                    <li>
-                      ${link("Learn_web_development/Howto", "Common questions")}
-                    </li>
-                    <li>
-                      <a
-                        class=${ifDefined(
-                          context.locale === "en-US"
-                            ? undefined
-                            : "only-in-en-us",
-                        )}
-                        href="/en-US/curriculum/"
-                        data-glean-id=${gleanId("/en-US/curriculum/")}
-                        >Curriculum</a
-                      >
-                    </li>
-                  </ul>
-                </dd>
-              </dl>
-              <dl>
-                <dt>Learn HTML</dt>
-                <dd>
-                  <ul>
-                    <li>
-                      ${link(
-                        "Learn_web_development/Core/Structuring_content",
-                        "Introduction to HTML",
-                      )}
-                    </li>
-                    <li>
-                      ${link(
-                        "Learn_web_development/Core/Structuring_content/Basic_HTML_syntax",
-                        "Getting started with HTML",
-                      )}
-                    </li>
-                  </ul>
-                </dd>
-              </dl>
-              <dl>
-                <dt>Learn CSS</dt>
-                <dd>
-                  <ul>
-                    <li>
-                      ${link(
-                        "Learn_web_development/Core/Styling_basics/What_is_CSS",
-                        "What is CSS",
-                      )}
-                    </li>
-                    <li>
-                      ${link(
-                        "Learn_web_development/Core/Styling_basics/Getting_started",
-                        "Getting started with CSS",
-                      )}
-                    </li>
-                  </ul>
-                </dd>
-              </dl>
-              <dl>
-                <dt>Learn JavaScript</dt>
-                <dd>
-                  <ul>
-                    <li>
-                      ${link(
-                        "Web/HTML/How_to/Use_data_attributes",
-                        "How to use data attributes",
-                      )}
-                    </li>
-                    <li>
-                      ${link(
-                        "Web/HTML/How_to/Add_JavaScript_to_your_web_page",
-                        "Add JavaScript to your web page",
-                      )}
-                    </li>
-                  </ul>
-                </dd>
-              </dl>
-            </div>`,
+                      href="/en-US/curriculum/"
+                      data-glean-id=${gleanId("/en-US/curriculum/")}
+                      >Curriculum</a
+                    >
+                  </li>
+                </ul>
+              </dd>
+            </dl>
+            <dl>
+              <dt>Learn HTML</dt>
+              <dd>
+                <ul>
+                  <li>
+                    ${link(
+                      "Learn_web_development/Core/Structuring_content",
+                      "Introduction to HTML",
+                    )}
+                  </li>
+                  <li>
+                    ${link(
+                      "Learn_web_development/Core/Structuring_content/Basic_HTML_syntax",
+                      "Getting started with HTML",
+                    )}
+                  </li>
+                </ul>
+              </dd>
+            </dl>
+            <dl>
+              <dt>Learn CSS</dt>
+              <dd>
+                <ul>
+                  <li>
+                    ${link(
+                      "Learn_web_development/Core/Styling_basics/What_is_CSS",
+                      "What is CSS",
+                    )}
+                  </li>
+                  <li>
+                    ${link(
+                      "Learn_web_development/Core/Styling_basics/Getting_started",
+                      "Getting started with CSS",
+                    )}
+                  </li>
+                </ul>
+              </dd>
+            </dl>
+            <dl>
+              <dt>Learn JavaScript</dt>
+              <dd>
+                <ul>
+                  <li>
+                    ${link(
+                      "Web/HTML/How_to/Use_data_attributes",
+                      "How to use data attributes",
+                    )}
+                  </li>
+                  <li>
+                    ${link(
+                      "Web/HTML/How_to/Add_JavaScript_to_your_web_page",
+                      "Add JavaScript to your web page",
+                    )}
+                  </li>
+                </ul>
+              </dd>
+            </dl>`,
       },
       {
         id: "tools",
         buttonText: "Tools",
-        renderPanel: () =>
-          html`<p class="menu__panel-title">Discover our tools</p>
-            <div class="menu__panel-content">
-              <ul>
-                <li>
-                  <a
-                    class="menu__panel-icon"
-                    data-icon="circle-play"
-                    href=${`/en-US/play`}
-                    data-glean-id=${gleanId("/en-US/play/")}
-                  >
-                    Playground
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="menu__panel-icon"
-                    data-icon="shield-check"
-                    href=${`/en-US/observatory`}
-                    data-glean-id=${gleanId("/en-US/observatory/")}
-                  >
-                    HTTP Observatory
-                  </a>
-                </li>
-              </ul>
-              <ul>
-                <li>
-                  ${link(
-                    "Web/CSS/CSS_backgrounds_and_borders/Border-image_generator",
-                    "Border-image generator",
-                  )}
-                </li>
-                <li>
-                  ${link(
-                    "Web/CSS/CSS_backgrounds_and_borders/Border-radius_generator",
-                    "Border-radius generator",
-                  )}
-                </li>
-                <li>
-                  ${link(
-                    "Web/CSS/CSS_backgrounds_and_borders/Box-shadow_generator",
-                    "Box-shadow generator",
-                  )}
-                </li>
-                <li>
-                  ${link(
-                    "Web/CSS/CSS_colors/Color_format_converter",
-                    "Color format converter",
-                  )}
-                </li>
-                <li>
-                  ${link("Web/CSS/CSS_colors/Color_mixer", "Color mixer")}
-                </li>
-                <li>
-                  ${link(
-                    "Web/CSS/CSS_shapes/Shape_generator",
-                    "Shape generator",
-                  )}
-                </li>
-              </ul>
-            </div>`,
+        panelTitle: "Discover our tools",
+        renderPanelContent: () =>
+          html` <ul>
+              <li>
+                <a
+                  class="menu__panel-icon"
+                  data-icon="circle-play"
+                  href=${`/en-US/play`}
+                  data-glean-id=${gleanId("/en-US/play/")}
+                >
+                  Playground
+                </a>
+              </li>
+              <li>
+                <a
+                  class="menu__panel-icon"
+                  data-icon="shield-check"
+                  href=${`/en-US/observatory`}
+                  data-glean-id=${gleanId("/en-US/observatory/")}
+                >
+                  HTTP Observatory
+                </a>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                ${link(
+                  "Web/CSS/CSS_backgrounds_and_borders/Border-image_generator",
+                  "Border-image generator",
+                )}
+              </li>
+              <li>
+                ${link(
+                  "Web/CSS/CSS_backgrounds_and_borders/Border-radius_generator",
+                  "Border-radius generator",
+                )}
+              </li>
+              <li>
+                ${link(
+                  "Web/CSS/CSS_backgrounds_and_borders/Box-shadow_generator",
+                  "Box-shadow generator",
+                )}
+              </li>
+              <li>
+                ${link(
+                  "Web/CSS/CSS_colors/Color_format_converter",
+                  "Color format converter",
+                )}
+              </li>
+              <li>${link("Web/CSS/CSS_colors/Color_mixer", "Color mixer")}</li>
+              <li>
+                ${link("Web/CSS/CSS_shapes/Shape_generator", "Shape generator")}
+              </li>
+            </ul>`,
       },
       {
         id: "about",
         buttonText: "About",
-        renderPanel: () =>
-          html`<p class="menu__panel-title">Get to know MDN better</p>
-            <div class="menu__panel-content">
-              <ul>
-                <li>
-                  <a
-                    class="menu__panel-icon"
-                    data-icon="mdn-m"
-                    href=${`/en-US/about`}
-                    data-glean-id=${gleanId("/en-US/about")}
-                  >
-                    About MDN
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="menu__panel-icon"
-                    data-icon="chart-no-axes-combined"
-                    href=${`/en-US/advertising`}
-                    data-glean-id=${gleanId("/en-US/advertising")}
-                  >
-                    Advertise with us
-                  </a>
-                </li>
-              </ul>
-              <ul>
-                <li>
-                  <a
-                    class="menu__panel-icon"
-                    data-icon="users"
-                    href=${`/en-US/community`}
-                    data-glean-id=${gleanId("/en-US/community")}
-                  >
-                    Community
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="menu__panel-icon"
-                    data-icon="github"
-                    href="https://github.com/mdn"
-                    data-glean-id=${gleanId("https://github.com/mdn")}
-                  >
-                    MDN on GitHub
-                  </a>
-                </li>
-              </ul>
-            </div>`,
+        panelTitle: "Get to know MDN better",
+        renderPanelContent: () =>
+          html`<ul>
+              <li>
+                <a
+                  class="menu__panel-icon"
+                  data-icon="mdn-m"
+                  href=${`/en-US/about`}
+                  data-glean-id=${gleanId("/en-US/about")}
+                >
+                  About MDN
+                </a>
+              </li>
+              <li>
+                <a
+                  class="menu__panel-icon"
+                  data-icon="chart-no-axes-combined"
+                  href=${`/en-US/advertising`}
+                  data-glean-id=${gleanId("/en-US/advertising")}
+                >
+                  Advertise with us
+                </a>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <a
+                  class="menu__panel-icon"
+                  data-icon="users"
+                  href=${`/en-US/community`}
+                  data-glean-id=${gleanId("/en-US/community")}
+                >
+                  Community
+                </a>
+              </li>
+              <li>
+                <a
+                  class="menu__panel-icon"
+                  data-icon="github"
+                  href="https://github.com/mdn"
+                  data-glean-id=${gleanId("https://github.com/mdn")}
+                >
+                  MDN on GitHub
+                </a>
+              </li>
+            </ul>`,
       },
       {
         id: "blog",
@@ -664,7 +626,14 @@ export class Menu extends ServerComponent {
                           >`}
                   </button>
                   <div class="menu__panel" slot="dropdown">
-                    ${section.renderPanel()}
+                    <p class="menu__panel-title">
+                      ${typeof section.panelTitle === "function"
+                        ? section.panelTitle()
+                        : section.panelTitle}
+                    </p>
+                    <div class="menu__panel-content">
+                      ${section.renderPanelContent()}
+                    </div>
                   </div>
                 </mdn-dropdown>`}
           </div>`;
