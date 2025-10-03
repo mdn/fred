@@ -65,9 +65,10 @@ export class Menu extends ServerComponent {
       {
         id: "html",
         buttonText: "HTML",
-        panelTitle: link("Web/HTML", "HTML: Markup language", {
-          primary: true,
-        }),
+        panelTitle: {
+          slug: "Web/HTML",
+          text: "HTML: Markup language",
+        },
         panelGroups: [
           {
             title: "HTML reference",
@@ -107,7 +108,10 @@ export class Menu extends ServerComponent {
       {
         id: "css",
         buttonText: "CSS",
-        panelTitle: link("Web/CSS", "CSS: Styling language", { primary: true }),
+        panelTitle: {
+          slug: "Web/CSS",
+          text: "CSS: Styling language",
+        },
         panelGroups: [
           {
             title: "CSS reference",
@@ -159,9 +163,10 @@ export class Menu extends ServerComponent {
           long: "JavaScript",
           short: "JS",
         },
-        panelTitle: link("Web/JavaScript", "JavaScript: Scripting language", {
-          primary: true,
-        }),
+        panelTitle: {
+          slug: "Web/JavaScript",
+          text: "JavaScript: Scripting language",
+        },
         panelGroups: [
           {
             title: "JS reference",
@@ -210,9 +215,10 @@ export class Menu extends ServerComponent {
       {
         id: "webapis",
         buttonText: "Web APIs",
-        panelTitle: link("Web/API", "Web APIs: Programming interfaces", {
-          primary: true,
-        }),
+        panelTitle: {
+          slug: "Web/API",
+          text: "Web APIs: Programming interfaces",
+        },
         panelGroups: [
           {
             title: "Web API reference",
@@ -255,7 +261,10 @@ export class Menu extends ServerComponent {
       {
         id: "all",
         buttonText: "All",
-        panelTitle: link("Web", "All web technology", { primary: true }),
+        panelTitle: {
+          slug: "Web",
+          text: "All web technology",
+        },
         panelGroups: [
           {
             title: "Technologies",
@@ -286,9 +295,10 @@ export class Menu extends ServerComponent {
       {
         id: "learn",
         buttonText: "Learn",
-        panelTitle: link("Learn_web_development", "Learn web development", {
-          primary: true,
-        }),
+        panelTitle: {
+          slug: "Learn_web_development",
+          text: "Learn web development",
+        },
         panelGroups: [
           {
             title: "Frontend developer course",
@@ -350,7 +360,9 @@ export class Menu extends ServerComponent {
       {
         id: "tools",
         buttonText: "Tools",
-        panelTitle: "Discover our tools",
+        panelTitle: {
+          text: "Discover our tools",
+        },
         panelGroups: [
           {
             items: [
@@ -401,7 +413,9 @@ export class Menu extends ServerComponent {
       {
         id: "about",
         buttonText: "About",
-        panelTitle: "Get to know MDN better",
+        panelTitle: {
+          text: "Get to know MDN better",
+        },
         panelGroups: [
           {
             items: [
@@ -482,9 +496,11 @@ export class Menu extends ServerComponent {
                   </button>
                   <div class="menu__panel" slot="dropdown">
                     <p class="menu__panel-title">
-                      ${typeof tab.panelTitle === "function"
-                        ? tab.panelTitle()
-                        : tab.panelTitle}
+                      ${tab.panelTitle.slug
+                        ? link(tab.panelTitle.slug, tab.panelTitle.text, {
+                            primary: true,
+                          })()
+                        : tab.panelTitle.text}
                     </p>
                     <div class="menu__panel-content">
                       ${tab.panelGroups === undefined
