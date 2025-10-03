@@ -485,13 +485,8 @@ export class Menu extends ServerComponent {
       },
       {
         id: "blog",
-        render: () =>
-          html`<a
-            class="menu__tab-link"
-            href=${`/en-US/blog/`}
-            data-glean-id=${`menu_click_link: top-level -> /en-US/blog/`}
-            >Blog</a
-          >`,
+        buttonText: "Blog",
+        href: "/en-US/blog/",
       },
     ];
 
@@ -500,8 +495,13 @@ export class Menu extends ServerComponent {
         ${tabs.map((tab) => {
           currentTab = tab.id;
           const result = html`<div class="menu__tab" data-section=${tab.id}>
-            ${"render" in tab
-              ? tab.render()
+            ${"href" in tab
+              ? html`<a
+                  class="menu__tab-link"
+                  href=${tab.href}
+                  data-glean-id=${`menu_click_link: top-level -> ${tab.href}`}
+                  >${tab.buttonText}</a
+                >`
               : html`<mdn-dropdown>
                   <button class="menu__tab-button" type="button" slot="button">
                     ${typeof tab.buttonText === "string"
