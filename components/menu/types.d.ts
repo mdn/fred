@@ -1,6 +1,7 @@
 import { ServerRenderedTemplate } from "@lit-labs/ssr";
 interface BaseTab {
   id: string;
+  buttonText: ButtonText;
 }
 
 type ButtonText = string | { long: string; short: string };
@@ -38,13 +39,12 @@ interface PanelGroup {
 }
 
 interface DropdownTab extends BaseTab {
-  buttonText: ButtonText;
   panelTitle: PanelTitle;
   panelGroups: PanelGroup[];
 }
 
 interface LinkTab extends BaseTab {
-  render: () => ServerRenderedTemplate;
+  href: string;
 }
 
 export type MenuTab = DropdownTab | LinkTab;
