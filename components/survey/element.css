@@ -9,6 +9,7 @@
 
   padding: 1rem;
   padding-left: 5rem;
+  margin-top: 1.6rem;
 
   background-color: var(--color-background-purple);
   border-radius: 0.5rem;
@@ -48,10 +49,17 @@ mdn-button::part(icon) {
   color: var(--color-text-purple);
 }
 
-summary,
-a {
+summary {
   color: var(--color-text-purple);
   cursor: pointer;
+}
+
+a {
+  color: var(--color-text-purple);
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 iframe {

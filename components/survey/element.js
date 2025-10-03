@@ -7,7 +7,7 @@ import { L10nMixin } from "../../l10n/mixin.js";
 import closeIcon from "../icon/cancel.svg?lit";
 
 import styles from "./element.css?lit";
-import { SURVEYS, SurveyBucket } from "./surveys.js";
+import { SURVEYS } from "./surveys.js";
 import { getSurveyState, writeSurveyState } from "./utils.js";
 
 /**
@@ -27,8 +27,8 @@ export class MDNSurvey extends L10nMixin(LitElement) {
     this._surveyState = undefined;
     /** @type {boolean} */
     this._isOpen = false;
-    /** @type {string | null}  */
-    this._force = null;
+    /** @type {boolean}  */
+    this._force = false;
     /** @type {string | undefined} */
     this._source = undefined;
 
@@ -65,12 +65,13 @@ export class MDNSurvey extends L10nMixin(LitElement) {
    * @returns {Survey.Survey | undefined}
    */
   #findSurvey() {
-    this._force = new URLSearchParams(location.search).get("force_survey");
+    const forcedSurvey = new URLSearchParams(location.search).get(
+      "force_survey",
+    );
+    this._force = forcedSurvey !== null;
     return SURVEYS.find((survey) => {
       if (this._force) {
-        return this._force in SurveyBucket
-          ? survey.key === this._force
-          : this._force;
+        return forcedSurvey ? survey.key === forcedSurvey : true;
       }
 
       if (!survey.show(location.pathname)) {
@@ -199,7 +200,9 @@ export class MDNSurvey extends L10nMixin(LitElement) {
           ></mdn-button>
         </header>
         ${this._survey.link
-          ? html`<a href=${this._source}>${this._survey.question}</a>`
+          ? html`<a href=${this._source} target="_blank"
+              >${this._survey.question}</a
+            >`
           : html`<details ${ref(this._detailsRef)} @toggle=${this.#onToggle}>
               <summary>${this._survey.question}</summary>
               ${this._isOpen && this._source
