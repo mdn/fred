@@ -113,20 +113,30 @@ export class MDNSurvey extends L10nMixin(LitElement) {
     this.requestUpdate();
   }
 
+  #onLinkClick() {
+    this.#markOpened();
+  }
+
   #onToggle() {
     if (!this._survey || !this._surveyState || this._isOpen) return;
 
     const details = this._detailsRef.value;
     if (details && details.open) {
-      this._surveyState = {
-        ...this._surveyState,
-        opened_at: Date.now(),
-      };
-      writeSurveyState(this._survey.bucket, this._surveyState);
-      this.#measure("opened");
+      this.#markOpened();
       this._isOpen = true;
       this.requestUpdate();
     }
+  }
+
+  #markOpened() {
+    if (!this._survey || !this._surveyState || this._isOpen) return;
+
+    this._surveyState = {
+      ...this._surveyState,
+      opened_at: Date.now(),
+    };
+    writeSurveyState(this._survey.bucket, this._surveyState);
+    this.#measure("opened");
   }
 
   #onSubmitted() {
@@ -200,7 +210,10 @@ export class MDNSurvey extends L10nMixin(LitElement) {
           ></mdn-button>
         </header>
         ${this._survey.link
-          ? html`<a href=${this._source} target="_blank"
+          ? html`<a
+              href=${this._source}
+              target="_blank"
+              @click=${this.#onLinkClick}
               >${this._survey.question}</a
             >`
           : html`<details ${ref(this._detailsRef)} @toggle=${this.#onToggle}>
