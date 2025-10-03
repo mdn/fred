@@ -10,11 +10,20 @@ interface PanelTitle {
   slug?: string;
 }
 
-interface LinkItem {
-  slug: string;
+interface BaseItem {
   text: string;
   label?: string;
 }
+
+interface SlugItem extends BaseItem {
+  slug: string;
+}
+
+interface HrefItem extends BaseItem {
+  href: string;
+}
+
+type LinkItem = SlugItem | HrefItem;
 
 interface RenderItem {
   render: () => ServerRenderedTemplate;
