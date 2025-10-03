@@ -408,26 +408,14 @@ export class Menu extends ServerComponent {
           {
             items: [
               {
-                render: () =>
-                  html`<a
-                    class="menu__panel-icon"
-                    data-icon="circle-play"
-                    href=${`/en-US/play`}
-                    data-glean-id=${gleanId("/en-US/play/")}
-                  >
-                    Playground
-                  </a>`,
+                href: "/en-US/play",
+                text: "Playground",
+                icon: "circle-play",
               },
               {
-                render: () =>
-                  html`<a
-                    class="menu__panel-icon"
-                    data-icon="shield-check"
-                    href=${`/en-US/observatory`}
-                    data-glean-id=${gleanId("/en-US/observatory/")}
-                  >
-                    HTTP Observatory
-                  </a>`,
+                href: "/en-US/observatory",
+                text: "HTTP Observatory",
+                icon: "shield-check",
               },
             ],
           },
@@ -468,52 +456,28 @@ export class Menu extends ServerComponent {
           {
             items: [
               {
-                render: () =>
-                  html`<a
-                    class="menu__panel-icon"
-                    data-icon="mdn-m"
-                    href=${`/en-US/about`}
-                    data-glean-id=${gleanId("/en-US/about")}
-                  >
-                    About MDN
-                  </a>`,
+                href: "/en-US/about",
+                text: "About MDN",
+                icon: "mdn-m",
               },
               {
-                render: () =>
-                  html`<a
-                    class="menu__panel-icon"
-                    data-icon="chart-no-axes-combined"
-                    href=${`/en-US/advertising`}
-                    data-glean-id=${gleanId("/en-US/advertising")}
-                  >
-                    Advertise with us
-                  </a>`,
+                href: "/en-US/advertising",
+                text: "Advertise with us",
+                icon: "chart-no-axes-combined",
               },
             ],
           },
           {
             items: [
               {
-                render: () =>
-                  html`<a
-                    class="menu__panel-icon"
-                    data-icon="users"
-                    href=${`/en-US/community`}
-                    data-glean-id=${gleanId("/en-US/community")}
-                  >
-                    Community
-                  </a>`,
+                href: "/en-US/community",
+                text: "Community",
+                icon: "users",
               },
               {
-                render: () =>
-                  html`<a
-                    class="menu__panel-icon"
-                    data-icon="github"
-                    href="https://github.com/mdn"
-                    data-glean-id=${gleanId("https://github.com/mdn")}
-                  >
-                    MDN on GitHub
-                  </a>`,
+                href: "https://github.com/mdn",
+                text: "MDN on GitHub",
+                icon: "github",
               },
             ],
           },
@@ -572,10 +536,15 @@ export class Menu extends ServerComponent {
                                       })
                                     : html`<a
                                         class=${ifDefined(
-                                          context.locale === "en-US"
-                                            ? undefined
-                                            : "only-in-en-us",
+                                          [
+                                            item.icon && "menu__panel-icon",
+                                            context.locale !== "en-US" &&
+                                              "only-in-en-us",
+                                          ]
+                                            .filter(Boolean)
+                                            .join(" "),
                                         )}
+                                        data-icon=${ifDefined(item.icon)}
                                         href=${item.href}
                                         aria-label=${ifDefined(item.label)}
                                         title=${ifDefined(item.label)}

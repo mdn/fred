@@ -21,6 +21,7 @@ interface SlugItem extends BaseItem {
 
 interface HrefItem extends BaseItem {
   href: string;
+  icon?: string;
 }
 
 type LinkItem = SlugItem | HrefItem;
