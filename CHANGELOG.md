@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.6.1](https://github.com/mdn/fred/compare/v1.6.0...v1.6.1) (2025-10-03)
+
+
+### Bug Fixes
+
+* **menu:** update Color format converter link (Color picker) ([#816](https://github.com/mdn/fred/issues/816)) ([7422d4b](https://github.com/mdn/fred/commit/7422d4b024967a5cd0765a8a546e27a381541c73))
+
+
+### Miscellaneous
+
+* **deps:** bump @codemirror/lang-html from 6.4.10 to 6.4.11 in the prod group ([#854](https://github.com/mdn/fred/issues/854)) ([3e8572c](https://github.com/mdn/fred/commit/3e8572cad623795fd12facc043c421a9850fe9b4))
+* **menu:** update missing docs ([#860](https://github.com/mdn/fred/issues/860)) ([212bfbc](https://github.com/mdn/fred/commit/212bfbca3b522f7c624674bc80641974d674c251))
+* **survey:** add developer survey 2025 ([#853](https://github.com/mdn/fred/issues/853)) ([71acaf1](https://github.com/mdn/fred/commit/71acaf165f8b1136a1c92990b70a6e55b990fd34))
+
 ## [1.6.0](https://github.com/mdn/fred/compare/v1.5.0...v1.6.0) (2025-10-01)
 
 
