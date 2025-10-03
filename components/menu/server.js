@@ -38,73 +38,68 @@ export class Menu extends ServerComponent {
      * @param {string} [options.label] - The title and aria-label of the link.
      * @param {boolean} [options.primary] - Whether this is the primary link (in the panel title).
      */
-    const link = (slug, text, { label, primary = false } = {}) => {
-      const locale =
-        context.locale in MISSING_DOCS &&
-        MISSING_DOCS[context.locale]?.includes(slug)
-          ? "en-US"
-          : context.locale;
+    const link =
+      (slug, text, { label, primary = false } = {}) =>
+      () => {
+        const locale =
+          context.locale in MISSING_DOCS &&
+          MISSING_DOCS[context.locale]?.includes(slug)
+            ? "en-US"
+            : context.locale;
 
-      const href = `/${locale}/docs/${slug}`;
+        const href = `/${locale}/docs/${slug}`;
 
-      return html`<a
-        class=${ifDefined(
-          locale === context.locale ? undefined : "only-in-en-us",
-        )}
-        href=${href}
-        aria-label=${ifDefined(label)}
-        title=${ifDefined(label)}
-        data-glean-id=${gleanId(href, { primary })}
-        >${text}</a
-      >`;
-    };
+        return html`<a
+          class=${ifDefined(
+            locale === context.locale ? undefined : "only-in-en-us",
+          )}
+          href=${href}
+          aria-label=${ifDefined(label)}
+          title=${ifDefined(label)}
+          data-glean-id=${gleanId(href, { primary })}
+          >${text}</a
+        >`;
+      };
 
     const sections = [
       {
         id: "html",
         buttonText: "HTML",
-        panelTitle: () =>
-          link("Web/HTML", "HTML: Markup language", { primary: true }),
+        panelTitle: link("Web/HTML", "HTML: Markup language", {
+          primary: true,
+        }),
         panelGroups: [
           {
             title: "HTML reference",
             items: [
-              () => link("Web/HTML/Reference/Elements", "Elements"),
-              () =>
-                link(
-                  "Web/HTML/Reference/Global_attributes",
-                  "Global attributes",
-                ),
-              () => link("Web/HTML/Reference/Attributes", "Attributes"),
-              () =>
-                link("Web/HTML/Reference", "See all…", {
-                  label: "See all HTML references",
-                }),
+              link("Web/HTML/Reference/Elements", "Elements"),
+              link("Web/HTML/Reference/Global_attributes", "Global attributes"),
+              link("Web/HTML/Reference/Attributes", "Attributes"),
+              link("Web/HTML/Reference", "See all…", {
+                label: "See all HTML references",
+              }),
             ],
           },
           {
             title: "HTML guides",
             items: [
-              () =>
-                link("Web/HTML/Guides/Responsive_images", "Responsive images"),
-              () => link("Web/HTML/Guides/Cheatsheet", "HTML cheatsheet"),
-              () =>
-                link(
-                  "Web/HTML/Guides/Date_and_time_formats",
-                  "Date & time formats",
-                ),
-              () =>
-                link("Web/HTML/Guides", "See all…", {
-                  label: "See all HTML guides",
-                }),
+              link("Web/HTML/Guides/Responsive_images", "Responsive images"),
+              link("Web/HTML/Guides/Cheatsheet", "HTML cheatsheet"),
+              link(
+                "Web/HTML/Guides/Date_and_time_formats",
+                "Date & time formats",
+              ),
+              link("Web/HTML/Guides", "See all…", {
+                label: "See all HTML guides",
+              }),
             ],
           },
           {
             title: "Markup languages",
             items: [
-              () => link("Web/SVG", "SVG"),
-              () => link("Web/MathML", "MathML"),
-              () => link("Web/XML", "XML"),
+              link("Web/SVG", "SVG"),
+              link("Web/MathML", "MathML"),
+              link("Web/XML", "XML"),
             ],
           },
         ],
@@ -112,62 +107,48 @@ export class Menu extends ServerComponent {
       {
         id: "css",
         buttonText: "CSS",
-        panelTitle: () =>
-          link("Web/CSS", "CSS: Styling language", { primary: true }),
+        panelTitle: link("Web/CSS", "CSS: Styling language", { primary: true }),
         panelGroups: [
           {
             title: "CSS reference",
             items: [
-              () => link("Web/CSS/Properties", "Properties"),
-              () => link("Web/CSS/CSS_selectors", "Selectors"),
-              () => link("Web/CSS/CSS_syntax/At-rule", "At-rules"),
-              () => link("Web/CSS/CSS_values_and_units", "Values & units"),
-              () =>
-                link("Web/CSS/Reference", "See all…", {
-                  label: "See all CSS references",
-                }),
+              link("Web/CSS/Properties", "Properties"),
+              link("Web/CSS/CSS_selectors", "Selectors"),
+              link("Web/CSS/CSS_syntax/At-rule", "At-rules"),
+              link("Web/CSS/CSS_values_and_units", "Values & units"),
+              link("Web/CSS/Reference", "See all…", {
+                label: "See all CSS references",
+              }),
             ],
           },
           {
             title: "CSS guides",
             items: [
-              () =>
-                link(
-                  "Web/CSS/CSS_box_model/Introduction_to_the_CSS_box_model",
-                  "Box model",
-                ),
-              () =>
-                link(
-                  "Web/CSS/CSS_animations/Using_CSS_animations",
-                  "Animations",
-                ),
-              () =>
-                link(
-                  "Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox",
-                  "Flexbox",
-                ),
-              () => link("Web/CSS/CSS_colors", "Colors"),
-              () =>
-                link("Web/CSS/Guides", "See all…", {
-                  label: "See all CSS guides",
-                }),
+              link(
+                "Web/CSS/CSS_box_model/Introduction_to_the_CSS_box_model",
+                "Box model",
+              ),
+              link("Web/CSS/CSS_animations/Using_CSS_animations", "Animations"),
+              link(
+                "Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox",
+                "Flexbox",
+              ),
+              link("Web/CSS/CSS_colors", "Colors"),
+              link("Web/CSS/Guides", "See all…", {
+                label: "See all CSS guides",
+              }),
             ],
           },
           {
             title: "Layout cookbook",
             items: [
-              () =>
-                link(
-                  "Web/CSS/Layout_cookbook/Column_layouts",
-                  "Column layouts",
-                ),
-              () =>
-                link(
-                  "Web/CSS/Layout_cookbook/Center_an_element",
-                  "Centering an element",
-                ),
-              () => link("Web/CSS/Layout_cookbook/Card", "Card component"),
-              () => link("Web/CSS/Layout_cookbook", "See all…"),
+              link("Web/CSS/Layout_cookbook/Column_layouts", "Column layouts"),
+              link(
+                "Web/CSS/Layout_cookbook/Center_an_element",
+                "Centering an element",
+              ),
+              link("Web/CSS/Layout_cookbook/Card", "Card component"),
+              link("Web/CSS/Layout_cookbook", "See all…"),
             ],
           },
         ],
@@ -178,59 +159,50 @@ export class Menu extends ServerComponent {
           long: "JavaScript",
           short: "JS",
         },
-        panelTitle: () =>
-          link("Web/JavaScript", "JavaScript: Scripting language", {
-            primary: true,
-          }),
+        panelTitle: link("Web/JavaScript", "JavaScript: Scripting language", {
+          primary: true,
+        }),
         panelGroups: [
           {
             title: "JS reference",
             items: [
-              () =>
-                link(
-                  "Web/JavaScript/Reference/Global_Objects",
-                  "Standard built-in objects",
-                ),
-              () =>
-                link(
-                  "Web/JavaScript/Reference/Operators",
-                  "Expressions & operators",
-                ),
-              () =>
-                link(
-                  "Web/JavaScript/Reference/Statements",
-                  "Statements & declarations",
-                ),
-              () => link("Web/JavaScript/Reference/Functions", "Functions"),
-              () =>
-                link("Web/JavaScript/Reference", "See all…", {
-                  label: "See all JavaScript references",
-                }),
+              link(
+                "Web/JavaScript/Reference/Global_Objects",
+                "Standard built-in objects",
+              ),
+              link(
+                "Web/JavaScript/Reference/Operators",
+                "Expressions & operators",
+              ),
+              link(
+                "Web/JavaScript/Reference/Statements",
+                "Statements & declarations",
+              ),
+              link("Web/JavaScript/Reference/Functions", "Functions"),
+              link("Web/JavaScript/Reference", "See all…", {
+                label: "See all JavaScript references",
+              }),
             ],
           },
           {
             title: "JS guides",
             items: [
-              () =>
-                link(
-                  "Web/JavaScript/Guide/Control_flow_and_error_handling",
-                  "Control flow & error handing",
-                ),
-              () =>
-                link(
-                  "Web/JavaScript/Guide/Loops_and_iteration",
-                  "Loops and iteration",
-                ),
-              () =>
-                link(
-                  "Web/JavaScript/Guide/Working_with_objects",
-                  "Working with objects",
-                ),
-              () => link("Web/JavaScript/Guide/Using_classes", "Using classes"),
-              () =>
-                link("Web/JavaScript/Guide", "See all…", {
-                  label: "See all JavaScript guides",
-                }),
+              link(
+                "Web/JavaScript/Guide/Control_flow_and_error_handling",
+                "Control flow & error handing",
+              ),
+              link(
+                "Web/JavaScript/Guide/Loops_and_iteration",
+                "Loops and iteration",
+              ),
+              link(
+                "Web/JavaScript/Guide/Working_with_objects",
+                "Working with objects",
+              ),
+              link("Web/JavaScript/Guide/Using_classes", "Using classes"),
+              link("Web/JavaScript/Guide", "See all…", {
+                label: "See all JavaScript guides",
+              }),
             ],
           },
         ],
@@ -238,51 +210,44 @@ export class Menu extends ServerComponent {
       {
         id: "webapis",
         buttonText: "Web APIs",
-        panelTitle: () =>
-          link("Web/API", "Web APIs: Programming interfaces", {
-            primary: true,
-          }),
+        panelTitle: link("Web/API", "Web APIs: Programming interfaces", {
+          primary: true,
+        }),
         panelGroups: [
           {
             title: "Web API reference",
             items: [
-              () => link("Web/API/File_System_API", "File system API"),
-              () => link("Web/API/Fetch_API", "Fetch API"),
-              () => link("Web/API/Geolocation_API", "Geolocation API"),
-              () => link("Web/API/HTML_DOM_API", "HTML DOM API"),
-              () => link("Web/API/Push_API", "Push API"),
-              () => link("Web/API/Service_Worker_API", "Service worker API"),
-              () =>
-                link("Web/API", "See all…", {
-                  label: "See all Web API guides",
-                }),
+              link("Web/API/File_System_API", "File system API"),
+              link("Web/API/Fetch_API", "Fetch API"),
+              link("Web/API/Geolocation_API", "Geolocation API"),
+              link("Web/API/HTML_DOM_API", "HTML DOM API"),
+              link("Web/API/Push_API", "Push API"),
+              link("Web/API/Service_Worker_API", "Service worker API"),
+              link("Web/API", "See all…", {
+                label: "See all Web API guides",
+              }),
             ],
           },
           {
             title: "Web API guides",
             items: [
-              () =>
-                link(
-                  "Web/API/Web_Animations_API/Using_the_Web_Animations_API",
-                  "Using the Web animation API",
-                ),
-              () =>
-                link("Web/API/Fetch_API/Using_Fetch", "Using the Fetch API"),
-              () =>
-                link(
-                  "Web/API/History_API/Working_with_the_History_API",
-                  "Working with the History API",
-                ),
-              () =>
-                link(
-                  "Web/API/Web_Speech_API/Using_the_Web_Speech_API",
-                  "Using the Web speech API",
-                ),
-              () =>
-                link(
-                  "Web/API/Web_Workers_API/Using_web_workers",
-                  "Using web workers",
-                ),
+              link(
+                "Web/API/Web_Animations_API/Using_the_Web_Animations_API",
+                "Using the Web animation API",
+              ),
+              link("Web/API/Fetch_API/Using_Fetch", "Using the Fetch API"),
+              link(
+                "Web/API/History_API/Working_with_the_History_API",
+                "Working with the History API",
+              ),
+              link(
+                "Web/API/Web_Speech_API/Using_the_Web_Speech_API",
+                "Using the Web speech API",
+              ),
+              link(
+                "Web/API/Web_Workers_API/Using_web_workers",
+                "Using web workers",
+              ),
             ],
           },
         ],
@@ -290,31 +255,30 @@ export class Menu extends ServerComponent {
       {
         id: "all",
         buttonText: "All",
-        panelTitle: () => link("Web", "All web technology", { primary: true }),
+        panelTitle: link("Web", "All web technology", { primary: true }),
         panelGroups: [
           {
             title: "Technologies",
             items: [
-              () => link("Web/Accessibility", "Accessibility"),
-              () => link("Web/HTTP", "HTTP"),
-              () => link("Web/URI", "URI"),
-              () => link("Mozilla/Add-ons/WebExtensions", "Web extensions"),
-              () => link("WebAssembly", "WebAssembly"),
-              () => link("Web/WebDriver", "WebDriver"),
-              () =>
-                link("Web", "See all…", {
-                  label: "See all web technology references",
-                }),
+              link("Web/Accessibility", "Accessibility"),
+              link("Web/HTTP", "HTTP"),
+              link("Web/URI", "URI"),
+              link("Mozilla/Add-ons/WebExtensions", "Web extensions"),
+              link("WebAssembly", "WebAssembly"),
+              link("Web/WebDriver", "WebDriver"),
+              link("Web", "See all…", {
+                label: "See all web technology references",
+              }),
             ],
           },
           {
             title: "Topics",
             items: [
-              () => link("Web/Media", "Media"),
-              () => link("Web/API/Performance", "Performance"),
-              () => link("Web/Privacy", "Privacy"),
-              () => link("Web/Security", "Security"),
-              () => link("Web/Progressive_web_apps", "Progressive web apps"),
+              link("Web/Media", "Media"),
+              link("Web/API/Performance", "Performance"),
+              link("Web/Privacy", "Privacy"),
+              link("Web/Security", "Security"),
+              link("Web/Progressive_web_apps", "Progressive web apps"),
             ],
           },
         ],
@@ -322,20 +286,15 @@ export class Menu extends ServerComponent {
       {
         id: "learn",
         buttonText: "Learn",
-        panelTitle: () =>
-          link("Learn_web_development", "Learn web development", {
-            primary: true,
-          }),
+        panelTitle: link("Learn_web_development", "Learn web development", {
+          primary: true,
+        }),
         panelGroups: [
           {
             title: "Frontend developer course",
             items: [
-              () =>
-                link(
-                  "Learn_web_development/Getting_started",
-                  "Getting started",
-                ),
-              () => link("Learn_web_development/Howto", "Common questions"),
+              link("Learn_web_development/Getting_started", "Getting started"),
+              link("Learn_web_development/Howto", "Common questions"),
               () =>
                 html`<a
                   class=${ifDefined(
@@ -350,46 +309,40 @@ export class Menu extends ServerComponent {
           {
             title: "Learn HTML",
             items: [
-              () =>
-                link(
-                  "Learn_web_development/Core/Structuring_content",
-                  "Introduction to HTML",
-                ),
-              () =>
-                link(
-                  "Learn_web_development/Core/Structuring_content/Basic_HTML_syntax",
-                  "Getting started with HTML",
-                ),
+              link(
+                "Learn_web_development/Core/Structuring_content",
+                "Introduction to HTML",
+              ),
+              link(
+                "Learn_web_development/Core/Structuring_content/Basic_HTML_syntax",
+                "Getting started with HTML",
+              ),
             ],
           },
           {
             title: "Learn CSS",
             items: [
-              () =>
-                link(
-                  "Learn_web_development/Core/Styling_basics/What_is_CSS",
-                  "What is CSS",
-                ),
-              () =>
-                link(
-                  "Learn_web_development/Core/Styling_basics/Getting_started",
-                  "Getting started with CSS",
-                ),
+              link(
+                "Learn_web_development/Core/Styling_basics/What_is_CSS",
+                "What is CSS",
+              ),
+              link(
+                "Learn_web_development/Core/Styling_basics/Getting_started",
+                "Getting started with CSS",
+              ),
             ],
           },
           {
             title: "Learn JavaScript",
             items: [
-              () =>
-                link(
-                  "Web/HTML/How_to/Use_data_attributes",
-                  "How to use data attributes",
-                ),
-              () =>
-                link(
-                  "Web/HTML/How_to/Add_JavaScript_to_your_web_page",
-                  "Add JavaScript to your web page",
-                ),
+              link(
+                "Web/HTML/How_to/Use_data_attributes",
+                "How to use data attributes",
+              ),
+              link(
+                "Web/HTML/How_to/Add_JavaScript_to_your_web_page",
+                "Add JavaScript to your web page",
+              ),
             ],
           },
         ],
@@ -423,29 +376,24 @@ export class Menu extends ServerComponent {
           },
           {
             items: [
-              () =>
-                link(
-                  "Web/CSS/CSS_backgrounds_and_borders/Border-image_generator",
-                  "Border-image generator",
-                ),
-              () =>
-                link(
-                  "Web/CSS/CSS_backgrounds_and_borders/Border-radius_generator",
-                  "Border-radius generator",
-                ),
-              () =>
-                link(
-                  "Web/CSS/CSS_backgrounds_and_borders/Box-shadow_generator",
-                  "Box-shadow generator",
-                ),
-              () =>
-                link(
-                  "Web/CSS/CSS_colors/Color_format_converter",
-                  "Color format converter",
-                ),
-              () => link("Web/CSS/CSS_colors/Color_mixer", "Color mixer"),
-              () =>
-                link("Web/CSS/CSS_shapes/Shape_generator", "Shape generator"),
+              link(
+                "Web/CSS/CSS_backgrounds_and_borders/Border-image_generator",
+                "Border-image generator",
+              ),
+              link(
+                "Web/CSS/CSS_backgrounds_and_borders/Border-radius_generator",
+                "Border-radius generator",
+              ),
+              link(
+                "Web/CSS/CSS_backgrounds_and_borders/Box-shadow_generator",
+                "Box-shadow generator",
+              ),
+              link(
+                "Web/CSS/CSS_colors/Color_format_converter",
+                "Color format converter",
+              ),
+              link("Web/CSS/CSS_colors/Color_mixer", "Color mixer"),
+              link("Web/CSS/CSS_shapes/Shape_generator", "Shape generator"),
             ],
           },
         ],
