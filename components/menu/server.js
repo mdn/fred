@@ -62,7 +62,7 @@ export class Menu extends ServerComponent {
     const sections = [
       {
         id: "html",
-        renderButton: () => html`<span class="menu__tab-label">HTML</span>`,
+        buttonText: "HTML",
         renderPanel: () =>
           html`<p class="menu__panel-title">
               ${link("Web/HTML", "HTML: Markup language", { primary: true })}
@@ -131,7 +131,7 @@ export class Menu extends ServerComponent {
       },
       {
         id: "css",
-        renderButton: () => html`<span class="menu__tab-label">CSS</span>`,
+        buttonText: "CSS",
         renderPanel: () =>
           html`<p class="menu__panel-title">
               ${link("Web/CSS", "CSS: Styling language", { primary: true })}
@@ -213,9 +213,10 @@ export class Menu extends ServerComponent {
       },
       {
         id: "javascript",
-        renderButton: () =>
-          html`<span class="menu__tab-label" data-type="long">JavaScript</span
-            ><span class="menu__tab-label" data-type="short">JS</span>`,
+        buttonText: {
+          long: "JavaScript",
+          short: "JS",
+        },
         renderPanel: () =>
           html`<p class="menu__panel-title">
               ${link("Web/JavaScript", "JavaScript: Scripting language", {
@@ -296,7 +297,7 @@ export class Menu extends ServerComponent {
       },
       {
         id: "webapis",
-        renderButton: () => html`<span class="menu__tab-label">Web APIs</span>`,
+        buttonText: "Web APIs",
         renderPanel: () =>
           html`<p class="menu__panel-title">
               ${link("Web/API", "Web APIs: Programming interfaces", {
@@ -372,7 +373,7 @@ export class Menu extends ServerComponent {
       },
       {
         id: "all",
-        renderButton: () => html`<span class="menu__tab-label">All</span>`,
+        buttonText: "All",
         renderPanel: () =>
           html`<p class="menu__panel-title">
               ${link("Web", "All web technology", { primary: true })}
@@ -419,7 +420,7 @@ export class Menu extends ServerComponent {
       },
       {
         id: "learn",
-        renderButton: () => html`<span class="menu__tab-label">Learn</span>`,
+        buttonText: "Learn",
         renderPanel: () =>
           html`<p class="menu__panel-title">
               ${link("Learn_web_development", "Learn web development", {
@@ -516,7 +517,7 @@ export class Menu extends ServerComponent {
       },
       {
         id: "tools",
-        renderButton: () => html`<span class="menu__tab-label">Tools</span>`,
+        buttonText: "Tools",
         renderPanel: () =>
           html`<p class="menu__panel-title">Discover our tools</p>
             <div class="menu__panel-content">
@@ -581,7 +582,7 @@ export class Menu extends ServerComponent {
       },
       {
         id: "about",
-        renderButton: () => html`<span class="menu__tab-label">About</span>`,
+        buttonText: "About",
         renderPanel: () =>
           html`<p class="menu__panel-title">Get to know MDN better</p>
             <div class="menu__panel-content">
@@ -652,7 +653,15 @@ export class Menu extends ServerComponent {
               ? section.render()
               : html`<mdn-dropdown>
                   <button class="menu__tab-button" type="button" slot="button">
-                    ${section.renderButton()}
+                    ${typeof section.buttonText === "string"
+                      ? html`<span class="menu__tab-label"
+                          >${section.buttonText}</span
+                        >`
+                      : html`<span class="menu__tab-label" data-type="long"
+                            >${section.buttonText.long}</span
+                          ><span class="menu__tab-label" data-type="short"
+                            >${section.buttonText.short}</span
+                          >`}
                   </button>
                   <div class="menu__panel" slot="dropdown">
                     ${section.renderPanel()}
