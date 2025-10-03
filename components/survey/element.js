@@ -211,6 +211,7 @@ export class MDNSurvey extends L10nMixin(LitElement) {
         </header>
         ${this._survey.link
           ? html`<a
+              class="external"
               href=${this._source}
               target="_blank"
               title=${this.l10n`Take survey (Opens in a new tab)`}
