@@ -129,7 +129,7 @@ export class MDNSurvey extends L10nMixin(LitElement) {
   }
 
   #markOpened() {
-    if (!this._survey || !this._surveyState || this._isOpen) return;
+    if (!this._survey || !this._surveyState) return;
 
     this._surveyState = {
       ...this._surveyState,
