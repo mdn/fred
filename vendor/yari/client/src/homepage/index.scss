@@ -1,0 +1,24 @@
+@use "../ui/vars" as *;
+
+.homepage {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  overflow-x: clip;
+  overflow-y: visible;
+  position: relative;
+
+  width: 100%;
+
+  > * {
+    margin-top: 2rem;
+  }
+
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}

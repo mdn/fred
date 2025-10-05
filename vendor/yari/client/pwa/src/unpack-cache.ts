@@ -9,7 +9,7 @@ zip.configure({
 export async function unpackAndCache(data, progress = async (number) => {}) {
   // create a BlobReader to read with a ZipReader the zip from a Blob object
   const reader = new zip.ZipReader(
-    new zip.Uint8ArrayReader(new Uint8Array(data)),
+    new zip.Uint8ArrayReader(new Uint8Array(data))
   );
   const entries = await reader.getEntries();
   const cache = await openContentCache();
@@ -51,8 +51,8 @@ export async function unpackAndCache(data, progress = async (number) => {}) {
           ignoreSearch: true,
           ignoreMethod: true,
           ignoreVary: true,
-        }),
-      ),
+        })
+      )
     );
   }
   console.log(`[update] removed ${removed?.length ?? 0}`);

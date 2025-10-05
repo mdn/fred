@@ -1,0 +1,67 @@
+<%
+/*
+ * This macro generates a list of links to Firefox release notes.
+ * It should be used under the "Mozilla/Firefox/Releases" tree.
+ * 
+ * Parameters:
+ *   None
+ */
+
+// for content
+const str = mdn.localString({
+  "en-US": ["Firefox ", " for developers"],
+  "fr" : ["Firefox ", " pour les développeurs"],
+  "ko": ["Firefox", "릴리즈노트"],
+  "ru": ["Firefox ", " для разработчиков"],
+  "zh-CN": ["Firefox ", " 的开发者说明"],
+});
+
+const locale = env.locale;
+const slug = env.slug;
+
+const oldVersion = ["3.6", "3.5", "3", "2", "1.5"];
+
+const versionStr = slug.split("/").at(-1);
+let maxVersion = Number(versionStr);
+
+let oldVersionStartIdx = 0;
+
+// determine the start index of old version and the max version
+if (maxVersion < 4) {
+  oldVersionStartIdx = oldVersion.indexOf(versionStr) + 1;
+} else {
+  maxVersion--;
+}
+
+let minVersion = maxVersion - 30;
+
+if (minVersion < 4) {
+  minVersion = 4;
+}
+
+// generate release links
+const releaseLinks = [];
+
+function generateReleaseLink(version) {
+  return `<li>${web.smartLink(`/${locale}/docs/Mozilla/Firefox/Releases/${version}`, null, `${str[0]}${version}${str[1]}`)}</li>`;
+}
+
+// for newer version
+for (let i = maxVersion; i >= minVersion; i--) {
+  releaseLinks.push(generateReleaseLink(i));
+}
+
+// for older version
+if (minVersion === 4) {
+  for (let i = oldVersionStartIdx; i < oldVersion.length; i++) {
+    releaseLinks.push(generateReleaseLink(oldVersion[i]));
+  }
+}
+
+const output = releaseLinks.join("");
+%>
+<div class="multiColumnList">
+  <ul>
+    <%-output%>
+  </ul>
+</div>

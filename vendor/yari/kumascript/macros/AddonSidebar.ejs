@@ -1,0 +1,297 @@
+<%
+var locale = env.locale;
+var slug = env.slug;
+var baseURL = '/' + locale + '/docs/Mozilla/Add-ons/';
+
+var text = mdn.localStringMap({
+  'de': {
+    'WebExtensions#Getting_started': 'Erste Schritte',
+    'WebExtensions#Concepts': 'Konzepte',
+    'WebExtensions#User_Interface': 'Benutzeroberfläche',
+    'WebExtensions#How_to': 'Anleitungen',
+    'WebExtensions#API': 'JavaScript-APIs',
+    'WebExtensions#manifest.json': 'Manifest-Schlüssel',
+    'extension_workshop': 'Erweiterungs-Workshop',
+    'extension_workshop_develop': 'Entwickeln',
+    'extension_workshop_publish': 'Veröffentlichen',
+    'extension_workshop_manage': 'Verwalten',
+    'extension_workshop_enterprise': 'Unternehmen',
+    'Channels': 'Kanäle',
+    'Blog': 'Add-ons Blog',
+    'Forums': 'Add-ons Forum',
+    'Chat': 'Add-ons Chat',
+  },
+  'en-US': {
+    'WebExtensions#Getting_started': 'Getting started',
+    'WebExtensions#Concepts': 'Concepts',
+    'WebExtensions#User_Interface': 'User interface',
+    'WebExtensions#How_to': 'How to',
+    'WebExtensions#API': 'JavaScript APIs',
+    'WebExtensions#manifest.json': 'Manifest keys',
+    'extension_workshop': 'Extension Workshop',
+    'extension_workshop_develop': 'Develop',
+    'extension_workshop_publish': 'Publish',
+    'extension_workshop_manage': 'Manage',
+    'extension_workshop_enterprise': 'Enterprise',
+    'Channels': 'Channels',
+    'Blog': 'Add-ons blog',
+    'Forums': 'Add-ons forum',
+    'Chat': 'Add-ons chat',
+  },
+  'fr': {
+    'WebExtensions#Getting_started': 'Commencer',
+    'WebExtensions#Concepts': 'Concepts',
+    'WebExtensions#User_Interface': 'Interface utilisateur',
+    'WebExtensions#How_to': 'Mode d\'emploi',
+    'WebExtensions#API': 'Les API JavaScript',
+    'WebExtensions#manifest.json': 'Clés de manifeste',
+    'extension_workshop': 'Atelier des extensions',
+    'extension_workshop_develop': 'Développer',
+    'extension_workshop_publish': 'Publier',
+    'extension_workshop_manage': 'Gérer',
+    'extension_workshop_enterprise': 'Entreprise',
+    'Channels': 'Canaux de discussions',
+    'Blog': 'Blog sur les extensions',
+    'Forums': 'Forum sur les extensions',
+    'Chat': 'Discussion sur les extensions',
+  },
+  'ja': {
+    'WebExtensions#Getting_started': '始めましょう',
+    'WebExtensions#Concepts': '概念',
+    'WebExtensions#User_Interface': 'ユーザーインターフェイス',
+    'WebExtensions#How_to': '逆引きリファレンス',
+    'WebExtensions#API': 'JavaScript APIs',
+    'WebExtensions#manifest.json': 'Manifest keys',
+    'extension_workshop': 'Extension Workshop',
+    'extension_workshop_develop': 'Develop',
+    'extension_workshop_publish': 'Publish',
+    'extension_workshop_manage': 'Manage',
+    'extension_workshop_enterprise': 'Enterprise',
+    'Channels': 'チャンネル',
+    'Blog': 'ブログ',
+    'Forums': 'フォーラム',
+    'Chat': 'Add-ons chat',
+  },
+  'ko': {
+    'WebExtensions#Getting_started': '시작하기',
+    'WebExtensions#Concepts': '개념',
+    'WebExtensions#User_Interface': '사용자 인터페이스',
+    'WebExtensions#How_to': '방법',
+    'WebExtensions#API': 'JavaScript APIs',
+    'WebExtensions#manifest.json': 'Manifest 키',
+    'extension_workshop': 'Extension Workshop',
+    'extension_workshop_develop': 'Develop',
+    'extension_workshop_publish': 'Publish',
+    'extension_workshop_manage': 'Manage',
+    'extension_workshop_enterprise': 'Enterprise',
+    'Channels': '채널',
+    'Blog': '부가 기능 블로그',
+    'Forums': '부가 기능 포럼',
+    'Chat': 'Add-ons chat',
+  },
+  'zh-CN': {
+    'WebExtensions#Getting_started': '开始',
+    'WebExtensions#Concepts': '概念',
+    'WebExtensions#User_Interface': '用户界面',
+    'WebExtensions#How_to': '怎么做',
+    'WebExtensions#API': 'JavaScript API',
+    'WebExtensions#manifest.json': '清单键',
+    'extension_workshop': 'Extension Workshop',
+    'extension_workshop_develop': 'Develop',
+    'extension_workshop_publish': 'Publish',
+    'extension_workshop_manage': 'Manage',
+    'extension_workshop_enterprise': 'Enterprise',
+    'Channels': '渠道',
+    'Blog': '附加组件博客',
+    'Forums': '附加组件论坛',
+    'Chat': '附加组件聊天',
+  },
+  'pt-BR': {
+    'WebExtensions#Getting_started': 'Começando',
+    'WebExtensions#Concepts': 'Conceitos',
+    'WebExtensions#User_Interface': 'Interface de usuário',
+    'WebExtensions#How_to': 'Como',
+    'WebExtensions#API': 'APIs JavaScript',
+    'WebExtensions#manifest.json': 'Chaves Manifest',
+    'extension_workshop': 'Workshop de extensões',
+    'extension_workshop_develop': 'Desenvolver',
+    'extension_workshop_publish': 'Publicar',
+    'extension_workshop_manage': 'Gerenciar',
+    'extension_workshop_enterprise': 'Empreendimento',
+    'Channels': 'Canais',
+    'Blog': 'Blog de complementos',
+    'Forums': 'Fóruns complementares',
+    'Chat': 'Add-ons chat',
+  },
+  'es': {
+    'WebExtensions#Getting_started': 'Comenzar',
+    'WebExtensions#Concepts': 'Conceptos',
+    'WebExtensions#User_Interface': 'Interfaz de usuario',
+    'WebExtensions#How_to': 'Cómo hacer',
+    'WebExtensions#API': 'API de JavaScript',
+    'WebExtensions#manifest.json': 'Claves de manifiesto',
+    'extension_workshop': 'Taller de Extensión',
+    'extension_workshop_develop': 'Desarrollar',
+    'extension_workshop_publish': 'Publish',
+    'extension_workshop_manage': 'Gestionar',
+    'extension_workshop_enterprise': 'Empresa',
+    'Channels': 'Canales de discusión',
+    'Blog': 'Blog de complementos',
+    'Forums': 'Foro de complementos',
+    'Chat': 'Chat de complementos',
+  },
+  'ru': {
+    'WebExtensions#Getting_started': 'Начало работы',
+    'WebExtensions#Concepts': 'Основные понятия',
+    'WebExtensions#User_Interface': 'Пользовательский интерфейс',
+    'WebExtensions#How_to': 'How to',
+    'WebExtensions#Firefox_workflow': 'Firefox workflow',
+    'WebExtensions#API': 'Обзор JavaScript API',
+    'WebExtensions#manifest.json': 'Manifest keys',
+    'extension_workshop': 'Extension Workshop',
+    'extension_workshop_develop': 'Develop',
+    'extension_workshop_publish': 'Publish',
+    'extension_workshop_manage': 'Manage',
+    'extension_workshop_enterprise': 'Enterprise',
+    'Channels': 'Channels',
+    'Blog': 'Add-ons blog',
+    'Forums': 'Add-ons forum',
+    'Chat': 'Add-ons chat',
+  },
+});
+
+async function renderRootItem(slug) {
+  return `<li class="section">${web.smartLink(`/${env.locale}${slug}`)}</li>`
+}
+
+async function renderItems(slugs) {
+  return (await Promise.all(slugs.map(renderItem))).join("\n");
+}
+
+async function renderItem(slug) {
+  return `<li>${web.smartLink(`/${env.locale}${slug}`)}</li>`;
+}
+
+%>
+
+<section id="Quick_links" data-macro="AddonSidebar">
+  <ol>
+    <%- await renderRootItem("/docs/Mozilla/Add-ons/WebExtensions") %>
+    <li>
+      <details>
+        <summary><%=text['WebExtensions#Getting_started']%></summary>
+        <ol>
+          <%- await renderItems([
+            "/docs/Mozilla/Add-ons/WebExtensions/What_are_WebExtensions",
+            "/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension",
+            "/docs/Mozilla/Add-ons/WebExtensions/Your_second_WebExtension",
+            "/docs/Mozilla/Add-ons/WebExtensions/Anatomy_of_a_WebExtension",
+            "/docs/Mozilla/Add-ons/WebExtensions/Examples",
+            "/docs/Mozilla/Add-ons/WebExtensions/What_next",
+          ]) %>
+        </ol>
+      </details>
+    </li>
+    <li>
+      <details>
+        <summary><%=text['WebExtensions#Concepts']%></summary>
+        <ol>
+          <%- await renderItems([
+            "/docs/Mozilla/Add-ons/WebExtensions/API",
+            "/docs/Mozilla/Add-ons/WebExtensions/Content_scripts",
+            "/docs/Mozilla/Add-ons/WebExtensions/Background_scripts",
+            "/docs/Mozilla/Add-ons/WebExtensions/Match_patterns",
+            "/docs/Mozilla/Add-ons/WebExtensions/Working_with_files",
+            "/docs/Mozilla/Add-ons/WebExtensions/Internationalization",
+            "/docs/Mozilla/Add-ons/WebExtensions/Content_Security_Policy",
+            "/docs/Mozilla/Add-ons/WebExtensions/Native_messaging",
+            "/docs/Mozilla/Add-ons/WebExtensions/Differences_between_API_implementations",
+            "/docs/Mozilla/Add-ons/WebExtensions/Chrome_incompatibilities",
+          ]) %>
+        </ol>
+      </details>
+    </li>
+    <li>
+      <details>
+        <summary><%=text['WebExtensions#User_Interface']%></summary>
+        <ol>
+          <%- await renderItems([
+            "/docs/Mozilla/Add-ons/WebExtensions/user_interface",
+            "/docs/Mozilla/Add-ons/WebExtensions/user_interface/Toolbar_button",
+            "/docs/Mozilla/Add-ons/WebExtensions/user_interface/Page_actions",
+            "/docs/Mozilla/Add-ons/WebExtensions/user_interface/Sidebars",
+            "/docs/Mozilla/Add-ons/WebExtensions/user_interface/Context_menu_items",
+            "/docs/Mozilla/Add-ons/WebExtensions/user_interface/Options_pages",
+            "/docs/Mozilla/Add-ons/WebExtensions/user_interface/Extension_pages",
+            "/docs/Mozilla/Add-ons/WebExtensions/user_interface/Notifications",
+            "/docs/Mozilla/Add-ons/WebExtensions/user_interface/Omnibox",
+            "/docs/Mozilla/Add-ons/WebExtensions/user_interface/devtools_panels",
+          ]) %>
+        </ol>
+      </details>
+    </li>
+    <li>
+      <details>
+        <summary><%=text['WebExtensions#How_to']%></summary>
+        <ol>
+          <%- await renderItems([
+            "/docs/Mozilla/Add-ons/WebExtensions/Intercept_HTTP_requests",
+            "/docs/Mozilla/Add-ons/WebExtensions/Modify_a_web_page",
+            "/docs/Mozilla/Add-ons/WebExtensions/Safely_inserting_external_content_into_a_page",
+            "/docs/Mozilla/Add-ons/WebExtensions/Sharing_objects_with_page_scripts",
+            "/docs/Mozilla/Add-ons/WebExtensions/Add_a_button_to_the_toolbar",
+            "/docs/Mozilla/Add-ons/WebExtensions/Implement_a_settings_page",
+            "/docs/Mozilla/Add-ons/WebExtensions/Working_with_the_Tabs_API",
+            "/docs/Mozilla/Add-ons/WebExtensions/Work_with_the_Bookmarks_API",
+            "/docs/Mozilla/Add-ons/WebExtensions/Work_with_the_Cookies_API",
+            "/docs/Mozilla/Add-ons/WebExtensions/Work_with_contextual_identities",
+            "/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard",
+            "/docs/Mozilla/Add-ons/WebExtensions/Extending_the_developer_tools",
+            "/docs/Mozilla/Add-ons/WebExtensions/Build_a_cross_browser_extension",
+          ]) %>
+        </ol>
+      </details>
+    </li>
+    <li>
+      <details>
+        <summary><%=text['WebExtensions#API']%></summary>
+        <%-await template("WebExtAPISidebar", [])%>
+      </details>
+    </li>
+    <li>
+      <details>
+      <summary><%=text['WebExtensions#manifest.json']%></summary>
+        <ol>
+          <%- await renderItems([
+            "/docs/Mozilla/Add-ons/WebExtensions/manifest.json",
+          ]) %>
+        </ol>
+      <%-
+        await wiki.tree(baseURL + "WebExtensions/manifest.json", 1, 0, 0, 1)
+      %>
+      </details>
+    </li>
+     <li>
+      <details>
+        <summary><%=text['extension_workshop']%></summary>
+        <ol>
+          <li><a href="https://extensionworkshop.com/documentation/develop/"><%=text['extension_workshop_develop']%></a></li>
+          <li><a href="https://extensionworkshop.com/documentation/publish/"><%=text['extension_workshop_publish']%></a></li>
+          <li><a href="https://extensionworkshop.com/documentation/manage/"><%=text['extension_workshop_manage']%></a></li>
+          <li><a href="https://extensionworkshop.com/documentation/enterprise/"><%=text['extension_workshop_enterprise']%></a></li>
+        </ol>
+      </details>
+    </li>
+    <%- await renderRootItem("/docs/Mozilla/Add-ons/Contact_us") %>
+    <li>
+      <details>
+        <summary><%=text['Channels']%></summary>
+        <ol>
+          <li><a href="https://blog.mozilla.org/addons"><%=text['Blog']%></a></li>
+          <li><a href="https://discourse.mozilla.org/c/add-ons"><%=text['Forums']%></a></li>
+          <li><a href="https://chat.mozilla.org/#/room/%23addons:mozilla.org"><%=text['Chat']%></a></li>
+        </ol>
+      </details>
+    </li>
+  </ol>
+</section>

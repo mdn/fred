@@ -1,0 +1,75 @@
+@use "../../vars" as *;
+
+.breadcrumbs-container {
+  align-items: center;
+  display: flex;
+  margin-right: auto;
+
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    line-height: 1.2;
+    padding: 0.25rem 0;
+    row-gap: 0.25rem;
+  }
+
+  li {
+    display: none;
+    hyphens: auto;
+
+    // only show last two items on mobile
+    &:nth-last-child(-n + 2) {
+      display: inline-flex;
+    }
+
+    .breadcrumb {
+      &::after {
+        background-color: var(--icon-secondary);
+        content: "";
+        display: block;
+        flex-shrink: 0;
+        height: 12px;
+        margin-right: 0.5rem;
+        mask-image: url("../../../assets/icons/chevron.svg");
+        mask-size: 12px;
+        transform: rotate(-90deg);
+        width: 12px;
+      }
+    }
+
+    a {
+      align-items: center;
+      display: flex;
+
+      &:link,
+      &:visited {
+        color: var(--text-secondary);
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &:focus-visible {
+        outline: 0;
+
+        [property="name"] {
+          outline-color: var(--accent-primary);
+          outline-offset: 1px;
+          outline-style: auto;
+        }
+      }
+    }
+
+    [property="name"] {
+      display: inline-block;
+      margin-right: 0.5rem;
+    }
+  }
+
+  @media (min-width: $screen-xl) {
+    li {
+      display: inline-flex;
+    }
+  }
+}

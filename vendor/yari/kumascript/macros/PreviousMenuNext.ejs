@@ -1,0 +1,73 @@
+<%
+/*
+
+Parameter
+    $0 (first parameter):  path of Previous page
+    $1 (second parameter): path of Next page
+    $2 (third parameter): path to main menu of module
+
+*/
+
+const locale = env.locale;
+const defaultLocale = "en-US";
+const prevPage = $0?.replace(/ /g, "_");
+const nextPage = $1?.replace(/ /g, "_");
+const mainMenu = $2?.replace(/ /g, "_");
+
+const previousNextStr = mdn.localString({
+    "de"   : [" Zurück ", " Weiter  "],
+    "en-US": [" Previous ",          " Next  "],
+    "es"   : [" Anterior ",     " Siguiente  "],
+    "fr"   : [" Précédent ",      " Suivant  "],
+    "ja"   : [" 前のページ ",                        " 次のページ  "],
+    "ko"   : [" 이전 ",                              " 다음  "],
+    "pt-BR": [" Anterior ",       " Próxima  "],
+    "ru"   : [" Назад ", " Далее  "],
+    "zh-CN": [" 上一页 ",                            " 下一页  "],
+    "zh-TW": [" 前頁 ",                              " 次頁  "]
+});
+
+const menuStr = mdn.localString({
+    "de"   : " Übersicht: ",
+    "en-US": " Overview: ",
+    "pt-BR": " Menu: ",
+    "fr"   : " Aperçu&nbsp;: ",
+    "ru"   : " Обзор: ",
+    "zh-CN": " 概述：",
+    "zh-TW": " 概述：",
+});
+
+function generateLink(pageSlug, linkText) {
+  return `<li><a class="button secondary" href="/${locale}/docs/${pageSlug}"><span class="button-wrap">${linkText}</span></a></li>`;
+}
+
+function generateMenuLink(pageSlug) {
+  const url = `/${locale}/docs/${pageSlug}`;
+  let aPage = info.getPageByURL(url);
+  if (!aPage.url && locale !== defaultLocale) {
+    const fallbackUrl = `/${defaultLocale}/docs/${pageSlug}`;
+    aPage = info.getPageByURL(fallbackUrl);
+  }
+  
+  let title = "";
+  if (!aPage.url) {
+    // fallback to generate title from slug
+    title = pageSlug.split('/').at(-1).replace(/_/g, " ");
+  } else {
+    title = aPage.title;
+  }
+  return generateLink(pageSlug, `${menuStr}${title}`);
+}
+
+
+// Output
+const strPrevious = prevPage ? generateLink(prevPage, previousNextStr[0]) : "";
+const strNext = nextPage ? generateLink(nextPage, previousNextStr[1]) : "";
+// If there is a main menu with a previous and/or a next page, generate a link to the main menu
+const strMenu = (mainMenu && (prevPage || nextPage)) ? generateMenuLink(mainMenu) : "";
+%>
+<ul class="prev-next">
+    <%- strPrevious %>
+    <%- strMenu %>
+    <%- strNext %>
+</ul>

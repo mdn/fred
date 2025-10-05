@@ -1,0 +1,44 @@
+@mixin fade-in() {
+  animation: fade-in 0.5s ease-out;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@mixin line-clamp($lines, $line-height, $background-color) {
+  max-height: calc(1em * $lines * $line-height);
+  overflow: hidden;
+  position: relative;
+
+  &::after {
+    background: $background-color;
+    content: "";
+    display: block;
+    height: calc(1em * $line-height);
+    mask-image: linear-gradient(to right, transparent, #000 75%);
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: calc(1em * ($lines - 1) * $line-height);
+    width: 20ch;
+  }
+
+  &:dir(rtl) {
+    &::after {
+      left: 0;
+      mask-image: linear-gradient(to left, transparent, #000 75%);
+      right: initial;
+    }
+  }
+}

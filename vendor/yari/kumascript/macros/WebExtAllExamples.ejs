@@ -1,0 +1,76 @@
+<%
+
+/*
+The "examples.json" file from the https://github.com/mdn/webextensions-examples
+repository contains information about the examples living in that repository.
+
+This macro loads the "examples.json" file and uses it to build a table
+presenting that information.
+
+For example, the page at https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Examples
+is generated using this macro.
+
+*/
+
+const examplesBaseUrl = "https://github.com/mdn/webextensions-examples/tree/main/";
+const allExamples = await MDN.fetchWebExtExamples();
+const lang = env.locale;
+
+const s_name = mdn.localString({
+    "de": "Name",
+    "en-US": "Name",
+    "zh-CN": "名称",
+    "zh-TW": "名稱",
+});
+
+const s_desc = mdn.localString({
+    "de": "Beschreibung",
+    "en-US": "Description",
+    "zh-CN": "描述",
+    "zh-TW": "描述",
+});
+
+const s_javascript_apis = mdn.localString({
+    "de": "JavaScript APIs",
+    "en-US": "JavaScript APIs",
+    "zh-CN": "JavaScript API",
+    "zh-TW": "JavaScript API",
+});
+
+const s_webextension_api_path = mdn.localString({
+    "en-US": "Add-ons/WebExtensions/API"
+});
+
+function writeJavaScriptAPIs(apisJSON) {
+  let output = "";
+  for (let jsAPI of apisJSON) {
+    var link = `/${lang}/${s_webextension_api_path}/${jsAPI.replace(".", "/")}`;
+    output += `<a href="${link}"><code>${jsAPI}</code></a><br/>`;
+  }
+  return output;
+}
+
+function writeAllExamples(examples) {
+  let output = `<table class="standard-table fullwidth-table">`;
+  output += `<tr>
+               <th>${s_name}</th>
+               <th>${s_desc}</th>
+               <th style="width: 40%">${s_javascript_apis}</th>
+            </tr>`;
+
+  for (let example of examples) {
+    output += `<tr>`;
+    output += `  <td><a href="${examplesBaseUrl + example.name}">${example.name}</a></td>`;
+    output += `  <td>${example.description}</td>`;
+    output += `  <td>${writeJavaScriptAPIs(example.javascript_apis)}</td>`;
+    output += `</tr>`;
+  }
+  output += "</table>";
+  return output;
+}
+
+var output = writeAllExamples(allExamples);
+
+%>
+
+<%- output %>

@@ -1,0 +1,27 @@
+<%
+// Embeds a live sample from a mdn.github.io GitHub page
+//
+// Parameters:
+//  $0 - The URL of mdn.github.io page (relative)
+//  $1 - The width of the iframe (optional)
+//  $2 - The height of the iframe (optional)
+//
+//  Example macro calls:
+//  {{EmbedGHLiveSample("canvas-raycaster", 900, 300)}}
+//  {{EmbedGHLiveSample("css-examples/learn/tasks/grid/grid1.html", '100%', 700)}}
+
+var str = "";
+var widthHeight = "";
+var url = "https://mdn.github.io/" + $0;
+
+if ($1) {
+    widthHeight = `width="${$1}" `;
+}
+if ($2) {
+    widthHeight += `height="${$2}" `;
+}
+
+str = `<iframe ${widthHeight} src="${url}"></iframe>`;
+
+%>
+<%- str %>

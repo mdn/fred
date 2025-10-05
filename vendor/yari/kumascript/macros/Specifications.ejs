@@ -1,0 +1,32 @@
+<%
+/*
+Placeholder to render a specification section with spec_urls from BCD
+
+Parameters
+
+$0 – A query string indicating for which feature to retrieve specification URLs for.
+
+Example calls
+
+{{Specifications}}
+{{Specifications("html.element.abbr")}}
+
+*/
+
+if ($0) {
+  mdn.deprecatedParams(`Calling the Specifications macro with any arguments is
+  deprecated; instead use either the 'browser-compat' or 'spec-urls'
+  front-matter key.`);
+}
+
+var query = $0 || env['browser-compat'];
+var specURLs = env['spec-urls'] || "";
+if (!query && !specURLs) {
+  throw new Error("No first query argument or 'browser-compat' or 'spec-urls' front-matter value passed");
+}
+var output = `<div class="bc-specs" data-bcd-query="${query}" data-spec-urls="${specURLs}">
+  If you're able to see this, something went wrong on this page.
+</div>`;
+%>
+
+<%-output%>

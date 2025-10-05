@@ -1,0 +1,158 @@
+@use "../../ui/vars" as *;
+@use "../../ui/mixins" as *;
+
+.icon-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.icon-card {
+  animation: fade-in 0.2s;
+  background-color: var(--background-primary);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--elem-radius);
+  padding: 1rem;
+  padding-left: 0.5rem;
+  transition: 0.3s ease-out; // this removes a flash from .doomed animations
+
+  a {
+    &:link,
+    &:visited {
+      color: var(--text-primary);
+    }
+  }
+
+  &:first-child {
+    margin-top: 1rem;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 1rem;
+  }
+
+  &-icon {
+    align-items: center;
+    background-color: var(--http-accent-color);
+    border-radius: 0.125rem;
+    color: var(--background-primary);
+    display: flex;
+    font-size: 0.75rem;
+    font-style: italic;
+    font-variation-settings: "slnt" -10;
+    height: 3rem;
+    justify-content: center;
+    padding: 0.5rem;
+    width: 3rem;
+
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &.html {
+      background-color: var(--html-accent-color);
+    }
+
+    &.css {
+      background-color: var(--css-accent-color);
+    }
+
+    &.javascript {
+      background-color: var(--js-accent-color);
+    }
+
+    &.http {
+      background-color: var(--http-accent-color);
+    }
+
+    &.apis {
+      background-color: var(--apis-accent-color);
+    }
+  }
+
+  &-title-wrap {
+    display: flex;
+    gap: 1rem;
+
+    .dropdown {
+      align-self: center;
+    }
+
+    .breadcrumbs a:link,
+    .breadcrumbs a:visited {
+      color: var(--text-secondary);
+    }
+  }
+
+  &-title {
+    font-size: var(--type-base-font-size-rem);
+    font-weight: var(--font-body-strong-weight);
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+  }
+
+  &-description {
+    color: var(--text-secondary);
+    font-size: var(--type-smaller-font-size);
+  }
+
+  &-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .icon-card-content {
+    flex: 1 1 80%;
+    overflow: hidden;
+
+    @media (max-width: $screen-sm) {
+      flex-basis: 95%;
+    }
+
+    h4 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .icon-card-actions {
+    align-self: center;
+    margin-left: auto;
+  }
+
+  .breadcrumbs {
+    color: var(--text-secondary);
+    font-size: var(--type-smaller-font-size);
+    list-style: none;
+    margin-bottom: 0;
+    margin-bottom: 0.5rem;
+
+    li {
+      display: inline-block;
+      margin: 0;
+
+      &::after {
+        background-color: var(--text-secondary);
+        content: "";
+        display: inline-block;
+        height: 8px;
+        margin: 0 4px;
+        mask-image: url("~@mdn/dinocons/arrows/chevron.svg");
+        transform: rotate(-90deg);
+        vertical-align: middle;
+        width: 8px;
+      }
+
+      &:last-child:after {
+        content: unset;
+      }
+    }
+  }
+}

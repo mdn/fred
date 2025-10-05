@@ -1,0 +1,80 @@
+@use "sass:color";
+
+@use "../../vars" as *;
+
+ul.main-menu {
+  box-sizing: border-box;
+  list-style: none;
+  margin-top: 1rem;
+  padding: 0;
+  width: 100%;
+
+  &.show {
+    display: block;
+
+    @media (min-width: $screen-lg) {
+      display: flex;
+    }
+  }
+
+  @media (min-width: $screen-lg) {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto 0 0;
+
+    li:last-child {
+      flex-basis: inherit;
+    }
+
+    .submenu.show {
+      display: none;
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+
+    .top-level-entry-container {
+      flex-shrink: 0;
+    }
+  }
+
+  @media (min-width: ($screen-xl)) {
+    gap: 1rem;
+  }
+}
+
+/* Enable hover interaction if javascript is not available */
+@media (min-width: $screen-lg) {
+  ul.main-menu .submenu {
+    display: none;
+  }
+
+  ul.main-menu .top-level-entry-container {
+    &:hover,
+    &:focus-within {
+      .submenu {
+        display: block;
+      }
+    }
+  }
+
+  // This allows keyboard nav to work more predictably on desktop dropdowns.
+  .open-on-focus-within {
+    &:focus-within {
+      .watch-submenu {
+        display: flex;
+      }
+
+      .submenu {
+        display: block;
+      }
+    }
+
+    .submenu,
+    .watch-submenu {
+      display: none;
+    }
+  }
+}

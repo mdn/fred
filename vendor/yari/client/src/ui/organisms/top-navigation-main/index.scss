@@ -1,0 +1,202 @@
+@use "../../vars" as *;
+
+.top-navigation-main {
+  display: none;
+  justify-content: space-between;
+  padding: 0;
+  width: 100%;
+
+  .show-nav & {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .auth-container {
+    order: 0;
+  }
+
+  .header-search {
+    order: 1;
+  }
+
+  .main-nav {
+    order: 2;
+  }
+
+  .user-menu {
+    order: 3;
+  }
+
+  .top-level-entry-container {
+    position: relative;
+
+    .submenu {
+      z-index: var(--z-index-nav-menu);
+    }
+  }
+
+  .theme-toggle {
+    align-self: end;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (min-width: $screen-lg) {
+    .theme-toggle {
+      align-self: initial;
+      margin-bottom: initial;
+    }
+  }
+
+  .button.action {
+    &:hover {
+      --button-bg: var(--border-secondary);
+    }
+
+    @at-root .is-transparent &:not(:focus):hover {
+      --button-border-color: transparent;
+    }
+
+    @at-root .is-transparent &:hover {
+      --button-bg: var(--accent-primary-engage);
+    }
+
+    &.search-button:hover {
+      --button-bg: transparent;
+    }
+  }
+
+  .top-level-entry {
+    background: none;
+    border-top: 1px solid var(--border-secondary);
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    padding: 1rem 0.5rem;
+    text-align: left;
+    width: 100%;
+
+    &:link,
+    &:visited {
+      color: var(--text-secondary);
+    }
+
+    &.menu-toggle {
+      padding: 0.5rem;
+    }
+
+    sup.new {
+      --new-background: var(--text-primary-blue);
+      --new-background-beta: var(--learn-accent-color);
+      --new-color: var(--background-primary);
+      align-self: flex-start;
+    }
+
+    @media (max-width: #{$screen-lg - 1}) {
+      &.button {
+        --button-color: var(--text-secondary);
+        --button-padding: 0;
+        --button-radius: 0;
+
+        .button-wrap {
+          background: none;
+          border: none;
+          gap: 0.5rem;
+          justify-content: flex-start;
+          padding: 0;
+          text-transform: initial;
+        }
+
+        &:focus {
+          --button-focus-effect: none;
+        }
+      }
+
+      &.menu-link {
+        min-height: 53px;
+        padding: 0.5rem;
+      }
+    }
+
+    @media (min-width: $screen-lg) {
+      border-radius: var(--elem-radius);
+      border-top: none;
+      padding: 0.5rem;
+
+      &:hover,
+      &:focus {
+        background-color: var(--category-color-background);
+        color: var(--category-color);
+        text-decoration: none;
+      }
+
+      &.button {
+        padding: 0;
+      }
+    }
+  }
+
+  .menu-toggle {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .menu-toggle:after {
+    background-color: var(--icon-primary);
+    content: "";
+    height: var(--icon-size);
+    margin-left: 0.2em;
+    margin-top: 0.2em;
+
+    mask-image: url("../../../assets/icons/chevron.svg");
+    width: var(--icon-size);
+  }
+
+  .menu-toggle[aria-expanded="true"]::after {
+    transform: rotate(180deg);
+  }
+
+  .menu-toggle + .top-level-entry {
+    display: none;
+  }
+
+  @media (min-width: $screen-lg) {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    gap: 0.5rem;
+    left: inherit;
+    padding: 0;
+    position: initial;
+    top: inherit;
+    z-index: inherit;
+
+    .show-nav & {
+      flex-direction: row;
+    }
+
+    .main-nav {
+      margin-right: auto;
+      order: 0;
+      width: max-content;
+    }
+
+    .header-search {
+      order: 1;
+    }
+
+    .auth-container {
+      order: 2;
+    }
+
+    .user-menu {
+      order: 3;
+    }
+
+    .menu-toggle + .top-level-entry {
+      display: inline-flex;
+    }
+  }
+}

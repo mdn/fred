@@ -1,0 +1,53 @@
+.switch {
+  align-items: center;
+  display: inline-flex;
+  position: relative;
+
+  input {
+    height: 0;
+    margin: 0;
+    opacity: 0;
+    width: 3em;
+
+    &:checked + .slider {
+      background-color: var(--text-link);
+
+      &:before {
+        left: 53.25%;
+        right: 3.25%;
+      }
+    }
+
+    &:focus-visible + .slider {
+      outline-color: var(--accent-primary);
+      outline-offset: 1px;
+      outline-style: auto;
+    }
+  }
+
+  .slider {
+    background-color: var(--text-secondary);
+    border-radius: 1.5em;
+    cursor: pointer;
+    height: 1.5em;
+    position: absolute;
+    transition: 0.4s;
+    width: 3em;
+
+    &:before {
+      background-color: var(--background-primary);
+      border-radius: 50%;
+      bottom: 7.5%;
+      content: "";
+      left: 3.25%;
+      position: absolute;
+      right: 53.25%;
+      top: 7.5%;
+      transition: 0.4s;
+    }
+  }
+
+  .label {
+    margin-left: 0.5em;
+  }
+}
