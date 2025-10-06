@@ -361,10 +361,10 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                         <p class="site-search-results__description">
                           ${result.highlight.body &&
                           result.highlight.body.length > 0
-                            ? unsafeHTML(
-                                result.highlight.body.join(
-                                  ' <span class="divider">…</span> ',
-                                ),
+                            ? result.highlight.body.flatMap((b, i) =>
+                                i === 0
+                                  ? [unsafeHTML(b)]
+                                  : [html` … `, unsafeHTML(b)],
                               )
                             : result.summary}
                         </p>
