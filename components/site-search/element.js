@@ -1,6 +1,7 @@
 import { Task } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
 
+import { join } from "lit/directives/join.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
@@ -361,10 +362,9 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                         <p class="site-search-results__description">
                           ${result.highlight.body &&
                           result.highlight.body.length > 0
-                            ? result.highlight.body.flatMap((b, i) =>
-                                i === 0
-                                  ? [unsafeHTML(b)]
-                                  : [html` … `, unsafeHTML(b)],
+                            ? join(
+                                result.highlight.body.map((b) => unsafeHTML(b)),
+                                html`<span class="divider"> … </span>`,
                               )
                             : result.summary}
                         </p>
