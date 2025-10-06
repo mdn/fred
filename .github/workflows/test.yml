@@ -59,6 +59,8 @@ jobs:
 
       - name: Install
         run: npm ci
+          # Increase GitHub API limit.
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Build
         run: npm run build
