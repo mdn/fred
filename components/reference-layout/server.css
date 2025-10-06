@@ -112,4 +112,8 @@
       --toc-header-font-size: var(--font-size-larger);
     }
   }
+
+  mdn-survey {
+    margin-top: 0.5rem;
+  }
 }
