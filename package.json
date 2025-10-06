@@ -88,7 +88,7 @@
     "@types/prismjs": "^1.26.5",
     "@types/webpack-hot-middleware": "^2.25.10",
     "@typescript-eslint/eslint-plugin": "^8.45.0",
-    "@zip.js/zip.js": "^2.8.5",
+    "@zip.js/zip.js": "^2.8.7",
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.2",
     "dexie": "^4.2.0",
