@@ -67,7 +67,7 @@
     "@codemirror/commands": "^6.9.0",
     "@codemirror/language": "^6.11.3",
     "@codemirror/lint": "^6.9.0",
-    "@codemirror/view": "^6.38.4",
+    "@codemirror/view": "^6.38.5",
     "@csstools/postcss-global-data": "^3.1.0",
     "@eslint/compat": "^1.4.0",
     "@eslint/js": "^9.37.0",
