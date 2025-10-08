@@ -15,6 +15,7 @@ jobs:
         uses: actions/checkout@v5
         with:
           path: mdn/fred
+          persist-credentials: false
 
       - name: (mdn/fred) Setup Node.js
         uses: actions/setup-node@v4
@@ -44,6 +45,7 @@ jobs:
         with:
           repository: mdn/content
           path: mdn/content
+          persist-credentials: false
 
       - name: (mdn/content) Setup Node.js
         uses: actions/setup-node@v4
