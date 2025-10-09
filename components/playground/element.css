@@ -104,6 +104,32 @@
         flex-grow: 1;
       }
 
+      .playground__runner-report-hint-banner {
+        display: flex;
+
+        &:hover {
+          background-color: var(--color-background-secondary);
+        }
+
+        button {
+          padding: 0.5em;
+
+          font-size: 0.875em;
+          font-weight: 450;
+
+          background-color: transparent;
+          border: none;
+        }
+
+        .report-hint-button {
+          flex-grow: 1;
+        }
+
+        .report-hint-close-button span:hover {
+          color: var(--error-color, #dd3333);
+        }
+      }
+
       .playground__console {
         background-color: var(--color-background-secondary);
         border-top: var(--border);
