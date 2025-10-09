@@ -1,5 +1,7 @@
 import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
+import { WRITER_MODE } from "../env/index.js";
 import { FeaturedArticles } from "../featured-articles/server.js";
 
 import { LatestNews } from "../latest-news/server.js";
@@ -12,6 +14,9 @@ export class HomepageBody extends ServerComponent {
    */
   render(context) {
     return html`<div class="homepage-body">
+      ${WRITER_MODE && context.localServer
+        ? html`<mdn-recently-visited></mdn-recently-visited>`
+        : nothing}
       <section>
         <h2>${context.l10n`Featured articles`}</h2>
         ${FeaturedArticles.render(context.hyData.featuredArticles)}

@@ -1,5 +1,40 @@
 # Changelog
 
+## [1.6.1](https://github.com/mdn/fred/compare/v1.6.0...v1.6.1) (2025-10-03)
+
+
+### Bug Fixes
+
+* **menu:** update Color format converter link (Color picker) ([#816](https://github.com/mdn/fred/issues/816)) ([7422d4b](https://github.com/mdn/fred/commit/7422d4b024967a5cd0765a8a546e27a381541c73))
+
+
+### Miscellaneous
+
+* **deps:** bump @codemirror/lang-html from 6.4.10 to 6.4.11 in the prod group ([#854](https://github.com/mdn/fred/issues/854)) ([3e8572c](https://github.com/mdn/fred/commit/3e8572cad623795fd12facc043c421a9850fe9b4))
+* **menu:** update missing docs ([#860](https://github.com/mdn/fred/issues/860)) ([212bfbc](https://github.com/mdn/fred/commit/212bfbca3b522f7c624674bc80641974d674c251))
+* **survey:** add developer survey 2025 ([#853](https://github.com/mdn/fred/issues/853)) ([71acaf1](https://github.com/mdn/fred/commit/71acaf165f8b1136a1c92990b70a6e55b990fd34))
+
+## [1.6.0](https://github.com/mdn/fred/compare/v1.5.0...v1.6.0) (2025-10-01)
+
+
+### Features
+
+* **writer-mode:** add recently visited list to homepage ([#821](https://github.com/mdn/fred/issues/821)) ([19d36f2](https://github.com/mdn/fred/commit/19d36f2748f735e838c6825f505ededa6c0db167))
+
+
+### Bug Fixes
+
+* **placement-top:** show fallback if unfilled ([#838](https://github.com/mdn/fred/issues/838)) ([61e2025](https://github.com/mdn/fred/commit/61e20255ac5b942e405f6697a47d0fba504bd7e2))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.6 to 7.1.8 ([#836](https://github.com/mdn/fred/issues/836)) ([a08b60f](https://github.com/mdn/fred/commit/a08b60f5e6adce641862416bdf0d3c95ee25eb7d))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.8 to 7.1.9 ([#844](https://github.com/mdn/fred/issues/844)) ([446f19b](https://github.com/mdn/fred/commit/446f19b225d62611575d5bfa8fe67dbc23b00ed6))
+* **deps-dev:** bump the dev group with 3 updates ([#824](https://github.com/mdn/fred/issues/824)) ([50bc063](https://github.com/mdn/fred/commit/50bc063d14612c78c2800701fa1268427cd4eb2d))
+* **deps:** bump @mdn/rari from 0.1.50 to 0.1.51 ([#841](https://github.com/mdn/fred/issues/841)) ([1609bb0](https://github.com/mdn/fred/commit/1609bb010a2335f5d8c6f90973f1b35ccce9056e))
+* **deps:** promote source-map-support ([#846](https://github.com/mdn/fred/issues/846)) ([467d496](https://github.com/mdn/fred/commit/467d496ac1f22b8d67953d4f607812d6ea9cecbd))
+
 ## [1.5.0](https://github.com/mdn/fred/compare/v1.4.0...v1.5.0) (2025-09-24)
 
 
