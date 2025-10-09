@@ -31,6 +31,18 @@
     display: none;
   }
 
+  mdn-color-theme,
+  mdn-language-switcher {
+    display: flex;
+  }
+
+  mdn-color-theme,
+  mdn-language-switcher,
+  mdn-color-theme::part(color-theme__button),
+  mdn-language-switcher::part(language-switcher__button) {
+    height: 100%;
+  }
+
   @media (--screen-layout-1-sidebar-or-less) {
     &:has(mdn-toggle-sidebar) {
       padding-left: 0;

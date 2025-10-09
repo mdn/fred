@@ -63,6 +63,7 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
     return html`<div class="color-theme">
       <mdn-dropdown>
         <button
+          part="color-theme__button"
           slot="button"
           class="color-theme__button"
           data-mode=${this._mode}
