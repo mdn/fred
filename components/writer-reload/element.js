@@ -1,11 +1,13 @@
 import { LitElement, html } from "lit";
 
+import { L10nMixin } from "../../l10n/mixin.js";
+
 import styles from "./element.css?lit";
 
 /**
  * Custom element which reloads the page when the document has changed.
  */
-export default class MDNWriterReload extends LitElement {
+export default class MDNWriterReload extends L10nMixin(LitElement) {
   static ssr = false;
   static styles = styles;
 
@@ -33,7 +35,13 @@ export default class MDNWriterReload extends LitElement {
   }
 
   render() {
-    return html`<div>Polling every ${this._interval / 1000}s</div>`;
+    const seconds = this._interval / 1000;
+    return html`<div>
+      ${this.l10n.raw({
+        id: "writer-reload-polling",
+        args: { seconds },
+      })}
+    </div>`;
   }
 
   async _reloadIfChanged() {
