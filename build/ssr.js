@@ -57,6 +57,7 @@ async function ssrAllDocuments() {
 
 async function findDocuments() {
   const api = new fdir()
+    .withPathSeparator("/")
     .withFullPaths()
     .withErrors()
     .filter((filePath) => filePath.endsWith("/index.json"))
