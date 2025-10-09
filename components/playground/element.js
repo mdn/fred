@@ -84,6 +84,7 @@ export class MDNPlayground extends L10nMixin(LitElement) {
     ) {
       controller.clear();
       this._autoRun = true;
+      this._showReportHintBanner && this._dismissReportHintBanner();
       this._storeSession();
       this.requestUpdate();
       const urlWithoutSearch = new URL(location.href);
