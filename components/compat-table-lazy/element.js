@@ -1,5 +1,6 @@
 import { Task } from "@lit/task";
 import { LitElement, html } from "lit";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import "../compat-table/element.js";
 import { L10nMixin } from "../../l10n/mixin.js";
@@ -95,8 +96,13 @@ export class MDNCompatTableLazy extends L10nMixin(LitElement) {
   });
 
   render() {
+    const noScript = unsafeHTML(
+      `<noscript><style>p:first-of-type:not(noscript p) { display: none !important; }</style><p>${this.l10n("compat-js-required")`Browser compatibility tables only load in the browser with JavaScript enabled.`}</p></noscript>`,
+    );
     return this._dataTask.render({
-      initial: () => html`<p>${this.l10n("compat-loading")`Loading…`}</p>`,
+      initial: () =>
+        // prettier-ignore
+        html`<p>${this.l10n("compat-loading")`Loading…`}</p>${noScript}`,
       pending: () => html`<p>${this.l10n("compat-loading")`Loading…`}</p>`,
 
       complete:
