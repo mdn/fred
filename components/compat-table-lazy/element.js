@@ -96,12 +96,13 @@ export class MDNCompatTableLazy extends L10nMixin(LitElement) {
   });
 
   render() {
+    const noScript = unsafeHTML(
+      `<noscript><style>p:first-of-type:not(noscript p) { display: none !important; }</style><p>${this.l10n("compat-js-required")`Browser compatibility tables only load in the browser with JavaScript enabled.`}</p></noscript>`,
+    );
     return this._dataTask.render({
       initial: () =>
-        html`<p>${this.l10n("compat-loading")`Loading…`}</p>
-          ${unsafeHTML(
-            `<noscript><style>p:first-of-type { display: none !important; }</style><div>${this.l10n("compat-js-required")`Browser compatibility tables only load in the browser with JavaScript enabled.`}</div></noscript>`,
-          )}`,
+        // prettier-ignore
+        html`<p>${this.l10n("compat-loading")`Loading…`}</p>${noScript}`,
       pending: () => html`<p>${this.l10n("compat-loading")`Loading…`}</p>`,
 
       complete:
