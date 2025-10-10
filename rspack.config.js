@@ -259,6 +259,7 @@ const ssrConfig = merge(common, notServiceWorkerCommon, clientAndSsrCommon, {
       index: [
         // load custom elements
         ...(await new fdir()
+          .withPathSeparator("/")
           .withFullPaths()
           .filter((filePath) => filePath.endsWith("/element.js"))
           .crawl(path.join(__dirname, "components"))
@@ -338,6 +339,7 @@ const clientConfig = merge(
         "styles-global": {
           runtime: "styles",
           import: await new fdir()
+            .withPathSeparator("/")
             .withFullPaths()
             .filter((filePath) => filePath.endsWith("/global.css"))
             .crawl(path.join(__dirname, "components"))
@@ -347,6 +349,7 @@ const clientConfig = merge(
         ...Object.fromEntries(
           (
             await new fdir()
+              .withPathSeparator("/")
               .withFullPaths()
               .filter((filePath) => filePath.endsWith("/server.css"))
               .crawl(path.join(__dirname, "components"))

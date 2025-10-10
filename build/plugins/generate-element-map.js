@@ -18,6 +18,7 @@ export class GenerateElementMapPlugin {
       "GenerateElementMapPlugin",
       async () => {
         const api = new fdir()
+          .withPathSeparator("/")
           .withFullPaths()
           .filter((filePath) => filePath.endsWith("/element.js"))
           .crawl(path.join(compiler.context, "components"));
@@ -25,7 +26,8 @@ export class GenerateElementMapPlugin {
 
         const mapping = files.map((filePath) => {
           const relPath =
-            ".." + filePath.replace(compiler.context, "").replaceAll("\\", "/");
+            "../" +
+            path.relative(compiler.context, filePath).replaceAll("\\", "/");
           const folderName = relPath.split("/").at(-2);
           const tagName = `mdn-${folderName}`;
           const className = toPascalCase(tagName);
