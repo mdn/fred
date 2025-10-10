@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.6.2](https://github.com/mdn/fred/compare/v1.6.1...v1.6.2) (2025-10-10)
+
+
+### Bug Fixes
+
+* **content-section:** preserve white space only in pre, not code ([#858](https://github.com/mdn/fred/issues/858)) ([a5a28ee](https://github.com/mdn/fred/commit/a5a28ee46885136ba5fd096344fcb3937a1d02d7))
+* **site-search:** add divider between result preview snippets ([#871](https://github.com/mdn/fred/issues/871)) ([7b65221](https://github.com/mdn/fred/commit/7b652219b4108b3fac24622b6ad91da35e3e734f))
+* **survey:** move above H1 element ([#870](https://github.com/mdn/fred/issues/870)) ([1dbb14b](https://github.com/mdn/fred/commit/1dbb14b0a9ce2373b1c8b93ae481940b4054f148))
+
+
+### Miscellaneous
+
+* add basic browser testing for kitchensink page ([#807](https://github.com/mdn/fred/issues/807)) ([e4e4bf9](https://github.com/mdn/fred/commit/e4e4bf9ae8fae80fa573bc5ae914f1f898018f1b))
+* **deps-dev:** bump [@zip](https://github.com/zip).js/zip.js from 2.8.5 to 2.8.7 in the dev group ([#866](https://github.com/mdn/fred/issues/866)) ([a4ef9c1](https://github.com/mdn/fred/commit/a4ef9c1a974d1f9a5503512fff0702348423a251))
+* **deps-dev:** bump @codemirror/view from 6.38.4 to 6.38.5 in the dev group ([#879](https://github.com/mdn/fred/issues/879)) ([09731d9](https://github.com/mdn/fred/commit/09731d9a5a1fb9cac6438f0b7c29895da9e6bed0))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.10 to 7.1.11 ([#881](https://github.com/mdn/fred/issues/881)) ([c215501](https://github.com/mdn/fred/commit/c215501ddebde7b462ee45d8674f4c8dbe96cf33))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.9 to 7.1.10 ([#865](https://github.com/mdn/fred/issues/865)) ([03eeba8](https://github.com/mdn/fred/commit/03eeba8ca0697b9ac96133b5935a438a9e5d461e))
+* **deps-dev:** bump the dev group across 1 directory with 15 updates ([#862](https://github.com/mdn/fred/issues/862)) ([12dcccb](https://github.com/mdn/fred/commit/12dcccba45c7699107cf46aa3dc2ba273db0d80d))
+* **deps-dev:** bump the dev group with 4 updates ([#874](https://github.com/mdn/fred/issues/874)) ([7507c43](https://github.com/mdn/fred/commit/7507c43e324b534ff0232ec770f1ccafdfbcda9b))
+* **deps-dev:** bump the dev group with 5 updates ([#896](https://github.com/mdn/fred/issues/896)) ([249c295](https://github.com/mdn/fred/commit/249c2959b96b60f7f8a22d4e8f3249c8b7d8d520))
+
 ## [1.6.1](https://github.com/mdn/fred/compare/v1.6.0...v1.6.1) (2025-10-03)
 
 
