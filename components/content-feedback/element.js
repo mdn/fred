@@ -14,24 +14,6 @@ import styles from "./element.css?lit";
  * @typedef {"outdated"|"incomplete"|"code_examples"|"technical"|"consistency"|"incomprehensible"|"linguistic"|"other"} FeedbackReason
  */
 
-/** @type {Partial<Record<FeedbackReason, string>>} */
-const FEEDBACK_REASONS = {
-  outdated: "Content is out of date",
-  incomplete: "Missing information",
-  code_examples: "Code examples not working as expected",
-  other: "Other",
-};
-
-/** @type {Partial<Record<FeedbackReason, string>>} */
-const FEEDBACK_REASONS_DE = {
-  technical: "Übersetzung enthält fachliche Fehler",
-  consistency: "Begriffe sind inkonsistent übersetzt",
-  incomprehensible: "Übersetzung ist nicht verständlich",
-  linguistic: "Übersetzung enthält sprachliche Fehler",
-  code_examples: "Code-Beispiele funktionieren nicht",
-  other: "Sonstige",
-};
-
 export class MDNContentFeedback extends L10nMixin(LitElement) {
   static styles = styles;
 
@@ -68,6 +50,60 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
   _handleFeedback() {
     this._view = "thanks";
     gleanClick(`article_footer: feedback -> ${this._reason}`);
+  }
+
+  /**
+   * Get list of feedback reasons with localized labels
+   * @returns {Array<{key: FeedbackReason, label: import("@lit").L10nResult}>}
+   */
+  _getFeedbackReasons() {
+    if (this.locale === "de") {
+      return [
+        {
+          key: "technical",
+          label: "Übersetzung enthält fachliche Fehler",
+        },
+        {
+          key: "consistency",
+          label: "Begriffe sind inkonsistent übersetzt",
+        },
+        {
+          key: "incomprehensible",
+          label: "Übersetzung ist nicht verständlich",
+        },
+        {
+          key: "linguistic",
+          label: "Übersetzung enthält sprachliche Fehler",
+        },
+        {
+          key: "code_examples",
+          label: "Code-Beispiele funktionieren nicht",
+        },
+        {
+          key: "other",
+          label: "Sonstige",
+        },
+      ];
+    }
+
+    return [
+      {
+        key: "outdated",
+        label: this.l10n`Content is out of date`,
+      },
+      {
+        key: "incomplete",
+        label: this.l10n`Missing information`,
+      },
+      {
+        key: "code_examples",
+        label: this.l10n`Code examples not working as expected`,
+      },
+      {
+        key: "other",
+        label: this.l10n`Other`,
+      },
+    ];
   }
 
   _renderVote() {
@@ -107,15 +143,15 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
         }
       };
 
+    const reasons = this._getFeedbackReasons();
+
     return html`<label
         >${this.l10n(
           "content-feedback-reason",
         )`Why was this page not helpful to you?`}</label
       >
-      ${Object.entries(
-        this.locale === "de" ? FEEDBACK_REASONS_DE : FEEDBACK_REASONS,
-      ).map(
-        ([key, label]) =>
+      ${reasons.map(
+        ({ key, label }) =>
           html`<div class="content-feedback--radios">
             <input
               type="radio"
