@@ -7,14 +7,9 @@
 
 import { GA_ENABLED, GA_MEASUREMENT_ID } from "../components/env/index.js";
 import { dntEnabled } from "../utils/dnt-helper.js";
+import { userIsOptedOut } from "../utils/telemetry-opt-out.js";
 
-const FIRST_PARTY_DATA_OPT_OUT_COOKIE_NAME = "moz-1st-party-data-opt-out";
-
-const userIsOptedOut = document.cookie
-  .split("; ")
-  .includes(`${FIRST_PARTY_DATA_OPT_OUT_COOKIE_NAME}=true`);
-
-if (GA_ENABLED && GA_MEASUREMENT_ID && !userIsOptedOut && !dntEnabled()) {
+if (GA_ENABLED && GA_MEASUREMENT_ID && !userIsOptedOut() && !dntEnabled()) {
   // @ts-expect-error - added by GA
   globalThis.dataLayer = globalThis.dataLayer || [];
 
