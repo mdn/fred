@@ -158,7 +158,7 @@ export class Menu extends ServerComponent {
                       <li>${link("Web/CSS/CSS_syntax/At-rule", "At-rules")}</li>
                       <li>
                         ${link(
-                          "Web/CSS/CSS_Values_and_Units",
+                          "Web/CSS/CSS_values_and_units",
                           "Values & units",
                         )}
                       </li>
