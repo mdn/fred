@@ -4,8 +4,8 @@
  * IE versions on Windows 7, 8 and 8.1, where the DNT implementation does not honor the spec.
  * Based on https://github.com/mozmeao/dnt-helper/blob/main/src/mozilla-dnt-helper.js
  * @see https://bugzilla.mozilla.org/show_bug.cgi?id=1217896 for more details
- * @params {string} [dnt] - An optional mock doNotTrack string to ease unit testing.
- * @params {string} [ua] - An optional mock userAgent string to ease unit testing.
+ * @param {string} [dnt] - An optional mock doNotTrack string to ease unit testing.
+ * @param {string} [ua] - An optional mock userAgent string to ease unit testing.
  * @returns {boolean} true if enabled else false
  */
 export function dntEnabled(dnt, ua) {
