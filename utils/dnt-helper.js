@@ -1,10 +1,14 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 /**
- * Checks if Do Not Track (DNT) is enabled.
- * @param {string} [dnt] - DNT value to check (for testing)
- * @param {string} [ua] - User agent string (for testing)
- * @returns {boolean} True if DNT is enabled, false otherwise
+ * Returns true or false based on whether doNotTrack is enabled. It also takes into account the
+ * anomalies, such as !bugzilla 887703, which effect versions of Fx 31 and lower. It also handles
+ * IE versions on Windows 7, 8 and 8.1, where the DNT implementation does not honor the spec.
+ * Based on https://github.com/mozmeao/dnt-helper/blob/main/src/mozilla-dnt-helper.js
+ * @see https://bugzilla.mozilla.org/show_bug.cgi?id=1217896 for more details
+ * @params {string} [dnt] - An optional mock doNotTrack string to ease unit testing.
+ * @params {string} [ua] - An optional mock userAgent string to ease unit testing.
+ * @returns {boolean} true if enabled else false
  */
 export function dntEnabled(dnt, ua) {
   let dntStatus =
