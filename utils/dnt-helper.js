@@ -1,5 +1,3 @@
-/* This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-
 /**
  * Returns true or false based on whether doNotTrack is enabled. It also takes into account the
  * anomalies, such as !bugzilla 887703, which effect versions of Fx 31 and lower. It also handles
