@@ -22,6 +22,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
         if: steps.release.outputs.release_created
+        with:
+          persist-credentials: false
 
       - name: Setup
         uses: actions/setup-node@v4
@@ -29,6 +31,7 @@ jobs:
         with:
           node-version-file: ".nvmrc"
           registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
 
       - name: Install
         if: steps.release.outputs.release_created

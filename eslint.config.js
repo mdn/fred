@@ -114,4 +114,12 @@ export default defineConfig([
     },
   },
   prettierConfig,
+  {
+    files: ["test/specs/**/*.js"],
+    languageOptions: {
+      globals: {
+        ...globals.mocha,
+      },
+    },
+  },
 ]);

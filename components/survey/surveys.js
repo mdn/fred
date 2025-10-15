@@ -29,6 +29,7 @@ export const SurveyBucket = Object.freeze({
   HOUSE_SURVEY_2025: "HOUSE_SURVEY_2025",
   JS_PROPOSALS_2025: "JS_PROPOSALS_2025",
   FIRST_FRED_2025: "FIRST_FRED_2025",
+  DEVELOPER_SURVEY_2025: "DEVELOPER_SURVEY_2025",
 });
 
 /**
@@ -43,25 +44,28 @@ export const SurveyBucket = Object.freeze({
  * @type {Survey.Survey[]}
  */
 export const SURVEYS = [
-  // {
-  //   key: "something unique in the current surveys",
-  //   bucket: SurveyBucket.FIRST_FRED_2025,
-  //   show: (mdn_url) => {
-  //     return /^\/[a-z]{2}(-[A-Z]{2})?\/docs\/Web\/CSS/.test(mdn_url);
-  //   },
-  //   src: (mdn_url) => {
-  //     const url = new URL(
-  //       "https://survey.alchemer.com/s3/8385674/MDN-short-survey-Fred",
-  //     );
-  //     url.searchParams.set("referrer", mdn_url);
-  //     return url.toString();
-  //   },
-  //   teaser: html`Fred is <strong>MDN</strong>'s shiny new frontend!`,
-  //   question: "How satisfied are you with this new MDN frontend?",
-  //   footnote: "fred = fr(ont)e(n)d",
-  //   rateFrom: 0,
-  //   rateTill: 1,
-  //   start: 0,
-  //   end: Infinity,
-  // },
+  {
+    key: SurveyBucket.DEVELOPER_SURVEY_2025,
+    bucket: SurveyBucket.DEVELOPER_SURVEY_2025,
+    show: (mdn_url) => {
+      return /^\/[a-z]{2}(-[A-Z]{2})?\/docs\/(Glossary|Learn|Web)/.test(
+        mdn_url,
+      );
+    },
+    src: (mdn_url) => {
+      const url = new URL(
+        "https://survey.alchemer.com/s3/8409929/MDN-Developer-Survey",
+      );
+      url.searchParams.set("referrer", mdn_url);
+      return url.toString();
+    },
+    teaser:
+      "We’re running a survey to understand how you use MDN in your web development work.",
+    question: "We’d love for you to take 10 minutes to share your feedback.",
+    link: true,
+    rateFrom: 0,
+    rateTill: 0.3,
+    start: Date.parse("2025-10-06"),
+    end: Date.parse("2025-10-20"),
+  },
 ];
