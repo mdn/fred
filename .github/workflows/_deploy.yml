@@ -196,6 +196,7 @@ jobs:
               -o -path '*/en-us/web/api/web_animations_api/using_the_web_animations_api/index.md' \
               -o -path '*/en-us/web/api/web_audio_api/using_web_audio_api/index.md' \
               -o -path '*/en-us/web/api/window/index.md' \
+              -o -path '*/en-us/web/api/window/innerwidth/index.md' \
               -o -path '*/en-us/web/css/@container/index.md' \
               -o -path '*/en-us/web/css/color/index.md' \
               -o -path '*/en-us/web/css/css_animations/using_css_animations/index.md' \
