@@ -61,7 +61,7 @@ obs-mdn = The { -brand-name-obs } provides effective security insights, guided b
 
 
 compat-loading = Loading…
-compat-js-required = Browser compatibility tables only load in the browser with JavaScript enabled.
+compat-js-required = Enable JavaScript to view this browser compatibility table.
 
 compat-browser-version-date = { $browser } { $version } – Release date: { $date }
 compat-browser-version-released = Release date: { $date }

@@ -96,11 +96,13 @@ export class MDNCompatTableLazy extends L10nMixin(LitElement) {
   });
 
   render() {
+    // The CSS will hide the compat-loading message when JavaScript is disabled
     const noScript = unsafeHTML(
-      `<noscript><style>p:first-of-type:not(noscript p) { display: none !important; }</style><p>${this.l10n("compat-js-required")`Browser compatibility tables only load in the browser with JavaScript enabled.`}</p></noscript>`,
+      `<noscript><style>p:first-of-type:not(noscript p) { display: none !important; }</style><p>${this.l10n("compat-js-required")`Enable JavaScript to view this browser compatibility table.`}</p></noscript>`,
     );
     return this._dataTask.render({
       initial: () =>
+        // Lit will only replace this message if there is no text node after it
         // prettier-ignore
         html`<p>${this.l10n("compat-loading")`Loading…`}</p>${noScript}`,
       pending: () => html`<p>${this.l10n("compat-loading")`Loading…`}</p>`,
