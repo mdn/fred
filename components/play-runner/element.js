@@ -109,16 +109,17 @@ export class MDNPlayRunner extends LitElement {
       );
       const prefix = (srcPrefix || "").replace(/\/$/, "");
       signal.throwIfAborted();
-      this._subdomain = permalink ? hash : this._uuid;
+      const subdomain = permalink ? hash : this._uuid;
       const url = new URL(
         `${prefix}/runner.html`,
         PLAYGROUND_LOCAL
           ? location.origin.replace(PORT.toString(), PLAYGROUND_PORT.toString())
-          : `${location.protocol}//${this._subdomain}.${PLAYGROUND_BASE_HOST}`,
+          : `${location.protocol}//${subdomain}.${PLAYGROUND_BASE_HOST}`,
       );
       // pass the uuid for postMessage isolation
-      url.searchParams.set("uuid", this._subdomain);
+      url.searchParams.set("uuid", subdomain);
       url.searchParams.set("state", state);
+      this._subdomain = subdomain;
       this._src = url.href;
       this.dispatchEvent(
         new CustomEvent("mdn-play-runner-src", {
