@@ -1,4 +1,4 @@
-import { toCamelCase } from "../../utils/name-transformation.js";
+import { camelToKebabCase } from "../../utils/name-transformation.js";
 
 /**
  * @param {import("@rspack/core").StatsCompilation} manifest
@@ -66,5 +66,5 @@ export function stylesForComponents(components, manifest) {
  * @param {string} component
  */
 export function styleEntryForComponent(component) {
-  return `styles-${toCamelCase(component)}`;
+  return `styles-${camelToKebabCase(component)}`;
 }

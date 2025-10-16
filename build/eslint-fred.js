@@ -1,6 +1,6 @@
 import path from "node:path";
 
-import { toCamelCase } from "../utils/name-transformation.js";
+import { camelToKebabCase } from "../utils/name-transformation.js";
 
 /** @type {import("eslint").ESLint.Plugin} */
 export default {
@@ -26,7 +26,9 @@ export default {
                 });
               }
 
-              const expectedDir = toCamelCase(className.replace(/^MDN/, ""));
+              const expectedDir = camelToKebabCase(
+                className.replace(/^MDN/, ""),
+              );
               const expectedPath = path.join(
                 "components",
                 expectedDir,
@@ -57,7 +59,7 @@ export default {
             const [className, superClassName] = getClassNames(node);
 
             if (superClassName === "ServerComponent") {
-              const expectedDir = toCamelCase(className);
+              const expectedDir = camelToKebabCase(className);
               const expectedPath = path.join(
                 "components",
                 expectedDir,
@@ -95,7 +97,7 @@ export default {
                 });
               }
 
-              const expectedDir = toCamelCase(
+              const expectedDir = camelToKebabCase(
                 className.replace(/Sandbox$/, ""),
               );
               const expectedPath = path.join(
