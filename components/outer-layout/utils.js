@@ -1,4 +1,4 @@
-import { toCamelCase } from "../../build/utils.js";
+import { toCamelCase } from "../../utils/name-transformation.js";
 
 /**
  * @param {import("@rspack/core").StatsCompilation} manifest

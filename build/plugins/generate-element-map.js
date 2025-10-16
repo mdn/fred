@@ -1,7 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-import { crawl, toPascalCase } from "../utils.js";
+import { toPascalCase } from "../../utils/name-transformation.js";
+import { crawl } from "../utils.js";
 
 /**
  * @import { Compiler } from "@rspack/core"

@@ -1,6 +1,6 @@
 import path from "node:path";
 
-import { toCamelCase } from "./utils.js";
+import { toCamelCase } from "../utils/name-transformation.js";
 
 /** @type {import("eslint").ESLint.Plugin} */
 export default {
