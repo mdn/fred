@@ -52,7 +52,7 @@ export class MDNPlayRunner extends LitElement {
     /** @type {boolean} */
     this.permalink = false;
     /** @type {string} */
-    this._hash = crypto.randomUUID();
+    this._uuid = crypto.randomUUID();
     /** @type {string} */
     this._subdomain = "";
     /** @type {Promise<true>} */
@@ -109,7 +109,7 @@ export class MDNPlayRunner extends LitElement {
       );
       const prefix = (srcPrefix || "").replace(/\/$/, "");
       signal.throwIfAborted();
-      this._subdomain = permalink ? hash : this._hash;
+      this._subdomain = permalink ? hash : this._uuid;
       const url = new URL(
         `${prefix}/runner.html`,
         PLAYGROUND_LOCAL
