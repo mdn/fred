@@ -9,6 +9,13 @@ on:
 
   workflow_dispatch:
 
+# Same as: _deploy.yml
+permissions:
+  # Post comment in pull request.
+  pull-requests: write
+  # Authenticate with GCP.
+  id-token: write
+
 jobs:
   deploy:
     if: github.repository_owner == 'mdn' && (github.event_name == 'schedule' || github.actor != 'dependabot[bot]')
