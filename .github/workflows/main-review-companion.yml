@@ -9,7 +9,6 @@ on:
 
   workflow_dispatch:
 
-# Same as: _deploy.yml
 permissions:
   # Authenticate with GCP.
   id-token: write
