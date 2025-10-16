@@ -38,8 +38,23 @@ jobs:
           TARBALL=`ls mdn-fred-*.tgz`
           echo $TARBALL
           ls -lh $TARBALL
-          echo "tarball=$(realpath $TARBALL)" >> "$GITHUB_OUTPUT"
+          echo "tarball=$TARBALL" >> "$GITHUB_OUTPUT"
 
+      - name: (mdn/fred) archive tarball
+        uses: actions/upload-artifact@v4
+        with:
+          name: tarball
+          path: mdn/fred/${{ steps.build.outputs.tarball }}
+          compression-level: 0 # file already compressed
+
+  test:
+    needs: build
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
       - name: (mdn/content) Checkout
         uses: actions/checkout@v5
         with:
@@ -54,41 +69,49 @@ jobs:
           cache: yarn
           cache-dependency-path: mdn/content/yarn.lock
 
+      - name: (mdn/content) Download tarball
+        uses: actions/download-artifact@v5
+        with:
+          name: tarball
+
       - name: (mdn/content) Install tarball
         working-directory: mdn/content
-        env:
-          TARBALL: ${{ steps.build.outputs.tarball }}
+        shell: bash
         run: |
           yarn cache clean --all
+          TARBALL=$(ls ../../mdn-fred-*.tgz)
           yarn add file:$TARBALL
           yarn install
 
-      - name: (mdn/content) yarn fred-ssr
+      - name: (mdn/content) yarn fred-ssr (Linux)
+        if: runner.os == 'Linux'
         working-directory: mdn/content
         run: yarn fred-ssr
 
-      - name: (mdn/content) yarn start
-        working-directory: mdn/content
-        run: yarn start > /tmp/stdout.log 2> /tmp/stderr.log &
+      - name: (mdn/fred) Checkout
+        uses: actions/checkout@v5
+        with:
+          path: mdn/fred
+          persist-credentials: false
+
+      - name: (mdn/fred) Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: mdn/fred/.nvmrc
+          cache: npm
+          cache-dependency-path: mdn/fred/package-lock.json
+
+      - name: (mdn/fred) Install all npm packages
+        working-directory: mdn/fred
+        run: npm ci
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Wait for Rari (localhost:8083)
-        run: curl --retry-connrefused --retry 5 -I http://localhost:8083/en-US/
-
-      - name: Test Fred (localhost:5042)
+      - name: (mdn/fred) Run tests
+        id: build
+        working-directory: mdn/fred
+        env:
+          FRED_PORT: 5042
+          CONTENT_REPO_ROOT: ../content
         run: |
-          curl --retry-connrefused --retry 5 -I http://localhost:5042
-
-          # Basically, test if it 200 OKs. If not, this'll exit non-zero.
-          curl --fail http://localhost:5042/en-US/ > /dev/null
-          curl --fail http://localhost:5042/en-US/docs/MDN/Kitchensink > /dev/null
-
-      - name: Debug server's stdout and stderr if tests failed
-        if: failure()
-        run: |
-          echo "STDOUT..................................................."
-          cat /tmp/stdout.log
-          echo ""
-          echo "STDERR..................................................."
-          cat /tmp/stderr.log
+          node scripts/npm-test.js
