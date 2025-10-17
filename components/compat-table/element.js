@@ -4,7 +4,7 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
-import { randomIdString } from "../utils/index.js";
+import { deterministicIdString } from "../utils/index.js";
 
 import { DEFAULT_LOCALE, ISSUE_METADATA_TEMPLATE } from "./constants.js";
 import styles from "./element.css?lit";
@@ -469,7 +469,10 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           version_added: false,
         };
 
-        const timelineId = randomIdString("timeline-");
+        const timelineId = deterministicIdString(
+          `timeline-${name}-${browserName}`,
+          "timeline-",
+        );
         const supportClassName = getSupportClassName(support, browser);
         const notes = this._renderNotes(browser, support);
 
