@@ -21,6 +21,9 @@ export const FXA_SIGNOUT_URL = parseString(
   "/users/fxa/login/logout/",
 );
 
+export const GA_ENABLED = parseBool("GA_ENABLED", false);
+export const GA_MEASUREMENT_ID = parseString("GA_MEASUREMENT_ID", "");
+
 /** Set to non-prod default, because we don't want glean to run without explicitly enabling. */
 export const GLEAN_ENABLED = parseBool("GLEAN_ENABLED", false);
 /** Set to non-prod default, because we don't want glean to run without explicitly enabling. */
