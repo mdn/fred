@@ -18,6 +18,14 @@ if (GA_ENABLED && GA_MEASUREMENT_ID && !userIsOptedOut() && !dntEnabled()) {
       globalThis.dataLayer.push(args);
     };
 
+  gtag("consent", "default", {
+    analytics_storage: "granted",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    wait_for_update: 0,
+  });
+
   gtag("js", new Date());
   gtag("config", GA_MEASUREMENT_ID, {
     anonymize_ip: true,
