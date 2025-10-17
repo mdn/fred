@@ -1,7 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-import { crawl, toPascalCase } from "../utils.js";
+import { kebabToPascalCase } from "../../utils/name-transformation.js";
+import { crawl } from "../utils.js";
 
 /**
  * @import { Compiler } from "@rspack/core"
@@ -26,7 +27,7 @@ export class GenerateElementMapPlugin {
             path.relative(compiler.context, filePath).replaceAll("\\", "/");
           const folderName = relPath.split("/").at(-2);
           const tagName = `mdn-${folderName}`;
-          const className = toPascalCase(tagName);
+          const className = kebabToPascalCase(tagName);
           return `"${tagName}": import("${relPath}").${className};`;
         });
 

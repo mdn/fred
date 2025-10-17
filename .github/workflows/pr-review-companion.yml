@@ -5,6 +5,13 @@ on:
     branches:
       - main
 
+# Same as: _deploy.yml
+permissions:
+  # Post comment in pull request.
+  pull-requests: write
+  # Authenticate with GCP.
+  id-token: write
+
 jobs:
   deploy:
     if: github.repository_owner == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
