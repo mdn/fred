@@ -5,7 +5,7 @@ import { ref } from "lit/directives/ref.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 import { MDNPlayEditor } from "../play-editor/element.js";
-import { randomIdString } from "../utils/index.js";
+import { deterministicIdString } from "../utils/index.js";
 
 import { isCSSSupported } from "./utils.js";
 
@@ -111,7 +111,7 @@ export const InteractiveExampleWithChoices = (Base) =>
     }
 
     #render() {
-      const id = randomIdString();
+      const id = deterministicIdString(`choices-${this.name}`, "ix-");
 
       return html`
         <div class="template-choices" aria-labelledby=${id}>
