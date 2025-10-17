@@ -158,7 +158,7 @@ export class Menu extends ServerComponent {
                       <li>${link("Web/CSS/CSS_syntax/At-rule", "At-rules")}</li>
                       <li>
                         ${link(
-                          "Web/CSS/CSS_Values_and_Units",
+                          "Web/CSS/CSS_values_and_units",
                           "Values & units",
                         )}
                       </li>
@@ -618,10 +618,13 @@ export class Menu extends ServerComponent {
                     )}
                   </li>
                   <li>
-                    ${link("Web/CSS/CSS_colors/Color_mixer", "Color mixer")}
+                    ${link(
+                      "Web/CSS/CSS_colors/Color_format_converter",
+                      "Color format converter",
+                    )}
                   </li>
                   <li>
-                    ${link("Web/CSS/CSS_colors/Color_picker", "Color picker")}
+                    ${link("Web/CSS/CSS_colors/Color_mixer", "Color mixer")}
                   </li>
                   <li>
                     ${link(

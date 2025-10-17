@@ -66,24 +66,28 @@ jobs:
         uses: actions/checkout@v5
         with:
           path: mdn/fred
+          persist-credentials: false
 
       - name: Checkout (content)
         uses: actions/checkout@v5
         with:
           repository: mdn/content
           path: mdn/content
+          persist-credentials: false
 
       - name: Checkout (translated-content)
         uses: actions/checkout@v5
         with:
           repository: mdn/translated-content
           path: mdn/translated-content
+          persist-credentials: false
 
       - name: Checkout (curriculum)
         uses: actions/checkout@v5
         with:
           repository: mdn/curriculum
           path: mdn/curriculum
+          persist-credentials: false
 
       - name: Checkout (blog)
         uses: actions/checkout@v5
@@ -92,21 +96,24 @@ jobs:
           path: mdn/blog
           lfs: true
           token: ${{ secrets.MDN_STUDIO_PAT }}
+          persist-credentials: false
 
       - name: Checkout (generic-content)
         uses: actions/checkout@v5
         with:
           repository: mdn/generic-content
           path: mdn/generic-content
+          persist-credentials: false
 
       - name: Checkout (mdn-contributor-spotlight)
         uses: actions/checkout@v5
         with:
           repository: mdn/mdn-contributor-spotlight
           path: mdn/mdn-contributor-spotlight
+          persist-credentials: false
 
       - name: Setup (fred)
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version-file: "mdn/fred/.nvmrc"
           cache: npm
@@ -189,6 +196,7 @@ jobs:
               -o -path '*/en-us/web/api/web_animations_api/using_the_web_animations_api/index.md' \
               -o -path '*/en-us/web/api/web_audio_api/using_web_audio_api/index.md' \
               -o -path '*/en-us/web/api/window/index.md' \
+              -o -path '*/en-us/web/api/window/innerwidth/index.md' \
               -o -path '*/en-us/web/css/@container/index.md' \
               -o -path '*/en-us/web/css/color/index.md' \
               -o -path '*/en-us/web/css/css_animations/using_css_animations/index.md' \
@@ -196,7 +204,7 @@ jobs:
               -o -path '*/en-us/web/css/css_backgrounds_and_borders/border-radius_generator/index.md' \
               -o -path '*/en-us/web/css/css_backgrounds_and_borders/box-shadow_generator/index.md' \
               -o -path '*/en-us/web/css/css_colors/index.md' \
-              -o -path '*/en-us/web/css/css_colors/color_picker_tool/index.md' \
+              -o -path '*/en-us/web/css/css_colors/color_format_converter/index.md' \
               -o -path '*/en-us/web/css/css_selectors/index.md' \
               -o -path '*/en-us/web/css/css_syntax/at-rule/index.md' \
               -o -path '*/en-us/web/css/functions/index.md' \

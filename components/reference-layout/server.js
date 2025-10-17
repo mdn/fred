@@ -26,6 +26,7 @@ export class ReferenceLayout extends ServerComponent {
           <div class="reference-layout__header">
             ${WRITER_MODE ? WriterToolbar.render(context) : nothing}
             ${TranslationBanner.render(context)}
+            <mdn-survey></mdn-survey>
             <h1>${doc.title}</h1>
             ${BaselineIndicator.render(context)} ${description}
           </div>
@@ -34,7 +35,6 @@ export class ReferenceLayout extends ServerComponent {
             <mdn-placement-sidebar></mdn-placement-sidebar>
           </aside>
           <div class="reference-layout__body">
-            <mdn-survey></mdn-survey>
             ${sections} ${ArticleFooter.render(context)}
           </div>
         </main>
