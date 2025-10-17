@@ -10,19 +10,28 @@ import { dntEnabled } from "../utils/dnt-helper.js";
 import { userIsOptedOut } from "../utils/telemetry-opt-out.js";
 
 if (GA_ENABLED && GA_MEASUREMENT_ID && !userIsOptedOut() && !dntEnabled()) {
-  // @ts-expect-error - added by GA
   globalThis.dataLayer = globalThis.dataLayer || [];
 
-  /** @param {...any} args */
-  function gtag(...args) {
-    // @ts-expect-error - added by GA
-    globalThis.dataLayer.push(args);
-  }
+  const gtag =
+    /** @param {...any} args */
+    (...args) => {
+      globalThis.dataLayer.push(args);
+    };
+
+  gtag("consent", "default", {
+    analytics_storage: "granted",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    wait_for_update: 0,
+  });
 
   gtag("js", new Date());
   gtag("config", GA_MEASUREMENT_ID, {
     anonymize_ip: true,
   });
+
+  globalThis.gtag = gtag;
 
   const gaScript = document.createElement("script");
   gaScript.async = true;
