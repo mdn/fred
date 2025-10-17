@@ -1,11 +1,12 @@
 import { LitElement, html, nothing } from "lit";
 
+import { L10nMixin } from "../../l10n/mixin.js";
 import exitIcon from "../icon/cancel.svg?lit";
 
 import "../button/element.js";
 import styles from "./element.css?lit";
 
-export class MDNModal extends LitElement {
+export class MDNModal extends L10nMixin(LitElement) {
   static styles = styles;
 
   static properties = {
@@ -35,7 +36,7 @@ export class MDNModal extends LitElement {
             icon-only
             .icon=${exitIcon}
             @click=${this.close}
-            >Exit modal</mdn-button
+            >${this.l10n`Exit modal`}</mdn-button
           >
         </header>
         <slot></slot>

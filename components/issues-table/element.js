@@ -1,8 +1,10 @@
 import { LitElement, html, nothing } from "lit";
 
+import { L10nMixin } from "../../l10n/mixin.js";
+
 import styles from "./element.css?lit";
 
-export class MDNIssuesTable extends LitElement {
+export class MDNIssuesTable extends L10nMixin(LitElement) {
   static styles = styles;
 
   static properties = {
@@ -58,7 +60,7 @@ export class MDNIssuesTable extends LitElement {
 
   render() {
     if (this._isLoading) {
-      return html`loading issues…`;
+      return html`${this.l10n`loading issues…`}`;
     }
     if (this._error) {
       return html`${this._error}`;
@@ -71,8 +73,8 @@ export class MDNIssuesTable extends LitElement {
       <table>
         <thead>
           <tr>
-            <th>Title</th>
-            <th>Repository</th>
+            <th>${this.l10n`Title`}</th>
+            <th>${this.l10n`Repository`}</th>
           </tr>
         </thead>
         <tbody>
