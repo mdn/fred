@@ -3,13 +3,20 @@
 .wrapper {
   display: grid;
 
-  grid-template-areas: "left runner";
-  grid-template-rows: 1fr;
+  grid-template-areas:
+    "left banner"
+    "left runner";
+  grid-template-rows: auto 1fr;
   grid-template-columns: 1fr 1fr;
 
   gap: 1rem;
 
   height: 100%;
+
+  &:not(:has(.playground__runner-report-hint-banner)) {
+    grid-template-areas: "left runner";
+    grid-template-rows: 1fr;
+  }
 
   section {
     display: flex;
@@ -91,58 +98,57 @@
         height: calc(100% - 2em);
       }
     }
+  }
 
-    &.playground__runner-console {
-      grid-area: runner;
+  .playground__runner-report-hint-banner {
+    display: flex;
 
-      overflow: hidden;
+    flex-wrap: wrap;
 
+    grid-area: banner;
+
+    gap: 0.5rem;
+    align-items: center;
+
+    padding: 0.5rem 0;
+
+    mdn-button {
+      align-self: flex-end;
       border: var(--border);
       border-radius: 0.25rem;
+    }
 
-      mdn-play-runner {
-        flex-grow: 1;
+    @media (--screen-medium-and-narrower) {
+      mdn-button {
+        align-self: center;
+      }
+    }
+  }
+
+  .playground__runner-console {
+    grid-area: runner;
+
+    overflow: hidden;
+
+    border: var(--border);
+    border-radius: 0.25rem;
+
+    mdn-play-runner {
+      flex-grow: 1;
+    }
+
+    .playground__console {
+      background-color: var(--color-background-secondary);
+      border-top: var(--border);
+
+      div {
+        font-size: var(--font-size-small);
+        font-weight: var(--font-weight-bold);
+        text-align: center;
       }
 
-      .playground__runner-report-hint-banner {
-        display: flex;
-
-        &:hover {
-          background-color: var(--color-background-secondary);
-        }
-
-        button {
-          padding: 0.5em;
-
-          font-size: 0.875em;
-          font-weight: 450;
-
-          background-color: transparent;
-          border: none;
-        }
-
-        .report-hint-button {
-          flex-grow: 1;
-        }
-
-        .report-hint-close-button span:hover {
-          color: var(--error-color, #dd3333);
-        }
-      }
-
-      .playground__console {
-        background-color: var(--color-background-secondary);
-        border-top: var(--border);
-
-        div {
-          font-size: var(--font-size-small);
-          font-weight: var(--font-weight-bold);
-          text-align: center;
-        }
-
-        mdn-play-console {
-          height: 6rem;
-        }
+      mdn-play-console {
+        height: 6rem;
       }
     }
   }
