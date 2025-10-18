@@ -1,4 +1,4 @@
-import { exec } from "node:child_process";
+import { spawn } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { Worker } from "node:worker_threads";
@@ -9,8 +9,12 @@ import { createProxyMiddleware } from "http-proxy-middleware";
 import openEditor from "open-editor";
 
 import { FRED_BUILD_ROOT } from "./build/env.js";
-import { PLAYGROUND_PORT, PORT, WRITER_MODE } from "./components/env/index.js";
-import { isURLValid } from "./utils/validate-url.js";
+import {
+  OPEN_BROWSER_ON_START,
+  PLAYGROUND_PORT,
+  PORT,
+  WRITER_MODE,
+} from "./components/env/index.js";
 import { handleRunner } from "./vendor/yari/libs/play/index.js";
 
 import "source-map-support/register.js";
@@ -329,22 +333,16 @@ export async function startServer() {
     const url = `${scheme}://localhost:${PORT}`;
     console.log(`Server started at ${url}`);
     // Auto open browser
-    const OPEN_BROWSER_ON_START = JSON.parse(
-      process.env.OPEN_BROWSER_ON_START || "null",
-    );
-    if (devMode && OPEN_BROWSER_ON_START && isURLValid(url, [scheme])) {
+    if (devMode && OPEN_BROWSER_ON_START) {
       const platform = process.platform;
 
-      if (platform === "darwin") {
-        // macOS
-        exec(`open ${url}`);
-      } else if (platform === "win32") {
-        // Windows
-        exec(`start ${url}`);
-      } else {
-        // Linux
-        exec(`xdg-open ${url}`);
-      }
+      const command =
+        platform === "win32"
+          ? "start"
+          : platform === "darwin"
+            ? "open"
+            : "xdg-open";
+      spawn(command, [url]);
     }
   });
 
