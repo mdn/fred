@@ -4,6 +4,7 @@ import { createRef, ref } from "lit/directives/ref.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 import { gleanClick } from "../../utils/glean.js";
+import warningIcon from "../icon/triangle-alert.svg?lit";
 import { globalUser } from "../user/context.js";
 
 import styles from "./element.css?lit";
@@ -265,7 +266,6 @@ ${"```"}`,
   }
 
   _reportOpen() {
-    this._dismissReportHintBanner();
     this._reportModal.value?.showModal();
   }
 
@@ -293,18 +293,15 @@ ${"```"}`,
   }
 
   _renderReportHintBanner() {
-    return html`<div class="playground__runner-report-hint-banner">
-      <button class="report-hint-button" @click=${this._reportOpen}>
-        Seeing something inappropriate?
-      </button>
-      <button
-        class="report-hint-close-button"
-        @click=${this._dismissReportHintBanner}
-        aria-label=${this.l10n`Close report hint banner`}
+    return html`<section class="playground__runner-report-hint-banner">
+      <mdn-button
+        @click=${this._reportOpen}
+        variant="plain"
+        .icon=${warningIcon}
       >
-        <span>X</span>
-      </button>
-    </div>`;
+        Seeing something inappropriate?
+      </mdn-button>
+    </section>`;
   }
 
   render() {
@@ -380,10 +377,10 @@ ${"```"}`,
               ></mdn-play-editor>
             </details>
           </section>
+          ${this._gistId && this._showReportHintBanner
+            ? html`${this._renderReportHintBanner()}`
+            : nothing}
           <section class="playground__runner-console">
-            ${this._gistId && this._showReportHintBanner
-              ? html`${this._renderReportHintBanner()}`
-              : nothing}
             <mdn-play-runner></mdn-play-runner>
             <div class="playground__console">
               <div>${this.l10n`Console`}</div>
