@@ -1,5 +1,5 @@
 article-footer-last-modified = Cette page a été modifiée le <time data-l10n-name="date">{ $date }</time> par les <a data-l10n-name="contributors">contributeurs du MDN</a>.
-article-footer-source-title = Dossier&nbsp;: { $folder } (Ouvre un onglet)
+article-footer-source-title = Dossier : { $folder } (Ouvre un onglet)
 
 baseline-asterisk = Certaines parties de cette fonctionnalité peuvent bénéficier de prise en charge variables.
 baseline-high-extra = Cette fonctionnalité est bien établie et fonctionne sur de nombreux appareils et versions de navigateurs. Elle est disponible sur tous les navigateurs depuis { $date }.
@@ -14,7 +14,7 @@ homepage-hero-description = Documenter le <a data-l10n-name="css">CSS</a>, le <a
 
 not-found-title = Page non trouvée
 not-found-description = Désolé, la page <code data-l10n-name="url">{ $url }</code> n'a pas été trouvée.
-not-found-fallback-english = <strong data-l10n-name="strong">Bonne nouvelle&nbsp;:</strong> La page que vous cherchez existe en <em data-l10n-name="em">Anglais</em>.
+not-found-fallback-english = <strong data-l10n-name="strong">Bonne nouvelle :</strong> La page que vous cherchez existe en <em data-l10n-name="em">Anglais</em>.
 not-found-fallback-search = La page que vous avez demandée n'existe pas, mais vous pouvez essayer une recherche sur le site pour :
 not-found-back = Retour à la page d'accueil
 
@@ -36,7 +36,7 @@ site-search-suggestion-matches =  { $relation ->
        *[other] { $matches } trouvés
     }
 }
-site-search-suggestions-text = Voulez-vous dire&nbsp;:
+site-search-suggestions-text = Voulez-vous dire :
 
 blog-time-to-read = { $minutes ->
     [one]   { $minutes } minute de lecture
@@ -67,7 +67,7 @@ compat-link-report-issue-title = Signaler un problème avec ces compatibility do
 compat-link-report-missing-title = Signaler des données de compatibilité manquantes
 compat-link-report-missing = Signaler le problème
 compat-link-source = Voir les données sur GitHub
-compat-link-source-title = Fichier&nbsp;: { $filename }
+compat-link-source-title = Fichier : { $filename }
 
 compat-deprecated = Obsolète
 compat-experimental = Expérimental
@@ -79,8 +79,8 @@ compat-support-partial = Prise en charge partielle
 compat-support-no = Pas de prise en charge
 compat-support-unknown = Prise en charge inconnue
 compat-support-preview = Pré-version du navigateur
-compat-support-prefix = Implémenté avec le préfixe vendeur&nbsp;: { $prefix }
-compat-support-altname = Nom alternatif&nbsp;: { $altname }
+compat-support-prefix = Implémenté avec le préfixe vendeur : { $prefix }
+compat-support-altname = Nom alternatif : { $altname }
 compat-support-removed = Supprimé en version { $version } et supérieure
 compat-support-see-impl-url = Voir <a data-l10n-name="impl_url">{ $label }</a>
 compat-support-flags =
@@ -114,7 +114,7 @@ compat-support-flags =
   }
 
 compat-legend = Légende
-compat-legend-tip = Astuce&nbsp;: cliquer/appuyer sur une cellule pour obtenir plus d'informations.
+compat-legend-tip = Astuce : cliquer/appuyer sur une cellule pour obtenir plus d'informations.
 compat-legend-yes = { compat-support-full }
 compat-legend-partial = { compat-support-partial }
 compat-legend-preview = En cours de développement. Pris en charge dans une pré-version.
@@ -130,7 +130,7 @@ compat-legend-prefix = Nécessite un préfixe vendeur ou un nom différent pour 
 compat-legend-more = Contient davantage d'informations sur la compatibilité.
 
 placement-note = Publicité
-placement-no = Vous ne voulez pas voir de publicités&nbsp;?
+placement-no = Vous ne voulez pas voir de publicités ?
 
 pagination-next = Page suivante
 pagination-prev = Page précédente
