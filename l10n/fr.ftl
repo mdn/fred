@@ -62,8 +62,8 @@ compat-loading = Chargement…
 compat-browser-version-date = { $browser } { $version } – Release date: { $date }
 compat-browser-version-released = Release date: { $date }
 
-compat-link-report-issue = Signaler des problèmes avec ces compatibility données de compatibilité
-compat-link-report-issue-title = Signaler un problème avec ces compatibility données de compatibilité
+compat-link-report-issue = Signaler des problèmes avec ces données de compatibilité
+compat-link-report-issue-title = Signaler un problème avec ces données de compatibilité
 compat-link-report-missing-title = Signaler des données de compatibilité manquantes
 compat-link-report-missing = Signaler le problème
 compat-link-source = Voir les données sur GitHub
