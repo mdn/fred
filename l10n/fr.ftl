@@ -9,7 +9,7 @@ baseline-supported-in = Pris en charge dans { $browsers }
 baseline-unsupported-in = Pas complètement pris en charge dans { $browsers }
 baseline-supported-and-unsupported-in = Pris en charge dans { $supported }, mais pas complètement pris en charge dans { $unsupported }
 
-homepage-hero-title = Des ressources pour les Dévellopeurs,<br> par les Dévellopeurs
+homepage-hero-title = Des ressources pour les Développeurs,<br> par les Développeurs
 homepage-hero-description = Documenter le <a data-l10n-name="css">CSS</a>, le <a data-l10n-name="html">HTML</a> et le <a data-l10n-name="js">JavaScript</a>, depuis 2005.
 
 not-found-title = Page non trouvée
