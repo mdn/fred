@@ -42,7 +42,7 @@ blog-time-to-read = { $minutes ->
     [one]   { $minutes } minute de lecture
    *[other] { $minutes } minutes de lecture
 }
-blog-post-not-found = Article de Blog non trouvé.
+blog-post-not-found = Article de blog introuvable.
 
 blog-previous = Article précédent
 blog-next = Article suivant
@@ -50,10 +50,10 @@ blog-next = Article suivant
 -brand-name-obs = HTTP Observatory
 obs-report = Signaler
 obs-title = { -brand-name-obs }
-obs-landing-intro = Lancé en 2016, { -brand-name-obs } améliore la sécurité Web en analysant la conformité aux meilleures pratiques en matière de sécurité. Il a fourni des informations à plus de 6,9 millions de sites Web grâce à 47 millions d'analyses.
+obs-landing-intro = Lancé en 2016, { -brand-name-obs } améliore la sécurité du Web en analysant la conformité aux meilleures pratiques en matière de sécurité. Il a fourni des informations à plus de 6,9 millions de sites web grâce à 47 millions d'analyses.
 obs-assessment = Développé par Mozilla, { -brand-name-obs } effectue une évaluation approfondie des en-têtes HTTP d'un site et d'autres configurations de sécurité clés.
-obs-scanning = Son processus d'analyse automatisé fournit aux développeurs et aux administrateurs de sites Web des commentaires détaillés et exploitables, axés sur l'identification et la résolution des failles de sécurité potentielles.
-obs-security = Cet outil aide les développeurs et les administrateurs de sites Web à renforcer la sécurité de leurs sites contre les menaces courantes dans un environnement numérique en constante évolution.
+obs-scanning = Son processus d'analyse automatisé fournit aux développeurs et aux administrateurs de sites web des commentaires détaillés et exploitables, axés sur l'identification et la résolution des failles de sécurité potentielles.
+obs-security = Cet outil aide les développeurs et les administrateurs de sites web à renforcer la sécurité de leurs sites contre les menaces courantes dans un environnement numérique en constante évolution.
 obs-mdn = { -brand-name-obs } fournit des informations efficaces en matière de sécurité, guidées par l'expertise et l'engagement de Mozilla en faveur d'un Internet plus sûr et plus sécurisé, et basées sur des tendances et des directives bien établies.
 
 
@@ -122,7 +122,7 @@ compat-legend-no = { compat-support-no }
 compat-legend-unknown = Compatibilité inconnue
 compat-legend-experimental = { compat-experimental }. Attendez-vous à ce que les comportements changent à l'avenir.
 compat-legend-nonstandard = { compat-nonstandard }. Vérifiez la compatibilité entre les navigateurs avant utilisation.
-compat-legend-deprecated = { compat-deprecated }. Ne pas utiliser dans les nouveaux sites Web.
+compat-legend-deprecated = { compat-deprecated }. Ne pas utiliser dans les nouveaux sites web.
 compat-legend-footnote = Voir les notes de mise en application.
 compat-legend-disabled = L'utilisateur doit explicitement activer cette fonctionnalité.
 compat-legend-altname = Utilise un nom hors standard.
