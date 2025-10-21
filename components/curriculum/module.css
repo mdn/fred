@@ -93,6 +93,7 @@
 
             background: var(--curriculum-bg-color);
             border-radius: 1em;
+
             text-rendering: optimizelegibility;
           }
         }
