@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.7.0](https://github.com/mdn/fred/compare/v1.6.2...v1.7.0) (2025-10-21)
+
+
+### Features
+
+* **menu:** convert content to data + manage missing with script ([#861](https://github.com/mdn/fred/issues/861)) ([e9be891](https://github.com/mdn/fred/commit/e9be891e1972ebecd4160e6e6b9f6e34aa491616))
+* **telemetry:** port Google Analytics ([#905](https://github.com/mdn/fred/issues/905)) ([e88d977](https://github.com/mdn/fred/commit/e88d977effe722f5619aebd9cdac64e796ceb530))
+
+
+### Bug Fixes
+
+* **live-sample-result:** use code hash as subdomain ([#922](https://github.com/mdn/fred/issues/922)) ([db48f7b](https://github.com/mdn/fred/commit/db48f7b8f9a858a2c85b6ea3727d9e6468374b49))
+* **windows:** remove fdir from ssr bundle ([#926](https://github.com/mdn/fred/issues/926)) ([f724bff](https://github.com/mdn/fred/commit/f724bff89278402e958da1a7a90e5d4a5e2dcb6b))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.12 to 7.1.13 ([#916](https://github.com/mdn/fred/issues/916)) ([81b9966](https://github.com/mdn/fred/commit/81b99662edbdd0abb1da8641a6491d7010a3adf0))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.13 to 7.1.14 ([#938](https://github.com/mdn/fred/issues/938)) ([411240f](https://github.com/mdn/fred/commit/411240f96714cf6c5404645cdc913e637ed72809))
+* **deps-dev:** bump the dev group across 1 directory with 6 updates ([#943](https://github.com/mdn/fred/issues/943)) ([2911855](https://github.com/mdn/fred/commit/29118556f9d618fa41c860de781d54064a03d34e))
+* **deps:** bump @mdn/rari from 0.1.52 to 0.1.53 ([#932](https://github.com/mdn/fred/issues/932)) ([42d79e4](https://github.com/mdn/fred/commit/42d79e42187698697d080d2d5d7de721e96220e8))
+* **l10n:** update french localization strings for various features ([#767](https://github.com/mdn/fred/issues/767)) ([be247ea](https://github.com/mdn/fred/commit/be247eafcbf5dc48dc300919c8bd5be6fac846d5))
+* **menu:** adjust case of "CSS values and units" links ([#910](https://github.com/mdn/fred/issues/910)) ([236a727](https://github.com/mdn/fred/commit/236a7275dcaf3e98a657674f72b8628743774338))
+* update ill cased links ([236a727](https://github.com/mdn/fred/commit/236a7275dcaf3e98a657674f72b8628743774338))
+
 ## [1.6.2](https://github.com/mdn/fred/compare/v1.6.1...v1.6.2) (2025-10-13)
 
 
