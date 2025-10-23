@@ -82,7 +82,7 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
     return html`<div class="language-switcher">
       <mdn-dropdown>
         <button
-          part="language-switcher__button"
+          part="button"
           slot="button"
           class="language-switcher__button"
           type="button"

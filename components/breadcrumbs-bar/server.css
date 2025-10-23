@@ -38,8 +38,8 @@
 
   mdn-color-theme,
   mdn-language-switcher,
-  mdn-color-theme::part(color-theme__button),
-  mdn-language-switcher::part(language-switcher__button) {
+  mdn-color-theme::part(button),
+  mdn-language-switcher::part(button) {
     height: 100%;
   }
 
