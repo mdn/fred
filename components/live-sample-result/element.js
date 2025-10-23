@@ -113,6 +113,7 @@ export class MDNLiveSampleResult extends L10nMixin(LitElement) {
             ...new Set(["allow-modals", ...(this.sandbox?.split(" ") || [])]),
           ].join(" ")}
           .srcPrefix=${this.srcPrefix}
+          permalink
           style=${styleMap({
             height: this.height
               ? `${this.height}${/[0-9]$/.test(this.height) ? "px" : ""}`
