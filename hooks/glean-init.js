@@ -7,15 +7,11 @@ import {
   GLEAN_ENABLED,
 } from "../components/env/index.js";
 import { gleanClick } from "../utils/glean.js";
+import { userIsOptedOut } from "../utils/telemetry-opt-out.js";
 
-const FIRST_PARTY_DATA_OPT_OUT_COOKIE_NAME = "moz-1st-party-data-opt-out";
 const GLEAN_APP_ID = "mdn-fred";
 
-const userIsOptedOut = document.cookie
-  .split("; ")
-  .includes(`${FIRST_PARTY_DATA_OPT_OUT_COOKIE_NAME}=true`);
-
-const uploadEnabled = !userIsOptedOut && GLEAN_ENABLED;
+const uploadEnabled = !userIsOptedOut() && GLEAN_ENABLED;
 
 if (GLEAN_DEBUG) {
   Glean.setDebugViewTag("mdn-dev");
