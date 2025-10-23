@@ -1,4 +1,5 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
@@ -53,7 +54,8 @@ function RenderToc(context) {
  */
 function RenderBlogContent(context, { doc }) {
   return html`
-    ${doc.body.map((section) => ContentSection.render(context, section))}
+    ${doc.body?.map((section) => ContentSection.render(context, section)) ??
+    nothing}
   `;
 }
 
@@ -61,7 +63,6 @@ export class BlogPost extends ServerComponent {
   /**
    *
    * @param {import("@fred").Context<import("@rari").BlogPostPage>} context
-   * @returns {import("@lit").TemplateResult}
    */
   render(context) {
     const { blogMeta, doc } = context;
@@ -69,14 +70,14 @@ export class BlogPost extends ServerComponent {
     if (!blogMeta || !doc) {
       return PageLayout.render(
         context,
-        html`<p>
+        html`<p id="content">
           ${context.l10n("blog-post-not-found")`Blog post not found`}
         </p>`,
       );
     }
 
     const postContent = html`
-      <article class="blog-post">
+      <article id="content" class="blog-post">
         <aside class="blog-post__toc">
           ${RenderToc(context)}
           <mdn-placement-sidebar></mdn-placement-sidebar>

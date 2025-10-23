@@ -1,9 +1,12 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import { ServerComponent } from "../server/index.js";
 
+import inlineScript from "./inline.js?source&csp=true";
+
 /**
- * @type {{ name: string, browsers: import("@baseline").BrowserGroup[] }[]}
+ * @type {{ name: string, browsers: import("./types.js").BrowserGroup[] }[]}
  */
 const ENGINES = [
   {
@@ -26,7 +29,7 @@ const ENGINES = [
 const DEFAULT_LOCALE = "en-US";
 
 /**
- * @type {Record<string, string> & Record<typeof DEFAULT_LOCALE, string>}}
+ * @type {Record<string, string>}
  */
 const LOCALIZED_BCD_IDS = {
   de: "browser-kompatibilität",
@@ -45,6 +48,8 @@ const SURVEY_URL =
   "https://survey.alchemer.com/s3/7634825/MDN-baseline-feedback";
 
 export class BaselineIndicator extends ServerComponent {
+  static inlineScript = inlineScript;
+
   /**
    *
    * @param {import("@fred").Context<import("@rari").DocPage>} context
@@ -79,12 +84,12 @@ export class BaselineIndicator extends ServerComponent {
     const feedbackLink = `${SURVEY_URL}?page=${encodeURIComponent(context.url)}&level=${level}`;
 
     const isBrowserSupported =
-      /** @param {import("@baseline").BrowserGroup} browser */ (browser) => {
+      /** @param {import("./types.js").BrowserGroup} browser */ (browser) => {
         return browser.ids.map((id) => status.support?.[id]).every(Boolean);
       };
 
     const engineTitle =
-      /** @param {import("@baseline").BrowserGroup[]} browsers */ (
+      /** @param {import("./types.js").BrowserGroup[]} browsers */ (
         browsers,
       ) => {
         const supported = [];
@@ -126,10 +131,13 @@ export class BaselineIndicator extends ServerComponent {
         }
       };
 
+    const openByDefault = level === "discouraged";
+
     return html`<details
       class="baseline-indicator ${level} ${removalDate ? "to-be-removed" : ""}"
       data-glean-toggle-open="baseline_toggle_open"
-      ?open=${level === "discouraged"}
+      ?open=${openByDefault}
+      ?data-open-by-default=${openByDefault}
     >
       <summary>
         <span
@@ -219,10 +227,30 @@ export class BaselineIndicator extends ServerComponent {
                   ${context.l10n`This feature is pending removal from browsers. Using it now may lead to broken functionality in future updates.`}
                 </p>`
               : html`<p>
-                  ${context.l10n`Avoid using this feature in new projects.`}
-                  ${status.feature.discouraged?.reason || nothing}
-                  ${context.l10n`This feature may be a candidate for removal from web standards or browsers.`}
-                </p>`
+                    ${context.l10n`Avoid using this feature in new projects.`}
+                    ${status.feature.discouraged?.reason || nothing}
+                    ${context.l10n`This feature may be a candidate for removal from web standards or browsers.`}
+                  </p>
+                  ${status.alternatives && status.alternatives.length > 0
+                    ? html`<p>
+                          ${context.l10n`Consider using the following features instead:`}
+                        </p>
+                        <ul class="alternatives">
+                          ${status.alternatives.map(
+                            ({ name, description, mdn_url }) =>
+                              html`<li>
+                                <a
+                                  href=${mdn_url.replace(
+                                    "/docs",
+                                    `/${context.locale}/docs`,
+                                  )}
+                                  title=${description}
+                                  >${name}</a
+                                >
+                              </li>`,
+                          )}
+                        </ul>`
+                    : nothing}`
             : html`<p>${context.l10n("baseline-not-extra")}</p>`}
         <ul>
           <li>

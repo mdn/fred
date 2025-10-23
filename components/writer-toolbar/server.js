@@ -1,4 +1,5 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import { Button } from "../button/server.js";
 import { ServerComponent } from "../server/index.js";
@@ -23,6 +24,9 @@ export class WriterToolbar extends ServerComponent {
               filepath=${`${folder}/${filename}`}
             ></mdn-writer-open-editor>
             <mdn-writer-reload></mdn-writer-reload>
+            <mdn-record-visit
+              page-title=${context.doc.title}
+            ></mdn-record-visit>
           `
         : nothing}
     </div>`;
