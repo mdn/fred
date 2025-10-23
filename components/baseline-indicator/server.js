@@ -1,5 +1,6 @@
 import { html } from "@lit-labs/ssr";
 import { nothing } from "lit";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { ServerComponent } from "../server/index.js";
 
@@ -79,6 +80,7 @@ export class BaselineIndicator extends ServerComponent {
     const level = status.feature.discouraged
       ? "discouraged"
       : status.baseline || "not";
+    const removalDate = status.feature.discouraged?.removal_date;
 
     const feedbackLink = `${SURVEY_URL}?page=${encodeURIComponent(context.url)}&level=${level}`;
 
@@ -130,10 +132,35 @@ export class BaselineIndicator extends ServerComponent {
         }
       };
 
+    const renderAlternatives =
+      /**
+       * @param {string} instruction
+       * @param {import("@rari").Alternative[]} [alternatives]
+       */
+      (instruction, alternatives) =>
+        alternatives && alternatives.length > 0
+          ? html`<p>${instruction}</p>
+              <ul class="alternatives">
+                ${alternatives.map(
+                  ({ name, description, mdn_url }) =>
+                    html`<li>
+                      <a
+                        href=${mdn_url.replace(
+                          "/docs",
+                          `/${context.locale}/docs`,
+                        )}
+                        title=${description}
+                        >${name}</a
+                      >
+                    </li>`,
+                )}
+              </ul>`
+          : nothing;
+
     const openByDefault = level === "discouraged";
 
     return html`<details
-      class="baseline-indicator ${level}"
+      class="baseline-indicator ${level} ${removalDate ? "to-be-removed" : ""}"
       data-glean-toggle-open="baseline_toggle_open"
       ?open=${openByDefault}
       ?data-open-by-default=${openByDefault}
@@ -167,7 +194,9 @@ export class BaselineIndicator extends ServerComponent {
         </div>
         ${level === "low"
           ? html`<div class="pill">${context.l10n`Newly available`}</div>`
-          : nothing}
+          : level === "discouraged" && removalDate
+            ? html`<div class="pill">${context.l10n`To be removed`}</div>`
+            : nothing}
         <div class="browsers">
           ${ENGINES.map(
             ({ name, browsers }) =>
@@ -219,29 +248,28 @@ export class BaselineIndicator extends ServerComponent {
                 ? html`<p>* ${context.l10n("baseline-asterisk")}</p>`
                 : nothing}`
           : level === "discouraged"
-            ? html`<p>
-                  ${context.l10n`Avoid using this feature in new projects. This feature may be a candidate for removal from web standards or browsers.`}
-                </p>
-                ${status.alternatives && status.alternatives.length > 0
-                  ? html`<p>
-                        ${context.l10n`Consider using the following features instead:`}
-                      </p>
-                      <ul class="alternatives">
-                        ${status.alternatives.map(
-                          ({ name, description, mdn_url }) =>
-                            html`<li>
-                              <a
-                                href=${mdn_url.replace(
-                                  "/docs",
-                                  `/${context.locale}/docs`,
-                                )}
-                                title=${description}
-                                >${name}</a
-                              >
-                            </li>`,
-                        )}
-                      </ul>`
-                  : nothing}`
+            ? removalDate
+              ? html`<p>
+                  ${context.l10n`This feature is pending removal from browsers. Using it now may lead to broken functionality in future updates.`}
+                  ${unsafeHTML(
+                    status.feature.discouraged?.reason_html || nothing,
+                  )}
+                  ${renderAlternatives(
+                    context.l10n`Use the following features instead:`,
+                    status.alternatives,
+                  )}
+                </p>`
+              : html`<p>
+                    ${context.l10n`Avoid using this feature in new projects.`}
+                    ${unsafeHTML(
+                      status.feature.discouraged?.reason_html || nothing,
+                    )}
+                    ${context.l10n`This feature may be a candidate for removal from web standards or browsers.`}
+                  </p>
+                  ${renderAlternatives(
+                    context.l10n`Consider using the following features instead:`,
+                    status.alternatives,
+                  )}`
             : html`<p>${context.l10n("baseline-not-extra")}</p>`}
         <ul>
           <li>
