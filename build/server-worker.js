@@ -1,4 +1,5 @@
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import { parentPort, workerData } from "node:worker_threads";
 
 import "source-map-support/register.js";
@@ -26,7 +27,7 @@ if (!indexModulePath) {
 
 try {
   /** @type {import("../entry.ssr.js")} */
-  const indexModule = await import(indexModulePath);
+  const indexModule = await import(pathToFileURL(indexModulePath).href);
   const html = await indexModule?.render(reqPath, context, {
     client: compilationStats.find((x) => x.name === "client") || {},
     legacy: compilationStats.find((x) => x.name === "legacy") || {},
