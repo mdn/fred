@@ -239,7 +239,7 @@ ${"```"}`,
     permalink.search = new URLSearchParams({ id }).toString();
     this._permalink = permalink.toString();
 
-    gleanClick("playground", { type: "load-shared" });
+    gleanClick("playground: load-shared");
     const code = await response.json();
     return stateToSession(code);
   }

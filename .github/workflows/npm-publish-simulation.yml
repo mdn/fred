@@ -15,9 +15,10 @@ jobs:
         uses: actions/checkout@v5
         with:
           path: mdn/fred
+          persist-credentials: false
 
       - name: (mdn/fred) Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: mdn/fred/.nvmrc
           cache: npm
@@ -44,9 +45,10 @@ jobs:
         with:
           repository: mdn/content
           path: mdn/content
+          persist-credentials: false
 
       - name: (mdn/content) Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: mdn/content/.nvmrc
           cache: yarn
@@ -65,20 +67,22 @@ jobs:
         working-directory: mdn/content
         run: yarn fred-ssr
 
-      - name: (mdn/content) yarn start:fred
+      - name: (mdn/content) yarn start
         working-directory: mdn/content
-        run: yarn start:fred > /tmp/stdout.log 2> /tmp/stderr.log &
+        run: yarn start > /tmp/stdout.log 2> /tmp/stderr.log &
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Wait for Rari (localhost:8083)
         run: curl --retry-connrefused --retry 5 -I http://localhost:8083/en-US/
 
-      - name: Test Fred (localhost:3000)
+      - name: Test Fred (localhost:5042)
         run: |
-          curl --retry-connrefused --retry 5 -I http://localhost:3000
+          curl --retry-connrefused --retry 5 -I http://localhost:5042
 
           # Basically, test if it 200 OKs. If not, this'll exit non-zero.
-          curl --fail http://localhost:3000/en-US/ > /dev/null
-          curl --fail http://localhost:3000/en-US/docs/MDN/Kitchensink > /dev/null
+          curl --fail http://localhost:5042/en-US/ > /dev/null
+          curl --fail http://localhost:5042/en-US/docs/MDN/Kitchensink > /dev/null
 
       - name: Debug server's stdout and stderr if tests failed
         if: failure()

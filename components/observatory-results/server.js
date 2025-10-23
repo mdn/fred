@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html } from "@lit-labs/ssr";
 
 import { Button } from "../button/server.js";
 import feedbackIcon from "../icon/circle-alert.svg?lit";
@@ -8,10 +8,9 @@ import { ServerComponent } from "../server/index.js";
 export class ObservatoryResults extends ServerComponent {
   /**
    * @param {import("@fred").Context<import("@rari").SPAPage>} context
-   * @returns {import("@lit").TemplateResult}
    */
   render(context) {
-    if (context.parents.length > 0) {
+    if (context.parents !== undefined && context.parents.length > 0) {
       const lastParent = context.parents.at(-1);
       if (lastParent) {
         lastParent.uri = "#";

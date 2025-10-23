@@ -102,7 +102,7 @@ export class InteractiveExampleBase extends LitElement {
     ) {
       action = `click@${ev.target.id}`;
     }
-    gleanClick("interactive-example", { type: "action", label: action });
+    gleanClick(`interactive-example: ${action}`);
   }
 
   connectedCallback() {

@@ -1,4 +1,5 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
@@ -59,7 +60,7 @@ export class ContributorSpotlight extends ServerComponent {
       context,
       html`
         <div class="contributor-spotlight-container">
-          <main class="contributor-spotlight">
+          <main id="content" class="contributor-spotlight">
             ${header}
             <section class="profile-header">
               <img

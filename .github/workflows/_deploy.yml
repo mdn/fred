@@ -11,10 +11,12 @@ on:
         description: "Deployment prefix"
         required: true
         type: string
+    outputs:
+      url:
+        description: "Deployment URL"
+        value: ${{ jobs.deploy.outputs.url }}
 
 permissions:
-  # Post comment in pull request.
-  pull-requests: write
   # Authenticate with GCP.
   id-token: write
 
@@ -29,6 +31,9 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    outputs:
+      url: ${{ steps.set-output.outputs.url }}
 
     environment:
       name: review
@@ -66,24 +71,28 @@ jobs:
         uses: actions/checkout@v5
         with:
           path: mdn/fred
+          persist-credentials: false
 
       - name: Checkout (content)
         uses: actions/checkout@v5
         with:
           repository: mdn/content
           path: mdn/content
+          persist-credentials: false
 
       - name: Checkout (translated-content)
         uses: actions/checkout@v5
         with:
           repository: mdn/translated-content
           path: mdn/translated-content
+          persist-credentials: false
 
       - name: Checkout (curriculum)
         uses: actions/checkout@v5
         with:
           repository: mdn/curriculum
           path: mdn/curriculum
+          persist-credentials: false
 
       - name: Checkout (blog)
         uses: actions/checkout@v5
@@ -92,21 +101,24 @@ jobs:
           path: mdn/blog
           lfs: true
           token: ${{ secrets.MDN_STUDIO_PAT }}
+          persist-credentials: false
 
       - name: Checkout (generic-content)
         uses: actions/checkout@v5
         with:
           repository: mdn/generic-content
           path: mdn/generic-content
+          persist-credentials: false
 
       - name: Checkout (mdn-contributor-spotlight)
         uses: actions/checkout@v5
         with:
           repository: mdn/mdn-contributor-spotlight
           path: mdn/mdn-contributor-spotlight
+          persist-credentials: false
 
       - name: Setup (fred)
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: "mdn/fred/.nvmrc"
           cache: npm
@@ -181,6 +193,7 @@ jobs:
               -o -path '*/en-us/mozilla/add-ons/webextensions/index.md' \
               -o -path '*/en-us/web/api/canvas_api/index.md' \
               -o -path '*/en-us/web/api/canvas_api/manipulating_video_using_canvas/index.md' \
+              -o -path '*/en-us/web/api/contactsmanager/index.md' \
               -o -path '*/en-us/web/api/fetch_api/index.md' \
               -o -path '*/en-us/web/api/geolocation_api/index.md' \
               -o -path '*/en-us/web/api/performance/index.md' \
@@ -188,6 +201,7 @@ jobs:
               -o -path '*/en-us/web/api/web_animations_api/using_the_web_animations_api/index.md' \
               -o -path '*/en-us/web/api/web_audio_api/using_web_audio_api/index.md' \
               -o -path '*/en-us/web/api/window/index.md' \
+              -o -path '*/en-us/web/api/window/innerwidth/index.md' \
               -o -path '*/en-us/web/css/@container/index.md' \
               -o -path '*/en-us/web/css/color/index.md' \
               -o -path '*/en-us/web/css/css_animations/using_css_animations/index.md' \
@@ -195,7 +209,7 @@ jobs:
               -o -path '*/en-us/web/css/css_backgrounds_and_borders/border-radius_generator/index.md' \
               -o -path '*/en-us/web/css/css_backgrounds_and_borders/box-shadow_generator/index.md' \
               -o -path '*/en-us/web/css/css_colors/index.md' \
-              -o -path '*/en-us/web/css/css_colors/color_picker_tool/index.md' \
+              -o -path '*/en-us/web/css/css_colors/color_format_converter/index.md' \
               -o -path '*/en-us/web/css/css_selectors/index.md' \
               -o -path '*/en-us/web/css/css_syntax/at-rule/index.md' \
               -o -path '*/en-us/web/css/functions/index.md' \
@@ -258,24 +272,9 @@ jobs:
           concurrency: 500
           process_gcloudignore: false
 
-      - name: Post message in PR
-        if: ${{ github.event_name == 'pull_request' }}
-        run: |
-          COMMENT_ID=$(gh pr view "$PR_NUMBER" --repo "${{ github.repository }}" --comments --json comments \
-            --jq ".comments | sort_by(.createdAt) | map(select(.author.login == \"github-actions\")) | .[0].id")
-          if [ -n "$COMMENT_ID" ]; then
-            gh api graphql -f query='
-                mutation($id:ID!, $body:String!) {
-                  updateIssueComment(input:{id:$id, body:$body}) {
-                    issueComment {
-                      id
-                    }
-                  }
-                }' -f id="$COMMENT_ID" -f body="$BODY"
-          else
-            gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" --body "$BODY"
-          fi
+      - name: Set deployment URL output
+        id: set-output
         env:
-          BODY: "${{ github.sha }} was deployed to: https://${{ env.PREFIX }}.${{ vars.HOST }}/"
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          GITHUB_TOKEN: ${{ github.token }}
+          URL: "https://${{ env.PREFIX }}.${{ vars.HOST }}/"
+        run: |
+          echo "url=$URL" >> $GITHUB_OUTPUT

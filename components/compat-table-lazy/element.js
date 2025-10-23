@@ -9,11 +9,15 @@ import {
 } from "../compat-table/constants.js";
 import { BCD_BASE_URL } from "../env/index.js";
 
+import styles from "./element.css?lit";
+
 /**
  * @typedef {{data: import("@bcd").Identifier, browsers: import("@bcd").Browsers}} Compat
  */
 
 export class MDNCompatTableLazy extends L10nMixin(LitElement) {
+  static styles = styles;
+
   static properties = {
     query: {},
     locale: {},

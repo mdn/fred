@@ -7,15 +7,13 @@ import GleanMetrics from "@mozilla/glean/metrics";
  * Use only if automatic click events are not an option.
  * See: https://mozilla.github.io/glean.js/automatic_instrumentation/click_events/
  *
- * @param {string} id
- * @param {object} options
- * @param {string=} options.type
- * @param {string=} options.label
+ * @param {string} source
  */
-export function gleanClick(id, { type, label }) {
+export function gleanClick(source) {
   GleanMetrics.recordElementClick({
-    id,
-    type,
-    label,
+    id: source,
+    url: globalThis.location.href,
+    referrer: document.referrer,
+    title: document.title,
   });
 }

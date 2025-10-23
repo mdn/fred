@@ -89,7 +89,7 @@ export class MDNScrimInline extends LitElement {
               target="_blank"
               rel="origin noreferrer"
               class="external"
-              data-glean="curriculum: scrim link id:${this._scrimId}"
+              data-glean-id="curriculum: scrim link id:${this._scrimId}"
             >
               <div class="scrim-link"></div>
               <span class="visually-hidden">Open on Scrimba</span>
@@ -123,7 +123,7 @@ export class MDNScrimInline extends LitElement {
                   <button
                     @click=${this.#open}
                     class="open"
-                    data-glean=${`curriculum: scrim engage id:${this._scrimId}`}
+                    data-glean-id=${`curriculum: scrim engage id:${this._scrimId}`}
                   >
                     ${playSvg}
                     <span class="visually-hidden">
@@ -142,7 +142,7 @@ export class MDNScrimInline extends LitElement {
    */
   #toggle(e) {
     if (e.target instanceof HTMLElement) {
-      e.target.dataset.glean = `curriculum: scrim fullscreen -> ${this._fullscreen ? 0 : 1} id:${this._scrimId}`;
+      e.target.dataset.gleanId = `curriculum: scrim fullscreen -> ${this._fullscreen ? 0 : 1} id:${this._scrimId}`;
     }
     if (this._fullscreen) {
       this.#close();

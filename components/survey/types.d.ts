@@ -23,6 +23,8 @@ export interface Survey {
   question: TemplateResult | string;
   /** Optional footer HTML displayed below the survey */
   footnote?: TemplateResult | string;
+  /** Link to the survey instead of embedding it */
+  link?: boolean;
 }
 
 export interface SurveyState {
