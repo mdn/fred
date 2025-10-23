@@ -9,6 +9,10 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  # Authenticate with GCP.
+  id-token: write
+
 jobs:
   deploy:
     if: github.repository_owner == 'mdn' && (github.event_name == 'schedule' || github.actor != 'dependabot[bot]')

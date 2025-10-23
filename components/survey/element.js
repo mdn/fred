@@ -4,6 +4,7 @@ import { createRef, ref } from "lit/directives/ref.js";
 
 import "../button/element.js";
 import { L10nMixin } from "../../l10n/mixin.js";
+import { gleanClick } from "../../utils/glean.js";
 import closeIcon from "../icon/cancel.svg?lit";
 
 import styles from "./element.css?lit";
@@ -48,18 +49,13 @@ export class MDNSurvey extends L10nMixin(LitElement) {
   }
 
   #checkForSurvey() {
-    if (globalThis.window === undefined) return;
-
-    const FORCE_SURVEY_PREFIX = "#FORCE_SURVEY=";
-    this._force = globalThis.location.hash.startsWith(FORCE_SURVEY_PREFIX);
-
     this._survey = this.#findSurvey();
 
     if (this._survey) {
       this._surveyState = getSurveyState(this._survey.bucket);
       this._source =
         typeof this._survey.src === "function"
-          ? this._survey.src(globalThis.location.pathname)
+          ? this._survey.src(location.pathname)
           : this._survey.src;
 
       this.#markAsSeen();
@@ -70,20 +66,16 @@ export class MDNSurvey extends L10nMixin(LitElement) {
    * @returns {Survey.Survey | undefined}
    */
   #findSurvey() {
+    const forcedSurvey = new URLSearchParams(location.search).get(
+      "force_survey",
+    );
+    this._force = forcedSurvey !== null;
     return SURVEYS.find((survey) => {
       if (this._force) {
-        const FORCE_SURVEY_PREFIX = "#FORCE_SURVEY=";
-        return (
-          survey.key ===
-          globalThis.location.hash.slice(FORCE_SURVEY_PREFIX.length)
-        );
+        return forcedSurvey ? survey.key === forcedSurvey : true;
       }
 
-      if (globalThis.window === undefined) {
-        return false;
-      }
-
-      if (!survey.show(globalThis.location.pathname)) {
+      if (!survey.show(location.pathname)) {
         return false;
       }
 
@@ -121,20 +113,30 @@ export class MDNSurvey extends L10nMixin(LitElement) {
     this.requestUpdate();
   }
 
+  #onLinkClick() {
+    this.#markOpened();
+  }
+
   #onToggle() {
     if (!this._survey || !this._surveyState || this._isOpen) return;
 
     const details = this._detailsRef.value;
     if (details && details.open) {
-      this._surveyState = {
-        ...this._surveyState,
-        opened_at: Date.now(),
-      };
-      writeSurveyState(this._survey.bucket, this._surveyState);
-      this.#measure("opened");
+      this.#markOpened();
       this._isOpen = true;
       this.requestUpdate();
     }
+  }
+
+  #markOpened() {
+    if (!this._survey || !this._surveyState) return;
+
+    this._surveyState = {
+      ...this._surveyState,
+      opened_at: Date.now(),
+    };
+    writeSurveyState(this._survey.bucket, this._surveyState);
+    this.#measure("opened");
   }
 
   #onSubmitted() {
@@ -155,8 +157,7 @@ export class MDNSurvey extends L10nMixin(LitElement) {
   #measure(action) {
     if (!this._survey) return;
 
-    // TODO: GLEAN
-    console.log(`Survey: ${action} ${this._survey.bucket}`);
+    gleanClick(`survey: ${action} ${this._survey.bucket}`);
   }
 
   #setupMessageListener() {
@@ -208,17 +209,26 @@ export class MDNSurvey extends L10nMixin(LitElement) {
             @click=${this.#dismiss}
           ></mdn-button>
         </header>
-        <details ${ref(this._detailsRef)} @toggle=${this.#onToggle}>
-          <summary>${this._survey.question}</summary>
-          ${this._isOpen && this._source
-            ? html`
-                <iframe
-                  title=${ifDefined(this._survey.question)}
-                  src=${this._source}
-                ></iframe>
-              `
-            : nothing}
-        </details>
+        ${this._survey.link
+          ? html`<a
+              class="external"
+              href=${this._source}
+              target="_blank"
+              title=${this.l10n`Take survey (Opens in a new tab)`}
+              @click=${this.#onLinkClick}
+              >${this._survey.question}</a
+            >`
+          : html`<details ${ref(this._detailsRef)} @toggle=${this.#onToggle}>
+              <summary>${this._survey.question}</summary>
+              ${this._isOpen && this._source
+                ? html`
+                    <iframe
+                      title=${ifDefined(this._survey.question)}
+                      src=${this._source}
+                    ></iframe>
+                  `
+                : nothing}
+            </details>`}
         ${this._survey.footnote
           ? html` <footer>(${this._survey.footnote})</footer> `
           : nothing}

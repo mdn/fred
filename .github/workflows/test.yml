@@ -16,9 +16,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           cache: npm
           node-version-file: ".nvmrc"
@@ -44,21 +46,43 @@ jobs:
       - name: Run tsc
         run: npx tsc --noEmit
 
-  build:
+  test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: fred
 
     steps:
-      - name: Checkout
+      - name: Checkout (fred)
         uses: actions/checkout@v5
+        with:
+          path: fred
+          persist-credentials: false
+
+      - name: Checkout (content)
+        uses: actions/checkout@v5
+        with:
+          repository: mdn/content
+          path: content
+          persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           cache: npm
-          node-version-file: ".nvmrc"
+          node-version-file: "fred/.nvmrc"
+          cache-dependency-path: "fred/package-lock.json"
 
       - name: Install
         run: npm ci
+        env:
+          # Increase GitHub API limit.
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Build
         run: npm run build
+
+      - name: Run
+        env:
+          CONTENT_ROOT: ../content/files
+        run: node scripts/tests.js

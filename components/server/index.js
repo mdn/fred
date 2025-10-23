@@ -1,4 +1,7 @@
-import { html } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
+
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { stylesForComponents } from "../outer-layout/utils.js";
 
@@ -7,27 +10,47 @@ import { asyncLocalStorage } from "./async-local-storage.js";
 export class ServerComponent {
   static stylesInHead = true;
   static legacy = false;
+  /** @type {string | undefined} */
+  static inlineScript;
 
   /**
    * @template {typeof ServerComponent} T
    * @this {T}
    * @param {Parameters<InstanceType<T>["render"]>} args
-   * @returns {ReturnType<InstanceType<T>["render"]> | import("@lit").TemplateResult}
+   * @returns {ReturnType<InstanceType<T>["render"]> | import("@lit").TemplateResult | import("@lit").nothing }
    */
   static render(...args) {
+    const asyncStore = asyncLocalStorage.getStore();
+    if (!asyncStore) {
+      throw new Error("asyncLocalStorage missing");
+    }
     const { componentsUsed, componentsWithStylesInHead, compilationStats } =
-      asyncLocalStorage.getStore() || {};
-    componentsUsed?.add(this.name);
+      asyncStore;
+    const componentUsedBefore = componentsUsed.has(this.name);
+    componentsUsed.add(this.name);
     if (this.stylesInHead) {
-      componentsWithStylesInHead?.add(this.name);
+      componentsWithStylesInHead.add(this.name);
     }
     if (this.legacy) {
-      componentsUsed?.add("legacy");
+      componentsUsed.add("legacy");
     }
 
-    const res = new this().render(...args);
+    let res = new this().render(...args);
 
-    if (!this.stylesInHead && compilationStats) {
+    if (!res || res === nothing) {
+      if (!componentUsedBefore) {
+        componentsUsed.delete(this.name);
+        componentsWithStylesInHead.delete(this.name);
+      }
+      return nothing;
+    }
+
+    const { inlineScript } = this;
+    if (inlineScript) {
+      res = html`${res}${unsafeHTML(`<script>${inlineScript}</script>`)}`;
+    }
+
+    if (!this.stylesInHead) {
       const styles = stylesForComponents([this.name], compilationStats.client);
       if (styles.length > 0) {
         // render block in Gecko and WebKit with empty script tag following link

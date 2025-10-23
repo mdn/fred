@@ -109,10 +109,11 @@ svg {
 
     li {
       animation: community-circle 0.1ms forwards;
-      offset-anchor: center calc(0.5 * var(--img-size));
-      offset-distance: var(--offset-distance);
+
       offset-path: ellipse(100% 50% at 100% 50%);
+      offset-distance: var(--offset-distance);
       offset-rotate: 0deg;
+      offset-anchor: center calc(0.5 * var(--img-size));
     }
 
     li:nth-of-type(n + 6) {

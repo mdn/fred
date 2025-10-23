@@ -61,16 +61,13 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
         this._view = "feedback";
       }
       // Reusing Thumbs' key to be able to reuse queries.
-      gleanClick("thumbs", {
-        type: "article-footer",
-        label: vote === "yes" ? "1" : "0",
-      });
+      gleanClick(`thumbs: article-footer -> ${vote === "yes" ? "1" : "0"}`);
     }
   }
 
   _handleFeedback() {
     this._view = "thanks";
-    gleanClick("article-footer", { type: "feedback", label: this._reason });
+    gleanClick(`article_footer: feedback -> ${this._reason}`);
   }
 
   _renderVote() {

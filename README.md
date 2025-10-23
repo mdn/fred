@@ -24,7 +24,46 @@ MDN's next fr(ont)e(n)d.
 - `npm run preview`
   - runs the preview server: using the production bundles with the rari server: useful for testing our prod rspack config
 
+### Accessing from non-localhost
+
+If you want to access fred from a different machine, you'll need to run with certain options:
+
+- `HTTPS=true` to enable HTTPS with a self-signed certificate, allowing Web APIs requiring a secure context to work
+- `ORIGIN_MAIN=your.local.ip.address` to allowlist your address in the playground
+
+So a full command might look like:
+
+```
+HTTPS=true ORIGIN_MAIN=192.168.0.99 npm run start
+```
+
+This is useful to test changes on mobile, tablets and other platforms.
+
 ## Development principles
+
+### Supported Browsers
+
+_tl;dr_ For visitors to MDN, we support the _Baseline widely available browser set_, with some minor modifications.
+
+#### Browsers
+
+The [_Baseline widely available browser set_](https://developer.mozilla.org/en-US/docs/Glossary/Baseline/Compatibility) is defined as browsers from the _Core browser set_ whose initial release date is on or before 30 months prior to today's date, plus long-term support releases.
+
+MDN supports these browsers, along with Firefox for iOS and all currently active Firefox ESR versions:
+
+- Apple Safari (iOS, macOS) — released within the last 2½ years
+- Google Chrome (Android, Desktop) — released within the last 2½ years
+- Microsoft Edge (Desktop) — released within the last 2½ years
+- Mozilla Firefox (Android, Desktop, iOS) — released within the last 2½ years
+- Mozilla Firefox ESR — currently supported by Mozilla
+
+#### "Supported"
+
+In this context, _supported_ means that any issues with rendering or functionality are considered bugs and will be addressed as soon as reasonably possible.
+
+For issues encountered while using unsupported browsers, we decide on a case-by-case assessment of whether the issue will be addressed; however, these issues may have lower priority. Issues with screen readers and other accessibility aids are likely to carry higher levels of importance.
+
+We make our best efforts to design MDN to degrade gracefully; however, there are no guarantees of any level of functionality outside the supported browser set.
 
 ### Environment variables
 
@@ -35,6 +74,30 @@ See [the environment variables README](./components/env/README.md).
 We need to run some JS as soon as possible at page load, to avoid layout shifts and flashes.
 We place this JS in `entry.inline.js`, and it's inlined on page load.
 Rspack also generates the necessary CSP hash when doing a prod build with `npm run build`.
+
+If this code is component-specific, it can be [imported with `?source&csp=true`](#custom-imports) and used to set the value of `static inlineScript` in a Server Component.
+Remember to add an additional entry to the CSP hashes in yari when doing so.
+
+### Custom Imports
+
+We support a range of non-standard imports in our JavaScript. This includes:
+
+#### `?source`
+
+Imports the raw source of the file as a string.
+
+```js
+import text from "./some-file.txt?source";
+```
+
+#### `&csp=true`
+
+Logs a CSP hash for the source of the file during the production build.
+Most commonly used alongside `?source` to import the source of a file for inlining in a component, which needs to be allowlisted in our CSP:
+
+```js
+import inlineScript from "./inline.js?source&csp=true";
+```
 
 ### Layout
 

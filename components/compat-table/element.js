@@ -4,11 +4,9 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
-import {
-  BCD_TABLE,
-  DEFAULT_LOCALE,
-  ISSUE_METADATA_TEMPLATE,
-} from "./constants.js";
+import { randomIdString } from "../utils/index.js";
+
+import { DEFAULT_LOCALE, ISSUE_METADATA_TEMPLATE } from "./constants.js";
 import styles from "./element.css?lit";
 import {
   getSupportBrowserReleaseDate,
@@ -17,7 +15,7 @@ import {
   versionLabelFromSupport,
 } from "./feature-row.js";
 import {
-  HIDDEN_BROWSERS,
+  SHOW_BROWSERS,
   asList,
   bugURLToString,
   getCurrentSupport,
@@ -135,7 +133,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           version_added: false,
         };
 
-        if (HIDDEN_BROWSERS.includes(browser)) {
+        if (!SHOW_BROWSERS.includes(browser)) {
           continue;
         }
 
@@ -393,7 +391,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         titleNode = html`<a
           href=${href}
           class="bc-table-row-header"
-          data-glean=${`${BCD_TABLE}: link -> ${href}`}
+          data-glean-id=${`bcd: link -> ${href}`}
         >
           ${titleContent}
         </a>`;
@@ -404,6 +402,11 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       }
 
       const handleMousedown = (/** @type {MouseEvent} */ event) => {
+        if (event.button !== 0) {
+          // Ignore middle/right button.
+          return;
+        }
+
         // Blur active element if already focused.
         const activeElement = this.shadowRoot?.activeElement;
         const { currentTarget } = event;
@@ -428,6 +431,34 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         }
       };
 
+      const toggleAriaExpanded =
+        /**
+         * @param {Event} event
+         * @param {boolean} expanded
+         */
+        (event, expanded) => {
+          const target = event.composedPath()?.[0] || event.target;
+          if (target instanceof HTMLElement) {
+            const controls = target.getAttribute("aria-controls");
+            if (controls) {
+              const controlsElement = this.shadowRoot?.querySelector(
+                `#${controls}`,
+              );
+              if (controlsElement instanceof HTMLElement) {
+                controlsElement.setAttribute(
+                  "aria-expanded",
+                  expanded ? "true" : "false",
+                );
+              }
+            }
+          }
+        };
+
+      const handleFocus = /** @param {Event} event */ (event) =>
+        toggleAriaExpanded(event, true);
+      const handleBlur = /** @param {Event} event */ (event) =>
+        toggleAriaExpanded(event, false);
+
       const browserCells = browsers.map((browserName) => {
         // <CompatCell>
         const browser = browserInfo[browserName];
@@ -438,6 +469,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           version_added: false,
         };
 
+        const timelineId = randomIdString("timeline-");
         const supportClassName = getSupportClassName(support, browser);
         const notes = this._renderNotes(browser, support);
 
@@ -448,13 +480,21 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         >
           <button
             type="button"
+            aria-controls=${timelineId}
             title=${ifDefined(notes && "Toggle history")}
             @mousedown=${handleMousedown}
+            @focus=${handleFocus}
+            @blur=${handleBlur}
           >
             ${this._renderCellText(support, browser)}
           </button>
           ${notes &&
-          html`<div class="timeline" tabindex="0">
+          html`<div
+            id=${timelineId}
+            class="timeline"
+            tabindex="0"
+            aria-expanded="false"
+          >
             <dl class="bc-notes-list">${notes}</dl>
           </div>`}
         </td>`;
@@ -699,6 +739,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
               flag_name: name,
               has_value: Number(typeof value_to_set === "string"),
               flag_value: value_to_set,
+              has_pref_url: Number(typeof browser.pref_url === "string"),
               browser_name: browser.name,
               browser_pref_url: browser.pref_url,
             },
@@ -985,11 +1026,17 @@ customElements.define("mdn-compat-table", MDNCompatTable);
  * @returns {[string[], import("@bcd").BrowserName[]]}
  */
 export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
-  const hasNodeJSData = data.__compat && "nodejs" in data.__compat.support;
-  const hasDenoData = data.__compat && "deno" in data.__compat.support;
+  const runtimes = Object.entries(browserInfo)
+    .filter(([, { type }]) => type == "server")
+    .map(([key]) => key);
 
   let platforms = ["desktop", "mobile"];
-  if (category === "javascript" || hasNodeJSData || hasDenoData) {
+  if (
+    category === "javascript" ||
+    runtimes.some(
+      (runtime) => data.__compat && runtime in data.__compat.support,
+    )
+  ) {
     platforms.push("server");
   }
 
@@ -1016,14 +1063,16 @@ export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
     );
   }
 
-  // If there is no Node.js data for a category outside "javascript", don't
-  // show it. It ended up in the browser list because there is data for Deno.
-  if (category !== "javascript" && !hasNodeJSData) {
-    browsers = browsers.filter((browser) => browser !== "nodejs");
+  // If there is no data for a runtime in a category outside "javascript", hide it.
+  if (category !== "javascript") {
+    for (const runtime of runtimes) {
+      if (data.__compat && !(runtime in data.__compat.support)) {
+        browsers = browsers.filter((browser) => browser !== runtime);
+      }
+    }
   }
 
-  // Hide Internet Explorer compatibility data
-  browsers = browsers.filter((browser) => !HIDDEN_BROWSERS.includes(browser));
+  browsers = browsers.filter((browser) => SHOW_BROWSERS.includes(browser));
 
   return [platforms, [...browsers]];
 }

@@ -51,7 +51,7 @@ export const InteractiveExampleWithTabs = (Base) =>
               <h4>${this.l10n`Output`}</h4>
               <mdn-play-runner
                 ${ref(this._runner)}
-                sandbox="allow-top-navigation-by-user-activation"
+                sandbox="allow-modals allow-top-navigation-by-user-activation"
                 defaults="ix-tabbed"
               ></mdn-play-runner>
             </div>

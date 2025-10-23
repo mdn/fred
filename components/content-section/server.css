@@ -82,8 +82,11 @@
   pre,
   code {
     font-family: var(--font-family-code);
-    white-space: pre-wrap;
     background-color: var(--color-background-secondary);
+  }
+
+  pre {
+    white-space: pre-wrap;
   }
 
   pre:not(.code-example pre) {
@@ -124,7 +127,7 @@
 
     margin: 2rem auto;
 
-    background-color: var(--color-background-secondary);
+    background-color: var(--color-white);
     border: 1px solid var(--color-border-primary);
     border-radius: 0.25rem;
   }
@@ -245,13 +248,18 @@
 
     dd {
       margin-left: 1rem;
+
+      /* Move description closer to term. */
+      p:first-child {
+        margin-top: 0.5rem;
+      }
     }
 
     ul {
       margin: 1rem 0 2rem;
     }
 
-    a[href^="#"] {
+    dt a[href^="#"] {
       color: inherit;
 
       &:hover::before {

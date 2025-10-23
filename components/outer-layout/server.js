@@ -19,18 +19,15 @@ import {
 export class OuterLayout extends ServerComponent {
   /**
    * @param {import("@fred").Context} context
-   * @param {import("lit-html").TemplateResult} markup
+   * @param {import("lit-html").TemplateResult | import("lit").nothing} markup
    */
   render(context, markup) {
-    const {
-      componentsUsed = /** @type {Set<string>} */ (new Set()),
-      componentsWithStylesInHead = /** @type {Set<string>} */ (new Set()),
-      compilationStats,
-    } = asyncLocalStorage.getStore() || {};
-
-    if (!compilationStats) {
-      throw new Error("compilation stats missing");
+    const asyncStore = asyncLocalStorage.getStore();
+    if (!asyncStore) {
+      throw new Error("asyncLocalStorage missing");
     }
+    const { componentsUsed, componentsWithStylesInHead, compilationStats } =
+      asyncStore;
 
     let legacyAssets;
     if (componentsUsed.has("legacy")) {
@@ -69,10 +66,8 @@ export class OuterLayout extends ServerComponent {
         ? "learn"
         : undefined;
 
-    const env = Object.fromEntries(
-      Object.entries(process.env).filter(([key]) =>
-        runtimeVariables.includes(key),
-      ),
+    const runtimeEnvEntries = Object.entries(process.env).filter(
+      ([key]) => key.startsWith("FRED_") && runtimeVariables.includes(key),
     );
 
     // if you want to put some script inline, put it in entry.inline.js
@@ -93,9 +88,9 @@ export class OuterLayout extends ServerComponent {
             content="width=device-width, initial-scale=1.0"
           />
           <title>${context.pageTitle || "MDN"}</title>
-          ${RUNTIME_ENV
+          ${RUNTIME_ENV && runtimeEnvEntries.length > 0
             ? unsafeHTML(`<script>process = {
-  env: ${JSON.stringify(env)}
+  env: ${JSON.stringify(Object.fromEntries(runtimeEnvEntries))}
 };</script>`)
             : nothing}
           ${unsafeHTML(`<script>${inlineScript}</script>`)}

@@ -6,7 +6,7 @@
   grid-template-areas:
     "sidebar . header . toc"
     "sidebar . body   . toc";
-  grid-template-rows: min-content auto;
+  grid-template-rows: min-content 1fr;
   grid-template-columns: var(--layout-2-sidebars);
 
   justify-content: space-between;
@@ -111,5 +111,9 @@
       overflow-y: unset;
       --toc-header-font-size: var(--font-size-larger);
     }
+  }
+
+  mdn-survey {
+    margin-top: 0.5rem;
   }
 }
