@@ -3,7 +3,6 @@ import { fileURLToPath } from "node:url";
 
 import { includeIgnoreFile } from "@eslint/compat";
 import js from "@eslint/js";
-import tseslint from "@typescript-eslint/eslint-plugin";
 import { defineConfig } from "eslint/config";
 import prettierConfig from "eslint-config-prettier/flat";
 import importPlugin from "eslint-plugin-import";
@@ -13,6 +12,7 @@ import n from "eslint-plugin-n";
 import unicorn from "eslint-plugin-unicorn";
 import * as wc from "eslint-plugin-wc";
 import globals from "globals";
+import tseslint from "typescript-eslint";
 
 import fred from "./build/eslint-fred.js";
 
@@ -52,7 +52,7 @@ export default defineConfig([
   },
   {
     files: ["**/*.{js,mjs,cjs}"],
-    plugins: { "@typescript-eslint": tseslint },
+    plugins: { "@typescript-eslint": tseslint.plugin },
     rules: {
       "@typescript-eslint/ban-ts-comment": [
         "error",
@@ -114,4 +114,12 @@ export default defineConfig([
     },
   },
   prettierConfig,
+  {
+    files: ["test/specs/**/*.js"],
+    languageOptions: {
+      globals: {
+        ...globals.mocha,
+      },
+    },
+  },
 ]);

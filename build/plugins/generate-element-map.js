@@ -1,9 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-import { fdir } from "fdir";
-
-import { toPascalCase } from "../utils.js";
+import { kebabToPascalCase } from "../../utils/name-transformation.js";
+import { crawl } from "../utils.js";
 
 /**
  * @import { Compiler } from "@rspack/core"
@@ -17,18 +16,18 @@ export class GenerateElementMapPlugin {
     compiler.hooks.beforeCompile.tapPromise(
       "GenerateElementMapPlugin",
       async () => {
-        const api = new fdir()
-          .withFullPaths()
-          .filter((filePath) => filePath.endsWith("/element.js"))
-          .crawl(path.join(compiler.context, "components"));
-        const files = await api.withPromise();
+        const files = await crawl(
+          path.join(compiler.context, "components"),
+          (filePath) => filePath.endsWith("/element.js"),
+        );
 
         const mapping = files.map((filePath) => {
           const relPath =
-            ".." + filePath.replace(compiler.context, "").replaceAll("\\", "/");
+            "../" +
+            path.relative(compiler.context, filePath).replaceAll("\\", "/");
           const folderName = relPath.split("/").at(-2);
           const tagName = `mdn-${folderName}`;
-          const className = toPascalCase(tagName);
+          const className = kebabToPascalCase(tagName);
           return `"${tagName}": import("${relPath}").${className};`;
         });
 
