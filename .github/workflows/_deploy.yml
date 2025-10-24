@@ -134,6 +134,8 @@ jobs:
       - name: Build (fred)
         working-directory: mdn/fred
         env:
+          FRED_GA_ENABLED: true
+          FRED_GA_MEASUREMENT_ID: G-ZG5HNVZRY0
           FRED_GLEAN_ENABLED: true
           FRED_GLEAN_CHANNEL: review
           FRED_PLAYGROUND_BASE_HOST: mdnyalp.dev
