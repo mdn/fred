@@ -8,6 +8,9 @@ export const PLAYGROUND_LOCAL = parseBool("PLAYGROUND_LOCAL", false, {
   runtime: true,
 });
 export const PORT = parseInt("PORT", 3000, { runtime: true });
+export const OPEN_BROWSER_ON_START = parseBool("OPEN_BROWSER_ON_START", false, {
+  runtime: true,
+});
 export const PLAYGROUND_PORT = parseInt("PLAYGROUND_PORT", 3001, {
   runtime: true,
 });
