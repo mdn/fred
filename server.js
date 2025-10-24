@@ -333,7 +333,7 @@ export async function startServer() {
     const url = `${scheme}://localhost:${PORT}`;
     console.log(`Server started at ${url}`);
     // Auto open browser
-    if (devMode && OPEN_BROWSER_ON_START) {
+    if (OPEN_BROWSER_ON_START) {
       const platform = process.platform;
 
       const command =
