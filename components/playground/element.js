@@ -30,6 +30,7 @@ export class MDNPlayground extends L10nMixin(LitElement) {
 
   static properties = {
     _gistID: { state: true },
+    _showReportHintBanner: { state: true },
   };
 
   constructor() {
@@ -38,6 +39,8 @@ export class MDNPlayground extends L10nMixin(LitElement) {
     this._autoRun = true;
     /** @type {string | undefined} */
     this._gistId = undefined;
+    /** @type {boolean} */
+    this._showReportHintBanner = false;
   }
 
   /** @type {Ref<MDNPlayController>} */
@@ -188,6 +191,7 @@ ${"```"}`,
 
       if (idParam) {
         this._gistId = idParam;
+        this._showReportHintBanner = true;
       }
 
       const { srcPrefix: srcPrefixState, code } =
@@ -255,7 +259,12 @@ ${"```"}`,
     this.requestUpdate();
   }
 
+  _dismissReportHintBanner() {
+    this._showReportHintBanner = false;
+  }
+
   _reportOpen() {
+    this._dismissReportHintBanner();
     this._reportModal.value?.showModal();
   }
 
@@ -280,6 +289,21 @@ ${"```"}`,
   connectedCallback() {
     super.connectedCallback();
     this._user.run();
+  }
+
+  _renderReportHintBanner() {
+    return html`<div class="playground__runner-report-hint-banner">
+      <button class="report-hint-button" @click=${this._reportOpen}>
+        Seeing something inappropriate?
+      </button>
+      <button
+        class="report-hint-close-button"
+        @click=${this._dismissReportHintBanner}
+        aria-label=${this.l10n`Close report hint banner`}
+      >
+        <span>X</span>
+      </button>
+    </div>`;
   }
 
   render() {
@@ -356,10 +380,8 @@ ${"```"}`,
             </details>
           </section>
           <section class="playground__runner-console">
-            ${this._gistId
-              ? html`<mdn-button @click=${this._reportOpen} variant="plain">
-                  ${this.l10n`Seeing something inappropriate?`}
-                </mdn-button>`
+            ${this._gistId && this._showReportHintBanner
+              ? html`${this._renderReportHintBanner()}`
               : nothing}
             <mdn-play-runner></mdn-play-runner>
             <div class="playground__console">
