@@ -11,10 +11,12 @@ on:
         description: "Deployment prefix"
         required: true
         type: string
+    outputs:
+      url:
+        description: "Deployment URL"
+        value: ${{ jobs.deploy.outputs.url }}
 
 permissions:
-  # Post comment in pull request.
-  pull-requests: write
   # Authenticate with GCP.
   id-token: write
 
@@ -29,6 +31,9 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    outputs:
+      url: ${{ steps.set-output.outputs.url }}
 
     environment:
       name: review
@@ -113,7 +118,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup (fred)
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version-file: "mdn/fred/.nvmrc"
           cache: npm
@@ -267,24 +272,9 @@ jobs:
           concurrency: 500
           process_gcloudignore: false
 
-      - name: Post message in PR
-        if: ${{ github.event_name == 'pull_request' }}
-        run: |
-          COMMENT_ID=$(gh pr view "$PR_NUMBER" --repo "${{ github.repository }}" --comments --json comments \
-            --jq ".comments | sort_by(.createdAt) | map(select(.author.login == \"github-actions\")) | .[0].id")
-          if [ -n "$COMMENT_ID" ]; then
-            gh api graphql -f query='
-                mutation($id:ID!, $body:String!) {
-                  updateIssueComment(input:{id:$id, body:$body}) {
-                    issueComment {
-                      id
-                    }
-                  }
-                }' -f id="$COMMENT_ID" -f body="$BODY"
-          else
-            gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" --body "$BODY"
-          fi
+      - name: Set deployment URL output
+        id: set-output
         env:
-          BODY: "${{ github.sha }} was deployed to: https://${{ env.PREFIX }}.${{ vars.HOST }}/"
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          GITHUB_TOKEN: ${{ github.token }}
+          URL: "https://${{ env.PREFIX }}.${{ vars.HOST }}/"
+        run: |
+          echo "url=$URL" >> $GITHUB_OUTPUT
