@@ -119,5 +119,7 @@ jobs:
         env:
           FRED_PORT: 5042
           CONTENT_REPO_ROOT: ../content
+          # Increase GitHub API limit.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           node scripts/npm-test.js
