@@ -85,6 +85,9 @@ jobs:
           TARBALL=$(ls ../../mdn-fred-*.tgz)
           yarn add file:$TARBALL
           yarn install
+        env:
+          # Increase GitHub API limit.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: (mdn/content) yarn fred-ssr (Linux)
         if: runner.os == 'Linux'
