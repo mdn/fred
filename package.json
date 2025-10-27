@@ -105,7 +105,7 @@
     "eslint-plugin-jsdoc": "^61.1.9",
     "eslint-plugin-lit": "^2.0.0",
     "eslint-plugin-n": "^17.23.1",
-    "eslint-plugin-unicorn": "^61.0.2",
+    "eslint-plugin-unicorn": "^62.0.0",
     "eslint-plugin-wc": "^3.0.2",
     "globals": "^16.4.0",
     "lefthook": "^2.0.1",
