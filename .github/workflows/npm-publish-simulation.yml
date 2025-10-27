@@ -41,7 +41,7 @@ jobs:
           echo "tarball=$TARBALL" >> "$GITHUB_OUTPUT"
 
       - name: (mdn/fred) archive tarball
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: tarball
           path: mdn/fred/${{ steps.build.outputs.tarball }}
