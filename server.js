@@ -1,3 +1,4 @@
+import { spawn } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { Worker } from "node:worker_threads";
@@ -8,7 +9,12 @@ import { createProxyMiddleware } from "http-proxy-middleware";
 import openEditor from "open-editor";
 
 import { FRED_BUILD_ROOT } from "./build/env.js";
-import { PLAYGROUND_PORT, PORT, WRITER_MODE } from "./components/env/index.js";
+import {
+  OPEN_BROWSER_ON_START,
+  PLAYGROUND_PORT,
+  PORT,
+  WRITER_MODE,
+} from "./components/env/index.js";
 import { handleRunner } from "./vendor/yari/libs/play/index.js";
 
 import "source-map-support/register.js";
@@ -323,9 +329,21 @@ export async function startServer() {
   }
 
   const httpServer = app.listen(PORT, () => {
-    console.log(
-      `Server started at ${http2 ? "https" : "http"}://localhost:${PORT}`,
-    );
+    const scheme = http2 ? "https" : "http";
+    const url = `${scheme}://localhost:${PORT}`;
+    console.log(`Server started at ${url}`);
+    // Auto open browser
+    if (OPEN_BROWSER_ON_START) {
+      const platform = process.platform;
+
+      const command =
+        platform === "win32"
+          ? "start"
+          : platform === "darwin"
+            ? "open"
+            : "xdg-open";
+      spawn(command, [url]);
+    }
   });
 
   const playServer = play.listen(PLAYGROUND_PORT, () => {

@@ -285,12 +285,12 @@ export const TABS = [
         items: [
           {
             slug: "Learn_web_development/Getting_started",
-            text: "Getting started",
+            text: "Getting started modules",
           },
-          { slug: "Learn_web_development/Howto", text: "Common questions" },
+          { slug: "Learn_web_development/Core", text: "Core modules" },
           {
             href: "/en-US/curriculum/",
-            text: "Curriculum",
+            text: "MDN Curriculum",
           },
         ],
       },
@@ -299,11 +299,7 @@ export const TABS = [
         items: [
           {
             slug: "Learn_web_development/Core/Structuring_content",
-            text: "Introduction to HTML",
-          },
-          {
-            slug: "Learn_web_development/Core/Structuring_content/Basic_HTML_syntax",
-            text: "Getting started with HTML",
+            text: "Structuring content with HTML module",
           },
         ],
       },
@@ -311,12 +307,12 @@ export const TABS = [
         title: "Learn CSS",
         items: [
           {
-            slug: "Learn_web_development/Core/Styling_basics/What_is_CSS",
-            text: "What is CSS",
+            slug: "Learn_web_development/Core/Styling_basics",
+            text: "CSS styling basics module",
           },
           {
-            slug: "Learn_web_development/Core/Styling_basics/Getting_started",
-            text: "Getting started with CSS",
+            slug: "Learn_web_development/Core/CSS_layout",
+            text: "CSS layout module",
           },
         ],
       },
@@ -324,12 +320,8 @@ export const TABS = [
         title: "Learn JavaScript",
         items: [
           {
-            slug: "Web/HTML/How_to/Use_data_attributes",
-            text: "How to use data attributes",
-          },
-          {
-            slug: "Web/HTML/How_to/Add_JavaScript_to_your_web_page",
-            text: "Add JavaScript to your web page",
+            slug: "Learn_web_development/Core/Scripting",
+            text: "Dynamic scripting with JavaScript module",
           },
         ],
       },
