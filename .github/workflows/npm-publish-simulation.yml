@@ -12,13 +12,13 @@ jobs:
 
     steps:
       - name: (mdn/fred) Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           path: mdn/fred
           persist-credentials: false
 
       - name: (mdn/fred) Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version-file: mdn/fred/.nvmrc
           cache: npm
@@ -41,7 +41,7 @@ jobs:
           echo "tarball=$TARBALL" >> "$GITHUB_OUTPUT"
 
       - name: (mdn/fred) archive tarball
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
           name: tarball
           path: mdn/fred/${{ steps.build.outputs.tarball }}
@@ -59,21 +59,21 @@ jobs:
 
     steps:
       - name: (mdn/content) Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           repository: mdn/content
           path: mdn/content
           persist-credentials: false
 
       - name: (mdn/content) Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version-file: mdn/content/.nvmrc
           cache: yarn
           cache-dependency-path: mdn/content/yarn.lock
 
       - name: (mdn/content) Download tarball
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
           name: tarball
 
@@ -95,13 +95,13 @@ jobs:
         run: yarn fred-ssr
 
       - name: (mdn/fred) Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           path: mdn/fred
           persist-credentials: false
 
       - name: (mdn/fred) Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version-file: mdn/fred/.nvmrc
           cache: npm
