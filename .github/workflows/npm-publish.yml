@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write # OIDC for npm Trusted Publishing
   pull-requests: write
 
 jobs:
@@ -46,9 +47,8 @@ jobs:
 
       - name: Publish
         if: steps.release.outputs.release_created
-        run: npm publish --access public
+        run: npm publish --access public --provenance
         env:
           FRED_RUNTIME_ENV: true
           # TODO: probably want to disable this, but it doesn't seem to work in content at the moment:
           FRED_LEGACY: true
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
