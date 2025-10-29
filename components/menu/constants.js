@@ -104,15 +104,18 @@ export const TABS = [
         title: "Layout cookbook",
         items: [
           {
-            slug: "Web/CSS/Layout_cookbook/Column_layouts",
+            slug: "Web/CSS/How_to/Layout_cookbook/Column_layouts",
             text: "Column layouts",
           },
           {
-            slug: "Web/CSS/Layout_cookbook/Center_an_element",
+            slug: "Web/CSS/How_to/Layout_cookbook/Center_an_element",
             text: "Centering an element",
           },
-          { slug: "Web/CSS/Layout_cookbook/Card", text: "Card component" },
-          { slug: "Web/CSS/Layout_cookbook", text: "See all…" },
+          {
+            slug: "Web/CSS/How_to/Layout_cookbook/Card",
+            text: "Card component",
+          },
+          { slug: "Web/CSS/How_to/Layout_cookbook", text: "See all…" },
         ],
       },
     ],
