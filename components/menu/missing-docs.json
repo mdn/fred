@@ -7,7 +7,6 @@
     "Web/CSS/CSS_shapes/Shape_generator",
     "Web/CSS/CSS_values_and_units",
     "Web/CSS/Guides",
-    "Web/CSS/How_to/Layout_cookbook",
     "Web/CSS/How_to/Layout_cookbook/Card",
     "Web/CSS/How_to/Layout_cookbook/Center_an_element",
     "Web/CSS/How_to/Layout_cookbook/Column_layouts",
@@ -20,18 +19,8 @@
     "Web/URI",
     "Web/WebDriver"
   ],
-  "fr": [
-    "Web/CSS/How_to/Layout_cookbook",
-    "Web/CSS/How_to/Layout_cookbook/Card",
-    "Web/CSS/How_to/Layout_cookbook/Center_an_element",
-    "Web/CSS/How_to/Layout_cookbook/Column_layouts"
-  ],
-  "ja": [
-    "Web/CSS/How_to/Layout_cookbook",
-    "Web/CSS/How_to/Layout_cookbook/Card",
-    "Web/CSS/How_to/Layout_cookbook/Center_an_element",
-    "Web/CSS/How_to/Layout_cookbook/Column_layouts"
-  ],
+  "fr": [],
+  "ja": [],
   "ko": [
     "Learn_web_development/Core",
     "Web/API/Performance",
@@ -43,7 +32,6 @@
     "Web/CSS/Guides",
     "Web/CSS/How_to/Layout_cookbook",
     "Web/CSS/How_to/Layout_cookbook/Card",
-    "Web/CSS/How_to/Layout_cookbook/Center_an_element",
     "Web/CSS/How_to/Layout_cookbook/Column_layouts",
     "Web/CSS/Properties",
     "Web/HTML/Guides",
@@ -65,7 +53,6 @@
     "Web/CSS/CSS_shapes/Shape_generator",
     "Web/CSS/CSS_values_and_units",
     "Web/CSS/Guides",
-    "Web/CSS/How_to/Layout_cookbook",
     "Web/CSS/How_to/Layout_cookbook/Card",
     "Web/CSS/How_to/Layout_cookbook/Center_an_element",
     "Web/CSS/How_to/Layout_cookbook/Column_layouts",
@@ -88,7 +75,6 @@
     "Web/CSS/CSS_shapes/Shape_generator",
     "Web/CSS/CSS_values_and_units",
     "Web/CSS/Guides",
-    "Web/CSS/How_to/Layout_cookbook",
     "Web/CSS/How_to/Layout_cookbook/Card",
     "Web/CSS/How_to/Layout_cookbook/Center_an_element",
     "Web/CSS/How_to/Layout_cookbook/Column_layouts",
@@ -101,13 +87,7 @@
     "Web/Privacy",
     "Web/WebDriver"
   ],
-  "zh-CN": [
-    "Web/CSS/How_to/Layout_cookbook",
-    "Web/CSS/How_to/Layout_cookbook/Card",
-    "Web/CSS/How_to/Layout_cookbook/Center_an_element",
-    "Web/CSS/How_to/Layout_cookbook/Column_layouts",
-    "Web/CSS/Properties"
-  ],
+  "zh-CN": ["Web/CSS/Properties"],
   "zh-TW": [
     "Learn_web_development/Core",
     "Learn_web_development/Getting_started",
