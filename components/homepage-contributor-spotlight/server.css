@@ -37,6 +37,10 @@
   &:not(:hover) {
     text-decoration: none;
   }
+
+  @media (width <= 768px) {
+    text-align: center;
+  }
 }
 
 .homepage-contributor-spotlight__quote {
@@ -97,5 +101,11 @@
 
   .homepage-contributor-spotlight__quote::before {
     margin-left: -1.5em;
+  }
+}
+
+@media (--screen-menu-hamburger) {
+  .homepage-contributor-spotlight__name {
+    width: 100%;
   }
 }
