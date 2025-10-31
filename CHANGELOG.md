@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.1](https://github.com/mdn/fred/compare/v1.8.0...v1.8.1) (2025-10-31)
+
+
+### Miscellaneous
+
+* **menu:** update missing docs in parallel ([#1046](https://github.com/mdn/fred/issues/1046)) ([f5ed81d](https://github.com/mdn/fred/commit/f5ed81d81f0cc1d59b4cdb1d0e6b49f80b0a65d8))
+
 ## [1.8.0](https://github.com/mdn/fred/compare/v1.7.0...v1.8.0) (2025-10-31)
 
 
