@@ -146,3 +146,9 @@ settings = My settings
 
 example-play-button-label = Play
 example-play-button-title = Run example in MDN Playground (opens in new tab)
+
+content-feedback-question = Was this page helpful to you?
+content-feedback-reason = Why was this page not helpful to you?
+content-feedback-thanks = Thank you for your feedback!
+
+writer-reload-polling = Polling every { $seconds }s
