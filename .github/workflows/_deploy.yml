@@ -11,6 +11,10 @@ on:
         description: "Deployment prefix"
         required: true
         type: string
+      build-artifact-name:
+        description: "Name of the build artifact to download"
+        required: true
+        type: string
     outputs:
       url:
         description: "Deployment URL"
@@ -30,12 +34,7 @@ env:
   PREFIX: ${{ inputs.prefix }}
 
 jobs:
-  build:
-    uses: ./.github/workflows/_build.yml
-    secrets: inherit
-
   deploy:
-    needs: build
     runs-on: ubuntu-latest
 
     outputs:
@@ -49,7 +48,7 @@ jobs:
       - name: Download build output
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
-          name: ${{ needs.build.outputs.artifact-name }}
+          name: ${{ inputs.build-artifact-name }}
           path: ${{ env.BUILD_OUT_ROOT }}
 
       - name: Authenticate with GCP

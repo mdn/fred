@@ -13,13 +13,20 @@ permissions:
   pull-requests: write
 
 jobs:
+  build:
+    if: github.repository_owner == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
+    uses: ./.github/workflows/_build.yml
+    secrets: inherit
+
   deploy:
+    needs: build
     if: github.repository_owner == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
     uses: ./.github/workflows/_deploy.yml
     secrets: inherit
     with:
       cancel-in-progress: true
       prefix: fred-pr${{ github.event.pull_request.number }}
+      build-artifact-name: ${{ needs.build.outputs.artifact-name }}
 
   comment:
     needs: deploy
