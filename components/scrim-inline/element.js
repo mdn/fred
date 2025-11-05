@@ -2,10 +2,12 @@ import { LitElement, html, nothing } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { styleMap } from "lit/directives/style-map.js";
 
+import { L10nMixin } from "../../l10n/mixin.js";
+
 import playSvg from "./assets/scrim-play.svg?lit";
 import styles from "./element.css?lit";
 
-export class MDNScrimInline extends LitElement {
+export class MDNScrimInline extends L10nMixin(LitElement) {
   static styles = styles;
 
   static ssr = false;
@@ -77,12 +79,16 @@ export class MDNScrimInline extends LitElement {
       <dialog @close=${this.#dialogClosed} style=${styleMap(this._imgStyle)}>
         <div class="inner">
           <div class="header">
-            <span>Clicking will load content from scrimba.com</span>
+            <span
+              >${this.l10n`Clicking will load content from scrimba.com`}</span
+            >
             <button tabindex="0" @click=${this.#toggle} class="toggle">
               <div
                 class="scrim-fullscreen ${this._fullscreen ? "exit" : "enter"}"
               ></div>
-              <span class="visually-hidden">Toggle fullscreen</span>
+              <span class="visually-hidden"
+                >${this.l10n`Toggle fullscreen`}</span
+              >
             </button>
             <a
               href=${this._fullUrl}
@@ -92,7 +98,7 @@ export class MDNScrimInline extends LitElement {
               data-glean-id="curriculum: scrim link id:${this._scrimId}"
             >
               <div class="scrim-link"></div>
-              <span class="visually-hidden">Open on Scrimba</span>
+              <span class="visually-hidden">${this.l10n`Open on Scrimba`}</span>
             </a>
           </div>
           <div class="body">
@@ -127,7 +133,7 @@ export class MDNScrimInline extends LitElement {
                   >
                     ${playSvg}
                     <span class="visually-hidden">
-                      "Load scrim and open dialog."
+                      ${this.l10n`Load scrim and open dialog.`}
                     </span>
                   </button>
                 `}
