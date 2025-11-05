@@ -17,6 +17,8 @@ jobs:
     if: github.repository_owner == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
     uses: ./.github/workflows/_build.yml
     secrets: inherit
+    with:
+      partial: true
 
   deploy:
     needs: build

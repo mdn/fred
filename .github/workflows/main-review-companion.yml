@@ -19,6 +19,8 @@ jobs:
     if: github.repository_owner == 'mdn' && (github.event_name == 'schedule' || github.actor != 'dependabot[bot]')
     uses: ./.github/workflows/_build.yml
     secrets: inherit
+    with:
+      partial: false
 
   deploy:
     needs: build
