@@ -46,33 +46,6 @@ jobs:
       url: https://${{ env.PREFIX }}.${{ vars.HOST }}
 
     steps:
-      - name: Stop if PR author/actor is not an admin
-        if: ${{ github.event_name == 'pull_request' }}
-        env:
-          ACTOR: ${{ github.actor }}
-          AUTHOR: ${{ github.event.pull_request.user.login }}
-          GH_TOKEN: ${{ github.token }}
-          REPO: ${{ github.repository }}
-          RUN_ID: ${{ github.run_id }}
-        run: |
-          # Check author.
-          AUTHOR_PERMISSION=$(gh api https://api.github.com/repos/$REPO/collaborators/$AUTHOR/permission --jq .permission)
-          if [ "$AUTHOR_PERMISSION" != "admin" ]; then
-              echo "PR author ($AUTHOR) is not an admin, please ping someone for a review."
-              gh run cancel --repo "$REPO" $RUN_ID
-              exit 1
-          fi
-
-          # Check actor.
-          if [ "$ACTOR" != "$AUTHOR" ]; then
-              ACTOR_PERMISSION=$(gh api https://api.github.com/repos/$REPO/collaborators/$ACTOR/permission --jq .permission)
-              if [ "$ACTOR_PERMISSION" != "admin" ]; then
-                  echo "PR actor ($ACTOR) is not an admin, please ping someone for a review."
-                  gh run cancel --repo "$REPO" $RUN_ID
-                  exit 1
-              fi
-          fi
-
       - name: Download build output
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
