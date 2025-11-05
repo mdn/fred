@@ -17,6 +17,7 @@ on:
         value: ${{ jobs.deploy.outputs.url }}
 
 permissions:
+  contents: read
   # Authenticate with GCP.
   id-token: write
 

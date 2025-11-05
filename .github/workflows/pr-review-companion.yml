@@ -6,6 +6,7 @@ on:
       - main
 
 permissions:
+  contents: read
   # Authenticate with GCP (same as _deploy.yml).
   id-token: write
   # Post comment in pull request.
