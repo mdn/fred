@@ -14,6 +14,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Setup privileged build
+        id: privileged
+        if: ${{ github.secret_source == 'Actions' }}
+        env:
+          BLOG_ROOT: ${{ github.workspace }}/mdn/blog/content/posts
+          BLOG_PAGINATION: true
+        run: |
+          echo "BLOG_ROOT=$BLOG_ROOT" >> "$GITHUB_OUTPUT"
+          echo "BLOG_PAGINATION=$BLOG_PAGINATION" >> "$GITHUB_OUTPUT"
+
       - name: Checkout (fred)
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
@@ -42,6 +52,7 @@ jobs:
           persist-credentials: false
 
       - name: Checkout (blog)
+        if: ${{ steps.privileged.conclusion.success }}
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           repository: mdn/blog
@@ -106,7 +117,8 @@ jobs:
           CONTENT_ROOT: ${{ github.workspace }}/mdn/content/files
           CONTENT_TRANSLATED_ROOT: ${{ github.workspace }}/mdn/translated-content/files
           CONTRIBUTOR_SPOTLIGHT_ROOT: ${{ github.workspace }}/mdn/mdn-contributor-spotlight/contributors
-          BLOG_ROOT: ${{ github.workspace }}/mdn/blog/content/posts
+          BLOG_ROOT: ${{ steps.privileged.outputs.BLOG_ROOT }}
+
           CURRICULUM_ROOT: ${{ github.workspace }}/mdn/curriculum
           GENERIC_CONTENT_ROOT: ${{ github.workspace }}/mdn/generic-content/files
 
@@ -115,7 +127,7 @@ jobs:
 
           ADDITIONAL_LOCALES_FOR_GENERICS_AND_SPAS: de
 
-          BLOG_PAGINATION: true
+          BLOG_PAGINATION: ${{ steps.privileged.outputs.BLOG_PAGINATION }}
 
           # Increase GitHub API limit.
           GITHUB_TOKEN: ${{ github.token }}
