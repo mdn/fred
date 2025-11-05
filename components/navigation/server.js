@@ -1,4 +1,5 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import { WRITER_MODE } from "../env/index.js";
 import { Logo } from "../logo/server.js";
@@ -28,7 +29,7 @@ export class Navigation extends ServerComponent {
           type="button"
           aria-expanded="false"
           aria-controls="navigation__popup"
-          aria-label="Toggle navigation"
+          aria-label=${context.l10n`Toggle navigation`}
         ></button>
         <div class="navigation__popup" id="navigation__popup">
           <div class="navigation__menu">${Menu.render(context)}</div>

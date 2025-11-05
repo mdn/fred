@@ -30,6 +30,7 @@ export class MDNPlayRunner extends LitElement {
     srcPrefix: { type: String, attribute: "src-prefix" },
     allow: { type: String },
     sandbox: { type: String },
+    permalink: { type: Boolean },
     _src: { state: true },
   };
 
@@ -48,7 +49,12 @@ export class MDNPlayRunner extends LitElement {
     this.allow = undefined;
     /** @type {string | undefined} */
     this.sandbox = undefined;
-    this._subdomain = crypto.randomUUID();
+    /** @type {boolean} */
+    this.permalink = false;
+    /** @type {string} */
+    this._uuid = crypto.randomUUID();
+    /** @type {string} */
+    this._subdomain = "";
     /** @type {Promise<true>} */
     this.ready = new Promise((resolve) => {
       this._resolveReady = () => resolve(true);
@@ -85,13 +91,14 @@ export class MDNPlayRunner extends LitElement {
         this.defaults,
         this.theme.value,
         this.srcPrefix,
+        this.permalink,
       ]),
-    task: async ([code, defaults, theme, srcPrefix], { signal }) => {
+    task: async ([code, defaults, theme, srcPrefix, permalink], { signal }) => {
       if (code && code.js && code.wat) {
         const watUrl = await compileAndEncodeWatToDataUrl(code.wat);
         code.js = code.js.replace("{%wasm-url%}", watUrl);
       }
-      const { state } = await compressAndBase64Encode(
+      const { state, hash } = await compressAndBase64Encode(
         JSON.stringify({
           html: code?.html || "",
           css: code?.css || "",
@@ -102,16 +109,17 @@ export class MDNPlayRunner extends LitElement {
       );
       const prefix = (srcPrefix || "").replace(/\/$/, "");
       signal.throwIfAborted();
-      // We're using a random subdomain for origin isolation.
+      const subdomain = permalink ? hash : this._uuid;
       const url = new URL(
         `${prefix}/runner.html`,
         PLAYGROUND_LOCAL
           ? location.origin.replace(PORT.toString(), PLAYGROUND_PORT.toString())
-          : `${location.protocol}//${this._subdomain}.${PLAYGROUND_BASE_HOST}`,
+          : `${location.protocol}//${subdomain}.${PLAYGROUND_BASE_HOST}`,
       );
       // pass the uuid for postMessage isolation
-      url.searchParams.set("uuid", this._subdomain);
+      url.searchParams.set("uuid", subdomain);
       url.searchParams.set("state", state);
+      this._subdomain = subdomain;
       this._src = url.href;
       this.dispatchEvent(
         new CustomEvent("mdn-play-runner-src", {
@@ -151,7 +159,6 @@ export class MDNPlayRunner extends LitElement {
               "allow-scripts",
               "allow-same-origin",
               "allow-forms",
-              "allow-modals",
               ...(this.sandbox?.split(" ") || []),
             ]),
           ].join(" ")}

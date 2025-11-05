@@ -1,12 +1,14 @@
 import { Task } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
 
+import { join } from "lit/directives/join.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
 import "../button/element.js";
 
+import { gleanClick } from "../../utils/glean.js";
 import { mdnUrl2Breadcrumb } from "../../utils/mdn-url2breadcrumb.js";
 import searchIcon from "../icon/search.svg?lit";
 
@@ -80,9 +82,15 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
         throw new Error(`${res.status}: ${res.statusText}`);
       }
 
-      return /** @type {Promise<import("./types.js").SearchResponse>} */ (
-        res.json()
+      const result = /** @type {import("./types.js").SearchResponse} */ (
+        await res.json()
       );
+
+      if (result.documents.length === 0 && result.metadata.total.value === 0) {
+        gleanClick("site-search: no-results");
+      }
+
+      return result;
     },
   });
 
@@ -327,14 +335,17 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                 })}</p>
               <ul class="site-search-results">
                 ${results.documents.map(
-                  (result) =>
+                  (result, index) =>
                     html`<li class="site-search-results__item">
                       <article>
                         <p class="site-search-results__path">
                           ${mdnUrl2Breadcrumb(result.mdn_url, this.locale)}
                         </p>
                         <h2 class="site-search-results__title">
-                          <a href=${result.mdn_url}>
+                          <a
+                            href=${result.mdn_url}
+                            data-glean-id=${`site-search: results[${1 + index + (results.metadata.page - 1) * results.metadata.size}] -> ${this._query} -> ${result.mdn_url}`}
+                          >
                             ${result.highlight.title &&
                             result.highlight.title.length > 0
                               ? unsafeHTML(result.highlight.title[0])
@@ -351,7 +362,10 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                         <p class="site-search-results__description">
                           ${result.highlight.body &&
                           result.highlight.body.length > 0
-                            ? result.highlight.body.map((b) => unsafeHTML(b))
+                            ? join(
+                                result.highlight.body.map((b) => unsafeHTML(b)),
+                                html`<span class="divider"> … </span>`,
+                              )
                             : result.summary}
                         </p>
                       </article>

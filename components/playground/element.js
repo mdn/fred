@@ -239,7 +239,7 @@ ${"```"}`,
     permalink.search = new URLSearchParams({ id }).toString();
     this._permalink = permalink.toString();
 
-    gleanClick("play_action: load-shared");
+    gleanClick("playground: load-shared");
     const code = await response.json();
     return stateToSession(code);
   }
@@ -358,7 +358,7 @@ ${"```"}`,
           <section class="playground__runner-console">
             ${this._gistId
               ? html`<mdn-button @click=${this._reportOpen} variant="plain">
-                  Seeing something inappropriate?
+                  ${this.l10n`Seeing something inappropriate?`}
                 </mdn-button>`
               : nothing}
             <mdn-play-runner></mdn-play-runner>
@@ -401,17 +401,23 @@ ${"```"}`,
       </mdn-modal>
       <mdn-modal ${ref(this._reportModal)} class="report">
         <section>
-          <p>Report this malicious or inappropriate shared playground.</p>
+          <p>
+            ${this
+              .l10n`Report this malicious or inappropriate shared playground.`}
+          </p>
           <label>
-            Can you please share some details on what's wrong with this content:
+            ${this
+              .l10n`Can you please share some details on what's wrong with this content:`}
             <textarea></textarea>
           </label>
         </section>
         <section>
           <mdn-button variant="secondary" @click=${this._reportCancel}
-            >Cancel</mdn-button
+            >${this.l10n`Cancel`}</mdn-button
           >
-          <mdn-button @click=${this._reportSubmit}>Report</mdn-button>
+          <mdn-button @click=${this._reportSubmit}
+            >${this.l10n`Report`}</mdn-button
+          >
         </section>
       </mdn-modal>
     `;

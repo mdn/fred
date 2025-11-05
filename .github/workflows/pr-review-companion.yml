@@ -5,6 +5,12 @@ on:
     branches:
       - main
 
+permissions:
+  # Authenticate with GCP (same as _deploy.yml).
+  id-token: write
+  # Post comment in pull request.
+  pull-requests: write
+
 jobs:
   deploy:
     if: github.repository_owner == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
@@ -13,3 +19,28 @@ jobs:
     with:
       cancel-in-progress: true
       prefix: fred-pr${{ github.event.pull_request.number }}
+
+  comment:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment in PR
+        run: |
+          COMMENT_ID=$(gh pr view "$PR_NUMBER" --repo "${{ github.repository }}" --comments --json comments \
+            --jq ".comments | sort_by(.createdAt) | map(select(.author.login == \"github-actions\")) | .[0].id")
+          if [ -n "$COMMENT_ID" ]; then
+            gh api graphql -f query='
+                mutation($id:ID!, $body:String!) {
+                  updateIssueComment(input:{id:$id, body:$body}) {
+                    issueComment {
+                      id
+                    }
+                  }
+                }' -f id="$COMMENT_ID" -f body="$BODY"
+          else
+            gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" --body "$BODY"
+          fi
+        env:
+          BODY: "${{ github.sha }} was deployed to: ${{ needs.deploy.outputs.url }}"
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GITHUB_TOKEN: ${{ github.token }}

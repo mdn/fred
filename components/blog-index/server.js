@@ -1,4 +1,5 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import { AuthorDateReadTime } from "../blog/utils.js";
 import { Button } from "../button/server.js";
@@ -76,13 +77,12 @@ export class BlogIndex extends ServerComponent {
   /**
    *
    * @param {import("@fred").Context<import("@rari").BlogPostPage>} context
-   * @returns {import("@lit").TemplateResult}
    */
   render(context) {
     return PageLayout.render(
       context,
       html`
-        <div class="blog-index">
+        <div id="content" class="blog-index">
           <header class="blog-index__header">
             <h1>${context.l10n`Blog it better`}</h1>
           </header>

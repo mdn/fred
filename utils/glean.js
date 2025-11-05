@@ -12,5 +12,8 @@ import GleanMetrics from "@mozilla/glean/metrics";
 export function gleanClick(source) {
   GleanMetrics.recordElementClick({
     id: source,
+    url: globalThis.location.href,
+    referrer: document.referrer,
+    title: document.title,
   });
 }
