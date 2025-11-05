@@ -2,6 +2,10 @@ name: Build Reusable Workflow
 
 on:
   workflow_call:
+    outputs:
+      artifact-name:
+        description: "Name of the uploaded build artifact"
+        value: ${{ jobs.build.outputs.artifact-name }}
 
 permissions:
   contents: read
@@ -12,6 +16,9 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    outputs:
+      artifact-name: ${{ steps.set-artifact-name.outputs.name }}
 
     steps:
       - name: Setup privileged build
@@ -211,9 +218,13 @@ jobs:
         working-directory: mdn/fred
         run: npm run ssr
 
+      - name: Set artifact name
+        id: set-artifact-name
+        run: echo "name=build-output" >> $GITHUB_OUTPUT
+
       - name: Upload build output
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
-          name: build-output
+          name: ${{ steps.set-artifact-name.outputs.name }}
           path: ${{ env.BUILD_OUT_ROOT }}
           retention-days: 1
