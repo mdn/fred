@@ -145,6 +145,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
 
           PARTIAL_BUILD: ${{ inputs.partial }}
+          FILE_LIST: ${{ github.workspace }}/files.txt
         run: |
           set -eo pipefail
 
@@ -152,7 +153,7 @@ jobs:
 
           if [ "$PARTIAL_BUILD" = "true" ]; then
             # Partial build.
-            find $CONTENT_ROOT -maxdepth 4 ! -path "*/en-us/glossary/*" -type f -name 'index.md' >> ${{ github.workspace }}/files.txt
+            find $CONTENT_ROOT -maxdepth 4 ! -path "*/en-us/glossary/*" -type f -name 'index.md' >> "$FILE_LIST"
             find $CONTENT_ROOT -path '*/en-us/glossary/index.md' \
               -o -path '*/en-us/learn_web_development/core/css_layout/flexbox/index.md' \
               -o -path '*/en-us/learn_web_development/core/scripting/index.md' \
@@ -204,9 +205,9 @@ jobs:
               -o -path '*/en-us/web/javascript/reference/global_objects/index.md' \
               -o -path '*/en-us/web/javascript/reference/global_objects/temporal/index.md' \
               -o -path '*/en-us/web/javascript/reference/operators/index.md' \
-              -o -path '*/en-us/web/javascript/reference/statements/index.md' >> ${{ github.workspace }}/files.txt
+              -o -path '*/en-us/web/javascript/reference/statements/index.md' >> "$FILE_LIST"
 
-            FILE_LIST="--file-list ${{ github.workspace }}/files.txt"
+            FILE_LIST="--file-list $FILE_LIST"
           else
             # Full build.
             FILE_LIST=""
