@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.8.1](https://github.com/mdn/fred/compare/v1.8.0...v1.8.1) (2025-11-06)
+
+
+### Bug Fixes
+
+* **telemetry:** insert gtag first, then configure ([#935](https://github.com/mdn/fred/issues/935)) ([e47a811](https://github.com/mdn/fred/commit/e47a811bb9cf24f844d11357ff9ebb610f3d06ad))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.17 to 7.1.18 ([#1048](https://github.com/mdn/fred/issues/1048)) ([bffd627](https://github.com/mdn/fred/commit/bffd627214a16515203abbb15c29848c9fe5e369))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.18 to 7.1.19 ([#1055](https://github.com/mdn/fred/issues/1055)) ([5136299](https://github.com/mdn/fred/commit/51362999ffb4871c4b422feace3f7e5409543abc))
+* **deps-dev:** bump the dev group across 1 directory with 10 updates ([#1050](https://github.com/mdn/fred/issues/1050)) ([24393ed](https://github.com/mdn/fred/commit/24393edd9af19748b29f137b86e3b25b8a18e97e))
+* **deps-dev:** bump the dev group with 2 updates ([#1054](https://github.com/mdn/fred/issues/1054)) ([83e0860](https://github.com/mdn/fred/commit/83e0860e9e5c8e03d8ecc3a71cae0728791fb4bf))
+* **deps-dev:** bump the dev group with 5 updates ([#1052](https://github.com/mdn/fred/issues/1052)) ([3d741ee](https://github.com/mdn/fred/commit/3d741ee984bfbd5fc1f8f34839740f20b572790d))
+* **deps:** bump @mdn/rari from 0.1.54 to 0.2.0 ([#1049](https://github.com/mdn/fred/issues/1049)) ([3688bba](https://github.com/mdn/fred/commit/3688bba3374c50489fd51b9e680a15cdd66d9627))
+* **menu:** update CSS Properties / Selectors link ([#1042](https://github.com/mdn/fred/issues/1042)) ([95fb58e](https://github.com/mdn/fred/commit/95fb58e4ae4c878feecc2c227d95af160a737451))
+* **menu:** update missing docs in parallel ([#1046](https://github.com/mdn/fred/issues/1046)) ([f5ed81d](https://github.com/mdn/fred/commit/f5ed81d81f0cc1d59b4cdb1d0e6b49f80b0a65d8))
+
 ## [1.8.0](https://github.com/mdn/fred/compare/v1.7.0...v1.8.0) (2025-10-31)
 
 
