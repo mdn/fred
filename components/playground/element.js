@@ -31,7 +31,6 @@ export class MDNPlayground extends L10nMixin(LitElement) {
 
   static properties = {
     _gistID: { state: true },
-    _showReportHintBanner: { state: true },
   };
 
   constructor() {
@@ -40,8 +39,6 @@ export class MDNPlayground extends L10nMixin(LitElement) {
     this._autoRun = true;
     /** @type {string | undefined} */
     this._gistId = undefined;
-    /** @type {boolean} */
-    this._showReportHintBanner = false;
   }
 
   /** @type {Ref<MDNPlayController>} */
@@ -85,7 +82,6 @@ export class MDNPlayground extends L10nMixin(LitElement) {
     ) {
       controller.clear();
       this._autoRun = true;
-      this._showReportHintBanner && this._dismissReportHintBanner();
       this._storeSession();
       this.requestUpdate();
       const urlWithoutSearch = new URL(location.href);
@@ -193,7 +189,6 @@ ${"```"}`,
 
       if (idParam) {
         this._gistId = idParam;
-        this._showReportHintBanner = true;
       }
 
       const { srcPrefix: srcPrefixState, code } =
@@ -261,10 +256,6 @@ ${"```"}`,
     this.requestUpdate();
   }
 
-  _dismissReportHintBanner() {
-    this._showReportHintBanner = false;
-  }
-
   _reportOpen() {
     this._reportModal.value?.showModal();
   }
@@ -290,18 +281,6 @@ ${"```"}`,
   connectedCallback() {
     super.connectedCallback();
     this._user.run();
-  }
-
-  _renderReportHintBanner() {
-    return html`<section class="playground__runner-report-hint-banner">
-      <mdn-button
-        @click=${this._reportOpen}
-        variant="plain"
-        .icon=${warningIcon}
-      >
-        Seeing something inappropriate?
-      </mdn-button>
-    </section>`;
   }
 
   render() {
@@ -377,10 +356,20 @@ ${"```"}`,
               ></mdn-play-editor>
             </details>
           </section>
-          ${this._gistId && this._showReportHintBanner
-            ? html`${this._renderReportHintBanner()}`
-            : nothing}
           <section class="playground__runner-console">
+            ${this._gistId
+              ? html`<aside class="playground__runner-menu">
+                  <menu>
+                    <mdn-button
+                      @click=${this._reportOpen}
+                      variant="plain"
+                      .icon=${warningIcon}
+                    >
+                      ${this.l10n`Seeing something inappropriate?`}
+                    </mdn-button>
+                  </menu>
+                </aside>`
+              : nothing}
             <mdn-play-runner></mdn-play-runner>
             <div class="playground__console">
               <div>${this.l10n`Console`}</div>
