@@ -68,8 +68,8 @@ export const TABS = [
         items: [
           { slug: "Web/CSS/Reference/Properties", text: "Properties" },
           { slug: "Web/CSS/Reference/Selectors", text: "Selectors" },
-          { slug: "Web/CSS/CSS_syntax/At-rule", text: "At-rules" },
-          { slug: "Web/CSS/CSS_values_and_units", text: "Values & units" },
+          { slug: "Web/CSS/Reference/At-rules", text: "At-rules" },
+          { slug: "Web/CSS/Reference/Values", text: "Values" },
           {
             slug: "Web/CSS/Reference",
             text: "See all…",
