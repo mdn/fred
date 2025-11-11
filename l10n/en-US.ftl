@@ -61,6 +61,7 @@ obs-mdn = The { -brand-name-obs } provides effective security insights, guided b
 
 
 compat-loading = Loading…
+compat-js-required = Enable JavaScript to view this browser compatibility table.
 
 compat-browser-version-date = { $browser } { $version } – Release date: { $date }
 compat-browser-version-released = Release date: { $date }
@@ -146,3 +147,9 @@ settings = My settings
 
 example-play-button-label = Play
 example-play-button-title = Run example in MDN Playground (opens in new tab)
+
+content-feedback-question = Was this page helpful to you?
+content-feedback-reason = Why was this page not helpful to you?
+content-feedback-thanks = Thank you for your feedback!
+
+writer-reload-polling = Polling every { $seconds }s

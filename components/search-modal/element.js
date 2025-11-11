@@ -245,6 +245,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
             type="search"
             name="q"
             .value=${this._query}
+            autocomplete="off"
             autofocus
             @input=${this._input}
             placeholder=${this.l10n`Search`}

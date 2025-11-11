@@ -37,29 +37,37 @@ console.log(`Checking ${slugs.length} slugs in ${locales.length} locales…`);
 const result = {};
 for (const locale of locales) {
   console.log(`\n=== ${locale} ===`);
-  result[locale] = [];
+  const missingSlugs = await Promise.all(
+    slugs.map(
+      /**
+       * @param {string} slug
+       * @returns {Promise<string[]>}
+       */
+      async (slug) => {
+        const url = `https://developer.mozilla.org/${locale}/docs/${slug}`;
 
-  for (const slug of slugs) {
-    const url = `https://developer.mozilla.org/${locale}/docs/${slug}`;
-    process.stdout.write(`.`);
+        try {
+          const res = await fetch(url, { method: "HEAD" });
+          process.stdout.write(`.`);
 
-    try {
-      const res = await fetch(url, { method: "HEAD" });
+          if (res.status === 200) {
+            // All good.
+            return [];
+          } else if (res.status === 404) {
+            // Not found.
+          } else {
+            console.log(`\n⚠️ HTTP ${res.status} [${url}]`);
+          }
+        } catch (error) {
+          console.log(`\n🔥 ERROR: ${error} [${url}]`);
+        }
 
-      if (res.status === 200) {
-        // All good.
-        continue;
-      } else if (res.status === 404) {
-        // Not found.
-      } else {
-        console.log(`\n⚠️ HTTP ${res.status} [${url}]`);
-      }
-    } catch (error) {
-      console.log(`\n🔥 ERROR: ${error} [${url}]`);
-    }
+        return [slug];
+      },
+    ),
+  );
 
-    result[locale].push(slug);
-  }
+  result[locale] = missingSlugs.flat();
 }
 
 const file = path.join(import.meta.dirname, "missing-docs.json");
