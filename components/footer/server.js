@@ -129,7 +129,7 @@ const mozillaLinks = (context) => [
     external: true,
   },
   {
-    text: context.l10n`Cookies`,
+    text: context.l10n`Telemetry Settings`,
     href: "https://www.mozilla.org/en-US/privacy/websites/data-preferences/",
     external: true,
   },
