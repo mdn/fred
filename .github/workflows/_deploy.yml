@@ -11,12 +11,17 @@ on:
         description: "Deployment prefix"
         required: true
         type: string
+      build-artifact-name:
+        description: "Name of the build artifact to download"
+        required: true
+        type: string
     outputs:
       url:
         description: "Deployment URL"
         value: ${{ jobs.deploy.outputs.url }}
 
 permissions:
+  contents: read
   # Authenticate with GCP.
   id-token: write
 
@@ -40,217 +45,11 @@ jobs:
       url: https://${{ env.PREFIX }}.${{ vars.HOST }}
 
     steps:
-      - name: Stop if PR author/actor is not an admin
-        if: ${{ github.event_name == 'pull_request' }}
-        env:
-          ACTOR: ${{ github.actor }}
-          AUTHOR: ${{ github.event.pull_request.user.login }}
-          GH_TOKEN: ${{ github.token }}
-          REPO: ${{ github.repository }}
-          RUN_ID: ${{ github.run_id }}
-        run: |
-          # Check author.
-          AUTHOR_PERMISSION=$(gh api https://api.github.com/repos/$REPO/collaborators/$AUTHOR/permission --jq .permission)
-          if [ "$AUTHOR_PERMISSION" != "admin" ]; then
-              echo "PR author ($AUTHOR) is not an admin, please ping someone for a review."
-              gh run cancel --repo "$REPO" $RUN_ID
-              exit 1
-          fi
-
-          # Check actor.
-          if [ "$ACTOR" != "$AUTHOR" ]; then
-              ACTOR_PERMISSION=$(gh api https://api.github.com/repos/$REPO/collaborators/$ACTOR/permission --jq .permission)
-              if [ "$ACTOR_PERMISSION" != "admin" ]; then
-                  echo "PR actor ($ACTOR) is not an admin, please ping someone for a review."
-                  gh run cancel --repo "$REPO" $RUN_ID
-                  exit 1
-              fi
-          fi
-
-      - name: Checkout (fred)
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - name: Download build output
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
-          path: mdn/fred
-          persist-credentials: false
-
-      - name: Checkout (content)
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-        with:
-          repository: mdn/content
-          path: mdn/content
-          persist-credentials: false
-
-      - name: Checkout (translated-content)
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-        with:
-          repository: mdn/translated-content
-          path: mdn/translated-content
-          persist-credentials: false
-
-      - name: Checkout (curriculum)
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-        with:
-          repository: mdn/curriculum
-          path: mdn/curriculum
-          persist-credentials: false
-
-      - name: Checkout (blog)
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-        with:
-          repository: mdn/blog
-          path: mdn/blog
-          lfs: true
-          token: ${{ secrets.MDN_STUDIO_PAT }}
-          persist-credentials: false
-
-      - name: Checkout (generic-content)
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-        with:
-          repository: mdn/generic-content
-          path: mdn/generic-content
-          persist-credentials: false
-
-      - name: Checkout (mdn-contributor-spotlight)
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-        with:
-          repository: mdn/mdn-contributor-spotlight
-          path: mdn/mdn-contributor-spotlight
-          persist-credentials: false
-
-      - name: Setup (fred)
-        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
-        with:
-          node-version-file: "mdn/fred/.nvmrc"
-          cache: npm
-          cache-dependency-path: "mdn/fred/package-lock.json"
-
-      - name: Install (fred)
-        working-directory: mdn/fred
-        run: npm ci
-        env:
-          # Increase GitHub API limit.
-          GITHUB_TOKEN: ${{ github.token }}
-
-      - name: Build (fred)
-        working-directory: mdn/fred
-        env:
-          FRED_GA_ENABLED: true
-          FRED_GA_MEASUREMENT_ID: G-ZG5HNVZRY0
-          FRED_GLEAN_ENABLED: true
-          FRED_GLEAN_CHANNEL: review
-          FRED_PLAYGROUND_BASE_HOST: mdnyalp.dev
-          FRED_ROBOTS_GLOBAL_ALLOW: false
-          FRED_BCD_BASE_URL: https://bcd.developer.allizom.org
-          FRED_OBSERVATORY_API_URL: https://observatory-api.mdn.allizom.net
-          REACT_APP_FXA_SETTINGS_URL: https://accounts.stage.mozaws.net/settings/
-          REACT_APP_MDN_PLUS_SUBSCRIBE_URL_SP3_BASE: https://payments-next.allizom.org
-          REACT_APP_MDN_PLUS_5M_SP3_ID: mdnplus5mstage
-          REACT_APP_MDN_PLUS_5Y_SP3_ID: mdnplus5ystage
-          REACT_APP_MDN_PLUS_10M_SP3_ID: mdnsupporter10mstage
-          REACT_APP_MDN_PLUS_10Y_SP3_ID: mdnsupporter10ystage
-          REACT_APP_GLEAN_CHANNEL: review
-          REACT_APP_GLEAN_ENABLED: true
-          REACT_APP_UPDATES_BASE_URL: https://updates.developer.allizom.org
-        run: npm run build
-
-      - name: Build (rari)
-        working-directory: mdn/fred
-        env:
-          CONTENT_ROOT: ${{ github.workspace }}/mdn/content/files
-          CONTENT_TRANSLATED_ROOT: ${{ github.workspace }}/mdn/translated-content/files
-          CONTRIBUTOR_SPOTLIGHT_ROOT: ${{ github.workspace }}/mdn/mdn-contributor-spotlight/contributors
-          BLOG_ROOT: ${{ github.workspace }}/mdn/blog/content/posts
-          CURRICULUM_ROOT: ${{ github.workspace }}/mdn/curriculum
-          GENERIC_CONTENT_ROOT: ${{ github.workspace }}/mdn/generic-content/files
-
-          LIVE_SAMPLES_BASE_URL: https://live.mdnyalp.dev
-          INTERACTIVE_EXAMPLES_BASE_URL: https://interactive-examples.mdn.allizom.net
-
-          ADDITIONAL_LOCALES_FOR_GENERICS_AND_SPAS: de
-
-          BLOG_PAGINATION: true
-
-          # Increase GitHub API limit.
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          set -eo pipefail
-
-          npm run rari git-history
-
-          if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
-            # Partial build.
-            find $CONTENT_ROOT -maxdepth 4 ! -path "*/en-us/glossary/*" -type f -name 'index.md' >> ${{ github.workspace }}/files.txt
-            find $CONTENT_ROOT -path '*/en-us/glossary/index.md' \
-              -o -path '*/en-us/learn_web_development/core/css_layout/flexbox/index.md' \
-              -o -path '*/en-us/learn_web_development/core/scripting/index.md' \
-              -o -path '*/en-us/learn_web_development/core/structuring_content/index.md' \
-              -o -path '*/en-us/learn_web_development/core/structuring_content/basic_html_syntax/index.md' \
-              -o -path '*/en-us/learn_web_development/core/structuring_content/html_video_and_audio/index.md' \
-              -o -path '*/en-us/learn_web_development/core/styling_basics/box_model/index.md' \
-              -o -path '*/en-us/learn_web_development/core/styling_basics/getting_started/index.md' \
-              -o -path '*/en-us/learn_web_development/core/styling_basics/what_is_css/index.md' \
-              -o -path '*/en-us/learn_web_development/extensions/advanced_javascript_objects/index.md' \
-              -o -path '*/en-us/learn_web_development/howto/solve_html_problems/use_javascript_within_a_webpage/index.md' \
-              -o -path '*/en-us/learn_web_development/howto/solve_html_problems/use_data_attributes/index.md' \
-              -o -path '*/en-us/mozilla/add-ons/webextensions/index.md' \
-              -o -path '*/en-us/web/api/canvas_api/index.md' \
-              -o -path '*/en-us/web/api/canvas_api/manipulating_video_using_canvas/index.md' \
-              -o -path '*/en-us/web/api/contactsmanager/index.md' \
-              -o -path '*/en-us/web/api/fetch_api/index.md' \
-              -o -path '*/en-us/web/api/geolocation_api/index.md' \
-              -o -path '*/en-us/web/api/performance/index.md' \
-              -o -path '*/en-us/web/api/view_transition_api/index.md' \
-              -o -path '*/en-us/web/api/web_animations_api/using_the_web_animations_api/index.md' \
-              -o -path '*/en-us/web/api/web_audio_api/using_web_audio_api/index.md' \
-              -o -path '*/en-us/web/api/window/index.md' \
-              -o -path '*/en-us/web/api/window/innerwidth/index.md' \
-              -o -path '*/en-us/web/css/@container/index.md' \
-              -o -path '*/en-us/web/css/color/index.md' \
-              -o -path '*/en-us/web/css/css_animations/using_css_animations/index.md' \
-              -o -path '*/en-us/web/css/css_backgrounds_and_borders/border-image_generator/index.md' \
-              -o -path '*/en-us/web/css/css_backgrounds_and_borders/border-radius_generator/index.md' \
-              -o -path '*/en-us/web/css/css_backgrounds_and_borders/box-shadow_generator/index.md' \
-              -o -path '*/en-us/web/css/css_colors/index.md' \
-              -o -path '*/en-us/web/css/css_colors/color_format_converter/index.md' \
-              -o -path '*/en-us/web/css/css_selectors/index.md' \
-              -o -path '*/en-us/web/css/css_syntax/at-rule/index.md' \
-              -o -path '*/en-us/web/css/functions/index.md' \
-              -o -path '*/en-us/web/css/guides/index.md' \
-              -o -path '*/en-us/web/css/modules/index.md' \
-              -o -path '*/en-us/web/css/properties/index.md' \
-              -o -path '*/en-us/web/css/reference/index.md' \
-              -o -path '*/en-us/web/html/attributes/index.md' \
-              -o -path '*/en-us/web/html/date_and_time_formats/index.md' \
-              -o -path '*/en-us/web/html/element/index.md' \
-              -o -path '*/en-us/web/html/global_attributes/index.md' \
-              -o -path '*/en-us/web/html/reference/index.md' \
-              -o -path '*/en-us/web/html/responsive_images/index.md' \
-              -o -path '*/en-us/web/javascript/guide/inheritance_and_the_prototype_chain/index.md' \
-              -o -path '*/en-us/web/javascript/reference/index.md' \
-              -o -path '*/en-us/web/javascript/reference/functions/index.md' \
-              -o -path '*/en-us/web/javascript/reference/global_objects/index.md' \
-              -o -path '*/en-us/web/javascript/reference/global_objects/temporal/index.md' \
-              -o -path '*/en-us/web/javascript/reference/operators/index.md' \
-              -o -path '*/en-us/web/javascript/reference/statements/index.md' >> ${{ github.workspace }}/files.txt
-
-            FILE_LIST="--file-list ${{ github.workspace }}/files.txt"
-          else
-            # Full build.
-            FILE_LIST=""
-
-            # Build French, but not other locales.
-            ignore_locales='es ja ko pt-br ru zh-cn zh-tw'
-            for locale in $ignore_locales
-            do
-              rm -rf $CONTENT_TRANSLATED_ROOT/$locale
-            done
-          fi
-
-          npm run rari build -- --all $FILE_LIST --templ-stats
-
-      - name: Render (fred)
-        working-directory: mdn/fred
-        run: npm run ssr
+          name: ${{ inputs.build-artifact-name }}
+          path: ${{ env.BUILD_OUT_ROOT }}
 
       - name: Authenticate with GCP
         uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
