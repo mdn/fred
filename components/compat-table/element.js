@@ -4,8 +4,6 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
-import { randomIdString } from "../utils/index.js";
-
 import { DEFAULT_LOCALE, ISSUE_METADATA_TEMPLATE } from "./constants.js";
 import styles from "./element.css?lit";
 import {
@@ -70,6 +68,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     _pathname: { state: true },
     _platforms: { state: true },
     _browsers: { state: true },
+    _showTimelineId: { state: true },
   };
 
   static styles = styles;
@@ -87,6 +86,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     this._platforms = [];
     /** @type {import("@bcd").BrowserName[]} */
     this._browsers = [];
+    /** @type {string|undefined} */
+    this._showTimelineId = undefined;
   }
 
   get _breadcrumbs() {
@@ -372,7 +373,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       features = features.slice(0, MAX_FEATURES);
     }
 
-    const featureRows = features.map((feature) => {
+    const featureRows = features.map((feature, featureIndex) => {
       // <FeatureRow>
       const { name, compat, depth } = feature;
 
@@ -401,65 +402,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         </div>`;
       }
 
-      const handleMousedown = (/** @type {MouseEvent} */ event) => {
-        if (event.button !== 0) {
-          // Ignore middle/right button.
-          return;
-        }
-
-        // Blur active element if already focused.
-        const activeElement = this.shadowRoot?.activeElement;
-        const { currentTarget } = event;
-
-        if (
-          activeElement instanceof HTMLElement &&
-          currentTarget instanceof HTMLElement
-        ) {
-          const activeCell = activeElement.closest("td");
-          const currentCell = currentTarget.closest("td");
-
-          if (activeCell === currentCell) {
-            activeElement.blur();
-            event.preventDefault();
-            return;
-          }
-        }
-
-        if (currentTarget instanceof HTMLElement) {
-          // Workaround for Safari, which doesn't focus implicitly.
-          setTimeout(() => currentTarget.focus(), 0);
-        }
-      };
-
-      const toggleAriaExpanded =
-        /**
-         * @param {Event} event
-         * @param {boolean} expanded
-         */
-        (event, expanded) => {
-          const target = event.composedPath()?.[0] || event.target;
-          if (target instanceof HTMLElement) {
-            const controls = target.getAttribute("aria-controls");
-            if (controls) {
-              const controlsElement = this.shadowRoot?.querySelector(
-                `#${controls}`,
-              );
-              if (controlsElement instanceof HTMLElement) {
-                controlsElement.setAttribute(
-                  "aria-expanded",
-                  expanded ? "true" : "false",
-                );
-              }
-            }
-          }
-        };
-
-      const handleFocus = /** @param {Event} event */ (event) =>
-        toggleAriaExpanded(event, true);
-      const handleBlur = /** @param {Event} event */ (event) =>
-        toggleAriaExpanded(event, false);
-
-      const browserCells = browsers.map((browserName) => {
+      const browserCells = browsers.map((browserName, browserIndex) => {
         // <CompatCell>
         const browser = browserInfo[browserName];
         if (!browser) {
@@ -469,34 +412,42 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           version_added: false,
         };
 
-        const timelineId = randomIdString("timeline-");
+        const timelineId = `timeline-${featureIndex}-${browserIndex}`;
         const supportClassName = getSupportClassName(support, browser);
         const notes = this._renderNotes(browser, support);
 
+        const hasHistory = notes.length > 0;
+        const isExpanded = hasHistory && this._showTimelineId == timelineId;
+
+        const handleClick = () => {
+          if (isExpanded) {
+            this._showTimelineId = undefined;
+          } else if (hasHistory) {
+            this._showTimelineId = timelineId;
+          }
+        };
+
         return html`<td
           class=${`bc-support bc-browser-${browserName} bc-supports-${supportClassName} ${
-            notes ? "bc-has-history" : ""
+            hasHistory ? "bc-has-history" : ""
           }`}
         >
           <button
             type="button"
-            aria-controls=${timelineId}
-            title=${ifDefined(notes && "Toggle history")}
-            @mousedown=${handleMousedown}
-            @focus=${handleFocus}
-            @blur=${handleBlur}
+            aria-controls=${ifDefined(hasHistory ? timelineId : undefined)}
+            aria-expanded=${ifDefined(hasHistory ? isExpanded : undefined)}
+            title=${ifDefined(hasHistory && "Toggle history")}
+            @click=${handleClick}
           >
             ${this._renderCellText(support, browser)}
           </button>
-          ${notes &&
-          html`<div
-            id=${timelineId}
-            class="timeline"
-            tabindex="0"
-            aria-expanded="false"
-          >
-            <dl class="bc-notes-list">${notes}</dl>
-          </div>`}
+          ${hasHistory
+            ? html`<div id=${timelineId} class="timeline" tabindex="0">
+                ${isExpanded
+                  ? html`<dl class="bc-notes-list">${notes}</dl>`
+                  : nothing}
+              </div>`
+            : nothing}
         </td>`;
       });
 
