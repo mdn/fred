@@ -1,8 +1,11 @@
 import { LitElement, html } from "lit";
 
-import { randomIdString } from "../utils/index.js";
+import { deterministicIdString } from "../utils/index.js";
 
 import styles from "./element.css?lit";
+
+// Counter for generating unique dropdown IDs during SSR
+let dropdownCounter = 0;
 
 /**
  * This element has two slots, which should take a single element each.
@@ -30,6 +33,8 @@ export class MDNDropdown extends LitElement {
     super();
     this.open = false;
     this.loaded = false;
+    // Assign a unique instance ID for deterministic SSR rendering
+    this._instanceId = dropdownCounter++;
   }
 
   get _buttonSlotElements() {
@@ -70,7 +75,7 @@ export class MDNDropdown extends LitElement {
   _setAriaAttributes() {
     let id = this._dropdownSlotElements.find((element) => element.id)?.id;
     if (!id) {
-      id = randomIdString("uid_");
+      id = deterministicIdString(this._instanceId, "dropdown-");
       this._dropdownSlotElements[0]?.setAttribute("id", id);
     }
     for (const element of this._buttonSlotElements) {

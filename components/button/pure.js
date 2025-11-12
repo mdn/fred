@@ -1,7 +1,7 @@
 import { html, nothing } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 
-import { randomIdString } from "../utils/index.js";
+import { deterministicIdString } from "../utils/index.js";
 
 /**
  * @param {object} options
@@ -28,7 +28,10 @@ export default function Button({
   variant = "primary",
   action,
 }) {
-  const labelId = randomIdString("label-");
+  const labelId = deterministicIdString(
+    `button-${typeof label === "string" ? label : "btn"}-${href || ""}`,
+    "label-",
+  );
   const iconElement = icon
     ? html`<span class="icon" part="icon">${icon}</span>`
     : nothing;
