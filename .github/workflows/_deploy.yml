@@ -35,6 +35,7 @@ env:
 
 jobs:
   deploy:
+    if: github.repository == 'mdn/fred' && github.secret_source == 'Actions'
     runs-on: ubuntu-latest
 
     outputs:
