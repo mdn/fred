@@ -107,8 +107,10 @@ export class Menu extends ServerComponent {
                                         class=${ifDefined(
                                           [
                                             item.icon && "menu__panel-icon",
-                                            context.locale !== "en-US" &&
-                                              "only-in-en-us",
+                                            (!item.href.startsWith("/") &&
+                                              "external") ||
+                                              (context.locale !== "en-US" &&
+                                                "only-in-en-us"),
                                           ]
                                             .filter(Boolean)
                                             .join(" "),
