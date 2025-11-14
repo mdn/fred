@@ -49,7 +49,14 @@ export class MDNObservatoryForm extends LitElement {
     try {
       // tolerate url-style host values and pick out the hostname part
       const url = new URL(host);
-      this._hostname = url.hostname.trim() || host;
+      let fullHost = url.hostname.trim() || host;
+      if (url.port) {
+        fullHost += ":" + url.port;
+      }
+      if (url.pathname && url.pathname !== "/") {
+        fullHost += url.pathname;
+      }
+      this._hostname = fullHost;
     } catch {
       this._hostname = host;
     }
