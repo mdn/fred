@@ -81,18 +81,18 @@ export const TABS = [
         title: "CSS guides",
         items: [
           {
-            slug: "Web/CSS/CSS_box_model/Introduction_to_the_CSS_box_model",
+            slug: "Web/CSS/Guides/Box_model/Introduction",
             text: "Box model",
           },
           {
-            slug: "Web/CSS/CSS_animations/Using_CSS_animations",
+            slug: "Web/CSS/Guides/Animations/Using",
             text: "Animations",
           },
           {
-            slug: "Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox",
+            slug: "Web/CSS/Guides/Flexible_box_layout/Basic_concepts",
             text: "Flexbox",
           },
-          { slug: "Web/CSS/CSS_colors", text: "Colors" },
+          { slug: "Web/CSS/Guides/Colors/Applying_color", text: "Colors" },
           {
             slug: "Web/CSS/Guides",
             text: "See all…",

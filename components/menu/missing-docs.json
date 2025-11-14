@@ -1,11 +1,12 @@
 {
   "es": [
-    "Web/API/History_API/Working_with_the_History_API",
     "Web/API/Web_Animations_API/Using_the_Web_Animations_API",
     "Web/CSS/CSS_backgrounds_and_borders/Box-shadow_generator",
+    "Web/CSS/CSS_colors/Color_format_converter",
     "Web/CSS/CSS_colors/Color_mixer",
     "Web/CSS/CSS_shapes/Shape_generator",
     "Web/CSS/Guides",
+    "Web/CSS/Guides/Colors/Applying_color",
     "Web/CSS/How_to/Layout_cookbook/Card",
     "Web/CSS/How_to/Layout_cookbook/Center_an_element",
     "Web/CSS/How_to/Layout_cookbook/Column_layouts",
@@ -26,11 +27,7 @@
     "Web/CSS/Reference/Selectors",
     "Web/CSS/Reference/Values"
   ],
-  "ja": [
-    "Web/CSS/Reference/At-rules",
-    "Web/CSS/Reference/Selectors",
-    "Web/CSS/Reference/Values"
-  ],
+  "ja": [],
   "ko": [
     "Learn_web_development/Core",
     "Web/API/Performance",
@@ -40,6 +37,7 @@
     "Web/CSS/CSS_colors/Color_mixer",
     "Web/CSS/CSS_shapes/Shape_generator",
     "Web/CSS/Guides",
+    "Web/CSS/Guides/Colors/Applying_color",
     "Web/CSS/How_to/Layout_cookbook",
     "Web/CSS/How_to/Layout_cookbook/Card",
     "Web/CSS/How_to/Layout_cookbook/Column_layouts",
@@ -61,7 +59,7 @@
     "Web/API/Web_Speech_API/Using_the_Web_Speech_API",
     "Web/API/Web_Workers_API/Using_web_workers",
     "Web/CSS/CSS_backgrounds_and_borders/Box-shadow_generator",
-    "Web/CSS/CSS_colors",
+    "Web/CSS/CSS_colors/Color_format_converter",
     "Web/CSS/CSS_colors/Color_mixer",
     "Web/CSS/CSS_shapes/Shape_generator",
     "Web/CSS/Guides",
@@ -107,7 +105,6 @@
   "zh-CN": [
     "Web/CSS/Reference/At-rules",
     "Web/CSS/Reference/Properties",
-    "Web/CSS/Reference/Selectors",
     "Web/CSS/Reference/Values"
   ],
   "zh-TW": [
@@ -124,11 +121,11 @@
     "Web/CSS/CSS_backgrounds_and_borders/Border-image_generator",
     "Web/CSS/CSS_backgrounds_and_borders/Border-radius_generator",
     "Web/CSS/CSS_backgrounds_and_borders/Box-shadow_generator",
-    "Web/CSS/CSS_box_model/Introduction_to_the_CSS_box_model",
-    "Web/CSS/CSS_colors",
     "Web/CSS/CSS_colors/Color_mixer",
     "Web/CSS/CSS_shapes/Shape_generator",
     "Web/CSS/Guides",
+    "Web/CSS/Guides/Box_model/Introduction",
+    "Web/CSS/Guides/Colors/Applying_color",
     "Web/CSS/How_to/Layout_cookbook",
     "Web/CSS/How_to/Layout_cookbook/Card",
     "Web/CSS/How_to/Layout_cookbook/Center_an_element",
