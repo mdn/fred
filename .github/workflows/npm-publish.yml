@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   build:
-    if: github.repository == 'mdn/fred'
+    if: github.repository == 'mdn/fred' && github.secret_source == 'Actions'
     runs-on: ubuntu-latest
 
     steps:
