@@ -4,7 +4,7 @@
 
 This policy applies to MDN's website (`developer.mozilla.org`), backend services, and GitHub repositories in the [`mdn`](https://github.com/mdn) organization. Issues affecting other Mozilla products or services should be reported through the [Mozilla Security Bug Bounty Program](https://www.mozilla.org/en-US/security/bug-bounty/).
 
-For non-security issues, please file a [content bug](https://github.com/mdn/content/issues/new/choose), a [frontend bug](https://github.com/mdn/fred/issues/new/choose) or a [content/feature suggestion](https://github.com/mdn/mdn/issues/new/choose).
+For non-security issues, please file a [content bug](https://github.com/mdn/content/issues/new/choose), a [website bug](https://github.com/mdn/fred/issues/new/choose) or a [content/feature suggestion](https://github.com/mdn/mdn/issues/new/choose).
 
 ## Reporting a Vulnerability
 
