@@ -29,7 +29,7 @@ try {
   /** @type {import("../entry.ssr.js")} */
   const indexModule = await import(pathToFileURL(indexModulePath).href);
   const html = process.env.FRED_SIMPLE_HTML
-    ? `<!doctype html><meta charset="UTF-8">${await indexModule?.renderSimple(reqPath, context)}`
+    ? `<!doctype html><meta charset="UTF-8">${await indexModule?.renderSimplified(reqPath, context)}`
     : await indexModule?.render(reqPath, context, {
         client: compilationStats.find((x) => x.name === "client") || {},
         legacy: compilationStats.find((x) => x.name === "legacy") || {},

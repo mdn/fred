@@ -27,8 +27,8 @@ export class ServerComponent {
 
     const component = new this();
 
-    if ("renderSimple" in asyncStore) {
-      return component.renderSimple(...args);
+    if ("renderSimplified" in asyncStore) {
+      return component.renderSimplified(...args);
     }
 
     const { componentsUsed, componentsWithStylesInHead, compilationStats } =
@@ -85,7 +85,7 @@ export class ServerComponent {
    * @param {...any} args
    * @returns {any}
    */
-  renderSimple(...args) {
+  renderSimplified(...args) {
     return this.render(...args);
   }
 }

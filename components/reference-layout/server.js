@@ -48,7 +48,7 @@ export class ReferenceLayout extends ServerComponent {
   /**
    * @param {import("@fred").Context<import("@rari").DocPage>} context
    */
-  renderSimple(context) {
+  renderSimplified(context) {
     const { doc } = context;
     const sections =
       doc.body?.map((section) => ContentSection.render(context, section)) || [];

@@ -137,7 +137,7 @@ export async function render(path, partialContext, compilationStats) {
  * @param {string} path
  * @param {import("@fred").PartialContext} partialContext
  */
-export async function renderSimple(path, partialContext) {
+export async function renderSimplified(path, partialContext) {
   const locale = path.split("/")[1] || "en-US";
   const context = {
     path,
@@ -146,7 +146,7 @@ export async function renderSimple(path, partialContext) {
   };
   /** @type {import("./components/server/types.js").FredLocalContents} */
   const storageContents = {
-    renderSimple: true,
+    renderSimplified: true,
   };
   return asyncLocalStorage.run(storageContents, () =>
     runWithContext({ locale }, async () => {

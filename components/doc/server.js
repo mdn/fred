@@ -14,7 +14,7 @@ export class Doc extends ServerComponent {
   /**
    * @param {import("@fred").Context<import("@rari").DocPage>} context
    */
-  renderSimple(context) {
+  renderSimplified(context) {
     return ReferenceLayout.render(context);
   }
 }

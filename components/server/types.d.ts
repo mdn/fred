@@ -5,5 +5,5 @@ export type FredLocalContents =
       compilationStats: import("@fred").CompilationStats;
     }
   | {
-      renderSimple: true;
+      renderSimplified: true;
     };
