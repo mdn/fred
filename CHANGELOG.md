@@ -1,5 +1,37 @@
 # Changelog
 
+## [1.9.0](https://github.com/mdn/fred/compare/v1.8.1...v1.9.0) (2025-11-18)
+
+
+### Features
+
+* **compat-table:** render only visible timeline on click ([#1057](https://github.com/mdn/fred/issues/1057)) ([33b6efe](https://github.com/mdn/fred/commit/33b6efeaf8a05a302d9acf01b03ab099dcc5621f))
+* **compat-table:** toggle timeline with click ([33b6efe](https://github.com/mdn/fred/commit/33b6efeaf8a05a302d9acf01b03ab099dcc5621f))
+
+
+### Bug Fixes
+
+* **compat-table:** show message when JavaScript is disabled ([#890](https://github.com/mdn/fred/issues/890)) ([3ac4661](https://github.com/mdn/fred/commit/3ac4661a1c6985337416d38500e0abeb96f8e77a))
+* **menu:** mark "MDN on GitHub" link as external ([#830](https://github.com/mdn/fred/issues/830)) ([dc32ba4](https://github.com/mdn/fred/commit/dc32ba4a7644fa51d5752fd0bf51e16bbdab976e))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump [@zip](https://github.com/zip).js/zip.js from 2.8.8 to 2.8.10 in the dev group ([#1065](https://github.com/mdn/fred/issues/1065)) ([5be28cc](https://github.com/mdn/fred/commit/5be28cce86c5dfe9f6a3417e61f6ea0717c1255b))
+* **deps-dev:** bump @eslint/compat from 1.4.1 to 2.0.0 ([#1085](https://github.com/mdn/fred/issues/1085)) ([c67b71f](https://github.com/mdn/fred/commit/c67b71fff05752aca7cf6c144bfef554d772bc8e))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.19 to 7.1.20 ([#1066](https://github.com/mdn/fred/issues/1066)) ([fd4d5a4](https://github.com/mdn/fred/commit/fd4d5a4ecb0d54d58ca509e270acee649e9a3fb1))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.20 to 7.1.21 ([#1077](https://github.com/mdn/fred/issues/1077)) ([c9c9cf5](https://github.com/mdn/fred/commit/c9c9cf51ee08bed3cb0d7af733a5c0d9c347a941))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.21 to 7.1.22 ([#1086](https://github.com/mdn/fred/issues/1086)) ([ad91022](https://github.com/mdn/fred/commit/ad91022efdf5dfd753e265db3beb3bc94e1be500))
+* **deps-dev:** bump @types/node from 22.19.0 to 22.19.1 in the dev group ([#1074](https://github.com/mdn/fred/issues/1074)) ([68a0f39](https://github.com/mdn/fred/commit/68a0f39ed86d54f9f3975dea8bdc1ae41eaeeb90))
+* **deps-dev:** bump the dev group with 2 updates ([#1071](https://github.com/mdn/fred/issues/1071)) ([6356d98](https://github.com/mdn/fred/commit/6356d98bb1492e1e3e3fa7e392f4c3129e264672))
+* **deps-dev:** bump the dev group with 2 updates ([#1084](https://github.com/mdn/fred/issues/1084)) ([f908c8c](https://github.com/mdn/fred/commit/f908c8ce69759809eb76fe8be7ac6034b844721d))
+* **deps-dev:** bump the dev group with 3 updates ([#1076](https://github.com/mdn/fred/issues/1076)) ([f8f2ff5](https://github.com/mdn/fred/commit/f8f2ff51aa08dcd45ea2c677229688a81ff63499))
+* **deps-dev:** bump the dev group with 4 updates ([#1080](https://github.com/mdn/fred/issues/1080)) ([7e6ea19](https://github.com/mdn/fred/commit/7e6ea19ab2b86d5071046ec7dbc7cff07ba5cc39))
+* **deps:** bump @mdn/rari from 0.2.0 to 0.2.1 ([#1067](https://github.com/mdn/fred/issues/1067)) ([eaee333](https://github.com/mdn/fred/commit/eaee3332521fb2bc5f846323eb80882d7ec0148d))
+* **deps:** bump @mozilla/glean from 5.0.6 to 5.0.7 in the prod group ([#1083](https://github.com/mdn/fred/issues/1083)) ([06ab3c7](https://github.com/mdn/fred/commit/06ab3c72108125c9ae8357808e5f38996b6e598b))
+* **menu:** update slug for At-Rules and Values ([#1059](https://github.com/mdn/fred/issues/1059)) ([7a7920d](https://github.com/mdn/fred/commit/7a7920d20a51ae269c191fcae79dbe749a8ae924))
+* **menu:** update slug for CSS guides ([#1078](https://github.com/mdn/fred/issues/1078)) ([622b237](https://github.com/mdn/fred/commit/622b2378fbc3790fc8a6d0890ca40499cd0f5942))
+
 ## [1.8.1](https://github.com/mdn/fred/compare/v1.8.0...v1.8.1) (2025-11-07)
 
 
