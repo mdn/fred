@@ -28,10 +28,12 @@ if (!indexModulePath) {
 try {
   /** @type {import("../entry.ssr.js")} */
   const indexModule = await import(pathToFileURL(indexModulePath).href);
-  const html = await indexModule?.render(reqPath, context, {
-    client: compilationStats.find((x) => x.name === "client") || {},
-    legacy: compilationStats.find((x) => x.name === "legacy") || {},
-  });
+  const html = process.env.FRED_SIMPLE_HTML
+    ? `<!doctype html><meta charset="UTF-8">${await indexModule?.renderSimple(reqPath, context)}`
+    : await indexModule?.render(reqPath, context, {
+        client: compilationStats.find((x) => x.name === "client") || {},
+        legacy: compilationStats.find((x) => x.name === "legacy") || {},
+      });
   parentPort?.postMessage({ html });
 } catch (error) {
   parentPort?.postMessage({ error });
