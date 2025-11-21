@@ -1,4 +1,4 @@
-export type AsyncLocalStorageContents =
+export type FredLocalContents =
   | {
       componentsUsed: Set<string>;
       componentsWithStylesInHead: Set<string>;

@@ -56,7 +56,7 @@ export async function render(path, partialContext, compilationStats) {
     ...(await addFluent(locale)),
     ...partialContext,
   };
-  /** @type {import("./components/server/types.js").AsyncLocalStorageContents} */
+  /** @type {import("./components/server/types.js").FredLocalContents} */
   const storageContents = {
     componentsUsed: new Set(),
     componentsWithStylesInHead: new Set(),
@@ -144,7 +144,7 @@ export async function renderSimple(path, partialContext) {
     ...(await addFluent(locale)),
     ...partialContext,
   };
-  /** @type {import("./components/server/types.js").AsyncLocalStorageContents} */
+  /** @type {import("./components/server/types.js").FredLocalContents} */
   const storageContents = {
     renderSimple: true,
   };

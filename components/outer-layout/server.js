@@ -23,8 +23,11 @@ export class OuterLayout extends ServerComponent {
    */
   render(context, markup) {
     const asyncStore = asyncLocalStorage.getStore();
-    if (!asyncStore || "renderSimple" in asyncStore) {
+    if (!asyncStore) {
       throw new Error("asyncLocalStorage missing");
+    }
+    if ("renderSimple" in asyncStore) {
+      throw new Error("OuterLayout called from renderSimple function");
     }
     const { componentsUsed, componentsWithStylesInHead, compilationStats } =
       asyncStore;
