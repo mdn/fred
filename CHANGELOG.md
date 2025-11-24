@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.9.1](https://github.com/mdn/fred/compare/v1.9.0...v1.9.1) (2025-11-24)
+
+
+### Miscellaneous
+
+* **deps-dev:** bump eslint-plugin-jsdoc from 61.2.1 to 61.3.0 in the dev group ([#1089](https://github.com/mdn/fred/issues/1089)) ([72338ac](https://github.com/mdn/fred/commit/72338acdee643e9f5e8e1e2d6cad883cbce96bb4))
+* **deps-dev:** bump the dev group with 3 updates ([#1091](https://github.com/mdn/fred/issues/1091)) ([fceae2f](https://github.com/mdn/fred/commit/fceae2f380e2334792650f072b8069e50eea83af))
+* **deps-dev:** bump the dev group with 3 updates ([#1095](https://github.com/mdn/fred/issues/1095)) ([d859516](https://github.com/mdn/fred/commit/d8595168a602e8fa5dd35f22a8318302f3e79d79))
+* **deps-dev:** bump the dev group with 5 updates ([#1088](https://github.com/mdn/fred/issues/1088)) ([7474875](https://github.com/mdn/fred/commit/7474875efec24e295127bdc4fae3f2f58417095a))
+* **deps:** bump @mdn/rari from 0.2.1 to 0.2.2 ([#1092](https://github.com/mdn/fred/issues/1092)) ([2262836](https://github.com/mdn/fred/commit/22628366e1b9ecc0d8f36811492c5a6f08e62db4))
+* **menu:** update missing docs ([#1094](https://github.com/mdn/fred/issues/1094)) ([1a416ef](https://github.com/mdn/fred/commit/1a416ef7fbc24c527045e3d4e5c0b1888802daff))
+
 ## [1.9.0](https://github.com/mdn/fred/compare/v1.8.1...v1.9.0) (2025-11-18)
 
 
