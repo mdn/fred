@@ -22,11 +22,7 @@
     "Web/URI",
     "Web/WebDriver"
   ],
-  "fr": [
-    "Web/CSS/Reference/At-rules",
-    "Web/CSS/Reference/Selectors",
-    "Web/CSS/Reference/Values"
-  ],
+  "fr": [],
   "ja": [],
   "ko": [
     "Learn_web_development/Core",
