@@ -6,19 +6,29 @@ on:
       - main
 
 permissions:
+  contents: read
   # Authenticate with GCP (same as _deploy.yml).
   id-token: write
   # Post comment in pull request.
   pull-requests: write
 
 jobs:
+  build:
+    if: github.repository_owner == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
+    uses: ./.github/workflows/_build.yml
+    secrets: inherit
+    with:
+      partial: true
+
   deploy:
+    needs: build
     if: github.repository_owner == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
     uses: ./.github/workflows/_deploy.yml
     secrets: inherit
     with:
       cancel-in-progress: true
       prefix: fred-pr${{ github.event.pull_request.number }}
+      build-artifact-name: ${{ needs.build.outputs.artifact-name }}
 
   comment:
     needs: deploy
