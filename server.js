@@ -118,12 +118,10 @@ export async function startServer() {
   if (devMode) {
     const { rspack } = await import("@rspack/core");
     const { default: rspackConfig } = await import("./rspack.config.js");
-    const { default: webpackDevMiddleware } = await import(
-      "webpack-dev-middleware"
-    );
-    const { default: webpackHotMiddleware } = await import(
-      "webpack-hot-middleware"
-    );
+    const { default: webpackDevMiddleware } =
+      await import("webpack-dev-middleware");
+    const { default: webpackHotMiddleware } =
+      await import("webpack-hot-middleware");
 
     const rspackCompiler = rspack(rspackConfig);
 
