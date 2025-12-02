@@ -9,7 +9,7 @@ concurrently(
     },
     {
       cwd: process.env.CONTENT_REPO_ROOT,
-      command: `yarn start`,
+      command: `npm start`,
       name: "content",
       prefixColor: "blue",
     },
