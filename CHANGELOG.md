@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.9.2](https://github.com/mdn/fred/compare/v1.9.1...v1.9.2) (2025-12-02)
+
+
+### Bug Fixes
+
+* **content-section:** update h4 styling ([#1112](https://github.com/mdn/fred/issues/1112)) ([e1b0ed5](https://github.com/mdn/fred/commit/e1b0ed5a4c5a3cffb4c1b8f0a0a96a1a1e410114))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.22 to 7.1.23 ([#1102](https://github.com/mdn/fred/issues/1102)) ([8468a6c](https://github.com/mdn/fred/commit/8468a6c51f786055f5b503f39e70f4724821a526))
+* **deps-dev:** bump prettier from 3.6.2 to 3.7.1 in the dev group ([#1107](https://github.com/mdn/fred/issues/1107)) ([44f4e2e](https://github.com/mdn/fred/commit/44f4e2ed1050490f142259a4a6f5b410000edec7))
+* **deps-dev:** bump the dev group across 1 directory with 9 updates ([#1116](https://github.com/mdn/fred/issues/1116)) ([71f54ba](https://github.com/mdn/fred/commit/71f54ba4c732f3263982b423893acfd623644c86))
+* **deps-dev:** bump the dev group with 2 updates ([#1101](https://github.com/mdn/fred/issues/1101)) ([6c72396](https://github.com/mdn/fred/commit/6c7239652e794230d61389861a09c347d0e450f0))
+* **deps-dev:** bump typescript-eslint from 8.47.0 to 8.48.0 in the dev group ([#1098](https://github.com/mdn/fred/issues/1098)) ([f058267](https://github.com/mdn/fred/commit/f0582679c85bff3aeb4cdc0a6f2cf22d020d5977))
+* **deps:** bump @mdn/rari from 0.2.2 to 0.2.4 ([#1110](https://github.com/mdn/fred/issues/1110)) ([8211aa9](https://github.com/mdn/fred/commit/8211aa98013cb285309e52d9951cf5e58b2fd998))
+* **deps:** bump @mdn/watify from 1.1.5 to 1.1.6 ([#1103](https://github.com/mdn/fred/issues/1103)) ([ff8b186](https://github.com/mdn/fred/commit/ff8b18655b1e297e5294f9db9cf0d39b417d5d55))
+* **deps:** pin npm version ([#1114](https://github.com/mdn/fred/issues/1114)) ([e36a6f8](https://github.com/mdn/fred/commit/e36a6f89c18754e922aad2900921bfbd73eb33f5))
+* **deps:** require npm 10 ([e36a6f8](https://github.com/mdn/fred/commit/e36a6f89c18754e922aad2900921bfbd73eb33f5))
+
 ## [1.9.1](https://github.com/mdn/fred/compare/v1.9.0...v1.9.1) (2025-11-24)
 
 
