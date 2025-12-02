@@ -11,8 +11,9 @@ export type PlacementMap = Record<
   { typ: string; pattern: RegExp; renderer: RegExp }
 >;
 
-export interface PlacementContextData
-  extends Partial<Record<PlacementType, PlacementData>> {
+export interface PlacementContextData extends Partial<
+  Record<PlacementType, PlacementData>
+> {
   plusAvailable?: boolean;
   status: Status;
 }

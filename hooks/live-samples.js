@@ -15,9 +15,8 @@ for (const iframe of document.querySelectorAll("iframe[data-live-id]")) {
       for (const element of document.querySelectorAll(
         `.live-sample___${escapedId}, .live-sample---${escapedId}`,
       )) {
-        const { MDNCodeExample, upgradePre } = await import(
-          "../components/code-example/element.js"
-        );
+        const { MDNCodeExample, upgradePre } =
+          await import("../components/code-example/element.js");
         const codeExample =
           element instanceof MDNCodeExample ? element : upgradePre(element);
         if (codeExample) {
