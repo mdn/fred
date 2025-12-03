@@ -86,7 +86,7 @@
     "@types/he": "^1.2.3",
     "@types/insane": "^1.0.0",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^22.19.2",
+    "@types/node": "^24.10.3",
     "@types/prismjs": "^1.26.5",
     "@types/webpack-hot-middleware": "^2.25.12",
     "@wdio/cli": "^9.21.1",
@@ -135,8 +135,8 @@
     "glob": ">=10.5.0",
     "tmp": ">=0.2.4"
   },
+  "packageManager": "npm@11.6.2",
   "engines": {
-    "node": ">=22"
-  },
-  "packageManager": "npm@10.9.4"
+    "node": ">=24"
+  }
 }
