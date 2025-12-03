@@ -108,7 +108,7 @@
     "eslint-plugin-unicorn": "^62.0.0",
     "eslint-plugin-wc": "^3.0.2",
     "globals": "^16.5.0",
-    "lefthook": "^2.0.4",
+    "lefthook": "^2.0.5",
     "postcss": "^8.5.3",
     "postcss-custom-media": "^11.0.5",
     "postcss-loader": "^8.2.0",
