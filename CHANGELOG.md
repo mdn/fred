@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.9.4](https://github.com/mdn/fred/compare/v1.9.3...v1.9.4) (2025-12-03)
+
+
+### Miscellaneous
+
+* **deps-dev:** bump lefthook from 2.0.4 to 2.0.5 in the dev group ([#1118](https://github.com/mdn/fred/issues/1118)) ([747ad38](https://github.com/mdn/fred/commit/747ad38a6057b8217a7308d859d378ea8696b052))
+* **deps:** bump @mdn/rari from 0.2.4 to 0.2.5 ([#1119](https://github.com/mdn/fred/issues/1119)) ([7d143fc](https://github.com/mdn/fred/commit/7d143fc2de292b44701b9ccbba2a1cf8ca1aca7a))
+* **deps:** bump @mdn/watify from 1.1.6 to 1.1.7 ([#1120](https://github.com/mdn/fred/issues/1120)) ([d6a4aa8](https://github.com/mdn/fred/commit/d6a4aa8a62b026750ff881cae18845da8d3b4752))
+* **deps:** bump express from 5.1.0 to 5.2.1 in the prod group ([#1117](https://github.com/mdn/fred/issues/1117)) ([4845292](https://github.com/mdn/fred/commit/484529239e766a7fadabaf9418017eaba5bb9665))
+
 ## [1.9.3](https://github.com/mdn/fred/compare/v1.9.2...v1.9.3) (2025-12-03)
 
 
