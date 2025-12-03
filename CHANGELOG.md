@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.9.3](https://github.com/mdn/fred/compare/v1.9.2...v1.9.3) (2025-12-03)
+
+
+### Miscellaneous
+
+* **deps:** unpin npm version, set `packageManager` instead ([#1124](https://github.com/mdn/fred/issues/1124)) ([a1435c1](https://github.com/mdn/fred/commit/a1435c1346d39f12a75fabc62c22ece2664a2139))
+* **npm:** specify version via `packageManager` field ([a1435c1](https://github.com/mdn/fred/commit/a1435c1346d39f12a75fabc62c22ece2664a2139))
+
 ## [1.9.2](https://github.com/mdn/fred/compare/v1.9.1...v1.9.2) (2025-12-02)
 
 
