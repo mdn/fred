@@ -76,7 +76,6 @@ jobs:
       - name: Install
         run: npm ci
         env:
-          # Increase GitHub API limit.
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Build
@@ -85,4 +84,5 @@ jobs:
       - name: Run
         env:
           CONTENT_ROOT: ../content/files
+          GITHUB_TOKEN: ${{ github.token }}
         run: node scripts/tests.js
