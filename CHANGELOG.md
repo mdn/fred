@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.9.5](https://github.com/mdn/fred/compare/v1.9.4...v1.9.5) (2025-12-04)
+
+
+### Miscellaneous
+
+* **deps-dev:** bump the dev group with 2 updates ([#1128](https://github.com/mdn/fred/issues/1128)) ([4db6bb4](https://github.com/mdn/fred/commit/4db6bb498bb3739847e7fdd4174fec5a75adcfb5))
+* **deps:** bump @mdn/rari from 0.2.5 to 0.2.6 ([#1129](https://github.com/mdn/fred/issues/1129)) ([49617fd](https://github.com/mdn/fred/commit/49617fdaf2d1bf8f9e77e0ebf42e1b5a3eabdf5e))
+* **deps:** bump open-editor from 5.1.0 to 6.0.0 ([#1096](https://github.com/mdn/fred/issues/1096)) ([c76f12f](https://github.com/mdn/fred/commit/c76f12fa1a830490f2c38a0e73b108f1c1881111))
+
 ## [1.9.4](https://github.com/mdn/fred/compare/v1.9.3...v1.9.4) (2025-12-03)
 
 
