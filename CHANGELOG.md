@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.6](https://github.com/mdn/fred/compare/v1.9.5...v1.9.6) (2025-12-04)
+
+
+### Miscellaneous
+
+* **deps:** bump @mdn/rari from 0.2.6 to 0.2.7 ([#1133](https://github.com/mdn/fred/issues/1133)) ([16b28d1](https://github.com/mdn/fred/commit/16b28d15dd50cd100faca93b5edbb19956856355))
+
 ## [1.9.5](https://github.com/mdn/fred/compare/v1.9.4...v1.9.5) (2025-12-04)
 
 
