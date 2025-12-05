@@ -264,7 +264,7 @@ export const TABS = [
         title: "Topics",
         items: [
           { slug: "Web/Media", text: "Media" },
-          { slug: "Web/API/Performance", text: "Performance" },
+          { slug: "Web/Performance", text: "Performance" },
           { slug: "Web/Privacy", text: "Privacy" },
           { slug: "Web/Security", text: "Security" },
           {
