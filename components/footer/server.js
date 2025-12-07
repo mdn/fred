@@ -174,6 +174,8 @@ export class Footer extends ServerComponent {
                 <li>
                   <a
                     href=${item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label=${item.ariaLabel}
                     data-icon=${item.icon}
                   ></a>
@@ -194,8 +196,11 @@ export class Footer extends ServerComponent {
                           <a
                             href=${link.href}
                             class=${link.external ? "external" : ""}
-                            >${link.text}</a
+                            target=${link.external ? "_blank" : undefined}
+                            rel=${link.external ? "noopener noreferrer" : undefined}
                           >
+                            ${link.text}
+                          </a>
                         </li>
                       `,
                     )}
