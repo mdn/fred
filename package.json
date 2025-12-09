@@ -131,6 +131,9 @@
     "webpack-merge": "^6.0.1",
     "webpack-stats-plugin": "^1.1.3"
   },
+  "overrides": {
+    "tmp": ">=0.2.4"
+  },
   "engines": {
     "node": ">=22"
   },
