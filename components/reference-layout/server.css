@@ -1,25 +1,9 @@
+@import url("../layout/2-sidebars.css");
+
 /* Reference Layout */
 
 .reference-layout {
-  display: grid;
-
-  grid-template-areas:
-    "sidebar . header . toc"
-    "sidebar . body   . toc";
-  grid-template-rows: min-content 1fr;
-  grid-template-columns: var(--layout-2-sidebars);
-
-  justify-content: space-between;
-
-  padding-inline: var(--layout-side-padding);
-
-  .reference-layout__content {
-    display: contents;
-  }
-
   .reference-layout__header {
-    grid-area: header;
-
     h1 {
       margin: 1rem 0;
 
@@ -31,12 +15,7 @@
   }
 
   .reference-layout__body {
-    grid-area: body;
     padding-bottom: 3rem;
-  }
-
-  .reference-layout__sidebar {
-    grid-area: sidebar;
   }
 
   .reference-layout__toc {
@@ -44,90 +23,14 @@
 
     flex-wrap: wrap;
 
-    grid-area: toc;
-
     gap: 0.5rem;
     align-content: start;
     align-items: start;
     justify-content: space-between;
   }
 
-  .reference-layout__sidebar,
-  .reference-layout__toc {
-    position: sticky;
-    top: var(--sticky-header-height);
-
-    max-height: calc(100vh - var(--sticky-header-height));
-
-    overflow-y: auto;
-
-    outline-offset: -2px;
-  }
-
-  @media (--screen-layout-2-sidebars) {
-    .reference-layout__sidebar {
-      padding-right: var(--layout-sidebar-padding);
-      padding-left: var(--layout-side-padding-min);
-      margin-left: calc(-1 * var(--layout-side-padding-min));
-    }
-
-    .reference-layout__toc {
-      padding-right: var(--layout-side-padding-min);
-      padding-left: var(--layout-sidebar-padding);
-      margin-right: calc(-1 * var(--layout-side-padding-min));
-    }
-  }
-
-  @media (--screen-layout-1-sidebar-or-less) {
-    grid-template-areas:
-      "toc . header"
-      "toc . body";
-    grid-template-columns: var(--layout-1-sidebar-left);
-
-    .reference-layout__sidebar {
-      z-index: 1;
-
-      display: none;
-
-      grid-area: toc;
-
-      background: var(--color-background-page);
-    }
-
-    .reference-layout__sidebar,
-    .reference-layout__toc {
-      padding-right: var(--layout-sidebar-padding);
-      padding-left: var(--layout-side-padding-min);
-      margin-left: calc(-1 * var(--layout-side-padding-min));
-    }
-  }
-
   @media (--screen-layout-no-sidebar) {
-    display: block;
-
-    .reference-layout__sidebar,
     .reference-layout__toc {
-      padding-right: unset;
-      padding-left: unset;
-      margin-left: unset;
-    }
-
-    .reference-layout__sidebar {
-      position: fixed;
-      inset: 0;
-      top: var(--sticky-header-height);
-      z-index: var(--z-index-sidebar-mobile);
-
-      padding: 0 var(--layout-side-padding-min);
-    }
-
-    .reference-layout__toc {
-      position: unset;
-      top: unset;
-
-      max-height: unset;
-
-      overflow-y: unset;
       --toc-header-font-size: var(--font-size-larger);
     }
   }
