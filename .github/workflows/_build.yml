@@ -37,27 +37,27 @@ jobs:
           echo "BLOG_PAGINATION=$BLOG_PAGINATION" >> "$GITHUB_OUTPUT"
 
       - name: Checkout (fred)
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           path: mdn/fred
           persist-credentials: false
 
       - name: Checkout (content)
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           repository: mdn/content
           path: mdn/content
           persist-credentials: false
 
       - name: Checkout (translated-content)
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           repository: mdn/translated-content
           path: mdn/translated-content
           persist-credentials: false
 
       - name: Checkout (curriculum)
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           repository: mdn/curriculum
           path: mdn/curriculum
@@ -65,7 +65,7 @@ jobs:
 
       - name: Checkout (blog)
         if: ${{ steps.privileged.conclusion.success }}
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           repository: mdn/blog
           path: mdn/blog
@@ -74,21 +74,21 @@ jobs:
           persist-credentials: false
 
       - name: Checkout (generic-content)
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           repository: mdn/generic-content
           path: mdn/generic-content
           persist-credentials: false
 
       - name: Checkout (mdn-contributor-spotlight)
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           repository: mdn/mdn-contributor-spotlight
           path: mdn/mdn-contributor-spotlight
           persist-credentials: false
 
       - name: Setup (fred)
-        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
+        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
         with:
           node-version-file: "mdn/fred/.nvmrc"
           cache: npm
@@ -156,56 +156,83 @@ jobs:
             find $CONTENT_ROOT -maxdepth 4 ! -path "*/en-us/glossary/*" -type f -name 'index.md' >> "$FILE_LIST"
             find $CONTENT_ROOT -path '*/en-us/glossary/index.md' \
               -o -path '*/en-us/learn_web_development/core/css_layout/flexbox/index.md' \
+              -o -path '*/en-us/learn_web_development/core/css_layout/index.md' \
               -o -path '*/en-us/learn_web_development/core/scripting/index.md' \
-              -o -path '*/en-us/learn_web_development/core/structuring_content/index.md' \
               -o -path '*/en-us/learn_web_development/core/structuring_content/basic_html_syntax/index.md' \
               -o -path '*/en-us/learn_web_development/core/structuring_content/html_video_and_audio/index.md' \
+              -o -path '*/en-us/learn_web_development/core/structuring_content/index.md' \
               -o -path '*/en-us/learn_web_development/core/styling_basics/box_model/index.md' \
               -o -path '*/en-us/learn_web_development/core/styling_basics/getting_started/index.md' \
+              -o -path '*/en-us/learn_web_development/core/styling_basics/index.md' \
               -o -path '*/en-us/learn_web_development/core/styling_basics/what_is_css/index.md' \
               -o -path '*/en-us/learn_web_development/extensions/advanced_javascript_objects/index.md' \
-              -o -path '*/en-us/learn_web_development/howto/solve_html_problems/use_javascript_within_a_webpage/index.md' \
               -o -path '*/en-us/learn_web_development/howto/solve_html_problems/use_data_attributes/index.md' \
+              -o -path '*/en-us/learn_web_development/howto/solve_html_problems/use_javascript_within_a_webpage/index.md' \
               -o -path '*/en-us/mozilla/add-ons/webextensions/index.md' \
               -o -path '*/en-us/web/api/canvas_api/index.md' \
               -o -path '*/en-us/web/api/canvas_api/manipulating_video_using_canvas/index.md' \
               -o -path '*/en-us/web/api/contactsmanager/index.md' \
               -o -path '*/en-us/web/api/fetch_api/index.md' \
+              -o -path '*/en-us/web/api/fetch_api/using_fetch/index.md' \
+              -o -path '*/en-us/web/api/file_system_api/index.md' \
               -o -path '*/en-us/web/api/geolocation_api/index.md' \
+              -o -path '*/en-us/web/api/history_api/working_with_the_history_api/index.md' \
+              -o -path '*/en-us/web/api/html_dom_api/index.md' \
               -o -path '*/en-us/web/api/performance/index.md' \
+              -o -path '*/en-us/web/api/push_api/index.md' \
+              -o -path '*/en-us/web/api/service_worker_api/index.md' \
               -o -path '*/en-us/web/api/view_transition_api/index.md' \
               -o -path '*/en-us/web/api/web_animations_api/using_the_web_animations_api/index.md' \
               -o -path '*/en-us/web/api/web_audio_api/using_web_audio_api/index.md' \
+              -o -path '*/en-us/web/api/web_speech_api/using_the_web_speech_api/index.md' \
+              -o -path '*/en-us/web/api/web_workers_api/using_web_workers/index.md' \
               -o -path '*/en-us/web/api/window/index.md' \
               -o -path '*/en-us/web/api/window/innerwidth/index.md' \
-              -o -path '*/en-us/web/css/@container/index.md' \
-              -o -path '*/en-us/web/css/color/index.md' \
-              -o -path '*/en-us/web/css/css_animations/using_css_animations/index.md' \
-              -o -path '*/en-us/web/css/css_backgrounds_and_borders/border-image_generator/index.md' \
-              -o -path '*/en-us/web/css/css_backgrounds_and_borders/border-radius_generator/index.md' \
-              -o -path '*/en-us/web/css/css_backgrounds_and_borders/box-shadow_generator/index.md' \
-              -o -path '*/en-us/web/css/css_colors/index.md' \
-              -o -path '*/en-us/web/css/css_colors/color_format_converter/index.md' \
-              -o -path '*/en-us/web/css/css_selectors/index.md' \
-              -o -path '*/en-us/web/css/css_syntax/at-rule/index.md' \
-              -o -path '*/en-us/web/css/functions/index.md' \
+              -o -path '*/en-us/web/css/guides/animations/using/index.md' \
+              -o -path '*/en-us/web/css/guides/backgrounds_and_borders/border-image_generator/index.md' \
+              -o -path '*/en-us/web/css/guides/backgrounds_and_borders/border-radius_generator/index.md' \
+              -o -path '*/en-us/web/css/guides/backgrounds_and_borders/box-shadow_generator/index.md' \
+              -o -path '*/en-us/web/css/guides/box_model/introduction/index.md' \
+              -o -path '*/en-us/web/css/guides/colors/applying_color/index.md' \
+              -o -path '*/en-us/web/css/guides/colors/index.md' \
+              -o -path '*/en-us/web/css/guides/flexible_box_layout/basic_concepts/index.md' \
               -o -path '*/en-us/web/css/guides/index.md' \
+              -o -path '*/en-us/web/css/guides/selectors/index.md' \
+              -o -path '*/en-us/web/css/guides/syntax/at-rule/index.md' \
+              -o -path '*/en-us/web/css/how_to/how_to/layout_cookbook/card/index.md' \
+              -o -path '*/en-us/web/css/how_to/layout_cookbook/center_an_element/index.md' \
+              -o -path '*/en-us/web/css/how_to/layout_cookbook/column_layouts/index.md' \
               -o -path '*/en-us/web/css/modules/index.md' \
-              -o -path '*/en-us/web/css/properties/index.md' \
+              -o -path '*/en-us/web/css/reference/at-rules/@container/index.md' \
+              -o -path '*/en-us/web/css/reference/at-rules/index.md' \
               -o -path '*/en-us/web/css/reference/index.md' \
-              -o -path '*/en-us/web/html/attributes/index.md' \
-              -o -path '*/en-us/web/html/date_and_time_formats/index.md' \
-              -o -path '*/en-us/web/html/element/index.md' \
-              -o -path '*/en-us/web/html/global_attributes/index.md' \
+              -o -path '*/en-us/web/css/reference/properties/color/index.md' \
+              -o -path '*/en-us/web/css/reference/properties/index.md' \
+              -o -path '*/en-us/web/css/reference/selectors/index.md' \
+              -o -path '*/en-us/web/css/reference/values/index.md' \
+              -o -path '*/en-us/web/html/guides/cheatsheet/index.md' \
+              -o -path '*/en-us/web/html/guides/date_and_time_formats/index.md' \
+              -o -path '*/en-us/web/html/guides/index.md' \
+              -o -path '*/en-us/web/html/guides/responsive_images/index.md' \
+              -o -path '*/en-us/web/html/reference/attributes/index.md' \
+              -o -path '*/en-us/web/html/reference/elements/index.md' \
+              -o -path '*/en-us/web/html/reference/global_attributes/index.md' \
               -o -path '*/en-us/web/html/reference/index.md' \
               -o -path '*/en-us/web/html/responsive_images/index.md' \
+              -o -path '*/en-us/web/javascript/guide/control_flow_and_error_handling/index.md' \
+              -o -path '*/en-us/web/javascript/guide/index.md' \
               -o -path '*/en-us/web/javascript/guide/inheritance_and_the_prototype_chain/index.md' \
-              -o -path '*/en-us/web/javascript/reference/index.md' \
+              -o -path '*/en-us/web/javascript/guide/loops_and_iteration/index.md' \
+              -o -path '*/en-us/web/javascript/guide/using_classes/index.md' \
+              -o -path '*/en-us/web/javascript/guide/working_with_objects/index.md' \
               -o -path '*/en-us/web/javascript/reference/functions/index.md' \
               -o -path '*/en-us/web/javascript/reference/global_objects/index.md' \
               -o -path '*/en-us/web/javascript/reference/global_objects/temporal/index.md' \
+              -o -path '*/en-us/web/javascript/reference/index.md' \
               -o -path '*/en-us/web/javascript/reference/operators/index.md' \
-              -o -path '*/en-us/web/javascript/reference/statements/index.md' >> "$FILE_LIST"
+              -o -path '*/en-us/web/javascript/reference/statements/index.md' \
+              -o -path '*/en-us/web/performance/index.md' \
+            >> "$FILE_LIST"
 
             FILE_LIST="--file-list $FILE_LIST"
           else
