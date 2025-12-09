@@ -22,7 +22,7 @@ export class ReferenceLayout extends ServerComponent {
 
     return html`
       <div class="layout__2-sidebars reference-layout">
-        <main id="content" class="layout__content reference-layout__content">
+        <main id="content" class="layout__content">
           <div class="layout__header reference-layout__header">
             ${WRITER_MODE ? WriterToolbar.render(context) : nothing}
             ${TranslationBanner.render(context)}
@@ -38,10 +38,7 @@ export class ReferenceLayout extends ServerComponent {
             ${sections} ${ArticleFooter.render(context)}
           </div>
         </main>
-        <aside
-          class="layout__left-sidebar reference-layout__sidebar"
-          id="main-sidebar"
-        >
+        <aside class="layout__left-sidebar" id="main-sidebar">
           ${LeftSidebar.render(context)}
         </aside>
       </div>
