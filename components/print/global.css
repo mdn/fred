@@ -42,8 +42,8 @@
   }
 
   .page-layout__banner,
-  .reference-layout__toc,
-  .reference-layout__sidebar,
+  .layout__left-sidebar,
+  .layout__right-sidebar,
   .footer__socials,
   .footer__links,
   .footer__mozilla,
