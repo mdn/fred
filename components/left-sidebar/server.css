@@ -131,12 +131,6 @@
   }
 }
 
-.left-sidebar__content {
-  > ol {
-    padding-left: 2px;
-  }
-}
-
 .left-sidebar__header {
   position: sticky;
   top: 0;
@@ -145,7 +139,6 @@
   padding-top: 0.5rem;
   padding-right: 0.5rem;
   padding-bottom: 2rem;
-  padding-left: 2px;
 
   background: linear-gradient(
     to bottom,

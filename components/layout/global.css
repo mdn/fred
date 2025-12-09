@@ -1,9 +1,9 @@
 /* --layout-side-padding-min * 2 + (--layout-sidebar-min + --layout-sidebar-gap) * 2 + --layout-content-min */
-@custom-media --screen-layout-2-sidebars (width >= calc(1rem * 2 + (14rem + 2rem) * 2 + 31rem));
-@custom-media --screen-layout-1-sidebar-or-less (width < calc(1rem * 2 + (14rem + 2rem) * 2 + 31rem));
+@custom-media --screen-layout-2-sidebars (width >= calc(1rem * 2 + (15rem + 1rem) * 2 + 31rem));
+@custom-media --screen-layout-1-sidebar-or-less (width < calc(1rem * 2 + (15rem + 1rem) * 2 + 31rem));
 
 /* --layout-side-padding-min * 2 + --layout-sidebar-min + --layout-sidebar-gap + --layout-content-min */
-@custom-media --screen-layout-no-sidebar (width < calc(1rem * 2 + 14rem + 2rem + 31rem));
+@custom-media --screen-layout-no-sidebar (width < calc(1rem * 2 + 15rem + 1rem + 31rem));
 
 :root {
   --layout-side-padding-min: 1rem;
@@ -13,12 +13,13 @@
   );
   --layout-full-width: calc(100vw - 2 * var(--layout-side-padding));
 
-  --layout-sidebar-min: 14rem;
-  --layout-sidebar-gap: 2rem;
+  --layout-sidebar-min: 15rem;
+  --layout-sidebar-gap: 1rem;
+
+  /* maintain existing gap, will remove/simplify soon: */
+  --layout-sidebar-padding: calc(1rem + 2px);
   --layout-content-min: 31rem;
   --layout-content-max: 48rem;
-
-  /* WARNING: TODO: left/center/right cols widths will change */
 
   /* prettier-ignore */
   --layout-2-sidebars:
