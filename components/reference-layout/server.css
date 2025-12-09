@@ -37,13 +37,6 @@
 
   .reference-layout__sidebar {
     grid-area: sidebar;
-
-    @media (--screen-layout-2-sidebars) {
-      .left-sidebar {
-        padding-right: calc(var(--layout-sidebar-gap) / 2);
-        margin-right: calc(var(--layout-sidebar-gap) / -2);
-      }
-    }
   }
 
   .reference-layout__toc {
@@ -66,9 +59,23 @@
 
     max-height: calc(100vh - var(--sticky-header-height));
 
-    padding-left: 2px;
-
     overflow-y: auto;
+
+    outline-offset: -2px;
+  }
+
+  @media (--screen-layout-2-sidebars) {
+    .reference-layout__sidebar .left-sidebar {
+      padding-right: var(--layout-sidebar-padding);
+      padding-left: var(--layout-side-padding-min);
+      margin-left: calc(-1 * var(--layout-side-padding-min));
+    }
+
+    .reference-layout__toc {
+      padding-right: var(--layout-side-padding-min);
+      padding-left: var(--layout-sidebar-padding);
+      margin-right: calc(-1 * var(--layout-side-padding-min));
+    }
   }
 
   @media (--screen-layout-1-sidebar-or-less) {
@@ -86,10 +93,24 @@
 
       background: var(--color-background-page);
     }
+
+    .reference-layout__sidebar .left-sidebar,
+    .reference-layout__toc {
+      padding-right: var(--layout-sidebar-padding);
+      padding-left: var(--layout-side-padding-min);
+      margin-left: calc(-1 * var(--layout-side-padding-min));
+    }
   }
 
   @media (--screen-layout-no-sidebar) {
     display: block;
+
+    .reference-layout__sidebar .left-sidebar,
+    .reference-layout__toc {
+      padding-right: unset;
+      padding-left: unset;
+      margin-left: unset;
+    }
 
     .reference-layout__sidebar {
       position: fixed;
@@ -98,7 +119,7 @@
       z-index: var(--z-index-sidebar-mobile);
 
       .left-sidebar {
-        padding: 0 1rem;
+        padding: 0 var(--layout-side-padding-min);
       }
     }
 
