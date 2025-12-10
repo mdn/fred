@@ -21,7 +21,7 @@ export class ReferenceLayout extends ServerComponent {
       doc.body?.map((section) => ContentSection.render(context, section)) || [];
 
     return html`
-      <div class="layout__2-sidebars reference-layout">
+      <div class="layout__2-sidebars-inline reference-layout">
         <main id="content" class="layout__content">
           <div class="layout__header reference-layout__header">
             ${WRITER_MODE ? WriterToolbar.render(context) : nothing}
