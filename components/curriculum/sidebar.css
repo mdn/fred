@@ -1,9 +1,5 @@
 .curriculum-content-container .left-sidebar {
-  position: sticky;
-  top: var(--sticky-header-height);
-
   padding-bottom: 3rem;
-
   overflow-wrap: anywhere;
 
   ol {
