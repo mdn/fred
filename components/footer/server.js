@@ -175,7 +175,7 @@ export class Footer extends ServerComponent {
                   <a
                     href=${item.href}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noopener"
                     aria-label=${item.ariaLabel}
                     data-icon=${item.icon}
                   ></a>
