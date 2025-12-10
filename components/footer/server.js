@@ -197,7 +197,7 @@ export class Footer extends ServerComponent {
                             href=${link.href}
                             class=${link.external ? "external" : ""}
                             target=${link.external ? "_blank" : undefined}
-                            rel=${link.external ? "noopener noreferrer" : undefined}
+                            rel=${link.external ? "noopener" : undefined}
                           >
                             ${link.text}
                           </a>
