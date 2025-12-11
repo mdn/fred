@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.9.7](https://github.com/mdn/fred/compare/v1.9.6...v1.9.7) (2025-12-11)
+
+
+### Bug Fixes
+
+* **menu:** link to Web/Performance, not Web/API/Performance ([#1136](https://github.com/mdn/fred/issues/1136)) ([aa7353c](https://github.com/mdn/fred/commit/aa7353c5902428dd65edc1a11359bae0eb55b540))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.23 to 7.1.24 ([#1142](https://github.com/mdn/fred/issues/1142)) ([fb38608](https://github.com/mdn/fred/commit/fb38608b544327672a49fdcf2b569d3679f1a4b6))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.24 to 7.2.0 ([#1152](https://github.com/mdn/fred/issues/1152)) ([14b63f1](https://github.com/mdn/fred/commit/14b63f1e16973d310faba39893525e2bf69f4489))
+* **deps-dev:** bump js-yaml from 3.14.1 to 3.14.2 ([#1148](https://github.com/mdn/fred/issues/1148)) ([b4ded6a](https://github.com/mdn/fred/commit/b4ded6a5d0145400da21f17b075ef954b9a554d6))
+* **deps-dev:** bump mdast-util-to-hast from 13.2.0 to 13.2.1 ([#1147](https://github.com/mdn/fred/issues/1147)) ([700fa02](https://github.com/mdn/fred/commit/700fa02a66d8d0fe57c906f41b60f20cd02e724c))
+* **deps-dev:** bump node-forge from 1.3.1 to 1.3.3 ([#1146](https://github.com/mdn/fred/issues/1146)) ([af30ef0](https://github.com/mdn/fred/commit/af30ef01df1ec25b12e6eca87658909a705feba4))
+* **deps-dev:** bump postcss-preset-env from 10.4.0 to 10.5.0 in the dev group ([#1135](https://github.com/mdn/fred/issues/1135)) ([334449f](https://github.com/mdn/fred/commit/334449f1b5478c08783e247a944d5cfaa9d83e53))
+* **deps-dev:** bump sass-embedded from 1.95.1 to 1.96.0 in the dev group ([#1155](https://github.com/mdn/fred/issues/1155)) ([f893d1d](https://github.com/mdn/fred/commit/f893d1db55c0228b6c5d913dd163e2856a9045eb))
+* **deps-dev:** bump the dev group with 3 updates ([#1141](https://github.com/mdn/fred/issues/1141)) ([10f6fbf](https://github.com/mdn/fred/commit/10f6fbf1d4dd6cd6c1a337f6909e22b2f9424094))
+* **deps-dev:** bump the dev group with 4 updates ([#1151](https://github.com/mdn/fred/issues/1151)) ([7d1da1e](https://github.com/mdn/fred/commit/7d1da1e38e4394f5fd04b4d8c5c90073ee4b0134))
+* **deps-dev:** bump the dev group with 5 updates ([#1144](https://github.com/mdn/fred/issues/1144)) ([27e2ada](https://github.com/mdn/fred/commit/27e2ada6809c65fdfc0a7af145cc326a2f63c753))
+* **deps:** bump @mdn/rari from 0.2.7 to 0.2.8 ([#1153](https://github.com/mdn/fred/issues/1153)) ([cc1363d](https://github.com/mdn/fred/commit/cc1363db05c76d0ea3eadbec9832c6eba550b962))
+* **footer:** add socials + external links in new tab ([#1138](https://github.com/mdn/fred/issues/1138)) ([51ddd06](https://github.com/mdn/fred/commit/51ddd0659fb03dcec96cf4582ae0bd0ffccdf8e9))
+
 ## [1.9.6](https://github.com/mdn/fred/compare/v1.9.5...v1.9.6) (2025-12-04)
 
 
