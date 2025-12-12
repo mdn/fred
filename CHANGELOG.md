@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.0.0](https://github.com/mdn/fred/compare/v1.9.7...v2.0.0) (2025-12-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** bump node from v22 to v24 ([#1122](https://github.com/mdn/fred/issues/1122))
+
+### Miscellaneous
+
+* **deps-dev:** bump the dev group with 2 updates ([#1159](https://github.com/mdn/fred/issues/1159)) ([e44b9b7](https://github.com/mdn/fred/commit/e44b9b731b8754a19d16cce70fef5a7f0bb8989b))
+* **deps-dev:** override glob &gt;= 10.5.0 ([#1145](https://github.com/mdn/fred/issues/1145)) ([675535f](https://github.com/mdn/fred/commit/675535f0e90a703711a84f36058fe836b3a790c9))
+* **deps-dev:** override tmp &gt;= 0.2.4 ([#1149](https://github.com/mdn/fred/issues/1149)) ([fade886](https://github.com/mdn/fred/commit/fade886ffe2daeb2703484d78406d13c63bdb986))
+* **deps:** bump node from v22 to v24 ([#1122](https://github.com/mdn/fred/issues/1122)) ([aeaf341](https://github.com/mdn/fred/commit/aeaf3413a11effe2149fe1fad67e361db1f47771))
+
 ## [1.9.7](https://github.com/mdn/fred/compare/v1.9.6...v1.9.7) (2025-12-11)
 
 
