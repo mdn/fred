@@ -258,7 +258,7 @@ jobs:
         run: echo "name=build-output" >> $GITHUB_OUTPUT
 
       - name: Upload build output
-        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: ${{ steps.set-artifact-name.outputs.name }}
           path: ${{ env.BUILD_OUT_ROOT }}
