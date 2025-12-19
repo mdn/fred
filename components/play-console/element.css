@@ -23,13 +23,28 @@ ul {
 
 li {
   padding: 0 0.5em;
+  white-space: nowrap;
 
   &::before {
+    display: inline-block;
+
+    width: 0.75rem;
+
+    vertical-align: top;
+
     content: "> ";
   }
 }
 
 code {
+  display: inline-block;
+
+  width: calc(100% - 0.75rem);
+
+  margin: 0;
+
   font-family: var(--font-family-code);
+
   tab-size: 4;
+  white-space: pre-wrap;
 }
