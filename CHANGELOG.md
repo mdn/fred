@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.1](https://github.com/mdn/fred/compare/v2.0.0...v2.0.1) (2026-01-09)
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.2.2 to 7.2.3 ([#1182](https://github.com/mdn/fred/issues/1182)) ([a080b1d](https://github.com/mdn/fred/commit/a080b1d3c3eac6ce9e33b3b3928096060103a9da))
+* **deps-dev:** bump the dev group across 1 directory with 13 updates ([#1181](https://github.com/mdn/fred/issues/1181)) ([efadcd6](https://github.com/mdn/fred/commit/efadcd695cb6ea3ee1790562e413c7c37c8a546d))
+* **deps:** bump the prod group across 1 directory with 4 updates ([#1173](https://github.com/mdn/fred/issues/1173)) ([cb79cff](https://github.com/mdn/fred/commit/cb79cffa49aeb7619aee0be8dfbeeb1d510aa84a))
+
 ## [2.0.0](https://github.com/mdn/fred/compare/v1.9.7...v2.0.0) (2025-12-19)
 
 
