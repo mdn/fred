@@ -59,13 +59,17 @@
       }
     }
 
+    button[aria-expanded="false"] ~ .timeline {
+      display: none;
+    }
+
     .timeline {
       border-top: var(--border);
       border-left: none !important;
     }
 
     .bc-has-history {
-      &:focus-within > button {
+      & > button[aria-expanded="true"] {
         /* Highlight expanded item. */
         --padding-bottom-offset: -2px;
         border-bottom: 2px solid var(--color-border-primary);
