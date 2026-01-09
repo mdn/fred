@@ -1,5 +1,30 @@
 # Changelog
 
+## [2.0.0](https://github.com/mdn/fred/compare/v1.9.7...v2.0.0) (2025-12-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** bump node from v22 to v24 ([#1122](https://github.com/mdn/fred/issues/1122))
+
+### Bug Fixes
+
+* **placement-top:** update Scrimba copy ([#1167](https://github.com/mdn/fred/issues/1167)) ([18aa567](https://github.com/mdn/fred/commit/18aa567fa5216bfef6c92f19b1e70c48ab49be91))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.2.0 to 7.2.1 ([#1163](https://github.com/mdn/fred/issues/1163)) ([cb38c68](https://github.com/mdn/fred/commit/cb38c6876f97fb2cb9fab0609ead4483f41ea81b))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.2.1 to 7.2.2 ([#1169](https://github.com/mdn/fred/issues/1169)) ([8caa1c6](https://github.com/mdn/fred/commit/8caa1c655f9ee9cf170e2f1e00fa9583c37be84c))
+* **deps-dev:** bump sass-embedded from 1.96.0 to 1.97.0 in the dev group ([#1165](https://github.com/mdn/fred/issues/1165)) ([d5d04ca](https://github.com/mdn/fred/commit/d5d04cab6c343ac96cddc5555a5b62bca631aefa))
+* **deps-dev:** bump the dev group with 2 updates ([#1159](https://github.com/mdn/fred/issues/1159)) ([e44b9b7](https://github.com/mdn/fred/commit/e44b9b731b8754a19d16cce70fef5a7f0bb8989b))
+* **deps-dev:** bump the dev group with 2 updates ([#1164](https://github.com/mdn/fred/issues/1164)) ([a5e9ffb](https://github.com/mdn/fred/commit/a5e9ffbfc446dc9420534af165f61aebbd4722e2))
+* **deps-dev:** bump the dev group with 3 updates ([#1168](https://github.com/mdn/fred/issues/1168)) ([b5da20d](https://github.com/mdn/fred/commit/b5da20df22a9cb905d961ff0021fefce67499d0e))
+* **deps-dev:** bump the dev group with 4 updates ([#1162](https://github.com/mdn/fred/issues/1162)) ([dcb6eb2](https://github.com/mdn/fred/commit/dcb6eb289c9d28bd1840ee97d0961ccb5e063cff))
+* **deps-dev:** override glob &gt;= 10.5.0 ([#1145](https://github.com/mdn/fred/issues/1145)) ([675535f](https://github.com/mdn/fred/commit/675535f0e90a703711a84f36058fe836b3a790c9))
+* **deps-dev:** override tmp &gt;= 0.2.4 ([#1149](https://github.com/mdn/fred/issues/1149)) ([fade886](https://github.com/mdn/fred/commit/fade886ffe2daeb2703484d78406d13c63bdb986))
+* **deps:** bump node from v22 to v24 ([#1122](https://github.com/mdn/fred/issues/1122)) ([aeaf341](https://github.com/mdn/fred/commit/aeaf3413a11effe2149fe1fad67e361db1f47771))
+
 ## [1.9.7](https://github.com/mdn/fred/compare/v1.9.6...v1.9.7) (2025-12-11)
 
 
