@@ -1,8 +1,50 @@
 # Layout
 
-This component provides some global utility variables for consistent layout.
+This component provides some global utility variables and some importable stylesheets for consistent layout.
 
-## Side padding
+If you need to do something very custom, you can use the variables directly, otherwise we recommend using one of the importable stylesheets and applying the classes to your component.
+
+## Class based layouts
+
+### `.layout__2-sidebars`
+
+Import from `./2-sidebars.css`
+
+Classes should be used with this hierarchy:
+
+- `layout__2-sidebars`
+  - `layout__left-sidebar`
+  - `layout__content`
+  - `layout__right-sidebar`
+
+When there's space for 2 sidebars then both sidebars will show, left on the left and right on the right.
+
+When there's only space for 1 sidebar then the right sidebar will show on the left and the left sidebar will become toggleable with `<mdn-toggle-sidebar>`.
+
+When there's no space for sidebars then the right sidebar will be hidden and the left sidebar still toggleable.
+
+### `.layout__2-sidebars-inline`
+
+Import from `./2-sidebars.css`
+
+Classes should be used with this hierarchy:
+
+- `layout__2-sidebars-inline`
+  - `layout__left-sidebar`
+  - `layout__content`
+    - `layout__header`
+    - `layout__right-sidebar`
+    - `layout__body`
+
+When there's space for 2 sidebars then both sidebars will show, left on the left and right on the right, with header and body shown in the central content area.
+
+When there's only space for 1 sidebar then the right sidebar will show on the left and the left sidebar will become toggleable with `<mdn-toggle-sidebar>`.
+
+When there's no space for sidebars then the right sidebar will be displayed inline within the content and the left sidebar still toggleable.
+
+## Global utility variables
+
+### Side padding
 
 In the simplest case, you may just need the `--layout-side-padding` variable. This keeps full width content in line with the padding in the navigation and footer, which provides a small padding on small screens, and centers content on very large screens:
 
@@ -12,7 +54,7 @@ In the simplest case, you may just need the `--layout-side-padding` variable. Th
 }
 ```
 
-## Content and sidebar layouts
+### Content and sidebar layouts
 
 If the page has "content" - some kind of prose - and optionally sidebars, you'll likely want one of the following layouts.
 The columns are sized to ensure that the content column doesn't become too wide (and have unreadably long lines of text), and that the sidebar columns don't become too narrow.
@@ -57,7 +99,7 @@ If you're using sidebars, you'll probably want to use the [custom media queries]
 }
 ```
 
-### 2 sidebars: `--layout-2-sidebars`
+#### 2 sidebars: `--layout-2-sidebars`
 
 A column for content, two columns for sidebars, and two columns for a gap between the content and sidebars. The columns are named as follows:
 
@@ -69,13 +111,13 @@ A column for content, two columns for sidebars, and two columns for a gap betwee
 
 Use the `--screen-layout-1-sidebar-or-less` custom media query to change to a different layout when the viewport becomes too narrow.
 
-### 1 sidebar
+#### 1 sidebar
 
 Two variants, which are identical apart from one having a left sidebar and the other a right sidebar. They have a column for content, a column for the sidebar, and a column for a gap between the content and sidebar.
 
 Use the `--screen-layout-no-sidebar` custom media query to change to a different layout when the viewport becomes too narrow.
 
-#### Left sidebar `--layout-1-sidebar-left`
+##### Left sidebar `--layout-1-sidebar-left`
 
 The columns are named as follows:
 
@@ -86,7 +128,7 @@ The columns are named as follows:
 | left-sidebar |      |         |
 |   sidebar    |      |         |
 
-#### Right sidebar `--layout-1-sidebar-right`
+##### Right sidebar `--layout-1-sidebar-right`
 
 The columns are named as follows:
 
@@ -97,11 +139,11 @@ The columns are named as follows:
 |         |      | right-sidebar |
 |         |      |    sidebar    |
 
-### No sidebar
+#### No sidebar
 
 Two variants, one if you're using `--layout-side-padding`, the other if you'd like to place things within that padding (e.g. a full width banner):
 
-#### Using padding: `--layout-no-sidebar`
+##### Using padding: `--layout-no-sidebar`
 
 The columns are named as follows:
 
@@ -122,7 +164,7 @@ The columns are named as follows:
 }
 ```
 
-#### Not using padding: `--layout-no-sidebar-extended`
+##### Not using padding: `--layout-no-sidebar-extended`
 
 The columns are named as follows:
 
