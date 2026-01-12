@@ -41,7 +41,7 @@
     "@codemirror/state": "^6.5.3",
     "@codemirror/theme-one-dark": "^6.1.2",
     "@fluent/bundle": "^0.19.0",
-    "@lit-labs/ssr": "^3.3.1",
+    "@lit-labs/ssr": "^4.0.0",
     "@lit-labs/ssr-client": "^1.1.8",
     "@lit/task": "^1.0.3",
     "@mdn/rari": "0.2.9",
