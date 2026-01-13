@@ -30,6 +30,12 @@ jobs:
           node-version-file: .nvmrc
           package-manager-cache: false
 
+      - name: Install
+        run: npm ci
+        env:
+          # Increase GitHub API limit.
+          GITHUB_TOKEN: ${{ github.token }}
+
       - name: Update
         id: update
         run: |
