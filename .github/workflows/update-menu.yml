@@ -37,9 +37,10 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Update
-        id: update
-        run: |
-          node components/menu/update-missing-docs.js
+        run: node components/menu/update-missing-docs.js
+
+      - name: Format
+        run: npx prettier -w components/menu/missing-docs.json
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@98357b18bf14b5342f975ff684046ec3b2a07725 # v8.0.0
