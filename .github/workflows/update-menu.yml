@@ -6,10 +6,6 @@ on:
   schedule:
     - cron: "30 4 * * 1-5"
 
-  push:
-    branches:
-      - update-menu-workflow
-
 permissions: {} # No GITHUB_TOKEN permissions, because we use MDN_BOT_PAT instead.
 
 jobs:
