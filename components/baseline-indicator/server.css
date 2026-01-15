@@ -48,8 +48,8 @@
       url("./icons/status/obsolete-dark.svg");
 
     &.to-be-removed {
-      --baseline-bg: #fceeee;
-      --baseline-engine-bg: #f3dddd;
+      --baseline-bg: light-dark(#fceeee, #410e0b);
+      --baseline-engine-bg: light-dark(#f3dddd, #1a0706);
       --baseline-pill-bg: #b3261e;
       --baseline-pill-color: #f1f3f4;
 
