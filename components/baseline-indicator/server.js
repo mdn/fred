@@ -62,29 +62,46 @@ export class BaselineIndicator extends ServerComponent {
    * @param {import("@fred").Context<import("@rari").DocPage>} context
    * @param {string} level
    * @param {Date} [lowDate]
+   * @param {string} [signalsLink]
    */
-  getExtraText(context, level, lowDate) {
-    return level === "high" && lowDate
-      ? context.l10n.raw({
-          id: "baseline-high-extra",
-          args: {
-            date: lowDate.toLocaleDateString(context.locale, {
-              year: "numeric",
-              month: "long",
-            }),
-          },
-        })
-      : level === "low" && lowDate
+  getExtraText(context, level, lowDate, signalsLink) {
+    return [
+      level === "high" && lowDate
         ? context.l10n.raw({
-            id: "baseline-low-extra",
+            id: "baseline-high-extra",
             args: {
-              date: lowDate.toLocaleDateString(DEFAULT_LOCALE, {
+              date: lowDate.toLocaleDateString(context.locale, {
                 year: "numeric",
                 month: "long",
               }),
             },
           })
-        : context.l10n("baseline-not-extra");
+        : level === "low" && lowDate
+          ? context.l10n.raw({
+              id: "baseline-low-extra",
+              args: {
+                date: lowDate.toLocaleDateString(DEFAULT_LOCALE, {
+                  year: "numeric",
+                  month: "long",
+                }),
+              },
+            })
+          : context.l10n("baseline-not-extra"),
+      signalsLink
+        ? context.l10n.raw({
+            id: "baseline-signals",
+            elements: {
+              link: {
+                tag: "a",
+                href: signalsLink,
+                target: "_blank",
+                rel: "noopener",
+                "data-glean-id": "baseline_link_signals",
+              },
+            },
+          })
+        : undefined,
+    ].filter((x) => x !== undefined);
   }
 
   /**
@@ -109,6 +126,7 @@ export class BaselineIndicator extends ServerComponent {
 
     const lowDate = this.parseDate(status.baseline_low_date);
     const level = status.baseline || "not";
+    const signalsLink = status.feature.developer_signals?.url;
 
     const feedbackLink = `${SURVEY_URL}?page=${encodeURIComponent(context.url)}&level=${level}`;
 
@@ -223,7 +241,9 @@ export class BaselineIndicator extends ServerComponent {
         <span class="icon icon-chevron"></span>
       </summary>
       <div class="extra">
-        <p>${this.getExtraText(context, level, lowDate)}</p>
+        ${this.getExtraText(context, level, lowDate, signalsLink).map(
+          (text) => html`<p>${text}</p>`,
+        )}
         ${status.asterisk
           ? html`<p>* ${context.l10n("baseline-asterisk")}</p>`
           : nothing}
