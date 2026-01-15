@@ -76,7 +76,6 @@
   ],
   "ru": [
     "Learn_web_development/Core",
-    "Learn_web_development/Getting_started",
     "Web/API/HTML_DOM_API",
     "Web/CSS/CSS_colors/Color_mixer",
     "Web/CSS/CSS_shapes/Shape_generator",
@@ -96,7 +95,7 @@
     "Web/Privacy",
     "Web/WebDriver"
   ],
-  "zh-CN": ["Web/CSS/Reference/At-rules", "Web/CSS/Reference/Values"],
+  "zh-CN": ["Web/CSS/Reference/At-rules"],
   "zh-TW": [
     "Learn_web_development/Core",
     "Learn_web_development/Getting_started",
@@ -123,7 +122,6 @@
     "Web/CSS/Reference/At-rules",
     "Web/CSS/Reference/Properties",
     "Web/CSS/Reference/Selectors",
-    "Web/CSS/Reference/Values",
     "Web/HTML/Guides",
     "Web/HTML/Guides/Cheatsheet",
     "Web/HTML/Guides/Date_and_time_formats",
