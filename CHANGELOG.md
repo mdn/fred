@@ -1,5 +1,37 @@
 # Changelog
 
+## [2.0.1](https://github.com/mdn/fred/compare/v2.0.0...v2.0.1) (2026-01-15)
+
+
+### Bug Fixes
+
+* **curriculum:** repair TOC + align with content TOC ([#1202](https://github.com/mdn/fred/issues/1202)) ([c5372b2](https://github.com/mdn/fred/commit/c5372b24afc0fdc63bdcecf4f8646c3127c0141b))
+* **live-sample:** add `sandbox="allow-downloads"` to all samples ([#1215](https://github.com/mdn/fred/issues/1215)) ([9416161](https://github.com/mdn/fred/commit/9416161b9db61761630c24495b7f3e7d81c0a047))
+* **live-sample:** add allow-downloads to all samples ([9416161](https://github.com/mdn/fred/commit/9416161b9db61761630c24495b7f3e7d81c0a047))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @csstools/postcss-global-data from 3.1.0 to 4.0.0 ([#1211](https://github.com/mdn/fred/issues/1211)) ([4282d7d](https://github.com/mdn/fred/commit/4282d7dc6e730dc56ef2b145f302cc1370092c85))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.2.2 to 7.2.3 ([#1182](https://github.com/mdn/fred/issues/1182)) ([a080b1d](https://github.com/mdn/fred/commit/a080b1d3c3eac6ce9e33b3b3928096060103a9da))
+* **deps-dev:** bump eslint-plugin-jsdoc from 61.5.0 to 62.0.0 ([#1192](https://github.com/mdn/fred/issues/1192)) ([c516041](https://github.com/mdn/fred/commit/c5160411c552088f098795b35815a1eb1ce30631))
+* **deps-dev:** bump globals from 16.5.0 to 17.0.0 ([#1190](https://github.com/mdn/fred/issues/1190)) ([3901fbb](https://github.com/mdn/fred/commit/3901fbb154b12dbd6668da8736d88b591987a838))
+* **deps-dev:** bump postcss-custom-media from 11.0.6 to 12.0.0 ([#1210](https://github.com/mdn/fred/issues/1210)) ([502fb33](https://github.com/mdn/fred/commit/502fb33cce4ebc45c5ef7f8f4068a55232d4603c))
+* **deps-dev:** bump postcss-custom-media from 11.0.6 to 12.0.0 correctly ([#1213](https://github.com/mdn/fred/issues/1213)) ([25f520c](https://github.com/mdn/fred/commit/25f520cebe93653d434ea491ebdbe1dbb9110af3))
+* **deps-dev:** bump postcss-preset-env from 10.6.1 to 11.1.0 ([#1209](https://github.com/mdn/fred/issues/1209)) ([e24aef9](https://github.com/mdn/fred/commit/e24aef9d8b88c4cbf9fb5dff44324a03522966b1))
+* **deps-dev:** bump the dev group across 1 directory with 13 updates ([#1181](https://github.com/mdn/fred/issues/1181)) ([efadcd6](https://github.com/mdn/fred/commit/efadcd695cb6ea3ee1790562e413c7c37c8a546d))
+* **deps-dev:** bump the dev group with 2 updates ([#1189](https://github.com/mdn/fred/issues/1189)) ([9f8154c](https://github.com/mdn/fred/commit/9f8154c8ac37625974feb40f140ca5153aa0eed4))
+* **deps-dev:** bump the dev group with 2 updates ([#1194](https://github.com/mdn/fred/issues/1194)) ([04a19fc](https://github.com/mdn/fred/commit/04a19fc7891ea1c0114e4b743f8f5f1e177fe4a7))
+* **deps-dev:** bump the dev group with 2 updates ([#1208](https://github.com/mdn/fred/issues/1208)) ([dc6f5c3](https://github.com/mdn/fred/commit/dc6f5c31f48fb630f0f63530fa3d93b93a28629f))
+* **deps-dev:** bump the dev group with 6 updates ([#1203](https://github.com/mdn/fred/issues/1203)) ([da0d4cf](https://github.com/mdn/fred/commit/da0d4cf1a2830348292db58bd5fb0292daacbce6))
+* **deps:** bump @codemirror/state from 6.5.3 to 6.5.4 in the prod group ([#1207](https://github.com/mdn/fred/issues/1207)) ([638bbb9](https://github.com/mdn/fred/commit/638bbb98d7cd54e9fe1045fb5e4219fe232165aa))
+* **deps:** bump @lit-labs/ssr from 3.3.1 to 4.0.0 ([#1191](https://github.com/mdn/fred/issues/1191)) ([b1397b9](https://github.com/mdn/fred/commit/b1397b9600fc46227bb22b63a7373f9a26c8070d))
+* **deps:** bump @mdn/rari from 0.2.8 to 0.2.9 ([#1193](https://github.com/mdn/fred/issues/1193)) ([4eaaa97](https://github.com/mdn/fred/commit/4eaaa976bc18049cfe4a03776d7ad603f2e2da8b))
+* **deps:** bump the prod group across 1 directory with 4 updates ([#1173](https://github.com/mdn/fred/issues/1173)) ([cb79cff](https://github.com/mdn/fred/commit/cb79cffa49aeb7619aee0be8dfbeeb1d510aa84a))
+* **l10n:** update french strings ([#1183](https://github.com/mdn/fred/issues/1183)) ([f10a508](https://github.com/mdn/fred/commit/f10a50893587e52c8c6606405aa3b988b3014683))
+* **l10n:** updating french strings ([f10a508](https://github.com/mdn/fred/commit/f10a50893587e52c8c6606405aa3b988b3014683))
+* **menu:** update missing docs ([#1200](https://github.com/mdn/fred/issues/1200)) ([63ce028](https://github.com/mdn/fred/commit/63ce028d75bb38a5c06d2f98fc07d3b27119b51f))
+
 ## [2.0.0](https://github.com/mdn/fred/compare/v1.9.7...v2.0.0) (2025-12-19)
 
 
