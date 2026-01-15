@@ -26,7 +26,6 @@
   "ja": [],
   "ko": [
     "Learn_web_development/Core",
-    "Web/API/Performance",
     "Web/API/Web_Animations_API/Using_the_Web_Animations_API",
     "Web/API/Web_Speech_API/Using_the_Web_Speech_API",
     "Web/API/Web_Workers_API/Using_web_workers",
@@ -51,7 +50,6 @@
     "Learn_web_development/Getting_started",
     "Web/API/File_System_API",
     "Web/API/HTML_DOM_API",
-    "Web/API/Performance",
     "Web/API/Web_Speech_API/Using_the_Web_Speech_API",
     "Web/API/Web_Workers_API/Using_web_workers",
     "Web/CSS/CSS_backgrounds_and_borders/Box-shadow_generator",
@@ -78,7 +76,6 @@
   ],
   "ru": [
     "Learn_web_development/Core",
-    "Learn_web_development/Getting_started",
     "Web/API/HTML_DOM_API",
     "Web/CSS/CSS_colors/Color_mixer",
     "Web/CSS/CSS_shapes/Shape_generator",
@@ -98,18 +95,13 @@
     "Web/Privacy",
     "Web/WebDriver"
   ],
-  "zh-CN": [
-    "Web/CSS/Reference/At-rules",
-    "Web/CSS/Reference/Properties",
-    "Web/CSS/Reference/Values"
-  ],
+  "zh-CN": ["Web/CSS/Reference/At-rules"],
   "zh-TW": [
     "Learn_web_development/Core",
     "Learn_web_development/Getting_started",
     "Web/API/File_System_API",
     "Web/API/HTML_DOM_API",
     "Web/API/History_API/Working_with_the_History_API",
-    "Web/API/Performance",
     "Web/API/Push_API",
     "Web/API/Service_Worker_API",
     "Web/API/Web_Animations_API/Using_the_Web_Animations_API",
@@ -130,7 +122,6 @@
     "Web/CSS/Reference/At-rules",
     "Web/CSS/Reference/Properties",
     "Web/CSS/Reference/Selectors",
-    "Web/CSS/Reference/Values",
     "Web/HTML/Guides",
     "Web/HTML/Guides/Cheatsheet",
     "Web/HTML/Guides/Date_and_time_formats",

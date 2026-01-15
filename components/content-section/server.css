@@ -10,7 +10,6 @@
     scroll-margin-top: var(--sticky-header-height);
   }
 
-  h1,
   h2,
   h3,
   h4,
@@ -18,11 +17,6 @@
   h6 {
     margin: 1rem 0 0;
     font-weight: var(--font-weight-normal);
-  }
-
-  h1 {
-    margin-top: 0;
-    font-size: var(--font-size-largest);
   }
 
   h2 {
@@ -34,9 +28,7 @@
   }
 
   h4 {
-    font-size: var(--font-size-normal);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-size: var(--font-size-medium);
   }
 
   h5,
