@@ -210,6 +210,7 @@ export class BaselineIndicator extends ServerComponent {
                     tag: "a",
                     href: signalsLink,
                     target: "_blank",
+                    "data-glean-id": "baseline_link_signals",
                   },
                 },
               })}
