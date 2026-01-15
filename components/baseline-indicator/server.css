@@ -213,6 +213,10 @@
     padding-right: 1rem;
     padding-bottom: 1.5rem;
 
+    a {
+      font-weight: 500;
+    }
+
     p {
       margin-top: 0;
       margin-bottom: 1rem;
@@ -231,7 +235,6 @@
 
       li {
         margin: 0;
-        font-weight: 500;
         list-style: none;
 
         a.learn-more {
