@@ -1,25 +1,9 @@
+@import url("../layout/2-sidebars.css");
+
 /* Reference Layout */
 
 .reference-layout {
-  display: grid;
-
-  grid-template-areas:
-    "sidebar . header . toc"
-    "sidebar . body   . toc";
-  grid-template-rows: min-content 1fr;
-  grid-template-columns: var(--layout-2-sidebars);
-
-  justify-content: space-between;
-
-  padding-inline: var(--layout-side-padding);
-
-  .reference-layout__content {
-    display: contents;
-  }
-
   .reference-layout__header {
-    grid-area: header;
-
     h1 {
       margin: 1rem 0;
 
@@ -31,19 +15,7 @@
   }
 
   .reference-layout__body {
-    grid-area: body;
     padding-bottom: 3rem;
-  }
-
-  .reference-layout__sidebar {
-    grid-area: sidebar;
-
-    @media (--screen-layout-2-sidebars) {
-      .left-sidebar {
-        padding-right: calc(var(--layout-sidebar-gap) / 2);
-        margin-right: calc(var(--layout-sidebar-gap) / -2);
-      }
-    }
   }
 
   .reference-layout__toc {
@@ -51,64 +23,14 @@
 
     flex-wrap: wrap;
 
-    grid-area: toc;
-
     gap: 0.5rem;
     align-content: start;
     align-items: start;
     justify-content: space-between;
   }
 
-  .reference-layout__sidebar .left-sidebar,
-  .reference-layout__toc {
-    position: sticky;
-    top: var(--sticky-header-height);
-
-    max-height: calc(100vh - var(--sticky-header-height));
-
-    padding-left: 2px;
-
-    overflow-y: auto;
-  }
-
-  @media (--screen-layout-1-sidebar-or-less) {
-    grid-template-areas:
-      "toc . header"
-      "toc . body";
-    grid-template-columns: var(--layout-1-sidebar-left);
-
-    .reference-layout__sidebar {
-      z-index: 1;
-
-      display: none;
-
-      grid-area: toc;
-
-      background: var(--color-background-page);
-    }
-  }
-
   @media (--screen-layout-no-sidebar) {
-    display: block;
-
-    .reference-layout__sidebar {
-      position: fixed;
-      inset: 0;
-      top: var(--sticky-header-height);
-      z-index: var(--z-index-sidebar-mobile);
-
-      .left-sidebar {
-        padding: 0 1rem;
-      }
-    }
-
     .reference-layout__toc {
-      position: unset;
-      top: unset;
-
-      max-height: unset;
-
-      overflow-y: unset;
       --toc-header-font-size: var(--font-size-larger);
     }
   }
