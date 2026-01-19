@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.0.2](https://github.com/mdn/fred/compare/v2.0.1...v2.0.2) (2026-01-19)
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.2.3 to 7.2.4 ([#1218](https://github.com/mdn/fred/issues/1218)) ([986860e](https://github.com/mdn/fred/commit/986860e6304aac6248607ab9bbcd2d3902c39a3f))
+* **deps-dev:** bump postcss-preset-env from 11.1.0 to 11.1.1 in the dev group ([#1216](https://github.com/mdn/fred/issues/1216)) ([dc08760](https://github.com/mdn/fred/commit/dc08760d2b302cedf43489a2174b5e5466ceae4e))
+* **deps-dev:** bump the dev group with 6 updates ([#1223](https://github.com/mdn/fred/issues/1223)) ([ec2b761](https://github.com/mdn/fred/commit/ec2b761560dde6f7d76c4d51a042c95965f52f3b))
+* **deps:** bump @mdn/rari from 0.2.9 to 0.2.10 ([#1226](https://github.com/mdn/fred/issues/1226)) ([63499c7](https://github.com/mdn/fred/commit/63499c7b51a4b14e25230f05852d65ebdd275f78))
+
 ## [2.0.1](https://github.com/mdn/fred/compare/v2.0.0...v2.0.1) (2026-01-15)
 
 
