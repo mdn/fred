@@ -91,6 +91,7 @@ async function serverRenderMiddleware(req, res, page) {
 
     res.writeHead(res.statusCode, {
       "Content-Type": "text/html",
+      "Content-Length": Buffer.byteLength(html),
     });
     res.end(html);
   } catch (error) {
