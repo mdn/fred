@@ -93,7 +93,7 @@ async function serverRenderMiddleware(req, res, page) {
       "Content-Type": "text/html",
       "Content-Length": Buffer.byteLength(html),
     });
-    res.end(html);
+    res.end(res.locals.wasHead ? undefined : html);
   } catch (error) {
     console.error("SSR render error:", error);
     res.writeHead(500).end();
@@ -203,6 +203,16 @@ export async function startServer() {
   }
 
   const RARI_URL = process.env.RARI_URL || "http://localhost:8083";
+
+  // Convert HEAD requests to GET so Rari returns full response for rendering
+  app.use((req, res, next) => {
+    if (req.method === "HEAD") {
+      req.method = "GET";
+      res.locals.wasHead = true;
+    }
+    next();
+  });
+
   app.use(
     createProxyMiddleware({
       target: RARI_URL,
