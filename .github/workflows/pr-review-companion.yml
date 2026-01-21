@@ -16,18 +16,32 @@ permissions:
   actions: read
 
 jobs:
-  deploy:
+  identify-pr:
     if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    outputs:
+      pr-number: ${{ steps.identify-pr.outputs.number }}
+    steps:
+      - name: Identify PR
+        id: identify-pr
+        run: |
+          PR_NUMBER=$(gh api repos/${{ github.repository }}/commits/${{ github.event.workflow_run.head_sha }}/pulls --jq '.[0].number')
+          echo "number=$PR_NUMBER" >> $GITHUB_OUTPUT
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+  deploy:
+    needs: identify-pr
     uses: ./.github/workflows/_deploy.yml
     secrets: inherit
     with:
       cancel-in-progress: true
-      prefix: fred-pr${{ github.event.workflow_run.pull_requests[0].number }}
+      prefix: fred-pr${{ needs.identify-pr.outputs.pr-number }}
       build-artifact-name: build-output
       build-workflow-run-id: ${{ github.event.workflow_run.id }}
 
   comment:
-    needs: deploy
+    needs: [identify-pr, deploy]
     runs-on: ubuntu-latest
     steps:
       - name: Comment in PR
@@ -48,5 +62,5 @@ jobs:
           fi
         env:
           BODY: "${{ github.event.workflow_run.head_sha }} was deployed to: ${{ needs.deploy.outputs.url }}"
-          PR_NUMBER: ${{ github.event.workflow_run.pull_requests[0].number }}
+          PR_NUMBER: ${{ needs.identify-pr.outputs.pr-number }}
           GITHUB_TOKEN: ${{ github.token }}
