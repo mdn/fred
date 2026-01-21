@@ -31,14 +31,14 @@
 
   font-weight: normal;
 
-  color: var(--about-tablist-color);
+  color: var(--about-tablist-color) !important;
 
   text-decoration: none;
 }
 
 ::slotted([slot="tab"]:hover),
 ::slotted([slot="tab"].active) {
-  color: var(--about-tablist-active-color);
+  color: var(--about-tablist-active-color) !important;
   border-bottom: 2px solid var(--about-tablist-active-border);
 }
 
