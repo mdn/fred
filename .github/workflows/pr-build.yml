@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build:
-    if: github.repository_owner == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
+    if: github.repository_owner == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]'
     uses: ./.github/workflows/_build.yml
     secrets: inherit
     with:
