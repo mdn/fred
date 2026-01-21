@@ -1,9 +1,10 @@
 name: PR Review Companion
 
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["PR Build"]
+    types:
+      - completed
 
 permissions:
   contents: read
@@ -11,24 +12,19 @@ permissions:
   id-token: write
   # Post comment in pull request.
   pull-requests: write
+  # Download artifacts from triggering workflow.
+  actions: read
 
 jobs:
-  build:
-    if: github.repository_owner == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
-    uses: ./.github/workflows/_build.yml
-    secrets: inherit
-    with:
-      partial: true
-
   deploy:
-    needs: build
-    if: github.repository_owner == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event.workflow_run.conclusion == 'success'
     uses: ./.github/workflows/_deploy.yml
     secrets: inherit
     with:
       cancel-in-progress: true
-      prefix: fred-pr${{ github.event.pull_request.number }}
-      build-artifact-name: ${{ needs.build.outputs.artifact-name }}
+      prefix: fred-pr${{ github.event.workflow_run.pull_requests[0].number }}
+      build-artifact-name: build-output
+      build-workflow-run-id: ${{ github.event.workflow_run.id }}
 
   comment:
     needs: deploy
@@ -51,6 +47,6 @@ jobs:
             gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" --body "$BODY"
           fi
         env:
-          BODY: "${{ github.sha }} was deployed to: ${{ needs.deploy.outputs.url }}"
-          PR_NUMBER: ${{ github.event.pull_request.number }}
+          BODY: "${{ github.event.workflow_run.head_sha }} was deployed to: ${{ needs.deploy.outputs.url }}"
+          PR_NUMBER: ${{ github.event.workflow_run.pull_requests[0].number }}
           GITHUB_TOKEN: ${{ github.token }}
