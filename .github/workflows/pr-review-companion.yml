@@ -61,6 +61,6 @@ jobs:
             gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" --body "$BODY"
           fi
         env:
-          BODY: "${{ github.event.workflow_run.head_sha }} was deployed to: ${{ needs.deploy.outputs.url }}"
+          BODY: "${{ github.sha }} was deployed to: ${{ needs.deploy.outputs.url }}"
           PR_NUMBER: ${{ needs.identify-pr.outputs.pr-number }}
           GITHUB_TOKEN: ${{ github.token }}
