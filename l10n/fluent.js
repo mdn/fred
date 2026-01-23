@@ -42,15 +42,16 @@ export class Fluent {
   constructor(locale = "en-US", resources = []) {
     this.locale = locale;
 
-    this.usBundle = Fluent.constructBundle(new FluentBundle(locale), [
-      enUS_ftl,
-    ]);
+    this.usBundle = Fluent.constructBundle(
+      new FluentBundle(locale, { useIsolating: false }),
+      [enUS_ftl],
+    );
 
     if (resources.length > 0) {
-      this.bundle = Fluent.constructBundle(new FluentBundle(locale), [
-        enUS_ftl,
-        ...resources,
-      ]);
+      this.bundle = Fluent.constructBundle(
+        new FluentBundle(locale, { useIsolating: false }),
+        [enUS_ftl, ...resources],
+      );
     }
   }
 
