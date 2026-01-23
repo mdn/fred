@@ -178,7 +178,7 @@ export class OuterLayout extends ServerComponent {
       "og:image:height": "1024",
       "og:image:width": "1024",
       "og:image:alt":
-        "The MDN Web Docs logo, featuring a blue accent color, displayed on a solid black background.",
+        "The MDN logo",
       "og:site_name": "MDN Web Docs",
       "twitter:card": "summary",
       "twitter:creator": "MozDevNet",
