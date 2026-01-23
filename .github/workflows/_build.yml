@@ -139,7 +139,7 @@ jobs:
 
           ADDITIONAL_LOCALES_FOR_GENERICS_AND_SPAS: de
 
-          BLOG_PAGINATION: ${{ steps.privileged.outputs.BLOG_PAGINATION }}
+          BLOG_PAGINATION: ${{ steps.privileged.outputs.BLOG_PAGINATION || 'false' }}
 
           # Increase GitHub API limit.
           GITHUB_TOKEN: ${{ github.token }}
