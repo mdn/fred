@@ -1,5 +1,5 @@
 import { FluentBundle, FluentResource } from "@fluent/bundle";
-import insane from "insane";
+import DOMPurify from "isomorphic-dompurify";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import de_ftl from "../l10n/de.ftl";
@@ -12,10 +12,6 @@ import ptBR_ftl from "../l10n/pt-BR.ftl";
 import ru_ftl from "../l10n/ru.ftl";
 import zhCN_ftl from "../l10n/zh-CN.ftl";
 import zhTW_ftl from "../l10n/zh-TW.ftl";
-
-/**
- * @import { AllowedTags } from "insane";
- */
 
 /** @type {Record<string, string>} */
 const ftlMap = {
@@ -92,14 +88,26 @@ export class Fluent {
    * @returns {string | ReturnType<typeof unsafeHTML>}
    */
   static sanitize(message, elements = {}) {
-    /** @type { Record<string, string[]> } */
-    const allowedAttributes = {};
-    for (const t of Object.values(elements)) {
-      allowedAttributes[t.tag] = [
-        ...Object.keys(t).filter((x) => x !== "tag"),
-        ...ALLOWED_ATTRIBUTES,
-      ];
+    /** @type {Record<string, string[]>} */
+    const allowedAttributesPerTag = Object.fromEntries(
+      Object.values(elements).map((t) => [
+        t.tag,
+        [...Object.keys(t).filter((x) => x !== "tag"), ...ALLOWED_ATTRIBUTES],
+      ]),
+    );
+
+    for (const tag of ALLOWED_TAGS) {
+      allowedAttributesPerTag[tag] ??= [...ALLOWED_ATTRIBUTES];
     }
+
+    // Global list for DOMPurify (we'll filter per-tag in the hook)
+    const allAllowedAttributes = [
+      "data-l10n-name",
+      ...ALLOWED_ATTRIBUTES,
+      ...Object.values(elements).flatMap((t) =>
+        Object.keys(t).filter((x) => x !== "tag"),
+      ),
+    ];
 
     const allowedTags = [
       ...Object.values(elements).map((t) => t.tag),
@@ -107,34 +115,58 @@ export class Fluent {
     ];
 
     let safe = true;
-    const sanitized = insane(
-      message,
-      {
-        allowedAttributes,
-        allowedTags: /** @type {AllowedTags[]} */ (allowedTags),
-        allowedSchemes: ["http", "https", "mailto"],
-        filter(token) {
-          // TODO: use element names directly
-          const name = token.attrs["data-l10n-name"];
-          if (name) {
-            for (const [k, v] of Object.entries(elements[name] || {})) {
-              token.attrs[k] = v;
+
+    // Add hook to process data-l10n-name attributes and enforce per-tag attribute rules
+    DOMPurify.addHook(
+      "afterSanitizeAttributes",
+      /** @param {Element} element */ (element) => {
+        const tagName = element.tagName.toLowerCase();
+        const name =
+          "dataset" in element
+            ? /** @type {HTMLElement} */ (element).dataset.l10nName
+            : undefined;
+
+        // Apply attributes from elements config based on data-l10n-name
+        const elementConfig = name ? elements[name] : undefined;
+        if (elementConfig) {
+          for (const [k, v] of Object.entries(elementConfig)) {
+            if (k !== "tag") {
+              element.setAttribute(k, String(v));
             }
           }
+        }
+
+        // Enforce per-tag attribute allowlist (remove disallowed attributes)
+        const allowedForTag = allowedAttributesPerTag[tagName] || [];
+        const attrsToRemove = [];
+        for (const attr of element.attributes) {
           if (
-            ALLOWED_TAGS.includes(token.tag) ||
-            (name &&
-              Object.keys(elements).includes(name) &&
-              elements[name]?.tag === token.tag)
+            attr.name !== "data-l10n-name" &&
+            !allowedForTag.includes(attr.name)
           ) {
-            safe = false;
-            return true;
+            attrsToRemove.push(attr.name);
           }
-          return false;
-        },
+        }
+        for (const attr of attrsToRemove) {
+          element.removeAttribute(attr);
+        }
+
+        // Track if HTML tags are used (to decide string vs unsafeHTML return)
+        if (
+          ALLOWED_TAGS.includes(tagName) ||
+          (elementConfig && elementConfig.tag === tagName)
+        ) {
+          safe = false;
+        }
       },
-      true,
     );
+
+    const sanitized = DOMPurify.sanitize(message, {
+      ALLOWED_TAGS: allowedTags,
+      ALLOWED_ATTR: allAllowedAttributes,
+      ALLOWED_URI_REGEXP: /^(?:https?|mailto):/i,
+    });
+
     return safe ? sanitized : unsafeHTML(sanitized);
   }
 
