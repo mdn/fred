@@ -44,7 +44,7 @@
     "@lit-labs/ssr": "^4.0.0",
     "@lit-labs/ssr-client": "^1.1.8",
     "@lit/task": "^1.0.3",
-    "@mdn/rari": "0.2.10",
+    "@mdn/rari": "0.2.11",
     "@mdn/watify": "^1.1.7",
     "@mozilla/glean": "^5.0.7",
     "codemirror": "^6.0.1",
