@@ -133,6 +133,7 @@
   },
   "overrides": {
     "glob": ">=10.5.0",
+    "stylelint-order": ">=7.0.1",
     "tmp": ">=0.2.4"
   },
   "packageManager": "npm@11.6.2",
