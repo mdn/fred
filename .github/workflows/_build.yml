@@ -139,7 +139,7 @@ jobs:
 
           ADDITIONAL_LOCALES_FOR_GENERICS_AND_SPAS: de
 
-          BLOG_PAGINATION: ${{ steps.privileged.outputs.BLOG_PAGINATION || 'false' }}
+          BLOG_PAGINATION: ${{ steps.privileged.outputs.BLOG_PAGINATION }}
 
           # Increase GitHub API limit.
           GITHUB_TOKEN: ${{ github.token }}
@@ -148,6 +148,11 @@ jobs:
           FILE_LIST: ${{ github.workspace }}/files.txt
         run: |
           set -eo pipefail
+
+          if [ -z "$BLOG_ROOT" ]; then
+            unset BLOG_ROOT
+            unset BLOG_PAGINATION
+          fi
 
           npm run rari git-history
 
@@ -247,7 +252,7 @@ jobs:
             done
           fi
 
-          npm run rari build -- --all $FILE_LIST --templ-stats
+          npm run rari build -- --all-available $FILE_LIST --templ-stats
 
       - name: Render (fred)
         working-directory: mdn/fred
