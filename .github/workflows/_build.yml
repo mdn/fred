@@ -37,27 +37,27 @@ jobs:
           echo "BLOG_PAGINATION=$BLOG_PAGINATION" >> "$GITHUB_OUTPUT"
 
       - name: Checkout (fred)
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           path: mdn/fred
           persist-credentials: false
 
       - name: Checkout (content)
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           repository: mdn/content
           path: mdn/content
           persist-credentials: false
 
       - name: Checkout (translated-content)
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           repository: mdn/translated-content
           path: mdn/translated-content
           persist-credentials: false
 
       - name: Checkout (curriculum)
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           repository: mdn/curriculum
           path: mdn/curriculum
@@ -65,7 +65,7 @@ jobs:
 
       - name: Checkout (blog)
         if: ${{ steps.privileged.conclusion.success }}
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           repository: mdn/blog
           path: mdn/blog
@@ -74,14 +74,14 @@ jobs:
           persist-credentials: false
 
       - name: Checkout (generic-content)
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           repository: mdn/generic-content
           path: mdn/generic-content
           persist-credentials: false
 
       - name: Checkout (mdn-contributor-spotlight)
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           repository: mdn/mdn-contributor-spotlight
           path: mdn/mdn-contributor-spotlight
