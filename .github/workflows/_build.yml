@@ -252,7 +252,7 @@ jobs:
             done
           fi
 
-          npm run rari build -- --all $FILE_LIST --templ-stats
+          npm run rari build -- --all-available $FILE_LIST --templ-stats
 
       - name: Render (fred)
         working-directory: mdn/fred
