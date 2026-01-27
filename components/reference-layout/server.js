@@ -21,24 +21,24 @@ export class ReferenceLayout extends ServerComponent {
       doc.body?.map((section) => ContentSection.render(context, section)) || [];
 
     return html`
-      <div class="reference-layout">
-        <main id="content" class="reference-layout__content">
-          <div class="reference-layout__header">
+      <div class="layout__2-sidebars-inline reference-layout">
+        <main id="content" class="layout__content">
+          <div class="layout__header reference-layout__header">
             ${WRITER_MODE ? WriterToolbar.render(context) : nothing}
             ${TranslationBanner.render(context)}
             <mdn-survey></mdn-survey>
             <h1>${doc.title}</h1>
             ${BaselineIndicator.render(context)} ${description}
           </div>
-          <aside class="reference-layout__toc">
+          <aside class="layout__right-sidebar reference-layout__toc">
             ${ReferenceToc.render(context)}
             <mdn-placement-sidebar></mdn-placement-sidebar>
           </aside>
-          <div class="reference-layout__body">
+          <div class="layout__body reference-layout__body">
             ${sections} ${ArticleFooter.render(context)}
           </div>
         </main>
-        <aside class="reference-layout__sidebar" id="main-sidebar">
+        <aside class="layout__left-sidebar" id="main-sidebar">
           ${LeftSidebar.render(context)}
         </aside>
       </div>
