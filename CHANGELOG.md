@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.2.0](https://github.com/mdn/fred/compare/v2.1.0...v2.2.0) (2026-01-30)
+
+
+### Features
+
+* **ServerComponent:** add method to render simplified html ([#1072](https://github.com/mdn/fred/issues/1072)) ([fa6c814](https://github.com/mdn/fred/commit/fa6c8143505b8f7629f90adf1bb1e5a5b3dadb54))
+
+
+### Bug Fixes
+
+* **outer-layout:** avoid `summary_large_image` in `twitter:card` ([#1227](https://github.com/mdn/fred/issues/1227)) ([dd47e77](https://github.com/mdn/fred/commit/dd47e77d6e320751d6219d4ed13f5254687d773a))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump the dev group across 1 directory with 8 updates ([#1262](https://github.com/mdn/fred/issues/1262)) ([bf48e08](https://github.com/mdn/fred/commit/bf48e08a92a69532397937586f073879db6f061c))
+* **deps:** bump tar from 7.5.6 to 7.5.7 ([#1264](https://github.com/mdn/fred/issues/1264)) ([0ae1ccd](https://github.com/mdn/fred/commit/0ae1ccd2ed24fc720f011d80e8c6ab83ea773811))
+
 ## [2.1.0](https://github.com/mdn/fred/compare/v2.0.2...v2.1.0) (2026-01-27)
 
 
