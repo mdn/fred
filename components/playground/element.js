@@ -118,6 +118,22 @@ ${"```"}`,
     }
   }
 
+  async _copyDataUrl() {
+    const controller = this._controller.value;
+    if (controller) {
+      const { css, html, js } = controller.code;
+      let code = `<!doctype html>`;
+      if (css) code += `<style>${css}</style>`;
+      if (html) code += html;
+      if (js) code += `<script>${js}</script>`;
+      // encode non-space whitespace
+      code = code.replaceAll(/[^\S ]/g, (ch) => encodeURIComponent(ch));
+      await navigator.clipboard.writeText(
+        `data:text/html;charset=utf-8,${code}`,
+      );
+    }
+  }
+
   async _createPermalink() {
     const controller = this._controller.value;
     if (controller) {
@@ -374,6 +390,12 @@ ${"```"}`,
           <h2>${this.l10n`Share Markdown`}</h2>
           <mdn-button variant="secondary" @click=${this._copyMarkdown}
             >${this.l10n`Copy markdown to clipboard`}</mdn-button
+          >
+        </section>
+        <section>
+          <h2>${this.l10n`Share Data URL`}</h2>
+          <mdn-button variant="secondary" @click=${this._copyDataUrl}
+            >${this.l10n`Copy data URL to clipboard`}</mdn-button
           >
         </section>
         <section>
