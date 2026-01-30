@@ -9,7 +9,7 @@ baseline-supported-in = Pris en charge dans { $browsers }
 baseline-unsupported-in = Pas complètement pris en charge dans { $browsers }
 baseline-supported-and-unsupported-in = Pris en charge dans { $supported }, mais pas complètement pris en charge dans { $unsupported }
 
-homepage-hero-title = Des ressources pour les Développeurs,<br> par les Développeurs
+homepage-hero-title = Des ressources pour les Développeuses et Développeurs,<br> par des Développeuses et Développeurs
 homepage-hero-description = Documenter le <a data-l10n-name="css">CSS</a>, le <a data-l10n-name="html">HTML</a> et le <a data-l10n-name="js">JavaScript</a>, depuis 2005.
 
 not-found-title = Page non trouvée
@@ -21,7 +21,7 @@ not-found-back = Retour à la page d'accueil
 reference-toc-header = Dans cet article
 
 footer-mofo = Visitez la société mère à but non lucratif de <a data-l10n-name="moco">Mozilla Corporation</a>, la <a data-l10n-name="mofo">Fondation Mozilla</a>.
-footer-copyright = Certaines parties de ce contenu sont protégées par le droit d'auteur ©1998–{ $year } des contributeurs individuels de mozilla.org. Contenu disponible sous <a data-l10n-name="cc">une licence Creative Commons</a>.
+footer-copyright = Certaines parties de ce contenu sont protégées par le droit d'auteur ©1998—{ $year } des contributeurs individuels de mozilla.org. Contenu disponible sous <a data-l10n-name="cc">une licence Creative Commons</a>.
 
 search-modal-site-search = Rechercher sur le site <em>{ $query }</em>
 
@@ -52,15 +52,16 @@ obs-report = Signaler
 obs-title = { -brand-name-obs }
 obs-landing-intro = Lancé en 2016, { -brand-name-obs } améliore la sécurité du Web en analysant la conformité aux meilleures pratiques en matière de sécurité. Il a fourni des informations à plus de 6,9 millions de sites web grâce à 47 millions d'analyses.
 obs-assessment = Développé par Mozilla, { -brand-name-obs } effectue une évaluation approfondie des en-têtes HTTP d'un site et d'autres configurations de sécurité clés.
-obs-scanning = Son processus d'analyse automatisé fournit aux développeurs et aux administrateurs de sites web des commentaires détaillés et exploitables, axés sur l'identification et la résolution des failles de sécurité potentielles.
-obs-security = Cet outil aide les développeurs et les administrateurs de sites web à renforcer la sécurité de leurs sites contre les menaces courantes dans un environnement numérique en constante évolution.
+obs-scanning = Son processus d'analyse automatisé fournit aux développeur·euse·s et aux administrateur·ice·s de sites web des commentaires détaillés et exploitables, axés sur l'identification et la résolution des failles de sécurité potentielles.
+obs-security = Cet outil aide les développeur·euse·s et les administrateur·ice·s de sites web à renforcer la sécurité de leurs sites contre les menaces courantes dans un environnement numérique en constante évolution.
 obs-mdn = { -brand-name-obs } fournit des informations efficaces en matière de sécurité, guidées par l'expertise et l'engagement de Mozilla en faveur d'un Internet plus sûr et plus sécurisé, et basées sur des tendances et des directives bien établies.
 
 
 compat-loading = Chargement…
+compat-js-required = Activez JavaScript pour afficher ce tableau de compatibilité des navigateurs.
 
-compat-browser-version-date = { $browser } { $version } – Release date: { $date }
-compat-browser-version-released = Release date: { $date }
+compat-browser-version-date = { $browser } { $version } — Date de sortie : { $date }
+compat-browser-version-released = Date de sortie : { $date }
 
 compat-link-report-issue = Signaler des problèmes avec ces données de compatibilité
 compat-link-report-issue-title = Signaler un problème avec ces données de compatibilité
@@ -89,19 +90,21 @@ compat-support-flags =
     *[other] {""}
   }{ $has_last ->
     [one] { NUMBER($has_added) ->
-          *[zero] Jusqu'à { $versionLast } des utilisateurs
-          [one] {" "}jusqu'à { $versionLast } des utilisateurs
+          *[zero] Jusqu'à { $versionLast } des utilisateur·ice·s
+          [one] {" "}jusqu'à { $versionLast } des utilisateur·ice·s
       }
     *[zero] { NUMBER($has_added) ->
-          *[zero] Utilisateurs
-          [one] {" "}utilisateurs
+          *[zero] Utilisateur·ice·s
+          [one] {" "}utilisateur·ice·s
       }
   }
-  {" "}doit explicitement définir le <code data-l10n-name="name">{ $flag_name }</code>{" "}
+  {" "}doit explicitement définir
   { $flag_type ->
-    *[preference] préférences
-    [runtime_flag] indicateur d'exécution
-  }{ NUMBER($has_value) ->
+    *[preference] la préférence
+    [runtime_flag] l'indicateur d'exécution
+  }
+  {" "}<code data-l10n-name="name">{ $flag_name }</code>
+  { NUMBER($has_value) ->
     [one] {" "}à <code data-l10n-name="value">{ $flag_value }</code>
     *[other] {""}
   }{"."}
@@ -124,7 +127,7 @@ compat-legend-experimental = { compat-experimental }. Attendez-vous à ce que le
 compat-legend-nonstandard = { compat-nonstandard }. Vérifiez la compatibilité entre les navigateurs avant utilisation.
 compat-legend-deprecated = { compat-deprecated }. Ne pas utiliser dans les nouveaux sites web.
 compat-legend-footnote = Voir les notes de mise en application.
-compat-legend-disabled = L'utilisateur doit explicitement activer cette fonctionnalité.
+compat-legend-disabled = L'utilisateur·ice doit explicitement activer cette fonctionnalité.
 compat-legend-altname = Utilise un nom hors standard.
 compat-legend-prefix = Nécessite un préfixe vendeur ou un nom différent pour être utilisé.
 compat-legend-more = Contient davantage d'informations sur la compatibilité.
@@ -143,3 +146,9 @@ settings = Mes paramètres
 
 example-play-button-label = Exécuter
 example-play-button-title = Exécutez l'exemple dans MDN Playground (ouvre un nouvel onglet)
+
+content-feedback-question = Cette page vous a-t-elle été utile ?
+content-feedback-reason = Pourquoi cette page ne vous a-t-elle pas été utile ?
+content-feedback-thanks = Merci pour votre commentaire !
+
+writer-reload-polling = Analyse toutes les { $seconds }s

@@ -11,8 +11,10 @@ on:
 
 permissions:
   contents: read
-  # Authenticate with GCP.
+  # See: _deploy.yml
   id-token: write
+  # See: _deploy.yml
+  actions: read
 
 jobs:
   build:
