@@ -36,7 +36,7 @@ console.log(`Checking ${slugs.length} slugs in ${locales.length} locales…`);
 /** @type {Record<string, string[]>} */
 const result = {};
 for (const locale of locales) {
-  console.log(`\n=== ${locale} ===`);
+  console.log(`\n# ${locale}`);
   const missingSlugs = await Promise.all(
     slugs.map(
       /**

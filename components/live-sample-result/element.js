@@ -110,7 +110,11 @@ export class MDNLiveSampleResult extends L10nMixin(LitElement) {
           .code=${this.code}
           .allow=${this.allow}
           .sandbox=${[
-            ...new Set(["allow-modals", ...(this.sandbox?.split(" ") || [])]),
+            ...new Set([
+              "allow-modals",
+              "allow-downloads",
+              ...(this.sandbox?.split(" ") || []),
+            ]),
           ].join(" ")}
           .srcPrefix=${this.srcPrefix}
           permalink
