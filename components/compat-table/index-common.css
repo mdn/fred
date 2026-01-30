@@ -217,14 +217,6 @@ table {
   .bc-feature-depth-3 {
     border-left: 15px solid var(--color-border-primary);
   }
-
-  .timeline {
-    display: none;
-  }
-
-  .bc-has-history:focus-within .timeline {
-    display: initial;
-  }
 }
 
 .bc-head-txt-label {

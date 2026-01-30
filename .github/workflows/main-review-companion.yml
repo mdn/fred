@@ -10,13 +10,25 @@ on:
   workflow_dispatch:
 
 permissions:
-  # Authenticate with GCP.
+  contents: read
+  # See: _deploy.yml
   id-token: write
+  # See: _deploy.yml
+  actions: read
 
 jobs:
+  build:
+    if: github.repository_owner == 'mdn' && (github.event_name == 'schedule' || github.actor != 'dependabot[bot]')
+    uses: ./.github/workflows/_build.yml
+    secrets: inherit
+    with:
+      partial: false
+
   deploy:
+    needs: build
     if: github.repository_owner == 'mdn' && (github.event_name == 'schedule' || github.actor != 'dependabot[bot]')
     uses: ./.github/workflows/_deploy.yml
     secrets: inherit
     with:
       prefix: fred
+      build-artifact-name: ${{ needs.build.outputs.artifact-name }}

@@ -395,9 +395,9 @@ const clientConfig = merge(
                     (chunk) =>
                       Boolean(
                         chunk.name &&
-                          components
-                            .map((component) => `styles-${component}`)
-                            .includes(chunk.name),
+                        components
+                          .map((component) => `styles-${component}`)
+                          .includes(chunk.name),
                       ),
                   enforce: true,
                 },
