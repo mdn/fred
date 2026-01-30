@@ -44,4 +44,18 @@ export class ReferenceLayout extends ServerComponent {
       </div>
     `;
   }
+
+  /**
+   * @param {import("@fred").Context<import("@rari").DocPage>} context
+   */
+  renderSimplified(context) {
+    const { doc } = context;
+    const sections =
+      doc.body?.map((section) => ContentSection.render(context, section)) || [];
+
+    return html`
+      <h1>${doc.title}</h1>
+      ${BaselineIndicator.render(context)} ${sections}
+    `;
+  }
 }

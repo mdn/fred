@@ -159,3 +159,21 @@ If our server side rendered custom elements are different to the initial state o
 To avoid this, don't compute things that are server/client dependent in `connectedCallback` (or run functions which do this). Instead you must run these in `firstUpdated` (despite the warning lit will raise in development about the element scheduling an update after an update completed).
 
 This issue is tracked upstream: https://github.com/lit/lit/issues/1434
+
+### Simplified HTML
+
+`entry.ssr.js` exports a top-level `renderSimplified` function: the purpose of this is to render a very basic HTML page for a particular path, which is useful for embedding MDN content as templated HTML in other contexts.
+
+Any server component can define a `renderSimplified` method to define the simplified form of that component. When in the top-level `renderSimplified` context, any calls of `ServerComponent.render()` will automatically call the `renderSimplified` method of that component, falling back to the `render` method. This is so we can nest components with a `renderSimplified` method ("simplified components") within ones without.
+
+There shouldn't be standalone simplified components: the nesting of components should be defined by the requirements of the `render` method. `renderSimplified` should only be added to a component which already exists with a `render` method to give a simplified view of it. This is especially important as, in the future, we may need to add options of what is/isn't rendered within `renderSimplified` for use in different contexts (one context may require a sidebar, another may not, for instance).
+
+You can preview the rendering locally by setting `FRED_SIMPLE_HTML`:
+
+```
+FRED_SIMPLE_HTML=true npm run start
+```
+
+Then visit a documentation path directly, e.g. http://localhost:3000/en-US/docs/Web/
+
+If you're loading a path which isn't rendering anything (like the homepage), check if it's defined in `renderSimplified` in `entry.ssr.js`: we "opt-in" routes as we need them.
