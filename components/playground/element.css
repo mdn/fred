@@ -138,7 +138,7 @@ mdn-modal {
     flex-direction: column;
     gap: 0.5rem;
 
-    &:first-child {
+    &:not(:last-child) {
       margin-bottom: 1rem;
     }
   }
