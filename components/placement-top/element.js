@@ -29,8 +29,7 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
     return html`
       <div class="fallback">
         <p class="fallback__copy">
-          Learn front-end development with high quality, interactive courses
-          from
+          Learn frontend, backend, and AI from our course partner
           <a
             href="https://scrimba.com/learn/frontend?via=mdn"
             target="_blank"

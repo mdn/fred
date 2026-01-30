@@ -1,0 +1,28 @@
+.social-image {
+  --social-image-size: 144px;
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: var(--social-image-size);
+  height: var(--social-image-size);
+
+  overflow: hidden;
+
+  color-scheme: dark;
+
+  background: var(--color-background-primary);
+
+  .logo {
+    height: 21%;
+    padding: 0;
+
+    .logo__image {
+      width: auto;
+      height: 100%;
+    }
+  }
+}

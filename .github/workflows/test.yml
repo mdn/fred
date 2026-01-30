@@ -15,12 +15,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           cache: npm
           node-version-file: ".nvmrc"
@@ -54,20 +54,20 @@ jobs:
 
     steps:
       - name: Checkout (fred)
-        uses: actions/checkout@v5
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           path: fred
           persist-credentials: false
 
       - name: Checkout (content)
-        uses: actions/checkout@v5
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           repository: mdn/content
           path: content
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
         with:
           cache: npm
           node-version-file: "fred/.nvmrc"
@@ -76,7 +76,6 @@ jobs:
       - name: Install
         run: npm ci
         env:
-          # Increase GitHub API limit.
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Build
@@ -85,4 +84,5 @@ jobs:
       - name: Run
         env:
           CONTENT_ROOT: ../content/files
+          GITHUB_TOKEN: ${{ github.token }}
         run: node scripts/tests.js

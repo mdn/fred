@@ -4,7 +4,12 @@ MDN's next fr(ont)e(n)d.
 
 ## Getting started
 
-1. Copy `.env-dist` to `.env` and update
+1. Copy `.env-dist` to `.env` and update values as needed. The file contains comments for guidance:
+
+```bash
+   cp .env-dist .env
+```
+
 2. Install dependencies `npm install`
 3. Bring up the dev environment with `npm run start`
 

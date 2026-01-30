@@ -1,4 +1,3 @@
-// @ts-expect-error "Could not find declaration file"
 import GleanMetrics from "@mozilla/glean/metrics";
 
 /**
