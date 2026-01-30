@@ -2,6 +2,7 @@
 
 @font-feature-values "Inter" {
   @styleset {
+    /* stylelint-disable-next-line at-rule-descriptor-no-unknown */
     disambiguation: 2;
   }
 }

@@ -66,10 +66,10 @@ export const TABS = [
       {
         title: "CSS reference",
         items: [
-          { slug: "Web/CSS/Properties", text: "Properties" },
-          { slug: "Web/CSS/CSS_selectors", text: "Selectors" },
-          { slug: "Web/CSS/CSS_syntax/At-rule", text: "At-rules" },
-          { slug: "Web/CSS/CSS_values_and_units", text: "Values & units" },
+          { slug: "Web/CSS/Reference/Properties", text: "Properties" },
+          { slug: "Web/CSS/Reference/Selectors", text: "Selectors" },
+          { slug: "Web/CSS/Reference/At-rules", text: "At-rules" },
+          { slug: "Web/CSS/Reference/Values", text: "Values" },
           {
             slug: "Web/CSS/Reference",
             text: "See all…",
@@ -81,18 +81,18 @@ export const TABS = [
         title: "CSS guides",
         items: [
           {
-            slug: "Web/CSS/CSS_box_model/Introduction_to_the_CSS_box_model",
+            slug: "Web/CSS/Guides/Box_model/Introduction",
             text: "Box model",
           },
           {
-            slug: "Web/CSS/CSS_animations/Using_CSS_animations",
+            slug: "Web/CSS/Guides/Animations/Using",
             text: "Animations",
           },
           {
-            slug: "Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox",
+            slug: "Web/CSS/Guides/Flexible_box_layout/Basic_concepts",
             text: "Flexbox",
           },
-          { slug: "Web/CSS/CSS_colors", text: "Colors" },
+          { slug: "Web/CSS/Guides/Colors/Applying_color", text: "Colors" },
           {
             slug: "Web/CSS/Guides",
             text: "See all…",
@@ -264,7 +264,7 @@ export const TABS = [
         title: "Topics",
         items: [
           { slug: "Web/Media", text: "Media" },
-          { slug: "Web/API/Performance", text: "Performance" },
+          { slug: "Web/Performance", text: "Performance" },
           { slug: "Web/Privacy", text: "Privacy" },
           { slug: "Web/Security", text: "Security" },
           {

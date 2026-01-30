@@ -8,6 +8,7 @@
     { "type": "enhance", "section": "Enhancements", "hidden": false },
     { "type": "chore", "section": "Miscellaneous", "hidden": false }
   ],
+  "draft-pull-request": true,
   "include-component-in-tag": false,
   "packages": {
     ".": {}

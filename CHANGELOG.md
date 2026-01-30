@@ -1,5 +1,245 @@
 # Changelog
 
+## [2.1.0](https://github.com/mdn/fred/compare/v2.0.2...v2.1.0) (2026-01-27)
+
+
+### Features
+
+* **components:** add social-image ([#1230](https://github.com/mdn/fred/issues/1230)) ([1d795f7](https://github.com/mdn/fred/commit/1d795f75071075a9be10daabad4eb5c6f8c63d13))
+
+
+### Bug Fixes
+
+* **about-tabs:** apply styles correctly on hover ([#1234](https://github.com/mdn/fred/issues/1234)) ([b318c10](https://github.com/mdn/fred/commit/b318c106a3bb1b389e1d3419a236db3462d854b2))
+* **l10n:** don't insert unicode directional isolates ([#1243](https://github.com/mdn/fred/issues/1243)) ([4c41385](https://github.com/mdn/fred/commit/4c41385331c0c1d99efaea62537ea4ce7b63fe20))
+* **server:** handle HEAD requests + send Content-Length header ([#1241](https://github.com/mdn/fred/issues/1241)) ([b6801c3](https://github.com/mdn/fred/commit/b6801c310b23fedd2843f523cda1b84a1c1dd862))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.2.4 to 7.2.5 ([#1254](https://github.com/mdn/fred/issues/1254)) ([facf4fa](https://github.com/mdn/fred/commit/facf4fae8478d686463f04a5581b1242d89c0061))
+* **deps-dev:** bump eslint-plugin-jsdoc from 62.3.0 to 62.3.1 in the dev group ([#1246](https://github.com/mdn/fred/issues/1246)) ([a7dcfb5](https://github.com/mdn/fred/commit/a7dcfb5a88c60e531a13ab818197087e09f623fc))
+* **deps-dev:** bump stylelint from 16.26.1 to 17.0.0 ([#1219](https://github.com/mdn/fred/issues/1219)) ([40d0b05](https://github.com/mdn/fred/commit/40d0b0594a8100cad1f4fb9b1d74ce3194721352))
+* **deps-dev:** bump the dev group with 3 updates ([#1228](https://github.com/mdn/fred/issues/1228)) ([b226d39](https://github.com/mdn/fred/commit/b226d39790e5103524169bcec228420f7b13dec3))
+* **deps-dev:** bump the dev group with 3 updates ([#1233](https://github.com/mdn/fred/issues/1233)) ([9c10307](https://github.com/mdn/fred/commit/9c103075e98d193a4c73ec93bf6a4ac6934e5635))
+* **deps-dev:** bump the dev group with 3 updates ([#1242](https://github.com/mdn/fred/issues/1242)) ([10a9d5e](https://github.com/mdn/fred/commit/10a9d5e7cd052627590afddaa39b18a349b2e381))
+* **deps-dev:** bump the dev group with 3 updates ([#1253](https://github.com/mdn/fred/issues/1253)) ([c2cfd21](https://github.com/mdn/fred/commit/c2cfd216987e9011d780b109db397b90cca3c4e1))
+* **deps-dev:** bump typescript-eslint from 8.53.1 to 8.54.0 in the dev group ([#1259](https://github.com/mdn/fred/issues/1259)) ([739dac8](https://github.com/mdn/fred/commit/739dac8059f4daf0cef35633b5de967bd4d306a8))
+* **deps:** bump @mdn/rari from 0.2.10 to 0.2.11 ([#1256](https://github.com/mdn/fred/issues/1256)) ([e9736d8](https://github.com/mdn/fred/commit/e9736d8aaac12d348c04c4a5d28d5d26c941a24e))
+* **deps:** bump lodash from 4.17.21 to 4.17.23 ([#1245](https://github.com/mdn/fred/issues/1245)) ([9a773c2](https://github.com/mdn/fred/commit/9a773c2eb687153ea8f7701b2ead08be771572a9))
+* **deps:** bump qs and body-parser ([#1239](https://github.com/mdn/fred/issues/1239)) ([126742e](https://github.com/mdn/fred/commit/126742e5abc6dc42ce8af5ae559d3258ae930c51))
+* **deps:** bump qs, express and @rsdoctor/rspack-plugin ([#1237](https://github.com/mdn/fred/issues/1237)) ([7d1da1a](https://github.com/mdn/fred/commit/7d1da1a0d8b4beba235af445e4f35c5f61f472b8))
+* **deps:** bump react-router and react-router-dom ([#1238](https://github.com/mdn/fred/issues/1238)) ([51491d7](https://github.com/mdn/fred/commit/51491d7c31d04ff6cce78fa5fbcd43f20cf5bcfa))
+* **deps:** bump tar from 7.4.3 to 7.5.6 ([#1236](https://github.com/mdn/fred/issues/1236)) ([e95cbb5](https://github.com/mdn/fred/commit/e95cbb5806a2c1b641f555f05007d7ee3d82b8a9))
+* **scrim-inline:** move global style out of element ([#1232](https://github.com/mdn/fred/issues/1232)) ([8821afe](https://github.com/mdn/fred/commit/8821afe0491c7d74d0277a6c6f9f76f09048cc59))
+
+## [2.0.2](https://github.com/mdn/fred/compare/v2.0.1...v2.0.2) (2026-01-19)
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.2.3 to 7.2.4 ([#1218](https://github.com/mdn/fred/issues/1218)) ([986860e](https://github.com/mdn/fred/commit/986860e6304aac6248607ab9bbcd2d3902c39a3f))
+* **deps-dev:** bump postcss-preset-env from 11.1.0 to 11.1.1 in the dev group ([#1216](https://github.com/mdn/fred/issues/1216)) ([dc08760](https://github.com/mdn/fred/commit/dc08760d2b302cedf43489a2174b5e5466ceae4e))
+* **deps-dev:** bump the dev group with 6 updates ([#1223](https://github.com/mdn/fred/issues/1223)) ([ec2b761](https://github.com/mdn/fred/commit/ec2b761560dde6f7d76c4d51a042c95965f52f3b))
+* **deps:** bump @mdn/rari from 0.2.9 to 0.2.10 ([#1226](https://github.com/mdn/fred/issues/1226)) ([63499c7](https://github.com/mdn/fred/commit/63499c7b51a4b14e25230f05852d65ebdd275f78))
+
+## [2.0.1](https://github.com/mdn/fred/compare/v2.0.0...v2.0.1) (2026-01-15)
+
+
+### Bug Fixes
+
+* **curriculum:** repair TOC + align with content TOC ([#1202](https://github.com/mdn/fred/issues/1202)) ([c5372b2](https://github.com/mdn/fred/commit/c5372b24afc0fdc63bdcecf4f8646c3127c0141b))
+* **live-sample:** add `sandbox="allow-downloads"` to all samples ([#1215](https://github.com/mdn/fred/issues/1215)) ([9416161](https://github.com/mdn/fred/commit/9416161b9db61761630c24495b7f3e7d81c0a047))
+* **live-sample:** add allow-downloads to all samples ([9416161](https://github.com/mdn/fred/commit/9416161b9db61761630c24495b7f3e7d81c0a047))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @csstools/postcss-global-data from 3.1.0 to 4.0.0 ([#1211](https://github.com/mdn/fred/issues/1211)) ([4282d7d](https://github.com/mdn/fred/commit/4282d7dc6e730dc56ef2b145f302cc1370092c85))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.2.2 to 7.2.3 ([#1182](https://github.com/mdn/fred/issues/1182)) ([a080b1d](https://github.com/mdn/fred/commit/a080b1d3c3eac6ce9e33b3b3928096060103a9da))
+* **deps-dev:** bump eslint-plugin-jsdoc from 61.5.0 to 62.0.0 ([#1192](https://github.com/mdn/fred/issues/1192)) ([c516041](https://github.com/mdn/fred/commit/c5160411c552088f098795b35815a1eb1ce30631))
+* **deps-dev:** bump globals from 16.5.0 to 17.0.0 ([#1190](https://github.com/mdn/fred/issues/1190)) ([3901fbb](https://github.com/mdn/fred/commit/3901fbb154b12dbd6668da8736d88b591987a838))
+* **deps-dev:** bump postcss-custom-media from 11.0.6 to 12.0.0 ([#1210](https://github.com/mdn/fred/issues/1210)) ([502fb33](https://github.com/mdn/fred/commit/502fb33cce4ebc45c5ef7f8f4068a55232d4603c))
+* **deps-dev:** bump postcss-custom-media from 11.0.6 to 12.0.0 correctly ([#1213](https://github.com/mdn/fred/issues/1213)) ([25f520c](https://github.com/mdn/fred/commit/25f520cebe93653d434ea491ebdbe1dbb9110af3))
+* **deps-dev:** bump postcss-preset-env from 10.6.1 to 11.1.0 ([#1209](https://github.com/mdn/fred/issues/1209)) ([e24aef9](https://github.com/mdn/fred/commit/e24aef9d8b88c4cbf9fb5dff44324a03522966b1))
+* **deps-dev:** bump the dev group across 1 directory with 13 updates ([#1181](https://github.com/mdn/fred/issues/1181)) ([efadcd6](https://github.com/mdn/fred/commit/efadcd695cb6ea3ee1790562e413c7c37c8a546d))
+* **deps-dev:** bump the dev group with 2 updates ([#1189](https://github.com/mdn/fred/issues/1189)) ([9f8154c](https://github.com/mdn/fred/commit/9f8154c8ac37625974feb40f140ca5153aa0eed4))
+* **deps-dev:** bump the dev group with 2 updates ([#1194](https://github.com/mdn/fred/issues/1194)) ([04a19fc](https://github.com/mdn/fred/commit/04a19fc7891ea1c0114e4b743f8f5f1e177fe4a7))
+* **deps-dev:** bump the dev group with 2 updates ([#1208](https://github.com/mdn/fred/issues/1208)) ([dc6f5c3](https://github.com/mdn/fred/commit/dc6f5c31f48fb630f0f63530fa3d93b93a28629f))
+* **deps-dev:** bump the dev group with 6 updates ([#1203](https://github.com/mdn/fred/issues/1203)) ([da0d4cf](https://github.com/mdn/fred/commit/da0d4cf1a2830348292db58bd5fb0292daacbce6))
+* **deps:** bump @codemirror/state from 6.5.3 to 6.5.4 in the prod group ([#1207](https://github.com/mdn/fred/issues/1207)) ([638bbb9](https://github.com/mdn/fred/commit/638bbb98d7cd54e9fe1045fb5e4219fe232165aa))
+* **deps:** bump @lit-labs/ssr from 3.3.1 to 4.0.0 ([#1191](https://github.com/mdn/fred/issues/1191)) ([b1397b9](https://github.com/mdn/fred/commit/b1397b9600fc46227bb22b63a7373f9a26c8070d))
+* **deps:** bump @mdn/rari from 0.2.8 to 0.2.9 ([#1193](https://github.com/mdn/fred/issues/1193)) ([4eaaa97](https://github.com/mdn/fred/commit/4eaaa976bc18049cfe4a03776d7ad603f2e2da8b))
+* **deps:** bump the prod group across 1 directory with 4 updates ([#1173](https://github.com/mdn/fred/issues/1173)) ([cb79cff](https://github.com/mdn/fred/commit/cb79cffa49aeb7619aee0be8dfbeeb1d510aa84a))
+* **l10n:** update french strings ([#1183](https://github.com/mdn/fred/issues/1183)) ([f10a508](https://github.com/mdn/fred/commit/f10a50893587e52c8c6606405aa3b988b3014683))
+* **l10n:** updating french strings ([f10a508](https://github.com/mdn/fred/commit/f10a50893587e52c8c6606405aa3b988b3014683))
+* **menu:** update missing docs ([#1200](https://github.com/mdn/fred/issues/1200)) ([63ce028](https://github.com/mdn/fred/commit/63ce028d75bb38a5c06d2f98fc07d3b27119b51f))
+
+## [2.0.0](https://github.com/mdn/fred/compare/v1.9.7...v2.0.0) (2025-12-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** bump node from v22 to v24 ([#1122](https://github.com/mdn/fred/issues/1122))
+
+### Bug Fixes
+
+* **placement-top:** update Scrimba copy ([#1167](https://github.com/mdn/fred/issues/1167)) ([18aa567](https://github.com/mdn/fred/commit/18aa567fa5216bfef6c92f19b1e70c48ab49be91))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.2.0 to 7.2.1 ([#1163](https://github.com/mdn/fred/issues/1163)) ([cb38c68](https://github.com/mdn/fred/commit/cb38c6876f97fb2cb9fab0609ead4483f41ea81b))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.2.1 to 7.2.2 ([#1169](https://github.com/mdn/fred/issues/1169)) ([8caa1c6](https://github.com/mdn/fred/commit/8caa1c655f9ee9cf170e2f1e00fa9583c37be84c))
+* **deps-dev:** bump sass-embedded from 1.96.0 to 1.97.0 in the dev group ([#1165](https://github.com/mdn/fred/issues/1165)) ([d5d04ca](https://github.com/mdn/fred/commit/d5d04cab6c343ac96cddc5555a5b62bca631aefa))
+* **deps-dev:** bump the dev group with 2 updates ([#1159](https://github.com/mdn/fred/issues/1159)) ([e44b9b7](https://github.com/mdn/fred/commit/e44b9b731b8754a19d16cce70fef5a7f0bb8989b))
+* **deps-dev:** bump the dev group with 2 updates ([#1164](https://github.com/mdn/fred/issues/1164)) ([a5e9ffb](https://github.com/mdn/fred/commit/a5e9ffbfc446dc9420534af165f61aebbd4722e2))
+* **deps-dev:** bump the dev group with 3 updates ([#1168](https://github.com/mdn/fred/issues/1168)) ([b5da20d](https://github.com/mdn/fred/commit/b5da20df22a9cb905d961ff0021fefce67499d0e))
+* **deps-dev:** bump the dev group with 4 updates ([#1162](https://github.com/mdn/fred/issues/1162)) ([dcb6eb2](https://github.com/mdn/fred/commit/dcb6eb289c9d28bd1840ee97d0961ccb5e063cff))
+* **deps-dev:** override glob &gt;= 10.5.0 ([#1145](https://github.com/mdn/fred/issues/1145)) ([675535f](https://github.com/mdn/fred/commit/675535f0e90a703711a84f36058fe836b3a790c9))
+* **deps-dev:** override tmp &gt;= 0.2.4 ([#1149](https://github.com/mdn/fred/issues/1149)) ([fade886](https://github.com/mdn/fred/commit/fade886ffe2daeb2703484d78406d13c63bdb986))
+* **deps:** bump node from v22 to v24 ([#1122](https://github.com/mdn/fred/issues/1122)) ([aeaf341](https://github.com/mdn/fred/commit/aeaf3413a11effe2149fe1fad67e361db1f47771))
+
+## [1.9.7](https://github.com/mdn/fred/compare/v1.9.6...v1.9.7) (2025-12-11)
+
+
+### Bug Fixes
+
+* **menu:** link to Web/Performance, not Web/API/Performance ([#1136](https://github.com/mdn/fred/issues/1136)) ([aa7353c](https://github.com/mdn/fred/commit/aa7353c5902428dd65edc1a11359bae0eb55b540))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.23 to 7.1.24 ([#1142](https://github.com/mdn/fred/issues/1142)) ([fb38608](https://github.com/mdn/fred/commit/fb38608b544327672a49fdcf2b569d3679f1a4b6))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.24 to 7.2.0 ([#1152](https://github.com/mdn/fred/issues/1152)) ([14b63f1](https://github.com/mdn/fred/commit/14b63f1e16973d310faba39893525e2bf69f4489))
+* **deps-dev:** bump js-yaml from 3.14.1 to 3.14.2 ([#1148](https://github.com/mdn/fred/issues/1148)) ([b4ded6a](https://github.com/mdn/fred/commit/b4ded6a5d0145400da21f17b075ef954b9a554d6))
+* **deps-dev:** bump mdast-util-to-hast from 13.2.0 to 13.2.1 ([#1147](https://github.com/mdn/fred/issues/1147)) ([700fa02](https://github.com/mdn/fred/commit/700fa02a66d8d0fe57c906f41b60f20cd02e724c))
+* **deps-dev:** bump node-forge from 1.3.1 to 1.3.3 ([#1146](https://github.com/mdn/fred/issues/1146)) ([af30ef0](https://github.com/mdn/fred/commit/af30ef01df1ec25b12e6eca87658909a705feba4))
+* **deps-dev:** bump postcss-preset-env from 10.4.0 to 10.5.0 in the dev group ([#1135](https://github.com/mdn/fred/issues/1135)) ([334449f](https://github.com/mdn/fred/commit/334449f1b5478c08783e247a944d5cfaa9d83e53))
+* **deps-dev:** bump sass-embedded from 1.95.1 to 1.96.0 in the dev group ([#1155](https://github.com/mdn/fred/issues/1155)) ([f893d1d](https://github.com/mdn/fred/commit/f893d1db55c0228b6c5d913dd163e2856a9045eb))
+* **deps-dev:** bump the dev group with 3 updates ([#1141](https://github.com/mdn/fred/issues/1141)) ([10f6fbf](https://github.com/mdn/fred/commit/10f6fbf1d4dd6cd6c1a337f6909e22b2f9424094))
+* **deps-dev:** bump the dev group with 4 updates ([#1151](https://github.com/mdn/fred/issues/1151)) ([7d1da1e](https://github.com/mdn/fred/commit/7d1da1e38e4394f5fd04b4d8c5c90073ee4b0134))
+* **deps-dev:** bump the dev group with 5 updates ([#1144](https://github.com/mdn/fred/issues/1144)) ([27e2ada](https://github.com/mdn/fred/commit/27e2ada6809c65fdfc0a7af145cc326a2f63c753))
+* **deps:** bump @mdn/rari from 0.2.7 to 0.2.8 ([#1153](https://github.com/mdn/fred/issues/1153)) ([cc1363d](https://github.com/mdn/fred/commit/cc1363db05c76d0ea3eadbec9832c6eba550b962))
+* **footer:** add socials + external links in new tab ([#1138](https://github.com/mdn/fred/issues/1138)) ([51ddd06](https://github.com/mdn/fred/commit/51ddd0659fb03dcec96cf4582ae0bd0ffccdf8e9))
+
+## [1.9.6](https://github.com/mdn/fred/compare/v1.9.5...v1.9.6) (2025-12-04)
+
+
+### Miscellaneous
+
+* **deps:** bump @mdn/rari from 0.2.6 to 0.2.7 ([#1133](https://github.com/mdn/fred/issues/1133)) ([16b28d1](https://github.com/mdn/fred/commit/16b28d15dd50cd100faca93b5edbb19956856355))
+
+## [1.9.5](https://github.com/mdn/fred/compare/v1.9.4...v1.9.5) (2025-12-04)
+
+
+### Miscellaneous
+
+* **deps-dev:** bump the dev group with 2 updates ([#1128](https://github.com/mdn/fred/issues/1128)) ([4db6bb4](https://github.com/mdn/fred/commit/4db6bb498bb3739847e7fdd4174fec5a75adcfb5))
+* **deps:** bump @mdn/rari from 0.2.5 to 0.2.6 ([#1129](https://github.com/mdn/fred/issues/1129)) ([49617fd](https://github.com/mdn/fred/commit/49617fdaf2d1bf8f9e77e0ebf42e1b5a3eabdf5e))
+* **deps:** bump open-editor from 5.1.0 to 6.0.0 ([#1096](https://github.com/mdn/fred/issues/1096)) ([c76f12f](https://github.com/mdn/fred/commit/c76f12fa1a830490f2c38a0e73b108f1c1881111))
+
+## [1.9.4](https://github.com/mdn/fred/compare/v1.9.3...v1.9.4) (2025-12-03)
+
+
+### Miscellaneous
+
+* **deps-dev:** bump lefthook from 2.0.4 to 2.0.5 in the dev group ([#1118](https://github.com/mdn/fred/issues/1118)) ([747ad38](https://github.com/mdn/fred/commit/747ad38a6057b8217a7308d859d378ea8696b052))
+* **deps:** bump @mdn/rari from 0.2.4 to 0.2.5 ([#1119](https://github.com/mdn/fred/issues/1119)) ([7d143fc](https://github.com/mdn/fred/commit/7d143fc2de292b44701b9ccbba2a1cf8ca1aca7a))
+* **deps:** bump @mdn/watify from 1.1.6 to 1.1.7 ([#1120](https://github.com/mdn/fred/issues/1120)) ([d6a4aa8](https://github.com/mdn/fred/commit/d6a4aa8a62b026750ff881cae18845da8d3b4752))
+* **deps:** bump express from 5.1.0 to 5.2.1 in the prod group ([#1117](https://github.com/mdn/fred/issues/1117)) ([4845292](https://github.com/mdn/fred/commit/484529239e766a7fadabaf9418017eaba5bb9665))
+
+## [1.9.3](https://github.com/mdn/fred/compare/v1.9.2...v1.9.3) (2025-12-03)
+
+
+### Miscellaneous
+
+* **deps:** unpin npm version, set `packageManager` instead ([#1124](https://github.com/mdn/fred/issues/1124)) ([a1435c1](https://github.com/mdn/fred/commit/a1435c1346d39f12a75fabc62c22ece2664a2139))
+* **npm:** specify version via `packageManager` field ([a1435c1](https://github.com/mdn/fred/commit/a1435c1346d39f12a75fabc62c22ece2664a2139))
+
+## [1.9.2](https://github.com/mdn/fred/compare/v1.9.1...v1.9.2) (2025-12-02)
+
+
+### Bug Fixes
+
+* **content-section:** update h4 styling ([#1112](https://github.com/mdn/fred/issues/1112)) ([e1b0ed5](https://github.com/mdn/fred/commit/e1b0ed5a4c5a3cffb4c1b8f0a0a96a1a1e410114))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.22 to 7.1.23 ([#1102](https://github.com/mdn/fred/issues/1102)) ([8468a6c](https://github.com/mdn/fred/commit/8468a6c51f786055f5b503f39e70f4724821a526))
+* **deps-dev:** bump prettier from 3.6.2 to 3.7.1 in the dev group ([#1107](https://github.com/mdn/fred/issues/1107)) ([44f4e2e](https://github.com/mdn/fred/commit/44f4e2ed1050490f142259a4a6f5b410000edec7))
+* **deps-dev:** bump the dev group across 1 directory with 9 updates ([#1116](https://github.com/mdn/fred/issues/1116)) ([71f54ba](https://github.com/mdn/fred/commit/71f54ba4c732f3263982b423893acfd623644c86))
+* **deps-dev:** bump the dev group with 2 updates ([#1101](https://github.com/mdn/fred/issues/1101)) ([6c72396](https://github.com/mdn/fred/commit/6c7239652e794230d61389861a09c347d0e450f0))
+* **deps-dev:** bump typescript-eslint from 8.47.0 to 8.48.0 in the dev group ([#1098](https://github.com/mdn/fred/issues/1098)) ([f058267](https://github.com/mdn/fred/commit/f0582679c85bff3aeb4cdc0a6f2cf22d020d5977))
+* **deps:** bump @mdn/rari from 0.2.2 to 0.2.4 ([#1110](https://github.com/mdn/fred/issues/1110)) ([8211aa9](https://github.com/mdn/fred/commit/8211aa98013cb285309e52d9951cf5e58b2fd998))
+* **deps:** bump @mdn/watify from 1.1.5 to 1.1.6 ([#1103](https://github.com/mdn/fred/issues/1103)) ([ff8b186](https://github.com/mdn/fred/commit/ff8b18655b1e297e5294f9db9cf0d39b417d5d55))
+* **deps:** pin npm version ([#1114](https://github.com/mdn/fred/issues/1114)) ([e36a6f8](https://github.com/mdn/fred/commit/e36a6f89c18754e922aad2900921bfbd73eb33f5))
+* **deps:** require npm 10 ([e36a6f8](https://github.com/mdn/fred/commit/e36a6f89c18754e922aad2900921bfbd73eb33f5))
+
+## [1.9.1](https://github.com/mdn/fred/compare/v1.9.0...v1.9.1) (2025-11-24)
+
+
+### Miscellaneous
+
+* **deps-dev:** bump eslint-plugin-jsdoc from 61.2.1 to 61.3.0 in the dev group ([#1089](https://github.com/mdn/fred/issues/1089)) ([72338ac](https://github.com/mdn/fred/commit/72338acdee643e9f5e8e1e2d6cad883cbce96bb4))
+* **deps-dev:** bump the dev group with 3 updates ([#1091](https://github.com/mdn/fred/issues/1091)) ([fceae2f](https://github.com/mdn/fred/commit/fceae2f380e2334792650f072b8069e50eea83af))
+* **deps-dev:** bump the dev group with 3 updates ([#1095](https://github.com/mdn/fred/issues/1095)) ([d859516](https://github.com/mdn/fred/commit/d8595168a602e8fa5dd35f22a8318302f3e79d79))
+* **deps-dev:** bump the dev group with 5 updates ([#1088](https://github.com/mdn/fred/issues/1088)) ([7474875](https://github.com/mdn/fred/commit/7474875efec24e295127bdc4fae3f2f58417095a))
+* **deps:** bump @mdn/rari from 0.2.1 to 0.2.2 ([#1092](https://github.com/mdn/fred/issues/1092)) ([2262836](https://github.com/mdn/fred/commit/22628366e1b9ecc0d8f36811492c5a6f08e62db4))
+* **menu:** update missing docs ([#1094](https://github.com/mdn/fred/issues/1094)) ([1a416ef](https://github.com/mdn/fred/commit/1a416ef7fbc24c527045e3d4e5c0b1888802daff))
+
+## [1.9.0](https://github.com/mdn/fred/compare/v1.8.1...v1.9.0) (2025-11-18)
+
+
+### Features
+
+* **compat-table:** render only visible timeline on click ([#1057](https://github.com/mdn/fred/issues/1057)) ([33b6efe](https://github.com/mdn/fred/commit/33b6efeaf8a05a302d9acf01b03ab099dcc5621f))
+* **compat-table:** toggle timeline with click ([33b6efe](https://github.com/mdn/fred/commit/33b6efeaf8a05a302d9acf01b03ab099dcc5621f))
+
+
+### Bug Fixes
+
+* **compat-table:** show message when JavaScript is disabled ([#890](https://github.com/mdn/fred/issues/890)) ([3ac4661](https://github.com/mdn/fred/commit/3ac4661a1c6985337416d38500e0abeb96f8e77a))
+* **menu:** mark "MDN on GitHub" link as external ([#830](https://github.com/mdn/fred/issues/830)) ([dc32ba4](https://github.com/mdn/fred/commit/dc32ba4a7644fa51d5752fd0bf51e16bbdab976e))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump [@zip](https://github.com/zip).js/zip.js from 2.8.8 to 2.8.10 in the dev group ([#1065](https://github.com/mdn/fred/issues/1065)) ([5be28cc](https://github.com/mdn/fred/commit/5be28cce86c5dfe9f6a3417e61f6ea0717c1255b))
+* **deps-dev:** bump @eslint/compat from 1.4.1 to 2.0.0 ([#1085](https://github.com/mdn/fred/issues/1085)) ([c67b71f](https://github.com/mdn/fred/commit/c67b71fff05752aca7cf6c144bfef554d772bc8e))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.19 to 7.1.20 ([#1066](https://github.com/mdn/fred/issues/1066)) ([fd4d5a4](https://github.com/mdn/fred/commit/fd4d5a4ecb0d54d58ca509e270acee649e9a3fb1))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.20 to 7.1.21 ([#1077](https://github.com/mdn/fred/issues/1077)) ([c9c9cf5](https://github.com/mdn/fred/commit/c9c9cf51ee08bed3cb0d7af733a5c0d9c347a941))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.21 to 7.1.22 ([#1086](https://github.com/mdn/fred/issues/1086)) ([ad91022](https://github.com/mdn/fred/commit/ad91022efdf5dfd753e265db3beb3bc94e1be500))
+* **deps-dev:** bump @types/node from 22.19.0 to 22.19.1 in the dev group ([#1074](https://github.com/mdn/fred/issues/1074)) ([68a0f39](https://github.com/mdn/fred/commit/68a0f39ed86d54f9f3975dea8bdc1ae41eaeeb90))
+* **deps-dev:** bump the dev group with 2 updates ([#1071](https://github.com/mdn/fred/issues/1071)) ([6356d98](https://github.com/mdn/fred/commit/6356d98bb1492e1e3e3fa7e392f4c3129e264672))
+* **deps-dev:** bump the dev group with 2 updates ([#1084](https://github.com/mdn/fred/issues/1084)) ([f908c8c](https://github.com/mdn/fred/commit/f908c8ce69759809eb76fe8be7ac6034b844721d))
+* **deps-dev:** bump the dev group with 3 updates ([#1076](https://github.com/mdn/fred/issues/1076)) ([f8f2ff5](https://github.com/mdn/fred/commit/f8f2ff51aa08dcd45ea2c677229688a81ff63499))
+* **deps-dev:** bump the dev group with 4 updates ([#1080](https://github.com/mdn/fred/issues/1080)) ([7e6ea19](https://github.com/mdn/fred/commit/7e6ea19ab2b86d5071046ec7dbc7cff07ba5cc39))
+* **deps:** bump @mdn/rari from 0.2.0 to 0.2.1 ([#1067](https://github.com/mdn/fred/issues/1067)) ([eaee333](https://github.com/mdn/fred/commit/eaee3332521fb2bc5f846323eb80882d7ec0148d))
+* **deps:** bump @mozilla/glean from 5.0.6 to 5.0.7 in the prod group ([#1083](https://github.com/mdn/fred/issues/1083)) ([06ab3c7](https://github.com/mdn/fred/commit/06ab3c72108125c9ae8357808e5f38996b6e598b))
+* **menu:** update slug for At-Rules and Values ([#1059](https://github.com/mdn/fred/issues/1059)) ([7a7920d](https://github.com/mdn/fred/commit/7a7920d20a51ae269c191fcae79dbe749a8ae924))
+* **menu:** update slug for CSS guides ([#1078](https://github.com/mdn/fred/issues/1078)) ([622b237](https://github.com/mdn/fred/commit/622b2378fbc3790fc8a6d0890ca40499cd0f5942))
+
+## [1.8.1](https://github.com/mdn/fred/compare/v1.8.0...v1.8.1) (2025-11-07)
+
+
+### Bug Fixes
+
+* **telemetry:** insert gtag first, then configure ([#935](https://github.com/mdn/fred/issues/935)) ([e47a811](https://github.com/mdn/fred/commit/e47a811bb9cf24f844d11357ff9ebb610f3d06ad))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.17 to 7.1.18 ([#1048](https://github.com/mdn/fred/issues/1048)) ([bffd627](https://github.com/mdn/fred/commit/bffd627214a16515203abbb15c29848c9fe5e369))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.1.18 to 7.1.19 ([#1055](https://github.com/mdn/fred/issues/1055)) ([5136299](https://github.com/mdn/fred/commit/51362999ffb4871c4b422feace3f7e5409543abc))
+* **deps-dev:** bump the dev group across 1 directory with 10 updates ([#1050](https://github.com/mdn/fred/issues/1050)) ([24393ed](https://github.com/mdn/fred/commit/24393edd9af19748b29f137b86e3b25b8a18e97e))
+* **deps-dev:** bump the dev group with 2 updates ([#1054](https://github.com/mdn/fred/issues/1054)) ([83e0860](https://github.com/mdn/fred/commit/83e0860e9e5c8e03d8ecc3a71cae0728791fb4bf))
+* **deps-dev:** bump the dev group with 5 updates ([#1052](https://github.com/mdn/fred/issues/1052)) ([3d741ee](https://github.com/mdn/fred/commit/3d741ee984bfbd5fc1f8f34839740f20b572790d))
+* **deps:** bump @mdn/rari from 0.1.54 to 0.2.0 ([#1049](https://github.com/mdn/fred/issues/1049)) ([3688bba](https://github.com/mdn/fred/commit/3688bba3374c50489fd51b9e680a15cdd66d9627))
+* **menu:** update CSS Properties / Selectors link ([#1042](https://github.com/mdn/fred/issues/1042)) ([95fb58e](https://github.com/mdn/fred/commit/95fb58e4ae4c878feecc2c227d95af160a737451))
+* **menu:** update missing docs in parallel ([#1046](https://github.com/mdn/fred/issues/1046)) ([f5ed81d](https://github.com/mdn/fred/commit/f5ed81d81f0cc1d59b4cdb1d0e6b49f80b0a65d8))
+
 ## [1.8.0](https://github.com/mdn/fred/compare/v1.7.0...v1.8.0) (2025-10-31)
 
 
