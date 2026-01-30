@@ -388,13 +388,19 @@ ${"```"}`,
       <mdn-modal ${ref(this._shareModal)} class="share">
         <section>
           <h2>${this.l10n`Share Markdown`}</h2>
-          <mdn-button variant="secondary" @click=${this._copyMarkdown}
+          <mdn-button
+            variant="secondary"
+            @click=${this._copyMarkdown}
+            data-glean-id="playground: copy-markdown"
             >${this.l10n`Copy markdown to clipboard`}</mdn-button
           >
         </section>
         <section>
           <h2>${this.l10n`Share Data URL`}</h2>
-          <mdn-button variant="secondary" @click=${this._copyDataUrl}
+          <mdn-button
+            variant="secondary"
+            @click=${this._copyDataUrl}
+            data-glean-id="playground: copy-data-url"
             >${this.l10n`Copy data URL to clipboard`}</mdn-button
           >
         </section>
@@ -411,6 +417,7 @@ ${"```"}`,
                       <mdn-button
                         variant="secondary"
                         @click=${this._copyPermalink}
+                        data-glean-id="playground: copy-permalink"
                         >${this.l10n`Copy to clipboard`}</mdn-button
                       >
                     `
