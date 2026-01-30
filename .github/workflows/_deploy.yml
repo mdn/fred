@@ -15,6 +15,10 @@ on:
         description: "Name of the build artifact to download"
         required: true
         type: string
+      build-workflow-run-id:
+        description: "ID of the workflow run that created the artifact"
+        type: number
+        required: false
     outputs:
       url:
         description: "Deployment URL"
@@ -24,6 +28,8 @@ permissions:
   contents: read
   # Authenticate with GCP.
   id-token: write
+  # Download artifact from workflow run.
+  actions: read
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ inputs.prefix }}
@@ -47,10 +53,12 @@ jobs:
 
     steps:
       - name: Download build output
-        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:
           name: ${{ inputs.build-artifact-name }}
           path: ${{ env.BUILD_OUT_ROOT }}
+          github-token: ${{ inputs.build-workflow-run-id && github.token || '' }}
+          run-id: ${{ inputs.build-workflow-run-id || '' }}
 
       - name: Authenticate with GCP
         uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
