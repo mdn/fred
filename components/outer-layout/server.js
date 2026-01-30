@@ -177,8 +177,7 @@ export class OuterLayout extends ServerComponent {
       "og:image:type": "image/png",
       "og:image:height": "1024",
       "og:image:width": "1024",
-      "og:image:alt":
-        "The MDN logo",
+      "og:image:alt": "The MDN logo",
       "og:site_name": "MDN Web Docs",
       "twitter:card": "summary",
       "twitter:creator": "MozDevNet",
