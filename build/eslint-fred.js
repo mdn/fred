@@ -1,6 +1,6 @@
 import path from "node:path";
 
-import { toCamelCase } from "./utils.js";
+import { camelToKebabCase } from "../utils/name-transformation.js";
 
 /** @type {import("eslint").ESLint.Plugin} */
 export default {
@@ -26,7 +26,9 @@ export default {
                 });
               }
 
-              const expectedDir = toCamelCase(className.replace(/^MDN/, ""));
+              const expectedDir = camelToKebabCase(
+                className.replace(/^MDN/, ""),
+              );
               const expectedPath = path.join(
                 "components",
                 expectedDir,
@@ -57,7 +59,7 @@ export default {
             const [className, superClassName] = getClassNames(node);
 
             if (superClassName === "ServerComponent") {
-              const expectedDir = toCamelCase(className);
+              const expectedDir = camelToKebabCase(className);
               const expectedPath = path.join(
                 "components",
                 expectedDir,
@@ -95,7 +97,7 @@ export default {
                 });
               }
 
-              const expectedDir = toCamelCase(
+              const expectedDir = camelToKebabCase(
                 className.replace(/Sandbox$/, ""),
               );
               const expectedPath = path.join(
@@ -107,6 +109,39 @@ export default {
                 context.report({
                   node,
                   message: `Class '${className}' extends SandboxComponent and should be in a file named './components/${expectedDir}/sandbox.js'.`,
+                });
+              }
+            }
+          },
+        };
+      },
+    },
+    "server-html-import": {
+      meta: {
+        type: "problem",
+      },
+      create(context) {
+        return {
+          /**
+           * @param {import("estree").ImportDeclaration} node
+           */
+          ImportDeclaration(node) {
+            const filename = context.filename;
+            if (!/\/components\/.*\/server\.js$/.test(filename)) {
+              return;
+            }
+
+            if (node.source.value === "lit") {
+              const htmlSpecifier = node.specifiers.find(
+                (spec) =>
+                  spec.type === "ImportSpecifier" &&
+                  spec.imported.type === "Identifier" &&
+                  spec.imported.name === "html",
+              );
+              if (htmlSpecifier) {
+                context.report({
+                  node,
+                  message: `Import "html" from "@lit-labs/ssr" instead of "lit" in server.js files.`,
                 });
               }
             }

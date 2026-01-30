@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html } from "@lit-labs/ssr";
 
 import { HomepageContributorSpotlight } from "../homepage-contributor-spotlight/server.js";
 import { ServerComponent } from "../server/index.js";

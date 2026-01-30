@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html } from "@lit-labs/ssr";
 
 import { ServerComponent } from "../server/index.js";
 
@@ -129,8 +129,8 @@ const mozillaLinks = (context) => [
     external: true,
   },
   {
-    text: context.l10n`Cookies`,
-    href: "https://www.mozilla.org/privacy/websites/cookie-settings/",
+    text: context.l10n`Telemetry Settings`,
+    href: "https://www.mozilla.org/en-US/privacy/websites/data-preferences/",
     external: true,
   },
   {
@@ -174,6 +174,8 @@ export class Footer extends ServerComponent {
                 <li>
                   <a
                     href=${item.href}
+                    target="_blank"
+                    rel="noopener"
                     aria-label=${item.ariaLabel}
                     data-icon=${item.icon}
                   ></a>
@@ -194,8 +196,11 @@ export class Footer extends ServerComponent {
                           <a
                             href=${link.href}
                             class=${link.external ? "external" : ""}
-                            >${link.text}</a
+                            target=${link.external ? "_blank" : undefined}
+                            rel=${link.external ? "noopener" : undefined}
                           >
+                            ${link.text}
+                          </a>
                         </li>
                       `,
                     )}

@@ -1,12 +1,32 @@
-import { LitElement, nothing } from "lit";
+import { LitElement, html } from "lit";
+
+import { L10nMixin } from "../../l10n/mixin.js";
+
+import styles from "./element.css?lit";
 
 /**
  * Custom element which reloads the page when the document has changed.
  */
-export default class MDNWriterReload extends LitElement {
+export default class MDNWriterReload extends L10nMixin(LitElement) {
+  static ssr = false;
+  static styles = styles;
+
   constructor() {
     super();
     this._state = "";
+    this._comparisons = 0;
+  }
+
+  get _interval() {
+    return Number(sessionStorage.getItem("writer-reload-interval") || 1000);
+  }
+
+  /** @param {number} interval  */
+  set _interval(interval) {
+    sessionStorage.setItem("writer-reload-interval", interval.toString());
+    if (!this._reloading) {
+      this.requestUpdate();
+    }
   }
 
   connectedCallback() {
@@ -15,7 +35,13 @@ export default class MDNWriterReload extends LitElement {
   }
 
   render() {
-    return nothing;
+    const seconds = this._interval / 1000;
+    return html`<div>
+      ${this.l10n.raw({
+        id: "writer-reload-polling",
+        args: { seconds },
+      })}
+    </div>`;
   }
 
   async _reloadIfChanged() {
@@ -26,10 +52,21 @@ export default class MDNWriterReload extends LitElement {
     const res = await fetch(url);
     if (res.ok) {
       const state = await res.text();
+      // eslint-disable-next-line unicorn/no-negated-condition
       if (!this._state) {
         this._state = state;
-      } else if (this._state !== state) {
-        location.reload();
+      } else {
+        this._comparisons++;
+        // eslint-disable-next-line unicorn/no-negated-condition
+        if (this._state !== state) {
+          if (this._comparisons <= 1) {
+            this._interval = this._interval * 2;
+          }
+          location.reload();
+          this._reloading = true;
+        } else {
+          this._interval = this._interval <= 2000 ? 1000 : this._interval / 2;
+        }
       }
     } else {
       console.error("Failed to fetch document", res.status, res.statusText);
@@ -37,11 +74,11 @@ export default class MDNWriterReload extends LitElement {
   }
 
   async _pollForChanges() {
-    while (true) {
+    while (!this._reloading) {
       if (document.visibilityState === "visible") {
         await this._reloadIfChanged();
       }
-      await timeout(1000);
+      await timeout(this._interval);
     }
   }
 }

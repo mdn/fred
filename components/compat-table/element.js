@@ -13,7 +13,7 @@ import {
   versionLabelFromSupport,
 } from "./feature-row.js";
 import {
-  HIDDEN_BROWSERS,
+  SHOW_BROWSERS,
   asList,
   bugURLToString,
   getCurrentSupport,
@@ -68,6 +68,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     _pathname: { state: true },
     _platforms: { state: true },
     _browsers: { state: true },
+    _showTimelineId: { state: true },
   };
 
   static styles = styles;
@@ -85,6 +86,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     this._platforms = [];
     /** @type {import("@bcd").BrowserName[]} */
     this._browsers = [];
+    /** @type {string|undefined} */
+    this._showTimelineId = undefined;
   }
 
   get _breadcrumbs() {
@@ -131,7 +134,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           version_added: false,
         };
 
-        if (HIDDEN_BROWSERS.includes(browser)) {
+        if (!SHOW_BROWSERS.includes(browser)) {
           continue;
         }
 
@@ -370,7 +373,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       features = features.slice(0, MAX_FEATURES);
     }
 
-    const featureRows = features.map((feature) => {
+    const featureRows = features.map((feature, featureIndex) => {
       // <FeatureRow>
       const { name, compat, depth } = feature;
 
@@ -399,32 +402,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         </div>`;
       }
 
-      const handleMousedown = (/** @type {MouseEvent} */ event) => {
-        // Blur active element if already focused.
-        const activeElement = this.shadowRoot?.activeElement;
-        const { currentTarget } = event;
-
-        if (
-          activeElement instanceof HTMLElement &&
-          currentTarget instanceof HTMLElement
-        ) {
-          const activeCell = activeElement.closest("td");
-          const currentCell = currentTarget.closest("td");
-
-          if (activeCell === currentCell) {
-            activeElement.blur();
-            event.preventDefault();
-            return;
-          }
-        }
-
-        if (currentTarget instanceof HTMLElement) {
-          // Workaround for Safari, which doesn't focus implicitly.
-          setTimeout(() => currentTarget.focus(), 0);
-        }
-      };
-
-      const browserCells = browsers.map((browserName) => {
+      const browserCells = browsers.map((browserName, browserIndex) => {
         // <CompatCell>
         const browser = browserInfo[browserName];
         if (!browser) {
@@ -434,25 +412,42 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           version_added: false,
         };
 
+        const timelineId = `timeline-${featureIndex}-${browserIndex}`;
         const supportClassName = getSupportClassName(support, browser);
         const notes = this._renderNotes(browser, support);
 
+        const hasHistory = notes.length > 0;
+        const isExpanded = hasHistory && this._showTimelineId == timelineId;
+
+        const handleClick = () => {
+          if (isExpanded) {
+            this._showTimelineId = undefined;
+          } else if (hasHistory) {
+            this._showTimelineId = timelineId;
+          }
+        };
+
         return html`<td
           class=${`bc-support bc-browser-${browserName} bc-supports-${supportClassName} ${
-            notes ? "bc-has-history" : ""
+            hasHistory ? "bc-has-history" : ""
           }`}
         >
           <button
             type="button"
-            title=${ifDefined(notes && "Toggle history")}
-            @mousedown=${handleMousedown}
+            aria-controls=${ifDefined(hasHistory ? timelineId : undefined)}
+            aria-expanded=${ifDefined(hasHistory ? isExpanded : undefined)}
+            title=${ifDefined(hasHistory && "Toggle history")}
+            @click=${handleClick}
           >
             ${this._renderCellText(support, browser)}
           </button>
-          ${notes &&
-          html`<div class="timeline" tabindex="0">
-            <dl class="bc-notes-list">${notes}</dl>
-          </div>`}
+          ${hasHistory
+            ? html`<div id=${timelineId} class="timeline" tabindex="0">
+                ${isExpanded
+                  ? html`<dl class="bc-notes-list">${notes}</dl>`
+                  : nothing}
+              </div>`
+            : nothing}
         </td>`;
       });
 
@@ -982,11 +977,17 @@ customElements.define("mdn-compat-table", MDNCompatTable);
  * @returns {[string[], import("@bcd").BrowserName[]]}
  */
 export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
-  const hasNodeJSData = data.__compat && "nodejs" in data.__compat.support;
-  const hasDenoData = data.__compat && "deno" in data.__compat.support;
+  const runtimes = Object.entries(browserInfo)
+    .filter(([, { type }]) => type == "server")
+    .map(([key]) => key);
 
   let platforms = ["desktop", "mobile"];
-  if (category === "javascript" || hasNodeJSData || hasDenoData) {
+  if (
+    category === "javascript" ||
+    runtimes.some(
+      (runtime) => data.__compat && runtime in data.__compat.support,
+    )
+  ) {
     platforms.push("server");
   }
 
@@ -1013,14 +1014,16 @@ export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
     );
   }
 
-  // If there is no Node.js data for a category outside "javascript", don't
-  // show it. It ended up in the browser list because there is data for Deno.
-  if (category !== "javascript" && !hasNodeJSData) {
-    browsers = browsers.filter((browser) => browser !== "nodejs");
+  // If there is no data for a runtime in a category outside "javascript", hide it.
+  if (category !== "javascript") {
+    for (const runtime of runtimes) {
+      if (data.__compat && !(runtime in data.__compat.support)) {
+        browsers = browsers.filter((browser) => browser !== runtime);
+      }
+    }
   }
 
-  // Hide Internet Explorer compatibility data
-  browsers = browsers.filter((browser) => !HIDDEN_BROWSERS.includes(browser));
+  browsers = browsers.filter((browser) => SHOW_BROWSERS.includes(browser));
 
   return [platforms, [...browsers]];
 }

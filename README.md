@@ -4,7 +4,12 @@ MDN's next fr(ont)e(n)d.
 
 ## Getting started
 
-1. Copy `.env-dist` to `.env` and update
+1. Copy `.env-dist` to `.env` and update values as needed. The file contains comments for guidance:
+
+```bash
+   cp .env-dist .env
+```
+
 2. Install dependencies `npm install`
 3. Bring up the dev environment with `npm run start`
 
@@ -41,6 +46,30 @@ This is useful to test changes on mobile, tablets and other platforms.
 
 ## Development principles
 
+### Supported Browsers
+
+_tl;dr_ For visitors to MDN, we support the _Baseline widely available browser set_, with some minor modifications.
+
+#### Browsers
+
+The [_Baseline widely available browser set_](https://developer.mozilla.org/en-US/docs/Glossary/Baseline/Compatibility) is defined as browsers from the _Core browser set_ whose initial release date is on or before 30 months prior to today's date, plus long-term support releases.
+
+MDN supports these browsers, along with Firefox for iOS and all currently active Firefox ESR versions:
+
+- Apple Safari (iOS, macOS) — released within the last 2½ years
+- Google Chrome (Android, Desktop) — released within the last 2½ years
+- Microsoft Edge (Desktop) — released within the last 2½ years
+- Mozilla Firefox (Android, Desktop, iOS) — released within the last 2½ years
+- Mozilla Firefox ESR — currently supported by Mozilla
+
+#### "Supported"
+
+In this context, _supported_ means that any issues with rendering or functionality are considered bugs and will be addressed as soon as reasonably possible.
+
+For issues encountered while using unsupported browsers, we decide on a case-by-case assessment of whether the issue will be addressed; however, these issues may have lower priority. Issues with screen readers and other accessibility aids are likely to carry higher levels of importance.
+
+We make our best efforts to design MDN to degrade gracefully; however, there are no guarantees of any level of functionality outside the supported browser set.
+
 ### Environment variables
 
 See [the environment variables README](./components/env/README.md).
@@ -50,6 +79,30 @@ See [the environment variables README](./components/env/README.md).
 We need to run some JS as soon as possible at page load, to avoid layout shifts and flashes.
 We place this JS in `entry.inline.js`, and it's inlined on page load.
 Rspack also generates the necessary CSP hash when doing a prod build with `npm run build`.
+
+If this code is component-specific, it can be [imported with `?source&csp=true`](#custom-imports) and used to set the value of `static inlineScript` in a Server Component.
+Remember to add an additional entry to the CSP hashes in yari when doing so.
+
+### Custom Imports
+
+We support a range of non-standard imports in our JavaScript. This includes:
+
+#### `?source`
+
+Imports the raw source of the file as a string.
+
+```js
+import text from "./some-file.txt?source";
+```
+
+#### `&csp=true`
+
+Logs a CSP hash for the source of the file during the production build.
+Most commonly used alongside `?source` to import the source of a file for inlining in a component, which needs to be allowlisted in our CSP:
+
+```js
+import inlineScript from "./inline.js?source&csp=true";
+```
 
 ### Layout
 

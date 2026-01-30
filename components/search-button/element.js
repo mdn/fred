@@ -23,6 +23,7 @@ export class MDNSearchButton extends L10nMixin(LitElement) {
       class="mdn-search-button"
       title=${this.l10n`Search the site`}
       @click=${this._showModal}
+      data-glean-id="quick-search-open: menu"
     >
       ${searchIcon}
     </button>`;

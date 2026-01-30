@@ -2,13 +2,6 @@
 
 :host {
   display: block;
-
-  width: 100%;
-  max-width: 36rem;
-  aspect-ratio: 1.5;
-
-  margin: 0.5rem auto;
-
   overflow: hidden;
 }
 

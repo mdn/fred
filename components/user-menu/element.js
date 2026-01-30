@@ -15,6 +15,7 @@ import { getLinks } from "./links.js";
 import "../button/element.js";
 
 export class MDNUserMenu extends L10nMixin(LitElement) {
+  static ssr = false;
   static styles = styles;
 
   static properties = {

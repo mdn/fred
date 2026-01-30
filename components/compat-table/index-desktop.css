@@ -59,15 +59,25 @@
       }
     }
 
+    button[aria-expanded="false"] ~ .timeline {
+      display: none;
+    }
+
     .timeline {
       border-top: var(--border);
       border-left: none !important;
     }
 
-    .bc-has-history:focus-within > button {
-      /* Highlight expanded item. */
-      --padding-bottom-offset: -2px;
-      border-bottom: 2px solid var(--color-border-primary);
+    .bc-has-history {
+      & > button[aria-expanded="true"] {
+        /* Highlight expanded item. */
+        --padding-bottom-offset: -2px;
+        border-bottom: 2px solid var(--color-border-primary);
+      }
+
+      > button:hover {
+        background: var(--color-background-secondary);
+      }
     }
   }
 
@@ -113,14 +123,6 @@
   .bc-support {
     .bc-support-level {
       display: none;
-    }
-  }
-
-  .bc-has-history {
-    cursor: pointer;
-
-    > button:hover {
-      background: var(--color-background-secondary);
     }
   }
 }

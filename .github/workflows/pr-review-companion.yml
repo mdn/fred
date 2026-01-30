@@ -1,15 +1,71 @@
 name: PR Review Companion
 
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["PR Build"]
+    types:
+      - completed
+
+permissions:
+  contents: read
+  # Authenticate with GCP (same as _deploy.yml).
+  id-token: write
+  # Post comment in pull request.
+  pull-requests: write
+  # Download artifacts from triggering workflow.
+  actions: read
 
 jobs:
+  identify-pr:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    outputs:
+      pr-number: ${{ steps.identify-pr.outputs.number }}
+    steps:
+      - name: Identify PR
+        id: identify-pr
+        run: |
+          PR_NUMBER=$(gh api "repos/$HEAD_REPO/commits/$HEAD_SHA/pulls" --jq ".[] | select(.base.repo.full_name == \"$BASE_REPO\") | .number")
+          echo "number=$PR_NUMBER" >> $GITHUB_OUTPUT
+        env:
+          BASE_REPO: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ github.token }}
+          HEAD_REPO: ${{ github.event.workflow_run.head_repository.full_name }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+
   deploy:
-    if: github.repository_owner == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository
+    needs: identify-pr
+    if: needs.identify-pr.outputs.pr-number
     uses: ./.github/workflows/_deploy.yml
     secrets: inherit
     with:
       cancel-in-progress: true
-      prefix: fred-pr${{ github.event.pull_request.number }}
+      prefix: fred-pr${{ needs.identify-pr.outputs.pr-number }}
+      build-artifact-name: build-output
+      build-workflow-run-id: ${{ github.event.workflow_run.id }}
+
+  comment:
+    needs: [identify-pr, deploy]
+    if: needs.identify-pr.outputs.pr-number
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment in PR
+        run: |
+          COMMENT_ID=$(gh pr view "$PR_NUMBER" --repo "${{ github.repository }}" --comments --json comments \
+            --jq ".comments | sort_by(.createdAt) | map(select(.author.login == \"github-actions\")) | .[0].id")
+          if [ -n "$COMMENT_ID" ]; then
+            gh api graphql -f query='
+                mutation($id:ID!, $body:String!) {
+                  updateIssueComment(input:{id:$id, body:$body}) {
+                    issueComment {
+                      id
+                    }
+                  }
+                }' -f id="$COMMENT_ID" -f body="$BODY"
+          else
+            gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" --body "$BODY"
+          fi
+        env:
+          BODY: "${{ github.sha }} was deployed to: ${{ needs.deploy.outputs.url }}"
+          PR_NUMBER: ${{ needs.identify-pr.outputs.pr-number }}
+          GITHUB_TOKEN: ${{ github.token }}

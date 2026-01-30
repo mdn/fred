@@ -14,8 +14,6 @@ import styles from "./element.css?lit";
  * @import { TemplateResult } from "lit";
  */
 
-const EMPTY = html`<div class="top-placement empty"></div>`;
-
 export class MDNPlacementTop extends PlacementMixin(LitElement) {
   static styles = styles;
 
@@ -24,20 +22,19 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
    * @returns {TemplateResult | symbol}
    */
   renderInitial() {
-    return EMPTY;
+    return html`<div class="top-placement empty"></div>`;
   }
 
   renderFallback() {
     return html`
       <div class="fallback">
         <p class="fallback__copy">
-          Learn front-end development with high quality, interactive courses
-          from
+          Learn frontend, backend, and AI from our course partner
           <a
             href="https://scrimba.com/learn/frontend?via=mdn"
             target="_blank"
             rel="noreferrer"
-            data-glean-id=${`pong: pong->click fallback-scrimba`}
+            data-glean-id="banner_scrimba_click"
           >
             Scrimba
           </a>
@@ -58,7 +55,7 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
 
     const data = placementContext?.hpTop || placementContext?.top;
     if (!data) {
-      return EMPTY;
+      return this.renderFallback();
     }
     const {
       status,
@@ -73,7 +70,7 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
       version,
     } = data;
     if (status !== "success") {
-      return EMPTY;
+      return this.renderFallback();
     }
     if (!this._viewedUrl) {
       this._viewedUrl = view;
@@ -104,18 +101,20 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
         ["--place-top-cta-color-dark", ctaTextColorDark || ctaBackgroundColor],
       ].filter(([_, v]) => Boolean(v)),
     );
+    const type = "top-banner";
 
     return imageFormat === "leaderboard"
       ? html`<div
           ${ref(this._placementRef)}
           class="top-placement-leaderboard"
           style=${styleMap(styles)}
+          data-type=${type}
         >
           <section class="placement-container">
             <div class="placement-inner">
               <a
                 class="placement-link"
-                data-glean-id=${`pong: pong->click top-banner`}
+                data-glean-id=${`pong: pong->click ${type}`}
                 href=${this.clickLink(click, version)}
                 target="_blank"
                 rel="sponsored"
@@ -137,12 +136,13 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
           ${ref(this._placementRef)}
           class="top-placement"
           style=${styleMap(styles)}
+          data-type=${type}
         >
           <section class="placement-container">
             <div class="placement-inner">
               <a
                 class="placement-link"
-                data-glean-id=${`pong: pong->click top-banner`}
+                data-glean-id=${`pong: pong->click ${type}`}
                 href=${this.clickLink(click, version)}
                 target="_blank"
                 rel="sponsored"

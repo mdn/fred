@@ -217,9 +217,7 @@ export function renderToc(context, toc, title) {
  * @returns {import("lit").TemplateResult}
  */
 export function renderTocItem(_context, item) {
-  const href = item.id
-    ? `#${item.id.toLowerCase().replace(/^[0-9._,]+/, "")}`
-    : undefined;
+  const href = item.id ? `#${item.id}` : undefined;
   return html`
     <li class="document-toc-item">
       <a class="document-toc-link" href=${ifDefined(href)}
@@ -305,7 +303,11 @@ export function renderModulesList(context, modules) {
     <ol class="modules-list">
       ${modules.map(
         (module) => html`
-          <li class="module-list-item topic-${topic2css(module.topic)}">
+          <li
+            class="module-list-item ${module.topic
+              ? `topic-${topic2css(module.topic)}`
+              : ""}"
+          >
             <a href=${module.url}>
               <header>
                 ${module.topic
