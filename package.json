@@ -21,7 +21,8 @@
     "rari": "rari",
     "prepack": "npm run build",
     "wdio": "wdio run ./wdio.conf.js",
-    "l10n:extract": "node l10n/parser/extract.js"
+    "l10n:extract": "node l10n/parser/extract.js",
+    "l10n:lint": "node l10n/parser/extract.js --lint"
   },
   "browserslist": [
     "Chrome > 0 and last 2.5 years",

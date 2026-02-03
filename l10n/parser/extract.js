@@ -1,3 +1,4 @@
 import { extract } from "./extractor.js";
 
-await extract();
+const lint = process.argv.includes("--lint");
+await extract({ lint });

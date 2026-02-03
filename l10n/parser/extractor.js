@@ -21,7 +21,10 @@ import { Node, Project, SyntaxKind } from "ts-morph";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-export async function extract() {
+/**
+ * @param {{ lint?: boolean }} [options]
+ */
+export async function extract(options = {}) {
   const manualStrings = await readFile(
     fileURLToPath(import.meta.resolve("../locales/en-US.ftl")),
     "utf8",
@@ -75,11 +78,19 @@ If you need to manually add strings, do so in ./locales/en-US.ftl. See ./README.
     ),
   ];
 
-  await writeFile(
-    fileURLToPath(import.meta.resolve("../template.ftl")),
-    serialize(fluentResource, {}),
-    "utf8",
-  );
+  const output = serialize(fluentResource, {});
+  const outputPath = fileURLToPath(import.meta.resolve("../template.ftl"));
+
+  if (options.lint) {
+    const existing = await readFile(outputPath, "utf8");
+    if (existing !== output) {
+      throw new Error(
+        "l10n template.ftl is out of date. Run `npm run l10n:extract` to update.",
+      );
+    }
+  } else {
+    await writeFile(outputPath, output, "utf8");
+  }
 }
 
 /**
