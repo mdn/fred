@@ -17,7 +17,7 @@ export class MDNLoginButton extends L10nMixin(LitElement) {
 
   render() {
     return html`<mdn-button href=${this._loginUrl}
-      >${this.l10n`Login`}</mdn-button
+      >${this.l10n("login-button-login")`Login`}</mdn-button
     >`;
   }
 }

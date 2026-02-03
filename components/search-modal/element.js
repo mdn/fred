@@ -225,7 +225,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
 
   _renderLoadingSearchIndex() {
     return html`<progress
-      aria-label=${this.l10n`Loading search index…`}
+      aria-label=${this.l10n("search-modal-loading-search-index")`Loading search index…`}
     ></progress>`;
   }
 
@@ -248,8 +248,8 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
             autocomplete="off"
             autofocus
             @input=${this._input}
-            placeholder=${this.l10n`Search`}
-            aria-label=${this.l10n`Search`}
+            placeholder=${this.l10n("search-modal-search")`Search`}
+            aria-label=${this.l10n("search-modal-search")`Search`}
           />
         </form>
         <mdn-button
@@ -258,7 +258,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
           icon-only
           .icon=${exitIcon}
           @click=${this._close}
-          >${this.l10n`Exit search`}</mdn-button
+          >${this.l10n("search-modal-exit-search")`Exit search`}</mdn-button
         >
         ${this._queryIndex.render({
           initial: this._renderLoadingSearchIndex.bind(this),

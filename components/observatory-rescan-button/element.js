@@ -63,9 +63,9 @@ export class MDNObservatoryRescanButton extends L10nMixin(LitElement) {
     const progressPercent = (remainingSecs * 100) / 60;
 
     return isExpired
-      ? html`<mdn-button>${this.l10n`Rescan`}</mdn-button>`
+      ? html`<mdn-button>${this.l10n("observatory-rescan-button-rescan")`Rescan`}</mdn-button>`
       : html` <mdn-button disabled .icon=${this._icon(progressPercent)}
-          >${this.l10n`Wait a minute to rescan`}</mdn-button
+          >${this.l10n("observatory-rescan-button-wait-a-minute-to-rescan")`Wait a minute to rescan`}</mdn-button
         >`;
   }
 }

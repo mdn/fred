@@ -89,19 +89,19 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
     return [
       {
         key: "outdated",
-        label: this.l10n`Content is out of date`,
+        label: this.l10n("content-feedback-content-is-out-of-date")`Content is out of date`,
       },
       {
         key: "incomplete",
-        label: this.l10n`Missing information`,
+        label: this.l10n("content-feedback-missing-information")`Missing information`,
       },
       {
         key: "code_examples",
-        label: this.l10n`Code examples not working as expected`,
+        label: this.l10n("content-feedback-code-examples-not-working-as-exp")`Code examples not working as expected`,
       },
       {
         key: "other",
-        label: this.l10n`Other`,
+        label: this.l10n("content-feedback-other")`Other`,
       },
     ];
   }
@@ -120,7 +120,7 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
           variant="secondary"
           action="positive"
         >
-          ${this.l10n`Yes`}
+          ${this.l10n("content-feedback-yes")`Yes`}
         </mdn-button>
         <mdn-button
           data-vote="no"
@@ -129,7 +129,7 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
           variant="secondary"
           action="negative"
         >
-          ${this.l10n`No`}
+          ${this.l10n("content-feedback-no")`No`}
         </mdn-button>
       </div>`;
   }
@@ -166,7 +166,7 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
       )}
       <div class="button-container">
         <mdn-button @click=${this._handleFeedback} ?disabled=${!this._reason}>
-          ${this.l10n`Submit`}
+          ${this.l10n("content-feedback-submit")`Submit`}
         </mdn-button>
       </div>`;
   }

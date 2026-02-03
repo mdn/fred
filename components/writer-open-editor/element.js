@@ -23,7 +23,7 @@ export class MDNWriterOpenEditor extends L10nMixin(LitElement) {
 
   render() {
     return html`<mdn-button @click=${this._open} variant="plain">
-      ${this.l10n`Open in editor`}
+      ${this.l10n("writer-open-editor-open-in-editor")`Open in editor`}
     </mdn-button>`;
   }
 }
