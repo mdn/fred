@@ -20,7 +20,8 @@
     "tsc": "tsc",
     "rari": "rari",
     "prepack": "npm run build",
-    "wdio": "wdio run ./wdio.conf.js"
+    "wdio": "wdio run ./wdio.conf.js",
+    "l10n:extract": "node l10n/parser/extract.js"
   },
   "browserslist": [
     "Chrome > 0 and last 2.5 years",
@@ -72,6 +73,7 @@
     "@csstools/postcss-global-data": "^4.0.0",
     "@eslint/compat": "^2.0.2",
     "@eslint/js": "^9.39.2",
+    "@fluent/syntax": "^0.19.0",
     "@jackolope/lit-analyzer": "^3.2.0",
     "@jackolope/ts-lit-plugin": "^3.1.6",
     "@mdn/browser-compat-data": "^7.3.0",
@@ -124,6 +126,7 @@
     "stylelint-config-recess-order": "^7.6.0",
     "stylelint-config-standard": "^40.0.0",
     "svgo-loader": "^4.0.0",
+    "ts-morph": "^26.0.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.54.0",
     "webpack-dev-middleware": "^7.4.5",
