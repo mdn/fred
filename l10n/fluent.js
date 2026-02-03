@@ -219,7 +219,11 @@ export default function getFluentContext(locale) {
   function l10n(id, _comment) {
     // called as a function, returning a template tag:
     // l10n("foobar")`Foobar`
-    const localizedString = getLocale(locale)?.get(id);
+    const localizedStringOrHtml = getLocale(locale)?.get(id);
+    const localizedString =
+      typeof localizedStringOrHtml === "string"
+        ? localizedStringOrHtml
+        : undefined;
     const fallbackString = `[${id}]`;
     /** @type {import("../types/fluent.js").L10nTag} */
     const tag = (strings) => {
@@ -231,10 +235,7 @@ export default function getFluentContext(locale) {
     tag.toString = () => {
       // called as a function, used as a function:
       // ${l10n("foobar")}
-      return (
-        (typeof localizedString === "string" && localizedString) ||
-        fallbackString
-      );
+      return localizedString || fallbackString;
     };
     return tag;
   }
