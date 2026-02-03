@@ -225,7 +225,9 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
 
   _renderLoadingSearchIndex() {
     return html`<progress
-      aria-label=${this.l10n("search-modal-loading-search-index")`Loading search index…`}
+      aria-label=${this.l10n(
+        "search-modal-loading-search-index",
+      )`Loading search index…`}
     ></progress>`;
   }
 

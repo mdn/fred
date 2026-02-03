@@ -84,7 +84,9 @@ export class BlogIndex extends ServerComponent {
       html`
         <div id="content" class="blog-index">
           <header class="blog-index__header">
-            <h1>${context.l10n("blog-index-blog-it-better")`Blog it better`}</h1>
+            <h1>
+              ${context.l10n("blog-index-blog-it-better")`Blog it better`}
+            </h1>
           </header>
           <div class="blog-index__main">
             <section class="blog-index__articles">

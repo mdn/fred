@@ -7,7 +7,9 @@ import { join } from "lit/directives/join.js";
  */
 export function SpecificationsList(context, specifications) {
   if (specifications.length === 0) {
-    return html`${context.l10n("specifications-list-this-feature-does-not-appear-to")`This feature does not appear to be defined in any specification.`}`;
+    return html`${context.l10n(
+      "specifications-list-this-feature-does-not-appear-to",
+    )`This feature does not appear to be defined in any specification.`}`;
   }
 
   /** @type {Map<string, string[]>} */
@@ -21,7 +23,9 @@ export function SpecificationsList(context, specifications) {
   return html`<table>
     <thead>
       <tr>
-        <th scope="col">${context.l10n("specifications-list-specification")`Specification`}</th>
+        <th scope="col">
+          ${context.l10n("specifications-list-specification")`Specification`}
+        </th>
       </tr>
     </thead>
     <tbody>

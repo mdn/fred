@@ -76,7 +76,11 @@ export class MDNPlayground extends L10nMixin(LitElement) {
   _clear() {
     const controller = this._controller.value;
     if (
-      confirm(this.l10n("playground-do-you-really-want-to-clear-ever")`Do you really want to clear everything?`) &&
+      confirm(
+        this.l10n(
+          "playground-do-you-really-want-to-clear-ever",
+        )`Do you really want to clear everything?`,
+      ) &&
       controller
     ) {
       controller.clear();
@@ -92,7 +96,11 @@ export class MDNPlayground extends L10nMixin(LitElement) {
   _reset() {
     const controller = this._controller.value;
     if (
-      confirm(this.l10n("playground-do-you-really-want-to-revert-you")`Do you really want to revert your changes?`) &&
+      confirm(
+        this.l10n(
+          "playground-do-you-really-want-to-revert-you",
+        )`Do you really want to revert your changes?`,
+      ) &&
       controller
     ) {
       controller.reset();
@@ -358,7 +366,9 @@ ${"```"}`,
           <section class="playground__runner-console">
             ${this._gistId
               ? html`<mdn-button @click=${this._reportOpen} variant="plain">
-                  ${this.l10n("playground-seeing-something-inappropriate")`Seeing something inappropriate?`}
+                  ${this.l10n(
+                    "playground-seeing-something-inappropriate",
+                  )`Seeing something inappropriate?`}
                 </mdn-button>`
               : nothing}
             <mdn-play-runner></mdn-play-runner>
@@ -373,11 +383,17 @@ ${"```"}`,
         <section>
           <h2>${this.l10n("playground-share-markdown")`Share Markdown`}</h2>
           <mdn-button variant="secondary" @click=${this._copyMarkdown}
-            >${this.l10n("playground-copy-markdown-to-clipboard")`Copy markdown to clipboard`}</mdn-button
+            >${this.l10n(
+              "playground-copy-markdown-to-clipboard",
+            )`Copy markdown to clipboard`}</mdn-button
           >
         </section>
         <section>
-          <h2>${this.l10n("playground-share-your-code-via-permalink")`Share your code via Permalink`}</h2>
+          <h2>
+            ${this.l10n(
+              "playground-share-your-code-via-permalink",
+            )`Share your code via Permalink`}
+          </h2>
           ${this._user.render({
             initial: () => html`<mdn-login-button></mdn-login-button>`,
             pending: () => html`<mdn-login-button></mdn-login-button>`,
@@ -389,11 +405,15 @@ ${"```"}`,
                       <mdn-button
                         variant="secondary"
                         @click=${this._copyPermalink}
-                        >${this.l10n("playground-copy-to-clipboard")`Copy to clipboard`}</mdn-button
+                        >${this.l10n(
+                          "playground-copy-to-clipboard",
+                        )`Copy to clipboard`}</mdn-button
                       >
                     `
                   : html`<mdn-button @click=${this._createPermalink}
-                      >${this.l10n("playground-create-link")`Create link`}</mdn-button
+                      >${this.l10n(
+                        "playground-create-link",
+                      )`Create link`}</mdn-button
                     >`
                 : html`<mdn-login-button></mdn-login-button>`,
           })}
@@ -402,12 +422,14 @@ ${"```"}`,
       <mdn-modal ${ref(this._reportModal)} class="report">
         <section>
           <p>
-            ${this
-                      .l10n("playground-report-this-malicious-or-inappro")`Report this malicious or inappropriate shared playground.`}
+            ${this.l10n(
+              "playground-report-this-malicious-or-inappro",
+            )`Report this malicious or inappropriate shared playground.`}
           </p>
           <label>
-            ${this
-                      .l10n("playground-can-you-please-share-some-detail")`Can you please share some details on what's wrong with this content:`}
+            ${this.l10n(
+              "playground-can-you-please-share-some-detail",
+            )`Can you please share some details on what's wrong with this content:`}
             <textarea></textarea>
           </label>
         </section>

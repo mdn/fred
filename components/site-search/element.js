@@ -290,7 +290,9 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
     return this._searchTask.render({
       pending: () => html`
         ${this.renderInputs()}
-        <div class="site-search__searching">${this.l10n("site-search-searching")`Searching…`}</div>
+        <div class="site-search__searching">
+          ${this.l10n("site-search-searching")`Searching…`}
+        </div>
       `,
 
       complete: (results) => {
@@ -302,7 +304,9 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
               <section class="site-search__options">
                 ${
                   LOCALE_OPTIONS.length > 0
-                    ? html` <h2>${this.l10n("site-search-language")`Language`}</h2>
+                    ? html` <h2>
+                          ${this.l10n("site-search-language")`Language`}
+                        </h2>
                         <ul>
                           ${LOCALE_OPTIONS.map((locales) => {
                             const label =

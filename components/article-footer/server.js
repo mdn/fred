@@ -38,7 +38,9 @@ function Contribute(context) {
   return html`<a
     class="article-footer__contribute"
     href=${`/${context.locale}/docs/MDN/Community/Getting_started`}
-    >${context.l10n("article-footer-learn-how-to-contribute")`Learn how to contribute`}</a
+    >${context.l10n(
+      "article-footer-learn-how-to-contribute",
+    )`Learn how to contribute`}</a
   >`;
 }
 
@@ -112,7 +114,9 @@ function GitHubSourceLink(context) {
     rel="noopener"
     >${locale === "de"
       ? "Übersetzung auf GitHub anzeigen"
-      : context.l10n("article-footer-view-this-page-on-github")`View this page on GitHub`}</a
+      : context.l10n(
+          "article-footer-view-this-page-on-github",
+        )`View this page on GitHub`}</a
   >`;
 }
 
@@ -146,12 +150,16 @@ function GitHubIssueLink(context) {
   return html`<a
     class="external"
     href=${url.href}
-    title=${context.l10n("article-footer-this-will-take-you-to-github-to")`This will take you to GitHub to file a new issue.`}
+    title=${context.l10n(
+      "article-footer-this-will-take-you-to-github-to",
+    )`This will take you to GitHub to file a new issue.`}
     target="_blank"
     rel="noopener"
     >${locale === "de"
       ? "Fehler mit dieser Übersetzung melden"
-      : context.l10n("article-footer-report-a-problem-with-this-conte")`Report a problem with this content`}</a
+      : context.l10n(
+          "article-footer-report-a-problem-with-this-conte",
+        )`Report a problem with this content`}</a
   >`;
 }
 
