@@ -224,6 +224,12 @@ export async function startServer() {
       },
       selfHandleResponse: true,
       on: {
+        proxyReq: async (req) => {
+          const locale = req.path.split("/")[1];
+          if (locale && /^q[a-t][a-z]$/.test(locale)) {
+            req.path = req.path.replace(locale, "en-US");
+          }
+        },
         proxyRes: async (proxyRes, req, res) => {
           const contentType = proxyRes.headers["content-type"] || "";
           const statusCode = proxyRes.statusCode || 500;

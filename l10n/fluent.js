@@ -132,7 +132,7 @@ export class Fluent {
     const parentMessage = bundle ? bundle.getMessage(id) : undefined;
     let message;
 
-    if (this.locale === "qa") {
+    if (this.locale === "qai") {
       return `[${id}${attr ? `.${attr}` : ""}]`;
     }
 
@@ -195,7 +195,7 @@ function getLocale(locale) {
  * @param {string} locale
  */
 export async function loadFluentFile(locale) {
-  if (locale !== "qa" && !ftlMap[locale]) {
+  if (locale !== "qai" && !ftlMap[locale]) {
     try {
       const { default: localeStrings } = await import(
         `./locales/${locale}.ftl`
