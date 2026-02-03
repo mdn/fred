@@ -2,11 +2,6 @@
 
 /* Generic Layout */
 
-/* Sidebar */
-.generic-layout__sidebar {
-  padding-block: 2rem;
-}
-
 /* Content */
 .generic-layout__content {
   padding-block: 2rem;
