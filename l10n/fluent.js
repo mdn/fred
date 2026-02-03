@@ -212,53 +212,31 @@ export async function loadFluentFile(locale) {
  */
 export default function getFluentContext(locale) {
   /**
-   * @overload
    * @param {string} id
    * @param {string} [_comment]
    * @returns {import("../types/fluent.js").L10nTag}
    */
-
-  /**
-   * @overload
-   * @param {TemplateStringsArray} strings
-   * @returns {string}
-   */
-
-  /**
-   * @param {string | TemplateStringsArray} idOrStrings
-   * @param {string} [_comment]
-   * @returns {import("../types/fluent.js").L10nTag | string}
-   */
-  function l10n(idOrStrings, _comment) {
-    if (typeof idOrStrings === "string") {
-      // called as a function, returning a template tag:
-      // l10n("foobar")`Foobar`
-      const id = idOrStrings;
-      const localizedString = getLocale(locale)?.get(id);
-      const fallbackString = `[${id}]`;
-      /** @type {import("../types/fluent.js").L10nTag} */
-      const tag = (strings) => {
-        // we don't currently support any expressions in the template string
-        // we might in the future, if we use l10n.raw a lot
-        const templateString = strings[0];
-        return localizedString || templateString || fallbackString;
-      };
-      tag.toString = () => {
-        // called as a function, used as a function:
-        // ${l10n("foobar")}
-        return (
-          (typeof localizedString === "string" && localizedString) ||
-          fallbackString
-        );
-      };
-      return tag;
-    }
-    // called directly as a template tag:
-    // l10n`Foobar`
-    // TODO: create consistent logic for id generation at runtime and scrapetime
-    const strings = idOrStrings;
-    const templateString = strings[0];
-    return templateString || "";
+  function l10n(id, _comment) {
+    // called as a function, returning a template tag:
+    // l10n("foobar")`Foobar`
+    const localizedString = getLocale(locale)?.get(id);
+    const fallbackString = `[${id}]`;
+    /** @type {import("../types/fluent.js").L10nTag} */
+    const tag = (strings) => {
+      // we don't currently support any expressions in the template string
+      // we might in the future, if we use l10n.raw a lot
+      const templateString = strings[0];
+      return localizedString || templateString || fallbackString;
+    };
+    tag.toString = () => {
+      // called as a function, used as a function:
+      // ${l10n("foobar")}
+      return (
+        (typeof localizedString === "string" && localizedString) ||
+        fallbackString
+      );
+    };
+    return tag;
   }
 
   /**
