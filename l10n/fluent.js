@@ -2,33 +2,15 @@ import { FluentBundle, FluentResource } from "@fluent/bundle";
 import insane from "insane";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
-import de_ftl from "../l10n/de.ftl";
-import enUS_ftl from "../l10n/en-US.ftl";
-import es_ftl from "../l10n/es.ftl";
-import fr_ftl from "../l10n/fr.ftl";
-import ja_ftl from "../l10n/ja.ftl";
-import ko_ftl from "../l10n/ko.ftl";
-import ptBR_ftl from "../l10n/pt-BR.ftl";
-import ru_ftl from "../l10n/ru.ftl";
-import zhCN_ftl from "../l10n/zh-CN.ftl";
-import zhTW_ftl from "../l10n/zh-TW.ftl";
+import enUS_ftl from "./locales/en-US.ftl";
 
 /**
  * @import { AllowedTags } from "insane";
  */
 
 /** @type {Record<string, string>} */
-const ftlMap = {
+let ftlMap = {
   "en-US": enUS_ftl,
-  de: de_ftl,
-  es: es_ftl,
-  fr: fr_ftl,
-  ja: ja_ftl,
-  ko: ko_ftl,
-  "pt-BR": ptBR_ftl,
-  ru: ru_ftl,
-  "zh-CN": zhCN_ftl,
-  "zh-TW": zhTW_ftl,
 };
 
 const ALLOWED_TAGS = ["i", "strong", "br", "em"];
@@ -210,7 +192,23 @@ function getLocale(locale) {
 }
 
 /**
- * @param {string} [locale]
+ * @param {string} locale
+ */
+export async function loadFluentFile(locale) {
+  if (locale !== "qa" && !ftlMap[locale]) {
+    try {
+      const { default: localeStrings } = await import(
+        `./locales/${locale}.ftl`
+      );
+      ftlMap[locale] = localeStrings;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}
+
+/**
+ * @param {string} locale
  */
 export default function getFluentContext(locale) {
   /**
