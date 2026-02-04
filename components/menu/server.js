@@ -76,7 +76,7 @@ export class Menu extends ServerComponent {
                     class="menu__tab-button"
                     type="button"
                     slot="button"
-                    data-glean-id=${`menu_click_dropdown: ${tab.id}`}
+                    data-glean-id=${`menu_toggle: ${tab.id}`}
                   >
                     ${typeof tab.buttonText === "string"
                       ? html`<span class="menu__tab-label"
