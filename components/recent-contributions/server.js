@@ -33,7 +33,10 @@ export class RecentContributions extends ServerComponent {
               )}
             </time>
             <div class="recent-contributions__title">
-              <a class="external" href=${contribution.url}
+              <a
+                class="external"
+                href=${contribution.url}
+                data-glean-id="homepage: contribution ${index + 1}"
                 >${contribution.title}</a
               >
             </div>
