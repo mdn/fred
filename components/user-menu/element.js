@@ -125,6 +125,7 @@ export class MDNUserMenu extends L10nMixin(LitElement) {
                   href=${this.#loginUrl()}
                   .icon=${logInIcon}
                   variant="plain"
+                  data-glean-id="top_nav: login"
                 >
                   ${this.l10n("login")}
                 </mdn-button>
