@@ -46,9 +46,11 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
     }
   }
 
-  /** @param {boolean} open */
-  _onDropdownToggle(open) {
-    gleanClick(`theme_switcher: ${open ? "open" : "close"}`);
+  /** @param {Event} event */
+  _onDropdownToggle({ target }) {
+    if (target instanceof HTMLElement && "open" in target) {
+      gleanClick(`theme_switcher: ${target.open ? "open" : "close"}`);
+    }
   }
 
   /**
@@ -69,7 +71,7 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
 
   render() {
     return html`<div class="color-theme">
-      <mdn-dropdown>
+      <mdn-dropdown @toggle=${this._onDropdownToggle}>
         <button
           part="button"
           slot="button"
@@ -121,19 +123,6 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
     }
     if (mode === "light dark" || mode === "light" || mode === "dark") {
       this._mode = mode;
-    }
-
-    // Observe dropdown open/close for Glean
-    const dropdown = this.shadowRoot?.querySelector("mdn-dropdown");
-    if (dropdown) {
-      const observer = new MutationObserver((mutations) => {
-        for (const mutation of mutations) {
-          if (mutation.attributeName === "open") {
-            this._onDropdownToggle(dropdown.hasAttribute("open"));
-          }
-        }
-      });
-      observer.observe(dropdown, { attributes: true });
     }
   }
 }
