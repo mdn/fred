@@ -23,6 +23,7 @@ Glean.initialize(GLEAN_APP_ID, uploadEnabled, {
   channel: GLEAN_CHANNEL,
 });
 
+// data-glean-toggle-open
 document.addEventListener("toggle", (event) => {
   const target = event.target;
   if (target instanceof HTMLDetailsElement) {
@@ -33,7 +34,7 @@ document.addEventListener("toggle", (event) => {
   }
 });
 
-// View tracking for elements with data-glean-view attribute
+// data-glean-view
 const viewedElements = new WeakSet();
 const viewObserver = new IntersectionObserver(
   (entries) => {
@@ -59,6 +60,7 @@ for (const element of document.querySelectorAll("[data-glean-view]")) {
   viewObserver.observe(element);
 }
 
+// data-glean-id
 document.addEventListener("click", (event) => {
   const composedTarget = event.composedPath()?.[0];
   if (composedTarget !== event.target && composedTarget instanceof Element) {
