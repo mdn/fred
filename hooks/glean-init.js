@@ -33,6 +33,32 @@ document.addEventListener("toggle", (event) => {
   }
 });
 
+// View tracking for elements with data-glean-view attribute
+const viewedElements = new WeakSet();
+const viewObserver = new IntersectionObserver(
+  (entries) => {
+    for (const entry of entries) {
+      if (
+        entry.isIntersecting &&
+        entry.target instanceof HTMLElement &&
+        !viewedElements.has(entry.target)
+      ) {
+        const gleanId = entry.target.dataset.gleanView;
+        if (gleanId) {
+          viewedElements.add(entry.target);
+          gleanClick(gleanId);
+          viewObserver.unobserve(entry.target);
+        }
+      }
+    }
+  },
+  { threshold: 0.5 },
+);
+
+for (const element of document.querySelectorAll("[data-glean-view]")) {
+  viewObserver.observe(element);
+}
+
 document.addEventListener("click", (event) => {
   const composedTarget = event.composedPath()?.[0];
   if (composedTarget !== event.target && composedTarget instanceof Element) {

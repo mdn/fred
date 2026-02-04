@@ -257,7 +257,10 @@ export class CurriculumLanding extends ServerComponent {
     const bannerLight = partnerBannerLight;
 
     return html`
-      <section class="curriculum-partner-banner-container">
+      <section
+        class="curriculum-partner-banner-container"
+        data-glean-view="curriculum: partner banner view"
+      >
         <div class="partner-banner">
           <section>
             <h2>Learn the curriculum with Scrimba and become job ready</h2>
