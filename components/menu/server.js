@@ -72,7 +72,12 @@ export class Menu extends ServerComponent {
                   >${tab.buttonText}</a
                 >`
               : html`<mdn-dropdown>
-                  <button class="menu__tab-button" type="button" slot="button">
+                  <button
+                    class="menu__tab-button"
+                    type="button"
+                    slot="button"
+                    data-glean-id=${`menu_click_dropdown: ${tab.id}`}
+                  >
                     ${typeof tab.buttonText === "string"
                       ? html`<span class="menu__tab-label"
                           >${tab.buttonText}</span
