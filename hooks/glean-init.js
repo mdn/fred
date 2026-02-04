@@ -23,6 +23,16 @@ Glean.initialize(GLEAN_APP_ID, uploadEnabled, {
   channel: GLEAN_CHANNEL,
 });
 
+document.addEventListener("toggle", (event) => {
+  const target = event.target;
+  if (target instanceof HTMLDetailsElement) {
+    const gleanId = target.dataset.gleanToggleOpen;
+    if (gleanId && target.open) {
+      gleanClick(gleanId);
+    }
+  }
+});
+
 document.addEventListener("click", (event) => {
   const composedTarget = event.composedPath()?.[0];
   if (composedTarget !== event.target && composedTarget instanceof Element) {
