@@ -70,6 +70,7 @@ export class MDNPlayground extends L10nMixin(LitElement) {
   }
 
   _share() {
+    gleanClick("playground: share-click");
     this._shareModal.value?.showModal();
   }
 
@@ -95,6 +96,7 @@ export class MDNPlayground extends L10nMixin(LitElement) {
       confirm(this.l10n`Do you really want to revert your changes?`) &&
       controller
     ) {
+      gleanClick("playground: reset-click");
       controller.reset();
       this._storeSession();
       this.requestUpdate();
@@ -104,6 +106,7 @@ export class MDNPlayground extends L10nMixin(LitElement) {
   async _copyMarkdown() {
     const controller = this._controller.value;
     if (controller) {
+      gleanClick("playground: share-markdown");
       const markdown = Object.entries(controller.code)
         .map(
           ([lang, code]) =>
@@ -121,6 +124,7 @@ ${"```"}`,
   async _createPermalink() {
     const controller = this._controller.value;
     if (controller) {
+      gleanClick("playground: share-permalink");
       const res = await fetch("/api/v1/play/", {
         method: "POST",
         headers: {
@@ -256,6 +260,7 @@ ${"```"}`,
   }
 
   _reportOpen() {
+    gleanClick("playground: flag-click");
     this._reportModal.value?.showModal();
   }
 
@@ -379,8 +384,14 @@ ${"```"}`,
         <section>
           <h2>${this.l10n`Share your code via Permalink`}</h2>
           ${this._user.render({
-            initial: () => html`<mdn-login-button></mdn-login-button>`,
-            pending: () => html`<mdn-login-button></mdn-login-button>`,
+            initial: () =>
+              html`<mdn-login-button
+                data-glean-id="playground: banner-login"
+              ></mdn-login-button>`,
+            pending: () =>
+              html`<mdn-login-button
+                data-glean-id="playground: banner-login"
+              ></mdn-login-button>`,
             complete: (user) =>
               user.isAuthenticated
                 ? this._permalink && !isResettable
@@ -395,7 +406,9 @@ ${"```"}`,
                   : html`<mdn-button @click=${this._createPermalink}
                       >${this.l10n`Create link`}</mdn-button
                     >`
-                : html`<mdn-login-button></mdn-login-button>`,
+                : html`<mdn-login-button
+                    data-glean-id="playground: banner-login"
+                  ></mdn-login-button>`,
           })}
         </section>
       </mdn-modal>
