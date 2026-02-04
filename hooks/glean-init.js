@@ -85,5 +85,14 @@ document.addEventListener("click", (event) => {
     ) {
       gleanClick(`external-link: ${anchor.href}`);
     }
+
+    // Sidebar click measurement.
+    if (anchor instanceof HTMLAnchorElement && anchor.href) {
+      const sidebar = anchor.closest(".left-sidebar");
+      if (sidebar) {
+        const href = anchor.getAttribute("href") || anchor.href;
+        gleanClick(`sidebar_click: sidebar ${href}`);
+      }
+    }
   }
 });
