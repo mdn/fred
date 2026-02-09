@@ -99,7 +99,7 @@
     "css-minimizer-webpack-plugin": "^7.0.4",
     "dexie": "^4.3.0",
     "downshift": "^9.2.0",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsdoc": "^62.5.4",
