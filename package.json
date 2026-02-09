@@ -71,7 +71,7 @@
     "@codemirror/view": "^6.39.13",
     "@csstools/postcss-global-data": "^4.0.0",
     "@eslint/compat": "^2.0.2",
-    "@eslint/js": "^9.39.2",
+    "@eslint/js": "^10.0.1",
     "@jackolope/lit-analyzer": "^3.2.0",
     "@jackolope/ts-lit-plugin": "^3.1.6",
     "@mdn/browser-compat-data": "^7.3.1",
