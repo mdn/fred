@@ -127,7 +127,7 @@ ${"```"}`,
       if (html) code += html;
       if (js) code += `<script>${js}</script>`;
       // encode non-space whitespace
-      code = code.replaceAll(/[^\S ]/g, (ch) => encodeURIComponent(ch));
+      code = code.replaceAll(/[^\S ]+/g, (str) => encodeURIComponent(str));
       await navigator.clipboard.writeText(
         `data:text/html;charset=utf-8,${code}`,
       );
