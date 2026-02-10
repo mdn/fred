@@ -391,7 +391,7 @@ ${"```"}`,
           <mdn-button
             variant="secondary"
             @click=${this._copyMarkdown}
-            data-glean-id="playground: copy-markdown"
+            data-glean-id="playground: share-markdown"
             >${this.l10n`Copy markdown to clipboard`}</mdn-button
           >
         </section>
@@ -400,7 +400,7 @@ ${"```"}`,
           <mdn-button
             variant="secondary"
             @click=${this._copyDataUrl}
-            data-glean-id="playground: copy-data-url"
+            data-glean-id="playground: share-data-url"
             >${this.l10n`Copy data URL to clipboard`}</mdn-button
           >
         </section>
@@ -417,7 +417,7 @@ ${"```"}`,
                       <mdn-button
                         variant="secondary"
                         @click=${this._copyPermalink}
-                        data-glean-id="playground: copy-permalink"
+                        data-glean-id="playground: share-permalink"
                         >${this.l10n`Copy to clipboard`}</mdn-button
                       >
                     `
