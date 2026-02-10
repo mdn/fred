@@ -331,12 +331,14 @@ ${"```"}`,
                   variant="secondary"
                   @click=${this._share}
                   ?disabled=${!hasCode}
+                  data-id="share"
                   >${this.l10n`Share`}</mdn-button
                 >
                 <mdn-button
                   variant="secondary"
                   @click=${this._clear}
                   ?disabled=${!(hasCode || isResettable)}
+                  data-id="clear"
                   >${this.l10n`Clear`}</mdn-button
                 >
                 ${hasInitialCode
