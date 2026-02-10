@@ -13,6 +13,15 @@ export const config = {
       },
     },
   ],
+  services: [
+    [
+      "firefox-profile",
+      {
+        "dom.events.testing.asyncClipboard": true,
+        "dom.events.testing.asyncClipboard.readText": true,
+      },
+    ],
+  ],
   logLevel: "error",
   framework: "mocha",
   reporters: ["spec"],
