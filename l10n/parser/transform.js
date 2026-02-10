@@ -69,16 +69,18 @@ class AccentTransformer extends Transformer {
   }
 }
 
-const strings = await readFile(
-  fileURLToPath(import.meta.resolve("../template.ftl")),
-  "utf8",
-);
-const resource = parse(strings, {});
+export async function generateQaaLocale() {
+  const strings = await readFile(
+    fileURLToPath(import.meta.resolve("../template.ftl")),
+    "utf8",
+  );
+  const resource = parse(strings, {});
 
-const accentedResource = resource.clone();
-new AccentTransformer().genericVisit(accentedResource);
-await writeFile(
-  fileURLToPath(import.meta.resolve("../locales/qaa.ftl")),
-  serialize(accentedResource, {}),
-  "utf8",
-);
+  const accentedResource = resource.clone();
+  new AccentTransformer().genericVisit(accentedResource);
+  await writeFile(
+    fileURLToPath(import.meta.resolve("../locales/qaa.ftl")),
+    serialize(accentedResource, {}),
+    "utf8",
+  );
+}

@@ -46,7 +46,7 @@ We have a few pseudo locales for testing if strings have been added, or if compo
 - `qaa`: "accented" locale: adds accents to all characters, duplicates some vowels to create longer strings, wraps string in square brackets to help detect truncation
 - `qai`: "id" locale: replaces strings with their identifiers, wrapped in square brackets
 
-The `qai` locale works all the time, the `qaa` locale must be manually generated with `node ./parser/transform.js`
+The `qai` locale works all the time, the `qaa` locale must be manually generated with `npm run l10n -- --gen-pseudo`
 
 ## For localizers
 
