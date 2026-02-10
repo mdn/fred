@@ -176,15 +176,13 @@ export class OuterLayout extends ServerComponent {
       "og:title": title,
       "og:locale": context.locale.replace("-", "_"),
       "og:description": description,
-      "og:image":
-        "https://developer.mozilla.org/mdn-social-share.d893525a4fb5fb1f67a2.png",
+      "og:image": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
       "og:image:type": "image/png",
-      "og:image:height": "1080",
-      "og:image:width": "1920",
-      "og:image:alt":
-        "The MDN Web Docs logo, featuring a blue accent color, displayed on a solid black background.",
+      "og:image:height": "1024",
+      "og:image:width": "1024",
+      "og:image:alt": "The MDN logo",
       "og:site_name": "MDN Web Docs",
-      "twitter:card": "summary_large_image",
+      "twitter:card": "summary",
       "twitter:creator": "MozDevNet",
     };
 
