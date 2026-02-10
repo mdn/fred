@@ -47,7 +47,7 @@ jobs:
         run: npx tsc --noEmit
 
       - name: Lint l10n strings
-        run: npm run l10n:lint
+        run: npm run l10n -- --lint
 
   test:
     runs-on: ubuntu-latest
