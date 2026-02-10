@@ -41,9 +41,9 @@ describe("Playground", () => {
       );
     });
 
-    it("should only uri-encode non-space whitespace", async () => {
+    it("should only uri-encode non-space whitespace and percent symbols", async () => {
       await $(`mdn-play-editor[language="html"]`).click();
-      await browser.keys("@\n@ @");
+      await browser.keys("@\n@ @%20 @");
       await $(`mdn-play-editor[language="css"]`).click();
       await browser.keys("body {\n  font-size: 5em;\n}");
 
@@ -52,7 +52,7 @@ describe("Playground", () => {
 
       // will cause a webdriver error about permissions, but we've set them in firefox through about:config
       await expect(browser).toHaveClipboardText(
-        expect.stringContaining("@%0A@ @"),
+        expect.stringContaining("@%0A@ @%2520 @"),
       );
       await expect(browser).toHaveClipboardText(
         expect.stringContaining(
