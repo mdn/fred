@@ -220,6 +220,7 @@ export default function getFluentContext(locale) {
     // called as a function, returning a template tag:
     // l10n("foobar")`Foobar`
     const localizedStringOrHtml = getLocale(locale)?.get(id);
+    // if fluent has returned a lit html template, discard it
     const localizedString =
       typeof localizedStringOrHtml === "string"
         ? localizedStringOrHtml
