@@ -24,7 +24,7 @@ describe("Playground", () => {
       await browser.keys("js-contents");
 
       await $(`[data-id="share"]:not([disabled])`).click();
-      await $(`[data-glean-id="playground: copy-data-url"]`).click();
+      await $(`[data-glean-id="playground: share-data-url"]`).click();
 
       // will cause a webdriver error about permissions, but we've set them in firefox through about:config
       await expect(browser).toHaveClipboardText(
@@ -48,7 +48,7 @@ describe("Playground", () => {
       await browser.keys("body {\n  font-size: 5em;\n}");
 
       await $(`[data-id="share"]:not([disabled])`).click();
-      await $(`[data-glean-id="playground: copy-data-url"]`).click();
+      await $(`[data-glean-id="playground: share-data-url"]`).click();
 
       // will cause a webdriver error about permissions, but we've set them in firefox through about:config
       await expect(browser).toHaveClipboardText(
