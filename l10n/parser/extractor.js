@@ -9,6 +9,7 @@ import {
   Identifier,
   Message,
   Pattern,
+  Resource,
   TextElement,
   parse,
   serialize,
@@ -28,16 +29,59 @@ If you need to manually add strings, do so in ./locales/en-US.ftl. See ./README.
  * @param {{ lint?: boolean }} [options]
  */
 export async function extract(options = {}) {
-  const manualStrings = await readFile(
+  const manualEntries = await getManualEntries(
     fileURLToPath(import.meta.resolve("../locales/en-US.ftl")),
-    "utf8",
   );
-  const fluentResource = parse(manualStrings, {});
-
-  const project = new Project({});
-  project.addSourceFilesAtPaths(
+  const tags = scrapeL10nTags(
     path.join(__dirname, "..", "..", "components", "**", "*.js"),
   );
+
+  const fluentResource = new Resource([
+    new Comment(EDIT_WARNING),
+    ...manualEntries,
+    ...[...tags].map(
+      ([key, value]) =>
+        new Message(new Identifier(key), new Pattern([new TextElement(value)])),
+    ),
+  ]);
+
+  const output = serialize(fluentResource, {});
+  const outputPath = fileURLToPath(import.meta.resolve("../template.ftl"));
+
+  if (options.lint) {
+    const existing = await readFile(outputPath, "utf8");
+    if (existing !== output) {
+      throw new Error(
+        "l10n template.ftl is out of date. Run `npm run l10n:extract` to update.",
+      );
+    }
+  } else {
+    await writeFile(outputPath, output, "utf8");
+  }
+}
+
+/**
+ * @param {string} path Path to fluent file
+ */
+export async function getManualEntries(path) {
+  const manualStrings = await readFile(path, "utf8");
+  const fluentResource = parse(manualStrings, {});
+  return fluentResource.body.filter(
+    (entry) =>
+      !(
+        entry instanceof Comment &&
+        (entry.content.startsWith("WARNING") ||
+          entry.content.startsWith("TODO"))
+      ),
+  );
+}
+
+/**
+ * @param {string} glob Files to scrape strings from
+ */
+export function scrapeL10nTags(glob) {
+  const project = new Project({});
+  project.addSourceFilesAtPaths(glob);
 
   /** @type {Map<string, string>} */
   const map = new Map();
@@ -62,35 +106,7 @@ export async function extract(options = {}) {
     }
   }
 
-  fluentResource.body = [
-    new Comment(EDIT_WARNING),
-    ...fluentResource.body.filter(
-      (entry) =>
-        !(
-          entry instanceof Comment &&
-          (entry.content.startsWith("WARNING") ||
-            entry.content.startsWith("TODO"))
-        ),
-    ),
-    ...[...map].map(
-      ([key, value]) =>
-        new Message(new Identifier(key), new Pattern([new TextElement(value)])),
-    ),
-  ];
-
-  const output = serialize(fluentResource, {});
-  const outputPath = fileURLToPath(import.meta.resolve("../template.ftl"));
-
-  if (options.lint) {
-    const existing = await readFile(outputPath, "utf8");
-    if (existing !== output) {
-      throw new Error(
-        "l10n template.ftl is out of date. Run `npm run l10n:extract` to update.",
-      );
-    }
-  } else {
-    await writeFile(outputPath, output, "utf8");
-  }
+  return map;
 }
 
 /**
