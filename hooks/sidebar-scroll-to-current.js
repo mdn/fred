@@ -1,4 +1,4 @@
-const sidebar = document.querySelector(".left-sidebar");
+const sidebar = document.querySelector("#main-sidebar");
 const current = sidebar?.querySelector('[aria-current="page"]');
 if (sidebar && current instanceof HTMLElement) {
   sidebar.scrollTo({
