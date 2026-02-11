@@ -362,7 +362,7 @@ ${"```"}`,
                   <menu>
                     <mdn-button
                       @click=${this._reportOpen}
-                      variant="plain"
+                      variant="secondary"
                       .icon=${warningIcon}
                     >
                       ${this.l10n`Seeing something inappropriate?`}

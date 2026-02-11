@@ -8,7 +8,6 @@
   grid-template-columns: 1fr 1fr;
 
   gap: 1rem;
-  align-items: stretch;
 
   height: 100%;
 
@@ -30,7 +29,7 @@
       gap: 0.5rem;
       align-items: center;
 
-      padding: 0.57rem;
+      padding: 0.5rem;
 
       h1 {
         margin: 0;
@@ -93,11 +92,6 @@
     .playground__runner-menu {
       align-self: flex-end;
       padding: 0.5rem 0;
-
-      mdn-button {
-        border: var(--border);
-        border-radius: 0.25rem;
-      }
 
       @media (--screen-medium-and-narrower) {
         align-self: center;
