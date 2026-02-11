@@ -24,6 +24,13 @@ export class ServerComponent {
     if (!asyncStore) {
       throw new Error("asyncLocalStorage missing");
     }
+
+    const component = new this();
+
+    if ("renderSimplified" in asyncStore) {
+      return component.renderSimplified(...args);
+    }
+
     const { componentsUsed, componentsWithStylesInHead, compilationStats } =
       asyncStore;
     const componentUsedBefore = componentsUsed.has(this.name);
@@ -35,7 +42,7 @@ export class ServerComponent {
       componentsUsed.add("legacy");
     }
 
-    let res = new this().render(...args);
+    let res = component.render(...args);
 
     if (!res || res === nothing) {
       if (!componentUsedBefore) {
@@ -72,5 +79,13 @@ export class ServerComponent {
    */
   render(..._args) {
     throw new Error("Must be implemented by subclass");
+  }
+
+  /**
+   * @param {...any} args
+   * @returns {any}
+   */
+  renderSimplified(...args) {
+    return this.render(...args);
   }
 }

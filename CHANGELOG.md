@@ -1,5 +1,56 @@
 # Changelog
 
+## [2.2.1](https://github.com/mdn/fred/compare/v2.2.0...v2.2.1) (2026-02-10)
+
+
+### Bug Fixes
+
+* **content-section:** Make table headings bold ([#1286](https://github.com/mdn/fred/issues/1286)) ([bc302e0](https://github.com/mdn/fred/commit/bc302e04ff2c6d94382f194b7990e3baeeb30a9d))
+* **homepage-contributor-spotlight:** fix content overflow ([#1045](https://github.com/mdn/fred/issues/1045)) ([bf72208](https://github.com/mdn/fred/commit/bf722088ee43f746bece188fc92c63066f420255))
+* **layout:** consolidate 2 sidebar layout across content types ([#1265](https://github.com/mdn/fred/issues/1265)) ([85dd580](https://github.com/mdn/fred/commit/85dd580a11ad1e585c5cd70b0d62169fc64a029a))
+* **layout:** increase gap between sidebar and content ([#1154](https://github.com/mdn/fred/issues/1154)) ([53d1adc](https://github.com/mdn/fred/commit/53d1adc64482ebfa56f4be57b3a69a56767a8126))
+* **play-console:** preserve whitespace ([#674](https://github.com/mdn/fred/issues/674)) ([2b69dcc](https://github.com/mdn/fred/commit/2b69dcc922d31262eff85710f0986350b8a9efc0))
+* **sidebar:** titles with code element run together ([#1285](https://github.com/mdn/fred/issues/1285)) ([15be5f8](https://github.com/mdn/fred/commit/15be5f8caae8d19af403870961f7d04db3fabcba))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.3.0 to 7.3.1 ([#1289](https://github.com/mdn/fred/issues/1289)) ([b123c55](https://github.com/mdn/fred/commit/b123c554187a0a6d5102fe602c26befadebc96aa))
+* **deps-dev:** bump eslint-plugin-jsdoc from 62.5.0 to 62.5.1 in the npm-dev group ([#1280](https://github.com/mdn/fred/issues/1280)) ([8c73e7c](https://github.com/mdn/fred/commit/8c73e7cbb85cd09c4eaa8ee93663489ec965abfe))
+* **deps-dev:** bump eslint-plugin-jsdoc in the npm-dev group ([8c73e7c](https://github.com/mdn/fred/commit/8c73e7cbb85cd09c4eaa8ee93663489ec965abfe))
+* **deps-dev:** bump lefthook from 2.0.16 to 2.1.0 in the npm-dev group ([#1276](https://github.com/mdn/fred/issues/1276)) ([443d179](https://github.com/mdn/fred/commit/443d1794356c6c23ccb3eff8b55fe65a9ea9b9c1))
+* **deps-dev:** bump sass-loader from 16.0.6 to 16.0.7 in the npm-dev group ([#1283](https://github.com/mdn/fred/issues/1283)) ([5edac32](https://github.com/mdn/fred/commit/5edac32b4f392e66fe594a721a3d1678d7795314))
+* **deps-dev:** bump sass-loader in the npm-dev group ([5edac32](https://github.com/mdn/fred/commit/5edac32b4f392e66fe594a721a3d1678d7795314))
+* **deps-dev:** bump stylelint from 17.1.0 to 17.1.1 in the npm-dev group ([#1278](https://github.com/mdn/fred/issues/1278)) ([68408a2](https://github.com/mdn/fred/commit/68408a28e8da5f96ff677b4dcc4e0db0aba9ea46))
+* **deps-dev:** bump stylelint in the npm-dev group ([68408a2](https://github.com/mdn/fred/commit/68408a28e8da5f96ff677b4dcc4e0db0aba9ea46))
+* **deps-dev:** bump the npm-dev group with 2 updates ([#1273](https://github.com/mdn/fred/issues/1273)) ([c46c81e](https://github.com/mdn/fred/commit/c46c81ec9bc8d3969ccfbc18b70b81502e51b20e))
+* **deps-dev:** bump the npm-dev group with 2 updates ([#1281](https://github.com/mdn/fred/issues/1281)) ([26cff5b](https://github.com/mdn/fred/commit/26cff5b1f857a9a9641cfc566b972b35110f65b6))
+* **deps-dev:** bump the npm-dev group with 5 updates ([#1287](https://github.com/mdn/fred/issues/1287)) ([16f94d1](https://github.com/mdn/fred/commit/16f94d1c4f638e18ace598e24377c87aba9ebc69))
+* **deps-dev:** bump the npm-dev group with 5 updates ([#1292](https://github.com/mdn/fred/issues/1292)) ([022c787](https://github.com/mdn/fred/commit/022c787b408263ea5d0bddd809cef77672d9614b))
+* **deps-dev:** bump webpack from 5.99.5 to 5.105.0 ([#1284](https://github.com/mdn/fred/issues/1284)) ([242007b](https://github.com/mdn/fred/commit/242007b364b9890471be474f2bc3d8cd777e55ff))
+* **deps:** bump @mdn/rari from 0.2.11 to 0.2.12 ([#1277](https://github.com/mdn/fred/issues/1277)) ([ba08f2e](https://github.com/mdn/fred/commit/ba08f2efdd8ca249d5e5c468bc8f1c5063101321))
+
+## [2.2.0](https://github.com/mdn/fred/compare/v2.1.0...v2.2.0) (2026-02-02)
+
+
+### Features
+
+* **ServerComponent:** add method to render simplified html ([#1072](https://github.com/mdn/fred/issues/1072)) ([fa6c814](https://github.com/mdn/fred/commit/fa6c8143505b8f7629f90adf1bb1e5a5b3dadb54))
+
+
+### Bug Fixes
+
+* **outer-layout:** avoid `summary_large_image` in `twitter:card` ([#1227](https://github.com/mdn/fred/issues/1227)) ([dd47e77](https://github.com/mdn/fred/commit/dd47e77d6e320751d6219d4ed13f5254687d773a))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.2.5 to 7.3.0 ([#1268](https://github.com/mdn/fred/issues/1268)) ([519f3ad](https://github.com/mdn/fred/commit/519f3adf1a3812e7c5d1eaa90ecbef2d57a7ff86))
+* **deps-dev:** bump the dev group across 1 directory with 8 updates ([#1262](https://github.com/mdn/fred/issues/1262)) ([bf48e08](https://github.com/mdn/fred/commit/bf48e08a92a69532397937586f073879db6f061c))
+* **deps-dev:** bump the dev group with 10 updates ([#1267](https://github.com/mdn/fred/issues/1267)) ([af4a569](https://github.com/mdn/fred/commit/af4a569a4506b1da190294e45f3676f5ff6341a2))
+* **deps:** bump @mdn/watify from 1.1.7 to 1.1.8 ([#1271](https://github.com/mdn/fred/issues/1271)) ([e2c10f9](https://github.com/mdn/fred/commit/e2c10f9fcbef36b5dbf9135777441f0923386e6b))
+* **deps:** bump tar from 7.5.6 to 7.5.7 ([#1264](https://github.com/mdn/fred/issues/1264)) ([0ae1ccd](https://github.com/mdn/fred/commit/0ae1ccd2ed24fc720f011d80e8c6ab83ea773811))
+
 ## [2.1.0](https://github.com/mdn/fred/compare/v2.0.2...v2.1.0) (2026-01-27)
 
 
