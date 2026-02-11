@@ -29,7 +29,9 @@ export class Navigation extends ServerComponent {
           type="button"
           aria-expanded="false"
           aria-controls="navigation__popup"
-          aria-label=${context.l10n`Toggle navigation`}
+          aria-label=${context.l10n(
+            "navigation-toggle-navigation",
+          )`Toggle navigation`}
         ></button>
         <div class="navigation__popup" id="navigation__popup">
           <div class="navigation__menu">${Menu.render(context)}</div>

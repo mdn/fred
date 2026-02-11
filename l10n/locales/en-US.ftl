@@ -1,3 +1,6 @@
+# WARNING: don't use this file as a source for strings requiring l10n, use ../template.ftl instead:
+# this file only contains manually added strings, not ones inlined in code. See ../README.md for more details.
+
 # TODO Use comments, see: https://firefox-source-docs.mozilla.org/l10n/fluent/review.html#comments
 # TODO Consider using terms, see: https://firefox-source-docs.mozilla.org/l10n/fluent/review.html#terms and https://projectfluent.org/fluent/guide/references.html#message-references
 

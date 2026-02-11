@@ -14,7 +14,7 @@ export class WriterToolbar extends ServerComponent {
 
     return html`<div class="writer-toolbar">
       ${Button.render(context, {
-        label: context.l10n`View on MDN`,
+        label: context.l10n("writer-toolbar-view-on-mdn")`View on MDN`,
         href: prodUrl.toString(),
         variant: "plain",
       })}

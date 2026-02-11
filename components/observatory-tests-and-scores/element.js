@@ -42,7 +42,9 @@ export class MDNObservatoryTestsAndScores extends L10nMixin(LitElement) {
     return this._fetchMatrixTask.render({
       pending: () =>
         html`<div class="loading">
-          ${this.l10n`Loading tests and scoring data...`}
+          ${this.l10n(
+            "observatory-tests-and-scores-loading-tests-and-scoring-data",
+          )`Loading tests and scoring data...`}
         </div>`,
       complete: (data) =>
         data.map(
@@ -50,17 +52,31 @@ export class MDNObservatoryTestsAndScores extends L10nMixin(LitElement) {
             <section>
               <h3 id=${entry.name}>${entry.title}</h3>
               <p>
-                ${this.l10n`See`}
+                ${this.l10n("observatory-tests-and-scores-see")`See`}
                 <a href=${entry.mdnLink}>${entry.title}</a>
-                ${this.l10n`for guidance.`}
+                ${this.l10n(
+                  "observatory-tests-and-scores-for-guidance",
+                )`for guidance.`}
               </p>
               <figure class="table-container">
                 <table>
                   <thead>
                     <tr>
-                      <th>${this.l10n`Test result`}</th>
-                      <th>${this.l10n`Description`}</th>
-                      <th align="center">${this.l10n`Modifier`}</th>
+                      <th>
+                        ${this.l10n(
+                          "observatory-tests-and-scores-test-result",
+                        )`Test result`}
+                      </th>
+                      <th>
+                        ${this.l10n(
+                          "observatory-tests-and-scores-description",
+                        )`Description`}
+                      </th>
+                      <th align="center">
+                        ${this.l10n(
+                          "observatory-tests-and-scores-modifier",
+                        )`Modifier`}
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -81,8 +97,9 @@ export class MDNObservatoryTestsAndScores extends L10nMixin(LitElement) {
         ),
       error: (error) => html`
         <div class="error">
-          ${this
-            .l10n`Failed to load tests and scoring data. Please try again later.`}
+          ${this.l10n(
+            "observatory-tests-and-scores-failed-to-load-tests-and-scoring",
+          )`Failed to load tests and scoring data. Please try again later.`}
           ${console.error("Observatory matrix fetch error:", error)}
         </div>
       `,

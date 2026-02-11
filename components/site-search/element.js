@@ -175,7 +175,7 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
             class="site-search-form__submit"
             @click=${this._handleSearch}
             ?disabled=${!this._inputValue || this._inputValue.trim() === ""}
-            >${this.l10n`Search`}</mdn-button
+            >${this.l10n("site-search-search")`Search`}</mdn-button
           >
         </div>
       </div>
@@ -224,14 +224,14 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
         ${previousURL
           ? html` <li>
               <mdn-button variant="secondary" href=${previousURL.toString()}
-                >${this.l10n`Previous`}</mdn-button
+                >${this.l10n("site-search-previous")`Previous`}</mdn-button
               >
             </li>`
           : html`<li></li>`}
         ${nextPage
           ? html` <li>
               <mdn-button variant="secondary" href=${nextURL}
-                >${this.l10n`Next`}</mdn-button
+                >${this.l10n("site-search-next")`Next`}</mdn-button
               >
             </li>`
           : html`<li></li>`}
@@ -290,7 +290,9 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
     return this._searchTask.render({
       pending: () => html`
         ${this.renderInputs()}
-        <div class="site-search__searching">${this.l10n`Searching…`}</div>
+        <div class="site-search__searching">
+          ${this.l10n("site-search-searching")`Searching…`}
+        </div>
       `,
 
       complete: (results) => {
@@ -302,13 +304,15 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
               <section class="site-search__options">
                 ${
                   LOCALE_OPTIONS.length > 0
-                    ? html` <h2>${this.l10n`Language`}</h2>
+                    ? html` <h2>
+                          ${this.l10n("site-search-language")`Language`}
+                        </h2>
                         <ul>
                           ${LOCALE_OPTIONS.map((locales) => {
                             const label =
                               locales.length == 1
                                 ? readableLocaleCode(locales.at(0) || "en-US")
-                                : this.l10n`Both`;
+                                : this.l10n("site-search-both")`Both`;
                             if (this._locales.join(",") === locales.join(",")) {
                               return html`<li><em>${label}</em></li>`;
                             } else {

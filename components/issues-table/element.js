@@ -60,7 +60,7 @@ export class MDNIssuesTable extends L10nMixin(LitElement) {
 
   render() {
     if (this._isLoading) {
-      return html`${this.l10n`loading issues…`}`;
+      return html`${this.l10n("issues-table-loading-issues")`loading issues…`}`;
     }
     if (this._error) {
       return html`${this._error}`;
@@ -73,8 +73,8 @@ export class MDNIssuesTable extends L10nMixin(LitElement) {
       <table>
         <thead>
           <tr>
-            <th>${this.l10n`Title`}</th>
-            <th>${this.l10n`Repository`}</th>
+            <th>${this.l10n("issues-table-title")`Title`}</th>
+            <th>${this.l10n("issues-table-repository")`Repository`}</th>
           </tr>
         </thead>
         <tbody>

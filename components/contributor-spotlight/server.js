@@ -34,12 +34,20 @@ export class ContributorSpotlight extends ServerComponent {
     const renderGetInvolved = () => html`
       <div class="get-involved-container">
         <section class="get-involved">
-          <h2>${context.l10n`Want to be part of the journey?`}</h2>
+          <h2>
+            ${context.l10n(
+              "contributor-spotlight-want-to-be-part-of-the-journey",
+            )`Want to be part of the journey?`}
+          </h2>
           <p>
-            ${context.l10n`Our constant quest for innovation starts here, with you. Every part of MDN (docs, demos and the site itself) springs from our incredible open community of developers. Please join us!`}
+            ${context.l10n(
+              "contributor-spotlight-our-constant-quest-for-innovatio",
+            )`Our constant quest for innovation starts here, with you. Every part of MDN (docs, demos and the site itself) springs from our incredible open community of developers. Please join us!`}
           </p>
           ${Button.render(context, {
-            label: context.l10n`Get involved`,
+            label: context.l10n(
+              "contributor-spotlight-get-involved",
+            )`Get involved`,
             href: `/${context.locale}/community/`,
             icon: arrowRightIcon,
             iconPosition: "after",
@@ -51,7 +59,11 @@ export class ContributorSpotlight extends ServerComponent {
     `;
 
     const header = html`
-      <h1 class="trailing-underscore">${context.l10n`Contributor profile`}</h1>
+      <h1 class="trailing-underscore">
+        ${context.l10n(
+          "contributor-spotlight-contributor-profile",
+        )`Contributor profile`}
+      </h1>
     `;
 
     const baseUrl = context.url;

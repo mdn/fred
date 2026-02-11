@@ -19,8 +19,8 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
     this._mode = "light dark";
     this._options = Object.entries({
       "light dark": this.l10n("theme-default")`OS default`,
-      light: this.l10n`Light`,
-      dark: this.l10n`Dark`,
+      light: this.l10n("color-theme-light")`Light`,
+      dark: this.l10n("color-theme-dark")`Dark`,
     });
   }
 
@@ -68,9 +68,11 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
           class="color-theme__button"
           data-mode=${this._mode}
           type="button"
-          aria-label=${this.l10n`Switch color theme`}
+          aria-label=${this.l10n(
+            "color-theme-switch-color-theme",
+          )`Switch color theme`}
         >
-          <span>${this.l10n`Theme`}</span>
+          <span>${this.l10n("color-theme-theme")`Theme`}</span>
         </button>
         <div
           slot="dropdown"

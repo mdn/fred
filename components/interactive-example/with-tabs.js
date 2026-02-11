@@ -34,7 +34,7 @@ export const InteractiveExampleWithTabs = (Base) =>
             <header>
               <h4 id=${id}>${decode(this.name)}</h4>
               <mdn-button id="reset" @click=${this._reset} variant="secondary"
-                >${this.l10n`Reset`}</mdn-button
+                >${this.l10n("interactive-example-reset")`Reset`}</mdn-button
               >
             </header>
             <mdn-ix-tab-wrapper>
@@ -48,7 +48,7 @@ export const InteractiveExampleWithTabs = (Base) =>
               )}
             </mdn-ix-tab-wrapper>
             <div class="output-wrapper">
-              <h4>${this.l10n`Output`}</h4>
+              <h4>${this.l10n("interactive-example-output")`Output`}</h4>
               <mdn-play-runner
                 ${ref(this._runner)}
                 sandbox="allow-modals allow-top-navigation-by-user-activation"

@@ -30,7 +30,9 @@ export class ObservatoryResults extends ServerComponent {
                 </h1>
                 <div class="observatory-results__feedback">
                   ${Button.render(context, {
-                    label: context.l10n`Report Feedback`,
+                    label: context.l10n(
+                      "observatory-results-report-feedback",
+                    )`Report Feedback`,
                     variant: "plain",
                     icon: feedbackIcon,
                     rel: "noopener",
@@ -58,7 +60,7 @@ export class ObservatoryResults extends ServerComponent {
                 </li>
                 <li class="observatory-results-toc__item">
                   <a href="/en-US/observatory/docs/faq" class="obs-toc__link"
-                    >${context.l10n`FAQ`}</a
+                    >${context.l10n("observatory-results-faq")`FAQ`}</a
                   >
                 </li>
               </ul>
