@@ -4,6 +4,7 @@ import { createRef, ref } from "lit/directives/ref.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 import { gleanClick } from "../../utils/glean.js";
+import circlePlay from "../icon/circle-play.svg?lit";
 import { globalUser } from "../user/context.js";
 
 import styles from "./element.css?lit";
@@ -65,6 +66,7 @@ export class MDNPlayground extends L10nMixin(LitElement) {
         this._autoRun = true;
         controller.runOnChange = true;
         this._storeSession();
+        this.requestUpdate();
       }
     }
   }
@@ -361,6 +363,16 @@ ${"```"}`,
                   ${this.l10n`Seeing something inappropriate?`}
                 </mdn-button>`
               : nothing}
+            ${this._autoRun
+              ? nothing
+              : html`<mdn-button
+                  class="overlay-run-button"
+                  @click=${this._run}
+                  .icon=${circlePlay}
+                  variant="plain"
+                >
+                  Run
+                </mdn-button>`}
             <mdn-play-runner></mdn-play-runner>
             <div class="playground__console">
               <div>${this.l10n`Console`}</div>
