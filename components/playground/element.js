@@ -4,6 +4,7 @@ import { createRef, ref } from "lit/directives/ref.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 import { gleanClick } from "../../utils/glean.js";
+import warningIcon from "../icon/triangle-alert.svg?lit";
 import { globalUser } from "../user/context.js";
 
 import styles from "./element.css?lit";
@@ -362,9 +363,17 @@ ${"```"}`,
           </section>
           <section class="playground__runner-console">
             ${this._gistId
-              ? html`<mdn-button @click=${this._reportOpen} variant="plain">
-                  ${this.l10n`Seeing something inappropriate?`}
-                </mdn-button>`
+              ? html`<aside class="playground__runner-menu">
+                  <menu>
+                    <mdn-button
+                      @click=${this._reportOpen}
+                      variant="secondary"
+                      .icon=${warningIcon}
+                    >
+                      ${this.l10n`Seeing something inappropriate?`}
+                    </mdn-button>
+                  </menu>
+                </aside>`
               : nothing}
             <mdn-play-runner></mdn-play-runner>
             <div class="playground__console">

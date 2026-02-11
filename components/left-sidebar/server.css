@@ -83,7 +83,7 @@
 
   a,
   span:not(.highlight-container) {
-    display: inline-flex;
+    display: inline-block;
     padding-block: 0.25rem;
     vertical-align: middle;
   }
@@ -103,6 +103,7 @@
   code {
     font-family: var(--font-family-code);
     font-size: var(--font-size-normal);
+    line-height: 1;
   }
 
   em {

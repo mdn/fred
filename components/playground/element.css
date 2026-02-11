@@ -31,9 +31,6 @@
 
       padding: 0.5rem;
 
-      border: var(--border);
-      border-radius: 0.25rem;
-
       h1 {
         margin: 0;
         margin-right: auto;
@@ -92,21 +89,29 @@
       }
     }
 
+    .playground__runner-menu {
+      align-self: flex-end;
+      padding: 0.5rem 0;
+
+      @media (--screen-medium-and-narrower) {
+        align-self: center;
+      }
+    }
+
     &.playground__runner-console {
       grid-area: runner;
-
       overflow: hidden;
-
-      border: var(--border);
-      border-radius: 0.25rem;
 
       mdn-play-runner {
         flex-grow: 1;
+        border: var(--border);
+        border-radius: 0.25rem;
       }
 
       .playground__console {
         background-color: var(--color-background-secondary);
-        border-top: var(--border);
+        border: var(--border);
+        border-radius: 0.25rem;
 
         div {
           font-size: var(--font-size-small);
