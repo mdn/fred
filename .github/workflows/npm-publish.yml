@@ -38,11 +38,6 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           package-manager-cache: false
 
-      # Ensure npm 11.5.1 or later for trusted publishing
-      - name: Install latest npm
-        if: steps.release.outputs.release_created
-        run: npm install -g npm@latest
-
       - name: Install
         if: steps.release.outputs.release_created
         run: npm ci

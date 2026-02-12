@@ -24,10 +24,6 @@ jobs:
           cache: npm
           cache-dependency-path: mdn/fred/package-lock.json
 
-      # Ensure npm 11.5.1 or later for trusted publishing
-      - name: Install latest npm
-        run: npm install -g npm@latest
-
       - name: (mdn/fred) Install all npm packages
         working-directory: mdn/fred
         run: npm ci
