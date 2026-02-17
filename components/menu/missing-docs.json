@@ -22,7 +22,7 @@
     "Web/URI",
     "Web/WebDriver"
   ],
-  "fr": [],
+  "fr": ["Web/CSS/CSS_colors/Color_mixer"],
   "ja": [],
   "ko": [
     "Learn_web_development/Core",
