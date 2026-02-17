@@ -78,6 +78,23 @@
 
     ol {
       padding-left: 1.5rem;
+
+      /* Unindent nested details so their chevron aligns with
+         the parent list level instead of being indented. */
+      > li:has(> details) > details {
+        /* Leaf details (no nested collapsibles):
+           pull back the entire block. */
+        &:not(:has(ol > li > details)) {
+          margin-left: -1.5rem;
+        }
+
+        /* Parent details (has nested collapsibles):
+           only pull back the summary, keeping content
+           indented for nested sections to outdent into. */
+        &:has(ol > li > details) > summary {
+          margin-left: -1.5rem;
+        }
+      }
     }
   }
 
