@@ -102,9 +102,12 @@
 
     padding-inline: 0.5rem;
 
+    /* Negative margin for text alignment. */
+    margin-inline-start: calc(-1 * (0.5rem + 2px));
+
     font-style: normal;
 
     background-color: var(--background-toc-active);
-    border-left: 2px solid var(--category-color);
+    border-inline-start: 2px solid var(--category-color);
   }
 }

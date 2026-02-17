@@ -111,10 +111,13 @@
 
     padding-inline: 0.5rem;
 
+    /* Negative margin for text alignment. */
+    margin-inline-start: calc(-1 * (0.5rem + 2px));
+
     font-style: normal;
 
     background-color: var(--color-area-background);
-    border-left: 2px solid var(--color-area-highlight-border);
+    border-inline-start: 2px solid var(--color-area-highlight-border);
   }
 
   .icon {
