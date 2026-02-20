@@ -1,5 +1,7 @@
 import { LitElement, html } from "lit";
 
+import { gleanClick } from "../../utils/glean.js";
+
 import styles from "./element.css?lit";
 
 export class MDNAboutTabs extends LitElement {
@@ -86,6 +88,7 @@ export class MDNAboutTabs extends LitElement {
         e.preventDefault();
         if (tabEl.dataset.panelId) {
           globalThis.location.hash = tabEl.dataset.panelId;
+          gleanClick(`about: tab -> ${tabEl.dataset.panelId}`);
         }
         this.active_index = i;
 

@@ -1,6 +1,7 @@
 import { LitElement, html } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
+import { gleanClick } from "../../utils/glean.js";
 
 import styles from "./element.css?lit";
 
@@ -30,6 +31,8 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
       const mode = target.dataset.mode;
       if (mode === "light dark" || mode === "light" || mode === "dark") {
         this._mode = mode;
+        const gleanMode = mode === "light dark" ? "os-default" : mode;
+        gleanClick(`theme_switcher: switch -> ${gleanMode}`);
         try {
           localStorage.setItem("theme", mode);
         } catch (error) {
@@ -40,6 +43,13 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
           dropdown.open = false;
         }
       }
+    }
+  }
+
+  /** @param {Event} event */
+  _onDropdownToggle({ target }) {
+    if (target instanceof HTMLElement && "open" in target) {
+      gleanClick(`theme_switcher: ${target.open ? "open" : "close"}`);
     }
   }
 
@@ -61,7 +71,7 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
 
   render() {
     return html`<div class="color-theme">
-      <mdn-dropdown>
+      <mdn-dropdown @toggle=${this._onDropdownToggle}>
         <button
           part="button"
           slot="button"

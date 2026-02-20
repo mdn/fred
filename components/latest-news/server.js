@@ -14,16 +14,21 @@ export class LatestNews extends ServerComponent {
 
     return html`<ul class="latest-news">
       ${items.map(
-        (item) =>
+        (item, index) =>
           html`<li>
             <article class="latest-news__item">
               ${item.source
-                ? html`<a class="latest-news__source" href=${item.source.url}
+                ? html`<a
+                    class="latest-news__source"
+                    href=${item.source.url}
+                    data-glean-id="homepage: news_source ${index + 1}"
                     >${item.source.name}</a
                   >`
                 : nothing}
               <h3 class="latest-news__title">
-                <a href=${item.url}>${item.title}</a>
+                <a href=${item.url} data-glean-id="homepage: news ${index + 1}"
+                  >${item.title}</a
+                >
               </h3>
               <time class="latest-news__date" datetime=${item.published_at}>
                 ${rtf.format(

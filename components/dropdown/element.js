@@ -22,7 +22,7 @@ export class MDNDropdown extends LitElement {
   static styles = styles;
 
   static properties = {
-    open: { type: Boolean },
+    open: { type: Boolean, reflect: true },
     loaded: { type: Boolean, reflect: true },
   };
 
@@ -96,8 +96,14 @@ export class MDNDropdown extends LitElement {
     `;
   }
 
-  updated() {
+  /**
+   * @param {import("lit").PropertyValues<this>} changedProperties
+   */
+  updated(changedProperties) {
     this._setAriaAttributes();
+    if (changedProperties.has("open")) {
+      this.dispatchEvent(new Event("toggle", { bubbles: true }));
+    }
   }
 
   firstUpdated() {

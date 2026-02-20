@@ -23,6 +23,44 @@ Glean.initialize(GLEAN_APP_ID, uploadEnabled, {
   channel: GLEAN_CHANNEL,
 });
 
+// data-glean-toggle-open
+document.addEventListener("toggle", (event) => {
+  const target = event.target;
+  if (target instanceof HTMLDetailsElement) {
+    const gleanId = target.dataset.gleanToggleOpen;
+    if (gleanId && target.open) {
+      gleanClick(gleanId);
+    }
+  }
+});
+
+// data-glean-view
+const viewedElements = new WeakSet();
+const viewObserver = new IntersectionObserver(
+  (entries) => {
+    for (const entry of entries) {
+      if (
+        entry.isIntersecting &&
+        entry.target instanceof HTMLElement &&
+        !viewedElements.has(entry.target)
+      ) {
+        const gleanId = entry.target.dataset.gleanView;
+        if (gleanId) {
+          viewedElements.add(entry.target);
+          gleanClick(gleanId);
+          viewObserver.unobserve(entry.target);
+        }
+      }
+    }
+  },
+  { threshold: 0.5 },
+);
+
+for (const element of document.querySelectorAll("[data-glean-view]")) {
+  viewObserver.observe(element);
+}
+
+// data-glean-id
 document.addEventListener("click", (event) => {
   const composedTarget = event.composedPath()?.[0];
   if (composedTarget !== event.target && composedTarget instanceof Element) {
@@ -48,6 +86,15 @@ document.addEventListener("click", (event) => {
       anchor.origin !== document.location.origin
     ) {
       gleanClick(`external-link: ${anchor.href}`);
+    }
+
+    // Sidebar click measurement.
+    if (anchor instanceof HTMLAnchorElement && anchor.href) {
+      const sidebar = anchor.closest(".left-sidebar");
+      if (sidebar) {
+        const href = anchor.getAttribute("href") || anchor.href;
+        gleanClick(`sidebar_click: sidebar ${href}`);
+      }
     }
   }
 });

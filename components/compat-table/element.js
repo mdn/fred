@@ -1,8 +1,11 @@
 import { LitElement, html, nothing } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { createRef, ref } from "lit/directives/ref.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
+import { gleanClick } from "../../utils/glean.js";
+import { ViewedController } from "../viewed-controller/viewed-controller.js";
 
 import { DEFAULT_LOCALE, ISSUE_METADATA_TEMPLATE } from "./constants.js";
 import styles from "./element.css?lit";
@@ -73,6 +76,9 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
   static styles = styles;
 
+  /** @type {import("lit/directives/ref.js").Ref<HTMLElement>} */
+  _ref = createRef();
+
   constructor() {
     super();
     this.query = "";
@@ -88,6 +94,9 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     this._browsers = [];
     /** @type {string|undefined} */
     this._showTimelineId = undefined;
+    new ViewedController(this, this._ref, () => {
+      gleanClick(`bcd: view -> ${this.query}`);
+    });
   }
 
   get _breadcrumbs() {
@@ -255,7 +264,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   }
 
   _renderTable() {
-    return html`<figure class="table-container">
+    return html`<figure ${ref(this._ref)} class="table-container">
       <figure class="table-container-inner">
         ${this._renderIssueLink()}
         <table

@@ -2,6 +2,7 @@ import { Task } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
+import { gleanClick } from "../../utils/glean.js";
 import { globalUser } from "../user/context.js";
 
 import styles from "./element.css?lit";
@@ -89,6 +90,7 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
   });
 
   _open() {
+    gleanClick("article_actions_collections_opened");
     this._bookmarks.run();
     this._collections.run();
     this.shadowRoot?.querySelector("mdn-modal")?.showModal();
@@ -98,7 +100,9 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
   _selectChange({ target }) {
     if (target instanceof HTMLSelectElement) {
       const { value } = target;
+      gleanClick("article_actions_collection_select_opened");
       if (value === ADD_VALUE) {
+        gleanClick("article_actions_new_collection");
         this.shadowRoot?.querySelector("mdn-modal")?.close();
         open("/en-US/plus/collections");
       } else {
@@ -149,6 +153,9 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
       this._lastAction = "save";
 
       const url = `/api/v2/collections/${collectionId}/items/${item ? `${item.id}/` : ""}`;
+
+      gleanClick("new_collection_modal_submit_article_actions");
+
       const res = await fetch(url, {
         body: JSON.stringify({
           url: this.docUrl,
