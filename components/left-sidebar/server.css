@@ -21,8 +21,8 @@
       > summary {
         margin-bottom: 0.5rem;
 
-        &::before {
-          transform: rotate(90deg);
+        &::after {
+          transform: rotate(180deg);
         }
       }
     }
@@ -32,7 +32,7 @@
       align-items: center;
       cursor: pointer;
 
-      &::before {
+      &::after {
         display: inline-block;
 
         flex-shrink: 0;
@@ -41,12 +41,13 @@
         height: 1rem;
 
         margin: 0.25rem;
+        margin-left: auto;
 
         content: "";
 
         background-color: currentcolor;
 
-        mask-image: url("../icon/chevron-right.svg");
+        mask-image: url("../icon/chevron-down.svg");
         mask-size: cover;
       }
 
