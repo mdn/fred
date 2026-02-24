@@ -10,12 +10,18 @@
       {
         "title": "HTML reference",
         "items": [
-          { "slug": "Web/HTML/Reference/Elements", "text": "Elements" },
+          {
+            "slug": "Web/HTML/Reference/Elements",
+            "text": "Elements"
+          },
           {
             "slug": "Web/HTML/Reference/Global_attributes",
             "text": "Global attributes"
           },
-          { "slug": "Web/HTML/Reference/Attributes", "text": "Attributes" },
+          {
+            "slug": "Web/HTML/Reference/Attributes",
+            "text": "Attributes"
+          },
           {
             "slug": "Web/HTML/Reference",
             "text": "See all…",
@@ -30,7 +36,10 @@
             "slug": "Web/HTML/Guides/Responsive_images",
             "text": "Responsive images"
           },
-          { "slug": "Web/HTML/Guides/Cheatsheet", "text": "HTML cheatsheet" },
+          {
+            "slug": "Web/HTML/Guides/Cheatsheet",
+            "text": "HTML cheatsheet"
+          },
           {
             "slug": "Web/HTML/Guides/Date_and_time_formats",
             "text": "Date & time formats"
@@ -45,9 +54,18 @@
       {
         "title": "Markup languages",
         "items": [
-          { "slug": "Web/SVG", "text": "SVG" },
-          { "slug": "Web/MathML", "text": "MathML" },
-          { "slug": "Web/XML", "text": "XML" }
+          {
+            "slug": "Web/SVG",
+            "text": "SVG"
+          },
+          {
+            "slug": "Web/MathML",
+            "text": "MathML"
+          },
+          {
+            "slug": "Web/XML",
+            "text": "XML"
+          }
         ]
       }
     ]
@@ -63,10 +81,22 @@
       {
         "title": "CSS reference",
         "items": [
-          { "slug": "Web/CSS/Reference/Properties", "text": "Properties" },
-          { "slug": "Web/CSS/Reference/Selectors", "text": "Selectors" },
-          { "slug": "Web/CSS/Reference/At-rules", "text": "At-rules" },
-          { "slug": "Web/CSS/Reference/Values", "text": "Values" },
+          {
+            "slug": "Web/CSS/Reference/Properties",
+            "text": "Properties"
+          },
+          {
+            "slug": "Web/CSS/Reference/Selectors",
+            "text": "Selectors"
+          },
+          {
+            "slug": "Web/CSS/Reference/At-rules",
+            "text": "At-rules"
+          },
+          {
+            "slug": "Web/CSS/Reference/Values",
+            "text": "Values"
+          },
           {
             "slug": "Web/CSS/Reference",
             "text": "See all…",
@@ -89,7 +119,10 @@
             "slug": "Web/CSS/Guides/Flexible_box_layout/Basic_concepts",
             "text": "Flexbox"
           },
-          { "slug": "Web/CSS/Guides/Colors/Applying_color", "text": "Colors" },
+          {
+            "slug": "Web/CSS/Guides/Colors/Applying_color",
+            "text": "Colors"
+          },
           {
             "slug": "Web/CSS/Guides",
             "text": "See all…",
@@ -112,7 +145,10 @@
             "slug": "Web/CSS/How_to/Layout_cookbook/Card",
             "text": "Card component"
           },
-          { "slug": "Web/CSS/How_to/Layout_cookbook", "text": "See all…" }
+          {
+            "slug": "Web/CSS/How_to/Layout_cookbook",
+            "text": "See all…"
+          }
         ]
       }
     ]
@@ -143,7 +179,10 @@
             "slug": "Web/JavaScript/Reference/Statements",
             "text": "Statements & declarations"
           },
-          { "slug": "Web/JavaScript/Reference/Functions", "text": "Functions" },
+          {
+            "slug": "Web/JavaScript/Reference/Functions",
+            "text": "Functions"
+          },
           {
             "slug": "Web/JavaScript/Reference",
             "text": "See all…",
@@ -190,11 +229,26 @@
       {
         "title": "Web API reference",
         "items": [
-          { "slug": "Web/API/File_System_API", "text": "File system API" },
-          { "slug": "Web/API/Fetch_API", "text": "Fetch API" },
-          { "slug": "Web/API/Geolocation_API", "text": "Geolocation API" },
-          { "slug": "Web/API/HTML_DOM_API", "text": "HTML DOM API" },
-          { "slug": "Web/API/Push_API", "text": "Push API" },
+          {
+            "slug": "Web/API/File_System_API",
+            "text": "File system API"
+          },
+          {
+            "slug": "Web/API/Fetch_API",
+            "text": "Fetch API"
+          },
+          {
+            "slug": "Web/API/Geolocation_API",
+            "text": "Geolocation API"
+          },
+          {
+            "slug": "Web/API/HTML_DOM_API",
+            "text": "HTML DOM API"
+          },
+          {
+            "slug": "Web/API/Push_API",
+            "text": "Push API"
+          },
           {
             "slug": "Web/API/Service_Worker_API",
             "text": "Service worker API"
@@ -244,12 +298,30 @@
       {
         "title": "Technologies",
         "items": [
-          { "slug": "Web/Accessibility", "text": "Accessibility" },
-          { "slug": "Web/HTTP", "text": "HTTP" },
-          { "slug": "Web/URI", "text": "URI" },
-          { "slug": "Mozilla/Add-ons/WebExtensions", "text": "Web extensions" },
-          { "slug": "WebAssembly", "text": "WebAssembly" },
-          { "slug": "Web/WebDriver", "text": "WebDriver" },
+          {
+            "slug": "Web/Accessibility",
+            "text": "Accessibility"
+          },
+          {
+            "slug": "Web/HTTP",
+            "text": "HTTP"
+          },
+          {
+            "slug": "Web/URI",
+            "text": "URI"
+          },
+          {
+            "slug": "Mozilla/Add-ons/WebExtensions",
+            "text": "Web extensions"
+          },
+          {
+            "slug": "WebAssembly",
+            "text": "WebAssembly"
+          },
+          {
+            "slug": "Web/WebDriver",
+            "text": "WebDriver"
+          },
           {
             "slug": "Web",
             "text": "See all…",
@@ -260,10 +332,22 @@
       {
         "title": "Topics",
         "items": [
-          { "slug": "Web/Media", "text": "Media" },
-          { "slug": "Web/Performance", "text": "Performance" },
-          { "slug": "Web/Privacy", "text": "Privacy" },
-          { "slug": "Web/Security", "text": "Security" },
+          {
+            "slug": "Web/Media",
+            "text": "Media"
+          },
+          {
+            "slug": "Web/Performance",
+            "text": "Performance"
+          },
+          {
+            "slug": "Web/Privacy",
+            "text": "Privacy"
+          },
+          {
+            "slug": "Web/Security",
+            "text": "Security"
+          },
           {
             "slug": "Web/Progressive_web_apps",
             "text": "Progressive web apps"
@@ -287,7 +371,10 @@
             "slug": "Learn_web_development/Getting_started",
             "text": "Getting started modules"
           },
-          { "slug": "Learn_web_development/Core", "text": "Core modules" },
+          {
+            "slug": "Learn_web_development/Core",
+            "text": "Core modules"
+          },
           {
             "href": "/en-US/curriculum/",
             "text": "MDN Curriculum"
@@ -351,24 +438,27 @@
       {
         "items": [
           {
-            "slug": "Web/CSS/CSS_backgrounds_and_borders/Border-image_generator",
+            "slug": "Web/CSS/Guides/Backgrounds_and_borders/Border-image_generator",
             "text": "Border-image generator"
           },
           {
-            "slug": "Web/CSS/CSS_backgrounds_and_borders/Border-radius_generator",
+            "slug": "Web/CSS/Guides/Backgrounds_and_borders/Border-radius_generator",
             "text": "Border-radius generator"
           },
           {
-            "slug": "Web/CSS/CSS_backgrounds_and_borders/Box-shadow_generator",
+            "slug": "Web/CSS/Guides/Backgrounds_and_borders/Box-shadow_generator",
             "text": "Box-shadow generator"
           },
           {
-            "slug": "Web/CSS/CSS_colors/Color_format_converter",
+            "slug": "Web/CSS/Guides/Colors/Color_format_converter",
             "text": "Color format converter"
           },
-          { "slug": "Web/CSS/CSS_colors/Color_mixer", "text": "Color mixer" },
           {
-            "slug": "Web/CSS/CSS_shapes/Shape_generator",
+            "slug": "Web/CSS/Guides/Colors/Color_mixer",
+            "text": "Color mixer"
+          },
+          {
+            "slug": "Web/CSS/Guides/Shapes/Shape_generator",
             "text": "Shape generator"
           }
         ]
