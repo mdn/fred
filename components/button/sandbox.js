@@ -18,6 +18,7 @@ export class ButtonSandbox extends SandboxComponent {
       { icon, iconOnly: false },
       { icon, iconOnly: true },
     ];
+    const disabled = [false, true];
 
     return html`
       <style>
@@ -43,29 +44,39 @@ export class ButtonSandbox extends SandboxComponent {
         Button in <mdn-button .icon=${icon}>the middle</mdn-button> of text with
         icon.
       </p>
-      ${hrefs.map(
-        (href) => html`
-          <h3><code>${href ? "<a>" : "<button>"}</code></h3>
-          <section>
-            ${variants.map((variant) =>
-              actions.map((action) =>
-                icons.map(
-                  ({ icon, iconOnly }) => html`
-                    <mdn-button
-                      href=${ifDefined(href)}
-                      variant=${ifDefined(variant)}
-                      action=${ifDefined(action)}
-                      .icon=${icon}
-                      ?icon-only=${iconOnly}
-                    >
-                      ${variant || "no variant"} ${action} ${icon ? "icon" : ""}
-                    </mdn-button>
-                  `,
+      ${hrefs.map((href) =>
+        disabled.map(
+          (disabled) => html`
+            <h3>
+              <code
+                >${href
+                  ? "<a>"
+                  : `<button${disabled ? " disabled" : ""}>`}</code
+              >
+            </h3>
+            <section>
+              ${variants.map((variant) =>
+                actions.map((action) =>
+                  icons.map(
+                    ({ icon, iconOnly }) => html`
+                      <mdn-button
+                        href=${ifDefined(href)}
+                        variant=${ifDefined(variant)}
+                        action=${ifDefined(action)}
+                        .icon=${icon}
+                        ?icon-only=${iconOnly}
+                        ?disabled=${disabled}
+                      >
+                        ${variant || "no variant"} ${action}
+                        ${icon ? "icon" : ""} ${disabled ? "disabled" : ""}
+                      </mdn-button>
+                    `,
+                  ),
                 ),
-              ),
-            )}
-          </section>
-        `,
+              )}
+            </section>
+          `,
+        ),
       )}
       <h2>Server component</h2>
       <div class="manual-size">

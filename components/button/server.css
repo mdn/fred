@@ -34,7 +34,7 @@
     background-color: light-dark(var(--color-black), var(--color-white));
 
     &:hover {
-      background-color: light-dark(var(--color-gray-20), var(--color-gray-80));
+      background-color: light-dark(var(--color-gray-40), var(--color-gray-60));
     }
 
     &[data-action="positive"] {
@@ -68,13 +68,14 @@
     border-color: currentcolor;
 
     &:hover {
-      background-color: light-dark(var(--color-gray-80), var(--color-gray-20));
+      background-color: light-dark(var(--color-gray-80), var(--color-gray-40));
     }
 
     &[data-action="positive"] {
       color: light-dark(var(--color-green-50), var(--color-green-80));
 
       &:hover {
+        color: light-dark(var(--color-green-20), var(--color-green-80));
         background-color: light-dark(
           var(--color-green-90),
           var(--color-green-10)
@@ -86,6 +87,7 @@
       color: light-dark(var(--color-red-50), var(--color-red-80));
 
       &:hover {
+        color: light-dark(var(--color-red-20), var(--color-red-80));
         background-color: light-dark(var(--color-red-90), var(--color-red-10));
       }
     }
@@ -95,13 +97,14 @@
 
   &[data-variant="plain"] {
     &:hover {
-      background-color: light-dark(var(--color-gray-80), var(--color-gray-20));
+      background-color: light-dark(var(--color-gray-80), var(--color-gray-40));
     }
 
     &[data-action="positive"] {
       color: light-dark(var(--color-green-50), var(--color-green-80));
 
       &:hover {
+        color: light-dark(var(--color-green-20), var(--color-green-80));
         background-color: light-dark(
           var(--color-green-90),
           var(--color-green-10)
@@ -113,6 +116,7 @@
       color: light-dark(var(--color-red-50), var(--color-red-80));
 
       &:hover {
+        color: light-dark(var(--color-red-20), var(--color-red-80));
         background-color: light-dark(var(--color-red-90), var(--color-red-10));
       }
     }
