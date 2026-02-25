@@ -98,6 +98,7 @@
 
           > input:checked + label::before {
             content: url("./assets/curriculum-modules-underline.svg#2");
+            transform: scaleX(0.45) translate3d(-1.5rem, 0.75rem, 0);
           }
         }
 
