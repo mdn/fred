@@ -1,5 +1,6 @@
 import { html } from "@lit-labs/ssr";
 import { nothing } from "lit";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { ServerComponent } from "../server/index.js";
 
@@ -76,7 +77,10 @@ export class BaselineIndicator extends ServerComponent {
       ? new Date(status.baseline_low_date.slice(low_date_range ? 1 : 0))
       : undefined;
 
-    const level = status.baseline || "not";
+    const level = status.feature.discouraged
+      ? "discouraged"
+      : status.baseline || "not";
+    const removalDate = status.feature.discouraged?.removal_date;
 
     const feedbackLink = `${SURVEY_URL}?page=${encodeURIComponent(context.url)}&level=${level}`;
 
@@ -128,36 +132,71 @@ export class BaselineIndicator extends ServerComponent {
         }
       };
 
+    const renderAlternatives =
+      /**
+       * @param {string} instruction
+       * @param {import("@rari").Alternative[]} [alternatives]
+       */
+      (instruction, alternatives) =>
+        alternatives && alternatives.length > 0
+          ? html`<p>${instruction}</p>
+              <ul class="alternatives">
+                ${alternatives.map(
+                  ({ name, description, mdn_url }) =>
+                    html`<li>
+                      <a
+                        href=${mdn_url.replace(
+                          "/docs",
+                          `/${context.locale}/docs`,
+                        )}
+                        title=${description}
+                        >${name}</a
+                      >
+                    </li>`,
+                )}
+              </ul>`
+          : nothing;
+
+    const openByDefault = level === "discouraged";
+
     return html`<details
-      class="baseline-indicator ${level}"
+      class="baseline-indicator ${level} ${removalDate ? "to-be-removed" : ""}"
       data-glean-toggle-open="baseline_toggle_open"
+      ?open=${openByDefault}
+      ?data-open-by-default=${openByDefault}
     >
       <summary>
         <span
           class="indicator"
           role="img"
-          aria-label=${level === "not"
-            ? context.l10n`Baseline Cross`
-            : context.l10n`Baseline Check`}
+          aria-label=${level === "discouraged"
+            ? context.l10n`Baseline Discouraged Mark`
+            : level === "not"
+              ? context.l10n`Baseline Cross`
+              : context.l10n`Baseline Check`}
         ></span>
         <div class="status-title">
-          ${level === "not"
-            ? html`<span class="not-bold"
-                >${context.l10n`Limited availability`}</span
-              >`
-            : html`
-                ${context.l10n`Baseline`}
-                <span class="not-bold">
-                  ${level === "high"
-                    ? context.l10n`Widely available`
-                    : low_date?.getFullYear()}
-                </span>
-                ${status.asterisk && " *"}
-              `}
+          ${level === "discouraged"
+            ? html`<span class="not-bold">${context.l10n`Deprecated`}</span>`
+            : level === "not"
+              ? html`<span class="not-bold"
+                  >${context.l10n`Limited availability`}</span
+                >`
+              : html`
+                  ${context.l10n`Baseline`}
+                  <span class="not-bold">
+                    ${level === "high"
+                      ? context.l10n`Widely available`
+                      : low_date?.getFullYear()}
+                  </span>
+                  ${status.asterisk && " *"}
+                `}
         </div>
         ${level === "low"
           ? html`<div class="pill">${context.l10n`Newly available`}</div>`
-          : nothing}
+          : level === "discouraged" && removalDate
+            ? html`<div class="pill">${context.l10n`To be removed`}</div>`
+            : nothing}
         <div class="browsers">
           ${ENGINES.map(
             ({ name, browsers }) =>
@@ -183,34 +222,55 @@ export class BaselineIndicator extends ServerComponent {
         <span class="icon icon-chevron"></span>
       </summary>
       <div class="extra">
-        ${level === "high" && low_date
+        ${(level === "high" || level === "low") && low_date
           ? html`<p>
-              ${context.l10n.raw({
-                id: "baseline-high-extra",
-                args: {
-                  date: low_date.toLocaleDateString(context.locale, {
-                    year: "numeric",
-                    month: "long",
-                  }),
-                },
-              })}
-            </p>`
-          : level === "low" && low_date
-            ? html`<p>
-                ${context.l10n.raw({
-                  id: "baseline-low-extra",
-                  args: {
-                    date: low_date.toLocaleDateString(DEFAULT_LOCALE, {
-                      year: "numeric",
-                      month: "long",
-                    }),
-                  },
-                })}
-              </p>`
+                ${level === "high"
+                  ? context.l10n.raw({
+                      id: "baseline-high-extra",
+                      args: {
+                        date: low_date.toLocaleDateString(context.locale, {
+                          year: "numeric",
+                          month: "long",
+                        }),
+                      },
+                    })
+                  : context.l10n.raw({
+                      id: "baseline-low-extra",
+                      args: {
+                        date: low_date.toLocaleDateString(DEFAULT_LOCALE, {
+                          year: "numeric",
+                          month: "long",
+                        }),
+                      },
+                    })}
+              </p>
+              ${status.asterisk
+                ? html`<p>* ${context.l10n("baseline-asterisk")}</p>`
+                : nothing}`
+          : level === "discouraged"
+            ? removalDate
+              ? html`<p>
+                  ${context.l10n`This feature is pending removal from browsers. Using it now may lead to broken functionality in future updates.`}
+                  ${unsafeHTML(
+                    status.feature.discouraged?.reason_html || nothing,
+                  )}
+                  ${renderAlternatives(
+                    context.l10n`Use the following features instead:`,
+                    status.alternatives,
+                  )}
+                </p>`
+              : html`<p>
+                    ${context.l10n`Avoid using this feature in new projects.`}
+                    ${unsafeHTML(
+                      status.feature.discouraged?.reason_html || nothing,
+                    )}
+                    ${context.l10n`This feature may be a candidate for removal from web standards or browsers.`}
+                  </p>
+                  ${renderAlternatives(
+                    context.l10n`Consider using the following features instead:`,
+                    status.alternatives,
+                  )}`
             : html`<p>${context.l10n("baseline-not-extra")}</p>`}
-        ${status.asterisk
-          ? html`<p>* ${context.l10n("baseline-asterisk")}</p>`
-          : nothing}
         <ul>
           <li>
             <a
