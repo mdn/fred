@@ -126,6 +126,10 @@
     color: unset;
     background-color: var(--color-background-yellow);
   }
+
+  li li summary {
+    margin-left: -1.5rem;
+  }
 }
 
 .left-sidebar__header {
