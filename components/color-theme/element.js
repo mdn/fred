@@ -17,11 +17,11 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
     super();
     /** @type {import("./types.js").ColorScheme} */
     this._mode = "light dark";
-    this._options = Object.entries({
+    this._options = {
       "light dark": this.l10n("theme-default")`OS default`,
       light: this.l10n`Light`,
       dark: this.l10n`Dark`,
-    });
+    };
   }
 
   /** @param {MouseEvent} event */
@@ -41,6 +41,10 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
         }
       }
     }
+  }
+
+  get _theme() {
+    return this._options[this._mode] ?? this.l10n`Theme`;
   }
 
   /**
@@ -70,7 +74,7 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
           type="button"
           aria-label=${this.l10n`Switch color theme`}
         >
-          <span>${this.l10n`Theme`}</span>
+          <span>${this._theme}</span>
         </button>
         <div
           slot="dropdown"
@@ -78,7 +82,7 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
           id="color-theme__dropdown"
         >
           <ul class="color-theme__list">
-            ${this._options.map(
+            ${Object.entries(this._options).map(
               ([mode, option]) =>
                 html`<li>
                   <button
