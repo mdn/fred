@@ -1,8 +1,11 @@
 import { LitElement, html, nothing } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { createRef, ref } from "lit/directives/ref.js";
 import { styleMap } from "lit/directives/style-map.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
+import { gleanClick } from "../../utils/glean.js";
+import { ViewedController } from "../viewed-controller/viewed-controller.js";
 
 import playSvg from "./assets/scrim-play.svg?lit";
 import styles from "./element.css?lit";
@@ -19,6 +22,9 @@ export class MDNScrimInline extends L10nMixin(LitElement) {
     _fullscreen: { state: true },
     _scrimLoaded: { state: true },
   };
+
+  /** @type {import("lit/directives/ref.js").Ref<HTMLElement>} */
+  _ref = createRef();
 
   constructor() {
     super();
@@ -41,6 +47,12 @@ export class MDNScrimInline extends L10nMixin(LitElement) {
     this._fullscreen = false;
     /** @type {boolean} */
     this._scrimLoaded = false;
+
+    new ViewedController(this, this._ref, () => {
+      if (this._scrimId) {
+        gleanClick(`curriculum: scrim view id:${this._scrimId}`);
+      }
+    });
   }
 
   /**
@@ -76,7 +88,11 @@ export class MDNScrimInline extends L10nMixin(LitElement) {
     }
 
     return html`
-      <dialog @close=${this.#dialogClosed} style=${styleMap(this._imgStyle)}>
+      <dialog
+        ${ref(this._ref)}
+        @close=${this.#dialogClosed}
+        style=${styleMap(this._imgStyle)}
+      >
         <div class="inner">
           <div class="header">
             <span

@@ -18,6 +18,7 @@ export class Breadcrumbs extends ServerComponent {
       return nothing;
     }
 
+    const total = parents.length;
     return html`
       <ol
         class="breadcrumbs"
@@ -27,7 +28,11 @@ export class Breadcrumbs extends ServerComponent {
         ${parents.map(
           ({ uri, title }, index) => html`
             <li property="itemListElement" typeof="ListItem">
-              <a href=${uri} property="item" typeof="WebPage"
+              <a
+                href=${uri}
+                property="item"
+                typeof="WebPage"
+                data-glean-id="breadcrumb_click: ${total - index}/${total}"
                 ><span property="name">${title}</span></a
               >
               <meta property="position" content=${index + 1} />

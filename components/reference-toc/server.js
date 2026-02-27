@@ -21,7 +21,11 @@ export class ReferenceToc extends ServerComponent {
       <ul>
         ${toc?.map(
           ({ id, text }) =>
-            html`<li><a href="#${id}">${unsafeHTML(text)}</a></li>`,
+            html`<li>
+              <a href="#${id}" data-glean-id="toc_click: #${id}"
+                >${unsafeHTML(text)}</a
+              >
+            </li>`,
         )}
       </ul>
     </nav>`;

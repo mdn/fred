@@ -5,6 +5,7 @@
 import { LitElement, html } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
+import { gleanClick } from "../../utils/glean.js";
 import cancelIcon from "../icon/cancel.svg?lit";
 
 import styles from "./element.css?lit";
@@ -91,6 +92,7 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
       // Mark that the user has typed if the query is non-empty.
       if (this.query && this.query.trim().length > 0 && !this.hasTyped) {
         this.hasTyped = true;
+        gleanClick("sidebar_filter_typed");
       }
 
       if (this._quicklinks) {
@@ -114,6 +116,14 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
         }
       }
     }
+  }
+
+  /**
+   * Event handler for focus events on the text field.
+   * @private
+   */
+  _onFocus() {
+    gleanClick("sidebar_filter_focus");
   }
 
   /**
@@ -150,6 +160,7 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
         type="text"
         placeholder=${this.l10n`Filter`}
         .value=${this.query}
+        @focus=${this._onFocus}
         @input=${this._onInput}
       />
       ${this.matchCount === undefined
