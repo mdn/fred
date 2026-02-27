@@ -47,6 +47,18 @@ const LOCALIZED_BCD_IDS = {
 const SURVEY_URL =
   "https://survey.alchemer.com/s3/7634825/MDN-baseline-feedback";
 
+/** @type {Record<string, { url: string, votes: number }>} */
+let signalsData = {};
+
+try {
+  const signalsRes = await fetch(
+    "https://web-platform-dx.github.io/developer-signals/web-features-signals.json",
+  );
+  signalsData = await signalsRes.json();
+} catch {
+  // noop
+}
+
 export class BaselineIndicator extends ServerComponent {
   static inlineScript = inlineScript;
 
@@ -79,6 +91,8 @@ export class BaselineIndicator extends ServerComponent {
     const level = status.baseline || "not";
 
     const feedbackLink = `${SURVEY_URL}?page=${encodeURIComponent(context.url)}&level=${level}`;
+
+    const signalsLink = signalsData[status.feature.id]?.url;
 
     const isBrowserSupported =
       /** @param {import("./types.js").BrowserGroup} browser */ (browser) => {
@@ -128,9 +142,13 @@ export class BaselineIndicator extends ServerComponent {
         }
       };
 
+    const openByDefault = Boolean(signalsLink);
+
     return html`<details
       class="baseline-indicator ${level}"
       data-glean-toggle-open="baseline_toggle_open"
+      ?open=${openByDefault}
+      ?data-open-by-default=${openByDefault}
     >
       <summary>
         <span
@@ -183,6 +201,21 @@ export class BaselineIndicator extends ServerComponent {
         <span class="icon icon-chevron"></span>
       </summary>
       <div class="extra">
+        ${signalsLink
+          ? html`<p>
+              ${context.l10n.raw({
+                id: "baseline-signals",
+                elements: {
+                  link: {
+                    tag: "a",
+                    href: signalsLink,
+                    target: "_blank",
+                    "data-glean-id": "baseline_link_signals",
+                  },
+                },
+              })}
+            </p>`
+          : nothing}
         ${level === "high" && low_date
           ? html`<p>
               ${context.l10n.raw({
