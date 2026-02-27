@@ -64,6 +64,10 @@
   li {
     display: block;
 
+    &:not(.section) {
+      padding-left: 1.5rem;
+    }
+
     &:not(:last-child) {
       margin-bottom: 0.5rem;
     }
@@ -74,10 +78,6 @@
       &:not(:first-child) {
         margin-top: 1em;
       }
-    }
-
-    ol {
-      padding-left: 1.5rem;
     }
   }
 
@@ -125,6 +125,10 @@
     /* Sidebar filter highlight */
     color: unset;
     background-color: var(--color-background-yellow);
+  }
+
+  li summary {
+    margin-left: -1.5rem;
   }
 }
 
