@@ -2,6 +2,18 @@
   padding-bottom: 3rem;
   overflow-wrap: anywhere;
 
+  /* In lists with a chevron in them, indent by this much: */
+  --sidebar-list-indent-chevron: 1rem;
+
+  /* In lists without a chevron in them, indent by this much: */
+  --sidebar-list-indent: 0.5rem;
+
+  /* Adjust to reduce the gap between chevron icon and left side */
+  --sidebar-chevron-crop: 0.2;
+
+  /* Adjust to set the gap between chevron icon and text on the right */
+  --sidebar-chevron-margin: 0.15;
+
   h4 {
     margin: 0;
     font-size: var(--font-size-large);
@@ -12,6 +24,13 @@
     padding: 0;
     margin: 0;
     list-style: none;
+
+    &:not(:has(> li > details)) > li {
+      /* List item without any sibling details elements */
+
+      /* Ok to use `:has` as this enhances the display, but isn't required */
+      padding-left: var(--sidebar-list-indent);
+    }
   }
 
   details {
@@ -29,18 +48,34 @@
 
     summary {
       display: flex;
+
       align-items: center;
+
+      margin-left: calc(var(--sidebar-list-indent-chevron) * -1);
+
       cursor: pointer;
 
       &::before {
+        --calc-margin-left: calc(
+          var(--sidebar-list-indent-chevron) * var(--sidebar-chevron-crop) * -1
+        );
+        --calc-margin-right: calc(
+          var(--sidebar-list-indent-chevron) * var(--sidebar-chevron-margin)
+        );
+        --calc-width-height: calc(
+          var(--sidebar-list-indent-chevron) - var(--calc-margin-right) -
+            var(--calc-margin-left)
+        );
+
         display: inline-block;
 
         flex-shrink: 0;
 
-        width: 1rem;
-        height: 1rem;
+        width: calc(var(--calc-width-height));
+        height: calc(var(--calc-width-height));
 
-        margin: 0.25rem;
+        margin-right: var(--calc-margin-right);
+        margin-left: calc(var(--calc-margin-left));
 
         content: "";
 
@@ -63,21 +98,19 @@
 
   li {
     display: block;
+    padding-left: var(--sidebar-list-indent-chevron);
 
     &:not(:last-child) {
       margin-bottom: 0.5rem;
     }
 
     &.section {
+      padding-left: 0;
       font-weight: var(--font-weight-bold);
 
       &:not(:first-child) {
         margin-top: 1em;
       }
-    }
-
-    ol {
-      padding-left: 1.5rem;
     }
   }
 
