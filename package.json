@@ -94,7 +94,7 @@
     "@wdio/local-runner": "^9.24.0",
     "@wdio/mocha-framework": "^9.24.0",
     "@wdio/spec-reporter": "^9.24.0",
-    "@zip.js/zip.js": "^2.8.22",
+    "@zip.js/zip.js": "^2.8.23",
     "css-loader": "^7.1.4",
     "css-minimizer-webpack-plugin": "^8.0.0",
     "dexie": "^4.3.0",
