@@ -18,15 +18,15 @@ export class HomepageBody extends ServerComponent {
         ? html`<mdn-recently-visited></mdn-recently-visited>`
         : nothing}
       <section>
-        <h2>${context.l10n`Featured articles`}</h2>
+        <h2>${context.l10n("homepage-body-featured-articles")`Featured articles`}</h2>
         ${FeaturedArticles.render(context.hyData.featuredArticles)}
       </section>
       <section>
-        <h2>${context.l10n`Latest news`}</h2>
+        <h2>${context.l10n("homepage-body-latest-news")`Latest news`}</h2>
         ${LatestNews.render(context.hyData.latestNews.items, context.locale)}
       </section>
       <section>
-        <h2>${context.l10n`Recent contributions`}</h2>
+        <h2>${context.l10n("homepage-body-recent-contributions")`Recent contributions`}</h2>
         ${RecentContributions.render(
           context.hyData.recentContributions.items,
           context.locale,

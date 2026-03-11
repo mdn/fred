@@ -28,7 +28,7 @@ export class Pagination extends ServerComponent {
     );
 
     return html`
-      <nav class="pagination" aria-label=${context.l10n`Pagination`}>
+      <nav class="pagination" aria-label=${context.l10n("pagination-pagination")`Pagination`}>
         <ul>
           ${this.renderPrevNextButton(
             "prev",

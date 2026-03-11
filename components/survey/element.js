@@ -194,7 +194,7 @@ export class MDNSurvey extends L10nMixin(LitElement) {
       return nothing;
     }
 
-    const title = this.l10n`Hide this survey`;
+    const title = this.l10n("survey-hide-this-survey")`Hide this survey`;
 
     return html`
       <div class="survey">
@@ -214,7 +214,7 @@ export class MDNSurvey extends L10nMixin(LitElement) {
               class="external"
               href=${this._source}
               target="_blank"
-              title=${this.l10n`Take survey (Opens in a new tab)`}
+              title=${this.l10n("survey-take-survey-opens-in-a-new-tab")`Take survey (Opens in a new tab)`}
               @click=${this.#onLinkClick}
               >${this._survey.question}</a
             >`

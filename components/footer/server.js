@@ -13,27 +13,27 @@ const socials = (context) => [
   {
     icon: "github",
     href: "https://github.com/mdn/",
-    ariaLabel: context.l10n`MDN on GitHub`,
+    ariaLabel: context.l10n("footer-mdn-on-github")`MDN on GitHub`,
   },
   {
     icon: "bluesky",
     href: "https://bsky.app/profile/developer.mozilla.org",
-    ariaLabel: context.l10n`MDN on Bluesky`,
+    ariaLabel: context.l10n("footer-mdn-on-bluesky")`MDN on Bluesky`,
   },
   {
     icon: "x",
     href: "https://x.com/mozdevnet",
-    ariaLabel: context.l10n`MDN on X`,
+    ariaLabel: context.l10n("footer-mdn-on-x")`MDN on X`,
   },
   {
     icon: "mastodon",
     href: "https://mastodon.social/@mdn",
-    ariaLabel: context.l10n`MDN on Mastodon`,
+    ariaLabel: context.l10n("footer-mdn-on-mastodon")`MDN on Mastodon`,
   },
   {
     icon: "rss",
     href: "/en-US/blog/rss.xml",
-    ariaLabel: context.l10n`MDN blog RSS feed`,
+    ariaLabel: context.l10n("footer-mdn-blog-rss-feed")`MDN blog RSS feed`,
   },
 ];
 
@@ -43,75 +43,75 @@ const socials = (context) => [
  */
 const links = (context) => [
   {
-    title: context.l10n`MDN`,
+    title: context.l10n("footer-mdn")`MDN`,
     links: [
-      { text: context.l10n`About`, href: "/en-US/about" },
-      { text: context.l10n`Blog`, href: "/en-US/blog/" },
+      { text: context.l10n("footer-about")`About`, href: "/en-US/about" },
+      { text: context.l10n("footer-blog")`Blog`, href: "/en-US/blog/" },
       {
-        text: context.l10n`Mozilla careers`,
+        text: context.l10n("footer-mozilla-careers")`Mozilla careers`,
         href: "https://www.mozilla.org/en-US/careers/listings/",
         external: true,
       },
       {
-        text: context.l10n`Advertise with us`,
+        text: context.l10n("footer-advertise-with-us")`Advertise with us`,
         href: "/en-US/advertising",
       },
-      { text: context.l10n`MDN Plus`, href: "/en-US/plus" },
+      { text: context.l10n("footer-mdn-plus")`MDN Plus`, href: "/en-US/plus" },
       {
-        text: context.l10n`Product help`,
+        text: context.l10n("footer-product-help")`Product help`,
         href: "https://support.mozilla.org/products/mdn-plus",
         external: true,
       },
     ],
   },
   {
-    title: context.l10n`Contribute`,
+    title: context.l10n("footer-contribute")`Contribute`,
     links: [
       {
-        text: context.l10n`MDN Community`,
+        text: context.l10n("footer-mdn-community")`MDN Community`,
         href: "/en-US/community",
       },
       {
-        text: context.l10n`Community resources`,
+        text: context.l10n("footer-community-resources")`Community resources`,
         href: "/en-US/docs/MDN/Community",
       },
       {
-        text: context.l10n`Writing guidelines`,
+        text: context.l10n("footer-writing-guidelines")`Writing guidelines`,
         href: "/en-US/docs/MDN/Writing_guidelines",
       },
-      { text: context.l10n`MDN Discord`, href: "/discord", external: true },
+      { text: context.l10n("footer-mdn-discord")`MDN Discord`, href: "/discord", external: true },
       {
-        text: context.l10n`MDN on GitHub`,
+        text: context.l10n("footer-mdn-on-github")`MDN on GitHub`,
         href: "https://github.com/mdn",
         external: true,
       },
     ],
   },
   {
-    title: context.l10n`Developers`,
+    title: context.l10n("footer-developers")`Developers`,
     links: [
       {
-        text: context.l10n`Web technologies`,
+        text: context.l10n("footer-web-technologies")`Web technologies`,
         href: "/en-US/docs/Web",
       },
       {
-        text: context.l10n`Learn web development`,
+        text: context.l10n("footer-learn-web-development")`Learn web development`,
         href: "/en-US/docs/Learn_web_development",
       },
       {
-        text: context.l10n`Guides`,
+        text: context.l10n("footer-guides")`Guides`,
         href: "/en-US/docs/MDN/Guides",
       },
       {
-        text: context.l10n`Tutorials`,
+        text: context.l10n("footer-tutorials")`Tutorials`,
         href: "/en-US/docs/MDN/Tutorials",
       },
       {
-        text: context.l10n`Glossary`,
+        text: context.l10n("footer-glossary")`Glossary`,
         href: "/en-US/docs/Glossary",
       },
       {
-        text: context.l10n`Hacks blog`,
+        text: context.l10n("footer-hacks-blog")`Hacks blog`,
         href: "https://hacks.mozilla.org/",
         external: true,
       },
@@ -124,22 +124,22 @@ const links = (context) => [
  */
 const mozillaLinks = (context) => [
   {
-    text: context.l10n`Website Privacy Notice`,
+    text: context.l10n("footer-website-privacy-notice")`Website Privacy Notice`,
     href: "https://www.mozilla.org/privacy/websites/",
     external: true,
   },
   {
-    text: context.l10n`Telemetry Settings`,
+    text: context.l10n("footer-telemetry-settings")`Telemetry Settings`,
     href: "https://www.mozilla.org/en-US/privacy/websites/data-preferences/",
     external: true,
   },
   {
-    text: context.l10n`Legal`,
+    text: context.l10n("footer-legal")`Legal`,
     href: "https://www.mozilla.org/about/legal/terms/mozilla",
     external: true,
   },
   {
-    text: context.l10n`Community Participation Guidelines`,
+    text: context.l10n("footer-community-participation-guidelin")`Community Participation Guidelines`,
     href: "https://www.mozilla.org/about/governance/policies/participation/",
     external: true,
   },
@@ -158,7 +158,7 @@ export class Footer extends ServerComponent {
             <a
               class="footer__logo"
               href="/"
-              aria-label=${context.l10n`MDN logo`}
+              aria-label=${context.l10n("footer-mdn-logo")`MDN logo`}
               >${mdnLogo}</a
             >
             <p>
@@ -215,7 +215,7 @@ export class Footer extends ServerComponent {
           <a
             class="footer__logo"
             href="https://www.mozilla.org/"
-            aria-label=${context.l10n`Mozilla logo`}
+            aria-label=${context.l10n("footer-mozilla-logo")`Mozilla logo`}
             >${mozillaLogo}</a
           >
           <ul>

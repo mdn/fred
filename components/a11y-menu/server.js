@@ -8,8 +8,8 @@ export class A11yMenu extends ServerComponent {
    */
   render(context) {
     return html`<ul class="a11y-menu">
-      <li><a href="#content">${context.l10n`Skip to main content`}</a></li>
-      <li><a href="#search">${context.l10n`Skip to search`}</a></li>
+      <li><a href="#content">${context.l10n("a11y-menu-skip-to-main-content")`Skip to main content`}</a></li>
+      <li><a href="#search">${context.l10n("a11y-menu-skip-to-search")`Skip to search`}</a></li>
     </ul>`;
   }
 }

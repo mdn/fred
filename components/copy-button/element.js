@@ -39,8 +39,8 @@ export class MDNCopyButton extends L10nMixin(LitElement) {
       }
 
       this._message = this._copiedSuccessfully
-        ? this.l10n`Copied`
-        : this.l10n`Copy failed!`;
+        ? this.l10n("copy-button-copied")`Copied`
+        : this.l10n("copy-button-copy-failed")`Copy failed!`;
 
       setTimeout(
         () => {
@@ -57,7 +57,7 @@ export class MDNCopyButton extends L10nMixin(LitElement) {
       @click=${this._copy}
       .icon=${this._copiedSuccessfully ? check : undefined}
       variant=${this.variant}
-      >${this._message ?? this.l10n`Copy`}</mdn-button
+      >${this._message ?? this.l10n("copy-button-copy")`Copy`}</mdn-button
     >`;
   }
 }

@@ -16,7 +16,7 @@ export class MDNRecentlyVisited extends L10nMixin(LitElement) {
   }
 
   render() {
-    return html`<h2>${this.l10n`Recently visited`}</h2>
+    return html`<h2>${this.l10n("recently-visited-recently-visited")`Recently visited`}</h2>
       <ul>
         ${this._pages.map(
           ({ path, title }) => html`<li><a href=${path}>${title}</a></li>`,
