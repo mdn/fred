@@ -45,6 +45,20 @@ describe("l10n extractor", () => {
         },
       );
     });
+
+    it("throws if duplicate ids are scraped with different text", () => {
+      assert.throws(
+        () =>
+          scrapeL10nTags(
+            path.join(__dirname, "fixtures", "tags-with-duplicates.js"),
+          ),
+        {
+          name: "Error",
+          message:
+            "L10n extractor: `this-l10n` is a duplicate id with different text",
+        },
+      );
+    });
   });
 
   describe("getManualEntries", () => {

@@ -99,6 +99,11 @@ export function scrapeL10nTags(glob) {
           if (Node.isStringLiteral(arg)) {
             const key = arg.getLiteralValue();
             const value = getLiteralValue(taggedTemplate);
+            if (map.has(key) && map.get(key) !== value) {
+              throw new Error(
+                `L10n extractor: \`${key}\` is a duplicate id with different text`,
+              );
+            }
             map.set(key, value);
           }
         }
