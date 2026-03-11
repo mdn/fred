@@ -9,7 +9,7 @@ import enUS_ftl from "./locales/en-US.ftl";
  */
 
 /** @type {Record<string, string>} */
-let ftlMap = {
+const ftlMap = {
   "en-US": enUS_ftl,
 };
 

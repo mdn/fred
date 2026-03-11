@@ -17,7 +17,7 @@ export const L10nMixin = (Base) =>
      */
     constructor(...args) {
       super(...args);
-      let context = getSymmetricContext();
+      const context = getSymmetricContext();
       this.locale = context.locale;
       this.l10n = getFluentContext(this.locale);
     }
