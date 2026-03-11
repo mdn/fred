@@ -1,3 +1,6 @@
+# WARNING: don't use this file as a source for strings requiring l10n, use ../template.ftl instead:
+# this file only contains manually added strings, not ones inlined in code. See ../README.md for more details.
+
 # TODO Use comments, see: https://firefox-source-docs.mozilla.org/l10n/fluent/review.html#comments
 # TODO Consider using terms, see: https://firefox-source-docs.mozilla.org/l10n/fluent/review.html#terms and https://projectfluent.org/fluent/guide/references.html#message-references
 
@@ -39,7 +42,6 @@ site-search-suggestion-matches =  { $relation ->
        *[other] { $matches } matches
     }
 }
-site-search-suggestions-text = Did you mean:
 
 blog-time-to-read = { $minutes ->
     [one]   { $minutes } minute read
@@ -82,7 +84,6 @@ compat-support-full = Full support
 compat-support-partial = Partial support
 compat-support-no = No support
 compat-support-unknown = Support unknown
-compat-support-preview = Preview browser support
 compat-support-prefix = Implemented with the vendor prefix: { $prefix }
 compat-support-altname = Alternate name: { $altname }
 compat-support-removed = Removed in { $version } and later

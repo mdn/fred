@@ -224,6 +224,15 @@ export async function startServer() {
       },
       selfHandleResponse: true,
       on: {
+        proxyReq: async (req) => {
+          const locale = req.path.split("/")[1];
+          if (locale && /^q[a-t][a-z]$/.test(locale)) {
+            // if the locale matches a qaa...qtz private use language tag,
+            // which we use for testing fluent with pseudo-locales,
+            // load the en-US doc from rari
+            req.path = req.path.replace(locale, "en-US");
+          }
+        },
         proxyRes: async (proxyRes, req, res) => {
           const contentType = proxyRes.headers["content-type"] || "";
           const statusCode = proxyRes.statusCode || 500;

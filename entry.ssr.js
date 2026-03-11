@@ -47,9 +47,6 @@ for (const [name, def] of customElements.__definitions) {
  */
 export async function render(path, partialContext, compilationStats) {
   const locale = path.split("/")[1] || "en-US";
-  if (locale === "qa") {
-    path = path.replace("/qa/", "/en-US/");
-  }
 
   const context = {
     path,

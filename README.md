@@ -29,6 +29,10 @@ MDN's next fr(ont)e(n)d.
 - `npm run preview`
   - runs the preview server: using the production bundles with the rari server: useful for testing our prod rspack config
 
+## L10n
+
+See [the l10n README](./l10n/README.md).
+
 ### Accessing from non-localhost
 
 If you want to access fred from a different machine, you'll need to run with certain options:
