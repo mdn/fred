@@ -1,9 +1,5 @@
 .left-sidebar {
-  position: sticky;
-  top: var(--sticky-header-height);
-
   padding-bottom: 3rem;
-
   overflow-wrap: anywhere;
 
   h4 {
@@ -87,7 +83,7 @@
 
   a,
   span:not(.highlight-container) {
-    display: inline-flex;
+    display: inline-block;
     padding-block: 0.25rem;
     vertical-align: middle;
   }
@@ -107,6 +103,7 @@
   code {
     font-family: var(--font-family-code);
     font-size: var(--font-size-normal);
+    line-height: 1;
   }
 
   em {
@@ -131,12 +128,6 @@
   }
 }
 
-.left-sidebar__content {
-  > ol {
-    padding-left: 2px;
-  }
-}
-
 .left-sidebar__header {
   position: sticky;
   top: 0;
@@ -145,7 +136,6 @@
   padding-top: 0.5rem;
   padding-right: 0.5rem;
   padding-bottom: 2rem;
-  padding-left: 2px;
 
   background: linear-gradient(
     to bottom,
