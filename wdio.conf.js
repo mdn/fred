@@ -13,6 +13,16 @@ export const config = {
       },
     },
   ],
+  services: [
+    [
+      "firefox-profile",
+      {
+        // Give the test framework permissions to read the clipboard:
+        "dom.events.testing.asyncClipboard": true,
+        "dom.events.testing.asyncClipboard.readText": true,
+      },
+    ],
+  ],
   logLevel: "error",
   framework: "mocha",
   reporters: ["spec"],
