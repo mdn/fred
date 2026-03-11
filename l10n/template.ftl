@@ -35,7 +35,6 @@ site-search-suggestion-matches =
                *[other] { $matches } matches
             }
     }
-site-search-suggestions-text = Did you mean:
 blog-time-to-read =
     { $minutes ->
         [one] { $minutes } minute read
@@ -70,7 +69,6 @@ compat-support-full = Full support
 compat-support-partial = Partial support
 compat-support-no = No support
 compat-support-unknown = Support unknown
-compat-support-preview = Preview browser support
 compat-support-prefix = Implemented with the vendor prefix: { $prefix }
 compat-support-altname = Alternate name: { $altname }
 compat-support-removed = Removed in { $version } and later
@@ -154,11 +152,11 @@ baseline-indicator-cross = cross
 baseline-indicator-learn-more = Learn more
 baseline-indicator-see-full-compatibility = See full compatibility
 baseline-indicator-report-feedback = Report feedback
-blog-previous = Previous Post
+blog-previous = Previous post
 blog-next = Next post
 blog-index-blog-it-better = Blog it better
 reference-toc-header = In this article
-blog-post-not-found = Blog post not found
+blog-post-not-found = Blog post not found.
 collection-save-button-save-in-collection = Save in collection
 collection-save-button-remove = Remove
 collection-save-button-save = Save
@@ -181,16 +179,17 @@ compat-link-report-issue-title = Report an issue with this compatibility data
 compat-link-report-issue = Report problems with this compatibility data
 compat-link-source = View data on GitHub
 compat-experimental = Experimental
-compat-deprecated = Experimental
+compat-deprecated = Deprecated
 compat-nonstandard = Non-standard
 compat-support-partial = Partial support
-compat-support-preview = Preview support
+compat-support-preview-browser = Preview browser support
 compat-support-full = Full support
 compat-support-no = No support
 compat-support-unknown = Support unknown
 compat-yes = Yes
 compat-partial = Partial
 compat-no = No
+compat-support-preview = Preview support
 compat-legend = Legend
 compat-legend-tip = Tip: you can click/tap on a cell for more information.
 compat-link-report-missing-title = Report missing compatibility data

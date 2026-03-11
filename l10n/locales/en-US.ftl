@@ -42,7 +42,6 @@ site-search-suggestion-matches =  { $relation ->
        *[other] { $matches } matches
     }
 }
-site-search-suggestions-text = Did you mean:
 
 blog-time-to-read = { $minutes ->
     [one]   { $minutes } minute read
@@ -85,7 +84,6 @@ compat-support-full = Full support
 compat-support-partial = Partial support
 compat-support-no = No support
 compat-support-unknown = Support unknown
-compat-support-preview = Preview browser support
 compat-support-prefix = Implemented with the vendor prefix: { $prefix }
 compat-support-altname = Alternate name: { $altname }
 compat-support-removed = Removed in { $version } and later
