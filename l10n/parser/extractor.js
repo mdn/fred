@@ -112,7 +112,7 @@ export function scrapeL10nTags(glob) {
 /**
  * @param {PropertyAccessExpression} tagNode
  */
-export function isL10nTag(tagNode) {
+function isL10nTag(tagNode) {
   return (
     ["context", "this"].includes(tagNode.getExpression().getText()) &&
     "l10n" === tagNode.getName()
@@ -122,7 +122,7 @@ export function isL10nTag(tagNode) {
 /**
  * @param {TaggedTemplateExpression} taggedTemplate
  */
-export function getLiteralValue(taggedTemplate) {
+function getLiteralValue(taggedTemplate) {
   const template = taggedTemplate.getTemplate();
   if (Node.isNoSubstitutionTemplateLiteral(template)) {
     return template.getLiteralValue();
