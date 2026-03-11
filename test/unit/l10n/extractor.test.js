@@ -13,6 +13,7 @@ import {
 } from "@fluent/syntax";
 
 import {
+  createFluentResource,
   getManualEntries,
   scrapeL10nTags,
 } from "../../../l10n/parser/extractor.js";
@@ -87,6 +88,23 @@ describe("l10n extractor", () => {
       const expected = [new Comment("This is a normal comment")];
       assert.partialDeepStrictEqual(entries, expected);
       assert.strictEqual(entries.length, expected.length);
+    });
+  });
+
+  describe("createFluentResource", () => {
+    it("throws if duplicate ids with different text exist across manual and scraped strings", async () => {
+      await assert.rejects(
+        async () =>
+          await createFluentResource(
+            path.join(__dirname, "fixtures", "simple.ftl"),
+            path.join(__dirname, "fixtures", "simple.js"),
+          ),
+        {
+          name: "Error",
+          message:
+            "L10n extractor: `id2` is a duplicate id with different text",
+        },
+      );
     });
   });
 });

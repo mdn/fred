@@ -29,22 +29,10 @@ If you need to manually add strings, do so in ./locales/en-US.ftl. See ./README.
  * @param {{ lint?: boolean }} [options]
  */
 export async function extract(options = {}) {
-  const manualEntries = await getManualEntries(
+  const fluentResource = await createFluentResource(
     fileURLToPath(import.meta.resolve("../locales/en-US.ftl")),
-  );
-  const tags = scrapeL10nTags(
     path.join(__dirname, "..", "..", "components", "**", "*.js"),
   );
-
-  const fluentResource = new Resource([
-    new Comment(TEMPLATE_HEADER),
-    ...manualEntries,
-    ...[...tags].map(
-      ([key, value]) =>
-        new Message(new Identifier(key), new Pattern([new TextElement(value)])),
-    ),
-  ]);
-
   const output = serialize(fluentResource, {});
   const outputPath = fileURLToPath(import.meta.resolve("../template.ftl"));
 
@@ -58,6 +46,39 @@ export async function extract(options = {}) {
   } else {
     await writeFile(outputPath, output, "utf8");
   }
+}
+
+/**
+ * @param {string} manualEntryPath
+ * @param {string} scrapeGlob
+ */
+export async function createFluentResource(manualEntryPath, scrapeGlob) {
+  const manualEntries = await getManualEntries(manualEntryPath);
+  const tags = scrapeL10nTags(scrapeGlob);
+
+  for (const entry of manualEntries) {
+    if (entry instanceof Message) {
+      const id = entry.id.name;
+      const value = tags.get(id);
+      if (value) {
+        const pattern = new Pattern([new TextElement(value)]);
+        if (!entry.value?.equals(pattern)) {
+          throw new Error(
+            `L10n extractor: \`${id}\` is a duplicate id with different text`,
+          );
+        }
+      }
+    }
+  }
+
+  return new Resource([
+    new Comment(TEMPLATE_HEADER),
+    ...manualEntries,
+    ...[...tags].map(
+      ([key, value]) =>
+        new Message(new Identifier(key), new Pattern([new TextElement(value)])),
+    ),
+  ]);
 }
 
 /**
