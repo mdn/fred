@@ -123,10 +123,11 @@ ${"```"}`,
     const controller = this._controller.value;
     if (controller) {
       const { css, html, js } = controller.code;
-      let code = `<!doctype html>`;
+      let code = `<!doctype html><body>`;
       if (css) code += `<style>${css}</style>`;
       if (html) code += html;
       if (js) code += `<script>${js}</script>`;
+      code += `</body>`;
       // encode non-space whitespace and percent
       code = code.replaceAll(/([^\S ]|%)+/g, (str) => encodeURIComponent(str));
       await navigator.clipboard.writeText(
