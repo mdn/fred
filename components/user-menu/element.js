@@ -83,7 +83,7 @@ export class MDNUserMenu extends L10nMixin(LitElement) {
                             height="32"
                             alt=""
                           />`
-                        : this.l10n("user-menu-user")`User`}
+                        : this.l10n`User`}
                     </button>
                     <div slot="dropdown" class="user-menu__dropdown">
                       <p>${user.email}</p>
