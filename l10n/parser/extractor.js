@@ -61,10 +61,10 @@ export async function extract(options = {}) {
 }
 
 /**
- * @param {string} path Path to fluent file
+ * @param {string} filePath Path to fluent file
  */
-export async function getManualEntries(path) {
-  const manualStrings = await readFile(path, "utf8");
+export async function getManualEntries(filePath) {
+  const manualStrings = await readFile(filePath, "utf8");
   const fluentResource = parse(manualStrings, {});
   return fluentResource.body.filter(
     (entry) =>
