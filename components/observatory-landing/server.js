@@ -75,9 +75,7 @@ export class ObservatoryLanding extends ServerComponent {
               </div>
               <aside class="observatory-about__links">
                 ${Button.render(context, {
-                  label: context.l10n(
-                    "observatory-landing-read-our-faq",
-                  )`Read our FAQ`,
+                  label: context.l10n("observatory-landing-read-our-faq")`Read our FAQ`,
                   variant: "plain",
                   icon: faqIcon,
                   rel: "noopener",
@@ -85,9 +83,7 @@ export class ObservatoryLanding extends ServerComponent {
                   href: "/en-US/observatory/docs/faq",
                 })}
                 ${Button.render(context, {
-                  label: context.l10n(
-                    "observatory-landing-report-feedback",
-                  )`Report Feedback`,
+                  label: context.l10n("observatory-landing-report-feedback")`Report Feedback`,
                   variant: "plain",
                   icon: feedbackIcon,
                   rel: "noopener",

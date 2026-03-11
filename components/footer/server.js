@@ -79,11 +79,7 @@ const links = (context) => [
         text: context.l10n("footer-writing-guidelines")`Writing guidelines`,
         href: "/en-US/docs/MDN/Writing_guidelines",
       },
-      {
-        text: context.l10n("footer-mdn-discord")`MDN Discord`,
-        href: "/discord",
-        external: true,
-      },
+      { text: context.l10n("footer-mdn-discord")`MDN Discord`, href: "/discord", external: true },
       {
         text: context.l10n("footer-mdn-on-github")`MDN on GitHub`,
         href: "https://github.com/mdn",
@@ -99,9 +95,7 @@ const links = (context) => [
         href: "/en-US/docs/Web",
       },
       {
-        text: context.l10n(
-          "footer-learn-web-development",
-        )`Learn web development`,
+        text: context.l10n("footer-learn-web-development")`Learn web development`,
         href: "/en-US/docs/Learn_web_development",
       },
       {
@@ -145,9 +139,7 @@ const mozillaLinks = (context) => [
     external: true,
   },
   {
-    text: context.l10n(
-      "footer-community-participation-guidelin",
-    )`Community Participation Guidelines`,
+    text: context.l10n("footer-community-participation-guidelin")`Community Participation Guidelines`,
     href: "https://www.mozilla.org/about/governance/policies/participation/",
     external: true,
   },
