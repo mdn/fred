@@ -56,24 +56,25 @@ export async function createFluentResource(manualEntryPath, scrapeGlob) {
   const manualEntries = await getManualEntries(manualEntryPath);
   const tags = scrapeL10nTags(scrapeGlob);
 
-  for (const entry of manualEntries) {
-    if (entry instanceof Message) {
-      const id = entry.id.name;
-      const value = tags.get(id);
-      if (value) {
-        const pattern = new Pattern([new TextElement(value)]);
-        if (!entry.value?.equals(pattern)) {
-          throw new Error(
-            `L10n extractor: \`${id}\` is a duplicate id with different text`,
-          );
-        }
-      }
-    }
-  }
-
   return new Resource([
     new Comment(TEMPLATE_HEADER),
-    ...manualEntries,
+    ...manualEntries.filter((entry) => {
+      if (entry instanceof Message) {
+        const id = entry.id.name;
+        const value = tags.get(id);
+        if (value) {
+          const pattern = new Pattern([new TextElement(value)]);
+          if (entry.value?.equals(pattern)) {
+            return false;
+          } else {
+            throw new Error(
+              `L10n extractor: \`${id}\` is a duplicate id with different text`,
+            );
+          }
+        }
+      }
+      return true;
+    }),
     ...[...tags].map(
       ([key, value]) =>
         new Message(new Identifier(key), new Pattern([new TextElement(value)])),

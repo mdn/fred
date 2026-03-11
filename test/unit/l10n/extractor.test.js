@@ -97,7 +97,7 @@ describe("l10n extractor", () => {
         async () =>
           await createFluentResource(
             path.join(__dirname, "fixtures", "simple.ftl"),
-            path.join(__dirname, "fixtures", "simple.js"),
+            path.join(__dirname, "fixtures", "simple-different.js"),
           ),
         {
           name: "Error",
@@ -105,6 +105,25 @@ describe("l10n extractor", () => {
             "L10n extractor: `id2` is a duplicate id with different text",
         },
       );
+    });
+
+    it("filters out duplicated entries", async () => {
+      const resource = await createFluentResource(
+        path.join(__dirname, "fixtures", "simple.ftl"),
+        path.join(__dirname, "fixtures", "simple.js"),
+      );
+      const entries = resource.body.filter((entry) => entry instanceof Message);
+      const expected = [
+        new Message(
+          new Identifier("id1"),
+          new Pattern([new TextElement("Hello world!")]),
+        ),
+        new Message(
+          new Identifier("id2"),
+          new Pattern([new TextElement("Hello dlrow!")]),
+        ),
+      ];
+      assert.deepStrictEqual(entries, expected);
     });
   });
 });
