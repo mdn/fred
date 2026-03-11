@@ -143,20 +143,28 @@ export class BaselineIndicator extends ServerComponent {
         <div class="status-title">
           ${level === "not"
             ? html`<span class="not-bold"
-                >${context.l10n("baseline-indicator-limited-availability")`Limited availability`}</span
+                >${context.l10n(
+                  "baseline-indicator-limited-availability",
+                )`Limited availability`}</span
               >`
             : html`
                 ${context.l10n("baseline-indicator-baseline")`Baseline`}
                 <span class="not-bold">
                   ${level === "high"
-                    ? context.l10n("baseline-indicator-widely-available")`Widely available`
+                    ? context.l10n(
+                        "baseline-indicator-widely-available",
+                      )`Widely available`
                     : low_date?.getFullYear()}
                 </span>
                 ${status.asterisk && " *"}
               `}
         </div>
         ${level === "low"
-          ? html`<div class="pill">${context.l10n("baseline-indicator-newly-available")`Newly available`}</div>`
+          ? html`<div class="pill">
+              ${context.l10n(
+                "baseline-indicator-newly-available",
+              )`Newly available`}
+            </div>`
           : nothing}
         <div class="browsers">
           ${ENGINES.map(
@@ -224,7 +232,9 @@ export class BaselineIndicator extends ServerComponent {
           </li>
           <li>
             <a href=${bcdLink} data-glean-id="baseline_link_bcd_table">
-              ${context.l10n("baseline-indicator-see-full-compatibility")`See full compatibility`}
+              ${context.l10n(
+                "baseline-indicator-see-full-compatibility",
+              )`See full compatibility`}
             </a>
           </li>
           <li>
@@ -235,7 +245,9 @@ export class BaselineIndicator extends ServerComponent {
               target="_blank"
               rel="noreferrer"
             >
-              ${context.l10n("baseline-indicator-report-feedback")`Report feedback`}
+              ${context.l10n(
+                "baseline-indicator-report-feedback",
+              )`Report feedback`}
             </a>
           </li>
         </ul>

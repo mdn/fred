@@ -20,7 +20,11 @@ export class HomepageContributorSpotlight extends ServerComponent {
 
     return html`<section class="homepage-contributor-spotlight">
       <div class="homepage-contributor-spotlight__spotlight">
-        <h2>${context.l10n("homepage-contributor-spotlight-contributor-spotlight")`Contributor Spotlight`}</h2>
+        <h2>
+          ${context.l10n(
+            "homepage-contributor-spotlight-contributor-spotlight",
+          )`Contributor Spotlight`}
+        </h2>
         <a class="homepage-contributor-spotlight__name" href=${contributor.url}
           >${contributor.contributorName}</a
         >
@@ -29,7 +33,9 @@ export class HomepageContributorSpotlight extends ServerComponent {
         </blockquote>
 
         ${Button({
-          label: context.l10n("homepage-contributor-spotlight-get-involved")`Get involved`,
+          label: context.l10n(
+            "homepage-contributor-spotlight-get-involved",
+          )`Get involved`,
           href: `/${context.locale}/community`,
           icon: arrowRightIcon,
           iconPosition: "after",

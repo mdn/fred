@@ -68,7 +68,9 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
           class="color-theme__button"
           data-mode=${this._mode}
           type="button"
-          aria-label=${this.l10n("color-theme-switch-color-theme")`Switch color theme`}
+          aria-label=${this.l10n(
+            "color-theme-switch-color-theme",
+          )`Switch color theme`}
         >
           <span>${this.l10n("color-theme-theme")`Theme`}</span>
         </button>

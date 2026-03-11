@@ -214,7 +214,9 @@ export class MDNSurvey extends L10nMixin(LitElement) {
               class="external"
               href=${this._source}
               target="_blank"
-              title=${this.l10n("survey-take-survey-opens-in-a-new-tab")`Take survey (Opens in a new tab)`}
+              title=${this.l10n(
+                "survey-take-survey-opens-in-a-new-tab",
+              )`Take survey (Opens in a new tab)`}
               @click=${this.#onLinkClick}
               >${this._survey.question}</a
             >`

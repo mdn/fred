@@ -141,7 +141,9 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
   render() {
     return html`
       <label class="icon" for="input">
-        <span class="visually-hidden">${this.l10n("sidebar-filter-filter-sidebar")`Filter sidebar`}</span>
+        <span class="visually-hidden"
+          >${this.l10n("sidebar-filter-filter-sidebar")`Filter sidebar`}</span
+        >
       </label>
       <input
         id="input"
@@ -158,7 +160,9 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
       <mdn-button
         class="button"
         variant="plain"
-        label=${this.l10n("sidebar-filter-clear-filter-input")`Clear filter input`}
+        label=${this.l10n(
+          "sidebar-filter-clear-filter-input",
+        )`Clear filter input`}
         .icon=${cancelIcon}
         icon-only
         @click=${this._clearFilter}

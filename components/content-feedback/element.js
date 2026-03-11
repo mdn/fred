@@ -89,15 +89,21 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
     return [
       {
         key: "outdated",
-        label: this.l10n("content-feedback-content-is-out-of-date")`Content is out of date`,
+        label: this.l10n(
+          "content-feedback-content-is-out-of-date",
+        )`Content is out of date`,
       },
       {
         key: "incomplete",
-        label: this.l10n("content-feedback-missing-information")`Missing information`,
+        label: this.l10n(
+          "content-feedback-missing-information",
+        )`Missing information`,
       },
       {
         key: "code_examples",
-        label: this.l10n("content-feedback-code-examples-not-working-as-exp")`Code examples not working as expected`,
+        label: this.l10n(
+          "content-feedback-code-examples-not-working-as-exp",
+        )`Code examples not working as expected`,
       },
       {
         key: "other",
