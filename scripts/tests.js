@@ -34,7 +34,7 @@ const argv = await yargs(hideBin(process.argv))
     type: "string",
   })
   .conflicts({
-    content: ["rari", "preview"],
+    content: ["rari", "fred"],
   })
   .parse();
 
