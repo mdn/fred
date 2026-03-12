@@ -19,10 +19,10 @@ const argv = await yargs(hideBin(process.argv))
     type: "boolean",
     default: false,
   })
-  .option("preview", {
-    describe: "run fred preview",
-    type: "boolean",
-    default: false,
+  .option("fred", {
+    describe: "run fred in this mode",
+    type: "string",
+    choices: ["preview", "dev"],
   })
   .option("content", {
     describe: "run fred and rari from this content repo",
@@ -66,10 +66,19 @@ if (argv.e2e) {
               },
             ]
           : []),
-        ...(argv.preview
+        ...(argv.fred === "preview"
           ? [
               {
                 command: `npm run preview`,
+                name: "server",
+                prefixColor: "red",
+              },
+            ]
+          : []),
+        ...(argv.fred === "dev"
+          ? [
+              {
+                command: `npm run dev`,
                 name: "server",
                 prefixColor: "red",
               },

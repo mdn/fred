@@ -88,4 +88,4 @@ jobs:
         env:
           CONTENT_ROOT: ../content/files
           GITHUB_TOKEN: ${{ github.token }}
-        run: node scripts/tests.js --e2e --preview --rari
+        run: node scripts/tests.js --e2e --fred preview --rari
