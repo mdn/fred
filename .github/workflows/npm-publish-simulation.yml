@@ -121,4 +121,4 @@ jobs:
           # Increase GitHub API limit.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          node scripts/tests.js --e2e --content ../content --unit false
+          node scripts/tests.js --e2e --content ../content --unit false --lint false

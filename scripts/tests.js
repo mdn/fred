@@ -4,6 +4,11 @@ import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 
 const argv = await yargs(hideBin(process.argv))
+  .option("lint", {
+    describe: "run linters",
+    type: "boolean",
+    default: true,
+  })
   .option("unit", {
     describe: "run unit tests",
     type: "boolean",
@@ -34,6 +39,18 @@ const argv = await yargs(hideBin(process.argv))
   .parse();
 
 const runs = [];
+
+if (argv.lint) {
+  runs.push(
+    concurrently([
+      {
+        command: `npx lefthook run --force pre-push`,
+        name: "lint",
+        prefixColor: "cyan",
+      },
+    ]).result,
+  );
+}
 
 if (argv.unit) {
   runs.push(
