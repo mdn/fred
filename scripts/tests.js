@@ -33,8 +33,11 @@ const argv = await yargs(hideBin(process.argv))
     describe: "run fred and rari from this content repo",
     type: "string",
   })
-  .conflicts({
-    content: ["rari", "fred"],
+  .check((argv) => {
+    if (argv.content && (argv.rari || argv.fred)) {
+      throw new Error("--content cannot be used with --rari or --fred");
+    }
+    return true;
   })
   .parse();
 
