@@ -71,11 +71,11 @@
 
         flex-shrink: 0;
 
-        width: calc(var(--calc-width-height));
-        height: calc(var(--calc-width-height));
+        width: var(--calc-width-height);
+        height: var(--calc-width-height);
 
         margin-right: var(--calc-margin-right);
-        margin-left: calc(var(--calc-margin-left));
+        margin-left: var(--calc-margin-left);
 
         content: "";
 
