@@ -16,7 +16,7 @@
     "preview": "NODE_ENV=production node ./server.js",
     "ssr": "node build/ssr.js",
     "lit-analyzer": "npx @jackolope/lit-analyzer --rules.no-incompatible-type-binding off",
-    "test": "lefthook run --force pre-push",
+    "test": "node scripts/tests.js",
     "tsc": "tsc",
     "rari": "rari",
     "prepack": "npm run build",
