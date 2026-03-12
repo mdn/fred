@@ -52,7 +52,7 @@ if (argv.e2e) {
     concurrently(
       [
         {
-          command: `npm run wdio`,
+          command: `npx wdio run ./wdio.conf.js`,
           name: "wdio",
           prefixColor: "green",
         },

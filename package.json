@@ -20,7 +20,6 @@
     "tsc": "tsc",
     "rari": "rari",
     "prepack": "npm run build",
-    "wdio": "wdio run ./wdio.conf.js",
     "l10n": "node l10n/cli.js"
   },
   "browserslist": [
