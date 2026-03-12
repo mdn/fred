@@ -33,58 +33,69 @@ const argv = await yargs(hideBin(process.argv))
   })
   .parse();
 
-concurrently(
-  [
-    ...(argv.unit
-      ? [
-          {
-            command: `node --test "**/*.test.js"`,
-            name: "unit",
-            prefixColor: "yellow",
-          },
-        ]
-      : []),
-    ...(argv.e2e
-      ? [
-          {
-            command: `npm run wdio`,
-            name: "wdio",
-            prefixColor: "green",
-          },
-        ]
-      : []),
-    ...(argv.content
-      ? [
-          {
-            cwd: argv.content,
-            command: `npm start`,
-            name: "content",
-            prefixColor: "blue",
-          },
-        ]
-      : []),
-    ...(argv.preview
-      ? [
-          {
-            command: `npm run preview`,
-            name: "server",
-            prefixColor: "red",
-          },
-        ]
-      : []),
-    ...(argv.rari
-      ? [
-          {
-            command: `"${rariBin}" serve`,
-            name: "rari",
-            prefixColor: "blue",
-          },
-        ]
-      : []),
-  ],
-  {
-    killOthersOn: ["failure", "success"],
-    restartTries: 0,
-    successCondition: "first",
-  },
-);
+const runs = [];
+
+if (argv.unit) {
+  runs.push(
+    concurrently([
+      {
+        command: `node --test "**/*.test.js"`,
+        name: "unit",
+        prefixColor: "yellow",
+      },
+    ]).result,
+  );
+}
+
+if (argv.e2e) {
+  runs.push(
+    concurrently(
+      [
+        {
+          command: `npm run wdio`,
+          name: "wdio",
+          prefixColor: "green",
+        },
+        ...(argv.content
+          ? [
+              {
+                cwd: argv.content,
+                command: `npm start`,
+                name: "content",
+                prefixColor: "blue",
+              },
+            ]
+          : []),
+        ...(argv.preview
+          ? [
+              {
+                command: `npm run preview`,
+                name: "server",
+                prefixColor: "red",
+              },
+            ]
+          : []),
+        ...(argv.rari
+          ? [
+              {
+                command: `"${rariBin}" serve`,
+                name: "rari",
+                prefixColor: "blue",
+              },
+            ]
+          : []),
+      ],
+      {
+        killOthersOn: ["failure", "success"],
+        restartTries: 0,
+        successCondition: "first",
+      },
+    ).result,
+  );
+}
+
+try {
+  await Promise.all(runs);
+} catch {
+  process.exitCode = 1;
+}
