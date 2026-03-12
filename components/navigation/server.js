@@ -38,9 +38,7 @@ export class Navigation extends ServerComponent {
           <div class="navigation__search" data-view="desktop">
             <mdn-search-button></mdn-search-button>
           </div>
-          ${WRITER_MODE
-            ? nothing
-            : html`<mdn-user-menu locale=${context.locale}></mdn-user-menu>`}
+          ${WRITER_MODE ? nothing : html`<mdn-user-menu></mdn-user-menu>`}
         </div>
       </nav>
       <mdn-search-modal id="search"></mdn-search-modal>
