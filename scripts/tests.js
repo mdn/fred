@@ -4,6 +4,11 @@ import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 
 const argv = await yargs(hideBin(process.argv))
+  .option("unit", {
+    describe: "run unit tests",
+    type: "boolean",
+    default: true,
+  })
   .option("e2e", {
     describe: "run e2e tests",
     type: "boolean",
@@ -30,6 +35,15 @@ const argv = await yargs(hideBin(process.argv))
 
 concurrently(
   [
+    ...(argv.unit
+      ? [
+          {
+            command: `node --test "**/*.test.js"`,
+            name: "unit",
+            prefixColor: "yellow",
+          },
+        ]
+      : []),
     ...(argv.e2e
       ? [
           {
