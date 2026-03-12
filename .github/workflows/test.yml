@@ -88,4 +88,4 @@ jobs:
         env:
           CONTENT_ROOT: ../content/files
           GITHUB_TOKEN: ${{ github.token }}
-        run: npm test -- --e2e --fred preview --rari --lint false
+        run: npm test -- --unit --e2e --fred preview --rari --lint false
