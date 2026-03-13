@@ -99,6 +99,34 @@ export async function getManualEntries(filePath) {
 }
 
 /**
+ * @param {string} sourcePath
+ * @param {string} targetPath
+ * @param {{ lint?: boolean }} [options]
+ */
+export async function merge(sourcePath, targetPath, options) {
+  const sourceText = await readFile(sourcePath, "utf8");
+  const targetText = await readFile(targetPath, "utf8");
+  const sourceResource = parse(sourceText, {});
+  const targetResource = parse(targetText, {});
+
+  const targetIds = new Set(
+    targetResource.body
+      .filter((entry) => entry instanceof Message)
+      .map((entry) => entry.id.name),
+  );
+
+  for (const entry of sourceResource.body) {
+    if (entry instanceof Message && !targetIds.has(entry.id.name)) {
+      targetResource.body.push(entry);
+    }
+  }
+
+  const output = serialize(targetResource, {});
+  if (!options?.lint) await writeFile(targetPath, output, "utf8");
+  return output;
+}
+
+/**
  * @param {string} glob Files to scrape strings from
  */
 export function scrapeL10nTags(glob) {
