@@ -2,7 +2,7 @@ import yargs from "yargs";
 
 import { hideBin } from "yargs/helpers";
 
-import { extract } from "./parser/extractor.js";
+import { extract, merge } from "./parser/extractor.js";
 import { generateQaaLocale } from "./parser/transform.js";
 
 await yargs(hideBin(process.argv))
@@ -27,6 +27,14 @@ await yargs(hideBin(process.argv))
       if (genPseudo) {
         await generateQaaLocale();
       }
+    },
+  })
+  .command({
+    command: "merge <source> <target>",
+    describe:
+      "Merges source file into target file, adding strings which the target file doesn't have",
+    handler: async ({ source, target }) => {
+      await merge(source, target);
     },
   })
   .demandCommand()

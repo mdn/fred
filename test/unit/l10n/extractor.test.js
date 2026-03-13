@@ -15,6 +15,7 @@ import {
 import {
   createFluentResource,
   getManualEntries,
+  merge,
   scrapeL10nTags,
 } from "../../../l10n/parser/extractor.js";
 
@@ -88,6 +89,22 @@ describe("l10n extractor", () => {
       const expected = [new Comment("This is a normal comment")];
       assert.partialDeepStrictEqual(entries, expected);
       assert.strictEqual(entries.length, expected.length);
+    });
+  });
+
+  describe("merge", () => {
+    const sourcePath = path.join(__dirname, "fixtures", "merge-source.ftl");
+    const targetPath = path.join(__dirname, "fixtures", "merge-target.ftl");
+
+    it("adds missing messages from source to target", async () => {
+      const output = await merge(sourcePath, targetPath, { lint: true });
+      assert.match(output, /id2 = Source two/);
+      assert.match(output, /id3 = Source three/);
+    });
+
+    it("preserves existing messages in target", async () => {
+      const output = await merge(sourcePath, targetPath, { lint: true });
+      assert.match(output, /id1 = Target one/);
     });
   });
 
