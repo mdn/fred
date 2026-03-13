@@ -58,8 +58,8 @@ compat-support-flags =
     }{ $has_last ->
         [one]
             { NUMBER($has_added) ->
-               *[zero] Jusqu'à { $versionLast } les utilisateur·ice·s
-                [one] { " " }jusqu'à { $versionLast } les utilisateur·ice·s
+               *[zero] Jusqu'à la version { $versionLast }, les utilisateur·ice·s
+                [one] { " " }jusqu'à { $versionLast }, les utilisateur·ice·s
             }
        *[zero]
             { NUMBER($has_added) ->
