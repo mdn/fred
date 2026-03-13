@@ -48,275 +48,275 @@ obs-scanning = Der automatisierte Scan-Prozess liefert Entwicklern und Website-A
 obs-security = Das Tool unterstützt Entwickler und Website-Administratoren maßgeblich dabei, ihre Websites in einem sich stetig weiterentwickelnden digitalen Umfeld gegen häufige Sicherheitsbedrohungen abzusichern.
 obs-mdn = Das HTTP Observatory bietet wirksame Sicherheitseinblicke auf Grundlage von Mozillas Expertise und Engagement für ein sichereres Internet sowie basierend auf etablierten Trends und Richtlinien.
 
-article-footer-last-modified = This page was last modified on <time data-l10n-name="date">{ $date }</time> by <a data-l10n-name="contributors">MDN contributors</a>.
-article-footer-source-title = Folder: { $folder } (Opens in a new tab)
-baseline-asterisk = Some parts of this feature may have varying levels of support.
-baseline-high-extra = This feature is well established and works across many devices and browser versions. It’s been available across browsers since { $date }.
-baseline-low-extra = Since { $date }, this feature works across the latest devices and browser versions. This feature might not work in older devices or browsers.
-baseline-not-extra = This feature is not Baseline because it does not work in some of the most widely-used browsers.
-baseline-supported-in = Supported in { $browsers }
-baseline-unsupported-in = Not widely supported in { $browsers }
-baseline-supported-and-unsupported-in = Supported in { $supported }, but not widely supported in { $unsupported }
-homepage-hero-title = Resources for Developers,<br> by Developers
-homepage-hero-description = Documenting <a data-l10n-name="css">CSS</a>, <a data-l10n-name="html">HTML</a>, and <a data-l10n-name="js">JavaScript</a>, since 2005.
-not-found-title = Page not found
-not-found-description = Sorry, the page <code data-l10n-name="url">{ $url }</code> could not be found.
-not-found-fallback-english = <strong data-l10n-name="strong">Good news:</strong> The page you requested exists in <em data-l10n-name="em">English</em>.
-not-found-fallback-search = The page you requested doesn't exist, but you could try a site search for:
-not-found-back = Go back to the home page
-compat-browser-version-date = { $browser } { $version } – Release date: { $date }
-compat-browser-version-released = Release date: { $date }
-compat-link-source-title = File: { $filename }
-compat-support-prefix = Implemented with the vendor prefix: { $prefix }
-compat-support-altname = Alternate name: { $altname }
-compat-support-removed = Removed in { $version } and later
-compat-support-see-impl-url = See <a data-l10n-name="impl_url">{ $label }</a>
+article-footer-last-modified = Diese Seite wurde zuletzt am <time data-l10n-name="date">{ $date }</time> von <a data-l10n-name="contributors">MDN-Mitwirkenden</a> bearbeitet.
+article-footer-source-title = Ordner: { $folder } (Wird in einem neuen Tab geöffnet)
+baseline-asterisk = Einige Teile dieser Funktion werden möglicherweise unterschiedlich unterstützt.
+baseline-high-extra = Diese Funktion ist gut etabliert und funktioniert auf vielen Geräten und Browser-Versionen. Sie ist seit { $date } in allen Browsern verfügbar.
+baseline-low-extra = Seit { $date } funktioniert diese Funktion auf den neuesten Geräten und Browser-Versionen. Diese Funktion funktioniert möglicherweise nicht auf älteren Geräten oder in älteren Browsern.
+baseline-not-extra = Diese Funktion ist nicht Baseline, da sie in einigen der am häufigsten verwendeten Browser nicht funktioniert.
+baseline-supported-in = Unterstützt in { $browsers }
+baseline-unsupported-in = Nicht weit verbreitet unterstützt in { $browsers }
+baseline-supported-and-unsupported-in = Unterstützt in { $supported }, aber nicht weit verbreitet unterstützt in { $unsupported }
+homepage-hero-title = Ressourcen für Entwickler,<br> von Entwicklern
+homepage-hero-description = Dokumentation von <a data-l10n-name="css">CSS</a>, <a data-l10n-name="html">HTML</a> und <a data-l10n-name="js">JavaScript</a> seit 2005.
+not-found-title = Seite nicht gefunden
+not-found-description = Entschuldigung, die Seite <code data-l10n-name="url">{ $url }</code> wurde nicht gefunden.
+not-found-fallback-english = <strong data-l10n-name="strong">Gute Nachricht:</strong> Die angeforderte Seite existiert auf <em data-l10n-name="em">Englisch</em>.
+not-found-fallback-search = Die angeforderte Seite existiert nicht, aber Sie könnten eine Website-Suche versuchen nach:
+not-found-back = Zurück zur Startseite
+compat-browser-version-date = { $browser } { $version } – Veröffentlichungsdatum: { $date }
+compat-browser-version-released = Veröffentlichungsdatum: { $date }
+compat-link-source-title = Datei: { $filename }
+compat-support-prefix = Implementiert mit dem Hersteller-Präfix: { $prefix }
+compat-support-altname = Alternativer Name: { $altname }
+compat-support-removed = Entfernt in { $version } und später
+compat-support-see-impl-url = Siehe <a data-l10n-name="impl_url">{ $label }</a>
 compat-support-flags =
     { NUMBER($has_added) ->
-        [one] From version { $version_added }
-       *[other] { "" }
+        [one] Ab Version { $version_added }
+        *[other] { "" }
     }{ $has_last ->
         [one]
             { NUMBER($has_added) ->
-               *[zero] Until { $versionLast } users
-                [one] { " " }until { $versionLast } users
+                *[zero] Bis { $versionLast } müssen Benutzer
+                [one] { " " }bis { $versionLast } müssen Benutzer
             }
-       *[zero]
+        *[zero]
             { NUMBER($has_added) ->
-               *[zero] Users
-                [one] { " " }users
+                *[zero] Benutzer müssen
+                [one] { " " }Benutzer müssen
             }
     }
-    { " " }must explicitly set the <code data-l10n-name="name">{ $flag_name }</code>{ " " }
+    { " " }die Einstellung <code data-l10n-name="name">{ $flag_name }</code>{ " " }
     { $flag_type ->
-       *[preference] preference
-        [runtime_flag] runtime flag
+        *[preference] explizit festlegen
+        [runtime_flag] als Laufzeit-Flag explizit festlegen
     }{ NUMBER($has_value) ->
-        [one] { " " }to <code data-l10n-name="value">{ $flag_value }</code>
-       *[other] { "" }
+        [one] { " " }auf <code data-l10n-name="value">{ $flag_value }</code>
+        *[other] { "" }
     }{ "." }
     { NUMBER($has_pref_url) ->
         [one]
             { $flag_type ->
-                [preference] To change preferences in { $browser_name }, visit { $browser_pref_url }.
-               *[other] { "" }
+                [preference] Um die Einstellungen in { $browser_name } zu ändern, besuchen Sie { $browser_pref_url }.
+                *[other] { "" }
             }
-       *[other] { "" }
+        *[other] { "" }
     }
 compat-legend-yes = { compat-support-full }
 compat-legend-partial = { compat-support-partial }
-compat-legend-preview = In development. Supported in a pre-release version.
+compat-legend-preview = In Entwicklung. In einer Vorabversion unterstützt.
 compat-legend-no = { compat-support-no }
-compat-legend-unknown = Compatibility unknown
-compat-legend-experimental = { compat-experimental }. Expect behavior to change in the future.
-compat-legend-nonstandard = { compat-nonstandard }. Check cross-browser support before using.
-compat-legend-deprecated = { compat-deprecated }. Not for use in new websites.
-compat-legend-footnote = See implementation notes.
-compat-legend-disabled = User must explicitly enable this feature.
-compat-legend-altname = Uses a non-standard name.
-compat-legend-prefix = Requires a vendor prefix or different name for use.
-compat-legend-more = Has more compatibility info.
-placement-note = Ad
-placement-no = Don't want to see ads?
-pagination-next = Next page
-pagination-prev = Previous page
-pagination-current = Current page
-pagination-goto = Go to page { $page }
-logout = Sign out
-login = Log in
-example-play-button-label = Play
-example-play-button-title = Run example in MDN Playground (opens in new tab)
-writer-reload-polling = Polling every { $seconds }s
-a11y-menu-skip-to-main-content = Skip to main content
-a11y-menu-skip-to-search = Skip to search
-article-footer-learn-how-to-contribute = Learn how to contribute
-article-footer-view-this-page-on-github = View this page on GitHub
-article-footer-this-will-take-you-to-github-to = This will take you to GitHub to file a new issue.
-article-footer-report-a-problem-with-this-conte = Report a problem with this content
-baseline-indicator-baseline-cross = Baseline Cross
-baseline-indicator-baseline-check = Baseline Check
-baseline-indicator-limited-availability = Limited availability
+compat-legend-unknown = Kompatibilität unbekannt
+compat-legend-experimental = { compat-experimental }. Verhaltensänderungen in der Zukunft sind zu erwarten.
+compat-legend-nonstandard = { compat-nonstandard }. Überprüfen Sie die browserübergreifende Unterstützung vor der Verwendung.
+compat-legend-deprecated = { compat-deprecated }. Nicht für neue Websites verwenden.
+compat-legend-footnote = Implementierungshinweise ansehen.
+compat-legend-disabled = Benutzer muss diese Funktion explizit aktivieren.
+compat-legend-altname = Verwendet einen nicht standardmäßigen Namen.
+compat-legend-prefix = Erfordert ein Hersteller-Präfix oder einen anderen Namen zur Verwendung.
+compat-legend-more = Hat mehr Kompatibilitätsinformationen.
+placement-note = Anzeige
+placement-no = Keine Werbung erwünscht?
+pagination-next = Nächste Seite
+pagination-prev = Vorherige Seite
+pagination-current = Aktuelle Seite
+pagination-goto = Zur Seite { $page }
+logout = Abmelden
+login = Anmelden
+example-play-button-label = Abspielen
+example-play-button-title = Beispiel im MDN Playground ausführen (öffnet sich in einem neuen Tab)
+writer-reload-polling = Abfrage alle { $seconds }s
+a11y-menu-skip-to-main-content = Zum Hauptinhalt springen
+a11y-menu-skip-to-search = Zur Suche springen
+article-footer-learn-how-to-contribute = Erfahren Sie, wie Sie beitragen können
+article-footer-view-this-page-on-github = Diese Seite auf GitHub ansehen
+article-footer-this-will-take-you-to-github-to = Dies führt Sie zu GitHub, um ein neues Problem zu melden.
+article-footer-report-a-problem-with-this-conte = Ein Problem mit diesem Inhalt melden
+baseline-indicator-baseline-cross = Baseline-Kreuz
+baseline-indicator-baseline-check = Baseline-Haken
+baseline-indicator-limited-availability = Eingeschränkte Verfügbarkeit
 baseline-indicator-baseline = Baseline
-baseline-indicator-widely-available = Widely available
-baseline-indicator-newly-available = Newly available
-baseline-indicator-check = check
-baseline-indicator-cross = cross
-baseline-indicator-learn-more = Learn more
-baseline-indicator-see-full-compatibility = See full compatibility
-baseline-indicator-report-feedback = Report feedback
+baseline-indicator-widely-available = Weit verbreitet verfügbar
+baseline-indicator-newly-available = Neu verfügbar
+baseline-indicator-check = Haken
+baseline-indicator-cross = Kreuz
+baseline-indicator-learn-more = Mehr erfahren
+baseline-indicator-see-full-compatibility = Vollständige Kompatibilität ansehen
+baseline-indicator-report-feedback = Feedback melden
 blog-index-blog-it-better = Blog it better
-collection-save-button-save-in-collection = Save in collection
-collection-save-button-remove = Remove
-collection-save-button-save = Save
-collection-save-button-add-to-collection = Add to collection
-collection-save-button-collection = Collection:
-collection-save-button-saved-articles = Saved articles
-collection-save-button-new-collection = New collection
+collection-save-button-save-in-collection = In Sammlung speichern
+collection-save-button-remove = Entfernen
+collection-save-button-save = Speichern
+collection-save-button-add-to-collection = Zur Sammlung hinzufügen
+collection-save-button-collection = Sammlung:
+collection-save-button-saved-articles = Gespeicherte Artikel
+collection-save-button-new-collection = Neue Sammlung
 collection-save-button-name = Name:
-collection-save-button-note = Note:
-collection-save-button-saving = Saving…
-collection-save-button-cancel = Cancel
-collection-save-button-deleting = Deleting…
-collection-save-button-delete = Delete
-color-theme-light = Light
-color-theme-dark = Dark
-color-theme-switch-color-theme = Switch color theme
-color-theme-theme = Theme
-compat-link-report-issue-title = Report an issue with this compatibility data
-compat-link-report-issue = Report problems with this compatibility data
-compat-link-source = View data on GitHub
-compat-experimental = Experimental
-compat-deprecated = Deprecated
-compat-nonstandard = Non-standard
-compat-support-partial = Partial support
-compat-support-preview-browser = Preview browser support
-compat-support-full = Full support
-compat-support-no = No support
-compat-support-unknown = Support unknown
-compat-yes = Yes
-compat-partial = Partial
-compat-no = No
-compat-support-preview = Preview support
-compat-legend = Legend
-compat-legend-tip = Tip: you can click/tap on a cell for more information.
-compat-link-report-missing-title = Report missing compatibility data
-compat-link-report-missing = Report this issue
-compat-js-required = Enable JavaScript to view this browser compatibility table.
-compat-loading = Loading…
-content-feedback-content-is-out-of-date = Content is out of date
-content-feedback-missing-information = Missing information
-content-feedback-code-examples-not-working-as-exp = Code examples not working as expected
-content-feedback-other = Other
-content-feedback-yes = Yes
-content-feedback-no = No
-content-feedback-submit = Submit
-contributor-spotlight-want-to-be-part-of-the-journey = Want to be part of the journey?
-contributor-spotlight-our-constant-quest-for-innovatio = Our constant quest for innovation starts here, with you. Every part of MDN (docs, demos and the site itself) springs from our incredible open community of developers. Please join us!
-contributor-spotlight-get-involved = Get involved
-contributor-spotlight-contributor-profile = Contributor profile
-copy-button-copied = Copied
-copy-button-copy-failed = Copy failed!
-copy-button-copy = Copy
-footer-mdn-on-github = MDN on GitHub
-footer-mdn-on-bluesky = MDN on Bluesky
-footer-mdn-on-x = MDN on X
-footer-mdn-on-mastodon = MDN on Mastodon
-footer-mdn-blog-rss-feed = MDN blog RSS feed
+collection-save-button-note = Notiz:
+collection-save-button-saving = Wird gespeichert…
+collection-save-button-cancel = Abbrechen
+collection-save-button-deleting = Wird gelöscht…
+collection-save-button-delete = Löschen
+color-theme-light = Hell
+color-theme-dark = Dunkel
+color-theme-switch-color-theme = Farbthema wechseln
+color-theme-theme = Thema
+compat-link-report-issue-title = Ein Problem mit diesen Kompatibilitätsdaten melden
+compat-link-report-issue = Probleme mit diesen Kompatibilitätsdaten melden
+compat-link-source = Daten auf GitHub ansehen
+compat-experimental = Experimentell
+compat-deprecated = Veraltet
+compat-nonstandard = Nicht standardisiert
+compat-support-partial = Partielle Unterstützung
+compat-support-preview-browser = Vorschau-Browser-Unterstützung
+compat-support-full = Vollständige Unterstützung
+compat-support-no = Keine Unterstützung
+compat-support-unknown = Unterstützung unbekannt
+compat-yes = Ja
+compat-partial = Partiell
+compat-no = Nein
+compat-support-preview = Vorschau-Unterstützung
+compat-legend = Legende
+compat-legend-tip = Tipp: Sie können auf eine Zelle klicken/tippen, um mehr Informationen zu erhalten.
+compat-link-report-missing-title = Fehlende Kompatibilitätsdaten melden
+compat-link-report-missing = Dieses Problem melden
+compat-js-required = JavaScript aktivieren, um diese Browser-Kompatibilitätstabelle anzuzeigen.
+compat-loading = Wird geladen…
+content-feedback-content-is-out-of-date = Inhalt ist veraltet
+content-feedback-missing-information = Fehlende Informationen
+content-feedback-code-examples-not-working-as-exp = Codebeispiele funktionieren nicht wie erwartet
+content-feedback-other = Sonstiges
+content-feedback-yes = Ja
+content-feedback-no = Nein
+content-feedback-submit = Absenden
+contributor-spotlight-want-to-be-part-of-the-journey = Möchten Sie Teil der Reise sein?
+contributor-spotlight-our-constant-quest-for-innovatio = Unsere ständige Suche nach Innovation beginnt hier, mit Ihnen. Jeder Teil von MDN (Dokumentationen, Demos und die Website selbst) entsteht aus unserer großartigen offenen Entwicklergemeinschaft. Bitte machen Sie mit!
+contributor-spotlight-get-involved = Mitmachen
+contributor-spotlight-contributor-profile = Mitwirkendenprofil
+copy-button-copied = Kopiert
+copy-button-copy-failed = Kopieren fehlgeschlagen!
+copy-button-copy = Kopieren
+footer-mdn-on-github = MDN auf GitHub
+footer-mdn-on-bluesky = MDN auf Bluesky
+footer-mdn-on-x = MDN auf X
+footer-mdn-on-mastodon = MDN auf Mastodon
+footer-mdn-blog-rss-feed = MDN-Blog-RSS-Feed
 footer-mdn = MDN
-footer-about = About
+footer-about = Über uns
 footer-blog = Blog
-footer-mozilla-careers = Mozilla careers
-footer-advertise-with-us = Advertise with us
+footer-mozilla-careers = Mozilla-Karriere
+footer-advertise-with-us = Mit uns werben
 footer-mdn-plus = MDN Plus
-footer-product-help = Product help
-footer-contribute = Contribute
-footer-mdn-community = MDN Community
-footer-community-resources = Community resources
-footer-writing-guidelines = Writing guidelines
-footer-mdn-discord = MDN Discord
-footer-developers = Developers
-footer-web-technologies = Web technologies
-footer-learn-web-development = Learn web development
-footer-guides = Guides
+footer-product-help = Produkthilfe
+footer-contribute = Beitragen
+footer-mdn-community = MDN-Community
+footer-community-resources = Community-Ressourcen
+footer-writing-guidelines = Schreibrichtlinien
+footer-mdn-discord = MDN-Discord
+footer-developers = Entwickler
+footer-web-technologies = Webtechnologien
+footer-learn-web-development = Webentwicklung lernen
+footer-guides = Leitfäden
 footer-tutorials = Tutorials
-footer-glossary = Glossary
-footer-hacks-blog = Hacks blog
-footer-website-privacy-notice = Website Privacy Notice
-footer-telemetry-settings = Telemetry Settings
-footer-legal = Legal
-footer-community-participation-guidelin = Community Participation Guidelines
-footer-mdn-logo = MDN logo
-footer-mozilla-logo = Mozilla logo
-generic-toc__header = In this article
-homepage-body-featured-articles = Featured articles
-homepage-body-latest-news = Latest news
-homepage-body-recent-contributions = Recent contributions
-homepage-contributor-spotlight-contributor-spotlight = Contributor Spotlight
-homepage-contributor-spotlight-get-involved = Get involved
-homepage-search-search-the-site = Search the site
-homepage-search-search = Search
-interactive-example-reset = Reset
-interactive-example-value-select = Value select
-interactive-example-the-current-value-is-not-support = The current value is not supported by your browser.
-interactive-example-run-example-and-show-console-ou = Run example, and show console output
-interactive-example-run = Run
-interactive-example-reset-example-and-clear-console = Reset example, and clear console output
-interactive-example-console-output = Console output
-interactive-example-output = Output
-issues-table-loading-issues = loading issues…
-issues-table-title = Title
+footer-glossary = Glossar
+footer-hacks-blog = Hacks-Blog
+footer-website-privacy-notice = Datenschutzmitteilung der Website
+footer-telemetry-settings = Telemetrieeinstellungen
+footer-legal = Rechtliches
+footer-community-participation-guidelin = Community-Teilnahmerichtlinien
+footer-mdn-logo = MDN-Logo
+footer-mozilla-logo = Mozilla-Logo
+generic-toc__header = In diesem Artikel
+homepage-body-featured-articles = Empfohlene Artikel
+homepage-body-latest-news = Neueste Nachrichten
+homepage-body-recent-contributions = Aktuelle Beiträge
+homepage-contributor-spotlight-contributor-spotlight = Mitwirkendenrampenlicht
+homepage-contributor-spotlight-get-involved = Mitmachen
+homepage-search-search-the-site = Website durchsuchen
+homepage-search-search = Suche
+interactive-example-reset = Zurücksetzen
+interactive-example-value-select = Wertauswahl
+interactive-example-the-current-value-is-not-support = Der aktuelle Wert wird von Ihrem Browser nicht unterstützt.
+interactive-example-run-example-and-show-console-ou = Beispiel ausführen und Konsolenausgabe anzeigen
+interactive-example-run = Ausführen
+interactive-example-reset-example-and-clear-console = Beispiel zurücksetzen und Konsole leeren
+interactive-example-console-output = Konsolenausgabe
+interactive-example-output = Ausgabe
+issues-table-loading-issues = Probleme werden geladen…
+issues-table-title = Titel
 issues-table-repository = Repository
-language-switcher-remember-language = Remember language
-language-switcher-enable-this-setting-to-always-sw = Enable this setting to always switch to the current language when available. (Click to learn more.)
-language-switcher-learn-more = Learn more
-login-button-login = Login
-modal-exit-modal = Exit modal
-navigation-toggle-navigation = Toggle navigation
-obs-about-title = About the HTTP Observatory
-observatory-landing-read-our-faq = Read our FAQ
-observatory-landing-report-feedback = Report Feedback
-observatory-rescan-button-rescan = Rescan
-observatory-rescan-button-wait-a-minute-to-rescan = Wait a minute to rescan
-observatory-results-report-feedback = Report Feedback
+language-switcher-remember-language = Sprache merken
+language-switcher-enable-this-setting-to-always-sw = Diese Einstellung aktivieren, um immer zur aktuellen Sprache zu wechseln, wenn verfügbar. (Zum Erfahren mehr klicken.)
+language-switcher-learn-more = Mehr erfahren
+login-button-login = Anmelden
+modal-exit-modal = Modal schließen
+navigation-toggle-navigation = Navigation umschalten
+obs-about-title = Über das HTTP Observatory
+observatory-landing-read-our-faq = FAQ lesen
+observatory-landing-report-feedback = Feedback melden
+observatory-rescan-button-rescan = Erneut scannen
+observatory-rescan-button-wait-a-minute-to-rescan = Warten Sie eine Minute, um erneut zu scannen
+observatory-results-report-feedback = Feedback melden
 observatory-results-faq = FAQ
-observatory-tests-and-scores-loading-tests-and-scoring-data = Loading tests and scoring data...
-observatory-tests-and-scores-see = See
-observatory-tests-and-scores-for-guidance = for guidance.
-observatory-tests-and-scores-test-result = Test result
-observatory-tests-and-scores-description = Description
-observatory-tests-and-scores-modifier = Modifier
-observatory-tests-and-scores-failed-to-load-tests-and-scoring = Failed to load tests and scoring data. Please try again later.
-pagination-pagination = Pagination
-playground-do-you-really-want-to-clear-ever = Do you really want to clear everything?
-playground-do-you-really-want-to-revert-you = Do you really want to revert your changes?
+observatory-tests-and-scores-loading-tests-and-scoring-data = Tests und Bewertungsdaten werden geladen...
+observatory-tests-and-scores-see = Siehe
+observatory-tests-and-scores-for-guidance = zur Anleitung.
+observatory-tests-and-scores-test-result = Testergebnis
+observatory-tests-and-scores-description = Beschreibung
+observatory-tests-and-scores-modifier = Modifikator
+observatory-tests-and-scores-failed-to-load-tests-and-scoring = Tests und Bewertungsdaten konnten nicht geladen werden. Bitte versuchen Sie es später erneut.
+pagination-pagination = Seitennavigation
+playground-do-you-really-want-to-clear-ever = Möchten Sie wirklich alles löschen?
+playground-do-you-really-want-to-revert-you = Möchten Sie wirklich Ihre Änderungen rückgängig machen?
 playground-playground = Playground
-playground-format = Format
-playground-run = Run
-playground-share = Share
-playground-clear = Clear
-playground-reset = Reset
-playground-seeing-something-inappropriate = Seeing something inappropriate?
-playground-console = Console
-playground-share-markdown = Share Markdown
-playground-copy-markdown-to-clipboard = Copy markdown to clipboard
-playground-share-data-url = Share Data URL
-playground-copy-data-url-to-clipboard = Copy data URL to clipboard
-playground-share-your-code-via-permalink = Share your code via Permalink
-playground-copy-to-clipboard = Copy to clipboard
-playground-create-link = Create link
-playground-report-this-malicious-or-inappro = Report this malicious or inappropriate shared playground.
-playground-can-you-please-share-some-detail = Can you please share some details on what's wrong with this content:
-playground-cancel = Cancel
-playground-report = Report
-recently-visited-recently-visited = Recently visited
-scrim-inline-clicking-will-load-content-from = Clicking will load content from scrimba.com
-scrim-inline-toggle-fullscreen = Toggle fullscreen
-scrim-inline-open-on-scrimba = Open on Scrimba
-scrim-inline-load-scrim-and-open-dialog = Load scrim and open dialog.
-search-button-search-the-site = Search the site
-search-modal-loading-search-index = Loading search index…
-search-modal-search = Search
-search-modal-exit-search = Exit search
-sidebar-filter-filter-sidebar = Filter sidebar
-sidebar-filter-filter = Filter
-sidebar-filter-clear-filter-input = Clear filter input
-site-search-search = Search
-site-search-previous = Previous
-site-search-next = Next
-site-search-searching = Searching…
-site-search-language = Language
-site-search-both = Both
-specifications-list-this-feature-does-not-appear-to = This feature does not appear to be defined in any specification.
-specifications-list-specification = Specification
-survey-hide-this-survey = Hide this survey
-survey-take-survey-opens-in-a-new-tab = Take survey (Opens in a new tab)
-toggle-sidebar-toggle-sidebar = Toggle sidebar
-user-menu-ai-help = AI Help
-user-menu-collections = Collections
-user-menu-updates = Updates
-user-menu-settings = My settings
-user-menu-help = Help
+playground-format = Formatieren
+playground-run = Ausführen
+playground-share = Teilen
+playground-clear = Leeren
+playground-reset = Zurücksetzen
+playground-seeing-something-inappropriate = Sehen Sie etwas Unangemessenes?
+playground-console = Konsole
+playground-share-markdown = Markdown teilen
+playground-copy-markdown-to-clipboard = Markdown in die Zwischenablage kopieren
+playground-share-data-url = Daten-URL teilen
+playground-copy-data-url-to-clipboard = Daten-URL in die Zwischenablage kopieren
+playground-share-your-code-via-permalink = Code per Permalink teilen
+playground-copy-to-clipboard = In die Zwischenablage kopieren
+playground-create-link = Link erstellen
+playground-report-this-malicious-or-inappro = Diesen bösartigen oder unangemessenen geteilten Playground melden.
+playground-can-you-please-share-some-detail = Können Sie bitte einige Details darüber mitteilen, was mit diesem Inhalt nicht stimmt:
+playground-cancel = Abbrechen
+playground-report = Melden
+recently-visited-recently-visited = Zuletzt besucht
+scrim-inline-clicking-will-load-content-from = Durch Klicken werden Inhalte von scrimba.com geladen
+scrim-inline-toggle-fullscreen = Vollbild umschalten
+scrim-inline-open-on-scrimba = Auf Scrimba öffnen
+scrim-inline-load-scrim-and-open-dialog = Scrim laden und Dialog öffnen.
+search-button-search-the-site = Website durchsuchen
+search-modal-loading-search-index = Suchindex wird geladen…
+search-modal-search = Suche
+search-modal-exit-search = Suche verlassen
+sidebar-filter-filter-sidebar = Seitenleiste filtern
+sidebar-filter-filter = Filtern
+sidebar-filter-clear-filter-input = Filtereingabe löschen
+site-search-search = Suche
+site-search-previous = Zurück
+site-search-next = Weiter
+site-search-searching = Suche läuft…
+site-search-language = Sprache
+site-search-both = Beide
+specifications-list-this-feature-does-not-appear-to = Diese Funktion scheint in keiner Spezifikation definiert zu sein.
+specifications-list-specification = Spezifikation
+survey-hide-this-survey = Diese Umfrage ausblenden
+survey-take-survey-opens-in-a-new-tab = An der Umfrage teilnehmen (öffnet sich in einem neuen Tab)
+toggle-sidebar-toggle-sidebar = Seitenleiste umschalten
+user-menu-ai-help = KI-Hilfe
+user-menu-collections = Sammlungen
+user-menu-updates = Aktualisierungen
+user-menu-settings = Meine Einstellungen
+user-menu-help = Hilfe
 user-menu-feedback = Feedback
-user-menu-user = User
-writer-open-editor-open-in-editor = Open in editor
-writer-toolbar-view-on-mdn = View on MDN
+user-menu-user = Benutzer
+writer-open-editor-open-in-editor = Im Editor öffnen
+writer-toolbar-view-on-mdn = Auf MDN ansehen
