@@ -22,7 +22,9 @@ export class ArticleFooter extends ServerComponent {
       >
         <div class="article-footer__inner">
           <div class="article-footer__svg-container">${svg}</div>
-          <h2 id="feedback">Help improve MDN</h2>
+          <h2 id="feedback">
+            ${context.l10n("article-footer-title")`Help improve MDN`}
+          </h2>
           <mdn-content-feedback locale=${context.locale}></mdn-content-feedback>
           ${Contribute(context)} ${LastModified(context)} ${Links(context)}
         </div>
