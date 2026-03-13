@@ -59,3 +59,15 @@ Adding Fluent comments to explain what context strings appear in is an open task
 If one English string is used in multiple places and requires multiple different strings in a locale, file an issue to distinguish the IDs.
 
 Please also file an issue for any other problems you encounter with localizing - either with specific strings which need fixing, or general issues with the l10n process.
+
+### Finding new strings to localise
+
+Instead of having to manually copy strings from `./template.ftl` into your locale file, you can use the `npm run l10n merge` command to add the missing strings, allowing you to localise them inline.
+
+For German, as an example, running from the project root:
+
+```
+npm run l10n merge l10n/template.ftl l10n/locales/de.ftl
+```
+
+`de.ftl` will now have all the English strings it lacks. You can localise them all, or just a subset, and remove the ones you don't localise. The next run of the merge command will add the strings you removed again, allowing you to localise in batches if you'd prefer.
