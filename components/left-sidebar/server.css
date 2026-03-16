@@ -150,6 +150,10 @@
     border-left: 2px solid var(--color-area-highlight-border);
   }
 
+  li li em {
+    margin-left: calc(-0.5rem - 2px);
+  }
+
   .icon {
     margin-left: 0.5ch;
   }
