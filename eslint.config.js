@@ -65,7 +65,7 @@ export default defineConfig([
   },
   {
     rules: {
-      "no-unused-vars": [
+      "@typescript-eslint/no-unused-vars": [
         "error",
         {
           argsIgnorePattern: "^_",
@@ -88,6 +88,7 @@ export default defineConfig([
       "n/no-missing-import": "off",
       "n/no-unsupported-features/node-builtins": ["off"],
       "n/no-unpublished-import": "off",
+      "no-unused-vars": "off", // Prefer `@typescript-eslint/no-unused-vars`.
       "unicorn/no-array-reverse": "off",
       "unicorn/no-array-sort": "off",
       "unicorn/no-array-callback-reference": "off",
