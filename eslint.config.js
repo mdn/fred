@@ -98,6 +98,7 @@ export default defineConfig([
       "unicorn/prefer-string-raw": "off",
       "unicorn/prefer-query-selector": "off",
       "unicorn/prevent-abbreviations": ["off"],
+      "unicorn/require-module-specifiers": "off",
       "unicorn/switch-case-braces": "off",
       "unicorn/template-indent": ["off"],
     },
