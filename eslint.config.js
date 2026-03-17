@@ -89,6 +89,7 @@ export default defineConfig([
       "n/no-unsupported-features/node-builtins": ["off"],
       "n/no-unpublished-import": "off",
       "no-unused-vars": "off", // Prefer `@typescript-eslint/no-unused-vars`.
+      "unicorn/consistent-function-scoping": "off",
       "unicorn/no-array-reverse": "off",
       "unicorn/no-array-sort": "off",
       "unicorn/no-array-callback-reference": "off",
