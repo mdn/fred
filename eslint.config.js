@@ -96,6 +96,7 @@ export default defineConfig([
       "unicorn/no-immediate-mutation": "off",
       "unicorn/no-null": ["off"],
       "unicorn/prefer-string-raw": "off",
+      "unicorn/prefer-query-selector": "off",
       "unicorn/prevent-abbreviations": ["off"],
       "unicorn/switch-case-braces": "off",
       "unicorn/template-indent": ["off"],
