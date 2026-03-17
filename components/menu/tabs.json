@@ -378,6 +378,10 @@
           {
             "href": "/en-US/curriculum/",
             "text": "MDN Curriculum"
+          },
+          {
+            "href": "https://scrimba.com/frontend-path-c0j?via=mdn-learn-navbar",
+            "text": "Check out the video course from Scrimba, our partner"
           }
         ]
       },
