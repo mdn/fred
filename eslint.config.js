@@ -29,6 +29,7 @@ export default defineConfig([
   n.configs["flat/recommended"],
   wc.configs["flat/best-practice"],
   lit.configs["flat/all"],
+  tseslint.configs["recommended"],
   unicorn.configs["recommended"],
   { files: ["**/*.{js,mjs,cjs}"] },
   {
