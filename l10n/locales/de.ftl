@@ -44,8 +44,8 @@ obs-report = Report
 obs-title = HTTP Observatory
 obs-landing-intro = Seit 2016 verbessert HTTP Observatory die Sicherheit durch Analyse der Einhaltung bewährter Sicherheitspraktiken. Es hat durch 47 Millionen Scans Einblicke in über 6,9 Millionen Websites geliefert.
 obs-assessment = Das von Mozilla entwickelte HTTP Observatory führt eine umfassende Bewertung der HTTP-Header und weiterer zentraler Sicherheitskonfigurationen einer Website durch.
-obs-scanning = Der automatisierte Scan-Prozess liefert Entwicklern und Website-Administratoren detailliertes, handlungsorientiertes Feedback und konzentriert sich darauf, potenzielle Sicherheitslücken zu erkennen und zu beheben.
-obs-security = Das Tool unterstützt Entwickler und Website-Administratoren maßgeblich dabei, ihre Websites in einem sich stetig weiterentwickelnden digitalen Umfeld gegen häufige Sicherheitsbedrohungen abzusichern.
+obs-scanning = Der automatisierte Scan-Prozess liefert detailliertes, handlungsorientiertes Feedback für Entwicklungsteams und Website-Administration und konzentriert sich darauf, potenzielle Sicherheitslücken zu erkennen und zu beheben.
+obs-security = Das Tool unterstützt Entwicklungsteams und Website-Administration dabei, Websites in einem sich stetig weiterentwickelnden digitalen Umfeld gegen häufige Sicherheitsbedrohungen abzusichern.
 obs-mdn = Das HTTP Observatory bietet wirksame Sicherheitseinblicke auf Grundlage von Mozillas Expertise und Engagement für ein sichereres Internet sowie basierend auf etablierten Trends und Richtlinien.
 
 article-footer-last-modified = Diese Seite wurde zuletzt am <time data-l10n-name="date">{ $date }</time> von <a data-l10n-name="contributors">MDN-Mitwirkenden</a> bearbeitet.
@@ -57,7 +57,7 @@ baseline-not-extra = Diese Funktion ist nicht Baseline, da sie in einigen der am
 baseline-supported-in = Unterstützt in { $browsers }
 baseline-unsupported-in = In { $browsers } nicht weitgehend unterstützt
 baseline-supported-and-unsupported-in = Unterstützt in { $supported }, aber in { $unsupported } nicht weitgehend unterstützt
-homepage-hero-title = Ressourcen für Entwickler*innen,<br> von Entwickler*innen
+homepage-hero-title = Ressourcen für Entwickelnde,<br> von Entwickelnden
 homepage-hero-description = Dokumentation zu <a data-l10n-name="css">CSS</a>, <a data-l10n-name="html">HTML</a> und <a data-l10n-name="js">JavaScript</a> – seit 2005.
 not-found-title = Seite nicht gefunden
 not-found-description = Entschuldigung, die Seite <code data-l10n-name="url">{ $url }</code> wurde nicht gefunden.
@@ -78,19 +78,20 @@ compat-support-flags =
     }{ $has_last ->
         [one]
             { NUMBER($has_added) ->
-                *[zero] Bis { $versionLast } müssen Benutzer
-                [one] { " " }bis { $versionLast } müssen Benutzer
+                *[zero] Bis { $versionLast } muss
+                [one] { " " }bis { $versionLast } muss
             }
         *[zero]
             { NUMBER($has_added) ->
-                *[zero] Benutzer müssen
-                [one] { " " }Benutzer müssen
+                *[zero] muss
+                [one] { " " }muss
             }
     }
     { " " }die Einstellung <code data-l10n-name="name">{ $flag_name }</code>{ " " }
     { $flag_type ->
-        *[preference] explizit festlegen
-        [runtime_flag] als Laufzeit-Flag explizit festlegen
+        *[preference] explizit festgelegt werden
+        [runtime_flag] als Laufzeit-Flag explizit festgelegt werden
+
     }{ NUMBER($has_value) ->
         [one] { " " }auf <code data-l10n-name="value">{ $flag_value }</code>
         *[other] { "" }
@@ -112,7 +113,7 @@ compat-legend-experimental = { compat-experimental }. Verhaltensänderungen in d
 compat-legend-nonstandard = { compat-nonstandard }. Überprüfen Sie die browserübergreifende Unterstützung vor der Verwendung.
 compat-legend-deprecated = { compat-deprecated }. Nicht für neue Websites verwenden.
 compat-legend-footnote = Implementierungshinweise ansehen.
-compat-legend-disabled = Benutzer muss diese Funktion explizit aktivieren.
+compat-legend-disabled = Diese Funktion muss explizit aktiviert werden.
 compat-legend-altname = Verwendet einen nicht standardmäßigen Namen.
 compat-legend-prefix = Erfordert ein Hersteller-Präfix oder einen anderen Namen zur Verwendung.
 compat-legend-more = Hat mehr Kompatibilitätsinformationen.
@@ -268,8 +269,8 @@ observatory-tests-and-scores-description = Beschreibung
 observatory-tests-and-scores-modifier = Modifikator
 observatory-tests-and-scores-failed-to-load-tests-and-scoring = Tests und Bewertungsdaten konnten nicht geladen werden. Bitte versuchen Sie es später erneut.
 pagination-pagination = Seitennavigation
-playground-do-you-really-want-to-clear-ever = Möchten Sie wirklich alles löschen?
-playground-do-you-really-want-to-revert-you = Möchten Sie Ihre Änderungen wirklich zurücksetzen?
+playground-do-you-really-want-to-clear-ever = Wirklich alles löschen?
+playground-do-you-really-want-to-revert-you = Alle Änderungen zurücksetzen?
 playground-playground = Playground
 playground-format = Formatieren
 playground-run = Ausführen
