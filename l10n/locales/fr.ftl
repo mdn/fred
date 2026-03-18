@@ -36,7 +36,7 @@ blog-time-to-read =
         [one] { $minutes } minute de lecture
         *[other] { $minutes } minutes de lecture
     }
--brand-name-obs = Observatoire HTTP
+-brand-name-obs = HTTP Observatory
 obs-report = Signaler
 obs-title = { -brand-name-obs }
 obs-landing-intro = Lancé en 2016, { -brand-name-obs } améliore la sécurité du Web en analysant la conformité aux meilleures pratiques en matière de sécurité. Il a fourni des informations à plus de 6,9 millions de sites web grâce à 47 millions d'analyses.
@@ -172,7 +172,7 @@ compat-link-report-missing = Signaler le problème
 compat-js-required = Activez JavaScript pour afficher ce tableau de compatibilité des navigateurs.
 compat-loading = Chargement…
 content-feedback-content-is-out-of-date = Le contenu n'est pas à jour
-content-feedback-missing-information = IInformations manquantes
+content-feedback-missing-information = Informations manquantes
 content-feedback-code-examples-not-working-as-exp = Les exemples de code ne fonctionnent pas comme prévu
 content-feedback-other = Autre
 content-feedback-question = Cette page vous a-t-elle été utile ?
