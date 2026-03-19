@@ -37,7 +37,7 @@ blog-time-to-read =
         *[other] { $minutes } minutes de lecture
     }
 -brand-name-obs = HTTP Observatory
-obs-report = Signaler
+obs-report = Rapport
 obs-title = { -brand-name-obs }
 obs-landing-intro = Lancé en 2016, { -brand-name-obs } améliore la sécurité du Web en analysant la conformité aux meilleures pratiques en matière de sécurité. Il a fourni des informations à plus de 6,9 millions de sites web grâce à 47 millions d'analyses.
 obs-assessment = Développé par Mozilla, { -brand-name-obs } effectue une évaluation approfondie des en-têtes HTTP d'un site et d'autres configurations de sécurité clés.
