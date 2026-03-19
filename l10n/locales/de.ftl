@@ -19,7 +19,6 @@ site-search-suggestion-matches =  { $relation ->
        *[other] { $matches } Übereinstimmungen
     }
 }
-site-search-suggestions-text = Meinten Sie:
 
 blog-time-to-read = { $minutes ->
     [one]   { $minutes } Minute Lesezeit
@@ -296,7 +295,7 @@ sidebar-filter-clear-filter-input = Filterfeld leeren
 site-search-search = Suchen
 site-search-previous = Zurück
 site-search-next = Weiter
-site-search-suggestions-text = Meinten Sie …?
+site-search-suggestions-text = Meinten Sie:
 site-search-searching = Suche läuft…
 site-search-language = Sprache
 site-search-both = Beides
