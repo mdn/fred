@@ -23,9 +23,6 @@ site-search-suggestion-matches =  { $relation ->
 }
 site-search-suggestions-text = Meinten Sie:
 
-
-theme-default = System
-
 blog-time-to-read = { $minutes ->
     [one]   { $minutes } Minute Lesezeit
    *[other] { $minutes } Minuten Lesezeit
@@ -160,7 +157,7 @@ collection-save-button-saving = Wird gespeichert…
 collection-save-button-cancel = Abbrechen
 collection-save-button-deleting = Wird gelöscht…
 collection-save-button-delete = Löschen
-theme-default = Systemstandard
+theme-default = Systemeinstellung
 color-theme-light = Hell
 color-theme-dark = Dunkel
 color-theme-switch-color-theme = Farbschema wechseln
