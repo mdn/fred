@@ -11,6 +11,15 @@
       font-weight: normal;
 
       line-height: var(--font-line-normal);
+
+      code {
+        padding: 0.125em 0.25em;
+
+        font-family: var(--font-family-code);
+
+        background-color: var(--color-background-secondary);
+        border-radius: var(--radius-normal);
+      }
     }
   }
 
