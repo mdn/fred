@@ -2,8 +2,6 @@ content-feedback-question = War diese Übersetzung hilfreich?
 content-feedback-reason = Warum war diese Übersetzung nicht hilfreich?
 content-feedback-thanks = Vielen Dank für die Rückmeldung!
 
-reference-toc-header = In diesem Artikel
-
 footer-tagline = Der Bauplan für ein besseres Internet.
 footer-mofo = Besuche die gemeinnützige Muttergesellschaft der <a data-l10n-name="moco">Mozilla Corporation</a>, die <a data-l10n-name="mofo">Mozilla Foundation</a>.
 footer-copyright = Teile dieses Inhalts sind ©1998–{ $year } von einzelnen mozilla.org-Mitwirkenden. Inhalte sind verfügbar unter <a data-l10n-name="cc">einer Creative-Commons-Lizenz</a>.
@@ -27,11 +25,6 @@ blog-time-to-read = { $minutes ->
     [one]   { $minutes } Minute Lesezeit
    *[other] { $minutes } Minuten Lesezeit
 }
-blog-post-not-found = Blogartikel nicht gefunden.
-
-blog-previous = Voriger Artikel
-blog-previous = Vorheriger Beitrag
-blog-next = Nächster Beitrag
 
 No = Nein
 Submit = Absenden
@@ -143,7 +136,11 @@ baseline-indicator-cross = Kreuz
 baseline-indicator-learn-more = Mehr erfahren
 baseline-indicator-see-full-compatibility = Vollständige Kompatibilität anzeigen
 baseline-indicator-report-feedback = Feedback geben
+blog-previous = Vorheriger Beitrag
+blog-next = Nächster Beitrag
 blog-index-blog-it-better = Blog it better
+reference-toc-header = In diesem Artikel
+blog-post-not-found = Blogartikel nicht gefunden.
 collection-save-button-save-in-collection = In einer Sammlung speichern
 collection-save-button-remove = Entfernen
 collection-save-button-save = Speichern
