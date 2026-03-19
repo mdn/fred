@@ -26,10 +26,6 @@ blog-time-to-read = { $minutes ->
    *[other] { $minutes } Minuten Lesezeit
 }
 
-No = Nein
-Submit = Absenden
-Yes = Ja
-
 obs-report = Bericht
 
 obs-title = HTTP Observatory
