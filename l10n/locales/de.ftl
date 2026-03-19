@@ -26,14 +26,14 @@ blog-time-to-read = { $minutes ->
    *[other] { $minutes } Minuten Lesezeit
 }
 
+-brand-name-obs = HTTP Observatory
 obs-report = Bericht
-
-obs-title = HTTP Observatory
-obs-landing-intro = Seit 2016 verbessert HTTP Observatory die Sicherheit durch Analyse der Einhaltung bewährter Sicherheitspraktiken. Es hat durch 47 Millionen Scans Einblicke in über 6,9 Millionen Websites geliefert.
-obs-assessment = Das von Mozilla entwickelte HTTP Observatory führt eine umfassende Bewertung der HTTP-Header und weiterer zentraler Sicherheitskonfigurationen einer Website durch.
+obs-title = { -brand-name-obs }
+obs-landing-intro = Seit 2016 verbessert { -brand-name-obs } die Sicherheit durch Analyse der Einhaltung bewährter Sicherheitspraktiken. Es hat durch 47 Millionen Scans Einblicke in über 6,9 Millionen Websites geliefert.
+obs-assessment = Das von Mozilla entwickelte { -brand-name-obs } führt eine umfassende Bewertung der HTTP-Header und weiterer zentraler Sicherheitskonfigurationen einer Website durch.
 obs-scanning = Der automatisierte Scan-Prozess liefert detailliertes, handlungsorientiertes Feedback für Entwicklungsteams und Website-Administration und konzentriert sich darauf, potenzielle Sicherheitslücken zu erkennen und zu beheben.
 obs-security = Das Tool unterstützt Entwicklungsteams und Website-Administration dabei, Websites in einem sich stetig weiterentwickelnden digitalen Umfeld gegen häufige Sicherheitsbedrohungen abzusichern.
-obs-mdn = Das HTTP Observatory bietet wirksame Sicherheitseinblicke auf Grundlage von Mozillas Expertise und Engagement für ein sichereres Internet sowie basierend auf etablierten Trends und Richtlinien.
+obs-mdn = Das { -brand-name-obs } bietet wirksame Sicherheitseinblicke auf Grundlage von Mozillas Expertise und Engagement für ein sichereres Internet sowie basierend auf etablierten Trends und Richtlinien.
 
 article-footer-last-modified = Diese Seite wurde zuletzt am <time data-l10n-name="date">{ $date }</time> von <a data-l10n-name="contributors">MDN-Mitwirkenden</a> bearbeitet.
 article-footer-source-title = Ordner: { $folder } (öffnet in neuem Tab)
