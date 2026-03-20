@@ -91,7 +91,7 @@ export class MDNIssuesTable extends L10nMixin(LitElement) {
                         typeof label === "object" && label !== null
                           ? label.name
                           : label;
-                      this.LABELS.includes(labelName)
+                      return this.LABELS.includes(labelName)
                         ? html`<span class="label">${labelName}</span>`
                         : null;
                     })}

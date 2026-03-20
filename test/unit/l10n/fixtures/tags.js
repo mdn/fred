@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment, no-undef */
+/* eslint-disable @typescript-eslint/ban-ts-comment, @typescript-eslint/no-unused-expressions, no-undef */
 // @ts-nocheck
 
 this.l10n("this-l10n")`This L10n`;

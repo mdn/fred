@@ -84,7 +84,11 @@ async function serverRenderMiddleware(req, res, page) {
         );
 
         worker.on("message", ({ html, error }) => {
-          error ? reject(error) : resolve(html);
+          if (error) {
+            reject(error);
+          } else {
+            resolve(html);
+          }
         });
       });
     }
