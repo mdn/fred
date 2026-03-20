@@ -1,19 +1,25 @@
 import { ServerRenderedTemplate } from "@lit-labs/ssr";
+
+type ButtonText = string | { long: string; short: string };
+type ButtonL10nId = string | { long: string; short: string };
+
 interface BaseTab {
   id: string;
   buttonText: ButtonText;
+  buttonL10nId: ButtonL10nId;
 }
-
-type ButtonText = string | { long: string; short: string };
 
 interface PanelTitle {
   text: string;
   slug?: string;
+  l10nId: string;
 }
 
 interface BaseItem {
   text: string;
   label?: string;
+  l10nId: string;
+  labelL10nId?: string;
 }
 
 interface SlugItem extends BaseItem {
@@ -35,6 +41,7 @@ type PanelItem = LinkItem | RenderItem;
 
 interface PanelGroup {
   title?: string;
+  titleL10nId?: string;
   items: PanelItem[];
 }
 
@@ -45,6 +52,7 @@ interface DropdownTab extends BaseTab {
 
 interface LinkTab extends BaseTab {
   href: string;
+  buttonL10nId: string;
 }
 
 export type MenuTab = DropdownTab | LinkTab;
