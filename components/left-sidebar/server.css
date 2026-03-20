@@ -140,14 +140,26 @@
   }
 
   em {
+    --padding: 0.5rem;
+    --border: 2px;
+
     display: block;
 
-    padding-inline: 0.5rem;
+    padding-inline: var(--padding);
+    margin-left: calc(-1 * (var(--padding) + var(--border)));
 
     font-style: normal;
 
     background-color: var(--color-area-background);
-    border-left: 2px solid var(--color-area-highlight-border);
+    border-left: var(--border) solid var(--color-area-highlight-border);
+
+    summary > & {
+      padding-left: calc(var(--padding) + var(--sidebar-list-indent-chevron));
+      margin-left: calc(
+        -1 *
+          (var(--padding) + var(--border) + var(--sidebar-list-indent-chevron))
+      );
+    }
   }
 
   .icon {
