@@ -13,10 +13,11 @@
       line-height: var(--font-line-normal);
 
       code {
-        padding: 0.125em 0.25em;
+        font-family: inherit;
+      }
 
-        font-family: var(--font-family-code);
-
+      code:first-of-type {
+        padding: 0.0625em 0.125em;
         background-color: var(--color-background-secondary);
         border-radius: var(--radius-normal);
       }
