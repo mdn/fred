@@ -1,4 +1,7 @@
-import tabsData from "./tabs.json" with { type: "json" };
+import tabsDataRaw from "./tabs.json" with { type: "json" };
+
+/** @type {Readonly<import("./types.d.ts").RawTab[]>} */
+const RAW_TABS = Object.freeze(tabsDataRaw);
 
 /**
  * Converts a string to a kebab-case slug for use in l10n IDs.
@@ -17,7 +20,7 @@ const slugify = (str) =>
  */
 export const TABS = Object.freeze(
   /** @type {import("./types.js").MenuTab[]} */ (
-    tabsData.map((tab) => {
+    RAW_TABS.map((tab) => {
       const buttonL10nId =
         typeof tab.buttonText === "string"
           ? `menu-${tab.id}`
@@ -37,7 +40,7 @@ export const TABS = Object.freeze(
           ...tab.panelTitle,
           l10nId: `menu-${tab.id}-panel-title`,
         },
-        panelGroups: tab.panelGroups.map((group, gi) => {
+        panelGroups: (tab.panelGroups ?? []).map((group, gi) => {
           const groupSlug = group.title ? slugify(group.title) : String(gi);
           return {
             ...group,

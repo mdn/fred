@@ -11,10 +11,16 @@ export const strings = new Map(
     /** @type {[string, string][]} */
     const entries = [];
 
-    if (typeof tab.buttonL10nId === "string") {
-      entries.push([tab.buttonL10nId, /** @type {string} */ (tab.buttonText)]);
+    if (typeof tab.buttonText === "string") {
+      entries.push([/** @type {string} */ (tab.buttonL10nId), tab.buttonText]);
     } else {
-      entries.push([tab.buttonL10nId.long, tab.buttonText.long], [tab.buttonL10nId.short, tab.buttonText.short]);
+      const buttonL10nId = /** @type {{ long: string; short: string }} */ (
+        tab.buttonL10nId
+      );
+      entries.push(
+        [buttonL10nId.long, tab.buttonText.long],
+        [buttonL10nId.short, tab.buttonText.short],
+      );
     }
 
     if (!("panelTitle" in tab)) return entries;
