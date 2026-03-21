@@ -14,7 +14,6 @@ import { Transformer, parse, serialize } from "@fluent/syntax";
  * - wrapping in square brackets to help detect truncation
  */
 class AccentTransformer extends Transformer {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   MARKS = Array.from({ length: 0x3_6f - 0x3_00 + 1 }, (_, i) =>
     String.fromCodePoint(0x3_00 + i),
   );

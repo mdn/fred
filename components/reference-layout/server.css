@@ -11,6 +11,16 @@
       font-weight: normal;
 
       line-height: var(--font-line-normal);
+
+      code {
+        font-family: inherit;
+      }
+
+      code:first-of-type {
+        padding: 0.0625em 0.125em;
+        background-color: var(--color-background-secondary);
+        border-radius: var(--radius-normal);
+      }
     }
   }
 

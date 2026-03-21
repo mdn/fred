@@ -39,11 +39,11 @@ export const PlacementMixin = (Base) =>
       /**
        * @type {string | undefined}
        */
-      this._viewedUrl;
+      this._viewedUrl = undefined;
       /**
        * @type {number | undefined}
        */
-      this._version;
+      this._version = undefined;
       /** @type {ViewedController} */
       this.viewed = new ViewedController(this, this._placementRef, () => {
         if (this._viewedUrl) {

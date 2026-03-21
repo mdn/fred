@@ -14,7 +14,7 @@ export class MDNRecordVisit extends LitElement {
   constructor() {
     super();
     /** @type {string | undefined} */
-    this.pageTitle;
+    this.pageTitle = undefined;
   }
 
   connectedCallback() {
