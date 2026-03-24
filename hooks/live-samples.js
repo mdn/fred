@@ -22,9 +22,11 @@ for (const iframe of document.querySelectorAll("iframe[data-live-id]")) {
         if (codeExample) {
           codeExamples.push(codeExample);
           const { language, code } = codeExample;
-          liveSampleCode[language]
-            ? (liveSampleCode[language] += code)
-            : (liveSampleCode[language] = code);
+          if (liveSampleCode[language]) {
+            liveSampleCode[language] += code;
+          } else {
+            liveSampleCode[language] = code;
+          }
         }
       }
 
