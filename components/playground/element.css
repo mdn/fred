@@ -100,7 +100,6 @@
 
     &.playground__runner-console {
       position: relative;
-
       grid-area: runner;
       overflow: hidden;
 
@@ -178,11 +177,12 @@ mdn-modal {
 
 .overlay-run-button {
   position: absolute;
-  inset: 4rem 1rem 9rem;
+  inset: 3.9rem 0 8rem;
   z-index: 1;
 
   font-size: clamp(1.5rem, 3vw, 3rem);
 
-  background-color: var(--color-border-primary);
+  background-color: var(--color-background-page);
+  border: var(--border);
   border-radius: 0.5rem;
 }

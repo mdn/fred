@@ -4,8 +4,8 @@ import { createRef, ref } from "lit/directives/ref.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 import { gleanClick } from "../../utils/glean.js";
-import warningIcon from "../icon/triangle-alert.svg?lit";
 import circlePlay from "../icon/circle-play.svg?lit";
+import warningIcon from "../icon/triangle-alert.svg?lit";
 import { globalUser } from "../user/context.js";
 
 import styles from "./element.css?lit";
