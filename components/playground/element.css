@@ -99,14 +99,22 @@
     }
 
     &.playground__runner-console {
-      position: relative;
       grid-area: runner;
       overflow: hidden;
 
-      mdn-play-runner {
+      mdn-play-runner,
+      .overlay-run-button {
         flex-grow: 1;
         border: var(--border);
         border-radius: 0.25rem;
+
+        &.hidden {
+          display: none;
+        }
+      }
+
+      .overlay-run-button {
+        font-size: clamp(1.5rem, 3vw, 3rem);
       }
 
       .playground__console {
@@ -173,16 +181,4 @@ mdn-modal {
     flex-direction: row;
     justify-content: flex-end;
   }
-}
-
-.overlay-run-button {
-  position: absolute;
-  inset: 3.9rem 0 8rem;
-  z-index: 1;
-
-  font-size: clamp(1.5rem, 3vw, 3rem);
-
-  background-color: var(--color-background-page);
-  border: var(--border);
-  border-radius: 0.5rem;
 }
