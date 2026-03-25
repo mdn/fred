@@ -414,7 +414,9 @@ ${"```"}`,
                 >
                   Run
                 </mdn-button>`}
-            <mdn-play-runner></mdn-play-runner>
+            <mdn-play-runner
+              class=${this._autoRun ? "" : "hidden"}
+            ></mdn-play-runner>
             <div class="playground__console">
               <div>${this.l10n("playground-console")`Console`}</div>
               <mdn-play-console></mdn-play-console>
