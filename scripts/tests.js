@@ -71,7 +71,7 @@ if (argv.e2e) {
   /** @type {import("concurrently").ConcurrentlyCommandInput[]} */
   const jobs = [
     {
-      command: `npx wdio run ./wdio.conf.js`,
+      command: `npx wdio run wdio.conf.js`,
       name: "wdio",
       prefixColor: "green",
     },
