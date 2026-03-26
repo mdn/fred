@@ -409,10 +409,28 @@ ${"```"}`,
               : html`<mdn-button
                   class="overlay-run-button"
                   @click=${this._run}
-                  .icon=${circlePlay}
                   variant="plain"
                 >
-                  Run
+                  <div>${circlePlay} Run</div>
+                  <ul>
+                    <li>
+                      This is a user-shared playground, not official MDN
+                      content.
+                    </li>
+                    <li>
+                      Always inspect the code first, and run it at your own
+                      risk.
+                    </li>
+                    <li>
+                      Running malicious code can expose you to serious risks,
+                      including theft of data, IP address, browser fingerprint,
+                      current session, etc.
+                    </li>
+                    <li>
+                      Never enter passwords, payment details, or any sensitive
+                      information.
+                    </li>
+                  </ul>
                 </mdn-button>`}
             <mdn-play-runner
               class=${this._autoRun ? "" : "hidden"}

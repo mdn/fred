@@ -114,7 +114,27 @@
       }
 
       .overlay-run-button {
-        font-size: clamp(1.5rem, 3vw, 3rem);
+        border-color: currentcolor;
+
+        div {
+          font-size: clamp(1.5rem, 3vw, 3rem);
+
+          svg {
+            width: clamp(1.5rem, 3vw, 3rem);
+            height: clamp(1.5rem, 3vw, 3rem);
+            vertical-align: bottom;
+          }
+        }
+
+        ul {
+          width: 80%;
+
+          margin: 1rem auto;
+
+          font-size: 16px;
+
+          text-align: left;
+        }
       }
 
       .playground__console {
