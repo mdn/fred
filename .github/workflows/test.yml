@@ -81,11 +81,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
+      - name: Run unit tests
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: npm test -- --unit --no-lint
+
       - name: Build
         run: npm run build
 
-      - name: Run
+      - name: Run e2e tests
         env:
           CONTENT_ROOT: ../content/files
           GITHUB_TOKEN: ${{ github.token }}
-        run: node scripts/tests.js
+        run: npm test -- --no-unit --e2e --fred preview --rari --no-lint

@@ -16,11 +16,10 @@
     "preview": "NODE_ENV=production node ./server.js",
     "ssr": "node build/ssr.js",
     "lit-analyzer": "npx @jackolope/lit-analyzer --rules.no-incompatible-type-binding off",
-    "test": "lefthook run --force pre-push",
+    "test": "node scripts/tests.js",
     "tsc": "tsc",
     "rari": "rari",
     "prepack": "npm run build",
-    "wdio": "wdio run ./wdio.conf.js",
     "l10n": "node l10n/cli.js"
   },
   "browserslist": [
@@ -133,7 +132,8 @@
     "webpack-dev-middleware": "^8.0.2",
     "webpack-hot-middleware": "^2.26.1",
     "webpack-merge": "^6.0.1",
-    "webpack-stats-plugin": "^1.1.3"
+    "webpack-stats-plugin": "^1.1.3",
+    "yargs": "^18.0.0"
   },
   "overrides": {
     "glob": ">=10.5.0",
