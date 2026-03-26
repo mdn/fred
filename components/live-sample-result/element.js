@@ -113,6 +113,8 @@ export class MDNLiveSampleResult extends L10nMixin(LitElement) {
             ...new Set([
               "allow-modals",
               "allow-downloads",
+              "allow-fullscreen",
+              "allow-orientation-lock",
               ...(this.sandbox?.split(" ") || []),
             ]),
           ].join(" ")}

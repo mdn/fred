@@ -185,7 +185,10 @@ function getLocale(locale) {
   }
   if (!fluent.has(locale)) {
     const ftl = ftlMap[locale];
-    const localeF = new Fluent(locale, ftl ? [ftl] : undefined);
+    if (!ftl) {
+      return new Fluent(locale);
+    }
+    const localeF = new Fluent(locale, [ftl]);
     fluent.set(locale, localeF);
   }
   return fluent.get(locale);

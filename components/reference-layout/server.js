@@ -1,6 +1,8 @@
 import { html } from "@lit-labs/ssr";
 import { nothing } from "lit";
 
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
+
 import { ArticleFooter } from "../article-footer/server.js";
 import { BaselineIndicator } from "../baseline-indicator/server.js";
 import { ContentSection } from "../content-section/server.js";
@@ -27,7 +29,7 @@ export class ReferenceLayout extends ServerComponent {
             ${WRITER_MODE ? WriterToolbar.render(context) : nothing}
             ${TranslationBanner.render(context)}
             <mdn-survey></mdn-survey>
-            <h1>${doc.title}</h1>
+            <h1>${unsafeHTML(doc.titleHTML)}</h1>
             ${BaselineIndicator.render(context)} ${description}
           </div>
           <aside class="layout__right-sidebar reference-layout__toc">
