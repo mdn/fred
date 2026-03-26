@@ -408,24 +408,27 @@ ${"```"}`,
                   @click=${this._run}
                   variant="plain"
                 >
-                  <div>${circlePlay} Run</div>
+                  <div>${circlePlay} ${this.l10n("playground-run")`Run`}</div>
                   <ul>
                     <li>
-                      This is a user-shared playground, not official MDN
-                      content.
+                      ${this.l10n(
+                        "playground-run-warning-line-one",
+                      )`This is a user-shared playground, not official MDN content.`}
                     </li>
                     <li>
-                      Always inspect the code first, and run it at your own
-                      risk.
+                      ${this.l10n(
+                        "playground-run-warning-line-two",
+                      )`Always inspect the code first, and run it at your own risk.`}
                     </li>
                     <li>
-                      Running malicious code can expose you to serious risks,
-                      including theft of data, IP address, browser fingerprint,
-                      current session, etc.
+                      ${this.l10n(
+                        "playground-run-warning-line-three",
+                      )`Running malicious code can expose you to serious risks, including theft of data, IP address, browser fingerprint, current session, etc.`}
                     </li>
                     <li>
-                      Never enter passwords, payment details, or any sensitive
-                      information.
+                      ${this.l10n(
+                        "playground-run-warning-line-four",
+                      )`Never enter passwords, payment details, address, or any sensitive information.`}
                     </li>
                   </ul>
                 </mdn-button>`}
