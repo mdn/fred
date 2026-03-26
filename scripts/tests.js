@@ -68,58 +68,54 @@ if (argv.unit) {
 }
 
 if (argv.e2e) {
+  /** @type {import("concurrently").ConcurrentlyCommandInput[]} */
+  const jobs = [
+    {
+      command: `npx wdio run ./wdio.conf.js`,
+      name: "wdio",
+      prefixColor: "green",
+    },
+  ];
+
+  if (argv.content) {
+    jobs.push({
+      cwd: argv.content,
+      command: `npm start`,
+      name: "content",
+      prefixColor: "blue",
+    });
+  }
+
+  if (argv.fred === "preview") {
+    jobs.push({
+      command: `npm run preview`,
+      name: "server",
+      prefixColor: "red",
+    });
+  }
+
+  if (argv.fred === "dev") {
+    jobs.push({
+      command: `npm run dev`,
+      name: "server",
+      prefixColor: "red",
+    });
+  }
+
+  if (argv.rari) {
+    jobs.push({
+      command: `"${rariBin}" serve`,
+      name: "rari",
+      prefixColor: "blue",
+    });
+  }
+
   runs.push(
-    concurrently(
-      [
-        {
-          command: `npx wdio run ./wdio.conf.js`,
-          name: "wdio",
-          prefixColor: "green",
-        },
-        ...(argv.content
-          ? [
-              {
-                cwd: argv.content,
-                command: `npm start`,
-                name: "content",
-                prefixColor: "blue",
-              },
-            ]
-          : []),
-        ...(argv.fred === "preview"
-          ? [
-              {
-                command: `npm run preview`,
-                name: "server",
-                prefixColor: "red",
-              },
-            ]
-          : []),
-        ...(argv.fred === "dev"
-          ? [
-              {
-                command: `npm run dev`,
-                name: "server",
-                prefixColor: "red",
-              },
-            ]
-          : []),
-        ...(argv.rari
-          ? [
-              {
-                command: `"${rariBin}" serve`,
-                name: "rari",
-                prefixColor: "blue",
-              },
-            ]
-          : []),
-      ],
-      {
-        killOthersOn: ["failure", "success"],
-        restartTries: 0,
-        successCondition: "first",
-      },
-    ).result,
+    concurrently(jobs, {
+      killOthersOn: ["failure", "success"],
+      restartTries: 0,
+      successCondition: "first",
+    }).result,
   );
 }
 
