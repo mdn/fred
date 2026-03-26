@@ -67,7 +67,7 @@
   "devDependencies": {
     "@codemirror/autocomplete": "^6.20.1",
     "@codemirror/commands": "^6.10.3",
-    "@codemirror/language": "^6.12.2",
+    "@codemirror/language": "^6.12.3",
     "@codemirror/lint": "^6.9.5",
     "@codemirror/view": "^6.40.0",
     "@csstools/postcss-global-data": "^4.0.0",
@@ -105,7 +105,7 @@
     "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-jsdoc": "^62.8.0",
+    "eslint-plugin-jsdoc": "^62.8.1",
     "eslint-plugin-lit": "^2.2.1",
     "eslint-plugin-n": "^17.24.0",
     "eslint-plugin-unicorn": "^63.0.0",
