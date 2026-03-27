@@ -134,6 +134,7 @@ ${"```"}`,
   async _copyDataUrl() {
     const controller = this._controller.value;
     if (controller) {
+      gleanClick("playground: share-data-url");
       const { css, html, js } = controller.code;
       let code = `<!doctype html><body>`;
       if (css) code += `<style>${css}</style>`;
