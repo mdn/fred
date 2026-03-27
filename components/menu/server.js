@@ -71,13 +71,10 @@ export class Menu extends ServerComponent {
                   data-glean-id=${`menu_click_link: top-level -> ${tab.href}`}
                   >${tab.buttonText}</a
                 >`
-              : html`<mdn-dropdown>
-                  <button
-                    class="menu__tab-button"
-                    type="button"
-                    slot="button"
-                    data-glean-id=${`menu_toggle: ${tab.id}`}
-                  >
+              : html`<mdn-dropdown
+                  data-glean-toggle-open=${`menu_toggle: ${tab.id}`}
+                >
+                  <button class="menu__tab-button" type="button" slot="button">
                     ${typeof tab.buttonText === "string"
                       ? html`<span class="menu__tab-label"
                           >${tab.buttonText}</span
