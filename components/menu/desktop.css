@@ -47,7 +47,7 @@
       display: none;
     }
 
-    @media (--screen-menu-short-labels) {
+    @media (--screen-menu-compact) {
       &[data-type="long"] {
         display: none;
       }

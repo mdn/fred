@@ -22,4 +22,4 @@
 
 @custom-media --screen-menu-full (width > 1044px);
 @custom-media --screen-menu-hamburger (width <= 1044px);
-@custom-media --screen-menu-short-labels (width <= 1104px);
+@custom-media --screen-menu-compact (width <= 1104px);
