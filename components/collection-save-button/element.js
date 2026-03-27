@@ -90,17 +90,24 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
   });
 
   _open() {
+    this._selectFocusEventTriggered = false;
     gleanClick("article_actions_collections_opened");
     this._bookmarks.run();
     this._collections.run();
     this.shadowRoot?.querySelector("mdn-modal")?.showModal();
   }
 
+  _selectOpen() {
+    if (!this._selectFocusEventTriggered) {
+      gleanClick("article_actions_collection_select_opened");
+      this._selectFocusEventTriggered = true;
+    }
+  }
+
   /** @param {Event} event */
   _selectChange({ target }) {
     if (target instanceof HTMLSelectElement) {
       const { value } = target;
-      gleanClick("article_actions_collection_select_opened");
       if (value === ADD_VALUE) {
         gleanClick("article_actions_new_collection");
         this.shadowRoot?.querySelector("mdn-modal")?.close();
@@ -236,6 +243,7 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
                           )`Collection:`}
                           <select
                             .value=${this._item?.collection_id}
+                            @focus=${this._selectOpen}
                             @change=${this._selectChange}
                           >
                             ${collections.map(
