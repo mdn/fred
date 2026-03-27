@@ -24,7 +24,7 @@ export class MDNScrimInline extends L10nMixin(LitElement) {
   };
 
   /** @type {import("lit/directives/ref.js").Ref<HTMLElement>} */
-  _ref = createRef();
+  _bodyRef = createRef();
 
   constructor() {
     super();
@@ -48,7 +48,7 @@ export class MDNScrimInline extends L10nMixin(LitElement) {
     /** @type {boolean} */
     this._scrimLoaded = false;
 
-    new ViewedController(this, this._ref, () => {
+    new ViewedController(this, this._bodyRef, () => {
       if (this._scrimId) {
         gleanClick(`curriculum: scrim view id:${this._scrimId}`);
       }
@@ -121,7 +121,7 @@ export class MDNScrimInline extends L10nMixin(LitElement) {
               >
             </a>
           </div>
-          <div class="body" ${ref(this._ref)}>
+          <div class="body" ${ref(this._bodyRef)}>
             ${this._scrimLoaded
               ? html`
                   <iframe
