@@ -101,7 +101,10 @@ export class MDNDropdown extends LitElement {
    */
   updated(changedProperties) {
     this._setAriaAttributes();
-    if (changedProperties.has("open")) {
+    if (
+      changedProperties.has("open") &&
+      changedProperties.get("open") !== undefined
+    ) {
       this.dispatchEvent(new Event("toggle", { bubbles: true }));
     }
   }
