@@ -119,6 +119,8 @@ export class OuterLayout extends ServerComponent {
           ${TRANSCEND_BUNDLE_ID &&
           html`<script
             data-cfasync="false"
+            data-report-only="on"
+            data-prompt="0"
             src=${`https://transcend-cdn.com/cm/${TRANSCEND_BUNDLE_ID}/airgap.js`}
           ></script>`}
           ${scripts?.map(
