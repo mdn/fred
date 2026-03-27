@@ -1,5 +1,7 @@
 import { LitElement, html } from "lit";
 
+import { gleanClick } from "../../utils/glean.js";
+
 import styles from "./element.css?lit";
 import Button from "./pure.js";
 
@@ -20,6 +22,12 @@ export class MDNButton extends LitElement {
 
   constructor() {
     super();
+    this.addEventListener("click", () => {
+      const gleanId = this.dataset.gleanId;
+      if (gleanId) {
+        gleanClick(gleanId);
+      }
+    });
     this.disabled = false;
     /** @type {import("@lit").TemplateResult | undefined} */
     this.icon = undefined;

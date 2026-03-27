@@ -71,6 +71,7 @@ export class MDNPlayground extends L10nMixin(LitElement) {
   }
 
   _share() {
+    gleanClick("playground: share-click");
     this._shareModal.value?.showModal();
   }
 
@@ -95,24 +96,27 @@ export class MDNPlayground extends L10nMixin(LitElement) {
   }
 
   _reset() {
-    const controller = this._controller.value;
     if (
       confirm(
         this.l10n(
           "playground-do-you-really-want-to-revert-you",
         )`Do you really want to revert your changes?`,
-      ) &&
-      controller
+      )
     ) {
-      controller.reset();
-      this._storeSession();
-      this.requestUpdate();
+      gleanClick("playground: reset-click");
+      const controller = this._controller.value;
+      if (controller) {
+        controller.reset();
+        this._storeSession();
+        this.requestUpdate();
+      }
     }
   }
 
   async _copyMarkdown() {
     const controller = this._controller.value;
     if (controller) {
+      gleanClick("playground: share-markdown");
       const markdown = Object.entries(controller.code)
         .map(
           ([lang, code]) =>
@@ -130,6 +134,7 @@ ${"```"}`,
   async _copyDataUrl() {
     const controller = this._controller.value;
     if (controller) {
+      gleanClick("playground: share-data-url");
       const { css, html, js } = controller.code;
       let code = `<!doctype html><body>`;
       if (css) code += `<style>${css}</style>`;
@@ -147,6 +152,7 @@ ${"```"}`,
   async _createPermalink() {
     const controller = this._controller.value;
     if (controller) {
+      gleanClick("playground: share-permalink");
       const res = await fetch("/api/v1/play/", {
         method: "POST",
         headers: {
@@ -282,6 +288,7 @@ ${"```"}`,
   }
 
   _reportOpen() {
+    gleanClick("playground: flag-click");
     this._reportModal.value?.showModal();
   }
 
@@ -437,8 +444,14 @@ ${"```"}`,
             )`Share your code via Permalink`}
           </h2>
           ${this._user.render({
-            initial: () => html`<mdn-login-button></mdn-login-button>`,
-            pending: () => html`<mdn-login-button></mdn-login-button>`,
+            initial: () =>
+              html`<mdn-login-button
+                data-glean-id="playground: banner-login"
+              ></mdn-login-button>`,
+            pending: () =>
+              html`<mdn-login-button
+                data-glean-id="playground: banner-login"
+              ></mdn-login-button>`,
             complete: (user) =>
               user.isAuthenticated
                 ? this._permalink && !isResettable
@@ -458,7 +471,9 @@ ${"```"}`,
                         "playground-create-link",
                       )`Create link`}</mdn-button
                     >`
-                : html`<mdn-login-button></mdn-login-button>`,
+                : html`<mdn-login-button
+                    data-glean-id="playground: banner-login"
+                  ></mdn-login-button>`,
           })}
         </section>
       </mdn-modal>
