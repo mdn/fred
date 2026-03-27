@@ -7,6 +7,16 @@ import { FXA_SIGNIN_URL } from "../env/index.js";
 export class MDNLoginButton extends L10nMixin(LitElement) {
   static ssr = false;
 
+  static properties = {
+    gleanId: { attribute: "data-glean-id" },
+  };
+
+  constructor() {
+    super();
+    /** @type {string | undefined} */
+    this.gleanId = undefined;
+  }
+
   get _loginUrl() {
     const next = location.href.replace(location.origin, "");
     // TODO: deal with local login
@@ -16,7 +26,9 @@ export class MDNLoginButton extends L10nMixin(LitElement) {
   }
 
   render() {
-    return html`<mdn-button href=${this._loginUrl} data-glean-id="login_button"
+    return html`<mdn-button
+      href=${this._loginUrl}
+      data-glean-id=${this.gleanId ?? "login_button"}
       >${this.l10n("login-button-login")`Login`}</mdn-button
     >`;
   }
