@@ -1,5 +1,9 @@
 /* Compat (mobile *and* desktop). */
 
+.table-container {
+  overflow-x: hidden;
+}
+
 table {
   display: grid;
   grid-auto-flow: row dense;

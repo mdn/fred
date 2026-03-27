@@ -4,7 +4,11 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import inlineScript from "../../entry.inline.js?source&csp=true";
-import { ROBOTS_GLOBAL_ALLOW, WRITER_MODE } from "../env/index.js";
+import {
+  ROBOTS_GLOBAL_ALLOW,
+  TRANSCEND_BUNDLE_ID,
+  WRITER_MODE,
+} from "../env/index.js";
 import { RUNTIME_ENV, runtimeVariables } from "../env/runtime.js";
 import Favicon from "../favicon/pure.js";
 import { asyncLocalStorage } from "../server/async-local-storage.js";
@@ -112,6 +116,13 @@ export class OuterLayout extends ServerComponent {
                 fetchpriority="low"
               />`,
           )}
+          ${TRANSCEND_BUNDLE_ID &&
+          html`<script
+            data-cfasync="false"
+            data-report-only="on"
+            data-prompt="0"
+            src=${`https://transcend-cdn.com/cm/${TRANSCEND_BUNDLE_ID}/airgap.js`}
+          ></script>`}
           ${scripts?.map(
             (path) => html`<script src=${path} type="module"></script>`,
           )}
