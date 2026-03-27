@@ -96,19 +96,20 @@ export class MDNPlayground extends L10nMixin(LitElement) {
   }
 
   _reset() {
-    const controller = this._controller.value;
     if (
       confirm(
         this.l10n(
           "playground-do-you-really-want-to-revert-you",
         )`Do you really want to revert your changes?`,
-      ) &&
-      controller
+      )
     ) {
       gleanClick("playground: reset-click");
-      controller.reset();
-      this._storeSession();
-      this.requestUpdate();
+      const controller = this._controller.value;
+      if (controller) {
+        controller.reset();
+        this._storeSession();
+        this.requestUpdate();
+      }
     }
   }
 
