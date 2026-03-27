@@ -18,6 +18,7 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
     super();
     /** @type {import("./types.js").ColorScheme} */
     this._mode = "light dark";
+    this._closingFromSelect = false;
     this._options = Object.entries({
       "light dark": this.l10n("theme-default")`OS default`,
       light: this.l10n("color-theme-light")`Light`,
@@ -40,6 +41,7 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
         }
         const dropdown = this.shadowRoot?.querySelector("mdn-dropdown");
         if (dropdown) {
+          this._closingFromSelect = true;
           dropdown.open = false;
         }
       }
@@ -49,6 +51,10 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
   /** @param {Event} event */
   _onDropdownToggle({ target }) {
     if (target instanceof HTMLElement && "open" in target) {
+      if (!target.open && this._closingFromSelect) {
+        this._closingFromSelect = false;
+        return;
+      }
       gleanClick(`theme_switcher: ${target.open ? "open" : "close"}`);
     }
   }
