@@ -36,7 +36,7 @@ export class MDNModal extends L10nMixin(LitElement) {
             icon-only
             .icon=${exitIcon}
             @click=${this.close}
-            >${this.l10n`Exit modal`}</mdn-button
+            >${this.l10n("modal-exit-modal")`Exit modal`}</mdn-button
           >
         </header>
         <slot></slot>

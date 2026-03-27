@@ -20,7 +20,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           cache: npm
           node-version-file: ".nvmrc"
@@ -46,6 +46,9 @@ jobs:
       - name: Run tsc
         run: npx tsc --noEmit
 
+      - name: Lint l10n strings
+        run: npm run l10n -- --lint
+
   test:
     runs-on: ubuntu-latest
     defaults:
@@ -67,7 +70,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           cache: npm
           node-version-file: "fred/.nvmrc"
@@ -78,11 +81,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
+      - name: Run unit tests
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: npm test -- --unit --no-lint
+
       - name: Build
         run: npm run build
 
-      - name: Run
+      - name: Run e2e tests
         env:
           CONTENT_ROOT: ../content/files
           GITHUB_TOKEN: ${{ github.token }}
-        run: node scripts/tests.js
+        run: npm test -- --no-unit --e2e --fred preview --rari --no-lint

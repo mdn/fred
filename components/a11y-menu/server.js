@@ -10,12 +10,14 @@ export class A11yMenu extends ServerComponent {
     return html`<ul class="a11y-menu">
       <li>
         <a href="#content" data-glean-id="a11y_menu: click #content"
-          >${context.l10n`Skip to main content`}</a
+          >${context.l10n(
+            "a11y-menu-skip-to-main-content",
+          )`Skip to main content`}</a
         >
       </li>
       <li>
         <a href="#search" data-glean-id="a11y_menu: click #search"
-          >${context.l10n`Skip to search`}</a
+          >${context.l10n("a11y-menu-skip-to-search")`Skip to search`}</a
         >
       </li>
     </ul>`;

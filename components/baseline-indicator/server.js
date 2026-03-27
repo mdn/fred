@@ -137,26 +137,34 @@ export class BaselineIndicator extends ServerComponent {
           class="indicator"
           role="img"
           aria-label=${level === "not"
-            ? context.l10n`Baseline Cross`
-            : context.l10n`Baseline Check`}
+            ? context.l10n("baseline-indicator-baseline-cross")`Baseline Cross`
+            : context.l10n("baseline-indicator-baseline-check")`Baseline Check`}
         ></span>
         <div class="status-title">
           ${level === "not"
             ? html`<span class="not-bold"
-                >${context.l10n`Limited availability`}</span
+                >${context.l10n(
+                  "baseline-indicator-limited-availability",
+                )`Limited availability`}</span
               >`
             : html`
-                ${context.l10n`Baseline`}
+                ${context.l10n("baseline-indicator-baseline")`Baseline`}
                 <span class="not-bold">
                   ${level === "high"
-                    ? context.l10n`Widely available`
+                    ? context.l10n(
+                        "baseline-indicator-widely-available",
+                      )`Widely available`
                     : low_date?.getFullYear()}
                 </span>
                 ${status.asterisk && " *"}
               `}
         </div>
         ${level === "low"
-          ? html`<div class="pill">${context.l10n`Newly available`}</div>`
+          ? html`<div class="pill">
+              ${context.l10n(
+                "baseline-indicator-newly-available",
+              )`Newly available`}
+            </div>`
           : nothing}
         <div class="browsers">
           ${ENGINES.map(
@@ -174,7 +182,7 @@ export class BaselineIndicator extends ServerComponent {
                         isBrowserSupported(browser) ? "supported" : ""
                       }`}
                       role="img"
-                      aria-label=${`${browser.name} ${isBrowserSupported(browser) ? context.l10n`check` : context.l10n`cross`}`}
+                      aria-label=${`${browser.name} ${isBrowserSupported(browser) ? context.l10n("baseline-indicator-check")`check` : context.l10n("baseline-indicator-cross")`cross`}`}
                     ></span>`,
                 )}
               </span>`,
@@ -219,12 +227,14 @@ export class BaselineIndicator extends ServerComponent {
               target="_blank"
               class="learn-more"
             >
-              ${context.l10n`Learn more`}
+              ${context.l10n("baseline-indicator-learn-more")`Learn more`}
             </a>
           </li>
           <li>
             <a href=${bcdLink} data-glean-id="baseline_link_bcd_table">
-              ${context.l10n`See full compatibility`}
+              ${context.l10n(
+                "baseline-indicator-see-full-compatibility",
+              )`See full compatibility`}
             </a>
           </li>
           <li>
@@ -235,7 +245,9 @@ export class BaselineIndicator extends ServerComponent {
               target="_blank"
               rel="noreferrer"
             >
-              ${context.l10n`Report feedback`}
+              ${context.l10n(
+                "baseline-indicator-report-feedback",
+              )`Report feedback`}
             </a>
           </li>
         </ul>

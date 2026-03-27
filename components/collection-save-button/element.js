@@ -206,16 +206,22 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
               <button
                 class="collection-save-button"
                 data-state=${this._bookmarks.value?.length ? "remove" : "save"}
-                title=${this.l10n`Save in collection`}
+                title=${this.l10n(
+                  "collection-save-button-save-in-collection",
+                )`Save in collection`}
                 @click=${this._open}
               >
                 <span
                   >${this._bookmarks.value?.length
-                    ? this.l10n`Remove`
-                    : this.l10n`Save`}</span
+                    ? this.l10n("collection-save-button-remove")`Remove`
+                    : this.l10n("collection-save-button-save")`Save`}</span
                 >
               </button>
-              <mdn-modal modal-title=${this.l10n`Add to collection`}>
+              <mdn-modal
+                modal-title=${this.l10n(
+                  "collection-save-button-add-to-collection",
+                )`Add to collection`}
+              >
                 ${this._bookmarks.render({
                   initial: () => html`<progress></progress>`,
                   pending: () => html`<progress></progress>`,
@@ -225,7 +231,9 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
                       pending: () => html`<progress></progress>`,
                       complete: (collections) => html`
                         <label>
-                          ${this.l10n`Collection:`}
+                          ${this.l10n(
+                            "collection-save-button-collection",
+                          )`Collection:`}
                           <select
                             .value=${this._item?.collection_id}
                             @change=${this._selectChange}
@@ -244,7 +252,9 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
                                     ? "★"
                                     : "☆"}
                                   ${collection.name === "Default"
-                                    ? this.l10n`Saved articles`
+                                    ? this.l10n(
+                                        "collection-save-button-saved-articles",
+                                      )`Saved articles`
                                     : collection.name}
                                 </option>
                               `,
@@ -253,31 +263,36 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
                               ——————————
                             </option>
                             <option value=${ADD_VALUE}>
-                              + ${this.l10n`New collection`}
+                              +
+                              ${this.l10n(
+                                "collection-save-button-new-collection",
+                              )`New collection`}
                             </option>
                           </select>
                         </label>
                         <label>
-                          ${this.l10n`Name:`}
+                          ${this.l10n("collection-save-button-name")`Name:`}
                           <input .value=${this._item?.title || this.docTitle} />
                         </label>
                         <label>
-                          ${this.l10n`Note:`}
+                          ${this.l10n("collection-save-button-note")`Note:`}
                           <textarea
                             .value=${this._item?.notes || ""}
                           ></textarea>
                         </label>
                         <mdn-button @click=${this._submit}>
                           ${this._pending && this._lastAction === "save"
-                            ? this.l10n`Saving…`
-                            : this.l10n`Save`}
+                            ? this.l10n(
+                                "collection-save-button-saving",
+                              )`Saving…`
+                            : this.l10n("collection-save-button-save")`Save`}
                         </mdn-button>
                         <mdn-button
                           @click=${this._cancel}
                           ?disabled=${this._pending}
                           variant="secondary"
                         >
-                          ${this.l10n`Cancel`}
+                          ${this.l10n("collection-save-button-cancel")`Cancel`}
                         </mdn-button>
                         ${bookmarks?.length
                           ? html`<mdn-button
@@ -289,8 +304,12 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
                               !isCurrentInCollection}
                             >
                               ${this._pending && this._lastAction === "delete"
-                                ? this.l10n`Deleting…`
-                                : this.l10n`Delete`}
+                                ? this.l10n(
+                                    "collection-save-button-deleting",
+                                  )`Deleting…`
+                                : this.l10n(
+                                    "collection-save-button-delete",
+                                  )`Delete`}
                             </mdn-button>`
                           : nothing}
                       `,

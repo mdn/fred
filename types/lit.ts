@@ -1,4 +1,4 @@
-import { UnsafeHTMLDirective } from "lit-html/directives/unsafe-html.js";
+import { UnsafeHTMLDirective } from "lit/directives/unsafe-html.js";
 import { DirectiveResult } from "lit/directive.js";
 
 export * from "lit";

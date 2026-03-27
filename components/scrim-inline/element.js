@@ -96,14 +96,18 @@ export class MDNScrimInline extends L10nMixin(LitElement) {
         <div class="inner">
           <div class="header">
             <span
-              >${this.l10n`Clicking will load content from scrimba.com`}</span
+              >${this.l10n(
+                "scrim-inline-clicking-will-load-content-from",
+              )`Clicking will load content from scrimba.com`}</span
             >
             <button tabindex="0" @click=${this.#toggle} class="toggle">
               <div
                 class="scrim-fullscreen ${this._fullscreen ? "exit" : "enter"}"
               ></div>
               <span class="visually-hidden"
-                >${this.l10n`Toggle fullscreen`}</span
+                >${this.l10n(
+                  "scrim-inline-toggle-fullscreen",
+                )`Toggle fullscreen`}</span
               >
             </button>
             <a
@@ -114,7 +118,11 @@ export class MDNScrimInline extends L10nMixin(LitElement) {
               data-glean-id="curriculum: scrim link id:${this._scrimId}"
             >
               <div class="scrim-link"></div>
-              <span class="visually-hidden">${this.l10n`Open on Scrimba`}</span>
+              <span class="visually-hidden"
+                >${this.l10n(
+                  "scrim-inline-open-on-scrimba",
+                )`Open on Scrimba`}</span
+              >
             </a>
           </div>
           <div class="body">
@@ -149,7 +157,9 @@ export class MDNScrimInline extends L10nMixin(LitElement) {
                   >
                     ${playSvg}
                     <span class="visually-hidden">
-                      ${this.l10n`Load scrim and open dialog.`}
+                      ${this.l10n(
+                        "scrim-inline-load-scrim-and-open-dialog",
+                      )`Load scrim and open dialog.`}
                     </span>
                   </button>
                 `}

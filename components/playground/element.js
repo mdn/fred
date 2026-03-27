@@ -78,7 +78,11 @@ export class MDNPlayground extends L10nMixin(LitElement) {
   _clear() {
     const controller = this._controller.value;
     if (
-      confirm(this.l10n`Do you really want to clear everything?`) &&
+      confirm(
+        this.l10n(
+          "playground-do-you-really-want-to-clear-ever",
+        )`Do you really want to clear everything?`,
+      ) &&
       controller
     ) {
       controller.clear();
@@ -94,7 +98,11 @@ export class MDNPlayground extends L10nMixin(LitElement) {
   _reset() {
     const controller = this._controller.value;
     if (
-      confirm(this.l10n`Do you really want to revert your changes?`) &&
+      confirm(
+        this.l10n(
+          "playground-do-you-really-want-to-revert-you",
+        )`Do you really want to revert your changes?`,
+      ) &&
       controller
     ) {
       gleanClick("playground: reset-click");
@@ -119,6 +127,23 @@ ${"```"}`,
         .filter(Boolean)
         .join("\n\n");
       await navigator.clipboard.writeText(markdown);
+    }
+  }
+
+  async _copyDataUrl() {
+    const controller = this._controller.value;
+    if (controller) {
+      const { css, html, js } = controller.code;
+      let code = `<!doctype html><body>`;
+      if (css) code += `<style>${css}</style>`;
+      if (html) code += html;
+      if (js) code += `<script>${js}</script>`;
+      code += `</body>`;
+      // encode non-space whitespace and percent
+      code = code.replaceAll(/([^\S ]|%)+/g, (str) => encodeURIComponent(str));
+      await navigator.clipboard.writeText(
+        `data:text/html;charset=utf-8,${code}`,
+      );
     }
   }
 
@@ -303,38 +328,40 @@ ${"```"}`,
         >
           <section>
             <aside>
-              <h1>${this.l10n`Playground`}</h1>
+              <h1>${this.l10n("playground-playground")`Playground`}</h1>
               <menu>
                 <mdn-button
                   variant="secondary"
                   @click=${this._format}
                   ?disabled=${!hasCode}
-                  >${this.l10n`Format`}</mdn-button
+                  >${this.l10n("playground-format")`Format`}</mdn-button
                 >
                 <mdn-button
                   variant="secondary"
                   @click=${this._run}
                   ?disabled=${!hasCode}
-                  >${this.l10n`Run`}</mdn-button
+                  >${this.l10n("playground-run")`Run`}</mdn-button
                 >
                 <mdn-button
                   variant="secondary"
                   @click=${this._share}
                   ?disabled=${!hasCode}
-                  >${this.l10n`Share`}</mdn-button
+                  data-id="share"
+                  >${this.l10n("playground-share")`Share`}</mdn-button
                 >
                 <mdn-button
                   variant="secondary"
                   @click=${this._clear}
                   ?disabled=${!(hasCode || isResettable)}
-                  >${this.l10n`Clear`}</mdn-button
+                  data-id="clear"
+                  >${this.l10n("playground-clear")`Clear`}</mdn-button
                 >
                 ${hasInitialCode
                   ? html`<mdn-button
                       variant="secondary"
                       @click=${this._reset}
                       ?disabled=${!isResettable}
-                      >${this.l10n`Reset`}</mdn-button
+                      >${this.l10n("playground-reset")`Reset`}</mdn-button
                     >`
                   : nothing}
               </menu>
@@ -370,14 +397,16 @@ ${"```"}`,
                       variant="secondary"
                       .icon=${warningIcon}
                     >
-                      ${this.l10n`Seeing something inappropriate?`}
+                      ${this.l10n(
+                        "playground-seeing-something-inappropriate",
+                      )`Seeing something inappropriate?`}
                     </mdn-button>
                   </menu>
                 </aside>`
               : nothing}
             <mdn-play-runner></mdn-play-runner>
             <div class="playground__console">
-              <div>${this.l10n`Console`}</div>
+              <div>${this.l10n("playground-console")`Console`}</div>
               <mdn-play-console></mdn-play-console>
             </div>
           </section>
@@ -385,13 +414,33 @@ ${"```"}`,
       </div>
       <mdn-modal ${ref(this._shareModal)} class="share">
         <section>
-          <h2>${this.l10n`Share Markdown`}</h2>
-          <mdn-button variant="secondary" @click=${this._copyMarkdown}
-            >${this.l10n`Copy markdown to clipboard`}</mdn-button
+          <h2>${this.l10n("playground-share-markdown")`Share Markdown`}</h2>
+          <mdn-button
+            variant="secondary"
+            @click=${this._copyMarkdown}
+            data-glean-id="playground: share-markdown"
+            >${this.l10n(
+              "playground-copy-markdown-to-clipboard",
+            )`Copy markdown to clipboard`}</mdn-button
           >
         </section>
         <section>
-          <h2>${this.l10n`Share your code via Permalink`}</h2>
+          <h2>${this.l10n("playground-share-data-url")`Share Data URL`}</h2>
+          <mdn-button
+            variant="secondary"
+            @click=${this._copyDataUrl}
+            data-glean-id="playground: share-data-url"
+            >${this.l10n(
+              "playground-copy-data-url-to-clipboard",
+            )`Copy data URL to clipboard`}</mdn-button
+          >
+        </section>
+        <section>
+          <h2>
+            ${this.l10n(
+              "playground-share-your-code-via-permalink",
+            )`Share your code via Permalink`}
+          </h2>
           ${this._user.render({
             initial: () =>
               html`<mdn-login-button
@@ -409,11 +458,16 @@ ${"```"}`,
                       <mdn-button
                         variant="secondary"
                         @click=${this._copyPermalink}
-                        >${this.l10n`Copy to clipboard`}</mdn-button
+                        data-glean-id="playground: share-permalink"
+                        >${this.l10n(
+                          "playground-copy-to-clipboard",
+                        )`Copy to clipboard`}</mdn-button
                       >
                     `
                   : html`<mdn-button @click=${this._createPermalink}
-                      >${this.l10n`Create link`}</mdn-button
+                      >${this.l10n(
+                        "playground-create-link",
+                      )`Create link`}</mdn-button
                     >`
                 : html`<mdn-login-button
                     data-glean-id="playground: banner-login"
@@ -424,21 +478,23 @@ ${"```"}`,
       <mdn-modal ${ref(this._reportModal)} class="report">
         <section>
           <p>
-            ${this
-              .l10n`Report this malicious or inappropriate shared playground.`}
+            ${this.l10n(
+              "playground-report-this-malicious-or-inappro",
+            )`Report this malicious or inappropriate shared playground.`}
           </p>
           <label>
-            ${this
-              .l10n`Can you please share some details on what's wrong with this content:`}
+            ${this.l10n(
+              "playground-can-you-please-share-some-detail",
+            )`Can you please share some details on what's wrong with this content:`}
             <textarea></textarea>
           </label>
         </section>
         <section>
           <mdn-button variant="secondary" @click=${this._reportCancel}
-            >${this.l10n`Cancel`}</mdn-button
+            >${this.l10n("playground-cancel")`Cancel`}</mdn-button
           >
           <mdn-button @click=${this._reportSubmit}
-            >${this.l10n`Report`}</mdn-button
+            >${this.l10n("playground-report")`Report`}</mdn-button
           >
         </section>
       </mdn-modal>

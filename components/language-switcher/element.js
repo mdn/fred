@@ -103,7 +103,9 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
             <mdn-switch
               @toggle=${this._togglePreferredLocale}
               ?checked=${this._isLocalePreferred}
-              >${this.l10n`Remember language`}</mdn-switch
+              >${this.l10n(
+                "language-switcher-remember-language",
+              )`Remember language`}</mdn-switch
             >
             <mdn-button
               variant="plain"
@@ -111,9 +113,12 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
               icon-only
               href="https://github.com/orgs/mdn/discussions/739"
               target="_blank"
-              title=${this
-                .l10n`Enable this setting to always switch to the current language when available. (Click to learn more.)`}
-              >${this.l10n`Learn more`}</mdn-button
+              title=${this.l10n(
+                "language-switcher-enable-this-setting-to-always-sw",
+              )`Enable this setting to always switch to the current language when available. (Click to learn more.)`}
+              >${this.l10n(
+                "language-switcher-learn-more",
+              )`Learn more`}</mdn-button
             >
           </div>
           <ul class="language-switcher__list">

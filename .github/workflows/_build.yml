@@ -88,7 +88,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup (fred)
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: "mdn/fred/.nvmrc"
           cache: npm
@@ -104,8 +104,6 @@ jobs:
       - name: Build (fred)
         working-directory: mdn/fred
         env:
-          FRED_GA_ENABLED: true
-          FRED_GA_MEASUREMENT_ID: G-ZG5HNVZRY0
           FRED_GLEAN_ENABLED: true
           FRED_GLEAN_CHANNEL: review
           FRED_PLAYGROUND_BASE_HOST: mdnyalp.dev
@@ -263,7 +261,7 @@ jobs:
         run: echo "name=build-output" >> $GITHUB_OUTPUT
 
       - name: Upload build output
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
           name: ${{ steps.set-artifact-name.outputs.name }}
           path: ${{ env.BUILD_OUT_ROOT }}

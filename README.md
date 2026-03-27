@@ -28,6 +28,12 @@ MDN's next fr(ont)e(n)d.
   - must be run at least once for `npm run preview` to work
 - `npm run preview`
   - runs the preview server: using the production bundles with the rari server: useful for testing our prod rspack config
+- `npm run test`
+  - runs linting and tests with various options, read more in [the testing README](./test/README.md)
+
+## L10n
+
+See [the l10n README](./l10n/README.md).
 
 ### Accessing from non-localhost
 
@@ -177,3 +183,7 @@ FRED_SIMPLE_HTML=true npm run start
 Then visit a documentation path directly, e.g. http://localhost:3000/en-US/docs/Web/
 
 If you're loading a path which isn't rendering anything (like the homepage), check if it's defined in `renderSimplified` in `entry.ssr.js`: we "opt-in" routes as we need them.
+
+### Testing
+
+See [the testing README](./test/README.md).

@@ -126,12 +126,12 @@ export class OuterLayout extends ServerComponent {
             rel="search"
             type="application/opensearchdescription+xml"
             href="/opensearch.xml"
-            title="MDN Web Docs"
+            title=${context.l10n("brand-web-docs")`MDN Web Docs`}
           />
           <link
             rel="alternate"
             type="application/rss+xml"
-            title="MDN Blog RSS Feed"
+            title=${context.l10n("blog-rss-title")`MDN Blog RSS Feed`}
             href="https://developer.mozilla.org/en-US/blog/rss.xml"
           />
         </head>
@@ -160,14 +160,16 @@ export class OuterLayout extends ServerComponent {
 
     const title =
       ("doc" in context ? context.doc.pageTitle : context.pageTitle) ||
-      "MDN Web Docs";
+      context.l10n("brand-web-docs")`MDN Web Docs`;
     const description =
       ("pageDescription" in context
         ? context.pageDescription
         : "doc" in context && "summary" in context.doc
           ? context.doc.summary
           : "") ||
-      "The MDN Web Docs site provides information about Open Web technologies including HTML, CSS, and APIs for both Web sites and progressive web apps.";
+      context.l10n(
+        "meta-description",
+      )`The MDN Web Docs site provides information about Open Web technologies including HTML, CSS, and APIs for both Web sites and progressive web apps.`;
 
     const entries = {
       robots,
@@ -180,8 +182,8 @@ export class OuterLayout extends ServerComponent {
       "og:image:type": "image/png",
       "og:image:height": "1024",
       "og:image:width": "1024",
-      "og:image:alt": "The MDN logo",
-      "og:site_name": "MDN Web Docs",
+      "og:image:alt": context.l10n("logo-alt")`The MDN logo`,
+      "og:site_name": context.l10n("brand-web-docs")`MDN Web Docs`,
       "twitter:card": "summary",
       "twitter:creator": "MozDevNet",
     };

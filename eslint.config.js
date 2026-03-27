@@ -29,6 +29,7 @@ export default defineConfig([
   n.configs["flat/recommended"],
   wc.configs["flat/best-practice"],
   lit.configs["flat/all"],
+  tseslint.configs["recommended"],
   unicorn.configs["recommended"],
   { files: ["**/*.{js,mjs,cjs}"] },
   {
@@ -64,7 +65,7 @@ export default defineConfig([
   },
   {
     rules: {
-      "no-unused-vars": [
+      "@typescript-eslint/no-unused-vars": [
         "error",
         {
           argsIgnorePattern: "^_",
@@ -87,13 +88,17 @@ export default defineConfig([
       "n/no-missing-import": "off",
       "n/no-unsupported-features/node-builtins": ["off"],
       "n/no-unpublished-import": "off",
+      "no-unused-vars": "off", // Prefer `@typescript-eslint/no-unused-vars`.
+      "unicorn/consistent-function-scoping": "off",
       "unicorn/no-array-reverse": "off",
       "unicorn/no-array-sort": "off",
       "unicorn/no-array-callback-reference": "off",
       "unicorn/no-immediate-mutation": "off",
       "unicorn/no-null": ["off"],
       "unicorn/prefer-string-raw": "off",
+      "unicorn/prefer-query-selector": "off",
       "unicorn/prevent-abbreviations": ["off"],
+      "unicorn/require-module-specifiers": "off",
       "unicorn/switch-case-braces": "off",
       "unicorn/template-indent": ["off"],
     },

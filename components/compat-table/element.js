@@ -554,7 +554,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     if (status.deprecated) {
       icons.push({
         title: this._getLegendLabel("deprecated"),
-        text: this.l10n("compat-deprecated")`Experimental`,
+        text: this.l10n("compat-deprecated")`Deprecated`,
         iconClassName: "icon-deprecated",
       });
     }
@@ -753,7 +753,9 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     if (versionIsPreview(item.version_added, browser)) {
       supportNotes.push({
         iconName: "footnote",
-        label: this.l10n("compat-support-preview")`Preview browser support`,
+        label: this.l10n(
+          "compat-support-preview-browser",
+        )`Preview browser support`,
       });
     }
 
