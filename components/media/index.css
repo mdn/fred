@@ -20,5 +20,6 @@
 
 @custom-media --screen-xxlarge (1441px < width);
 
-@custom-media --screen-menu-full (width > 1006px);
-@custom-media --screen-menu-hamburger (width <= 1006px);
+@custom-media --screen-menu-full (width > 1044px);
+@custom-media --screen-menu-hamburger (width <= 1044px);
+@custom-media --screen-menu-short-labels (width <= 1104px);
