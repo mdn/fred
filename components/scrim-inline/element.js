@@ -88,11 +88,7 @@ export class MDNScrimInline extends L10nMixin(LitElement) {
     }
 
     return html`
-      <dialog
-        ${ref(this._ref)}
-        @close=${this.#dialogClosed}
-        style=${styleMap(this._imgStyle)}
-      >
+      <dialog @close=${this.#dialogClosed} style=${styleMap(this._imgStyle)}>
         <div class="inner">
           <div class="header">
             <span
@@ -125,7 +121,7 @@ export class MDNScrimInline extends L10nMixin(LitElement) {
               >
             </a>
           </div>
-          <div class="body">
+          <div class="body" ${ref(this._ref)}>
             ${this._scrimLoaded
               ? html`
                   <iframe
