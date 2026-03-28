@@ -1,5 +1,33 @@
 # Changelog
 
+## [2.4.1](https://github.com/mdn/fred/compare/v2.4.0...v2.4.1) (2026-03-28)
+
+
+### Bug Fixes
+
+* **compat-table:** avoid overflow on horizontal scroll ([#1432](https://github.com/mdn/fred/issues/1432)) ([badb1fb](https://github.com/mdn/fred/commit/badb1fbb88a8edf81c2f5a50d0fe08ea4cb67f44))
+* **deps-dev:** revert webpack-dev-middleware to v7.4.5 ([#1417](https://github.com/mdn/fred/issues/1417)) ([2ac06ec](https://github.com/mdn/fred/commit/2ac06ec5f88172cf041fbdd19400f3b8881708c9))
+* **live-sample-result:** open Playground in current locale ([#1438](https://github.com/mdn/fred/issues/1438)) ([e34f394](https://github.com/mdn/fred/commit/e34f39436323d7848f3d9005971f1fec6e79369d))
+* **menu:** increase breakpoints to avoid overflow ([#1434](https://github.com/mdn/fred/issues/1434)) ([22813a6](https://github.com/mdn/fred/commit/22813a6f9316c042ebd757fab34c38c41d61649d))
+* **svgo:** remove obsolete option ([#1433](https://github.com/mdn/fred/issues/1433)) ([a656bdd](https://github.com/mdn/fred/commit/a656bdd3e17f6d38a4349c99406d38d0116d0c9b))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.3.7 to 7.3.8 ([#1411](https://github.com/mdn/fred/issues/1411)) ([34e68d1](https://github.com/mdn/fred/commit/34e68d1da549927a85cb93a25eb8eecf58d376f5))
+* **deps-dev:** bump node-forge from 1.3.3 to 1.4.0 ([#1430](https://github.com/mdn/fred/issues/1430)) ([c5faa63](https://github.com/mdn/fred/commit/c5faa63017f744e42e5fa0ec06301b7f5659d494))
+* **deps-dev:** bump picomatch from 2.3.1 to 2.3.2 ([#1425](https://github.com/mdn/fred/issues/1425)) ([75394a8](https://github.com/mdn/fred/commit/75394a8c8bb4b182f279e474c7aa1988a867c8ec))
+* **deps-dev:** bump svgo-loader from 4.0.0 to 5.0.0 ([#1428](https://github.com/mdn/fred/issues/1428)) ([42d86b4](https://github.com/mdn/fred/commit/42d86b40bac4800f8e8f8eddbd5e2796819e3333))
+* **deps-dev:** bump the npm-dev group with 2 updates ([#1418](https://github.com/mdn/fred/issues/1418)) ([5ac19a1](https://github.com/mdn/fred/commit/5ac19a1373dab2a832a99733dd4f443363ef622a))
+* **deps-dev:** bump the npm-dev group with 2 updates ([#1424](https://github.com/mdn/fred/issues/1424)) ([e7cf8c2](https://github.com/mdn/fred/commit/e7cf8c28c27000b8680dd9819025b80155cf7a46))
+* **deps-dev:** bump the npm-dev group with 2 updates ([#1427](https://github.com/mdn/fred/issues/1427)) ([99966bc](https://github.com/mdn/fred/commit/99966bc442da034f752043c76d7d2497fff77027))
+* **deps-dev:** bump the npm-dev group with 8 updates ([#1415](https://github.com/mdn/fred/issues/1415)) ([c2d788d](https://github.com/mdn/fred/commit/c2d788de1d620300215b9f3e6d0056147b7c4d61))
+* **deps-dev:** bump webpack-dev-middleware from 7.4.5 to 8.0.2 ([#1419](https://github.com/mdn/fred/issues/1419)) ([8f3cc5c](https://github.com/mdn/fred/commit/8f3cc5c5636c8ef2c174a7c316616b4d098bbbaa))
+* **deps:** bump @mdn/rari from 0.2.15 to 0.2.16 ([#1429](https://github.com/mdn/fred/issues/1429)) ([611fa24](https://github.com/mdn/fred/commit/611fa244d6438e6545eb44c8adcab1b08d2c1714))
+* **deps:** bump path-to-regexp ([#1439](https://github.com/mdn/fred/issues/1439)) ([c01d233](https://github.com/mdn/fred/commit/c01d233234c89b36f8d551095e3c022178a147fb))
+* **outer-layout:** insert Transcend snippet ([#1423](https://github.com/mdn/fred/issues/1423)) ([372969e](https://github.com/mdn/fred/commit/372969e79f5f187f372a8dc70ba558403c850510))
+* **tests:** run unit tests, update script ([#1365](https://github.com/mdn/fred/issues/1365)) ([058621a](https://github.com/mdn/fred/commit/058621a520ac33584bb61dd044e75a1a224300d6))
+
 ## [2.4.0](https://github.com/mdn/fred/compare/v2.3.0...v2.4.0) (2026-03-20)
 
 
