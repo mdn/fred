@@ -128,7 +128,7 @@
     "svgo-loader": "^5.0.0",
     "ts-morph": "^27.0.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.57.2",
+    "typescript-eslint": "^8.58.0",
     "webpack-dev-middleware": "^8.0.2",
     "webpack-hot-middleware": "^2.26.1",
     "webpack-merge": "^6.0.1",
