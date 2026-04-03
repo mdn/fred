@@ -57,6 +57,8 @@ const viewObserver = new IntersectionObserver(
 );
 
 for (const element of document.querySelectorAll("[data-glean-view]")) {
+  // Excludes shadow DOM, and elements added after page load.
+  // For custom elements, use `ViewedController()` instead.
   viewObserver.observe(element);
 }
 
