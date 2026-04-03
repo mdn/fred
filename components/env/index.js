@@ -48,3 +48,6 @@ export const OBSERVATORY_API_URL = parseString(
   "OBSERVATORY_API_URL",
   "https://observatory-api.mdn.mozilla.net",
 );
+
+// Transcend Consent Management - https://docs.transcend.io/docs/consent
+export const TRANSCEND_BUNDLE_ID = parseString("TRANSCEND_BUNDLE_ID", "");
