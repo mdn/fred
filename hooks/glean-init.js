@@ -62,11 +62,14 @@ for (const element of document.querySelectorAll("[data-glean-view]")) {
 
 // data-glean-id
 document.addEventListener("click", (event) => {
-  const composedTarget = event.composedPath()?.[0];
+  const composedPath = event.composedPath();
+  const composedTarget = composedPath?.[0];
   if (composedTarget !== event.target && composedTarget instanceof Element) {
     // Workaround for automatic click events in shadow DOM.
     // See: https://bugzil.la/1988206
-    const taggedElement = composedTarget.closest("[data-glean-id]");
+    const taggedElement = composedPath.find(
+      (el) => el instanceof Element && el.matches("[data-glean-id]"),
+    );
     if (taggedElement instanceof HTMLElement) {
       const gleanId = taggedElement.dataset.gleanId;
       if (gleanId) {
