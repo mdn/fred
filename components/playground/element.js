@@ -71,7 +71,6 @@ export class MDNPlayground extends L10nMixin(LitElement) {
   }
 
   _share() {
-    gleanClick("playground: share-click");
     this._shareModal.value?.showModal();
   }
 
@@ -103,7 +102,6 @@ export class MDNPlayground extends L10nMixin(LitElement) {
         )`Do you really want to revert your changes?`,
       )
     ) {
-      gleanClick("playground: reset-click");
       const controller = this._controller.value;
       if (controller) {
         controller.reset();
@@ -116,7 +114,6 @@ export class MDNPlayground extends L10nMixin(LitElement) {
   async _copyMarkdown() {
     const controller = this._controller.value;
     if (controller) {
-      gleanClick("playground: share-markdown");
       const markdown = Object.entries(controller.code)
         .map(
           ([lang, code]) =>
@@ -134,7 +131,6 @@ ${"```"}`,
   async _copyDataUrl() {
     const controller = this._controller.value;
     if (controller) {
-      gleanClick("playground: share-data-url");
       const { css, html, js } = controller.code;
       let code = `<!doctype html><body>`;
       if (css) code += `<style>${css}</style>`;
@@ -152,7 +148,6 @@ ${"```"}`,
   async _createPermalink() {
     const controller = this._controller.value;
     if (controller) {
-      gleanClick("playground: share-permalink");
       const res = await fetch("/api/v1/play/", {
         method: "POST",
         headers: {
@@ -288,7 +283,6 @@ ${"```"}`,
   }
 
   _reportOpen() {
-    gleanClick("playground: flag-click");
     this._reportModal.value?.showModal();
   }
 
@@ -349,6 +343,7 @@ ${"```"}`,
                   @click=${this._share}
                   ?disabled=${!hasCode}
                   data-id="share"
+                  data-glean-id="playground: share-click"
                   >${this.l10n("playground-share")`Share`}</mdn-button
                 >
                 <mdn-button
@@ -363,6 +358,7 @@ ${"```"}`,
                       variant="secondary"
                       @click=${this._reset}
                       ?disabled=${!isResettable}
+                      data-glean-id="playground: reset-click"
                       >${this.l10n("playground-reset")`Reset`}</mdn-button
                     >`
                   : nothing}
@@ -398,6 +394,7 @@ ${"```"}`,
                       @click=${this._reportOpen}
                       variant="secondary"
                       .icon=${warningIcon}
+                      data-glean-id="playground: flag-click"
                     >
                       ${this.l10n(
                         "playground-seeing-something-inappropriate",
@@ -466,7 +463,9 @@ ${"```"}`,
                         )`Copy to clipboard`}</mdn-button
                       >
                     `
-                  : html`<mdn-button @click=${this._createPermalink}
+                  : html`<mdn-button
+                      @click=${this._createPermalink}
+                      data-glean-id="playground: share-permalink"
                       >${this.l10n(
                         "playground-create-link",
                       )`Create link`}</mdn-button
