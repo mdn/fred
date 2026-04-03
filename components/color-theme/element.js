@@ -1,6 +1,7 @@
 import { LitElement, html } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
+import { gleanClick } from "../../utils/glean.js";
 
 import styles from "./element.css?lit";
 
@@ -17,6 +18,7 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
     super();
     /** @type {import("./types.js").ColorScheme} */
     this._mode = "light dark";
+    this._closingFromSelect = false;
     this._options = Object.entries({
       "light dark": this.l10n("theme-default")`OS default`,
       light: this.l10n("color-theme-light")`Light`,
@@ -30,6 +32,8 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
       const mode = target.dataset.mode;
       if (mode === "light dark" || mode === "light" || mode === "dark") {
         this._mode = mode;
+        const gleanMode = mode === "light dark" ? "os-default" : mode;
+        gleanClick(`theme_switcher: switch -> ${gleanMode}`);
         try {
           localStorage.setItem("theme", mode);
         } catch (error) {
@@ -37,9 +41,21 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
         }
         const dropdown = this.shadowRoot?.querySelector("mdn-dropdown");
         if (dropdown) {
+          this._closingFromSelect = true;
           dropdown.open = false;
         }
       }
+    }
+  }
+
+  /** @param {Event} event */
+  _onDropdownToggle({ target }) {
+    if (target instanceof HTMLElement && "open" in target) {
+      if (!target.open && this._closingFromSelect) {
+        this._closingFromSelect = false;
+        return;
+      }
+      gleanClick(`theme_switcher: ${target.open ? "open" : "close"}`);
     }
   }
 
@@ -61,7 +77,7 @@ export class MDNColorTheme extends L10nMixin(LitElement) {
 
   render() {
     return html`<div class="color-theme">
-      <mdn-dropdown>
+      <mdn-dropdown @toggle=${this._onDropdownToggle}>
         <button
           part="button"
           slot="button"
