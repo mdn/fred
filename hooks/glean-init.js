@@ -67,13 +67,11 @@ document.addEventListener("click", (event) => {
   if (composedTarget !== event.target && composedTarget instanceof Element) {
     // Workaround for automatic click events in shadow DOM.
     // See: https://bugzil.la/1988206
-    const taggedElement = composedPath.find(
-      (el) => el instanceof Element && el.matches("[data-glean-id]"),
-    );
-    if (taggedElement instanceof HTMLElement) {
-      const gleanId = taggedElement.dataset.gleanId;
-      if (gleanId) {
-        gleanClick(gleanId);
+
+    // Measure click for all `data-glean-id`s along the path.
+    for (const el of composedPath) {
+      if (el instanceof HTMLElement && typeof el.dataset.gleanId === "string") {
+        gleanClick(el.dataset.gleanId);
       }
     }
   }
