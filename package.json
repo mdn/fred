@@ -70,7 +70,7 @@
     "@codemirror/lint": "^6.9.5",
     "@codemirror/view": "^6.41.0",
     "@csstools/postcss-global-data": "^4.0.0",
-    "@eslint/compat": "^2.0.3",
+    "@eslint/compat": "^2.0.4",
     "@eslint/js": "^9.39.4",
     "@fluent/syntax": "^0.19.0",
     "@jackolope/lit-analyzer": "^3.2.0",
