@@ -1,0 +1,4 @@
+:root.search-modal-open {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
