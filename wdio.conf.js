@@ -8,6 +8,7 @@ export const config = {
   capabilities: [
     {
       browserName: "firefox",
+      browserVersion: "stable",
       "moz:firefoxOptions": {
         args: ["-headless"],
       },
