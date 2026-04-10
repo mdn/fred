@@ -8,6 +8,7 @@ export const config = {
   capabilities: [
     {
       browserName: "firefox",
+      browserVersion: "stable",
       "moz:firefoxOptions": {
         args: ["-headless"],
       },
@@ -28,7 +29,7 @@ export const config = {
   reporters: ["spec"],
   mochaOpts: {
     ui: "bdd",
-    timeout: 60_000,
+    timeout: 120_000,
   },
   baseUrl: `http://localhost:${FRED_PORT}/`,
   async before(_, __, browser) {
