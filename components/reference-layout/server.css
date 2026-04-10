@@ -10,7 +10,7 @@
       font-size: var(--font-size-largest);
       font-weight: normal;
 
-      line-height: var(--font-line-normal);
+      line-height: var(--font-line-header);
 
       code {
         font-family: inherit;
