@@ -237,6 +237,9 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         title=${this.l10n(
           "compat-link-report-issue-title",
         )`Report an issue with this compatibility data`}
+        aria-label=${this.l10n(
+          "compat-link-report-issue-title",
+        )`Report an issue with this compatibility data`}
       >
         ${this.l10n(
           "compat-link-report-issue",
@@ -250,6 +253,12 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
                 target="_blank"
                 rel="noopener noreferrer"
                 title=${this.l10n.raw({
+                  id: "compat-link-source-title",
+                  args: {
+                    filename: source_file,
+                  },
+                })}
+                aria-label=${this.l10n.raw({
                   id: "compat-link-source-title",
                   args: {
                     filename: source_file,
