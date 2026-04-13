@@ -116,6 +116,57 @@ export default {
         };
       },
     },
+    "title-needs-aria-label": {
+      meta: {
+        type: "problem",
+        docs: {
+          description:
+            "Enforce that HTML elements with a title attribute also have aria-label set to the same value.",
+        },
+      },
+      create(context) {
+        return {
+          /**
+           * @param {import("estree").TaggedTemplateExpression} node
+           */
+          TaggedTemplateExpression(node) {
+            // Only process html`` tagged template literals.
+            const { tag } = node;
+            if (tag.type !== "Identifier" || tag.name !== "html") {
+              return;
+            }
+
+            // Reconstruct the template string by joining the static parts with
+            // a placeholder so attribute patterns remain searchable across
+            // expression boundaries.
+            const reconstructed = node.quasi.quasis
+              .map((q) => q.value.cooked ?? q.value.raw)
+              .join('"__EXPR__"');
+
+            // Match opening HTML tags; attributes may span multiple lines.
+            // Expressions are replaced with "__EXPR__" so no stray > chars.
+            const tagPattern = /<([a-z][a-z0-9-]*)(\s[^>]*)?\/?>/gis;
+            let match;
+
+            while ((match = tagPattern.exec(reconstructed)) !== null) {
+              const [fullTag, tagName] = match;
+
+              // Skip elements where title has standardised HTML semantics
+              // (abbr expansion) or where aria-label is not applicable (link).
+              if (tagName === "abbr" || tagName === "link") continue;
+
+              if (!/(?:^|\s)title\s*=/.test(fullTag)) continue;
+              if (/(?:^|\s)aria-label\s*=/.test(fullTag)) continue;
+
+              context.report({
+                node,
+                message: `<${tagName}> has a title attribute but no aria-label. Add aria-label with the same value, or eslint-disable this rule with a comment explaining why.`,
+              });
+            }
+          },
+        };
+      },
+    },
     "server-html-import": {
       meta: {
         type: "problem",
