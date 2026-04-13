@@ -49,6 +49,7 @@ export default defineConfig([
       "fred/server-component-name": "error",
       "fred/sandbox-component-name": "error",
       "fred/server-html-import": "error",
+      "fred/title-needs-aria-label": "error",
     },
   },
   {
