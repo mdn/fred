@@ -327,7 +327,11 @@ export class BaselineIndicator extends ServerComponent {
             ? html`<div class="browsers">
                 ${ENGINES.map(
                   ({ browsers }) =>
-                    html`<span class="engine" title=${engineTitle(browsers)}>
+                    html`<span
+                      class="engine"
+                      title=${engineTitle(browsers)}
+                      aria-label=${engineTitle(browsers)}
+                    >
                       ${browsers.map(
                         (browser) =>
                           html`<span

@@ -378,6 +378,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           class=${cellClass}
           colspan=${browserCount}
           title=${platform}
+          aria-label=${platform}
           style="grid-column: ${columnStart} / ${columnEnd}"
         >
           <span class=${iconClass}></span>
@@ -1016,6 +1017,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
     title = `${browser.name} – ${title}`;
 
+    // eslint-disable-next-line fred/title-needs-aria-label -- bc-version-label title is a date tooltip; aria-label would override the accessible version label text
     return html`<div
       class=${
         timeline ? "bcd-timeline-cell-text-wrapper" : "bcd-cell-text-wrapper"
