@@ -29,8 +29,8 @@ export default function Button({
   action,
 }) {
   const labelId = createElementId(
-    `button-${typeof label === "string" ? label : "btn"}-${href || ""}`,
-    "label-",
+    "label",
+    `${typeof label === "string" ? label : "btn"}-${href || ""}`,
   );
   const iconElement = icon
     ? html`<span class="icon" part="icon">${icon}</span>`

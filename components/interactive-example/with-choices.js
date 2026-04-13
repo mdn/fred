@@ -111,7 +111,7 @@ export const InteractiveExampleWithChoices = (Base) =>
     }
 
     #render() {
-      const id = createElementId(`choices-${this.name}`, "ix-");
+      const id = createElementId("ix-choices", this.name);
 
       return html`
         <div class="template-choices" aria-labelledby=${id}>

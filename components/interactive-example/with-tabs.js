@@ -22,7 +22,7 @@ import { createElementId } from "../utils/index.js";
 export const InteractiveExampleWithTabs = (Base) =>
   class extends L10nMixin(Base) {
     #render() {
-      const id = createElementId(`tabbed-${this.name}`, "ix-");
+      const id = createElementId("ix-tabbed", this.name);
 
       return html`
         <mdn-play-controller

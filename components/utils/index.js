@@ -18,14 +18,14 @@ function hashString(str) {
  * Used to generate a deterministic element id by hashing the provided content.
  * Falls back to random generation if no content is provided (for backwards compatibility).
  *
- * @param {string | number | undefined} content - Content to hash for ID generation
  * @param {string} prefix - Prefix for the ID
+ * @param {string} content - Content to hash for ID generation
  * @returns {string}
  */
-export function createElementId(content, prefix = "id-") {
-  if (content === undefined || content === null || content === "") {
+export function createElementId(prefix, content) {
+  if (!content) {
     // Fallback to random for backwards compatibility when no content provided
     return Math.random().toString(36).replace("0.", prefix);
   }
-  return `${prefix}${hashString(String(content))}`;
+  return `${prefix}-${hashString(String(content))}`;
 }

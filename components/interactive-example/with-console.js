@@ -24,7 +24,7 @@ import { createElementId } from "../utils/index.js";
 export const InteractiveExampleWithConsole = (Base) =>
   class extends L10nMixin(Base) {
     #render() {
-      const id = createElementId(`console-${this.name}`, "ix-");
+      const id = createElementId("ix-console", this.name);
 
       return html`
         <mdn-play-controller ${ref(this._controller)}>

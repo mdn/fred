@@ -73,7 +73,7 @@ export class MDNDropdown extends LitElement {
   _setAriaAttributes() {
     let id = this._dropdownSlotElements.find((element) => element.id)?.id;
     if (!id) {
-      id = createElementId(`dropdown-${this.name}`, "dropdown-");
+      id = createElementId("dropdown", this.name);
       this._dropdownSlotElements[0]?.setAttribute("id", id);
     }
     for (const element of this._buttonSlotElements) {
