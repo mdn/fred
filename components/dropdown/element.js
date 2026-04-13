@@ -4,9 +4,6 @@ import { deterministicIdString } from "../utils/index.js";
 
 import styles from "./element.css?lit";
 
-// Counter for generating unique dropdown IDs during SSR
-let dropdownCounter = 0;
-
 /**
  * This element has two slots, which should take a single element each.
  * The element in the `dropdown` slot is hidden by default,
@@ -16,6 +13,7 @@ let dropdownCounter = 0;
  *
  * @element mdn-dropdown
  *
+ * @attr {string} name - Unique name used to generate a stable ID for the dropdown slot element (for aria-controls). Required when the dropdown slot element has no explicit id.
  * @attr {boolean} open - Whether the dropdown is open or not.
  *
  * @slot button - The element used to toggle the dropdown.
@@ -25,16 +23,16 @@ export class MDNDropdown extends LitElement {
   static styles = styles;
 
   static properties = {
+    name: { type: String, required: true },
     open: { type: Boolean },
     loaded: { type: Boolean, reflect: true },
   };
 
   constructor() {
     super();
+    this.name = "";
     this.open = false;
     this.loaded = false;
-    // Assign a unique instance ID for deterministic SSR rendering
-    this._instanceId = dropdownCounter++;
   }
 
   get _buttonSlotElements() {
@@ -75,7 +73,7 @@ export class MDNDropdown extends LitElement {
   _setAriaAttributes() {
     let id = this._dropdownSlotElements.find((element) => element.id)?.id;
     if (!id) {
-      id = deterministicIdString(this._instanceId, "dropdown-");
+      id = deterministicIdString(`dropdown-${this.name}`, "dropdown-");
       this._dropdownSlotElements[0]?.setAttribute("id", id);
     }
     for (const element of this._buttonSlotElements) {
