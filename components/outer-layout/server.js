@@ -4,7 +4,11 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import inlineScript from "../../entry.inline.js?source&csp=true";
-import { ROBOTS_GLOBAL_ALLOW, WRITER_MODE } from "../env/index.js";
+import {
+  ROBOTS_GLOBAL_ALLOW,
+  TRANSCEND_BUNDLE_ID,
+  WRITER_MODE,
+} from "../env/index.js";
 import { RUNTIME_ENV, runtimeVariables } from "../env/runtime.js";
 import Favicon from "../favicon/pure.js";
 import { asyncLocalStorage } from "../server/async-local-storage.js";
@@ -25,6 +29,9 @@ export class OuterLayout extends ServerComponent {
     const asyncStore = asyncLocalStorage.getStore();
     if (!asyncStore) {
       throw new Error("asyncLocalStorage missing");
+    }
+    if ("renderSimplified" in asyncStore) {
+      throw new Error("OuterLayout called from renderSimplified function");
     }
     const { componentsUsed, componentsWithStylesInHead, compilationStats } =
       asyncStore;
@@ -109,6 +116,13 @@ export class OuterLayout extends ServerComponent {
                 fetchpriority="low"
               />`,
           )}
+          ${TRANSCEND_BUNDLE_ID &&
+          html`<script
+            data-cfasync="false"
+            data-report-only="on"
+            data-prompt="0"
+            src=${`https://transcend-cdn.com/cm/${TRANSCEND_BUNDLE_ID}/airgap.js`}
+          ></script>`}
           ${scripts?.map(
             (path) => html`<script src=${path} type="module"></script>`,
           )}
@@ -123,12 +137,12 @@ export class OuterLayout extends ServerComponent {
             rel="search"
             type="application/opensearchdescription+xml"
             href="/opensearch.xml"
-            title="MDN Web Docs"
+            title=${context.l10n("brand-web-docs")`MDN Web Docs`}
           />
           <link
             rel="alternate"
             type="application/rss+xml"
-            title="MDN Blog RSS Feed"
+            title=${context.l10n("blog-rss-title")`MDN Blog RSS Feed`}
             href="https://developer.mozilla.org/en-US/blog/rss.xml"
           />
         </head>
@@ -157,14 +171,16 @@ export class OuterLayout extends ServerComponent {
 
     const title =
       ("doc" in context ? context.doc.pageTitle : context.pageTitle) ||
-      "MDN Web Docs";
+      context.l10n("brand-web-docs")`MDN Web Docs`;
     const description =
       ("pageDescription" in context
         ? context.pageDescription
         : "doc" in context && "summary" in context.doc
           ? context.doc.summary
           : "") ||
-      "The MDN Web Docs site provides information about Open Web technologies including HTML, CSS, and APIs for both Web sites and progressive web apps.";
+      context.l10n(
+        "meta-description",
+      )`The MDN Web Docs site provides information about Open Web technologies including HTML, CSS, and APIs for both Web sites and progressive web apps.`;
 
     const entries = {
       robots,
@@ -173,15 +189,13 @@ export class OuterLayout extends ServerComponent {
       "og:title": title,
       "og:locale": context.locale.replace("-", "_"),
       "og:description": description,
-      "og:image":
-        "https://developer.mozilla.org/mdn-social-share.d893525a4fb5fb1f67a2.png",
+      "og:image": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
       "og:image:type": "image/png",
-      "og:image:height": "1080",
-      "og:image:width": "1920",
-      "og:image:alt":
-        "The MDN Web Docs logo, featuring a blue accent color, displayed on a solid black background.",
-      "og:site_name": "MDN Web Docs",
-      "twitter:card": "summary_large_image",
+      "og:image:height": "1024",
+      "og:image:width": "1024",
+      "og:image:alt": context.l10n("logo-alt")`The MDN logo`,
+      "og:site_name": context.l10n("brand-web-docs")`MDN Web Docs`,
+      "twitter:card": "summary",
       "twitter:creator": "MozDevNet",
     };
 

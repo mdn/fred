@@ -10,22 +10,12 @@ import logInIcon from "../icon/log-in.svg?lit";
 import { globalUser } from "../user/context.js";
 
 import styles from "./element.css?lit";
-import { getLinks } from "./links.js";
 
 import "../button/element.js";
 
 export class MDNUserMenu extends L10nMixin(LitElement) {
   static ssr = false;
   static styles = styles;
-
-  static properties = {
-    locale: { type: String },
-  };
-
-  constructor() {
-    super();
-    this.locale = "en-US";
-  }
 
   #loginUrl() {
     const base = globalThis.location.origin;
@@ -46,6 +36,37 @@ export class MDNUserMenu extends L10nMixin(LitElement) {
     const base = globalThis.location.origin;
     const url = new URL(FXA_SIGNOUT_URL, base);
     return url.toString();
+  }
+
+  #getLinks() {
+    return [
+      {
+        href: `/${this.locale}/plus/ai-help`,
+        label: this.l10n("user-menu-ai-help")`AI Help`,
+      },
+      {
+        href: `/${this.locale}/plus/collections`,
+        label: this.l10n("user-menu-collections")`Collections`,
+      },
+      {
+        href: `/${this.locale}/plus/updates`,
+        label: this.l10n("user-menu-updates")`Updates`,
+      },
+      {
+        href: `/${this.locale}/plus/settings`,
+        label: this.l10n("user-menu-settings")`My settings`,
+      },
+      {
+        href: "https://support.mozilla.org/products/mdn-plus",
+        label: this.l10n("user-menu-help")`Help`,
+        external: true,
+      },
+      {
+        href: "https://github.com/mdn/MDN-feedback",
+        label: this.l10n("user-menu-feedback")`Feedback`,
+        external: true,
+      },
+    ];
   }
 
   _user = new Task(this, {
@@ -69,8 +90,6 @@ export class MDNUserMenu extends L10nMixin(LitElement) {
          * @param {import("../user/types.js").User} user
          */
         (user) => {
-          const links = getLinks(this.locale, this.l10n);
-
           return user.isAuthenticated
             ? html`
                 <div class="user-menu">
@@ -83,12 +102,12 @@ export class MDNUserMenu extends L10nMixin(LitElement) {
                             height="32"
                             alt=""
                           />`
-                        : this.l10n`User`}
+                        : this.l10n("user-menu-user")`User`}
                     </button>
                     <div slot="dropdown" class="user-menu__dropdown">
                       <p>${user.email}</p>
                       <ul>
-                        ${links.map(
+                        ${this.#getLinks().map(
                           (link) =>
                             html`<li>
                               <a

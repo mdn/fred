@@ -29,7 +29,7 @@
     color-scheme: dark;
   }
 
-  @media (--screen-small-and-narrower) {
+  @media (--screen-small-and-narrower) or (--screen-layout-no-sidebar) {
     display: none;
   }
 }

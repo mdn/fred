@@ -1,4 +1,6 @@
+// eslint-disable-next-line n/no-extraneous-import
 import ReactDOM from "react-dom/client";
+// eslint-disable-next-line n/no-extraneous-import
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { UserDataProvider } from "@mdn/yari/client/src/user-context";
 import { UIProvider } from "@mdn/yari/client/src/ui-context";

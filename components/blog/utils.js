@@ -128,7 +128,7 @@ export function PrevNextLinks(context, { blogMeta }) {
         >
           <article>
             <h2>
-              <strong>${context.l10n("blog-previous")`Previous Post`}</strong>
+              <strong>${context.l10n("blog-previous")`Previous post`}</strong>
               ${blogMeta.links.previous.title}
             </h2>
           </article>

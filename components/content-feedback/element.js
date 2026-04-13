@@ -14,24 +14,6 @@ import styles from "./element.css?lit";
  * @typedef {"outdated"|"incomplete"|"code_examples"|"technical"|"consistency"|"incomprehensible"|"linguistic"|"other"} FeedbackReason
  */
 
-/** @type {Partial<Record<FeedbackReason, string>>} */
-const FEEDBACK_REASONS = {
-  outdated: "Content is out of date",
-  incomplete: "Missing information",
-  code_examples: "Code examples not working as expected",
-  other: "Other",
-};
-
-/** @type {Partial<Record<FeedbackReason, string>>} */
-const FEEDBACK_REASONS_DE = {
-  technical: "Übersetzung enthält fachliche Fehler",
-  consistency: "Begriffe sind inkonsistent übersetzt",
-  incomprehensible: "Übersetzung ist nicht verständlich",
-  linguistic: "Übersetzung enthält sprachliche Fehler",
-  code_examples: "Code-Beispiele funktionieren nicht",
-  other: "Sonstige",
-};
-
 export class MDNContentFeedback extends L10nMixin(LitElement) {
   static styles = styles;
 
@@ -70,6 +52,66 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
     gleanClick(`article_footer: feedback -> ${this._reason}`);
   }
 
+  /**
+   * Get list of feedback reasons with localized labels
+   * @returns {Array<{key: FeedbackReason, label: import("@lit").L10nResult}>}
+   */
+  _getFeedbackReasons() {
+    if (this.locale === "de") {
+      return [
+        {
+          key: "technical",
+          label: "Übersetzung enthält fachliche Fehler",
+        },
+        {
+          key: "consistency",
+          label: "Begriffe sind inkonsistent übersetzt",
+        },
+        {
+          key: "incomprehensible",
+          label: "Übersetzung ist nicht verständlich",
+        },
+        {
+          key: "linguistic",
+          label: "Übersetzung enthält sprachliche Fehler",
+        },
+        {
+          key: "code_examples",
+          label: "Code-Beispiele funktionieren nicht",
+        },
+        {
+          key: "other",
+          label: "Sonstige",
+        },
+      ];
+    }
+
+    return [
+      {
+        key: "outdated",
+        label: this.l10n(
+          "content-feedback-content-is-out-of-date",
+        )`Content is out of date`,
+      },
+      {
+        key: "incomplete",
+        label: this.l10n(
+          "content-feedback-missing-information",
+        )`Missing information`,
+      },
+      {
+        key: "code_examples",
+        label: this.l10n(
+          "content-feedback-code-examples-not-working-as-exp",
+        )`Code examples not working as expected`,
+      },
+      {
+        key: "other",
+        label: this.l10n("content-feedback-other")`Other`,
+      },
+    ];
+  }
+
   _renderVote() {
     return html`<label
         >${this.l10n(
@@ -84,7 +126,7 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
           variant="secondary"
           action="positive"
         >
-          ${this.l10n`Yes`}
+          ${this.l10n("content-feedback-yes")`Yes`}
         </mdn-button>
         <mdn-button
           data-vote="no"
@@ -93,7 +135,7 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
           variant="secondary"
           action="negative"
         >
-          ${this.l10n`No`}
+          ${this.l10n("content-feedback-no")`No`}
         </mdn-button>
       </div>`;
   }
@@ -107,15 +149,15 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
         }
       };
 
+    const reasons = this._getFeedbackReasons();
+
     return html`<label
         >${this.l10n(
           "content-feedback-reason",
         )`Why was this page not helpful to you?`}</label
       >
-      ${Object.entries(
-        this.locale === "de" ? FEEDBACK_REASONS_DE : FEEDBACK_REASONS,
-      ).map(
-        ([key, label]) =>
+      ${reasons.map(
+        ({ key, label }) =>
           html`<div class="content-feedback--radios">
             <input
               type="radio"
@@ -130,7 +172,7 @@ export class MDNContentFeedback extends L10nMixin(LitElement) {
       )}
       <div class="button-container">
         <mdn-button @click=${this._handleFeedback} ?disabled=${!this._reason}>
-          ${this.l10n`Submit`}
+          ${this.l10n("content-feedback-submit")`Submit`}
         </mdn-button>
       </div>`;
   }

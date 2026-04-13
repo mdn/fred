@@ -5,8 +5,16 @@ import { ServerComponent } from "../server/index.js";
 export class Doc extends ServerComponent {
   /**
    * @param {import("@fred").Context<import("@rari").DocPage>} context
-   */ render(context) {
+   */
+  render(context) {
     context.pageTitle = context.doc.pageTitle;
     return PageLayout.render(context, ReferenceLayout.render(context));
+  }
+
+  /**
+   * @param {import("@fred").Context<import("@rari").DocPage>} context
+   */
+  renderSimplified(context) {
+    return ReferenceLayout.render(context);
   }
 }

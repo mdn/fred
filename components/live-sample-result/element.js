@@ -73,7 +73,10 @@ export class MDNLiveSampleResult extends L10nMixin(LitElement) {
     if (this._fullscreenPending) {
       this._openFullscreen();
     }
-    const playUrl = new URL("/en-US/play", location.href);
+    const playUrl = new URL(
+      `/${document.documentElement.lang}/play`,
+      location.href,
+    );
     playUrl.search = new URL(this._runnerSrc).search;
     if (this.srcPrefix)
       playUrl.searchParams.append("srcPrefix", this.srcPrefix);
@@ -110,7 +113,13 @@ export class MDNLiveSampleResult extends L10nMixin(LitElement) {
           .code=${this.code}
           .allow=${this.allow}
           .sandbox=${[
-            ...new Set(["allow-modals", ...(this.sandbox?.split(" ") || [])]),
+            ...new Set([
+              "allow-modals",
+              "allow-downloads",
+              "allow-fullscreen",
+              "allow-orientation-lock",
+              ...(this.sandbox?.split(" ") || []),
+            ]),
           ].join(" ")}
           .srcPrefix=${this.srcPrefix}
           permalink

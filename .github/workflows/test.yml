@@ -15,12 +15,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           cache: npm
           node-version-file: ".nvmrc"
@@ -46,6 +46,9 @@ jobs:
       - name: Run tsc
         run: npx tsc --noEmit
 
+      - name: Lint l10n strings
+        run: npm run l10n -- --lint
+
   test:
     runs-on: ubuntu-latest
     defaults:
@@ -54,20 +57,20 @@ jobs:
 
     steps:
       - name: Checkout (fred)
-        uses: actions/checkout@v5
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           path: fred
           persist-credentials: false
 
       - name: Checkout (content)
-        uses: actions/checkout@v5
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           repository: mdn/content
           path: content
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           cache: npm
           node-version-file: "fred/.nvmrc"
@@ -76,13 +79,18 @@ jobs:
       - name: Install
         run: npm ci
         env:
-          # Increase GitHub API limit.
           GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Run unit tests
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: npm test -- --unit --no-lint
 
       - name: Build
         run: npm run build
 
-      - name: Run
+      - name: Run e2e tests
         env:
           CONTENT_ROOT: ../content/files
-        run: node scripts/tests.js
+          GITHUB_TOKEN: ${{ github.token }}
+        run: npm test -- --no-unit --e2e --fred preview --rari --no-lint

@@ -59,13 +59,17 @@
       }
     }
 
+    button[aria-expanded="false"] ~ .timeline {
+      display: none;
+    }
+
     .timeline {
       border-top: var(--border);
       border-left: none !important;
     }
 
     .bc-has-history {
-      &:focus-within > button {
+      & > button[aria-expanded="true"] {
         /* Highlight expanded item. */
         --padding-bottom-offset: -2px;
         border-bottom: 2px solid var(--color-border-primary);
@@ -77,19 +81,8 @@
     }
   }
 
-  /* TODO: removed to stop overflowing
-  .table-container {
-    width: 100vw;
-    margin: 0 -3rem;
-    overflow: auto;
-  } */
-
   .table-container-inner {
     position: relative;
-
-    /* TODO: removed to stop overflowing
-    min-width: max-content;
-    padding: 0 3rem; */
 
     &::after {
       position: absolute;

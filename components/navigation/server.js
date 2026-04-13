@@ -29,16 +29,16 @@ export class Navigation extends ServerComponent {
           type="button"
           aria-expanded="false"
           aria-controls="navigation__popup"
-          aria-label="Toggle navigation"
+          aria-label=${context.l10n(
+            "navigation-toggle-navigation",
+          )`Toggle navigation`}
         ></button>
         <div class="navigation__popup" id="navigation__popup">
           <div class="navigation__menu">${Menu.render(context)}</div>
           <div class="navigation__search" data-view="desktop">
             <mdn-search-button></mdn-search-button>
           </div>
-          ${WRITER_MODE
-            ? nothing
-            : html`<mdn-user-menu locale=${context.locale}></mdn-user-menu>`}
+          ${WRITER_MODE ? nothing : html`<mdn-user-menu></mdn-user-menu>`}
         </div>
       </nav>
       <mdn-search-modal id="search"></mdn-search-modal>

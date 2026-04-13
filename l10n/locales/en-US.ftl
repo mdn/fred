@@ -1,3 +1,6 @@
+# WARNING: don't use this file as a source for strings requiring l10n, use ../template.ftl instead:
+# this file only contains manually added strings, not ones inlined in code. See ../README.md for more details.
+
 # TODO Use comments, see: https://firefox-source-docs.mozilla.org/l10n/fluent/review.html#comments
 # TODO Consider using terms, see: https://firefox-source-docs.mozilla.org/l10n/fluent/review.html#terms and https://projectfluent.org/fluent/guide/references.html#message-references
 
@@ -39,7 +42,6 @@ site-search-suggestion-matches =  { $relation ->
        *[other] { $matches } matches
     }
 }
-site-search-suggestions-text = Did you mean:
 
 blog-time-to-read = { $minutes ->
     [one]   { $minutes } minute read
@@ -61,6 +63,7 @@ obs-mdn = The { -brand-name-obs } provides effective security insights, guided b
 
 
 compat-loading = Loading…
+compat-js-required = Enable JavaScript to view this browser compatibility table.
 
 compat-browser-version-date = { $browser } { $version } – Release date: { $date }
 compat-browser-version-released = Release date: { $date }
@@ -81,7 +84,6 @@ compat-support-full = Full support
 compat-support-partial = Partial support
 compat-support-no = No support
 compat-support-unknown = Support unknown
-compat-support-preview = Preview browser support
 compat-support-prefix = Implemented with the vendor prefix: { $prefix }
 compat-support-altname = Alternate name: { $altname }
 compat-support-removed = Removed in { $version } and later
@@ -142,7 +144,12 @@ pagination-goto = Go to page { $page }
 
 logout = Sign out
 login = Log in
-settings = My settings
 
 example-play-button-label = Play
 example-play-button-title = Run example in MDN Playground (opens in new tab)
+
+content-feedback-question = Was this page helpful to you?
+content-feedback-reason = Why was this page not helpful to you?
+content-feedback-thanks = Thank you for your feedback!
+
+writer-reload-polling = Polling every { $seconds }s
