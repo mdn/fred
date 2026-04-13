@@ -22,7 +22,7 @@ function hashString(str) {
  * @param {string} prefix - Prefix for the ID
  * @returns {string}
  */
-export function deterministicIdString(content, prefix = "id-") {
+export function createElementId(content, prefix = "id-") {
   if (content === undefined || content === null || content === "") {
     // Fallback to random for backwards compatibility when no content provided
     return Math.random().toString(36).replace("0.", prefix);

@@ -1,6 +1,6 @@
 import { LitElement, html } from "lit";
 
-import { deterministicIdString } from "../utils/index.js";
+import { createElementId } from "../utils/index.js";
 
 import styles from "./element.css?lit";
 
@@ -73,7 +73,7 @@ export class MDNDropdown extends LitElement {
   _setAriaAttributes() {
     let id = this._dropdownSlotElements.find((element) => element.id)?.id;
     if (!id) {
-      id = deterministicIdString(`dropdown-${this.name}`, "dropdown-");
+      id = createElementId(`dropdown-${this.name}`, "dropdown-");
       this._dropdownSlotElements[0]?.setAttribute("id", id);
     }
     for (const element of this._buttonSlotElements) {

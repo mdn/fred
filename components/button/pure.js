@@ -1,7 +1,7 @@
 import { html, nothing } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 
-import { deterministicIdString } from "../utils/index.js";
+import { createElementId } from "../utils/index.js";
 
 /**
  * @param {object} options
@@ -28,7 +28,7 @@ export default function Button({
   variant = "primary",
   action,
 }) {
-  const labelId = deterministicIdString(
+  const labelId = createElementId(
     `button-${typeof label === "string" ? label : "btn"}-${href || ""}`,
     "label-",
   );
