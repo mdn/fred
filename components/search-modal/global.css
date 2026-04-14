@@ -1,4 +1,7 @@
-:root.search-modal-open {
-  overflow: hidden;
+:root {
   scrollbar-gutter: stable;
+
+  &.search-modal-open {
+    overflow: hidden;
+  }
 }
