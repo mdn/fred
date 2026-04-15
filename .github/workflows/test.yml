@@ -9,6 +9,9 @@ on:
 # No GITHUB_TOKEN permissions, as we only use it to increase API limit.
 permissions: {}
 
+env:
+  FORCE_COLOR: 1
+
 jobs:
   lint:
     runs-on: ubuntu-latest
