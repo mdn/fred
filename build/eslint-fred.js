@@ -146,15 +146,19 @@ export default {
 
             // Match opening HTML tags; attributes may span multiple lines.
             // Expressions are replaced with "__EXPR__" so no stray > chars.
+
             const tagPattern = /<([a-z][a-z0-9-]*)(\s[^>]*)?\/?>/gis;
+
+            // Skip elements where title has standardized HTML semantics
+            // (abbr expansion) or where aria-label is not applicable (link).
+            const SKIP_TAG_NAMES = new Set(["abbr", "link"]);
+
             let match;
 
             while ((match = tagPattern.exec(reconstructed)) !== null) {
               const [fullTag, tagName] = match;
 
-              // Skip elements where title has standardised HTML semantics
-              // (abbr expansion) or where aria-label is not applicable (link).
-              if (tagName === "abbr" || tagName === "link") continue;
+              if (!tagName || SKIP_TAG_NAMES.has(tagName)) continue;
 
               if (!/(?:^|\s)title\s*=/.test(fullTag)) continue;
               if (/(?:^|\s)aria-label\s*=/.test(fullTag)) continue;
