@@ -157,7 +157,7 @@ export default {
 
             // Skip elements where title has standardized HTML semantics
             // (abbr expansion) or where aria-label is not applicable (link).
-            const SKIP_TAG_NAMES = new Set(["abbr", "link"]);
+            const SKIP_TAG_NAMES = new Set(["abbr", "link", "time"]);
 
             for (const [fullTag, tagName] of reconstructed.matchAll(
               tagPattern,
