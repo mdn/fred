@@ -149,6 +149,14 @@ export default {
 
             const tagPattern = /<([a-z][a-z0-9-]*)(\s[^>]*)?\/?>/gis;
 
+            /**
+             * @param {string} tag
+             * @param {string} attr
+             * @param attr
+             */
+            const hasAttr = (tag, attr) =>
+              new RegExp(`(?:^|\\s)${attr}\\s*=`).test(tag);
+
             // Skip elements where title has standardized HTML semantics
             // (abbr expansion) or where aria-label is not applicable (link).
             const SKIP_TAG_NAMES = new Set(["abbr", "link"]);
@@ -158,8 +166,8 @@ export default {
             )) {
               if (!tagName || SKIP_TAG_NAMES.has(tagName)) continue;
 
-              if (!/(?:^|\s)title\s*=/.test(fullTag)) continue;
-              if (/(?:^|\s)aria-label\s*=/.test(fullTag)) continue;
+              if (!hasAttr(fullTag, "title")) continue;
+              if (hasAttr(fullTag, "aria-label")) continue;
 
               context.report({
                 node,
