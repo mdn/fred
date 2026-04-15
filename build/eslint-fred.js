@@ -120,6 +120,8 @@ export default {
       meta: {
         type: "problem",
         docs: {
+          // "Relying on the title attribute is currently discouraged as many user agents do not expose the attribute in an accessible manner …"
+          // See: https://html.spec.whatwg.org/multipage/dom.html#the-title-attribute
           description: "require aria-label for HTML elements with title",
         },
       },
