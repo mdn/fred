@@ -168,6 +168,7 @@ export default {
 
               if (!hasAttr(fullTag, "title")) continue;
               if (hasAttr(fullTag, "aria-label")) continue;
+              if (hasAttr(fullTag, "aria-labelledby")) continue;
 
               context.report({
                 node,
