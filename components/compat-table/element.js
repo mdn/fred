@@ -876,7 +876,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
     title = `${browser.name} – ${title}`;
 
-    // eslint-disable-next-line fred/title-needs-aria-label -- bc-version-label title is a date tooltip; aria-label would override the accessible version label text
+    // eslint-disable-next-line fred/require-aria-label-for-title -- bc-version-label title is a date tooltip; aria-label would override the accessible version label text
     return html`<div
       class=${timeline
         ? "bcd-timeline-cell-text-wrapper"

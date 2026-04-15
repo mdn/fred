@@ -169,7 +169,7 @@ export class BaselineIndicator extends ServerComponent {
         <div class="browsers">
           ${ENGINES.map(
             ({ name, browsers }) =>
-              // eslint-disable-next-line fred/title-needs-aria-label -- non-interactive container; child spans carry role="img" aria-label
+              // eslint-disable-next-line fred/require-aria-label-for-title -- non-interactive container; child spans carry role="img" aria-label
               html`<span
                 key=${name}
                 class="engine"

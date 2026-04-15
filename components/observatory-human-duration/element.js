@@ -42,7 +42,7 @@ export class MDNObservatoryHumanDuration extends LitElement {
   }
 
   render() {
-    // eslint-disable-next-line fred/title-needs-aria-label -- title is a full date tooltip; aria-label would override the humanized duration text as the accessible name
+    // eslint-disable-next-line fred/require-aria-label-for-title -- title is a full date tooltip; aria-label would override the humanized duration text as the accessible name
     return html`
       <time
         datetime=${this.date.toDateString()}
