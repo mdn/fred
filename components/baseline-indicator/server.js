@@ -167,27 +167,28 @@ export class BaselineIndicator extends ServerComponent {
             </div>`
           : nothing}
         <div class="browsers">
-          ${ENGINES.map(
-            ({ name, browsers }) =>
-              // eslint-disable-next-line fred/require-aria-label-for-title -- non-interactive container; child spans carry role="img" aria-label
-              html`<span
-                key=${name}
-                class="engine"
-                title=${engineTitle(browsers)}
-              >
-                ${browsers.map(
-                  (browser) =>
-                    html`<span
-                      key=${browser.ids[0]}
-                      class=${`browser ${browser.ids[0]} ${
-                        isBrowserSupported(browser) ? "supported" : ""
-                      }`}
-                      role="img"
-                      aria-label=${`${browser.name} ${isBrowserSupported(browser) ? context.l10n("baseline-indicator-check")`check` : context.l10n("baseline-indicator-cross")`cross`}`}
-                    ></span>`,
-                )}
-              </span>`,
-          )}
+          ${ENGINES.map(({ name, browsers }) => {
+            const title = engineTitle(browsers);
+
+            return html`<span
+              key=${name}
+              class="engine"
+              title=${title}
+              aria-label=${title}
+            >
+              ${browsers.map(
+                (browser) =>
+                  html`<span
+                    key=${browser.ids[0]}
+                    class=${`browser ${browser.ids[0]} ${
+                      isBrowserSupported(browser) ? "supported" : ""
+                    }`}
+                    role="img"
+                    aria-label=${`${browser.name} ${isBrowserSupported(browser) ? context.l10n("baseline-indicator-check")`check` : context.l10n("baseline-indicator-cross")`cross`}`}
+                  ></span>`,
+              )}
+            </span>`;
+          })}
         </div>
         <span class="icon icon-chevron"></span>
       </summary>

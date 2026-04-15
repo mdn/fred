@@ -876,7 +876,18 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
     title = `${browser.name} – ${title}`;
 
-    // eslint-disable-next-line fred/require-aria-label-for-title -- bc-version-label title is a date tooltip; aria-label would override the accessible version label text
+    const versionTitle =
+      browserReleaseDate && !timeline
+        ? this.l10n.raw({
+            id: "compat-browser-version-date",
+            args: {
+              browser: browser.name,
+              version: added,
+              date: browserReleaseDate,
+            },
+          })
+        : nothing;
+
     return html`<div
       class=${timeline
         ? "bcd-timeline-cell-text-wrapper"
@@ -899,16 +910,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         <span class="bc-browser-name">${browser.name}</span>
         <span
           class="bc-version-label"
-          title=${browserReleaseDate && !timeline
-            ? this.l10n.raw({
-                id: "compat-browser-version-date",
-                args: {
-                  browser: browser.name,
-                  version: added,
-                  date: browserReleaseDate,
-                },
-              })
-            : ""}
+          title=${versionTitle}
+          aria-label=${versionTitle}
         >
           ${!timeline || added ? label : undefined}
           ${browserReleaseDate && timeline
