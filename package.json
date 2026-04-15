@@ -116,7 +116,7 @@
     "postcss-loader": "^8.2.1",
     "postcss-mixins": "^12.1.2",
     "postcss-preset-env": "^11.2.1",
-    "prettier": "^3.8.2",
+    "prettier": "^3.8.3",
     "resolve-url-loader": "^5.0.0",
     "rspack-manifest-plugin": "^5.2.1",
     "sass-embedded": "^1.99.0",
