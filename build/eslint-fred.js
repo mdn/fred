@@ -151,7 +151,6 @@ export default {
             /**
              * @param {string} tag
              * @param {string} attr
-             * @param attr
              */
             const hasAttr = (tag, attr) =>
               new RegExp(`(?:^|\\s)${attr}\\s*=`).test(tag);
