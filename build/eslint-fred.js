@@ -146,7 +146,6 @@ export default {
 
             // Match opening HTML tags; attributes may span multiple lines.
             // Expressions are replaced with "__EXPR__" so no stray > chars.
-
             const tagPattern = /<([a-z][a-z0-9-]*)(\s[^>]*)?\/?>/gis;
 
             /**
