@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.4.2](https://github.com/mdn/fred/compare/v2.4.1...v2.4.2) (2026-04-15)
+
+
+### Bug Fixes
+
+* **search-modal:** move overscroll-behavior to dialog ([#1455](https://github.com/mdn/fred/issues/1455)) ([c2d9952](https://github.com/mdn/fred/commit/c2d9952436c693c5cb7800328b2350db2a0fbf0e))
+* **search-modal:** overflow documentElement when dialog is open ([#1456](https://github.com/mdn/fred/issues/1456)) ([f60fdb0](https://github.com/mdn/fred/commit/f60fdb0eadcd3e33e092ae27a59277bd47e060bc))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.3.10 to 7.3.11 ([#1472](https://github.com/mdn/fred/issues/1472)) ([83d817d](https://github.com/mdn/fred/commit/83d817d15c70a823a9068b26e9fc5fd81faad9f2))
+* **deps-dev:** bump basic-ftp from 5.2.1 to 5.2.2 ([#1467](https://github.com/mdn/fred/issues/1467)) ([d089b0a](https://github.com/mdn/fred/commit/d089b0a8ea6d2589583d5745eb3e01b284415a07))
+* **deps-dev:** bump prettier from 3.8.2 to 3.8.3 in the npm-dev group ([#1480](https://github.com/mdn/fred/issues/1480)) ([4a56ca4](https://github.com/mdn/fred/commit/4a56ca45e23e57eeccedfa8a4a21e20c6c3a9426))
+* **deps-dev:** bump the npm-dev group across 1 directory with 5 updates ([#1476](https://github.com/mdn/fred/issues/1476)) ([84dfc50](https://github.com/mdn/fred/commit/84dfc50c580e2dfaa852749a7f45bc1a0782f8d9))
+* **deps-dev:** bump ts-morph from 27.0.2 to 28.0.0 ([#1473](https://github.com/mdn/fred/issues/1473)) ([842d422](https://github.com/mdn/fred/commit/842d422e333e294a291e99f1116d83ed6b2ef8a8))
+* **deps:** bump @mdn/rari from 0.2.16 to 0.2.17 ([#1485](https://github.com/mdn/fred/issues/1485)) ([fd7251a](https://github.com/mdn/fred/commit/fd7251a0cbd9310fb0ff0b904901702fa2ad5b4f))
+* **deps:** bump follow-redirects from 1.15.9 to 1.16.0 ([#1481](https://github.com/mdn/fred/issues/1481)) ([a5d5eae](https://github.com/mdn/fred/commit/a5d5eae1ad7e7e76ad67d1003d9fb266b5dc99f3))
+
 ## [2.4.1](https://github.com/mdn/fred/compare/v2.4.0...v2.4.1) (2026-04-10)
 
 
