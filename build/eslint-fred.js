@@ -164,11 +164,15 @@ export default {
             for (const [fullTag, tagName] of reconstructed.matchAll(
               tagPattern,
             )) {
-              if (!tagName || SKIP_TAG_NAMES.has(tagName)) continue;
-
-              if (!hasAttr(fullTag, "title")) continue;
-              if (hasAttr(fullTag, "aria-label")) continue;
-              if (hasAttr(fullTag, "aria-labelledby")) continue;
+              if (
+                !tagName ||
+                SKIP_TAG_NAMES.has(tagName) ||
+                !hasAttr(fullTag, "title") ||
+                hasAttr(fullTag, "aria-label") ||
+                hasAttr(fullTag, "aria-labelledby")
+              ) {
+                continue;
+              }
 
               context.report({
                 node,
