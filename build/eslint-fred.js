@@ -116,12 +116,11 @@ export default {
         };
       },
     },
-    "title-needs-aria-label": {
+    "require-aria-label-for-title": {
       meta: {
         type: "problem",
         docs: {
-          description:
-            "Enforce that HTML elements with a title attribute also have aria-label set to the same value.",
+          description: "require aria-label for HTML elements with title",
         },
       },
       create(context) {
