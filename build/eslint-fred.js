@@ -153,11 +153,9 @@ export default {
             // (abbr expansion) or where aria-label is not applicable (link).
             const SKIP_TAG_NAMES = new Set(["abbr", "link"]);
 
-            let match;
-
-            while ((match = tagPattern.exec(reconstructed)) !== null) {
-              const [fullTag, tagName] = match;
-
+            for (const [fullTag, tagName] of reconstructed.matchAll(
+              tagPattern,
+            )) {
               if (!tagName || SKIP_TAG_NAMES.has(tagName)) continue;
 
               if (!/(?:^|\s)title\s*=/.test(fullTag)) continue;
