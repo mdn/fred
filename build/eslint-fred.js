@@ -176,7 +176,7 @@ export default {
 
               context.report({
                 node,
-                message: `<${tagName}> has a title attribute but no aria-label. Add aria-label with the same value, or eslint-disable this rule with a comment explaining why.`,
+                message: `<${tagName}> has a title attribute but no aria-label. Relying on the title attribute is discouraged as many user agents do not expose the attribute in an accessible manner. Add aria-label, or eslint-disable this rule with a comment explaining why.`,
               });
             }
           },
