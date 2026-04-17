@@ -116,6 +116,65 @@ export default {
         };
       },
     },
+    "a11y-no-title-attribute": {
+      meta: {
+        type: "problem",
+        docs: {
+          // "Relying on the title attribute is currently discouraged as many user agents do not expose the attribute in an accessible manner …"
+          // See: https://html.spec.whatwg.org/multipage/dom.html#the-title-attribute
+          description: "disallow using the title attribute",
+        },
+      },
+      create(context) {
+        return {
+          /**
+           * @param {import("estree").TaggedTemplateExpression} node
+           */
+          TaggedTemplateExpression(node) {
+            // Only process html`` tagged template literals.
+            const { tag } = node;
+            if (tag.type !== "Identifier" || tag.name !== "html") {
+              return;
+            }
+
+            // Reconstruct the template string by joining the static parts with
+            // a placeholder so attribute patterns remain searchable across
+            // expression boundaries.
+            const reconstructed = node.quasi.quasis
+              .map((q) => q.value.cooked ?? q.value.raw)
+              .join('"__EXPR__"');
+
+            // Match opening HTML tags; attributes may span multiple lines.
+            // Expressions are replaced with "__EXPR__" so no stray > chars.
+            const tagPattern = /<([a-z][a-z0-9-]*)(\s[^>]*)?\/?>/gis;
+
+            /**
+             * @param {string} tag
+             * @param {string} attr
+             */
+            const hasAttr = (tag, attr) =>
+              new RegExp(`(?:^|\\s)${attr}\\s*=`).test(tag);
+
+            for (const [fullTag, tagName] of reconstructed.matchAll(
+              tagPattern,
+            )) {
+              if (
+                !tagName ||
+                tagName === "iframe" ||
+                !hasAttr(fullTag, "title")
+              ) {
+                continue;
+              }
+
+              context.report({
+                node,
+                message: `Do not use the 'title' attribute (it is not accessible, except for an \`<iframe>\`).`,
+              });
+            }
+          },
+        };
+      },
+    },
     "server-html-import": {
       meta: {
         type: "problem",
