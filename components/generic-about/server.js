@@ -80,6 +80,7 @@ export class GenericAbout extends ServerComponent {
                                 slot="tab"
                                 href="#${h3Value.id}"
                                 data-panel-id=${h3Value.id}
+                                data-glean-id=${`about: tab -> ${h3Value.id}`}
                               >
                                 ${h3Value.title}
                               </a>

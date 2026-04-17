@@ -1,6 +1,7 @@
 import { LitElement, html, nothing } from "lit";
 import { createRef, ref } from "lit/directives/ref.js";
 
+import { gleanClick } from "../../utils/glean.js";
 import { OBSERVATORY_API_URL } from "../env/index.js";
 import "../progress-bar/element.js";
 import "../button/element.js";
@@ -61,6 +62,7 @@ export class MDNObservatoryForm extends LitElement {
       this._hostname = host;
     }
     this._queryRunning = true;
+    gleanClick("observatory: scan");
     try {
       const apiUrl = new URL(
         OBSERVATORY_API_URL +
@@ -77,6 +79,7 @@ export class MDNObservatoryForm extends LitElement {
     } catch (error) {
       // @ts-expect-error
       this._errorMessage = `${ERROR_MAP[error.name] || "message" in error ? error["message"] : error}`;
+      gleanClick(`observatory: error -> ${this._errorMessage}`);
     } finally {
       this._queryRunning = false;
     }

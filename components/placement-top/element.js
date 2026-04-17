@@ -1,11 +1,13 @@
 import { LitElement, html, nothing } from "lit";
-import { ref } from "lit/directives/ref.js";
+import { createRef, ref } from "lit/directives/ref.js";
 import { styleMap } from "lit/directives/style-map.js";
+
+import { gleanClick } from "../../utils/glean.js";
+import { PlacementMixin } from "../placement/mixin.js";
+import { ViewedController } from "../viewed-controller/viewed-controller.js";
 
 import "../placement-note/element.js";
 import "../placement-no/element.js";
-
-import { PlacementMixin } from "../placement/mixin.js";
 
 import styles from "./element.css?lit";
 
@@ -17,6 +19,16 @@ import styles from "./element.css?lit";
 export class MDNPlacementTop extends PlacementMixin(LitElement) {
   static styles = styles;
 
+  /** @type {import("lit/directives/ref.js").Ref<HTMLElement>} */
+  _ref = createRef();
+
+  constructor() {
+    super();
+    new ViewedController(this, this._ref, () => {
+      gleanClick("banner_scrimba_view");
+    });
+  }
+
   /**
    *
    * @returns {TemplateResult | symbol}
@@ -27,7 +39,7 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
 
   renderFallback() {
     return html`
-      <div class="fallback">
+      <div ${ref(this._ref)} class="fallback">
         <p class="fallback__copy">
           Learn frontend, backend, and AI from our course partner
           <a
