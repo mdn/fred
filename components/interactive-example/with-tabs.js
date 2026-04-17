@@ -9,7 +9,7 @@ import "../ix-tab/element.js";
 import "../ix-tab-panel/element.js";
 import "../ix-tab-wrapper/element.js";
 import { L10nMixin } from "../../l10n/mixin.js";
-import { randomIdString } from "../utils/index.js";
+import { createElementId } from "../utils/index.js";
 
 /**
  * @import { InteractiveExampleBase } from "./element.js";
@@ -22,7 +22,7 @@ import { randomIdString } from "../utils/index.js";
 export const InteractiveExampleWithTabs = (Base) =>
   class extends L10nMixin(Base) {
     #render() {
-      const id = randomIdString();
+      const id = createElementId("ix-tabbed", this.name);
 
       return html`
         <mdn-play-controller

@@ -93,7 +93,7 @@ export class MDNUserMenu extends L10nMixin(LitElement) {
           return user.isAuthenticated
             ? html`
                 <div class="user-menu">
-                  <mdn-dropdown>
+                  <mdn-dropdown name="user-menu">
                     <button slot="button" class="user-menu__button">
                       ${user.avatarUrl
                         ? html`<img
