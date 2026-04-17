@@ -103,15 +103,18 @@ function GitHubSourceLink(context) {
     },
   } = context;
 
+  const title = context.l10n.raw({
+    id: "article-footer-source-title",
+    args: {
+      folder,
+    },
+  });
+
   return html`<a
     class="external"
     href=${`${github_url}?plain=1`}
-    title=${context.l10n.raw({
-      id: "article-footer-source-title",
-      args: {
-        folder,
-      },
-    })}
+    title=${title}
+    aria-label=${title}
     target="_blank"
     rel="noopener"
     >${locale === "de"
@@ -149,12 +152,15 @@ function GitHubIssueLink(context) {
 
   url.search = sp.toString();
 
+  const title = context.l10n(
+    "article-footer-this-will-take-you-to-github-to",
+  )`This will take you to GitHub to file a new issue.`;
+
   return html`<a
     class="external"
     href=${url.href}
-    title=${context.l10n(
-      "article-footer-this-will-take-you-to-github-to",
-    )`This will take you to GitHub to file a new issue.`}
+    title=${title}
+    aria-label=${title}
     target="_blank"
     rel="noopener"
     >${locale === "de"

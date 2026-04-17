@@ -79,6 +79,10 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
       return nothing;
     }
 
+    const infoTitle = this.l10n(
+      "language-switcher-enable-this-setting-to-always-sw",
+    )`Enable this setting to always switch to the current language when available. (Click to learn more.)`;
+
     return html`<div class="language-switcher">
       <mdn-dropdown>
         <button
@@ -109,9 +113,8 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
               icon-only
               href="https://github.com/orgs/mdn/discussions/739"
               target="_blank"
-              title=${this.l10n(
-                "language-switcher-enable-this-setting-to-always-sw",
-              )`Enable this setting to always switch to the current language when available. (Click to learn more.)`}
+              title=${infoTitle}
+              aria-label=${infoTitle}
               >${this.l10n(
                 "language-switcher-learn-more",
               )`Learn more`}</mdn-button

@@ -75,6 +75,8 @@ export class MDNScrimInline extends L10nMixin(LitElement) {
       return nothing;
     }
 
+    const iframeTitle = ifDefined(this.scrimTitle);
+
     return html`
       <dialog @close=${this.#dialogClosed} style=${styleMap(this._imgStyle)}>
         <div class="inner">
@@ -114,7 +116,8 @@ export class MDNScrimInline extends L10nMixin(LitElement) {
               ? html`
                   <iframe
                     src=${this._fullUrl}
-                    title=${ifDefined(this.scrimTitle)}
+                    title=${iframeTitle}
+                    aria-label=${iframeTitle}
                   ></iframe>
                 `
               : html`
