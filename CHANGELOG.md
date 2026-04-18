@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.4.3](https://github.com/mdn/fred/compare/v2.4.2...v2.4.3) (2026-04-17)
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.3.11 to 7.3.12 ([#1491](https://github.com/mdn/fred/issues/1491)) ([c135a83](https://github.com/mdn/fred/commit/c135a83e2732bc9342a18ae67f07065a6f9b17cb))
+* **deps-dev:** bump the npm-dev group with 2 updates ([#1484](https://github.com/mdn/fred/issues/1484)) ([f7f1096](https://github.com/mdn/fred/commit/f7f1096c93bfd978176c0edcec9f53d90b66f0e2))
+* **deps-dev:** bump the npm-dev group with 2 updates ([#1489](https://github.com/mdn/fred/issues/1489)) ([f2e1e39](https://github.com/mdn/fred/commit/f2e1e394c7dc1d6be60d9601a5a7bcfaf2ea8b8b))
+* **deps:** bump @mdn/rari from 0.2.17 to 0.2.19 ([#1492](https://github.com/mdn/fred/issues/1492)) ([7693845](https://github.com/mdn/fred/commit/76938450156aea8657f74dfa6d6662fd86950b5e))
+* **media:** reorder width-first in two-part queries ([#1464](https://github.com/mdn/fred/issues/1464)) ([c808c41](https://github.com/mdn/fred/commit/c808c4119d9e08b84fb95ff7da2a53dafc5767e2))
+* **menu:** update menu entries ([#1487](https://github.com/mdn/fred/issues/1487)) ([2065f38](https://github.com/mdn/fred/commit/2065f3885866a63d9007649d7489fa3a346ab3e2))
+
 ## [2.4.2](https://github.com/mdn/fred/compare/v2.4.1...v2.4.2) (2026-04-15)
 
 
