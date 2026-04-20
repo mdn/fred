@@ -68,7 +68,7 @@
     "@codemirror/commands": "^6.10.3",
     "@codemirror/language": "^6.12.3",
     "@codemirror/lint": "^6.9.5",
-    "@codemirror/view": "^6.41.0",
+    "@codemirror/view": "^6.41.1",
     "@csstools/postcss-global-data": "^4.0.0",
     "@eslint/compat": "^2.0.5",
     "@eslint/js": "^9.39.4",
@@ -140,8 +140,14 @@
     "stylelint-order": ">=7.0.1",
     "tmp": ">=0.2.4"
   },
-  "packageManager": "npm@11.6.2",
+  "packageManager": "npm@11.12.1",
   "engines": {
     "node": ">=24"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "npm",
+      "version": ">=11.8.0"
+    }
   }
 }
