@@ -154,7 +154,7 @@ export class SidebarFilterer {
    * @param {HTMLAnchorElement} link The link element to reset.
    */
   resetHighlighting(link) {
-    const nodes = [...link.querySelectorAll("span, mark")];
+    const nodes = [...link.querySelectorAll("span.highlight-container, mark")];
     const parents = new Set();
     for (const node of nodes) {
       const parent = node.parentElement;
