@@ -72,6 +72,6 @@ function SpecificationsSection(context, { id, title, specifications, isH3 }) {
     aria-labelledby=${ifDefined(id ?? undefined)}
   >
     ${HeadingAnchor.render(level, id ? String(id) : null, String(title))}
-    ${SpecificationsList(context, specifications)}
+    ${SpecificationsList.render(context, specifications)}
   </section>`;
 }
