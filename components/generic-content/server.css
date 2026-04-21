@@ -1,4 +1,6 @@
 .generic-content {
+  margin-block-end: 3rem;
+
   h1 {
     margin: 1rem 0;
 
