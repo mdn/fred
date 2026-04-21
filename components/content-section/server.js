@@ -4,7 +4,7 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { HeadingAnchor } from "../heading-anchor/server.js";
 import { ServerComponent } from "../server/index.js";
-import { SpecificationsList } from "../specifications-list/index.js";
+import { SpecificationsList } from "../specifications-list/server.js";
 
 export class ContentSection extends ServerComponent {
   /**
