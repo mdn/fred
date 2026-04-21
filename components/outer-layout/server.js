@@ -6,7 +6,7 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import inlineScript from "../../entry.inline.js?source&csp=true";
 import {
   ROBOTS_GLOBAL_ALLOW,
-  TRANSCEND_BUNDLE_ID,
+  TRANSCEND_AIRGAP_URL,
   WRITER_MODE,
 } from "../env/index.js";
 import { RUNTIME_ENV, runtimeVariables } from "../env/runtime.js";
@@ -116,12 +116,12 @@ export class OuterLayout extends ServerComponent {
                 fetchpriority="low"
               />`,
           )}
-          ${TRANSCEND_BUNDLE_ID &&
+          ${TRANSCEND_AIRGAP_URL &&
           html`<script
             data-cfasync="false"
             data-report-only="on"
             data-prompt="0"
-            src=${`https://transcend-cdn.com/cm/${TRANSCEND_BUNDLE_ID}/airgap.js`}
+            src=${TRANSCEND_AIRGAP_URL}
           ></script>`}
           ${scripts?.map(
             (path) => html`<script src=${path} type="module"></script>`,
