@@ -51,13 +51,11 @@ export class BaselineIndicator extends ServerComponent {
   static inlineScript = inlineScript;
 
   /**
-   * @param {import("@rari").Baseline} status
+   * @param {string | null | undefined} date
    */
-  parseDate(status) {
-    const lowDateRange = status.baseline_low_date?.match(/^([^0-9])/)?.[0];
-    return status.baseline_low_date
-      ? new Date(status.baseline_low_date.slice(lowDateRange ? 1 : 0))
-      : undefined;
+  parseDate(date) {
+    const lowDateRange = date?.match(/^([^0-9])/)?.[0];
+    return date ? new Date(date.slice(lowDateRange ? 1 : 0)) : undefined;
   }
 
   /**
@@ -109,7 +107,7 @@ export class BaselineIndicator extends ServerComponent {
       LOCALIZED_BCD_IDS[context.locale] || LOCALIZED_BCD_IDS[DEFAULT_LOCALE]
     }`;
 
-    const lowDate = this.parseDate(status);
+    const lowDate = this.parseDate(status.baseline_low_date);
     const level = status.baseline || "not";
 
     const feedbackLink = `${SURVEY_URL}?page=${encodeURIComponent(context.url)}&level=${level}`;
@@ -281,7 +279,7 @@ export class BaselineIndicator extends ServerComponent {
       return nothing;
     }
 
-    const lowDate = this.parseDate(status);
+    const lowDate = this.parseDate(status.baseline_low_date);
     const level = status.baseline || "not";
 
     return html`<p>
