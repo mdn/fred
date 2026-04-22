@@ -2,11 +2,11 @@ import { html } from "@lit-labs/ssr";
 import { nothing } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 
-import { BCD_BASE_URL } from "../env/index.js";
+import { queryToUrl } from "../compat-table/utils.js";
 import { HeadingAnchor } from "../heading-anchor/server.js";
 import { ServerComponent } from "../server/index.js";
 
-export class BCDSection extends ServerComponent {
+export class CompatSection extends ServerComponent {
   /**
    * @param {import("@fred").Context} _context
    * @param {import("@rari").Compat} section
@@ -37,10 +37,7 @@ export class BCDSection extends ServerComponent {
       ${isH3
         ? nothing
         : HeadingAnchor.render(2, id ? String(id) : null, String(title))}
-      <a
-        href="${BCD_BASE_URL}/bcd/api/v0/current/${query}.json"
-        target="_blank"
-        rel="noopener"
+      <a href=${queryToUrl(query)} target="_blank" rel="noopener"
         ><code>${query}</code></a
       >
     </section>`;

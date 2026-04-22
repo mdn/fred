@@ -2,7 +2,7 @@ import { html } from "@lit-labs/ssr";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
-import { BCDSection } from "../bcd-section/server.js";
+import { CompatSection } from "../compat-section/server.js";
 import { HeadingAnchor } from "../heading-anchor/server.js";
 import { ServerComponent } from "../server/index.js";
 import { SpecificationsList } from "../specifications-list/index.js";
@@ -15,7 +15,7 @@ export class ContentSection extends ServerComponent {
   render(context, { type, value }) {
     switch (type) {
       case "browser_compatibility": {
-        return BCDSection.render(context, value);
+        return CompatSection.render(context, value);
       }
       case "specifications": {
         return SpecificationsSection(context, value);
