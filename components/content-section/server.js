@@ -4,7 +4,7 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { HeadingAnchor } from "../heading-anchor/server.js";
 import { ServerComponent } from "../server/index.js";
-import { SpecificationsList } from "../specifications-list/index.js";
+import { SpecificationsList } from "../specifications-list/server.js";
 
 export class ContentSection extends ServerComponent {
   /**
@@ -72,6 +72,6 @@ function SpecificationsSection(context, { id, title, specifications, isH3 }) {
     aria-labelledby=${ifDefined(id ?? undefined)}
   >
     ${HeadingAnchor.render(level, id ? String(id) : null, String(title))}
-    ${SpecificationsList(context, specifications)}
+    ${SpecificationsList.render(context, specifications)}
   </section>`;
 }
