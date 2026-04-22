@@ -28,29 +28,28 @@ export class SpecificationsList extends ServerComponent {
         urls.map((url) => this.renderLink(url, title)),
       );
 
-    return this.simplifiedMode
-      ? html`<ul>
-          ${links.map((link) => html`<li>${link}</li>`)}
-        </ul>`
-      : html`<table>
-          <thead>
-            <tr>
-              <th scope="col">
-                ${context.l10n(
-                  "specifications-list-specification",
-                )`Specification`}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            ${links.map(
-              (link) =>
-                html`<tr>
-                  <td>${link}</td>
-                </tr>`,
-            )}
-          </tbody>
-        </table>`;
+    if (this.simplifiedMode) {
+      return html`<ul>
+        ${links.map((link) => html`<li>${link}</li>`)}
+      </ul>`;
+    }
+    return html`<table>
+      <thead>
+        <tr>
+          <th scope="col">
+            ${context.l10n("specifications-list-specification")`Specification`}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        ${links.map(
+          (link) =>
+            html`<tr>
+              <td>${link}</td>
+            </tr>`,
+        )}
+      </tbody>
+    </table>`;
   }
 
   /**
