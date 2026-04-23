@@ -105,7 +105,9 @@ export class MDNDropdown extends LitElement {
       changedProperties.has("open") &&
       changedProperties.get("open") !== undefined
     ) {
-      this.dispatchEvent(new Event("toggle", { bubbles: true }));
+      this.dispatchEvent(
+        new Event("toggle", { bubbles: true, composed: true }),
+      );
     }
   }
 
