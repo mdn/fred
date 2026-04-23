@@ -36,7 +36,7 @@ export class RecentContributions extends ServerComponent {
               <a
                 class="external"
                 href=${contribution.url}
-                data-glean-id="homepage: contribution ${index + 1}"
+                data-glean-id=${`homepage: contribution ${index + 1} -> ${contribution.url}`}
                 >${contribution.title}</a
               >
             </div>
