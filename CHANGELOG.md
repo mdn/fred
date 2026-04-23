@@ -1,5 +1,32 @@
 # Changelog
 
+## [2.5.0](https://github.com/mdn/fred/compare/v2.4.3...v2.5.0) (2026-04-23)
+
+
+### Features
+
+* **baseline-indicator:** add renderSimplified method ([#1500](https://github.com/mdn/fred/issues/1500)) ([556412d](https://github.com/mdn/fred/commit/556412d6ac6b5398e773eedd89fa4ae710ad6f43))
+* **bcd:** render links to JSON in simplified HTML ([#1502](https://github.com/mdn/fred/issues/1502)) ([d82fd33](https://github.com/mdn/fred/commit/d82fd33921bea39e23c2b1aae3123848ddae0b5c))
+* **specifications:** render a list in simplified mode ([#1504](https://github.com/mdn/fred/issues/1504)) ([abf1784](https://github.com/mdn/fred/commit/abf17843f6dc0f6a18f6bff6f523255ed74e37b2))
+
+
+### Bug Fixes
+
+* **sidebar-filter:** remove only highlight spans on reset ([#1496](https://github.com/mdn/fred/issues/1496)) ([c647e79](https://github.com/mdn/fred/commit/c647e794552c08f1574545378ba5986699633e7f))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @codemirror/view from 6.41.0 to 6.41.1 in the npm-dev group ([#1494](https://github.com/mdn/fred/issues/1494)) ([06be168](https://github.com/mdn/fred/commit/06be168411bf3efe7a38bc6a291e9a91b1b6c309))
+* **deps-dev:** bump @codemirror/view in the npm-dev group ([06be168](https://github.com/mdn/fred/commit/06be168411bf3efe7a38bc6a291e9a91b1b6c309))
+* **deps-dev:** bump npm from 11.6.2 to 11.12.1 ([#1490](https://github.com/mdn/fred/issues/1490)) ([fbc5e9a](https://github.com/mdn/fred/commit/fbc5e9a78d5332ade4f99d931011fc681c653f77))
+* **deps-dev:** bump stylelint from 17.8.0 to 17.9.0 in the npm-dev group ([#1514](https://github.com/mdn/fred/issues/1514)) ([87617be](https://github.com/mdn/fred/commit/87617be8e0f3c712385ccce424edf07756b9bf8c))
+* **deps-dev:** bump stylelint in the npm-dev group ([87617be](https://github.com/mdn/fred/commit/87617be8e0f3c712385ccce424edf07756b9bf8c))
+* **deps-dev:** bump typescript-eslint from 8.58.2 to 8.59.0 in the npm-dev group ([#1499](https://github.com/mdn/fred/issues/1499)) ([b25912c](https://github.com/mdn/fred/commit/b25912ceb942de26ac5df8153317b8de172a4e2c))
+* **deps-dev:** bump typescript-eslint in the npm-dev group ([b25912c](https://github.com/mdn/fred/commit/b25912ceb942de26ac5df8153317b8de172a4e2c))
+* **deps:** bump @mdn/rari from 0.2.19 to 0.2.20 ([#1515](https://github.com/mdn/fred/issues/1515)) ([d292b8a](https://github.com/mdn/fred/commit/d292b8aedf464a17ab7f5a3224fbeaef330ade2e))
+* **transcend:** use TRANSCEND_AIRGAP_URL ([#1497](https://github.com/mdn/fred/issues/1497)) ([5e8a62a](https://github.com/mdn/fred/commit/5e8a62a1437718631ca1ee010e53cda377126a1b))
+
 ## [2.4.3](https://github.com/mdn/fred/compare/v2.4.2...v2.4.3) (2026-04-17)
 
 
