@@ -115,7 +115,7 @@
   }
 
   a,
-  span:not(.highlight-container) {
+  span:not(.sidebar-filter-mark-container) {
     display: inline-block;
     padding-block: 0.25rem;
     vertical-align: middle;
