@@ -13,6 +13,9 @@ export class ServerComponent {
   /** @type {string | undefined} */
   static inlineScript;
 
+  /** `true` if we're rendering in a renderSimplified context */
+  simplifiedMode = false;
+
   /**
    * @template {typeof ServerComponent} T
    * @this {T}
@@ -28,6 +31,7 @@ export class ServerComponent {
     const component = new this();
 
     if ("renderSimplified" in asyncStore) {
+      component.simplifiedMode = true;
       return component.renderSimplified(...args);
     }
 
