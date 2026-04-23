@@ -21,12 +21,14 @@ export class LatestNews extends ServerComponent {
                 ? html`<a
                     class="latest-news__source"
                     href=${item.source.url}
-                    data-glean-id="homepage: news_source ${index + 1}"
+                    data-glean-id=${`homepage: news_source ${index + 1} -> ${item.source.url}`}
                     >${item.source.name}</a
                   >`
                 : nothing}
               <h3 class="latest-news__title">
-                <a href=${item.url} data-glean-id="homepage: news ${index + 1}"
+                <a
+                  href=${item.url}
+                  data-glean-id=${`homepage: news ${index + 1} ${item.url}`}
                   >${item.title}</a
                 >
               </h3>
