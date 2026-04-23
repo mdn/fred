@@ -20,11 +20,11 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
   static styles = styles;
 
   /** @type {import("lit/directives/ref.js").Ref<HTMLElement>} */
-  _ref = createRef();
+  _fallbackRef = createRef();
 
   constructor() {
     super();
-    new ViewedController(this, this._ref, () => {
+    new ViewedController(this, this._fallbackRef, () => {
       gleanClick("banner_scrimba_view");
     });
   }
@@ -39,7 +39,7 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
 
   renderFallback() {
     return html`
-      <div ${ref(this._ref)} class="fallback">
+      <div ${ref(this._fallbackRef)} class="fallback">
         <p class="fallback__copy">
           Learn frontend, backend, and AI from our course partner
           <a
