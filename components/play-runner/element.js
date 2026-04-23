@@ -55,10 +55,12 @@ export class MDNPlayRunner extends LitElement {
     this._uuid = crypto.randomUUID();
     /** @type {string} */
     this._subdomain = "";
-    /** @type {Promise<true>} */
-    this.ready = new Promise((resolve) => {
-      this._resolveReady = () => resolve(true);
-    });
+    this._resetReady = () => {
+      this.ready = new Promise((resolve) => {
+        this._resolveReady = () => resolve(true);
+      });
+    };
+    this._resetReady();
     this._src = "about:blank";
   }
 
@@ -94,6 +96,7 @@ export class MDNPlayRunner extends LitElement {
         this.permalink,
       ]),
     task: async ([code, defaults, theme, srcPrefix, permalink], { signal }) => {
+      this._resetReady();
       if (code && code.js && code.wat) {
         const watUrl = await compileAndEncodeWatToDataUrl(code.wat);
         code.js = code.js.replace("{%wasm-url%}", watUrl);
@@ -119,6 +122,32 @@ export class MDNPlayRunner extends LitElement {
       // pass the uuid for postMessage isolation
       url.searchParams.set("uuid", subdomain);
       url.searchParams.set("state", state);
+      if (url.href.length > 8000) {
+        console.error(`OH NO! Playground URL is ${url.href.length} bytes`);
+        const { state: shimState } = await compressAndBase64Encode(
+          JSON.stringify({
+            html: "",
+            css: "",
+            js: `window.addEventListener("message", ({ data }) => {
+  if (data.typ === "code") {
+    document.getElementById("css-output").textContent = data.code.css;
+    document.body.innerHTML = data.code.html;
+    const script = document.createElement("script");
+    script.textContent = data.code.js;
+    document.body.appendChild(script);
+  }
+});`,
+            defaults: defaults,
+            theme: theme,
+          }),
+        );
+        url.searchParams.set("state", shimState);
+        this.postMessage({
+          typ: "code",
+          code,
+        });
+        console.error(`Playground URL is now ${url.href.length} bytes`);
+      }
       this._subdomain = subdomain;
       this._src = url.href;
       this.dispatchEvent(
