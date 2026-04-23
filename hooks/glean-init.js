@@ -25,11 +25,15 @@ Glean.initialize(GLEAN_APP_ID, uploadEnabled, {
 
 // data-glean-toggle-open
 document.addEventListener("toggle", (event) => {
-  const target = event.target;
-  if (target instanceof HTMLElement && "open" in target) {
-    const gleanId = target.dataset.gleanToggleOpen;
-    if (gleanId && target.open) {
-      gleanClick(gleanId);
+  const composedPath = event.composedPath();
+  for (const el of composedPath) {
+    if (
+      el instanceof HTMLElement &&
+      typeof el.dataset.gleanToggleOpen === "string" &&
+      "open" in el &&
+      el.open
+    ) {
+      gleanClick(el.dataset.gleanToggleOpen);
     }
   }
 });
