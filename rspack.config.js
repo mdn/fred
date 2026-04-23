@@ -111,7 +111,6 @@ const common = {
     assetModuleFilename: "[name].[hash][ext]",
   },
   experiments: {
-    outputModule: true,
     futureDefaults: true,
   },
   optimization: {
