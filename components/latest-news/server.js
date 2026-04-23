@@ -28,7 +28,7 @@ export class LatestNews extends ServerComponent {
               <h3 class="latest-news__title">
                 <a
                   href=${item.url}
-                  data-glean-id=${`homepage: news ${index + 1} ${item.url}`}
+                  data-glean-id=${`homepage: news ${index + 1} -> ${item.url}`}
                   >${item.title}</a
                 >
               </h3>
