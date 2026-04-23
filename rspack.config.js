@@ -576,7 +576,6 @@ const legacyConfig = merge(
               },
               titleProp: true,
               ref: true,
-              exportType: "named",
             },
           },
         },
