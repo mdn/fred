@@ -119,6 +119,23 @@ export class MDNPlayRunner extends LitElement {
       // pass the uuid for postMessage isolation
       url.searchParams.set("uuid", subdomain);
       url.searchParams.set("state", state);
+      if (url.href.length > 8000) {
+        console.error(`OH NO! Playground URL is ${url.href.length} bytes`);
+        const { minify } = await import("terser");
+        const minJs = await minify(code?.js || "");
+        console.log(minJs.code);
+        const { state } = await compressAndBase64Encode(
+          JSON.stringify({
+            html: code?.html || "",
+            css: code?.css || "",
+            js: minJs.code,
+            defaults: defaults,
+            theme: theme,
+          }),
+        );
+        url.searchParams.set("state", state);
+        console.error(`Playground URL is now ${url.href.length} bytes`);
+      }
       this._subdomain = subdomain;
       this._src = url.href;
       this.dispatchEvent(
