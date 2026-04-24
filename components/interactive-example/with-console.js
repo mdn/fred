@@ -25,6 +25,15 @@ export const InteractiveExampleWithConsole = (Base) =>
   class extends L10nMixin(Base) {
     #render() {
       const id = randomIdString();
+      const runTitle = this.l10n(
+        "interactive-example-run-example-and-show-console-ou",
+      )`Run example, and show console output`;
+      const resetTitle = this.l10n(
+        "interactive-example-reset-example-and-clear-console",
+      )`Reset example, and clear console output`;
+      const consoleTitle = this.l10n(
+        "interactive-example-console-output",
+      )`Console output`;
 
       return html`
         <mdn-play-controller ${ref(this._controller)}>
@@ -54,26 +63,23 @@ export const InteractiveExampleWithConsole = (Base) =>
                 id="execute"
                 @click=${this._run}
                 variant="secondary"
-                title=${this.l10n(
-                  "interactive-example-run-example-and-show-console-ou",
-                )`Run example, and show console output`}
+                title=${runTitle}
+                aria-label=${runTitle}
                 >${this.l10n("interactive-example-run")`Run`}</mdn-button
               >
               <mdn-button
                 id="reset"
                 @click=${this._reset}
                 variant="secondary"
-                title=${this.l10n(
-                  "interactive-example-reset-example-and-clear-console",
-                )`Reset example, and clear console output`}
+                title=${resetTitle}
+                aria-label=${resetTitle}
                 >${this.l10n("interactive-example-reset")`Reset`}</mdn-button
               >
             </div>
             <mdn-play-console
               id="console"
-              title=${this.l10n(
-                "interactive-example-console-output",
-              )`Console output`}
+              title=${consoleTitle}
+              aria-label=${consoleTitle}
             ></mdn-play-console>
             <mdn-play-runner
               defaults=${ifDefined(

@@ -219,7 +219,20 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       event.preventDefault();
       window.open(this._issueUrl, "_blank", "noopener,noreferrer");
     };
+
+    const reportTitle = this.l10n(
+      "compat-link-report-issue-title",
+    )`Report an issue with this compatibility data`;
+
     const source_file = this.data.__compat?.source_file;
+    const sourceTitle = source_file
+      ? this.l10n.raw({
+          id: "compat-link-source-title",
+          args: {
+            filename: source_file,
+          },
+        })
+      : undefined;
     return html`<div class="bc-on-github">
       <a
         class="bc-github-link external external-icon"
@@ -227,9 +240,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         @click=${onClick}
         target="_blank"
         rel="noopener noreferrer"
-        title=${this.l10n(
-          "compat-link-report-issue-title",
-        )`Report an issue with this compatibility data`}
+        title=${reportTitle}
+        aria-label=${reportTitle}
       >
         ${this.l10n(
           "compat-link-report-issue",
@@ -241,12 +253,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
               href=${`https://github.com/mdn/browser-compat-data/tree/main/${source_file}`}
               target="_blank"
               rel="noopener noreferrer"
-              title=${this.l10n.raw({
-                id: "compat-link-source-title",
-                args: {
-                  filename: source_file,
-                },
-              })}
+              title=${sourceTitle}
+              aria-label=${sourceTitle}
             >
               ${this.l10n("compat-link-source")`View data on GitHub`}
             </a>`
@@ -299,6 +307,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           class=${cellClass}
           colspan=${browserCount}
           title=${platform}
+          aria-label=${platform}
           style="grid-column: ${columnStart} / ${columnEnd}"
         >
           <span class=${iconClass}></span>
@@ -418,6 +427,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
         const hasHistory = notes.length > 0;
         const isExpanded = hasHistory && this._showTimelineId == timelineId;
+        const toggleTitle = ifDefined(hasHistory && "Toggle history");
 
         const handleClick = () => {
           if (isExpanded) {
@@ -436,7 +446,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
             type="button"
             aria-controls=${ifDefined(hasHistory ? timelineId : undefined)}
             aria-expanded=${ifDefined(hasHistory ? isExpanded : undefined)}
-            title=${ifDefined(hasHistory && "Toggle history")}
+            title=${toggleTitle}
+            aria-label=${toggleTitle}
             @click=${handleClick}
           >
             ${this._renderCellText(support, browser)}
@@ -865,6 +876,18 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
     title = `${browser.name} – ${title}`;
 
+    const versionTitle =
+      browserReleaseDate && !timeline
+        ? this.l10n.raw({
+            id: "compat-browser-version-date",
+            args: {
+              browser: browser.name,
+              version: added,
+              date: browserReleaseDate,
+            },
+          })
+        : nothing;
+
     return html`<div
       class=${timeline
         ? "bcd-timeline-cell-text-wrapper"
@@ -887,16 +910,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         <span class="bc-browser-name">${browser.name}</span>
         <span
           class="bc-version-label"
-          title=${browserReleaseDate && !timeline
-            ? this.l10n.raw({
-                id: "compat-browser-version-date",
-                args: {
-                  browser: browser.name,
-                  version: added,
-                  date: browserReleaseDate,
-                },
-              })
-            : ""}
+          title=${versionTitle}
+          aria-label=${versionTitle}
         >
           ${!timeline || added ? label : undefined}
           ${browserReleaseDate && timeline
