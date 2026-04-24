@@ -22,7 +22,7 @@ export function Rating({ result, host, rescan }) {
     <section class="scan-result">
       <section class="grade-trend">
         <div class="overall">
-          <mdn-dropdown>
+          <mdn-dropdown name="observatory-results">
             <button
               slot="button"
               aria-label="show info tooltip"

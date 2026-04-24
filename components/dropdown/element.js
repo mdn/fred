@@ -1,6 +1,6 @@
 import { LitElement, html } from "lit";
 
-import { randomIdString } from "../utils/index.js";
+import { createElementId } from "../utils/index.js";
 
 import styles from "./element.css?lit";
 
@@ -13,6 +13,7 @@ import styles from "./element.css?lit";
  *
  * @element mdn-dropdown
  *
+ * @attr {string} name - Unique name used to generate a stable ID for the dropdown slot element (for aria-controls). Required when the dropdown slot element has no explicit id.
  * @attr {boolean} open - Whether the dropdown is open or not.
  *
  * @slot button - The element used to toggle the dropdown.
@@ -22,12 +23,14 @@ export class MDNDropdown extends LitElement {
   static styles = styles;
 
   static properties = {
+    name: { type: String, required: true },
     open: { type: Boolean },
     loaded: { type: Boolean, reflect: true },
   };
 
   constructor() {
     super();
+    this.name = "";
     this.open = false;
     this.loaded = false;
   }
@@ -70,7 +73,7 @@ export class MDNDropdown extends LitElement {
   _setAriaAttributes() {
     let id = this._dropdownSlotElements.find((element) => element.id)?.id;
     if (!id) {
-      id = randomIdString("uid_");
+      id = createElementId("dropdown", this.name);
       this._dropdownSlotElements[0]?.setAttribute("id", id);
     }
     for (const element of this._buttonSlotElements) {
