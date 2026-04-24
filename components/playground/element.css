@@ -102,10 +102,35 @@
       grid-area: runner;
       overflow: hidden;
 
-      mdn-play-runner {
+      mdn-play-runner,
+      .overlay-run-button {
         flex-grow: 1;
         border: var(--border);
         border-radius: 0.25rem;
+
+        &.hidden {
+          display: none;
+        }
+      }
+
+      .overlay-run-button {
+        border-color: currentcolor;
+
+        div:first-child {
+          font-size: clamp(1.5rem, 3vw, 3rem);
+
+          svg {
+            width: clamp(1.5rem, 3vw, 3rem) !important;
+            height: clamp(1.5rem, 3vw, 3rem) !important;
+            vertical-align: bottom;
+          }
+        }
+
+        div:nth-child(2) {
+          margin-top: 0.5rem;
+          line-height: var(--font-line-normal);
+          color: var(--color-text-secondary);
+        }
       }
 
       .playground__console {

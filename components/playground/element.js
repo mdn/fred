@@ -4,6 +4,7 @@ import { createRef, ref } from "lit/directives/ref.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 import { gleanClick } from "../../utils/glean.js";
+import circlePlay from "../icon/circle-play.svg?lit";
 import warningIcon from "../icon/triangle-alert.svg?lit";
 import { globalUser } from "../user/context.js";
 
@@ -66,6 +67,7 @@ export class MDNPlayground extends L10nMixin(LitElement) {
         this._autoRun = true;
         controller.runOnChange = true;
         this._storeSession();
+        this.requestUpdate();
       }
     }
   }
@@ -399,7 +401,22 @@ ${"```"}`,
                   </menu>
                 </aside>`
               : nothing}
-            <mdn-play-runner></mdn-play-runner>
+            ${this._autoRun
+              ? nothing
+              : html`<mdn-button
+                  class="overlay-run-button"
+                  @click=${this._run}
+                  variant="plain"
+                >
+                  <div>${circlePlay} ${this.l10n("playground-run")`Run`}</div>
+                  <div>
+                    This is a user-shared playground.<br />
+                    Always inspect the code before running it.
+                  </div>
+                </mdn-button>`}
+            <mdn-play-runner
+              class=${this._autoRun ? "" : "hidden"}
+            ></mdn-play-runner>
             <div class="playground__console">
               <div>${this.l10n("playground-console")`Console`}</div>
               <mdn-play-console></mdn-play-console>
