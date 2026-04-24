@@ -111,7 +111,6 @@ const common = {
     assetModuleFilename: "[name].[hash][ext]",
   },
   experiments: {
-    outputModule: true,
     futureDefaults: true,
   },
   optimization: {
@@ -577,7 +576,6 @@ const legacyConfig = merge(
               },
               titleProp: true,
               ref: true,
-              exportType: "named",
             },
           },
         },
