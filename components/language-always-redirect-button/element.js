@@ -1,5 +1,6 @@
 import { LitElement, html } from "lit";
 
+import { gleanClick } from "../../utils/glean.js";
 import { setPreferredLocale } from "../preferred-locale/utils.js";
 
 export class MDNLanguageAlwaysRedirectButton extends LitElement {
@@ -15,6 +16,7 @@ export class MDNLanguageAlwaysRedirectButton extends LitElement {
   }
 
   _handleClick() {
+    gleanClick(`language: ${this.locale} -> ${this.to} (always)`);
     setPreferredLocale(this.to);
     const url = document.location.pathname.replace(
       `/${this.locale}/`,
