@@ -61,7 +61,7 @@ export const SURVEYS = [
     teaser:
       "Help us improve how we communicate browser compatibility by answering this question about your understanding of Baseline.",
     question: "TBD",
-    link: true,
+    link: false,
     rateFrom: 0,
     rateTill: 0.05,
     start: Date.parse("2026-05-04"),
