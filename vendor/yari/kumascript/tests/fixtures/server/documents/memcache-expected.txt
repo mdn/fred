@@ -1,3 +1,0 @@
-This is a test of a template using Memcache:
-
-* true

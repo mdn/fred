@@ -1,3 +1,0 @@
-This exercises autorequire:
-
-* The result is a SUCCESS!

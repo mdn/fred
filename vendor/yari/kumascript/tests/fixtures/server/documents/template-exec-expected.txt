@@ -1,3 +1,0 @@
-Testing a library:
-
-* The result was a SUCCESS!

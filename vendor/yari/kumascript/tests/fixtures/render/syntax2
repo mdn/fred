@@ -1,3 +1,0 @@
-Trailing comma in the argument list is a syntax error.
-
-{{ add(1,) }}

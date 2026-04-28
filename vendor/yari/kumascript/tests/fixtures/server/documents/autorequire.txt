@@ -1,3 +1,0 @@
-This exercises autorequire:
-
-* {{ autorequire-used('SUCCESS') }}
