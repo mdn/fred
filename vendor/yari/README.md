@@ -44,10 +44,6 @@ What each entry in [`package.json`](./package.json) is for:
 
 - **PWA offline pre-cache is a no-op** — the service worker's install handler fetches `/static/legacy/asset-manifest.json` and expects a `string[]` of asset paths, but rspack doesn't emit that file. The fetch-event runtime cache still works opportunistically; install-time pre-caching does nothing.
 
-## Updating
-
-There's no automated sync. To incorporate upstream changes, hand-pick from the relevant yari commit and re-apply over this tree, then re-verify `npm run build` and `npm run tsc` in fred.
-
 ## License
 
 MPL-2.0 — see [`LICENSE`](./LICENSE).
