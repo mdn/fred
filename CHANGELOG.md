@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.6.0](https://github.com/mdn/fred/compare/v2.5.0...v2.6.0) (2026-04-28)
+
+
+### Features
+
+* **glean:** port missing measurements ([#1279](https://github.com/mdn/fred/issues/1279)) ([bdbc1a1](https://github.com/mdn/fred/commit/bdbc1a166cbd4fd2dd01ce898b0f5ff7837599d9))
+
+
+### Bug Fixes
+
+* **content-section:** add iframe styling ([#1414](https://github.com/mdn/fred/issues/1414)) ([2696dbc](https://github.com/mdn/fred/commit/2696dbc9ad769855ef9c3356a54ef06ebdcd132c))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.3.12 to 7.3.13 ([#1517](https://github.com/mdn/fred/issues/1517)) ([6dbfba4](https://github.com/mdn/fred/commit/6dbfba4c396c0490f753c7a0cbc8e29f267adacb))
+* **deps-dev:** bump postcss from 8.5.10 to 8.5.12 in the npm-dev group ([#1516](https://github.com/mdn/fred/issues/1516)) ([b605a17](https://github.com/mdn/fred/commit/b605a170bb1c003c728ecee9695197add9e07957))
+* **deps-dev:** bump the npm-dev group with 2 updates ([#1519](https://github.com/mdn/fred/issues/1519)) ([e1f4d25](https://github.com/mdn/fred/commit/e1f4d258df237b192d391e337b72e5026ed022d0))
+* **deps:** bump @mdn/rari from 0.2.20 to 0.2.21 ([#1525](https://github.com/mdn/fred/issues/1525)) ([63a0803](https://github.com/mdn/fred/commit/63a08039823627b6816469f7798ed54941b33a30))
+* **I10n:** add Simplified Chinese translation ([#1510](https://github.com/mdn/fred/issues/1510)) ([ae1bf08](https://github.com/mdn/fred/commit/ae1bf083d88e3579d99e3587b687245ce26a8107))
+
 ## [2.5.0](https://github.com/mdn/fred/compare/v2.4.3...v2.5.0) (2026-04-23)
 
 
