@@ -427,6 +427,10 @@ const legacyConfig = merge(
     },
     resolve: {
       extensions: ["...", ".tsx", ".ts", ".jsx"],
+      modules: [
+        "node_modules",
+        path.resolve(__dirname, "vendor/yari/node_modules"),
+      ],
       alias: {
         [path.resolve(
           __dirname,
