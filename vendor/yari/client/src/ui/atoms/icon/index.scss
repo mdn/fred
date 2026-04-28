@@ -1,14 +1,12 @@
 $icons:
-  "add", "altname", "bell-filled", "bell-ring", "bookmark-filled", "bookmark",
-  "cancel", "chatgpt", "checkmark", "chevron", "deno", "deprecated", "desktop",
-  "disabled", "edit", "edit-filled", "ellipses", "experimental", "external",
-  "filter", "footnote", "ie", "highlight", "history", "language", "menu",
-  "mobile", "more", "new-topic", "next", "no", "nodejs", "nonstandard",
-  "note-info", "note-warning", "note-deprecated", "partial", "play", "prefix",
-  "preview", "previous", "question-mark", "queue", "queued", "return", "safari",
-  "search", "send", "server", "sidebar", "simple-firefox", "small-arrow",
-  "thumbs-down", "thumbs-up", "trash", "unknown", "warning", "webview", "yes",
-  "yes-circle";
+  "bell-filled", "bell-ring", "bookmark-filled", "bookmark", "cancel",
+  "chatgpt", "checkmark", "chevron", "deno", "deprecated", "edit",
+  "edit-filled", "ellipses", "experimental", "external", "filter", "ie",
+  "highlight", "history", "language", "new-topic", "next", "no", "nodejs",
+  "nonstandard", "note-info", "note-warning", "note-deprecated", "play",
+  "previous", "question-mark", "queue", "queued", "return", "safari", "search",
+  "send", "sidebar", "simple-firefox", "small-arrow", "thumbs-down",
+  "thumbs-up", "trash", "webview";
 
 .icon {
   --size: var(--icon-size, 1rem);
