@@ -45,6 +45,8 @@ pre-push:
             run: npx stylelint '**/*.css' --cache --ignore-path .stylelintignore --ignore-path .gitignore
           - name: tsc
             run: npx tsc
+          - name: lint l10n strings
+            run: npm run l10n -- --lint
 
 post-merge:
   only:

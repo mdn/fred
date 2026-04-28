@@ -6,7 +6,6 @@ import { fileURLToPath } from "node:url";
 import { RsdoctorRspackPlugin } from "@rsdoctor/rspack-plugin";
 import { rspack } from "@rspack/core";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
-import { fdir } from "fdir";
 import { RspackManifestPlugin } from "rspack-manifest-plugin";
 import { merge } from "webpack-merge";
 // @ts-expect-error
@@ -15,6 +14,7 @@ import { StatsWriterPlugin } from "webpack-stats-plugin";
 import { FRED_BUILD_ROOT } from "./build/env.js";
 import { CSPHashPlugin } from "./build/plugins/csp-hash.js";
 import { GenerateElementMapPlugin } from "./build/plugins/generate-element-map.js";
+import { crawl } from "./build/utils.js";
 import { override as svgoOverride } from "./svgo.config.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -258,11 +258,9 @@ const ssrConfig = merge(common, notServiceWorkerCommon, clientAndSsrCommon, {
     return {
       index: [
         // load custom elements
-        ...(await new fdir()
-          .withFullPaths()
-          .filter((filePath) => filePath.endsWith("/element.js"))
-          .crawl(path.join(__dirname, "components"))
-          .withPromise()),
+        ...(await crawl(path.join(__dirname, "components"), (filePath) =>
+          filePath.endsWith("/element.js"),
+        )),
         "./entry.ssr.js",
       ],
     };
@@ -337,20 +335,16 @@ const clientConfig = merge(
         // load `components/*/global.css` files into global style entrypoint
         "styles-global": {
           runtime: "styles",
-          import: await new fdir()
-            .withFullPaths()
-            .filter((filePath) => filePath.endsWith("/global.css"))
-            .crawl(path.join(__dirname, "components"))
-            .withPromise(),
+          import: await crawl(path.join(__dirname, "components"), (filePath) =>
+            filePath.endsWith("/global.css"),
+          ),
         },
         // load `components/*/server.css` files into per-component style entrypoints
         ...Object.fromEntries(
           (
-            await new fdir()
-              .withFullPaths()
-              .filter((filePath) => filePath.endsWith("/server.css"))
-              .crawl(path.join(__dirname, "components"))
-              .withPromise()
+            await crawl(path.join(__dirname, "components"), (filePath) =>
+              filePath.endsWith("/server.css"),
+            )
           )
             // eslint-disable-next-line unicorn/no-await-expression-member
             .map((file) => [
@@ -401,9 +395,9 @@ const clientConfig = merge(
                     (chunk) =>
                       Boolean(
                         chunk.name &&
-                          components
-                            .map((component) => `styles-${component}`)
-                            .includes(chunk.name),
+                        components
+                          .map((component) => `styles-${component}`)
+                          .includes(chunk.name),
                       ),
                   enforce: true,
                 },

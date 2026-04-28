@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 import { readFile, writeFile } from "node:fs/promises";
 
-import { fdir } from "fdir";
-
 import { RARI_BUILD_ROOT } from "./env.js";
 import { render } from "./render.js";
+import { crawl } from "./utils.js";
 
 /**
  * @template T
@@ -30,7 +29,9 @@ function formatDuration(seconds) {
 }
 
 async function ssrAllDocuments() {
-  const files = await findDocuments();
+  const files = await crawl(RARI_BUILD_ROOT, (filePath) =>
+    filePath.endsWith("/index.json"),
+  );
 
   const start = Date.now();
 
@@ -53,16 +54,6 @@ async function ssrAllDocuments() {
       count / seconds
     ).toFixed(1)} documents per second.`,
   );
-}
-
-async function findDocuments() {
-  const api = new fdir()
-    .withFullPaths()
-    .withErrors()
-    .filter((filePath) => filePath.endsWith("/index.json"))
-    .crawl(RARI_BUILD_ROOT);
-  const docs = await api.withPromise();
-  return docs;
 }
 
 /**

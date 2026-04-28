@@ -21,7 +21,7 @@ export class MDNSearchButton extends L10nMixin(LitElement) {
   render() {
     return html`<button
       class="mdn-search-button"
-      title=${this.l10n`Search the site`}
+      title=${this.l10n("search-button-search-the-site")`Search the site`}
       @click=${this._showModal}
       data-glean-id="quick-search-open: menu"
     >

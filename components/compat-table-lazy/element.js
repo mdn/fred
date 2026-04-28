@@ -1,5 +1,6 @@
 import { Task } from "@lit/task";
 import { LitElement, html } from "lit";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import "../compat-table/element.js";
 import { L10nMixin } from "../../l10n/mixin.js";
@@ -7,7 +8,7 @@ import {
   DEFAULT_LOCALE,
   ISSUE_METADATA_TEMPLATE,
 } from "../compat-table/constants.js";
-import { BCD_BASE_URL } from "../env/index.js";
+import { queryToUrl } from "../compat-table/utils.js";
 
 import styles from "./element.css?lit";
 
@@ -75,10 +76,7 @@ export class MDNCompatTableLazy extends L10nMixin(LitElement) {
   _dataTask = new Task(this, {
     args: () => [this.query],
     task: async ([query], { signal }) => {
-      const response = await fetch(
-        `${BCD_BASE_URL}/bcd/api/v0/current/${query}.json`,
-        { signal },
-      );
+      const response = await fetch(queryToUrl(query), { signal });
       if (!response.ok) {
         console.error("Failed to fetch BCD data:", response);
 
@@ -95,8 +93,11 @@ export class MDNCompatTableLazy extends L10nMixin(LitElement) {
   });
 
   render() {
+    const noScript = unsafeHTML(
+      `<noscript>${this.l10n("compat-js-required")`Enable JavaScript to view this browser compatibility table.`}</noscript>`,
+    );
     return this._dataTask.render({
-      initial: () => html`<p>${this.l10n("compat-loading")`Loading…`}</p>`,
+      initial: () => html`<p>${noScript}</p>`,
       pending: () => html`<p>${this.l10n("compat-loading")`Loading…`}</p>`,
 
       complete:

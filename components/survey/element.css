@@ -1,3 +1,5 @@
+@import url("../external-link/global.css");
+
 :host {
   display: block;
 }
@@ -51,6 +53,14 @@ mdn-button::part(icon) {
 summary {
   color: var(--color-text-purple);
   cursor: pointer;
+}
+
+a {
+  color: var(--color-text-purple);
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 iframe {

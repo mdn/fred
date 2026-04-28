@@ -158,7 +158,6 @@
 
 .menu__panel-icon {
   display: inline-flex;
-  column-gap: 0.5rem;
   align-items: center;
 
   &::before {
@@ -166,6 +165,8 @@
 
     width: 1.25rem;
     height: 1.25rem;
+
+    margin-inline-end: 0.5rem;
 
     content: "";
 

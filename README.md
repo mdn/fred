@@ -4,7 +4,12 @@ MDN's next fr(ont)e(n)d.
 
 ## Getting started
 
-1. Copy `.env-dist` to `.env` and update
+1. Copy `.env-dist` to `.env` and update values as needed. The file contains comments for guidance:
+
+```bash
+   cp .env-dist .env
+```
+
 2. Install dependencies `npm install`
 3. Bring up the dev environment with `npm run start`
 
@@ -23,6 +28,12 @@ MDN's next fr(ont)e(n)d.
   - must be run at least once for `npm run preview` to work
 - `npm run preview`
   - runs the preview server: using the production bundles with the rari server: useful for testing our prod rspack config
+- `npm run test`
+  - runs linting and tests with various options, read more in [the testing README](./test/README.md)
+
+## L10n
+
+See [the l10n README](./l10n/README.md).
 
 ### Accessing from non-localhost
 
@@ -40,6 +51,30 @@ HTTPS=true ORIGIN_MAIN=192.168.0.99 npm run start
 This is useful to test changes on mobile, tablets and other platforms.
 
 ## Development principles
+
+### Supported Browsers
+
+_tl;dr_ For visitors to MDN, we support the _Baseline widely available browser set_, with some minor modifications.
+
+#### Browsers
+
+The [_Baseline widely available browser set_](https://developer.mozilla.org/en-US/docs/Glossary/Baseline/Compatibility) is defined as browsers from the _Core browser set_ whose initial release date is on or before 30 months prior to today's date, plus long-term support releases.
+
+MDN supports these browsers, along with Firefox for iOS and all currently active Firefox ESR versions:
+
+- Apple Safari (iOS, macOS) — released within the last 2½ years
+- Google Chrome (Android, Desktop) — released within the last 2½ years
+- Microsoft Edge (Desktop) — released within the last 2½ years
+- Mozilla Firefox (Android, Desktop, iOS) — released within the last 2½ years
+- Mozilla Firefox ESR — currently supported by Mozilla
+
+#### "Supported"
+
+In this context, _supported_ means that any issues with rendering or functionality are considered bugs and will be addressed as soon as reasonably possible.
+
+For issues encountered while using unsupported browsers, we decide on a case-by-case assessment of whether the issue will be addressed; however, these issues may have lower priority. Issues with screen readers and other accessibility aids are likely to carry higher levels of importance.
+
+We make our best efforts to design MDN to degrade gracefully; however, there are no guarantees of any level of functionality outside the supported browser set.
 
 ### Environment variables
 
@@ -72,7 +107,7 @@ Logs a CSP hash for the source of the file during the production build.
 Most commonly used alongside `?source` to import the source of a file for inlining in a component, which needs to be allowlisted in our CSP:
 
 ```js
-import inlineScript from "./inline.js?source&csp=true`;
+import inlineScript from "./inline.js?source&csp=true";
 ```
 
 ### Layout
@@ -130,3 +165,27 @@ If our server side rendered custom elements are different to the initial state o
 To avoid this, don't compute things that are server/client dependent in `connectedCallback` (or run functions which do this). Instead you must run these in `firstUpdated` (despite the warning lit will raise in development about the element scheduling an update after an update completed).
 
 This issue is tracked upstream: https://github.com/lit/lit/issues/1434
+
+### Simplified HTML
+
+`entry.ssr.js` exports a top-level `renderSimplified` function: the purpose of this is to render a very basic HTML page for a particular path, which is useful for embedding MDN content as templated HTML in other contexts.
+
+Any server component can define a `renderSimplified` method to define the simplified form of that component. When in the top-level `renderSimplified` context, any calls of `ServerComponent.render()` will automatically call the `renderSimplified` method of that component, falling back to the `render` method. This is so we can nest components with a `renderSimplified` method ("simplified components") within ones without.
+
+Server components also have a `simplifiedMode` property set, which is `true` when rendered from the top-level `renderSimplified` function: this allows a small tweak within a `render` method without having to totally re-implement logic in the `renderSimplified` method.
+
+There shouldn't be standalone simplified components: the nesting of components should be defined by the requirements of the `render` method. `renderSimplified` should only be added to a component which already exists with a `render` method to give a simplified view of it. This is especially important as, in the future, we may need to add options of what is/isn't rendered within `renderSimplified` for use in different contexts (one context may require a sidebar, another may not, for instance).
+
+You can preview the rendering locally by setting `FRED_SIMPLE_HTML`:
+
+```
+FRED_SIMPLE_HTML=true npm run start
+```
+
+Then visit a documentation path directly, e.g. http://localhost:3000/en-US/docs/Web/
+
+If you're loading a path which isn't rendering anything (like the homepage), check if it's defined in `renderSimplified` in `entry.ssr.js`: we "opt-in" routes as we need them.
+
+### Testing
+
+See [the testing README](./test/README.md).

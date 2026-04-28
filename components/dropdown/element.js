@@ -96,8 +96,19 @@ export class MDNDropdown extends LitElement {
     `;
   }
 
-  updated() {
+  /**
+   * @param {import("lit").PropertyValues<this>} changedProperties
+   */
+  updated(changedProperties) {
     this._setAriaAttributes();
+    if (
+      changedProperties.has("open") &&
+      changedProperties.get("open") !== undefined
+    ) {
+      this.dispatchEvent(
+        new Event("toggle", { bubbles: true, composed: true }),
+      );
+    }
   }
 
   firstUpdated() {

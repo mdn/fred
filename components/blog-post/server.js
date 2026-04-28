@@ -71,7 +71,7 @@ export class BlogPost extends ServerComponent {
       return PageLayout.render(
         context,
         html`<p id="content">
-          ${context.l10n("blog-post-not-found")`Blog post not found`}
+          ${context.l10n("blog-post-not-found")`Blog post not found.`}
         </p>`,
       );
     }

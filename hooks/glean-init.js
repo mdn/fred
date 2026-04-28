@@ -1,4 +1,3 @@
-// @ts-expect-error "Could not find declaration file"
 import Glean from "@mozilla/glean/web";
 
 import {
@@ -6,16 +5,13 @@ import {
   GLEAN_DEBUG,
   GLEAN_ENABLED,
 } from "../components/env/index.js";
+import { ViewedObserver } from "../components/viewed-controller/viewed-observer.js";
 import { gleanClick } from "../utils/glean.js";
+import { userIsOptedOut } from "../utils/telemetry-opt-out.js";
 
-const FIRST_PARTY_DATA_OPT_OUT_COOKIE_NAME = "moz-1st-party-data-opt-out";
 const GLEAN_APP_ID = "mdn-fred";
 
-const userIsOptedOut = document.cookie
-  .split("; ")
-  .includes(`${FIRST_PARTY_DATA_OPT_OUT_COOKIE_NAME}=true`);
-
-const uploadEnabled = !userIsOptedOut && GLEAN_ENABLED;
+const uploadEnabled = !userIsOptedOut() && GLEAN_ENABLED;
 
 if (GLEAN_DEBUG) {
   Glean.setDebugViewTag("mdn-dev");
@@ -28,16 +24,49 @@ Glean.initialize(GLEAN_APP_ID, uploadEnabled, {
   channel: GLEAN_CHANNEL,
 });
 
+// data-glean-toggle-open
+document.addEventListener("toggle", (event) => {
+  const composedPath = event.composedPath();
+  for (const el of composedPath) {
+    if (
+      el instanceof HTMLElement &&
+      typeof el.dataset.gleanToggleOpen === "string" &&
+      "open" in el &&
+      el.open
+    ) {
+      gleanClick(el.dataset.gleanToggleOpen);
+    }
+  }
+});
+
+// data-glean-view
+for (const element of /** @type {NodeListOf<HTMLElement>} */ (
+  document.querySelectorAll("[data-glean-view]")
+)) {
+  // Excludes shadow DOM, and elements added after page load.
+  // For custom elements, use `ViewedController()` instead.
+  const gleanId = element.dataset.gleanView;
+  if (gleanId) {
+    const observer = new ViewedObserver(element, () => {
+      gleanClick(gleanId);
+      observer.disconnect();
+    });
+    observer.connect();
+  }
+}
+
+// data-glean-id
 document.addEventListener("click", (event) => {
-  const composedTarget = event.composedPath()?.[0];
+  const composedPath = event.composedPath();
+  const composedTarget = composedPath?.[0];
   if (composedTarget !== event.target && composedTarget instanceof Element) {
     // Workaround for automatic click events in shadow DOM.
     // See: https://bugzil.la/1988206
-    const taggedElement = composedTarget.closest("[data-glean-id]");
-    if (taggedElement instanceof HTMLElement) {
-      const gleanId = taggedElement.dataset.gleanId;
-      if (gleanId) {
-        gleanClick(gleanId);
+
+    // Measure click for all `data-glean-id`s along the path.
+    for (const el of composedPath) {
+      if (el instanceof HTMLElement && typeof el.dataset.gleanId === "string") {
+        gleanClick(el.dataset.gleanId);
       }
     }
   }
@@ -53,6 +82,15 @@ document.addEventListener("click", (event) => {
       anchor.origin !== document.location.origin
     ) {
       gleanClick(`external-link: ${anchor.href}`);
+    }
+
+    // Sidebar click measurement.
+    if (anchor instanceof HTMLAnchorElement && anchor.href) {
+      const sidebar = anchor.closest(".left-sidebar");
+      if (sidebar) {
+        const href = anchor.getAttribute("href") || anchor.href;
+        gleanClick(`sidebar_click: sidebar ${href}`);
+      }
     }
   }
 });

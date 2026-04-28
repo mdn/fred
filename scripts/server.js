@@ -9,7 +9,7 @@ export const server = fileURLToPath(import.meta.resolve("../server.js"));
 const { commands, result } = concurrently(
   [
     {
-      command: `node ${server}`,
+      command: `node "${server}"`,
       name: "server",
       env: {
         ...process.env,

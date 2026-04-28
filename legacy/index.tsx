@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom/client";
+
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { UserDataProvider } from "../vendor/yari/client/src/user-context";
 import { UIProvider } from "../vendor/yari/client/src/ui-context";
