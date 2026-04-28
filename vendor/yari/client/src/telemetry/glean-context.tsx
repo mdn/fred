@@ -14,7 +14,6 @@ import {
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router";
 import { useUserData } from "../user-context";
-import { handleSidebarClick } from "./sidebar-click";
 import { EXTERNAL_LINK } from "./constants";
 import { Doc } from "../../../libs/types/document";
 
@@ -141,7 +140,6 @@ function glean(): GleanAnalytics {
   window?.addEventListener("click", (ev) => {
     handleLinkClick(ev, gleanClick);
     handleButtonClick(ev, gleanClick);
-    handleSidebarClick(ev, gleanClick);
   });
   window?.addEventListener("glean-click", (ev: CustomEvent<string>) => {
     gleanClick(ev.detail);
