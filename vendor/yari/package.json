@@ -5,10 +5,10 @@
   "license": "MPL-2.0",
   "author": "MDN Web Docs",
   "type": "module",
-  "scripts": {
-    "install:all": "find . -mindepth 2 -name 'package-lock.json' ! -wholename '**/node_modules/**' -print0 | xargs -n1 -0 sh -cx 'npm --prefix $(dirname $0) ci'",
-    "prepare": "npm run install:all"
-  },
+  "workspaces": [
+    "libs/*",
+    "client/pwa"
+  ],
   "dependencies": {
     "@mdn/minimalist": "^2.0.4",
     "@mozilla/glean": "5.0.5",
