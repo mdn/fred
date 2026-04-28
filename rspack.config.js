@@ -429,9 +429,6 @@ const legacyConfig = merge(
         "node_modules",
         path.resolve(__dirname, "vendor/yari/node_modules"),
       ],
-      alias: {
-        react: path.resolve(__dirname, "vendor/yari/node_modules/react"),
-      },
     },
     plugins: [
       new rspack.DefinePlugin({

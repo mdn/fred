@@ -42,7 +42,6 @@ What each entry in [`package.json`](./package.json) is for:
 
 ## Known limitations / quirks
 
-- **Dual React** — yari targets React 18; fred transitively pulls React 19 via the `downshift` devDep. The legacy bundle aliases `react` to `vendor/yari/node_modules/react@18` to keep a single copy.
 - **PWA offline pre-cache is a no-op** — the service worker's install handler fetches `/asset-manifest.json` (yari's old root-level manifest path) and parses it as `{ files: object }` (yari's old shape). Fred doesn't emit either. The fetch-event runtime cache still works opportunistically, but install-time pre-caching does nothing.
 - **`packageManager: "yarn@1.22.22"`** in this `package.json` is a workaround so yarn 1.x doesn't refuse to run when fred's outer `package.json` declares `npm@…` as its package manager.
 
