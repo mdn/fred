@@ -1,12 +1,10 @@
-import { NotecardType } from "../../../types/notecards";
-
 export default function NoteCard({
   children,
   type = "info",
   extraClasses,
 }: {
   children: JSX.Element | JSX.Element[];
-  type?: NotecardType;
+  type?: string;
   extraClasses?: string | null;
 }) {
   const classes = `notecard ${type !== "info" ? type : ""} ${
