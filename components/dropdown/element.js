@@ -22,7 +22,7 @@ export class MDNDropdown extends LitElement {
   static styles = styles;
 
   static properties = {
-    open: { type: Boolean, reflect: true },
+    open: { type: Boolean },
     loaded: { type: Boolean, reflect: true },
   };
 
