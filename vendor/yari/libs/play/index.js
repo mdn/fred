@@ -427,16 +427,19 @@ export function renderHtml(state = null) {
           const consoleProxy = new Proxy(console, {
             get(target, prop) {
               if (typeof target[prop] === "function") {
+                const uuid =
+                  new URLSearchParams(location.search).get("uuid") || undefined;
                 return (...args) => {
                   try {
                     window.parent.postMessage(
-                      { typ: "console", prop, args },
-                      "*"
+                      { uuid, typ: "console", prop, args },
+                      "*",
                     );
                   } catch {
                     try {
                       window.parent.postMessage(
                         {
+                          uuid,
                           typ: "console",
                           prop,
                           args: args.map((x) => {
@@ -448,18 +451,19 @@ export function renderHtml(state = null) {
                             }
                           }),
                         },
-                        "*"
+                        "*",
                       );
                     } catch {
                       window.parent.postMessage(
                         {
+                          uuid,
                           typ: "console",
                           prop: "warn",
                           args: [
                             "[Playground] Unsupported console message (see browser console)",
                           ],
                         },
-                        "*"
+                        "*",
                       );
                     }
                   }
@@ -516,7 +520,9 @@ export function renderHtml(state = null) {
         </script>
         <script>
           try {
-            window.parent.postMessage({ typ: "ready" }, "*");
+            const uuid =
+              new URLSearchParams(location.search).get("uuid") || undefined;
+            window.parent.postMessage({ uuid, typ: "ready" }, "*");
           } catch (e) {
             console.error("[Playground] Failed to post ready message", e);
           }
@@ -602,7 +608,7 @@ export async function decompressFromBase64(base64String) {
 
   // eslint-disable-next-line n/no-unsupported-features/node-builtins
   const decompressedStream = new Response(
-    new Blob([bytes]).stream().pipeThrough(decompressionStream)
+    new Blob([bytes]).stream().pipeThrough(decompressionStream),
   ).arrayBuffer();
 
   const state = new TextDecoder().decode(await decompressedStream);
@@ -623,9 +629,10 @@ function playSubdomain(hostname) {
 }
 
 /**
- * @param {string} hostname
+ * @param {URL} referer
  */
-function isMDNHost(hostname) {
+function isMDNReferer(referer) {
+  const { hostname } = referer;
   return (
     hostname === ORIGIN_MAIN ||
     // Review Companion (old/new).
@@ -651,48 +658,22 @@ export async function handleRunner(req, res) {
   }
   const referer = new URL(
     req.headers["referer"] || "https://example.com",
-    "https://example.com"
+    "https://example.com",
   );
   const stateParam = url.searchParams.get("state");
-
-  if (!stateParam) {
-    console.warn("[runner] Missing state parameter");
-    return res.status(400).end();
-  }
-
   const { state, hash } = await decompressFromBase64(stateParam);
 
-  if (!state) {
-    console.warn("[runner] Invalid state value");
+  const isLocalhost = req.hostname === "localhost";
+  const hasMatchingHash = playSubdomain(req.hostname) === hash;
+  const isIframeOnMDN =
+    isMDNReferer(referer) && req.headers["sec-fetch-dest"] === "iframe";
+
+  if (
+    !stateParam ||
+    !state ||
+    (!isLocalhost && !hasMatchingHash && !isIframeOnMDN)
+  ) {
     return res.status(404).end();
-  }
-
-  if (req.hostname !== "localhost") {
-    // For security reasons, we only allow the runner:
-    // 1. on localhost (without any restrictions),
-    // 2. if the subdomain matches the hash (for embedded direct links), or
-    // 3. in iframes on MDN.
-    const subdomain = playSubdomain(req.hostname);
-
-    if (subdomain !== hash) {
-      const secFetchDest = req.headers["sec-fetch-dest"];
-
-      if (secFetchDest !== "iframe") {
-        console.warn(
-          `[runner] Disallowed Sec-Fetch-Dest (expected "iframe", was ${JSON.stringify(secFetchDest)})`
-        );
-        return res.status(403).end();
-      }
-
-      const { hostname } = referer;
-
-      if (!isMDNHost(hostname)) {
-        console.warn(
-          `[runner] Disallowed Referer (expected MDN host, was ${JSON.stringify(hostname)})`
-        );
-        return res.status(403).end();
-      }
-    }
   }
 
   const json = JSON.parse(state);
@@ -720,8 +701,8 @@ export async function handleRunner(req, res) {
         renderWarning(
           json,
           `${urlWithCode.pathname}${urlWithCode.search}`,
-          url.search
-        )
+          url.search,
+        ),
       );
   }
 }
