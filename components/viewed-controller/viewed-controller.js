@@ -3,42 +3,42 @@
  * @import { Ref } from "lit/directives/ref.js";
  */
 
-import { ViewedTracker } from "./viewed-tracker.js";
+import { ViewedObserver } from "./viewed-observer.js";
 
 export class ViewedController {
   #host;
-  /** @type {ViewedTracker | null} */
-  #tracker = null;
+  /** @type {ViewedObserver | null} */
+  observer = null;
 
   /**
    * @param {LitElement} host
    * @param {Ref<Element>} target
    * @param {Function} callback
-   * @param {IntersectionObserverInit} [intersectionObserverOptions]
+   * @param {IntersectionObserverInit} [observerOptions]
    */
-  constructor(host, target, callback, intersectionObserverOptions) {
+  constructor(host, target, callback, observerOptions) {
     this.#host = host;
     this.#host.addController(this);
 
     this.target = target;
     this.callback = callback;
-    this.intersectionObserverOptions = intersectionObserverOptions;
+    this.observerOptions = observerOptions;
   }
 
   hostDisconnected() {
-    this.#tracker?.disconnect();
-    this.#tracker = null;
+    this.observer?.disconnect();
+    this.observer = null;
   }
 
   hostUpdated() {
     const target = this.target.value;
-    if (target && !this.#tracker) {
-      this.#tracker = new ViewedTracker(
+    if (target && !this.observer) {
+      this.observer = new ViewedObserver(
         target,
         this.callback,
-        this.intersectionObserverOptions,
+        this.observerOptions,
       );
-      this.#tracker.connect();
+      this.observer.connect();
     }
   }
 }

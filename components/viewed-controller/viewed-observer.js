@@ -2,7 +2,7 @@ const OPTIONS = {
   threshold: 0.5,
 };
 
-export class ViewedTracker {
+export class ViewedObserver {
   #element;
   #callback;
   #options;

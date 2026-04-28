@@ -5,7 +5,7 @@ import {
   GLEAN_DEBUG,
   GLEAN_ENABLED,
 } from "../components/env/index.js";
-import { ViewedTracker } from "../components/viewed-controller/viewed-tracker.js";
+import { ViewedObserver } from "../components/viewed-controller/viewed-observer.js";
 import { gleanClick } from "../utils/glean.js";
 import { userIsOptedOut } from "../utils/telemetry-opt-out.js";
 
@@ -47,11 +47,11 @@ for (const element of /** @type {NodeListOf<HTMLElement>} */ (
   // For custom elements, use `ViewedController()` instead.
   const gleanId = element.dataset.gleanView;
   if (gleanId) {
-    const tracker = new ViewedTracker(element, () => {
+    const observer = new ViewedObserver(element, () => {
       gleanClick(gleanId);
-      tracker.disconnect();
+      observer.disconnect();
     });
-    tracker.connect();
+    observer.connect();
   }
 }
 
