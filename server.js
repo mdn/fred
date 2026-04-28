@@ -292,7 +292,6 @@ export async function startServer() {
   play.use(cookieParser());
 
   play.get(["/*_/runner.html", "/runner.html"], (req, res) => {
-    // @ts-expect-error Yari uses Express v4, but Fred uses v5.
     handleRunner(req, res);
   });
 
