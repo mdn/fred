@@ -23,9 +23,8 @@ import { DataError } from "../common";
 import { useCollections } from "../collections/api";
 import React from "react";
 
-const LazyCompatTable = React.lazy(
-  () => import("../../lit/compat/lazy-compat-table.js")
-);
+// Side-effect import: registers <mdn-compat-table-lazy> custom element.
+import "../../../../../../components/compat-table-lazy/element.js";
 
 type EventWithStatus = Event & { status: Status };
 type Status = "added" | "removed";
@@ -352,7 +351,7 @@ function EventInnerComponent({
   return (
     <div>
       <ArticleActions path={path} mdn_url={mdn_url} />
-      <LazyCompatTable query={path} locale={locale} />
+      <mdn-compat-table-lazy query={path} locale={locale}></mdn-compat-table-lazy>
     </div>
   );
 }
