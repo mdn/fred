@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Button } from "../../../ui/atoms/button";
-import { OnGitHubLink } from "../../on-github";
 import { ReactComponent as ArticleFooterSVG } from "../../../assets/article-footer/article-footer.svg";
 import "./index.scss";
 import { useGleanClick } from "../../../telemetry/glean-context";
@@ -171,7 +170,6 @@ export function ArticleFooter({ doc }) {
             <>Diese Seite wurde automatisch aus dem Englischen übersetzt.</>
           )}
         </p>
-        {doc.isActive && <OnGitHubLink doc={doc} />}
       </div>
     </aside>
   );

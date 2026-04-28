@@ -1,11 +1,10 @@
 import React, { ReactElement } from "react";
 import useSWR from "swr";
-import { DEV_MODE, PLACEMENT_ENABLED } from "../../env";
+import { DEV_MODE } from "../../env";
 import { SidebarContainer } from "../../document/organisms/sidebar";
 import { TOC } from "../../document/organisms/toc";
 import { Section, Toc } from "../../../../libs/types/document";
 import { Loading } from "../../ui/atoms/loading";
-import { SidePlacement } from "../../ui/organisms/placement";
 import { Prose } from "../../document/ingredients/prose";
 
 interface StaticPageDoc {
@@ -78,7 +77,6 @@ function StaticPage({
                 )}
               </nav>
             </aside>
-            {PLACEMENT_ENABLED && <SidePlacement />}
           </div>
         </div>
         <main id="content" className="main-content" role="main">
