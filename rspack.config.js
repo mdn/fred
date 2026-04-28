@@ -432,6 +432,7 @@ const legacyConfig = merge(
         path.resolve(__dirname, "vendor/yari/node_modules"),
       ],
       alias: {
+        react$: path.resolve(__dirname, "vendor/yari/node_modules/react"),
         [path.resolve(
           __dirname,
           "vendor/yari/client/src/document/toolbar/index.tsx",
