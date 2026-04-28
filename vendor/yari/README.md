@@ -11,12 +11,12 @@ Originally inlined from upstream commit [`0cfdd1b8`](https://github.com/mdn/yari
 - **`client/public/assets/`** — illustration/icon SVGs and PNGs referenced by Plus React components.
 - **`libs/play/`** — playground runner used at runtime by fred's [server.js](../../server.js) (`handleRunner`). Not bundled by rspack.
 - **`libs/{constants,languages,locale-utils,types}/`** — utility libs imported by `client/src/` files we kept.
-- **`package.json`, `yarn.lock`** — define the deps installed into `node_modules/` here. Rspack reaches into this tree to resolve React, react-router-dom, and other yari runtime deps when building the legacy bundle (see [rspack.config.js:430-433](../../rspack.config.js#L430-L433)).
+- **`package.json`, `package-lock.json`** — define the deps installed into `node_modules/` here. The root declares `libs/*` and `client/pwa` as npm workspaces, so a single `npm ci` populates everything. Rspack reaches into this tree to resolve React, react-router-dom, and other yari runtime deps when building the legacy bundle (see [rspack.config.js](../../rspack.config.js)).
 
 ## How fred uses it
 
-- `npm install` in fred's root triggers `fred/package.json`'s `prepare` script, which runs `yarn --frozen-lockfile` here. That invokes `vendor/yari/package.json`'s own `prepare`, which recursively installs nested `node_modules/` for `libs/locale-utils/`, `libs/play/`, and `client/pwa/`.
-- `npm run build` / `npm run dev` (with `FRED_LEGACY=true`) bundles `legacy/index.tsx` and the service worker via rspack, pulling React/React-Router/etc. from `vendor/yari/node_modules/` and `vendor/yari/client/pwa/node_modules/`.
+- `npm install` in fred's root triggers `fred/package.json`'s `prepare` script, which runs `npm ci` here. Workspaces hoist nested deps to `vendor/yari/node_modules/`.
+- `npm run build` / `npm run dev` (with `FRED_LEGACY=true`) bundles `legacy/index.tsx` and the service worker via rspack, pulling React/React-Router/etc. from `vendor/yari/node_modules/`.
 
 ## Dependencies
 
@@ -42,8 +42,7 @@ What each entry in [`package.json`](./package.json) is for:
 
 ## Known limitations / quirks
 
-- **PWA offline pre-cache is a no-op** — the service worker's install handler fetches `/asset-manifest.json` (yari's old root-level manifest path) and parses it as `{ files: object }` (yari's old shape). Fred doesn't emit either. The fetch-event runtime cache still works opportunistically, but install-time pre-caching does nothing.
-- **`packageManager: "yarn@1.22.22"`** in this `package.json` is a workaround so yarn 1.x doesn't refuse to run when fred's outer `package.json` declares `npm@…` as its package manager.
+- **PWA offline pre-cache is a no-op** — the service worker's install handler fetches `/static/legacy/asset-manifest.json` and expects a `string[]` of asset paths, but rspack doesn't emit that file. The fetch-event runtime cache still works opportunistically; install-time pre-caching does nothing.
 
 ## Updating
 
