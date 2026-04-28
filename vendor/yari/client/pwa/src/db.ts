@@ -102,7 +102,7 @@ export async function getContentStatus(): Promise<ContentStatus> {
 }
 
 export async function patchContentStatus(
-  changes: Omit<Partial<ContentStatus>, "id" | "timestamp">
+  changes: Omit<Partial<ContentStatus>, "id" | "timestamp">,
 ) {
   const db = offlineDb;
   const table = db.contentStatusHistory;
