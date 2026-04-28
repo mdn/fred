@@ -20,7 +20,6 @@ Originally inlined from upstream commit [`0cfdd1b8`](https://github.com/mdn/yari
 
 ## Known limitations / quirks
 
-- **Express v4/v5 mismatch** — yari was written against Express 4, fred uses Express 5. Server-side calls into `libs/play/handleRunner` need a `// @ts-expect-error` at the call site (see [server.js](../../server.js)).
 - **Dual React** — yari targets React 18; fred transitively pulls React 19 via the `downshift` devDep. The legacy bundle aliases `react` to `vendor/yari/node_modules/react@18` to keep a single copy.
 - **PWA offline pre-cache is a no-op** — the service worker's install handler fetches `/asset-manifest.json` (yari's old root-level manifest path) and parses it as `{ files: object }` (yari's old shape). Fred doesn't emit either. The fetch-event runtime cache still works opportunistically, but install-time pre-caching does nothing.
 - **`packageManager: "yarn@1.22.22"`** in this `package.json` is a workaround so yarn 1.x doesn't refuse to run when fred's outer `package.json` declares `npm@…` as its package manager.
