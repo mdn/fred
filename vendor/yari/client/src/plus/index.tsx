@@ -4,7 +4,6 @@ import { Routes, Route } from "react-router-dom";
 import { useIsServer } from "../hooks";
 import { Loading } from "../ui/atoms/loading";
 import { MainContentContainer } from "../ui/atoms/page-content";
-import { PageNotFound } from "../page-not-found";
 import { MDN_PLUS_TITLE } from "../constants";
 import { Settings } from "../settings";
 import PlusDocs from "./plus-docs";
@@ -108,14 +107,6 @@ export function Plus({ pageTitle, ...props }: { pageTitle?: string }) {
         element={
           <Layout withoutContainer withSSR={true}>
             <PlusDocs {...props} />
-          </Layout>
-        }
-      />
-      <Route
-        path="*"
-        element={
-          <Layout>
-            <PageNotFound />
           </Layout>
         }
       />

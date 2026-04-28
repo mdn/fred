@@ -4,7 +4,6 @@ import { DEV_MODE, PLACEMENT_ENABLED } from "../../env";
 import { SidebarContainer } from "../../document/organisms/sidebar";
 import { TOC } from "../../document/organisms/toc";
 import { Section, Toc } from "../../../../libs/types/document";
-import { PageNotFound } from "../../page-not-found";
 import { Loading } from "../../ui/atoms/loading";
 import { SidePlacement } from "../../ui/organisms/placement";
 import { Prose } from "../../document/ingredients/prose";
@@ -60,9 +59,7 @@ function StaticPage({
     document.title = hyData ? `${hyData.title} | ${title}` : title;
   }, [hyData, title]);
 
-  if (error) {
-    return <PageNotFound />;
-  } else if (!hyData) {
+  if (error || !hyData) {
     return <Loading />;
   }
 
