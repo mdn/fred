@@ -18,6 +18,28 @@ Originally inlined from upstream commit [`0cfdd1b8`](https://github.com/mdn/yari
 - `npm install` in fred's root triggers `fred/package.json`'s `prepare` script, which runs `yarn --frozen-lockfile` here. That invokes `vendor/yari/package.json`'s own `prepare`, which recursively installs nested `node_modules/` for `libs/locale-utils/`, `libs/play/`, and `client/pwa/`.
 - `npm run build` / `npm run dev` (with `FRED_LEGACY=true`) bundles `legacy/index.tsx` and the service worker via rspack, pulling React/React-Router/etc. from `vendor/yari/node_modules/` and `vendor/yari/client/pwa/node_modules/`.
 
+## Dependencies
+
+What each entry in [`package.json`](./package.json) is for:
+
+- **`@mdn/minimalist`** — Sass mixins (e.g. `animation`) used by [loading/index.scss](./client/src/ui/atoms/loading/index.scss).
+- **`@mozilla/glean`** — telemetry SDK powering the Glean event/ping pipeline in [client/src/telemetry/](./client/src/telemetry/).
+- **`@stripe/stripe-js`** — loads Stripe.js for the Plus subscribe flow ([stripe.tsx](./client/src/plus/offer-overview/offer-overview-subscribe/stripe.tsx)).
+- **`@use-it/interval`** — `setInterval` React hook used by [offline-settings.tsx](./client/src/settings/offline-settings.tsx) to poll offline-content state.
+- **`dayjs`** — "time ago" relative-time formatting in [collections](./client/src/plus/collections/) views.
+- **`dexie`** — IndexedDB wrapper backing the offline-settings DB and PWA service worker DB ([settings/db.ts](./client/src/settings/db.ts), [pwa/src/db.ts](./client/pwa/src/db.ts)).
+- **`prismjs`** — syntax highlighter used by [syntax-highlight.tsx](./client/src/document/code/syntax-highlight.tsx) for code blocks.
+- **`prism-svelte`** — Prism language plugin lazy-loaded for `lang="svelte"` code blocks.
+- **`react`** — UI framework; every Plus page is a React component.
+- **`react-dom`** — React DOM renderer; mounted by fred's [legacy/index.tsx](../../legacy/index.tsx) entry that hosts the vendored Plus UI.
+- **`react-markdown`** — renders streamed Markdown answers in [ai-help](./client/src/plus/ai-help/index.tsx).
+- **`react-modal`** — accessible modal primitive in [ui/atoms/modal](./client/src/ui/atoms/modal/index.tsx).
+- **`react-router`** — core routing primitives (`Routes`, `useParams`, `useLocation`) for Plus sub-routes.
+- **`react-router-dom`** — DOM-bound router (`Link`, `useSearchParams`) used widely across Plus pages.
+- **`remark-gfm`** — GitHub-flavored Markdown plugin paired with `react-markdown` in AI Help.
+- **`sse.js`** — Server-Sent-Events client streaming AI Help responses ([use-ai.ts](./client/src/plus/ai-help/use-ai.ts)).
+- **`swr`** — data-fetching/cache hook used pervasively (user context, collections, article actions, etc.).
+
 ## Known limitations / quirks
 
 - **Dual React** — yari targets React 18; fred transitively pulls React 19 via the `downshift` devDep. The legacy bundle aliases `react` to `vendor/yari/node_modules/react@18` to keep a single copy.
