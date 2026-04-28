@@ -141,7 +141,7 @@ const useFilters = (canFilter: boolean) => {
           } else {
             return val;
           }
-        })
+        }),
       );
     }
   }, [isLoading, canFilter, data, error]);
@@ -198,7 +198,7 @@ function UpdatesLayout() {
               gleanClick(
                 `${PLUS_UPDATES.FILTER_CHANGE}_${key}: ${
                   oldValue ?? "(default)"
-                } -> ${newValue ?? "(default)"}`
+                } -> ${newValue ?? "(default)"}`,
               )
             }
           />
@@ -285,8 +285,8 @@ function collapseEvents<T extends { path: string }>(events: T[]): T[] {
   return events.filter(
     (event) =>
       events.findIndex(
-        (e) => e.path === event.path.split(".").slice(0, -1).join(".")
-      ) === -1
+        (e) => e.path === event.path.split(".").slice(0, -1).join("."),
+      ) === -1,
   );
 }
 
@@ -351,7 +351,10 @@ function EventInnerComponent({
   return (
     <div>
       <ArticleActions path={path} mdn_url={mdn_url} />
-      <mdn-compat-table-lazy query={path} locale={locale}></mdn-compat-table-lazy>
+      <mdn-compat-table-lazy
+        query={path}
+        locale={locale}
+      ></mdn-compat-table-lazy>
     </div>
   );
 }
@@ -378,7 +381,7 @@ function ArticleActions({ path, mdn_url }: { path: string; mdn_url?: string }) {
       revalidateIfStale: false,
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
-    }
+    },
   );
 
   return (

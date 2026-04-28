@@ -46,7 +46,7 @@ export function CodeWithSyntaxHighlight({
     // needed to prevent flashing
     () =>
       language ? highlightStringSync(String(children), language) : undefined,
-    [children, language]
+    [children, language],
   );
   const [html, setHtml] = useState(initial);
 
@@ -69,7 +69,7 @@ export function CodeWithSyntaxHighlight({
 export async function highlightElement(element: Element, language: string) {
   const highlighted = await highlightString(
     element.textContent || "",
-    language
+    language,
   );
   if (highlighted) {
     element.innerHTML = `<code>${highlighted}</code>`;
@@ -78,7 +78,7 @@ export async function highlightElement(element: Element, language: string) {
 
 async function highlightString(
   text: string,
-  language: string
+  language: string,
 ): Promise<string | undefined> {
   const resolvedLanguage = ALIASES.get(language) || language;
 
@@ -93,7 +93,7 @@ async function highlightString(
 
 function highlightStringSync(
   text: string,
-  language: string
+  language: string,
 ): string | undefined {
   const resolvedLanguage = ALIASES.get(language) || language;
   const prismLanguage = Prism.languages[resolvedLanguage];
@@ -124,7 +124,7 @@ async function importLanguage(language: string, recursiveDepth = 0) {
         );
       } catch (e) {
         console.warn(
-          `Syntax highlighting: failed to import ${language} prism language`
+          `Syntax highlighting: failed to import ${language} prism language`,
         );
         throw e;
       }
@@ -137,8 +137,8 @@ async function importLanguage(language: string, recursiveDepth = 0) {
               ? [config.require]
               : config.require
             ).map((dependency) =>
-              importLanguage(dependency, recursiveDepth + 1)
-            )
+              importLanguage(dependency, recursiveDepth + 1),
+            ),
           );
         } catch {
           return;
@@ -149,7 +149,7 @@ async function importLanguage(language: string, recursiveDepth = 0) {
           (typeof config.optional === "string"
             ? [config.optional]
             : config.optional
-          ).map((dependency) => importLanguage(dependency, recursiveDepth + 1))
+          ).map((dependency) => importLanguage(dependency, recursiveDepth + 1)),
         );
       }
       try {
@@ -160,7 +160,7 @@ async function importLanguage(language: string, recursiveDepth = 0) {
         );
       } catch (e) {
         console.warn(
-          `Syntax highlighting: failed to import ${language} prism language`
+          `Syntax highlighting: failed to import ${language} prism language`,
         );
         throw e;
       }

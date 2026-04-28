@@ -53,5 +53,5 @@ export const utm = new LabeledMetricType(
     disabled: false,
   },
   StringMetricType,
-  ["campaign", "content", "medium", "source", "term"]
+  ["campaign", "content", "medium", "source", "term"],
 );

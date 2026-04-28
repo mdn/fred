@@ -128,7 +128,7 @@ export function FrequentlyViewedCollectionComponent() {
   let frequentlyViewed: FrequentlyViewedCollection = useFrequentlyViewed(
     10,
     size,
-    setAtEnd
+    setAtEnd,
   );
 
   useScrollToTop();
@@ -195,7 +195,7 @@ function ItemComponent({
     .map((parent) => camelWrap(parent.title))
     .filter(
       // remove duplicated titles
-      (title, index, titles) => title !== titles[index + 1]
+      (title, index, titles) => title !== titles[index + 1],
     );
 
   const openBookmarkMenu: React.MouseEventHandler = (e) => {
@@ -226,7 +226,7 @@ function ItemComponent({
       revalidateIfStale: false,
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
-    }
+    },
   );
 
   const category = getCategoryByPathname(item.url);

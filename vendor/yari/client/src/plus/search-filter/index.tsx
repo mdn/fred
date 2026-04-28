@@ -45,7 +45,7 @@ export default function SearchFilter({
   onChange?: (
     key: string,
     newValue: string | null,
-    oldValue: string | null
+    oldValue: string | null,
   ) => unknown;
 }) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -56,12 +56,12 @@ export default function SearchFilter({
 
   useEffect(
     () => setTerms(searchParams.get(Params.QUERY) ?? ""),
-    [searchParams]
+    [searchParams],
   );
 
   const sortedParams = (params: URLSearchParams): URLSearchParams =>
     new URLSearchParams(
-      [...params.entries()].sort(([a], [b]) => a.localeCompare(b))
+      [...params.entries()].sort(([a], [b]) => a.localeCompare(b)),
     );
 
   const replaceSearchParam = (key: string, value: string | null) => {
@@ -220,7 +220,7 @@ export default function SearchFilter({
             } ${isDisabled ? "inactive" : ""}`}
             onClickHandler={() =>
               setOpenFilter(
-                openFilter === filterMenu.key ? null : filterMenu.key
+                openFilter === filterMenu.key ? null : filterMenu.key,
               )
             }
             isDisabled={filterMenu.items.length === 0}

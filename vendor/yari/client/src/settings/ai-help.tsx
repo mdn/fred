@@ -48,7 +48,7 @@ export function ManageAIHelp() {
                     setSaving(true);
                     const { checked } = e.target;
                     const source = `${SETTINGS}: ai_help history toggle -> ${Number(
-                      checked
+                      checked,
                     )}`;
                     gleanClick(source);
                     await toggleAIHelpHistory(checked);
@@ -75,12 +75,12 @@ export function ManageAIHelp() {
                 className="button"
                 onClick={async () => {
                   const confirmed = window.confirm(
-                    "Do you want to permanently delete your AI Help history?"
+                    "Do you want to permanently delete your AI Help history?",
                   );
                   gleanClick(
                     `${SETTINGS}: ai_help history delete -> ${Number(
-                      confirmed
-                    )}`
+                      confirmed,
+                    )}`,
                   );
                   if (confirmed) {
                     await fetch("/api/v1/plus/ai/help/history/list", {

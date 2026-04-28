@@ -13,7 +13,7 @@ interface ChildProps {
 }
 
 type ChangeWrapper = (
-  callback: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
+  callback: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>,
 ) => ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 
 export default function LimitedInput({ children, value, limit }: Props) {
@@ -23,7 +23,7 @@ export default function LimitedInput({ children, value, limit }: Props) {
       e.target.setCustomValidity(
         charLength(e.target.value) > limit
           ? `Please ensure your input is no longer than ${limit} characters.`
-          : ""
+          : "",
       );
     };
   };

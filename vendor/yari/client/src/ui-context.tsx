@@ -44,7 +44,7 @@ export function UIProvider(props: any) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [toastData, setToastData] = useState<ToastData | null>(null);
   const [colorScheme, setColorScheme] = useState<Theme>(
-    (initialTheme as Theme) || "os-default"
+    (initialTheme as Theme) || "os-default",
   );
   const [queuedExamples, setQueuedExamples] = useState<Set<string>>(new Set());
   const [queue, setQueue] = useState<QueueEntry[]>([]);
@@ -70,7 +70,7 @@ export function UIProvider(props: any) {
         return oldOverlays.size === overlays.size ? oldOverlays : overlays;
       });
     },
-    []
+    [],
   );
 
   React.useEffect(() => {

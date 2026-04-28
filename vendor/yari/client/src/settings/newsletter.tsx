@@ -57,8 +57,8 @@ export default function Newsletter() {
                     setLoading(true);
                     setEnabled(
                       await toggleNewsletterSubscription(
-                        Boolean(e.target.checked)
-                      )
+                        Boolean(e.target.checked),
+                      ),
                     );
                     setLoading(false);
                   }}

@@ -49,7 +49,7 @@ export class OfflineSettingsData {
     let settingsData: OfflineSettingsData | undefined;
     try {
       settingsData = JSON.parse(
-        window.localStorage.getItem(OFFLINE_SETTINGS_KEY) || "{}"
+        window.localStorage.getItem(OFFLINE_SETTINGS_KEY) || "{}",
       );
     } catch (err) {
       console.warn("Unable to read settings from localStorage", err);
@@ -231,7 +231,7 @@ export function UserDataProvider(props: { children: React.ReactNode }) {
         offlineSettings: null,
         mutate,
       };
-    }
+    },
   );
 
   React.useEffect(() => {

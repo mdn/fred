@@ -34,13 +34,13 @@ function groupHistory(history) {
   const now = new Date();
   const today = new Date(now.toDateString());
   const yesterday = new Date(
-    structuredClone(today).setDate(today.getDate() - 1)
+    structuredClone(today).setDate(today.getDate() - 1),
   );
   const last7Days = new Date(
-    structuredClone(today).setDate(today.getDate() - 7)
+    structuredClone(today).setDate(today.getDate() - 7),
   );
   const last30Days = new Date(
-    structuredClone(today).setDate(today.getDate() - 30)
+    structuredClone(today).setDate(today.getDate() - 30),
   );
   const groups = [
     { label: "Last 30 Days", d: last30Days },
@@ -123,10 +123,10 @@ function AIHelpHistorySubList({
                   icon="trash"
                   onClickHandler={async () => {
                     const confirmed = window.confirm(
-                      "Do you want to permanently delete this topic?"
+                      "Do you want to permanently delete this topic?",
                     );
                     gleanClick(
-                      `${AI_HELP}: history delete -> ${Number(confirmed)}`
+                      `${AI_HELP}: history delete -> ${Number(confirmed)}`,
                     );
                     if (confirmed) {
                       await fetch(`/api/v1/plus/ai/help/history/${chat_id}`, {
@@ -187,7 +187,7 @@ export function AIHelpHistoryInner({
     },
     {
       fallbackData: [],
-    }
+    },
   );
 
   const { label: currentChatLabel = "" } =
@@ -200,7 +200,7 @@ export function AIHelpHistoryInner({
           `/api/v1/plus/ai/help/history/summary/${messageId}`,
           {
             method: "POST",
-          }
+          },
         );
         if (res.ok) {
           await res.json();

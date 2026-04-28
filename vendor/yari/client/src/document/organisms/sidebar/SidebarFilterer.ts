@@ -14,14 +14,14 @@ export class SidebarFilterer {
 
   constructor(root: HTMLElement) {
     this.allHeadings = Array.from(
-      root.querySelectorAll<HTMLElement>("li strong")
+      root.querySelectorAll<HTMLElement>("li strong"),
     );
     this.allParents = Array.from(
-      root.querySelectorAll<HTMLDetailsElement>("details")
+      root.querySelectorAll<HTMLDetailsElement>("details"),
     );
 
     const links = Array.from(
-      root.querySelectorAll<HTMLAnchorElement>("a[href]")
+      root.querySelectorAll<HTMLAnchorElement>("a[href]"),
     );
 
     this.items = links.map((link) => ({
@@ -158,7 +158,7 @@ export class SidebarFilterer {
         }
       });
       const sortedRanges = Array.from(ranges.entries()).sort(
-        ([x1, y1], [x2, y2]) => x1 - x2 || y1 - y2
+        ([x1, y1], [x2, y2]) => x1 - x2 || y1 - y2,
       );
 
       const span = this.replaceChildNode(node, "span");
@@ -229,7 +229,7 @@ export class SidebarFilterer {
       .find(
         (candidate) =>
           candidate.compareDocumentPosition(el) &
-          Node.DOCUMENT_POSITION_FOLLOWING
+          Node.DOCUMENT_POSITION_FOLLOWING,
       );
   }
 

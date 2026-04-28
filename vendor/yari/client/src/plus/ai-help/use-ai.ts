@@ -112,7 +112,7 @@ export interface MessageTreeState {
 export function stateToMessagePath(
   state: MessageTreeState,
   path: number[],
-  traverseWithDefault: boolean = false
+  traverseWithDefault: boolean = false,
 ): Message[] {
   const [current = traverseWithDefault ? 0 : null, ...tail] = path || [];
   if (!state.root.length || current === null) {
@@ -124,7 +124,7 @@ export function stateToMessagePath(
 function messagePath(
   node: MessageTreeNode,
   path: number[],
-  traverseWithDefault: boolean = false
+  traverseWithDefault: boolean = false,
 ): Message[] {
   const [current = traverseWithDefault ? 0 : null, ...tail] = path;
   if (!node) {
@@ -361,7 +361,7 @@ export function useAiChat({
   const [lastUpdate, setLastUpdate] = useState(new Date());
   const [datas, dispatchData] = useReducer(
     (state: any[], value: any) => (value === null ? [] : [...state, value]),
-    []
+    [],
   );
 
   const [chatId, setChatId] = useState<string | undefined>();
@@ -389,7 +389,7 @@ export function useAiChat({
       mutate(AI_HELP_QUOTA_PATH);
       console.error(err);
     },
-    [gleanClick]
+    [gleanClick],
   );
 
   const reset = useCallback(() => {
@@ -414,7 +414,7 @@ export function useAiChat({
         prev.delete("c");
         return prev;
       },
-      { replace: true }
+      { replace: true },
     );
   }, [setSearchParams]);
 
@@ -441,13 +441,13 @@ export function useAiChat({
             window.clearTimeout(timeoutID);
             if (
               Object.values(treeState.nodes).some(
-                (node) => node.response.status === MessageStatus.InProgress
+                (node) => node.response.status === MessageStatus.InProgress,
               )
             ) {
               setLoadingState("responding");
               timeoutID = window.setTimeout(
                 () => updateHistory(),
-                RETRY_INTERVAL
+                RETRY_INTERVAL,
               );
             } else {
               setLoadingState("finished");
@@ -636,7 +636,7 @@ export function useAiChat({
         handleError(err);
       }
     },
-    [handleError, messageId]
+    [handleError, messageId],
   );
 
   const submit = useCallback(
@@ -644,7 +644,7 @@ export function useAiChat({
       query: string,
       chatId?: string,
       parentId?: string | null,
-      messageId?: string
+      messageId?: string,
     ) => {
       let newPath = messageId
         ? addSibling(state, messageId)
@@ -679,7 +679,7 @@ export function useAiChat({
       // Note that `dispatchMessage()` above does not change `messages` here yet.
       const completeMessagesAndUserQuery = stateToMessagePath(
         state,
-        newPath.slice(0, -1)
+        newPath.slice(0, -1),
       )
         .filter(({ status }) => status === MessageStatus.Complete)
         .map(({ role, content }) => ({ role, content }))
@@ -711,7 +711,7 @@ export function useAiChat({
 
       eventSourceRef.current = eventSource;
     },
-    [state, gleanClick, messageTemplate, handleError, handleEventData]
+    [state, gleanClick, messageTemplate, handleError, handleEventData],
   );
 
   useEffect(() => {
@@ -772,16 +772,16 @@ export function useAiChat({
       const index = siblings.findIndex((c) => c.messageId === messageId);
       if (dir === "next" && index < siblings.length - 1) {
         return setPath(
-          findPath(state, siblings[index + 1].messageId || messageId)
+          findPath(state, siblings[index + 1].messageId || messageId),
         );
       }
       if (dir === "prev" && index > 0) {
         return setPath(
-          findPath(state, siblings[index - 1].messageId || messageId)
+          findPath(state, siblings[index - 1].messageId || messageId),
         );
       }
     },
-    [state]
+    [state],
   );
 
   const siblingCount = useCallback(
@@ -799,7 +799,7 @@ export function useAiChat({
       const index = siblings.findIndex((c) => c.messageId === messageId);
       return { pos: index + 1, total: siblings.length };
     },
-    [state]
+    [state],
   );
 
   return {

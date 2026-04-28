@@ -5,7 +5,7 @@
 // - We cannot use /libs/env, because fs/path are not available client-side.
 
 export const DISABLE_AUTH = Boolean(
-  JSON.parse(process.env.REACT_APP_DISABLE_AUTH || "false")
+  JSON.parse(process.env.REACT_APP_DISABLE_AUTH || "false"),
 );
 
 /** Deprecated, don't export, use WRITER_MODE and/or DEV_MODE instead. */
@@ -15,17 +15,17 @@ const CRUD_MODE =
     : Boolean(
         JSON.parse(
           process.env.REACT_APP_CRUD_MODE ||
-            JSON.stringify(process.env.NODE_ENV === "development")
-        )
+            JSON.stringify(process.env.NODE_ENV === "development"),
+        ),
       );
 
 if (process.env.REACT_APP_CRUD_MODE) {
   console.warn(
-    "Warning: REACT_APP_CRUD_MODE is deprecated, set REACT_APP_WRITER_MODE and/or REACT_APP_DEV_MODE instead."
+    "Warning: REACT_APP_CRUD_MODE is deprecated, set REACT_APP_WRITER_MODE and/or REACT_APP_DEV_MODE instead.",
   );
 } else if (process.env.NODE_ENV === "development" && CRUD_MODE) {
   console.warn(
-    "Warning: setting REACT_APP_CRUD_MODE with NODE_ENV=development is deprecated, set REACT_APP_WRITER_MODE and/or REACT_APP_DEV_MODE instead."
+    "Warning: setting REACT_APP_CRUD_MODE with NODE_ENV=development is deprecated, set REACT_APP_WRITER_MODE and/or REACT_APP_DEV_MODE instead.",
   );
 }
 
@@ -51,21 +51,21 @@ export const PLAYGROUND_BASE_HOST =
   process.env.REACT_APP_PLAYGROUND_BASE_HOST || "mdnplay.dev";
 
 export const PLUS_IS_ENABLED = Boolean(
-  JSON.parse(process.env.REACT_APP_ENABLE_PLUS || "false")
+  JSON.parse(process.env.REACT_APP_ENABLE_PLUS || "false"),
 );
 
 export const NEWSLETTER_ENABLED = Boolean(
-  JSON.parse(process.env.REACT_APP_NEWSLETTER_ENABLED || "false")
+  JSON.parse(process.env.REACT_APP_NEWSLETTER_ENABLED || "false"),
 );
 
 export const PLACEMENT_ENABLED = Boolean(
-  JSON.parse(process.env.REACT_APP_PLACEMENT_ENABLED || "false")
+  JSON.parse(process.env.REACT_APP_PLACEMENT_ENABLED || "false"),
 );
 
 export const MDN_PLUS_SUBSCRIBE_URL_SP3_BASE =
   process.env.REACT_APP_MDN_PLUS_SUBSCRIBE_URL_SP3_BASE;
 export const MDN_PLUS_USE_SP3 = Boolean(
-  MDN_PLUS_SUBSCRIBE_URL_SP3_BASE || "false"
+  MDN_PLUS_SUBSCRIBE_URL_SP3_BASE || "false",
 );
 export const MDN_PLUS_SUBSCRIBE_5M_URL_SP3 = `${MDN_PLUS_SUBSCRIBE_URL_SP3_BASE}/${process.env.REACT_APP_MDN_PLUS_5M_SP3_ID}/monthly/landing`;
 export const MDN_PLUS_SUBSCRIBE_5Y_URL_SP3 = `${MDN_PLUS_SUBSCRIBE_URL_SP3_BASE}/${process.env.REACT_APP_MDN_PLUS_5Y_SP3_ID}/yearly/landing`;
@@ -104,13 +104,13 @@ export const UPDATES_BASE_URL =
 
 export const GLEAN_CHANNEL = process.env.REACT_APP_GLEAN_CHANNEL || "dev";
 export const GLEAN_DEBUG = Boolean(
-  JSON.parse(process.env.REACT_APP_GLEAN_DEBUG || "false")
+  JSON.parse(process.env.REACT_APP_GLEAN_DEBUG || "false"),
 );
 export const GLEAN_ENABLED = Boolean(
-  JSON.parse(process.env.REACT_APP_GLEAN_ENABLED || "false")
+  JSON.parse(process.env.REACT_APP_GLEAN_ENABLED || "false"),
 );
 export const GLEAN_LOG_CLICK = Boolean(
-  JSON.parse(process.env.REACT_APP_GLEAN_LOG_CLICK || "false")
+  JSON.parse(process.env.REACT_APP_GLEAN_LOG_CLICK || "false"),
 );
 
 export const AI_FEEDBACK_GITHUB_REPO =
@@ -121,10 +121,10 @@ export function survey_duration(surveyBucket: string): {
   end: number;
 } {
   const start = Number(
-    process.env[`REACT_APP_SURVEY_START_${surveyBucket}`] || 0
+    process.env[`REACT_APP_SURVEY_START_${surveyBucket}`] || 0,
   );
   const end = Number(
-    process.env[`REACT_APP_SURVEY_END_${surveyBucket}`] || Infinity
+    process.env[`REACT_APP_SURVEY_END_${surveyBucket}`] || Infinity,
   );
   return { start, end };
 }
@@ -134,10 +134,10 @@ export function survey_rates(surveyKey: string): {
   rateTill: number;
 } {
   const rateFrom = Number(
-    process.env[`REACT_APP_SURVEY_RATE_FROM_${surveyKey}`] || 0
+    process.env[`REACT_APP_SURVEY_RATE_FROM_${surveyKey}`] || 0,
   );
   const rateTill = Number(
-    process.env[`REACT_APP_SURVEY_RATE_TILL_${surveyKey}`] || 1
+    process.env[`REACT_APP_SURVEY_RATE_TILL_${surveyKey}`] || 1,
   );
   return { rateFrom, rateTill };
 }

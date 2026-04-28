@@ -22,5 +22,5 @@ export const clicked = new EventMetricType<{
     lifetime: "ping",
     disabled: false,
   },
-  ["source", "subscription_type"]
+  ["source", "subscription_type"],
 );

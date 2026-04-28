@@ -12,7 +12,7 @@ export default function UpdateButton({
   const current =
     updateStatus?.local?.date &&
     `Last updated: ${Intl.DateTimeFormat([], { dateStyle: "medium" }).format(
-      Date.parse(updateStatus?.local?.date)
+      Date.parse(updateStatus?.local?.date),
     )}`;
   let button: JSX.Element | null = null;
   let info: string | undefined;

@@ -26,18 +26,18 @@ export function codeToMarkdown(code: EditorContent): string {
 export async function initPlayIframe(
   iframe: HTMLIFrameElement | null,
   editorContent: EditorContent | null,
-  fullscreen: boolean = false
+  fullscreen: boolean = false,
 ) {
   if (!iframe || !editorContent) {
     return;
   }
   const { state, hash } = await compressAndBase64Encode(
-    JSON.stringify(editorContent)
+    JSON.stringify(editorContent),
   );
   const path = iframe.getAttribute("data-live-path");
   const url = new URL(
     `${path || ""}${path?.endsWith("/") ? "" : "/"}runner.html`,
-    window.location.origin
+    window.location.origin,
   );
   if (!window.location.hostname.endsWith("localhost")) {
     const host = PLAYGROUND_BASE_HOST.startsWith("localhost")
@@ -59,7 +59,7 @@ export async function initPlayIframe(
 
 function bytesToBase64(bytes: ArrayBuffer) {
   const binString = Array.from(new Uint8Array(bytes), (byte: number) =>
-    String.fromCodePoint(byte)
+    String.fromCodePoint(byte),
   ).join("");
   return btoa(binString);
 }
@@ -70,7 +70,7 @@ export async function compressAndBase64Encode(inputString: string) {
   const compressionStream = new CompressionStream("deflate-raw");
 
   const compressedStream = new Response(
-    inputArray.stream().pipeThrough(compressionStream)
+    inputArray.stream().pipeThrough(compressionStream),
   ).arrayBuffer();
 
   const compressed = await compressedStream;
@@ -107,7 +107,7 @@ export async function decompressFromBase64(base64String: string) {
   const decompressionStream = new DecompressionStream("deflate-raw");
 
   const decompressedStream = new Response(
-    new Blob([bytes]).stream().pipeThrough(decompressionStream)
+    new Blob([bytes]).stream().pipeThrough(decompressionStream),
   ).arrayBuffer();
 
   const state = new TextDecoder().decode(await decompressedStream);

@@ -59,7 +59,7 @@ const COLLECTIONS_ENDPOINT = "/api/v2/collections/";
 
 function getCollectionKey(
   id: string | undefined,
-  params?: URLSearchParams | Record<string, string>
+  params?: URLSearchParams | Record<string, string>,
 ) {
   if (!id) return;
   params = new URLSearchParams(params);
@@ -87,7 +87,7 @@ function getBookmarkKey(url: string | undefined) {
 
 function getItemKey(
   collection_id: string | undefined,
-  item_id: string | undefined
+  item_id: string | undefined,
 ) {
   return (
     collection_id &&
@@ -146,7 +146,7 @@ async function deleter(key: string | undefined): Promise<Response> {
 
 function useMutation<B, R>(
   mutator: (body: B) => Promise<R>,
-  success: (body: B) => void
+  success: (body: B) => void,
 ) {
   const [error, setError] = useState<Error>();
   const [isPending, setIsPending] = useState(false);
@@ -190,15 +190,15 @@ export function useCollections() {
   return useLoading(
     useSWR<Collection[]>(
       COLLECTIONS_ENDPOINT,
-      async (key: string) => await fetcher<MultipleCollectionInfo[]>(key)
-    )
+      async (key: string) => await fetcher<MultipleCollectionInfo[]>(key),
+    ),
   );
 }
 
 export function useCollection(id: string | undefined) {
   return useSWR<Collection>(
     getCollectionKey(id),
-    async (key: string) => await fetcher<MultipleCollectionResponse>(key)
+    async (key: string) => await fetcher<MultipleCollectionResponse>(key),
   );
 }
 
@@ -207,9 +207,9 @@ export function useCollectionCreate() {
     (collection) =>
       poster<MultipleCollectionCreationRequest, MultipleCollectionInfo>(
         COLLECTIONS_ENDPOINT,
-        collection
+        collection,
       ),
-    () => mutate(COLLECTIONS_ENDPOINT)
+    () => mutate(COLLECTIONS_ENDPOINT),
   );
 }
 
@@ -218,12 +218,12 @@ export function useCollectionEdit() {
     (collection) =>
       poster<MultipleCollectionCreationRequest, MultipleCollectionInfo>(
         getCollectionKey(collection.id),
-        collection
+        collection,
       ),
     ({ id }) => {
       mutate(COLLECTIONS_ENDPOINT);
       mutate(getCollectionKey(id));
-    }
+    },
   );
 }
 
@@ -233,7 +233,7 @@ export function useCollectionDelete() {
     ({ id }) => {
       mutate(COLLECTIONS_ENDPOINT);
       mutate(getCollectionKey(id));
-    }
+    },
   );
 }
 
@@ -254,7 +254,7 @@ export function useItems(id: string | undefined, initialSize = 1) {
     },
     {
       initialSize,
-    }
+    },
   );
   const pages = useData.data;
   const lastPageLength = (pages && pages[pages.length - 1]?.length) || 0;
@@ -281,7 +281,7 @@ export function useBookmark(url: string) {
           return { ...entry.item, collection_id: entry.collection_id };
         })
       );
-    }
+    },
   );
 }
 
@@ -289,29 +289,29 @@ export function useItemAdd() {
   return useMutation<NewItem, Response>(
     ({ collection_id, ...body }) =>
       poster<CollectionItemCreationRequest>(getItemsKey(collection_id), body),
-    ({ url }) => mutate(getBookmarkKey(url))
+    ({ url }) => mutate(getBookmarkKey(url)),
   );
 }
 
 export function useItemEdit(
-  scopedMutator?: KeyedMutator<Item[][]> | InfiniteKeyedMutator<Item[][]>
+  scopedMutator?: KeyedMutator<Item[][]> | InfiniteKeyedMutator<Item[][]>,
 ) {
   return useMutation<Item, Response>(
     ({ collection_id, id, ...body }) =>
       poster<CollectionItemModificationRequest>(
         getItemKey(collection_id, id),
-        body
+        body,
       ),
     ({ collection_id, url }) => {
       mutate(getCollectionKey(collection_id));
       mutate(getBookmarkKey(url));
       if (scopedMutator) scopedMutator();
-    }
+    },
   );
 }
 
 export function useItemDelete(
-  scopedMutator?: KeyedMutator<Item[][]> | InfiniteKeyedMutator<Item[][]>
+  scopedMutator?: KeyedMutator<Item[][]> | InfiniteKeyedMutator<Item[][]>,
 ) {
   return useMutation<Item, Response>(
     ({ collection_id, id }) => deleter(getItemKey(collection_id, id)),
@@ -319,6 +319,6 @@ export function useItemDelete(
       mutate(getCollectionKey(collection_id));
       mutate(getBookmarkKey(url));
       if (scopedMutator) scopedMutator();
-    }
+    },
   );
 }

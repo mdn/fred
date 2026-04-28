@@ -173,7 +173,7 @@ function AIHelpUserQuestion({
                 question,
                 message.chatId,
                 message.parentId,
-                message.messageId
+                message.messageId,
               );
             }
           }
@@ -365,7 +365,7 @@ function AIHelpAssistantResponse({
                 if (props.href?.startsWith("https://developer.mozilla.org/")) {
                   props.href = props.href.replace(
                     "https://developer.mozilla.org",
-                    ""
+                    "",
                   );
                 }
 
@@ -381,7 +381,7 @@ function AIHelpAssistantResponse({
                   gleanClick(
                     `${AI_HELP}: link ${
                       isExternal ? "external" : "internal"
-                    } -> ${props.href}`
+                    } -> ${props.href}`,
                   );
 
                 // Always open in new tab.
@@ -395,8 +395,8 @@ function AIHelpAssistantResponse({
                   .map(
                     (child) =>
                       /language-(\w+)/.exec(
-                        (child as ReactElement)?.props?.className || ""
-                      )?.[1]
+                        (child as ReactElement)?.props?.className || "",
+                      )?.[1],
                   )
                   .find(Boolean);
 
@@ -421,7 +421,7 @@ function AIHelpAssistantResponse({
                       <span className="language-name">{code}</span>
                       {message.status === MessageStatus.Complete &&
                         ["html", "js", "javascript", "css"].includes(
-                          code.toLowerCase()
+                          code.toLowerCase(),
                         ) && (
                           <div className="playlist">
                             <input
@@ -431,14 +431,14 @@ function AIHelpAssistantResponse({
                                 gleanClick(
                                   `${AI_HELP}: example ${
                                     isQueued ? "dequeue" : "queue"
-                                  } -> ${id}`
+                                  } -> ${id}`,
                                 );
                                 setQueue((old) =>
                                   !old.some((item) => item.id === id)
                                     ? [...old, createQueueEntry(id)].sort(
-                                        (a, b) => a.key - b.key
+                                        (a, b) => a.key - b.key,
                                       )
-                                    : [...old].filter((item) => item.id !== id)
+                                    : [...old].filter((item) => item.id !== id),
                                 );
                               }}
                               id={id}
@@ -458,7 +458,7 @@ function AIHelpAssistantResponse({
                                 const code = collectCode(input);
                                 sessionStorage.setItem(
                                   SESSION_KEY,
-                                  JSON.stringify(code)
+                                  JSON.stringify(code),
                                 );
                                 const url = new URL(window?.location.href);
                                 url.pathname = `/${locale}/play`;
@@ -642,7 +642,7 @@ export function AIHelpInner() {
     const messageIds = new Set(messages.map((m) => m.messageId));
     setQueue((old) => {
       const fresh = [...old].filter(({ id }) =>
-        messageIds.has(id.split("--")[0])
+        messageIds.has(id.split("--")[0]),
       );
 
       return fresh;
@@ -659,7 +659,7 @@ export function AIHelpInner() {
 
   const lastUserQuestion = useMemo(
     () => messages.filter((message) => message.role === "user").at(-1),
-    [messages]
+    [messages],
   );
   const retryLastQuestion = useCallback(() => {
     if (!lastUserQuestion) {
@@ -819,7 +819,7 @@ export function AIHelpInner() {
                               ? MESSAGE_ANSWERING
                               : hasConversation
                                 ? "Ask your follow up question"
-                                : "Ask your question"
+                                : "Ask your question",
                         )}
                       />
                       <div className="ai-help-input-actions">
@@ -838,7 +838,7 @@ export function AIHelpInner() {
                               gleanClick(
                                 `${AI_HELP}: ${
                                   previousChatId ? "topic return" : "cancel"
-                                }`
+                                }`,
                               );
                               unReset();
                             }}
@@ -965,7 +965,7 @@ export function AIHelpInner() {
                     key={index}
                     type="button"
                     className={["ai-help-example", `category-${category}`].join(
-                      " "
+                      " ",
                     )}
                     onClick={() => {
                       gleanClick(`${AI_HELP}: example ${1 + index}`);
@@ -1009,7 +1009,7 @@ function useAutoScroll(
   }: {
     bodyRef: MutableRefObject<HTMLElement | null>;
     footerRef: MutableRefObject<HTMLElement | null>;
-  }
+  },
 ) {
   const [autoScroll, setAutoScroll] = useState(false);
   const lastScrollY = useRef(0);
@@ -1104,9 +1104,9 @@ function ReportIssueOnGitHubLink({
     currentMessage.sources
       ?.map(
         (source) =>
-          `- [${source.title}](https://developer.mozilla.org${source.url})`
+          `- [${source.title}](https://developer.mozilla.org${source.url})`,
       )
-      .join("\n") || "(None)"
+      .join("\n") || "(None)",
   );
   // TODO Persist model in messages and read it from there.
   sp.set("model", isSubscriber ? "gpt-4o" : "gpt-4o mini");

@@ -32,7 +32,7 @@ function extractCookiesFromHeaders(headers) {
 
   const cookies = value.reduce(
     (reduced, header) => Object.assign(reduced, parse(header.value)),
-    {}
+    {},
   );
 
   return cookies;

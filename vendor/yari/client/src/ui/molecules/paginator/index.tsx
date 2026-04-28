@@ -90,7 +90,7 @@ export function Paginator({
           </span>
         ) : (
           <PageLink key={page} page={page} onClick={onClick} />
-        )
+        ),
       )}
       {Boolean(right.length) &&
         middle[middle.length - 1] + 1 !== right[0] &&

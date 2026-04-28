@@ -83,7 +83,7 @@ function Settings() {
     const mdnWorker = getMDNWorker();
     const isWorkerBusy = status?.phase
       ? ![ContentStatusPhase.INITIAL, ContentStatusPhase.IDLE].includes(
-          status?.phase
+          status?.phase,
         )
       : false;
     mdnWorker.toggleKeepAlive(isWorkerBusy);

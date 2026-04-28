@@ -45,7 +45,7 @@ export const ArticleActions = ({
 
   useEffect(
     () => toggleMobileOverlay(Overlay.ArticleActions, showArticleActionsMenu),
-    [showArticleActionsMenu, toggleMobileOverlay]
+    [showArticleActionsMenu, toggleMobileOverlay],
   );
 
   // @TODO we will need the following when including the language drop-down

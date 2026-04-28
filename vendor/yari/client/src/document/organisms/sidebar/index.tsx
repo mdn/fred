@@ -46,7 +46,7 @@ export function SidebarContainer({
       [sidebar, sidebar.querySelector(".sidebar-inner-nav")].forEach((n) =>
         n?.scrollTo({
           top: currentSidebarItem.offsetTop - window.innerHeight / 4,
-        })
+        }),
       );
     }
   }, []);

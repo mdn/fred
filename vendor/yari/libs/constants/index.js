@@ -1,7 +1,7 @@
 export const VALID_LOCALES = new Map(
   ["de", "en-US", "es", "fr", "ja", "ko", "pt-BR", "ru", "zh-CN", "zh-TW"].map(
-    (x) => [x.toLowerCase(), x]
-  )
+    (x) => [x.toLowerCase(), x],
+  ),
 );
 
 export const RETIRED_LOCALES = new Map(
@@ -29,7 +29,7 @@ export const RETIRED_LOCALES = new Map(
     "tr",
     "uk",
     "vi",
-  ].map((x) => [x.toLowerCase(), x])
+  ].map((x) => [x.toLowerCase(), x]),
 );
 
 export const DEFAULT_LOCALE = "en-US";
@@ -228,10 +228,10 @@ export function createRegExpFromExtensions(...extensions) {
 }
 
 export const ANY_ATTACHMENT_REGEXP = createRegExpFromExtensions(
-  ...ANY_ATTACHMENT_EXT
+  ...ANY_ATTACHMENT_EXT,
 );
 export const BINARY_ATTACHMENT_REGEXP = createRegExpFromExtensions(
-  ...BINARY_ATTACHMENT_EXT
+  ...BINARY_ATTACHMENT_EXT,
 );
 
 // -----

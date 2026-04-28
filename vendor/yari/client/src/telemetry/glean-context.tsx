@@ -225,7 +225,7 @@ export function useGleanClick() {
         subscriptionType: userData?.subscriptionType || "none",
       });
     },
-    [glean, userData?.subscriptionType]
+    [glean, userData?.subscriptionType],
   );
 }
 

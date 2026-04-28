@@ -34,7 +34,7 @@ export const Breadcrumbs = ({ parents }: { parents: DocParent[] }) => {
                   gleanClick(
                     `${BREADCRUMB_CLICK}: ${parents.length - i}/${
                       parents.length
-                    }`
+                    }`,
                   )
                 }
               >

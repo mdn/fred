@@ -18,7 +18,7 @@ export class MDNWorker {
     }
     if (this.settings.offline) {
       this.enableServiceWorker(
-        this.settings.preferOnline ? SwType.PreferOnline : SwType.PreferOffline
+        this.settings.preferOnline ? SwType.PreferOnline : SwType.PreferOffline,
       );
     } else {
       this.disableServiceWorker();
@@ -63,7 +63,7 @@ export class MDNWorker {
 
   registerMessageHandler() {
     navigator.serviceWorker.addEventListener("message", (e) =>
-      this.messageHandler(e)
+      this.messageHandler(e),
     );
   }
 
@@ -98,7 +98,7 @@ export class MDNWorker {
       console.log("[worker] keepalive -> disabling");
       this.keepAlive = setInterval(
         () => this.controller()?.postMessage({ type: "keepalive" }),
-        10000
+        10000,
       );
     }
   }
@@ -112,7 +112,7 @@ export class MDNWorker {
   }
 
   async setOfflineSettings(
-    settingsData: Partial<OfflineSettingsData>
+    settingsData: Partial<OfflineSettingsData>,
   ): Promise<OfflineSettingsData> {
     const current = this.offlineSettings();
 
@@ -121,7 +121,7 @@ export class MDNWorker {
       await this.enableServiceWorker(
         settingsData.preferOnline || current.preferOnline
           ? SwType.PreferOnline
-          : SwType.PreferOffline
+          : SwType.PreferOffline,
       );
     } else if (
       "preferOnline" in settingsData &&
@@ -129,7 +129,7 @@ export class MDNWorker {
     ) {
       await this.disableServiceWorker();
       await this.enableServiceWorker(
-        settingsData.preferOnline ? SwType.PreferOnline : SwType.PreferOffline
+        settingsData.preferOnline ? SwType.PreferOnline : SwType.PreferOffline,
       );
     }
     if (current.offline && settingsData.offline === false) {

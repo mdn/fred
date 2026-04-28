@@ -102,7 +102,7 @@ export function useUpdates() {
       revalidateOnFocus: false,
       revalidateIfStale: false,
       revalidateOnReconnect: false,
-    }
+    },
   );
 }
 
@@ -123,6 +123,6 @@ export function useBCD(path: string) {
       revalidateOnFocus: false,
       revalidateIfStale: false,
       revalidateOnReconnect: false,
-    }
+    },
   );
 }

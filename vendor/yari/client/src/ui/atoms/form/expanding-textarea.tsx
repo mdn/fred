@@ -14,7 +14,7 @@ type AreaProps = DetailedHTMLProps<
 
 const ExpandingTextarea = forwardRef(function ExpandingTextarea(
   props: AreaProps | { enterKeyHint: string },
-  ref
+  ref,
 ) {
   const { value } = props as AreaProps;
   const textAreaRef = useRef<HTMLTextAreaElement>(null);

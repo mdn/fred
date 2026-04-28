@@ -39,7 +39,7 @@ export function useCollectSample(doc: any) {
     }
     document
       .querySelectorAll(
-        "section > *:not(#syntax) ~ * .example-header:not(.play-sample)"
+        "section > *:not(#syntax) ~ * .example-header:not(.play-sample)",
       )
       .forEach((header) => {
         addCollectButton(header, "collect", locale);
@@ -87,7 +87,7 @@ export function useRunSample(doc: Doc | undefined) {
         iframe.parentElement?.querySelector(".example-header") || null,
         id,
         code,
-        locale
+        locale,
       );
       const fullscreen = hash === `#livesample_fullscreen=${id}`;
       initPlayIframe(iframe, code, fullscreen);
@@ -111,7 +111,7 @@ export function useDecorateCodeExamples(doc: Doc | undefined) {
         // addExplainButton(header, element);
         if (!navigator.clipboard) {
           console.log(
-            "Copy-to-clipboard disabled because your browser does not appear to support it."
+            "Copy-to-clipboard disabled because your browser does not appear to support it.",
           );
           return;
         } else {
@@ -120,7 +120,7 @@ export function useDecorateCodeExamples(doc: Doc | undefined) {
         import("./code/syntax-highlight").then(({ highlightElement }) => {
           highlightElement(
             element,
-            header?.querySelector(".language-name")?.textContent || "plain"
+            header?.querySelector(".language-name")?.textContent || "plain",
           );
         });
       });
@@ -137,7 +137,7 @@ export function useStickyHeaderHeight() {
 
   useEffect(() => {
     const header = document.getElementsByClassName(
-      "sticky-header-container"
+      "sticky-header-container",
     )?.[0];
     if (!header) {
       return;
@@ -168,7 +168,7 @@ export function useStickyHeaderHeight() {
  */
 export function useFirstVisibleElement(
   observedElementsProvider: () => Element[],
-  visibleElementCallback: (firstVisibleElement: Element | null) => void
+  visibleElementCallback: (firstVisibleElement: Element | null) => void,
 ) {
   const [firstVisibleElement, setFirstVisibleElement] =
     useState<Element | null>(null);
@@ -215,7 +215,7 @@ export function useFirstVisibleElement(
       {
         rootMargin,
         threshold: [0.0, 1.0],
-      }
+      },
     );
 
     observedElements.forEach((element) => {

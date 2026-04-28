@@ -1,6 +1,6 @@
 export function addCopyToClipboardButton(
   element: Element,
-  header: Element | null | undefined
+  header: Element | null | undefined,
 ) {
   if (!header || header.querySelector(".copy-icon")) return;
 
@@ -28,7 +28,7 @@ export function addCopyToClipboardButton(
     } catch (err) {
       console.error(
         "Error when trying to use navigator.clipboard.writeText()",
-        err
+        err,
       );
       copiedSuccessfully = false;
     }
@@ -45,7 +45,7 @@ export function addCopyToClipboardButton(
       () => {
         hideCopiedMessage(header);
       },
-      copiedSuccessfully ? 1000 : 3000
+      copiedSuccessfully ? 1000 : 3000,
     );
   };
 }
@@ -66,7 +66,7 @@ function hideCopiedMessage(wrapper: Element) {
 function getCopiedMessageElement(wrapper: Element) {
   const className = "copy-icon-message";
   let element: HTMLSpanElement | null = wrapper.querySelector(
-    `span.${className}`
+    `span.${className}`,
   );
   if (!element) {
     element = document.createElement("span");

@@ -32,7 +32,7 @@ function isPreviouslySubmitted(feature: string, key?: string): boolean {
 function markPreviouslySubmitted(
   feature: string,
   value: boolean,
-  key?: string
+  key?: string,
 ) {
   try {
     const db = getPreviouslySubmitted();
@@ -78,7 +78,7 @@ export function GleanThumbs({
 
   useEffect(() => {
     setPreviouslySubmitted(
-      !permanent && isPreviouslySubmitted(feature, featureKey)
+      !permanent && isPreviouslySubmitted(feature, featureKey),
     );
   }, [feature, featureKey, permanent, setPreviouslySubmitted]);
 

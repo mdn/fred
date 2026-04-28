@@ -56,7 +56,7 @@ export function useOnClickOutside(ref, handler) {
     // ... callback/cleanup to run every render. It's not a big deal ...
     // ... but to optimize you can wrap handler in useCallback before ...
     // ... passing it into this hook.
-    [ref, handler]
+    [ref, handler],
   );
 }
 
@@ -113,7 +113,7 @@ export function useTrueOnlineStatus(): {
   isOffline: boolean;
 } {
   const [isOnline, setIsOnline] = useState<boolean>(
-    typeof window === "undefined" ? false : window.navigator.onLine
+    typeof window === "undefined" ? false : window.navigator.onLine,
   );
   const isOffline = useMemo(() => !isOnline, [isOnline]);
 
@@ -200,7 +200,7 @@ export function usePing() {
         // fetch offline settings from local storage as its
         // values are very inconsistent in the user context
         const offlineSettings = JSON.parse(
-          localStorage.getItem(OFFLINE_SETTINGS_KEY) || "{}"
+          localStorage.getItem(OFFLINE_SETTINGS_KEY) || "{}",
         );
         if (offlineSettings?.offline) params.set("offline", "true");
 
@@ -244,7 +244,7 @@ export function usePageVisibility() {
 
 export function useIsIntersecting(
   node: HTMLElement | undefined,
-  options: IntersectionObserverInit
+  options: IntersectionObserverInit,
 ) {
   const [isIntersectingState, setIsIntersectingState] = useState(false);
   useEffect(() => {
@@ -286,7 +286,7 @@ export function useViewed(
     root: null,
     rootMargin: "0px",
     threshold: 0.5,
-  }
+  },
 ) {
   const timer = useRef<ViewedTimer>({ timeout: null });
   const isVisible = usePageVisibility();

@@ -45,12 +45,12 @@ function getFrequentlyViewed(): FrequentlyViewedEntry[] {
   } catch (err) {
     console.warn(
       "Unable to read frequently viewed documents from localStorage",
-      err
+      err,
     );
   }
 
   const entries = JSON.parse(
-    frequentlyViewed || "[]"
+    frequentlyViewed || "[]",
   ) as FrequentlyViewedEntry[];
 
   //Remove all timestamps older than 30 days and any pages with no more hits.
@@ -61,19 +61,19 @@ function setFrequentlyViewed(frequentlyViewed: FrequentlyViewedEntry[]) {
   try {
     localStorage.setItem(
       FREQUENTLY_VIEWED_STORAGE_KEY,
-      JSON.stringify(frequentlyViewed)
+      JSON.stringify(frequentlyViewed),
     );
   } catch (err) {
     console.warn(
       "Failed to write frequently viewed documents to localStorage",
-      err
+      err,
     );
   }
 }
 
 const sortByVisitsThenTimestampsDesc = (
   first: FrequentlyViewedEntry,
-  second: FrequentlyViewedEntry
+  second: FrequentlyViewedEntry,
 ) => {
   //'Each timestamp represents one visit. The first is the most recent visit.
   if (first.timestamps.length > second.timestamps.length) return -1;
@@ -89,13 +89,15 @@ const sortByVisitsThenTimestampsDesc = (
 };
 
 function getNextFrequentlyViewedSerial(
-  entries: OldFrequentlyViewedEntry[] | FrequentlyViewedEntry[]
+  entries: OldFrequentlyViewedEntry[] | FrequentlyViewedEntry[],
 ): number {
   return (
     1 +
     Math.max(
       0,
-      ...entries.map((entry) => entry.serial).filter((serial) => !isNaN(serial))
+      ...entries
+        .map((entry) => entry.serial)
+        .filter((serial) => !isNaN(serial)),
     )
   );
 }
@@ -103,7 +105,7 @@ function getNextFrequentlyViewedSerial(
 export function useFrequentlyViewed(
   limit: number = 0,
   offset: number = 10,
-  setEnd?: (bool: boolean) => void
+  setEnd?: (bool: boolean) => void,
 ): FrequentlyViewedCollection {
   const [collection, setCollection] = useState<FrequentlyViewedCollection>({
     article_count: 0,
@@ -152,13 +154,13 @@ function migrateOld() {
   } catch (err) {
     console.warn(
       "Unable to read frequently viewed documents from localStorage",
-      err
+      err,
     );
     return;
   }
 
   const entries = JSON.parse(
-    frequentlyViewed || "[]"
+    frequentlyViewed || "[]",
   ) as OldFrequentlyViewedEntry[];
 
   if (entries.length === 0) {
@@ -214,7 +216,7 @@ export function useIncrementFrequentlyViewed(doc: Doc | undefined) {
     let frequentlyViewed = getFrequentlyViewed();
 
     const foundEntry = frequentlyViewed.find(
-      (entry) => entry.url === doc.mdn_url
+      (entry) => entry.url === doc.mdn_url,
     );
 
     if (foundEntry) {
@@ -249,7 +251,7 @@ const filterFrequentlyViewed = (frequentlyViewed: FrequentlyViewedEntry[]) => {
       return {
         ...fv,
         timestamps: fv.timestamps.filter((ts) =>
-          isWithinLastThirtyDays(new Date(ts))
+          isWithinLastThirtyDays(new Date(ts)),
         ),
       };
     })

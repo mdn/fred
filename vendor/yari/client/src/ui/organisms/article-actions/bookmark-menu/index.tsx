@@ -131,7 +131,7 @@ function BookmarkMenuDropdown({
   const { resetErrors, errors, isPending } = combineMutationStatus(
     addStatus,
     editStatus,
-    deleteStatus
+    deleteStatus,
   );
 
   useEffect(() => {
@@ -166,7 +166,7 @@ function BookmarkMenuDropdown({
     } else {
       const item = savedItems?.find((item) => item.collection_id === value);
       const previousItem = savedItems?.find(
-        (item) => item.collection_id === formItem.collection_id
+        (item) => item.collection_id === formItem.collection_id,
       );
       const modifiedNotes =
         savedItems && previousItem?.notes !== formItem.notes;
@@ -178,7 +178,7 @@ function BookmarkMenuDropdown({
           collection_id: value,
           notes: modifiedNotes ? formItem.notes : defaultItem.notes,
           title: modifiedTitle ? formItem.title : defaultItem.title,
-        }
+        },
       );
     }
   };
@@ -186,7 +186,7 @@ function BookmarkMenuDropdown({
   const changeHandler = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -204,7 +204,7 @@ function BookmarkMenuDropdown({
     savedItems.some((item) => item.collection_id === formItem.collection_id);
 
   const saveHandler = async (
-    e: React.FormEvent<HTMLFormElement> | React.BaseSyntheticEvent
+    e: React.FormEvent<HTMLFormElement> | React.BaseSyntheticEvent,
   ) => {
     e.preventDefault();
     if (!collections || isPending) return;
@@ -225,7 +225,7 @@ function BookmarkMenuDropdown({
     resetErrors();
     if (isCurrentInCollection()) {
       const selectedItem = savedItems?.find(
-        (item) => item.collection_id === formItem.collection_id
+        (item) => item.collection_id === formItem.collection_id,
       );
       if (selectedItem) {
         await deleteItem(selectedItem);
@@ -278,7 +278,7 @@ function BookmarkMenuDropdown({
                   onFocus={() => {
                     if (!focusEventTriggered) {
                       gleanClick(
-                        PLUS_COLLECTIONS.ARTICLE_ACTIONS_SELECT_OPENED
+                        PLUS_COLLECTIONS.ARTICLE_ACTIONS_SELECT_OPENED,
                       );
                       setFocusEventTriggered(true);
                     }
@@ -289,7 +289,7 @@ function BookmarkMenuDropdown({
                     /** Todo remove hard coded name post Migration */
                     <option key={collection.id} value={collection.id}>
                       {savedItems?.some(
-                        (item) => item.collection_id === collection.id
+                        (item) => item.collection_id === collection.id,
                       )
                         ? "★"
                         : "☆"}{" "}

@@ -87,7 +87,7 @@ export function switchTheme(theme: Theme, set: (theme: Theme) => void) {
 
     setTimeout(() => {
       const meta = document.querySelector<HTMLMetaElement>(
-        'meta[name="theme-color"]'
+        'meta[name="theme-color"]',
       );
       const color = getComputedStyle(document.body).backgroundColor;
       if (meta && color) {
@@ -182,7 +182,7 @@ export function setCookieValue(
     expires,
     maxAge,
     path = "/",
-  }: { expires?: Date; maxAge?: number; path?: string }
+  }: { expires?: Date; maxAge?: number; path?: string },
 ) {
   const cookieValue = [
     `${name}=${value}`,

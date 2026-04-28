@@ -64,7 +64,7 @@ export const Submenu = ({
                   }`}
                   onClick={() =>
                     gleanClick(
-                      `${MENU.CLICK_SUBMENU}: ${menuEntry.id} -> ${item.url}`
+                      `${MENU.CLICK_SUBMENU}: ${menuEntry.id} -> ${item.url}`,
                     )
                   }
                 >

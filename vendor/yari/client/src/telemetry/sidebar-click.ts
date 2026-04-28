@@ -2,7 +2,7 @@ import { SIDEBAR_CLICK, SIDEBAR_CLICK_WITH_FILTER } from "./constants";
 
 export function handleSidebarClick(
   event: MouseEvent,
-  record: (source: string) => void
+  record: (source: string) => void,
 ) {
   const payload = getClickPayload(event);
   if (payload) {
@@ -46,7 +46,7 @@ function getClickPayload(event: MouseEvent) {
 
 export function getSidebarFilterValue() {
   const input = document.querySelector<HTMLInputElement>(
-    "#sidebar-filter-input"
+    "#sidebar-filter-input",
   );
   return input?.value;
 }

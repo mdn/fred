@@ -51,7 +51,7 @@ function StaticPage({
       fallbackData,
       revalidateOnFocus: DEV_MODE,
       revalidateOnMount: !fallbackData,
-    }
+    },
   );
 
   React.useEffect(() => {

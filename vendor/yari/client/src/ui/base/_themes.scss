@@ -193,16 +193,16 @@
   --ai-help-icon: #{$mdn-color-light-theme-green-50};
   --ai-help-accent-background-color: #{$mdn-color-light-theme-green-50}10;
 
---form-limit-color: #{$mdn-color-neutral-60};
+  --form-limit-color: #{$mdn-color-neutral-60};
   --form-limit-color-emphasis: #{$mdn-color-neutral-70};
   --form-invalid-color: #{$mdn-color-light-theme-red-60};
   --form-invalid-focus-color: #{$mdn-color-light-theme-red-50};
   --form-invalid-focus-effect-color: #{rgba($mdn-color-light-theme-red-50, 0.2)};
 
-color-scheme: light;
+  color-scheme: light;
 
   @media (min-width: $screen-md) {
-}
+  }
 }
 
 @mixin dark-theme {
@@ -395,16 +395,16 @@ color-scheme: light;
   --ai-help-icon: #{$mdn-color-dark-theme-green-30};
   --ai-help-accent-background-color: #{$mdn-color-light-theme-green-50}30;
 
---form-limit-color: #{$mdn-color-neutral-40};
+  --form-limit-color: #{$mdn-color-neutral-40};
   --form-limit-color-emphasis: #{$mdn-color-neutral-30};
   --form-invalid-color: #{$mdn-color-light-theme-red-30};
   --form-invalid-focus-color: #{$mdn-color-light-theme-red-40};
   --form-invalid-focus-effect-color: #{rgba($mdn-color-light-theme-red-40, 0.2)};
 
-color-scheme: dark;
+  color-scheme: dark;
 
   @media (min-width: $screen-md) {
-}
+  }
 }
 
 body,

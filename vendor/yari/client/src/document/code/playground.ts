@@ -63,7 +63,7 @@ export function addBreakoutButton(
   element: Element | null,
   id: string,
   code: EditorContent,
-  locale: string
+  locale: string,
 ) {
   if (!element || !element.querySelector("play-sample")) {
     element?.classList.add("play-sample");
@@ -111,7 +111,7 @@ export function collectCode(input?: HTMLInputElement): EditorContent {
       .map((pre) =>
         pre?.classList.contains("js") || pre?.classList.contains("javascript")
           ? pre.textContent
-          : null
+          : null,
       )
       .filter(Boolean)
       .join("\n"),
@@ -128,7 +128,7 @@ export function collectCode(input?: HTMLInputElement): EditorContent {
 
 export function highlight(
   header: Element,
-  highlightedQueueExample: string | null
+  highlightedQueueExample: string | null,
 ) {
   // Highlight the header if it's the one we're mouse-overing
   // on the corresponding item in the queue.
@@ -143,7 +143,7 @@ export function highlight(
 export function addCollectButton(
   element: Element | null,
   id: string,
-  locale: string
+  locale: string,
 ) {
   if (!element || !element.querySelector("play-collect")) {
     element?.classList.add("play-collect");
@@ -153,7 +153,7 @@ export function addCollectButton(
   if (!element || element.querySelector(".play-button")) return;
   if (
     [...(element.nextElementSibling?.classList.values() || [])].filter((c) =>
-      ["js", "javascript", "css", "html"].includes(c)
+      ["js", "javascript", "css", "html"].includes(c),
     ).length === 0
   ) {
     return;
@@ -206,7 +206,7 @@ export function addCollectButton(
 
 function codeForHeading(
   heading: Element,
-  src: string
+  src: string,
 ): { code: EditorContent; nodes: Element[] } | null {
   const section = sectionForHeading(heading);
 
@@ -247,7 +247,7 @@ function getLanguage(node: Element): string | null {
 
 export function getCodeAndNodesForIframeBySampleClass(
   cls: string,
-  src: string
+  src: string,
 ) {
   const code: EditorContent = {
     css: "",
@@ -267,7 +267,7 @@ export function getCodeAndNodesForIframeBySampleClass(
       empty = false;
       nodes.push(pre);
       code[lang] += pre.textContent;
-    }
+    },
   );
   return empty ? null : { code, nodes };
 }
@@ -275,7 +275,7 @@ export function getCodeAndNodesForIframeBySampleClass(
 export function getCodeAndNodesForIframe(
   id: string,
   iframe: Element,
-  src: string
+  src: string,
 ) {
   let heading = document.getElementById(id) || closestHeading(iframe);
   if (!heading) {

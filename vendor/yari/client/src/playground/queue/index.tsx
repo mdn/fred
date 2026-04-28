@@ -87,7 +87,7 @@ export function PlayQueue({
     setQueue(
       elements
         .filter((e) => e.checked)
-        .map((e) => createQueueEntry(e, elements))
+        .map((e) => createQueueEntry(e, elements)),
     );
   }, [setQueue]);
 
@@ -163,7 +163,7 @@ const LANG_MAPPING = {
 
 export function createQueueEntry(
   elementOrId: HTMLInputElement | string,
-  elements?: HTMLInputElement[]
+  elements?: HTMLInputElement[],
 ) {
   const e =
     elementOrId instanceof HTMLInputElement

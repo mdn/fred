@@ -8,7 +8,7 @@ export type PLUS_SETTINGS = {
 };
 
 export async function toggleNewsletterSubscription(
-  subscribed: boolean
+  subscribed: boolean,
 ): Promise<boolean | null> {
   try {
     const res = await fetch(NEWSLETTER_BASE_PATH, {
