@@ -5,6 +5,7 @@ import {
   GLEAN_DEBUG,
   GLEAN_ENABLED,
 } from "../components/env/index.js";
+import { ViewedTracker } from "../components/viewed-controller/viewed-tracker.js";
 import { gleanClick } from "../utils/glean.js";
 import { userIsOptedOut } from "../utils/telemetry-opt-out.js";
 
@@ -39,31 +40,19 @@ document.addEventListener("toggle", (event) => {
 });
 
 // data-glean-view
-const viewedElements = new WeakSet();
-const viewObserver = new IntersectionObserver(
-  (entries) => {
-    for (const entry of entries) {
-      if (
-        entry.isIntersecting &&
-        entry.target instanceof HTMLElement &&
-        !viewedElements.has(entry.target)
-      ) {
-        const gleanId = entry.target.dataset.gleanView;
-        if (gleanId) {
-          viewedElements.add(entry.target);
-          gleanClick(gleanId);
-          viewObserver.unobserve(entry.target);
-        }
-      }
-    }
-  },
-  { threshold: 0.5 },
-);
-
-for (const element of document.querySelectorAll("[data-glean-view]")) {
+for (const element of /** @type {NodeListOf<HTMLElement>} */ (
+  document.querySelectorAll("[data-glean-view]")
+)) {
   // Excludes shadow DOM, and elements added after page load.
   // For custom elements, use `ViewedController()` instead.
-  viewObserver.observe(element);
+  const gleanId = element.dataset.gleanView;
+  if (gleanId) {
+    const tracker = new ViewedTracker(element, () => {
+      gleanClick(gleanId);
+      tracker.disconnect();
+    });
+    tracker.connect();
+  }
 }
 
 // data-glean-id
