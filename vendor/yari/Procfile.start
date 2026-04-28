@@ -1,2 +1,0 @@
-server: yarn start:server
-web: yarn start:client

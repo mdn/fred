@@ -1,4 +1,0 @@
-server: yarn start:server
-type-check: cd client && tsc --noEmit --watch
-web: yarn start:client
-ssr: yarn watch:ssr
