@@ -5,7 +5,6 @@ import { useUIStatus } from "../../../ui-context";
 
 import "./index.scss";
 import { TOC } from "../toc";
-import { SidebarFilter } from "./filter";
 
 export function SidebarContainer({
   doc,
@@ -38,25 +37,9 @@ export function SidebarContainer({
     }
   }, [isSidebarOpen]);
 
-  useEffect(() => {
-    const sidebar = document.querySelector("#sidebar-quicklinks");
-    const currentSidebarItem = sidebar?.querySelector("em");
-    if (sidebar && currentSidebarItem) {
-      [sidebar, sidebar.querySelector(".sidebar-inner-nav")].forEach((n) =>
-        n?.scrollTo({
-          top: currentSidebarItem.offsetTop - window.innerHeight / 4,
-        }),
-      );
-    }
-  }, []);
-
   return (
     <>
-      <aside
-        id="sidebar-quicklinks"
-        className={classes}
-        data-macro={doc.sidebarMacro}
-      >
+      <aside id="sidebar-quicklinks" className={classes}>
         <Button
           extraClasses="backdrop"
           type="action"
@@ -64,11 +47,6 @@ export function SidebarContainer({
           aria-label="Collapse sidebar"
         />
         <nav aria-label={label} className="sidebar-inner">
-          {doc.sidebarHTML && (
-            <header className="sidebar-actions">
-              <SidebarFilter />
-            </header>
-          )}
           <div className="sidebar-inner-nav">
             <div className="in-nav-toc">
               {doc.toc && !!doc.toc.length && (
