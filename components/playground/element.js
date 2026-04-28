@@ -342,6 +342,7 @@ ${"```"}`,
                   @click=${this._share}
                   ?disabled=${!hasCode}
                   data-id="share"
+                  data-glean-id="playground: share-click"
                   >${this.l10n("playground-share")`Share`}</mdn-button
                 >
                 <mdn-button
@@ -356,6 +357,7 @@ ${"```"}`,
                       variant="secondary"
                       @click=${this._reset}
                       ?disabled=${!isResettable}
+                      data-glean-id="playground: reset-click"
                       >${this.l10n("playground-reset")`Reset`}</mdn-button
                     >`
                   : nothing}
@@ -391,6 +393,7 @@ ${"```"}`,
                       @click=${this._reportOpen}
                       variant="secondary"
                       .icon=${warningIcon}
+                      data-glean-id="playground: flag-click"
                     >
                       ${this.l10n(
                         "playground-seeing-something-inappropriate",
@@ -437,8 +440,14 @@ ${"```"}`,
             )`Share your code via Permalink`}
           </h2>
           ${this._user.render({
-            initial: () => html`<mdn-login-button></mdn-login-button>`,
-            pending: () => html`<mdn-login-button></mdn-login-button>`,
+            initial: () =>
+              html`<mdn-login-button
+                data-glean-id="playground: banner-login"
+              ></mdn-login-button>`,
+            pending: () =>
+              html`<mdn-login-button
+                data-glean-id="playground: banner-login"
+              ></mdn-login-button>`,
             complete: (user) =>
               user.isAuthenticated
                 ? this._permalink && !isResettable
@@ -453,12 +462,16 @@ ${"```"}`,
                         )`Copy to clipboard`}</mdn-button
                       >
                     `
-                  : html`<mdn-button @click=${this._createPermalink}
+                  : html`<mdn-button
+                      @click=${this._createPermalink}
+                      data-glean-id="playground: share-permalink"
                       >${this.l10n(
                         "playground-create-link",
                       )`Create link`}</mdn-button
                     >`
-                : html`<mdn-login-button></mdn-login-button>`,
+                : html`<mdn-login-button
+                    data-glean-id="playground: banner-login"
+                  ></mdn-login-button>`,
           })}
         </section>
       </mdn-modal>
