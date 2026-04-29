@@ -1,7 +1,6 @@
 .generic-toc {
   --color-accent: var(--color-blue-50);
   --color-background-accent: var(--color-background-blue);
-  --color-border-items: light-dark(var(--color-gray-80), var(--color-gray-20));
 
   .generic-toc__header {
     padding: 0.75em 0;

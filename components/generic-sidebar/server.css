@@ -1,7 +1,6 @@
 .generic-sidebar {
   --color-accent: var(--color-blue-50);
   --color-background-accent: var(--color-background-blue);
-  --color-border-items: light-dark(var(--color-gray-80), var(--color-gray-20));
   margin-bottom: 2rem;
 
   .generic-sidebar__header {
