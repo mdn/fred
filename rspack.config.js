@@ -133,6 +133,7 @@ const common = {
   module: {
     parser: {
       javascript: {
+        exportsPresence: "warn",
         url: "relative",
       },
     },
