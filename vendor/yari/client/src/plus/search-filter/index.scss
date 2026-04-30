@@ -1,0 +1,67 @@
+@use "../../ui/vars" as *;
+
+.search-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem 0;
+
+  &.inline-on-mobile {
+    flex-wrap: nowrap;
+
+    .search-filter-category {
+      width: auto;
+    }
+  }
+
+  [type="search"] {
+    flex: 1;
+  }
+}
+
+.search-filter-category {
+  position: relative;
+  width: calc(50% - 0.25rem);
+
+  > .button,
+  .dropdown-list {
+    width: 100%;
+  }
+
+  .button-wrap {
+    font-size: var(--type-smaller-font-size);
+    white-space: nowrap;
+  }
+
+  .action {
+    > span:before {
+      content: "✓";
+    }
+
+    &:not(.active-menu-item) > span:before {
+      visibility: hidden;
+    }
+  }
+}
+
+@media (min-width: $screen-md) {
+  .search-filter {
+    flex-wrap: nowrap;
+  }
+
+  .search-filter .submenu {
+    max-width: max-content;
+    right: 0;
+  }
+
+  .search-filter-category,
+  .search-filter-category .dropdown-list {
+    width: auto;
+  }
+
+  .search-filter-category .dropdown-list.filters-menu {
+    left: auto;
+    right: 0;
+    white-space: nowrap;
+  }
+}

@@ -1,0 +1,50 @@
+$icons:
+  "bell-filled", "bell-ring", "bookmark-filled", "bookmark", "cancel",
+  "chatgpt", "checkmark", "chevron", "chrome", "deno", "deprecated", "edge",
+  "edit", "edit-filled", "ellipses", "experimental", "external", "filter", "ie",
+  "highlight", "history", "language", "new-topic", "next", "no", "nodejs",
+  "nonstandard", "note-info", "note-warning", "note-deprecated", "opera",
+  "play", "previous", "question-mark", "queue", "queued", "return", "safari",
+  "samsunginternet", "search", "send", "sidebar", "simple-firefox",
+  "small-arrow", "thumbs-down", "thumbs-up", "trash", "webview";
+
+.icon {
+  --size: var(--icon-size, 1rem);
+  background-color: var(--icon-primary);
+  display: inline-block;
+  flex-shrink: 0;
+  height: var(--size);
+  mask-position: center;
+  mask-repeat: no-repeat;
+  vertical-align: middle;
+  width: var(--size);
+
+  @each $name in $icons {
+    &.icon-#{$name} {
+      mask-image: url("../../../assets/icons/" + $name + ".svg");
+    }
+  }
+}
+
+// The icon class is applied directly to SVGs sometimes. This
+// override un-breaks those.
+svg.icon {
+  background: transparent;
+  color: var(--icon-primary);
+}
+
+.icons-highlighted {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  > span {
+    height: var(--icon-size);
+    line-height: 0;
+    width: var(--icon-size);
+
+    &.icons-icon-wrapper {
+      margin-top: -0.1rem;
+    }
+  }
+}

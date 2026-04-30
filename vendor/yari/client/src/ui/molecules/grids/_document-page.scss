@@ -1,0 +1,77 @@
+@use "../../vars" as *;
+
+.document-page {
+  .page-header,
+  .generic-loading,
+  .article-actions-container,
+  .document-toc-container,
+  .main-content,
+  .sidebar,
+  .metadata {
+    display: flex;
+  }
+
+  .main-content,
+  .sidebar {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.main-wrapper {
+  display: flex;
+  margin: 0 auto;
+  max-width: var(--max-width);
+
+  .toc {
+    display: none;
+  }
+
+  @media (min-width: $screen-md) {
+    display: grid;
+    gap: 3rem;
+    grid-template-areas: "sidebar main";
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    padding-left: 1.5rem;
+    padding-right: 3rem;
+
+    .sidebar,
+    .toc,
+    .main-content {
+      padding-bottom: 3rem;
+      padding-top: 3rem;
+    }
+
+    .sidebar {
+      align-self: start;
+      grid-area: sidebar;
+      padding-top: unset;
+    }
+
+    .main-content {
+      grid-area: main;
+    }
+  }
+
+  @media (min-width: $screen-xl) {
+    display: grid;
+    gap: 3rem;
+    grid-template-areas: "sidebar main toc";
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2.5fr) minmax(0, 15rem);
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    .toc {
+      --offset: var(--sticky-header-with-actions-height);
+
+      display: block;
+      grid-area: toc;
+      height: fit-content;
+      padding-bottom: 0;
+    }
+
+    .in-nav-toc {
+      display: none;
+    }
+  }
+}

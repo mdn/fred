@@ -6,7 +6,6 @@ import { fileURLToPath } from "node:url";
 import { RsdoctorRspackPlugin } from "@rsdoctor/rspack-plugin";
 import { rspack } from "@rspack/core";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
-import { RspackManifestPlugin } from "rspack-manifest-plugin";
 import { merge } from "webpack-merge";
 // @ts-expect-error
 import { StatsWriterPlugin } from "webpack-stats-plugin";
@@ -418,7 +417,6 @@ const legacyConfig = merge(
     name: "legacy",
     entry: {
       index: "./legacy/index.tsx",
-      yari: "./node_modules/@mdn/yari/client/src/index.tsx",
     },
     output: {
       filename: "[name].[contenthash].js",
@@ -427,12 +425,10 @@ const legacyConfig = merge(
     },
     resolve: {
       extensions: ["...", ".tsx", ".ts", ".jsx"],
-      alias: {
-        [path.resolve(
-          __dirname,
-          "node_modules/@mdn/yari/client/src/document/toolbar/index.tsx",
-        )]: false,
-      },
+      modules: [
+        "node_modules",
+        path.resolve(__dirname, "vendor/yari/node_modules"),
+      ],
     },
     plugins: [
       new rspack.DefinePlugin({
@@ -454,19 +450,6 @@ const legacyConfig = merge(
       new rspack.CssExtractRspackPlugin({
         filename: "[name].[contenthash].css",
         runtime: true,
-      }),
-      new rspack.HtmlRspackPlugin({
-        inject: true,
-        chunks: ["yari"],
-        filename: "index.[contenthash].html",
-        template: "node_modules/@mdn/yari/client/public/index.html",
-      }),
-      new RspackManifestPlugin({
-        fileName: "asset-manifest.json",
-        generate: (_seed, files) =>
-          files
-            .map((file) => file.path)
-            .filter((path) => !path.endsWith(".map")),
       }),
     ],
     module: {
