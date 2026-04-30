@@ -58,9 +58,9 @@ export const SURVEYS = [
       url.searchParams.set("referrer", mdn_url);
       return url.toString();
     },
-    teaser:
-      "Help us improve how we communicate browser compatibility by answering this question about your understanding of Baseline.",
-    question: "TBD",
+    teaser: "Help us improve how we communicate browser compatibility on MDN.",
+    question:
+      "Please answer this question about your understanding of Baseline.",
     link: false,
     rateFrom: 0,
     rateTill: 0.05,
