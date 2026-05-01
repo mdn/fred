@@ -75,7 +75,7 @@
     "@fluent/syntax": "^0.19.0",
     "@jackolope/lit-analyzer": "^3.2.0",
     "@jackolope/ts-lit-plugin": "^3.1.6",
-    "@mdn/browser-compat-data": "^7.3.13",
+    "@mdn/browser-compat-data": "^7.3.14",
     "@mdn/yari": "^5.1.2",
     "@rsdoctor/rspack-plugin": "^1.5.0",
     "@rspack/cli": "^1.7.11",
