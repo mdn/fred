@@ -411,14 +411,14 @@ ${"```"}`,
                   @click=${this._run}
                   variant="plain"
                 >
-                  <div>${circlePlay} ${this.l10n("playground-run")`Run`}</div>
-                  <div>
+                  <div class="overlay-run-button--header">${circlePlay} ${this.l10n("playground-run")`Run`}</div>
+                  <div class="overlay-run-button--body">
                     This is a user-shared playground.<br />
                     Always inspect the code before running it.
                   </div>
                 </mdn-button>`}
             <mdn-play-runner
-              class=${this._autoRun ? "" : "hidden"}
+              class=${this._autoRun ? nothing : "hidden"}
             ></mdn-play-runner>
             <div class="playground__console">
               <div>${this.l10n("playground-console")`Console`}</div>

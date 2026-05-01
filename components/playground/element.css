@@ -116,7 +116,7 @@
       .overlay-run-button {
         border-color: currentcolor;
 
-        div:first-child {
+        .overlay-run-button--header {
           font-size: clamp(1.5rem, 3vw, 3rem);
 
           svg {
@@ -126,7 +126,7 @@
           }
         }
 
-        div:nth-child(2) {
+        .overlay-run-button--body {
           margin-top: 0.5rem;
           line-height: var(--font-line-normal);
           color: var(--color-text-secondary);
