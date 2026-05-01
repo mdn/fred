@@ -115,22 +115,22 @@
 
       .overlay-run-button {
         border-color: currentcolor;
+      }
 
-        .overlay-run-button--header {
-          font-size: clamp(1.5rem, 3vw, 3rem);
+      .overlay-run-button--header {
+        font-size: clamp(1.5rem, 3vw, 3rem);
 
-          svg {
-            width: clamp(1.5rem, 3vw, 3rem) !important;
-            height: clamp(1.5rem, 3vw, 3rem) !important;
-            vertical-align: bottom;
-          }
+        svg {
+          width: clamp(1.5rem, 3vw, 3rem) !important;
+          height: clamp(1.5rem, 3vw, 3rem) !important;
+          vertical-align: bottom;
         }
+      }
 
-        .overlay-run-button--body {
-          margin-top: 0.5rem;
-          line-height: var(--font-line-normal);
-          color: var(--color-text-secondary);
-        }
+      .overlay-run-button--body {
+        margin-top: 0.5rem;
+        line-height: var(--font-line-normal);
+        color: var(--color-text-secondary);
       }
 
       .playground__console {
