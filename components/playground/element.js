@@ -411,7 +411,9 @@ ${"```"}`,
                   @click=${this._run}
                   variant="plain"
                 >
-                  <div class="overlay-run-button--header">${circlePlay} ${this.l10n("playground-run")`Run`}</div>
+                  <div class="overlay-run-button--header">
+                    ${circlePlay} ${this.l10n("playground-run")`Run`}
+                  </div>
                   <div class="overlay-run-button--body">
                     This is a user-shared playground.<br />
                     Always inspect the code before running it.
