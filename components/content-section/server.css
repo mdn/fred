@@ -108,6 +108,43 @@
         border-bottom-left-radius: 0.25rem;
       }
     }
+
+    &.example-good,
+    &.example-bad {
+      display: flex;
+      justify-content: space-between;
+
+      &::after {
+        display: inline-block;
+
+        flex-shrink: 0;
+
+        width: var(--font-size-medium);
+        height: var(--font-size-medium);
+
+        content: "";
+
+        mask-size: cover;
+      }
+    }
+
+    &.example-good {
+      background-color: var(--color-background-green);
+
+      &::after {
+        background-color: var(--color-text-green);
+        mask-image: url("../icon/circle-check.svg");
+      }
+    }
+
+    &.example-bad {
+      background-color: var(--color-background-red);
+
+      &::after {
+        background-color: var(--color-text-red);
+        mask-image: url("../icon/circle-x.svg");
+      }
+    }
   }
 
   code {
