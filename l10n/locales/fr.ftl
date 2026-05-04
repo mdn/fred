@@ -272,6 +272,7 @@ playground-share = Partager
 playground-clear = Effacer
 playground-reset = Réinitialiser
 playground-seeing-something-inappropriate = Voir quelque chose d'inapproprié ?
+playground-user-shared-warning = Il s'agit d'un terrain d'essai partagé par un·e utilisateur·ice.<br>Inspectez toujours le code avant de l'exécuter.
 playground-console = Console
 playground-share-markdown = Partager le Markdown
 playground-copy-markdown-to-clipboard = Copier le Markdown dans le presse-papiers

@@ -415,8 +415,7 @@ ${"```"}`,
                     ${circlePlay} ${this.l10n("playground-run")`Run`}
                   </div>
                   <div class="overlay-run-button--body">
-                    This is a user-shared playground.<br />
-                    Always inspect the code before running it.
+                    ${this.l10n.raw({ id: "playground-user-shared-warning" })}
                   </div>
                 </mdn-button>`}
             <mdn-play-runner
