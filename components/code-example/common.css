@@ -56,8 +56,8 @@
 
         flex-shrink: 0;
 
-        width: 1.24rem;
-        height: 1.24rem;
+        width: var(--font-size-medium);
+        height: var(--font-size-medium);
 
         margin: 1.255rem 1rem;
 
