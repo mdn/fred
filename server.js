@@ -191,7 +191,7 @@ export async function startServer() {
   );
 
   if (WRITER_MODE) {
-    app.get("/_open", async (req, _res) => {
+    app.get("/_open", async (req, res) => {
       const { filepath } = req.query;
       const { CONTENT_ROOT, CONTENT_TRANSLATED_ROOT } = process.env;
       if (typeof filepath === "string") {
@@ -201,8 +201,12 @@ export async function startServer() {
             : CONTENT_TRANSLATED_ROOT) || "",
           filepath,
         );
+        console.log(
+          `Attempting to open ${absolutePath} with ${process.env.EDITOR}`,
+        );
         openEditor([absolutePath]);
       }
+      res.sendStatus(204);
     });
   }
 
