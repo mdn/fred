@@ -182,6 +182,8 @@ const notServiceWorkerCommon = {
   plugins: [
     /** @type {import("@rspack/core").Plugin} */
     new StatsWriterPlugin({
+      /** @type {import("@rspack/core").StatsValue} */
+      stats: { entrypoints: true },
       fields: ["publicPath", "entrypoints"],
     }),
   ],
