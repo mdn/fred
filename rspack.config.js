@@ -133,7 +133,6 @@ const common = {
   module: {
     parser: {
       javascript: {
-        exportsPresence: "warn",
         url: "relative",
       },
     },
@@ -298,6 +297,11 @@ const clientAndLegacyCommon = {
     clean: true,
   },
   module: {
+    parser: {
+      javascript: {
+        exportsPresence: false,
+      },
+    },
     rules: [
       {
         test: /\.css$/i,
