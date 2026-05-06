@@ -6,7 +6,7 @@ import { Worker } from "node:worker_threads";
 import cookieParser from "cookie-parser";
 import express from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
-import openEditor from "open-editor";
+import { getEditorInfo } from "open-editor";
 
 import { FRED_BUILD_ROOT } from "./build/env.js";
 import {
@@ -204,7 +204,14 @@ export async function startServer() {
         console.log(
           `Attempting to open ${absolutePath} with ${process.env.EDITOR}`,
         );
-        openEditor([absolutePath]);
+        const { binary, arguments: args } = getEditorInfo([absolutePath]);
+        const child = spawn(binary, args, { detached: true, stdio: "ignore" });
+
+        child.on("error", (error) => {
+          console.error("Failed to open editor:", error);
+          return;
+        });
+        child.unref();
       }
       res.sendStatus(204);
     });
