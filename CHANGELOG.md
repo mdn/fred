@@ -1,5 +1,32 @@
 # Changelog
 
+## [2.6.1](https://github.com/mdn/fred/compare/v2.6.0...v2.6.1) (2026-05-07)
+
+
+### Bug Fixes
+
+* **browserslist:** add Firefox 115 ESR explicitly ([#1545](https://github.com/mdn/fred/issues/1545)) ([7a7ef7a](https://github.com/mdn/fred/commit/7a7ef7aa1f4226f2dc5c8ce21849205e98ff421b))
+* **content-section:** add min-width to headers of properties table ([#1534](https://github.com/mdn/fred/issues/1534)) ([6939122](https://github.com/mdn/fred/commit/6939122f756bc4cae6437ad61ae21bdf569acd1d))
+* **content-section:** add styling for good/bad plain examples ([#1532](https://github.com/mdn/fred/issues/1532)) ([5460c56](https://github.com/mdn/fred/commit/5460c564fcb65e050538d3bf8b48199e7b26f9ba))
+* **generic-doc:** consolidate style ([#1503](https://github.com/mdn/fred/issues/1503)) ([aede5b5](https://github.com/mdn/fred/commit/aede5b50d878e1e8bd26ce0268f281c52d26f664))
+* **playground:** overlay run button for shared playground ([#712](https://github.com/mdn/fred/issues/712)) ([8aa2708](https://github.com/mdn/fred/commit/8aa2708693ccf8b6ec8cb9e1c6bb7ad3ea627002))
+* **writer-mode:** improve handling of _open route ([#1536](https://github.com/mdn/fred/issues/1536)) ([f6cff76](https://github.com/mdn/fred/commit/f6cff76ed2ad26ac9cd3fb78d3e28d2f20f3dbca))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.3.13 to 7.3.14 ([#1529](https://github.com/mdn/fred/issues/1529)) ([a11d23c](https://github.com/mdn/fred/commit/a11d23c23f3eea736c53ff56fad470511b37a611))
+* **deps-dev:** bump eslint-plugin-n from 17.24.0 to 18.0.1 ([#1539](https://github.com/mdn/fred/issues/1539)) ([f1aa541](https://github.com/mdn/fred/commit/f1aa5416890670840ce12f434bc1a4177641aaf8))
+* **deps-dev:** bump ip-address from 10.0.1 to 10.2.0 ([#1540](https://github.com/mdn/fred/issues/1540)) ([32a6254](https://github.com/mdn/fred/commit/32a6254ecc0a541f402c65d17b0fc4f83009dc3c))
+* **deps-dev:** bump stylelint from 17.10.0 to 17.11.0 in the npm-dev group ([#1537](https://github.com/mdn/fred/issues/1537)) ([752b5f5](https://github.com/mdn/fred/commit/752b5f5d13163c6822126b1f2373b54eff9b6b65))
+* **deps-dev:** bump stylelint in the npm-dev group ([752b5f5](https://github.com/mdn/fred/commit/752b5f5d13163c6822126b1f2373b54eff9b6b65))
+* **deps-dev:** bump the npm-dev group with 2 updates ([#1531](https://github.com/mdn/fred/issues/1531)) ([a91e4e2](https://github.com/mdn/fred/commit/a91e4e2532c703836dbd79ffbf66689dfe83c6ce))
+* **deps-dev:** bump the npm-dev group with 2 updates ([#1533](https://github.com/mdn/fred/issues/1533)) ([694cbc7](https://github.com/mdn/fred/commit/694cbc71240319488a95d6b9194db2c1a0cffbae))
+* **deps-dev:** bump the npm-dev group with 3 updates ([#1541](https://github.com/mdn/fred/issues/1541)) ([3419517](https://github.com/mdn/fred/commit/341951770fd8a488f1c5c6b0f38d34893a6e17f4))
+* **deps-dev:** bump the npm-dev group with 7 updates ([#1528](https://github.com/mdn/fred/issues/1528)) ([77cbc41](https://github.com/mdn/fred/commit/77cbc417a5a9645cdf5e3ce148d916ab6dcfabde))
+* **deps:** bump @mdn/rari from 0.2.21 to 0.2.22 ([#1547](https://github.com/mdn/fred/issues/1547)) ([395a003](https://github.com/mdn/fred/commit/395a0033bb2ffc206a21075e970af610bc7910e7))
+* **survey:** run Baseline survey ([#1522](https://github.com/mdn/fred/issues/1522)) ([73360c5](https://github.com/mdn/fred/commit/73360c5c00f236c76ce9606ab376fddbc4c4cae9))
+
 ## [2.6.0](https://github.com/mdn/fred/compare/v2.5.0...v2.6.0) (2026-04-28)
 
 
