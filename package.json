@@ -64,10 +64,10 @@
     "source-map-support": "^0.5.21"
   },
   "devDependencies": {
-    "@codemirror/autocomplete": "^6.20.1",
+    "@codemirror/autocomplete": "^6.20.2",
     "@codemirror/commands": "^6.10.3",
     "@codemirror/language": "^6.12.3",
-    "@codemirror/lint": "^6.9.5",
+    "@codemirror/lint": "^6.9.6",
     "@codemirror/view": "^6.41.1",
     "@csstools/postcss-global-data": "^4.0.0",
     "@eslint/compat": "^2.0.5",
