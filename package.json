@@ -31,6 +31,7 @@
     "Safari > 0 and last 2.5 years",
     "iOS > 0 and last 2.5 years",
     "Firefox ESR",
+    "Firefox 115",
     "not dead"
   ],
   "dependencies": {
