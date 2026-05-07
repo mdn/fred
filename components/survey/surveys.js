@@ -30,6 +30,7 @@ export const SurveyBucket = Object.freeze({
   JS_PROPOSALS_2025: "JS_PROPOSALS_2025",
   FIRST_FRED_2025: "FIRST_FRED_2025",
   DEVELOPER_SURVEY_2025: "DEVELOPER_SURVEY_2025",
+  BASELINE_A11Y_2026: "BASELINE_A11Y_2026",
 });
 
 /**
@@ -45,27 +46,25 @@ export const SurveyBucket = Object.freeze({
  */
 export const SURVEYS = [
   {
-    key: SurveyBucket.DEVELOPER_SURVEY_2025,
-    bucket: SurveyBucket.DEVELOPER_SURVEY_2025,
+    key: SurveyBucket.BASELINE_A11Y_2026,
+    bucket: SurveyBucket.BASELINE_A11Y_2026,
     show: (mdn_url) => {
-      return /^\/[a-z]{2}(-[A-Z]{2})?\/docs\/(Glossary|Learn|Web)/.test(
-        mdn_url,
-      );
+      return /^\/en-US\/docs\/Web/.test(mdn_url);
     },
     src: (mdn_url) => {
       const url = new URL(
-        "https://survey.alchemer.com/s3/8409929/MDN-Developer-Survey",
+        "https://survey.alchemer.com/s3/8804357/MDN-Short-Survey-Dev-Perception-of-Baseline-Widely-Available-re-Accessibility",
       );
       url.searchParams.set("referrer", mdn_url);
       return url.toString();
     },
-    teaser:
-      "We’re running a survey to understand how you use MDN in your web development work.",
-    question: "We’d love for you to take 10 minutes to share your feedback.",
-    link: true,
+    teaser: "Help us improve how we communicate browser compatibility on MDN.",
+    question:
+      "Please answer this question about your understanding of Baseline.",
+    link: false,
     rateFrom: 0,
-    rateTill: 0.3,
-    start: Date.parse("2025-10-06"),
-    end: Date.parse("2025-10-20"),
+    rateTill: 0.05,
+    start: Date.parse("2026-05-04"),
+    end: Date.parse("2026-05-11"),
   },
 ];
