@@ -58,19 +58,19 @@ compat-support-altname = Alternativer Name: { $altname }
 compat-support-removed = Ab { $version } entfernt
 compat-support-see-impl-url = Siehe <a data-l10n-name="impl_url">{ $label }</a>
 compat-support-flags =
-    { NUMBER($has_added) ->
-        [one] Ab Version { $version_added }
-        *[other] { "" }
+    { $has_added ->
+        [1] Ab Version { $version_added }
+        *[0] { "" }
     }{ $has_last ->
-        [one]
-            { NUMBER($has_added) ->
-                *[zero] Bis { $versionLast } muss
-                [one] { " " }bis { $versionLast } muss
+        [1]
+            { $has_added ->
+                *[0] Bis { $versionLast } muss
+                [1] { " " }bis { $versionLast } muss
             }
-        *[zero]
-            { NUMBER($has_added) ->
-                *[zero] muss
-                [one] { " " }muss
+        *[0]
+            { $has_added ->
+                *[0] muss
+                [1] { " " }muss
             }
     }
     { " " }die Einstellung <code data-l10n-name="name">{ $flag_name }</code>{ " " }
@@ -78,17 +78,17 @@ compat-support-flags =
         *[preference] explizit festgelegt werden
         [runtime_flag] als Laufzeit-Flag explizit festgelegt werden
 
-    }{ NUMBER($has_value) ->
-        [one] { " " }auf <code data-l10n-name="value">{ $flag_value }</code>
-        *[other] { "" }
+    }{ $has_value ->
+        [1] { " " }auf <code data-l10n-name="value">{ $flag_value }</code>
+        *[0] { "" }
     }{ "." }
-    { NUMBER($has_pref_url) ->
-        [one]
+    { $has_pref_url ->
+        [1]
             { $flag_type ->
                 [preference] Um die Einstellungen in { $browser_name } zu ändern, besuchen Sie { $browser_pref_url }.
                 *[other] { "" }
             }
-        *[other] { "" }
+        *[0] { "" }
     }
 compat-legend-yes = { compat-support-full }
 compat-legend-partial = { compat-support-partial }
