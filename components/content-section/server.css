@@ -18,6 +18,10 @@
     margin: 1rem 0 0;
     font-weight: var(--font-weight-normal);
     line-height: var(--font-line-header);
+
+    code {
+      padding: 0 0.125em;
+    }
   }
 
   h2 {
