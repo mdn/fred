@@ -194,7 +194,11 @@ export class MDNSurvey extends L10nMixin(LitElement) {
       return nothing;
     }
 
-    const title = this.l10n("survey-hide-this-survey")`Hide this survey`;
+    const buttonTitle = this.l10n("survey-hide-this-survey")`Hide this survey`;
+    const linkTitle = this.l10n(
+      "survey-take-survey-opens-in-a-new-tab",
+    )`Take survey (Opens in a new tab)`;
+    const iframeTitle = ifDefined(this._survey.question);
 
     return html`
       <div class="survey">
@@ -204,8 +208,8 @@ export class MDNSurvey extends L10nMixin(LitElement) {
             variant="plain"
             .icon=${closeIcon}
             icon-only
-            title=${title}
-            aria-label=${title}
+            title=${buttonTitle}
+            aria-label=${buttonTitle}
             @click=${this.#dismiss}
           ></mdn-button>
         </header>
@@ -214,9 +218,8 @@ export class MDNSurvey extends L10nMixin(LitElement) {
               class="external"
               href=${this._source}
               target="_blank"
-              title=${this.l10n(
-                "survey-take-survey-opens-in-a-new-tab",
-              )`Take survey (Opens in a new tab)`}
+              title=${linkTitle}
+              aria-label=${linkTitle}
               @click=${this.#onLinkClick}
               >${this._survey.question}</a
             >`
@@ -225,7 +228,8 @@ export class MDNSurvey extends L10nMixin(LitElement) {
               ${this._isOpen && this._source
                 ? html`
                     <iframe
-                      title=${ifDefined(this._survey.question)}
+                      title=${iframeTitle}
+                      aria-label=${iframeTitle}
                       src=${this._source}
                     ></iframe>
                   `

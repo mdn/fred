@@ -60,15 +60,18 @@ export class MDNCompatTableLazy extends L10nMixin(LitElement) {
       window.open(this._issueUrl, "_blank", "noopener,noreferrer");
     };
 
+    const title = this.l10n(
+      "compat-link-report-missing-title",
+    )`Report missing compatibility data`;
+
     return html`<a
       class="bc-github-link external external-icon"
       href="#"
       @click=${onClick}
       target="_blank"
       rel="noopener noreferrer"
-      title=${this.l10n(
-        "compat-link-report-missing-title",
-      )`Report missing compatibility data`}
+      title=${title}
+      aria-label=${title}
       >${this.l10n("compat-link-report-missing")`Report this issue`}</a
     >`;
   }

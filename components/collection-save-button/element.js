@@ -202,10 +202,14 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
   }
 
   render() {
+    const saveButtonTitle = this.l10n(
+      "collection-save-button-save-in-collection",
+    )`Save in collection`;
     const isCurrentInCollection =
       this._bookmarks.value?.some(
         (item) => item.collection_id === this._item?.collection_id,
       ) || false;
+
     return this._user.render({
       complete: (user) =>
         user.isAuthenticated
@@ -213,9 +217,8 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
               <button
                 class="collection-save-button"
                 data-state=${this._bookmarks.value?.length ? "remove" : "save"}
-                title=${this.l10n(
-                  "collection-save-button-save-in-collection",
-                )`Save in collection`}
+                title=${saveButtonTitle}
+                aria-label=${saveButtonTitle}
                 @click=${this._open}
               >
                 <span

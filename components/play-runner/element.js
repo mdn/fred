@@ -4,6 +4,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { keyed } from "lit/directives/keyed.js";
 import { createRef, ref } from "lit/directives/ref.js";
 
+import { L10nMixin } from "../../l10n/mixin.js";
 import { ThemeController } from "../color-theme/controller.js";
 import {
   PLAYGROUND_BASE_HOST,
@@ -21,7 +22,7 @@ import styles from "./element.css?lit";
  * @import { Ref } from "lit/directives/ref.js";
  */
 
-export class MDNPlayRunner extends LitElement {
+export class MDNPlayRunner extends L10nMixin(LitElement) {
   static ssr = false;
 
   static properties = {
@@ -144,6 +145,8 @@ export class MDNPlayRunner extends LitElement {
   }
 
   render() {
+    const title = this.l10n("play-runner-title")`Runner`;
+
     // use `keyed` to replace the iframe when src updates
     // this ensures we don't add to browser history
     return keyed(
@@ -152,7 +155,8 @@ export class MDNPlayRunner extends LitElement {
         <iframe
           ${ref(this._iframe)}
           src=${this._src}
-          title="runner"
+          title=${title}
+          aria-label=${title}
           allow=${ifDefined(this.allow)}
           sandbox=${[
             ...new Set([
