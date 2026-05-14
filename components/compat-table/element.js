@@ -224,16 +224,11 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   }
 
   _renderIssueLink() {
-    const onClick = (/** @type {MouseEvent} */ event) => {
-      event.preventDefault();
-      window.open(this._issueUrl, "_blank", "noopener,noreferrer");
-    };
     const source_file = this.data.__compat?.source_file;
     return html`<div class="bc-on-github">
       <a
         class="bc-github-link external external-icon"
-        href="#"
-        @click=${onClick}
+        href=${this._issueUrl}
         target="_blank"
         rel="noopener noreferrer"
         title=${this.l10n(
