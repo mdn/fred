@@ -46,7 +46,7 @@ pre-push:
           - name: tsc
             run: npx tsc
           - name: lint l10n strings
-            run: npm run l10n -- --lint
+            run: npm run l10n extract -- --lint
 
 post-merge:
   only:
