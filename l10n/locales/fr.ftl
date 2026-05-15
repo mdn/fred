@@ -52,19 +52,19 @@ compat-support-altname = Nom alternatif : { $altname }
 compat-support-removed = Supprimé en version { $version } et supérieure
 compat-support-see-impl-url = Voir <a data-l10n-name="impl_url">{ $label }</a>
 compat-support-flags =
-    { NUMBER($has_added) ->
-        [one] De la version { $version_added }
-       *[other] { "" }
+    { $has_added ->
+        [1] De la version { $version_added }
+       *[0] { "" }
     }{ $has_last ->
-        [one]
-            { NUMBER($has_added) ->
-               *[zero] Jusqu'à la version { $versionLast }, les utilisateur·ice·s
-                [one] { " " }jusqu'à { $versionLast }, les utilisateur·ice·s
+        [1]
+            { $has_added ->
+               *[0] Jusqu'à la version { $versionLast }, les utilisateur·ice·s
+                [1] { " " }jusqu'à { $versionLast }, les utilisateur·ice·s
             }
-       *[zero]
-            { NUMBER($has_added) ->
-               *[zero] Les utilisateur·ice·s
-                [one] {" "}les utilisateur·ice·s
+       *[0]
+            { $has_added ->
+               *[0] Les utilisateur·ice·s
+                [1] {" "}les utilisateur·ice·s
             }
     }
     { " " }doivent explicitement définir
@@ -73,17 +73,17 @@ compat-support-flags =
         [runtime_flag] l'indicateur d'exécution
     }
     { " " }<code data-l10n-name="name">{ $flag_name }</code>
-    { NUMBER($has_value) ->
-        [one] { " " }à <code data-l10n-name="value">{ $flag_value }</code>
-       *[other] { "" }
+    { $has_value ->
+        [1] { " " }à <code data-l10n-name="value">{ $flag_value }</code>
+       *[0] { "" }
     }{"."}
-    { NUMBER($has_pref_url) ->
-        [one]
+    { $has_pref_url ->
+        [1]
             { $flag_type ->
                 [preference] Pour changer vos préférences sur le navigateur { $browser_name }, visitez { $browser_pref_url }.
                *[other] { "" }
             }
-       *[other] { "" }
+       *[0] { "" }
     }
 compat-legend-yes = { compat-support-full }
 compat-legend-partial = { compat-support-partial }

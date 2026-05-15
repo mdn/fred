@@ -165,12 +165,45 @@ export class Fluent {
 
     /** @type {Error[]} */
     const errors = [];
-    const formatted = bundle?.formatPattern(message, args, errors);
+    const formatted = bundle?.formatPattern(
+      message,
+      /** @type {Record<string, import("@fluent/bundle").FluentVariable>} */ (
+        escapeArgs(args)
+      ),
+      errors,
+    );
     if (errors.length > 0) {
       console.error(errors);
     }
     return formatted;
   }
+}
+
+/**
+ * HTML-escape string-valued args so that variable substitution can't inject
+ * tags that confuse the downstream sanitizer. Only string values are touched
+ * so that Number/Date selectors keep working.
+ *
+ * @param {Record<string, unknown>} args
+ * @returns {Record<string, unknown>}
+ */
+function escapeArgs(args) {
+  /** @type {Record<string, unknown>} */
+  const out = {};
+  for (const [k, v] of Object.entries(args)) {
+    out[k] = typeof v === "string" ? escapeHtml(v) : v;
+  }
+  return out;
+}
+
+/**
+ * @param {string} s
+ */
+function escapeHtml(s) {
+  return s
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
 }
 
 /** @type {Map<string, Fluent>} */
