@@ -33,9 +33,9 @@ export class Menu extends ServerComponent {
      * Renders a link to a page.
      *
      * @param {string} slug - The link slug (the part after `/en-US/docs/`!).
-     * @param {string} text - The link text.
+     * @param {import("../../types/fluent.js").L10nTag} text - The link text.
      * @param {object} [options]
-     * @param {string} [options.label] - The title and aria-label of the link.
+     * @param {import("../../types/fluent.js").L10nTag} [options.label] - The title and aria-label of the link.
      * @param {boolean} [options.primary] - Whether this is the primary link (in the panel title).
      */
     const link = (slug, text, { label, primary = false } = {}) => {
@@ -69,29 +69,31 @@ export class Menu extends ServerComponent {
                   class="menu__tab-link"
                   href=${tab.href}
                   data-glean-id=${`menu_click_link: top-level -> ${tab.href}`}
-                  >${tab.buttonText}</a
+                  >${context.l10n(tab.buttonL10nId)}</a
                 >`
               : html`<mdn-dropdown
                   data-glean-toggle-open=${`menu_toggle: ${tab.id}`}
                 >
                   <button class="menu__tab-button" type="button" slot="button">
-                    ${typeof tab.buttonText === "string"
+                    ${typeof tab.buttonL10nId === "string"
                       ? html`<span class="menu__tab-label"
-                          >${tab.buttonText}</span
+                          >${context.l10n(tab.buttonL10nId)}</span
                         >`
                       : html`<span class="menu__tab-label" data-type="long"
-                            >${tab.buttonText.long}</span
+                            >${context.l10n(tab.buttonL10nId.long)}</span
                           ><span class="menu__tab-label" data-type="short"
-                            >${tab.buttonText.short}</span
+                            >${context.l10n(tab.buttonL10nId.short)}</span
                           >`}
                   </button>
                   <div class="menu__panel" slot="dropdown">
                     <p class="menu__panel-title">
                       ${tab.panelTitle.slug
-                        ? link(tab.panelTitle.slug, tab.panelTitle.text, {
-                            primary: true,
-                          })
-                        : tab.panelTitle.text}
+                        ? link(
+                            tab.panelTitle.slug,
+                            context.l10n(tab.panelTitle.l10nId),
+                            { primary: true },
+                          )
+                        : context.l10n(tab.panelTitle.l10nId)}
                     </p>
                     <div class="menu__panel-content">
                       ${tab.panelGroups.map((group) => {
@@ -102,9 +104,15 @@ export class Menu extends ServerComponent {
                                 ${"render" in item
                                   ? item.render()
                                   : "slug" in item
-                                    ? link(item.slug, item.text, {
-                                        label: item.label,
-                                      })
+                                    ? link(
+                                        item.slug,
+                                        context.l10n(item.l10nId),
+                                        {
+                                          label: item.labelL10nId
+                                            ? context.l10n(item.labelL10nId)
+                                            : undefined,
+                                        },
+                                      )
                                     : html`<a
                                         class=${ifDefined(
                                           [
@@ -119,18 +127,26 @@ export class Menu extends ServerComponent {
                                         )}
                                         data-icon=${ifDefined(item.icon)}
                                         href=${item.href}
-                                        aria-label=${ifDefined(item.label)}
-                                        title=${ifDefined(item.label)}
+                                        aria-label=${ifDefined(
+                                          item.labelL10nId
+                                            ? context.l10n(item.labelL10nId)
+                                            : undefined,
+                                        )}
+                                        title=${ifDefined(
+                                          item.labelL10nId
+                                            ? context.l10n(item.labelL10nId)
+                                            : undefined,
+                                        )}
                                         data-glean-id=${gleanId(item.href)}
-                                        >${item.text}</a
+                                        >${context.l10n(item.l10nId)}</a
                                       >`}
                               </li>`,
                           )}
                         </ul>`;
 
-                        return "title" in group
+                        return group.titleL10nId
                           ? html`<dl>
-                              <dt>${group.title}</dt>
+                              <dt>${context.l10n(group.titleL10nId)}</dt>
                               <dd>${items}</dd>
                             </dl>`
                           : items;
