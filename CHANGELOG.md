@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.6.2](https://github.com/mdn/fred/compare/v2.6.1...v2.6.2) (2026-05-15)
+
+
+### Bug Fixes
+
+* **compat-table:** revert report action to plain link ([#1549](https://github.com/mdn/fred/issues/1549)) ([7049e96](https://github.com/mdn/fred/commit/7049e96232e40a9b098dc1e5bd24ff411beabc73))
+* **content-section:** decrease code paddings for headings ([#1561](https://github.com/mdn/fred/issues/1561)) ([99801fc](https://github.com/mdn/fred/commit/99801fcc75d6a8eddaa8540958c91fa27e8471ec))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @babel/plugin-transform-modules-systemjs ([94036c4](https://github.com/mdn/fred/commit/94036c43829bedf39fd9c6690df68b281c33ae9e))
+* **deps-dev:** bump @babel/plugin-transform-modules-systemjs from 7.27.1 to 7.29.4 ([#1555](https://github.com/mdn/fred/issues/1555)) ([94036c4](https://github.com/mdn/fred/commit/94036c43829bedf39fd9c6690df68b281c33ae9e))
+* **deps-dev:** bump @codemirror/view from 6.42.0 to 6.42.1 in the npm-dev group ([#1551](https://github.com/mdn/fred/issues/1551)) ([33ec989](https://github.com/mdn/fred/commit/33ec9891f6e578437576c06d50e188857cd86b6d))
+* **deps-dev:** bump @codemirror/view in the npm-dev group ([33ec989](https://github.com/mdn/fred/commit/33ec9891f6e578437576c06d50e188857cd86b6d))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.3.14 to 7.3.15 ([#1559](https://github.com/mdn/fred/issues/1559)) ([e2aaef0](https://github.com/mdn/fred/commit/e2aaef0f21f8ad1e30d89358cffe608b15c670f2))
+* **deps-dev:** bump fast-uri from 3.0.6 to 3.1.2 ([#1554](https://github.com/mdn/fred/issues/1554)) ([94640e6](https://github.com/mdn/fred/commit/94640e6fce665828d72e2753ce888c3c95f5a4bd))
+* **deps-dev:** bump fast-xml-builder from 1.1.4 to 1.2.0 ([#1553](https://github.com/mdn/fred/issues/1553)) ([4d8ce05](https://github.com/mdn/fred/commit/4d8ce05989093857a140729e940736528ef2d028))
+* **deps-dev:** bump the npm-dev group across 1 directory with 5 updates ([#1569](https://github.com/mdn/fred/issues/1569)) ([2450d74](https://github.com/mdn/fred/commit/2450d7473647fd8b7195c846a04ad6ab5edda902))
+* **deps-dev:** bump the npm-dev group with 2 updates ([#1558](https://github.com/mdn/fred/issues/1558)) ([4b5a6fc](https://github.com/mdn/fred/commit/4b5a6fc9483e903249ab46d91889f699275a1ff6))
+* **deps:** bump @mdn/rari from 0.2.22 to 0.2.23 ([#1570](https://github.com/mdn/fred/issues/1570)) ([c2dc03e](https://github.com/mdn/fred/commit/c2dc03ef21c895bc05175e967f10a36a182fecef))
+* **deps:** bump the npm-prod group with 3 updates ([#1568](https://github.com/mdn/fred/issues/1568)) ([99b7e89](https://github.com/mdn/fred/commit/99b7e89d58cc772df3acbcc56b9f10088b4afc96))
+
 ## [2.6.1](https://github.com/mdn/fred/compare/v2.6.0...v2.6.1) (2026-05-07)
 
 
