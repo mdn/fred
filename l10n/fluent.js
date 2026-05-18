@@ -5,7 +5,8 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import enUS_ftl from "./locales/en-US.ftl";
 
 /**
- * @import { AllowedTags } from "insane";
+ * @import { FluentVariable } from "@fluent/bundle"
+ * @import { AllowedTags } from "insane"
  */
 
 /** @type {Record<string, string>} */
@@ -123,7 +124,7 @@ export class Fluent {
   /**
    * @param {string} id
    * @param {string} [attr]
-   * @param {Record<string, any>} [args]
+   * @param {Record<string, FluentVariable>} [args]
    * @param {FluentBundle | undefined} [bundle]
    * @param {boolean} [us]
    * @returns {string | undefined}
@@ -165,13 +166,7 @@ export class Fluent {
 
     /** @type {Error[]} */
     const errors = [];
-    const formatted = bundle?.formatPattern(
-      message,
-      /** @type {Record<string, import("@fluent/bundle").FluentVariable>} */ (
-        escapeArgs(args)
-      ),
-      errors,
-    );
+    const formatted = bundle?.formatPattern(message, escapeArgs(args), errors);
     if (errors.length > 0) {
       console.error(errors);
     }
@@ -184,11 +179,11 @@ export class Fluent {
  * tags that confuse the downstream sanitizer. Only string values are touched
  * so that Number/Date selectors keep working.
  *
- * @param {Record<string, unknown>} args
- * @returns {Record<string, unknown>}
+ * @param {Record<string, import("@fluent/bundle").FluentVariable>} args
+ * @returns {Record<string, import("@fluent/bundle").FluentVariable>}
  */
 function escapeArgs(args) {
-  /** @type {Record<string, unknown>} */
+  /** @type {Record<string, import("@fluent/bundle").FluentVariable>} */
   const out = {};
   for (const [k, v] of Object.entries(args)) {
     out[k] = typeof v === "string" ? escapeHtml(v) : v;
