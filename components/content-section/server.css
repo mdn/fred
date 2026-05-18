@@ -382,16 +382,12 @@
 
   /* Alphabetical/grouped indexes (rari `CSS_Ref`, `ListGroups`, `APIListAlpha`, `css_ref_list`) */
   .index {
-    columns: 18rem;
-    column-gap: 2rem;
-
-    h3 {
-      margin-top: 0;
-      break-after: avoid;
+    ul {
+      columns: 18rem;
+      column-gap: 2rem;
     }
 
-    ul {
-      margin-top: 0.5rem;
+    li {
       break-inside: avoid;
     }
   }
