@@ -325,31 +325,38 @@ table {
 }
 
 .bc-notes-list {
-  position: relative;
-
   width: 100%;
-
   margin: 0.5rem 0;
-
   text-align: left;
 
-  &::before {
-    position: absolute;
-    top: 0;
-    bottom: 4px;
-    left: 7px;
-    z-index: -1;
-
-    width: 3px;
-
-    margin-top: 0.25rem;
-
-    content: "";
-
-    background: var(--color-border-primary);
+  /* Each branch carries its own timeline line, spanning from its first
+     to its last icon. Used to break the line between parallel support
+     branches (e.g. unprefixed vs. -webkit- vs. -moz-). */
+  .bc-branch {
+    position: relative;
   }
 
-  .bc-notes-wrapper:last-child dd:last-child {
+  .bc-branch-items {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      bottom: 4px;
+      left: 7px;
+      z-index: -1;
+
+      width: 3px;
+
+      margin-top: 0.25rem;
+
+      content: "";
+
+      background: var(--color-border-primary);
+    }
+  }
+
+  .bc-branch-items .bc-notes-wrapper:last-child dd:last-child {
     position: relative;
 
     &::before {
@@ -412,6 +419,16 @@ table {
   &:last-child {
     margin-bottom: 0;
   }
+}
+
+.bc-notes-list .bc-branch + .bc-branch {
+  margin-top: 1.5rem;
+}
+
+.bc-branch-heading {
+  margin-bottom: 0.5rem;
+  font-weight: var(--font-body-strong-weight);
+  color: var(--color-text-primary);
 }
 
 dl.bc-notes-list {

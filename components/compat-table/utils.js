@@ -143,6 +143,37 @@ export function hasMore(support) {
 }
 
 /**
+ * Groups support items into parallel branches.
+ *
+ * BCD support arrays interleave parallel implementations (e.g. unprefixed,
+ * `-webkit-`, `-moz-`). Items sharing the same `prefix` and `alternative_name`
+ * form one chronological branch; items differing in either are parallel and
+ * should be rendered as separate timelines to avoid out-of-order versions.
+ *
+ * The canonical branch (no prefix, no alternative name) is returned first;
+ * other branches preserve their original BCD order.
+ * @param {import("@bcd").SupportStatement} support
+ * @returns {import("@bcd").SimpleSupportStatement[][]}
+ */
+export function groupSupportBranches(support) {
+  /** @type {Map<string, import("@bcd").SimpleSupportStatement[]>} */
+  const branches = new Map();
+  for (const item of asList(support)) {
+    const key = `${item.prefix ?? ""}\0${item.alternative_name ?? ""}`;
+    const branch = branches.get(key);
+    if (branch) {
+      branch.push(item);
+    } else {
+      branches.set(key, [item]);
+    }
+  }
+  const canonicalKey = "\0";
+  return [...branches.entries()]
+    .sort(([a], [b]) => (a === canonicalKey ? -1 : b === canonicalKey ? 1 : 0))
+    .map(([, items]) => items);
+}
+
+/**
  * Determines if a version is a preview version.
  * @param {string | import("@bcd").VersionValue | undefined} version
  * @param {import("@bcd").BrowserStatement} browser

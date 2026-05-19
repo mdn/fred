@@ -21,6 +21,7 @@ import {
   bugURLToString,
   getCurrentSupport,
   getFirst,
+  groupSupportBranches,
   hasMore,
   hasNoteworthyNotes,
   isFullySupportedWithoutLimitation,
@@ -583,33 +584,61 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
    * @param {import("@bcd").SupportStatement} support
    */
   _renderNotes(browser, support) {
-    return [...asList(support)]
-      .reverse()
-      .flatMap((item, i) => {
-        const notes = this._getNotes(browser, support, item);
+    // Support arrays interleave parallel branches (e.g. unprefixed vs.
+    // `-webkit-` vs. `-moz-`). Render each branch as its own timeline so
+    // versions stay in chronological order within the branch.
+    const branches = groupSupportBranches(support);
+    const hasParallelBranches = branches.length > 1;
 
-        const notesItems = notes.map(({ iconName, label }) => {
-          return html`<dd class="bc-supports-dd">
-            ${this._renderIcon(iconName)}${typeof label === "string"
-              ? html`<span>${unsafeHTML(label)}</span>`
-              : label}
-          </dd>`;
-        });
+    return branches
+      .map((branchItems) => {
+        const { prefix, alternative_name } = branchItems[0] ?? {};
+        const heading =
+          hasParallelBranches && (prefix || alternative_name)
+            ? this._renderBranchHeading(prefix, alternative_name)
+            : nothing;
 
-        const hasNotes = notesItems.length > 0;
+        const wrappers = [...branchItems]
+          .reverse()
+          .flatMap((item, i) => {
+            // Suppress prefix/alt-name notes when the branch heading already
+            // conveys the modifier — avoids redundancy.
+            const notes = this._getNotes(browser, support, item, {
+              omitModifiers: hasParallelBranches,
+            });
+
+            const notesItems = notes.map(({ iconName, label }) => {
+              return html`<dd class="bc-supports-dd">
+                ${this._renderIcon(iconName)}${typeof label === "string"
+                  ? html`<span>${unsafeHTML(label)}</span>`
+                  : label}
+              </dd>`;
+            });
+
+            const hasNotes = notesItems.length > 0;
+
+            return (
+              (i === 0 || hasNotes) &&
+              html`<div class="bc-notes-wrapper">
+                <dt
+                  class=${`bc-supports-${getSupportClassName(
+                    item,
+                    browser,
+                  )} bc-supports`}
+                >
+                  ${this._renderCellText(item, browser, true)}
+                </dt>
+                ${notesItems} ${hasNotes ? undefined : html`<dd></dd>`}
+              </div>`
+            );
+          })
+          .filter(Boolean);
 
         return (
-          (i === 0 || hasNotes) &&
-          html`<div class="bc-notes-wrapper">
-            <dt
-              class=${`bc-supports-${getSupportClassName(
-                item,
-                browser,
-              )} bc-supports`}
-            >
-              ${this._renderCellText(item, browser, true)}
-            </dt>
-            ${notesItems} ${hasNotes ? undefined : html`<dd></dd>`}
+          wrappers.length > 0 &&
+          html`<div class="bc-branch">
+            ${heading}
+            <div class="bc-branch-items">${wrappers}</div>
           </div>`
         );
       })
@@ -617,12 +646,50 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   }
 
   /**
+   * @param {string | undefined} prefix
+   * @param {string | undefined} alternativeName
+   */
+  _renderBranchHeading(prefix, alternativeName) {
+    const codeElements = {
+      prefix: { tag: "code" },
+      altname: { tag: "code" },
+    };
+    /** @type {import("@lit").L10nResult | undefined} */
+    let label;
+    if (prefix && alternativeName) {
+      label = this.l10n.raw({
+        id: "compat-branch-prefix-altname",
+        args: { prefix, altname: alternativeName },
+        elements: codeElements,
+      });
+    } else if (prefix) {
+      label = this.l10n.raw({
+        id: "compat-branch-prefix",
+        args: { prefix },
+        elements: codeElements,
+      });
+    } else if (alternativeName) {
+      label = this.l10n.raw({
+        id: "compat-branch-altname",
+        args: { altname: alternativeName },
+        elements: codeElements,
+      });
+    }
+    return label
+      ? html`<div class="bc-branch-heading">${label}</div>`
+      : nothing;
+  }
+
+  /**
    * @param {import("@bcd").BrowserStatement} browser
    * @param {import("@bcd").SupportStatement} support
    * @param {import("@bcd").SimpleSupportStatement} item
+   * @param {{ omitModifiers?: boolean }} [options] - When `omitModifiers` is
+   *   true, the `prefix` and `alternative_name` notes are skipped (because a
+   *   branch heading already conveys the modifier).
    * @returns
    */
-  _getNotes(browser, support, item) {
+  _getNotes(browser, support, item, { omitModifiers = false } = {}) {
     /**
      * @type {Array<{iconName: import("@compat").IconName; label: string | import("@lit").L10nResult | undefined }>}
      */
@@ -652,7 +719,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       });
     }
 
-    if (item.prefix) {
+    if (item.prefix && !omitModifiers) {
       supportNotes.push({
         iconName: "prefix",
         label: this.l10n.raw({
@@ -664,7 +731,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       });
     }
 
-    if (item.alternative_name) {
+    if (item.alternative_name && !omitModifiers) {
       supportNotes.push({
         iconName: "altname",
         label: this.l10n.raw({
