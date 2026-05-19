@@ -29,5 +29,5 @@
       }
     ]
   },
-  "exclude": ["node_modules", "dist", "out", "legacy", "vendor"]
+  "exclude": ["node_modules", "dist", "out", "legacy", "vendor", "test/tmp"]
 }

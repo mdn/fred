@@ -1,3 +1,9 @@
+import { rm } from "node:fs/promises";
+
+import path from "node:path";
+
+const FRED_ROOT = path.join(import.meta.dirname, "..");
+
 import { rariBin } from "@mdn/rari";
 import { concurrently } from "concurrently";
 import yargs from "yargs";
@@ -19,6 +25,11 @@ const argv = await yargs(hideBin(process.argv))
     type: "boolean",
     default: false,
   })
+  .option("update-visual-baseline", {
+    describe: "update visual diff baseline",
+    type: "boolean",
+    default: false,
+  })
   .option("rari", {
     describe: "run rari",
     type: "boolean",
@@ -36,6 +47,9 @@ const argv = await yargs(hideBin(process.argv))
   .check((argv) => {
     if (argv.content && (argv.rari || argv.fred)) {
       throw new Error("--content cannot be used with --rari or --fred");
+    }
+    if (argv["update-visual-baseline"] && !argv.e2e) {
+      throw new Error("--update-visual-baseline requires --e2e");
     }
     return true;
   })
@@ -68,6 +82,18 @@ if (argv.unit) {
 }
 
 if (argv.e2e) {
+  await rm(path.join(FRED_ROOT, "test", "tmp"), {
+    recursive: true,
+    force: true,
+  });
+
+  if (argv["update-visual-baseline"]) {
+    await rm(path.join(FRED_ROOT, "test", "baseline"), {
+      recursive: true,
+      force: true,
+    });
+  }
+
   /** @type {import("concurrently").ConcurrentlyCommandInput[]} */
   const jobs = [
     {
