@@ -471,17 +471,22 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
   /**
    * @param {import("@bcd").SupportStatement} support
+   * @param {{ omitModifiers?: boolean }} [options] - When `omitModifiers` is
+   *   true, the `prefix` and `altname` icons are skipped (because a branch
+   *   heading already conveys the modifier).
    */
-  _renderCellIcons(support) {
+  _renderCellIcons(support, { omitModifiers = false } = {}) {
     const supportItem = getCurrentSupport(support);
     if (!supportItem) {
       return;
     }
 
     const icons = [
-      supportItem.prefix && this._renderIcon("prefix"),
+      !omitModifiers && supportItem.prefix && this._renderIcon("prefix"),
       hasNoteworthyNotes(supportItem) && this._renderIcon("footnote"),
-      supportItem.alternative_name && this._renderIcon("altname"),
+      !omitModifiers &&
+        supportItem.alternative_name &&
+        this._renderIcon("altname"),
       supportItem.flags && this._renderIcon("disabled"),
       hasMore(support) && this._renderIcon("more"),
     ].filter(Boolean);
@@ -626,7 +631,9 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
                     browser,
                   )} bc-supports`}
                 >
-                  ${this._renderCellText(item, browser, true)}
+                  ${this._renderCellText(item, browser, true, {
+                    omitModifiers: hasParallelBranches,
+                  })}
                 </dt>
                 ${notesItems} ${hasNotes ? undefined : html`<dd></dd>`}
               </div>`
@@ -675,9 +682,17 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         elements: codeElements,
       });
     }
-    return label
-      ? html`<div class="bc-branch-heading">${label}</div>`
-      : nothing;
+    if (!label) {
+      return nothing;
+    }
+    const icons = [
+      prefix && this._renderIcon("prefix"),
+      alternativeName && this._renderIcon("altname"),
+    ].filter(Boolean);
+    return html`<div class="bc-branch-heading">
+      <div class="bc-icons">${icons}</div>
+      <span>${label}</span>
+    </div>`;
   }
 
   /**
@@ -854,8 +869,16 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
    * @param {import("@bcd").SupportStatement | undefined} support
    * @param {import("@bcd").BrowserStatement} browser
    * @param {boolean} [timeline]
+   * @param {{ omitModifiers?: boolean }} [options] - Forwarded to
+   *   {@link _renderCellIcons} to suppress prefix/altname icons when a branch
+   *   heading already conveys the modifier.
    */
-  _renderCellText(support, browser, timeline = false) {
+  _renderCellText(
+    support,
+    browser,
+    timeline = false,
+    { omitModifiers = false } = {},
+  ) {
     const currentSupport = getCurrentSupport(support);
 
     const added = currentSupport?.version_added ?? undefined;
@@ -975,7 +998,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
             : ""}
         </span>
       </div>
-      ${support && this._renderCellIcons(support)}
+      ${support && this._renderCellIcons(support, { omitModifiers })}
     </div>`;
   }
 
