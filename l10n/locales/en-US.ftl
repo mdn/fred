@@ -88,9 +88,9 @@ compat-support-no = No support
 compat-support-unknown = Support unknown
 compat-support-prefix = Implemented with the vendor prefix: { $prefix }
 compat-support-altname = Alternate name: { $altname }
-compat-branch-prefix = With <code data-l10n-name="prefix">{ $prefix }</code> prefix
-compat-branch-altname = With alternate name <code data-l10n-name="altname">{ $altname }</code>
-compat-branch-prefix-altname = With <code data-l10n-name="prefix">{ $prefix }</code> prefix and alternate name <code data-l10n-name="altname">{ $altname }</code>
+compat-branch-prefix = Prefix: <code data-l10n-name="prefix">{ $prefix }</code>
+compat-branch-altname = Alternate name: <code data-l10n-name="altname">{ $altname }</code>
+compat-branch-prefix-altname = Prefix: <code data-l10n-name="prefix">{ $prefix }</code>, alternate name: <code data-l10n-name="altname">{ $altname }</code>
 compat-support-removed = Removed in { $version } and later
 compat-support-see-impl-url = See <a data-l10n-name="impl_url">{ $label }</a>
 compat-support-flags =
