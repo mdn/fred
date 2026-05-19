@@ -839,8 +839,14 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     // If we encounter nothing else than the required `version_added` and
     // `release_date` properties, assume full support.
     // EDIT 1-5-21: if item.version_added doesn't exist, assume no support.
+    // When the branch heading already conveys the modifier, ignore prefix
+    // and alternative_name when judging full support — otherwise a plain
+    // `{ prefix, version_added }` item falls through to "Support unknown".
+    const itemForSupportCheck = omitModifiers
+      ? { ...item, prefix: undefined, alternative_name: undefined }
+      : item;
     if (
-      isFullySupportedWithoutLimitation(item) &&
+      isFullySupportedWithoutLimitation(itemForSupportCheck) &&
       !versionIsPreview(item.version_added, browser)
     ) {
       supportNotes.push({
