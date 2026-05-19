@@ -591,17 +591,18 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   _renderNotes(browser, support) {
     // Support arrays interleave parallel branches (e.g. unprefixed vs.
     // `-webkit-` vs. `-moz-`). Render each branch as its own timeline so
-    // versions stay in chronological order within the branch.
+    // versions stay in chronological order within the branch. Any branch
+    // with a `prefix` or `alternative_name` gets a heading conveying the
+    // modifier, even if it's the only branch.
     const branches = groupSupportBranches(support);
-    const hasParallelBranches = branches.length > 1;
 
     return branches
       .map((branchItems) => {
         const { prefix, alternative_name } = branchItems[0] ?? {};
-        const heading =
-          hasParallelBranches && (prefix || alternative_name)
-            ? this._renderBranchHeading(prefix, alternative_name)
-            : nothing;
+        const hasModifier = !!(prefix || alternative_name);
+        const heading = hasModifier
+          ? this._renderBranchHeading(prefix, alternative_name)
+          : nothing;
 
         const wrappers = [...branchItems]
           .reverse()
@@ -609,7 +610,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
             // Suppress prefix/alt-name notes when the branch heading already
             // conveys the modifier — avoids redundancy.
             const notes = this._getNotes(browser, support, item, {
-              omitModifiers: hasParallelBranches,
+              omitModifiers: hasModifier,
             });
 
             const notesItems = notes.map(({ iconName, label }) => {
@@ -632,7 +633,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
                   )} bc-supports`}
                 >
                   ${this._renderCellText(item, browser, true, {
-                    omitModifiers: hasParallelBranches,
+                    omitModifiers: hasModifier,
                   })}
                 </dt>
                 ${notesItems} ${hasNotes ? undefined : html`<dd></dd>`}
