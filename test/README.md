@@ -27,3 +27,23 @@ To only run e2e tests and bring up a fred dev server and rari server:
 ```
 npm test -- --lint false --unit false --e2e --fred dev --rari
 ```
+
+## Visual tests
+
+Some of our tests do a visual diff. These require a baseline to compare against. Generate this with:
+
+```
+npm run test -- --lint false --unit false --e2e --update-visual-baseline
+```
+
+Then make your changes and compare:
+
+```
+npm run test -- --lint false --unit false --e2e
+```
+
+And generate a report to visualise the changes:
+
+```
+npm run test:visual-report generate -- --serve
+```
