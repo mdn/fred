@@ -17,6 +17,7 @@
     "ssr": "node build/ssr.js",
     "lit-analyzer": "npx @jackolope/lit-analyzer --rules.no-incompatible-type-binding off",
     "test": "node scripts/tests.js",
+    "test:visual-report": "node scripts/visual-report.js",
     "tsc": "tsc",
     "rari": "rari",
     "prepack": "npm run build",
