@@ -29,8 +29,8 @@ export class ReferenceLayout extends ServerComponent {
             ${WRITER_MODE ? WriterToolbar.render(context) : nothing}
             ${TranslationBanner.render(context)}
             <mdn-survey></mdn-survey>
-            <h1>${unsafeHTML(doc.titleHTML)}</h1>
-            ${BaselineIndicator.render(context)} ${description}
+            ${unsafeHTML(doc.titleHTML)} ${BaselineIndicator.render(context)}
+            ${description}
           </div>
           <aside class="layout__right-sidebar reference-layout__toc">
             ${ReferenceToc.render(context)}
