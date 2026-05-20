@@ -18,14 +18,6 @@ export default class Page {
     const activeRequests = new Map();
     let lastActivityTime = Date.now();
 
-    await browser.sessionSubscribe({
-      events: [
-        "network.beforeRequestSent",
-        "network.responseCompleted",
-        "network.fetchError",
-      ],
-    });
-
     /** @param {NetworkBeforeRequestSentParameters} event */
     const onRequestStart = (event) => {
       activeRequests.set(event.request.request, event);
