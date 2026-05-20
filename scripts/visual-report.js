@@ -26,7 +26,7 @@ await yargs(hideBin(process.argv))
       );
       const reportFolder = path.join(FRED_ROOT, "test", "tmp");
       execSync(
-        `npx wdio-visual-reporter --jsonOutput=${jsonOutput} --reportFolder=${reportFolder}`,
+        `npx wdio-visual-reporter --jsonOutput="${jsonOutput}" --reportFolder="${reportFolder}"`,
         { stdio: "inherit" },
       );
       if (argv.serve) await serve();
