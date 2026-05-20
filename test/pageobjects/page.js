@@ -20,8 +20,8 @@ export default class Page {
 
     /** @param {NetworkBeforeRequestSentParameters} event */
     const onRequestStart = (event) => {
-      lastActivityTime = Date.now();
       if (!event.request.url.endsWith("/__webpack_hmr")) {
+        lastActivityTime = Date.now();
         activeRequests.add(event.request.request);
       }
     };
