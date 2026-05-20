@@ -1,13 +1,12 @@
 import { rm } from "node:fs/promises";
-
 import path from "node:path";
-
-const FRED_ROOT = path.join(import.meta.dirname, "..");
 
 import { rariBin } from "@mdn/rari";
 import { concurrently } from "concurrently";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
+
+const FRED_ROOT = path.join(import.meta.dirname, "..");
 
 const argv = await yargs(hideBin(process.argv))
   .option("lint", {
