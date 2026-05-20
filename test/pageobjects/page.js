@@ -15,13 +15,15 @@ export default class Page {
    * @param {number} timeout - maximum time to wait (default 10000ms)
    */
   async waitForNetworkIdle(idleTime = 500, timeout = 10_000) {
-    const activeRequests = new Map();
+    const activeRequests = new Set();
     let lastActivityTime = Date.now();
 
     /** @param {NetworkBeforeRequestSentParameters} event */
     const onRequestStart = (event) => {
-      activeRequests.set(event.request.request, event);
       lastActivityTime = Date.now();
+      if (!event.request.url.endsWith("/__webpack_hmr")) {
+        activeRequests.add(event.request.request);
+      }
     };
 
     /** @param {NetworkResponseCompletedParameters | NetworkFetchErrorParameters} event */
@@ -57,7 +59,6 @@ export default class Page {
    * @param {string} path path of page (e.g. /path/to/page.html)
    */
   async open(path) {
-    await browser.url(path);
-    await this.waitForNetworkIdle();
+    await Promise.all([this.waitForNetworkIdle(), browser.url(path)]);
   }
 }
