@@ -45,7 +45,7 @@ npm run test -- --lint false --unit false --e2e
 And generate a report to visualise the changes:
 
 ```
-npm run test:visual-report generate -- --serve
+npm run test:visual-report -- generate --serve
 ```
 
 ### Running in CI
