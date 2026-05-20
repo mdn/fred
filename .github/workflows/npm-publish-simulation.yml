@@ -54,7 +54,7 @@ jobs:
         os:
           - ubuntu-latest
           - macos-latest
-          - windows-latest
+          - windows-2022
     runs-on: ${{ matrix.os }}
 
     steps:
