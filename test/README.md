@@ -47,3 +47,15 @@ And generate a report to visualise the changes:
 ```
 npm run test:visual-report generate -- --serve
 ```
+
+### Running in CI
+
+Visual tests are run in CI. First we checkout and build the base branch of the PR and build fred. Then we checkout the head of the PR and run the tests against the base build to generate the baseline. Finally we build fred from the head and run the tests again to compare.
+
+We do this to ensure that if any tests are added or changed in the PR they are also run against the base branch.
+
+The tests generate an artifact containing the diff report. To view it download it, unzip it, and start a server in the folder, like so:
+
+```
+npx http-server
+```
