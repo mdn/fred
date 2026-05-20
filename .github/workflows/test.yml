@@ -87,7 +87,7 @@ jobs:
       - name: Run unit tests
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: npm test -- --unit --no-lint
+        run: npm test -- unit
 
       - name: Build
         run: npm run build
@@ -96,4 +96,4 @@ jobs:
         env:
           CONTENT_ROOT: ../content/files
           GITHUB_TOKEN: ${{ github.token }}
-        run: npm test -- --no-unit --e2e --fred preview --rari --no-lint
+        run: npm test -- e2e --fred preview --rari
