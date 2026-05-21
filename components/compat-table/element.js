@@ -471,20 +471,20 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
   /**
    * @param {import("@bcd").SupportStatement} support
-   * @param {{ omitModifiers?: boolean }} [options] - When `omitModifiers` is
+   * @param {{ omitAliasModifiers?: boolean }} [options] - When `omitAliasModifiers` is
    *   true, the `prefix` and `altname` icons are skipped (because a branch
-   *   heading already conveys the modifier).
+   *   heading already conveys the alias modifier).
    */
-  _renderCellIcons(support, { omitModifiers = false } = {}) {
+  _renderCellIcons(support, { omitAliasModifiers = false } = {}) {
     const supportItem = getCurrentSupport(support);
     if (!supportItem) {
       return;
     }
 
     const icons = [
-      !omitModifiers && supportItem.prefix && this._renderIcon("prefix"),
+      !omitAliasModifiers && supportItem.prefix && this._renderIcon("prefix"),
       hasNoteworthyNotes(supportItem) && this._renderIcon("footnote"),
-      !omitModifiers &&
+      !omitAliasModifiers &&
         supportItem.alternative_name &&
         this._renderIcon("altname"),
       supportItem.flags && this._renderIcon("disabled"),
@@ -593,14 +593,14 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     // `-webkit-` vs. `-moz-`). Render each branch as its own timeline so
     // versions stay in chronological order within the branch. Any branch
     // with a `prefix` or `alternative_name` gets a heading conveying the
-    // modifier, even if it's the only branch.
+    // alias modifier, even if it's the only branch.
     const branches = groupSupportBranches(support);
 
     return branches
       .map((branchItems) => {
         const { prefix, alternative_name } = branchItems[0];
-        const hasModifier = !!(prefix || alternative_name);
-        const heading = hasModifier
+        const hasAliasModifier = !!(prefix || alternative_name);
+        const heading = hasAliasModifier
           ? this._renderBranchHeading(prefix, alternative_name)
           : nothing;
 
@@ -608,9 +608,9 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           .reverse()
           .flatMap((item, i) => {
             // Suppress prefix/alt-name notes when the branch heading already
-            // conveys the modifier — avoids redundancy.
+            // conveys the alias modifier — avoids redundancy.
             const notes = this._getNotes(browser, support, item, {
-              omitModifiers: hasModifier,
+              omitAliasModifiers: hasAliasModifier,
             });
 
             const notesItems = notes.map(({ iconName, label }) => {
@@ -633,7 +633,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
                   )} bc-supports`}
                 >
                   ${this._renderCellText(item, browser, true, {
-                    omitModifiers: hasModifier,
+                    omitAliasModifiers: hasAliasModifier,
                   })}
                 </dt>
                 ${notesItems} ${hasNotes ? undefined : html`<dd></dd>`}
@@ -700,12 +700,12 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
    * @param {import("@bcd").BrowserStatement} browser
    * @param {import("@bcd").SupportStatement} support
    * @param {import("@bcd").SimpleSupportStatement} item
-   * @param {{ omitModifiers?: boolean }} [options] - When `omitModifiers` is
+   * @param {{ omitAliasModifiers?: boolean }} [options] - When `omitAliasModifiers` is
    *   true, the `prefix` and `alternative_name` notes are skipped (because a
-   *   branch heading already conveys the modifier).
+   *   branch heading already conveys the alias modifier).
    * @returns
    */
-  _getNotes(browser, support, item, { omitModifiers = false } = {}) {
+  _getNotes(browser, support, item, { omitAliasModifiers = false } = {}) {
     /**
      * @type {Array<{iconName: import("@compat").IconName; label: string | import("@lit").L10nResult | undefined }>}
      */
@@ -735,7 +735,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       });
     }
 
-    if (item.prefix && !omitModifiers) {
+    if (item.prefix && !omitAliasModifiers) {
       supportNotes.push({
         iconName: "prefix",
         label: this.l10n.raw({
@@ -747,7 +747,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       });
     }
 
-    if (item.alternative_name && !omitModifiers) {
+    if (item.alternative_name && !omitAliasModifiers) {
       supportNotes.push({
         iconName: "altname",
         label: this.l10n.raw({
@@ -840,12 +840,12 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     // If we encounter nothing else than the required `version_added` and
     // `release_date` properties, assume full support.
     // EDIT 1-5-21: if item.version_added doesn't exist, assume no support.
-    // When the branch heading already conveys the modifier, ignore prefix
+    // When the branch heading already conveys the alias modifier, ignore prefix
     // and alternative_name when judging full support — otherwise a plain
     // `{ prefix, version_added }` item falls through to "Support unknown".
     if (
       isFullySupportedWithoutLimitation(item, {
-        ignoreModifiers: omitModifiers,
+        ignoreAliasModifiers: omitAliasModifiers,
       }) &&
       !versionIsPreview(item.version_added, browser)
     ) {
@@ -875,15 +875,15 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
    * @param {import("@bcd").SupportStatement | undefined} support
    * @param {import("@bcd").BrowserStatement} browser
    * @param {boolean} [timeline]
-   * @param {{ omitModifiers?: boolean }} [options] - Forwarded to
+   * @param {{ omitAliasModifiers?: boolean }} [options] - Forwarded to
    *   {@link _renderCellIcons} to suppress prefix/altname icons when a branch
-   *   heading already conveys the modifier.
+   *   heading already conveys the alias modifier.
    */
   _renderCellText(
     support,
     browser,
     timeline = false,
-    { omitModifiers = false } = {},
+    { omitAliasModifiers = false } = {},
   ) {
     const currentSupport = getCurrentSupport(support);
 
@@ -1004,7 +1004,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
             : ""}
         </span>
       </div>
-      ${support && this._renderCellIcons(support, { omitModifiers })}
+      ${support && this._renderCellIcons(support, { omitAliasModifiers })}
     </div>`;
   }
 

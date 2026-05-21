@@ -225,12 +225,12 @@ export function bugURLToString(url) {
 /**
  * Checks if a support statement has any limitation.
  * @param {import("@bcd").SimpleSupportStatement} support
- * @param {{ ignoreModifiers?: boolean }} [options]
+ * @param {{ ignoreAliasModifiers?: boolean }} [options]
  * @returns {boolean}
  */
-function hasLimitation(support, { ignoreModifiers = false } = {}) {
+function hasLimitation(support, { ignoreAliasModifiers = false } = {}) {
   return (
-    hasMajorLimitation(support, { ignoreModifiers }) ||
+    hasMajorLimitation(support, { ignoreAliasModifiers }) ||
     !!support.notes ||
     !!support.impl_url
   );
@@ -239,17 +239,17 @@ function hasLimitation(support, { ignoreModifiers = false } = {}) {
 /**
  * Checks if a support statement has major limitations.
  * @param {import("@bcd").SimpleSupportStatement} support
- * @param {{ ignoreModifiers?: boolean }} [options] - When `ignoreModifiers` is
+ * @param {{ ignoreAliasModifiers?: boolean }} [options] - When `ignoreAliasModifiers` is
  *   true, `prefix` and `alternative_name` don't count as limitations (because
  *   a branch heading conveys them).
  * @returns {boolean}
  */
-function hasMajorLimitation(support, { ignoreModifiers = false } = {}) {
+function hasMajorLimitation(support, { ignoreAliasModifiers = false } = {}) {
   return (
     support.partial_implementation ||
-    (!ignoreModifiers && !!support.alternative_name) ||
+    (!ignoreAliasModifiers && !!support.alternative_name) ||
     !!support.flags ||
-    (!ignoreModifiers && !!support.prefix) ||
+    (!ignoreAliasModifiers && !!support.prefix) ||
     !!support.version_removed
   );
 }
@@ -257,16 +257,16 @@ function hasMajorLimitation(support, { ignoreModifiers = false } = {}) {
 /**
  * Checks if a support statement is fully supported without any limitation.
  * @param {import("@bcd").SimpleSupportStatement} support
- * @param {{ ignoreModifiers?: boolean }} [options] - When `ignoreModifiers` is
+ * @param {{ ignoreAliasModifiers?: boolean }} [options] - When `ignoreAliasModifiers` is
  *   true, `prefix` and `alternative_name` don't count as limitations.
  * @returns {boolean}
  */
 export function isFullySupportedWithoutLimitation(
   support,
-  { ignoreModifiers = false } = {},
+  { ignoreAliasModifiers = false } = {},
 ) {
   return (
-    !!support.version_added && !hasLimitation(support, { ignoreModifiers })
+    !!support.version_added && !hasLimitation(support, { ignoreAliasModifiers })
   );
 }
 
