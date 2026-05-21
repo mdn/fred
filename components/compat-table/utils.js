@@ -159,7 +159,9 @@ export function groupSupportBranches(support) {
   /** @type {Map<string, [import("@bcd").SimpleSupportStatement, ...import("@bcd").SimpleSupportStatement[]]>} */
   const branches = new Map();
   for (const item of asList(support)) {
-    const key = `${item.prefix ?? ""}\0${item.alternative_name ?? ""}`;
+    // `/` is safe as a separator: BCD prefixes (e.g. `-webkit-`) and
+    // alternative names (identifier-shaped) never contain it.
+    const key = `${item.prefix ?? ""}/${item.alternative_name ?? ""}`;
     const branch = branches.get(key);
     if (branch) {
       branch.push(item);
@@ -167,7 +169,7 @@ export function groupSupportBranches(support) {
       branches.set(key, [item]);
     }
   }
-  const canonicalKey = "\0";
+  const canonicalKey = "/";
   const canonical = branches.get(canonicalKey);
   branches.delete(canonicalKey);
   return [...(canonical ? [canonical] : []), ...branches.values()];
