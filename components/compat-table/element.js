@@ -690,8 +690,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
    * @param {import("@bcd").SupportStatement} support
    * @param {import("@bcd").SimpleSupportStatement} item
    * @param {{ omitAliasModifiers?: boolean }} [options] - When `omitAliasModifiers` is
-   *   true, the `prefix` and `alternative_name` notes are skipped (because a
-   *   branch heading already conveys the alias modifier).
+   *   true, prefix / alternative_name don't count as limitations when judging
+   *   full support (because a branch heading already conveys the modifier).
    * @returns
    */
   _getNotes(browser, support, item, { omitAliasModifiers = false } = {}) {
@@ -724,29 +724,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       });
     }
 
-    if (item.prefix && !omitAliasModifiers) {
-      supportNotes.push({
-        iconName: "prefix",
-        label: this.l10n.raw({
-          id: "compat-support-prefix",
-          args: {
-            prefix: item.prefix,
-          },
-        }),
-      });
-    }
-
-    if (item.alternative_name && !omitAliasModifiers) {
-      supportNotes.push({
-        iconName: "altname",
-        label: this.l10n.raw({
-          id: "compat-support-altname",
-          args: {
-            altname: item.alternative_name,
-          },
-        }),
-      });
-    }
+    // Note: prefix / alternative_name modifiers are conveyed by the branch
+    // heading (see `_renderBranchHeading`), so they aren't pushed here.
 
     if (item.flags) {
       for (const { type, name, value_to_set } of item.flags) {

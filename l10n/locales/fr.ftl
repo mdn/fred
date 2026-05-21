@@ -47,8 +47,6 @@ obs-mdn = { -brand-name-obs } fournit des informations efficaces en matière de 
 compat-browser-version-date = { $browser } { $version } — Date de sortie : { $date }
 compat-browser-version-released = Date de sortie : { $date }
 compat-link-source-title = Fichier : { $filename }
-compat-support-prefix = Implémenté avec le préfixe vendeur : { $prefix }
-compat-support-altname = Nom alternatif : { $altname }
 compat-support-removed = Supprimé en version { $version } et supérieure
 compat-support-see-impl-url = Voir <a data-l10n-name="impl_url">{ $label }</a>
 compat-support-flags =

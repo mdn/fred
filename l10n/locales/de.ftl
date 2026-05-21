@@ -53,8 +53,6 @@ not-found-back = Zurück zur Startseite
 compat-browser-version-date = { $browser } { $version } – Veröffentlichungsdatum: { $date }
 compat-browser-version-released = Veröffentlichungsdatum: { $date }
 compat-link-source-title = Datei: { $filename }
-compat-support-prefix = Implementiert mit dem Hersteller-Präfix: { $prefix }
-compat-support-altname = Alternativer Name: { $altname }
 compat-support-removed = Ab { $version } entfernt
 compat-support-see-impl-url = Siehe <a data-l10n-name="impl_url">{ $label }</a>
 compat-support-flags =
