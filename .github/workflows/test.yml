@@ -114,14 +114,14 @@ jobs:
       - name: Run unit tests
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: npm test -- --unit --no-lint
+        run: npm test -- unit
 
       - name: Generate visual baseline
         if: github.event_name == 'pull_request'
         env:
           CONTENT_ROOT: ../content/files
           GITHUB_TOKEN: ${{ github.token }}
-        run: npm test -- --no-unit --e2e --update-visual-baseline --fred preview --rari --no-lint
+        run: npm test -- e2e --update-visual-baseline --fred preview --rari
 
       - name: Build
         run: npm run build
@@ -130,7 +130,7 @@ jobs:
         env:
           CONTENT_ROOT: ../content/files
           GITHUB_TOKEN: ${{ github.token }}
-        run: npm test -- --no-unit --e2e --fred preview --rari --no-lint
+        run: npm test -- e2e --fred preview --rari
 
       - name: Generate visual report
         if: github.event_name == 'pull_request' && always()
