@@ -85,6 +85,7 @@ export default defineConfig([
         { definedTags: ["element", "attr", "slot"] },
       ],
       "lit/no-template-map": "off",
+      "lit/prefer-query-decorators": "off",
       "n/no-missing-import": "off",
       "n/no-unsupported-features/node-builtins": ["off"],
       "n/no-unpublished-import": "off",

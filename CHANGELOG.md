@@ -1,5 +1,55 @@
 # Changelog
 
+## [2.6.2](https://github.com/mdn/fred/compare/v2.6.1...v2.6.2) (2026-05-15)
+
+
+### Bug Fixes
+
+* **compat-table:** revert report action to plain link ([#1549](https://github.com/mdn/fred/issues/1549)) ([7049e96](https://github.com/mdn/fred/commit/7049e96232e40a9b098dc1e5bd24ff411beabc73))
+* **content-section:** decrease code paddings for headings ([#1561](https://github.com/mdn/fred/issues/1561)) ([99801fc](https://github.com/mdn/fred/commit/99801fcc75d6a8eddaa8540958c91fa27e8471ec))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @babel/plugin-transform-modules-systemjs ([94036c4](https://github.com/mdn/fred/commit/94036c43829bedf39fd9c6690df68b281c33ae9e))
+* **deps-dev:** bump @babel/plugin-transform-modules-systemjs from 7.27.1 to 7.29.4 ([#1555](https://github.com/mdn/fred/issues/1555)) ([94036c4](https://github.com/mdn/fred/commit/94036c43829bedf39fd9c6690df68b281c33ae9e))
+* **deps-dev:** bump @codemirror/view from 6.42.0 to 6.42.1 in the npm-dev group ([#1551](https://github.com/mdn/fred/issues/1551)) ([33ec989](https://github.com/mdn/fred/commit/33ec9891f6e578437576c06d50e188857cd86b6d))
+* **deps-dev:** bump @codemirror/view in the npm-dev group ([33ec989](https://github.com/mdn/fred/commit/33ec9891f6e578437576c06d50e188857cd86b6d))
+* **deps-dev:** bump @mdn/browser-compat-data from 7.3.14 to 7.3.15 ([#1559](https://github.com/mdn/fred/issues/1559)) ([e2aaef0](https://github.com/mdn/fred/commit/e2aaef0f21f8ad1e30d89358cffe608b15c670f2))
+* **deps-dev:** bump fast-uri from 3.0.6 to 3.1.2 ([#1554](https://github.com/mdn/fred/issues/1554)) ([94640e6](https://github.com/mdn/fred/commit/94640e6fce665828d72e2753ce888c3c95f5a4bd))
+* **deps-dev:** bump fast-xml-builder from 1.1.4 to 1.2.0 ([#1553](https://github.com/mdn/fred/issues/1553)) ([4d8ce05](https://github.com/mdn/fred/commit/4d8ce05989093857a140729e940736528ef2d028))
+* **deps-dev:** bump the npm-dev group across 1 directory with 5 updates ([#1569](https://github.com/mdn/fred/issues/1569)) ([2450d74](https://github.com/mdn/fred/commit/2450d7473647fd8b7195c846a04ad6ab5edda902))
+* **deps-dev:** bump the npm-dev group with 2 updates ([#1558](https://github.com/mdn/fred/issues/1558)) ([4b5a6fc](https://github.com/mdn/fred/commit/4b5a6fc9483e903249ab46d91889f699275a1ff6))
+* **deps:** bump @mdn/rari from 0.2.22 to 0.2.23 ([#1570](https://github.com/mdn/fred/issues/1570)) ([c2dc03e](https://github.com/mdn/fred/commit/c2dc03ef21c895bc05175e967f10a36a182fecef))
+* **deps:** bump the npm-prod group with 3 updates ([#1568](https://github.com/mdn/fred/issues/1568)) ([99b7e89](https://github.com/mdn/fred/commit/99b7e89d58cc772df3acbcc56b9f10088b4afc96))
+
+## [2.6.1](https://github.com/mdn/fred/compare/v2.6.0...v2.6.1) (2026-05-07)
+
+
+### Bug Fixes
+
+* **browserslist:** add Firefox 115 ESR explicitly ([#1545](https://github.com/mdn/fred/issues/1545)) ([7a7ef7a](https://github.com/mdn/fred/commit/7a7ef7aa1f4226f2dc5c8ce21849205e98ff421b))
+* **content-section:** add min-width to headers of properties table ([#1534](https://github.com/mdn/fred/issues/1534)) ([6939122](https://github.com/mdn/fred/commit/6939122f756bc4cae6437ad61ae21bdf569acd1d))
+* **content-section:** add styling for good/bad plain examples ([#1532](https://github.com/mdn/fred/issues/1532)) ([5460c56](https://github.com/mdn/fred/commit/5460c564fcb65e050538d3bf8b48199e7b26f9ba))
+* **generic-doc:** consolidate style ([#1503](https://github.com/mdn/fred/issues/1503)) ([aede5b5](https://github.com/mdn/fred/commit/aede5b50d878e1e8bd26ce0268f281c52d26f664))
+* **playground:** overlay run button for shared playground ([#712](https://github.com/mdn/fred/issues/712)) ([8aa2708](https://github.com/mdn/fred/commit/8aa2708693ccf8b6ec8cb9e1c6bb7ad3ea627002))
+* **writer-mode:** improve handling of _open route ([#1536](https://github.com/mdn/fred/issues/1536)) ([f6cff76](https://github.com/mdn/fred/commit/f6cff76ed2ad26ac9cd3fb78d3e28d2f20f3dbca))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @mdn/browser-compat-data from 7.3.13 to 7.3.14 ([#1529](https://github.com/mdn/fred/issues/1529)) ([a11d23c](https://github.com/mdn/fred/commit/a11d23c23f3eea736c53ff56fad470511b37a611))
+* **deps-dev:** bump eslint-plugin-n from 17.24.0 to 18.0.1 ([#1539](https://github.com/mdn/fred/issues/1539)) ([f1aa541](https://github.com/mdn/fred/commit/f1aa5416890670840ce12f434bc1a4177641aaf8))
+* **deps-dev:** bump ip-address from 10.0.1 to 10.2.0 ([#1540](https://github.com/mdn/fred/issues/1540)) ([32a6254](https://github.com/mdn/fred/commit/32a6254ecc0a541f402c65d17b0fc4f83009dc3c))
+* **deps-dev:** bump stylelint from 17.10.0 to 17.11.0 in the npm-dev group ([#1537](https://github.com/mdn/fred/issues/1537)) ([752b5f5](https://github.com/mdn/fred/commit/752b5f5d13163c6822126b1f2373b54eff9b6b65))
+* **deps-dev:** bump stylelint in the npm-dev group ([752b5f5](https://github.com/mdn/fred/commit/752b5f5d13163c6822126b1f2373b54eff9b6b65))
+* **deps-dev:** bump the npm-dev group with 2 updates ([#1531](https://github.com/mdn/fred/issues/1531)) ([a91e4e2](https://github.com/mdn/fred/commit/a91e4e2532c703836dbd79ffbf66689dfe83c6ce))
+* **deps-dev:** bump the npm-dev group with 2 updates ([#1533](https://github.com/mdn/fred/issues/1533)) ([694cbc7](https://github.com/mdn/fred/commit/694cbc71240319488a95d6b9194db2c1a0cffbae))
+* **deps-dev:** bump the npm-dev group with 3 updates ([#1541](https://github.com/mdn/fred/issues/1541)) ([3419517](https://github.com/mdn/fred/commit/341951770fd8a488f1c5c6b0f38d34893a6e17f4))
+* **deps-dev:** bump the npm-dev group with 7 updates ([#1528](https://github.com/mdn/fred/issues/1528)) ([77cbc41](https://github.com/mdn/fred/commit/77cbc417a5a9645cdf5e3ce148d916ab6dcfabde))
+* **deps:** bump @mdn/rari from 0.2.21 to 0.2.22 ([#1547](https://github.com/mdn/fred/issues/1547)) ([395a003](https://github.com/mdn/fred/commit/395a0033bb2ffc206a21075e970af610bc7910e7))
+* **survey:** run Baseline survey ([#1522](https://github.com/mdn/fred/issues/1522)) ([73360c5](https://github.com/mdn/fred/commit/73360c5c00f236c76ce9606ab376fddbc4c4cae9))
+
 ## [2.6.0](https://github.com/mdn/fred/compare/v2.5.0...v2.6.0) (2026-04-28)
 
 
