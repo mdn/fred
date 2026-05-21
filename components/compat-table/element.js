@@ -654,6 +654,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   }
 
   /**
+   * Called only when at least one of `prefix` / `alternativeName` is present;
+   * the three branches below cover that invariant exhaustively.
    * @param {string | undefined} prefix
    * @param {string | undefined} alternativeName
    */
@@ -662,30 +664,24 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       prefix: { tag: "code" },
       altname: { tag: "code" },
     };
-    /** @type {import("@lit").L10nResult | undefined} */
-    let label;
-    if (prefix && alternativeName) {
-      label = this.l10n.raw({
-        id: "compat-branch-prefix-altname",
-        args: { prefix, altname: alternativeName },
-        elements: codeElements,
-      });
-    } else if (prefix) {
-      label = this.l10n.raw({
-        id: "compat-branch-prefix",
-        args: { prefix },
-        elements: codeElements,
-      });
-    } else if (alternativeName) {
-      label = this.l10n.raw({
-        id: "compat-branch-altname",
-        args: { altname: alternativeName },
-        elements: codeElements,
-      });
-    }
-    if (!label) {
-      return nothing;
-    }
+    const label =
+      prefix && alternativeName
+        ? this.l10n.raw({
+            id: "compat-branch-prefix-altname",
+            args: { prefix, altname: alternativeName },
+            elements: codeElements,
+          })
+        : prefix
+          ? this.l10n.raw({
+              id: "compat-branch-prefix",
+              args: { prefix },
+              elements: codeElements,
+            })
+          : this.l10n.raw({
+              id: "compat-branch-altname",
+              args: { altname: alternativeName },
+              elements: codeElements,
+            });
     const icons = [
       prefix && this._renderIcon("prefix"),
       alternativeName && this._renderIcon("altname"),
