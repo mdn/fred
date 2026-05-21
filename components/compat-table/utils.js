@@ -225,23 +225,31 @@ export function bugURLToString(url) {
 /**
  * Checks if a support statement has any limitation.
  * @param {import("@bcd").SimpleSupportStatement} support
+ * @param {{ ignoreModifiers?: boolean }} [options]
  * @returns {boolean}
  */
-function hasLimitation(support) {
-  return hasMajorLimitation(support) || !!support.notes || !!support.impl_url;
+function hasLimitation(support, { ignoreModifiers = false } = {}) {
+  return (
+    hasMajorLimitation(support, { ignoreModifiers }) ||
+    !!support.notes ||
+    !!support.impl_url
+  );
 }
 
 /**
  * Checks if a support statement has major limitations.
  * @param {import("@bcd").SimpleSupportStatement} support
+ * @param {{ ignoreModifiers?: boolean }} [options] - When `ignoreModifiers` is
+ *   true, `prefix` and `alternative_name` don't count as limitations (because
+ *   a branch heading conveys them).
  * @returns {boolean}
  */
-function hasMajorLimitation(support) {
+function hasMajorLimitation(support, { ignoreModifiers = false } = {}) {
   return (
     support.partial_implementation ||
-    !!support.alternative_name ||
+    (!ignoreModifiers && !!support.alternative_name) ||
     !!support.flags ||
-    !!support.prefix ||
+    (!ignoreModifiers && !!support.prefix) ||
     !!support.version_removed
   );
 }
@@ -249,10 +257,17 @@ function hasMajorLimitation(support) {
 /**
  * Checks if a support statement is fully supported without any limitation.
  * @param {import("@bcd").SimpleSupportStatement} support
+ * @param {{ ignoreModifiers?: boolean }} [options] - When `ignoreModifiers` is
+ *   true, `prefix` and `alternative_name` don't count as limitations.
  * @returns {boolean}
  */
-export function isFullySupportedWithoutLimitation(support) {
-  return !!support.version_added && !hasLimitation(support);
+export function isFullySupportedWithoutLimitation(
+  support,
+  { ignoreModifiers = false } = {},
+) {
+  return (
+    !!support.version_added && !hasLimitation(support, { ignoreModifiers })
+  );
 }
 
 /**

@@ -843,11 +843,10 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     // When the branch heading already conveys the modifier, ignore prefix
     // and alternative_name when judging full support — otherwise a plain
     // `{ prefix, version_added }` item falls through to "Support unknown".
-    const itemForSupportCheck = omitModifiers
-      ? { ...item, prefix: undefined, alternative_name: undefined }
-      : item;
     if (
-      isFullySupportedWithoutLimitation(itemForSupportCheck) &&
+      isFullySupportedWithoutLimitation(item, {
+        ignoreModifiers: omitModifiers,
+      }) &&
       !versionIsPreview(item.version_added, browser)
     ) {
       supportNotes.push({
