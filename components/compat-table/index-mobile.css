@@ -21,7 +21,9 @@
     }
 
     .timeline {
-      /* Align timeline icons with summary icon. */
+      /* Align timeline icons with summary icon. Symmetric on mobile because
+         the branch box drops its horizontal padding and reaches both edges
+         of the cell. */
       margin-right: 0.25rem;
       margin-left: 0.25rem;
     }
