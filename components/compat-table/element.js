@@ -593,7 +593,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     // `-webkit-` vs. `-moz-`). Render each branch as its own timeline so
     // versions stay in chronological order within the branch. Any branch
     // with a `prefix` or `alternative_name` gets a heading conveying the
-    // alias modifier, even if it's the only branch.
+    // alias modifier, even when there is no canonical branch to contrast
+    // with.
     const branches = groupSupportBranches(support);
 
     return branches.map((branchItems) => {
