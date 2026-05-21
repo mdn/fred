@@ -28,8 +28,10 @@ export default class Page {
 
     /** @param {NetworkResponseCompletedParameters | NetworkFetchErrorParameters} event */
     const onRequestEnd = (event) => {
-      activeRequests.delete(event.request.request);
-      lastActivityTime = Date.now();
+      const deleted = activeRequests.delete(event.request.request);
+      if (deleted) {
+        lastActivityTime = Date.now();
+      }
     };
 
     browser.on("network.beforeRequestSent", onRequestStart);
