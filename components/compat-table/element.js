@@ -596,61 +596,53 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     // alias modifier, even if it's the only branch.
     const branches = groupSupportBranches(support);
 
-    return branches
-      .map((branchItems) => {
-        const { prefix, alternative_name } = branchItems[0];
-        const hasAliasModifier = !!(prefix || alternative_name);
-        const heading = hasAliasModifier
-          ? this._renderBranchHeading(prefix, alternative_name)
-          : nothing;
+    return branches.map((branchItems) => {
+      const { prefix, alternative_name } = branchItems[0];
+      const hasAliasModifier = !!(prefix || alternative_name);
+      const heading = hasAliasModifier
+        ? this._renderBranchHeading(prefix, alternative_name)
+        : nothing;
 
-        const wrappers = [...branchItems]
-          .reverse()
-          .flatMap((item, i) => {
-            // Suppress prefix/alt-name notes when the branch heading already
-            // conveys the alias modifier — avoids redundancy.
-            const notes = this._getNotes(browser, support, item, {
-              omitAliasModifiers: hasAliasModifier,
-            });
+      const wrappers = [...branchItems].reverse().flatMap((item, i) => {
+        // Suppress prefix/alt-name notes when the branch heading already
+        // conveys the alias modifier — avoids redundancy.
+        const notes = this._getNotes(browser, support, item, {
+          omitAliasModifiers: hasAliasModifier,
+        });
 
-            const notesItems = notes.map(({ iconName, label }) => {
-              return html`<dd class="bc-supports-dd">
-                ${this._renderIcon(iconName)}${typeof label === "string"
-                  ? html`<span>${unsafeHTML(label)}</span>`
-                  : label}
-              </dd>`;
-            });
+        const notesItems = notes.map(({ iconName, label }) => {
+          return html`<dd class="bc-supports-dd">
+            ${this._renderIcon(iconName)}${typeof label === "string"
+              ? html`<span>${unsafeHTML(label)}</span>`
+              : label}
+          </dd>`;
+        });
 
-            const hasNotes = notesItems.length > 0;
-
-            return (
-              (i === 0 || hasNotes) &&
-              html`<div class="bc-notes-wrapper">
-                <dt
-                  class=${`bc-supports-${getSupportClassName(
-                    item,
-                    browser,
-                  )} bc-supports`}
-                >
-                  ${this._renderCellText(item, browser, true, {
-                    omitAliasModifiers: hasAliasModifier,
-                  })}
-                </dt>
-                ${notesItems} ${hasNotes ? undefined : html`<dd></dd>`}
-              </div>`
-            );
-          })
-          .filter(Boolean);
+        const hasNotes = notesItems.length > 0;
 
         return (
-          wrappers.length > 0 &&
-          html`<div class="bc-branch">
-            ${heading}
-            <div class="bc-branch-items">${wrappers}</div>
+          (i === 0 || hasNotes) &&
+          html`<div class="bc-notes-wrapper">
+            <dt
+              class=${`bc-supports-${getSupportClassName(
+                item,
+                browser,
+              )} bc-supports`}
+            >
+              ${this._renderCellText(item, browser, true, {
+                omitAliasModifiers: hasAliasModifier,
+              })}
+            </dt>
+            ${notesItems} ${hasNotes ? undefined : html`<dd></dd>`}
           </div>`
         );
-      })
-      .filter(Boolean);
+      });
+
+      return html`<div class="bc-branch">
+        ${heading}
+        <div class="bc-branch-items">${wrappers}</div>
+      </div>`;
+    });
   }
 
   /**
