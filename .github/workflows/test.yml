@@ -134,7 +134,7 @@ jobs:
 
       - name: Generate visual report
         if: github.event_name == 'pull_request' && always()
-        run: npm run test:visual-report -- generate
+        run: npm run test -- visual-report generate
 
       - name: Upload visual report
         if: github.event_name == 'pull_request' && always()

@@ -120,5 +120,49 @@ await yargs(hideBin(process.argv))
       }
     },
   )
+  .command(
+    "visual-report",
+    "manage visual test reports",
+    (yargs) =>
+      yargs
+        .command(
+          "generate",
+          "generate report",
+          (yargs) =>
+            yargs.option("serve", {
+              describe: "serve report after generation",
+              type: "boolean",
+              default: false,
+            }),
+          async (argv) => {
+            const jsonOutput = path.join(
+              FRED_ROOT,
+              "test",
+              "tmp",
+              "actual",
+              "output.json",
+            );
+            const reportFolder = path.join(FRED_ROOT, "test", "tmp");
+            execSync(
+              `npx wdio-visual-reporter --jsonOutput="${jsonOutput}" --reportFolder="${reportFolder}"`,
+              { stdio: "inherit" },
+            );
+            if (argv.serve) await serveVisualReport();
+          },
+        )
+        .command("serve", "serve report", () => {}, serveVisualReport)
+        .demandCommand(1),
+    () => {},
+  )
   .demandCommand()
   .parseAsync();
+
+async function serveVisualReport() {
+  const { default: express } = await import("express");
+  const WDIO_PORT = process.env.WDIO_PORT || "3002";
+  const app = express();
+  app.use("/", express.static(path.join(FRED_ROOT, "test", "tmp", "report")));
+  app.listen(WDIO_PORT, () => {
+    console.log(`WebdriverIO visual reporter started on port ${WDIO_PORT}`);
+  });
+}

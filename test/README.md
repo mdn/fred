@@ -31,19 +31,19 @@ npm test -- e2e --fred dev --rari
 Some of our tests do a visual diff. These require a baseline to compare against. Generate this with:
 
 ```
-npm run test -- --lint false --unit false --e2e --update-visual-baseline
+npm run test -- e2e --update-visual-baseline
 ```
 
 Then make your changes and compare:
 
 ```
-npm run test -- --lint false --unit false --e2e
+npm run test -- e2e
 ```
 
 And generate a report to visualise the changes:
 
 ```
-npm run test:visual-report -- generate --serve
+npm run test -- visual-report generate --serve
 ```
 
 ### Running in CI
