@@ -52,9 +52,6 @@ await yargs(hideBin(process.argv))
           if (argv.content && (argv.rari || argv.fred)) {
             throw new Error("--content cannot be used with --rari or --fred");
           }
-          if (argv["update-visual-baseline"] && !argv.e2e) {
-            throw new Error("--update-visual-baseline requires --e2e");
-          }
           return true;
         }),
     async (argv) => {
