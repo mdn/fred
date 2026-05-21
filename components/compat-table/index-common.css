@@ -348,6 +348,19 @@ table {
     border-top: 1px solid var(--color-border-primary);
   }
 
+  .bc-branch-heading {
+    display: flex;
+
+    gap: 0.375rem;
+    align-items: center;
+
+    margin-bottom: 0.75rem;
+
+    font-weight: var(--font-body-strong-weight);
+
+    color: var(--color-text-primary);
+  }
+
   /* Each branch carries its own timeline line, spanning from its first
      to its last icon, so versions stay chronological within the branch. */
   .bc-branch-items {
@@ -433,19 +446,6 @@ table {
   &:last-child {
     margin-bottom: 0;
   }
-}
-
-.bc-branch-heading {
-  display: flex;
-
-  gap: 0.375rem;
-  align-items: center;
-
-  margin-bottom: 0.75rem;
-
-  font-weight: var(--font-body-strong-weight);
-
-  color: var(--color-text-primary);
 }
 
 dl.bc-notes-list {
