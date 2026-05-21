@@ -153,10 +153,10 @@ export function hasMore(support) {
  * The canonical branch (no prefix, no alternative name) is returned first;
  * other branches preserve their original BCD order.
  * @param {import("@bcd").SupportStatement} support
- * @returns {import("@bcd").SimpleSupportStatement[][]}
+ * @returns {[import("@bcd").SimpleSupportStatement, ...import("@bcd").SimpleSupportStatement[]][]}
  */
 export function groupSupportBranches(support) {
-  /** @type {Map<string, import("@bcd").SimpleSupportStatement[]>} */
+  /** @type {Map<string, [import("@bcd").SimpleSupportStatement, ...import("@bcd").SimpleSupportStatement[]]>} */
   const branches = new Map();
   for (const item of asList(support)) {
     const key = `${item.prefix ?? ""}\0${item.alternative_name ?? ""}`;

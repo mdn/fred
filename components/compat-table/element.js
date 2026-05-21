@@ -598,7 +598,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
     return branches
       .map((branchItems) => {
-        const { prefix, alternative_name } = branchItems[0] ?? {};
+        const { prefix, alternative_name } = branchItems[0];
         const hasModifier = !!(prefix || alternative_name);
         const heading = hasModifier
           ? this._renderBranchHeading(prefix, alternative_name)
