@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.6.3](https://github.com/mdn/fred/compare/v2.6.2...v2.6.3) (2026-05-21)
+
+
+### Bug Fixes
+
+* **content-section:** display index in multiple columns ([#1563](https://github.com/mdn/fred/issues/1563)) ([77cb0d0](https://github.com/mdn/fred/commit/77cb0d07f9b322e6e9d118932280193cfba5984e))
+
+
+### Miscellaneous
+
+* **deps:** bump @mdn/rari from 0.2.23 to 0.2.24 ([#1594](https://github.com/mdn/fred/issues/1594)) ([f7a9855](https://github.com/mdn/fred/commit/f7a985549bfc357d6b565ca0f17488a4c954d951))
+* **tests:** move from args to commands in cli ([#1590](https://github.com/mdn/fred/issues/1590)) ([f3afadc](https://github.com/mdn/fred/commit/f3afadc5f64d6f02e9cf923d70673adf545b6cc1))
+
 ## [2.6.2](https://github.com/mdn/fred/compare/v2.6.1...v2.6.2) (2026-05-15)
 
 
