@@ -168,9 +168,9 @@ export function groupSupportBranches(support) {
     }
   }
   const canonicalKey = "\0";
-  return [...branches.entries()]
-    .sort(([a], [b]) => (a === canonicalKey ? -1 : b === canonicalKey ? 1 : 0))
-    .map(([, items]) => items);
+  const canonical = branches.get(canonicalKey);
+  branches.delete(canonicalKey);
+  return [...(canonical ? [canonical] : []), ...branches.values()];
 }
 
 /**
