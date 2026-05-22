@@ -57,7 +57,7 @@ export class Fluent {
   /**
    * @param {string} id
    * @param {string} [attr]
-   * @param {Record<string, any>} [args]
+   * @param {Record<string, FluentVariable | undefined>} [args]
    * @param {Record<string, import("../types/fluent.js").Element>} [elements]
    * @returns {string | ReturnType<typeof unsafeHTML> | undefined}
    */
@@ -124,7 +124,7 @@ export class Fluent {
   /**
    * @param {string} id
    * @param {string} [attr]
-   * @param {Record<string, FluentVariable>} [args]
+   * @param {Record<string, FluentVariable | undefined>} [args]
    * @param {FluentBundle | undefined} [bundle]
    * @param {boolean} [us]
    * @returns {string | undefined}
@@ -179,14 +179,16 @@ export class Fluent {
  * tags that confuse the downstream sanitizer. Only string values are touched
  * so that Number/Date selectors keep working.
  *
- * @param {Record<string, import("@fluent/bundle").FluentVariable>} args
- * @returns {Record<string, import("@fluent/bundle").FluentVariable>}
+ * @param {Record<string, FluentVariable | undefined>} args
+ * @returns {Record<string, FluentVariable>}
  */
 function escapeArgs(args) {
-  /** @type {Record<string, import("@fluent/bundle").FluentVariable>} */
+  /** @type {Record<string, FluentVariable>} */
   const out = {};
   for (const [k, v] of Object.entries(args)) {
-    out[k] = typeof v === "string" ? escapeHtml(v) : v;
+    if (v !== undefined) {
+      out[k] = typeof v === "string" ? escapeHtml(v) : v;
+    }
   }
   return out;
 }
@@ -273,7 +275,7 @@ export default function getFluentContext(locale) {
   }
 
   /**
-   * @param {{ id: string, attr?: string, args?: Record<string, any>, elements?: Record<string, import("../types/fluent.js").Element> }} param0
+   * @param {{ id: string, attr?: string, args?: Record<string, FluentVariable | undefined>, elements?: Record<string, import("../types/fluent.js").Element> }} param0
    */
   l10n.raw = function ({ id, attr, args, elements }) {
     const fluent = getLocale(locale);
