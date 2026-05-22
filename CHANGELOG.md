@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.6.4](https://github.com/mdn/fred/compare/v2.6.3...v2.6.4) (2026-05-22)
+
+
+### Bug Fixes
+
+* **l10n:** correct compat-support-flags rendering across locales ([#1562](https://github.com/mdn/fred/issues/1562)) ([2f5b04f](https://github.com/mdn/fred/commit/2f5b04fa8ea970c839102d211aa8efd06a585880))
+
+
+### Miscellaneous
+
+* **deps:** bump @mdn/rari from 0.2.24 to 0.2.25 ([#1597](https://github.com/mdn/fred/issues/1597)) ([ed147d1](https://github.com/mdn/fred/commit/ed147d19d49fdb3e1d6b8b3e222a492f86844bcd))
+
 ## [2.6.3](https://github.com/mdn/fred/compare/v2.6.2...v2.6.3) (2026-05-21)
 
 
