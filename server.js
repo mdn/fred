@@ -1,3 +1,4 @@
+import { spawn } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { Worker } from "node:worker_threads";
@@ -5,10 +6,15 @@ import { Worker } from "node:worker_threads";
 import cookieParser from "cookie-parser";
 import express from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
-import openEditor from "open-editor";
+import { getEditorInfo } from "open-editor";
 
 import { FRED_BUILD_ROOT } from "./build/env.js";
-import { WRITER_MODE } from "./components/env/index.js";
+import {
+  OPEN_BROWSER_ON_START,
+  PLAYGROUND_PORT,
+  PORT,
+  WRITER_MODE,
+} from "./components/env/index.js";
 import { handleRunner } from "./vendor/yari/libs/play/index.js";
 
 import "source-map-support/register.js";
@@ -78,15 +84,20 @@ async function serverRenderMiddleware(req, res, page) {
         );
 
         worker.on("message", ({ html, error }) => {
-          error ? reject(error) : resolve(html);
+          if (error) {
+            reject(error);
+          } else {
+            resolve(html);
+          }
         });
       });
     }
 
     res.writeHead(res.statusCode, {
       "Content-Type": "text/html",
+      "Content-Length": Buffer.byteLength(html),
     });
-    res.end(html);
+    res.end(res.locals.wasHead ? undefined : html);
   } catch (error) {
     console.error("SSR render error:", error);
     res.writeHead(500).end();
@@ -112,12 +123,10 @@ export async function startServer() {
   if (devMode) {
     const { rspack } = await import("@rspack/core");
     const { default: rspackConfig } = await import("./rspack.config.js");
-    const { default: webpackDevMiddleware } = await import(
-      "webpack-dev-middleware"
-    );
-    const { default: webpackHotMiddleware } = await import(
-      "webpack-hot-middleware"
-    );
+    const { default: webpackDevMiddleware } =
+      await import("webpack-dev-middleware");
+    const { default: webpackHotMiddleware } =
+      await import("webpack-hot-middleware");
 
     const rspackCompiler = rspack(rspackConfig);
 
@@ -182,7 +191,7 @@ export async function startServer() {
   );
 
   if (WRITER_MODE) {
-    app.get("/_open", async (req, _res) => {
+    app.get("/_open", async (req, res) => {
       const { filepath } = req.query;
       const { CONTENT_ROOT, CONTENT_TRANSLATED_ROOT } = process.env;
       if (typeof filepath === "string") {
@@ -192,12 +201,33 @@ export async function startServer() {
             : CONTENT_TRANSLATED_ROOT) || "",
           filepath,
         );
-        openEditor([absolutePath]);
+        console.log(
+          `Attempting to open ${absolutePath} with ${process.env.EDITOR}`,
+        );
+        const { binary, arguments: args } = getEditorInfo([absolutePath]);
+        const child = spawn(binary, args, { detached: true, stdio: "ignore" });
+
+        child.on("error", (error) => {
+          console.error("Failed to open editor:", error);
+          return;
+        });
+        child.unref();
       }
+      res.sendStatus(204);
     });
   }
 
   const RARI_URL = process.env.RARI_URL || "http://localhost:8083";
+
+  // Convert HEAD requests to GET so Rari returns full response for rendering
+  app.use((req, res, next) => {
+    if (req.method === "HEAD") {
+      req.method = "GET";
+      res.locals.wasHead = true;
+    }
+    next();
+  });
+
   app.use(
     createProxyMiddleware({
       target: RARI_URL,
@@ -209,6 +239,15 @@ export async function startServer() {
       },
       selfHandleResponse: true,
       on: {
+        proxyReq: async (req) => {
+          const locale = req.path.split("/")[1];
+          if (locale && /^q[a-t][a-z]$/.test(locale)) {
+            // if the locale matches a qaa...qtz private use language tag,
+            // which we use for testing fluent with pseudo-locales,
+            // load the en-US doc from rari
+            req.path = req.path.replace(locale, "en-US");
+          }
+        },
         proxyRes: async (proxyRes, req, res) => {
           const contentType = proxyRes.headers["content-type"] || "";
           const statusCode = proxyRes.statusCode || 500;
@@ -322,14 +361,26 @@ export async function startServer() {
     );
   }
 
-  const httpServer = app.listen(3000, () => {
-    console.log(
-      `Server started at ${http2 ? "https" : "http"}://localhost:3000`,
-    );
+  const httpServer = app.listen(PORT, () => {
+    const scheme = http2 ? "https" : "http";
+    const url = `${scheme}://localhost:${PORT}`;
+    console.log(`Server started at ${url}`);
+    // Auto open browser
+    if (OPEN_BROWSER_ON_START) {
+      const platform = process.platform;
+
+      const command =
+        platform === "win32"
+          ? "start"
+          : platform === "darwin"
+            ? "open"
+            : "xdg-open";
+      spawn(command, [url]);
+    }
   });
 
-  const playServer = play.listen(3001, () => {
-    console.log(`Play server started at http://localhost:3001`);
+  const playServer = play.listen(PLAYGROUND_PORT, () => {
+    console.log(`Playground backend started on port ${PLAYGROUND_PORT}`);
   });
 
   return {

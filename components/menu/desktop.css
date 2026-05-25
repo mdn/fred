@@ -47,7 +47,7 @@
       display: none;
     }
 
-    @media (width <= 1065px) {
+    @media (--screen-menu-compact) {
       &[data-type="long"] {
         display: none;
       }

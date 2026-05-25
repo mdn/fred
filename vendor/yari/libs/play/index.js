@@ -207,7 +207,7 @@ export function renderWarning(state, hrefWithCode, searchWithState) {
             href="https://developer.mozilla.org/en-US/play${searchWithState}"
             >Open in Playground</a
           >
-          <a class="continue" href="${hrefWithCode}">Continue</a>
+          <a class="continue" href=${hrefWithCode}>Continue</a>
         </main>
       </body>
     </html>`;
@@ -515,7 +515,7 @@ export function renderHtml(state = null) {
       </head>
       <body>
         ${htmlCode}
-        <script type="${defaults === "ix-wat" ? "module" : ""}">
+        <script type=${defaults === "ix-wat" ? "module" : ""}>
           ${js};
         </script>
         <script>

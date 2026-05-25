@@ -104,7 +104,11 @@ export class MDNPlayConsole extends LitElement {
   onConsole({ detail }) {
     if (detail.prop in this.vconsole) {
       const prop = /** @type {keyof typeof this.vconsole} */ (detail.prop);
-      detail.args ? this.vconsole[prop](...detail.args) : this.vconsole[prop]();
+      if (detail.args) {
+        this.vconsole[prop](...detail.args);
+      } else {
+        this.vconsole[prop]();
+      }
     } else {
       this.vconsole.warn(
         "[Playground] Unsupported console message (see browser console)",

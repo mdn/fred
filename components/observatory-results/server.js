@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html } from "@lit-labs/ssr";
 
 import { Button } from "../button/server.js";
 import feedbackIcon from "../icon/circle-alert.svg?lit";
@@ -8,10 +8,9 @@ import { ServerComponent } from "../server/index.js";
 export class ObservatoryResults extends ServerComponent {
   /**
    * @param {import("@fred").Context<import("@rari").SPAPage>} context
-   * @returns {import("@lit").TemplateResult}
    */
   render(context) {
-    if (context.parents.length > 0) {
+    if (context.parents !== undefined && context.parents.length > 0) {
       const lastParent = context.parents.at(-1);
       if (lastParent) {
         lastParent.uri = "#";
@@ -31,7 +30,9 @@ export class ObservatoryResults extends ServerComponent {
                 </h1>
                 <div class="observatory-results__feedback">
                   ${Button.render(context, {
-                    label: context.l10n`Report Feedback`,
+                    label: context.l10n(
+                      "observatory-results-report-feedback",
+                    )`Report Feedback`,
                     variant: "plain",
                     icon: feedbackIcon,
                     rel: "noopener",
@@ -59,7 +60,7 @@ export class ObservatoryResults extends ServerComponent {
                 </li>
                 <li class="observatory-results-toc__item">
                   <a href="/en-US/observatory/docs/faq" class="obs-toc__link"
-                    >${context.l10n`FAQ`}</a
+                    >${context.l10n("observatory-results-faq")`FAQ`}</a
                   >
                 </li>
               </ul>

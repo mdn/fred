@@ -1,4 +1,7 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
+
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { ArticleFooter } from "../article-footer/server.js";
 import { BaselineIndicator } from "../baseline-indicator/server.js";
@@ -16,32 +19,45 @@ export class ReferenceLayout extends ServerComponent {
    */
   render(context) {
     const { doc } = context;
-    const [description, ...sections] = doc.body.map((section) =>
-      ContentSection.render(context, section),
-    );
+    const [description, ...sections] =
+      doc.body?.map((section) => ContentSection.render(context, section)) || [];
 
     return html`
-      <div class="reference-layout">
-        <main id="content" class="reference-layout__content">
-          <div class="reference-layout__header">
+      <div class="layout__2-sidebars-inline reference-layout">
+        <main id="content" class="layout__content">
+          <div class="layout__header reference-layout__header">
             ${WRITER_MODE ? WriterToolbar.render(context) : nothing}
             ${TranslationBanner.render(context)}
-            <h1>${doc.title}</h1>
+            <mdn-survey></mdn-survey>
+            <h1>${unsafeHTML(doc.titleHTML)}</h1>
             ${BaselineIndicator.render(context)} ${description}
           </div>
-          <aside class="reference-layout__toc">
+          <aside class="layout__right-sidebar reference-layout__toc">
             ${ReferenceToc.render(context)}
             <mdn-placement-sidebar></mdn-placement-sidebar>
           </aside>
-          <div class="reference-layout__body">
-            <mdn-survey></mdn-survey>
+          <div class="layout__body reference-layout__body">
             ${sections} ${ArticleFooter.render(context)}
           </div>
         </main>
-        <aside class="reference-layout__sidebar" id="main-sidebar">
+        <aside class="layout__left-sidebar" id="main-sidebar">
           ${LeftSidebar.render(context)}
         </aside>
       </div>
+    `;
+  }
+
+  /**
+   * @param {import("@fred").Context<import("@rari").DocPage>} context
+   */
+  renderSimplified(context) {
+    const { doc } = context;
+    const sections =
+      doc.body?.map((section) => ContentSection.render(context, section)) || [];
+
+    return html`
+      <h1>${doc.title}</h1>
+      ${BaselineIndicator.render(context)} ${sections}
     `;
   }
 }

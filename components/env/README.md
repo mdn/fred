@@ -26,3 +26,5 @@ Rspack will bundle **all** environment variables prefixed with `FRED_` into the 
 By default, variables are baked into our bundle at build time. However, you can define variables as runtime environment variables, which can be changed when running a version of Fred built with `FRED_RUNTIME_ENV=true`.
 
 This is used in our npm package, so we can e.g. set `FRED_WRITER_MODE=true` in the `content` repo, without having to bake that into the npm package for all consumers.
+
+Runtime environment variables fall back to their build-time values if not set, and then to the default defined in code.

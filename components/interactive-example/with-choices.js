@@ -122,7 +122,7 @@ export const InteractiveExampleWithChoices = (Base) =>
               @click=${this._reset}
               variant="secondary"
               .disabled=${!this.__choiceUpdated}
-              >${this.l10n`Reset`}</mdn-button
+              >${this.l10n("interactive-example-reset")`Reset`}</mdn-button
             >
           </header>
           <ul
@@ -130,7 +130,9 @@ export const InteractiveExampleWithChoices = (Base) =>
             @click=${this.#choiceFocus}
             @focus=${this.#choiceSelect}
             @update=${this.#choiceUpdate}
-            aria-label=${this.l10n`Value select`}
+            aria-label=${this.l10n(
+              "interactive-example-value-select",
+            )`Value select`}
           >
             ${this._choices?.map(
               (code, index) => html`
@@ -149,8 +151,9 @@ export const InteractiveExampleWithChoices = (Base) =>
                     .value=${code?.trim()}
                     aria-label=${ifDefined(
                       this.__choiceUnsupported[index]
-                        ? this
-                            .l10n`The current value is not supported by your browser.`
+                        ? this.l10n(
+                            "interactive-example-the-current-value-is-not-support",
+                          )`The current value is not supported by your browser.`
                         : undefined,
                     )}
                   ></mdn-play-editor>
@@ -163,6 +166,7 @@ export const InteractiveExampleWithChoices = (Base) =>
               <mdn-play-runner
                 ${ref(this._runner)}
                 defaults="ix-choice"
+                sandbox="allow-modals"
               ></mdn-play-runner>
             </mdn-play-controller>
           </div>

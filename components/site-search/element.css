@@ -209,6 +209,10 @@
     color: inherit;
     background-color: var(--color-highlight-background);
   }
+
+  .divider {
+    color: var(--color-text-secondary);
+  }
 }
 
 .site-search-results__locale-indicator {

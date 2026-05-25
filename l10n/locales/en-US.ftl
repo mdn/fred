@@ -1,3 +1,6 @@
+# WARNING: don't use this file as a source for strings requiring l10n, use ../template.ftl instead:
+# this file only contains manually added strings, not ones inlined in code. See ../README.md for more details.
+
 # TODO Use comments, see: https://firefox-source-docs.mozilla.org/l10n/fluent/review.html#comments
 # TODO Consider using terms, see: https://firefox-source-docs.mozilla.org/l10n/fluent/review.html#terms and https://projectfluent.org/fluent/guide/references.html#message-references
 
@@ -13,6 +16,8 @@ baseline-unsupported-in = Not widely supported in { $browsers }
 baseline-supported-and-unsupported-in = Supported in { $supported }, but not widely supported in { $unsupported }
 
 homepage-hero-title = Resources for Developers,<br> by Developers
+
+playground-user-shared-warning = This is a user-shared playground.<br>Always inspect the code before running it.
 homepage-hero-description = Documenting <a data-l10n-name="css">CSS</a>, <a data-l10n-name="html">HTML</a>, and <a data-l10n-name="js">JavaScript</a>, since 2005.
 
 not-found-title = Page not found
@@ -39,7 +44,6 @@ site-search-suggestion-matches =  { $relation ->
        *[other] { $matches } matches
     }
 }
-site-search-suggestions-text = Did you mean:
 
 blog-time-to-read = { $minutes ->
     [one]   { $minutes } minute read
@@ -61,9 +65,10 @@ obs-mdn = The { -brand-name-obs } provides effective security insights, guided b
 
 
 compat-loading = Loading…
+compat-js-required = Enable JavaScript to view this browser compatibility table.
 
-compat-browser-version-date = { $browser } { $version } – Released { $date }
-compat-browser-version-released = Released { $date }
+compat-browser-version-date = { $browser } { $version } – Release date: { $date }
+compat-browser-version-released = Release date: { $date }
 
 compat-link-report-issue = Report problems with this compatibility data
 compat-link-report-issue-title = Report an issue with this compatibility data
@@ -81,36 +86,38 @@ compat-support-full = Full support
 compat-support-partial = Partial support
 compat-support-no = No support
 compat-support-unknown = Support unknown
-compat-support-preview = Preview browser support
 compat-support-prefix = Implemented with the vendor prefix: { $prefix }
 compat-support-altname = Alternate name: { $altname }
 compat-support-removed = Removed in { $version } and later
 compat-support-see-impl-url = See <a data-l10n-name="impl_url">{ $label }</a>
 compat-support-flags =
-  { NUMBER($has_added) ->
-    [one] From version { $version_added }
-    *[other] {""}
+  { $has_added ->
+    [1] From version { $version_added }
+    *[0] {""}
   }{ $has_last ->
-    [one] { NUMBER($has_added) ->
-          *[zero] Until { $versionLast } users
-          [one] {" "}until { $versionLast } users
+    [1] { $has_added ->
+          *[0] Until { $versionLast } users
+          [1] {" "}until { $versionLast } users
       }
-    *[zero] { NUMBER($has_added) ->
-          *[zero] Users
-          [one] {" "}users
+    *[0] { $has_added ->
+          *[0] Users
+          [1] {" "}users
       }
   }
   {" "}must explicitly set the <code data-l10n-name="name">{ $flag_name }</code>{" "}
   { $flag_type ->
     *[preference] preference
     [runtime_flag] runtime flag
-  }{ NUMBER($has_value) ->
-    [one] {" "}to <code data-l10n-name="value">{ $flag_value }</code>
-    *[other] {""}
+  }{ $has_value ->
+    [1] {" "}to <code data-l10n-name="value">{ $flag_value }</code>
+    *[0] {""}
   }{"."}
-  { $flag_type ->
-    [preference] To change preferences in { $browser_name }, visit { $browser_pref_url }.
-    *[other] {""}
+  { $has_pref_url ->
+    [1] { $flag_type ->
+      [preference] To change preferences in { $browser_name }, visit { $browser_pref_url }.
+      *[other] {""}
+    }
+    *[0] {""}
   }
 
 compat-legend = Legend
@@ -139,7 +146,12 @@ pagination-goto = Go to page { $page }
 
 logout = Sign out
 login = Log in
-settings = My settings
 
 example-play-button-label = Play
 example-play-button-title = Run example in MDN Playground (opens in new tab)
+
+content-feedback-question = Was this page helpful to you?
+content-feedback-reason = Why was this page not helpful to you?
+content-feedback-thanks = Thank you for your feedback!
+
+writer-reload-polling = Polling every { $seconds }s

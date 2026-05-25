@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html } from "@lit-labs/ssr";
 
 import { GenericContent } from "../generic-content/server.js";
 import { GenericSidebar } from "../generic-sidebar/server.js";
@@ -11,12 +11,17 @@ export class GenericLayout extends ServerComponent {
    */
   render(context) {
     return html`
-      <div class="generic-layout">
-        <aside class="generic-layout__toc">${GenericToc.render(context)}</aside>
-        <div class="generic-layout__content">
+      <div class="layout__2-sidebars generic-layout">
+        <aside class="layout__right-sidebar generic-layout__toc">
+          ${GenericToc.render(context)}
+        </aside>
+        <div class="layout__content generic-layout__content">
           ${GenericContent.render(context)}
         </div>
-        <aside class="generic-layout__sidebar" id="main-sidebar">
+        <aside
+          class="layout__left-sidebar generic-layout__sidebar"
+          id="main-sidebar"
+        >
           ${GenericSidebar.render(context)}
         </aside>
       </div>

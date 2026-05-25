@@ -1,4 +1,5 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import { ServerComponent } from "../server/index.js";
 
@@ -27,7 +28,10 @@ export class Pagination extends ServerComponent {
     );
 
     return html`
-      <nav class="pagination" aria-label=${context.l10n`Pagination`}>
+      <nav
+        class="pagination"
+        aria-label=${context.l10n("pagination-pagination")`Pagination`}
+      >
         <ul>
           ${this.renderPrevNextButton(
             "prev",

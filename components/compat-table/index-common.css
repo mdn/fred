@@ -1,5 +1,9 @@
 /* Compat (mobile *and* desktop). */
 
+.table-container {
+  overflow-x: hidden;
+}
+
 table {
   display: grid;
   grid-auto-flow: row dense;
@@ -216,14 +220,6 @@ table {
 
   .bc-feature-depth-3 {
     border-left: 15px solid var(--color-border-primary);
-  }
-
-  .timeline {
-    display: none;
-  }
-
-  .bc-has-history:focus-within .timeline {
-    display: initial;
   }
 }
 

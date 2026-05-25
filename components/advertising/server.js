@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html } from "@lit-labs/ssr";
 
 import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
@@ -36,7 +36,6 @@ const STATS = [
 export class Advertising extends ServerComponent {
   /**
    * @param {import("@fred").Context<import("@rari").SPAPage>} context
-   * @returns {import("@lit").TemplateResult}
    */
   render(context) {
     // Set the document title

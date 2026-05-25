@@ -1,4 +1,5 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import { Breadcrumbs } from "../breadcrumbs/server.js";
 
@@ -64,7 +65,7 @@ export class BreadcrumbsBar extends ServerComponent {
         : "doc" in context && "other_translations" in context.doc
           ? context.doc.other_translations
           : [];
-    const native = translations.find(
+    const native = translations?.find(
       (t) => t.locale === context.locale,
     )?.native;
 

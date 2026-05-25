@@ -1,11 +1,14 @@
 import { readFile } from "node:fs/promises";
-
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 import { FRED_BUILD_ROOT } from "./env.js";
 
 const { render: distRender } = /** @type {import("../entry.ssr.js")} */ (
-  await import(path.resolve(FRED_BUILD_ROOT, "static", "ssr", "index.js"))
+  await import(
+    pathToFileURL(path.resolve(FRED_BUILD_ROOT, "static", "ssr", "index.js"))
+      .href
+  )
 );
 
 /** @type {import("@rspack/core").StatsCompilation} */

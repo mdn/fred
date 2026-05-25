@@ -7,3 +7,13 @@
     url("./assets/BarlowCondensed-SemiBold.woff2") format("woff2");
   font-display: block;
 }
+
+mdn-scrim-inline {
+  display: block;
+
+  width: 100%;
+  max-width: 36rem;
+  aspect-ratio: 1.5;
+
+  margin: 0.5rem auto;
+}

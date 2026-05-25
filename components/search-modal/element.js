@@ -3,6 +3,7 @@ import { LitElement, html, nothing } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
+import { gleanClick } from "../../utils/glean.js";
 import { mdnUrl2Breadcrumb } from "../../utils/mdn-url2breadcrumb.js";
 
 import exitIcon from "../icon/cancel.svg?lit";
@@ -10,6 +11,7 @@ import exitIcon from "../icon/cancel.svg?lit";
 import styles from "./element.css?lit";
 
 export class MDNSearchModal extends L10nMixin(LitElement) {
+  static ssr = false;
   static styles = styles;
 
   static properties = {
@@ -26,6 +28,8 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     this._query = "";
     this._selected = 0;
     this._shiftFocus = false;
+    /** Capture whether user has engaged with the search. */
+    this._hasEngaged = false;
   }
 
   async _loadIndex() {
@@ -60,9 +64,15 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
   }
 
   /** @param {InputEvent} event */
-  _input({ target }) {
+  _input({ inputType, target }) {
     if (target instanceof HTMLInputElement) {
       this._query = target.value;
+      if (!this._hasEngaged && inputType.startsWith("insert")) {
+        this._hasEngaged = true;
+        gleanClick(
+          `quick-search-change: ${inputType === "insertFromPaste" ? "paste" : "type"}`,
+        );
+      }
     }
   }
 
@@ -87,6 +97,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
           item.dispatchEvent(
             new MouseEvent("click", {
               bubbles: true,
+              composed: true,
               // we attempt to pass modifier keys through
               // but browser support is incredibly varied:
               ctrlKey,
@@ -170,9 +181,16 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
 
     if (isSlash || isCtrlK) {
       event.preventDefault();
+      gleanClick(
+        `quick-search-open: keyboard -> ${isSlash ? "slash" : "ctrl-k"}`,
+      );
       this.showModal();
       if (selection) {
         this._query = selection;
+        if (!this._hasEngaged) {
+          this._hasEngaged = true;
+          gleanClick("quick-search-change: selection");
+        }
       }
     }
   }
@@ -191,6 +209,14 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     this.shadowRoot?.querySelector("dialog")?.close();
   }
 
+  /** @param {ToggleEvent} event */
+  _toggle({ newState }) {
+    document.documentElement.classList.toggle(
+      "search-modal-open",
+      newState === "open",
+    );
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this._globalKeydown = this._globalKeydown.bind(this);
@@ -203,18 +229,29 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     super.disconnectedCallback();
     this.renderRoot.removeEventListener("mouseover", this._loadIndex);
     document.removeEventListener("keydown", this._globalKeydown);
+    document.documentElement.classList.remove("search-modal-open");
   }
 
   _renderLoadingSearchIndex() {
     return html`<progress
-      aria-label=${this.l10n`Loading search index…`}
+      aria-label=${this.l10n(
+        "search-modal-loading-search-index",
+      )`Loading search index…`}
     ></progress>`;
   }
 
   render() {
     const siteSearchIndex = this._queryIndex.value?.length || 0;
+    const searchUrl = this._query
+      ? `/${this.locale}/search?${new URLSearchParams({ q: this._query })}`
+      : null;
     return html`
-      <dialog @keydown=${this._keydown} @focusin=${this._focus} closedby="any">
+      <dialog
+        @keydown=${this._keydown}
+        @focusin=${this._focus}
+        @toggle=${this._toggle}
+        closedby="any"
+      >
         <form
           method="get"
           action=${`/${this.locale}/search`}
@@ -224,10 +261,11 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
             type="search"
             name="q"
             .value=${this._query}
+            autocomplete="off"
             autofocus
             @input=${this._input}
-            placeholder=${this.l10n`Search`}
-            aria-label=${this.l10n`Search`}
+            placeholder=${this.l10n("search-modal-search")`Search`}
+            aria-label=${this.l10n("search-modal-search")`Search`}
           />
         </form>
         <mdn-button
@@ -236,7 +274,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
           icon-only
           .icon=${exitIcon}
           @click=${this._close}
-          >${this.l10n`Exit search`}</mdn-button
+          >${this.l10n("search-modal-exit-search")`Exit search`}</mdn-button
         >
         ${this._queryIndex.render({
           initial: this._renderLoadingSearchIndex.bind(this),
@@ -248,7 +286,9 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
               results?.map(
                 ({ title, url }, i) => html`
                   <li ?data-selected=${this._selected === i} data-result=${i}>
-                    <a href=${url}
+                    <a
+                      href=${url}
+                      data-glean-id=${`quick-search: results[${1 + i}] -> ${this._query} -> ${url}`}
                       ><span class="slug"
                         >${mdnUrl2Breadcrumb(url, this.locale)}</span
                       >
@@ -260,13 +300,14 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
                 `,
               ),
           })}
-          ${this._query
+          ${searchUrl
             ? html`<li
                 ?data-selected=${this._selected === siteSearchIndex}
                 data-result=${siteSearchIndex}
               >
                 <a
-                  href=${`/${this.locale}/search?${new URLSearchParams({ q: this._query })}`}
+                  href=${searchUrl}
+                  data-glean-id=${`quick-search: site-search -> ${this._query}`}
                   ><span class="title"
                     >${this.l10n.raw({
                       id: "search-modal-site-search",

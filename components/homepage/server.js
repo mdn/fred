@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html } from "@lit-labs/ssr";
 
 import { HomepageBody } from "../homepage-body/server.js";
 import { HomepageFooter } from "../homepage-footer/server.js";
@@ -14,7 +14,7 @@ export class Homepage extends ServerComponent {
     return PageLayout.render(
       context,
       html`
-        <div class="homepage homepage--dark">
+        <div id="content" class="homepage homepage--dark">
           ${HomepageHeader.render(context)}
         </div>
         <div class="homepage">

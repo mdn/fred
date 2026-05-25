@@ -1,8 +1,26 @@
+import { BCD_BASE_URL } from "../env/index.js";
+
 /**
  * A list of browsers to be hidden.
  * @constant {string[]}
  */
-export const HIDDEN_BROWSERS = ["bun", "ie"];
+export const SHOW_BROWSERS = [
+  "chrome",
+  "edge",
+  "firefox",
+  "opera",
+  "safari",
+  "chrome_android",
+  "firefox_android",
+  "opera_android",
+  "safari_ios",
+  "samsunginternet_android",
+  "webview_android",
+  "webview_ios",
+  "bun",
+  "deno",
+  "nodejs",
+];
 
 /**
  * Gets the first element of an array or returns the value itself.
@@ -276,4 +294,12 @@ export function getCurrentSupport(support) {
 
   // Default (likely never reached).
   return getFirst(support);
+}
+
+/**
+ * Get the URL to the JSON file for a given BCD key
+ * @param {string} query
+ */
+export function queryToUrl(query) {
+  return `${BCD_BASE_URL}/bcd/api/v0/current/${query}.json`;
 }

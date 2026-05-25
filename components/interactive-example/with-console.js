@@ -54,25 +54,32 @@ export const InteractiveExampleWithConsole = (Base) =>
                 id="execute"
                 @click=${this._run}
                 variant="secondary"
-                title=${this.l10n`Run example, and show console output`}
-                >${this.l10n`Run`}</mdn-button
+                title=${this.l10n(
+                  "interactive-example-run-example-and-show-console-ou",
+                )`Run example, and show console output`}
+                >${this.l10n("interactive-example-run")`Run`}</mdn-button
               >
               <mdn-button
                 id="reset"
                 @click=${this._reset}
                 variant="secondary"
-                title=${this.l10n`Reset example, and clear console output`}
-                >${this.l10n`Reset`}</mdn-button
+                title=${this.l10n(
+                  "interactive-example-reset-example-and-clear-console",
+                )`Reset example, and clear console output`}
+                >${this.l10n("interactive-example-reset")`Reset`}</mdn-button
               >
             </div>
             <mdn-play-console
               id="console"
-              title=${this.l10n`Console output`}
+              title=${this.l10n(
+                "interactive-example-console-output",
+              )`Console output`}
             ></mdn-play-console>
             <mdn-play-runner
               defaults=${ifDefined(
                 this._languages.includes("wat") ? "ix-wat" : undefined,
               )}
+              sandbox="allow-modals"
             ></mdn-play-runner>
           </div>
         </mdn-play-controller>

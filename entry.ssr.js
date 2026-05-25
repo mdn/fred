@@ -2,6 +2,8 @@
 import { render as r } from "@lit-labs/ssr";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 
+import { nothing } from "lit";
+
 import { Advertising } from "./components/advertising/server.js";
 import { BlogIndex } from "./components/blog-index/server.js";
 import { BlogPost } from "./components/blog-post/server.js";
@@ -45,16 +47,13 @@ for (const [name, def] of customElements.__definitions) {
  */
 export async function render(path, partialContext, compilationStats) {
   const locale = path.split("/")[1] || "en-US";
-  if (locale === "qa") {
-    path = path.replace("/qa/", "/en-US/");
-  }
 
   const context = {
     path,
     ...(await addFluent(locale)),
     ...partialContext,
   };
-  /** @type {import("./components/server/types.js").AsyncLocalStorageContents} */
+  /** @type {import("./components/server/types.js").FredLocalContents} */
   const storageContents = {
     componentsUsed: new Set(),
     componentsWithStylesInHead: new Set(),
@@ -127,6 +126,36 @@ export async function render(path, partialContext, compilationStats) {
         }
       })();
       return await collectResult(r(OuterLayout.render(context, component)));
+    }),
+  );
+}
+
+/**
+ * @param {string} path
+ * @param {import("@fred").PartialContext} partialContext
+ */
+export async function renderSimplified(path, partialContext) {
+  const locale = path.split("/")[1] || "en-US";
+  const context = {
+    path,
+    ...(await addFluent(locale)),
+    ...partialContext,
+  };
+  /** @type {import("./components/server/types.js").FredLocalContents} */
+  const storageContents = {
+    renderSimplified: true,
+  };
+  return asyncLocalStorage.run(storageContents, () =>
+    runWithContext({ locale }, async () => {
+      const component = await (async () => {
+        switch (context.renderer) {
+          case "Doc":
+            return Doc.render(context);
+          default:
+            return nothing;
+        }
+      })();
+      return await collectResult(r(component));
     }),
   );
 }

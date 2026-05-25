@@ -6,6 +6,7 @@
 
 dialog {
   padding: 0;
+  overscroll-behavior: contain;
   border: 0;
 
   @media (--screen-menu-full) {
@@ -130,8 +131,6 @@ ul {
   margin: 0;
 
   overflow: auto;
-
-  overscroll-behavior: contain;
 
   &:has(li) {
     border-top: 1px solid var(--color-border-primary);

@@ -1,4 +1,5 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import { ServerComponent } from "../server/index.js";
 
@@ -24,7 +25,12 @@ export class GenericToc extends ServerComponent {
         ${context.hyData.toc.map(
           ({ id, text }) =>
             html`<li class="generic-toc__item">
-              <a class="generic-toc__link" href="#${id}">${text}</a>
+              <a
+                class="generic-toc__link"
+                href="#${id}"
+                data-glean-id="toc_click: #${id}"
+                >${text}</a
+              >
             </li>`,
         )}
       </ul>

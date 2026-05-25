@@ -102,6 +102,7 @@ export class MDNPlayController extends LitElement {
   }
 
   clear() {
+    this.runOnChange = true;
     this.initialCode = undefined;
     this.srcPrefix = "";
     this.reset();

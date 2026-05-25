@@ -1,12 +1,14 @@
 import { Task } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
 
+import { join } from "lit/directives/join.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 
 import "../button/element.js";
 
+import { gleanClick } from "../../utils/glean.js";
 import { mdnUrl2Breadcrumb } from "../../utils/mdn-url2breadcrumb.js";
 import searchIcon from "../icon/search.svg?lit";
 
@@ -80,9 +82,15 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
         throw new Error(`${res.status}: ${res.statusText}`);
       }
 
-      return /** @type {Promise<import("./types.js").SearchResponse>} */ (
-        res.json()
+      const result = /** @type {import("./types.js").SearchResponse} */ (
+        await res.json()
       );
+
+      if (result.documents.length === 0 && result.metadata.total.value === 0) {
+        gleanClick("site-search: no-results");
+      }
+
+      return result;
     },
   });
 
@@ -167,7 +175,7 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
             class="site-search-form__submit"
             @click=${this._handleSearch}
             ?disabled=${!this._inputValue || this._inputValue.trim() === ""}
-            >${this.l10n`Search`}</mdn-button
+            >${this.l10n("site-search-search")`Search`}</mdn-button
           >
         </div>
       </div>
@@ -216,14 +224,14 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
         ${previousURL
           ? html` <li>
               <mdn-button variant="secondary" href=${previousURL.toString()}
-                >${this.l10n`Previous`}</mdn-button
+                >${this.l10n("site-search-previous")`Previous`}</mdn-button
               >
             </li>`
           : html`<li></li>`}
         ${nextPage
           ? html` <li>
               <mdn-button variant="secondary" href=${nextURL}
-                >${this.l10n`Next`}</mdn-button
+                >${this.l10n("site-search-next")`Next`}</mdn-button
               >
             </li>`
           : html`<li></li>`}
@@ -282,7 +290,9 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
     return this._searchTask.render({
       pending: () => html`
         ${this.renderInputs()}
-        <div class="site-search__searching">${this.l10n`Searching…`}</div>
+        <div class="site-search__searching">
+          ${this.l10n("site-search-searching")`Searching…`}
+        </div>
       `,
 
       complete: (results) => {
@@ -294,13 +304,15 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
               <section class="site-search__options">
                 ${
                   LOCALE_OPTIONS.length > 0
-                    ? html` <h2>${this.l10n`Language`}</h2>
+                    ? html` <h2>
+                          ${this.l10n("site-search-language")`Language`}
+                        </h2>
                         <ul>
                           ${LOCALE_OPTIONS.map((locales) => {
                             const label =
                               locales.length == 1
                                 ? readableLocaleCode(locales.at(0) || "en-US")
-                                : this.l10n`Both`;
+                                : this.l10n("site-search-both")`Both`;
                             if (this._locales.join(",") === locales.join(",")) {
                               return html`<li><em>${label}</em></li>`;
                             } else {
@@ -327,14 +339,17 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                 })}</p>
               <ul class="site-search-results">
                 ${results.documents.map(
-                  (result) =>
+                  (result, index) =>
                     html`<li class="site-search-results__item">
                       <article>
                         <p class="site-search-results__path">
                           ${mdnUrl2Breadcrumb(result.mdn_url, this.locale)}
                         </p>
                         <h2 class="site-search-results__title">
-                          <a href=${result.mdn_url}>
+                          <a
+                            href=${result.mdn_url}
+                            data-glean-id=${`site-search: results[${1 + index + (results.metadata.page - 1) * results.metadata.size}] -> ${this._query} -> ${result.mdn_url}`}
+                          >
                             ${result.highlight.title &&
                             result.highlight.title.length > 0
                               ? unsafeHTML(result.highlight.title[0])
@@ -351,7 +366,10 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                         <p class="site-search-results__description">
                           ${result.highlight.body &&
                           result.highlight.body.length > 0
-                            ? result.highlight.body.map((b) => unsafeHTML(b))
+                            ? join(
+                                result.highlight.body.map((b) => unsafeHTML(b)),
+                                html`<span class="divider"> … </span>`,
+                              )
                             : result.summary}
                         </p>
                       </article>

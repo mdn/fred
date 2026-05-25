@@ -65,6 +65,7 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
         ["--side-color-dark", textColorDark || textColor],
       ].filter(([_, v]) => Boolean(v)),
     );
+    const type = "side";
 
     return imageFormat === "skyscraper"
       ? html`<section class="sidebar-placement-skyscraper">
@@ -72,13 +73,14 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
             ${ref(this._placementRef)}
             class="placement-container"
             style=${styleMap(styles)}
+            data-type=${type}
           >
             <a
               class="placement-link"
-              data-glean="pong: pong-&gt;click side"
+              data-glean-id=${`pong: pong->click ${type}`}
               href=${this.clickLink(click, version)}
               target="_blank"
-              rel="sponsored noreferrer"
+              rel="sponsored"
               ><img
                 src=${this.imgLink(image)}
                 aria-hidden=${!alt}
@@ -98,13 +100,14 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
             ${ref(this._placementRef)}
             class="placement-container"
             style=${styleMap(styles)}
+            data-type=${type}
           >
             <a
               class="placement-link"
-              data-glean="pong: pong-&gt;click side"
+              data-glean-id=${`pong: pong->click ${type}`}
               href=${this.clickLink(click, version)}
               target="_blank"
-              rel="sponsored noreferrer"
+              rel="sponsored"
               ><img
                 src=${this.imgLink(image)}
                 aria-hidden=${!alt}

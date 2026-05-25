@@ -502,12 +502,12 @@ mdn-observatory-rescan-button {
           display: none;
         }
       }
-    }
 
-    td::before {
-      display: inline;
-      font-weight: var(--font-weight-bold);
-      content: attr(data-header);
+      td::before {
+        display: inline;
+        font-weight: var(--font-weight-bold);
+        content: attr(data-header);
+      }
     }
 
     &.tests,

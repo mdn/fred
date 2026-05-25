@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html } from "@lit-labs/ssr";
 
 import { ServerComponent } from "../server/index.js";
 
@@ -20,17 +20,17 @@ export class HomepageHero extends ServerComponent {
             css: {
               tag: "a",
               href: `/${context.locale}/docs/Web/CSS`,
-              "data-glean": "homepage_hero: css",
+              "data-glean-id": "homepage_hero: css",
             },
             html: {
               tag: "a",
               href: `/${context.locale}/docs/Web/HTML`,
-              "data-glean": "homepage_hero: html",
+              "data-glean-id": "homepage_hero: html",
             },
             js: {
               tag: "a",
               href: `/${context.locale}/docs/Web/JavaScript`,
-              "data-glean": "homepage_hero: js",
+              "data-glean-id": "homepage_hero: js",
             },
           },
         })}

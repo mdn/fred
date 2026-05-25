@@ -1030,8 +1030,7 @@
         margin-bottom: 0.75rem;
       }
 
-      a[href^="https://github.com"]
-      {
+      a[href^="https://github.com"] {
         position: absolute;
 
         padding: 0.25rem 0.5rem;

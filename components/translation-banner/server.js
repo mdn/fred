@@ -1,4 +1,5 @@
-import { html, nothing } from "lit";
+import { html } from "@lit-labs/ssr";
+import { nothing } from "lit";
 
 import { ServerComponent } from "../server/index.js";
 
@@ -98,7 +99,10 @@ export class TranslationBanner extends ServerComponent {
     // Note: Do not translate, this is intentionally in English.
 
     return html`<p class="translation-banner__switch" lang="en-US">
-      <mdn-button data-variant="secondary" href=${url}
+      <mdn-button
+        data-variant="secondary"
+        href=${url}
+        data-glean-id=${`language: ${context.locale} -> en-US (view)`}
         >View in English</mdn-button
       >
       <mdn-language-always-redirect-button locale=${context.locale} to="en-US"

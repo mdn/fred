@@ -69,7 +69,7 @@ export class MDNToggleSidebar extends L10nMixin(LitElement) {
       icon-only
       variant="plain"
     >
-      ${this.l10n`Toggle sidebar`}
+      ${this.l10n("toggle-sidebar-toggle-sidebar")`Toggle sidebar`}
     </mdn-button>`;
   }
 

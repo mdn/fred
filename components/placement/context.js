@@ -2,6 +2,7 @@
  * @import * as Placements from "../placement/types.js";
  */
 
+import { gleanClick } from "../../utils/glean.js";
 import { globalUser } from "../user/context.js";
 
 /**
@@ -89,12 +90,24 @@ async function fetchPlacementData() {
       ),
     }),
   });
+
+  gleanClick(`pong: pong->fetched ${response.status}`);
+
   if (!response.ok) {
     throw new Error(response.statusText);
   }
 
   try {
+    /** @type {Placements.PlacementContextData} */
     const placementResponse = await response.json();
+
+    const typs = Object.entries(PLACEMENT_MAP)
+      .filter(([key]) => key in placementResponse)
+      .map(([, { typ }]) => typ);
+    if (typs.length > 0) {
+      gleanClick(`pong: pong->served ${typs.join(",")}`);
+    }
+
     return placementResponse;
   } catch {
     throw new Error(response.statusText);

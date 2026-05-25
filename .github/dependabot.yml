@@ -1,31 +1,54 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: npm
+    directory: /
     schedule:
-      interval: "daily"
+      interval: daily
     groups:
-      prod:
+      npm-prod:
         dependency-type: production
         update-types:
           - minor
           - patch
         exclude-patterns:
           - "@mdn/*"
-      dev:
+      npm-dev:
         dependency-type: development
         update-types:
           - minor
           - patch
         exclude-patterns:
           - "@mdn/*"
+      codemirror:
+        patterns:
+          - "@codemirror/*"
+        update-types:
+          - major
+      eslint:
+        patterns:
+          - "@eslint/*"
+          - "eslint"
+        update-types:
+          - major
+      rspack:
+        patterns:
+          - "@rspack/*"
+        update-types:
+          - major
+      wdio:
+        patterns:
+          - "@wdio/*"
+        update-types:
+          - major
     commit-message:
-      prefix: "chore(deps): "
-      prefix-development: "chore(deps-dev): "
+      prefix: chore
+      prefix-development: build
+      include: scope
 
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "weekly"
+      interval: weekly
     commit-message:
-      prefix: "ci(deps): "
+      prefix: ci
+      include: scope
