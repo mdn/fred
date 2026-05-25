@@ -77,7 +77,7 @@
       &:hover {
         background-color: light-dark(
           var(--color-green-90),
-          var(--color-green-10)
+          var(--color-green-20)
         );
       }
     }
@@ -105,7 +105,7 @@
       &:hover {
         background-color: light-dark(
           var(--color-green-90),
-          var(--color-green-10)
+          var(--color-green-20)
         );
       }
     }
