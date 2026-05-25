@@ -45,38 +45,40 @@ export class ButtonSandbox extends SandboxComponent {
         icon.
       </p>
       ${hrefs.map((href) =>
-        disabled.map(
-          (isDisabled) => html`
-            <h3>
-              <code
-                >${href
-                  ? "<a>"
-                  : `<button${isDisabled ? " disabled" : ""}>`}</code
-              >
-            </h3>
-            <section>
-              ${variants.map((variant) =>
-                actions.map((action) =>
-                  icons.map(
-                    ({ icon, iconOnly }) => html`
-                      <mdn-button
-                        href=${ifDefined(href)}
-                        variant=${ifDefined(variant)}
-                        action=${ifDefined(action)}
-                        .icon=${icon}
-                        ?icon-only=${iconOnly}
-                        ?disabled=${isDisabled}
-                      >
-                        ${variant || "no variant"} ${action}
-                        ${icon ? "icon" : ""} ${isDisabled ? "disabled" : ""}
-                      </mdn-button>
-                    `,
+        disabled
+          .filter((isDisabled) => !(href && isDisabled))
+          .map(
+            (isDisabled) => html`
+              <h3>
+                <code
+                  >${href
+                    ? "<a>"
+                    : `<button${isDisabled ? " disabled" : ""}>`}</code
+                >
+              </h3>
+              <section>
+                ${variants.map((variant) =>
+                  actions.map((action) =>
+                    icons.map(
+                      ({ icon, iconOnly }) => html`
+                        <mdn-button
+                          href=${ifDefined(href)}
+                          variant=${ifDefined(variant)}
+                          action=${ifDefined(action)}
+                          .icon=${icon}
+                          ?icon-only=${iconOnly}
+                          ?disabled=${isDisabled}
+                        >
+                          ${variant || "no variant"} ${action}
+                          ${icon ? "icon" : ""} ${isDisabled ? "disabled" : ""}
+                        </mdn-button>
+                      `,
+                    ),
                   ),
-                ),
-              )}
-            </section>
-          `,
-        ),
+                )}
+              </section>
+            `,
+          ),
       )}
       <h2>Server component</h2>
       <div class="manual-size">
