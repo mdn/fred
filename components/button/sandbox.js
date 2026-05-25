@@ -46,12 +46,12 @@ export class ButtonSandbox extends SandboxComponent {
       </p>
       ${hrefs.map((href) =>
         disabled.map(
-          (disabled) => html`
+          (isDisabled) => html`
             <h3>
               <code
                 >${href
                   ? "<a>"
-                  : `<button${disabled ? " disabled" : ""}>`}</code
+                  : `<button${isDisabled ? " disabled" : ""}>`}</code
               >
             </h3>
             <section>
@@ -65,10 +65,10 @@ export class ButtonSandbox extends SandboxComponent {
                         action=${ifDefined(action)}
                         .icon=${icon}
                         ?icon-only=${iconOnly}
-                        ?disabled=${disabled}
+                        ?disabled=${isDisabled}
                       >
                         ${variant || "no variant"} ${action}
-                        ${icon ? "icon" : ""} ${disabled ? "disabled" : ""}
+                        ${icon ? "icon" : ""} ${isDisabled ? "disabled" : ""}
                       </mdn-button>
                     `,
                   ),
