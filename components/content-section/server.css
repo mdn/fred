@@ -18,6 +18,10 @@
     margin: 1rem 0 0;
     font-weight: var(--font-weight-normal);
     line-height: var(--font-line-header);
+
+    code {
+      padding: 0 0.125em;
+    }
   }
 
   h2 {
@@ -381,6 +385,18 @@
           }
         }
       }
+    }
+  }
+
+  /* Alphabetical/grouped indexes (rari `CSS_Ref`, `ListGroups`, `APIListAlpha`, `css_ref_list`) */
+  .index {
+    ul {
+      columns: 18rem;
+      column-gap: 2rem;
+    }
+
+    li {
+      break-inside: avoid;
     }
   }
 
