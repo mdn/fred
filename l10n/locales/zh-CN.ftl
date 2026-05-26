@@ -14,7 +14,6 @@ not-found-description = 抱歉，找不到页面 <code data-l10n-name="url">{ $u
 not-found-fallback-english = <strong data-l10n-name="strong">好消息：</strong>您请求的页面存在<em data-l10n-name="em">英文版本</em>。
 not-found-fallback-search = 您请求的页面不存在，但您可以尝试站内搜索：
 not-found-back = 返回首页
-footer-mofo = 访问 <a data-l10n-name="moco">Mozilla 公司</a>的非营利母机构 <a data-l10n-name="mofo">Mozilla 基金会</a>。
 footer-copyright = 本内容的部分版权归 mozilla.org 贡献者所有，©1998–{ $year }。内容依据<a data-l10n-name="cc">知识共享许可协议</a>提供。
 search-modal-site-search = 站内搜索 <em>{ $query }</em>
 site-search-search-stats = 找到 { $results } 个文档。

@@ -209,19 +209,16 @@ table {
     text-align: left;
 
     border: none;
+    border-left: max(
+        0px,
+        calc((var(--compat-feature-depth, 1) - 1) * 8px - 1px)
+      )
+      solid var(--color-border-primary);
 
     > * {
       flex-basis: max-content;
       border: none !important;
     }
-  }
-
-  .bc-feature-depth-2 {
-    border-left: 7px solid var(--color-border-primary);
-  }
-
-  .bc-feature-depth-3 {
-    border-left: 15px solid var(--color-border-primary);
   }
 }
 

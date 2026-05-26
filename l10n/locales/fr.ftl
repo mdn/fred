@@ -14,7 +14,6 @@ not-found-description = Désolé, la page <code data-l10n-name="url">{ $url }</c
 not-found-fallback-english = <strong data-l10n-name="strong">Bonne nouvelle :</strong> La page que vous cherchez existe en <em data-l10n-name="em">Anglais</em>.
 not-found-fallback-search = La page que vous avez demandée n'existe pas, mais vous pouvez essayer une recherche sur le site pour :
 not-found-back = Retour à la page d'accueil
-footer-mofo = Visitez la société mère à but non lucratif de <a data-l10n-name="moco">Mozilla Corporation</a>, la <a data-l10n-name="mofo">Fondation Mozilla</a>.
 footer-copyright = Certaines parties de ce contenu sont protégées par le droit d'auteur ©1998—{ $year } des contributeurs individuels de mozilla.org. Contenu disponible sous <a data-l10n-name="cc">une licence Creative Commons</a>.
 search-modal-site-search = Rechercher sur le site <em>{ $query }</em>
 site-search-search-stats = { $results } documents trouvés.
