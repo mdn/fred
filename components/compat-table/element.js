@@ -625,6 +625,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
         const hasNotes = notesItems.length > 0;
 
+        // Always render the first (most recent) item even when it has no
+        // notes, so each branch shows at least one row in its timeline.
         return (
           (i === 0 || hasNotes) &&
           html`<div class="bc-notes-wrapper">
