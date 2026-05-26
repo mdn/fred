@@ -652,34 +652,25 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   }
 
   /**
-   * Called only when at least one of `prefix` / `alternativeName` is present;
-   * the three branches below cover that invariant exhaustively.
+   * Called only when at least one of `prefix` / `alternativeName` is present.
    * @param {string | undefined} prefix
    * @param {string | undefined} alternativeName
    */
   _renderBranchHeading(prefix, alternativeName) {
-    const codeElements = {
-      prefix: { tag: "code" },
-      altname: { tag: "code" },
-    };
-    const label =
+    const id =
       prefix && alternativeName
-        ? this.l10n.raw({
-            id: "compat-branch-prefix-altname",
-            args: { prefix, altname: alternativeName },
-            elements: codeElements,
-          })
+        ? "compat-branch-prefix-altname"
         : prefix
-          ? this.l10n.raw({
-              id: "compat-branch-prefix",
-              args: { prefix },
-              elements: codeElements,
-            })
-          : this.l10n.raw({
-              id: "compat-branch-altname",
-              args: { altname: alternativeName },
-              elements: codeElements,
-            });
+          ? "compat-branch-prefix"
+          : "compat-branch-altname";
+    const label = this.l10n.raw({
+      id,
+      args: { prefix, altname: alternativeName },
+      elements: {
+        prefix: { tag: "code" },
+        altname: { tag: "code" },
+      },
+    });
     const icons = [
       prefix && this._renderIcon("prefix"),
       alternativeName && this._renderIcon("altname"),
