@@ -151,7 +151,8 @@ export function hasMore(support) {
  * should be rendered as separate timelines to avoid out-of-order versions.
  *
  * The canonical branch (no prefix, no alternative name) is returned first;
- * other branches preserve their original BCD order.
+ * non-canonical branches sort by `(alternative_name, prefix)` so the output
+ * is stable regardless of how BCD happens to order the source items.
  * @param {import("@bcd").SupportStatement} support
  * @returns {[import("@bcd").SimpleSupportStatement, ...import("@bcd").SimpleSupportStatement[]][]}
  */
@@ -172,7 +173,13 @@ export function groupSupportBranches(support) {
   const canonicalKey = "/";
   const canonical = branches.get(canonicalKey);
   branches.delete(canonicalKey);
-  return [...(canonical ? [canonical] : []), ...branches.values()];
+  const others = [...branches.values()].sort(([a], [b]) => {
+    return (
+      (a.alternative_name ?? "").localeCompare(b.alternative_name ?? "") ||
+      (a.prefix ?? "").localeCompare(b.prefix ?? "")
+    );
+  });
+  return [...(canonical ? [canonical] : []), ...others];
 }
 
 /**
