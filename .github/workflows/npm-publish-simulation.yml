@@ -34,7 +34,7 @@ jobs:
         id: build
         working-directory: mdn/fred
         run: |
-          npm pkg set _gitSha=${{ github.sha }}
+          npm pkg set _gitSha=foobar
           npm pack
           TARBALL=`ls mdn-fred-*.tgz`
           echo $TARBALL
