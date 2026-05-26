@@ -456,7 +456,11 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       });
 
       return html`<tr>
-        <th class=${`bc-feature bc-feature-depth-${depth}`} scope="row">
+        <th
+          class="bc-feature"
+          style=${`--compat-feature-depth: ${depth}`}
+          scope="row"
+        >
           ${titleNode}
         </th>
         ${browserCells}
