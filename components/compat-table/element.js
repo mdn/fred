@@ -449,7 +449,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           ${hasHistory
             ? html`<div id=${timelineId} class="timeline" tabindex="0">
                 ${isExpanded
-                  ? html`<dl class="bc-notes-list">${notes}</dl>`
+                  ? html`<div class="bc-notes-list">${notes}</div>`
                   : nothing}
               </div>`
             : nothing}
@@ -616,11 +616,11 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         });
 
         const notesItems = notes.map(({ iconName, label }) => {
-          return html`<dd class="bc-supports-dd">
+          return html`<div class="bc-supports-dd">
             ${this._renderIcon(iconName)}${typeof label === "string"
               ? html`<span>${unsafeHTML(label)}</span>`
               : label}
-          </dd>`;
+          </div>`;
         });
 
         const hasNotes = notesItems.length > 0;
@@ -628,7 +628,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         return (
           (i === 0 || hasNotes) &&
           html`<div class="bc-notes-wrapper">
-            <dt
+            <div
               class=${`bc-supports-${getSupportClassName(
                 item,
                 browser,
@@ -637,8 +637,9 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
               ${this._renderCellText(item, browser, true, {
                 omitAliasModifiers: hasAliasModifier,
               })}
-            </dt>
-            ${notesItems} ${hasNotes ? undefined : html`<dd></dd>`}
+            </div>
+            ${notesItems}
+            ${hasNotes ? undefined : html`<div class="bc-notes-end"></div>`}
           </div>`
         );
       });

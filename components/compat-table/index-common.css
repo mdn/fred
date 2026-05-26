@@ -380,7 +380,7 @@ table {
     }
   }
 
-  .bc-branch-items .bc-notes-wrapper:last-child dd:last-child {
+  .bc-branch-items .bc-notes-wrapper:last-child > :last-child {
     position: relative;
 
     &::before {
@@ -405,6 +405,14 @@ table {
   }
 
   .bc-supports-dd {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+    text-indent: -1.5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
     .icon {
       background-color: var(--color-text-secondary);
       mask-image: url("../icon/circle.svg");
@@ -416,6 +424,10 @@ table {
     }
   }
 
+  .bc-notes-end {
+    margin-bottom: 2rem;
+  }
+
   .bc-version-label {
     display: inline;
   }
@@ -423,16 +435,6 @@ table {
   abbr {
     margin-right: 4px;
     text-decoration: none;
-  }
-
-  dd {
-    padding-left: 1.5rem;
-    margin-bottom: 1rem;
-    text-indent: -1.5rem;
-
-    &:last-child {
-      margin-bottom: 2rem;
-    }
   }
 }
 
@@ -442,24 +444,6 @@ table {
 
   &:last-child {
     margin-bottom: 0;
-  }
-}
-
-dl.bc-notes-list {
-  dt.bc-supports {
-    margin-top: 1rem;
-
-    &:first-child {
-      margin-top: 0;
-    }
-  }
-
-  dd.bc-supports-dd {
-    margin-bottom: 1rem;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 }
 
