@@ -44,9 +44,6 @@ const LOCALIZED_BCD_IDS = {
   "zh-TW": "瀏覽器相容性",
 };
 
-const SURVEY_URL =
-  "https://survey.alchemer.com/s3/7634825/MDN-baseline-feedback";
-
 export class BaselineIndicator extends ServerComponent {
   static inlineScript = inlineScript;
 
@@ -127,8 +124,6 @@ export class BaselineIndicator extends ServerComponent {
     const lowDate = this.parseDate(status.baseline_low_date);
     const level = status.baseline || "not";
     const signalsLink = status.feature.developer_signals?.url;
-
-    const feedbackLink = `${SURVEY_URL}?page=${encodeURIComponent(context.url)}&level=${level}`;
 
     const isBrowserSupported =
       /** @param {import("./types.js").BrowserGroup} browser */ (browser) => {
@@ -267,19 +262,6 @@ export class BaselineIndicator extends ServerComponent {
               ${context.l10n(
                 "baseline-indicator-see-full-compatibility",
               )`See full compatibility`}
-            </a>
-          </li>
-          <li>
-            <a
-              href=${feedbackLink}
-              data-glean-id="baseline_link_feedback"
-              class="feedback-link"
-              target="_blank"
-              rel="noreferrer"
-            >
-              ${context.l10n(
-                "baseline-indicator-report-feedback",
-              )`Report feedback`}
             </a>
           </li>
         </ul>

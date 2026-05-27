@@ -8,7 +8,6 @@
     url("./icons/status/limited-dark.svg");
   --baseline-check: #1e8e3e;
   --baseline-cross: #ea8600;
-  --feedback-link-icon: var(--icon-primary, light-dark(#696969, #ffffff));
 
   padding-left: 3.8125rem;
   margin: 1rem 0;
