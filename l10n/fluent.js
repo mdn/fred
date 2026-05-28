@@ -5,7 +5,8 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import enUS_ftl from "./locales/en-US.ftl";
 
 /**
- * @import { AllowedTags } from "insane";
+ * @import { FluentVariable } from "@fluent/bundle"
+ * @import { AllowedTags } from "insane"
  */
 
 /** @type {Record<string, string>} */
@@ -56,7 +57,7 @@ export class Fluent {
   /**
    * @param {string} id
    * @param {string} [attr]
-   * @param {Record<string, any>} [args]
+   * @param {Record<string, FluentVariable | undefined>} [args]
    * @param {Record<string, import("../types/fluent.js").Element>} [elements]
    * @returns {string | ReturnType<typeof unsafeHTML> | undefined}
    */
@@ -123,7 +124,7 @@ export class Fluent {
   /**
    * @param {string} id
    * @param {string} [attr]
-   * @param {Record<string, any>} [args]
+   * @param {Record<string, FluentVariable | undefined>} [args]
    * @param {FluentBundle | undefined} [bundle]
    * @param {boolean} [us]
    * @returns {string | undefined}
@@ -165,12 +166,41 @@ export class Fluent {
 
     /** @type {Error[]} */
     const errors = [];
-    const formatted = bundle?.formatPattern(message, args, errors);
+    const formatted = bundle?.formatPattern(message, escapeArgs(args), errors);
     if (errors.length > 0) {
       console.error(errors);
     }
     return formatted;
   }
+}
+
+/**
+ * HTML-escape string-valued args so that variable substitution can't inject
+ * tags that confuse the downstream sanitizer. Only string values are touched
+ * so that Number/Date selectors keep working.
+ *
+ * @param {Record<string, FluentVariable | undefined>} args
+ * @returns {Record<string, FluentVariable>}
+ */
+function escapeArgs(args) {
+  /** @type {Record<string, FluentVariable>} */
+  const out = {};
+  for (const [k, v] of Object.entries(args)) {
+    if (v !== undefined) {
+      out[k] = typeof v === "string" ? escapeHtml(v) : v;
+    }
+  }
+  return out;
+}
+
+/**
+ * @param {string} s
+ */
+function escapeHtml(s) {
+  return s
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
 }
 
 /** @type {Map<string, Fluent>} */
@@ -245,7 +275,7 @@ export default function getFluentContext(locale) {
   }
 
   /**
-   * @param {{ id: string, attr?: string, args?: Record<string, any>, elements?: Record<string, import("../types/fluent.js").Element> }} param0
+   * @param {{ id: string, attr?: string, args?: Record<string, FluentVariable | undefined>, elements?: Record<string, import("../types/fluent.js").Element> }} param0
    */
   l10n.raw = function ({ id, attr, args, elements }) {
     const fluent = getLocale(locale);

@@ -117,6 +117,7 @@ export class OuterLayout extends ServerComponent {
               />`,
           )}
           ${TRANSCEND_AIRGAP_URL &&
+          context.renderer !== "SpaPlay" &&
           html`<script
             data-cfasync="false"
             data-report-only="on"
