@@ -100,7 +100,7 @@
     "@zip.js/zip.js": "^2.8.26",
     "css-loader": "^7.1.4",
     "css-minimizer-webpack-plugin": "^8.0.0",
-    "dexie": "^4.4.2",
+    "dexie": "^4.4.3",
     "downshift": "^9.3.3",
     "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
