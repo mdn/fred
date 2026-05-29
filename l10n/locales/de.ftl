@@ -3,7 +3,6 @@ content-feedback-reason = Warum war diese Übersetzung nicht hilfreich?
 content-feedback-thanks = Vielen Dank für die Rückmeldung!
 
 footer-tagline = Der Bauplan für ein besseres Internet.
-footer-mofo = Besuche die gemeinnützige Muttergesellschaft der <a data-l10n-name="moco">Mozilla Corporation</a>, die <a data-l10n-name="mofo">Mozilla Foundation</a>.
 footer-copyright = Teile dieses Inhalts sind ©1998–{ $year } von einzelnen mozilla.org-Mitwirkenden. Inhalte sind verfügbar unter <a data-l10n-name="cc">einer Creative-Commons-Lizenz</a>.
 
 search-modal-site-search = Website-Suche nach <em>{ $query }</em>

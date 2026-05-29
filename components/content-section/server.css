@@ -222,6 +222,10 @@
     }
   }
 
+  .table-container {
+    margin: 1rem 0;
+  }
+
   .code-example,
   mdn-code-example,
   mdn-live-sample-result {
