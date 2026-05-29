@@ -26,11 +26,6 @@ const e2eOptions = /** @satisfies {Record<string, Options>} */ ({
     describe: "run fred and rari from this content repo",
     type: "string",
   },
-  "update-baseline": {
-    describe: "update visual diff baseline",
-    type: "boolean",
-    default: false,
-  },
 });
 
 const visualOptions = /** @satisfies {Record<string, Options>} */ ({
