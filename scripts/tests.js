@@ -52,14 +52,22 @@ await yargs(hideBin(process.argv))
       process.exitCode = 1;
     }
   })
-  .command("e2e", "run e2e tests", e2eOptions, async (argv) => {
-    checkWdioArgs(argv);
-    await runWdio("e2e", argv);
-  })
-  .command("visual", "run visual tests", visualOptions, async (argv) => {
-    checkWdioArgs(argv);
-    await runWdio("visual", argv);
-  })
+  .command(
+    "e2e",
+    "run e2e tests",
+    (yargs) => yargs.options(e2eOptions).check(checkWdioArgs),
+    async (argv) => {
+      await runWdio("e2e", argv);
+    },
+  )
+  .command(
+    "visual",
+    "run visual tests",
+    (yargs) => yargs.options(visualOptions).check(checkWdioArgs),
+    async (argv) => {
+      await runWdio("visual", argv);
+    },
+  )
   .command(
     "visual-report",
     "manage visual test reports",
@@ -102,6 +110,7 @@ function checkWdioArgs(argv) {
   if (argv.content && (argv.rari || argv.fred)) {
     throw new Error("--content cannot be used with --rari or --fred");
   }
+  return true;
 }
 
 /**
