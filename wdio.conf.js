@@ -1,12 +1,9 @@
-import path from "node:path";
-
-const FRED_ROOT = import.meta.dirname;
 const FRED_PORT = process.env.FRED_PORT || "3000";
 
 /** @type {WebdriverIO.Config} */
 export const config = {
   runner: "local",
-  specs: ["./test/specs/**/*.js"],
+  specs: ["./test/specs/**/*.e2e.js"],
   maxInstances: 10,
   capabilities: [
     {
@@ -18,14 +15,6 @@ export const config = {
     },
   ],
   services: [
-    [
-      "visual",
-      {
-        baselineFolder: path.join(FRED_ROOT, "test", "baseline"),
-        screenshotPath: path.join(FRED_ROOT, "test", "tmp"),
-        createJsonReportFiles: true,
-      },
-    ],
     [
       "firefox-profile",
       {

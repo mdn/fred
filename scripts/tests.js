@@ -7,7 +7,40 @@ import { concurrently } from "concurrently";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 
+/**
+ * @import { ArgumentsCamelCase, InferredOptionTypes, Options } from "yargs"
+ * @typedef {ArgumentsCamelCase<InferredOptionTypes<typeof e2eOptions>>} E2eArgv
+ * @typedef {ArgumentsCamelCase<InferredOptionTypes<typeof visualOptions>>} VisualArgv
+ */
+
 const FRED_ROOT = path.join(import.meta.dirname, "..");
+
+const e2eOptions = /** @satisfies {Record<string, Options>} */ ({
+  rari: { describe: "run rari", type: "boolean", default: false },
+  fred: {
+    describe: "run fred in this mode",
+    type: "string",
+    choices: ["preview", "dev"],
+  },
+  content: {
+    describe: "run fred and rari from this content repo",
+    type: "string",
+  },
+  "update-baseline": {
+    describe: "update visual diff baseline",
+    type: "boolean",
+    default: false,
+  },
+});
+
+const visualOptions = /** @satisfies {Record<string, Options>} */ ({
+  ...e2eOptions,
+  "update-baseline": {
+    describe: "update visual diff baseline",
+    type: "boolean",
+    default: false,
+  },
+});
 
 await yargs(hideBin(process.argv))
   .command("lint", "run linters", {}, () => {
@@ -24,102 +57,14 @@ await yargs(hideBin(process.argv))
       process.exitCode = 1;
     }
   })
-  .command(
-    "e2e",
-    "run e2e tests",
-    (yargs) =>
-      yargs
-        .option("update-visual-baseline", {
-          describe: "update visual diff baseline",
-          type: "boolean",
-          default: false,
-        })
-        .option("rari", {
-          describe: "run rari",
-          type: "boolean",
-          default: false,
-        })
-        .option("fred", {
-          describe: "run fred in this mode",
-          type: "string",
-          choices: ["preview", "dev"],
-        })
-        .option("content", {
-          describe: "run fred and rari from this content repo",
-          type: "string",
-        })
-        .check((argv) => {
-          if (argv.content && (argv.rari || argv.fred)) {
-            throw new Error("--content cannot be used with --rari or --fred");
-          }
-          return true;
-        }),
-    async (argv) => {
-      await rm(path.join(FRED_ROOT, "test", "tmp"), {
-        recursive: true,
-        force: true,
-      });
-
-      if (argv["update-visual-baseline"]) {
-        await rm(path.join(FRED_ROOT, "test", "baseline"), {
-          recursive: true,
-          force: true,
-        });
-      }
-
-      /** @type {import("concurrently").ConcurrentlyCommandInput[]} */
-      const jobs = [
-        {
-          command: `npx wdio run wdio.conf.js`,
-          name: "wdio",
-          prefixColor: "green",
-        },
-      ];
-
-      if (argv.content) {
-        jobs.push({
-          cwd: argv.content,
-          command: `npm start`,
-          name: "content",
-          prefixColor: "blue",
-        });
-      }
-
-      if (argv.fred === "preview") {
-        jobs.push({
-          command: `npm run preview`,
-          name: "server",
-          prefixColor: "red",
-        });
-      }
-
-      if (argv.fred === "dev") {
-        jobs.push({
-          command: `npm run dev`,
-          name: "server",
-          prefixColor: "red",
-        });
-      }
-
-      if (argv.rari) {
-        jobs.push({
-          command: `"${rariBin}" serve`,
-          name: "rari",
-          prefixColor: "blue",
-        });
-      }
-
-      try {
-        await concurrently(jobs, {
-          killOthersOn: ["failure", "success"],
-          restartTries: 0,
-          successCondition: "first",
-        }).result;
-      } catch {
-        process.exitCode = 1;
-      }
-    },
-  )
+  .command("e2e", "run e2e tests", e2eOptions, async (argv) => {
+    checkWdioArgs(argv);
+    await runWdio("e2e", argv);
+  })
+  .command("visual", "run visual tests", visualOptions, async (argv) => {
+    checkWdioArgs(argv);
+    await runWdio("visual", argv);
+  })
   .command(
     "visual-report",
     "manage visual test reports",
@@ -156,6 +101,86 @@ await yargs(hideBin(process.argv))
   )
   .demandCommand()
   .parseAsync();
+
+/** @param {E2eArgv} argv */
+function checkWdioArgs(argv) {
+  if (argv.content && (argv.rari || argv.fred)) {
+    throw new Error("--content cannot be used with --rari or --fred");
+  }
+}
+
+/**
+ * @param {string} suite
+ * @param {E2eArgv} argv
+ */
+async function runWdio(suite, argv) {
+  await rm(path.join(FRED_ROOT, "test", "tmp"), {
+    recursive: true,
+    force: true,
+  });
+
+  if (argv.updateBaseline) {
+    await rm(path.join(FRED_ROOT, "test", "baseline"), {
+      recursive: true,
+      force: true,
+    });
+  }
+
+  const configFile =
+    suite === "visual" ? "wdio.visual.conf.js" : "wdio.conf.js";
+
+  /** @type {import("concurrently").ConcurrentlyCommandInput[]} */
+  const jobs = [
+    {
+      command: `npx wdio run ${configFile}`,
+      name: "wdio",
+      prefixColor: "green",
+    },
+  ];
+
+  if (argv.content) {
+    jobs.push({
+      cwd: argv.content,
+      command: `npm start`,
+      name: "content",
+      prefixColor: "blue",
+    });
+  }
+
+  if (argv.fred === "preview") {
+    jobs.push({
+      command: `npm run preview`,
+      name: "server",
+      prefixColor: "red",
+    });
+  }
+
+  if (argv.fred === "dev") {
+    jobs.push({
+      command: `npm run dev`,
+      name: "server",
+      prefixColor: "red",
+    });
+  }
+
+  if (argv.rari) {
+    jobs.push({
+      command: `"${rariBin}" serve`,
+      name: "rari",
+      prefixColor: "blue",
+    });
+  }
+
+  try {
+    await concurrently(jobs, {
+      killOthersOn: ["failure", "success"],
+      restartTries: 0,
+      successCondition: "first",
+    }).result;
+  } catch {
+    process.exitCode = 1;
+  }
+}
 
 async function serveVisualReport() {
   const { default: express } = await import("express");

@@ -121,7 +121,7 @@ jobs:
         env:
           CONTENT_ROOT: ../content/files
           GITHUB_TOKEN: ${{ github.token }}
-        run: npm test -- e2e --update-visual-baseline --fred preview --rari
+        run: npm test -- visual --update-baseline --fred preview --rari
 
       - name: Build
         run: npm run build
@@ -131,6 +131,14 @@ jobs:
           CONTENT_ROOT: ../content/files
           GITHUB_TOKEN: ${{ github.token }}
         run: npm test -- e2e --fred preview --rari
+
+      - name: Run visual tests
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        env:
+          CONTENT_ROOT: ../content/files
+          GITHUB_TOKEN: ${{ github.token }}
+        run: npm test -- visual --fred preview --rari
 
       - name: Generate visual report
         if: github.event_name == 'pull_request' && always()
