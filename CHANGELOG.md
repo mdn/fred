@@ -1,5 +1,30 @@
 # Changelog
 
+## [2.6.4](https://github.com/mdn/fred/compare/v2.6.3...v2.6.4) (2026-05-22)
+
+
+### Bug Fixes
+
+* **l10n:** correct compat-support-flags rendering across locales ([#1562](https://github.com/mdn/fred/issues/1562)) ([2f5b04f](https://github.com/mdn/fred/commit/2f5b04fa8ea970c839102d211aa8efd06a585880))
+
+
+### Miscellaneous
+
+* **deps:** bump @mdn/rari from 0.2.24 to 0.2.25 ([#1597](https://github.com/mdn/fred/issues/1597)) ([ed147d1](https://github.com/mdn/fred/commit/ed147d19d49fdb3e1d6b8b3e222a492f86844bcd))
+
+## [2.6.3](https://github.com/mdn/fred/compare/v2.6.2...v2.6.3) (2026-05-21)
+
+
+### Bug Fixes
+
+* **content-section:** display index in multiple columns ([#1563](https://github.com/mdn/fred/issues/1563)) ([77cb0d0](https://github.com/mdn/fred/commit/77cb0d07f9b322e6e9d118932280193cfba5984e))
+
+
+### Miscellaneous
+
+* **deps:** bump @mdn/rari from 0.2.23 to 0.2.24 ([#1594](https://github.com/mdn/fred/issues/1594)) ([f7a9855](https://github.com/mdn/fred/commit/f7a985549bfc357d6b565ca0f17488a4c954d951))
+* **tests:** move from args to commands in cli ([#1590](https://github.com/mdn/fred/issues/1590)) ([f3afadc](https://github.com/mdn/fred/commit/f3afadc5f64d6f02e9cf923d70673adf545b6cc1))
+
 ## [2.6.2](https://github.com/mdn/fred/compare/v2.6.1...v2.6.2) (2026-05-15)
 
 

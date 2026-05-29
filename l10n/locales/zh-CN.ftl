@@ -14,7 +14,6 @@ not-found-description = 抱歉，找不到页面 <code data-l10n-name="url">{ $u
 not-found-fallback-english = <strong data-l10n-name="strong">好消息：</strong>您请求的页面存在<em data-l10n-name="em">英文版本</em>。
 not-found-fallback-search = 您请求的页面不存在，但您可以尝试站内搜索：
 not-found-back = 返回首页
-footer-mofo = 访问 <a data-l10n-name="moco">Mozilla 公司</a>的非营利母机构 <a data-l10n-name="mofo">Mozilla 基金会</a>。
 footer-copyright = 本内容的部分版权归 mozilla.org 贡献者所有，©1998–{ $year }。内容依据<a data-l10n-name="cc">知识共享许可协议</a>提供。
 search-modal-site-search = 站内搜索 <em>{ $query }</em>
 site-search-search-stats = 找到 { $results } 个文档。
@@ -52,36 +51,36 @@ compat-support-altname = 备用名称：{ $altname }
 compat-support-removed = 已在 { $version } 及更高版本中移除
 compat-support-see-impl-url = 参见 <a data-l10n-name="impl_url">{ $label }</a>
 compat-support-flags =
-    { NUMBER($has_added) ->
-        [one] 自版本 { $version_added } 起
-       *[other] { "" }
+    { $has_added ->
+        [1] 自版本 { $version_added } 起
+       *[0] { "" }
     }{ $has_last ->
-        [one]
-            { NUMBER($has_added) ->
-               *[zero] 截至 { $versionLast }，用户
-                [one] { " " }截至 { $versionLast }，用户
+        [1]
+            { $has_added ->
+               *[0] 截至 { $versionLast }，用户
+                [1] { " " }截至 { $versionLast }，用户
             }
-       *[zero]
-            { NUMBER($has_added) ->
-               *[zero] 用户
-                [one] { " " }用户
+       *[0]
+            { $has_added ->
+               *[0] 用户
+                [1] { " " }用户
             }
     }
     { " " }必须显式将 <code data-l10n-name="name">{ $flag_name }</code>{ " " }
     { $flag_type ->
        *[preference] 首选项
         [runtime_flag] 运行时标志
-    }{ NUMBER($has_value) ->
-        [one] { " " }设置为 <code data-l10n-name="value">{ $flag_value }</code>
-       *[other] { "" }
+    }{ $has_value ->
+        [1] { " " }设置为 <code data-l10n-name="value">{ $flag_value }</code>
+       *[0] { "" }
     }{ "。" }
-    { NUMBER($has_pref_url) ->
-        [one]
+    { $has_pref_url ->
+        [1]
             { $flag_type ->
                 [preference] 要更改 { $browser_name } 中的首选项，请访问 { $browser_pref_url }。
                *[other] { "" }
             }
-       *[other] { "" }
+        *[0] { "" }
     }
 compat-legend-yes = { compat-support-full }
 compat-legend-partial = { compat-support-partial }

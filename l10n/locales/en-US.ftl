@@ -28,7 +28,6 @@ not-found-back = Go back to the home page
 
 reference-toc-header = In this article
 
-footer-mofo = Visit <a data-l10n-name="moco">Mozilla Corporation’s</a> not-for-profit parent, the <a data-l10n-name="mofo">Mozilla Foundation</a>.
 footer-copyright = Portions of this content are ©1998–{ $year } by individual mozilla.org contributors. Content available under <a data-l10n-name="cc">a Creative Commons license</a>.
 
 search-modal-site-search = Site search for <em>{ $query }</em>
@@ -91,33 +90,33 @@ compat-support-altname = Alternate name: { $altname }
 compat-support-removed = Removed in { $version } and later
 compat-support-see-impl-url = See <a data-l10n-name="impl_url">{ $label }</a>
 compat-support-flags =
-  { NUMBER($has_added) ->
-    [one] From version { $version_added }
-    *[other] {""}
+  { $has_added ->
+    [1] From version { $version_added }
+    *[0] {""}
   }{ $has_last ->
-    [one] { NUMBER($has_added) ->
-          *[zero] Until { $versionLast } users
-          [one] {" "}until { $versionLast } users
+    [1] { $has_added ->
+          *[0] Until { $versionLast } users
+          [1] {" "}until { $versionLast } users
       }
-    *[zero] { NUMBER($has_added) ->
-          *[zero] Users
-          [one] {" "}users
+    *[0] { $has_added ->
+          *[0] Users
+          [1] {" "}users
       }
   }
   {" "}must explicitly set the <code data-l10n-name="name">{ $flag_name }</code>{" "}
   { $flag_type ->
     *[preference] preference
     [runtime_flag] runtime flag
-  }{ NUMBER($has_value) ->
-    [one] {" "}to <code data-l10n-name="value">{ $flag_value }</code>
-    *[other] {""}
+  }{ $has_value ->
+    [1] {" "}to <code data-l10n-name="value">{ $flag_value }</code>
+    *[0] {""}
   }{"."}
-  { NUMBER($has_pref_url) ->
-    [one] { $flag_type ->
+  { $has_pref_url ->
+    [1] { $flag_type ->
       [preference] To change preferences in { $browser_name }, visit { $browser_pref_url }.
       *[other] {""}
     }
-    *[other] {""}
+    *[0] {""}
   }
 
 compat-legend = Legend
