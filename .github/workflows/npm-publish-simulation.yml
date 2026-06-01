@@ -51,10 +51,10 @@ jobs:
   test:
     needs: build
     strategy:
+      # TEMPORARY (revert before merge): windows-only, to measure the
+      # intermittent Node libuv crash. See https://github.com/nodejs/node/issues/56645
       matrix:
         os:
-          - ubuntu-latest
-          - macos-latest
           - windows-latest
     runs-on: ${{ matrix.os }}
 
@@ -122,12 +122,26 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # TEMPORARY (revert before merge): repeat the e2e run, stopping at the
+      # first failure, to measure how often the Node libuv crash occurs.
       - name: (mdn/fred) Run tests
         id: build
         working-directory: mdn/fred
+        shell: bash
         env:
           FRED_PORT: 5042
           # Increase GitHub API limit.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npm test -- e2e --content ../content
+          runs=25
+          for i in $(seq 1 "$runs"); do
+            echo "::group::e2e run $i/$runs"
+            if ! npm test -- e2e --content ../content; then
+              echo "::endgroup::"
+              echo "=== FAILED on run $i of $runs ==="
+              exit 1
+            fi
+            echo "::endgroup::"
+            echo "run $i/$runs: PASS"
+          done
+          echo "=== all $runs runs passed ==="
