@@ -3,7 +3,10 @@ const FRED_PORT = process.env.FRED_PORT || "3000";
 /** Attempt to workaround https://github.com/nodejs/node/issues/56645 */
 async function letConnectionsClose() {
   if (process.platform === "win32") {
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    // Drain Node's internal fetch (undici) connection pool so no sockets are
+    // still tearing down when the process exits.
+    // @ts-expect-error
+    await globalThis[Symbol.for("undici.globalDispatcher.1")]?.close();
   }
 }
 
