@@ -8,7 +8,7 @@ async function letConnectionsClose() {
     // so nothing is still tearing down when the process exits.
     // @ts-expect-error
     await globalThis[Symbol.for("undici.globalDispatcher.1")]?.close();
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
   }
 }
 
