@@ -1,5 +1,12 @@
 const FRED_PORT = process.env.FRED_PORT || "3000";
 
+/** Attempt to workaround https://github.com/nodejs/node/issues/56645 */
+async function letConnectionsClose() {
+  if (process.platform === "win32") {
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  }
+}
+
 /** @type {WebdriverIO.Config} */
 export const config = {
   runner: "local",
@@ -51,4 +58,6 @@ export const config = {
       },
     );
   },
+  afterSession: letConnectionsClose,
+  onComplete: letConnectionsClose,
 };
