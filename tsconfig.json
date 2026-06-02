@@ -25,7 +25,13 @@
     "plugins": [
       {
         "name": "@jackolope/ts-lit-plugin",
-        "strict": true
+        "strict": true,
+        "rules": {
+          "no-missing-import": "error",
+          "no-unknown-tag-name": "error",
+          "no-incompatible-type-binding": "off",
+          "no-unknown-attribute": "off"
+        }
       }
     ]
   },

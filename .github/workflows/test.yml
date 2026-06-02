@@ -41,7 +41,7 @@ jobs:
         run: npx eslint .
 
       - name: Run lit-analyzer
-        run: npm run lit-analyzer -- components
+        run: npm run lit-analyzer
 
       - name: Run stylelint
         run: npx stylelint '**/*.css' || (exit_code=$? && (npx stylelint --fix '**/*.css' || true) && git diff --color && exit $exit_code)
