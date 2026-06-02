@@ -12,6 +12,7 @@ import { globalUser } from "../user/context.js";
 import styles from "./element.css?lit";
 
 import "../button/element.js";
+import "../dropdown/element.js";
 
 export class MDNUserMenu extends L10nMixin(LitElement) {
   static ssr = false;

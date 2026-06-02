@@ -11,6 +11,8 @@ import cancelIcon from "../icon/cancel.svg?lit";
 import styles from "./element.css?lit";
 import { SidebarFilterer } from "./sidebar-filterer.js";
 
+import "../button/element.js";
+
 class MDNSidebarFilter extends L10nMixin(LitElement) {
   static styles = styles;
 

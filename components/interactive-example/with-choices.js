@@ -9,6 +9,7 @@ import { randomIdString } from "../utils/index.js";
 
 import { isCSSSupported } from "./utils.js";
 
+import "../button/element.js";
 import "../play-controller/element.js";
 import "../play-runner/element.js";
 

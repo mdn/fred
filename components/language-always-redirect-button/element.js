@@ -3,6 +3,8 @@ import { LitElement, html } from "lit";
 import { gleanClick } from "../../utils/glean.js";
 import { setPreferredLocale } from "../preferred-locale/utils.js";
 
+import "../button/element.js";
+
 export class MDNLanguageAlwaysRedirectButton extends LitElement {
   static properties = {
     locale: { type: String },

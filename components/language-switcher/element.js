@@ -14,6 +14,7 @@ import {
 
 import styles from "./element.css?lit";
 
+import "../button/element.js";
 import "../dropdown/element.js";
 import "../switch/element.js";
 
