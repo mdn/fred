@@ -30,11 +30,13 @@ export class MDNObservatoryResults extends LitElement {
   /**
    * @type { import("@lit").PropertyDeclarations }
    */
-  static properties = {
-    host: { type: String },
-    selectedTab: { state: true, type: Number },
-    _usePostInApi: { state: true, type: Boolean },
-  };
+  static get properties() {
+    return {
+      host: { type: String },
+      selectedTab: { state: true, type: Number },
+      _usePostInApi: { state: true, type: Boolean },
+    };
+  }
 
   _apiTask = new Task(this, {
     args: () => [this.host],

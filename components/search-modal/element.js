@@ -16,12 +16,14 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
   static ssr = false;
   static styles = styles;
 
-  static properties = {
-    _index: { state: true },
-    _query: { state: true },
-    _selected: { state: true },
-    _shiftFocus: { state: true },
-  };
+  static get properties() {
+    return {
+      _index: { state: true },
+      _query: { state: true },
+      _selected: { state: true },
+      _shiftFocus: { state: true },
+    };
+  }
 
   constructor() {
     super();

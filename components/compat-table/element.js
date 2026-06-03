@@ -63,16 +63,18 @@ function browserToIconName(browser) {
 }
 
 export class MDNCompatTable extends L10nMixin(LitElement) {
-  static properties = {
-    query: {},
-    locale: {},
-    data: {},
-    browserInfo: { attribute: "browserinfo" },
-    _pathname: { state: true },
-    _platforms: { state: true },
-    _browsers: { state: true },
-    _showTimelineId: { state: true },
-  };
+  static get properties() {
+    return {
+      query: {},
+      locale: {},
+      data: {},
+      browserInfo: { attribute: "browserinfo" },
+      _pathname: { state: true },
+      _platforms: { state: true },
+      _browsers: { state: true },
+      _showTimelineId: { state: true },
+    };
+  }
 
   static styles = styles;
 

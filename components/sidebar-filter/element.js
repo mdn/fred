@@ -16,10 +16,12 @@ import "../button/element.js";
 class MDNSidebarFilter extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    query: { type: String },
-    matchCount: { state: true, type: Number },
-  };
+  static get properties() {
+    return {
+      query: { type: String },
+      matchCount: { state: true, type: Number },
+    };
+  }
 
   /**
    * Creates an instance of SidebarFilterElement.

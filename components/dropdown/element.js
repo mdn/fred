@@ -21,10 +21,12 @@ import styles from "./element.css?lit";
 export class MDNDropdown extends LitElement {
   static styles = styles;
 
-  static properties = {
-    open: { type: Boolean },
-    loaded: { type: Boolean, reflect: true },
-  };
+  static get properties() {
+    return {
+      open: { type: Boolean },
+      loaded: { type: Boolean, reflect: true },
+    };
+  }
 
   constructor() {
     super();

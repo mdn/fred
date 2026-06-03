@@ -7,9 +7,11 @@ import { formatMinus } from "../observatory/utils.js";
 import styles from "./element.css?lit";
 
 export class MDNObservatoryComparisonTable extends LitElement {
-  static properties = {
-    result: { type: Object },
-  };
+  static get properties() {
+    return {
+      result: { type: Object },
+    };
+  }
 
   static styles = styles;
 

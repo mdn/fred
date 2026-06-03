@@ -9,10 +9,12 @@ import styles from "./element.css?lit";
 
 export class MDNObservatoryHumanDuration extends LitElement {
   static styles = styles;
-  static properties = {
-    date: { type: Date },
-    _text: { state: true },
-  };
+  static get properties() {
+    return {
+      date: { type: Date },
+      _text: { state: true },
+    };
+  }
 
   constructor() {
     super();

@@ -17,10 +17,12 @@ const LANGUAGE_CLASSES = new Set(["html", "js", "css", "wat"]);
 export class MDNCodeExample extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    language: { type: String },
-    code: { type: String },
-  };
+  static get properties() {
+    return {
+      language: { type: String },
+      code: { type: String },
+    };
+  }
 
   constructor() {
     super();

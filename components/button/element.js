@@ -6,17 +6,19 @@ import Button from "./pure.js";
 export class MDNButton extends LitElement {
   static styles = styles;
 
-  static properties = {
-    disabled: { type: Boolean },
-    variant: { type: String },
-    action: { type: String },
-    icon: { state: true },
-    iconOnly: { type: Boolean, attribute: "icon-only" },
-    iconPosition: { type: String, attribute: "icon-position" },
-    href: { type: String },
-    target: { type: String },
-    rel: { type: String },
-  };
+  static get properties() {
+    return {
+      disabled: { type: Boolean },
+      variant: { type: String },
+      action: { type: String },
+      icon: { state: true },
+      iconOnly: { type: Boolean, attribute: "icon-only" },
+      iconPosition: { type: String, attribute: "icon-position" },
+      href: { type: String },
+      target: { type: String },
+      rel: { type: String },
+    };
+  }
 
   constructor() {
     super();

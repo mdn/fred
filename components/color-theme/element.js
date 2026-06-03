@@ -10,9 +10,11 @@ import "../dropdown/element.js";
 export class MDNColorTheme extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    _mode: { state: true },
-  };
+  static get properties() {
+    return {
+      _mode: { state: true },
+    };
+  }
 
   constructor() {
     super();

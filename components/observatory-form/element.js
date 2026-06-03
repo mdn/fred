@@ -15,11 +15,13 @@ const ERROR_MAP = {
 export class MDNObservatoryForm extends LitElement {
   static styles = styles;
 
-  static properties = {
-    _queryRunning: { type: Boolean, state: true },
-    _hostname: { type: String, state: true },
-    _errorMessage: { type: String, state: true },
-  };
+  static get properties() {
+    return {
+      _queryRunning: { type: Boolean, state: true },
+      _hostname: { type: String, state: true },
+      _errorMessage: { type: String, state: true },
+    };
+  }
 
   constructor() {
     super();

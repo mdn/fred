@@ -24,15 +24,17 @@ import styles from "./element.css?lit";
 export class MDNPlayRunner extends LitElement {
   static ssr = false;
 
-  static properties = {
-    code: { type: Object },
-    defaults: { type: String },
-    srcPrefix: { type: String, attribute: "src-prefix" },
-    allow: { type: String },
-    sandbox: { type: String },
-    permalink: { type: Boolean },
-    _src: { state: true },
-  };
+  static get properties() {
+    return {
+      code: { type: Object },
+      defaults: { type: String },
+      srcPrefix: { type: String, attribute: "src-prefix" },
+      allow: { type: String },
+      sandbox: { type: String },
+      permalink: { type: Boolean },
+      _src: { state: true },
+    };
+  }
 
   static styles = styles;
 

@@ -23,11 +23,13 @@ import "../play-runner/element.js";
  */
 export const InteractiveExampleWithChoices = (Base) =>
   class extends L10nMixin(Base) {
-    static properties = {
-      __choiceSelected: { state: true },
-      __choiceUnsupported: { state: true },
-      __choiceUpdated: { state: true },
-    };
+    static get properties() {
+      return {
+        __choiceSelected: { state: true },
+        __choiceUnsupported: { state: true },
+        __choiceUpdated: { state: true },
+      };
+    }
 
     /** @param {any[]} _args  */
     constructor(..._args) {
