@@ -11,7 +11,7 @@ export class MDNObservatoryHumanDuration extends LitElement {
   static styles = styles;
   static get properties() {
     return {
-      date: { type: Date },
+      date: { attribute: false },
       _text: { state: true },
     };
   }
