@@ -89,6 +89,15 @@ export default defineConfig([
       ],
       "lit/no-template-map": "off",
       "lit/prefer-query-decorators": "off",
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector:
+            "PropertyDefinition[static=true][key.name='properties'][value.type='ObjectExpression']",
+          message:
+            "Declare reactive properties with `static get properties()`, so lit-analyzer can detect the element's attributes.",
+        },
+      ],
       "n/no-missing-import": "off",
       "n/no-unsupported-features/node-builtins": ["off"],
       "n/no-unpublished-import": "off",
