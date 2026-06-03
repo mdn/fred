@@ -149,7 +149,7 @@ export const InteractiveExampleWithChoices = (Base) =>
                   <mdn-play-editor
                     data-index=${index}
                     language="css"
-                    minimal="true"
+                    minimal
                     .delay=${100}
                     .value=${code?.trim()}
                     aria-label=${ifDefined(

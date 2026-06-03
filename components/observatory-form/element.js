@@ -97,7 +97,7 @@ export class MDNObservatoryForm extends LitElement {
       : html`
           <form @submit=${this._handleSubmit} class="observatory-form">
             <div class="observatory-form__input-group">
-              <label htmlFor="host" class="visually-hidden">
+              <label for="host" class="visually-hidden">
                 Domain name or URL
               </label>
               <input

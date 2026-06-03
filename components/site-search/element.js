@@ -171,7 +171,7 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
             @keydown=${this._handleKeyDown}
           />
           <mdn-button
-            icon-only="true"
+            icon-only
             .icon=${searchIcon}
             variant="plain"
             class="site-search-form__submit"
