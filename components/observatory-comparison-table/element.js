@@ -207,7 +207,6 @@ function GradeSVG({ gradeDistribution, result }) {
             const barHeight =
               (height - bottomSpace - topSpace) * (item.count / yTickMax);
             return svg` <g
-              key="you-are-here"
               class="you-are-here"
               transform="translate(${xTickOffset + index * xTickIncr}, ${
                 height - bottomSpace - barHeight - 50

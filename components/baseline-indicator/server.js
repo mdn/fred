@@ -217,16 +217,11 @@ export class BaselineIndicator extends ServerComponent {
           : nothing}
         <div class="browsers">
           ${ENGINES.map(
-            ({ name, browsers }) =>
-              html`<span
-                key=${name}
-                class="engine"
-                title=${engineTitle(browsers)}
-              >
+            ({ browsers }) =>
+              html`<span class="engine" title=${engineTitle(browsers)}>
                 ${browsers.map(
                   (browser) =>
                     html`<span
-                      key=${browser.ids[0]}
                       class=${`browser ${browser.ids[0]} ${
                         isBrowserSupported(browser) ? "supported" : ""
                       }`}
