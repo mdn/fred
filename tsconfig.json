@@ -30,7 +30,7 @@
           "no-missing-import": "error",
           "no-unknown-tag-name": "error",
           "no-incompatible-type-binding": "off",
-          "no-unknown-attribute": "off"
+          "no-unknown-attribute": "error"
         }
       }
     ]
