@@ -44,7 +44,9 @@ export class MDNDropdown extends LitElement {
 
   /** @param {string} name  */
   _slotElements(name) {
-    const slot = this.shadowRoot?.querySelector(`slot[name="${name}"]`);
+    const slot = this.shadowRoot?.querySelector(
+      `slot[name="${CSS.escape(name)}"]`,
+    );
     if (slot instanceof HTMLSlotElement) {
       return slot.assignedElements();
     }

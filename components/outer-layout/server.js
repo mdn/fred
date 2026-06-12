@@ -69,7 +69,7 @@ export class OuterLayout extends ServerComponent {
       .filter((x) => x !== undefined);
 
     const area =
-      context.path.split("/")[3]?.toLowerCase() === "learn_web_development"
+      context.path.split("/", 4)[3]?.toLowerCase() === "learn_web_development"
         ? "learn"
         : undefined;
 

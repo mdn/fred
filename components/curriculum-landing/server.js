@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/better-dom-traversing */
 import { html } from "@lit-labs/ssr";
 import { nothing } from "lit";
 

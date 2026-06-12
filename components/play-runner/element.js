@@ -70,7 +70,7 @@ export class MDNPlayRunner extends LitElement {
   /** @param {MessageEvent} e  */
   _onMessage({ data: { typ, prop, args, uuid }, origin }) {
     if (!uuid) {
-      uuid = new URL(origin, "https://example.com").hostname.split(".")[0];
+      uuid = new URL(origin, "https://example.com").hostname.split(".", 1)[0];
     }
     if (uuid !== this._subdomain) {
       return;

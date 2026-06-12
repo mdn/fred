@@ -58,7 +58,7 @@ function browserToIconName(browser) {
   } else if (browser === "webview_ios") {
     return "safari";
   } else {
-    return browser.split("_")[0] ?? "";
+    return browser.split("_", 1)[0] ?? "";
   }
 }
 

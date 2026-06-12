@@ -240,7 +240,7 @@ export async function startServer() {
       selfHandleResponse: true,
       on: {
         proxyReq: async (req) => {
-          const locale = req.path.split("/")[1];
+          const locale = req.path.split("/", 2)[1];
           if (locale && /^q[a-t][a-z]$/.test(locale)) {
             // if the locale matches a qaa...qtz private use language tag,
             // which we use for testing fluent with pseudo-locales,

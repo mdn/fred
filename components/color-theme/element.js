@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prefer-includes-over-repeated-comparisons */
 import { LitElement, html } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";

@@ -14,7 +14,7 @@ const ftlMap = {
   "en-US": enUS_ftl,
 };
 
-const ALLOWED_TAGS = ["i", "strong", "br", "em"];
+const ALLOWED_TAGS = new Set(["i", "strong", "br", "em"]);
 const ALLOWED_ATTRIBUTES = ["title", "aria-label"];
 
 export class Fluent {
@@ -105,7 +105,7 @@ export class Fluent {
             }
           }
           if (
-            ALLOWED_TAGS.includes(token.tag) ||
+            ALLOWED_TAGS.has(token.tag) ||
             (name &&
               Object.keys(elements).includes(name) &&
               elements[name]?.tag === token.tag)
