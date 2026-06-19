@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/better-dom-traversing */
 import { html } from "@lit-labs/ssr";
 import { nothing } from "lit";
 
@@ -220,11 +221,7 @@ export class CurriculumLanding extends ServerComponent {
                 : nothing;
 
             return html`
-              <li
-                id=${listItemId}
-                class="modules-list-list-item"
-                key="mll-${i}"
-              >
+              <li id=${listItemId} class="modules-list-list-item">
                 <input
                   class="visually-hidden"
                   id=${radioId}

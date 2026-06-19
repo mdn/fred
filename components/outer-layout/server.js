@@ -69,7 +69,7 @@ export class OuterLayout extends ServerComponent {
       .filter((x) => x !== undefined);
 
     const area =
-      context.path.split("/")[3]?.toLowerCase() === "learn_web_development"
+      context.path.split("/", 4)[3]?.toLowerCase() === "learn_web_development"
         ? "learn"
         : undefined;
 
@@ -116,13 +116,14 @@ export class OuterLayout extends ServerComponent {
                 fetchpriority="low"
               />`,
           )}
-          ${TRANSCEND_AIRGAP_URL &&
-          html`<script
-            data-cfasync="false"
-            data-report-only="on"
-            data-prompt="0"
-            src=${TRANSCEND_AIRGAP_URL}
-          ></script>`}
+          ${TRANSCEND_AIRGAP_URL && context.renderer !== "SpaPlay"
+            ? html`<script
+                data-cfasync="false"
+                data-report-only="on"
+                data-prompt="0"
+                src=${TRANSCEND_AIRGAP_URL}
+              ></script>`
+            : nothing}
           ${scripts?.map(
             (path) => html`<script src=${path} type="module"></script>`,
           )}

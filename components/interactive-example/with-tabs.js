@@ -2,6 +2,7 @@ import { decode } from "he";
 import { html } from "lit";
 import { ref } from "lit/directives/ref.js";
 
+import "../button/element.js";
 import "../play-controller/element.js";
 import "../play-editor/element.js";
 import "../play-runner/element.js";

@@ -44,9 +44,6 @@ const LOCALIZED_BCD_IDS = {
   "zh-TW": "瀏覽器相容性",
 };
 
-const SURVEY_URL =
-  "https://survey.alchemer.com/s3/7634825/MDN-baseline-feedback";
-
 export class BaselineIndicator extends ServerComponent {
   static inlineScript = inlineScript;
 
@@ -62,29 +59,46 @@ export class BaselineIndicator extends ServerComponent {
    * @param {import("@fred").Context<import("@rari").DocPage>} context
    * @param {string} level
    * @param {Date} [lowDate]
+   * @param {string} [signalsLink]
    */
-  getExtraText(context, level, lowDate) {
-    return level === "high" && lowDate
-      ? context.l10n.raw({
-          id: "baseline-high-extra",
-          args: {
-            date: lowDate.toLocaleDateString(context.locale, {
-              year: "numeric",
-              month: "long",
-            }),
-          },
-        })
-      : level === "low" && lowDate
+  getExtraText(context, level, lowDate, signalsLink) {
+    return [
+      level === "high" && lowDate
         ? context.l10n.raw({
-            id: "baseline-low-extra",
+            id: "baseline-high-extra",
             args: {
-              date: lowDate.toLocaleDateString(DEFAULT_LOCALE, {
+              date: lowDate.toLocaleDateString(context.locale, {
                 year: "numeric",
                 month: "long",
               }),
             },
           })
-        : context.l10n("baseline-not-extra");
+        : level === "low" && lowDate
+          ? context.l10n.raw({
+              id: "baseline-low-extra",
+              args: {
+                date: lowDate.toLocaleDateString(DEFAULT_LOCALE, {
+                  year: "numeric",
+                  month: "long",
+                }),
+              },
+            })
+          : context.l10n("baseline-not-extra"),
+      signalsLink
+        ? context.l10n.raw({
+            id: "baseline-signals",
+            elements: {
+              link: {
+                tag: "a",
+                href: signalsLink,
+                target: "_blank",
+                rel: "noopener",
+                "data-glean-id": "baseline_link_signals",
+              },
+            },
+          })
+        : undefined,
+    ].filter((x) => x !== undefined);
   }
 
   /**
@@ -109,8 +123,7 @@ export class BaselineIndicator extends ServerComponent {
 
     const lowDate = this.parseDate(status.baseline_low_date);
     const level = status.baseline || "not";
-
-    const feedbackLink = `${SURVEY_URL}?page=${encodeURIComponent(context.url)}&level=${level}`;
+    const signalsLink = status.feature.developer_signals?.url;
 
     const isBrowserSupported =
       /** @param {import("./types.js").BrowserGroup} browser */ (browser) => {
@@ -160,9 +173,13 @@ export class BaselineIndicator extends ServerComponent {
         }
       };
 
+    const openByDefault = Boolean(signalsLink);
+
     return html`<details
       class="baseline-indicator ${level}"
       data-glean-toggle-open="baseline_toggle_open"
+      ?open=${openByDefault}
+      ?data-open-by-default=${openByDefault}
     >
       <summary>
         <span
@@ -200,16 +217,11 @@ export class BaselineIndicator extends ServerComponent {
           : nothing}
         <div class="browsers">
           ${ENGINES.map(
-            ({ name, browsers }) =>
-              html`<span
-                key=${name}
-                class="engine"
-                title=${engineTitle(browsers)}
-              >
+            ({ browsers }) =>
+              html`<span class="engine" title=${engineTitle(browsers)}>
                 ${browsers.map(
                   (browser) =>
                     html`<span
-                      key=${browser.ids[0]}
                       class=${`browser ${browser.ids[0]} ${
                         isBrowserSupported(browser) ? "supported" : ""
                       }`}
@@ -223,7 +235,9 @@ export class BaselineIndicator extends ServerComponent {
         <span class="icon icon-chevron"></span>
       </summary>
       <div class="extra">
-        <p>${this.getExtraText(context, level, lowDate)}</p>
+        ${this.getExtraText(context, level, lowDate, signalsLink).map(
+          (text) => html`<p>${text}</p>`,
+        )}
         ${status.asterisk
           ? html`<p>* ${context.l10n("baseline-asterisk")}</p>`
           : nothing}
@@ -243,19 +257,6 @@ export class BaselineIndicator extends ServerComponent {
               ${context.l10n(
                 "baseline-indicator-see-full-compatibility",
               )`See full compatibility`}
-            </a>
-          </li>
-          <li>
-            <a
-              href=${feedbackLink}
-              data-glean-id="baseline_link_feedback"
-              class="feedback-link"
-              target="_blank"
-              rel="noreferrer"
-            >
-              ${context.l10n(
-                "baseline-indicator-report-feedback",
-              )`Report feedback`}
             </a>
           </li>
         </ul>

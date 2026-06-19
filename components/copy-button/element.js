@@ -5,11 +5,13 @@ import { MDNButton } from "../button/element.js";
 import check from "../icon/check.svg?lit";
 
 export class MDNCopyButton extends L10nMixin(LitElement) {
-  static properties = {
-    variant: {},
-    _message: { state: true },
-    _copiedSuccessfully: { state: true },
-  };
+  static get properties() {
+    return {
+      variant: {},
+      _message: { state: true },
+      _copiedSuccessfully: { state: true },
+    };
+  }
 
   constructor() {
     super();

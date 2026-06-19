@@ -14,20 +14,23 @@ import {
 
 import styles from "./element.css?lit";
 
+import "../button/element.js";
 import "../dropdown/element.js";
 import "../switch/element.js";
 
 export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    locale: { type: String },
-    native: { type: String },
-    translations: { type: Array },
-    url: { type: String },
-    notFound: { type: Boolean, attribute: "not-found" },
-    _preferredLocale: { state: true },
-  };
+  static get properties() {
+    return {
+      locale: { type: String },
+      native: { type: String },
+      translations: { type: Array },
+      url: { type: String },
+      notFound: { type: Boolean, attribute: "not-found" },
+      _preferredLocale: { state: true },
+    };
+  }
 
   constructor() {
     super();

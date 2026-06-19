@@ -15,11 +15,13 @@ const ERROR_MAP = {
 export class MDNObservatoryForm extends LitElement {
   static styles = styles;
 
-  static properties = {
-    _queryRunning: { type: Boolean, state: true },
-    _hostname: { type: String, state: true },
-    _errorMessage: { type: String, state: true },
-  };
+  static get properties() {
+    return {
+      _queryRunning: { type: Boolean, state: true },
+      _hostname: { type: String, state: true },
+      _errorMessage: { type: String, state: true },
+    };
+  }
 
   constructor() {
     super();
@@ -95,7 +97,7 @@ export class MDNObservatoryForm extends LitElement {
       : html`
           <form @submit=${this._handleSubmit} class="observatory-form">
             <div class="observatory-form__input-group">
-              <label htmlFor="host" class="visually-hidden">
+              <label for="host" class="visually-hidden">
                 Domain name or URL
               </label>
               <input

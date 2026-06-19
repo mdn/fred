@@ -7,11 +7,13 @@ import styles from "./element.css?lit";
 
 export class MDNObservatoryRescanButton extends L10nMixin(LitElement) {
   static styles = styles;
-  static properties = {
-    from: { type: Object }, // Date object
-    duration: { type: Number },
-    _remainingTime: { state: true },
-  };
+  static get properties() {
+    return {
+      from: { type: Object }, // Date object
+      duration: { type: Number },
+      _remainingTime: { state: true },
+    };
+  }
 
   constructor() {
     super();

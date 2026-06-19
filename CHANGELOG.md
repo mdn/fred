@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.6.5](https://github.com/mdn/fred/compare/v2.6.4...v2.6.5) (2026-06-01)
+
+
+### Bug Fixes
+
+* **button:** increase contrast ([#666](https://github.com/mdn/fred/issues/666)) ([60f3f48](https://github.com/mdn/fred/commit/60f3f481de1838e95fbb3fed9495b10f1a590678))
+* **compat-table:** support arbitrary nesting depth ([#1604](https://github.com/mdn/fred/issues/1604)) ([573fb9e](https://github.com/mdn/fred/commit/573fb9e9bddb4b2622f34222e92847d0b2b059f0))
+* **content-section:** add margin before table ([#1550](https://github.com/mdn/fred/issues/1550)) ([ad5f4ae](https://github.com/mdn/fred/commit/ad5f4ae0b6162d819bd2296ef4f5c8f7ca2099d4))
+
+
+### Miscellaneous
+
+* **deps:** bump @mdn/rari from 0.2.25 to 0.2.26 ([#1620](https://github.com/mdn/fred/issues/1620)) ([545b25a](https://github.com/mdn/fred/commit/545b25acd9636634c897b7a58e1eebf19c65cf76))
+* **deps:** bump http-proxy-middleware from 3.0.5 to 4.0.0 ([#1538](https://github.com/mdn/fred/issues/1538)) ([433da7c](https://github.com/mdn/fred/commit/433da7c7b56725ec271de6dbff08acbf81298508))
+* **deps:** bump qs and express ([#1598](https://github.com/mdn/fred/issues/1598)) ([84866ab](https://github.com/mdn/fred/commit/84866abc13aaba8d5a782d50de33292738344f85))
+* **footer:** remove foundation link ([#1607](https://github.com/mdn/fred/issues/1607)) ([4c726e6](https://github.com/mdn/fred/commit/4c726e63017f64d69ccfe0cafbe47d92c66f51fe))
+* **l10n:** add Japanese strings ([#1318](https://github.com/mdn/fred/issues/1318)) ([71fbab5](https://github.com/mdn/fred/commit/71fbab5c7d619479b692501a41a546c2f5651365))
+* **outer-layout:** skip Transcend snippet on Playground ([#1610](https://github.com/mdn/fred/issues/1610)) ([d0a8f0e](https://github.com/mdn/fred/commit/d0a8f0e581ccc7c44e62d27cbb2366a16f15ef99))
+
 ## [2.6.4](https://github.com/mdn/fred/compare/v2.6.3...v2.6.4) (2026-05-22)
 
 

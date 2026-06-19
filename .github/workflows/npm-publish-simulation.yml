@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: (mdn/fred) Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           path: mdn/fred
           persist-credentials: false
@@ -34,6 +34,7 @@ jobs:
         id: build
         working-directory: mdn/fred
         run: |
+          npm pkg set _gitSha=${{ github.sha }}
           npm pack
           TARBALL=`ls mdn-fred-*.tgz`
           echo $TARBALL
@@ -58,8 +59,12 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      - name: "Move npm cache to D: drive"
+        if: runner.os == 'Windows'
+        run: echo "npm_config_cache=D:\npm-cache" >> $env:GITHUB_ENV
+
       - name: (mdn/content) Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           repository: mdn/content
           path: mdn/content
@@ -81,7 +86,6 @@ jobs:
         working-directory: mdn/content
         shell: bash
         run: |
-          npm cache clean --force
           TARBALL=$(ls ../../mdn-fred-*.tgz)
           npm install file:$TARBALL
           npm install
@@ -89,13 +93,18 @@ jobs:
           # Increase GitHub API limit.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: (mdn/content) Verify correct fred installed
+        working-directory: mdn/content/node_modules/@mdn/fred
+        shell: bash
+        run: test "$(npm pkg get _gitSha --json)" = '"${{ github.sha }}"'
+
       - name: (mdn/content) Render (Linux)
         if: runner.os == 'Linux'
         working-directory: mdn/content
         run: npx fred-ssr
 
       - name: (mdn/fred) Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           path: mdn/fred
           persist-credentials: false

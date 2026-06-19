@@ -87,9 +87,11 @@ class VirtualConsole {
 }
 
 export class MDNPlayConsole extends LitElement {
-  static properties = {
-    _messages: { state: true },
-  };
+  static get properties() {
+    return {
+      _messages: { state: true },
+    };
+  }
 
   static styles = styles;
 

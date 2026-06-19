@@ -44,11 +44,13 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
   static styles = styles;
   static ssr = false;
 
-  static properties = {
-    _inputValue: { state: true },
-    _query: { state: true },
-    _page: { state: true },
-  };
+  static get properties() {
+    return {
+      _inputValue: { state: true },
+      _query: { state: true },
+      _page: { state: true },
+    };
+  }
 
   constructor() {
     super();
@@ -169,7 +171,7 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
             @keydown=${this._handleKeyDown}
           />
           <mdn-button
-            icon-only="true"
+            icon-only
             .icon=${searchIcon}
             variant="plain"
             class="site-search-form__submit"

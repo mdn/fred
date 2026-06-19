@@ -30,9 +30,11 @@ const SESSION_KEY = "playground-session-code";
 export class MDNPlayground extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    _gistID: { state: true },
-  };
+  static get properties() {
+    return {
+      _gistID: { state: true },
+    };
+  }
 
   constructor() {
     super();
