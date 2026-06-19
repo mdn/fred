@@ -3,6 +3,7 @@ import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { ref } from "lit/directives/ref.js";
 
+import "../button/element.js";
 import "../play-controller/element.js";
 import "../play-editor/element.js";
 import "../play-runner/element.js";

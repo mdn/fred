@@ -4,5 +4,5 @@
  * @type {import("./types.js").SymmetricContext}
  */
 globalThis.__MDNClientContext = {
-  locale: globalThis.location.pathname.split("/")[1] || "en-US",
+  locale: globalThis.location.pathname.split("/", 2)[1] || "en-US",
 };

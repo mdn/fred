@@ -15,6 +15,25 @@ import { hideBin } from "yargs/helpers";
 
 const FRED_ROOT = path.join(import.meta.dirname, "..");
 
+const MAX_WDIO_RETRIES = 3;
+
+// node bug causing crash in windows, drop when fixed upstream:
+// https://github.com/nodejs/node/issues/56645
+const WINDOWS_STACK_BUFFER_OVERRUN = 3_221_226_505;
+
+/** @param {unknown} closeEvents */
+function isRetryableWdioCrash(closeEvents) {
+  return (
+    Array.isArray(closeEvents) &&
+    closeEvents.some(
+      (event) =>
+        event?.command?.name === "wdio" &&
+        !event.killed &&
+        event.exitCode === WINDOWS_STACK_BUFFER_OVERRUN,
+    )
+  );
+}
+
 const e2eOptions = /** @satisfies {Record<string, Options>} */ ({
   rari: { describe: "run rari", type: "boolean", default: false },
   fred: {
@@ -175,14 +194,25 @@ async function runWdio(suite, argv) {
     });
   }
 
-  try {
-    await concurrently(jobs, {
-      killOthersOn: ["failure", "success"],
-      restartTries: 0,
-      successCondition: "first",
-    }).result;
-  } catch {
-    process.exitCode = 1;
+  for (let attempt = 0; ; attempt++) {
+    try {
+      await concurrently(jobs, {
+        killOthersOn: ["failure", "success"],
+        restartTries: 0,
+        successCondition: "first",
+      }).result;
+      break;
+    } catch (error) {
+      if (attempt < MAX_WDIO_RETRIES && isRetryableWdioCrash(error)) {
+        console.warn(
+          `wdio crashed with Windows exit code ${WINDOWS_STACK_BUFFER_OVERRUN} ` +
+            `(attempt ${attempt + 1}/${MAX_WDIO_RETRIES + 1}); retrying`,
+        );
+        continue;
+      }
+      process.exitCode = 1;
+      break;
+    }
   }
 }
 

@@ -355,13 +355,11 @@ export class SidebarFilterer {
    * @returns {HTMLElement|undefined} The found element or undefined if none found.
    */
   findFirstElementBefore(el, candidates) {
-    return [...candidates]
-      .reverse()
-      .find(
-        (candidate) =>
-          candidate.compareDocumentPosition(el) &
-          Node.DOCUMENT_POSITION_FOLLOWING,
-      );
+    return candidates.findLast(
+      (candidate) =>
+        candidate.compareDocumentPosition(el) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    );
   }
 
   /**

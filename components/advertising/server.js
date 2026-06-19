@@ -52,7 +52,7 @@ export class Advertising extends ServerComponent {
                 <ul class="sing__stats">
                   ${STATS.map(
                     (s) => html`
-                      <li key=${s.id}>
+                      <li>
                         <span class="sing__number">${s.number}</span>
                         <span class="sing__legend">${s.legend}</span>
                       </li>

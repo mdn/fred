@@ -1,7 +1,8 @@
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { includeIgnoreFile } from "@eslint/compat";
+import { includeIgnoreFile } from "@eslint/config-helpers";
 import js from "@eslint/js";
 import { defineConfig } from "eslint/config";
 import prettierConfig from "eslint-config-prettier/flat";
@@ -19,9 +20,11 @@ import fred from "./build/eslint-fred.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const gitignorePath = path.resolve(__dirname, ".gitignore");
+const gitExcludePath = path.resolve(__dirname, ".git", "info", "exclude");
 
 export default defineConfig([
   includeIgnoreFile(gitignorePath),
+  ...(fs.existsSync(gitExcludePath) ? [includeIgnoreFile(gitExcludePath)] : []),
   {
     ignores: ["./vendor/"],
   },
@@ -86,6 +89,15 @@ export default defineConfig([
       ],
       "lit/no-template-map": "off",
       "lit/prefer-query-decorators": "off",
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector:
+            "PropertyDefinition[static=true][key.name='properties'][value.type='ObjectExpression']",
+          message:
+            "Declare reactive properties with `static get properties()`, so lit-analyzer can detect the element's attributes.",
+        },
+      ],
       "n/no-missing-import": "off",
       "n/no-unsupported-features/node-builtins": ["off"],
       "n/no-unpublished-import": "off",

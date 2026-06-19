@@ -6,6 +6,7 @@ import { Tooltip } from "./tooltip.js";
 import { Trend } from "./trend.js";
 
 import "../observatory-rescan-button/element.js";
+import "../observatory-human-duration/element.js";
 import "../dropdown/element.js";
 
 /**

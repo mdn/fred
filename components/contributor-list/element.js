@@ -7,9 +7,11 @@ import styles from "./element.css?lit";
 export class MDNContributorList extends LitElement {
   static ssr = false;
 
-  static properties = {
-    _contributors: { state: true },
-  };
+  static get properties() {
+    return {
+      _contributors: { state: true },
+    };
+  }
 
   static styles = styles;
 

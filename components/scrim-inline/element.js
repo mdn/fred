@@ -15,13 +15,15 @@ export class MDNScrimInline extends L10nMixin(LitElement) {
 
   static ssr = false;
 
-  static properties = {
-    url: { type: String },
-    img: { type: String },
-    scrimTitle: { type: String, attribute: "scrimtitle" },
-    _fullscreen: { state: true },
-    _scrimLoaded: { state: true },
-  };
+  static get properties() {
+    return {
+      url: { type: String },
+      img: { type: String },
+      scrimTitle: { type: String, attribute: "scrimtitle" },
+      _fullscreen: { state: true },
+      _scrimLoaded: { state: true },
+    };
+  }
 
   /** @type {import("lit/directives/ref.js").Ref<HTMLElement>} */
   _bodyRef = createRef();

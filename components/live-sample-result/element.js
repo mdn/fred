@@ -12,15 +12,17 @@ import "../button/element.js";
 export class MDNLiveSampleResult extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    liveId: { attribute: "live-id" },
-    code: { type: Object },
-    allowed: {},
-    sandbox: {},
-    srcPrefix: { attribute: "src-prefix" },
-    height: {},
-    breakoutLink: { state: true },
-  };
+  static get properties() {
+    return {
+      liveId: { attribute: "live-id" },
+      code: { type: Object },
+      allowed: {},
+      sandbox: {},
+      srcPrefix: { attribute: "src-prefix" },
+      height: {},
+      breakoutLink: { state: true },
+    };
+  }
 
   constructor() {
     super();

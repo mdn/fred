@@ -10,7 +10,7 @@ import { Button } from "./server.js";
 
 export class ButtonSandbox extends SandboxComponent {
   render() {
-    const hrefs = [undefined, "http://example.com"];
+    const hrefs = [undefined, "https://example.com"];
     const variants = [undefined, "primary", "secondary", "plain"];
     const actions = [undefined, "positive", "negative"];
     const icons = [

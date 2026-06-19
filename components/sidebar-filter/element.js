@@ -11,13 +11,17 @@ import cancelIcon from "../icon/cancel.svg?lit";
 import styles from "./element.css?lit";
 import { SidebarFilterer } from "./sidebar-filterer.js";
 
+import "../button/element.js";
+
 class MDNSidebarFilter extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    query: { type: String },
-    matchCount: { state: true, type: Number },
-  };
+  static get properties() {
+    return {
+      query: { type: String },
+      matchCount: { state: true, type: Number },
+    };
+  }
 
   /**
    * Creates an instance of SidebarFilterElement.
@@ -171,13 +175,13 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
       <mdn-button
         class="button"
         variant="plain"
-        label=${this.l10n(
-          "sidebar-filter-clear-filter-input",
-        )`Clear filter input`}
         .icon=${cancelIcon}
         icon-only
         @click=${this._clearFilter}
-      ></mdn-button>
+        >${this.l10n(
+          "sidebar-filter-clear-filter-input",
+        )`Clear filter input`}</mdn-button
+      >
     `;
   }
 }

@@ -9,6 +9,7 @@ import { randomIdString } from "../utils/index.js";
 
 import { isCSSSupported } from "./utils.js";
 
+import "../button/element.js";
 import "../play-controller/element.js";
 import "../play-runner/element.js";
 
@@ -22,11 +23,13 @@ import "../play-runner/element.js";
  */
 export const InteractiveExampleWithChoices = (Base) =>
   class extends L10nMixin(Base) {
-    static properties = {
-      __choiceSelected: { state: true },
-      __choiceUnsupported: { state: true },
-      __choiceUpdated: { state: true },
-    };
+    static get properties() {
+      return {
+        __choiceSelected: { state: true },
+        __choiceUnsupported: { state: true },
+        __choiceUpdated: { state: true },
+      };
+    }
 
     /** @param {any[]} _args  */
     constructor(..._args) {
@@ -146,7 +149,7 @@ export const InteractiveExampleWithChoices = (Base) =>
                   <mdn-play-editor
                     data-index=${index}
                     language="css"
-                    minimal="true"
+                    minimal
                     .delay=${100}
                     .value=${code?.trim()}
                     aria-label=${ifDefined(

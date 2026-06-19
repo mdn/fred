@@ -16,13 +16,15 @@ export class MDNCollectionSaveButton extends L10nMixin(LitElement) {
   static ssr = false;
   static styles = styles;
 
-  static properties = {
-    docUrl: { type: String, attribute: "doc-url" },
-    docTitle: { type: String, attribute: "doc-title" },
-    _item: { state: true },
-    _pending: { state: true },
-    _lastAction: { state: true },
-  };
+  static get properties() {
+    return {
+      docUrl: { type: String, attribute: "doc-url" },
+      docTitle: { type: String, attribute: "doc-title" },
+      _item: { state: true },
+      _pending: { state: true },
+      _lastAction: { state: true },
+    };
+  }
 
   constructor() {
     super();

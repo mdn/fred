@@ -58,21 +58,23 @@ function browserToIconName(browser) {
   } else if (browser === "webview_ios") {
     return "safari";
   } else {
-    return browser.split("_")[0] ?? "";
+    return browser.split("_", 1)[0] ?? "";
   }
 }
 
 export class MDNCompatTable extends L10nMixin(LitElement) {
-  static properties = {
-    query: {},
-    locale: {},
-    data: {},
-    browserInfo: { attribute: "browserinfo" },
-    _pathname: { state: true },
-    _platforms: { state: true },
-    _browsers: { state: true },
-    _showTimelineId: { state: true },
-  };
+  static get properties() {
+    return {
+      query: {},
+      locale: {},
+      data: {},
+      browserInfo: { attribute: "browserinfo" },
+      _pathname: { state: true },
+      _platforms: { state: true },
+      _browsers: { state: true },
+      _showTimelineId: { state: true },
+    };
+  }
 
   static styles = styles;
 
