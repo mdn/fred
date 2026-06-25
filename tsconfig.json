@@ -8,7 +8,7 @@
     "target": "esnext",
     "module": "nodenext",
     "moduleResolution": "nodenext",
-    "types": ["@wdio/globals/types", "mocha"],
+    "types": ["@wdio/globals/types", "mocha", "@wdio/visual-service"],
     // fix for badly-formed types in dependencies:
     "skipLibCheck": true,
     // alias for imports:
@@ -73,5 +73,5 @@
       }
     ]
   },
-  "exclude": ["node_modules", "dist", "out", "legacy", "vendor"]
+  "exclude": ["node_modules", "dist", "out", "legacy", "vendor", "test/tmp"]
 }

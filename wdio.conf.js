@@ -3,7 +3,7 @@ const FRED_PORT = process.env.FRED_PORT || "3000";
 /** @type {WebdriverIO.Config} */
 export const config = {
   runner: "local",
-  specs: ["./test/specs/**/*.js"],
+  specs: ["./test/specs/**/*.e2e.js"],
   maxInstances: 10,
   capabilities: [
     {

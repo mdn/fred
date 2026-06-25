@@ -9,3 +9,5 @@ out/
 .DS_Store
 .env
 *.tgz
+test/baseline/
+test/tmp/
