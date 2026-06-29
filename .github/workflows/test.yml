@@ -47,7 +47,7 @@ jobs:
         run: npx stylelint '**/*.css' || (exit_code=$? && (npx stylelint --fix '**/*.css' || true) && git diff --color && exit $exit_code)
 
       - name: Run tsc
-        run: npx tsc --noEmit
+        run: npx --package=typescript tsc --noEmit
 
       - name: Lint l10n strings
         run: npm run l10n -- --lint
