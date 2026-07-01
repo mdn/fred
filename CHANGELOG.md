@@ -1,5 +1,36 @@
 # Changelog
 
+## [2.7.0](https://github.com/mdn/fred/compare/v2.6.5...v2.7.0) (2026-07-01)
+
+
+### Features
+
+* **baseline:** add link to developer-signals repo ([#1212](https://github.com/mdn/fred/issues/1212)) ([0da991f](https://github.com/mdn/fred/commit/0da991f3588a57b0e8683c41ef88799952999b22))
+
+
+### Bug Fixes
+
+* **compat-table:** group support history by prefix/altname ([#1587](https://github.com/mdn/fred/issues/1587)) ([b089c65](https://github.com/mdn/fred/commit/b089c657eab3b38b7efae0ce225cde96fffb4eb7))
+* **components:** correct invalid attributes ([#1633](https://github.com/mdn/fred/issues/1633)) ([10d9130](https://github.com/mdn/fred/commit/10d9130513d3abcfdf0fe7a5766f13c72f0fd4db))
+* **external-link:** glue the icon to the last word ([#1656](https://github.com/mdn/fred/issues/1656)) ([baed6c3](https://github.com/mdn/fred/commit/baed6c382dce7ee7cdb715e72432708ddcad8bf5))
+* **lit-analyzer:** fix missing imports, fail in CI ([#1631](https://github.com/mdn/fred/issues/1631)) ([302b4dc](https://github.com/mdn/fred/commit/302b4dcca306d56339aa5412a48af47993199562))
+* **playground:** "false" shown at top of page ([#1627](https://github.com/mdn/fred/issues/1627)) ([aa134e1](https://github.com/mdn/fred/commit/aa134e1c022776abc8ca21dfa0d2fab0d8370411))
+
+
+### Miscellaneous
+
+* **deps:** bump @codemirror/state from 6.6.0 to 6.7.0 in the npm-prod group ([#1673](https://github.com/mdn/fred/issues/1673)) ([9e9239b](https://github.com/mdn/fred/commit/9e9239b12056dd6f348f67d0147b6d2aaa5c8d72))
+* **deps:** bump @codemirror/state in the npm-prod group ([9e9239b](https://github.com/mdn/fred/commit/9e9239b12056dd6f348f67d0147b6d2aaa5c8d72))
+* **deps:** bump @mdn/rari from 0.2.26 to 0.2.27 ([#1626](https://github.com/mdn/fred/issues/1626)) ([8669688](https://github.com/mdn/fred/commit/8669688f0430dd68c7ca9c6f2e08d6e445537132))
+* **deps:** bump concurrently from 9.2.1 to 10.0.1 ([#1617](https://github.com/mdn/fred/issues/1617)) ([79446be](https://github.com/mdn/fred/commit/79446bedb435c7716c17a7c3be64c83418d777a6))
+* **deps:** bump esbuild and tsx ([#1650](https://github.com/mdn/fred/issues/1650)) ([e4a8b86](https://github.com/mdn/fred/commit/e4a8b8624671a4bae55295e42db990155cfaeb88))
+* **deps:** bump http-proxy-middleware from 4.1.0 to 4.1.1 in the npm-prod group ([#1651](https://github.com/mdn/fred/issues/1651)) ([f62a85d](https://github.com/mdn/fred/commit/f62a85dbcae72204696af06ff4098f247640a5e3))
+* **deps:** bump http-proxy-middleware in the npm-prod group ([f62a85d](https://github.com/mdn/fred/commit/f62a85dbcae72204696af06ff4098f247640a5e3))
+* **deps:** bump react-router and react-router-dom ([#1635](https://github.com/mdn/fred/issues/1635)) ([0b1f304](https://github.com/mdn/fred/commit/0b1f30491838e34171c3521cf001444772604274))
+* **deps:** bump tar from 7.5.11 to 7.5.16 ([#1654](https://github.com/mdn/fred/issues/1654)) ([0dca91a](https://github.com/mdn/fred/commit/0dca91a183849c666aa899a36f7271cf68335d20))
+* **deps:** bump the npm-prod group across 1 directory with 2 updates ([#1640](https://github.com/mdn/fred/issues/1640)) ([40b9706](https://github.com/mdn/fred/commit/40b9706d24df28215a5c21a3ae909dcc7a506739))
+* **survey:** add canvas api survey ([#1630](https://github.com/mdn/fred/issues/1630)) ([ad364bd](https://github.com/mdn/fred/commit/ad364bd774bbeaffbd7f5aee953539b7cf8f1eed))
+
 ## [2.6.5](https://github.com/mdn/fred/compare/v2.6.4...v2.6.5) (2026-06-01)
 
 
