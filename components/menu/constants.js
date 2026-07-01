@@ -1,8 +1,6 @@
 import missingDocs from "./missing-docs.json" with { type: "json" };
-import tabs from "./tabs.json" with { type: "json" };
 
-/** @type {Readonly<import("./types.js").MenuTab[]>}*/
-export const TABS = Object.freeze(tabs);
+export { TABS } from "./tabs.js";
 
 /**
  * Lists untranslated menu pages per locale.
