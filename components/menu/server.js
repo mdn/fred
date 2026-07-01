@@ -106,37 +106,37 @@ export class Menu extends ServerComponent {
                         ${tab.panelGroups.map((group) => {
                           const items = html`<ul>
                             ${group.items.map(
-                            (item) =>
-                              html`<li>
-                                ${
-                                  "render" in item
-                                    ? item.render()
-                                    : "slug" in item
-                                      ? link(item.slug, item.text, {
-                                          label: item.label,
-                                        })
-                                      : html`<a
-                                          class=${ifDefined(
-                                            [
-                                              item.icon && "menu__panel-icon",
-                                              (!item.href.startsWith("/") &&
-                                                "external") ||
-                                                (context.locale !== "en-US" &&
-                                                  "only-in-en-us"),
-                                            ]
-                                              .filter(Boolean)
-                                              .join(" "),
-                                          )}
-                                          data-icon=${ifDefined(item.icon)}
-                                          href=${item.href}
-                                          aria-label=${ifDefined(item.label)}
-                                          title=${ifDefined(item.label)}
-                                          data-glean-id=${gleanId(item.href)}
-                                          >${item.text}</a
-                                        >`
-                                }
-                              </li>`,
-                          )}
+                              (item) =>
+                                html`<li>
+                                  ${
+                                    "render" in item
+                                      ? item.render()
+                                      : "slug" in item
+                                        ? link(item.slug, item.text, {
+                                            label: item.label,
+                                          })
+                                        : html`<a
+                                            class=${ifDefined(
+                                              [
+                                                item.icon && "menu__panel-icon",
+                                                (!item.href.startsWith("/") &&
+                                                  "external") ||
+                                                  (context.locale !== "en-US" &&
+                                                    "only-in-en-us"),
+                                              ]
+                                                .filter(Boolean)
+                                                .join(" "),
+                                            )}
+                                            data-icon=${ifDefined(item.icon)}
+                                            href=${item.href}
+                                            aria-label=${ifDefined(item.label)}
+                                            title=${ifDefined(item.label)}
+                                            data-glean-id=${gleanId(item.href)}
+                                            >${item.text}</a
+                                          >`
+                                  }
+                                </li>`,
+                            )}
                           </ul>`;
 
                           return "title" in group

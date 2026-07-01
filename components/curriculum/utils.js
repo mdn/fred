@@ -143,11 +143,11 @@ export function renderSidebar(context, doc) {
                             (subEntry) => html`
                               <li>
                                 ${renderSidebarLink(
-                                context,
-                                doc.mdn_url,
-                                subEntry.url,
-                                subEntry.title,
-                              )}
+                                  context,
+                                  doc.mdn_url,
+                                  subEntry.url,
+                                  subEntry.title,
+                                )}
                               </li>
                             `,
                           )}
