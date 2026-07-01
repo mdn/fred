@@ -361,7 +361,9 @@ function quickSearch(input, index) {
     .map(([_, i]) => i)
     .slice(0, 10);
 
-  return indexResults.map((i) => i && (index.items || [])[i]).filter(Boolean);
+  return indexResults
+    .map((i) => (index.items || [])[i])
+    .filter((item) => item !== undefined);
 }
 
 /**

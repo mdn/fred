@@ -20,6 +20,8 @@ import {
   stylesForComponents,
 } from "./utils.js";
 
+const DEFAULT_LOCALE = "en-US";
+
 export class OuterLayout extends ServerComponent {
   /**
    * @param {import("@fred").Context} context
@@ -137,8 +139,10 @@ export class OuterLayout extends ServerComponent {
           <link
             rel="search"
             type="application/opensearchdescription+xml"
-            href="/opensearch.xml"
-            title=${context.l10n("brand-web-docs")`MDN Web Docs`}
+            href=${`/opensearch.xml?locale=${context.locale}`}
+            title=${context.locale === DEFAULT_LOCALE
+              ? "MDN"
+              : `MDN (${context.locale})`}
           />
           <link
             rel="alternate"
