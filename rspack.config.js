@@ -410,6 +410,55 @@ const clientConfig = merge(
   },
 );
 
+const ssrinBrowserConfig = merge(clientConfig, {
+  name: "ssr-browser",
+  target: ["web", "browserslist"],
+  async entry() {
+    return {
+      index: [
+        // load custom elements
+        ...(await crawl(path.join(__dirname, "components"), (filePath) =>
+          filePath.endsWith("/element.js"),
+        )),
+        "./entry.ssr-browser.js",
+      ],
+    };
+  },
+  plugins: [
+    new rspack.NormalModuleReplacementPlugin(
+      /^node:async_hooks$/,
+      path.resolve(
+        __dirname,
+        "components/server/async-local-storage-client.js",
+      ),
+    ),
+    new rspack.HtmlRspackPlugin({
+      inject: true,
+      chunks: ["index"],
+      filename: "index.html",
+      scriptLoading: "module",
+      // template: "node_modules/@mdn/yari/client/public/index.html",
+    }),
+  ],
+  resolve: {
+    alias: {
+      "@lit-labs/ssr": "lit",
+    },
+  },
+  output: {
+    path: path.resolve(FRED_BUILD_ROOT, "static", "ssr-browser"),
+    filename: "[name].js",
+    // use proper file names in sourcemaps:
+    devtoolModuleFilenameTemplate: (info) =>
+      path.resolve(info.absoluteResourcePath),
+    clean: {
+      keep: "index.d.ts",
+    },
+    publicPath: "/static/ssr-browser/",
+    library: { type: "module" },
+  },
+});
+
 const legacyConfig = merge(
   common,
   notServiceWorkerCommon,
@@ -639,6 +688,7 @@ const serviceWorkerConfig = merge(common, {
 /** @type {import("@rspack/core").MultiRspackOptions} */
 export default [
   ssrConfig,
+  ssrinBrowserConfig,
   clientConfig,
   ...(buildLegacy ? [legacyConfig, serviceWorkerConfig] : []),
 ];
