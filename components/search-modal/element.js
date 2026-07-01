@@ -304,28 +304,30 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
                 `,
               ),
           })}
-          ${searchUrl
-            ? html`<li
-                ?data-selected=${this._selected === siteSearchIndex}
-                data-result=${siteSearchIndex}
-              >
-                <a
-                  href=${searchUrl}
-                  data-glean-id=${`quick-search: site-search -> ${this._query}`}
-                  ><span class="title"
-                    >${this.l10n.raw({
-                      id: "search-modal-site-search",
-                      args: {
-                        query: this._query,
-                      },
-                      elements: {
-                        query: { tag: "code" },
-                      },
-                    })}</span
-                  ></a
+          ${
+            searchUrl
+              ? html`<li
+                  ?data-selected=${this._selected === siteSearchIndex}
+                  data-result=${siteSearchIndex}
                 >
-              </li>`
-            : nothing}
+                  <a
+                    href=${searchUrl}
+                    data-glean-id=${`quick-search: site-search -> ${this._query}`}
+                    ><span class="title"
+                      >${this.l10n.raw({
+                        id: "search-modal-site-search",
+                        args: {
+                          query: this._query,
+                        },
+                        elements: {
+                          query: { tag: "code" },
+                        },
+                      })}</span
+                    ></a
+                  >
+                </li>`
+              : nothing
+          }
         </ul>
       </dialog>
     `;

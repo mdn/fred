@@ -169,9 +169,11 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
         @focus=${this._onFocus}
         @input=${this._onInput}
       />
-      ${this.matchCount === undefined
-        ? ""
-        : html` <span class="counter"> ${this.matchCount} </span> `}
+      ${
+        this.matchCount === undefined
+          ? ""
+          : html` <span class="counter"> ${this.matchCount} </span> `
+      }
       <mdn-button
         class="button"
         variant="plain"

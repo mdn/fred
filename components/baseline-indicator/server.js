@@ -185,36 +185,48 @@ export class BaselineIndicator extends ServerComponent {
         <span
           class="indicator"
           role="img"
-          aria-label=${level === "not"
-            ? context.l10n("baseline-indicator-baseline-cross")`Baseline Cross`
-            : context.l10n("baseline-indicator-baseline-check")`Baseline Check`}
+          aria-label=${
+            level === "not"
+              ? context.l10n(
+                  "baseline-indicator-baseline-cross",
+                )`Baseline Cross`
+              : context.l10n(
+                  "baseline-indicator-baseline-check",
+                )`Baseline Check`
+          }
         ></span>
         <div class="status-title">
-          ${level === "not"
-            ? html`<span class="not-bold"
-                >${context.l10n(
-                  "baseline-indicator-limited-availability",
-                )`Limited availability`}</span
-              >`
-            : html`
-                ${context.l10n("baseline-indicator-baseline")`Baseline`}
-                <span class="not-bold">
-                  ${level === "high"
-                    ? context.l10n(
-                        "baseline-indicator-widely-available",
-                      )`Widely available`
-                    : lowDate?.getFullYear()}
-                </span>
-                ${status.asterisk && " *"}
-              `}
+          ${
+            level === "not"
+              ? html`<span class="not-bold"
+                  >${context.l10n(
+                    "baseline-indicator-limited-availability",
+                  )`Limited availability`}</span
+                >`
+              : html`
+                  ${context.l10n("baseline-indicator-baseline")`Baseline`}
+                  <span class="not-bold">
+                    ${
+                      level === "high"
+                        ? context.l10n(
+                            "baseline-indicator-widely-available",
+                          )`Widely available`
+                        : lowDate?.getFullYear()
+                    }
+                  </span>
+                  ${status.asterisk && " *"}
+                `
+          }
         </div>
-        ${level === "low"
-          ? html`<div class="pill">
-              ${context.l10n(
-                "baseline-indicator-newly-available",
-              )`Newly available`}
-            </div>`
-          : nothing}
+        ${
+          level === "low"
+            ? html`<div class="pill">
+                ${context.l10n(
+                  "baseline-indicator-newly-available",
+                )`Newly available`}
+              </div>`
+            : nothing
+        }
         <div class="browsers">
           ${ENGINES.map(
             ({ browsers }) =>
@@ -238,9 +250,11 @@ export class BaselineIndicator extends ServerComponent {
         ${this.getExtraText(context, level, lowDate, signalsLink).map(
           (text) => html`<p>${text}</p>`,
         )}
-        ${status.asterisk
-          ? html`<p>* ${context.l10n("baseline-asterisk")}</p>`
-          : nothing}
+        ${
+          status.asterisk
+            ? html`<p>* ${context.l10n("baseline-asterisk")}</p>`
+            : nothing
+        }
         <ul>
           <li>
             <a
@@ -285,28 +299,34 @@ export class BaselineIndicator extends ServerComponent {
 
     return html`<p>
       <strong>
-        ${level === "not"
-          ? context.l10n(
-              "baseline-indicator-limited-availability",
-            )`Limited availability`
-          : context.l10n("baseline-indicator-baseline")`Baseline`}
-        ${level === "high"
-          ? context.l10n(
-              "baseline-indicator-widely-available",
-            )`Widely available`
-          : level === "low"
-            ? html`${lowDate?.getFullYear()}
-              ${context.l10n(
-                "baseline-indicator-newly-available",
-              )`Newly available`}`
-            : nothing}
+        ${
+          level === "not"
+            ? context.l10n(
+                "baseline-indicator-limited-availability",
+              )`Limited availability`
+            : context.l10n("baseline-indicator-baseline")`Baseline`
+        }
+        ${
+          level === "high"
+            ? context.l10n(
+                "baseline-indicator-widely-available",
+              )`Widely available`
+            : level === "low"
+              ? html`${lowDate?.getFullYear()}
+                ${context.l10n(
+                  "baseline-indicator-newly-available",
+                )`Newly available`}`
+              : nothing
+        }
         ${status.asterisk ? " *" : nothing}
       </strong>
       <br />
       ${this.getExtraText(context, level, lowDate)}
-      ${status.asterisk
-        ? html`<br />* ${context.l10n("baseline-asterisk")}`
-        : nothing}
+      ${
+        status.asterisk
+          ? html`<br />* ${context.l10n("baseline-asterisk")}`
+          : nothing
+      }
     </p>`;
   }
 }

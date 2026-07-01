@@ -223,20 +223,24 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
       }
 
       return html` <ul>
-        ${previousURL
-          ? html` <li>
-              <mdn-button variant="secondary" href=${previousURL.toString()}
-                >${this.l10n("site-search-previous")`Previous`}</mdn-button
-              >
-            </li>`
-          : html`<li></li>`}
-        ${nextPage
-          ? html` <li>
-              <mdn-button variant="secondary" href=${nextURL}
-                >${this.l10n("site-search-next")`Next`}</mdn-button
-              >
-            </li>`
-          : html`<li></li>`}
+        ${
+          previousURL
+            ? html` <li>
+                <mdn-button variant="secondary" href=${previousURL.toString()}
+                  >${this.l10n("site-search-previous")`Previous`}</mdn-button
+                >
+              </li>`
+            : html`<li></li>`
+        }
+        ${
+          nextPage
+            ? html` <li>
+                <mdn-button variant="secondary" href=${nextURL}
+                  >${this.l10n("site-search-next")`Next`}</mdn-button
+                >
+              </li>`
+            : html`<li></li>`
+        }
       </ul>`;
     }
     return nothing;
@@ -352,27 +356,35 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                             href=${result.mdn_url}
                             data-glean-id=${`site-search: results[${1 + index + (results.metadata.page - 1) * results.metadata.size}] -> ${this._query} -> ${result.mdn_url}`}
                           >
-                            ${result.highlight.title &&
-                            result.highlight.title.length > 0
-                              ? unsafeHTML(result.highlight.title[0])
-                              : result.title}
-                            ${result.locale.toLowerCase() ===
-                            this.locale.toLowerCase()
-                              ? nothing
-                              : html`<sup
-                                  class="site-search-results__locale-indicator"
-                                  >${readableLocaleCode(result.locale)}</sup
-                                >`}
+                            ${
+                              result.highlight.title &&
+                              result.highlight.title.length > 0
+                                ? unsafeHTML(result.highlight.title[0])
+                                : result.title
+                            }
+                            ${
+                              result.locale.toLowerCase() ===
+                              this.locale.toLowerCase()
+                                ? nothing
+                                : html`<sup
+                                    class="site-search-results__locale-indicator"
+                                    >${readableLocaleCode(result.locale)}</sup
+                                  >`
+                            }
                           </a>
                         </h2>
                         <p class="site-search-results__description">
-                          ${result.highlight.body &&
-                          result.highlight.body.length > 0
-                            ? join(
-                                result.highlight.body.map((b) => unsafeHTML(b)),
-                                html`<span class="divider"> … </span>`,
-                              )
-                            : result.summary}
+                          ${
+                            result.highlight.body &&
+                            result.highlight.body.length > 0
+                              ? join(
+                                  result.highlight.body.map((b) =>
+                                    unsafeHTML(b),
+                                  ),
+                                  html`<span class="divider"> … </span>`,
+                                )
+                              : result.summary
+                          }
                         </p>
                       </article>
                     </li>`,
