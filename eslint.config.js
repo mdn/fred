@@ -6,7 +6,7 @@ import { includeIgnoreFile } from "@eslint/config-helpers";
 import js from "@eslint/js";
 import { defineConfig } from "eslint/config";
 import prettierConfig from "eslint-config-prettier/flat";
-import importPlugin from "eslint-plugin-import";
+import importX from "eslint-plugin-import-x";
 import jsdoc from "eslint-plugin-jsdoc";
 import * as lit from "eslint-plugin-lit";
 import n from "eslint-plugin-n";
@@ -118,10 +118,10 @@ export default defineConfig([
   },
   {
     files: ["**/*.{js,mjs,cjs}"],
-    plugins: { import: importPlugin },
+    plugins: { "import-x": importX },
     rules: {
       "sort-imports": "off",
-      "import/order": [
+      "import-x/order": [
         "error",
         {
           alphabetize: {
