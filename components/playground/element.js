@@ -536,7 +536,7 @@ ${"```"}`,
 customElements.define("mdn-playground", MDNPlayground);
 
 /**
- * @param {import("./types.js").PlaygroundStateParam | import("./types.js").PlaygroundSession | {}} stateOrSession
+ * @param {import("./types.js").PlaygroundStateParam | import("./types.js").PlaygroundSession} stateOrSession
  * @returns {import("./types.js").PlaygroundSession}
  */
 function stateToSession(stateOrSession) {
