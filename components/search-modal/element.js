@@ -1,4 +1,4 @@
-import { Task } from "@lit/task";
+import { Task, TaskStatus } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
@@ -71,6 +71,9 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
   _input({ inputType, target }) {
     if (target instanceof HTMLInputElement) {
       this._query = target.value;
+      // Reset the active option so `aria-activedescendant` and the visual
+      // highlight can't point past the end of a shrunken result set.
+      this._selected = 0;
       if (!this._hasEngaged && inputType.startsWith("insert")) {
         this._hasEngaged = true;
         gleanClick(
@@ -249,6 +252,20 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     const searchUrl = this._query
       ? `/${this.locale}/search?${new URLSearchParams({ q: this._query })}`
       : null;
+    // Options are the quick-search results plus the trailing "site search"
+    // entry (present whenever there is a query).
+    const optionCount = siteSearchIndex + (searchUrl ? 1 : 0);
+    const hasOptions = optionCount > 0;
+    // Only announce a count once the search has actually completed, so we
+    // don't say "no results" while the query is still being looked up.
+    const searchComplete =
+      Boolean(this._query) && this._queryIndex.status === TaskStatus.COMPLETE;
+    const resultsStatus = searchComplete
+      ? this.l10n.raw({
+          id: "search-modal-results-status",
+          args: { results: siteSearchIndex },
+        })
+      : "";
     return html`
       <dialog
         @keydown=${this._keydown}
@@ -270,8 +287,16 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
             @input=${this._input}
             placeholder=${this.l10n("search-modal-search")`Search`}
             aria-label=${this.l10n("search-modal-search")`Search`}
+            role="combobox"
+            aria-autocomplete="list"
+            aria-controls="search-modal-listbox"
+            aria-expanded=${hasOptions ? "true" : "false"}
+            aria-activedescendant=${
+              hasOptions ? `search-modal-result-${this._selected}` : nothing
+            }
           />
         </form>
+        <div class="visually-hidden" role="status">${resultsStatus}</div>
         <mdn-button
           class="close"
           variant="plain"
@@ -284,12 +309,22 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
           initial: this._renderLoadingSearchIndex.bind(this),
           pending: this._renderLoadingSearchIndex.bind(this),
         })}
-        <ul>
+        <ul
+          id="search-modal-listbox"
+          role="listbox"
+          aria-label=${this.l10n("search-modal-results-label")`Search results`}
+        >
           ${this._queryIndex.render({
             complete: (results) =>
               results?.map(
                 ({ title, url }, i) => html`
-                  <li ?data-selected=${this._selected === i} data-result=${i}>
+                  <li
+                    id="search-modal-result-${i}"
+                    role="option"
+                    aria-selected=${this._selected === i ? "true" : "false"}
+                    ?data-selected=${this._selected === i}
+                    data-result=${i}
+                  >
                     <a
                       href=${url}
                       data-glean-id=${`quick-search: results[${1 + i}] -> ${this._query} -> ${url}`}
@@ -307,6 +342,11 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
           ${
             searchUrl
               ? html`<li
+                  id="search-modal-result-${siteSearchIndex}"
+                  role="option"
+                  aria-selected=${
+                    this._selected === siteSearchIndex ? "true" : "false"
+                  }
                   ?data-selected=${this._selected === siteSearchIndex}
                   data-result=${siteSearchIndex}
                 >

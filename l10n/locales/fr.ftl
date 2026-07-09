@@ -16,6 +16,12 @@ not-found-fallback-search = La page que vous avez demandée n'existe pas, mais v
 not-found-back = Retour à la page d'accueil
 footer-copyright = Certaines parties de ce contenu sont protégées par le droit d'auteur ©1998—{ $year } des contributeurs individuels de mozilla.org. Contenu disponible sous <a data-l10n-name="cc">une licence Creative Commons</a>.
 search-modal-site-search = Rechercher sur le site <em>{ $query }</em>
+search-modal-results-status =
+    { $results ->
+        [0] Aucun résultat trouvé.
+        [one] { $results } résultat disponible.
+        *[other] { $results } résultats disponibles.
+    }
 site-search-search-stats = { $results } documents trouvés.
 site-search-suggestion-matches =
     { $relation ->
@@ -291,6 +297,7 @@ search-button-search-the-site = Rechercher sur le site
 search-modal-loading-search-index = Chargement de l'index de recherche…
 search-modal-search = Rechercher
 search-modal-exit-search = Quitter la recherche
+search-modal-results-label = Résultats de recherche
 sidebar-filter-filter-sidebar = Filtrer la barre latérale
 sidebar-filter-filter = Filtrer
 sidebar-filter-clear-filter-input = Effacer le filtre
