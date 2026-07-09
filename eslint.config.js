@@ -1,7 +1,8 @@
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { includeIgnoreFile } from "@eslint/compat";
+import { includeIgnoreFile } from "@eslint/config-helpers";
 import js from "@eslint/js";
 import { defineConfig } from "eslint/config";
 import prettierConfig from "eslint-config-prettier/flat";
@@ -19,9 +20,11 @@ import fred from "./build/eslint-fred.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const gitignorePath = path.resolve(__dirname, ".gitignore");
+const gitExcludePath = path.resolve(__dirname, ".git", "info", "exclude");
 
 export default defineConfig([
   includeIgnoreFile(gitignorePath),
+  ...(fs.existsSync(gitExcludePath) ? [includeIgnoreFile(gitExcludePath)] : []),
   {
     ignores: ["./vendor/"],
   },
@@ -29,6 +32,7 @@ export default defineConfig([
   n.configs["flat/recommended"],
   wc.configs["flat/best-practice"],
   lit.configs["flat/all"],
+  tseslint.configs["recommended"],
   unicorn.configs["recommended"],
   { files: ["**/*.{js,mjs,cjs}"] },
   {
@@ -64,7 +68,7 @@ export default defineConfig([
   },
   {
     rules: {
-      "no-unused-vars": [
+      "@typescript-eslint/no-unused-vars": [
         "error",
         {
           argsIgnorePattern: "^_",
@@ -84,16 +88,30 @@ export default defineConfig([
         { definedTags: ["element", "attr", "slot"] },
       ],
       "lit/no-template-map": "off",
+      "lit/prefer-query-decorators": "off",
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector:
+            "PropertyDefinition[static=true][key.name='properties'][value.type='ObjectExpression']",
+          message:
+            "Declare reactive properties with `static get properties()`, so lit-analyzer can detect the element's attributes.",
+        },
+      ],
       "n/no-missing-import": "off",
       "n/no-unsupported-features/node-builtins": ["off"],
       "n/no-unpublished-import": "off",
+      "no-unused-vars": "off", // Prefer `@typescript-eslint/no-unused-vars`.
+      "unicorn/consistent-function-scoping": "off",
       "unicorn/no-array-reverse": "off",
       "unicorn/no-array-sort": "off",
       "unicorn/no-array-callback-reference": "off",
       "unicorn/no-immediate-mutation": "off",
       "unicorn/no-null": ["off"],
       "unicorn/prefer-string-raw": "off",
+      "unicorn/prefer-query-selector": "off",
       "unicorn/prevent-abbreviations": ["off"],
+      "unicorn/require-module-specifiers": "off",
       "unicorn/switch-case-braces": "off",
       "unicorn/template-indent": ["off"],
     },

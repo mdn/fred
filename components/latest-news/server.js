@@ -14,16 +14,25 @@ export class LatestNews extends ServerComponent {
 
     return html`<ul class="latest-news">
       ${items.map(
-        (item) =>
+        (item, index) =>
           html`<li>
             <article class="latest-news__item">
-              ${item.source
-                ? html`<a class="latest-news__source" href=${item.source.url}
-                    >${item.source.name}</a
-                  >`
-                : nothing}
+              ${
+                item.source
+                  ? html`<a
+                      class="latest-news__source"
+                      href=${item.source.url}
+                      data-glean-id=${`homepage: news_source ${index + 1} -> ${item.source.url}`}
+                      >${item.source.name}</a
+                    >`
+                  : nothing
+              }
               <h3 class="latest-news__title">
-                <a href=${item.url}>${item.title}</a>
+                <a
+                  href=${item.url}
+                  data-glean-id=${`homepage: news ${index + 1} -> ${item.url}`}
+                  >${item.title}</a
+                >
               </h3>
               <time class="latest-news__date" datetime=${item.published_at}>
                 ${rtf.format(
@@ -52,7 +61,7 @@ function getRelativeTime(seconds) {
     { amount: 60, unit: "minute" },
     { amount: 24, unit: "hour" },
     { amount: 7, unit: "day" },
-    { amount: 4.345_24, unit: "week" }, // 365/12/7
+    { amount: 4.34524, unit: "week" }, // 365/12/7
     { amount: 12, unit: "month" },
     { amount: Number.POSITIVE_INFINITY, unit: "year" },
   ];

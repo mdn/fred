@@ -7,9 +7,11 @@ import { L10nMixin } from "../../l10n/mixin.js";
  */
 export class MDNCurriculumTabs extends L10nMixin(LitElement) {
   static ssr = false;
-  static properties = {
-    selectedtab: {},
-  };
+  static get properties() {
+    return {
+      selectedtab: {},
+    };
+  }
 
   // Disable shadow DOM
   createRenderRoot() {

@@ -7,9 +7,11 @@ import { formatMinus } from "../observatory/utils.js";
 import styles from "./element.css?lit";
 
 export class MDNObservatoryComparisonTable extends LitElement {
-  static properties = {
-    result: { type: Object },
-  };
+  static get properties() {
+    return {
+      result: { type: Object },
+    };
+  }
 
   static styles = styles;
 
@@ -205,7 +207,6 @@ function GradeSVG({ gradeDistribution, result }) {
             const barHeight =
               (height - bottomSpace - topSpace) * (item.count / yTickMax);
             return svg` <g
-              key="you-are-here"
               class="you-are-here"
               transform="translate(${xTickOffset + index * xTickIncr}, ${
                 height - bottomSpace - barHeight - 50

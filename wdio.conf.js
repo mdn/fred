@@ -8,17 +8,28 @@ export const config = {
   capabilities: [
     {
       browserName: "firefox",
+      browserVersion: "stable",
       "moz:firefoxOptions": {
         args: ["-headless"],
       },
     },
+  ],
+  services: [
+    [
+      "firefox-profile",
+      {
+        // Give the test framework permissions to read the clipboard:
+        "dom.events.testing.asyncClipboard": true,
+        "dom.events.testing.asyncClipboard.readText": true,
+      },
+    ],
   ],
   logLevel: "error",
   framework: "mocha",
   reporters: ["spec"],
   mochaOpts: {
     ui: "bdd",
-    timeout: 60_000,
+    timeout: 120_000,
   },
   baseUrl: `http://localhost:${FRED_PORT}/`,
   async before(_, __, browser) {

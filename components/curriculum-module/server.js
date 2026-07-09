@@ -32,32 +32,45 @@ export class CurriculumModule extends ServerComponent {
     return PageLayout.render(
       context,
       html`
-        <div class="curriculum-layout curriculum-content-container">
+        <div
+          class="layout__2-sidebars-inline curriculum-layout curriculum-content-container"
+        >
           <main
             id="content"
-            class="curriculum-layout__content curriculum-content-container curriculum-module topic-${topicCssClass}"
+            class="layout__content curriculum-layout__content curriculum-content-container curriculum-module topic-${topicCssClass}"
             lang=${doc.locale}
           >
-            <header class="curriculum-layout__header curriculum-content">
+            <header
+              class="layout__header curriculum-layout__header curriculum-content"
+            >
               ${doc?.topic ? renderTopicIcon(context, doc.topic) : nothing}
               <h1>${doc?.title}</h1>
-              ${doc?.topic
-                ? html`<p class="module-topic">${doc.topic}</p>`
-                : nothing}
-              ${doc?.group
-                ? html`<p class="module-group">${doc.group}</p>`
-                : nothing}
+              ${
+                doc?.topic
+                  ? html`<p class="module-topic">${doc.topic}</p>`
+                  : nothing
+              }
+              ${
+                doc?.group
+                  ? html`<p class="module-group">${doc.group}</p>`
+                  : nothing
+              }
             </header>
-            <aside class="curriculum-layout__toc">
+            <aside class="layout__right-sidebar curriculum-layout__toc">
               ${toc}
               <mdn-placement-sidebar></mdn-placement-sidebar>
             </aside>
-            <div class="curriculum-layout__body curriculum-content">
+            <div
+              class="layout__body curriculum-layout__body curriculum-content"
+            >
               ${renderCurriculumBody(context, doc)}
               ${this.renderPrevNext(context, doc)}
             </div>
           </main>
-          <aside class="curriculum-layout__sidebar" id="main-sidebar">
+          <aside
+            class="layout__left-sidebar curriculum-layout__sidebar"
+            id="main-sidebar"
+          >
             ${sidebar}
           </aside>
         </div>
@@ -77,20 +90,24 @@ export class CurriculumModule extends ServerComponent {
 
     return html`
       <section class="curriculum-prev-next">
-        ${prev
-          ? Button.render(context, {
-              label: `Previous: ${prev.title}`,
-              icon: addAttrs(PrevIcon, { width: "16px", height: "16px" }),
-              href: prev.url,
-            })
-          : nothing}
-        ${next
-          ? Button.render(context, {
-              label: `Next: ${next.title}`,
-              icon: addAttrs(NextIcon, { width: "16px", height: "16px" }),
-              href: next.url,
-            })
-          : nothing}
+        ${
+          prev
+            ? Button.render(context, {
+                label: `Previous: ${prev.title}`,
+                icon: addAttrs(PrevIcon, { width: "16px", height: "16px" }),
+                href: prev.url,
+              })
+            : nothing
+        }
+        ${
+          next
+            ? Button.render(context, {
+                label: `Next: ${next.title}`,
+                icon: addAttrs(NextIcon, { width: "16px", height: "16px" }),
+                href: next.url,
+              })
+            : nothing
+        }
       </section>
     `;
   }

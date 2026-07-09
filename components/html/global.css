@@ -1,6 +1,8 @@
 /* HTML */
 
 html {
+  scroll-behavior: smooth;
+
   font-family: var(--font-family-text);
   font-size: var(--font-size-normal);
   font-feature-settings: "calt" 0;
@@ -15,7 +17,6 @@ html {
   color-scheme: light dark;
 
   background-color: var(--color-background-page);
-  scroll-behavior: smooth;
 
   @media (prefers-reduced-motion: reduce) {
     scroll-behavior: auto;

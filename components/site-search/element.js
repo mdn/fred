@@ -44,11 +44,13 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
   static styles = styles;
   static ssr = false;
 
-  static properties = {
-    _inputValue: { state: true },
-    _query: { state: true },
-    _page: { state: true },
-  };
+  static get properties() {
+    return {
+      _inputValue: { state: true },
+      _query: { state: true },
+      _page: { state: true },
+    };
+  }
 
   constructor() {
     super();
@@ -169,13 +171,13 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
             @keydown=${this._handleKeyDown}
           />
           <mdn-button
-            icon-only="true"
+            icon-only
             .icon=${searchIcon}
             variant="plain"
             class="site-search-form__submit"
             @click=${this._handleSearch}
             ?disabled=${!this._inputValue || this._inputValue.trim() === ""}
-            >${this.l10n`Search`}</mdn-button
+            >${this.l10n("site-search-search")`Search`}</mdn-button
           >
         </div>
       </div>
@@ -221,20 +223,24 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
       }
 
       return html` <ul>
-        ${previousURL
-          ? html` <li>
-              <mdn-button variant="secondary" href=${previousURL.toString()}
-                >${this.l10n`Previous`}</mdn-button
-              >
-            </li>`
-          : html`<li></li>`}
-        ${nextPage
-          ? html` <li>
-              <mdn-button variant="secondary" href=${nextURL}
-                >${this.l10n`Next`}</mdn-button
-              >
-            </li>`
-          : html`<li></li>`}
+        ${
+          previousURL
+            ? html` <li>
+                <mdn-button variant="secondary" href=${previousURL.toString()}
+                  >${this.l10n("site-search-previous")`Previous`}</mdn-button
+                >
+              </li>`
+            : html`<li></li>`
+        }
+        ${
+          nextPage
+            ? html` <li>
+                <mdn-button variant="secondary" href=${nextURL}
+                  >${this.l10n("site-search-next")`Next`}</mdn-button
+                >
+              </li>`
+            : html`<li></li>`
+        }
       </ul>`;
     }
     return nothing;
@@ -290,7 +296,9 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
     return this._searchTask.render({
       pending: () => html`
         ${this.renderInputs()}
-        <div class="site-search__searching">${this.l10n`Searching…`}</div>
+        <div class="site-search__searching">
+          ${this.l10n("site-search-searching")`Searching…`}
+        </div>
       `,
 
       complete: (results) => {
@@ -302,13 +310,15 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
               <section class="site-search__options">
                 ${
                   LOCALE_OPTIONS.length > 0
-                    ? html` <h2>${this.l10n`Language`}</h2>
+                    ? html` <h2>
+                          ${this.l10n("site-search-language")`Language`}
+                        </h2>
                         <ul>
                           ${LOCALE_OPTIONS.map((locales) => {
                             const label =
                               locales.length == 1
                                 ? readableLocaleCode(locales.at(0) || "en-US")
-                                : this.l10n`Both`;
+                                : this.l10n("site-search-both")`Both`;
                             if (this._locales.join(",") === locales.join(",")) {
                               return html`<li><em>${label}</em></li>`;
                             } else {
@@ -346,27 +356,35 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                             href=${result.mdn_url}
                             data-glean-id=${`site-search: results[${1 + index + (results.metadata.page - 1) * results.metadata.size}] -> ${this._query} -> ${result.mdn_url}`}
                           >
-                            ${result.highlight.title &&
-                            result.highlight.title.length > 0
-                              ? unsafeHTML(result.highlight.title[0])
-                              : result.title}
-                            ${result.locale.toLowerCase() ===
-                            this.locale.toLowerCase()
-                              ? nothing
-                              : html`<sup
-                                  class="site-search-results__locale-indicator"
-                                  >${readableLocaleCode(result.locale)}</sup
-                                >`}
+                            ${
+                              result.highlight.title &&
+                              result.highlight.title.length > 0
+                                ? unsafeHTML(result.highlight.title[0])
+                                : result.title
+                            }
+                            ${
+                              result.locale.toLowerCase() ===
+                              this.locale.toLowerCase()
+                                ? nothing
+                                : html`<sup
+                                    class="site-search-results__locale-indicator"
+                                    >${readableLocaleCode(result.locale)}</sup
+                                  >`
+                            }
                           </a>
                         </h2>
                         <p class="site-search-results__description">
-                          ${result.highlight.body &&
-                          result.highlight.body.length > 0
-                            ? join(
-                                result.highlight.body.map((b) => unsafeHTML(b)),
-                                html`<span class="divider"> … </span>`,
-                              )
-                            : result.summary}
+                          ${
+                            result.highlight.body &&
+                            result.highlight.body.length > 0
+                              ? join(
+                                  result.highlight.body.map((b) =>
+                                    unsafeHTML(b),
+                                  ),
+                                  html`<span class="divider"> … </span>`,
+                                )
+                              : result.summary
+                          }
                         </p>
                       </article>
                     </li>`,

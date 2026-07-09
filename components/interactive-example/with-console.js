@@ -3,6 +3,7 @@ import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { ref } from "lit/directives/ref.js";
 
+import "../button/element.js";
 import "../play-controller/element.js";
 import "../play-editor/element.js";
 import "../play-runner/element.js";
@@ -32,42 +33,50 @@ export const InteractiveExampleWithConsole = (Base) =>
             <header>
               <h4 id=${id}>${decode(this.name)}</h4>
             </header>
-            ${this._languages.length === 1
-              ? html`<mdn-play-editor
-                  id="editor"
-                  language=${ifDefined(this._languages[0])}
-                ></mdn-play-editor>`
-              : html`<mdn-ix-tab-wrapper>
-                  ${this._languages.map(
-                    (lang) => html`
-                      <mdn-ix-tab id=${lang}
-                        >${this._langName(lang)}</mdn-ix-tab
-                      >
-                      <mdn-ix-tab-panel id=${`${lang}-panel`}>
-                        <mdn-play-editor language=${lang}></mdn-play-editor>
-                      </mdn-ix-tab-panel>
-                    `,
-                  )}
-                </mdn-ix-tab-wrapper>`}
+            ${
+              this._languages.length === 1
+                ? html`<mdn-play-editor
+                    id="editor"
+                    language=${ifDefined(this._languages[0])}
+                  ></mdn-play-editor>`
+                : html`<mdn-ix-tab-wrapper>
+                    ${this._languages.map(
+                      (lang) => html`
+                        <mdn-ix-tab id=${lang}
+                          >${this._langName(lang)}</mdn-ix-tab
+                        >
+                        <mdn-ix-tab-panel id=${`${lang}-panel`}>
+                          <mdn-play-editor language=${lang}></mdn-play-editor>
+                        </mdn-ix-tab-panel>
+                      `,
+                    )}
+                  </mdn-ix-tab-wrapper>`
+            }
             <div class="buttons">
               <mdn-button
                 id="execute"
                 @click=${this._run}
                 variant="secondary"
-                title=${this.l10n`Run example, and show console output`}
-                >${this.l10n`Run`}</mdn-button
+                title=${this.l10n(
+                  "interactive-example-run-example-and-show-console-ou",
+                )`Run example, and show console output`}
+                >${this.l10n("interactive-example-run")`Run`}</mdn-button
               >
               <mdn-button
                 id="reset"
                 @click=${this._reset}
                 variant="secondary"
-                title=${this.l10n`Reset example, and clear console output`}
-                >${this.l10n`Reset`}</mdn-button
+                title=${this.l10n(
+                  "interactive-example-reset-example-and-clear-console",
+                )`Reset example, and clear console output`}
+                >${this.l10n("interactive-example-reset")`Reset`}</mdn-button
               >
             </div>
             <mdn-play-console
               id="console"
-              title=${this.l10n`Console output`}
+              title=${this.l10n(
+                "interactive-example-console-output",
+              )`Console output`}
             ></mdn-play-console>
             <mdn-play-runner
               defaults=${ifDefined(

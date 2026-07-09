@@ -45,11 +45,15 @@ class MDNPlacementNo extends L10nMixin(LitElement) {
           return showNoAds
             ? html`<a
                 class="placement-no"
-                data-glean-id=${"pong: " +
-                (user?.isSubscriber ? "pong->settings" : "pong->plus")}
-                href=${user?.isSubscriber
-                  ? "/en-US/plus/settings?ref=nope"
-                  : "/en-US/plus?ref=nope"}
+                data-glean-id=${
+                  "pong: " +
+                  (user?.isSubscriber ? "pong->settings" : "pong->plus")
+                }
+                href=${
+                  user?.isSubscriber
+                    ? "/en-US/plus/settings?ref=nope"
+                    : "/en-US/plus?ref=nope"
+                }
               >
                 ${this.l10n("placement-no")}
               </a>`

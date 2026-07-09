@@ -1,7 +1,5 @@
 .curriculum-content-container {
   .curriculum-layout__toc {
-    padding: 2px;
-
     .document-toc {
       padding: 0;
       margin-bottom: 2rem;
@@ -83,7 +81,7 @@
         }
       }
 
-      @media (--screen-small-and-narrower) {
+      @media (--screen-layout-no-sidebar) {
         padding: 0 1rem;
       }
 

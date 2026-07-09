@@ -6,7 +6,7 @@ import { Worker } from "node:worker_threads";
 import cookieParser from "cookie-parser";
 import express from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
-import openEditor from "open-editor";
+import { getEditorInfo } from "open-editor";
 
 import { FRED_BUILD_ROOT } from "./build/env.js";
 import {
@@ -84,7 +84,11 @@ async function serverRenderMiddleware(req, res, page) {
         );
 
         worker.on("message", ({ html, error }) => {
-          error ? reject(error) : resolve(html);
+          if (error) {
+            reject(error);
+          } else {
+            resolve(html);
+          }
         });
       });
     }
@@ -187,7 +191,7 @@ export async function startServer() {
   );
 
   if (WRITER_MODE) {
-    app.get("/_open", async (req, _res) => {
+    app.get("/_open", async (req, res) => {
       const { filepath } = req.query;
       const { CONTENT_ROOT, CONTENT_TRANSLATED_ROOT } = process.env;
       if (typeof filepath === "string") {
@@ -197,8 +201,19 @@ export async function startServer() {
             : CONTENT_TRANSLATED_ROOT) || "",
           filepath,
         );
-        openEditor([absolutePath]);
+        console.log(
+          `Attempting to open ${absolutePath} with ${process.env.EDITOR}`,
+        );
+        const { binary, arguments: args } = getEditorInfo([absolutePath]);
+        const child = spawn(binary, args, { detached: true, stdio: "ignore" });
+
+        child.on("error", (error) => {
+          console.error("Failed to open editor:", error);
+          return;
+        });
+        child.unref();
       }
+      res.sendStatus(204);
     });
   }
 
@@ -224,6 +239,15 @@ export async function startServer() {
       },
       selfHandleResponse: true,
       on: {
+        proxyReq: async (req) => {
+          const locale = req.path.split("/", 2)[1];
+          if (locale && /^q[a-t][a-z]$/.test(locale)) {
+            // if the locale matches a qaa...qtz private use language tag,
+            // which we use for testing fluent with pseudo-locales,
+            // load the en-US doc from rari
+            req.path = req.path.replace(locale, "en-US");
+          }
+        },
         proxyRes: async (proxyRes, req, res) => {
           const contentType = proxyRes.headers["content-type"] || "";
           const statusCode = proxyRes.statusCode || 500;

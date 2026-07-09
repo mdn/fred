@@ -14,21 +14,23 @@ export class WriterToolbar extends ServerComponent {
 
     return html`<div class="writer-toolbar">
       ${Button.render(context, {
-        label: context.l10n`View on MDN`,
+        label: context.l10n("writer-toolbar-view-on-mdn")`View on MDN`,
         href: prodUrl.toString(),
         variant: "plain",
       })}
-      ${context.localServer
-        ? html`
-            <mdn-writer-open-editor
-              filepath=${`${folder}/${filename}`}
-            ></mdn-writer-open-editor>
-            <mdn-writer-reload></mdn-writer-reload>
-            <mdn-record-visit
-              page-title=${context.doc.title}
-            ></mdn-record-visit>
-          `
-        : nothing}
+      ${
+        context.localServer
+          ? html`
+              <mdn-writer-open-editor
+                filepath=${`${folder}/${filename}`}
+              ></mdn-writer-open-editor>
+              <mdn-writer-reload></mdn-writer-reload>
+              <mdn-record-visit
+                page-title=${context.doc.title}
+              ></mdn-record-visit>
+            `
+          : nothing
+      }
     </div>`;
   }
 }

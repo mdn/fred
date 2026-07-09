@@ -4,12 +4,7 @@ export interface AnalyzeRequest {
 }
 
 export type ScanState =
-  | "ABORTED"
-  | "FAILED"
-  | "FINISHED"
-  | "PENDING"
-  | "STARTING"
-  | "RUNNING";
+  "ABORTED" | "FAILED" | "FINISHED" | "PENDING" | "STARTING" | "RUNNING";
 
 export interface Result {
   scan: ScanResult;

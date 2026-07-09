@@ -9,6 +9,7 @@ import { randomIdString } from "../utils/index.js";
 
 import { isCSSSupported } from "./utils.js";
 
+import "../button/element.js";
 import "../play-controller/element.js";
 import "../play-runner/element.js";
 
@@ -22,11 +23,13 @@ import "../play-runner/element.js";
  */
 export const InteractiveExampleWithChoices = (Base) =>
   class extends L10nMixin(Base) {
-    static properties = {
-      __choiceSelected: { state: true },
-      __choiceUnsupported: { state: true },
-      __choiceUpdated: { state: true },
-    };
+    static get properties() {
+      return {
+        __choiceSelected: { state: true },
+        __choiceUnsupported: { state: true },
+        __choiceUpdated: { state: true },
+      };
+    }
 
     /** @param {any[]} _args  */
     constructor(..._args) {
@@ -122,7 +125,7 @@ export const InteractiveExampleWithChoices = (Base) =>
               @click=${this._reset}
               variant="secondary"
               .disabled=${!this.__choiceUpdated}
-              >${this.l10n`Reset`}</mdn-button
+              >${this.l10n("interactive-example-reset")`Reset`}</mdn-button
             >
           </header>
           <ul
@@ -130,7 +133,9 @@ export const InteractiveExampleWithChoices = (Base) =>
             @click=${this.#choiceFocus}
             @focus=${this.#choiceSelect}
             @update=${this.#choiceUpdate}
-            aria-label=${this.l10n`Value select`}
+            aria-label=${this.l10n(
+              "interactive-example-value-select",
+            )`Value select`}
           >
             ${this._choices?.map(
               (code, index) => html`
@@ -144,13 +149,14 @@ export const InteractiveExampleWithChoices = (Base) =>
                   <mdn-play-editor
                     data-index=${index}
                     language="css"
-                    minimal="true"
+                    minimal
                     .delay=${100}
                     .value=${code?.trim()}
                     aria-label=${ifDefined(
                       this.__choiceUnsupported[index]
-                        ? this
-                            .l10n`The current value is not supported by your browser.`
+                        ? this.l10n(
+                            "interactive-example-the-current-value-is-not-support",
+                          )`The current value is not supported by your browser.`
                         : undefined,
                     )}
                   ></mdn-play-editor>

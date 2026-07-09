@@ -5,9 +5,11 @@ import { L10nMixin } from "../../l10n/mixin.js";
 import "../button/element.js";
 
 export class MDNWriterOpenEditor extends L10nMixin(LitElement) {
-  static properties = {
-    filepath: { type: String },
-  };
+  static get properties() {
+    return {
+      filepath: { type: String },
+    };
+  }
 
   constructor() {
     super();
@@ -23,7 +25,7 @@ export class MDNWriterOpenEditor extends L10nMixin(LitElement) {
 
   render() {
     return html`<mdn-button @click=${this._open} variant="plain">
-      ${this.l10n`Open in editor`}
+      ${this.l10n("writer-open-editor-open-in-editor")`Open in editor`}
     </mdn-button>`;
   }
 }

@@ -1,9 +1,5 @@
 .curriculum-content-container .left-sidebar {
-  position: sticky;
-  top: var(--sticky-header-height);
-
   padding-bottom: 3rem;
-
   overflow-wrap: anywhere;
 
   ol {
@@ -82,7 +78,7 @@
   }
 
   a,
-  span:not(.highlight-container) {
+  span:not(.sidebar-filter-mark-container) {
     display: inline-flex;
     padding-block: 0.25rem;
   }

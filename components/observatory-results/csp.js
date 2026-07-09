@@ -98,8 +98,10 @@ export function CSP({ result }) {
       <p class="arrow">${PassIcon({ pass })}</p>
       <div
         class="detail-header-content"
-        .innerHTML=${result.tests["content-security-policy"]
-          ?.score_description ?? `<p class="obs-none">None</p>`}
+        .innerHTML=${
+          result.tests["content-security-policy"]?.score_description ??
+          `<p class="obs-none">None</p>`
+        }
       ></div>
     </div>
 

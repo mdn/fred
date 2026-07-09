@@ -70,34 +70,37 @@ export class GenericAbout extends ServerComponent {
           ? html`<section aria-labelledby=${id} data-interactive-tabs>
               <h2 id=${id}>${title}</h2>
               <div class="section-content">${unsafeHTML(content)}</div>
-              ${h3s.length > 0
-                ? html`
-                    <mdn-about-tabs>
-                      ${h3s.map(({ value: h3Value }, _idx) =>
-                        h3Value.id && h3Value.content
-                          ? html`
-                              <a
-                                slot="tab"
-                                href="#${h3Value.id}"
-                                data-panel-id=${h3Value.id}
-                              >
-                                ${h3Value.title}
-                              </a>
-                            `
-                          : nothing,
-                      )}
-                      ${h3s.map(({ value: h3Value }, _idx) =>
-                        h3Value.id && h3Value.content
-                          ? html`
-                              <div slot="panel" id=${h3Value.id}>
-                                ${unsafeHTML(h3Value.content)}
-                              </div>
-                            `
-                          : nothing,
-                      )}
-                    </mdn-about-tabs>
-                  `
-                : nothing}
+              ${
+                h3s.length > 0
+                  ? html`
+                      <mdn-about-tabs>
+                        ${h3s.map(({ value: h3Value }, _idx) =>
+                          h3Value.id && h3Value.content
+                            ? html`
+                                <a
+                                  slot="tab"
+                                  href="#${h3Value.id}"
+                                  data-panel-id=${h3Value.id}
+                                  data-glean-id=${`about: tab -> ${h3Value.id}`}
+                                >
+                                  ${h3Value.title}
+                                </a>
+                              `
+                            : nothing,
+                        )}
+                        ${h3s.map(({ value: h3Value }, _idx) =>
+                          h3Value.id && h3Value.content
+                            ? html`
+                                <div slot="panel" id=${h3Value.id}>
+                                  ${unsafeHTML(h3Value.content)}
+                                </div>
+                              `
+                            : nothing,
+                        )}
+                      </mdn-about-tabs>
+                    `
+                  : nothing
+              }
             </section>`
           : nothing;
       } else {

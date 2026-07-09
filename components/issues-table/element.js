@@ -7,11 +7,13 @@ import styles from "./element.css?lit";
 export class MDNIssuesTable extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    _issues: { state: true },
-    _isLoading: { state: true },
-    _error: { state: true },
-  };
+  static get properties() {
+    return {
+      _issues: { state: true },
+      _isLoading: { state: true },
+      _error: { state: true },
+    };
+  }
 
   constructor() {
     super();
@@ -60,7 +62,7 @@ export class MDNIssuesTable extends L10nMixin(LitElement) {
 
   render() {
     if (this._isLoading) {
-      return html`${this.l10n`loading issues…`}`;
+      return html`${this.l10n("issues-table-loading-issues")`loading issues…`}`;
     }
     if (this._error) {
       return html`${this._error}`;
@@ -73,8 +75,8 @@ export class MDNIssuesTable extends L10nMixin(LitElement) {
       <table>
         <thead>
           <tr>
-            <th>${this.l10n`Title`}</th>
-            <th>${this.l10n`Repository`}</th>
+            <th>${this.l10n("issues-table-title")`Title`}</th>
+            <th>${this.l10n("issues-table-repository")`Repository`}</th>
           </tr>
         </thead>
         <tbody>
@@ -91,7 +93,7 @@ export class MDNIssuesTable extends L10nMixin(LitElement) {
                         typeof label === "object" && label !== null
                           ? label.name
                           : label;
-                      this.LABELS.includes(labelName)
+                      return this.LABELS.includes(labelName)
                         ? html`<span class="label">${labelName}</span>`
                         : null;
                     })}

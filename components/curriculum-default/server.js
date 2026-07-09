@@ -29,24 +29,33 @@ export class CurriculumDefault extends ServerComponent {
     return PageLayout.render(
       context,
       html`
-        <div class="curriculum-layout curriculum-content-container">
+        <div
+          class="layout__2-sidebars-inline curriculum-layout curriculum-content-container"
+        >
           <main
             id="content"
-            class="curriculum-layout__content curriculum-content-container curriculum-default curriculum-about curriculum-module topic-${topicCssClass}"
+            class="layout__content curriculum-layout__content curriculum-content-container curriculum-default curriculum-about curriculum-module topic-${topicCssClass}"
             lang=${doc.locale}
           >
-            <header class="curriculum-layout__header curriculum-content">
+            <header
+              class="layout__header curriculum-layout__header curriculum-content"
+            >
               <h1><span>${coloredTitle}</span> ${restTitle.join(" ")}</h1>
             </header>
-            <aside class="curriculum-layout__toc">
+            <aside class="layout__right-sidebar curriculum-layout__toc">
               ${toc}
               <mdn-placement-sidebar></mdn-placement-sidebar>
             </aside>
-            <div class="curriculum-layout__body curriculum-content">
+            <div
+              class="layout__body curriculum-layout__body curriculum-content"
+            >
               ${renderCurriculumBody(context, doc)}
             </div>
           </main>
-          <aside class="curriculum-layout__sidebar" id="main-sidebar">
+          <aside
+            class="layout__left-sidebar curriculum-layout__sidebar"
+            id="main-sidebar"
+          >
             ${sidebar}
           </aside>
         </div>

@@ -9,9 +9,11 @@ import styles from "./element.css?lit";
 export class MDNModal extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    modalTitle: { type: String, attribute: "modal-title" },
-  };
+  static get properties() {
+    return {
+      modalTitle: { type: String, attribute: "modal-title" },
+    };
+  }
 
   constructor() {
     super();
@@ -36,7 +38,7 @@ export class MDNModal extends L10nMixin(LitElement) {
             icon-only
             .icon=${exitIcon}
             @click=${this.close}
-            >${this.l10n`Exit modal`}</mdn-button
+            >${this.l10n("modal-exit-modal")`Exit modal`}</mdn-button
           >
         </header>
         <slot></slot>

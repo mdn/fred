@@ -60,9 +60,11 @@ function PostPreview(context, blogMeta, lazyLoad = false) {
     </header>
     <p class="blog-post-preview__description">${blogMeta.description}</p>
     <footer class="blog-post-preview__footer">
-      ${blogMeta.sponsored
-        ? html`<span class="blog-post-preview__sponsored">Sponsored</span>`
-        : nothing}
+      ${
+        blogMeta.sponsored
+          ? html`<span class="blog-post-preview__sponsored">Sponsored</span>`
+          : nothing
+      }
       ${Button.render(context, {
         label: "Read more",
         href: `/en-US/blog/${blogMeta.slug}/`,
@@ -84,7 +86,9 @@ export class BlogIndex extends ServerComponent {
       html`
         <div id="content" class="blog-index">
           <header class="blog-index__header">
-            <h1>${context.l10n`Blog it better`}</h1>
+            <h1>
+              ${context.l10n("blog-index-blog-it-better")`Blog it better`}
+            </h1>
           </header>
           <div class="blog-index__main">
             <section class="blog-index__articles">

@@ -54,8 +54,10 @@ function RenderToc(context) {
  */
 function RenderBlogContent(context, { doc }) {
   return html`
-    ${doc.body?.map((section) => ContentSection.render(context, section)) ??
-    nothing}
+    ${
+      doc.body?.map((section) => ContentSection.render(context, section)) ??
+      nothing
+    }
   `;
 }
 
@@ -71,7 +73,7 @@ export class BlogPost extends ServerComponent {
       return PageLayout.render(
         context,
         html`<p id="content">
-          ${context.l10n("blog-post-not-found")`Blog post not found`}
+          ${context.l10n("blog-post-not-found")`Blog post not found.`}
         </p>`,
       );
     }
@@ -89,9 +91,11 @@ export class BlogPost extends ServerComponent {
               width: 800,
               height: 420,
             })}
-            ${blogMeta.sponsored
-              ? html`<span class="blog-post__sponsored">Sponsored</span>`
-              : nothing}
+            ${
+              blogMeta.sponsored
+                ? html`<span class="blog-post__sponsored">Sponsored</span>`
+                : nothing
+            }
             <h1 class="blog-post-header__heading">${blogMeta.title}</h1>
             <div class="blog-post-header__author-read-time">
               ${AuthorDateReadTime(context, blogMeta, false)}
