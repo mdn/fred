@@ -30,6 +30,7 @@
     "Web/CSS/Guides",
     "Web/CSS/Guides/Colors/Applying_color",
     "Web/CSS/Guides/Colors/Color_mixer",
+    "Web/CSS/Guides/Flexible_box_layout/Basic_concepts",
     "Web/CSS/Guides/Shapes/Shape_generator",
     "Web/CSS/How_to/Layout_cookbook",
     "Web/CSS/How_to/Layout_cookbook/Card",
@@ -90,6 +91,7 @@
     "Web/JavaScript/Guide/Using_classes",
     "Web/Media",
     "Web/Privacy",
+    "Web/SVG",
     "Web/WebDriver"
   ],
   "zh-CN": ["Web/CSS/Reference/At-rules"],
