@@ -347,6 +347,12 @@ export function renderHtml(state = null) {
                 body math {
                   font-size: 1.5rem;
                 }
+
+                /* Safari won't drive Inter's slnt variable axis from
+                 font-style: italic alone, so set the slant explicitly. */
+                :is(i, em, cite, dfn, var, address) {
+                  font-variation-settings: "slnt" -10;
+                }
               </style>`
             : ""
         }
@@ -389,6 +395,12 @@ export function renderHtml(state = null) {
                   padding: 1rem;
                   margin: 0;
                   box-sizing: border-box;
+                }
+
+                /* Safari won't drive Inter's slnt variable axis from
+                 font-style: italic alone, so set the slant explicitly. */
+                :is(i, em, cite, dfn, var, address) {
+                  font-variation-settings: "slnt" -10;
                 }
 
                 section {
