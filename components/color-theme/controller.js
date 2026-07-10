@@ -31,7 +31,7 @@ export class ThemeController {
   }
 
   /**
-   * @param {any} value
+   * @param {unknown} value
    * @returns {"light" | "dark" | undefined}
    */
   _lightOrDark(value) {

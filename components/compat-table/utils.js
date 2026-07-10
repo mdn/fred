@@ -25,7 +25,7 @@ export const SHOW_BROWSERS = [
 /**
  * Gets the first element of an array or returns the value itself.
  * @template T
- * @param {T | [T?, ...any[]]} a
+ * @param {T | [T?, ...unknown[]]} a
  * @returns {T | undefined}
  */
 export function getFirst(a) {
