@@ -220,7 +220,7 @@
   },
   {
     "id": "webapis",
-    "buttonText": "Web APIs",
+    "buttonText": "APIs",
     "panelTitle": {
       "slug": "Web/API",
       "text": "Web APIs: Programming interfaces"
