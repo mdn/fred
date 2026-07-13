@@ -125,22 +125,24 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
             >
           </div>
           <ul class="language-switcher__list">
-            ${notFound
-              ? this._notFoundFallback.render({
-                  initial: () => this._renderCurrentLocale(),
-                  pending: () => this._renderCurrentLocale(),
-                  error: () => this._renderCurrentLocale(),
-                  complete: (doc) =>
-                    doc?.other_translations
-                      ? this._renderDropdownItems(
-                          doc.other_translations,
-                          locale,
-                          doc.mdn_url,
-                          notFound,
-                        )
-                      : this._renderCurrentLocale(),
-                })
-              : this._renderDropdownItems(translations, locale, url)}
+            ${
+              notFound
+                ? this._notFoundFallback.render({
+                    initial: () => this._renderCurrentLocale(),
+                    pending: () => this._renderCurrentLocale(),
+                    error: () => this._renderCurrentLocale(),
+                    complete: (doc) =>
+                      doc?.other_translations
+                        ? this._renderDropdownItems(
+                            doc.other_translations,
+                            locale,
+                            doc.mdn_url,
+                            notFound,
+                          )
+                        : this._renderCurrentLocale(),
+                  })
+                : this._renderDropdownItems(translations, locale, url)
+            }
           </ul>
         </div>
       </mdn-dropdown>

@@ -60,9 +60,11 @@ function PostPreview(context, blogMeta, lazyLoad = false) {
     </header>
     <p class="blog-post-preview__description">${blogMeta.description}</p>
     <footer class="blog-post-preview__footer">
-      ${blogMeta.sponsored
-        ? html`<span class="blog-post-preview__sponsored">Sponsored</span>`
-        : nothing}
+      ${
+        blogMeta.sponsored
+          ? html`<span class="blog-post-preview__sponsored">Sponsored</span>`
+          : nothing
+      }
       ${Button.render(context, {
         label: "Read more",
         href: `/en-US/blog/${blogMeta.slug}/`,

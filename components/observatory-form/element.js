@@ -120,9 +120,11 @@ export class MDNObservatoryForm extends LitElement {
               </button>
             </div>
           </form>
-          ${this._errorMessage
-            ? html`<div class="error">${this._errorMessage}</div>`
-            : nothing}
+          ${
+            this._errorMessage
+              ? html`<div class="error">${this._errorMessage}</div>`
+              : nothing
+          }
         `;
   }
 }

@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: (mdn/fred) Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           path: mdn/fred
           persist-credentials: false
@@ -64,7 +64,7 @@ jobs:
         run: echo "npm_config_cache=D:\npm-cache" >> $env:GITHUB_ENV
 
       - name: (mdn/content) Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           repository: mdn/content
           path: mdn/content
@@ -101,10 +101,10 @@ jobs:
       - name: (mdn/content) Render (Linux)
         if: runner.os == 'Linux'
         working-directory: mdn/content
-        run: npx --package=@mdn/fred fred-ssr
+        run: npx @mdn/fred ssr
 
       - name: (mdn/fred) Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           path: mdn/fred
           persist-credentials: false

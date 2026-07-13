@@ -51,9 +51,9 @@ export class ButtonSandbox extends SandboxComponent {
             (isDisabled) => html`
               <h3>
                 <code
-                  >${href
-                    ? "<a>"
-                    : `<button${isDisabled ? " disabled" : ""}>`}</code
+                  >${
+                    href ? "<a>" : `<button${isDisabled ? " disabled" : ""}>`
+                  }</code
                 >
               </h3>
               <section>

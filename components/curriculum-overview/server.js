@@ -59,14 +59,16 @@ export class CurriculumOverview extends ServerComponent {
               class="layout__body curriculum-layout__body curriculum-content"
             >
               ${renderCurriculumBody(context, doc)}
-              ${doc?.modules && doc.modules.length > 0
-                ? html`
-                    <section class="module-contents">
-                      <h2>Module list</h2>
-                      ${renderModulesList(context, doc.modules)}
-                    </section>
-                  `
-                : nothing}
+              ${
+                doc?.modules && doc.modules.length > 0
+                  ? html`
+                      <section class="module-contents">
+                        <h2>Module list</h2>
+                        ${renderModulesList(context, doc.modules)}
+                      </section>
+                    `
+                  : nothing
+              }
               ${this.renderPrevNext(context, doc)}
             </div>
           </main>
@@ -94,20 +96,24 @@ export class CurriculumOverview extends ServerComponent {
 
     return html`
       <section class="curriculum-prev-next">
-        ${prev
-          ? Button.render(context, {
-              label: `Previous: ${prev.title}`,
-              icon: addAttrs(PrevIcon, { width: "16px", height: "16px" }),
-              href: prev.url,
-            })
-          : nothing}
-        ${next
-          ? Button.render(context, {
-              label: `Next: ${next.title}`,
-              icon: addAttrs(NextIcon, { width: "16px", height: "16px" }),
-              href: next.url,
-            })
-          : nothing}
+        ${
+          prev
+            ? Button.render(context, {
+                label: `Previous: ${prev.title}`,
+                icon: addAttrs(PrevIcon, { width: "16px", height: "16px" }),
+                href: prev.url,
+              })
+            : nothing
+        }
+        ${
+          next
+            ? Button.render(context, {
+                label: `Next: ${next.title}`,
+                icon: addAttrs(NextIcon, { width: "16px", height: "16px" }),
+                href: next.url,
+              })
+            : nothing
+        }
       </section>
     `;
   }

@@ -18,22 +18,22 @@ class VirtualConsole {
     this.#host._messages = [];
   }
 
-  /** @param {...any} args */
+  /** @param {...unknown} args */
   debug(...args) {
     return this.log(...args);
   }
 
-  /** @param {...any} args */
+  /** @param {...unknown} args */
   error(...args) {
     return this.log(...args);
   }
 
-  /** @param {...any} args */
+  /** @param {...unknown} args */
   info(...args) {
     return this.log(...args);
   }
 
-  /** @param {...any} args */
+  /** @param {...unknown} args */
   log(...args) {
     if (args.length > 1 && typeof args[0] === "string") {
       // https://developer.mozilla.org/en-US/docs/Web/API/console#using_string_substitutions
@@ -49,18 +49,20 @@ class VirtualConsole {
             }
             case "d":
             case "i": {
-              const i = args.splice(1, 1)[0];
+              const i = /** @type {number} */ (args.splice(1, 1)[0]);
               return Math.trunc(i).toFixed(0).padStart(formatArg, "0");
             }
             case "s": {
-              const s = args.splice(1, 1)[0];
+              const s = /** @type {string} */ (args.splice(1, 1)[0]);
               return s.toString();
             }
             case "f": {
               const f = args.splice(1, 1)[0];
-              return (typeof f === "number" ? f : Number.parseFloat(f)).toFixed(
-                formatArg ?? 6,
-              );
+              return (
+                typeof f === "number"
+                  ? f
+                  : Number.parseFloat(/** @type {string} */ (f))
+              ).toFixed(formatArg ?? 6);
             }
             case "c":
               // TODO: Not implemented yet, so just remove the argument
@@ -80,7 +82,7 @@ class VirtualConsole {
     ];
   }
 
-  /** @param {...any} args */
+  /** @param {...unknown} args */
   warn(...args) {
     return this.log(...args);
   }

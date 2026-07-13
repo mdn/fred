@@ -241,23 +241,25 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         ${this.l10n(
           "compat-link-report-issue",
         )`Report problems with this compatibility data`}</a
-      >${source_file
-        ? html` •
-            <a
-              class="bc-github-link external external-icon"
-              href=${`https://github.com/mdn/browser-compat-data/tree/main/${source_file}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              title=${this.l10n.raw({
-                id: "compat-link-source-title",
-                args: {
-                  filename: source_file,
-                },
-              })}
-            >
-              ${this.l10n("compat-link-source")`View data on GitHub`}
-            </a>`
-        : undefined}
+      >${
+        source_file
+          ? html` •
+              <a
+                class="bc-github-link external external-icon"
+                href=${`https://github.com/mdn/browser-compat-data/tree/main/${source_file}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                title=${this.l10n.raw({
+                  id: "compat-link-source-title",
+                  args: {
+                    filename: source_file,
+                  },
+                })}
+              >
+                ${this.l10n("compat-link-source")`View data on GitHub`}
+              </a>`
+          : undefined
+      }
     </div>`;
   }
 
@@ -389,8 +391,9 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         : html`<code>${name}</code>`;
 
       let titleNode;
-      const titleContent = html`${title}${compat.status &&
-      this._renderStatusIcons(compat.status)}`;
+      const titleContent = html`${title}${
+        compat.status && this._renderStatusIcons(compat.status)
+      }`;
       if (compat.mdn_url && depth > 0) {
         const href = compat.mdn_url.replace(
           `/${DEFAULT_LOCALE}/docs`,
@@ -448,13 +451,17 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           >
             ${this._renderCellText(support, browser)}
           </button>
-          ${hasHistory
-            ? html`<div id=${timelineId} class="timeline" tabindex="0">
-                ${isExpanded
-                  ? html`<div class="bc-notes-list">${notes}</div>`
-                  : nothing}
-              </div>`
-            : nothing}
+          ${
+            hasHistory
+              ? html`<div id=${timelineId} class="timeline" tabindex="0">
+                  ${
+                    isExpanded
+                      ? html`<div class="bc-notes-list">${notes}</div>`
+                      : nothing
+                  }
+                </div>`
+              : nothing
+          }
         </td>`;
       });
 
@@ -619,9 +626,11 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
         const notesItems = notes.map(({ iconName, label }) => {
           return html`<div class="bc-supports-dd">
-            ${this._renderIcon(iconName)}${typeof label === "string"
-              ? html`<span>${unsafeHTML(label)}</span>`
-              : label}
+            ${this._renderIcon(iconName)}${
+              typeof label === "string"
+                ? html`<span>${unsafeHTML(label)}</span>`
+                : label
+            }
           </div>`;
         });
 
@@ -934,9 +943,9 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     title = `${browser.name} – ${title}`;
 
     return html`<div
-      class=${timeline
-        ? "bcd-timeline-cell-text-wrapper"
-        : "bcd-cell-text-wrapper"}
+      class=${
+        timeline ? "bcd-timeline-cell-text-wrapper" : "bcd-cell-text-wrapper"
+      }
     >
       <div class="bcd-cell-icons">
         <span class="icon-wrap">
@@ -955,21 +964,25 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         <span class="bc-browser-name">${browser.name}</span>
         <span
           class="bc-version-label"
-          title=${browserReleaseDate && !timeline
-            ? this.l10n.raw({
-                id: "compat-browser-version-date",
-                args: {
-                  browser: browser.name,
-                  version: added,
-                  date: browserReleaseDate,
-                },
-              })
-            : ""}
+          title=${
+            browserReleaseDate && !timeline
+              ? this.l10n.raw({
+                  id: "compat-browser-version-date",
+                  args: {
+                    browser: browser.name,
+                    version: added,
+                    date: browserReleaseDate,
+                  },
+                })
+              : ""
+          }
         >
           ${!timeline || added ? label : undefined}
-          ${browserReleaseDate && timeline
-            ? ` (${this.l10n.raw({ id: "compat-browser-version-released", args: { date: browserReleaseDate } })})`
-            : ""}
+          ${
+            browserReleaseDate && timeline
+              ? ` (${this.l10n.raw({ id: "compat-browser-version-released", args: { date: browserReleaseDate } })})`
+              : ""
+          }
         </span>
       </div>
       ${support && this._renderCellIcons(support, { omitAliasModifiers })}

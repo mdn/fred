@@ -46,10 +46,16 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    # The action auto-enables subprocess secret scrubbing when
+    # allowed_non_write_users is set. Pin it on explicitly so the protection
+    # survives if that input is ever changed, and never set this to 0.
+    env:
+      CLAUDE_CODE_SUBPROCESS_ENV_SCRUB: 1
+
     steps:
       # Check out the base branch only - never the untrusted PR head.
       - name: Checkout trusted base branch
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           ref: ${{ github.event.pull_request.base.sha }}
           # Don't leave credentials on disk for later steps.
@@ -101,10 +107,17 @@ jobs:
       # below keep Claude read-only - it inspects the data and posts comments,
       # but does not apply the diff or execute any repository code.
       - name: Claude code review
-        uses: anthropics/claude-code-action@80b31826338489861333dc17217865dfe8085cdc # v1.0.155
+        uses: anthropics/claude-code-action@ba0aafd4308cbba7165f9f2cdb0cfbed5a3c99ce # v1.0.168
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # By default the action refuses to run for actors without write
+          # access, which would skip every external-contributor PR - exactly the
+          # PRs we most want reviewed. "*" bypasses that gate so the review runs
+          # for any author. This is safe here because the workflow treats all PR
+          # content as untrusted: it never checks out or executes the PR head,
+          # and Claude is restricted to read-only inspection plus commenting.
+          allowed_non_write_users: "*"
           prompt: |
             REPO: ${{ github.repository }}
             PR NUMBER: ${{ github.event.pull_request.number }}

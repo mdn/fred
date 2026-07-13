@@ -146,12 +146,14 @@ export class Pagination extends ServerComponent {
           <a
             href=${url}
             aria-current=${isCurrentPage ? "page" : "false"}
-            aria-label=${isCurrentPage
-              ? context.l10n("pagination-current")
-              : context.l10n.raw({
-                  id: "pagination-goto",
-                  args: { page: pageNumber },
-                })}
+            aria-label=${
+              isCurrentPage
+                ? context.l10n("pagination-current")
+                : context.l10n.raw({
+                    id: "pagination-goto",
+                    args: { page: pageNumber },
+                  })
+            }
           >
             ${pageNumber}
           </a>

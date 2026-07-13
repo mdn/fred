@@ -18,10 +18,12 @@ import { randomIdString } from "../utils/index.js";
  * @import { InteractiveExampleBase } from "./element.js";
  */
 
+/* eslint-disable jsdoc/reject-any-type -- TS mixin constructors require `any[]` (error TS2545) */
 /**
  * @template {new (...args: any[]) => InteractiveExampleBase} TBase
  * @param {TBase} Base
  */
+/* eslint-enable jsdoc/reject-any-type */
 export const InteractiveExampleWithConsole = (Base) =>
   class extends L10nMixin(Base) {
     #render() {
@@ -33,23 +35,25 @@ export const InteractiveExampleWithConsole = (Base) =>
             <header>
               <h4 id=${id}>${decode(this.name)}</h4>
             </header>
-            ${this._languages.length === 1
-              ? html`<mdn-play-editor
-                  id="editor"
-                  language=${ifDefined(this._languages[0])}
-                ></mdn-play-editor>`
-              : html`<mdn-ix-tab-wrapper>
-                  ${this._languages.map(
-                    (lang) => html`
-                      <mdn-ix-tab id=${lang}
-                        >${this._langName(lang)}</mdn-ix-tab
-                      >
-                      <mdn-ix-tab-panel id=${`${lang}-panel`}>
-                        <mdn-play-editor language=${lang}></mdn-play-editor>
-                      </mdn-ix-tab-panel>
-                    `,
-                  )}
-                </mdn-ix-tab-wrapper>`}
+            ${
+              this._languages.length === 1
+                ? html`<mdn-play-editor
+                    id="editor"
+                    language=${ifDefined(this._languages[0])}
+                  ></mdn-play-editor>`
+                : html`<mdn-ix-tab-wrapper>
+                    ${this._languages.map(
+                      (lang) => html`
+                        <mdn-ix-tab id=${lang}
+                          >${this._langName(lang)}</mdn-ix-tab
+                        >
+                        <mdn-ix-tab-panel id=${`${lang}-panel`}>
+                          <mdn-play-editor language=${lang}></mdn-play-editor>
+                        </mdn-ix-tab-panel>
+                      `,
+                    )}
+                  </mdn-ix-tab-wrapper>`
+            }
             <div class="buttons">
               <mdn-button
                 id="execute"
