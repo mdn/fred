@@ -7,11 +7,13 @@
   --menu-tab-text: var(--color-text-blue);
 
   &[data-section="learn"] {
+    --menu-tab-icon: url("../icon/graduation-cap.svg");
     --menu-tab-background: var(--color-background-orange);
     --menu-tab-text: var(--color-text-orange);
   }
 
   &[data-section="tools"] {
+    --menu-tab-icon: url("../icon/wrench.svg");
     --menu-tab-background: var(--color-background-purple);
     --menu-tab-text: var(--color-text-purple);
   }
@@ -65,6 +67,15 @@
 
   &[aria-expanded="true"]::after {
     scale: -1;
+  }
+
+  /* Icon */
+
+  :is([data-section="learn"], [data-section="tools"]) & {
+    &::before {
+      content: "";
+      mask-image: var(--menu-tab-icon);
+    }
   }
 }
 
@@ -186,5 +197,15 @@
 
   &[data-icon="github"]::before {
     mask-image: url("../icon/social/github.svg");
+  }
+}
+
+@media (--screen-small-and-narrower) {
+  .menu__tab-button {
+    :is([data-section="learn"], [data-section="tools"]) & {
+      &::before {
+        content: none;
+      }
+    }
   }
 }
