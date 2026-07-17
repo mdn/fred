@@ -64,7 +64,7 @@ async function serverRenderMiddleware(req, res, page) {
       /** @type {Stats} */
       const stats = res.locals.webpack.devMiddleware.stats;
 
-      const compilationStats = stats.toJson().children;
+      const compilationStats = stats.toJson({ entrypoints: true }).children;
       if (!compilationStats) {
         throw new Error("cannot parse the rspack config, did you modify it?");
       }

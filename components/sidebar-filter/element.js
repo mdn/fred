@@ -89,7 +89,7 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
   /**
    * Lit lifecycle method called after properties are updated.
    * Triggers telemetry events and applies filtering logic when properties change.
-   * @param {Map<string, any>} changedProperties
+   * @param {import("lit").PropertyValues<this>} changedProperties
    */
   updated(changedProperties) {
     if (changedProperties.has("query")) {

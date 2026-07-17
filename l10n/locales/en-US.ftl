@@ -14,7 +14,7 @@ baseline-not-extra = This feature is not Baseline because it does not work in so
 baseline-supported-in = Supported in { $browsers }
 baseline-unsupported-in = Not widely supported in { $browsers }
 baseline-supported-and-unsupported-in = Supported in { $supported }, but not widely supported in { $unsupported }
-baseline-signals = Want more support for this feature? <a data-l10n-name="link">Tell us why.</a>
+baseline-signals = Want more browser support for this feature? <a data-l10n-name="link">Tell us why.</a>
 
 homepage-hero-title = Resources for Developers,<br> by Developers
 
