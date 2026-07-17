@@ -21,6 +21,12 @@ not-found-fallback-search = The page you requested doesn't exist, but you could 
 not-found-back = Go back to the home page
 footer-copyright = Portions of this content are ©1998–{ $year } by individual mozilla.org contributors. Content available under <a data-l10n-name="cc">a Creative Commons license</a>.
 search-modal-site-search = Site search for <em>{ $query }</em>
+search-modal-results-status =
+    { $results ->
+        [0] No results found.
+        [one] { $results } result available.
+       *[other] { $results } results available.
+    }
 site-search-search-stats = Found { $results } documents.
 site-search-suggestion-matches =
     { $relation ->
@@ -295,6 +301,7 @@ search-button-search-the-site = Search the site
 search-modal-loading-search-index = Loading search index…
 search-modal-search = Search
 search-modal-exit-search = Exit search
+search-modal-results-label = Search results
 sidebar-filter-filter-sidebar = Filter sidebar
 sidebar-filter-filter = Filter
 sidebar-filter-clear-filter-input = Clear filter input

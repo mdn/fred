@@ -6,6 +6,11 @@ footer-tagline = Der Bauplan für ein besseres Internet.
 footer-copyright = Teile dieses Inhalts sind ©1998–{ $year } von einzelnen mozilla.org-Mitwirkenden. Inhalte sind verfügbar unter <a data-l10n-name="cc">einer Creative-Commons-Lizenz</a>.
 
 search-modal-site-search = Website-Suche nach <em>{ $query }</em>
+search-modal-results-status = { $results ->
+    [0] Keine Ergebnisse gefunden.
+    [one] { $results } Ergebnis verfügbar.
+   *[other] { $results } Ergebnisse verfügbar.
+}
 
 site-search-search-stats = { $results } Dokumente gefunden.
 site-search-suggestion-matches =  { $relation ->
@@ -286,6 +291,7 @@ search-button-search-the-site = Website durchsuchen
 search-modal-loading-search-index = Suchindex wird geladen…
 search-modal-search = Suche
 search-modal-exit-search = Suche schließen
+search-modal-results-label = Suchergebnisse
 sidebar-filter-filter-sidebar = Seitenleiste filtern
 sidebar-filter-filter = Filtern
 sidebar-filter-clear-filter-input = Filterfeld leeren
