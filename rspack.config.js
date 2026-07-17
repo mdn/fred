@@ -299,11 +299,6 @@ const clientAndLegacyCommon = {
     clean: true,
   },
   module: {
-    parser: {
-      javascript: {
-        exportsPresence: false,
-      },
-    },
     rules: [
       {
         test: /\.css$/i,
@@ -476,6 +471,11 @@ const legacyConfig = merge(
       }),
     ],
     module: {
+      parser: {
+        javascript: {
+          exportsPresence: false,
+        },
+      },
       rules: [
         {
           test: /\.jsx$/,
