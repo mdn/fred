@@ -65,7 +65,7 @@ const postcssLoaders = (lit = false) => [
               mixins: {
                 "light-dark":
                   /**
-                   * @param {any} _mixin
+                   * @param {unknown} _mixin
                    * @param {string} property
                    * @param {string} light
                    * @param {string} dark

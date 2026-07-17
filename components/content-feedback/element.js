@@ -17,11 +17,13 @@ import styles from "./element.css?lit";
 export class MDNContentFeedback extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    locale: { type: String },
-    _reason: { state: true },
-    _view: { state: true },
-  };
+  static get properties() {
+    return {
+      locale: { type: String },
+      _reason: { state: true },
+      _view: { state: true },
+    };
+  }
 
   constructor() {
     super();

@@ -13,7 +13,7 @@ export default {
     "no-descending-specificity": null,
     "no-duplicate-selectors": null,
     "order/properties-order": [
-      propertyGroups.map((/** @type {any} */ group) => ({
+      propertyGroups.map((/** @type {Record<string, unknown>} */ group) => ({
         ...group,
         emptyLineBefore: "threshold",
         noEmptyLineBetween: true,

@@ -6,7 +6,7 @@
  * - adds commas appropriately (with spacing)
  * - identifies empty slots
  * designed to be used recursively
- * @param {any} input - The output to log.
+ * @param {unknown[]} input - The output to log.
  * @returns Formatted output as a string.
  */
 export function formatArray(input) {
@@ -16,7 +16,7 @@ export function formatArray(input) {
       output += '"' + input[i] + '"';
     } else if (Array.isArray(input[i])) {
       output += "Array [";
-      output += formatArray(input[i]);
+      output += formatArray(/** @type {unknown[]} */ (input[i]));
       output += "]";
     } else if (Object.prototype.hasOwnProperty.call(input, i)) {
       output += formatOutput(input[i]);
@@ -37,6 +37,7 @@ export function formatArray(input) {
   return output;
 }
 
+/* eslint-disable jsdoc/reject-any-type -- formats arbitrary console values via dynamic member access (`.constructor`, `for...in`, indexing); vendored from mdn/bob */
 /**
  * Formats objects:
  * ArrayBuffer, DataView, SharedArrayBuffer,
@@ -47,6 +48,7 @@ export function formatArray(input) {
  * @param {any} input - The output to log.
  * @returns Formatted output as a string.
  */
+/* eslint-enable jsdoc/reject-any-type */
 export function formatObject(input) {
   const bufferDataViewRegExp = /^(ArrayBuffer|SharedArrayBuffer|DataView)$/;
   const complexArrayRegExp =
@@ -126,7 +128,7 @@ export function formatObject(input) {
  * - square brackets around arrays
  * (also copes with arrays of arrays)
  * does NOT detect Int32Array etc
- * @param {any} input - The output to log.
+ * @param {unknown} input - The output to log.
  * @returns Formatted output as a string.
  */
 export function formatOutput(input) {

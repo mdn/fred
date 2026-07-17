@@ -21,7 +21,9 @@ const GLEAN_EVENT_TYPES = ["focus", "copy", "cut", "paste", "click"];
 export class InteractiveExampleBase extends LitElement {
   static ssr = false;
 
-  static properties = { name: { type: String } };
+  static get properties() {
+    return { name: { type: String } };
+  }
 
   static styles = styles;
 

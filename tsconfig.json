@@ -25,7 +25,51 @@
     "plugins": [
       {
         "name": "@jackolope/ts-lit-plugin",
-        "strict": true
+        "strict": true,
+        "rules": {
+          "no-missing-import": "error",
+          "no-unknown-tag-name": "error",
+          "no-incompatible-type-binding": "off",
+          "no-complex-attribute-binding": "off",
+          "no-unknown-attribute": "error"
+        },
+        "customHtmlData": {
+          "version": 1.1,
+          "tags": [
+            {
+              "name": "dialog",
+              "attributes": [
+                {
+                  "name": "closedby",
+                  "description": "Controls which user actions can light-dismiss the dialog (any, closerequest, or none). [MDN reference](https://developer.mozilla.org/docs/Web/HTML/Reference/Elements/dialog#closedby)"
+                }
+              ]
+            },
+            {
+              "name": "link",
+              "attributes": [
+                {
+                  "name": "fetchpriority",
+                  "description": "Hints the relative priority for fetching the linked resource (high, low, or auto). [MDN reference](https://developer.mozilla.org/docs/Web/HTML/Reference/Elements/link#fetchpriority)"
+                }
+              ]
+            }
+          ],
+          "globalAttributes": [
+            {
+              "name": "vocab",
+              "description": "RDFa: default vocabulary IRI used to expand property and typeof values."
+            },
+            {
+              "name": "typeof",
+              "description": "RDFa: declares the RDF type(s) of the subject described by the current element."
+            },
+            {
+              "name": "property",
+              "description": "RDFa: declares a property relationship between the subject and its value."
+            }
+          ]
+        }
       }
     ]
   },

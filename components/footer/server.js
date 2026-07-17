@@ -244,13 +244,6 @@ export class Footer extends ServerComponent {
           </ul>
           <p>
             ${context.l10n.raw({
-              id: "footer-mofo",
-              elements: {
-                moco: { tag: "a", href: "https://www.mozilla.org/" },
-                mofo: { tag: "a", href: "https://foundation.mozilla.org/" },
-              },
-            })}<br />
-            ${context.l10n.raw({
               id: "footer-copyright",
               args: {
                 year: new Date().getUTCFullYear().toString(),

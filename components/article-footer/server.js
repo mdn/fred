@@ -114,11 +114,13 @@ function GitHubSourceLink(context) {
     })}
     target="_blank"
     rel="noopener"
-    >${locale === "de"
-      ? "Übersetzung auf GitHub anzeigen"
-      : context.l10n(
-          "article-footer-view-this-page-on-github",
-        )`View this page on GitHub`}</a
+    >${
+      locale === "de"
+        ? "Übersetzung auf GitHub anzeigen"
+        : context.l10n(
+            "article-footer-view-this-page-on-github",
+          )`View this page on GitHub`
+    }</a
   >`;
 }
 
@@ -157,11 +159,13 @@ function GitHubIssueLink(context) {
     )`This will take you to GitHub to file a new issue.`}
     target="_blank"
     rel="noopener"
-    >${locale === "de"
-      ? "Fehler mit dieser Übersetzung melden"
-      : context.l10n(
-          "article-footer-report-a-problem-with-this-conte",
-        )`Report a problem with this content`}</a
+    >${
+      locale === "de"
+        ? "Fehler mit dieser Übersetzung melden"
+        : context.l10n(
+            "article-footer-report-a-problem-with-this-conte",
+          )`Report a problem with this content`
+    }</a
   >`;
 }
 

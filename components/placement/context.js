@@ -78,20 +78,28 @@ export function globalPlacementContext() {
  * @returns {Promise<Placements.PlacementContextData>}
  */
 async function fetchPlacementData() {
-  const response = await fetch("/pong/get", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      keywords: [],
-      pongs: placementTypes(
-        globalThis.document.documentElement.dataset.renderer || "Unknown",
-      ),
-    }),
-  });
-
-  gleanClick(`pong: pong->fetched ${response.status}`);
+  let response;
+  try {
+    gleanClick(`pong: pong->requested`);
+    response = await fetch("/pong/get", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        keywords: [],
+        pongs: placementTypes(
+          globalThis.document.documentElement.dataset.renderer || "Unknown",
+        ),
+      }),
+    });
+    gleanClick(`pong: pong->fetched ${response.status}`);
+  } catch (error) {
+    gleanClick(
+      `pong: pong->error ${error instanceof Error ? error.name : "unknown"}`,
+    );
+    throw error;
+  }
 
   if (!response.ok) {
     throw new Error(response.statusText);

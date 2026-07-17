@@ -10,16 +10,20 @@ import exitIcon from "../icon/cancel.svg?lit";
 
 import styles from "./element.css?lit";
 
+import "../button/element.js";
+
 export class MDNSearchModal extends L10nMixin(LitElement) {
   static ssr = false;
   static styles = styles;
 
-  static properties = {
-    _index: { state: true },
-    _query: { state: true },
-    _selected: { state: true },
-    _shiftFocus: { state: true },
-  };
+  static get properties() {
+    return {
+      _index: { state: true },
+      _query: { state: true },
+      _selected: { state: true },
+      _shiftFocus: { state: true },
+    };
+  }
 
   constructor() {
     super();
@@ -300,28 +304,30 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
                 `,
               ),
           })}
-          ${searchUrl
-            ? html`<li
-                ?data-selected=${this._selected === siteSearchIndex}
-                data-result=${siteSearchIndex}
-              >
-                <a
-                  href=${searchUrl}
-                  data-glean-id=${`quick-search: site-search -> ${this._query}`}
-                  ><span class="title"
-                    >${this.l10n.raw({
-                      id: "search-modal-site-search",
-                      args: {
-                        query: this._query,
-                      },
-                      elements: {
-                        query: { tag: "code" },
-                      },
-                    })}</span
-                  ></a
+          ${
+            searchUrl
+              ? html`<li
+                  ?data-selected=${this._selected === siteSearchIndex}
+                  data-result=${siteSearchIndex}
                 >
-              </li>`
-            : nothing}
+                  <a
+                    href=${searchUrl}
+                    data-glean-id=${`quick-search: site-search -> ${this._query}`}
+                    ><span class="title"
+                      >${this.l10n.raw({
+                        id: "search-modal-site-search",
+                        args: {
+                          query: this._query,
+                        },
+                        elements: {
+                          query: { tag: "code" },
+                        },
+                      })}</span
+                    ></a
+                  >
+                </li>`
+              : nothing
+          }
         </ul>
       </dialog>
     `;

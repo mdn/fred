@@ -15,9 +15,11 @@ function ScoreModifier({ overallScore, scoreModifier }) {
 
   return html`
     <span class=${!bonusEligible && scoreModifier > 0 ? "not-counted" : ""}>
-      ${!bonusEligible && scoreModifier > 0
-        ? html`0<sup><a href="#bonus-points-explanation">*</a></sup>`
-        : formattedScoreModifier}
+      ${
+        !bonusEligible && scoreModifier > 0
+          ? html`0<sup><a href="#bonus-points-explanation">*</a></sup>`
+          : formattedScoreModifier
+      }
     </span>
   `;
 }
@@ -53,19 +55,21 @@ export function Scoring({ result }) {
             ${test.title}
           </a>
         </td>
-        ${test.pass === null
-          ? html`<td data-header="Score">-</td>`
-          : html` <td class="score" data-header="Score">
-              <span>
-                <span class="obs-score-value">
-                  ${ScoreModifier({
-                    overallScore: result.scan.score || 0,
-                    scoreModifier: test.score_modifier,
-                  })}
+        ${
+          test.pass === null
+            ? html`<td data-header="Score">-</td>`
+            : html` <td class="score" data-header="Score">
+                <span>
+                  <span class="obs-score-value">
+                    ${ScoreModifier({
+                      overallScore: result.scan.score || 0,
+                      scoreModifier: test.score_modifier,
+                    })}
+                  </span>
+                  ${PassIcon({ pass: test.pass })}
                 </span>
-                ${PassIcon({ pass: test.pass })}
-              </span>
-            </td>`}
+              </td>`
+        }
         <td data-header="Reason" .innerHTML=${test.score_description}></td>
         <td
           data-header="Advice"
@@ -89,15 +93,17 @@ export function Scoring({ result }) {
         ${rows}
       </tbody>
     </table>
-    ${showFootnote
-      ? html` <section class="footnote" id="bonus-points-explanation">
-          <sup>*</sup> Normally awards bonus points, however, in this case they
-          are not included in the overall score (
-          <a href="/en-US/observatory/docs/tests_and_scoring" target="_blank">
-            find out why
-          </a>
-          ).
-        </section>`
-      : null}
+    ${
+      showFootnote
+        ? html` <section class="footnote" id="bonus-points-explanation">
+            <sup>*</sup> Normally awards bonus points, however, in this case
+            they are not included in the overall score (
+            <a href="/en-US/observatory/docs/tests_and_scoring" target="_blank">
+              find out why
+            </a>
+            ).
+          </section>`
+        : null
+    }
   `;
 }
