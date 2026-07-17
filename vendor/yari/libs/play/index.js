@@ -86,6 +86,39 @@ function html(strings, ...args) {
 }
 
 /**
+ * Prevent user CSS from breaking out of the `<style>` element via a literal
+ * `</style` sequence. Inserting a backslash (`<\/style`) stops the HTML parser
+ * from ending the element while remaining equivalent inside CSS strings, where
+ * `\/` resolves to `/`.
+ * @param {string} css
+ */
+function escapeStyleText(css) {
+  return css.replace(/<\/(style)/gi, String.raw`<\/$1`);
+}
+
+/**
+ * Prevent user JS from breaking out of the `<script>` element via a literal
+ * `</script` sequence. Inserting a backslash (`<\/script`) stops the HTML
+ * parser from ending the element while remaining equivalent inside JS strings,
+ * template literals, and regexes, where `\/` resolves to `/`. The equivalence
+ * holds within literal *contents*; the pathological `x</script/` — a `<`
+ * operator immediately followed by a regex literal beginning with `script`
+ * (i.e. `x < /script/`) — would not round-trip, but such code is vanishingly
+ * rare.
+ *
+ * Known limitation: this does not neutralize a `<!--` … `<script` sequence,
+ * which pushes the parser into the script-data-double-escaped state where the
+ * runner's own closing `</script>` no longer closes the element (swallowing
+ * everything after it, including the swallow-detection warning). No backslash
+ * escape fixes this without changing behavior — `<\!--` is an invalid escape in
+ * `/u` regexes — so such input still corrupts the runner.
+ * @param {string} js
+ */
+function escapeScriptText(js) {
+  return js.replace(/<\/(script)/gi, String.raw`<\/$1`);
+}
+
+/**
  * @param {State | null} state
  * @param {string} hrefWithCode
  * @param {string} searchWithState
@@ -428,7 +461,7 @@ export function renderHtml(state = null) {
             : ""
         }
         <style id="css-output">
-          ${css}
+          ${escapeStyleText(css)}
         </style>
         <script>
           const consoleProxy = new Proxy(console, {
@@ -527,7 +560,7 @@ export function renderHtml(state = null) {
       <body>
         ${htmlCode}
         <script id="mdn-play-js" type=${defaults === "ix-wat" ? "module" : ""}>
-          ${js};
+          ${escapeScriptText(js)};
         </script>
         <script>
           try {
