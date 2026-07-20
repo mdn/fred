@@ -1,3 +1,7 @@
+// This file is largely based on the `cloud-function/src/internal/play/index.js` file in
+// mdn/dex, and must remain compatible with it. Changes should be made with care.
+// See: https://github.com/mdn/dex/issues/436
+
 import * as crypto from "node:crypto";
 
 import he from "he";
