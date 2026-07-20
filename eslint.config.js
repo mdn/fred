@@ -1,11 +1,12 @@
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { includeIgnoreFile } from "@eslint/compat";
+import { includeIgnoreFile } from "@eslint/config-helpers";
 import js from "@eslint/js";
 import { defineConfig } from "eslint/config";
 import prettierConfig from "eslint-config-prettier/flat";
-import importPlugin from "eslint-plugin-import";
+import importX from "eslint-plugin-import-x";
 import jsdoc from "eslint-plugin-jsdoc";
 import * as lit from "eslint-plugin-lit";
 import n from "eslint-plugin-n";
@@ -19,9 +20,11 @@ import fred from "./build/eslint-fred.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const gitignorePath = path.resolve(__dirname, ".gitignore");
+const gitExcludePath = path.resolve(__dirname, ".git", "info", "exclude");
 
 export default defineConfig([
   includeIgnoreFile(gitignorePath),
+  ...(fs.existsSync(gitExcludePath) ? [includeIgnoreFile(gitExcludePath)] : []),
   {
     ignores: ["./vendor/"],
   },
@@ -85,6 +88,16 @@ export default defineConfig([
         { definedTags: ["element", "attr", "slot"] },
       ],
       "lit/no-template-map": "off",
+      "lit/prefer-query-decorators": "off",
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector:
+            "PropertyDefinition[static=true][key.name='properties'][value.type='ObjectExpression']",
+          message:
+            "Declare reactive properties with `static get properties()`, so lit-analyzer can detect the element's attributes.",
+        },
+      ],
       "n/no-missing-import": "off",
       "n/no-unsupported-features/node-builtins": ["off"],
       "n/no-unpublished-import": "off",
@@ -105,10 +118,10 @@ export default defineConfig([
   },
   {
     files: ["**/*.{js,mjs,cjs}"],
-    plugins: { import: importPlugin },
+    plugins: { "import-x": importX },
     rules: {
       "sort-imports": "off",
-      "import/order": [
+      "import-x/order": [
         "error",
         {
           alphabetize: {

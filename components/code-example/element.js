@@ -17,10 +17,12 @@ const LANGUAGE_CLASSES = new Set(["html", "js", "css", "wat"]);
 export class MDNCodeExample extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    language: { type: String },
-    code: { type: String },
-  };
+  static get properties() {
+    return {
+      language: { type: String },
+      code: { type: String },
+    };
+  }
 
   constructor() {
     super();
@@ -74,17 +76,19 @@ export class MDNCodeExample extends L10nMixin(LitElement) {
             .copiesFrom=${this._codeRef.value}
             variant="secondary"
           ></mdn-copy-button>
-          ${this.liveSample?.breakoutLink
-            ? html`<mdn-button
-                variant="secondary"
-                href=${this.liveSample?.breakoutLink}
-                target="_blank"
-                rel="opener"
-                aria-label=${this.l10n("example-play-button-title")}
-                title=${this.l10n("example-play-button-title")}
-                >${this.l10n("example-play-button-label")}</mdn-button
-              >`
-            : nothing}
+          ${
+            this.liveSample?.breakoutLink
+              ? html`<mdn-button
+                  variant="secondary"
+                  href=${this.liveSample?.breakoutLink}
+                  target="_blank"
+                  rel="opener"
+                  aria-label=${this.l10n("example-play-button-title")}
+                  title=${this.l10n("example-play-button-title")}
+                  >${this.l10n("example-play-button-label")}</mdn-button
+                >`
+              : nothing
+          }
         </div>
         <pre class=${this.className}><code ${ref(
           this._codeRef,

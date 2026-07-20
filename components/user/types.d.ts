@@ -1,9 +1,5 @@
 export type SubscriptionType =
-  | "mdn_core"
-  | "mdn_plus_5m"
-  | "mdn_plus_5y"
-  | "mdn_plus_10m"
-  | "mdn_plus_10y";
+  "mdn_core" | "mdn_plus_5m" | "mdn_plus_5y" | "mdn_plus_10m" | "mdn_plus_10y";
 
 export type UserPlusSettings = {
   aiHelpHistory: boolean | null;
@@ -41,11 +37,7 @@ export type WhoamiResponse = {
 };
 
 export type SubscriptionTypeResponse =
-  | "core"
-  | "mdn_plus_5m"
-  | "mdn_plus_5y"
-  | "mdn_plus_10m"
-  | "mdn_plus_10y";
+  "core" | "mdn_plus_5m" | "mdn_plus_5y" | "mdn_plus_10m" | "mdn_plus_10y";
 
 export type SettingsResponse = {
   no_ads: boolean | null;

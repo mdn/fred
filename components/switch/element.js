@@ -5,11 +5,13 @@ import styles from "./element.css?lit";
 export class MDNSwitch extends LitElement {
   static styles = styles;
 
-  static properties = {
-    label: { type: String },
-    checked: { type: Boolean, reflect: true },
-    disabled: { type: Boolean },
-  };
+  static get properties() {
+    return {
+      label: { type: String },
+      checked: { type: Boolean, reflect: true },
+      disabled: { type: Boolean },
+    };
+  }
 
   constructor() {
     super();

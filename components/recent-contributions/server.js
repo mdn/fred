@@ -58,7 +58,7 @@ function getRelativeTime(seconds) {
     { amount: 60, unit: "minute" },
     { amount: 24, unit: "hour" },
     { amount: 7, unit: "day" },
-    { amount: 4.345_24, unit: "week" }, // 365/12/7
+    { amount: 4.34524, unit: "week" }, // 365/12/7
     { amount: 12, unit: "month" },
     { amount: Number.POSITIVE_INFINITY, unit: "year" },
   ];

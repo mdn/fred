@@ -5,9 +5,11 @@ import styles from "./element.css?lit";
 export class MDNAboutTabs extends LitElement {
   static styles = styles;
 
-  static properties = {
-    active_index: { type: Number },
-  };
+  static get properties() {
+    return {
+      active_index: { type: Number },
+    };
+  }
 
   constructor() {
     super();

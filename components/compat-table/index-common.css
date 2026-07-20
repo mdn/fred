@@ -36,6 +36,8 @@ table {
         }
 
         .timeline {
+          display: grid;
+          grid-template-columns: subgrid;
           grid-column: 1 / -1;
         }
       }
@@ -207,19 +209,16 @@ table {
     text-align: left;
 
     border: none;
+    border-left: max(
+        0px,
+        calc((var(--compat-feature-depth, 1) - 1) * 8px - 1px)
+      )
+      solid var(--color-border-primary);
 
     > * {
       flex-basis: max-content;
       border: none !important;
     }
-  }
-
-  .bc-feature-depth-2 {
-    border-left: 7px solid var(--color-border-primary);
-  }
-
-  .bc-feature-depth-3 {
-    border-left: 15px solid var(--color-border-primary);
   }
 }
 
@@ -325,36 +324,72 @@ table {
 }
 
 .bc-notes-list {
-  position: relative;
+  /* Skip the feature-name column so the box aligns with the browser columns. */
+  grid-column: 2 / -1;
 
-  width: 100%;
-
-  margin: 0.5rem 0;
+  margin: 0;
 
   text-align: left;
 
-  &::before {
-    position: absolute;
-    top: 0;
-    bottom: 4px;
-    left: 7px;
-    z-index: -1;
+  border-left: 1px solid var(--color-border-primary);
 
-    width: 3px;
-
-    margin-top: 0.25rem;
-
-    content: "";
-
-    background: var(--color-border-primary);
+  /* Each branch renders as a cell-like box. The surrounding table cell
+     already provides the outer borders, so each branch only draws a
+     top separator when stacked under another branch. */
+  .bc-branch {
+    position: relative;
+    padding: 0.75rem 1rem;
   }
 
-  .bc-notes-wrapper:last-child dd:last-child {
+  .bc-branch + .bc-branch {
+    border-top: 1px solid var(--color-border-primary);
+  }
+
+  .bc-branch-heading {
+    display: flex;
+
+    gap: 0.375rem;
+    align-items: center;
+
+    margin-bottom: 0.75rem;
+
+    font-weight: var(--font-body-strong-weight);
+
+    color: var(--color-text-primary);
+  }
+
+  /* Each branch carries its own timeline line, spanning from its first
+     to its last icon, so versions stay chronological within the branch.
+     `--compat-timeline-cap` is the gap the cap pseudo carves out below
+     the last icon — kept in one place so both rules stay in sync. */
+  --compat-timeline-cap: 4px;
+
+  .bc-branch-items {
     position: relative;
 
     &::before {
       position: absolute;
-      top: 3px;
+      top: 0;
+      bottom: var(--compat-timeline-cap);
+      left: 7px;
+      z-index: -1;
+
+      width: 3px;
+
+      margin-top: 0.25rem;
+
+      content: "";
+
+      background: var(--color-border-primary);
+    }
+  }
+
+  .bc-branch-items .bc-notes-wrapper:last-child > :last-child {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      top: var(--compat-timeline-cap);
       bottom: 0;
       left: 7px;
       z-index: -1;
@@ -374,6 +409,14 @@ table {
   }
 
   .bc-supports-dd {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+    text-indent: -1.5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
     .icon {
       background-color: var(--color-text-secondary);
       mask-image: url("../icon/circle.svg");
@@ -385,6 +428,10 @@ table {
     }
   }
 
+  .bc-notes-end {
+    margin-bottom: 2rem;
+  }
+
   .bc-version-label {
     display: inline;
   }
@@ -392,16 +439,6 @@ table {
   abbr {
     margin-right: 4px;
     text-decoration: none;
-  }
-
-  dd {
-    padding-left: 1.5rem;
-    margin-bottom: 1rem;
-    text-indent: -1.5rem;
-
-    &:last-child {
-      margin-bottom: 2rem;
-    }
   }
 }
 
@@ -411,24 +448,6 @@ table {
 
   &:last-child {
     margin-bottom: 0;
-  }
-}
-
-dl.bc-notes-list {
-  dt.bc-supports {
-    margin-top: 1rem;
-
-    &:first-child {
-      margin-top: 0;
-    }
-  }
-
-  dd.bc-supports-dd {
-    margin-bottom: 1rem;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 }
 

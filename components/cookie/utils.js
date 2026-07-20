@@ -5,7 +5,7 @@ export function getCookieValue(name) {
     .find((row) => row.startsWith(`${name}=`));
 
   if (value && value.includes("=")) {
-    value = value.split("=")[1];
+    value = value.split("=", 2)[1];
   }
 
   return value;

@@ -60,14 +60,16 @@ export class GenericSidebar extends ServerComponent {
     const items = data.items.map(
       ({ href, title }) => html`
         <li class="generic-sidebar__item">
-          ${context.path === href
-            ? html`<a
-                class="generic-sidebar__link"
-                aria-current="true"
-                href=${href}
-                >${title}</a
-              >`
-            : html`<a class="generic-sidebar__link" href=${href}>${title}</a>`}
+          ${
+            context.path === href
+              ? html`<a
+                  class="generic-sidebar__link"
+                  aria-current="true"
+                  href=${href}
+                  >${title}</a
+                >`
+              : html`<a class="generic-sidebar__link" href=${href}>${title}</a>`
+          }
         </li>
       `,
     );

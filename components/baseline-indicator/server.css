@@ -8,7 +8,6 @@
     url("./icons/status/limited-dark.svg");
   --baseline-check: #1e8e3e;
   --baseline-cross: #ea8600;
-  --feedback-link-icon: var(--icon-primary, light-dark(#696969, #ffffff));
 
   padding-left: 3.8125rem;
   margin: 1rem 0;
@@ -213,6 +212,10 @@
     padding-right: 1rem;
     padding-bottom: 1.5rem;
 
+    a {
+      font-weight: 500;
+    }
+
     p {
       margin-top: 0;
       margin-bottom: 1rem;
@@ -231,7 +234,6 @@
 
       li {
         margin: 0;
-        font-weight: 500;
         list-style: none;
 
         a.learn-more {

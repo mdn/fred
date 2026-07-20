@@ -46,7 +46,7 @@ for (const [name, def] of customElements.__definitions) {
  * @param {import("@fred").CompilationStats} compilationStats
  */
 export async function render(path, partialContext, compilationStats) {
-  const locale = path.split("/")[1] || "en-US";
+  const locale = path.split("/", 2)[1] || "en-US";
 
   const context = {
     path,
@@ -135,7 +135,7 @@ export async function render(path, partialContext, compilationStats) {
  * @param {import("@fred").PartialContext} partialContext
  */
 export async function renderSimplified(path, partialContext) {
-  const locale = path.split("/")[1] || "en-US";
+  const locale = path.split("/", 2)[1] || "en-US";
   const context = {
     path,
     ...(await addFluent(locale)),

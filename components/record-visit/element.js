@@ -7,9 +7,11 @@ import {
 
 export class MDNRecordVisit extends LitElement {
   static ssr = false;
-  static properties = {
-    pageTitle: { type: String, attribute: "page-title" },
-  };
+  static get properties() {
+    return {
+      pageTitle: { type: String, attribute: "page-title" },
+    };
+  }
 
   constructor() {
     super();

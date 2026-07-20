@@ -31,6 +31,7 @@ export const SurveyBucket = Object.freeze({
   FIRST_FRED_2025: "FIRST_FRED_2025",
   DEVELOPER_SURVEY_2025: "DEVELOPER_SURVEY_2025",
   BASELINE_A11Y_2026: "BASELINE_A11Y_2026",
+  CANVAS_2026: "CANVAS_2026",
 });
 
 /**
@@ -46,25 +47,25 @@ export const SurveyBucket = Object.freeze({
  */
 export const SURVEYS = [
   {
-    key: SurveyBucket.BASELINE_A11Y_2026,
-    bucket: SurveyBucket.BASELINE_A11Y_2026,
+    key: SurveyBucket.CANVAS_2026,
+    bucket: SurveyBucket.CANVAS_2026,
     show: (mdn_url) => {
-      return /^\/en-US\/docs\/Web/.test(mdn_url);
+      return /^\/en-US\/docs\/Web\/API/.test(mdn_url);
     },
     src: (mdn_url) => {
       const url = new URL(
-        "https://survey.alchemer.com/s3/8804357/MDN-Short-Survey-Dev-Perception-of-Baseline-Widely-Available-re-Accessibility",
+        "https://survey.alchemer.com/s3/8586037/MDN-Canvas-API",
       );
       url.searchParams.set("referrer", mdn_url);
       return url.toString();
     },
-    teaser: "Help us improve how we communicate browser compatibility on MDN.",
-    question:
-      "Please answer this question about your understanding of Baseline.",
-    link: false,
+    teaser:
+      "We’re running a survey to better understand use of the Canvas API.",
+    question: "We’d love for you to take 2 minutes to share your feedback.",
+    link: true,
     rateFrom: 0,
-    rateTill: 0.05,
-    start: Date.parse("2026-05-04"),
-    end: Date.parse("2026-05-11"),
+    rateTill: 0.1,
+    start: Date.parse("2026-06-08"),
+    end: Date.parse("2026-06-15"),
   },
 ];

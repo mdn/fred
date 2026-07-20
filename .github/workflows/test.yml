@@ -18,12 +18,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           cache: npm
           node-version-file: ".nvmrc"
@@ -41,13 +41,13 @@ jobs:
         run: npx eslint .
 
       - name: Run lit-analyzer
-        run: npm run lit-analyzer -- components
+        run: npm run lit-analyzer
 
       - name: Run stylelint
         run: npx stylelint '**/*.css' || (exit_code=$? && (npx stylelint --fix '**/*.css' || true) && git diff --color && exit $exit_code)
 
       - name: Run tsc
-        run: npx tsc --noEmit
+        run: npx --package=typescript tsc --noEmit
 
       - name: Lint l10n strings
         run: npm run l10n -- --lint
@@ -60,20 +60,20 @@ jobs:
 
     steps:
       - name: Checkout (fred)
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           path: fred
           persist-credentials: false
 
       - name: Checkout (content)
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           repository: mdn/content
           path: content
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           cache: npm
           node-version-file: "fred/.nvmrc"
@@ -87,7 +87,7 @@ jobs:
       - name: Run unit tests
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: npm test -- --unit --no-lint
+        run: npm test -- unit
 
       - name: Build
         run: npm run build
@@ -96,4 +96,4 @@ jobs:
         env:
           CONTENT_ROOT: ../content/files
           GITHUB_TOKEN: ${{ github.token }}
-        run: npm test -- --no-unit --e2e --fred preview --rari --no-lint
+        run: npm test -- e2e --fred preview --rari

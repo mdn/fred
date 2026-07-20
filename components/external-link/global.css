@@ -1,21 +1,25 @@
-.external::after {
-  display: inline-block;
+.external {
+  padding-right: 1.125em;
 
-  width: 1em;
-  height: 1em;
+  &::after {
+    position: absolute;
 
-  margin-left: 0.25em;
+    width: 1em;
+    height: 1em;
 
-  vertical-align: text-top;
+    margin-left: 0.125em;
 
-  /*
-    Unicode zero width space as `<content replacement>` to expose the alt text in the a11y tree.
-    See: https://bugzilla.mozilla.org/show_bug.cgi?id=1976574
-  */
-  content: "\200b" / " (external)";
+    /*
+      Unicode zero width space as `<content replacement>` to expose the alt text in the a11y tree.
+      See: https://bugzilla.mozilla.org/show_bug.cgi?id=1976574
+    */
+    content: "\200b" / " (external)";
 
-  background-color: currentcolor;
+    background-color: currentcolor;
 
-  mask-image: url("../icon/external-link.svg");
-  mask-size: cover;
+    mask-image: url("../icon/external-link.svg");
+    mask-size: cover;
+
+    transform: translateY(calc(1lh / 2 - 0.5em));
+  }
 }

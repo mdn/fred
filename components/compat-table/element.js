@@ -21,6 +21,7 @@ import {
   bugURLToString,
   getCurrentSupport,
   getFirst,
+  groupSupportBranches,
   hasMore,
   hasNoteworthyNotes,
   isFullySupportedWithoutLimitation,
@@ -58,21 +59,23 @@ function browserToIconName(browser) {
   } else if (browser === "webview_ios") {
     return "safari";
   } else {
-    return browser.split("_")[0] ?? "";
+    return browser.split("_", 1)[0] ?? "";
   }
 }
 
 export class MDNCompatTable extends L10nMixin(LitElement) {
-  static properties = {
-    query: {},
-    locale: {},
-    data: {},
-    browserInfo: { attribute: "browserinfo" },
-    _pathname: { state: true },
-    _platforms: { state: true },
-    _browsers: { state: true },
-    _showTimelineId: { state: true },
-  };
+  static get properties() {
+    return {
+      query: {},
+      locale: {},
+      data: {},
+      browserInfo: { attribute: "browserinfo" },
+      _pathname: { state: true },
+      _platforms: { state: true },
+      _browsers: { state: true },
+      _showTimelineId: { state: true },
+    };
+  }
 
   static styles = styles;
 
@@ -224,16 +227,11 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   }
 
   _renderIssueLink() {
-    const onClick = (/** @type {MouseEvent} */ event) => {
-      event.preventDefault();
-      window.open(this._issueUrl, "_blank", "noopener,noreferrer");
-    };
     const source_file = this.data.__compat?.source_file;
     return html`<div class="bc-on-github">
       <a
         class="bc-github-link external external-icon"
-        href="#"
-        @click=${onClick}
+        href=${this._issueUrl}
         target="_blank"
         rel="noopener noreferrer"
         title=${this.l10n(
@@ -243,23 +241,25 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         ${this.l10n(
           "compat-link-report-issue",
         )`Report problems with this compatibility data`}</a
-      >${source_file
-        ? html` •
-            <a
-              class="bc-github-link external external-icon"
-              href=${`https://github.com/mdn/browser-compat-data/tree/main/${source_file}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              title=${this.l10n.raw({
-                id: "compat-link-source-title",
-                args: {
-                  filename: source_file,
-                },
-              })}
-            >
-              ${this.l10n("compat-link-source")`View data on GitHub`}
-            </a>`
-        : undefined}
+      >${
+        source_file
+          ? html` •
+              <a
+                class="bc-github-link external external-icon"
+                href=${`https://github.com/mdn/browser-compat-data/tree/main/${source_file}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                title=${this.l10n.raw({
+                  id: "compat-link-source-title",
+                  args: {
+                    filename: source_file,
+                  },
+                })}
+              >
+                ${this.l10n("compat-link-source")`View data on GitHub`}
+              </a>`
+          : undefined
+      }
     </div>`;
   }
 
@@ -391,8 +391,9 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         : html`<code>${name}</code>`;
 
       let titleNode;
-      const titleContent = html`${title}${compat.status &&
-      this._renderStatusIcons(compat.status)}`;
+      const titleContent = html`${title}${
+        compat.status && this._renderStatusIcons(compat.status)
+      }`;
       if (compat.mdn_url && depth > 0) {
         const href = compat.mdn_url.replace(
           `/${DEFAULT_LOCALE}/docs`,
@@ -450,18 +451,26 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           >
             ${this._renderCellText(support, browser)}
           </button>
-          ${hasHistory
-            ? html`<div id=${timelineId} class="timeline" tabindex="0">
-                ${isExpanded
-                  ? html`<dl class="bc-notes-list">${notes}</dl>`
-                  : nothing}
-              </div>`
-            : nothing}
+          ${
+            hasHistory
+              ? html`<div id=${timelineId} class="timeline" tabindex="0">
+                  ${
+                    isExpanded
+                      ? html`<div class="bc-notes-list">${notes}</div>`
+                      : nothing
+                  }
+                </div>`
+              : nothing
+          }
         </td>`;
       });
 
       return html`<tr>
-        <th class=${`bc-feature bc-feature-depth-${depth}`} scope="row">
+        <th
+          class="bc-feature"
+          style=${`--compat-feature-depth: ${depth}`}
+          scope="row"
+        >
           ${titleNode}
         </th>
         ${browserCells}
@@ -475,17 +484,22 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
   /**
    * @param {import("@bcd").SupportStatement} support
+   * @param {{ omitAliasModifiers?: boolean }} [options] - When `omitAliasModifiers` is
+   *   true, the `prefix` and `altname` icons are skipped (because a branch
+   *   heading already conveys the alias modifier).
    */
-  _renderCellIcons(support) {
+  _renderCellIcons(support, { omitAliasModifiers = false } = {}) {
     const supportItem = getCurrentSupport(support);
     if (!supportItem) {
       return;
     }
 
     const icons = [
-      supportItem.prefix && this._renderIcon("prefix"),
+      !omitAliasModifiers && supportItem.prefix && this._renderIcon("prefix"),
       hasNoteworthyNotes(supportItem) && this._renderIcon("footnote"),
-      supportItem.alternative_name && this._renderIcon("altname"),
+      !omitAliasModifiers &&
+        supportItem.alternative_name &&
+        this._renderIcon("altname"),
       supportItem.flags && this._renderIcon("disabled"),
       hasMore(support) && this._renderIcon("more"),
     ].filter(Boolean);
@@ -588,46 +602,108 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
    * @param {import("@bcd").SupportStatement} support
    */
   _renderNotes(browser, support) {
-    return [...asList(support)]
-      .reverse()
-      .flatMap((item, i) => {
-        const notes = this._getNotes(browser, support, item);
+    // Support arrays interleave parallel branches (e.g. unprefixed vs.
+    // `-webkit-` vs. `-moz-`). Render each branch as its own timeline so
+    // versions stay in chronological order within the branch. Any branch
+    // with a `prefix` or `alternative_name` gets a heading conveying the
+    // alias modifier, even when there is no canonical branch to contrast
+    // with.
+    const branches = groupSupportBranches(support);
+
+    return branches.map((branchItems) => {
+      const { prefix, alternative_name } = branchItems[0];
+      const hasAliasModifier = !!(prefix || alternative_name);
+      const heading = hasAliasModifier
+        ? this._renderBranchHeading(prefix, alternative_name)
+        : nothing;
+
+      const wrappers = [...branchItems].reverse().flatMap((item, i) => {
+        // Suppress prefix/alt-name notes when the branch heading already
+        // conveys the alias modifier — avoids redundancy.
+        const notes = this._getNotes(browser, support, item, {
+          omitAliasModifiers: hasAliasModifier,
+        });
 
         const notesItems = notes.map(({ iconName, label }) => {
-          return html`<dd class="bc-supports-dd">
-            ${this._renderIcon(iconName)}${typeof label === "string"
-              ? html`<span>${unsafeHTML(label)}</span>`
-              : label}
-          </dd>`;
+          return html`<div class="bc-supports-dd">
+            ${this._renderIcon(iconName)}${
+              typeof label === "string"
+                ? html`<span>${unsafeHTML(label)}</span>`
+                : label
+            }
+          </div>`;
         });
 
         const hasNotes = notesItems.length > 0;
 
+        // Always render the first (most recent) item even when it has no
+        // notes, so each branch shows at least one row in its timeline.
         return (
           (i === 0 || hasNotes) &&
           html`<div class="bc-notes-wrapper">
-            <dt
+            <div
               class=${`bc-supports-${getSupportClassName(
                 item,
                 browser,
               )} bc-supports`}
             >
-              ${this._renderCellText(item, browser, true)}
-            </dt>
-            ${notesItems} ${hasNotes ? undefined : html`<dd></dd>`}
+              ${this._renderCellText(item, browser, true, {
+                omitAliasModifiers: hasAliasModifier,
+              })}
+            </div>
+            ${notesItems}
+            ${hasNotes ? undefined : html`<div class="bc-notes-end"></div>`}
           </div>`
         );
-      })
-      .filter(Boolean);
+      });
+
+      return html`<div class="bc-branch">
+        ${heading}
+        <div class="bc-branch-items">${wrappers}</div>
+      </div>`;
+    });
+  }
+
+  /**
+   * Called only when at least one of `prefix` / `alternativeName` is present.
+   * @param {string | undefined} prefix
+   * @param {string | undefined} alternativeName
+   */
+  _renderBranchHeading(prefix, alternativeName) {
+    const id =
+      prefix && alternativeName
+        ? "compat-branch-prefix-altname"
+        : prefix
+          ? "compat-branch-prefix"
+          : "compat-branch-altname";
+    const label = this.l10n.raw({
+      id,
+      args: { prefix, altname: alternativeName },
+      elements: {
+        prefix: { tag: "code" },
+        altname: { tag: "code" },
+      },
+    });
+    const icons = [
+      prefix && this._renderIcon("prefix"),
+      alternativeName && this._renderIcon("altname"),
+    ].filter(Boolean);
+    return html`<div class="bc-branch-heading">
+      <div class="bc-icons">${icons}</div>
+      <span>${label}</span>
+    </div>`;
   }
 
   /**
    * @param {import("@bcd").BrowserStatement} browser
    * @param {import("@bcd").SupportStatement} support
    * @param {import("@bcd").SimpleSupportStatement} item
+   * @param {{ omitAliasModifiers?: boolean }} [options] - When `omitAliasModifiers` is
+   *   true, prefix / alternative_name don't count as limitations when judging
+   *   full support (because a branch heading already conveys the modifier).
    * @returns
    */
-  _getNotes(browser, support, item) {
+  _getNotes(browser, support, item, { omitAliasModifiers = false } = {}) {
     /**
      * @type {Array<{iconName: import("@compat").IconName; label: string | import("@lit").L10nResult | undefined }>}
      */
@@ -657,29 +733,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       });
     }
 
-    if (item.prefix) {
-      supportNotes.push({
-        iconName: "prefix",
-        label: this.l10n.raw({
-          id: "compat-support-prefix",
-          args: {
-            prefix: item.prefix,
-          },
-        }),
-      });
-    }
-
-    if (item.alternative_name) {
-      supportNotes.push({
-        iconName: "altname",
-        label: this.l10n.raw({
-          id: "compat-support-altname",
-          args: {
-            altname: item.alternative_name,
-          },
-        }),
-      });
-    }
+    // Note: prefix / alternative_name modifiers are conveyed by the branch
+    // heading (see `_renderBranchHeading`), so they aren't pushed here.
 
     if (item.flags) {
       for (const { type, name, value_to_set } of item.flags) {
@@ -762,8 +817,13 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     // If we encounter nothing else than the required `version_added` and
     // `release_date` properties, assume full support.
     // EDIT 1-5-21: if item.version_added doesn't exist, assume no support.
+    // When the branch heading already conveys the alias modifier, ignore prefix
+    // and alternative_name when judging full support — otherwise a plain
+    // `{ prefix, version_added }` item falls through to "Support unknown".
     if (
-      isFullySupportedWithoutLimitation(item) &&
+      isFullySupportedWithoutLimitation(item, {
+        ignoreAliasModifiers: omitAliasModifiers,
+      }) &&
       !versionIsPreview(item.version_added, browser)
     ) {
       supportNotes.push({
@@ -792,8 +852,16 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
    * @param {import("@bcd").SupportStatement | undefined} support
    * @param {import("@bcd").BrowserStatement} browser
    * @param {boolean} [timeline]
+   * @param {{ omitAliasModifiers?: boolean }} [options] - Forwarded to
+   *   {@link _renderCellIcons} to suppress prefix/altname icons when a branch
+   *   heading already conveys the alias modifier.
    */
-  _renderCellText(support, browser, timeline = false) {
+  _renderCellText(
+    support,
+    browser,
+    timeline = false,
+    { omitAliasModifiers = false } = {},
+  ) {
     const currentSupport = getCurrentSupport(support);
 
     const added = currentSupport?.version_added ?? undefined;
@@ -875,9 +943,9 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     title = `${browser.name} – ${title}`;
 
     return html`<div
-      class=${timeline
-        ? "bcd-timeline-cell-text-wrapper"
-        : "bcd-cell-text-wrapper"}
+      class=${
+        timeline ? "bcd-timeline-cell-text-wrapper" : "bcd-cell-text-wrapper"
+      }
     >
       <div class="bcd-cell-icons">
         <span class="icon-wrap">
@@ -896,24 +964,28 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         <span class="bc-browser-name">${browser.name}</span>
         <span
           class="bc-version-label"
-          title=${browserReleaseDate && !timeline
-            ? this.l10n.raw({
-                id: "compat-browser-version-date",
-                args: {
-                  browser: browser.name,
-                  version: added,
-                  date: browserReleaseDate,
-                },
-              })
-            : ""}
+          title=${
+            browserReleaseDate && !timeline
+              ? this.l10n.raw({
+                  id: "compat-browser-version-date",
+                  args: {
+                    browser: browser.name,
+                    version: added,
+                    date: browserReleaseDate,
+                  },
+                })
+              : ""
+          }
         >
           ${!timeline || added ? label : undefined}
-          ${browserReleaseDate && timeline
-            ? ` (${this.l10n.raw({ id: "compat-browser-version-released", args: { date: browserReleaseDate } })})`
-            : ""}
+          ${
+            browserReleaseDate && timeline
+              ? ` (${this.l10n.raw({ id: "compat-browser-version-released", args: { date: browserReleaseDate } })})`
+              : ""
+          }
         </span>
       </div>
-      ${support && this._renderCellIcons(support)}
+      ${support && this._renderCellIcons(support, { omitAliasModifiers })}
     </div>`;
   }
 

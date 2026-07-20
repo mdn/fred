@@ -19,8 +19,30 @@ updates:
           - patch
         exclude-patterns:
           - "@mdn/*"
+      codemirror:
+        patterns:
+          - "@codemirror/*"
+        update-types:
+          - major
+      eslint:
+        patterns:
+          - "@eslint/*"
+          - "eslint"
+        update-types:
+          - major
+      rspack:
+        patterns:
+          - "@rspack/*"
+        update-types:
+          - major
+      wdio:
+        patterns:
+          - "@wdio/*"
+        update-types:
+          - major
     commit-message:
       prefix: chore
+      prefix-development: build
       include: scope
 
   - package-ecosystem: github-actions

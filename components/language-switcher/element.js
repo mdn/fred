@@ -14,20 +14,23 @@ import {
 
 import styles from "./element.css?lit";
 
+import "../button/element.js";
 import "../dropdown/element.js";
 import "../switch/element.js";
 
 export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    locale: { type: String },
-    native: { type: String },
-    translations: { type: Array },
-    url: { type: String },
-    notFound: { type: Boolean, attribute: "not-found" },
-    _preferredLocale: { state: true },
-  };
+  static get properties() {
+    return {
+      locale: { type: String },
+      native: { type: String },
+      translations: { type: Array },
+      url: { type: String },
+      notFound: { type: Boolean, attribute: "not-found" },
+      _preferredLocale: { state: true },
+    };
+  }
 
   constructor() {
     super();
@@ -122,22 +125,24 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
             >
           </div>
           <ul class="language-switcher__list">
-            ${notFound
-              ? this._notFoundFallback.render({
-                  initial: () => this._renderCurrentLocale(),
-                  pending: () => this._renderCurrentLocale(),
-                  error: () => this._renderCurrentLocale(),
-                  complete: (doc) =>
-                    doc?.other_translations
-                      ? this._renderDropdownItems(
-                          doc.other_translations,
-                          locale,
-                          doc.mdn_url,
-                          notFound,
-                        )
-                      : this._renderCurrentLocale(),
-                })
-              : this._renderDropdownItems(translations, locale, url)}
+            ${
+              notFound
+                ? this._notFoundFallback.render({
+                    initial: () => this._renderCurrentLocale(),
+                    pending: () => this._renderCurrentLocale(),
+                    error: () => this._renderCurrentLocale(),
+                    complete: (doc) =>
+                      doc?.other_translations
+                        ? this._renderDropdownItems(
+                            doc.other_translations,
+                            locale,
+                            doc.mdn_url,
+                            notFound,
+                          )
+                        : this._renderCurrentLocale(),
+                  })
+                : this._renderDropdownItems(translations, locale, url)
+            }
           </ul>
         </div>
       </mdn-dropdown>
