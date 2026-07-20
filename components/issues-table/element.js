@@ -7,11 +7,13 @@ import styles from "./element.css?lit";
 export class MDNIssuesTable extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    _issues: { state: true },
-    _isLoading: { state: true },
-    _error: { state: true },
-  };
+  static get properties() {
+    return {
+      _issues: { state: true },
+      _isLoading: { state: true },
+      _error: { state: true },
+    };
+  }
 
   constructor() {
     super();

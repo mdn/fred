@@ -1,4 +1,15 @@
 .generic-content {
+  margin-block-end: 3rem;
+
+  h1 {
+    margin: 1rem 0;
+
+    font-size: var(--font-size-largest);
+    font-weight: normal;
+
+    line-height: var(--font-line-header);
+  }
+
   .content-section {
     h2 {
       margin: 4rem 0 0.5rem;

@@ -1,3 +1,5 @@
+import { BCD_BASE_URL } from "../env/index.js";
+
 /**
  * A list of browsers to be hidden.
  * @constant {string[]}
@@ -23,7 +25,7 @@ export const SHOW_BROWSERS = [
 /**
  * Gets the first element of an array or returns the value itself.
  * @template T
- * @param {T | [T?, ...any[]]} a
+ * @param {T | [T?, ...unknown[]]} a
  * @returns {T | undefined}
  */
 export function getFirst(a) {
@@ -141,6 +143,46 @@ export function hasMore(support) {
 }
 
 /**
+ * Groups support items into parallel branches.
+ *
+ * BCD support arrays interleave parallel implementations (e.g. unprefixed,
+ * `-webkit-`, `-moz-`). Items sharing the same `prefix` and `alternative_name`
+ * form one chronological branch; items differing in either are parallel and
+ * should be rendered as separate timelines to avoid out-of-order versions.
+ *
+ * The canonical branch (no prefix, no alternative name) is returned first;
+ * non-canonical branches sort by `(alternative_name, prefix)` so the output
+ * is stable regardless of how BCD happens to order the source items.
+ * @param {import("@bcd").SupportStatement} support
+ * @returns {[import("@bcd").SimpleSupportStatement, ...import("@bcd").SimpleSupportStatement[]][]}
+ */
+export function groupSupportBranches(support) {
+  /** @type {Map<string, [import("@bcd").SimpleSupportStatement, ...import("@bcd").SimpleSupportStatement[]]>} */
+  const branches = new Map();
+  for (const item of asList(support)) {
+    // `/` is safe as a separator: BCD prefixes (e.g. `-webkit-`) and
+    // alternative names (identifier-shaped) never contain it.
+    const key = `${item.prefix ?? ""}/${item.alternative_name ?? ""}`;
+    const branch = branches.get(key);
+    if (branch) {
+      branch.push(item);
+    } else {
+      branches.set(key, [item]);
+    }
+  }
+  const canonicalKey = "/";
+  const canonical = branches.get(canonicalKey);
+  branches.delete(canonicalKey);
+  const others = [...branches.values()].sort(([a], [b]) => {
+    return (
+      (a.alternative_name ?? "").localeCompare(b.alternative_name ?? "") ||
+      (a.prefix ?? "").localeCompare(b.prefix ?? "")
+    );
+  });
+  return [...(canonical ? [canonical] : []), ...others];
+}
+
+/**
  * Determines if a version is a preview version.
  * @param {string | import("@bcd").VersionValue | undefined} version
  * @param {import("@bcd").BrowserStatement} browser
@@ -192,23 +234,31 @@ export function bugURLToString(url) {
 /**
  * Checks if a support statement has any limitation.
  * @param {import("@bcd").SimpleSupportStatement} support
+ * @param {{ ignoreAliasModifiers?: boolean }} [options]
  * @returns {boolean}
  */
-function hasLimitation(support) {
-  return hasMajorLimitation(support) || !!support.notes || !!support.impl_url;
+function hasLimitation(support, { ignoreAliasModifiers = false } = {}) {
+  return (
+    hasMajorLimitation(support, { ignoreAliasModifiers }) ||
+    !!support.notes ||
+    !!support.impl_url
+  );
 }
 
 /**
  * Checks if a support statement has major limitations.
  * @param {import("@bcd").SimpleSupportStatement} support
+ * @param {{ ignoreAliasModifiers?: boolean }} [options] - When `ignoreAliasModifiers` is
+ *   true, `prefix` and `alternative_name` don't count as limitations (because
+ *   a branch heading conveys them).
  * @returns {boolean}
  */
-function hasMajorLimitation(support) {
+function hasMajorLimitation(support, { ignoreAliasModifiers = false } = {}) {
   return (
     support.partial_implementation ||
-    !!support.alternative_name ||
+    (!ignoreAliasModifiers && !!support.alternative_name) ||
     !!support.flags ||
-    !!support.prefix ||
+    (!ignoreAliasModifiers && !!support.prefix) ||
     !!support.version_removed
   );
 }
@@ -216,10 +266,17 @@ function hasMajorLimitation(support) {
 /**
  * Checks if a support statement is fully supported without any limitation.
  * @param {import("@bcd").SimpleSupportStatement} support
+ * @param {{ ignoreAliasModifiers?: boolean }} [options] - When `ignoreAliasModifiers` is
+ *   true, `prefix` and `alternative_name` don't count as limitations.
  * @returns {boolean}
  */
-export function isFullySupportedWithoutLimitation(support) {
-  return !!support.version_added && !hasLimitation(support);
+export function isFullySupportedWithoutLimitation(
+  support,
+  { ignoreAliasModifiers = false } = {},
+) {
+  return (
+    !!support.version_added && !hasLimitation(support, { ignoreAliasModifiers })
+  );
 }
 
 /**
@@ -292,4 +349,12 @@ export function getCurrentSupport(support) {
 
   // Default (likely never reached).
   return getFirst(support);
+}
+
+/**
+ * Get the URL to the JSON file for a given BCD key
+ * @param {string} query
+ */
+export function queryToUrl(query) {
+  return `${BCD_BASE_URL}/bcd/api/v0/current/${query}.json`;
 }

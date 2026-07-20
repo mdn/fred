@@ -50,4 +50,4 @@ export const OBSERVATORY_API_URL = parseString(
 );
 
 // Transcend Consent Management - https://docs.transcend.io/docs/consent
-export const TRANSCEND_BUNDLE_ID = parseString("TRANSCEND_BUNDLE_ID", "");
+export const TRANSCEND_AIRGAP_URL = parseString("TRANSCEND_AIRGAP_URL", "");

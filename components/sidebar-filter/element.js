@@ -5,18 +5,23 @@
 import { LitElement, html } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
+import { gleanClick } from "../../utils/glean.js";
 import cancelIcon from "../icon/cancel.svg?lit";
 
 import styles from "./element.css?lit";
 import { SidebarFilterer } from "./sidebar-filterer.js";
 
+import "../button/element.js";
+
 class MDNSidebarFilter extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    query: { type: String },
-    matchCount: { state: true, type: Number },
-  };
+  static get properties() {
+    return {
+      query: { type: String },
+      matchCount: { state: true, type: Number },
+    };
+  }
 
   /**
    * Creates an instance of SidebarFilterElement.
@@ -84,13 +89,14 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
   /**
    * Lit lifecycle method called after properties are updated.
    * Triggers telemetry events and applies filtering logic when properties change.
-   * @param {Map<string, any>} changedProperties
+   * @param {import("lit").PropertyValues<this>} changedProperties
    */
   updated(changedProperties) {
     if (changedProperties.has("query")) {
       // Mark that the user has typed if the query is non-empty.
       if (this.query && this.query.trim().length > 0 && !this.hasTyped) {
         this.hasTyped = true;
+        gleanClick("sidebar_filter_typed");
       }
 
       if (this._quicklinks) {
@@ -114,6 +120,14 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
         }
       }
     }
+  }
+
+  /**
+   * Event handler for focus events on the text field.
+   * @private
+   */
+  _onFocus() {
+    gleanClick("sidebar_filter_focus");
   }
 
   /**
@@ -152,21 +166,24 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
         type="text"
         placeholder=${this.l10n("sidebar-filter-filter")`Filter`}
         .value=${this.query}
+        @focus=${this._onFocus}
         @input=${this._onInput}
       />
-      ${this.matchCount === undefined
-        ? ""
-        : html` <span class="counter"> ${this.matchCount} </span> `}
+      ${
+        this.matchCount === undefined
+          ? ""
+          : html` <span class="counter"> ${this.matchCount} </span> `
+      }
       <mdn-button
         class="button"
         variant="plain"
-        label=${this.l10n(
-          "sidebar-filter-clear-filter-input",
-        )`Clear filter input`}
         .icon=${cancelIcon}
         icon-only
         @click=${this._clearFilter}
-      ></mdn-button>
+        >${this.l10n(
+          "sidebar-filter-clear-filter-input",
+        )`Clear filter input`}</mdn-button
+      >
     `;
   }
 }

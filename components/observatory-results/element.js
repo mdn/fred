@@ -2,6 +2,7 @@ import { Task } from "@lit/task";
 import { LitElement, html } from "lit";
 import { nothing } from "lit";
 
+import { gleanClick } from "../../utils/glean.js";
 import { OBSERVATORY_API_URL } from "../env/index.js";
 
 import styles from "./element.css?lit";
@@ -29,11 +30,13 @@ export class MDNObservatoryResults extends LitElement {
   /**
    * @type { import("@lit").PropertyDeclarations }
    */
-  static properties = {
-    host: { type: String },
-    selectedTab: { state: true, type: Number },
-    _usePostInApi: { state: true, type: Boolean },
-  };
+  static get properties() {
+    return {
+      host: { type: String },
+      selectedTab: { state: true, type: Number },
+      _usePostInApi: { state: true, type: Boolean },
+    };
+  }
 
   _apiTask = new Task(this, {
     args: () => [this.host],
@@ -62,7 +65,9 @@ export class MDNObservatoryResults extends LitElement {
         }
         return await res.json();
       } catch (error) {
-        throw new Error("Observatory API request for scan data failed", {
+        const message = "Observatory API request for scan data failed";
+        gleanClick(`observatory: error -> ${message}`);
+        throw new Error(message, {
           cause: error,
         });
       }
@@ -116,6 +121,7 @@ export class MDNObservatoryResults extends LitElement {
     if (!this.host) {
       return;
     }
+    gleanClick("observatory: rescan");
     this._usePostInApi = true;
     this._apiTask.run();
   }
@@ -127,6 +133,7 @@ export class MDNObservatoryResults extends LitElement {
    */
   _handleTabSelect(index, key) {
     this.selectedTab = index;
+    gleanClick(`observatory: tab -> ${key}`);
     globalThis.history.replaceState(
       "",
       "",

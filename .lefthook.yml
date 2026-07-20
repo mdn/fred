@@ -44,7 +44,7 @@ pre-push:
           - name: stylelint
             run: npx stylelint '**/*.css' --cache --ignore-path .gitignore
           - name: tsc
-            run: npx tsc
+            run: npx --package=typescript tsc
           - name: lint l10n strings
             run: npm run l10n -- --lint
 

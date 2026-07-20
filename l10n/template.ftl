@@ -10,14 +10,15 @@ baseline-not-extra = This feature is not Baseline because it does not work in so
 baseline-supported-in = Supported in { $browsers }
 baseline-unsupported-in = Not widely supported in { $browsers }
 baseline-supported-and-unsupported-in = Supported in { $supported }, but not widely supported in { $unsupported }
+baseline-signals = Want more browser support for this feature? <a data-l10n-name="link">Tell us why.</a>
 homepage-hero-title = Resources for Developers,<br> by Developers
+playground-user-shared-warning = This is a user-shared playground.<br>Always inspect the code before running it.
 homepage-hero-description = Documenting <a data-l10n-name="css">CSS</a>, <a data-l10n-name="html">HTML</a>, and <a data-l10n-name="js">JavaScript</a>, since 2005.
 not-found-title = Page not found
 not-found-description = Sorry, the page <code data-l10n-name="url">{ $url }</code> could not be found.
 not-found-fallback-english = <strong data-l10n-name="strong">Good news:</strong> The page you requested exists in <em data-l10n-name="em">English</em>.
 not-found-fallback-search = The page you requested doesn't exist, but you could try a site search for:
 not-found-back = Go back to the home page
-footer-mofo = Visit <a data-l10n-name="moco">Mozilla Corporation’s</a> not-for-profit parent, the <a data-l10n-name="mofo">Mozilla Foundation</a>.
 footer-copyright = Portions of this content are ©1998–{ $year } by individual mozilla.org contributors. Content available under <a data-l10n-name="cc">a Creative Commons license</a>.
 search-modal-site-search = Site search for <em>{ $query }</em>
 site-search-search-stats = Found { $results } documents.
@@ -50,41 +51,42 @@ obs-mdn = The { -brand-name-obs } provides effective security insights, guided b
 compat-browser-version-date = { $browser } { $version } – Release date: { $date }
 compat-browser-version-released = Release date: { $date }
 compat-link-source-title = File: { $filename }
-compat-support-prefix = Implemented with the vendor prefix: { $prefix }
-compat-support-altname = Alternate name: { $altname }
+compat-branch-prefix = Prefix: <code data-l10n-name="prefix">{ $prefix }</code>
+compat-branch-altname = Alternate name: <code data-l10n-name="altname">{ $altname }</code>
+compat-branch-prefix-altname = Prefix: <code data-l10n-name="prefix">{ $prefix }</code>, alternate name: <code data-l10n-name="altname">{ $altname }</code>
 compat-support-removed = Removed in { $version } and later
 compat-support-see-impl-url = See <a data-l10n-name="impl_url">{ $label }</a>
 compat-support-flags =
-    { NUMBER($has_added) ->
-        [one] From version { $version_added }
-       *[other] { "" }
+    { $has_added ->
+        [1] From version { $version_added }
+       *[0] { "" }
     }{ $has_last ->
-        [one]
-            { NUMBER($has_added) ->
-               *[zero] Until { $versionLast } users
-                [one] { " " }until { $versionLast } users
+        [1]
+            { $has_added ->
+               *[0] Until { $versionLast } users
+                [1] { " " }until { $versionLast } users
             }
-       *[zero]
-            { NUMBER($has_added) ->
-               *[zero] Users
-                [one] { " " }users
+       *[0]
+            { $has_added ->
+               *[0] Users
+                [1] { " " }users
             }
     }
     { " " }must explicitly set the <code data-l10n-name="name">{ $flag_name }</code>{ " " }
     { $flag_type ->
        *[preference] preference
         [runtime_flag] runtime flag
-    }{ NUMBER($has_value) ->
-        [one] { " " }to <code data-l10n-name="value">{ $flag_value }</code>
-       *[other] { "" }
+    }{ $has_value ->
+        [1] { " " }to <code data-l10n-name="value">{ $flag_value }</code>
+       *[0] { "" }
     }{ "." }
-    { NUMBER($has_pref_url) ->
-        [one]
+    { $has_pref_url ->
+        [1]
             { $flag_type ->
                 [preference] To change preferences in { $browser_name }, visit { $browser_pref_url }.
                *[other] { "" }
             }
-       *[other] { "" }
+       *[0] { "" }
     }
 compat-legend-yes = { compat-support-full }
 compat-legend-partial = { compat-support-partial }
@@ -127,7 +129,6 @@ baseline-indicator-check = check
 baseline-indicator-cross = cross
 baseline-indicator-learn-more = Learn more
 baseline-indicator-see-full-compatibility = See full compatibility
-baseline-indicator-report-feedback = Report feedback
 blog-previous = Previous post
 blog-next = Next post
 blog-index-blog-it-better = Blog it better

@@ -90,19 +90,25 @@ export class ContributorSpotlight extends ServerComponent {
               </a>
             </section>
 
-            ${hyData.sections && hyData.sections[0]
-              ? html`<section>
-                  ${unsafeHTML(hyData.sections[0].value.content)}
-                </section>`
-              : nothing}
-            ${hyData.quote
-              ? renderQuote(hyData.contributorName, hyData.quote)
-              : nothing}
-            ${hyData.sections && hyData.sections.length > 1
-              ? hyData.sections
-                  .slice(1)
-                  .map((section) => ContentSection.render(context, section))
-              : nothing}
+            ${
+              hyData.sections && hyData.sections[0]
+                ? html`<section>
+                    ${unsafeHTML(hyData.sections[0].value.content)}
+                  </section>`
+                : nothing
+            }
+            ${
+              hyData.quote
+                ? renderQuote(hyData.contributorName, hyData.quote)
+                : nothing
+            }
+            ${
+              hyData.sections && hyData.sections.length > 1
+                ? hyData.sections
+                    .slice(1)
+                    .map((section) => ContentSection.render(context, section))
+                : nothing
+            }
           </main>
         </div>
         ${renderGetInvolved()}

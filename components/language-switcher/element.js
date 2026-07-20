@@ -2,6 +2,7 @@ import { Task } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
+import { gleanClick } from "../../utils/glean.js";
 
 import infoIcon from "../icon/info.svg?lit";
 import { getEnglishDoc } from "../not-found/utils.js";
@@ -13,20 +14,23 @@ import {
 
 import styles from "./element.css?lit";
 
+import "../button/element.js";
 import "../dropdown/element.js";
 import "../switch/element.js";
 
 export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    locale: { type: String },
-    native: { type: String },
-    translations: { type: Array },
-    url: { type: String },
-    notFound: { type: Boolean, attribute: "not-found" },
-    _preferredLocale: { state: true },
-  };
+  static get properties() {
+    return {
+      locale: { type: String },
+      native: { type: String },
+      translations: { type: Array },
+      url: { type: String },
+      notFound: { type: Boolean, attribute: "not-found" },
+      _preferredLocale: { state: true },
+    };
+  }
 
   constructor() {
     super();
@@ -63,12 +67,15 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
 
   _togglePreferredLocale() {
     if (this.notFound) return;
+    const oldValue = this._preferredLocale ?? "0";
     if (this._isLocalePreferred) {
       resetPreferredLocale();
       this._preferredLocale = undefined;
+      gleanClick(`language_remember: ${oldValue} -> 0`);
     } else {
       setPreferredLocale(this.locale);
       this._preferredLocale = this.locale;
+      gleanClick(`language_remember: ${oldValue} -> ${this.locale}`);
     }
   }
 
@@ -118,22 +125,24 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
             >
           </div>
           <ul class="language-switcher__list">
-            ${notFound
-              ? this._notFoundFallback.render({
-                  initial: () => this._renderCurrentLocale(),
-                  pending: () => this._renderCurrentLocale(),
-                  error: () => this._renderCurrentLocale(),
-                  complete: (doc) =>
-                    doc?.other_translations
-                      ? this._renderDropdownItems(
-                          doc.other_translations,
-                          locale,
-                          doc.mdn_url,
-                          notFound,
-                        )
-                      : this._renderCurrentLocale(),
-                })
-              : this._renderDropdownItems(translations, locale, url)}
+            ${
+              notFound
+                ? this._notFoundFallback.render({
+                    initial: () => this._renderCurrentLocale(),
+                    pending: () => this._renderCurrentLocale(),
+                    error: () => this._renderCurrentLocale(),
+                    complete: (doc) =>
+                      doc?.other_translations
+                        ? this._renderDropdownItems(
+                            doc.other_translations,
+                            locale,
+                            doc.mdn_url,
+                            notFound,
+                          )
+                        : this._renderCurrentLocale(),
+                  })
+                : this._renderDropdownItems(translations, locale, url)
+            }
           </ul>
         </div>
       </mdn-dropdown>
@@ -160,6 +169,7 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
                 `/${notFound ? "en-US" : locale}/`,
                 `/${translation.locale}/`,
               )}
+              data-glean-id=${`language: ${locale} -> ${translation.locale}`}
               >${translation.native}</a
             >
           </li>

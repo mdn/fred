@@ -1,6 +1,7 @@
 import { LitElement, html, nothing } from "lit";
 import { createRef, ref } from "lit/directives/ref.js";
 
+import { gleanClick } from "../../utils/glean.js";
 import { OBSERVATORY_API_URL } from "../env/index.js";
 import "../progress-bar/element.js";
 import "../button/element.js";
@@ -14,11 +15,13 @@ const ERROR_MAP = {
 export class MDNObservatoryForm extends LitElement {
   static styles = styles;
 
-  static properties = {
-    _queryRunning: { type: Boolean, state: true },
-    _hostname: { type: String, state: true },
-    _errorMessage: { type: String, state: true },
-  };
+  static get properties() {
+    return {
+      _queryRunning: { type: Boolean, state: true },
+      _hostname: { type: String, state: true },
+      _errorMessage: { type: String, state: true },
+    };
+  }
 
   constructor() {
     super();
@@ -61,6 +64,7 @@ export class MDNObservatoryForm extends LitElement {
       this._hostname = host;
     }
     this._queryRunning = true;
+    gleanClick("observatory: scan");
     try {
       const apiUrl = new URL(
         OBSERVATORY_API_URL +
@@ -77,6 +81,7 @@ export class MDNObservatoryForm extends LitElement {
     } catch (error) {
       // @ts-expect-error
       this._errorMessage = `${ERROR_MAP[error.name] || "message" in error ? error["message"] : error}`;
+      gleanClick(`observatory: error -> ${this._errorMessage}`);
     } finally {
       this._queryRunning = false;
     }
@@ -92,7 +97,7 @@ export class MDNObservatoryForm extends LitElement {
       : html`
           <form @submit=${this._handleSubmit} class="observatory-form">
             <div class="observatory-form__input-group">
-              <label htmlFor="host" class="visually-hidden">
+              <label for="host" class="visually-hidden">
                 Domain name or URL
               </label>
               <input
@@ -115,9 +120,11 @@ export class MDNObservatoryForm extends LitElement {
               </button>
             </div>
           </form>
-          ${this._errorMessage
-            ? html`<div class="error">${this._errorMessage}</div>`
-            : nothing}
+          ${
+            this._errorMessage
+              ? html`<div class="error">${this._errorMessage}</div>`
+              : nothing
+          }
         `;
   }
 }

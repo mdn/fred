@@ -6,7 +6,7 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import inlineScript from "../../entry.inline.js?source&csp=true";
 import {
   ROBOTS_GLOBAL_ALLOW,
-  TRANSCEND_BUNDLE_ID,
+  TRANSCEND_AIRGAP_URL,
   WRITER_MODE,
 } from "../env/index.js";
 import { RUNTIME_ENV, runtimeVariables } from "../env/runtime.js";
@@ -69,7 +69,7 @@ export class OuterLayout extends ServerComponent {
       .filter((x) => x !== undefined);
 
     const area =
-      context.path.split("/")[3]?.toLowerCase() === "learn_web_development"
+      context.path.split("/", 4)[3]?.toLowerCase() === "learn_web_development"
         ? "learn"
         : undefined;
 
@@ -95,11 +95,13 @@ export class OuterLayout extends ServerComponent {
             content="width=device-width, initial-scale=1.0"
           />
           <title>${context.pageTitle || "MDN"}</title>
-          ${RUNTIME_ENV && runtimeEnvEntries.length > 0
-            ? unsafeHTML(`<script>process = {
+          ${
+            RUNTIME_ENV && runtimeEnvEntries.length > 0
+              ? unsafeHTML(`<script>process = {
   env: ${JSON.stringify(Object.fromEntries(runtimeEnvEntries))}
 };</script>`)
-            : nothing}
+              : nothing
+          }
           ${unsafeHTML(`<script>${inlineScript}</script>`)}
           ${styles.map(
             (path) =>
@@ -116,13 +118,16 @@ export class OuterLayout extends ServerComponent {
                 fetchpriority="low"
               />`,
           )}
-          ${TRANSCEND_BUNDLE_ID &&
-          html`<script
-            data-cfasync="false"
-            data-report-only="on"
-            data-prompt="0"
-            src=${`https://transcend-cdn.com/cm/${TRANSCEND_BUNDLE_ID}/airgap.js`}
-          ></script>`}
+          ${
+            TRANSCEND_AIRGAP_URL && context.renderer !== "SpaPlay"
+              ? html`<script
+                  data-cfasync="false"
+                  data-report-only="on"
+                  data-prompt="0"
+                  src=${TRANSCEND_AIRGAP_URL}
+                ></script>`
+              : nothing
+          }
           ${scripts?.map(
             (path) => html`<script src=${path} type="module"></script>`,
           )}

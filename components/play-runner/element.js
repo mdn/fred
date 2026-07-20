@@ -24,15 +24,17 @@ import styles from "./element.css?lit";
 export class MDNPlayRunner extends LitElement {
   static ssr = false;
 
-  static properties = {
-    code: { type: Object },
-    defaults: { type: String },
-    srcPrefix: { type: String, attribute: "src-prefix" },
-    allow: { type: String },
-    sandbox: { type: String },
-    permalink: { type: Boolean },
-    _src: { state: true },
-  };
+  static get properties() {
+    return {
+      code: { type: Object },
+      defaults: { type: String },
+      srcPrefix: { type: String, attribute: "src-prefix" },
+      allow: { type: String },
+      sandbox: { type: String },
+      permalink: { type: Boolean },
+      _src: { state: true },
+    };
+  }
 
   static styles = styles;
 
@@ -68,7 +70,7 @@ export class MDNPlayRunner extends LitElement {
   /** @param {MessageEvent} e  */
   _onMessage({ data: { typ, prop, args, uuid }, origin }) {
     if (!uuid) {
-      uuid = new URL(origin, "https://example.com").hostname.split(".")[0];
+      uuid = new URL(origin, "https://example.com").hostname.split(".", 1)[0];
     }
     if (uuid !== this._subdomain) {
       return;
@@ -137,7 +139,7 @@ export class MDNPlayRunner extends LitElement {
     window.addEventListener("message", this._onMessage);
   }
 
-  /** @param {any} message */
+  /** @param {unknown} message */
   async postMessage(message) {
     await this.ready;
     this._iframe.value?.contentWindow?.postMessage(message, "*");

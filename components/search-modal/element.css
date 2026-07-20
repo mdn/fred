@@ -6,6 +6,7 @@
 
 dialog {
   padding: 0;
+  overscroll-behavior: contain;
   border: 0;
 
   @media (--screen-menu-full) {
@@ -41,19 +42,13 @@ dialog {
   }
 
   &[open] {
-    display: grid;
-
-    grid-template-areas:
-      "search   close"
-      "progress progress"
-      "results  results";
-    grid-template-rows: var(--navigation-height) min-content min-content;
-    grid-template-columns: 1fr min-content;
+    display: flex;
+    flex-direction: column;
   }
 }
 
 progress {
-  grid-area: progress;
+  flex-shrink: 0;
   margin: 0 1rem 0.5rem;
 
   @media (--screen-menu-hamburger) {
@@ -61,8 +56,17 @@ progress {
   }
 }
 
+.header {
+  display: flex;
+
+  flex-shrink: 0;
+
+  align-items: center;
+
+  height: var(--navigation-height);
+}
+
 .close {
-  grid-area: close;
   font-size: 1.37rem;
 
   @media (--screen-menu-full) {
@@ -73,7 +77,8 @@ progress {
 form {
   display: grid;
 
-  grid-area: search;
+  flex: 1;
+
   grid-template-columns: min-content 1fr;
 
   gap: 0.5rem;
@@ -124,14 +129,9 @@ input {
 }
 
 ul {
-  grid-area: results;
-
   padding: 0;
   margin: 0;
-
   overflow: auto;
-
-  overscroll-behavior: contain;
 
   &:has(li) {
     border-top: 1px solid var(--color-border-primary);

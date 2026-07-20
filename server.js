@@ -6,7 +6,7 @@ import { Worker } from "node:worker_threads";
 import cookieParser from "cookie-parser";
 import express from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
-import openEditor from "open-editor";
+import { getEditorInfo } from "open-editor";
 
 import { FRED_BUILD_ROOT } from "./build/env.js";
 import {
@@ -64,7 +64,7 @@ async function serverRenderMiddleware(req, res, page) {
       /** @type {Stats} */
       const stats = res.locals.webpack.devMiddleware.stats;
 
-      const compilationStats = stats.toJson().children;
+      const compilationStats = stats.toJson({ entrypoints: true }).children;
       if (!compilationStats) {
         throw new Error("cannot parse the rspack config, did you modify it?");
       }
@@ -191,7 +191,7 @@ export async function startServer() {
   );
 
   if (WRITER_MODE) {
-    app.get("/_open", async (req, _res) => {
+    app.get("/_open", async (req, res) => {
       const { filepath } = req.query;
       const { CONTENT_ROOT, CONTENT_TRANSLATED_ROOT } = process.env;
       if (typeof filepath === "string") {
@@ -201,8 +201,19 @@ export async function startServer() {
             : CONTENT_TRANSLATED_ROOT) || "",
           filepath,
         );
-        openEditor([absolutePath]);
+        console.log(
+          `Attempting to open ${absolutePath} with ${process.env.EDITOR}`,
+        );
+        const { binary, arguments: args } = getEditorInfo([absolutePath]);
+        const child = spawn(binary, args, { detached: true, stdio: "ignore" });
+
+        child.on("error", (error) => {
+          console.error("Failed to open editor:", error);
+          return;
+        });
+        child.unref();
       }
+      res.sendStatus(204);
     });
   }
 
@@ -229,7 +240,7 @@ export async function startServer() {
       selfHandleResponse: true,
       on: {
         proxyReq: async (req) => {
-          const locale = req.path.split("/")[1];
+          const locale = req.path.split("/", 2)[1];
           if (locale && /^q[a-t][a-z]$/.test(locale)) {
             // if the locale matches a qaa...qtz private use language tag,
             // which we use for testing fluent with pseudo-locales,

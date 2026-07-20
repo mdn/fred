@@ -154,7 +154,9 @@ export class SidebarFilterer {
    * @param {HTMLAnchorElement} link The link element to reset.
    */
   resetHighlighting(link) {
-    const nodes = [...link.querySelectorAll("span, mark")];
+    const nodes = [
+      ...link.querySelectorAll("span.sidebar-filter-mark-container, mark"),
+    ];
     const parents = new Set();
     for (const node of nodes) {
       const parent = node.parentElement;
@@ -250,7 +252,7 @@ export class SidebarFilterer {
       );
 
       const span = this.replaceChildNode(node, "span");
-      span.className = "highlight-container";
+      span.className = "sidebar-filter-mark-container";
 
       /** @type {Text|undefined} */
       const initialRest = [...span.childNodes].find(
@@ -353,13 +355,11 @@ export class SidebarFilterer {
    * @returns {HTMLElement|undefined} The found element or undefined if none found.
    */
   findFirstElementBefore(el, candidates) {
-    return [...candidates]
-      .reverse()
-      .find(
-        (candidate) =>
-          candidate.compareDocumentPosition(el) &
-          Node.DOCUMENT_POSITION_FOLLOWING,
-      );
+    return candidates.findLast(
+      (candidate) =>
+        candidate.compareDocumentPosition(el) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    );
   }
 
   /**

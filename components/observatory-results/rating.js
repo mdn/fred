@@ -6,11 +6,12 @@ import { Tooltip } from "./tooltip.js";
 import { Trend } from "./trend.js";
 
 import "../observatory-rescan-button/element.js";
+import "../observatory-human-duration/element.js";
 import "../dropdown/element.js";
 
 /**
  *
- * @param {{result: import("@observatory").Result, host: string, rescan: Function}} props
+ * @param {{result: import("@observatory").Result, host: string, rescan: (event: Event) => void}} props
  * @returns {import("@lit").TemplateResult}
  */
 export function Rating({ result, host, rescan }) {
@@ -65,7 +66,12 @@ export function Rating({ result, host, rescan }) {
           @click=${rescan}
         ></mdn-observatory-rescan-button>
         <div class="scan-another">
-          <a href="/en-US/observatory"> Scan another website </a>
+          <a
+            href="/en-US/observatory"
+            data-glean-id="observatory: scan-another"
+          >
+            Scan another website
+          </a>
         </div>
       </section>
     </section>

@@ -33,7 +33,10 @@ export class RecentContributions extends ServerComponent {
               )}
             </time>
             <div class="recent-contributions__title">
-              <a class="external" href=${contribution.url}
+              <a
+                class="external"
+                href=${contribution.url}
+                data-glean-id=${`homepage: contribution ${index + 1} -> ${contribution.url}`}
                 >${contribution.title}</a
               >
             </div>
@@ -55,7 +58,7 @@ function getRelativeTime(seconds) {
     { amount: 60, unit: "minute" },
     { amount: 24, unit: "hour" },
     { amount: 7, unit: "day" },
-    { amount: 4.345_24, unit: "week" }, // 365/12/7
+    { amount: 4.34524, unit: "week" }, // 365/12/7
     { amount: 12, unit: "month" },
     { amount: Number.POSITIVE_INFINITY, unit: "year" },
   ];

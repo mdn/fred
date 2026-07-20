@@ -10,7 +10,7 @@ import { Button } from "./server.js";
 
 export class ButtonSandbox extends SandboxComponent {
   render() {
-    const hrefs = [undefined, "http://example.com"];
+    const hrefs = [undefined, "https://example.com"];
     const variants = [undefined, "primary", "secondary", "plain"];
     const actions = [undefined, "positive", "negative"];
     const icons = [
@@ -18,6 +18,7 @@ export class ButtonSandbox extends SandboxComponent {
       { icon, iconOnly: false },
       { icon, iconOnly: true },
     ];
+    const disabled = [false, true];
 
     return html`
       <style>
@@ -43,29 +44,41 @@ export class ButtonSandbox extends SandboxComponent {
         Button in <mdn-button .icon=${icon}>the middle</mdn-button> of text with
         icon.
       </p>
-      ${hrefs.map(
-        (href) => html`
-          <h3><code>${href ? "<a>" : "<button>"}</code></h3>
-          <section>
-            ${variants.map((variant) =>
-              actions.map((action) =>
-                icons.map(
-                  ({ icon, iconOnly }) => html`
-                    <mdn-button
-                      href=${ifDefined(href)}
-                      variant=${ifDefined(variant)}
-                      action=${ifDefined(action)}
-                      .icon=${icon}
-                      ?icon-only=${iconOnly}
-                    >
-                      ${variant || "no variant"} ${action} ${icon ? "icon" : ""}
-                    </mdn-button>
-                  `,
-                ),
-              ),
-            )}
-          </section>
-        `,
+      ${hrefs.map((href) =>
+        disabled
+          .filter((isDisabled) => !(href && isDisabled))
+          .map(
+            (isDisabled) => html`
+              <h3>
+                <code
+                  >${
+                    href ? "<a>" : `<button${isDisabled ? " disabled" : ""}>`
+                  }</code
+                >
+              </h3>
+              <section>
+                ${variants.map((variant) =>
+                  actions.map((action) =>
+                    icons.map(
+                      ({ icon, iconOnly }) => html`
+                        <mdn-button
+                          href=${ifDefined(href)}
+                          variant=${ifDefined(variant)}
+                          action=${ifDefined(action)}
+                          .icon=${icon}
+                          ?icon-only=${iconOnly}
+                          ?disabled=${isDisabled}
+                        >
+                          ${variant || "no variant"} ${action}
+                          ${icon ? "icon" : ""} ${isDisabled ? "disabled" : ""}
+                        </mdn-button>
+                      `,
+                    ),
+                  ),
+                )}
+              </section>
+            `,
+          ),
       )}
       <h2>Server component</h2>
       <div class="manual-size">

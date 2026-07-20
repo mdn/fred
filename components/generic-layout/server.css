@@ -1,13 +1,1 @@
 @import url("../layout/2-sidebars.css");
-
-/* Generic Layout */
-
-/* Content */
-.generic-layout__content {
-  padding-block: 2rem;
-}
-
-/* TOC */
-.generic-layout__toc {
-  padding-block: 2rem;
-}

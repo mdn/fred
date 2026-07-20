@@ -16,9 +16,11 @@ import styles from "./element.css?lit";
 export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    horizontal: { type: Boolean },
-  };
+  static get properties() {
+    return {
+      horizontal: { type: Boolean },
+    };
+  }
 
   constructor() {
     super();
