@@ -92,33 +92,23 @@ compat-branch-prefix-altname = Prefix: <code data-l10n-name="prefix">{ $prefix }
 compat-support-removed = Removed in { $version } and later
 compat-support-see-impl-url = See <a data-l10n-name="impl_url">{ $label }</a>
 compat-support-flags =
-  { $has_added ->
-    [1] From version { $version_added }
-    *[0] {""}
-  }{ $has_last ->
-    [1] { $has_added ->
-          *[0] Until { $versionLast } users
-          [1] {" "}until { $versionLast } users
-      }
-    *[0] { $has_added ->
-          *[0] Users
-          [1] {" "}users
-      }
-  }
-  {" "}must explicitly set the <code data-l10n-name="name">{ $flag_name }</code>{" "}
-  { $flag_type ->
+  { $version_range ->
+    [range] From version { $version_added } until { $version_last }, users
+    [from] From version { $version_added }, users
+    [until] Until { $version_last }, users
+    *[none] Users
+  } must explicitly set the <code data-l10n-name="name">{ $flag_name }</code> { $flag_type ->
     *[preference] preference
     [runtime_flag] runtime flag
   }{ $has_value ->
-    [1] {" "}to <code data-l10n-name="value">{ $flag_value }</code>
-    *[0] {""}
-  }{"."}
-  { $has_pref_url ->
+    [1]{ " " }to <code data-l10n-name="value">{ $flag_value }</code>
+    *[0] { "" }
+  }.{ $has_pref_url ->
     [1] { $flag_type ->
-      [preference] To change preferences in { $browser_name }, visit { $browser_pref_url }.
-      *[other] {""}
+    [preference]{ " " }To change preferences in { $browser_name }, visit { $browser_pref_url }.
+    *[other] { "" }
     }
-    *[0] {""}
+    *[0] { "" }
   }
 
 compat-legend = Legend

@@ -738,18 +738,27 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
     if (item.flags) {
       for (const { type, name, value_to_set } of item.flags) {
+        const hasAdded =
+          typeof item.version_added === "string" &&
+          item.version_added !== "preview";
+        const hasLast = typeof item.version_last === "string";
+
+        const versionRange = hasAdded
+          ? hasLast
+            ? "range"
+            : "from"
+          : hasLast
+            ? "until"
+            : "none";
+
         supportNotes.push({
           iconName: "disabled",
           label: this.l10n.raw({
             id: "compat-support-flags",
             args: {
-              has_added: Number(
-                typeof item.version_added === "string" &&
-                  item.version_added !== "preview",
-              ),
+              version_range: versionRange,
               version_added: item.version_added,
-              has_last: Number(typeof item.version_last === "string"),
-              versionLast: item.version_last,
+              version_last: item.version_last,
               flag_type: type,
               flag_name: name,
               has_value: Number(typeof value_to_set === "string"),
