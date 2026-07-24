@@ -9,7 +9,6 @@
     "Web/CSS/How_to/Layout_cookbook/Center_an_element",
     "Web/CSS/How_to/Layout_cookbook/Column_layouts",
     "Web/CSS/Reference/At-rules",
-    "Web/CSS/Reference/Properties",
     "Web/CSS/Reference/Selectors",
     "Web/CSS/Reference/Values",
     "Web/HTML/Guides",
@@ -92,7 +91,11 @@
     "Web/Privacy",
     "Web/WebDriver"
   ],
-  "zh-CN": ["Web/CSS/Reference/At-rules"],
+  "zh-CN": [
+    "Web/CSS/How_to/Layout_cookbook/Card",
+    "Web/CSS/Reference/At-rules",
+    "Web/XML"
+  ],
   "zh-TW": [
     "Learn_web_development/Core",
     "Learn_web_development/Getting_started",
