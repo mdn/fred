@@ -199,3 +199,13 @@
     mask-image: url("../icon/social/github.svg");
   }
 }
+
+@media (--screen-small-and-narrower) {
+  .menu__tab-button {
+    :is([data-section="learn"], [data-section="tools"]) & {
+      &::before {
+        content: none;
+      }
+    }
+  }
+}

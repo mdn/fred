@@ -1,34 +1,16 @@
 .mdn-search-button {
   display: flex;
-
-  align-items: center;
-  justify-content: space-between;
-
-  width: 5rem;
-
-  padding: 0.25rem;
-  padding-left: 0.75rem;
+  padding: 0;
   margin: 0;
 
-  color: var(--color-text-primary);
+  --icon-size: 1.5em;
 
-  cursor: pointer;
+  &::part(label) {
+    position: absolute;
 
-  background-color: var(--color-background-page);
-  border: 1px solid var(--color-border-primary);
-  border-radius: var(--radius-full);
+    width: 0;
+    height: 0;
 
-  &:hover {
-    background-color: var(--color-background-secondary);
-  }
-
-  &::before {
-    width: 15px;
-    height: 18px;
-
-    content: "";
-
-    border-bottom: 2px solid
-      light-dark(var(--color-blue-50), var(--color-blue-80));
+    overflow: hidden;
   }
 }

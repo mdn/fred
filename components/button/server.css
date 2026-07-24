@@ -142,8 +142,8 @@
   }
 
   svg {
-    width: 1.25em;
-    height: 1.25em;
+    width: var(--icon-size, 1.25em);
+    height: var(--icon-size, 1.25em);
   }
 
   /* Label */
