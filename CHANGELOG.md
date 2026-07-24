@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.7.1](https://github.com/mdn/fred/compare/v2.7.0...v2.7.1) (2026-07-24)
+
+
+### Bug Fixes
+
+* **about-tabs:** add keyboard navigation to About page tabs ([#1715](https://github.com/mdn/fred/issues/1715)) ([8d3853d](https://github.com/mdn/fred/commit/8d3853d3041b9d77e2a2eff05cf3e735530a8567))
+* **search:** scroll only results ([#1548](https://github.com/mdn/fred/issues/1548)) ([6d87176](https://github.com/mdn/fred/commit/6d87176abec8532ca9ee933e6779eaddd2fede15))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump @rspack/* from 1.7 to 2.0 ([#1511](https://github.com/mdn/fred/issues/1511)) ([b720866](https://github.com/mdn/fred/commit/b72086676bd82ba5fb32cd8545f0ab5e07c34fe4))
+* **deps:** bump body-parser ([#1728](https://github.com/mdn/fred/issues/1728)) ([4b369c5](https://github.com/mdn/fred/commit/4b369c55d781e43ae05ea4353f7ad4af9198ce42))
+* **deps:** bump immutable from 5.1.5 to 5.1.9 ([#1740](https://github.com/mdn/fred/issues/1740)) ([30e3f6d](https://github.com/mdn/fred/commit/30e3f6def7379bde9b105470c2d4f24c019578eb))
+* **deps:** bump react-router and react-router-dom ([#1741](https://github.com/mdn/fred/issues/1741)) ([c7d6c76](https://github.com/mdn/fred/commit/c7d6c768ba5f19393b9262b413e336c17652a9bc))
+* **deps:** bump tar from 7.5.16 to 7.5.20 ([#1729](https://github.com/mdn/fred/issues/1729)) ([d3fa875](https://github.com/mdn/fred/commit/d3fa875c31235536846b39fa0eba9b1d8ffa72d8))
+* **play:** add note referencing original file ([#1725](https://github.com/mdn/fred/issues/1725)) ([8e50747](https://github.com/mdn/fred/commit/8e50747eafc704bc45be23be7f16c6c1f358e3c1))
+
 ## [2.7.0](https://github.com/mdn/fred/compare/v2.6.5...v2.7.0) (2026-07-16)
 
 
