@@ -754,7 +754,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         supportNotes.push({
           iconName: "disabled",
           label: this.l10n.raw({
-            id: "compat-support-flags",
+            id: "compat-support-flag-range",
             args: {
               version_range: versionRange,
               version_added: item.version_added,

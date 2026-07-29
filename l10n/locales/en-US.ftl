@@ -91,7 +91,7 @@ compat-branch-altname = Alternate name: <code data-l10n-name="altname">{ $altnam
 compat-branch-prefix-altname = Prefix: <code data-l10n-name="prefix">{ $prefix }</code>, alternate name: <code data-l10n-name="altname">{ $altname }</code>
 compat-support-removed = Removed in { $version } and later
 compat-support-see-impl-url = See <a data-l10n-name="impl_url">{ $label }</a>
-compat-support-flags =
+compat-support-flag-range =
   { $version_range ->
     [range] From version { $version_added } until { $version_last }, users
     [from] From version { $version_added }, users
