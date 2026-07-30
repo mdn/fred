@@ -737,20 +737,20 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     // heading (see `_renderBranchHeading`), so they aren't pushed here.
 
     if (item.flags) {
+      const hasAdded =
+        typeof item.version_added === "string" &&
+        item.version_added !== "preview";
+      const hasLast = typeof item.version_last === "string";
+
+      const versionRange = hasAdded
+        ? hasLast
+          ? "range"
+          : "from"
+        : hasLast
+          ? "until"
+          : "none";
+
       for (const { type, name, value_to_set } of item.flags) {
-        const hasAdded =
-          typeof item.version_added === "string" &&
-          item.version_added !== "preview";
-        const hasLast = typeof item.version_last === "string";
-
-        const versionRange = hasAdded
-          ? hasLast
-            ? "range"
-            : "from"
-          : hasLast
-            ? "until"
-            : "none";
-
         supportNotes.push({
           iconName: "disabled",
           label: this.l10n.raw({
