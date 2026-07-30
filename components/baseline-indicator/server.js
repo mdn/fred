@@ -290,7 +290,7 @@ export class BaselineIndicator extends ServerComponent {
 
     const status = doc.baseline;
 
-    if (!status) {
+    if (!status || status.feature.discouraged) {
       return nothing;
     }
 
