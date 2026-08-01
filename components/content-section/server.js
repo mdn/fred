@@ -33,7 +33,6 @@ export class ContentSection extends ServerComponent {
  */
 function Prose({ id, title, content, isH3 }) {
   const level = isH3 ? 3 : 2;
-  // @ts-nocheck
   return html`<section
     class="content-section"
     aria-labelledby=${ifDefined(id ?? undefined)}
