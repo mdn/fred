@@ -57,13 +57,13 @@ export class BaselineIndicator extends ServerComponent {
 
   /**
    * @param {import("@fred").Context<import("@rari").DocPage>} context
-   * @param {string} level
+   * @param {import("@rari").BaselineStatus} status
    * @param {Date} [lowDate]
    * @param {string} [signalsLink]
    */
-  getExtraText(context, level, lowDate, signalsLink) {
+  getExtraText(context, status, lowDate, signalsLink) {
     return [
-      level === "high" && lowDate
+      status === "high" && lowDate
         ? context.l10n.raw({
             id: "baseline-high-extra",
             args: {
@@ -73,7 +73,7 @@ export class BaselineIndicator extends ServerComponent {
               }),
             },
           })
-        : level === "low" && lowDate
+        : status === "low" && lowDate
           ? context.l10n.raw({
               id: "baseline-low-extra",
               args: {
@@ -111,9 +111,14 @@ export class BaselineIndicator extends ServerComponent {
       return nothing;
     }
 
-    const status = doc.baseline;
+    const status = doc.status?.baseline;
+    const baseline = doc.baseline;
 
-    if (!status || status.feature.discouraged) {
+    if (!status || !baseline) {
+      return nothing;
+    }
+
+    if (status === "discouraged" || status === "removing") {
       return nothing;
     }
 
@@ -121,13 +126,13 @@ export class BaselineIndicator extends ServerComponent {
       LOCALIZED_BCD_IDS[context.locale] || LOCALIZED_BCD_IDS[DEFAULT_LOCALE]
     }`;
 
-    const lowDate = this.parseDate(status.baseline_low_date);
-    const level = status.baseline || "not";
-    const signalsLink = status.feature.developer_signals?.url;
+    const { baseline_low_date, feature, support, asterisk } = baseline;
+    const lowDate = this.parseDate(baseline_low_date);
+    const signalsLink = feature.developer_signals?.url;
 
     const isBrowserSupported =
       /** @param {import("./types.js").BrowserGroup} browser */ (browser) => {
-        return browser.ids.map((id) => status.support?.[id]).every(Boolean);
+        return browser.ids.map((id) => support?.[id]).every(Boolean);
       };
 
     const engineTitle =
@@ -176,7 +181,7 @@ export class BaselineIndicator extends ServerComponent {
     const openByDefault = Boolean(signalsLink);
 
     return html`<details
-      class="baseline-indicator ${level}"
+      class="baseline-indicator ${status}"
       data-glean-toggle-open="baseline_toggle_open"
       ?open=${openByDefault}
       ?data-open-by-default=${openByDefault}
@@ -186,7 +191,7 @@ export class BaselineIndicator extends ServerComponent {
           class="indicator"
           role="img"
           aria-label=${
-            level === "not"
+            status === "limited"
               ? context.l10n(
                   "baseline-indicator-baseline-cross",
                 )`Baseline Cross`
@@ -197,7 +202,7 @@ export class BaselineIndicator extends ServerComponent {
         ></span>
         <div class="status-title">
           ${
-            level === "not"
+            status === "limited"
               ? html`<span class="not-bold"
                   >${context.l10n(
                     "baseline-indicator-limited-availability",
@@ -207,19 +212,19 @@ export class BaselineIndicator extends ServerComponent {
                   ${context.l10n("baseline-indicator-baseline")`Baseline`}
                   <span class="not-bold">
                     ${
-                      level === "high"
+                      status === "high"
                         ? context.l10n(
                             "baseline-indicator-widely-available",
                           )`Widely available`
                         : lowDate?.getFullYear()
                     }
                   </span>
-                  ${status.asterisk && " *"}
+                  ${asterisk && " *"}
                 `
           }
         </div>
         ${
-          level === "low"
+          status === "low"
             ? html`<div class="pill">
                 ${context.l10n(
                   "baseline-indicator-newly-available",
@@ -247,11 +252,11 @@ export class BaselineIndicator extends ServerComponent {
         <span class="icon icon-chevron"></span>
       </summary>
       <div class="extra">
-        ${this.getExtraText(context, level, lowDate, signalsLink).map(
+        ${this.getExtraText(context, status, lowDate, signalsLink).map(
           (text) => html`<p>${text}</p>`,
         )}
         ${
-          status.asterisk
+          asterisk
             ? html`<p>* ${context.l10n("baseline-asterisk")}</p>`
             : nothing
         }
@@ -288,45 +293,46 @@ export class BaselineIndicator extends ServerComponent {
       return nothing;
     }
 
-    const status = doc.baseline;
+    const status = doc.status?.baseline;
+    const baseline = doc.baseline;
 
-    if (!status || status.feature.discouraged) {
+    if (!status || !baseline) {
       return nothing;
     }
 
-    const lowDate = this.parseDate(status.baseline_low_date);
-    const level = status.baseline || "not";
+    if (status === "discouraged" || status === "removing") {
+      return nothing;
+    }
+
+    const { baseline_low_date, asterisk } = baseline;
+    const lowDate = this.parseDate(baseline_low_date);
 
     return html`<p>
       <strong>
         ${
-          level === "not"
+          status === "limited"
             ? context.l10n(
                 "baseline-indicator-limited-availability",
               )`Limited availability`
             : context.l10n("baseline-indicator-baseline")`Baseline`
         }
         ${
-          level === "high"
+          status === "high"
             ? context.l10n(
                 "baseline-indicator-widely-available",
               )`Widely available`
-            : level === "low"
+            : status === "low"
               ? html`${lowDate?.getFullYear()}
                 ${context.l10n(
                   "baseline-indicator-newly-available",
                 )`Newly available`}`
               : nothing
         }
-        ${status.asterisk ? " *" : nothing}
+        ${asterisk ? " *" : nothing}
       </strong>
       <br />
-      ${this.getExtraText(context, level, lowDate)}
-      ${
-        status.asterisk
-          ? html`<br />* ${context.l10n("baseline-asterisk")}`
-          : nothing
-      }
+      ${this.getExtraText(context, status, lowDate)}
+      ${asterisk ? html`<br />* ${context.l10n("baseline-asterisk")}` : nothing}
     </p>`;
   }
 }
