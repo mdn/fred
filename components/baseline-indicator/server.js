@@ -71,14 +71,14 @@ export class BaselineIndicator extends ServerComponent {
     const status = doc.status?.baseline;
     const baseline = doc.baseline;
 
-    if (!status || !baseline) {
+    if (!status) {
       return;
     }
 
     const { baseline_low_date, asterisk, feature, support, alternatives } =
-      baseline;
+      baseline || {};
     const lowDate = this.parseDate(baseline_low_date);
-    const signalsLink = simple ? undefined : feature.developer_signals?.url;
+    const signalsLink = simple ? undefined : feature?.developer_signals?.url;
     const isDiscouraged = status === "discouraged" || status === "removing";
 
     const titleText = isDiscouraged
@@ -138,7 +138,7 @@ export class BaselineIndicator extends ServerComponent {
                 "baseline-indicator-avoid-using",
               )`Avoid using this feature in new projects.`
         }
-        ${unsafeHTML(feature.discouraged?.reason_html || nothing)}
+        ${unsafeHTML(feature?.discouraged?.reason_html || nothing)}
         ${
           status === "removing"
             ? nothing
@@ -313,23 +313,27 @@ export class BaselineIndicator extends ServerComponent {
             ? html`<div class="pill">${statusText}</div>`
             : nothing
         }
-        <div class="browsers">
-          ${ENGINES.map(
-            ({ browsers }) =>
-              html`<span class="engine" title=${engineTitle(browsers)}>
-                ${browsers.map(
-                  (browser) =>
-                    html`<span
-                      class=${`browser ${browser.ids[0]} ${
-                        isBrowserSupported(browser) ? "supported" : ""
-                      }`}
-                      role="img"
-                      aria-label=${`${browser.name} ${isBrowserSupported(browser) ? context.l10n("baseline-indicator-check")`check` : context.l10n("baseline-indicator-cross")`cross`}`}
-                    ></span>`,
+        ${
+          support
+            ? html`<div class="browsers">
+                ${ENGINES.map(
+                  ({ browsers }) =>
+                    html`<span class="engine" title=${engineTitle(browsers)}>
+                      ${browsers.map(
+                        (browser) =>
+                          html`<span
+                            class=${`browser ${browser.ids[0]} ${
+                              isBrowserSupported(browser) ? "supported" : ""
+                            }`}
+                            role="img"
+                            aria-label=${`${browser.name} ${isBrowserSupported(browser) ? context.l10n("baseline-indicator-check")`check` : context.l10n("baseline-indicator-cross")`cross`}`}
+                          ></span>`,
+                      )}
+                    </span>`,
                 )}
-              </span>`,
-          )}
-        </div>
+              </div>`
+            : nothing
+        }
         <span class="icon icon-chevron"></span>
       </summary>
       <div class="extra">
