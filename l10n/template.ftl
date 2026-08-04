@@ -114,6 +114,7 @@ baseline-indicator-widely-available = Widely available
 baseline-indicator-newly-available = Newly available
 baseline-indicator-avoid-using = Avoid using this feature in new projects.
 baseline-indicator-candidate-for-removal = This feature may be a candidate for removal from web standards or browsers.
+baseline-indicator-alternatives-consider = Consider using the following features instead:
 baseline-indicator-baseline-discouraged = Baseline Discouraged
 baseline-indicator-baseline-cross = Baseline Cross
 baseline-indicator-baseline-check = Baseline Check

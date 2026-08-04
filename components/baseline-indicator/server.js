@@ -1,5 +1,6 @@
 import { html } from "@lit-labs/ssr";
 import { nothing } from "lit";
+import { join } from "lit/directives/join.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { ServerComponent } from "../server/index.js";
@@ -78,7 +79,8 @@ export class BaselineIndicator extends ServerComponent {
       return;
     }
 
-    const { baseline_low_date, asterisk, feature, support } = baseline;
+    const { baseline_low_date, asterisk, feature, support, alternatives } =
+      baseline;
     const lowDate = this.parseDate(baseline_low_date);
     const signalsLink = simple ? undefined : feature.developer_signals?.url;
 
@@ -137,6 +139,20 @@ export class BaselineIndicator extends ServerComponent {
           "baseline-indicator-candidate-for-removal",
         )`This feature may be a candidate for removal from web standards or browsers.`}`,
       );
+      if (alternatives && alternatives.length > 0) {
+        const list = alternatives.map(
+          ({ name, description, mdn_url }) =>
+            html`<a
+              href=${mdn_url.replace("/docs", `/${context.locale}/docs`)}
+              title=${description}
+              >${name}</a
+            >`,
+        );
+        extraText.push(
+          html`${context.l10n("baseline-indicator-alternatives-consider")`Consider using the following features instead:`}
+          ${join(list, ", ")}.`,
+        );
+      }
     } else if (status === "limited") {
       extraText.push(context.l10n("baseline-not-extra"));
     }
