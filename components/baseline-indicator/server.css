@@ -37,7 +37,8 @@
     --baseline-pill-color: #f1f3f4;
   }
 
-  &.discouraged {
+  &.discouraged,
+  &.removing {
     --baseline-check: light-dark(#707070, #868686);
     --baseline-check-img: url("./icons/browser-check-obsolete.svg");
     --baseline-cross: light-dark(#707070, #868686);
@@ -45,6 +46,16 @@
 
     @mixin light-dark --baseline-img, url("./icons/status/obsolete.svg"),
       url("./icons/status/obsolete-dark.svg");
+  }
+
+  &.removing {
+    --baseline-bg: light-dark(#fceeee, #410e0b);
+    --baseline-engine-bg: light-dark(#f3dddd, #1a0706);
+    --baseline-pill-bg: #b3261e;
+    --baseline-pill-color: #f1f3f4;
+
+    @mixin light-dark --baseline-img, url("./icons/status/pending-removal.svg"),
+      url("./icons/status/pending-removal-dark.svg");
   }
 
   &[open] {

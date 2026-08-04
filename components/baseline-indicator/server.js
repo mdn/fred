@@ -75,30 +75,28 @@ export class BaselineIndicator extends ServerComponent {
       return;
     }
 
-    if (status === "removing") {
-      return;
-    }
-
     const { baseline_low_date, asterisk, feature, support, alternatives } =
       baseline;
     const lowDate = this.parseDate(baseline_low_date);
     const signalsLink = simple ? undefined : feature.developer_signals?.url;
+    const isDiscouraged = status === "discouraged" || status === "removing";
 
-    const titleText =
-      status === "discouraged"
-        ? context.l10n("baseline-indicator-deprecated")`Deprecated`
-        : status === "limited"
-          ? context.l10n(
-              "baseline-indicator-limited-availability",
-            )`Limited availability`
-          : context.l10n("baseline-indicator-baseline")`Baseline`;
+    const titleText = isDiscouraged
+      ? context.l10n("baseline-indicator-deprecated")`Deprecated`
+      : status === "limited"
+        ? context.l10n(
+            "baseline-indicator-limited-availability",
+          )`Limited availability`
+        : context.l10n("baseline-indicator-baseline")`Baseline`;
 
     const statusText =
       status === "high"
         ? context.l10n("baseline-indicator-widely-available")`Widely available`
         : status === "low"
           ? context.l10n("baseline-indicator-newly-available")`Newly available`
-          : undefined;
+          : status === "removing"
+            ? context.l10n("baseline-indicator-to-be-removed")`To be removed`
+            : undefined;
 
     const extraText = [];
 
@@ -129,15 +127,25 @@ export class BaselineIndicator extends ServerComponent {
         );
       }
     }
-    if (status === "discouraged") {
+    if (isDiscouraged) {
       extraText.push(
-        html`${context.l10n(
-          "baseline-indicator-avoid-using",
-        )`Avoid using this feature in new projects.`}
+        html`${
+          status === "removing"
+            ? context.l10n(
+                "baseline-indicator-pending-removal",
+              )`This feature is pending removal from browsers. Using it now may lead to broken functionality in future updates.`
+            : context.l10n(
+                "baseline-indicator-avoid-using",
+              )`Avoid using this feature in new projects.`
+        }
         ${unsafeHTML(feature.discouraged?.reason_html || nothing)}
-        ${context.l10n(
-          "baseline-indicator-candidate-for-removal",
-        )`This feature may be a candidate for removal from web standards or browsers.`}`,
+        ${
+          status === "removing"
+            ? nothing
+            : context.l10n(
+                "baseline-indicator-candidate-for-removal",
+              )`This feature may be a candidate for removal from web standards or browsers.`
+        }`,
       );
       if (alternatives && alternatives.length > 0) {
         const list = alternatives.map(
@@ -149,7 +157,7 @@ export class BaselineIndicator extends ServerComponent {
             >`,
         );
         extraText.push(
-          html`${context.l10n("baseline-indicator-alternatives-consider")`Consider using the following features instead:`}
+          html`${status === "removing" ? context.l10n("baseline-indicator-alternatives-use")`Use the following features instead:` : context.l10n("baseline-indicator-alternatives-consider")`Consider using the following features instead:`}
           ${join(list, ", ")}.`,
         );
       }
@@ -177,12 +185,13 @@ export class BaselineIndicator extends ServerComponent {
     return {
       status,
       lowDate,
-      asterisk: status === "discouraged" ? undefined : asterisk,
+      asterisk: isDiscouraged ? undefined : asterisk,
       support,
       signalsLink,
       extraText,
       titleText,
       statusText,
+      isDiscouraged,
     };
   }
 
@@ -205,6 +214,7 @@ export class BaselineIndicator extends ServerComponent {
       extraText,
       titleText,
       statusText,
+      isDiscouraged,
     } = data;
 
     const bcdLink = `#${
@@ -259,7 +269,7 @@ export class BaselineIndicator extends ServerComponent {
         }
       };
 
-    const openByDefault = status === "discouraged" || Boolean(signalsLink);
+    const openByDefault = isDiscouraged || Boolean(signalsLink);
 
     return html`<details
       class="baseline-indicator ${status}"
@@ -276,7 +286,7 @@ export class BaselineIndicator extends ServerComponent {
               ? context.l10n(
                   "baseline-indicator-baseline-discouraged",
                 )`Baseline Discouraged`
-              : status === "limited"
+              : status === "limited" || status === "removing"
                 ? context.l10n(
                     "baseline-indicator-baseline-cross",
                   )`Baseline Cross`
@@ -287,7 +297,7 @@ export class BaselineIndicator extends ServerComponent {
         ></span>
         <div class="status-title">
           ${
-            status === "discouraged" || status === "limited"
+            isDiscouraged || status === "limited"
               ? html`<span class="not-bold">${titleText}</span>`
               : html`
                   ${titleText}
@@ -299,7 +309,7 @@ export class BaselineIndicator extends ServerComponent {
           }
         </div>
         ${
-          status === "low"
+          status === "low" || status === "removing"
             ? html`<div class="pill">${statusText}</div>`
             : nothing
         }
@@ -369,16 +379,14 @@ export class BaselineIndicator extends ServerComponent {
       <strong>
         ${titleText}
         ${
-          status === "high"
-            ? statusText
-            : status === "low"
-              ? html`${lowDate?.getFullYear()} ${statusText}`
-              : nothing
+          status === "low"
+            ? html`${lowDate?.getFullYear()} ${statusText}`
+            : statusText || nothing
         }
         ${asterisk ? " *" : nothing}
       </strong>
       <br />
-      ${extraText}
+      ${join(extraText, " ")}
       ${asterisk ? html`<br />* ${context.l10n("baseline-asterisk")}` : nothing}
     </p>`;
   }
