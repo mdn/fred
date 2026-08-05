@@ -9,7 +9,6 @@
     "Web/CSS/How_to/Layout_cookbook/Center_an_element",
     "Web/CSS/How_to/Layout_cookbook/Column_layouts",
     "Web/CSS/Reference/At-rules",
-    "Web/CSS/Reference/Properties",
     "Web/CSS/Reference/Selectors",
     "Web/CSS/Reference/Values",
     "Web/HTML/Guides",
@@ -17,6 +16,7 @@
     "Web/HTML/Guides/Date_and_time_formats",
     "Web/JavaScript/Guide/Using_classes",
     "Web/Privacy",
+    "Web/Security",
     "Web/URI",
     "Web/WebDriver"
   ],
