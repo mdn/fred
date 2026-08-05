@@ -70,9 +70,10 @@ export class BaselineIndicator extends ServerComponent {
     }
 
     const status = doc.status?.baseline;
+    const isDiscouraged = status === "discouraged" || status === "removing";
     const baseline = doc.baseline;
 
-    if (!status) {
+    if (!status || (!baseline && !isDiscouraged)) {
       return;
     }
 
@@ -80,7 +81,6 @@ export class BaselineIndicator extends ServerComponent {
       baseline || {};
     const lowDate = this.parseDate(baseline_low_date);
     const signalsLink = simple ? undefined : feature?.developer_signals?.url;
-    const isDiscouraged = status === "discouraged" || status === "removing";
 
     const titleText = isDiscouraged
       ? context.l10n("baseline-indicator-deprecated")`Deprecated`
