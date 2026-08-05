@@ -140,8 +140,8 @@ ${"```"}`,
       if (html) code += html;
       if (js) code += `<script>${js}</script>`;
       code += `</body>`;
-      // encode characters which break urls
-      code = code.replaceAll(/([^\S ]|%|#)+/g, (str) =>
+      // allowlist for characters we know not to be problematic in data urls
+      code = code.replaceAll(/[^ <>/{}=:;]+/g, (str) =>
         encodeURIComponent(str),
       );
       await navigator.clipboard.writeText(
