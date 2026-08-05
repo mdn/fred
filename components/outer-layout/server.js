@@ -144,9 +144,11 @@ export class OuterLayout extends ServerComponent {
             rel="search"
             type="application/opensearchdescription+xml"
             href=${`/opensearch.xml?locale=${context.locale}`}
-            title=${context.locale === DEFAULT_LOCALE
-              ? "MDN"
-              : `MDN (${context.locale})`}
+            title=${
+              context.locale === DEFAULT_LOCALE
+                ? "MDN"
+                : `MDN (${context.locale})`
+            }
           />
           <link
             rel="alternate"
