@@ -3,6 +3,7 @@ import { nothing } from "lit";
 import { join } from "lit/directives/join.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
+import { changeDocsLocale } from "../../utils/docs-locale-url.js";
 import { ServerComponent } from "../server/index.js";
 
 import inlineScript from "./inline.js?source&csp=true";
@@ -151,7 +152,7 @@ export class BaselineIndicator extends ServerComponent {
         const list = alternatives.map(
           ({ name, description, mdn_url }) =>
             html`<a
-              href=${mdn_url.replace("/docs", `/${context.locale}/docs`)}
+              href=${changeDocsLocale(mdn_url, context.locale)}
               title=${description}
               >${name}</a
             >`,
