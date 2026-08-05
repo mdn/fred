@@ -119,6 +119,7 @@ baseline-indicator-candidate-for-removal = This feature may be a candidate for r
 baseline-indicator-alternatives-use = Use the following features instead:
 baseline-indicator-alternatives-consider = Consider using the following features instead:
 baseline-indicator-baseline-discouraged = Baseline Discouraged
+baseline-indicator-baseline-discouraged-cross = Baseline Discouraged Cross
 baseline-indicator-baseline-cross = Baseline Cross
 baseline-indicator-baseline-check = Baseline Check
 baseline-indicator-check = check

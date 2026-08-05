@@ -286,13 +286,17 @@ export class BaselineIndicator extends ServerComponent {
               ? context.l10n(
                   "baseline-indicator-baseline-discouraged",
                 )`Baseline Discouraged`
-              : status === "limited" || status === "removing"
+              : status === "removing"
                 ? context.l10n(
-                    "baseline-indicator-baseline-cross",
-                  )`Baseline Cross`
-                : context.l10n(
-                    "baseline-indicator-baseline-check",
-                  )`Baseline Check`
+                    "baseline-indicator-baseline-discouraged-cross",
+                  )`Baseline Discouraged Cross`
+                : status === "limited"
+                  ? context.l10n(
+                      "baseline-indicator-baseline-cross",
+                    )`Baseline Cross`
+                  : context.l10n(
+                      "baseline-indicator-baseline-check",
+                    )`Baseline Check`
           }
         ></span>
         <div class="status-title">
