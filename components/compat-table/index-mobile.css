@@ -21,8 +21,25 @@
     }
 
     .timeline {
-      /* Align timeline icons with summary icon. */
+      /* Align timeline icons with summary icon. Symmetric on mobile because
+         the branch box drops its horizontal padding and reaches both edges
+         of the cell. */
+      margin-right: 0.25rem;
       margin-left: 0.25rem;
+    }
+
+    .bc-notes-list {
+      /* Mobile uses a single-column grid; don't skip column 1, and the
+         left border that separates from the feature-name column on
+         desktop doesn't apply here. */
+      grid-column: 1 / -1;
+      border-left: none;
+    }
+
+    .bc-branch {
+      /* Use the available width on narrow viewports. */
+      padding-right: 0;
+      padding-left: 0;
     }
 
     tr:not(:first-of-type) .bc-feature {

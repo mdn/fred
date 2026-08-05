@@ -41,9 +41,11 @@ export function Cookies({ result }) {
         <td data-header="Secure">${PassIcon({ pass: value.secure })}</td>
         <td data-header="HttpOnly">${PassIcon({ pass: value.httponly })}</td>
         <td data-header="SameSite">
-          ${value.samesite
-            ? html`<code>${upperCaseHeaderName(value.samesite)}</code>`
-            : "-"}
+          ${
+            value.samesite
+              ? html`<code>${upperCaseHeaderName(value.samesite)}</code>`
+              : "-"
+          }
         </td>
         <td data-header="Prefixed">${CookiePrefix({ cookieName: key })}</td>
       </tr>
@@ -57,8 +59,10 @@ export function Cookies({ result }) {
       </p>
       <div
         class="detail-header-content"
-        .innerHTML=${result.tests["cookies"]?.score_description ??
-        `<p class="obs-none">None</p>`}
+        .innerHTML=${
+          result.tests["cookies"]?.score_description ??
+          `<p class="obs-none">None</p>`
+        }
       ></div>
     </div>
     <table class="cookies">

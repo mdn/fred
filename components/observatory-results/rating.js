@@ -11,7 +11,7 @@ import "../dropdown/element.js";
 
 /**
  *
- * @param {{result: import("@observatory").Result, host: string, rescan: Function}} props
+ * @param {{result: import("@observatory").Result, host: string, rescan: (event: Event) => void}} props
  * @returns {import("@lit").TemplateResult}
  */
 export function Rating({ result, host, rescan }) {

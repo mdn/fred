@@ -16,10 +16,12 @@ import { randomIdString } from "../utils/index.js";
  * @import { InteractiveExampleBase } from "./element.js";
  */
 
+/* eslint-disable jsdoc/reject-any-type -- TS mixin constructors require `any[]` (error TS2545) */
 /**
  * @template {new (...args: any[]) => InteractiveExampleBase} TBase
  * @param {TBase} Base
  */
+/* eslint-enable jsdoc/reject-any-type */
 export const InteractiveExampleWithTabs = (Base) =>
   class extends L10nMixin(Base) {
     #render() {

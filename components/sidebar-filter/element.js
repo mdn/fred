@@ -89,7 +89,7 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
   /**
    * Lit lifecycle method called after properties are updated.
    * Triggers telemetry events and applies filtering logic when properties change.
-   * @param {Map<string, any>} changedProperties
+   * @param {import("lit").PropertyValues<this>} changedProperties
    */
   updated(changedProperties) {
     if (changedProperties.has("query")) {
@@ -169,9 +169,11 @@ class MDNSidebarFilter extends L10nMixin(LitElement) {
         @focus=${this._onFocus}
         @input=${this._onInput}
       />
-      ${this.matchCount === undefined
-        ? ""
-        : html` <span class="counter"> ${this.matchCount} </span> `}
+      ${
+        this.matchCount === undefined
+          ? ""
+          : html` <span class="counter"> ${this.matchCount} </span> `
+      }
       <mdn-button
         class="button"
         variant="plain"

@@ -13,7 +13,7 @@ export class ViewedController {
   /**
    * @param {LitElement} host
    * @param {Ref<Element>} target
-   * @param {Function} callback
+   * @param {() => void} callback
    * @param {IntersectionObserverInit} [observerOptions]
    */
   constructor(host, target, callback, observerOptions) {

@@ -17,14 +17,16 @@ export class LatestNews extends ServerComponent {
         (item, index) =>
           html`<li>
             <article class="latest-news__item">
-              ${item.source
-                ? html`<a
-                    class="latest-news__source"
-                    href=${item.source.url}
-                    data-glean-id=${`homepage: news_source ${index + 1} -> ${item.source.url}`}
-                    >${item.source.name}</a
-                  >`
-                : nothing}
+              ${
+                item.source
+                  ? html`<a
+                      class="latest-news__source"
+                      href=${item.source.url}
+                      data-glean-id=${`homepage: news_source ${index + 1} -> ${item.source.url}`}
+                      >${item.source.name}</a
+                    >`
+                  : nothing
+              }
               <h3 class="latest-news__title">
                 <a
                   href=${item.url}

@@ -98,17 +98,19 @@ export class MDNLiveSampleResult extends L10nMixin(LitElement) {
     return html`
       <div class="code-example">
         <div class="example-header">
-          ${this.breakoutLink
-            ? html`<mdn-button
-                variant="secondary"
-                href=${this.breakoutLink}
-                target="_blank"
-                rel="opener"
-                aria-label=${this.l10n("example-play-button-title")}
-                title=${this.l10n("example-play-button-title")}
-                >${this.l10n("example-play-button-label")}</mdn-button
-              >`
-            : nothing}
+          ${
+            this.breakoutLink
+              ? html`<mdn-button
+                  variant="secondary"
+                  href=${this.breakoutLink}
+                  target="_blank"
+                  rel="opener"
+                  aria-label=${this.l10n("example-play-button-title")}
+                  title=${this.l10n("example-play-button-title")}
+                  >${this.l10n("example-play-button-label")}</mdn-button
+                >`
+              : nothing
+          }
         </div>
         <mdn-play-runner
           @mdn-play-runner-src=${this._runnerSrcUpdated}

@@ -120,44 +120,47 @@ export function renderSidebar(context, doc) {
         ${doc.sidebar.map(
           (entry, _i) => html`
             <li class=${entry.children?.length ? "toggle" : ""}>
-              ${entry.children?.length
-                ? html`
-                    <details
-                      ?open=${entry.children.some(
-                        (c) => c.url === doc.mdn_url,
-                      ) || entry.url === doc.mdn_url}
-                    >
-                      <summary>${entry.title}</summary>
-                      <ol>
-                        <li>
-                          ${renderSidebarLink(
-                            context,
-                            doc.mdn_url,
-                            entry.url,
-                            `${entry.title.replace(/ modules$/, "")} overview`,
+              ${
+                entry.children?.length
+                  ? html`
+                      <details
+                        ?open=${
+                          entry.children.some((c) => c.url === doc.mdn_url) ||
+                          entry.url === doc.mdn_url
+                        }
+                      >
+                        <summary>${entry.title}</summary>
+                        <ol>
+                          <li>
+                            ${renderSidebarLink(
+                              context,
+                              doc.mdn_url,
+                              entry.url,
+                              `${entry.title.replace(/ modules$/, "")} overview`,
+                            )}
+                          </li>
+                          ${entry.children.map(
+                            (subEntry) => html`
+                              <li>
+                                ${renderSidebarLink(
+                                  context,
+                                  doc.mdn_url,
+                                  subEntry.url,
+                                  subEntry.title,
+                                )}
+                              </li>
+                            `,
                           )}
-                        </li>
-                        ${entry.children.map(
-                          (subEntry) => html`
-                            <li>
-                              ${renderSidebarLink(
-                                context,
-                                doc.mdn_url,
-                                subEntry.url,
-                                subEntry.title,
-                              )}
-                            </li>
-                          `,
-                        )}
-                      </ol>
-                    </details>
-                  `
-                : renderSidebarLink(
-                    context,
-                    doc.mdn_url,
-                    entry.url,
-                    entry.title,
-                  )}
+                        </ol>
+                      </details>
+                    `
+                  : renderSidebarLink(
+                      context,
+                      doc.mdn_url,
+                      entry.url,
+                      entry.title,
+                    )
+              }
             </li>
           `,
         )}
@@ -304,15 +307,17 @@ export function renderModulesList(context, modules) {
       ${modules.map(
         (module) => html`
           <li
-            class="module-list-item ${module.topic
-              ? `topic-${topic2css(module.topic)}`
-              : ""}"
+            class="module-list-item ${
+              module.topic ? `topic-${topic2css(module.topic)}` : ""
+            }"
           >
             <a href=${module.url}>
               <header>
-                ${module.topic
-                  ? renderTopicIcon(context, module.topic)
-                  : nothing}
+                ${
+                  module.topic
+                    ? renderTopicIcon(context, module.topic)
+                    : nothing
+                }
                 <span>${module.title}</span>
               </header>
               <section>

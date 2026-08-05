@@ -41,7 +41,9 @@ export class MDNObservatoryComparisonTable extends LitElement {
         return await res.json();
       } catch (error) {
         console.log(error);
-        throw new Error("Observatory API request for comparison data failed");
+        throw new Error("Observatory API request for comparison data failed", {
+          cause: error,
+        });
       }
     },
     args: () => [],

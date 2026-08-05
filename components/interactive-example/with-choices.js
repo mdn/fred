@@ -17,10 +17,12 @@ import "../play-runner/element.js";
  * @import { InteractiveExampleBase } from "./element.js";
  */
 
+/* eslint-disable jsdoc/reject-any-type -- TS mixin constructors require `any[]` (error TS2545) */
 /**
  * @template {new (...args: any[]) => InteractiveExampleBase} TBase
  * @param {TBase} Base
  */
+/* eslint-enable jsdoc/reject-any-type */
 export const InteractiveExampleWithChoices = (Base) =>
   class extends L10nMixin(Base) {
     static get properties() {
@@ -31,6 +33,7 @@ export const InteractiveExampleWithChoices = (Base) =>
       };
     }
 
+    // eslint-disable-next-line jsdoc/reject-any-type -- TS mixin constructors require `any[]` (error TS2545)
     /** @param {any[]} _args  */
     constructor(..._args) {
       super();

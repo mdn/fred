@@ -14,9 +14,11 @@ export class HomepageBody extends ServerComponent {
    */
   render(context) {
     return html`<div class="homepage-body">
-      ${WRITER_MODE && context.localServer
-        ? html`<mdn-recently-visited></mdn-recently-visited>`
-        : nothing}
+      ${
+        WRITER_MODE && context.localServer
+          ? html`<mdn-recently-visited></mdn-recently-visited>`
+          : nothing
+      }
       <section>
         <h2>
           ${context.l10n("homepage-body-featured-articles")`Featured articles`}

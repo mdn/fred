@@ -68,7 +68,7 @@ await yargs(hideBin(process.argv))
       /** @type {import("concurrently").ConcurrentlyCommandInput[]} */
       const jobs = [
         {
-          command: `npx wdio run wdio.conf.js`,
+          command: `npx --package=@wdio/cli wdio run wdio.conf.js`,
           name: "wdio",
           prefixColor: "green",
         },

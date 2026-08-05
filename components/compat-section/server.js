@@ -34,9 +34,11 @@ export class CompatSection extends ServerComponent {
       class="content-section"
       aria-labelledby=${ifDefined(id ?? undefined)}
     >
-      ${isH3
-        ? nothing
-        : HeadingAnchor.render(2, id ? String(id) : null, String(title))}
+      ${
+        isH3
+          ? nothing
+          : HeadingAnchor.render(2, id ? String(id) : null, String(title))
+      }
       <a href=${queryToUrl(query)} target="_blank" rel="noopener"
         ><code>${query}</code></a
       >

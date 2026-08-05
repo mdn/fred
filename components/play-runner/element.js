@@ -139,7 +139,7 @@ export class MDNPlayRunner extends LitElement {
     window.addEventListener("message", this._onMessage);
   }
 
-  /** @param {any} message */
+  /** @param {unknown} message */
   async postMessage(message) {
     await this.ready;
     this._iframe.value?.contentWindow?.postMessage(message, "*");

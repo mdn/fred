@@ -10,7 +10,7 @@ baseline-not-extra = This feature is not Baseline because it does not work in so
 baseline-supported-in = Supported in { $browsers }
 baseline-unsupported-in = Not widely supported in { $browsers }
 baseline-supported-and-unsupported-in = Supported in { $supported }, but not widely supported in { $unsupported }
-baseline-signals = Want more support for this feature? <a data-l10n-name="link">Tell us why.</a>
+baseline-signals = Want more browser support for this feature? <a data-l10n-name="link">Tell us why.</a>
 homepage-hero-title = Resources for Developers,<br> by Developers
 playground-user-shared-warning = This is a user-shared playground.<br>Always inspect the code before running it.
 homepage-hero-description = Documenting <a data-l10n-name="css">CSS</a>, <a data-l10n-name="html">HTML</a>, and <a data-l10n-name="js">JavaScript</a>, since 2005.
@@ -51,8 +51,9 @@ obs-mdn = The { -brand-name-obs } provides effective security insights, guided b
 compat-browser-version-date = { $browser } { $version } – Release date: { $date }
 compat-browser-version-released = Release date: { $date }
 compat-link-source-title = File: { $filename }
-compat-support-prefix = Implemented with the vendor prefix: { $prefix }
-compat-support-altname = Alternate name: { $altname }
+compat-branch-prefix = Prefix: <code data-l10n-name="prefix">{ $prefix }</code>
+compat-branch-altname = Alternate name: <code data-l10n-name="altname">{ $altname }</code>
+compat-branch-prefix-altname = Prefix: <code data-l10n-name="prefix">{ $prefix }</code>, alternate name: <code data-l10n-name="altname">{ $altname }</code>
 compat-support-removed = Removed in { $version } and later
 compat-support-see-impl-url = See <a data-l10n-name="impl_url">{ $label }</a>
 compat-support-flags =
