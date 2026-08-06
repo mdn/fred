@@ -2,6 +2,7 @@
 @import url("../prev-next/index.css");
 @import url("../notecard/index.css");
 @import url("../code-example/prism.css");
+@import url("../baseline-indicator/icon.css");
 
 .content-section {
   line-height: var(--font-line-content);

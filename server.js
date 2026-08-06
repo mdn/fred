@@ -154,12 +154,18 @@ export async function startServer() {
     res.end();
   });
 
-  const RUMBA_URL = process.env.RUMBA_URL;
+  const CF_URL = process.env.CF_URL;
   app.all(
-    ["/api/*_", "/users/*_"],
-    RUMBA_URL
+    [
+      "/opensearch.xml",
+      "/api/v1/search/suggestions",
+      "/api/v1/search/go",
+      "/pong/*_",
+      "/pimg/*_",
+    ],
+    CF_URL
       ? createProxyMiddleware({
-          target: RUMBA_URL,
+          target: CF_URL,
           changeOrigin: true,
           proxyTimeout: 20_000,
           timeout: 20_000,
@@ -172,12 +178,12 @@ export async function startServer() {
         },
   );
 
-  const CF_URL = process.env.CF_URL;
+  const RUMBA_URL = process.env.RUMBA_URL;
   app.all(
-    ["/pong/*_", "/pimg/*_"],
-    CF_URL
+    ["/api/*_", "/users/*_"],
+    RUMBA_URL
       ? createProxyMiddleware({
-          target: CF_URL,
+          target: RUMBA_URL,
           changeOrigin: true,
           proxyTimeout: 20_000,
           timeout: 20_000,

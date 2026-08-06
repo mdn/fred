@@ -140,8 +140,10 @@ ${"```"}`,
       if (html) code += html;
       if (js) code += `<script>${js}</script>`;
       code += `</body>`;
-      // encode non-space whitespace and percent
-      code = code.replaceAll(/([^\S ]|%)+/g, (str) => encodeURIComponent(str));
+      // allowlist for characters we know not to be problematic in data urls
+      code = code.replaceAll(/[^ <>/{}=:;]+/g, (str) =>
+        encodeURIComponent(str),
+      );
       await navigator.clipboard.writeText(
         `data:text/html;charset=utf-8,${code}`,
       );
