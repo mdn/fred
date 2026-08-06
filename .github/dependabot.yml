@@ -4,6 +4,9 @@ updates:
     directory: /
     schedule:
       interval: daily
+    cooldown:
+      exclude:
+        - "@mdn/*"
     groups:
       npm-prod:
         dependency-type: production
