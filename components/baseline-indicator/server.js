@@ -149,7 +149,7 @@ export class BaselineIndicator extends ServerComponent {
         }`,
       );
       if (alternatives && alternatives.length > 0) {
-        const list = alternatives.map(
+        const links = alternatives.map(
           ({ name, description, mdn_url }) =>
             html`<a
               href=${changeDocsLocale(mdn_url, context.locale)}
@@ -157,9 +157,15 @@ export class BaselineIndicator extends ServerComponent {
               >${name}</a
             >`,
         );
+        const parts = new Intl.ListFormat(context.locale, {
+          type: "disjunction",
+        }).formatToParts(links.map((_, i) => String(i)));
+        const list = parts.map(({ type, value }) =>
+          type === "element" ? links[Number(value)] : value,
+        );
         extraText.push(
           html`${status === "removing" ? context.l10n("baseline-indicator-alternatives-use")`Use the following features instead:` : context.l10n("baseline-indicator-alternatives-consider")`Consider using the following features instead:`}
-          ${join(list, ", ")}.`,
+          ${list}${context.l10n("baseline-indicator-alternatives-end")`.`}`,
         );
       }
     } else if (status === "limited") {

@@ -118,6 +118,7 @@ baseline-indicator-avoid-using = Avoid using this feature in new projects.
 baseline-indicator-candidate-for-removal = This feature may be a candidate for removal from web standards or browsers.
 baseline-indicator-alternatives-use = Use the following features instead:
 baseline-indicator-alternatives-consider = Consider using the following features instead:
+baseline-indicator-alternatives-end = .
 baseline-indicator-baseline-discouraged = Baseline Discouraged
 baseline-indicator-baseline-discouraged-cross = Baseline Discouraged Cross
 baseline-indicator-baseline-cross = Baseline Cross
