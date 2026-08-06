@@ -1,0 +1,6 @@
+.left-sidebar,
+.content-section {
+  .icon.icon-baseline {
+    display: none;
+  }
+}
