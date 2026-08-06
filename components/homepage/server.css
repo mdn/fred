@@ -1,6 +1,7 @@
 .homepage {
   display: grid;
   grid-template-columns: var(--layout-no-sidebar-extended);
+  scroll-margin-block-start: var(--sticky-header-height);
 
   > * {
     grid-column: content;
