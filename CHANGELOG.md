@@ -1,5 +1,40 @@
 # Changelog
 
+## [2.8.0](https://github.com/mdn/fred/compare/v2.7.0...v2.8.0) (2026-08-07)
+
+
+### Features
+
+* point opensearch.xml at cloud function ([#1664](https://github.com/mdn/fred/issues/1664)) ([f79902d](https://github.com/mdn/fred/commit/f79902de21e80750caf1244d671e78ed63554760))
+
+
+### Bug Fixes
+
+* **about-tabs:** add keyboard navigation to About page tabs ([#1715](https://github.com/mdn/fred/issues/1715)) ([8d3853d](https://github.com/mdn/fred/commit/8d3853d3041b9d77e2a2eff05cf3e735530a8567))
+* **compat-table:** simplify compat-support-flags fluent string ([#1738](https://github.com/mdn/fred/issues/1738)) ([cf53089](https://github.com/mdn/fred/commit/cf530893935ed4f3b7994fdde5f1e08c0a196215))
+* **play:** encode # in data urls ([#1743](https://github.com/mdn/fred/issues/1743)) ([b082b99](https://github.com/mdn/fred/commit/b082b997ed52c6d7eac6bece352a07f3a8237133))
+* **search:** scroll only results ([#1548](https://github.com/mdn/fred/issues/1548)) ([6d87176](https://github.com/mdn/fred/commit/6d87176abec8532ca9ee933e6779eaddd2fede15))
+
+
+### Miscellaneous
+
+* **baseline:** ensure discouraged features are hidden ([#1753](https://github.com/mdn/fred/issues/1753)) ([c240ea6](https://github.com/mdn/fred/commit/c240ea680ece24dc144f1fce9547ccbbb184eb58))
+* **baseline:** hide baseline icon in sidebar ([#1766](https://github.com/mdn/fred/issues/1766)) ([c947723](https://github.com/mdn/fred/commit/c947723d6cdb8eb1391114394019bd87534a4bda))
+* **content-section:** remove no-op [@ts-nocheck](https://github.com/ts-nocheck) ([#1755](https://github.com/mdn/fred/issues/1755)) ([258fe3a](https://github.com/mdn/fred/commit/258fe3a41c6e634623b9dd541e29f9823724e0c7))
+* **deps-dev:** bump @rspack/* from 1.7 to 2.0 ([#1511](https://github.com/mdn/fred/issues/1511)) ([b720866](https://github.com/mdn/fred/commit/b72086676bd82ba5fb32cd8545f0ab5e07c34fe4))
+* **deps:** bump body-parser ([#1728](https://github.com/mdn/fred/issues/1728)) ([4b369c5](https://github.com/mdn/fred/commit/4b369c55d781e43ae05ea4353f7ad4af9198ce42))
+* **deps:** bump concurrently from 10.0.3 to 10.0.4 in the npm-prod group ([#1744](https://github.com/mdn/fred/issues/1744)) ([6bf14ba](https://github.com/mdn/fred/commit/6bf14bad33b85a0006b4226be0b869437894cf39))
+* **deps:** bump concurrently in the npm-prod group ([6bf14ba](https://github.com/mdn/fred/commit/6bf14bad33b85a0006b4226be0b869437894cf39))
+* **deps:** bump immutable from 5.1.5 to 5.1.9 ([#1740](https://github.com/mdn/fred/issues/1740)) ([30e3f6d](https://github.com/mdn/fred/commit/30e3f6def7379bde9b105470c2d4f24c019578eb))
+* **deps:** bump react-router and react-router-dom ([#1741](https://github.com/mdn/fred/issues/1741)) ([c7d6c76](https://github.com/mdn/fred/commit/c7d6c768ba5f19393b9262b413e336c17652a9bc))
+* **deps:** bump svgo ([#1737](https://github.com/mdn/fred/issues/1737)) ([e3ed66f](https://github.com/mdn/fred/commit/e3ed66fd953759ac91db688cbacbfdab2c94c29d))
+* **deps:** bump tar from 7.5.16 to 7.5.20 ([#1729](https://github.com/mdn/fred/issues/1729)) ([d3fa875](https://github.com/mdn/fred/commit/d3fa875c31235536846b39fa0eba9b1d8ffa72d8))
+* **deps:** bump tar from 7.5.20 to 7.5.22 ([#1747](https://github.com/mdn/fred/issues/1747)) ([dd990fa](https://github.com/mdn/fred/commit/dd990fa566453ccf1f5778881a9c82c520b41bcc))
+* **menu:** update menu entries ([#1739](https://github.com/mdn/fred/issues/1739)) ([aceec76](https://github.com/mdn/fred/commit/aceec76312134321fdb4e19384635254a788edd1))
+* **menu:** update menu entries ([#1756](https://github.com/mdn/fred/issues/1756)) ([c5ecd99](https://github.com/mdn/fred/commit/c5ecd995680b23b91f3d170a0902e53ceb8c913d))
+* **menu:** update menu entries ([#1757](https://github.com/mdn/fred/issues/1757)) ([d51b1df](https://github.com/mdn/fred/commit/d51b1df32a989bfedf351feac2dd5cfd1ec4d820))
+* **play:** add note referencing original file ([#1725](https://github.com/mdn/fred/issues/1725)) ([8e50747](https://github.com/mdn/fred/commit/8e50747eafc704bc45be23be7f16c6c1f358e3c1))
+
 ## [2.7.0](https://github.com/mdn/fred/compare/v2.6.5...v2.7.0) (2026-07-16)
 
 
