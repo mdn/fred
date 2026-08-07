@@ -1,6 +1,9 @@
 import { html } from "@lit-labs/ssr";
 import { nothing } from "lit";
+import { join } from "lit/directives/join.js";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
+import { changeDocsLocale } from "../../utils/docs-locale-url.js";
 import { ServerComponent } from "../server/index.js";
 
 import inlineScript from "./inline.js?source&csp=true";
@@ -67,22 +70,21 @@ export class BaselineIndicator extends ServerComponent {
     }
 
     const status = doc.status?.baseline;
+    const isDiscouraged = status === "discouraged" || status === "removing";
     const baseline = doc.baseline;
 
-    if (!status || !baseline) {
+    if (!status || (!baseline && !isDiscouraged)) {
       return;
     }
 
-    if (status === "discouraged" || status === "removing") {
-      return;
-    }
-
-    const { baseline_low_date, asterisk, feature, support } = baseline;
+    const { baseline_low_date, asterisk, feature, support, alternatives } =
+      baseline || {};
     const lowDate = this.parseDate(baseline_low_date);
-    const signalsLink = simple ? undefined : feature.developer_signals?.url;
+    const signalsLink = simple ? undefined : feature?.developer_signals?.url;
 
-    const titleText =
-      status === "limited"
+    const titleText = isDiscouraged
+      ? context.l10n("baseline-indicator-deprecated")`Deprecated`
+      : status === "limited"
         ? context.l10n(
             "baseline-indicator-limited-availability",
           )`Limited availability`
@@ -93,7 +95,9 @@ export class BaselineIndicator extends ServerComponent {
         ? context.l10n("baseline-indicator-widely-available")`Widely available`
         : status === "low"
           ? context.l10n("baseline-indicator-newly-available")`Newly available`
-          : undefined;
+          : status === "removing"
+            ? context.l10n("baseline-indicator-to-be-removed")`To be removed`
+            : undefined;
 
     const extraText = [];
 
@@ -124,7 +128,48 @@ export class BaselineIndicator extends ServerComponent {
         );
       }
     }
-    if (status === "limited") {
+    if (isDiscouraged) {
+      extraText.push(
+        html`${
+          status === "removing"
+            ? context.l10n(
+                "baseline-indicator-pending-removal",
+              )`This feature is pending removal from browsers. Using it now may lead to broken functionality in future updates.`
+            : context.l10n(
+                "baseline-indicator-avoid-using",
+              )`Avoid using this feature in new projects.`
+        }
+        ${unsafeHTML(feature?.discouraged?.reason_html || nothing)}
+        ${
+          status === "removing"
+            ? nothing
+            : context.l10n(
+                "baseline-indicator-candidate-for-removal",
+              )`This feature may be a candidate for removal from web standards or browsers.`
+        }`,
+      );
+      if (alternatives && alternatives.length > 0) {
+        const links = alternatives.map(
+          ({ name, description, mdn_url }) =>
+            html`<a
+              href=${changeDocsLocale(mdn_url, context.locale)}
+              title=${description}
+              data-glean-id=${`baseline_link_alternatives: ${name}`}
+              >${name}</a
+            >`,
+        );
+        const parts = new Intl.ListFormat(context.locale, {
+          type: "disjunction",
+        }).formatToParts(links.map((_, i) => String(i)));
+        const list = parts.map(({ type, value }) =>
+          type === "element" ? links[Number(value)] : value,
+        );
+        extraText.push(
+          html`${status === "removing" ? context.l10n("baseline-indicator-alternatives-use")`Use the following features instead:` : context.l10n("baseline-indicator-alternatives-consider")`Consider using the following features instead:`}
+          ${list}${context.l10n("baseline-indicator-alternatives-end")`.`}`,
+        );
+      }
+    } else if (status === "limited") {
       extraText.push(context.l10n("baseline-not-extra"));
     }
 
@@ -148,12 +193,13 @@ export class BaselineIndicator extends ServerComponent {
     return {
       status,
       lowDate,
-      asterisk,
+      asterisk: isDiscouraged ? undefined : asterisk,
       support,
       signalsLink,
       extraText,
       titleText,
       statusText,
+      isDiscouraged,
     };
   }
 
@@ -176,6 +222,7 @@ export class BaselineIndicator extends ServerComponent {
       extraText,
       titleText,
       statusText,
+      isDiscouraged,
     } = data;
 
     const bcdLink = `#${
@@ -230,7 +277,7 @@ export class BaselineIndicator extends ServerComponent {
         }
       };
 
-    const openByDefault = Boolean(signalsLink);
+    const openByDefault = isDiscouraged || Boolean(signalsLink);
 
     return html`<details
       class="baseline-indicator ${status}"
@@ -243,18 +290,26 @@ export class BaselineIndicator extends ServerComponent {
           class="indicator"
           role="img"
           aria-label=${
-            status === "limited"
+            status === "discouraged"
               ? context.l10n(
-                  "baseline-indicator-baseline-cross",
-                )`Baseline Cross`
-              : context.l10n(
-                  "baseline-indicator-baseline-check",
-                )`Baseline Check`
+                  "baseline-indicator-baseline-discouraged",
+                )`Baseline Discouraged`
+              : status === "removing"
+                ? context.l10n(
+                    "baseline-indicator-baseline-discouraged-cross",
+                  )`Baseline Discouraged Cross`
+                : status === "limited"
+                  ? context.l10n(
+                      "baseline-indicator-baseline-cross",
+                    )`Baseline Cross`
+                  : context.l10n(
+                      "baseline-indicator-baseline-check",
+                    )`Baseline Check`
           }
         ></span>
         <div class="status-title">
           ${
-            status === "limited"
+            isDiscouraged || status === "limited"
               ? html`<span class="not-bold">${titleText}</span>`
               : html`
                   ${titleText}
@@ -266,27 +321,31 @@ export class BaselineIndicator extends ServerComponent {
           }
         </div>
         ${
-          status === "low"
+          status === "low" || status === "removing"
             ? html`<div class="pill">${statusText}</div>`
             : nothing
         }
-        <div class="browsers">
-          ${ENGINES.map(
-            ({ browsers }) =>
-              html`<span class="engine" title=${engineTitle(browsers)}>
-                ${browsers.map(
-                  (browser) =>
-                    html`<span
-                      class=${`browser ${browser.ids[0]} ${
-                        isBrowserSupported(browser) ? "supported" : ""
-                      }`}
-                      role="img"
-                      aria-label=${`${browser.name} ${isBrowserSupported(browser) ? context.l10n("baseline-indicator-check")`check` : context.l10n("baseline-indicator-cross")`cross`}`}
-                    ></span>`,
+        ${
+          support
+            ? html`<div class="browsers">
+                ${ENGINES.map(
+                  ({ browsers }) =>
+                    html`<span class="engine" title=${engineTitle(browsers)}>
+                      ${browsers.map(
+                        (browser) =>
+                          html`<span
+                            class=${`browser ${browser.ids[0]} ${
+                              isBrowserSupported(browser) ? "supported" : ""
+                            }`}
+                            role="img"
+                            aria-label=${`${browser.name} ${isBrowserSupported(browser) ? context.l10n("baseline-indicator-check")`check` : context.l10n("baseline-indicator-cross")`cross`}`}
+                          ></span>`,
+                      )}
+                    </span>`,
                 )}
-              </span>`,
-          )}
-        </div>
+              </div>`
+            : nothing
+        }
         <span class="icon icon-chevron"></span>
       </summary>
       <div class="extra">
@@ -336,16 +395,14 @@ export class BaselineIndicator extends ServerComponent {
       <strong>
         ${titleText}
         ${
-          status === "high"
-            ? statusText
-            : status === "low"
-              ? html`${lowDate?.getFullYear()} ${statusText}`
-              : nothing
+          status === "low"
+            ? html`${lowDate?.getFullYear()} ${statusText}`
+            : statusText || nothing
         }
         ${asterisk ? " *" : nothing}
       </strong>
       <br />
-      ${extraText}
+      ${join(extraText, " ")}
       ${asterisk ? html`<br />* ${context.l10n("baseline-asterisk")}` : nothing}
     </p>`;
   }
