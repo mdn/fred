@@ -10,11 +10,14 @@ const READY_TIMEOUT = 60_000;
 const READY_INTERVAL = 1000;
 const READY_URL = `${baseUrl}en-US/docs/MDN/Kitchensink`;
 
+const windowsCI = process.env.CI && process.platform === "win32";
+
 /** @type {WebdriverIO.Config} */
 export const config = {
   runner: "local",
   specs: ["./test/specs/**/*.js"],
   maxInstances: 10,
+  specFileRetries: windowsCI ? 1 : 0,
   capabilities: [
     {
       browserName: "firefox",
