@@ -1,4 +1,14 @@
+import { setTimeout as sleep } from "node:timers/promises";
+
+import { SevereServiceError } from "webdriverio";
+
 const FRED_PORT = process.env.FRED_PORT || "3000";
+
+const baseUrl = `http://localhost:${FRED_PORT}/`;
+
+const READY_TIMEOUT = 60_000;
+const READY_INTERVAL = 1000;
+const READY_URL = `${baseUrl}en-US/docs/MDN/Kitchensink`;
 
 /** @type {WebdriverIO.Config} */
 export const config = {
@@ -31,24 +41,27 @@ export const config = {
     ui: "bdd",
     timeout: 120_000,
   },
-  baseUrl: `http://localhost:${FRED_PORT}/`,
-  async before(_, __, browser) {
+  baseUrl,
+  async onPrepare() {
     console.log("waiting for servers to start");
-    await browser.waitUntil(
-      async () => {
-        try {
-          await browser.url(`http://localhost:${FRED_PORT}`);
-          await browser.url("http://localhost:8083");
-          return true;
-        } catch {
-          return false;
+    const deadline = Date.now() + READY_TIMEOUT;
+    while (Date.now() < deadline) {
+      try {
+        const res = await fetch(READY_URL, {
+          signal: AbortSignal.timeout(deadline - Date.now()),
+        });
+        await res.text();
+        if (res.ok) {
+          return;
         }
-      },
-      {
-        timeout: 30_000,
-        timeoutMsg: "Server not available after 30 seconds",
-        interval: 1000,
-      },
+      } catch {
+        // no-op
+      }
+      await sleep(READY_INTERVAL);
+    }
+    // wdio ignores anything but a SevereServiceError
+    throw new SevereServiceError(
+      `server not ready after ${READY_TIMEOUT}ms: ${READY_URL}`,
     );
   },
 };
