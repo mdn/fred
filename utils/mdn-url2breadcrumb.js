@@ -12,7 +12,9 @@ export function mdnUrl2Breadcrumb(url, locale) {
     .filter((p) => !["", locale, "docs"].includes(p));
 
   // Replace "API" for clarity.
-  parents = parents.map((p) => (p === "API" ? "Web APIs" : p));
+  if (parents.at(0) === "Web" && parents.at(1) === "API") {
+    parents[1] = "Web APIs";
+  }
 
   if (parents.length > 1 && parents.at(0) === "Web") {
     // Remove virtual "Web" path.
