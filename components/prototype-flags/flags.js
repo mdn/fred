@@ -5,7 +5,43 @@
 export const STORAGE_KEY = "prototype-flags";
 
 /** @type {Flag[]} */
-export const FLAGS = [];
+export const FLAGS = [
+  {
+    id: "baseline-high-links",
+    name: "Show Baseline Widely Available icon after links",
+    default: false,
+  },
+  {
+    id: "baseline-low-links",
+    name: "Show Baseline Newly Available icon after links",
+    default: true,
+  },
+  {
+    id: "baseline-limited-links",
+    name: "Show Limited Availability icon after links",
+    default: true,
+  },
+  {
+    id: "baseline-icons-code-only",
+    name: "Only show icons after code blocks",
+    default: false,
+  },
+  {
+    id: "baseline-icons-dt-only",
+    name: "Only show icons in <dt>s",
+    default: false,
+  },
+  {
+    id: "baseline-icons-in-code",
+    name: "Show Baseline icons within code blocks",
+    default: false,
+  },
+  {
+    id: "baseline-icons-hide-others",
+    name: "Baseline icons hide other icons",
+    default: true,
+  },
+];
 
 /**
  * @param {string} id

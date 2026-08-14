@@ -16,10 +16,6 @@
     background-position: center;
     background-size: contain;
 
-    & ~ .icon {
-      display: none;
-    }
-
     &.discouraged {
       @mixin light-dark --baseline-img, url("./icons/sidebar/deprecated.svg"),
         url("./icons/sidebar/deprecated-dark.svg");
@@ -29,5 +25,72 @@
       @mixin light-dark --baseline-img, url("./icons/sidebar/removing.svg"),
         url("./icons/sidebar/removing-dark.svg");
     }
+  }
+}
+
+a[data-baseline]:not(
+    [data-baseline="high"],
+    [data-baseline="low"],
+    [data-baseline="limited"]
+  ),
+.prototype-baseline-high-links a[data-baseline="high"],
+.prototype-baseline-low-links a[data-baseline="low"],
+.prototype-baseline-limited-links a[data-baseline="limited"] {
+  &:not(.prototype-baseline-icons-dt-only .content-section &:not(dt &)) {
+    &:not(.prototype-baseline-icons-code-only &:not(:has(code))) {
+      &:not(.prototype-baseline-icons-in-code &:has(code)),
+      .prototype-baseline-icons-in-code &:has(code) code {
+        &::after {
+          display: inline-block;
+
+          height: 0.8em;
+          aspect-ratio: 300/167;
+
+          /* align with optical middle: */
+          margin-top: -0.1em;
+          margin-left: 0.5ch;
+
+          vertical-align: middle;
+
+          content: "";
+
+          background-image: var(--baseline-img);
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+        }
+      }
+    }
+  }
+
+  &[data-baseline="high"] {
+    @mixin light-dark --baseline-img, url("./icons/sidebar/widely.svg"),
+      url("./icons/sidebar/widely-dark.svg");
+  }
+
+  &[data-baseline="low"] {
+    @mixin light-dark --baseline-img, url("./icons/sidebar/newly.svg"),
+      url("./icons/sidebar/newly-dark.svg");
+  }
+
+  &[data-baseline="limited"] {
+    @mixin light-dark --baseline-img, url("./icons/sidebar/limited.svg"),
+      url("./icons/sidebar/limited-dark.svg");
+  }
+
+  &[data-baseline="discouraged"] {
+    @mixin light-dark --baseline-img, url("./icons/sidebar/deprecated.svg"),
+      url("./icons/sidebar/deprecated-dark.svg");
+  }
+
+  &[data-baseline="removing"] {
+    @mixin light-dark --baseline-img, url("./icons/sidebar/removing.svg"),
+      url("./icons/sidebar/removing-dark.svg");
+  }
+
+  .prototype-baseline-icons-hide-others & .icon,
+  .prototype-baseline-icons-hide-others & ~ .icon,
+  & ~ .icon.icon-baseline {
+    display: none !important;
   }
 }
