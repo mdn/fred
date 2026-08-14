@@ -7,7 +7,9 @@ baseline-not-extra = Cette fonctionnalité n'est pas Compatible car elle ne fonc
 baseline-supported-in = Pris en charge dans { $browsers }
 baseline-unsupported-in = Pas complètement pris en charge dans { $browsers }
 baseline-supported-and-unsupported-in = Pris en charge dans { $supported }, mais pas complètement pris en charge dans { $unsupported }
+baseline-signals = Vous voulez une meilleure prise en charge pour cette fonctionnalité ? <a data-l10n-name="link">Dites-nous pourquoi.</a>
 homepage-hero-title = Des ressources pour les Développeuses et Développeurs,<br> par des Développeuses et Développeurs
+playground-user-shared-warning = Il s'agit d'un terrain d'essai partagé par un·e utilisateur·ice.<br>Inspectez toujours le code avant de l'exécuter.
 homepage-hero-description = Documenter le <a data-l10n-name="css">CSS</a>, le <a data-l10n-name="html">HTML</a> et le <a data-l10n-name="js">JavaScript</a>, depuis 2005.
 not-found-title = Page non trouvée
 not-found-description = Désolé, la page <code data-l10n-name="url">{ $url }</code> n'a pas été trouvée.
@@ -46,38 +48,27 @@ obs-mdn = { -brand-name-obs } fournit des informations efficaces en matière de 
 compat-browser-version-date = { $browser } { $version } — Date de sortie : { $date }
 compat-browser-version-released = Date de sortie : { $date }
 compat-link-source-title = Fichier : { $filename }
+compat-branch-prefix = Préfixe : <code data-l10n-name="prefix">{ $prefix }</code>
+compat-branch-altname = Nom alternatif : <code data-l10n-name="altname">{ $altname }</code>
+compat-branch-prefix-altname = Préfixe : <code data-l10n-name="prefix">{ $prefix }</code>, Nom alternatif : <code data-l10n-name="altname">{ $altname }</code>
 compat-support-removed = Supprimé en version { $version } et supérieure
 compat-support-see-impl-url = Voir <a data-l10n-name="impl_url">{ $label }</a>
-compat-support-flags =
-    { $has_added ->
-        [1] De la version { $version_added }
+compat-support-flag-range =
+    { $version_range ->
+        [range] De la version { $version_added } jusqu'à { $version_last }, les utilisateur·ice·s
+        [from] À partir de la version { $version_added }, les utilisateur·ice·s
+        [until] Jusqu'à la version { $version_last }, les utilisateur·ice·s
+       *[none] Les utilisateur·ice·s
+    } doivent explicitement définir { $flag_type ->
+       *[preference] la préférence <code data-l10n-name="name">{ $flag_name }</code>
+        [runtime_flag] l'indicateur d'exécution <code data-l10n-name="name">{ $flag_name }</code>
+    }{ $has_value ->
+        [1] { " " }sur <code data-l10n-name="value">{ $flag_value }</code>
        *[0] { "" }
-    }{ $has_last ->
-        [1]
-            { $has_added ->
-               *[0] Jusqu'à la version { $versionLast }, les utilisateur·ice·s
-                [1] { " " }jusqu'à { $versionLast }, les utilisateur·ice·s
-            }
-       *[0]
-            { $has_added ->
-               *[0] Les utilisateur·ice·s
-                [1] {" "}les utilisateur·ice·s
-            }
-    }
-    { " " }doivent explicitement définir
-    { $flag_type ->
-       *[preference] la préférence
-        [runtime_flag] l'indicateur d'exécution
-    }
-    { " " }<code data-l10n-name="name">{ $flag_name }</code>
-    { $has_value ->
-        [1] { " " }à <code data-l10n-name="value">{ $flag_value }</code>
-       *[0] { "" }
-    }{"."}
-    { $has_pref_url ->
+    }.{ $has_pref_url ->
         [1]
             { $flag_type ->
-                [preference] Pour changer vos préférences sur le navigateur { $browser_name }, visitez { $browser_pref_url }.
+                [preference] { " " }Pour changer les préférences dans { $browser_name }, visitez { $browser_pref_url }.
                *[other] { "" }
             }
        *[0] { "" }
@@ -113,17 +104,26 @@ article-footer-learn-how-to-contribute = Apprendre à contribuer
 article-footer-view-this-page-on-github = Voir cette page sur GitHub
 article-footer-this-will-take-you-to-github-to = Cela vous mènera à GitHub pour créer un nouveau problème.
 article-footer-report-a-problem-with-this-conte = Signaler un problème avec ce contenu
-baseline-indicator-baseline-cross = Croix de Baseline
-baseline-indicator-baseline-check = Coche de Baseline
+baseline-indicator-deprecated = Obsolète
 baseline-indicator-limited-availability = Disponibilité limitée
 baseline-indicator-baseline = Baseline
 baseline-indicator-widely-available = Large disponibilité
 baseline-indicator-newly-available = Nouvellement disponible
+baseline-indicator-baseline-cross = Croix de Baseline
+baseline-indicator-baseline-check = Coche de Baseline
+baseline-indicator-to-be-removed = En cours de suppression
+baseline-indicator-pending-removal = Cette fonctionnalité est en cours de suppression des navigateurs. L'utiliser maintenant peut entraîner un dysfonctionnement dans les futures mises à jour.
+baseline-indicator-avoid-using = Évitez d'utiliser cette fonctionnalité dans de nouveaux projets.
+baseline-indicator-candidate-for-removal = Cette fonctionnalité peut être candidate à la suppression des standards web ou des navigateurs.
+baseline-indicator-alternatives-use = Utilisez plutôt les fonctionnalités suivantes :
+baseline-indicator-alternatives-consider = Envisagez d'utiliser plutôt les fonctionnalités suivantes :
+baseline-indicator-alternatives-end = .
+baseline-indicator-baseline-discouraged = Déconseillé par la Baseline
+baseline-indicator-baseline-discouraged-cross = Croix déconseillée de Baseline
 baseline-indicator-check = coche
 baseline-indicator-cross = croix
 baseline-indicator-learn-more = En savoir plus
 baseline-indicator-see-full-compatibility = Voir la compatibilité complète
-baseline-indicator-report-feedback = Faire un retour
 blog-previous = Article précédent
 blog-next = Article suivant
 blog-index-blog-it-better = Bloguez mieux
@@ -255,8 +255,8 @@ observatory-tests-and-scores-test-result = Résultat du test
 observatory-tests-and-scores-description = Description
 observatory-tests-and-scores-modifier = Modifier
 observatory-tests-and-scores-failed-to-load-tests-and-scoring = Échec du chargement des tests et des données de notation. Veuillez réessayer plus tard.
-brand-web-docs = MDN Web Docs
 blog-rss-title = Flux RSS du Blog MDN
+brand-web-docs = MDN Web Docs
 meta-description = Le site MDN Web Docs fournit des informations sur les technologies Web ouvertes, y compris HTML, CSS et les API pour les sites Web et les applications Web progressives.
 logo-alt = Logo MDN
 pagination-pagination = Pagination
@@ -269,7 +269,6 @@ playground-share = Partager
 playground-clear = Effacer
 playground-reset = Réinitialiser
 playground-seeing-something-inappropriate = Voir quelque chose d'inapproprié ?
-playground-user-shared-warning = Il s'agit d'un terrain d'essai partagé par un·e utilisateur·ice.<br>Inspectez toujours le code avant de l'exécuter.
 playground-console = Console
 playground-share-markdown = Partager le Markdown
 playground-copy-markdown-to-clipboard = Copier le Markdown dans le presse-papiers
