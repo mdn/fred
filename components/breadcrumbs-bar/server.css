@@ -31,13 +31,16 @@
     display: none;
   }
 
+  mdn-prototype-flags,
   mdn-color-theme,
   mdn-language-switcher {
     display: flex;
   }
 
+  mdn-prototype-flags,
   mdn-color-theme,
   mdn-language-switcher,
+  mdn-prototype-flags::part(button),
   mdn-color-theme::part(button),
   mdn-language-switcher::part(button) {
     height: 100%;

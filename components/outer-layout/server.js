@@ -11,6 +11,7 @@ import {
 } from "../env/index.js";
 import { RUNTIME_ENV, runtimeVariables } from "../env/runtime.js";
 import Favicon from "../favicon/pure.js";
+import { FLAGS, className } from "../prototype-flags/flags.js";
 import { asyncLocalStorage } from "../server/async-local-storage.js";
 import { ServerComponent } from "../server/index.js";
 
@@ -75,6 +76,10 @@ export class OuterLayout extends ServerComponent {
         ? "learn"
         : undefined;
 
+    const prototypeClasses = FLAGS.filter((flag) => flag.default)
+      .map((flag) => className(flag.id))
+      .join(" ");
+
     const runtimeEnvEntries = Object.entries(process.env).filter(
       ([key]) => key.startsWith("FRED_") && runtimeVariables.includes(key),
     );
@@ -85,6 +90,7 @@ export class OuterLayout extends ServerComponent {
       <!doctype html>
       <html
         lang=${context.locale}
+        class=${ifDefined(prototypeClasses || undefined)}
         data-theme="light dark"
         data-renderer=${context.renderer}
         data-nop=${ifDefined(WRITER_MODE ? "yes" : undefined)}

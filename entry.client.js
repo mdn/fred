@@ -2,6 +2,7 @@ import "./symmetric-context/client.js";
 import "@lit-labs/ssr-client/lit-element-hydrate-support.js";
 
 // hooks:
+import "./components/prototype-flags/hook.js";
 import "./hooks/glean-init.js";
 import "./hooks/dialog-closedby.js";
 import "./l10n/hook.js";

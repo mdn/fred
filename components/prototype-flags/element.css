@@ -1,0 +1,101 @@
+.prototype-flags {
+  position: relative;
+}
+
+.prototype-flags__button {
+  display: flex;
+
+  column-gap: 0.25rem;
+  align-items: center;
+
+  padding: 0 0.5rem;
+  margin: 0;
+
+  font: inherit;
+
+  color: inherit;
+
+  cursor: pointer;
+
+  background-color: transparent;
+  border: none;
+
+  &:is(:hover, :focus, [aria-expanded="true"]) {
+    background-color: var(--color-background-secondary);
+  }
+
+  @media (--screen-small-and-narrower) {
+    > span {
+      display: none;
+    }
+  }
+
+  &::before {
+    width: 1.25rem;
+    height: 1.25rem;
+
+    content: "";
+
+    background-color: currentcolor;
+
+    mask-image: url("../icon/flask-conical.svg");
+    mask-size: cover;
+  }
+}
+
+.prototype-flags__dropdown {
+  position: absolute;
+  right: 0;
+  z-index: 1;
+
+  width: max-content;
+
+  padding: 0.75rem;
+  margin: 0;
+
+  background-color: var(--color-background-primary);
+  border: 1px solid var(--color-border-primary);
+}
+
+.prototype-flags__list {
+  width: max-content;
+
+  padding: 0;
+  margin: 0;
+
+  list-style: none;
+}
+
+.prototype-flags__flag {
+  display: flex;
+
+  column-gap: 0.5rem;
+  align-items: center;
+
+  padding: 0.25rem;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-background-secondary);
+  }
+}
+
+.prototype-flags__reset {
+  padding: 0.25rem;
+  margin-top: 0.5rem;
+
+  font: inherit;
+  font-size: var(--font-size-small);
+
+  color: var(--color-text-secondary);
+
+  cursor: pointer;
+
+  background-color: transparent;
+  border: none;
+
+  &:hover {
+    background-color: var(--color-background-secondary);
+  }
+}

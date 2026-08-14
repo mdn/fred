@@ -27,6 +27,7 @@ export class BreadcrumbsBar extends ServerComponent {
               ></mdn-collection-save-button>`
             : nothing
         }
+        <mdn-prototype-flags></mdn-prototype-flags>
         <mdn-color-theme></mdn-color-theme>
         ${this._renderLanguageSwitcher(context)}
       </div>
