@@ -30,3 +30,7 @@ a {
 [hidden] {
   display: none !important;
 }
+
+#content {
+  scroll-margin-block-start: var(--sticky-header-height);
+}
