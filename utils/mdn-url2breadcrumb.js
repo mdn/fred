@@ -9,7 +9,10 @@ export function mdnUrl2Breadcrumb(url, locale) {
   let parents = url
     .replaceAll("_", " ")
     .split("/")
-    .filter((p) => !["", locale, "docs"].includes(p));
+    .filter((p) => !["", "docs"].includes(p));
+
+  const urlLocale = parents.shift();
+  const prefix = urlLocale === locale ? [] : [urlLocale];
 
   // Replace "API" for clarity.
   if (parents.at(0) === "Web" && parents.at(1) === "API") {
@@ -26,5 +29,5 @@ export function mdnUrl2Breadcrumb(url, locale) {
     parents.splice(-1, 1);
   }
 
-  return parents.join(" / ");
+  return [...prefix, ...parents].join(" / ");
 }
