@@ -59,6 +59,7 @@ td > div {
   flex-wrap: wrap;
 
   gap: 1rem 1.5rem;
+
   align-items: baseline;
 }
 

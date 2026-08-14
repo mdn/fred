@@ -18,6 +18,7 @@
 
   row-gap: 2rem;
   column-gap: 1rem;
+
   align-items: start;
 
   padding-block: 2rem 1.5rem;
@@ -70,6 +71,7 @@
   grid-area: intro;
 
   row-gap: 1rem;
+
   justify-items: start;
 
   p {
@@ -188,6 +190,7 @@
 
   row-gap: 1rem;
   column-gap: 1.5rem;
+
   align-items: start;
   justify-items: start;
 

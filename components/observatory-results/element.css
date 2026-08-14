@@ -12,6 +12,7 @@
   grid-template-columns: auto 3fr 1fr;
 
   column-gap: 2rem;
+
   justify-content: space-between;
 
   max-width: var(--max-width);
@@ -31,6 +32,7 @@
     grid-template-columns: auto 1fr auto;
 
     row-gap: calc(var(--spacing) / 2);
+
     align-items: flex-start;
     justify-content: space-between;
   }

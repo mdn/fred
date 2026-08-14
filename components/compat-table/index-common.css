@@ -312,6 +312,7 @@ table {
     flex-direction: column;
 
     gap: 0.25rem;
+
     align-items: center;
     justify-content: end;
 
@@ -349,6 +350,7 @@ table {
     display: flex;
 
     gap: 0.375rem;
+
     align-items: center;
 
     margin-bottom: 0.75rem;
