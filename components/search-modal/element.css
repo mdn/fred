@@ -82,6 +82,7 @@ form {
   grid-template-columns: min-content 1fr;
 
   gap: 0.5rem;
+
   place-items: center;
 
   padding: 1rem;

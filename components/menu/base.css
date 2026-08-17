@@ -114,6 +114,7 @@
     display: grid;
 
     row-gap: var(--font-size-small);
+
     align-content: start;
 
     margin: 0;

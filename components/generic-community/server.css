@@ -241,6 +241,7 @@
       display: flex;
 
       gap: 1rem;
+
       justify-content: space-around;
 
       padding: 1rem;
@@ -265,6 +266,7 @@
         flex-wrap: wrap;
 
         column-gap: 1rem;
+
         align-items: baseline;
         justify-content: center;
 
@@ -637,6 +639,7 @@
           flex-direction: column;
 
           gap: 1.5rem;
+
           align-items: center;
           justify-content: space-between;
 
@@ -791,6 +794,7 @@
         flex-wrap: wrap;
 
         gap: 1rem 1.5rem;
+
         align-items: baseline;
       }
 
@@ -826,6 +830,7 @@
         flex-direction: column;
 
         gap: 1.5rem;
+
         align-items: flex-start;
         justify-content: space-between;
 

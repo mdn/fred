@@ -87,6 +87,7 @@
   flex-direction: row;
 
   column-gap: 2rem;
+
   justify-content: space-between;
 
   @media (--screen-small-and-narrower) {
