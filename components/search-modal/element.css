@@ -142,6 +142,10 @@ ul {
 li[data-selected] {
   background: var(--color-background-blue);
   border-color: var(--color-blue-50);
+
+  &:has(:focus-visible) {
+    border-color: transparent;
+  }
 }
 
 li {
@@ -165,6 +169,11 @@ a {
 
   &:visited {
     color: var(--color-link-visited);
+  }
+
+  &:focus-visible {
+    outline: 2px solid;
+    outline-offset: -2px;
   }
 }
 
