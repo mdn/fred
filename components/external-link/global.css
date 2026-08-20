@@ -1,4 +1,5 @@
 .external {
+  position: relative;
   padding-right: 1.125em;
 
   &::after {
