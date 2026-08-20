@@ -7,8 +7,10 @@ import { SandboxComponent } from "./class.js";
 export class Sandbox extends ServerComponent {
   render() {
     // @ts-expect-error
-    // eslint-disable-next-line no-undef
-    const modulesContext = require.context("../", true, /\/sandbox\.js$/);
+    const modulesContext = import.meta.webpackContext("../", {
+      recursive: true,
+      regExp: /\/sandbox\.js$/,
+    });
     // @ts-expect-error
     const modules = modulesContext.keys().map((key) => modulesContext(key));
 
