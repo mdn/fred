@@ -5,7 +5,10 @@ import { ServerComponent } from "../server/index.js";
 import { SandboxComponent } from "./class.js";
 
 export class Sandbox extends ServerComponent {
-  render() {
+  /**
+   * @param {import("@fred").Context} context
+   */
+  render(context) {
     // @ts-expect-error
     const modulesContext = import.meta.webpackContext("../", {
       recursive: true,
@@ -42,7 +45,7 @@ export class Sandbox extends ServerComponent {
           ([name, component]) =>
             html`<section class="sandbox__section" id=${name}>
               <h1>${name}</h1>
-              ${component.render()}
+              ${component.render(context)}
             </section>`,
         )}
       </body>
