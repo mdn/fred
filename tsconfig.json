@@ -57,6 +57,10 @@
           ],
           "globalAttributes": [
             {
+              "name": "aria-description",
+              "description": "Defines a string value that describes or annotates the current element. [MDN reference](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-description)"
+            },
+            {
               "name": "vocab",
               "description": "RDFa: default vocabulary IRI used to expand property and typeof values."
             },
