@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.8.1](https://github.com/mdn/fred/compare/v2.8.0...v2.8.1) (2026-08-21)
+
+
+### Miscellaneous
+
+* **deps:** bump shell-quote and concurrently ([#1816](https://github.com/mdn/fred/issues/1816)) ([bfc255f](https://github.com/mdn/fred/commit/bfc255f827f34ff2dd79d19cc0204ba5d66e1e58))
+* **sandbox:** pass context to sandbox components ([#1819](https://github.com/mdn/fred/issues/1819)) ([f794093](https://github.com/mdn/fred/commit/f794093fe2e904f7edfc75a310a3418850fe3ea8))
+* **sandbox:** use import.meta.webpackContext ([#1818](https://github.com/mdn/fred/issues/1818)) ([4ae04ea](https://github.com/mdn/fred/commit/4ae04ea7d834ff28b4ae756b280ff60a24a257b1))
+
 ## [2.8.0](https://github.com/mdn/fred/compare/v2.7.0...v2.8.0) (2026-08-19)
 
 
