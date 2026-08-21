@@ -182,6 +182,7 @@ export class BaselineIndicator extends ServerComponent {
               tag: "a",
               href: signalsLink,
               target: "_blank",
+              class: "external",
               rel: "noopener",
               "data-glean-id": "baseline_link_signals",
             },
@@ -309,22 +310,17 @@ export class BaselineIndicator extends ServerComponent {
         ></span>
         <div class="status-title">
           ${
-            isDiscouraged || status === "limited"
-              ? html`<span class="not-bold">${titleText}</span>`
-              : html`
-                  ${titleText}
-                  <span class="not-bold">
-                    ${status === "high" ? statusText : lowDate?.getFullYear()}
-                  </span>
-                  ${asterisk && " *"}
-                `
+            status === "low"
+              ? html` ${titleText} ${lowDate?.getFullYear()} `
+              : titleText
           }
         </div>
         ${
-          status === "low" || status === "removing"
+          ["high", "low", "removing"].includes(status)
             ? html`<div class="pill">${statusText}</div>`
             : nothing
         }
+        ${asterisk ? html`<div class="asterisk">*</div>` : nothing}
         ${
           support
             ? html`<div class="browsers">
@@ -352,25 +348,26 @@ export class BaselineIndicator extends ServerComponent {
         ${extraText.map((text) => html`<p>${text}</p>`)}
         ${
           asterisk
-            ? html`<p>* ${context.l10n("baseline-asterisk")}</p>`
+            ? html`<p class="asterisk-note">
+                * ${context.l10n("baseline-asterisk")}
+              </p>`
             : nothing
         }
         <ul>
-          <li>
-            <a
-              href=${`/${context.locale}/docs/Glossary/Baseline/Compatibility`}
-              data-glean-id="baseline_link_learn_more"
-              target="_blank"
-              class="learn-more"
-            >
-              ${context.l10n("baseline-indicator-learn-more")`Learn more`}
-            </a>
-          </li>
           <li>
             <a href=${bcdLink} data-glean-id="baseline_link_bcd_table">
               ${context.l10n(
                 "baseline-indicator-see-full-compatibility",
               )`See full compatibility`}
+            </a>
+          </li>
+          <li>
+            <a
+              href=${`/${context.locale}/docs/Glossary/Baseline/Compatibility`}
+              data-glean-id="baseline_link_learn_more"
+              target="_blank"
+            >
+              ${context.l10n("baseline-indicator-learn-more")`Learn more`}
             </a>
           </li>
         </ul>
