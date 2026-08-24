@@ -128,6 +128,7 @@ export const InteractiveExampleWithChoices = (Base) =>
               @click=${this._reset}
               variant="secondary"
               .disabled=${!this.__choiceUpdated}
+              disabled-reason=${this.l10n("interactive-example-reset-disabled")`Reset is disabled until you edit the example`}
               >${this.l10n("interactive-example-reset")`Reset`}</mdn-button
             >
           </header>

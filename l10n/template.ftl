@@ -227,6 +227,7 @@ homepage-contributor-spotlight-contributor-spotlight = Contributor Spotlight
 homepage-contributor-spotlight-get-involved = Get involved
 homepage-search-search-the-site = Search the site
 homepage-search-search = Search
+interactive-example-reset-disabled = Reset is disabled until you edit the example
 interactive-example-reset = Reset
 interactive-example-value-select = Value select
 interactive-example-the-current-value-is-not-support = The current value is not supported by your browser.
