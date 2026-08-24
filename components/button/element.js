@@ -46,7 +46,7 @@ export class MDNButton extends LitElement {
    * @param {MouseEvent} event
    */
   #click(event) {
-    if (this.disabled && this.disabledReason) {
+    if (!this.href && this.disabled && this.disabledReason) {
       event.preventDefault();
       event.stopImmediatePropagation();
     }
@@ -64,7 +64,9 @@ export class MDNButton extends LitElement {
 
   render() {
     const title =
-      this.disabled && this.disabledReason ? this.disabledReason : undefined;
+      !this.href && this.disabled && this.disabledReason
+        ? this.disabledReason
+        : undefined;
     return Button({
       label: html`<slot></slot>`,
       disabled: this.disabledReason ? false : this.disabled,
