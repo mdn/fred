@@ -59,7 +59,7 @@ export class BaselineIndicator extends ServerComponent {
   }
 
   /**
-   * @param {import("@fred").Context<import("@rari").DocPage>} context
+   * @param {import("./types.js").BaselineContext} context
    * @param {boolean} [simple]
    */
   normalizeData(context, simple = false) {
@@ -204,7 +204,7 @@ export class BaselineIndicator extends ServerComponent {
   }
 
   /**
-   * @param {import("@fred").Context<import("@rari").DocPage>} context
+   * @param {import("./types.js").BaselineContext} context
    */
   render(context) {
     const data = this.normalizeData(context);
@@ -379,7 +379,7 @@ export class BaselineIndicator extends ServerComponent {
   }
 
   /**
-   * @param {import("@fred").Context<import("@rari").DocPage>} context
+   * @param {import("./types.js").BaselineContext} context
    */
   renderSimplified(context) {
     const data = this.normalizeData(context, true);

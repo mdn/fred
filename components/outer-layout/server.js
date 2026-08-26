@@ -24,7 +24,7 @@ const DEFAULT_LOCALE = "en-US";
 
 export class OuterLayout extends ServerComponent {
   /**
-   * @param {import("@fred").Context} context
+   * @param {import("@fred").RenderContext} context
    * @param {import("lit-html").TemplateResult | import("lit").nothing} markup
    */
   render(context, markup) {
@@ -163,7 +163,7 @@ export class OuterLayout extends ServerComponent {
   }
 
   /**
-   * @param {import("@fred").Context} context
+   * @param {import("@fred").RenderContext} context
    */
   _renderMeta(context) {
     const noIndexing =
