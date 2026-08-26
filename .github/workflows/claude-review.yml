@@ -107,7 +107,7 @@ jobs:
       # below keep Claude read-only - it inspects the data and posts comments,
       # but does not apply the diff or execute any repository code.
       - name: Claude code review
-        uses: anthropics/claude-code-action@9d7150bc8a3dae8149739a88019d192b579ad90c # v1.0.193
+        uses: anthropics/claude-code-action@c81e3bc69d1b18badbb63ba39581218f02421678 # v1.0.201
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
