@@ -9,7 +9,7 @@ import warningIcon from "../icon/triangle-alert.svg?lit";
 import { globalUser } from "../user/context.js";
 
 import styles from "./element.css?lit";
-import { decompressFromBase64 } from "./utils.js";
+import { codeToDataUrl, decompressFromBase64 } from "./utils.js";
 
 import "../play-controller/element.js";
 import "../button/element.js";
@@ -135,18 +135,7 @@ ${"```"}`,
     const controller = this._controller.value;
     if (controller) {
       const { css, html, js } = controller.code;
-      let code = `<!doctype html><body>`;
-      if (css) code += `<style>${css}</style>`;
-      if (html) code += html;
-      if (js) code += `<script>${js}</script>`;
-      code += `</body>`;
-      // allowlist for characters we know not to be problematic in data urls
-      code = code.replaceAll(/[^ <>/{}=:;]+/g, (str) =>
-        encodeURIComponent(str),
-      );
-      await navigator.clipboard.writeText(
-        `data:text/html;charset=utf-8,${code}`,
-      );
+      await navigator.clipboard.writeText(codeToDataUrl({ css, html, js }));
     }
   }
 
