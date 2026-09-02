@@ -285,8 +285,10 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
               aria-controls="search-modal-listbox"
               aria-expanded=${this._query ? "true" : "false"}
               aria-activedescendant=${
-              this._query ? `search-modal-result-${this._selected}` : nothing
-            }
+                searchComplete
+                  ? `search-modal-result-${this._selected}`
+                  : nothing
+              }
             />
           </form>
           <div class="visually-hidden" role="status">${resultsStatus}</div>
