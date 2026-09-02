@@ -71,8 +71,6 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
   _input({ inputType, target }) {
     if (target instanceof HTMLInputElement) {
       this._query = target.value;
-      // Reset the active option so `aria-activedescendant` and the visual
-      // highlight can't point past the end of a shrunken result set.
       this._selected = 0;
       if (!this._hasEngaged && inputType.startsWith("insert")) {
         this._hasEngaged = true;
@@ -252,12 +250,6 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     const searchUrl = this._query
       ? `/${this.locale}/search?${new URLSearchParams({ q: this._query })}`
       : null;
-    // Options are the quick-search results plus the trailing "site search"
-    // entry (present whenever there is a query).
-    const optionCount = siteSearchIndex + (searchUrl ? 1 : 0);
-    const hasOptions = optionCount > 0;
-    // Only announce a count once the search has actually completed, so we
-    // don't say "no results" while the query is still being looked up.
     const searchComplete =
       Boolean(this._query) && this._queryIndex.status === TaskStatus.COMPLETE;
     const resultsStatus = searchComplete
@@ -290,9 +282,9 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
             role="combobox"
             aria-autocomplete="list"
             aria-controls="search-modal-listbox"
-            aria-expanded=${hasOptions ? "true" : "false"}
+            aria-expanded=${this._query ? "true" : "false"}
             aria-activedescendant=${
-              hasOptions ? `search-modal-result-${this._selected}` : nothing
+              this._query ? `search-modal-result-${this._selected}` : nothing
             }
           />
         </form>
