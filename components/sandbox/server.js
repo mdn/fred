@@ -5,10 +5,15 @@ import { ServerComponent } from "../server/index.js";
 import { SandboxComponent } from "./class.js";
 
 export class Sandbox extends ServerComponent {
-  render() {
+  /**
+   * @param {import("@fred").Context} context
+   */
+  render(context) {
     // @ts-expect-error
-    // eslint-disable-next-line no-undef
-    const modulesContext = require.context("../", true, /\/sandbox\.js$/);
+    const modulesContext = import.meta.webpackContext("../", {
+      recursive: true,
+      regExp: /\/sandbox\.js$/,
+    });
     // @ts-expect-error
     const modules = modulesContext.keys().map((key) => modulesContext(key));
 
@@ -40,7 +45,7 @@ export class Sandbox extends ServerComponent {
           ([name, component]) =>
             html`<section class="sandbox__section" id=${name}>
               <h1>${name}</h1>
-              ${component.render()}
+              ${component.render(context)}
             </section>`,
         )}
       </body>

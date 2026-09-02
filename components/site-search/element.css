@@ -24,6 +24,7 @@
   flex-direction: row;
 
   gap: 0.25rem;
+
   align-items: baseline;
 
   @media (--screen-small-and-narrower) {
@@ -232,6 +233,7 @@
     display: flex;
 
     gap: 0.5rem;
+
     align-items: center;
     justify-content: space-between;
 

@@ -7,7 +7,9 @@
   @mixin light-dark --baseline-img, url("./icons/status/limited.svg"),
     url("./icons/status/limited-dark.svg");
   --baseline-check: #1e8e3e;
+  --baseline-check-img: url("./icons/browser-check.svg");
   --baseline-cross: #ea8600;
+  --baseline-cross-img: url("./icons/browser-cross.svg");
 
   padding-left: 3.8125rem;
   margin: 1rem 0;
@@ -35,6 +37,27 @@
     --baseline-pill-color: #f1f3f4;
   }
 
+  &.discouraged,
+  &.removing {
+    --baseline-check: light-dark(#707070, #868686);
+    --baseline-check-img: url("./icons/browser-check-obsolete.svg");
+    --baseline-cross: light-dark(#707070, #868686);
+    --baseline-cross-img: url("./icons/browser-cross-obsolete.svg");
+
+    @mixin light-dark --baseline-img, url("./icons/status/obsolete.svg"),
+      url("./icons/status/obsolete-dark.svg");
+  }
+
+  &.removing {
+    --baseline-bg: light-dark(#fceeee, #410e0b);
+    --baseline-engine-bg: light-dark(#f3dddd, #1a0706);
+    --baseline-pill-bg: #b3261e;
+    --baseline-pill-color: #f1f3f4;
+
+    @mixin light-dark --baseline-img, url("./icons/status/pending-removal.svg"),
+      url("./icons/status/pending-removal-dark.svg");
+  }
+
   &[open] {
     summary .icon-chevron {
       transform: rotate(180deg);
@@ -53,6 +76,7 @@
     flex-wrap: wrap;
 
     gap: 0.5rem;
+
     align-items: center;
     justify-content: space-between;
 
@@ -176,14 +200,14 @@
 
             background-color: var(--baseline-cross);
 
-            mask-image: url("./icons/browser-cross.svg");
+            mask-image: var(--baseline-cross-img);
             mask-repeat: no-repeat;
             mask-size: contain;
           }
 
           &.supported::after {
             background-color: var(--baseline-check);
-            mask-image: url("./icons/browser-check.svg");
+            mask-image: var(--baseline-check-img);
           }
         }
       }

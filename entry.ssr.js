@@ -119,7 +119,7 @@ export async function render(path, partialContext, compilationStats) {
           }
           // @ts-expect-error
           case "Sandbox":
-            return Sandbox.render();
+            return Sandbox.render(context);
           case "SpaNotFound":
           default:
             return NotFound.render(context);

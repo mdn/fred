@@ -9,10 +9,15 @@ export function mdnUrl2Breadcrumb(url, locale) {
   let parents = url
     .replaceAll("_", " ")
     .split("/")
-    .filter((p) => !["", locale, "docs"].includes(p));
+    .filter((p) => !["", "docs"].includes(p));
+
+  const urlLocale = parents.shift();
+  const prefix = urlLocale === locale ? [] : [urlLocale];
 
   // Replace "API" for clarity.
-  parents = parents.map((p) => (p === "API" ? "Web APIs" : p));
+  if (parents.at(0) === "Web" && parents.at(1) === "API") {
+    parents[1] = "Web APIs";
+  }
 
   if (parents.length > 1 && parents.at(0) === "Web") {
     // Remove virtual "Web" path.
@@ -24,5 +29,5 @@ export function mdnUrl2Breadcrumb(url, locale) {
     parents.splice(-1, 1);
   }
 
-  return parents.join(" / ");
+  return [...prefix, ...parents].join(" / ");
 }

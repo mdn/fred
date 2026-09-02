@@ -2,6 +2,7 @@
 @import url("../prev-next/index.css");
 @import url("../notecard/index.css");
 @import url("../code-example/prism.css");
+@import url("../baseline-indicator/icon.css");
 
 .content-section {
   line-height: var(--font-line-content);
@@ -390,13 +391,36 @@
 
   /* Alphabetical/grouped indexes (rari `CSS_Ref`, `ListGroups`, `APIListAlpha`, `css_ref_list`) */
   .index {
-    ul {
+    .index-nav ul {
+      display: grid;
+
+      grid-template-columns: repeat(auto-fit, minmax(1.75rem, 1fr));
+
+      padding: 0;
+
+      list-style: none;
+
+      li {
+        margin: 0;
+        text-align: center;
+      }
+
+      a {
+        display: block;
+      }
+    }
+
+    > ul {
       columns: 18rem;
       column-gap: 2rem;
     }
 
     li {
       break-inside: avoid;
+    }
+
+    .icon {
+      margin-left: 0.5ch;
     }
   }
 

@@ -62,34 +62,22 @@ compat-branch-altname = Alternate name: <code data-l10n-name="altname">{ $altnam
 compat-branch-prefix-altname = Prefix: <code data-l10n-name="prefix">{ $prefix }</code>, alternate name: <code data-l10n-name="altname">{ $altname }</code>
 compat-support-removed = Removed in { $version } and later
 compat-support-see-impl-url = See <a data-l10n-name="impl_url">{ $label }</a>
-compat-support-flags =
-    { $has_added ->
-        [1] From version { $version_added }
-       *[0] { "" }
-    }{ $has_last ->
-        [1]
-            { $has_added ->
-               *[0] Until { $versionLast } users
-                [1] { " " }until { $versionLast } users
-            }
-       *[0]
-            { $has_added ->
-               *[0] Users
-                [1] { " " }users
-            }
-    }
-    { " " }must explicitly set the <code data-l10n-name="name">{ $flag_name }</code>{ " " }
-    { $flag_type ->
+compat-support-flag-range =
+    { $version_range ->
+        [range] From version { $version_added } until { $version_last }, users
+        [from] From version { $version_added }, users
+        [until] Until { $version_last }, users
+       *[none] Users
+    } must explicitly set the <code data-l10n-name="name">{ $flag_name }</code> { $flag_type ->
        *[preference] preference
         [runtime_flag] runtime flag
     }{ $has_value ->
         [1] { " " }to <code data-l10n-name="value">{ $flag_value }</code>
        *[0] { "" }
-    }{ "." }
-    { $has_pref_url ->
+    }.{ $has_pref_url ->
         [1]
             { $flag_type ->
-                [preference] To change preferences in { $browser_name }, visit { $browser_pref_url }.
+                [preference] { " " }To change preferences in { $browser_name }, visit { $browser_pref_url }.
                *[other] { "" }
             }
        *[0] { "" }
@@ -125,12 +113,22 @@ article-footer-learn-how-to-contribute = Learn how to contribute
 article-footer-view-this-page-on-github = View this page on GitHub
 article-footer-this-will-take-you-to-github-to = This will take you to GitHub to file a new issue.
 article-footer-report-a-problem-with-this-conte = Report a problem with this content
-baseline-indicator-baseline-cross = Baseline Cross
-baseline-indicator-baseline-check = Baseline Check
+baseline-indicator-deprecated = Deprecated
 baseline-indicator-limited-availability = Limited availability
 baseline-indicator-baseline = Baseline
 baseline-indicator-widely-available = Widely available
 baseline-indicator-newly-available = Newly available
+baseline-indicator-to-be-removed = To be removed
+baseline-indicator-pending-removal = This feature is pending removal from browsers. Using it now may lead to broken functionality in future updates.
+baseline-indicator-avoid-using = Avoid using this feature in new projects.
+baseline-indicator-candidate-for-removal = This feature may be a candidate for removal from web standards or browsers.
+baseline-indicator-alternatives-use = Use the following features instead:
+baseline-indicator-alternatives-consider = Consider using the following features instead:
+baseline-indicator-alternatives-end = .
+baseline-indicator-baseline-discouraged = Baseline Discouraged
+baseline-indicator-baseline-discouraged-cross = Baseline Discouraged Cross
+baseline-indicator-baseline-cross = Baseline Cross
+baseline-indicator-baseline-check = Baseline Check
 baseline-indicator-check = check
 baseline-indicator-cross = cross
 baseline-indicator-learn-more = Learn more
@@ -235,6 +233,7 @@ homepage-contributor-spotlight-contributor-spotlight = Contributor Spotlight
 homepage-contributor-spotlight-get-involved = Get involved
 homepage-search-search-the-site = Search the site
 homepage-search-search = Search
+interactive-example-reset-disabled = Reset is disabled until you edit the example
 interactive-example-reset = Reset
 interactive-example-value-select = Value select
 interactive-example-the-current-value-is-not-support = The current value is not supported by your browser.
@@ -266,8 +265,8 @@ observatory-tests-and-scores-test-result = Test result
 observatory-tests-and-scores-description = Description
 observatory-tests-and-scores-modifier = Modifier
 observatory-tests-and-scores-failed-to-load-tests-and-scoring = Failed to load tests and scoring data. Please try again later.
-brand-web-docs = MDN Web Docs
 blog-rss-title = MDN Blog RSS Feed
+brand-web-docs = MDN Web Docs
 meta-description = The MDN Web Docs site provides information about Open Web technologies including HTML, CSS, and APIs for both Web sites and progressive web apps.
 logo-alt = The MDN logo
 pagination-pagination = Pagination

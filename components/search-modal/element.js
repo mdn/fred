@@ -265,38 +265,40 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
         @toggle=${this._toggle}
         closedby="any"
       >
-        <form
-          method="get"
-          action=${`/${this.locale}/search`}
-          @submit=${this._submit}
-        >
-          <input
-            type="search"
-            name="q"
-            .value=${this._query}
-            autocomplete="off"
-            autofocus
-            @input=${this._input}
-            placeholder=${this.l10n("search-modal-search")`Search`}
-            aria-label=${this.l10n("search-modal-search")`Search`}
-            role="combobox"
-            aria-autocomplete="list"
-            aria-controls="search-modal-listbox"
-            aria-expanded=${this._query ? "true" : "false"}
-            aria-activedescendant=${
+        <div class="header">
+          <form
+            method="get"
+            action=${`/${this.locale}/search`}
+            @submit=${this._submit}
+          >
+            <input
+              type="search"
+              name="q"
+              .value=${this._query}
+              autocomplete="off"
+              autofocus
+              @input=${this._input}
+              placeholder=${this.l10n("search-modal-search")`Search`}
+              aria-label=${this.l10n("search-modal-search")`Search`}
+              role="combobox"
+              aria-autocomplete="list"
+              aria-controls="search-modal-listbox"
+              aria-expanded=${this._query ? "true" : "false"}
+              aria-activedescendant=${
               this._query ? `search-modal-result-${this._selected}` : nothing
             }
-          />
-        </form>
-        <div class="visually-hidden" role="status">${resultsStatus}</div>
-        <mdn-button
-          class="close"
-          variant="plain"
-          icon-only
-          .icon=${exitIcon}
-          @click=${this._close}
-          >${this.l10n("search-modal-exit-search")`Exit search`}</mdn-button
-        >
+            />
+          </form>
+          <div class="visually-hidden" role="status">${resultsStatus}</div>
+          <mdn-button
+            class="close"
+            variant="plain"
+            icon-only
+            .icon=${exitIcon}
+            @click=${this._close}
+            >${this.l10n("search-modal-exit-search")`Exit search`}</mdn-button
+          >
+        </div>
         ${this._queryIndex.render({
           initial: this._renderLoadingSearchIndex.bind(this),
           pending: this._renderLoadingSearchIndex.bind(this),
@@ -395,7 +397,9 @@ function quickSearch(input, index) {
     .map(([_, i]) => i)
     .slice(0, 10);
 
-  return indexResults.map((i) => i && (index.items || [])[i]).filter(Boolean);
+  return indexResults
+    .map((i) => (index.items || [])[i])
+    .filter((item) => item !== undefined);
 }
 
 /**

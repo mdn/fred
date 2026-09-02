@@ -1,0 +1,33 @@
+.left-sidebar,
+.content-section {
+  .icon.icon-baseline {
+    display: inline-block;
+
+    height: 0.8em;
+    aspect-ratio: 300/167;
+
+    /* align with optical middle: */
+    margin-top: -0.1em;
+
+    vertical-align: middle;
+
+    background-image: var(--baseline-img);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    & ~ .icon {
+      display: none;
+    }
+
+    &.discouraged {
+      @mixin light-dark --baseline-img, url("./icons/sidebar/deprecated.svg"),
+        url("./icons/sidebar/deprecated-dark.svg");
+    }
+
+    &.removing {
+      @mixin light-dark --baseline-img, url("./icons/sidebar/removing.svg"),
+        url("./icons/sidebar/removing-dark.svg");
+    }
+  }
+}

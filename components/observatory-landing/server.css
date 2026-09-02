@@ -160,6 +160,7 @@
     grid-template-columns: 2rem 1fr;
 
     gap: 1.5rem;
+
     align-items: start;
 
     figcaption {
