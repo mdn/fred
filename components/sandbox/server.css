@@ -18,18 +18,6 @@
   }
 }
 
-.sandbox__section {
-  display: none;
-
-  &:target {
-    display: block;
-  }
-}
-
-.sandbox__list {
-  padding: 0;
-
-  > li {
-    margin-block: 1rem;
-  }
+#host {
+  padding: 1rem;
 }

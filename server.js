@@ -47,7 +47,7 @@ if (process.env.NODE_ENV === "production") {
 /**
  * @param {Request} req
  * @param {Response} res
- * @param {import("@rari").BuiltPage} page
+ * @param {import("@fred").RenderPage} page
  */
 async function serverRenderMiddleware(req, res, page) {
   try {
@@ -234,6 +234,26 @@ export async function startServer() {
     next();
   });
 
+  app.get("/sandbox", (_req, res) => {
+    res.redirect(302, "/en-US/sandbox");
+  });
+
+  app.get(
+    ["/:locale/sandbox", "/:locale/sandbox/:component"],
+    async (req, res) => {
+      const { component } = req.params;
+
+      await serverRenderMiddleware(req, res, {
+        renderer: "Sandbox",
+        pageTitle: component ? `${component} sandbox` : "Fred sandbox",
+        url: req.path,
+        sandbox: {
+          component,
+        },
+      });
+    },
+  );
+
   app.use(
     createProxyMiddleware({
       target: RARI_URL,
@@ -257,14 +277,6 @@ export async function startServer() {
         proxyRes: async (proxyRes, req, res) => {
           const contentType = proxyRes.headers["content-type"] || "";
           const statusCode = proxyRes.statusCode || 500;
-
-          if (req.path === "/sandbox") {
-            return serverRenderMiddleware(req, res, {
-              // @ts-expect-error
-              renderer: "Sandbox",
-              pageTitle: "Fred sandbox",
-            });
-          }
 
           if (
             (!contentType || contentType.includes("text/plain")) &&

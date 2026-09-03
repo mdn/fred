@@ -48,6 +48,7 @@ for (const [name, def] of customElements.__definitions) {
 export async function render(path, partialContext, compilationStats) {
   const locale = path.split("/", 2)[1] || "en-US";
 
+  /** @type {import("@fred").RenderContext} */
   const context = {
     path,
     ...(await addFluent(locale)),
@@ -117,7 +118,6 @@ export async function render(path, partialContext, compilationStats) {
               `Unknown Spa Page title=${context.pageTitle}, slug=${context.slug}`,
             );
           }
-          // @ts-expect-error
           case "Sandbox":
             return Sandbox.render(context);
           case "SpaNotFound":
@@ -136,6 +136,7 @@ export async function render(path, partialContext, compilationStats) {
  */
 export async function renderSimplified(path, partialContext) {
   const locale = path.split("/", 2)[1] || "en-US";
+  /** @type {import("@fred").RenderContext} */
   const context = {
     path,
     ...(await addFluent(locale)),

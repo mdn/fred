@@ -22,7 +22,7 @@ export class ButtonSandbox extends SandboxComponent {
 
     return html`
       <style>
-        #Button {
+        #host {
           section {
             display: flex;
             flex-wrap: wrap;

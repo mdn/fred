@@ -8,9 +8,21 @@ export type Context<T = BuiltPage> = PartialContext<T> &
     path: string;
   };
 
-export type PartialContext<T = BuiltPage> = T & {
+export type SandboxPage = {
+  renderer: "Sandbox";
+  pageTitle: string;
+  url: string;
+  sandbox: {
+    component?: string;
+  };
+};
+
+export type RenderPage = BuiltPage | SandboxPage;
+export type PartialContext<T = RenderPage> = T & {
   localServer?: boolean;
 };
+export type RenderContext = Context<RenderPage>;
+export type SandboxContext = Context<SandboxPage>;
 
 export type L10nContext = {
   locale: string;

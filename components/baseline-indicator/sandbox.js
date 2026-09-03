@@ -194,18 +194,18 @@ const CASES = [
 
 export class BaselineIndicatorSandbox extends SandboxComponent {
   /**
-   * @param {import("@fred").Context} context
+   * @param {import("@fred").SandboxContext} context
    */
   render(context) {
     return html`
       <style>
-        #BaselineIndicator .baseline-indicator {
+        #host .baseline-indicator {
           max-width: var(--layout-content-max);
         }
       </style>
       ${CASES.map((testCase) => {
         const docContext =
-          /** @type {import("@fred").Context<import("@rari").DocPage>} */ ({
+          /** @type {import("./types.js").BaselineContext} */ ({
             ...context,
             doc: {
               status: { baseline: testCase.status },
