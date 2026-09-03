@@ -311,7 +311,7 @@ export class BaselineIndicator extends ServerComponent {
         <div class="status-title">
           ${
             status === "low"
-              ? html` ${titleText} ${lowDate?.getFullYear()} `
+              ? html`${titleText} ${lowDate?.getFullYear()}`
               : titleText
           }
         </div>
