@@ -32,6 +32,8 @@ const TEST_NAMES_IN_ORDER = [
   "subresource-integrity",
   "x-content-type-options",
   "x-frame-options",
+  "cross-origin-embedder-policy",
+  "cross-origin-opener-policy",
   "cross-origin-resource-policy",
 ];
 
