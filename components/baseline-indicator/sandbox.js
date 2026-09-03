@@ -46,7 +46,7 @@ const ALTERNATIVES = [
 ];
 
 const REASON_HTML =
-  "It was replaced by a standardised equivalent that browsers implement consistently.";
+  "This reason comes from upstream and can include <code>&lt;code&gt;</code> blocks.";
 
 /**
  * @param {Partial<import("@rari").FeatureData>} [overrides]
