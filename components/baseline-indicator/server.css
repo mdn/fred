@@ -10,7 +10,6 @@
 
   --baseline-color-red-90: oklch(97% 0.028 22deg);
   --baseline-color-red-80: oklch(88.9% 0.058 22deg);
-  --baseline-color-red-40: oklch(55.2% 0.258 22deg);
   --baseline-color-red-20: oklch(36.4% 0.16 22deg);
   --baseline-color-red-10: oklch(25% 0.095 22deg);
 
@@ -27,7 +26,6 @@
   --baseline-color-blue-90: oklch(97% 0.025 258deg);
   --baseline-color-blue-80: oklch(88.9% 0.055 258deg);
   --baseline-color-blue-70: oklch(80.8% 0.102 258deg);
-  --baseline-color-blue-40: oklch(55.2% 0.205 258deg);
   --baseline-color-blue-30: oklch(46.1% 0.17 258deg);
   --baseline-color-blue-20: oklch(36.4% 0.125 258deg);
   --baseline-color-blue-10: oklch(25% 0.078 258deg);
