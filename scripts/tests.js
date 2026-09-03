@@ -58,6 +58,16 @@ await yargs(hideBin(process.argv))
           describe: "run fred and rari from this content repo",
           type: "string",
         })
+        .option("spec", {
+          describe: "only run these spec files",
+          type: "array",
+          string: true,
+        })
+        .option("exclude", {
+          describe: "exclude these spec files",
+          type: "array",
+          string: true,
+        })
         .check((argv) => {
           if (argv.content && (argv.rari || argv.fred)) {
             throw new Error("--content cannot be used with --rari or --fred");
@@ -65,10 +75,17 @@ await yargs(hideBin(process.argv))
           return true;
         }),
     async (argv) => {
+      const wdioArgs = [
+        ...(argv.spec?.map((file) => ["spec", file]) || []),
+        ...(argv.exclude?.map((file) => ["exclude", file]) || []),
+      ]
+        .map(([option, file]) => ` --${option} ${JSON.stringify(file)}`)
+        .join("");
+
       /** @type {import("concurrently").ConcurrentlyCommandInput[]} */
       const jobs = [
         {
-          command: `npx --package=@wdio/cli wdio run wdio.conf.js`,
+          command: `npx --package=@wdio/cli wdio run wdio.conf.js${wdioArgs}`,
           name: "wdio",
           prefixColor: "green",
         },

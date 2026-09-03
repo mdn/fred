@@ -25,3 +25,15 @@ To run e2e tests and bring up a fred dev server and rari server:
 ```
 npm test -- e2e --fred dev --rari
 ```
+
+To run only some files:
+
+```
+npm test -- e2e --spec test/specs/playground.e2e.js
+```
+
+To exclude files:
+
+```
+npm test -- e2e --exclude test/specs/layout.e2e.js
+```
