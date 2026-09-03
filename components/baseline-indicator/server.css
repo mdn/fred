@@ -85,7 +85,7 @@
       var(--baseline-color-green-30),
       var(--baseline-color-green-70)
     );
-    --baseline-pill-bg: var(--baseline-color-green-30);
+    --baseline-pill-bg: #0f7a34;
 
     --baseline-note: light-dark(
       var(--baseline-color-green-80),
@@ -109,7 +109,7 @@
       var(--baseline-color-blue-30),
       var(--baseline-color-blue-70)
     );
-    --baseline-pill-bg: var(--baseline-color-blue-40);
+    --baseline-pill-bg: #1b6ef3;
 
     --baseline-note: light-dark(
       var(--baseline-color-blue-80),
@@ -143,7 +143,7 @@
       var(--baseline-color-red-80),
       var(--baseline-color-red-20)
     );
-    --baseline-pill-bg: var(--baseline-color-red-40);
+    --baseline-pill-bg: #b3261e;
 
     @mixin light-dark --baseline-img, url("./icons/status/pending-removal.svg"),
       url("./icons/status/pending-removal-dark.svg");
