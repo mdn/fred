@@ -129,6 +129,7 @@ export class BaselineIndicator extends ServerComponent {
       }
     }
     if (isDiscouraged) {
+      const reason = feature?.discouraged?.reason_html;
       extraText.push(
         html`${
           status === "removing"
@@ -139,7 +140,7 @@ export class BaselineIndicator extends ServerComponent {
                 "baseline-indicator-avoid-using",
               )`Avoid using this feature in new projects.`
         }
-        ${unsafeHTML(feature?.discouraged?.reason_html || nothing)}
+        ${reason ? html`<span lang="en-US">${unsafeHTML(reason)}</span>` : nothing}
         ${
           status === "removing"
             ? nothing
