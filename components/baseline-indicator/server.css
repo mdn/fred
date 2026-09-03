@@ -34,7 +34,7 @@
     var(--baseline-color-gray-90),
     var(--baseline-color-gray-10)
   );
-  --baseline-engine-bg: light-dark(
+  --baseline-bg-secondary: light-dark(
     oklch(0% 0 0deg / 6%),
     oklch(100% 0 0deg / 6%)
   );
@@ -239,7 +239,7 @@
 
         padding: 0.5rem 0.625rem;
 
-        background: var(--baseline-engine-bg);
+        background: var(--baseline-bg-secondary);
         border-radius: 2rem;
 
         .browser {
@@ -324,9 +324,18 @@
       font-weight: 500;
     }
 
-    p {
+    > p {
       margin-top: 0;
       margin-bottom: 1rem;
+
+      code {
+        padding: 0.125em 0.25em;
+
+        font-family: var(--font-family-code);
+
+        background: var(--baseline-bg-secondary);
+        border-radius: var(--radius-normal);
+      }
     }
 
     .asterisk-note {
