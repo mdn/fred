@@ -33,6 +33,12 @@ footer-copyright = Portions of this content are ©1998–{ $year } by individual
 
 search-modal-site-search = Site search for <em>{ $query }</em>
 
+search-modal-results-status = { $results ->
+    [0] No results found.
+    [one] { $results } result available.
+   *[other] { $results } results available.
+}
+
 site-search-search-stats = Found { $results } documents.
 site-search-suggestion-matches =  { $relation ->
     [gt] more than { $matches ->

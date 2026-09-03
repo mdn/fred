@@ -18,6 +18,11 @@ not-found-back = ホームページに戻る
 footer-mofo = <a data-l10n-name="moco">Mozilla Corporation</a> の非営利の親会社である <a data-l10n-name="mofo">Mozilla Foundation</a> を参照してください。
 footer-copyright = このコンテンツの一部は、©1998–{ $year } 個人の mozilla.org 協力者です。コンテンツは<a data-l10n-name="cc">クリエイティブ・コモンズ・ライセンス</a>のもとで利用できます。
 search-modal-site-search = サイトで <em>{ $query }</em> を検索
+search-modal-results-status =
+    { $results ->
+        [0] 結果が見つかりませんでした。
+       *[other] { $results } 件の結果が利用可能です。
+    }
 
 site-search-search-stats = { $results } 件の文書が見つかりました。
 site-search-suggestion-matches =
@@ -293,6 +298,7 @@ search-button-search-the-site = このサイトを検索
 search-modal-loading-search-index = 検索インデックスを読み込み中…
 search-modal-search = 検索
 search-modal-exit-search = 検索終了
+search-modal-results-label = 検索結果
 sidebar-filter-filter-sidebar = サイドバーをフィルタリング
 sidebar-filter-filter = フィルター
 sidebar-filter-clear-filter-input = フィルター入力をクリア
