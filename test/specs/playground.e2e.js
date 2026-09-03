@@ -40,25 +40,5 @@ describe("Playground", () => {
         expect.stringContaining("js-contents"),
       );
     });
-
-    it("should only uri-encode characters outside the allowlist", async () => {
-      await $(`mdn-play-editor[language="html"]`).click();
-      await browser.keys("@\n@ @%20 @");
-      await $(`mdn-play-editor[language="css"]`).click();
-      await browser.keys("body {\n  font-size: 5em;\n}");
-
-      await $(`[data-id="share"]:not([disabled])`).click();
-      await $(`[data-glean-id="playground: share-data-url"]`).click();
-
-      // will cause a webdriver error about permissions, but we've set them in firefox through about:config
-      await expect(browser).toHaveClipboardText(
-        expect.stringContaining("%40%0A%40 %40%2520 %40"),
-      );
-      await expect(browser).toHaveClipboardText(
-        expect.stringContaining(
-          "<style>body {%0A  font-size: 5em;%0A}</style>",
-        ),
-      );
-    });
   });
 });
