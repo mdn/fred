@@ -21,13 +21,14 @@
     }
 
     &.discouraged {
-      @mixin light-dark --baseline-img, url("./icons/sidebar/deprecated.svg"),
-        url("./icons/sidebar/deprecated-dark.svg");
+      @mixin light-dark --baseline-img, url("./icons/status/obsolete.svg"),
+        url("./icons/status/obsolete-dark.svg");
     }
 
     &.removing {
-      @mixin light-dark --baseline-img, url("./icons/sidebar/removing.svg"),
-        url("./icons/sidebar/removing-dark.svg");
+      @mixin light-dark --baseline-img,
+        url("./icons/status/pending-removal.svg"),
+        url("./icons/status/pending-removal-dark.svg");
     }
   }
 }
