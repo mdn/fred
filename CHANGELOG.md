@@ -1,5 +1,37 @@
 # Changelog
 
+## [2.9.0](https://github.com/mdn/fred/compare/v2.8.0...v2.9.0) (2026-09-04)
+
+
+### Features
+
+* **baseline:** implement new banner design ([#1821](https://github.com/mdn/fred/issues/1821)) ([ba04401](https://github.com/mdn/fred/commit/ba04401033226365113d7a1e8c568557d2b8f1a7))
+* **index:** style index navigation links ([#1827](https://github.com/mdn/fred/issues/1827)) ([ac0a394](https://github.com/mdn/fred/commit/ac0a3949deed1769997fb071c81115f6d0d30157))
+* **observatory:** show COEP and COOP results in scoring ([#1843](https://github.com/mdn/fred/issues/1843)) ([9f5469b](https://github.com/mdn/fred/commit/9f5469b695de3b96d6b0732efa7f1b0dcd1a2161))
+* **sandbox:** add per-component preview routes ([2219bc6](https://github.com/mdn/fred/commit/2219bc6adfaa9f185b04c0e1815c113493d28586))
+
+
+### Bug Fixes
+
+* **baseline:** add `<code>` styling to discouraged reason ([#1852](https://github.com/mdn/fred/issues/1852)) ([82f41e7](https://github.com/mdn/fred/commit/82f41e7eb0d6af337efd93c02841606c140c4f0e))
+* **baseline:** add lang attribute to discouraged reason ([#1853](https://github.com/mdn/fred/issues/1853)) ([09e5bf0](https://github.com/mdn/fred/commit/09e5bf0222b63c9fa021fe523145845754a7d785))
+* **button:** make disabled state more obvious ([#1825](https://github.com/mdn/fred/issues/1825)) ([cadedeb](https://github.com/mdn/fred/commit/cadedebc28b9bd1c1be96a77d44f610809a7912f))
+* **search-modal:** add ARIA combobox semantics to quick search ([#1706](https://github.com/mdn/fred/issues/1706)) ([23c02d4](https://github.com/mdn/fred/commit/23c02d4aa6499d7b01e05ed47952029645a0ad55))
+
+
+### Miscellaneous
+
+* **baseline:** add sandbox component ([#1820](https://github.com/mdn/fred/issues/1820)) ([0327ed5](https://github.com/mdn/fred/commit/0327ed5616f518a0d6418e60b002d590be43341a))
+* **deps:** bump @codemirror/state from 6.7.1 to 6.7.2 in the npm-prod group ([#1837](https://github.com/mdn/fred/issues/1837)) ([03bee6c](https://github.com/mdn/fred/commit/03bee6c3c8de8d197e40e781f7886325718a99bb))
+* **deps:** bump @codemirror/state in the npm-prod group ([03bee6c](https://github.com/mdn/fred/commit/03bee6c3c8de8d197e40e781f7886325718a99bb))
+* **deps:** bump fflate from 0.8.2 to 0.8.3 ([#1854](https://github.com/mdn/fred/issues/1854)) ([ba3c1d4](https://github.com/mdn/fred/commit/ba3c1d4854ba5cbecfcb0814c4787abc53f8f76f))
+* **deps:** bump js-yaml from 4.1.1 to 4.3.2 ([#1851](https://github.com/mdn/fred/issues/1851)) ([022ed57](https://github.com/mdn/fred/commit/022ed574f4364e59e9d367e8033b98b72b55ff18))
+* **deps:** bump postcss-selector-parser from 6.1.2 to 6.1.4 ([#1841](https://github.com/mdn/fred/issues/1841)) ([15c4a53](https://github.com/mdn/fred/commit/15c4a53a23ed5ed0f25c657d7fb9506a39f887f2))
+* **deps:** bump shell-quote and concurrently ([#1816](https://github.com/mdn/fred/issues/1816)) ([bfc255f](https://github.com/mdn/fred/commit/bfc255f827f34ff2dd79d19cc0204ba5d66e1e58))
+* **sandbox:** pass context to sandbox components ([#1819](https://github.com/mdn/fred/issues/1819)) ([f794093](https://github.com/mdn/fred/commit/f794093fe2e904f7edfc75a310a3418850fe3ea8))
+* **sandbox:** use import.meta.webpackContext ([#1818](https://github.com/mdn/fred/issues/1818)) ([4ae04ea](https://github.com/mdn/fred/commit/4ae04ea7d834ff28b4ae756b280ff60a24a257b1))
+* **test:** support filtering spec files ([#1848](https://github.com/mdn/fred/issues/1848)) ([0e0569e](https://github.com/mdn/fred/commit/0e0569eed5ac829737c244ec29b917f3c0a1fc84))
+
 ## [2.8.0](https://github.com/mdn/fred/compare/v2.7.0...v2.8.0) (2026-08-19)
 
 
