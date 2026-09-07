@@ -26,5 +26,6 @@ export default {
     "selector-id-pattern": null,
     "font-family-name-quotes": "always-unless-keyword",
     "at-rule-no-unknown": [true, { ignoreAtRules: ["mixin"] }],
+    "at-rule-prelude-no-invalid": [true, { ignoreAtRules: ["media", "mixin"] }],
   },
 };
