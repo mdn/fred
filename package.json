@@ -152,5 +152,18 @@
       "name": "npm",
       "version": ">=11.8.0"
     }
+  },
+  "allowScripts": {
+    "@mdn/rari": true,
+    "@parcel/watcher": true,
+    "edgedriver": true,
+    "esbuild": true,
+    "fsevents": true,
+    "geckodriver": true,
+    "gifsicle": true,
+    "lefthook": true,
+    "mozjpeg": true,
+    "pngquant-bin": true,
+    "unrs-resolver": true
   }
 }
