@@ -158,7 +158,7 @@
     "@parcel/watcher": true,
     "edgedriver": true,
     "esbuild": true,
-    "fsevents": true,
+    "fsevents": false,
     "geckodriver": true,
     "gifsicle": true,
     "lefthook": true,
