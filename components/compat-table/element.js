@@ -207,8 +207,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   }
 
   firstUpdated() {
-    // Keep the anchored settings dialog below the table header, whose height
-    // depends on the (vertical) browser names, so the header stays visible.
+    // Expose the table's top and header's bottom edge to the CSS, which picks
+    // one as the anchored settings dialog's top depending on the viewport.
     this._headerObserver = new ResizeObserver(() => this._updateDialogOffset());
     // `thead` is `display: contents`, so observe the table instead.
     const inner = this._innerRef.value;
@@ -220,18 +220,22 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   _updateDialogOffset() {
     const inner = this._innerRef.value;
     const thead = this._theadRef.value;
-    const toolbar = inner?.querySelector(".bc-toolbar");
-    if (!inner || !thead || !toolbar) return;
+    const table = thead?.parentElement;
+    if (!inner || !thead || !table) return;
     const top = inner.getBoundingClientRect().top;
-    // Measure the header cells (`thead` itself has no box); on mobile the
-    // header is hidden, so this falls back to the toolbar.
-    const bottom = Math.max(
-      toolbar.getBoundingClientRect().bottom,
+    const tableTop = table.getBoundingClientRect().top;
+    // Measure the header cells, as `thead` itself has no box.
+    const headerBottom = Math.max(
+      tableTop,
       ...[...thead.querySelectorAll("th, td")].map(
         (cell) => cell.getBoundingClientRect().bottom,
       ),
     );
-    inner.style.setProperty("--modal-anchored-top", `${bottom - top}px`);
+    inner.style.setProperty("--compat-table-top", `${tableTop - top}px`);
+    inner.style.setProperty(
+      "--compat-header-bottom",
+      `${headerBottom - top}px`,
+    );
   }
 
   /**

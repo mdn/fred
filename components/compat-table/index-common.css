@@ -46,8 +46,17 @@ table {
 }
 
 .table-container-inner {
-  /* Containing block for the anchored settings dialog. */
+  /* Containing block for the anchored settings dialog, which sits below the
+     header (vertical browser names stay visible) on wide viewports, and
+     flush with the table's top edge on narrow ones. */
+  --modal-anchored-top: var(--compat-header-bottom);
+
   position: relative;
+
+  @media (--screen-small-and-narrower) {
+    --modal-anchored-top: var(--compat-table-top);
+    --modal-anchored-gap: 0px;
+  }
 }
 
 .bc-toolbar {

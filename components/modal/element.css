@@ -15,7 +15,7 @@ dialog {
   width: auto;
   max-width: none;
 
-  margin: 0.5rem 0 0;
+  margin: var(--modal-anchored-gap, 0.5rem) 0 0;
 
   background: var(--color-background-primary);
   box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
