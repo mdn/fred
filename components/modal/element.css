@@ -4,9 +4,27 @@ dialog {
   border-radius: 0.25rem;
 }
 
+:host([anchored]) dialog {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  z-index: 1;
+
+  width: auto;
+  max-width: none;
+
+  margin: 0.5rem 0 0;
+
+  background: var(--color-background-primary);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
+}
+
 header {
   display: flex;
-  padding: 0.5rem;
+  align-items: center;
+
+  /* Align the title with the slotted content's 1rem padding. */
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
 
   h2 {
     margin: 0;
