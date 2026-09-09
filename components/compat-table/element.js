@@ -7,6 +7,10 @@ import { L10nMixin } from "../../l10n/mixin.js";
 import { gleanClick } from "../../utils/glean.js";
 import { ViewedController } from "../viewed-controller/viewed-controller.js";
 
+import {
+  getVisibleBrowsers,
+  onVisibleBrowsersChange,
+} from "./browser-settings.js";
 import { DEFAULT_LOCALE, ISSUE_METADATA_TEMPLATE } from "./constants.js";
 import styles from "./element.css?lit";
 import {
@@ -16,7 +20,6 @@ import {
   versionLabelFromSupport,
 } from "./feature-row.js";
 import {
-  SHOW_BROWSERS,
   asList,
   bugURLToString,
   getCurrentSupport,
@@ -71,8 +74,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       data: {},
       browserInfo: { attribute: "browserinfo" },
       _pathname: { state: true },
-      _platforms: { state: true },
-      _browsers: { state: true },
+      _visibleBrowsers: { state: true },
       _showTimelineId: { state: true },
     };
   }
@@ -91,10 +93,14 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     this.browserInfo = {};
     this.locale = "";
     this._pathname = "";
+    /** @type {import("@bcd").BrowserName[]} */
+    this._visibleBrowsers = [];
     /** @type {string[]} */
     this._platforms = [];
     /** @type {import("@bcd").BrowserName[]} */
     this._browsers = [];
+    /** @type {(() => void) | undefined} */
+    this._unsubscribeBrowserSettings = undefined;
     /** @type {string|undefined} */
     this._showTimelineId = undefined;
     new ViewedController(this, this._ref, () => {
@@ -145,10 +151,6 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         const browserSupport = feature.compat.support[browser] ?? {
           version_added: false,
         };
-
-        if (!SHOW_BROWSERS.includes(browser)) {
-          continue;
-        }
 
         const firstSupportItem = getFirst(browserSupport);
         if (firstSupportItem && hasNoteworthyNotes(firstSupportItem)) {
@@ -202,11 +204,35 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   connectedCallback() {
     super.connectedCallback();
     this._pathname = globalThis.location.pathname;
-    [this._platforms, this._browsers] = gatherPlatformsAndBrowsers(
-      this._category,
-      this.data,
-      this.browserInfo,
-    );
+    this._visibleBrowsers = getVisibleBrowsers();
+    this._unsubscribeBrowserSettings = onVisibleBrowsersChange(() => {
+      this._visibleBrowsers = getVisibleBrowsers();
+    });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._unsubscribeBrowserSettings?.();
+    this._unsubscribeBrowserSettings = undefined;
+  }
+
+  /**
+   * @param {import("lit").PropertyValues<this>} changedProperties
+   */
+  willUpdate(changedProperties) {
+    if (
+      changedProperties.has("query") ||
+      changedProperties.has("data") ||
+      changedProperties.has("browserInfo") ||
+      changedProperties.has("_visibleBrowsers")
+    ) {
+      [this._platforms, this._browsers] = gatherPlatformsAndBrowsers(
+        this._category,
+        this.data,
+        this.browserInfo,
+        this._visibleBrowsers,
+      );
+    }
   }
 
   get _issueUrl() {
@@ -1056,19 +1082,26 @@ customElements.define("mdn-compat-table", MDNCompatTable);
 
 /**
  * Return a list of platforms and browsers that are relevant for this category &
- * data.
+ * data, limited to the browsers the user chose to see.
  *
  * If the category is "webextensions", only those are shown. In all other cases
  * at least the entirety of the "desktop" and "mobile" platforms are shown. If
  * the category is JavaScript, the entirety of the "server" category is also
  * shown. In all other categories, if compat data has info about Deno / Node.js
- * those are also shown. Deno is always shown if Node.js is shown.
+ * those are also shown. Deno is always shown if Node.js is shown. Any other
+ * platform (e.g. "xr") is shown if the user made one of its browsers visible.
  * @param {string} category
  * @param {import("@bcd").Identifier} data
  * @param {Partial<import("@bcd").Browsers>} browserInfo
+ * @param {import("@bcd").BrowserName[]} visibleBrowsers
  * @returns {[string[], import("@bcd").BrowserName[]]}
  */
-export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
+export function gatherPlatformsAndBrowsers(
+  category,
+  data,
+  browserInfo,
+  visibleBrowsers,
+) {
   const runtimes = Object.entries(browserInfo)
     .filter(([, { type }]) => type == "server")
     .map(([key]) => key);
@@ -1081,6 +1114,12 @@ export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
     )
   ) {
     platforms.push("server");
+  }
+  for (const browser of visibleBrowsers) {
+    const type = browserInfo[browser]?.type;
+    if (type && type !== "server" && !platforms.includes(type)) {
+      platforms.push(type);
+    }
   }
 
   /** @type {import("@bcd").BrowserName[]} */
@@ -1115,7 +1154,12 @@ export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
     }
   }
 
-  browsers = browsers.filter((browser) => SHOW_BROWSERS.includes(browser));
+  browsers = browsers.filter((browser) => visibleBrowsers.includes(browser));
 
-  return [platforms, [...browsers]];
+  // Drop platforms without any visible browser to avoid empty header cells.
+  platforms = platforms.filter((platform) =>
+    browsers.some((browser) => browserInfo[browser]?.type === platform),
+  );
+
+  return [platforms, browsers];
 }
