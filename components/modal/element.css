@@ -10,6 +10,11 @@ header {
 
   h2 {
     margin: 0;
+
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-normal);
+
+    line-height: var(--font-line-header);
   }
 
   mdn-button {
