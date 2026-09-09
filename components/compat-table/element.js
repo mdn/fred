@@ -222,7 +222,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     const thead = this._theadRef.value;
     const table = thead?.parentElement;
     if (!inner || !thead || !table) return;
-    const top = inner.getBoundingClientRect().top;
+    const top = this.getBoundingClientRect().top;
     const tableTop = table.getBoundingClientRect().top;
     // Measure the header cells, as `thead` itself has no box.
     const headerBottom = Math.max(
@@ -231,11 +231,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         (cell) => cell.getBoundingClientRect().bottom,
       ),
     );
-    inner.style.setProperty("--compat-table-top", `${tableTop - top}px`);
-    inner.style.setProperty(
-      "--compat-header-bottom",
-      `${headerBottom - top}px`,
-    );
+    this.style.setProperty("--compat-table-top", `${tableTop - top}px`);
+    this.style.setProperty("--compat-header-bottom", `${headerBottom - top}px`);
   }
 
   /**

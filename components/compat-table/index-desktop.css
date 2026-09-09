@@ -80,21 +80,6 @@
     }
   }
 
-  .table-container-inner {
-    position: relative;
-
-    &::after {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-
-      width: 10px;
-      height: 10px;
-
-      content: "";
-    }
-  }
-
   .bcd-cell-text-wrapper {
     .bc-support-level,
     .bc-browser-name {
