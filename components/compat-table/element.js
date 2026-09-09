@@ -197,6 +197,14 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     });
   }
 
+  /**
+   * Previews a browser selection on this table only, before it's saved.
+   * @param {CustomEvent<import("@bcd").BrowserName[]>} event
+   */
+  _onBrowsersPreview(event) {
+    this._visibleBrowsers = event.detail;
+  }
+
   disconnectedCallback() {
     super.disconnectedCallback();
     this._unsubscribeBrowserSettings?.();
@@ -283,6 +291,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           ${this._renderIssueLink()}
           <mdn-compat-table-settings
             .browserInfo=${this.browserInfo}
+            @mdn-compat-browsers-preview=${this._onBrowsersPreview}
           ></mdn-compat-table-settings>
         </div>
         <table

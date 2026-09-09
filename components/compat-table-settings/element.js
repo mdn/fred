@@ -19,9 +19,11 @@ import styles from "./element.css?lit";
 const PLATFORM_ORDER = ["desktop", "mobile", "server"];
 
 /**
- * A cog button opening a modal to choose which browsers compat tables show.
+ * A settings button opening a dialog to choose which browsers compat tables
+ * show.
  *
- * Changes are only persisted when the modal is confirmed.
+ * The selection is previewed on the parent table immediately (via the
+ * `mdn-compat-browsers-preview` event), but only persisted when confirmed.
  */
 export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   static styles = styles;
@@ -104,10 +106,40 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
     this._modal?.close();
   }
 
+  /** Reverts any unsaved preview once the dialog closes for whatever reason. */
+  _onClose() {
+    this._preview(getVisibleBrowsers());
+  }
+
   _restoreDefaults() {
     gleanClick("bcd: settings -> restore defaults");
     this._selected = new Set(DEFAULT_BROWSERS);
     this._error = false;
+    this._preview(this._selectedInOrder);
+  }
+
+  /** Selected browsers in BCD order (as listed in `browserInfo`). */
+  get _selectedInOrder() {
+    return /** @type {import("@bcd").BrowserName[]} */ (
+      Object.keys(this.browserInfo)
+    ).filter((browser) => this._selected.has(browser));
+  }
+
+  /**
+   * @param {import("@bcd").BrowserName[]} browsers
+   */
+  _preview(browsers) {
+    // An empty selection is an error state, not something worth previewing.
+    if (browsers.length === 0) {
+      return;
+    }
+    this.dispatchEvent(
+      new CustomEvent("mdn-compat-browsers-preview", {
+        detail: browsers,
+        bubbles: true,
+        composed: true,
+      }),
+    );
   }
 
   _save() {
@@ -116,10 +148,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
       return;
     }
     gleanClick("bcd: settings -> save");
-    // Persist in BCD order (as listed in `browserInfo`) rather than click order.
-    const browsers = /** @type {import("@bcd").BrowserName[]} */ (
-      Object.keys(this.browserInfo)
-    ).filter((browser) => this._selected.has(browser));
+    const browsers = this._selectedInOrder;
     // Don't pin the defaults, so users keep following future default changes.
     const isDefault =
       browsers.length === DEFAULT_BROWSERS.length &&
@@ -148,6 +177,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
     }
     this._selected = selected;
     this._error = false;
+    this._preview(this._selectedInOrder);
   }
 
   /**
@@ -184,7 +214,11 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
       <mdn-button variant="plain" .icon=${settingsIcon} @click=${this._open}
         >${this.l10n("compat-settings-open")`Configure browsers`}</mdn-button
       >
-      <mdn-modal modal-title=${this.l10n("compat-settings-title")`Browsers`}>
+      <mdn-modal
+        anchored
+        modal-title=${this.l10n("compat-settings-title")`Browsers`}
+        @close=${this._onClose}
+      >
         <p class="intro">
           ${this.l10n(
             "compat-settings-intro",

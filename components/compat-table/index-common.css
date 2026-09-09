@@ -46,6 +46,8 @@ table {
 }
 
 .bc-toolbar {
+  position: relative;
+
   display: flex;
 
   flex-wrap: wrap;
