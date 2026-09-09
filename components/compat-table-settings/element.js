@@ -4,6 +4,7 @@ import { L10nMixin } from "../../l10n/mixin.js";
 import { gleanClick } from "../../utils/glean.js";
 import {
   DEFAULT_BROWSERS,
+  MAX_BROWSERS,
   getVisibleBrowsers,
   resetVisibleBrowsers,
   setVisibleBrowsers,
@@ -143,7 +144,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   }
 
   _save() {
-    if (this._selected.size === 0) {
+    if (this._selected.size === 0 || this._selected.size > MAX_BROWSERS) {
       this._error = true;
       return;
     }
@@ -185,6 +186,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
    * @param {import("@bcd").BrowserName[]} browsers
    */
   _renderPlatform(platform, browsers) {
+    const atMax = this._selected.size >= MAX_BROWSERS;
     return html`<fieldset>
       <legend>
         <span class=${`icon icon-${platform}`}></span>
@@ -199,6 +201,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
                 name="browsers"
                 .value=${browser}
                 .checked=${this._selected.has(browser)}
+                ?disabled=${atMax && !this._selected.has(browser)}
                 @change=${this._toggle}
               />
               <span class=${`icon icon-${browserToIconName(browser)}`}></span>
@@ -223,6 +226,10 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
           ${this.l10n(
             "compat-settings-intro",
           )`Choose which browsers to show in compatibility tables. This is saved in your browser only.`}
+          ${this.l10n.raw({
+            id: "compat-settings-max",
+            args: { max: MAX_BROWSERS },
+          })}
         </p>
         <div class="platforms">
           ${this._platforms.map(([platform, browsers]) =>

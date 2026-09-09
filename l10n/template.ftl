@@ -54,6 +54,7 @@ obs-assessment = Developed by Mozilla, the { -brand-name-obs } performs an in-de
 obs-scanning = Its automated scanning process provides developers and website administrators with detailed, actionable feedback, focusing on identifying and addressing potential security vulnerabilities.
 obs-security = The tool is instrumental in helping developers and website administrators strengthen their sites against common security threats in a constantly advancing digital environment.
 obs-mdn = The { -brand-name-obs } provides effective security insights, guided by Mozilla's expertise and commitment to a safer and more secure internet and based on well-established trends and guidelines.
+compat-settings-max = You can select up to { $max } browsers.
 compat-browser-version-date = { $browser } { $version } – Release date: { $date }
 compat-browser-version-released = Release date: { $date }
 compat-link-source-title = File: { $filename }

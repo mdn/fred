@@ -31,6 +31,12 @@ export const DEFAULT_BROWSERS = Object.freeze([
 ]);
 
 /**
+ * Upper bound for the selection: the default set is the largest the table
+ * layout is known to fit without overflowing.
+ */
+export const MAX_BROWSERS = DEFAULT_BROWSERS.length;
+
+/**
  * @returns {import("@bcd").BrowserName[]}
  */
 export function getVisibleBrowsers() {
@@ -43,7 +49,9 @@ export function getVisibleBrowsers() {
         parsed.length > 0 &&
         parsed.every((browser) => typeof browser === "string")
       ) {
-        return /** @type {import("@bcd").BrowserName[]} */ (parsed);
+        return /** @type {import("@bcd").BrowserName[]} */ (
+          parsed.slice(0, MAX_BROWSERS)
+        );
       }
     }
   } catch (error) {
@@ -56,8 +64,8 @@ export function getVisibleBrowsers() {
  * @param {import("@bcd").BrowserName[]} browsers - Must not be empty.
  */
 export function setVisibleBrowsers(browsers) {
-  if (browsers.length === 0) {
-    throw new Error("At least one browser must be visible");
+  if (browsers.length === 0 || browsers.length > MAX_BROWSERS) {
+    throw new Error(`Between 1 and ${MAX_BROWSERS} browsers must be visible`);
   }
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(browsers));
