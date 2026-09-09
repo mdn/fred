@@ -27,6 +27,10 @@
     mask-image: url("../icon/server.svg");
   }
 
+  &.icon-xr {
+    mask-image: url("../icon/glasses.svg");
+  }
+
   /** Browser icons. */
 
   &.icon-bun {
@@ -71,6 +75,11 @@
 
   &.icon-webview {
     mask-image: url("../icon/browser/webview.svg");
+  }
+
+  /** Browsers without a dedicated icon (e.g. Internet Explorer). */
+  &.icon-browser {
+    mask-image: url("../icon/globe.svg");
   }
 
   /** Status icons. */

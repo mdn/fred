@@ -52,20 +52,36 @@ const ICON_NAMES = [
   "more",
 ];
 
+/** Browsers with a dedicated icon in `icons.css`. */
+const BROWSER_ICONS = new Set([
+  "bun",
+  "chrome",
+  "deno",
+  "edge",
+  "firefox",
+  "nodejs",
+  "opera",
+  "safari",
+  "samsunginternet",
+  "webview",
+]);
+
 /**
  * @param {import("@bcd").BrowserName} browser
  * @returns {string}
  */
 function browserToIconName(browser) {
+  let name;
   if (browser.startsWith("firefox")) {
-    return "firefox";
+    name = "firefox";
   } else if (browser === "webview_android") {
-    return "webview";
+    name = "webview";
   } else if (browser === "webview_ios") {
-    return "safari";
+    name = "safari";
   } else {
-    return browser.split("_", 1)[0] ?? "";
+    name = browser.split("_", 1)[0] ?? "";
   }
+  return BROWSER_ICONS.has(name) ? name : "browser";
 }
 
 export class MDNCompatTable extends L10nMixin(LitElement) {
