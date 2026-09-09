@@ -7,7 +7,9 @@ dialog {
 :host([anchored]) dialog {
   position: absolute;
   inset-inline: 0;
-  top: 100%;
+
+  /* Hosts may push the dialog further down (e.g. below a table header). */
+  top: var(--modal-anchored-top, 100%);
   z-index: 1;
 
   width: auto;

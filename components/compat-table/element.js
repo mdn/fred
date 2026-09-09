@@ -71,6 +71,15 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   /** @type {import("lit/directives/ref.js").Ref<HTMLElement>} */
   _ref = createRef();
 
+  /** @type {import("lit/directives/ref.js").Ref<HTMLElement>} */
+  _innerRef = createRef();
+
+  /** @type {import("lit/directives/ref.js").Ref<HTMLElement>} */
+  _theadRef = createRef();
+
+  /** @type {ResizeObserver | undefined} */
+  _headerObserver = undefined;
+
   constructor() {
     super();
     this.query = "";
@@ -197,6 +206,34 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     });
   }
 
+  firstUpdated() {
+    // Keep the anchored settings dialog below the table header, whose height
+    // depends on the (vertical) browser names, so the header stays visible.
+    this._headerObserver = new ResizeObserver(() => this._updateDialogOffset());
+    // `thead` is `display: contents`, so observe the table instead.
+    const inner = this._innerRef.value;
+    const table = this._theadRef.value?.parentElement;
+    if (inner) this._headerObserver.observe(inner);
+    if (table) this._headerObserver.observe(table);
+  }
+
+  _updateDialogOffset() {
+    const inner = this._innerRef.value;
+    const thead = this._theadRef.value;
+    const toolbar = inner?.querySelector(".bc-toolbar");
+    if (!inner || !thead || !toolbar) return;
+    const top = inner.getBoundingClientRect().top;
+    // Measure the header cells (`thead` itself has no box); on mobile the
+    // header is hidden, so this falls back to the toolbar.
+    const bottom = Math.max(
+      toolbar.getBoundingClientRect().bottom,
+      ...[...thead.querySelectorAll("th, td")].map(
+        (cell) => cell.getBoundingClientRect().bottom,
+      ),
+    );
+    inner.style.setProperty("--modal-anchored-top", `${bottom - top}px`);
+  }
+
   /**
    * Previews a browser selection on this table only, before it's saved.
    * @param {CustomEvent<import("@bcd").BrowserName[]>} event
@@ -207,6 +244,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
   disconnectedCallback() {
     super.disconnectedCallback();
+    this._headerObserver?.disconnect();
     this._unsubscribeBrowserSettings?.();
     this._unsubscribeBrowserSettings = undefined;
   }
@@ -286,7 +324,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
   _renderTable() {
     return html`<figure ${ref(this._ref)} class="table-container">
-      <figure class="table-container-inner">
+      <figure class="table-container-inner" ${ref(this._innerRef)}>
         <div class="bc-toolbar">
           ${this._renderIssueLink()}
           <mdn-compat-table-settings
@@ -305,7 +343,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   }
 
   _renderTableHeader() {
-    return html`<thead>
+    return html`<thead ${ref(this._theadRef)}>
       ${this._renderPlatformHeaders()} ${this._renderBrowserHeaders()}
     </thead>`;
   }

@@ -45,9 +45,12 @@ table {
   }
 }
 
-.bc-toolbar {
+.table-container-inner {
+  /* Containing block for the anchored settings dialog. */
   position: relative;
+}
 
+.bc-toolbar {
   display: flex;
 
   flex-wrap: wrap;
