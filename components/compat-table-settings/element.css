@@ -14,13 +14,37 @@
   color: var(--color-text-red);
 }
 
+/* Two platforms per row (Desktop | Mobile, Server | XR), separated by lines. */
+.platforms {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @media (--screen-small-and-wider) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 fieldset {
   min-width: 0;
 
-  padding: 0;
-  margin: 0 0 1rem;
+  padding: 0.5rem 0 1rem;
+  margin: 0;
 
   border: none;
+  border-top: 1px solid var(--color-border-primary);
+
+  @media (--screen-small-and-wider) {
+    padding: 0.5rem 1rem 1rem;
+
+    &:nth-child(odd) {
+      padding-left: 0;
+    }
+
+    &:nth-child(even) {
+      padding-right: 0;
+      border-left: 1px solid var(--color-border-primary);
+    }
+  }
 }
 
 legend {
@@ -34,16 +58,16 @@ legend {
   margin-bottom: 0.5rem;
 
   font-weight: var(--font-body-strong-weight);
+}
 
-  .icon {
-    background-color: var(--color-text-secondary);
-  }
+.icon {
+  background-color: var(--color-text-secondary);
 }
 
 .browsers {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-  gap: 0.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 label {
@@ -69,7 +93,7 @@ footer {
 
   align-items: center;
 
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
 
   .spacer {
     flex: 1;

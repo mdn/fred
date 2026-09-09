@@ -23,6 +23,7 @@ import {
 } from "./feature-row.js";
 import {
   asList,
+  browserToIconName,
   bugURLToString,
   getCurrentSupport,
   getFirst,
@@ -51,38 +52,6 @@ const ICON_NAMES = [
   "prefix",
   "more",
 ];
-
-/** Browsers with a dedicated icon in `icons.css`. */
-const BROWSER_ICONS = new Set([
-  "bun",
-  "chrome",
-  "deno",
-  "edge",
-  "firefox",
-  "nodejs",
-  "opera",
-  "safari",
-  "samsunginternet",
-  "webview",
-]);
-
-/**
- * @param {import("@bcd").BrowserName} browser
- * @returns {string}
- */
-function browserToIconName(browser) {
-  let name;
-  if (browser.startsWith("firefox")) {
-    name = "firefox";
-  } else if (browser === "webview_android") {
-    name = "webview";
-  } else if (browser === "webview_ios") {
-    name = "safari";
-  } else {
-    name = browser.split("_", 1)[0] ?? "";
-  }
-  return BROWSER_ICONS.has(name) ? name : "browser";
-}
 
 export class MDNCompatTable extends L10nMixin(LitElement) {
   static get properties() {

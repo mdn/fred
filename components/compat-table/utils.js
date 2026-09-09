@@ -1,5 +1,37 @@
 import { BCD_BASE_URL } from "../env/index.js";
 
+/** Browsers with a dedicated icon in `icons.css`. */
+const BROWSER_ICONS = new Set([
+  "bun",
+  "chrome",
+  "deno",
+  "edge",
+  "firefox",
+  "nodejs",
+  "opera",
+  "safari",
+  "samsunginternet",
+  "webview",
+]);
+
+/**
+ * @param {import("@bcd").BrowserName} browser
+ * @returns {string}
+ */
+export function browserToIconName(browser) {
+  let name;
+  if (browser.startsWith("firefox")) {
+    name = "firefox";
+  } else if (browser === "webview_android") {
+    name = "webview";
+  } else if (browser === "webview_ios") {
+    name = "safari";
+  } else {
+    name = browser.split("_", 1)[0] ?? "";
+  }
+  return BROWSER_ICONS.has(name) ? name : "browser";
+}
+
 /**
  * Gets the first element of an array or returns the value itself.
  * @template T

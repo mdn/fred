@@ -8,7 +8,8 @@ import {
   resetVisibleBrowsers,
   setVisibleBrowsers,
 } from "../compat-table/browser-settings.js";
-import cogIcon from "../icon/cog.svg?lit";
+import { browserToIconName } from "../compat-table/utils.js";
+import settingsIcon from "../icon/settings.svg?lit";
 
 import "../button/element.js";
 import "../modal/element.js";
@@ -170,6 +171,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
                 .checked=${this._selected.has(browser)}
                 @change=${this._toggle}
               />
+              <span class=${`icon icon-${browserToIconName(browser)}`}></span>
               ${this.browserInfo[browser]?.name}
             </label>`,
         )}
@@ -179,11 +181,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
 
   render() {
     return html`
-      <mdn-button
-        variant="plain"
-        icon-only
-        .icon=${cogIcon}
-        @click=${this._open}
+      <mdn-button variant="plain" .icon=${settingsIcon} @click=${this._open}
         >${this.l10n("compat-settings-open")`Configure browsers`}</mdn-button
       >
       <mdn-modal modal-title=${this.l10n("compat-settings-title")`Browsers`}>
@@ -192,9 +190,11 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
             "compat-settings-intro",
           )`Choose which browsers to show in compatibility tables. This is saved in your browser only.`}
         </p>
-        ${this._platforms.map(([platform, browsers]) =>
-          this._renderPlatform(platform, browsers),
-        )}
+        <div class="platforms">
+          ${this._platforms.map(([platform, browsers]) =>
+            this._renderPlatform(platform, browsers),
+          )}
+        </div>
         ${
           this._error
             ? html`<p class="error" role="alert">
