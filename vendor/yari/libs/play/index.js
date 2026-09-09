@@ -490,13 +490,10 @@ export function renderHtml(state = null) {
         </script>
         <script>
           document.addEventListener("DOMContentLoaded", () => {
-            const start = document.querySelector("script#mdn-play-js");
-            const end = document.querySelector("script#mdn-play-js-end");
-            if (!(start instanceof HTMLScriptElement) || !end) {
+            if (!(window.__mdnPlayJsStarted && window.__mdnPlayJsEnded)) {
               console.warn(
-                "[Playground] Could not verify that the JavaScript ran. This " +
-                  "usually means the HTML input contains an unclosed or " +
-                  "malformed tag.",
+                "[Playground] The JavaScript did not run. This usually means " +
+                  "the HTML input contains an unclosed or malformed tag.",
               );
             }
           });
@@ -543,10 +540,15 @@ export function renderHtml(state = null) {
       </head>
       <body>
         ${htmlCode}
+        <!-- "" '' -->
+        <script>
+          window.__mdnPlayJsStarted = true;
+        </script>
         <script id="mdn-play-js" type=${defaults === "ix-wat" ? "module" : ""}>
           ${js};
         </script>
         <script id="mdn-play-js-end">
+          window.__mdnPlayJsEnded = true;
           try {
             const uuid =
               new URLSearchParams(location.search).get("uuid") || undefined;
