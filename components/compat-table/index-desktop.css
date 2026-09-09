@@ -2,10 +2,9 @@
 
 @media (--screen-small-and-wider) {
   .bc-table {
-    /* Expand all columns. */
-    grid-template-columns: minmax(20vw, min-content) repeat(
+    grid-template-columns: minmax(20vw, 1fr) repeat(
         var(--compat-browser-count),
-        auto
+        minmax(auto, var(--compat-browser-column-max))
       );
 
     thead {

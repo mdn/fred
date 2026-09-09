@@ -66,6 +66,10 @@ table {
 }
 
 .bc-table {
+  /* Cap browser columns so few selected browsers don't stretch across the
+     table; the feature column absorbs the remaining space instead. */
+  --compat-browser-column-max: 4rem;
+
   width: 100%;
 
   margin: 0;
