@@ -45,6 +45,15 @@ table {
   }
 }
 
+.bc-toolbar {
+  display: flex;
+
+  gap: 0.5rem;
+
+  align-items: center;
+  justify-content: space-between;
+}
+
 .bc-on-github {
   font-size: var(--font-size-small);
 }

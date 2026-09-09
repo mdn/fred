@@ -1,0 +1,77 @@
+@import url("../compat-table/icons.css");
+
+:host {
+  display: inline-flex;
+}
+
+.intro,
+.error {
+  margin: 0 0 1rem;
+  font-size: var(--font-size-small);
+}
+
+.error {
+  color: var(--color-text-red);
+}
+
+fieldset {
+  min-width: 0;
+
+  padding: 0;
+  margin: 0 0 1rem;
+
+  border: none;
+}
+
+legend {
+  display: flex;
+
+  gap: 0.5rem;
+
+  align-items: center;
+
+  padding: 0;
+  margin-bottom: 0.5rem;
+
+  font-weight: var(--font-body-strong-weight);
+
+  .icon {
+    background-color: var(--color-text-secondary);
+  }
+}
+
+.browsers {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 0.5rem 1rem;
+}
+
+label {
+  display: flex;
+
+  gap: 0.5rem;
+
+  align-items: center;
+
+  cursor: pointer;
+}
+
+input {
+  margin: 0;
+}
+
+footer {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 0.5rem;
+
+  align-items: center;
+
+  margin-top: 1.5rem;
+
+  .spacer {
+    flex: 1;
+  }
+}

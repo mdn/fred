@@ -7,6 +7,8 @@ import { L10nMixin } from "../../l10n/mixin.js";
 import { gleanClick } from "../../utils/glean.js";
 import { ViewedController } from "../viewed-controller/viewed-controller.js";
 
+import "../compat-table-settings/element.js";
+
 import {
   getVisibleBrowsers,
   onVisibleBrowsersChange,
@@ -292,7 +294,12 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   _renderTable() {
     return html`<figure ${ref(this._ref)} class="table-container">
       <figure class="table-container-inner">
-        ${this._renderIssueLink()}
+        <div class="bc-toolbar">
+          ${this._renderIssueLink()}
+          <mdn-compat-table-settings
+            .browserInfo=${this.browserInfo}
+          ></mdn-compat-table-settings>
+        </div>
         <table
           class="bc-table bc-table-web"
           style="--compat-browser-count: ${Object.keys(this._browsers).length}"
