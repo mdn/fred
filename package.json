@@ -143,7 +143,7 @@
     "stylelint-order": ">=7.0.1",
     "tmp": ">=0.2.4"
   },
-  "packageManager": "npm@11.12.1",
+  "packageManager": "npm@11.19.0",
   "engines": {
     "node": ">=24"
   },
@@ -152,5 +152,18 @@
       "name": "npm",
       "version": ">=11.8.0"
     }
+  },
+  "allowScripts": {
+    "@mdn/rari": true,
+    "@parcel/watcher": true,
+    "edgedriver": true,
+    "esbuild": true,
+    "fsevents": false,
+    "geckodriver": true,
+    "gifsicle": true,
+    "lefthook": true,
+    "mozjpeg": true,
+    "pngquant-bin": true,
+    "unrs-resolver": true
   }
 }
