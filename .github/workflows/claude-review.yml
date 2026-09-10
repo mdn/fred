@@ -110,7 +110,10 @@ jobs:
         uses: anthropics/claude-code-action@9c5ddab2e6d17b83ea679153b31f1d5f023cf636 # v1.0.217
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          anthropic_federation_rule_id: fdrl_01NjNUAm6hgd28kiXMTHpoja
+          anthropic_organization_id: bc6e8deb-65ec-4bee-8ca0-b8ff93b3295f
+          anthropic_service_account_id: svac_01FtDyBMqDtyf1zQgMYg98n2
+          anthropic_workspace_id: wrkspc_01B9xUyyQJZ3v8ZnvEboCB2B
           # By default the action refuses to run for actors without write
           # access, which would skip every external-contributor PR - exactly the
           # PRs we most want reviewed. "*" bypasses that gate so the review runs
