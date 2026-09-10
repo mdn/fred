@@ -151,7 +151,6 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   }
 
   _restoreDefaults() {
-    gleanClick("bcd: settings -> restore defaults");
     this._selected = new Set(this._defaults);
     this._preview(this._visibility);
   }
@@ -190,12 +189,27 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   }
 
   _save() {
-    gleanClick("bcd: settings -> save");
     // Don't pin the defaults, so users keep following future default changes.
     const defaults = this._defaults;
     const isDefault =
       this._selected.size === defaults.length &&
       defaults.every((browser) => this._selected.has(browser));
+    // Only measure actual changes, not an unchanged dialog being saved.
+    const changed = this._browsers.filter(
+      (browser) =>
+        isBrowserVisible(browser, this.visibility) !==
+        this._selected.has(browser),
+    );
+    if (changed.length > 0) {
+      if (isDefault) {
+        gleanClick("bcd: settings -> change default");
+      }
+      for (const browser of changed) {
+        gleanClick(
+          `bcd: settings -> ${this._selected.has(browser) ? "show" : "hide"} ${browser}`,
+        );
+      }
+    }
     if (isDefault) {
       resetBrowserVisibility();
     } else {
