@@ -185,6 +185,7 @@ compat-settings-platform-xr = XR
 compat-settings-open = Configure browsers
 compat-settings-title = Browsers
 compat-settings-intro = Choose which browsers to show in compatibility tables. This is saved in your browser only.
+compat-settings-disclaimer = Note that not all features apply to all browsers, and data for some browsers may be incomplete.
 compat-settings-restore-defaults = Restore defaults
 compat-settings-cancel = Cancel
 compat-settings-ok = OK

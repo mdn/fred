@@ -211,6 +211,11 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
             "compat-settings-intro",
           )`Choose which browsers to show in compatibility tables. This is saved in your browser only.`}
         </p>
+        <p class="intro">
+          ${this.l10n(
+            "compat-settings-disclaimer",
+          )`Note that not all features apply to all browsers, and data for some browsers may be incomplete.`}
+        </p>
         <div class="platforms">
           ${this._platforms.map(([platform, browsers]) =>
             this._renderPlatform(platform, browsers),
