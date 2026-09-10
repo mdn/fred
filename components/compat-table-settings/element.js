@@ -4,9 +4,10 @@ import { L10nMixin } from "../../l10n/mixin.js";
 import { gleanClick } from "../../utils/glean.js";
 import {
   DEFAULT_BROWSERS,
-  getVisibleBrowsers,
-  resetVisibleBrowsers,
-  setVisibleBrowsers,
+  getBrowserVisibility,
+  isBrowserVisible,
+  resetBrowserVisibility,
+  setBrowserVisibility,
 } from "../compat-table/browser-settings.js";
 import { browserToIconName } from "../compat-table/utils.js";
 import settingsIcon from "../icon/settings.svg?lit";
@@ -95,7 +96,11 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
 
   _open() {
     gleanClick("bcd: settings -> open");
-    this._selected = new Set(getVisibleBrowsers());
+    this._selected = new Set(
+      this._browsers.filter((browser) =>
+        isBrowserVisible(browser, getBrowserVisibility()),
+      ),
+    );
     this._modal?.showModal();
   }
 
@@ -105,29 +110,42 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
 
   /** Reverts any unsaved preview once the dialog closes for whatever reason. */
   _onClose() {
-    this._preview(getVisibleBrowsers());
+    this._preview(getBrowserVisibility());
   }
 
   _restoreDefaults() {
     gleanClick("bcd: settings -> restore defaults");
-    this._selected = new Set(DEFAULT_BROWSERS);
-    this._preview(this._selectedInOrder);
+    this._selected = new Set(this._defaults);
+    this._preview(this._visibility);
   }
 
-  /** Selected browsers in BCD order (as listed in `browserInfo`). */
-  get _selectedInOrder() {
+  /** All browsers listed by BCD. */
+  get _browsers() {
     return /** @type {import("@bcd").BrowserName[]} */ (
       Object.keys(this.browserInfo)
-    ).filter((browser) => this._selected.has(browser));
+    );
+  }
+
+  get _defaults() {
+    return this._browsers.filter((browser) =>
+      DEFAULT_BROWSERS.includes(browser),
+    );
+  }
+
+  /** The current selection as an explicit choice for every listed browser. */
+  get _visibility() {
+    return Object.fromEntries(
+      this._browsers.map((browser) => [browser, this._selected.has(browser)]),
+    );
   }
 
   /**
-   * @param {import("@bcd").BrowserName[]} browsers
+   * @param {import("../compat-table/browser-settings.js").BrowserVisibility} visibility
    */
-  _preview(browsers) {
+  _preview(visibility) {
     this.dispatchEvent(
       new CustomEvent("mdn-compat-browsers-preview", {
-        detail: browsers,
+        detail: visibility,
         bubbles: true,
         composed: true,
       }),
@@ -136,15 +154,15 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
 
   _save() {
     gleanClick("bcd: settings -> save");
-    const browsers = this._selectedInOrder;
     // Don't pin the defaults, so users keep following future default changes.
+    const defaults = this._defaults;
     const isDefault =
-      browsers.length === DEFAULT_BROWSERS.length &&
-      browsers.every((browser) => DEFAULT_BROWSERS.includes(browser));
+      this._selected.size === defaults.length &&
+      defaults.every((browser) => this._selected.has(browser));
     if (isDefault) {
-      resetVisibleBrowsers();
+      resetBrowserVisibility();
     } else {
-      setVisibleBrowsers(browsers);
+      setBrowserVisibility(this._visibility);
     }
     this._modal?.close();
   }
@@ -164,7 +182,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
       selected.delete(browser);
     }
     this._selected = selected;
-    this._preview(this._selectedInOrder);
+    this._preview(this._visibility);
   }
 
   /**

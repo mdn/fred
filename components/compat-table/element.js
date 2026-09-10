@@ -10,8 +10,9 @@ import { ViewedController } from "../viewed-controller/viewed-controller.js";
 import "../compat-table-settings/element.js";
 
 import {
-  getVisibleBrowsers,
-  onVisibleBrowsersChange,
+  getBrowserVisibility,
+  isBrowserVisible,
+  onBrowserVisibilityChange,
 } from "./browser-settings.js";
 import { DEFAULT_LOCALE, ISSUE_METADATA_TEMPLATE } from "./constants.js";
 import styles from "./element.css?lit";
@@ -61,7 +62,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       data: {},
       browserInfo: { attribute: "browserinfo" },
       _pathname: { state: true },
-      _visibleBrowsers: { state: true },
+      _visibility: { state: true },
       _showTimelineId: { state: true },
     };
   }
@@ -89,8 +90,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     this.browserInfo = {};
     this.locale = "";
     this._pathname = "";
-    /** @type {import("@bcd").BrowserName[]} */
-    this._visibleBrowsers = [];
+    /** @type {import("./browser-settings.js").BrowserVisibility} */
+    this._visibility = {};
     /** @type {string[]} */
     this._platforms = [];
     /** @type {import("@bcd").BrowserName[]} */
@@ -200,9 +201,9 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   connectedCallback() {
     super.connectedCallback();
     this._pathname = globalThis.location.pathname;
-    this._visibleBrowsers = getVisibleBrowsers();
-    this._unsubscribeBrowserSettings = onVisibleBrowsersChange(() => {
-      this._visibleBrowsers = getVisibleBrowsers();
+    this._visibility = getBrowserVisibility();
+    this._unsubscribeBrowserSettings = onBrowserVisibilityChange(() => {
+      this._visibility = getBrowserVisibility();
     });
   }
 
@@ -240,10 +241,10 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
   /**
    * Previews a browser selection on this table only, before it's saved.
-   * @param {CustomEvent<import("@bcd").BrowserName[]>} event
+   * @param {CustomEvent<import("./browser-settings.js").BrowserVisibility>} event
    */
   _onBrowsersPreview(event) {
-    this._visibleBrowsers = event.detail;
+    this._visibility = event.detail;
   }
 
   disconnectedCallback() {
@@ -261,13 +262,13 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       changedProperties.has("query") ||
       changedProperties.has("data") ||
       changedProperties.has("browserInfo") ||
-      changedProperties.has("_visibleBrowsers")
+      changedProperties.has("_visibility")
     ) {
       [this._platforms, this._browsers] = gatherPlatformsAndBrowsers(
         this._category,
         this.data,
         this.browserInfo,
-        this._visibleBrowsers,
+        this._visibility,
       );
     }
   }
@@ -1147,15 +1148,18 @@ customElements.define("mdn-compat-table", MDNCompatTable);
  * @param {string} category
  * @param {import("@bcd").Identifier} data
  * @param {Partial<import("@bcd").Browsers>} browserInfo
- * @param {import("@bcd").BrowserName[]} visibleBrowsers
+ * @param {import("./browser-settings.js").BrowserVisibility} visibility
  * @returns {[string[], import("@bcd").BrowserName[]]}
  */
 export function gatherPlatformsAndBrowsers(
   category,
   data,
   browserInfo,
-  visibleBrowsers,
+  visibility,
 ) {
+  const isVisible = (/** @type {import("@bcd").BrowserName} */ browser) =>
+    isBrowserVisible(browser, visibility);
+
   const runtimes = Object.entries(browserInfo)
     .filter(([, { type }]) => type == "server")
     .map(([key]) => key);
@@ -1169,9 +1173,12 @@ export function gatherPlatformsAndBrowsers(
   ) {
     platforms.push("server");
   }
-  for (const browser of visibleBrowsers) {
-    const type = browserInfo[browser]?.type;
-    if (type && type !== "server" && !platforms.includes(type)) {
+  for (const [browser, { type }] of Object.entries(browserInfo)) {
+    if (
+      type !== "server" &&
+      !platforms.includes(type) &&
+      isVisible(/** @type {import("@bcd").BrowserName} */ (browser))
+    ) {
       platforms.push(type);
     }
   }
@@ -1208,7 +1215,7 @@ export function gatherPlatformsAndBrowsers(
     }
   }
 
-  browsers = browsers.filter((browser) => visibleBrowsers.includes(browser));
+  browsers = browsers.filter((browser) => isVisible(browser));
 
   // Drop platforms without any visible browser to avoid empty header cells.
   platforms = platforms.filter((platform) =>

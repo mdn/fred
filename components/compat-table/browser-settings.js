@@ -48,40 +48,56 @@ export const DEFAULT_BROWSERS = Object.freeze([
 ]);
 
 /**
- * @returns {import("@bcd").BrowserName[]}
+ * Explicit per-browser visibility, as saved by the user. Browsers missing from
+ * the map (e.g. added to BCD later) follow `DEFAULT_BROWSERS`, while saved
+ * choices stay stable even if the defaults change.
+ * @typedef {Partial<Record<import("@bcd").BrowserName, boolean>>} BrowserVisibility
  */
-export function getVisibleBrowsers() {
+
+/**
+ * @returns {BrowserVisibility}
+ */
+export function getBrowserVisibility() {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
       const parsed = JSON.parse(stored);
-      // An empty selection is valid (the user deselected all browsers).
       if (
-        Array.isArray(parsed) &&
-        parsed.every((browser) => typeof browser === "string")
+        parsed &&
+        typeof parsed === "object" &&
+        !Array.isArray(parsed) &&
+        Object.values(parsed).every((value) => typeof value === "boolean")
       ) {
-        return /** @type {import("@bcd").BrowserName[]} */ (parsed);
+        return parsed;
       }
     }
   } catch (error) {
     console.warn("Unable to read compat browsers from localStorage", error);
   }
-  return [...DEFAULT_BROWSERS];
+  return {};
 }
 
 /**
- * @param {import("@bcd").BrowserName[]} browsers
+ * @param {import("@bcd").BrowserName} browser
+ * @param {BrowserVisibility} visibility
  */
-export function setVisibleBrowsers(browsers) {
+export function isBrowserVisible(browser, visibility) {
+  return visibility[browser] ?? DEFAULT_BROWSERS.includes(browser);
+}
+
+/**
+ * @param {BrowserVisibility} visibility
+ */
+export function setBrowserVisibility(visibility) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(browsers));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(visibility));
   } catch (error) {
     console.warn("Unable to write compat browsers to localStorage", error);
   }
   notifyChange();
 }
 
-export function resetVisibleBrowsers() {
+export function resetBrowserVisibility() {
   try {
     localStorage.removeItem(STORAGE_KEY);
   } catch (error) {
@@ -91,11 +107,11 @@ export function resetVisibleBrowsers() {
 }
 
 /**
- * Calls `callback` whenever the visible browsers change, in this or another tab.
+ * Calls `callback` whenever the visibility changes, in this or another tab.
  * @param {() => void} callback
  * @returns {() => void} Unsubscribes.
  */
-export function onVisibleBrowsersChange(callback) {
+export function onBrowserVisibilityChange(callback) {
   const channel = getChannel();
   globalThis.addEventListener(UPDATE_EVENT, callback);
   channel?.addEventListener("message", callback);
