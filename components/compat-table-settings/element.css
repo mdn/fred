@@ -112,17 +112,20 @@ mdn-modal {
     }
   }
 
-  .icon-add,
-  .icon-remove {
+  /* A plus that turns into an x (rotated 45deg) for shown browsers. */
+  .icon-toggle {
     --icon-size: 0.75rem;
-  }
 
-  .icon-add {
     mask-image: url("../icon/plus.svg");
+    transition: transform 0.2s;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 
-  .icon-remove {
-    mask-image: url("../icon/x.svg");
+  &[aria-pressed="true"] .icon-toggle {
+    transform: rotate(45deg);
   }
 }
 

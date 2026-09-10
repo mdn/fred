@@ -120,13 +120,15 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
     }
   }
 
-  _open() {
+  async _open() {
     gleanClick("bcd: settings -> open");
     this._selected = new Set(
       this._browsers.filter((browser) =>
         isBrowserVisible(browser, this.visibility),
       ),
     );
+    // Render the selection first, so the pills don't animate into place.
+    await this.updateComplete;
     this._modal?.showModal();
   }
 
@@ -292,7 +294,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
     >
       <span class=${`icon icon-${browserToIconName(browser)}`}></span>
       ${name} ${this._renderHiddenNote(browser)}
-      <span class=${`icon icon-${selected ? "remove" : "add"}`}></span>
+      <span class="icon icon-toggle"></span>
     </button>`;
   }
 
