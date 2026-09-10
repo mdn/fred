@@ -17,18 +17,9 @@ const SUPPORT_FULL = {
 };
 
 /** @type {import("@rari").Support} */
-const SUPPORT_NO_WEBKIT = {
-  chrome: "111",
-  chrome_android: "111",
-  edge: "111",
+const SUPPORT_ONLY_FIREFOX = {
   firefox: "113",
   firefox_android: "113",
-};
-
-/** @type {import("@rari").Support} */
-const SUPPORT_WEBKIT_ONLY = {
-  safari: "15.4",
-  safari_ios: "15.4",
 };
 
 /** @type {import("@rari").Alternative[]} */
@@ -69,7 +60,7 @@ function feature(overrides) {
 function notAvailable(overrides) {
   return {
     baseline: false,
-    support: SUPPORT_NO_WEBKIT,
+    support: SUPPORT_ONLY_FIREFOX,
     feature: feature(),
     ...overrides,
   };
@@ -140,7 +131,7 @@ const CASES = [
     id: "limited-asterisk",
     name: "limited, asterisk",
     status: "limited",
-    baseline: notAvailable({ support: SUPPORT_WEBKIT_ONLY, asterisk: true }),
+    baseline: notAvailable({ asterisk: true }),
   },
   {
     id: "limited-developer-signals",

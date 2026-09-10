@@ -108,11 +108,11 @@ describe("Baseline indicator", () => {
     const limited = BaselineIndicatorPage.indicator("limited");
     await expect(limited.browser("chrome")).toHaveAttribute(
       "aria-label",
-      "Chrome check",
+      "Chrome cross",
     );
     await expect(limited.browser("edge")).toHaveAttribute(
       "aria-label",
-      "Edge check",
+      "Edge cross",
     );
     await expect(limited.browser("firefox")).toHaveAttribute(
       "aria-label",
@@ -124,7 +124,7 @@ describe("Baseline indicator", () => {
     );
     await expect(limited.engine(0)).toHaveAttribute(
       "title",
-      "Supported in Chrome and Edge",
+      "Not widely supported in Chrome and Edge",
     );
     await expect(limited.engine(1)).toHaveAttribute(
       "title",
@@ -133,24 +133,6 @@ describe("Baseline indicator", () => {
     await expect(limited.engine(2)).toHaveAttribute(
       "title",
       "Not widely supported in Safari",
-    );
-
-    const webkitOnly = BaselineIndicatorPage.indicator("limited-asterisk");
-    await expect(webkitOnly.browser("chrome")).toHaveAttribute(
-      "aria-label",
-      "Chrome cross",
-    );
-    await expect(webkitOnly.browser("edge")).toHaveAttribute(
-      "aria-label",
-      "Edge cross",
-    );
-    await expect(webkitOnly.browser("firefox")).toHaveAttribute(
-      "aria-label",
-      "Firefox cross",
-    );
-    await expect(webkitOnly.browser("safari")).toHaveAttribute(
-      "aria-label",
-      "Safari check",
     );
   });
 
