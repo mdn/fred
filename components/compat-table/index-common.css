@@ -358,6 +358,12 @@ table {
 
   border-left: 1px solid var(--color-border-primary);
 
+  /* A few capped browser columns leave too little room for support notes. */
+  .bc-table[data-few-browsers] & {
+    grid-column: 1 / -1;
+    border-left: none;
+  }
+
   /* Each branch renders as a cell-like box. The surrounding table cell
      already provides the outer borders, so each branch only draws a
      top separator when stacked under another branch. */

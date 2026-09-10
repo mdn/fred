@@ -326,6 +326,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           this._browsers.length > 0
             ? html`<table
                 class="bc-table bc-table-web"
+                ?data-few-browsers=${this._browsers.length < 4}
                 style="--compat-browser-count: ${this._browsers.length}"
               >
                 ${this._renderTableHeader()} ${this._renderTableBody()}
