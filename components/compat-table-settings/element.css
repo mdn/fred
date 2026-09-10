@@ -158,6 +158,11 @@ footer {
   dd {
     margin: 0;
   }
+
+  /* Let the row's centering position the icon, not `vertical-align`. */
+  dt {
+    display: flex;
+  }
 }
 
 .legend-item {
