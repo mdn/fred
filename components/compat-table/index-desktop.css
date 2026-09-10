@@ -80,6 +80,12 @@
     }
   }
 
+  /* Containing block for positioned cell content, so `.table-container`
+     clips it instead of it overflowing the page. */
+  .table-container-inner {
+    position: relative;
+  }
+
   .bcd-cell-text-wrapper {
     .bc-support-level,
     .bc-browser-name {
