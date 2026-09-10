@@ -105,6 +105,11 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     this._platforms = [];
     /** @type {import("@bcd").BrowserName[]} */
     this._browsers = [];
+    /**
+     * Browsers this table never shows, with the reason.
+     * @type {import("@compat").HiddenBrowsers}
+     */
+    this._hiddenBrowsers = {};
     /** @type {(() => void) | undefined} */
     this._unsubscribeBrowserSettings = undefined;
     /** @type {string|undefined} */
@@ -277,12 +282,13 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       changedProperties.has("_visibility") ||
       changedProperties.has("_previewVisibility")
     ) {
-      [this._platforms, this._browsers] = gatherPlatformsAndBrowsers(
-        this._category,
-        this.data,
-        this.browserInfo,
-        this._previewVisibility ?? this._visibility,
-      );
+      [this._platforms, this._browsers, this._hiddenBrowsers] =
+        gatherPlatformsAndBrowsers(
+          this._category,
+          this.data,
+          this.browserInfo,
+          this._previewVisibility ?? this._visibility,
+        );
     }
   }
 
@@ -348,6 +354,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           <mdn-compat-table-settings
             .browserInfo=${this.browserInfo}
             .visibility=${this._visibility}
+            .hiddenBrowsers=${this._hiddenBrowsers}
             @mdn-compat-browsers-preview=${this._onBrowsersPreview}
           ></mdn-compat-table-settings>
         </div>
@@ -1162,8 +1169,10 @@ customElements.define("mdn-compat-table", MDNCompatTable);
  * @param {string} category
  * @param {import("@bcd").Identifier} data
  * @param {Partial<import("@bcd").Browsers>} browserInfo
+ * Browsers this table never shows (regardless of visibility) are returned with
+ * the reason, so the settings dialog can explain why they have no column.
  * @param {import("./browser-settings.js").BrowserVisibility} visibility
- * @returns {[string[], import("@bcd").BrowserName[]]}
+ * @returns {[string[], import("@bcd").BrowserName[], import("@compat").HiddenBrowsers]}
  */
 export function gatherPlatformsAndBrowsers(
   category,
@@ -1174,9 +1183,11 @@ export function gatherPlatformsAndBrowsers(
   const isVisible = (/** @type {import("@bcd").BrowserName} */ browser) =>
     isBrowserVisible(browser, visibility);
 
-  const runtimes = Object.entries(browserInfo)
-    .filter(([, { type }]) => type == "server")
-    .map(([key]) => key);
+  const runtimes = /** @type {import("@bcd").BrowserName[]} */ (
+    Object.entries(browserInfo)
+      .filter(([, { type }]) => type == "server")
+      .map(([key]) => key)
+  );
 
   let platforms = ["desktop", "mobile"];
   if (
@@ -1213,28 +1224,40 @@ export function gatherPlatformsAndBrowsers(
     );
   }
 
+  // Determine over all listed browsers (not just those on a shown platform),
+  // so the dialog can mark every browser this table would never show.
+  /** @type {import("@compat").HiddenBrowsers} */
+  const hidden = {};
+
   // Filter WebExtension browsers in corresponding tables.
   if (category === "webextensions") {
-    browsers = browsers.filter(
-      (browser) => browserInfo[browser]?.accepts_webextensions,
-    );
+    for (const [browser, { accepts_webextensions }] of Object.entries(
+      browserInfo,
+    )) {
+      if (!accepts_webextensions) {
+        hidden[/** @type {import("@bcd").BrowserName} */ (browser)] =
+          "not-applicable";
+      }
+    }
   }
 
   // If there is no data for a runtime in a category outside "javascript", hide it.
   if (category !== "javascript") {
     for (const runtime of runtimes) {
       if (data.__compat && !(runtime in data.__compat.support)) {
-        browsers = browsers.filter((browser) => browser !== runtime);
+        hidden[runtime] = "no-data";
       }
     }
   }
 
-  browsers = browsers.filter((browser) => isVisible(browser));
+  browsers = browsers.filter(
+    (browser) => !(browser in hidden) && isVisible(browser),
+  );
 
   // Drop platforms without any visible browser to avoid empty header cells.
   platforms = platforms.filter((platform) =>
     browsers.some((browser) => browserInfo[browser]?.type === platform),
   );
 
-  return [platforms, browsers];
+  return [platforms, browsers, hidden];
 }

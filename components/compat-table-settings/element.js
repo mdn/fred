@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit";
+import { LitElement, html, nothing } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 import { gleanClick } from "../../utils/glean.js";
@@ -32,6 +32,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
     return {
       browserInfo: { attribute: false },
       visibility: { attribute: false },
+      hiddenBrowsers: { attribute: false },
       _selected: { state: true },
     };
   }
@@ -46,6 +47,11 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
      * @type {import("../compat-table/browser-settings.js").BrowserVisibility}
      */
     this.visibility = {};
+    /**
+     * Browsers the parent table never shows, with the reason.
+     * @type {import("@compat").HiddenBrowsers}
+     */
+    this.hiddenBrowsers = {};
     /** @type {Set<import("@bcd").BrowserName>} */
     this._selected = new Set();
   }
@@ -192,6 +198,65 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   }
 
   /**
+   * @param {import("@compat").HiddenBrowserReason} reason
+   */
+  _hiddenLabel(reason) {
+    return reason === "no-data"
+      ? this.l10n(
+          "compat-settings-hidden-no-data",
+        )`Browser not available for current feature. No support data available.`
+      : this.l10n(
+          "compat-settings-hidden-not-applicable",
+        )`Browser not available for current feature. WebExtensions features don't apply.`;
+  }
+
+  /**
+   * @param {import("@bcd").BrowserName} browser
+   */
+  _renderHiddenNote(browser) {
+    const reason = this.hiddenBrowsers[browser];
+    if (!reason) {
+      return nothing;
+    }
+    const label = this._hiddenLabel(reason);
+    return html`<span
+      class=${`icon icon-hidden-${reason}`}
+      role="img"
+      title=${label}
+      aria-label=${label}
+    ></span>`;
+  }
+
+  /** Reasons for which a browser is hidden on this page, in legend order. */
+  get _hiddenReasons() {
+    const present = new Set(Object.values(this.hiddenBrowsers));
+    return /** @type {import("@compat").HiddenBrowserReason[]} */ ([
+      "not-applicable",
+      "no-data",
+    ]).filter((reason) => present.has(reason));
+  }
+
+  /** Explains the hidden-browser icons, for the reasons that occur. */
+  _renderHiddenLegend() {
+    const reasons = this._hiddenReasons;
+    if (reasons.length === 0) {
+      return nothing;
+    }
+    return html`<section class="legend">
+      <h3>${this.l10n("compat-settings-legend")`Legend`}</h3>
+      <dl>
+        ${reasons.map(
+          (reason) =>
+            html`<div class="legend-item">
+              <dt><span class=${`icon icon-hidden-${reason}`}></span></dt>
+              <dd>${this._hiddenLabel(reason)}</dd>
+            </div>`,
+        )}
+      </dl>
+    </section>`;
+  }
+
+  /**
    * @param {string} platform
    * @param {import("@bcd").BrowserName[]} browsers
    */
@@ -214,6 +279,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
               />
               <span class=${`icon icon-${browserToIconName(browser)}`}></span>
               ${this.browserInfo[browser]?.name}
+              ${this._renderHiddenNote(browser)}
             </label>`,
         )}
       </div>
@@ -236,16 +302,12 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
             "compat-settings-intro",
           )`Choose which browsers to show in compatibility tables. This is saved in your browser only.`}
         </p>
-        <p class="intro">
-          ${this.l10n(
-            "compat-settings-disclaimer",
-          )`Note that not all features apply to all browsers, and data for some browsers may be incomplete.`}
-        </p>
         <div class="platforms">
           ${this._platforms.map(([platform, browsers]) =>
             this._renderPlatform(platform, browsers),
           )}
         </div>
+        ${this._renderHiddenLegend()}
         <footer>
           <mdn-button variant="secondary" @click=${this._restoreDefaults}
             >${this.l10n(
