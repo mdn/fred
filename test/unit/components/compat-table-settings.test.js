@@ -4,7 +4,7 @@ import { describe, it } from "node:test";
 import {
   DEFAULT_BROWSERS,
   isBrowserVisible,
-} from "../../../components/compat-table/browser-settings.js";
+} from "../../../components/compat-table/settings.js";
 
 describe("isBrowserVisible", () => {
   const cases = [

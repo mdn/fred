@@ -9,11 +9,6 @@ import { ViewedController } from "../viewed-controller/viewed-controller.js";
 
 import "../compat-table-settings/element.js";
 
-import {
-  getBrowserVisibility,
-  isBrowserVisible,
-  onBrowserVisibilityChange,
-} from "./browser-settings.js";
 import { DEFAULT_LOCALE, ISSUE_METADATA_TEMPLATE } from "./constants.js";
 import styles from "./element.css?lit";
 import {
@@ -22,6 +17,11 @@ import {
   labelFromString,
   versionLabelFromSupport,
 } from "./feature-row.js";
+import {
+  getBrowserVisibility,
+  isBrowserVisible,
+  onBrowserVisibilityChange,
+} from "./settings.js";
 import {
   asList,
   browserToIconName,
@@ -84,12 +84,12 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     this._pathname = "";
     /**
      * The saved visibility.
-     * @type {import("./browser-settings.js").BrowserVisibility}
+     * @type {import("./settings.js").BrowserVisibility}
      */
     this._visibility = {};
     /**
      * An unsaved selection from the settings dialog, shown while it's open.
-     * @type {import("./browser-settings.js").BrowserVisibility | undefined}
+     * @type {import("./settings.js").BrowserVisibility | undefined}
      */
     this._previewVisibility = undefined;
     /** @type {string[]} */
@@ -217,7 +217,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   /**
    * Previews a browser selection on this table only, before it's saved.
    * `null` ends the preview.
-   * @param {CustomEvent<import("./browser-settings.js").BrowserVisibility | null>} event
+   * @param {CustomEvent<import("./settings.js").BrowserVisibility | null>} event
    */
   _onBrowsersPreview(event) {
     this._previewVisibility = event.detail ?? undefined;
@@ -1129,7 +1129,7 @@ customElements.define("mdn-compat-table", MDNCompatTable);
  * @param {Partial<import("@bcd").Browsers>} browserInfo
  * Browsers this table never shows (regardless of visibility) are returned with
  * the reason, so the settings dialog can explain why they have no column.
- * @param {import("./browser-settings.js").BrowserVisibility} visibility
+ * @param {import("./settings.js").BrowserVisibility} visibility
  * @returns {[string[], import("@bcd").BrowserName[], import("@compat").HiddenBrowsers]}
  */
 export function gatherPlatformsAndBrowsers(

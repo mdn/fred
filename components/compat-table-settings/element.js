@@ -7,7 +7,7 @@ import {
   isBrowserVisible,
   resetBrowserVisibility,
   setBrowserVisibility,
-} from "../compat-table/browser-settings.js";
+} from "../compat-table/settings.js";
 import { browserToIconName } from "../compat-table/utils.js";
 import settingsIcon from "../icon/settings.svg?lit";
 
@@ -58,7 +58,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
     /**
      * The saved visibility, provided by the table (which keeps it in sync
      * across tabs) rather than read from storage here.
-     * @type {import("../compat-table/browser-settings.js").BrowserVisibility}
+     * @type {import("../compat-table/settings.js").BrowserVisibility}
      */
     this.visibility = {};
     /**
@@ -168,7 +168,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   }
 
   /**
-   * @param {import("../compat-table/browser-settings.js").BrowserVisibility | null} visibility
+   * @param {import("../compat-table/settings.js").BrowserVisibility | null} visibility
    */
   _preview(visibility) {
     this.dispatchEvent(
