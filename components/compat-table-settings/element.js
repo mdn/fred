@@ -19,7 +19,7 @@ import styles from "./element.css?lit";
 const PLATFORM_ORDER = ["desktop", "mobile", "server"];
 
 /**
- * Baseline's core browser set, listed before the remaining browsers.
+ * Baseline's core browser set.
  * @type {readonly import("@bcd").BrowserName[]}
  */
 const BASELINE_BROWSERS = Object.freeze([
@@ -31,6 +31,15 @@ const BASELINE_BROWSERS = Object.freeze([
   "safari",
   "safari_ios",
 ]);
+
+/** @type {readonly import("@bcd").BrowserName[]} */
+const WEBVIEW_BROWSERS = Object.freeze(["webview_android", "webview_ios"]);
+
+/**
+ * Browser groups per platform, each on its own row; remaining browsers
+ * (e.g. Opera, Samsung Internet) follow on a final row.
+ */
+const BROWSER_ROWS = [BASELINE_BROWSERS, WEBVIEW_BROWSERS];
 
 /**
  * A settings button opening a dialog to choose which browsers compat tables
@@ -299,14 +308,17 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   }
 
   /**
-   * Baseline browsers form the first row, all others a second one.
    * @param {string} platform
    * @param {import("@bcd").BrowserName[]} browsers
    */
   _renderPlatform(platform, browsers) {
     const rows = [
-      browsers.filter((browser) => BASELINE_BROWSERS.includes(browser)),
-      browsers.filter((browser) => !BASELINE_BROWSERS.includes(browser)),
+      ...BROWSER_ROWS.map((group) =>
+        browsers.filter((browser) => group.includes(browser)),
+      ),
+      browsers.filter(
+        (browser) => !BROWSER_ROWS.some((group) => group.includes(browser)),
+      ),
     ].filter((row) => row.length > 0);
     return html`<div class="platform">
       <h3>
