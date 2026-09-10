@@ -89,8 +89,14 @@ mdn-modal {
   border: 1px solid var(--color-text-blue);
   border-radius: 1rem;
 
+  transition: background-color 0.15s;
+
   &:hover {
-    border-color: var(--color-border-active);
+    background: color-mix(
+      in srgb,
+      var(--color-background-blue),
+      var(--color-text-blue) 12%
+    );
   }
 
   /* Hidden browsers are outlined and muted, shown ones filled. */
@@ -100,6 +106,10 @@ mdn-modal {
     background: transparent;
     border-color: var(--color-border-primary);
     border-style: dashed;
+
+    &:hover {
+      background: var(--color-background-secondary);
+    }
   }
 
   .icon-add,
