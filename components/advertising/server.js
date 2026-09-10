@@ -70,8 +70,7 @@ export class Advertising extends ServerComponent {
                   target="_blank"
                   rel="noreferrer"
                   class="external"
-                >
-                  Mozilla's Ad targeting guidelines</a
+                  >Mozilla's Ad targeting guidelines</a
                 >. We pride ourselves with an ethical advertising approach that
                 ensures ads are context-based, free from tracking pixels, and
                 don't involve personal data sharing.
@@ -95,9 +94,8 @@ export class Advertising extends ServerComponent {
                   target="_blank"
                   rel="noreferrer"
                   class="external"
+                  >Join us</a
                 >
-                  Join us
-                </a>
                 in this journey!
               </p>
               <h2>Our offering</h2>
@@ -125,25 +123,22 @@ export class Advertising extends ServerComponent {
                   target="_blank"
                   rel="noreferrer"
                   class="external"
-                >
-                  this form</a
+                  >this form</a
                 >, and we'll respond shortly. Discover more about
                 <a
                   href="https://www.mozilla.org/en-US/privacy/ad-targeting-guidelines/"
                   target="_blank"
                   rel="noreferrer"
                   class="external"
+                  >Mozilla's Ad targeting guidelines</a
                 >
-                  Mozilla's Ad targeting guidelines
-                </a>
                 and
                 <a
                   href="https://www.mozilla.org/en-US/privacy/"
                   target="_blank"
                   rel="noreferrer"
                   class="external"
-                >
-                  Privacy policy</a
+                  >Privacy policy</a
                 >.
               </p>
             </section>

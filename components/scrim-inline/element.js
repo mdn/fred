@@ -114,14 +114,13 @@ export class MDNScrimInline extends L10nMixin(LitElement) {
               rel="origin noreferrer"
               class="external"
               data-glean-id="curriculum: scrim link id:${this._scrimId}"
-            >
-              <div class="scrim-link"></div>
+              ><div class="scrim-link"></div>
               <span class="visually-hidden"
                 >${this.l10n(
                   "scrim-inline-open-on-scrimba",
                 )`Open on Scrimba`}</span
-              >
-            </a>
+              ></a
+            >
           </div>
           <div class="body" ${ref(this._bodyRef)}>
             ${
