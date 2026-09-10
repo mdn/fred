@@ -19,10 +19,17 @@ function getChannel() {
   return channel;
 }
 
-/** Notifies this tab (which doesn't receive its own channel messages) and others. */
-function notifyChange() {
-  globalThis.dispatchEvent(new Event(UPDATE_EVENT));
-  getChannel()?.postMessage("update");
+/**
+ * Notifies this tab (which doesn't receive its own channel messages) and
+ * others. The value travels with the message: a background tab may still see
+ * a stale `localStorage` snapshot (observed in Firefox) when it arrives.
+ * @param {BrowserVisibility} visibility
+ */
+function notifyChange(visibility) {
+  globalThis.dispatchEvent(
+    new CustomEvent(UPDATE_EVENT, { detail: visibility }),
+  );
+  getChannel()?.postMessage(visibility);
 }
 
 /**
@@ -94,7 +101,7 @@ export function setBrowserVisibility(visibility) {
   } catch (error) {
     console.warn("Unable to write compat browsers to localStorage", error);
   }
-  notifyChange();
+  notifyChange(visibility);
 }
 
 export function resetBrowserVisibility() {
@@ -103,20 +110,29 @@ export function resetBrowserVisibility() {
   } catch (error) {
     console.warn("Unable to remove compat browsers from localStorage", error);
   }
-  notifyChange();
+  notifyChange({});
 }
 
 /**
- * Calls `callback` whenever the visibility changes, in this or another tab.
- * @param {() => void} callback
+ * Calls `callback` with the new visibility whenever it changes, in this or
+ * another tab.
+ * @param {(visibility: BrowserVisibility) => void} callback
  * @returns {() => void} Unsubscribes.
  */
 export function onBrowserVisibilityChange(callback) {
   const channel = getChannel();
-  globalThis.addEventListener(UPDATE_EVENT, callback);
-  channel?.addEventListener("message", callback);
+  /** @param {Event} event */
+  const onLocal = (event) => {
+    callback(/** @type {CustomEvent<BrowserVisibility>} */ (event).detail);
+  };
+  /** @param {MessageEvent} event */
+  const onMessage = ({ data }) => {
+    callback(data && typeof data === "object" ? data : getBrowserVisibility());
+  };
+  globalThis.addEventListener(UPDATE_EVENT, onLocal);
+  channel?.addEventListener("message", onMessage);
   return () => {
-    globalThis.removeEventListener(UPDATE_EVENT, callback);
-    channel?.removeEventListener("message", callback);
+    globalThis.removeEventListener(UPDATE_EVENT, onLocal);
+    channel?.removeEventListener("message", onMessage);
   };
 }

@@ -4,7 +4,6 @@ import { L10nMixin } from "../../l10n/mixin.js";
 import { gleanClick } from "../../utils/glean.js";
 import {
   DEFAULT_BROWSERS,
-  getBrowserVisibility,
   isBrowserVisible,
   resetBrowserVisibility,
   setBrowserVisibility,
@@ -32,6 +31,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   static get properties() {
     return {
       browserInfo: { attribute: false },
+      visibility: { attribute: false },
       _selected: { state: true },
     };
   }
@@ -40,6 +40,12 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
     super();
     /** @type {Partial<import("@bcd").Browsers>} */
     this.browserInfo = {};
+    /**
+     * The saved visibility, provided by the table (which keeps it in sync
+     * across tabs) rather than read from storage here.
+     * @type {import("../compat-table/browser-settings.js").BrowserVisibility}
+     */
+    this.visibility = {};
     /** @type {Set<import("@bcd").BrowserName>} */
     this._selected = new Set();
   }
@@ -98,7 +104,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
     gleanClick("bcd: settings -> open");
     this._selected = new Set(
       this._browsers.filter((browser) =>
-        isBrowserVisible(browser, getBrowserVisibility()),
+        isBrowserVisible(browser, this.visibility),
       ),
     );
     this._modal?.showModal();
@@ -108,9 +114,9 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
     this._modal?.close();
   }
 
-  /** Reverts any unsaved preview once the dialog closes for whatever reason. */
+  /** Ends the preview once the dialog closes for whatever reason. */
   _onClose() {
-    this._preview(getBrowserVisibility());
+    this._preview(null);
   }
 
   _restoreDefaults() {
@@ -140,7 +146,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   }
 
   /**
-   * @param {import("../compat-table/browser-settings.js").BrowserVisibility} visibility
+   * @param {import("../compat-table/browser-settings.js").BrowserVisibility | null} visibility
    */
   _preview(visibility) {
     this.dispatchEvent(

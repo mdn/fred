@@ -63,6 +63,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       browserInfo: { attribute: "browserinfo" },
       _pathname: { state: true },
       _visibility: { state: true },
+      _previewVisibility: { state: true },
       _showTimelineId: { state: true },
     };
   }
@@ -90,8 +91,16 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     this.browserInfo = {};
     this.locale = "";
     this._pathname = "";
-    /** @type {import("./browser-settings.js").BrowserVisibility} */
+    /**
+     * The saved visibility.
+     * @type {import("./browser-settings.js").BrowserVisibility}
+     */
     this._visibility = {};
+    /**
+     * An unsaved selection from the settings dialog, shown while it's open.
+     * @type {import("./browser-settings.js").BrowserVisibility | undefined}
+     */
+    this._previewVisibility = undefined;
     /** @type {string[]} */
     this._platforms = [];
     /** @type {import("@bcd").BrowserName[]} */
@@ -202,9 +211,11 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     super.connectedCallback();
     this._pathname = globalThis.location.pathname;
     this._visibility = getBrowserVisibility();
-    this._unsubscribeBrowserSettings = onBrowserVisibilityChange(() => {
-      this._visibility = getBrowserVisibility();
-    });
+    this._unsubscribeBrowserSettings = onBrowserVisibilityChange(
+      (visibility) => {
+        this._visibility = visibility;
+      },
+    );
   }
 
   firstUpdated() {
@@ -241,10 +252,11 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
   /**
    * Previews a browser selection on this table only, before it's saved.
-   * @param {CustomEvent<import("./browser-settings.js").BrowserVisibility>} event
+   * `null` ends the preview.
+   * @param {CustomEvent<import("./browser-settings.js").BrowserVisibility | null>} event
    */
   _onBrowsersPreview(event) {
-    this._visibility = event.detail;
+    this._previewVisibility = event.detail ?? undefined;
   }
 
   disconnectedCallback() {
@@ -262,13 +274,14 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       changedProperties.has("query") ||
       changedProperties.has("data") ||
       changedProperties.has("browserInfo") ||
-      changedProperties.has("_visibility")
+      changedProperties.has("_visibility") ||
+      changedProperties.has("_previewVisibility")
     ) {
       [this._platforms, this._browsers] = gatherPlatformsAndBrowsers(
         this._category,
         this.data,
         this.browserInfo,
-        this._visibility,
+        this._previewVisibility ?? this._visibility,
       );
     }
   }
@@ -334,6 +347,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           ${this._renderIssueLink()}
           <mdn-compat-table-settings
             .browserInfo=${this.browserInfo}
+            .visibility=${this._visibility}
             @mdn-compat-browsers-preview=${this._onBrowsersPreview}
           ></mdn-compat-table-settings>
         </div>
