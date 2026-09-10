@@ -1,12 +1,29 @@
 /**
  * Persists which browsers the compat table shows, in `localStorage` only.
  *
- * All compat tables on a page share one setting, so changes are broadcast via
- * a global event (same tab) and the `storage` event (other tabs).
+ * All compat tables share one setting, so changes are broadcast via a global
+ * event (same tab) and a `BroadcastChannel` (other tabs).
  */
 
 const STORAGE_KEY = "compat-browsers";
 const UPDATE_EVENT = "mdn-compat-browsers-update";
+const CHANNEL_NAME = "mdn-compat-browsers";
+
+/** @type {BroadcastChannel | undefined} */
+let channel;
+
+function getChannel() {
+  if (!channel && typeof BroadcastChannel !== "undefined") {
+    channel = new BroadcastChannel(CHANNEL_NAME);
+  }
+  return channel;
+}
+
+/** Notifies this tab (which doesn't receive its own channel messages) and others. */
+function notifyChange() {
+  globalThis.dispatchEvent(new Event(UPDATE_EVENT));
+  getChannel()?.postMessage("update");
+}
 
 /**
  * Browsers shown when the user hasn't configured any.
@@ -61,7 +78,7 @@ export function setVisibleBrowsers(browsers) {
   } catch (error) {
     console.warn("Unable to write compat browsers to localStorage", error);
   }
-  globalThis.dispatchEvent(new Event(UPDATE_EVENT));
+  notifyChange();
 }
 
 export function resetVisibleBrowsers() {
@@ -70,7 +87,7 @@ export function resetVisibleBrowsers() {
   } catch (error) {
     console.warn("Unable to remove compat browsers from localStorage", error);
   }
-  globalThis.dispatchEvent(new Event(UPDATE_EVENT));
+  notifyChange();
 }
 
 /**
@@ -79,16 +96,11 @@ export function resetVisibleBrowsers() {
  * @returns {() => void} Unsubscribes.
  */
 export function onVisibleBrowsersChange(callback) {
-  /** @param {StorageEvent} event */
-  const onStorage = (event) => {
-    if (event.key === null || event.key === STORAGE_KEY) {
-      callback();
-    }
-  };
+  const channel = getChannel();
   globalThis.addEventListener(UPDATE_EVENT, callback);
-  globalThis.addEventListener("storage", onStorage);
+  channel?.addEventListener("message", callback);
   return () => {
     globalThis.removeEventListener(UPDATE_EVENT, callback);
-    globalThis.removeEventListener("storage", onStorage);
+    channel?.removeEventListener("message", callback);
   };
 }
