@@ -253,6 +253,13 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           this.browserInfo,
           this._previewVisibility ?? this._visibility,
         );
+      const timelineId = this._showTimelineId;
+      if (
+        timelineId &&
+        !this._browsers.some((browser) => timelineId.endsWith(`-${browser}`))
+      ) {
+        this._showTimelineId = undefined;
+      }
     }
   }
 
@@ -476,7 +483,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         </div>`;
       }
 
-      const browserCells = browsers.map((browserName, browserIndex) => {
+      const browserCells = browsers.map((browserName) => {
         // <CompatCell>
         const browser = browserInfo[browserName];
         if (!browser) {
@@ -486,7 +493,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           version_added: false,
         };
 
-        const timelineId = `timeline-${featureIndex}-${browserIndex}`;
+        const timelineId = `timeline-${featureIndex}-${browserName}`;
         const supportClassName = getSupportClassName(support, browser);
         const notes = this._renderNotes(browser, support);
 
