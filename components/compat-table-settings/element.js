@@ -19,6 +19,20 @@ import styles from "./element.css?lit";
 const PLATFORM_ORDER = ["desktop", "mobile", "server"];
 
 /**
+ * Baseline's core browser set, listed before the remaining browsers.
+ * @type {readonly import("@bcd").BrowserName[]}
+ */
+const BASELINE_BROWSERS = Object.freeze([
+  "chrome",
+  "chrome_android",
+  "edge",
+  "firefox",
+  "firefox_android",
+  "safari",
+  "safari_ios",
+]);
+
+/**
  * A settings button opening a dialog to choose which browsers compat tables
  * show.
  *
@@ -283,20 +297,28 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   }
 
   /**
+   * Baseline browsers form the first row, all others a second one.
    * @param {string} platform
    * @param {import("@bcd").BrowserName[]} browsers
    */
   _renderPlatform(platform, browsers) {
+    const rows = [
+      browsers.filter((browser) => BASELINE_BROWSERS.includes(browser)),
+      browsers.filter((browser) => !BASELINE_BROWSERS.includes(browser)),
+    ].filter((row) => row.length > 0);
     return html`<div class="platform">
       <h3>
         <span class=${`icon icon-${platform}`}></span>
         ${this._platformLabel(platform)}
       </h3>
-      <div class="pills">
-        ${browsers.map((browser) =>
-          this._renderBrowser(browser, this._selected.has(browser)),
-        )}
-      </div>
+      ${rows.map(
+        (row) =>
+          html`<div class="pills">
+            ${row.map((browser) =>
+              this._renderBrowser(browser, this._selected.has(browser)),
+            )}
+          </div>`,
+      )}
     </div>`;
   }
 
