@@ -182,16 +182,15 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   /**
    * @param {Event} event
    */
-  _toggle({ target }) {
-    if (!(target instanceof HTMLInputElement)) {
-      return;
-    }
-    const browser = /** @type {import("@bcd").BrowserName} */ (target.value);
+  _toggle({ currentTarget }) {
+    const browser = /** @type {import("@bcd").BrowserName} */ (
+      /** @type {HTMLElement} */ (currentTarget).dataset.browser
+    );
     const selected = new Set(this._selected);
-    if (target.checked) {
-      selected.add(browser);
-    } else {
+    if (selected.has(browser)) {
       selected.delete(browser);
+    } else {
+      selected.add(browser);
     }
     this._selected = selected;
     this._preview(this._visibility);
@@ -257,33 +256,48 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   }
 
   /**
+   * A pill toggling whether the browser is shown.
+   * @param {import("@bcd").BrowserName} browser
+   * @param {boolean} selected
+   */
+  _renderBrowser(browser, selected) {
+    const name = this.browserInfo[browser]?.name;
+    const action = this.l10n.raw({
+      id: selected
+        ? "compat-settings-hide-browser"
+        : "compat-settings-show-browser",
+      args: { browser: name ?? browser },
+    });
+    return html`<button
+      type="button"
+      class="pill"
+      aria-pressed=${selected}
+      title=${action}
+      data-browser=${browser}
+      @click=${this._toggle}
+    >
+      <span class=${`icon icon-${browserToIconName(browser)}`}></span>
+      ${name} ${this._renderHiddenNote(browser)}
+      <span class=${`icon icon-${selected ? "remove" : "add"}`}></span>
+    </button>`;
+  }
+
+  /**
    * @param {string} platform
    * @param {import("@bcd").BrowserName[]} browsers
    */
   _renderPlatform(platform, browsers) {
-    return html`<fieldset>
-      <legend>
+    return html`<div class="platform">
+      <h3>
         <span class=${`icon icon-${platform}`}></span>
         ${this._platformLabel(platform)}
-      </legend>
-      <div class="browsers">
-        ${browsers.map(
-          (browser) =>
-            html`<label>
-              <input
-                type="checkbox"
-                name="browsers"
-                .value=${browser}
-                .checked=${this._selected.has(browser)}
-                @change=${this._toggle}
-              />
-              <span class=${`icon icon-${browserToIconName(browser)}`}></span>
-              ${this.browserInfo[browser]?.name}
-              ${this._renderHiddenNote(browser)}
-            </label>`,
+      </h3>
+      <div class="pills">
+        ${browsers.map((browser) =>
+          this._renderBrowser(browser, this._selected.has(browser)),
         )}
       </div>
-    </fieldset>`;
+    </div>`;
   }
 
   render() {

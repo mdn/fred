@@ -83,6 +83,9 @@ compat-link-report-missing = Report this issue
 compat-link-source = View data on GitHub
 compat-link-source-title = File: { $filename }
 
+compat-settings-hide-browser = Hide { $browser }
+compat-settings-show-browser = Show { $browser }
+
 compat-deprecated = Deprecated
 compat-experimental = Experimental
 compat-nonstandard = Non-standard
