@@ -1,3 +1,4 @@
+import fs from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { parentPort, workerData } from "node:worker_threads";
@@ -26,15 +27,26 @@ if (!indexModulePath) {
 }
 
 try {
-  /** @type {import("../entry.ssr.js")} */
-  const indexModule = await import(pathToFileURL(indexModulePath).href);
-  const html = process.env.FRED_SIMPLE_HTML
-    ? `<!doctype html><meta charset="UTF-8">${await indexModule?.renderSimplified(reqPath, context)}`
-    : await indexModule?.render(reqPath, context, {
-        client: compilationStats.find((x) => x.name === "client") || {},
-        legacy: compilationStats.find((x) => x.name === "legacy") || {},
-      });
-  parentPort?.postMessage({ html });
+  if (process.env.FRED_BROWSER_SSR) {
+    const ssrBrowserStats = compilationStats.find(
+      (x) => x.name === "ssr-browser",
+    );
+    const html = await fs.readFile(
+      path.join(ssrBrowserStats.outputPath, "index.html"),
+      "utf8",
+    );
+    parentPort?.postMessage({ html });
+  } else {
+    /** @type {import("../entry.ssr.js")} */
+    const indexModule = await import(pathToFileURL(indexModulePath).href);
+    const html = process.env.FRED_SIMPLE_HTML
+      ? `<!doctype html><meta charset="UTF-8">${await indexModule?.renderSimplified(reqPath, context)}`
+      : await indexModule?.render(reqPath, context, {
+          client: compilationStats.find((x) => x.name === "client") || {},
+          legacy: compilationStats.find((x) => x.name === "legacy") || {},
+        });
+    parentPort?.postMessage({ html });
+  }
 } catch (error) {
   parentPort?.postMessage({ error });
 }
