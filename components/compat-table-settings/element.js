@@ -1,10 +1,9 @@
-import { LitElement, html, nothing } from "lit";
+import { LitElement, html } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 import { gleanClick } from "../../utils/glean.js";
 import {
   DEFAULT_BROWSERS,
-  MAX_BROWSERS,
   getVisibleBrowsers,
   resetVisibleBrowsers,
   setVisibleBrowsers,
@@ -33,7 +32,6 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
     return {
       browserInfo: { attribute: false },
       _selected: { state: true },
-      _error: { state: true },
     };
   }
 
@@ -43,7 +41,6 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
     this.browserInfo = {};
     /** @type {Set<import("@bcd").BrowserName>} */
     this._selected = new Set();
-    this._error = false;
   }
 
   get _modal() {
@@ -99,7 +96,6 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   _open() {
     gleanClick("bcd: settings -> open");
     this._selected = new Set(getVisibleBrowsers());
-    this._error = false;
     this._modal?.showModal();
   }
 
@@ -115,7 +111,6 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   _restoreDefaults() {
     gleanClick("bcd: settings -> restore defaults");
     this._selected = new Set(DEFAULT_BROWSERS);
-    this._error = false;
     this._preview(this._selectedInOrder);
   }
 
@@ -130,10 +125,6 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
    * @param {import("@bcd").BrowserName[]} browsers
    */
   _preview(browsers) {
-    // An empty selection is an error state, not something worth previewing.
-    if (browsers.length === 0) {
-      return;
-    }
     this.dispatchEvent(
       new CustomEvent("mdn-compat-browsers-preview", {
         detail: browsers,
@@ -144,10 +135,6 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   }
 
   _save() {
-    if (this._selected.size === 0 || this._selected.size > MAX_BROWSERS) {
-      this._error = true;
-      return;
-    }
     gleanClick("bcd: settings -> save");
     const browsers = this._selectedInOrder;
     // Don't pin the defaults, so users keep following future default changes.
@@ -177,7 +164,6 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
       selected.delete(browser);
     }
     this._selected = selected;
-    this._error = false;
     this._preview(this._selectedInOrder);
   }
 
@@ -186,7 +172,6 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
    * @param {import("@bcd").BrowserName[]} browsers
    */
   _renderPlatform(platform, browsers) {
-    const atMax = this._selected.size >= MAX_BROWSERS;
     return html`<fieldset>
       <legend>
         <span class=${`icon icon-${platform}`}></span>
@@ -201,7 +186,6 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
                 name="browsers"
                 .value=${browser}
                 .checked=${this._selected.has(browser)}
-                ?disabled=${atMax && !this._selected.has(browser)}
                 @change=${this._toggle}
               />
               <span class=${`icon icon-${browserToIconName(browser)}`}></span>
@@ -226,25 +210,12 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
           ${this.l10n(
             "compat-settings-intro",
           )`Choose which browsers to show in compatibility tables. This is saved in your browser only.`}
-          ${this.l10n.raw({
-            id: "compat-settings-max",
-            args: { max: MAX_BROWSERS },
-          })}
         </p>
         <div class="platforms">
           ${this._platforms.map(([platform, browsers]) =>
             this._renderPlatform(platform, browsers),
           )}
         </div>
-        ${
-          this._error
-            ? html`<p class="error" role="alert">
-                ${this.l10n(
-                  "compat-settings-error-none",
-                )`Select at least one browser.`}
-              </p>`
-            : nothing
-        }
         <footer>
           <mdn-button variant="secondary" @click=${this._restoreDefaults}
             >${this.l10n(

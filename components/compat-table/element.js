@@ -210,24 +210,27 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     // Expose the table's top and header's bottom edge to the CSS, which picks
     // one as the anchored settings dialog's top depending on the viewport.
     this._headerObserver = new ResizeObserver(() => this._updateDialogOffset());
-    // `thead` is `display: contents`, so observe the table instead.
-    const inner = this._innerRef.value;
-    const table = this._theadRef.value?.parentElement;
-    if (inner) this._headerObserver.observe(inner);
-    if (table) this._headerObserver.observe(table);
+    this._headerObserver.observe(this);
+  }
+
+  updated() {
+    // The table (and thus header) may have been re-rendered or removed.
+    this._updateDialogOffset();
   }
 
   _updateDialogOffset() {
-    const inner = this._innerRef.value;
-    const thead = this._theadRef.value;
-    const table = thead?.parentElement;
-    if (!inner || !thead || !table) return;
+    const toolbar = this._innerRef.value?.querySelector(".bc-toolbar");
+    if (!toolbar) return;
     const top = this.getBoundingClientRect().top;
-    const tableTop = table.getBoundingClientRect().top;
+    // Without a table (no browsers selected), anchor below the toolbar.
+    const thead = this._theadRef.value;
+    const tableTop =
+      thead?.parentElement?.getBoundingClientRect().top ??
+      toolbar.getBoundingClientRect().bottom;
     // Measure the header cells, as `thead` itself has no box.
     const headerBottom = Math.max(
       tableTop,
-      ...[...thead.querySelectorAll("th, td")].map(
+      ...[...(thead?.querySelectorAll("th, td") ?? [])].map(
         (cell) => cell.getBoundingClientRect().bottom,
       ),
     );
@@ -333,12 +336,20 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
             @mdn-compat-browsers-preview=${this._onBrowsersPreview}
           ></mdn-compat-table-settings>
         </div>
-        <table
-          class="bc-table bc-table-web"
-          style="--compat-browser-count: ${Object.keys(this._browsers).length}"
-        >
-          ${this._renderTableHeader()} ${this._renderTableBody()}
-        </table>
+        ${
+          this._browsers.length > 0
+            ? html`<table
+                class="bc-table bc-table-web"
+                style="--compat-browser-count: ${this._browsers.length}"
+              >
+                ${this._renderTableHeader()} ${this._renderTableBody()}
+              </table>`
+            : html`<p class="bc-no-browsers">
+                ${this.l10n(
+                  "compat-no-browsers",
+                )`No browsers selected. Use "Configure browsers" to choose which browsers to show.`}
+              </p>`
+        }
       </figure>
     </figure>`;
   }
@@ -1114,7 +1125,10 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   }
 
   render() {
-    return html` ${this._renderTable()} ${this._renderTableLegend()} `;
+    return html`
+      ${this._renderTable()}
+      ${this._browsers.length > 0 ? this._renderTableLegend() : nothing}
+    `;
   }
 }
 

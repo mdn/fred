@@ -71,7 +71,6 @@ obs-mdn = The { -brand-name-obs } provides effective security insights, guided b
 
 
 compat-loading = Loading…
-compat-settings-max = You can select up to { $max } browsers.
 compat-js-required = Enable JavaScript to view this browser compatibility table.
 
 compat-browser-version-date = { $browser } { $version } – Release date: { $date }

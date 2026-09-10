@@ -4,14 +4,9 @@
   display: inline-flex;
 }
 
-.intro,
-.error {
+.intro {
   margin: 0 0 1rem;
   font-size: var(--font-size-small);
-}
-
-.error {
-  color: var(--color-text-red);
 }
 
 /* Two platforms per row (Desktop | Mobile, Server | XR), separated by lines. */

@@ -76,6 +76,15 @@ table {
   font-size: var(--font-size-small);
 }
 
+.bc-no-browsers {
+  padding: 1rem;
+
+  font-size: var(--font-size-small);
+
+  border: 1px solid var(--color-border-primary);
+  border-radius: 0.25rem;
+}
+
 .bc-table {
   /* Cap browser columns so few selected browsers don't stretch across the
      table; the feature column absorbs the remaining space instead. */
