@@ -21,9 +21,11 @@ on:
       - labeled
 
 # Read-only access to the repo; write to pull-requests so review comments can be posted.
+# id-token for minting short-lived Anthropic credentials.
 permissions:
   contents: read
   pull-requests: write
+  id-token: write
 
 jobs:
   claude-code-review:
