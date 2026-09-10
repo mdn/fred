@@ -12,7 +12,6 @@ export class MDNModal extends L10nMixin(LitElement) {
   static get properties() {
     return {
       modalTitle: { type: String, attribute: "modal-title" },
-      anchored: { type: Boolean, reflect: true },
       closedby: { type: String },
     };
   }
@@ -20,11 +19,6 @@ export class MDNModal extends L10nMixin(LitElement) {
   constructor() {
     super();
     this.modalTitle = "";
-    /**
-     * Open as a non-modal dialog, positioned below the nearest positioned
-     * ancestor instead of centered in the viewport.
-     */
-    this.anchored = false;
     /**
      * Forwarded to the dialog's `closedby`: "any" (default) also closes on
      * click outside, "closerequest" only on Escape or the close button.
@@ -34,12 +28,7 @@ export class MDNModal extends L10nMixin(LitElement) {
   }
 
   showModal() {
-    const dialog = this.shadowRoot?.querySelector("dialog");
-    if (this.anchored) {
-      dialog?.show();
-    } else {
-      dialog?.showModal();
-    }
+    this.shadowRoot?.querySelector("dialog")?.showModal();
   }
 
   /** Re-dispatches the dialog's non-composed `close` event to the host. */

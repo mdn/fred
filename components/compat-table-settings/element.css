@@ -4,6 +4,11 @@
   display: inline-flex;
 }
 
+mdn-modal {
+  /* No wider than the article's content column. */
+  --modal-max-width: var(--layout-content-max);
+}
+
 .intro {
   margin: 0 0 1rem;
   font-size: var(--font-size-small);
