@@ -221,6 +221,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
       >
       <mdn-modal
         anchored
+        closedby="closerequest"
         modal-title=${this.l10n("compat-settings-title")`Browsers`}
         @close=${this._onClose}
       >

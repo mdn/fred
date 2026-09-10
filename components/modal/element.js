@@ -13,6 +13,7 @@ export class MDNModal extends L10nMixin(LitElement) {
     return {
       modalTitle: { type: String, attribute: "modal-title" },
       anchored: { type: Boolean, reflect: true },
+      closedby: { type: String },
     };
   }
 
@@ -24,6 +25,12 @@ export class MDNModal extends L10nMixin(LitElement) {
      * ancestor instead of centered in the viewport.
      */
     this.anchored = false;
+    /**
+     * Forwarded to the dialog's `closedby`: "any" (default) also closes on
+     * click outside, "closerequest" only on Escape or the close button.
+     * @type {"any" | "closerequest" | "none"}
+     */
+    this.closedby = "any";
   }
 
   showModal() {
@@ -46,7 +53,7 @@ export class MDNModal extends L10nMixin(LitElement) {
 
   render() {
     return html`
-      <dialog closedby="any" @close=${this._onClose}>
+      <dialog closedby=${this.closedby} @close=${this._onClose}>
         <header>
           ${this.modalTitle ? html`<h2>${this.modalTitle}</h2>` : nothing}
           <mdn-button
