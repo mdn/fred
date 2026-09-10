@@ -333,7 +333,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
             >${this.l10n("compat-settings-cancel")`Cancel`}</mdn-button
           >
           <mdn-button @click=${this._save}
-            >${this.l10n("compat-settings-ok")`OK`}</mdn-button
+            >${this.l10n("compat-settings-save")`Save`}</mdn-button
           >
         </footer>
       </mdn-modal>
