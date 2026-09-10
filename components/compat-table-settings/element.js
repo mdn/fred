@@ -325,11 +325,11 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   render() {
     return html`
       <mdn-button variant="plain" .icon=${settingsIcon} @click=${this._open}
-        >${this.l10n("compat-settings-open")`Configure browsers`}</mdn-button
+        >${this.l10n("compat-settings-open")`Customize`}</mdn-button
       >
       <mdn-modal
         closedby="closerequest"
-        modal-title=${this.l10n("compat-settings-title")`Browsers`}
+        modal-title=${this.l10n("compat-settings-title")`Customize browser compatibility tables`}
         @close=${this._onClose}
       >
         <p class="intro">
