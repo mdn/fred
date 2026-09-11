@@ -127,7 +127,6 @@ export default defineConfig([
       "unicorn/prefer-await": "off",
       "unicorn/prefer-continue": "off",
       "unicorn/prefer-early-return": "off",
-      "unicorn/prefer-else-if": "off",
       "unicorn/prefer-hoisting-branch-code": "off",
       "unicorn/prefer-iterator-to-array": "off",
       "unicorn/prefer-number-coercion": "off",
