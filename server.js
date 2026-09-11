@@ -112,7 +112,9 @@ const streamToBuffer = (stream) =>
   new Promise((resolve, reject) => {
     /** @type {Buffer[]} */
     const chunks = [];
-    stream.on("data", (chunk) => chunks.push(chunk));
+    stream.on("data", (chunk) => {
+      chunks.push(chunk);
+    });
     stream.on("end", () => resolve(Buffer.concat(chunks)));
     stream.on("error", reject);
   });

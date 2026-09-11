@@ -115,7 +115,6 @@ export default defineConfig([
       "unicorn/no-global-object-property-assignment": "off",
       "unicorn/no-loop-iterable-mutation": "off",
       "unicorn/no-null": ["off"],
-      "unicorn/no-return-array-push": "off",
       "unicorn/no-top-level-assignment-in-function": "off",
       "unicorn/no-top-level-side-effects": "off",
       "unicorn/no-undeclared-class-members": "off",
