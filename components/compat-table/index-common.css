@@ -50,6 +50,9 @@ table {
 }
 
 .bc-table {
+  /* Keep small browser selections narrow; the feature column fills the rest. */
+  --compat-browser-column-max: 4rem;
+
   width: 100%;
 
   margin: 0;
