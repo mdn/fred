@@ -16,7 +16,7 @@ export class A11yMenu extends ServerComponent {
         >
       </li>
       <li>
-        <a href="#search" data-glean-id="a11y_menu: click #search"
+        <a href="#mdn-search" data-glean-id="a11y_menu: click #search"
           >${context.l10n("a11y-menu-skip-to-search")`Skip to search`}</a
         >
       </li>

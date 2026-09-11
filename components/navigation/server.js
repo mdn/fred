@@ -41,7 +41,7 @@ export class Navigation extends ServerComponent {
           ${WRITER_MODE ? nothing : html`<mdn-user-menu></mdn-user-menu>`}
         </div>
       </nav>
-      <mdn-search-modal id="search"></mdn-search-modal>
+      <mdn-search-modal id="mdn-search"></mdn-search-modal>
     `;
   }
 }
