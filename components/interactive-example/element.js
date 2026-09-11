@@ -96,14 +96,10 @@ export class InteractiveExampleBase extends LitElement {
 
   /** @param {Event} ev  */
   _telemetryHandler(ev) {
-    let action = ev.type;
-    if (
-      ev.type === "click" &&
-      ev.target instanceof HTMLElement &&
-      ev.target.id
-    ) {
-      action = `click@${ev.target.id}`;
-    }
+    const action =
+      ev.type === "click" && ev.target instanceof HTMLElement && ev.target.id
+        ? `click@${ev.target.id}`
+        : ev.type;
     gleanClick(`interactive-example: ${action}`);
   }
 

@@ -133,7 +133,6 @@ export default defineConfig([
       "unicorn/prefer-private-class-fields": "off",
       "unicorn/prefer-scoped-selector": "off",
       "unicorn/prefer-simple-condition-first": "off",
-      "unicorn/prefer-ternary": "off",
       "unicorn/prefer-query-selector": "off",
       "unicorn/prefer-url-href": "off",
       "unicorn/prevent-abbreviations": ["off"],
