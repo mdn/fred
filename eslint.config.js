@@ -87,6 +87,7 @@ export default defineConfig([
         "error",
         { definedTags: ["element", "attr", "slot"] },
       ],
+      "jsdoc/multiline-blocks": "off",
       "lit/no-template-map": "off",
       "lit/prefer-query-decorators": "off",
       "no-restricted-syntax": [
