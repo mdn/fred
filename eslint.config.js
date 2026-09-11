@@ -104,7 +104,6 @@ export default defineConfig([
       "no-unused-vars": "off", // Prefer `@typescript-eslint/no-unused-vars`.
       "unicorn/consistent-boolean-name": "off",
       "unicorn/consistent-class-member-order": "off",
-      "unicorn/consistent-optional-chaining": "off",
       "unicorn/logical-assignment-operators": "off",
       "unicorn/max-nested-calls": "off",
       "unicorn/name-replacements": "off",
