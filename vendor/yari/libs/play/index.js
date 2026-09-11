@@ -488,6 +488,16 @@ export function renderHtml(state = null) {
           window.console = consoleProxy;
           window.addEventListener("error", (e) => console.log(e.error));
         </script>
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            if (!(window.__mdnPlayJsStarted && window.__mdnPlayJsEnded)) {
+              console.warn(
+                "[Playground] The JavaScript did not run. This usually means " +
+                  "the HTML input contains an unclosed or malformed tag.",
+              );
+            }
+          });
+        </script>
         ${
           defaults === "ix-tabbed"
             ? html`<script>
@@ -530,10 +540,15 @@ export function renderHtml(state = null) {
       </head>
       <body>
         ${htmlCode}
-        <script type=${defaults === "ix-wat" ? "module" : ""}>
+        <!-- "" '' -->
+        <script>
+          window.__mdnPlayJsStarted = true;
+        </script>
+        <script id="mdn-play-js" type=${defaults === "ix-wat" ? "module" : ""}>
           ${js};
         </script>
-        <script>
+        <script id="mdn-play-js-end">
+          window.__mdnPlayJsEnded = true;
           try {
             const uuid =
               new URLSearchParams(location.search).get("uuid") || undefined;
