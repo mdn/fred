@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.2](https://github.com/mdn/fred/compare/v2.9.1...v2.9.2) (2026-09-11)
+
+
+### Bug Fixes
+
+* **search:** rename modal ID to `mdn-search` ([#1892](https://github.com/mdn/fred/issues/1892)) ([1bd8b8a](https://github.com/mdn/fred/commit/1bd8b8ade2b798f89eca9995d71a261178a06e24))
+
 ## [2.9.1](https://github.com/mdn/fred/compare/v2.9.0...v2.9.1) (2026-09-11)
 
 
