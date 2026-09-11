@@ -113,7 +113,6 @@ export default defineConfig([
       "unicorn/no-computed-property-existence-check": "off",
       "unicorn/no-declarations-before-early-exit": "off",
       "unicorn/no-global-object-property-assignment": "off",
-      "unicorn/no-immediate-mutation": "off",
       "unicorn/no-loop-iterable-mutation": "off",
       "unicorn/no-null": ["off"],
       "unicorn/no-return-array-push": "off",
