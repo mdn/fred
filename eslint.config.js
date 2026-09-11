@@ -109,7 +109,6 @@ export default defineConfig([
       "unicorn/no-array-callback-reference": "off",
       "unicorn/no-array-reverse": "off",
       "unicorn/no-array-sort": "off",
-      "unicorn/no-array-splice": "off",
       "unicorn/no-break-in-nested-loop": "off",
       "unicorn/no-computed-property-existence-check": "off",
       "unicorn/no-declarations-before-early-exit": "off",
