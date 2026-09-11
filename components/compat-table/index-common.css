@@ -45,8 +45,28 @@ table {
   }
 }
 
+.bc-toolbar {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 0.5rem;
+
+  align-items: center;
+  justify-content: space-between;
+}
+
 .bc-on-github {
   font-size: var(--font-size-small);
+}
+
+.bc-no-browsers {
+  padding: 1rem;
+
+  font-size: var(--font-size-small);
+
+  border: 1px solid var(--color-border-primary);
+  border-radius: 0.25rem;
 }
 
 .bc-table {

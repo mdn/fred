@@ -1,26 +1,21 @@
 import { BCD_BASE_URL } from "../env/index.js";
 
 /**
- * A list of browsers to be hidden.
- * @constant {string[]}
+ * Pair with `icon-browser` for the generic fallback.
+ * @param {import("@bcd").BrowserName} browser
+ * @returns {string}
  */
-export const SHOW_BROWSERS = [
-  "chrome",
-  "edge",
-  "firefox",
-  "opera",
-  "safari",
-  "chrome_android",
-  "firefox_android",
-  "opera_android",
-  "safari_ios",
-  "samsunginternet_android",
-  "webview_android",
-  "webview_ios",
-  "bun",
-  "deno",
-  "nodejs",
-];
+export function browserToIconName(browser) {
+  if (browser.startsWith("firefox")) {
+    return "firefox";
+  } else if (browser === "webview_android") {
+    return "webview";
+  } else if (browser === "webview_ios") {
+    return "safari";
+  } else {
+    return browser.split("_", 1)[0] ?? "";
+  }
+}
 
 /**
  * Gets the first element of an array or returns the value itself.
