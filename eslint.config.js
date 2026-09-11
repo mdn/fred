@@ -121,7 +121,6 @@ export default defineConfig([
       "unicorn/no-unnecessary-global-this": "off",
       "unicorn/no-unreadable-array-destructuring": "off",
       "unicorn/no-unreadable-for-of-expression": "off",
-      "unicorn/no-unreadable-object-destructuring": "off",
       "unicorn/no-unsafe-string-replacement": "off",
       "unicorn/no-useless-else": "off",
       "unicorn/no-useless-template-literals": "off",
