@@ -52,7 +52,7 @@ export default defineConfig([
       "fred/server-component-name": "error",
       "fred/sandbox-component-name": "error",
       "fred/server-html-import": "error",
-      "fred/no-external-link-whitespace": "warn",
+      "fred/no-external-link-whitespace": "error",
     },
   },
   {

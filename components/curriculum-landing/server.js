@@ -120,9 +120,8 @@ export class CurriculumLanding extends ServerComponent {
                 class="external"
                 target="_blank"
                 rel="noreferrer"
+                >Frontend Developer Career Path</a
               >
-                Frontend Developer Career Path
-              </a>
               .
             </p>
           </section>
@@ -268,9 +267,8 @@ export class CurriculumLanding extends ServerComponent {
                 rel="origin noreferrer"
                 class="external"
                 data-glean-id="curriculum: partner banner click"
+                >Scrimba's Frontend Developer Career Path</a
               >
-                Scrimba's Frontend Developer Career Path
-              </a>
               teaches the MDN Curriculum Core with fun interactive lessons and
               challenges, knowledgeable teachers, and a supportive community. Go
               from zero to landing your first front-end job!
@@ -281,9 +279,8 @@ export class CurriculumLanding extends ServerComponent {
               rel="origin noreferrer"
               class="external"
               data-glean-id="curriculum: partner banner click"
+              >Find out more</a
             >
-              Find out more
-            </a>
           </section>
 
           <mdn-themed-image
