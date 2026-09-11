@@ -1,4 +1,5 @@
 import {
+  BrowserName,
   CompatStatement,
   SimpleSupportStatement,
   VersionValue,
@@ -36,3 +37,7 @@ export type SupportStatementExtended =
 
 export type SupportClassName =
   "no" | "yes" | "partial" | "preview" | "removed-partial" | "unknown";
+
+/** Why a visible browser has no column in a given table. */
+export type HiddenBrowserReason = "no-data" | "not-applicable";
+export type HiddenBrowsers = Partial<Record<BrowserName, HiddenBrowserReason>>;
