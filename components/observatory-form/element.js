@@ -75,9 +75,9 @@ export class MDNObservatoryForm extends LitElement {
         const json = await response.json();
         throw new Error(`Request failed: ${json.message}`);
       }
-      globalThis.location.href = `/en-US/observatory/analyze?host=${encodeURIComponent(
-        this._hostname,
-      )}`;
+      globalThis.location.assign(
+        `/en-US/observatory/analyze?host=${encodeURIComponent(this._hostname)}`,
+      );
     } catch (error) {
       // @ts-expect-error
       this._errorMessage = `${ERROR_MAP[error.name] || "message" in error ? error["message"] : error}`;

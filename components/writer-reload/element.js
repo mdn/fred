@@ -60,7 +60,7 @@ export default class MDNWriterReload extends L10nMixin(LitElement) {
         // eslint-disable-next-line unicorn/no-negated-condition
         if (this._state !== state) {
           if (this._comparisons <= 1) {
-            this._interval = this._interval * 2;
+            this._interval *= 2;
           }
           location.reload();
           this._reloading = true;

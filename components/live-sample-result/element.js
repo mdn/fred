@@ -47,7 +47,7 @@ export class MDNLiveSampleResult extends L10nMixin(LitElement) {
       if (replace || this._fullscreenReplace) {
         location.replace(this._runnerSrc);
       } else {
-        location.href = this._runnerSrc;
+        location.assign(this._runnerSrc);
       }
     } else {
       this._fullscreenPending = true;

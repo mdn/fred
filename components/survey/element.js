@@ -170,7 +170,9 @@ export class MDNSurvey extends L10nMixin(LitElement) {
         this.#onSubmitted();
       }
     };
-    window.addEventListener("message", this._messageListener, false);
+    window.addEventListener("message", this._messageListener, {
+      capture: false,
+    });
   }
 
   #removeMessageListener() {
