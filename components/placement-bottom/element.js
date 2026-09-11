@@ -39,7 +39,7 @@ export class MDNPlacementBottom extends PlacementMixin(LitElement) {
       [
         ["--bottom-background", backgroundColor],
         ["--bottom-color", textColor],
-      ].filter(([_, v]) => Boolean(v)),
+      ].filter(([_, v]) => v),
     );
     const type = placementContext?.hpFooter ? "hp-footer" : "bottom-banner";
 

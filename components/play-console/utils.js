@@ -93,7 +93,7 @@ export function formatObject(input) {
         if (start) {
           start = false;
         } else {
-          formattedChild = formattedChild + ", ";
+          formattedChild += ", ";
         }
         formattedChild = formattedChild + key + ": " + formatOutput(input[key]);
       }
@@ -111,7 +111,7 @@ export function formatObject(input) {
       if (start) {
         start = false;
       } else {
-        formattedChild = formattedChild + ", ";
+        formattedChild += ", ";
       }
       formattedChild = formattedChild + key + ": " + formatOutput(input[key]);
     }
