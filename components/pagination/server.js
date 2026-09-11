@@ -63,10 +63,8 @@ export class Pagination extends ServerComponent {
     if (numPages < 2 * surroundingPages + 3) {
       return Array.from({ length: numPages }, (_, i) => i + 1);
     }
-    const pageNumbers = [];
-
-    // Always add page 1
-    pageNumbers.push(1);
+    /** @type {Array<number | string>} */
+    const pageNumbers = [1];
 
     // Calculate start and end of the surrounding pages
     const startPage = Math.max(2, currentPage - surroundingPages);
