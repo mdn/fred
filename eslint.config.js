@@ -130,7 +130,6 @@ export default defineConfig([
       "unicorn/prefer-hoisting-branch-code": "off",
       "unicorn/prefer-iterator-to-array": "off",
       "unicorn/prefer-number-coercion": "off",
-      "unicorn/prefer-object-destructuring-defaults": "off",
       "unicorn/prefer-private-class-fields": "off",
       "unicorn/prefer-scoped-selector": "off",
       "unicorn/prefer-simple-condition-first": "off",
