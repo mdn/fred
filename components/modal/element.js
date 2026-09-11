@@ -12,16 +12,26 @@ export class MDNModal extends L10nMixin(LitElement) {
   static get properties() {
     return {
       modalTitle: { type: String, attribute: "modal-title" },
+      closedby: { type: String },
     };
   }
 
   constructor() {
     super();
     this.modalTitle = "";
+    /**
+     * @type {"any" | "closerequest" | "none"}
+     */
+    this.closedby = "any";
   }
 
   showModal() {
     this.shadowRoot?.querySelector("dialog")?.showModal();
+  }
+
+  /** Forward `close` across the shadow boundary. */
+  _onClose() {
+    this.dispatchEvent(new Event("close"));
   }
 
   close() {
@@ -30,7 +40,7 @@ export class MDNModal extends L10nMixin(LitElement) {
 
   render() {
     return html`
-      <dialog closedby="any">
+      <dialog closedby=${this.closedby} @close=${this._onClose}>
         <header>
           ${this.modalTitle ? html`<h2>${this.modalTitle}</h2>` : nothing}
           <mdn-button
