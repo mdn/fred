@@ -1,6 +1,7 @@
 import { LitElement, html, nothing } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
+import { gleanClick } from "../../utils/glean.js";
 import {
   DEFAULT_BROWSERS,
   isBrowserVisible,
@@ -121,6 +122,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   }
 
   async _open() {
+    gleanClick("bcd: settings -> open");
     this._selected = new Set(
       this._browsers.filter((browser) =>
         isBrowserVisible(browser, this.visibility),
@@ -181,6 +183,21 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
     const isDefault =
       this._selected.size === defaults.length &&
       defaults.every((browser) => this._selected.has(browser));
+    const changed = this._browsers.filter(
+      (browser) =>
+        isBrowserVisible(browser, this.visibility) !==
+        this._selected.has(browser),
+    );
+    if (changed.length > 0) {
+      if (isDefault) {
+        gleanClick("bcd: settings -> reset");
+      }
+      for (const browser of changed) {
+        gleanClick(
+          `bcd: settings -> ${this._selected.has(browser) ? "show" : "hide"} ${browser}`,
+        );
+      }
+    }
     if (isDefault) {
       resetBrowserVisibility();
     } else {

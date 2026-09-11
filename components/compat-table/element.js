@@ -104,6 +104,12 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     this._showTimelineId = undefined;
     new ViewedController(this, this._ref, () => {
       gleanClick(`bcd: view -> ${this.query}`);
+      // Record displayed browser columns in table order.
+      const browsers =
+        Object.keys(this._visibility).length > 0
+          ? this._browsers.join(",")
+          : "default";
+      gleanClick(`bcd: browsers -> ${browsers}`);
     });
   }
 
