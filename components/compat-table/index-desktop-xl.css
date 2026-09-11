@@ -6,7 +6,7 @@
     grid-template-columns: minmax(33%, 1fr) repeat(
         var(--compat-table-browser-count),
         minmax(
-          auto,
+          0,
           min(
             calc(67% / var(--compat-table-browser-count)),
             var(--compat-browser-column-max)

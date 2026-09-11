@@ -4,7 +4,7 @@
   .bc-table {
     grid-template-columns: minmax(20vw, 1fr) repeat(
         var(--compat-table-browser-count),
-        minmax(auto, var(--compat-browser-column-max))
+        minmax(0, var(--compat-browser-column-max))
       );
 
     thead {
