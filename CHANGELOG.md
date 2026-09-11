@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.9.1](https://github.com/mdn/fred/compare/v2.9.0...v2.9.1) (2026-09-11)
+
+
+### Miscellaneous
+
+* **deps-dev:** bump eslint-plugin-unicorn from 65.0.1 to 74.0.0 ([#1900](https://github.com/mdn/fred/issues/1900)) ([1f7587a](https://github.com/mdn/fred/commit/1f7587a77bbff0c8402ad1c96ba368fb0c29d5ff))
+* **deps:** bump @mdn/watify from 1.1.9 to 1.1.10 ([#1894](https://github.com/mdn/fred/issues/1894)) ([6967512](https://github.com/mdn/fred/commit/6967512b6738737284c2e8bd910678a5ddf69aa2))
+* **deps:** bump brace-expansion ([#1884](https://github.com/mdn/fred/issues/1884)) ([4d02eaa](https://github.com/mdn/fred/commit/4d02eaa0158953a94bd1aca4b22109c08eb65e9b))
+* **deps:** bump compression from 1.8.1 to 1.8.2 in the npm-prod group ([#1899](https://github.com/mdn/fred/issues/1899)) ([b8a8ff5](https://github.com/mdn/fred/commit/b8a8ff52877819841fa2ba3c2845f8c380670e74))
+* **deps:** bump qs from 6.15.2 to 6.16.0 ([#1902](https://github.com/mdn/fred/issues/1902)) ([842427f](https://github.com/mdn/fred/commit/842427f983d94341c18adb1f28b88b12e1f83388))
+* **deps:** bump svgo ([ba69f51](https://github.com/mdn/fred/commit/ba69f5159eb837ee75ef322ca68f2d09aae561df))
+* **deps:** bump svgo to 3.3.5/4.1.0 ([#1878](https://github.com/mdn/fred/issues/1878)) ([ba69f51](https://github.com/mdn/fred/commit/ba69f5159eb837ee75ef322ca68f2d09aae561df))
+* **deps:** bump ws and socket.io-adapter ([#1883](https://github.com/mdn/fred/issues/1883)) ([a6204ef](https://github.com/mdn/fred/commit/a6204ef17c6f22394ca8e711096b6650e4fe58c7))
+
 ## [2.9.0](https://github.com/mdn/fred/compare/v2.8.0...v2.9.0) (2026-09-07)
 
 
