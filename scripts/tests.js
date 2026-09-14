@@ -106,9 +106,7 @@ await yargs(hideBin(process.argv))
           name: "server",
           prefixColor: "red",
         });
-      }
-
-      if (argv.fred === "dev") {
+      } else if (argv.fred === "dev") {
         jobs.push({
           command: `npm run dev`,
           name: "server",

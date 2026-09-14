@@ -46,7 +46,7 @@ export function parseString(name, fallback, options) {
  * @returns {string | undefined}
  */
 function getEnv(name, options = {}) {
-  const { runtime } = { runtime: false, ...options };
+  const { runtime = false } = options;
   const fullName = `FRED_${name}`;
   if (runtime && RUNTIME_ENV) {
     runtimeVariables.push(fullName);

@@ -191,7 +191,7 @@ export class MDNSurvey extends L10nMixin(LitElement) {
 
     if (
       !this._force &&
-      (this._surveyState.dismissed_at || this._surveyState?.submitted_at)
+      (this._surveyState.dismissed_at || this._surveyState.submitted_at)
     ) {
       return nothing;
     }

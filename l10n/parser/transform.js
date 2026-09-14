@@ -7,6 +7,10 @@ import { Transformer, parse, serialize } from "@fluent/syntax";
  * @import { TextElement } from "@fluent/syntax";
  */
 
+const combiningMarks = Array.from({ length: 0x3_6f - 0x3_00 + 1 }, (_, i) =>
+  String.fromCodePoint(0x3_00 + i),
+);
+
 /**
  * Tranforms strings by:
  * - adding accents to all characters
@@ -14,9 +18,7 @@ import { Transformer, parse, serialize } from "@fluent/syntax";
  * - wrapping in square brackets to help detect truncation
  */
 class AccentTransformer extends Transformer {
-  MARKS = Array.from({ length: 0x3_6f - 0x3_00 + 1 }, (_, i) =>
-    String.fromCodePoint(0x3_00 + i),
-  );
+  MARKS = combiningMarks;
 
   /**
    * @param {number} min

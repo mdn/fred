@@ -26,7 +26,7 @@ export function mdnUrl2Breadcrumb(url, locale) {
 
   if (parents.length > 1) {
     // Remove current item.
-    parents.splice(-1, 1);
+    parents.pop();
   }
 
   return [...prefix, ...parents].join(" / ");
