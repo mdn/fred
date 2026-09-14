@@ -39,7 +39,7 @@ export class MDNPlacementHpMain extends PlacementMixin(LitElement) {
       [
         ["--hp-main-background", backgroundColor],
         ["--hp-main-color", textColor],
-      ].filter(([_, v]) => Boolean(v)),
+      ].filter(([_, v]) => v),
     );
     const type = "hp-main";
 

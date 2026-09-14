@@ -111,7 +111,7 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
           ctaBackgroundColorDark || ctaBackgroundColor,
         ],
         ["--place-top-cta-color-dark", ctaTextColorDark || ctaBackgroundColor],
-      ].filter(([_, v]) => Boolean(v)),
+      ].filter(([_, v]) => v),
     );
     const type = "top-banner";
 
