@@ -88,7 +88,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
       group.push(/** @type {import("@bcd").BrowserName} */ (name));
       groups.set(platform, group);
     }
-    return [...groups.entries()].sort(([a], [b]) => {
+    return [...groups].sort(([a], [b]) => {
       const indexA = PLATFORM_ORDER.indexOf(a);
       const indexB = PLATFORM_ORDER.indexOf(b);
       return (
@@ -317,8 +317,8 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
       ...BROWSER_ROWS.map((group) =>
         browsers.filter((browser) => group.includes(browser)),
       ),
-      browsers.filter(
-        (browser) => !BROWSER_ROWS.some((group) => group.includes(browser)),
+      browsers.filter((browser) =>
+        BROWSER_ROWS.every((group) => !group.includes(browser)),
       ),
     ].filter((row) => row.length > 0);
     return html`<div class="platform">
