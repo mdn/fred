@@ -32,13 +32,24 @@ await yargs(hideBin(process.argv))
       process.exitCode = 1;
     }
   })
-  .command("unit", "run unit tests", {}, () => {
-    try {
-      execSync(`node --test "**/*.test.js"`, { stdio: "inherit" });
-    } catch {
-      process.exitCode = 1;
-    }
-  })
+  .command(
+    "unit",
+    "run unit tests",
+    (yargs) =>
+      yargs.option("coverage", {
+        describe: "report test coverage with c8",
+        type: "boolean",
+        default: false,
+      }),
+    (argv) => {
+      const prefix = argv.coverage ? "npx c8 " : "";
+      try {
+        execSync(`${prefix}node --test "**/*.test.js"`, { stdio: "inherit" });
+      } catch {
+        process.exitCode = 1;
+      }
+    },
+  )
   .command(
     "e2e",
     "run e2e tests",

@@ -1,0 +1,16 @@
+{
+  "all": true,
+  "extension": [".js"],
+  "exclude": [
+    "*.config.js",
+    "**/coverage/**",
+    "**/node_modules/**",
+    "dist/**",
+    "legacy/**",
+    "out/**",
+    "scripts/**",
+    "test/**",
+    "types/**",
+    "vendor/**"
+  ]
+}
