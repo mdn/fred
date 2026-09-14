@@ -237,8 +237,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         title=${this.l10n(
           "compat-link-report-issue-title",
         )`Report an issue with this compatibility data`}
-      >
-        ${this.l10n(
+        >${this.l10n(
           "compat-link-report-issue",
         )`Report problems with this compatibility data`}</a
       >${
@@ -255,9 +254,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
                     filename: source_file,
                   },
                 })}
-              >
-                ${this.l10n("compat-link-source")`View data on GitHub`}
-              </a>`
+                >${this.l10n("compat-link-source")`View data on GitHub`}</a
+              >`
           : undefined
       }
     </div>`;

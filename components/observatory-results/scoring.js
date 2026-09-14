@@ -51,9 +51,8 @@ export function Scoring({ result }) {
             target="_blank"
             rel="noreferrer"
             class=${test.link.startsWith("/") ? "" : "external"}
+            >${test.title}</a
           >
-            ${test.title}
-          </a>
         </td>
         ${
           test.pass === null
