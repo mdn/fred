@@ -147,9 +147,7 @@ export async function startServer() {
 
   app.use("/", express.static(FRED_BUILD_ROOT));
 
-  // Anything under /static/* not found on disk (e.g. before the dev compiler
-  // finishes, or a stale hashed chunk name) shouldn't fall through to the
-  // rari proxy below, which logs "invalid locale: static" errors for it.
+  // Don't fall through to rari, express.static above should've served it:
   app.use("/static/*_", (_req, res) => {
     res.writeHead(404).end();
   });
