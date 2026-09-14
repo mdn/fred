@@ -154,9 +154,8 @@ export class Pagination extends ServerComponent {
                     args: { page: pageNumber },
                   })
             }
+            >${pageNumber}</a
           >
-            ${pageNumber}
-          </a>
         </li>
       `;
     });

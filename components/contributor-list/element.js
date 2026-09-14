@@ -96,15 +96,15 @@ export class MDNContributorList extends LitElement {
               ?.split("/")
               .slice(-1)}`;
             return html`<li>
-              <a href=${github} target="_blank" rel="nofollow noreferrer">
-                <img
+              <a href=${github} target="_blank" rel="nofollow noreferrer"
+                ><img
                   src="${imgSrc}?size=80"
                   srcset="${imgSrc}?size=160 2x"
                   loading="lazy"
                   referrerpolicy="no-referrer"
                 />
-                ${name}
-              </a>
+                ${name}</a
+              >
               <span class="org">${org}</span>
             </li>`;
           })}

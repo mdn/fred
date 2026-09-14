@@ -47,9 +47,8 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
             target="_blank"
             rel="noreferrer"
             data-glean-id="banner_scrimba_click"
+            >Scrimba</a
           >
-            Scrimba
-          </a>
         </p>
       </div>
     `;
@@ -136,9 +135,8 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
                     aria-hidden=${!alt}
                     alt=${alt || ""}
                     height="90"
-                  />
-                </div>
-              </a>
+                  /></div
+              ></a>
             </div>
             <mdn-placement-note></mdn-placement-note>
             <mdn-placement-no></mdn-placement-no>

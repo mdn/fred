@@ -81,9 +81,9 @@ export class MDNObservatoryHeaderLink extends LitElement {
     if (this._headerExists) {
       const headerPath = `/en-US/docs/Web/HTTP/Reference/Headers/${encodeURIComponent(displayHeaderName)}`;
       return html`
-        <a href=${headerPath} target="_blank" rel="noreferrer">
-          ${displayHeaderName}
-        </a>
+        <a href=${headerPath} target="_blank" rel="noreferrer"
+          >${displayHeaderName}</a
+        >
       `;
     }
 

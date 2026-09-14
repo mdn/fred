@@ -401,9 +401,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           href=${href}
           class="bc-table-row-header"
           data-glean-id=${`bcd: link -> ${href}`}
-        >
-          ${titleContent}
-        </a>`;
+          >${titleContent}</a
+        >`;
       } else {
         titleNode = html`<div class="bc-table-row-header">
           ${titleContent}

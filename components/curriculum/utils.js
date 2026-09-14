@@ -311,8 +311,8 @@ export function renderModulesList(context, modules) {
               module.topic ? `topic-${topic2css(module.topic)}` : ""
             }"
           >
-            <a href=${module.url}>
-              <header>
+            <a href=${module.url}
+              ><header>
                 ${
                   module.topic
                     ? renderTopicIcon(context, module.topic)
@@ -323,8 +323,8 @@ export function renderModulesList(context, modules) {
               <section>
                 <p>${module.summary}</p>
                 <p>${module.topic}</p>
-              </section>
-            </a>
+              </section></a
+            >
           </li>
         `,
       )}

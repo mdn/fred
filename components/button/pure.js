@@ -62,9 +62,8 @@ export default function Button({
           data-variant=${ifDefined(variant)}
           data-action=${ifDefined(action)}
           part="button"
+          >${inner}</a
         >
-          ${inner}
-        </a>
       `
     : html`
         <button

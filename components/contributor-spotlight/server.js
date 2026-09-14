@@ -85,9 +85,8 @@ export class ContributorSpotlight extends ServerComponent {
               <a
                 class="username"
                 href="https://github.com/${hyData.usernames.github}"
+                >@${hyData.usernames.github}</a
               >
-                @${hyData.usernames.github}
-              </a>
             </section>
 
             ${

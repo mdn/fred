@@ -56,15 +56,13 @@ export class MDNPlacementBottom extends PlacementMixin(LitElement) {
           href=${this.clickLink(click, version)}
           target="_blank"
           rel="sponsored"
-        >
-          <img
+          ><img
             src=${this.imgLink(image)}
             aria-hidden=${!alt}
             alt=${alt || ""}
             width="728"
             height="90"
-          />
-        </a>
+        /></a>
         <mdn-placement-note></mdn-placement-note>
       </section>
     </div>`;

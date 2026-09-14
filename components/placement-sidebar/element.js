@@ -89,8 +89,7 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
                 alt=${alt || ""}
                 width="160px"
                 height="600px"
-              />
-            </a>
+            /></a>
           </div>
           <mdn-placement-no></mdn-placement-no>
           <mdn-placement-note></mdn-placement-note>
@@ -121,8 +120,8 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
                 <strong class="placement-heading">${heading}</strong>
                 <span class="placement-copy">${copy}</span>
                 <span class="placement-cta external">${cta}</span>
-              </div>
-            </a>
+              </div></a
+            >
             <mdn-placement-note></mdn-placement-note>
           </div>
           <mdn-placement-no></mdn-placement-no>
