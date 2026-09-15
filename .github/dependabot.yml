@@ -4,6 +4,16 @@ updates:
     directory: /
     schedule:
       interval: daily
+    ignore:
+      # matches .nvmrc
+      - dependency-name: "@types/node"
+        versions: [">=25"]
+      # https://github.com/mdn/fred/issues/1704
+      - dependency-name: "typescript"
+        versions: [">=7"]
+      # need to fix lint breakage before updating
+      - dependency-name: "eslint-plugin-unicorn"
+        versions: [">65.0.1"]
     cooldown:
       exclude:
         - "@mdn/*"

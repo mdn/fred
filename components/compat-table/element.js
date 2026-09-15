@@ -711,8 +711,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
     if (
       item.version_removed &&
-      !asList(support).some(
-        (otherItem) => otherItem.version_added === item.version_removed,
+      asList(support).every(
+        (otherItem) => otherItem.version_added !== item.version_removed,
       )
     ) {
       supportNotes.push({

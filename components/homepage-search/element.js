@@ -9,7 +9,7 @@ export class MDNHomepageSearch extends L10nMixin(LitElement) {
   static styles = styles;
 
   _showModal() {
-    const search = document.querySelector("#search");
+    const search = document.querySelector("#mdn-search");
     if (search instanceof MDNSearchModal) {
       search.showModal();
     } else {

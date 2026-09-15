@@ -89,7 +89,7 @@ export class TranslationBanner extends ServerComponent {
     const { locale } = context;
     if (
       locale === "en-US" ||
-      !context.doc.other_translations.some(({ locale }) => locale === "en-US")
+      context.doc.other_translations.every(({ locale }) => locale !== "en-US")
     ) {
       return nothing;
     }

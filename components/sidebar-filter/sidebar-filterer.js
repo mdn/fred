@@ -247,7 +247,7 @@ export class SidebarFilterer {
           ranges.set(index, index + needle.length);
         }
       }
-      const sortedRanges = [...ranges.entries()].sort(
+      const sortedRanges = [...ranges].sort(
         ([x1, y1], [x2, y2]) => x1 - x2 || y1 - y2,
       );
 
