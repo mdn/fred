@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.9.2](https://github.com/mdn/fred/compare/v2.9.1...v2.9.2) (2026-09-15)
+
+
+### Bug Fixes
+
+* **playground:** handle malformed HTML + warn when JS cannot run ([#1705](https://github.com/mdn/fred/issues/1705)) ([f1e6af2](https://github.com/mdn/fred/commit/f1e6af23016734371bc0562de32ca8b3f7883933))
+* **search:** rename modal ID to `mdn-search` ([#1892](https://github.com/mdn/fred/issues/1892)) ([1bd8b8a](https://github.com/mdn/fred/commit/1bd8b8ade2b798f89eca9995d71a261178a06e24))
+* **server:** 404 unmatched `/static/*` before rari proxy ([#1888](https://github.com/mdn/fred/issues/1888)) ([add0ef0](https://github.com/mdn/fred/commit/add0ef06c1370fae515a97570a2d5712f7ce0dc1))
+
+
+### Miscellaneous
+
+* **deps:** bump @mozilla/glean from 5.0.8 to 5.0.10 in the npm-prod group ([#1905](https://github.com/mdn/fred/issues/1905)) ([1cd74ca](https://github.com/mdn/fred/commit/1cd74ca343e2fdd0b1e3e89be9757aebc51db3be))
+
 ## [2.9.1](https://github.com/mdn/fred/compare/v2.9.0...v2.9.1) (2026-09-11)
 
 
