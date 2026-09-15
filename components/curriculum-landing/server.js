@@ -121,8 +121,7 @@ export class CurriculumLanding extends ServerComponent {
                 target="_blank"
                 rel="noreferrer"
                 >Frontend Developer Career Path</a
-              >
-              .
+              >.
             </p>
           </section>
         </div>
