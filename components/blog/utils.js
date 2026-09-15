@@ -17,9 +17,8 @@ export function MaybeLink(_context, { className = "", link, content }) {
           class="external ${className}"
           target="_blank"
           rel="noreferrer"
-        >
-          ${content}
-        </a>`
+          >${content}</a
+        >`
       : html`<a href=${link} class=${className}> ${content} </a>`
     : html`<span class=${className}>${content}</span>`;
 }

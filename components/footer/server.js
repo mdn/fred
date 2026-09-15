@@ -208,9 +208,8 @@ export class Footer extends ServerComponent {
                             target=${link.external ? "_blank" : undefined}
                             rel=${link.external ? "noopener" : undefined}
                             data-glean-id=${`footer: link -> ${link.href}`}
+                            >${link.text}</a
                           >
-                            ${link.text}
-                          </a>
                         </li>
                       `,
                     )}
