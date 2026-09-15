@@ -356,20 +356,19 @@ export class BaselineIndicator extends ServerComponent {
         }
         <ul>
           <li>
-            <a href=${bcdLink} data-glean-id="baseline_link_bcd_table">
-              ${context.l10n(
+            <a href=${bcdLink} data-glean-id="baseline_link_bcd_table"
+              >${context.l10n(
                 "baseline-indicator-see-full-compatibility",
-              )`See full compatibility`}
-            </a>
+              )`See full compatibility`}</a
+            >
           </li>
           <li>
             <a
               href=${`/${context.locale}/docs/Glossary/Baseline/Compatibility`}
               data-glean-id="baseline_link_learn_more"
               target="_blank"
+              >${context.l10n("baseline-indicator-learn-more")`Learn more`}</a
             >
-              ${context.l10n("baseline-indicator-learn-more")`Learn more`}
-            </a>
           </li>
         </ul>
       </div>

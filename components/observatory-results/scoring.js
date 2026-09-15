@@ -97,9 +97,9 @@ export function Scoring({ result }) {
         ? html` <section class="footnote" id="bonus-points-explanation">
             <sup>*</sup> Normally awards bonus points, however, in this case
             they are not included in the overall score (
-            <a href="/en-US/observatory/docs/tests_and_scoring" target="_blank">
-              find out why
-            </a>
+            <a href="/en-US/observatory/docs/tests_and_scoring" target="_blank"
+              >find out why</a
+            >
             ).
           </section>`
         : null

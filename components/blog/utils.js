@@ -19,7 +19,7 @@ export function MaybeLink(_context, { className = "", link, content }) {
           rel="noreferrer"
           >${content}</a
         >`
-      : html`<a href=${link} class=${className}> ${content} </a>`
+      : html`<a href=${link} class=${className}>${content}</a>`
     : html`<span class=${className}>${content}</span>`;
 }
 
@@ -124,14 +124,13 @@ export function PrevNextLinks(context, { blogMeta }) {
         <a
           href="/en-US/blog/${blogMeta.links.previous.slug}/"
           class="blog-post-previous-next__previous"
-        >
-          <article>
+          ><article>
             <h2>
               <strong>${context.l10n("blog-previous")`Previous post`}</strong>
               ${blogMeta.links.previous.title}
             </h2>
-          </article>
-        </a>
+          </article></a
+        >
       `
     : nothing;
   const next = blogMeta.links.next
@@ -139,14 +138,13 @@ export function PrevNextLinks(context, { blogMeta }) {
         <a
           href="/en-US/blog/${blogMeta.links.next.slug}/"
           class="blog-post-previous-next__next"
-        >
-          <article>
+          ><article>
             <h2>
               <strong>${context.l10n("blog-next")`Next post`}</strong>
               ${blogMeta.links.next.title}
             </h2>
-          </article>
-        </a>
+          </article></a
+        >
       `
     : nothing;
   return html`<div class="blog-post-previous-next">${previous} ${next}</div>`;

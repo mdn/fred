@@ -88,12 +88,11 @@ export class GenericCommunity extends ServerComponent {
                           )}
                           target="_blank"
                           rel="noreferrer"
-                        >
-                          ${issue.repository_url.replace(
+                          >${issue.repository_url.replace(
                             "https://api.github.com/repos/",
                             "",
-                          )}
-                        </a>
+                          )}</a
+                        >
                       </td>
                     </tr>
                   `,

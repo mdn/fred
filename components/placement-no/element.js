@@ -54,9 +54,8 @@ class MDNPlacementNo extends L10nMixin(LitElement) {
                     ? "/en-US/plus/settings?ref=nope"
                     : "/en-US/plus?ref=nope"
                 }
-              >
-                ${this.l10n("placement-no")}
-              </a>`
+                >${this.l10n("placement-no")}</a
+              >`
             : nothing;
         },
     });

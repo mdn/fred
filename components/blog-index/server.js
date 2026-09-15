@@ -23,15 +23,14 @@ export function BlogIndexImageFigure(
 ) {
   const src = `/en-US/blog/${slug}/${image.file}`;
   return html`<figure class="blog-post-preview__figure">
-    <a href="/en-US/blog/${slug}/">
-      <img
+    <a href="/en-US/blog/${slug}/"
+      ><img
         alt=${image.alt || ""}
         src=${src}
         width=${width}
         height=${height}
         loading=${lazyLoad ? "lazy" : "eager"}
-      />
-    </a>
+    /></a>
   </figure>`;
 }
 

@@ -154,9 +154,9 @@ export function headerLink(header) {
   )}`;
 
   return html`
-    <a href=${headerPath} target="_blank" rel="noreferrer">
-      ${displayHeaderName}
-    </a>
+    <a href=${headerPath} target="_blank" rel="noreferrer"
+      >${displayHeaderName}</a
+    >
   `;
 }
 

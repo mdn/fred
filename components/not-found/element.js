@@ -44,11 +44,11 @@ export class MDNNotFound extends L10nMixin(LitElement) {
                 })}
               </p>
               <p>
-                <a href=${doc.mdn_url}>
-                  <b>${doc.title}</b>
+                <a href=${doc.mdn_url}
+                  ><b>${doc.title}</b>
                   <br />
-                  <small>${doc.mdn_url}</small>
-                </a>
+                  <small>${doc.mdn_url}</small></a
+                >
               </p>
             </div>`;
           } else {
@@ -64,11 +64,9 @@ export class MDNNotFound extends L10nMixin(LitElement) {
               ${normalizedLocationParts.map(
                 (part) =>
                   html`<li>
-                    <a
-                      href=${`/${locale}/search?q=${encodeURIComponent(part)}`}
+                    <a href=${`/${locale}/search?q=${encodeURIComponent(part)}`}
+                      >${part}</a
                     >
-                      ${part}
-                    </a>
                   </li>`,
               )}
             </ul>`;

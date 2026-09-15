@@ -355,8 +355,7 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                           <a
                             href=${result.mdn_url}
                             data-glean-id=${`site-search: results[${1 + index + (results.metadata.page - 1) * results.metadata.size}] -> ${this._query} -> ${result.mdn_url}`}
-                          >
-                            ${
+                            >${
                               result.highlight.title &&
                               result.highlight.title.length > 0
                                 ? unsafeHTML(result.highlight.title[0])
@@ -370,8 +369,8 @@ export class MDNSiteSearch extends L10nMixin(LitElement) {
                                     class="site-search-results__locale-indicator"
                                     >${readableLocaleCode(result.locale)}</sup
                                   >`
-                            }
-                          </a>
+                            }</a
+                          >
                         </h2>
                         <p class="site-search-results__description">
                           ${

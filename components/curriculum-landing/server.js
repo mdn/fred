@@ -213,9 +213,8 @@ export class CurriculumLanding extends ServerComponent {
                       target="_self"
                       class="button lets-begin"
                       data-variant="primary"
-                    >
-                      Let's begin
-                    </a> `
+                      >Let's begin</a
+                    > `
                 : nothing;
 
             return html`

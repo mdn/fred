@@ -51,8 +51,8 @@ export function CSP({ result }) {
                 <p>
                   <code>Content-Security-Policy-Report-Only</code> header
                   detected. Implement an enforced policy; see
-                  <a href="/en-US/docs/Web/HTTP/CSP" target="_blank">
-                    MDN's Content Security Policy (CSP) documentation </a
+                  <a href="/en-US/docs/Web/HTTP/CSP" target="_blank"
+                    >MDN's Content Security Policy (CSP) documentation</a
                   >.
                 </p>
               </td>

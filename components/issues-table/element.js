@@ -85,9 +85,9 @@ export class MDNIssuesTable extends L10nMixin(LitElement) {
               <tr>
                 <td>
                   <div>
-                    <a href=${issue.html_url} target="_blank" rel="noreferrer">
-                      ${issue.title}
-                    </a>
+                    <a href=${issue.html_url} target="_blank" rel="noreferrer"
+                      >${issue.title}</a
+                    >
                     ${issue.labels.map((label) => {
                       const labelName =
                         typeof label === "object" && label !== null
@@ -107,12 +107,11 @@ export class MDNIssuesTable extends L10nMixin(LitElement) {
                     )}
                     target="_blank"
                     rel="noreferrer"
-                  >
-                    ${issue.repository_url.replace(
+                    >${issue.repository_url.replace(
                       "https://api.github.com/repos/",
                       "",
-                    )}
-                  </a>
+                    )}</a
+                  >
                 </td>
               </tr>
             `,
