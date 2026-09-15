@@ -7,6 +7,9 @@ import { L10nMixin } from "../../l10n/mixin.js";
 import { gleanClick } from "../../utils/glean.js";
 import { ViewedController } from "../viewed-controller/viewed-controller.js";
 
+import "../compat-table-settings/element.js";
+
+import { gatherPlatformsAndBrowsers } from "./browsers.js";
 import { DEFAULT_LOCALE, ISSUE_METADATA_TEMPLATE } from "./constants.js";
 import styles from "./element.css?lit";
 import {
@@ -15,9 +18,10 @@ import {
   labelFromString,
   versionLabelFromSupport,
 } from "./feature-row.js";
+import { getBrowserVisibility, onBrowserVisibilityChange } from "./settings.js";
 import {
-  SHOW_BROWSERS,
   asList,
+  browserToIconName,
   bugURLToString,
   getCurrentSupport,
   getFirst,
@@ -47,22 +51,6 @@ const ICON_NAMES = [
   "more",
 ];
 
-/**
- * @param {import("@bcd").BrowserName} browser
- * @returns {string}
- */
-function browserToIconName(browser) {
-  if (browser.startsWith("firefox")) {
-    return "firefox";
-  } else if (browser === "webview_android") {
-    return "webview";
-  } else if (browser === "webview_ios") {
-    return "safari";
-  } else {
-    return browser.split("_", 1)[0] ?? "";
-  }
-}
-
 export class MDNCompatTable extends L10nMixin(LitElement) {
   static get properties() {
     return {
@@ -71,8 +59,8 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       data: {},
       browserInfo: { attribute: "browserinfo" },
       _pathname: { state: true },
-      _platforms: { state: true },
-      _browsers: { state: true },
+      _visibility: { state: true },
+      _previewVisibility: { state: true },
       _showTimelineId: { state: true },
     };
   }
@@ -91,14 +79,37 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     this.browserInfo = {};
     this.locale = "";
     this._pathname = "";
+    /**
+     * Saved browser visibility. An empty object follows defaults.
+     * @type {import("./settings.js").BrowserVisibility}
+     */
+    this._visibility = {};
+    /**
+     * Unsaved preview while the settings dialog is open.
+     * @type {import("./settings.js").BrowserVisibility | undefined}
+     */
+    this._previewVisibility = undefined;
     /** @type {string[]} */
     this._platforms = [];
     /** @type {import("@bcd").BrowserName[]} */
     this._browsers = [];
+    /**
+     * Exclusions that override user choices.
+     * @type {import("@compat").HiddenBrowsers}
+     */
+    this._hiddenBrowsers = {};
+    /** @type {(() => void) | undefined} */
+    this._unsubscribeBrowserSettings = undefined;
     /** @type {string|undefined} */
     this._showTimelineId = undefined;
     new ViewedController(this, this._ref, () => {
       gleanClick(`bcd: view -> ${this.query}`);
+      // Record displayed browser columns in table order.
+      const browsers =
+        Object.keys(this._visibility).length > 0
+          ? this._browsers.join(",")
+          : "default";
+      gleanClick(`bcd: browsers -> ${browsers}`);
     });
   }
 
@@ -145,10 +156,6 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         const browserSupport = feature.compat.support[browser] ?? {
           version_added: false,
         };
-
-        if (!SHOW_BROWSERS.includes(browser)) {
-          continue;
-        }
 
         const firstSupportItem = getFirst(browserSupport);
         if (firstSupportItem && hasNoteworthyNotes(firstSupportItem)) {
@@ -202,11 +209,47 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   connectedCallback() {
     super.connectedCallback();
     this._pathname = globalThis.location.pathname;
-    [this._platforms, this._browsers] = gatherPlatformsAndBrowsers(
-      this._category,
-      this.data,
-      this.browserInfo,
+    this._visibility = getBrowserVisibility();
+    this._unsubscribeBrowserSettings = onBrowserVisibilityChange(
+      (visibility) => {
+        this._visibility = visibility;
+      },
     );
+  }
+
+  /**
+   * Previews this table only; `null` restores saved settings.
+   * @param {CustomEvent<import("./settings.js").BrowserVisibility | null>} event
+   */
+  _onBrowsersPreview(event) {
+    this._previewVisibility = event.detail ?? undefined;
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._unsubscribeBrowserSettings?.();
+    this._unsubscribeBrowserSettings = undefined;
+  }
+
+  /**
+   * @param {import("lit").PropertyValues<this>} changedProperties
+   */
+  willUpdate(changedProperties) {
+    if (
+      changedProperties.has("query") ||
+      changedProperties.has("data") ||
+      changedProperties.has("browserInfo") ||
+      changedProperties.has("_visibility") ||
+      changedProperties.has("_previewVisibility")
+    ) {
+      [this._platforms, this._browsers, this._hiddenBrowsers] =
+        gatherPlatformsAndBrowsers(
+          this._category,
+          this.data,
+          this.browserInfo,
+          this._previewVisibility ?? this._visibility,
+        );
+    }
   }
 
   get _issueUrl() {
@@ -266,13 +309,29 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   _renderTable() {
     return html`<figure ${ref(this._ref)} class="table-container">
       <figure class="table-container-inner">
-        ${this._renderIssueLink()}
-        <table
-          class="bc-table bc-table-web"
-          style="--compat-browser-count: ${Object.keys(this._browsers).length}"
-        >
-          ${this._renderTableHeader()} ${this._renderTableBody()}
-        </table>
+        <div class="bc-toolbar">
+          ${this._renderIssueLink()}
+          <mdn-compat-table-settings
+            .browserInfo=${this.browserInfo}
+            .visibility=${this._visibility}
+            .hiddenBrowsers=${this._hiddenBrowsers}
+            @mdn-compat-table-settings-preview=${this._onBrowsersPreview}
+          ></mdn-compat-table-settings>
+        </div>
+        ${
+          this._browsers.length > 0
+            ? html`<table
+                class="bc-table bc-table-web"
+                style="--compat-table-browser-count: ${this._browsers.length}"
+              >
+                ${this._renderTableHeader()} ${this._renderTableBody()}
+              </table>`
+            : html`<p class="bc-no-browsers">
+                ${this.l10n(
+                  "compat-no-browsers",
+                )`No browsers selected. Use "Settings" to choose which browsers to show.`}
+              </p>`
+        }
       </figure>
     </figure>`;
   }
@@ -331,7 +390,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
             ${this.browserInfo[browser]?.name}
           </div>
           <div
-            class=${`bc-head-icon-symbol icon icon-${browserToIconName(
+            class=${`bc-head-icon-symbol icon icon-browser icon-${browserToIconName(
               browser,
             )}`}
           ></div>
@@ -1048,74 +1107,11 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
   }
 
   render() {
-    return html` ${this._renderTable()} ${this._renderTableLegend()} `;
+    return html`
+      ${this._renderTable()}
+      ${this._browsers.length > 0 ? this._renderTableLegend() : nothing}
+    `;
   }
 }
 
 customElements.define("mdn-compat-table", MDNCompatTable);
-
-/**
- * Return a list of platforms and browsers that are relevant for this category &
- * data.
- *
- * If the category is "webextensions", only those are shown. In all other cases
- * at least the entirety of the "desktop" and "mobile" platforms are shown. If
- * the category is JavaScript, the entirety of the "server" category is also
- * shown. In all other categories, if compat data has info about Deno / Node.js
- * those are also shown. Deno is always shown if Node.js is shown.
- * @param {string} category
- * @param {import("@bcd").Identifier} data
- * @param {Partial<import("@bcd").Browsers>} browserInfo
- * @returns {[string[], import("@bcd").BrowserName[]]}
- */
-export function gatherPlatformsAndBrowsers(category, data, browserInfo) {
-  const runtimes = Object.entries(browserInfo)
-    .filter(([, { type }]) => type == "server")
-    .map(([key]) => key);
-
-  let platforms = ["desktop", "mobile"];
-  if (
-    category === "javascript" ||
-    runtimes.some(
-      (runtime) => data.__compat && runtime in data.__compat.support,
-    )
-  ) {
-    platforms.push("server");
-  }
-
-  /** @type {import("@bcd").BrowserName[]} */
-  let browsers = [];
-
-  // Add browsers in platform order to align table cells
-  for (const platform of platforms) {
-    const platformBrowsers = /** @type {import("@bcd").BrowserName[]} */ (
-      Object.keys(browserInfo)
-    );
-    browsers.push(
-      ...platformBrowsers.filter(
-        (browser) =>
-          browser in browserInfo && browserInfo[browser]?.type === platform,
-      ),
-    );
-  }
-
-  // Filter WebExtension browsers in corresponding tables.
-  if (category === "webextensions") {
-    browsers = browsers.filter(
-      (browser) => browserInfo[browser]?.accepts_webextensions,
-    );
-  }
-
-  // If there is no data for a runtime in a category outside "javascript", hide it.
-  if (category !== "javascript") {
-    for (const runtime of runtimes) {
-      if (data.__compat && !(runtime in data.__compat.support)) {
-        browsers = browsers.filter((browser) => browser !== runtime);
-      }
-    }
-  }
-
-  browsers = browsers.filter((browser) => SHOW_BROWSERS.includes(browser));
-
-  return [platforms, [...browsers]];
-}
