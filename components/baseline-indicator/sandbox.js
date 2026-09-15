@@ -17,18 +17,9 @@ const SUPPORT_FULL = {
 };
 
 /** @type {import("@rari").Support} */
-const SUPPORT_NO_WEBKIT = {
-  chrome: "111",
-  chrome_android: "111",
-  edge: "111",
+const SUPPORT_ONLY_FIREFOX = {
   firefox: "113",
   firefox_android: "113",
-};
-
-/** @type {import("@rari").Support} */
-const SUPPORT_WEBKIT_ONLY = {
-  safari: "15.4",
-  safari_ios: "15.4",
 };
 
 /** @type {import("@rari").Alternative[]} */
@@ -69,7 +60,7 @@ function feature(overrides) {
 function notAvailable(overrides) {
   return {
     baseline: false,
-    support: SUPPORT_NO_WEBKIT,
+    support: SUPPORT_ONLY_FIREFOX,
     feature: feature(),
     ...overrides,
   };
@@ -99,6 +90,7 @@ function discouragedFeature(overrides) {
 
 /**
  * @type {{
+ *   id: string;
  *   name: string;
  *   status: import("@rari").BaselineStatus;
  *   baseline?: import("@rari").Baseline;
@@ -106,36 +98,43 @@ function discouragedFeature(overrides) {
  */
 const CASES = [
   {
+    id: "high",
     name: "high",
     status: "high",
     baseline: available("high"),
   },
   {
+    id: "high-asterisk",
     name: "high, asterisk",
     status: "high",
     baseline: available("high", { asterisk: true }),
   },
   {
+    id: "low",
     name: "low",
     status: "low",
     baseline: available("low"),
   },
   {
+    id: "low-asterisk",
     name: "low, asterisk",
     status: "low",
     baseline: available("low", { asterisk: true }),
   },
   {
+    id: "limited",
     name: "limited",
     status: "limited",
     baseline: notAvailable(),
   },
   {
+    id: "limited-asterisk",
     name: "limited, asterisk",
     status: "limited",
-    baseline: notAvailable({ support: SUPPORT_WEBKIT_ONLY, asterisk: true }),
+    baseline: notAvailable({ asterisk: true }),
   },
   {
+    id: "limited-developer-signals",
     name: "limited, developer signals",
     status: "limited",
     baseline: notAvailable({
@@ -145,11 +144,22 @@ const CASES = [
     }),
   },
   {
+    id: "discouraged",
     name: "discouraged",
     status: "discouraged",
     baseline: notAvailable({ feature: discouragedFeature() }),
   },
   {
+    id: "discouraged-asterisk",
+    name: "discouraged, asterisk ignored",
+    status: "discouraged",
+    baseline: notAvailable({
+      asterisk: true,
+      feature: discouragedFeature(),
+    }),
+  },
+  {
+    id: "discouraged-one-alternative",
     name: "discouraged, one alternative",
     status: "discouraged",
     baseline: notAvailable({
@@ -158,6 +168,7 @@ const CASES = [
     }),
   },
   {
+    id: "discouraged-several-alternatives",
     name: "discouraged, several alternatives",
     status: "discouraged",
     baseline: notAvailable({
@@ -166,15 +177,18 @@ const CASES = [
     }),
   },
   {
+    id: "discouraged-no-compatibility-data",
     name: "discouraged, no compatibility data",
     status: "discouraged",
   },
   {
+    id: "removing",
     name: "removing",
     status: "removing",
     baseline: notAvailable({ feature: discouragedFeature() }),
   },
   {
+    id: "removing-one-alternative",
     name: "removing, one alternative",
     status: "removing",
     baseline: notAvailable({
@@ -183,6 +197,7 @@ const CASES = [
     }),
   },
   {
+    id: "removing-several-alternatives",
     name: "removing, several alternatives",
     status: "removing",
     baseline: notAvailable({
@@ -212,8 +227,10 @@ export class BaselineIndicatorSandbox extends SandboxComponent {
               baseline: testCase.baseline,
             },
           });
-        return html`<h2>${testCase.name}</h2>
-          ${BaselineIndicator.render(docContext)}`;
+        return html`<section id=${testCase.id}>
+          <h2>${testCase.name}</h2>
+          ${BaselineIndicator.render(docContext)}
+        </section>`;
       })}
     `;
   }
