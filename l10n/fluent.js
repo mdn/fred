@@ -118,17 +118,19 @@ export class Fluent {
         );
     });
 
-    // Add hook to process data-l10n-name attributes and enforce per-tag attribute rules
+    // Configured attributes must pass DOMPurify's validation too.
     DOMPurify.addHook(
-      "afterSanitizeAttributes",
+      "beforeSanitizeAttributes",
       /** @param {Element} element */ (element) => {
+        if (!element.tagName) {
+          return;
+        }
         const tagName = element.tagName.toLowerCase();
         const name =
           "dataset" in element
             ? /** @type {HTMLElement} */ (element).dataset.l10nName
             : undefined;
 
-        // Apply attributes from elements config based on data-l10n-name
         const elementConfig =
           name &&
           Object.hasOwn(elements, name) &&
@@ -143,7 +145,6 @@ export class Fluent {
           }
         }
 
-        // Enforce per-tag attribute allowlist (remove disallowed attributes)
         const allowedForTag = allowedAttributesPerTag[tagName] || [];
         const attrsToRemove = [];
         for (const attr of element.attributes) {
@@ -158,7 +159,6 @@ export class Fluent {
           element.removeAttribute(attr);
         }
 
-        // Track if HTML tags are used (to decide string vs unsafeHTML return)
         if (
           ALLOWED_TAGS.has(tagName) ||
           (elementConfig && elementConfig.tag === tagName)
@@ -172,11 +172,12 @@ export class Fluent {
       const sanitized = DOMPurify.sanitize(message, {
         ALLOWED_TAGS: allowedTags,
         ALLOWED_ATTR: allAllowedAttributes,
-        ALLOWED_URI_REGEXP: /^(?:https?|mailto):/i,
+        // Allow approved schemes and relative URLs with no scheme before /, ?, or #.
+        ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto):|[^:/?#]*(?:[/?#]|$))/i,
       });
       return safe ? sanitized : unsafeHTML(sanitized);
     } finally {
-      DOMPurify.removeHook("afterSanitizeAttributes");
+      DOMPurify.removeHook("beforeSanitizeAttributes");
       DOMPurify.removeHook("uponSanitizeElement");
     }
   }

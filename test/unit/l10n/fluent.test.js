@@ -105,4 +105,43 @@ describe("Fluent.sanitize", () => {
       );
     });
   }
+
+  for (const { name, href, allowed } of [
+    { name: "HTTPS", href: "https://example.com", allowed: true },
+    // HTTP remains an explicitly supported link scheme.
+    // eslint-disable-next-line unicorn/prefer-https
+    { name: "HTTP", href: "http://example.com", allowed: true },
+    { name: "email", href: "mailto:hello@example.com", allowed: true },
+    { name: "root relative", href: "/en-US/docs/Web", allowed: true },
+    { name: "path relative", href: "../Web", allowed: true },
+    { name: "bare relative", href: "Web", allowed: true },
+    { name: "fragment", href: "#section", allowed: true },
+    { name: "query", href: "?q=javascript:example", allowed: true },
+    { name: "colon in path", href: "/docs/Example:Page", allowed: true },
+    { name: "protocol relative", href: "//example.com", allowed: true },
+    { name: "JavaScript", href: "javascript:alert(1)", allowed: false },
+    {
+      name: "mixed-case JavaScript",
+      href: "JaVaScRiPt:alert(1)",
+      allowed: false,
+    },
+    {
+      name: "obfuscated JavaScript",
+      href: "java\nscript:alert(1)",
+      allowed: false,
+    },
+    { name: "data", href: "data:text/html,example", allowed: false },
+    { name: "unapproved scheme", href: "ftp://example.com", allowed: false },
+  ]) {
+    it(`validates configured ${name} URLs`, () => {
+      assert.deepEqual(
+        Fluent.sanitize('<a data-l10n-name="link">Link</a>', {
+          link: { tag: "a", href },
+        }),
+        unsafeHTML(
+          `<a data-l10n-name="link"${allowed ? ` href="${href}"` : ""}>Link</a>`,
+        ),
+      );
+    });
+  }
 });
