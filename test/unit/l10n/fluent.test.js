@@ -60,4 +60,49 @@ describe("Fluent.sanitize", () => {
       unsafeHTML(input),
     );
   });
+
+  for (const { name, input, expected } of [
+    {
+      name: "matching names and tags",
+      input: '<a data-l10n-name="link">Link</a>',
+      expected: '<a data-l10n-name="link" href="https://example.com">Link</a>',
+    },
+    {
+      name: "unnamed tags",
+      input: '<a href="https://unexpected.example">Link</a>',
+      expected: "Link",
+    },
+    {
+      name: "unknown names",
+      input: '<a data-l10n-name="unknown">Link</a>',
+      expected: "Link",
+    },
+    {
+      name: "mismatched tags",
+      input: '<a data-l10n-name="code">Link</a>',
+      expected: "Link",
+    },
+    {
+      name: "unnamed tags after matching tags",
+      input: '<a data-l10n-name="link">Link</a><a>Extra</a>',
+      expected:
+        '<a data-l10n-name="link" href="https://example.com">Link</a>Extra',
+    },
+    {
+      name: "matching tags after unnamed tags",
+      input: '<a>Extra</a><a data-l10n-name="link">Link</a>',
+      expected:
+        'Extra<a data-l10n-name="link" href="https://example.com">Link</a>',
+    },
+  ]) {
+    it(`filters configured elements with ${name}`, () => {
+      assert.deepEqual(
+        Fluent.sanitize(`<strong>Text</strong>${input}`, {
+          link: { tag: "a", href: "https://example.com" },
+          code: { tag: "code" },
+        }),
+        unsafeHTML(`<strong>Text</strong>${expected}`),
+      );
+    });
+  }
 });

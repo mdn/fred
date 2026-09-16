@@ -101,6 +101,23 @@ export class Fluent {
 
     let safe = true;
 
+    DOMPurify.addHook("uponSanitizeElement", (node, data) => {
+      if (node.nodeType !== 1) {
+        return;
+      }
+      const name =
+        "dataset" in node
+          ? /** @type {HTMLElement} */ (node).dataset.l10nName
+          : undefined;
+      data.allowedTags[data.tagName] =
+        ALLOWED_TAGS.has(data.tagName) ||
+        !!(
+          name &&
+          Object.hasOwn(elements, name) &&
+          elements[name]?.tag === data.tagName
+        );
+    });
+
     // Add hook to process data-l10n-name attributes and enforce per-tag attribute rules
     DOMPurify.addHook(
       "afterSanitizeAttributes",
@@ -112,7 +129,12 @@ export class Fluent {
             : undefined;
 
         // Apply attributes from elements config based on data-l10n-name
-        const elementConfig = name ? elements[name] : undefined;
+        const elementConfig =
+          name &&
+          Object.hasOwn(elements, name) &&
+          elements[name]?.tag === tagName
+            ? elements[name]
+            : undefined;
         if (elementConfig) {
           for (const [k, v] of Object.entries(elementConfig)) {
             if (k !== "tag") {
@@ -155,6 +177,7 @@ export class Fluent {
       return safe ? sanitized : unsafeHTML(sanitized);
     } finally {
       DOMPurify.removeHook("afterSanitizeAttributes");
+      DOMPurify.removeHook("uponSanitizeElement");
     }
   }
 
