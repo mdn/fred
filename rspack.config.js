@@ -255,6 +255,10 @@ const clientAndSsrCommon = {
 const ssrConfig = merge(common, notServiceWorkerCommon, clientAndSsrCommon, {
   name: "ssr",
   target: "node22",
+  externals: {
+    // jsdom reads package-relative assets that cannot be bundled.
+    "isomorphic-dompurify": "module isomorphic-dompurify",
+  },
   async entry() {
     return {
       index: [
