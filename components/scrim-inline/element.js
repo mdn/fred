@@ -15,13 +15,15 @@ export class MDNScrimInline extends L10nMixin(LitElement) {
 
   static ssr = false;
 
-  static properties = {
-    url: { type: String },
-    img: { type: String },
-    scrimTitle: { type: String, attribute: "scrimtitle" },
-    _fullscreen: { state: true },
-    _scrimLoaded: { state: true },
-  };
+  static get properties() {
+    return {
+      url: { type: String },
+      img: { type: String },
+      scrimTitle: { type: String, attribute: "scrimtitle" },
+      _fullscreen: { state: true },
+      _scrimLoaded: { state: true },
+    };
+  }
 
   /** @type {import("lit/directives/ref.js").Ref<HTMLElement>} */
   _bodyRef = createRef();
@@ -122,43 +124,47 @@ export class MDNScrimInline extends L10nMixin(LitElement) {
             </a>
           </div>
           <div class="body" ${ref(this._bodyRef)}>
-            ${this._scrimLoaded
-              ? html`
-                  <iframe
-                    src=${this._fullUrl}
-                    title=${ifDefined(this.scrimTitle)}
-                  ></iframe>
-                `
-              : html`
-                  ${this.scrimTitle && !this.img
-                    ? html`<div class="background">
-                        <div class="background-noise">
-                          <svg width="0" height="0">
-                            <filter id="noise">
-                              <feTurbulence
-                                type="fractalNoise"
-                                baseFrequency="0.7"
-                                numOctaves="4"
-                              />
-                            </filter>
-                          </svg>
-                        </div>
-                        <h1>${this.scrimTitle}</h1>
-                      </div>`
-                    : null}
-                  <button
-                    @click=${this.#open}
-                    class="open"
-                    data-glean-id=${`curriculum: scrim engage id:${this._scrimId}`}
-                  >
-                    ${playSvg}
-                    <span class="visually-hidden">
-                      ${this.l10n(
-                        "scrim-inline-load-scrim-and-open-dialog",
-                      )`Load scrim and open dialog.`}
-                    </span>
-                  </button>
-                `}
+            ${
+              this._scrimLoaded
+                ? html`
+                    <iframe
+                      src=${this._fullUrl}
+                      title=${ifDefined(this.scrimTitle)}
+                    ></iframe>
+                  `
+                : html`
+                    ${
+                      this.scrimTitle && !this.img
+                        ? html`<div class="background">
+                            <div class="background-noise">
+                              <svg width="0" height="0">
+                                <filter id="noise">
+                                  <feTurbulence
+                                    type="fractalNoise"
+                                    baseFrequency="0.7"
+                                    numOctaves="4"
+                                  />
+                                </filter>
+                              </svg>
+                            </div>
+                            <h1>${this.scrimTitle}</h1>
+                          </div>`
+                        : null
+                    }
+                    <button
+                      @click=${this.#open}
+                      class="open"
+                      data-glean-id=${`curriculum: scrim engage id:${this._scrimId}`}
+                    >
+                      ${playSvg}
+                      <span class="visually-hidden">
+                        ${this.l10n(
+                          "scrim-inline-load-scrim-and-open-dialog",
+                        )`Load scrim and open dialog.`}
+                      </span>
+                    </button>
+                  `
+            }
           </div>
         </div>
       </dialog>

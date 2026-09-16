@@ -75,6 +75,7 @@ mdn-ix-tab-wrapper {
   grid-template-columns: max-content 1fr;
 
   gap: 0.5rem;
+
   align-content: start;
 
   height: 100%;

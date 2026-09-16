@@ -132,7 +132,7 @@ export default {
             }
 
             if (node.source.value === "lit") {
-              const htmlSpecifier = node.specifiers.find(
+              const htmlSpecifier = node.specifiers.some(
                 (spec) =>
                   spec.type === "ImportSpecifier" &&
                   spec.imported.type === "Identifier" &&

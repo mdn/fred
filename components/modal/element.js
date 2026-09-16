@@ -9,9 +9,11 @@ import styles from "./element.css?lit";
 export class MDNModal extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    modalTitle: { type: String, attribute: "modal-title" },
-  };
+  static get properties() {
+    return {
+      modalTitle: { type: String, attribute: "modal-title" },
+    };
+  }
 
   constructor() {
     super();

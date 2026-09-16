@@ -16,9 +16,11 @@ import styles from "./element.css?lit";
 export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    horizontal: { type: Boolean },
-  };
+  static get properties() {
+    return {
+      horizontal: { type: Boolean },
+    };
+  }
 
   constructor() {
     super();
@@ -63,7 +65,7 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
         ["--side-color-light", textColor],
         ["--side-background-dark", backgroundColorDark || backgroundColor],
         ["--side-color-dark", textColorDark || textColor],
-      ].filter(([_, v]) => Boolean(v)),
+      ].filter(([_, v]) => v),
     );
     const type = "side";
 

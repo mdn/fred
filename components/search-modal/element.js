@@ -1,4 +1,4 @@
-import { Task } from "@lit/task";
+import { Task, TaskStatus } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
 
 import { L10nMixin } from "../../l10n/mixin.js";
@@ -10,16 +10,20 @@ import exitIcon from "../icon/cancel.svg?lit";
 
 import styles from "./element.css?lit";
 
+import "../button/element.js";
+
 export class MDNSearchModal extends L10nMixin(LitElement) {
   static ssr = false;
   static styles = styles;
 
-  static properties = {
-    _index: { state: true },
-    _query: { state: true },
-    _selected: { state: true },
-    _shiftFocus: { state: true },
-  };
+  static get properties() {
+    return {
+      _index: { state: true },
+      _query: { state: true },
+      _selected: { state: true },
+      _shiftFocus: { state: true },
+    };
+  }
 
   constructor() {
     super();
@@ -67,6 +71,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
   _input({ inputType, target }) {
     if (target instanceof HTMLInputElement) {
       this._query = target.value;
+      this._selected = 0;
       if (!this._hasEngaged && inputType.startsWith("insert")) {
         this._hasEngaged = true;
         gleanClick(
@@ -245,6 +250,14 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     const searchUrl = this._query
       ? `/${this.locale}/search?${new URLSearchParams({ q: this._query })}`
       : null;
+    const searchComplete =
+      Boolean(this._query) && this._queryIndex.status === TaskStatus.COMPLETE;
+    const resultsStatus = searchComplete
+      ? this.l10n.raw({
+          id: "search-modal-results-status",
+          args: { results: siteSearchIndex },
+        })
+      : "";
     return html`
       <dialog
         @keydown=${this._keydown}
@@ -252,40 +265,60 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
         @toggle=${this._toggle}
         closedby="any"
       >
-        <form
-          method="get"
-          action=${`/${this.locale}/search`}
-          @submit=${this._submit}
-        >
-          <input
-            type="search"
-            name="q"
-            .value=${this._query}
-            autocomplete="off"
-            autofocus
-            @input=${this._input}
-            placeholder=${this.l10n("search-modal-search")`Search`}
-            aria-label=${this.l10n("search-modal-search")`Search`}
-          />
-        </form>
-        <mdn-button
-          class="close"
-          variant="plain"
-          icon-only
-          .icon=${exitIcon}
-          @click=${this._close}
-          >${this.l10n("search-modal-exit-search")`Exit search`}</mdn-button
-        >
+        <div class="header">
+          <form
+            method="get"
+            action=${`/${this.locale}/search`}
+            @submit=${this._submit}
+          >
+            <input
+              type="search"
+              name="q"
+              .value=${this._query}
+              autocomplete="off"
+              autofocus
+              @input=${this._input}
+              placeholder=${this.l10n("search-modal-search")`Search`}
+              aria-label=${this.l10n("search-modal-search")`Search`}
+              role="combobox"
+              aria-autocomplete="list"
+              aria-controls="search-modal-listbox"
+              aria-expanded=${this._query ? "true" : "false"}
+              aria-activedescendant=${
+                this._query ? `search-modal-result-${this._selected}` : nothing
+              }
+            />
+          </form>
+          <div class="visually-hidden" role="status">${resultsStatus}</div>
+          <mdn-button
+            class="close"
+            variant="plain"
+            icon-only
+            .icon=${exitIcon}
+            @click=${this._close}
+            >${this.l10n("search-modal-exit-search")`Exit search`}</mdn-button
+          >
+        </div>
         ${this._queryIndex.render({
           initial: this._renderLoadingSearchIndex.bind(this),
           pending: this._renderLoadingSearchIndex.bind(this),
         })}
-        <ul>
+        <ul
+          id="search-modal-listbox"
+          role="listbox"
+          aria-label=${this.l10n("search-modal-results-label")`Search results`}
+        >
           ${this._queryIndex.render({
             complete: (results) =>
               results?.map(
                 ({ title, url }, i) => html`
-                  <li ?data-selected=${this._selected === i} data-result=${i}>
+                  <li
+                    id="search-modal-result-${i}"
+                    role="option"
+                    aria-selected=${this._selected === i ? "true" : "false"}
+                    ?data-selected=${this._selected === i}
+                    data-result=${i}
+                  >
                     <a
                       href=${url}
                       data-glean-id=${`quick-search: results[${1 + i}] -> ${this._query} -> ${url}`}
@@ -300,28 +333,35 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
                 `,
               ),
           })}
-          ${searchUrl
-            ? html`<li
-                ?data-selected=${this._selected === siteSearchIndex}
-                data-result=${siteSearchIndex}
-              >
-                <a
-                  href=${searchUrl}
-                  data-glean-id=${`quick-search: site-search -> ${this._query}`}
-                  ><span class="title"
-                    >${this.l10n.raw({
-                      id: "search-modal-site-search",
-                      args: {
-                        query: this._query,
-                      },
-                      elements: {
-                        query: { tag: "code" },
-                      },
-                    })}</span
-                  ></a
+          ${
+            searchUrl
+              ? html`<li
+                  id="search-modal-result-${siteSearchIndex}"
+                  role="option"
+                  aria-selected=${
+                    this._selected === siteSearchIndex ? "true" : "false"
+                  }
+                  ?data-selected=${this._selected === siteSearchIndex}
+                  data-result=${siteSearchIndex}
                 >
-              </li>`
-            : nothing}
+                  <a
+                    href=${searchUrl}
+                    data-glean-id=${`quick-search: site-search -> ${this._query}`}
+                    ><span class="title"
+                      >${this.l10n.raw({
+                        id: "search-modal-site-search",
+                        args: {
+                          query: this._query,
+                        },
+                        elements: {
+                          query: { tag: "code" },
+                        },
+                      })}</span
+                    ></a
+                  >
+                </li>`
+              : nothing
+          }
         </ul>
       </dialog>
     `;
@@ -357,7 +397,9 @@ function quickSearch(input, index) {
     .map(([_, i]) => i)
     .slice(0, 10);
 
-  return indexResults.map((i) => i && (index.items || [])[i]).filter(Boolean);
+  return indexResults
+    .map((i) => (index.items || [])[i])
+    .filter((item) => item !== undefined);
 }
 
 /**

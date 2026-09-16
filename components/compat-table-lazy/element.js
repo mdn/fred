@@ -19,10 +19,12 @@ import styles from "./element.css?lit";
 export class MDNCompatTableLazy extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    query: {},
-    locale: {},
-  };
+  static get properties() {
+    return {
+      query: {},
+      locale: {},
+    };
+  }
 
   constructor() {
     super();

@@ -32,13 +32,7 @@ export type SimpleSupportStatementExtended = SimpleSupportStatement & {
 };
 
 export type SupportStatementExtended =
-  | SimpleSupportStatementExtended
-  | SimpleSupportStatementExtended[];
+  SimpleSupportStatementExtended | SimpleSupportStatementExtended[];
 
 export type SupportClassName =
-  | "no"
-  | "yes"
-  | "partial"
-  | "preview"
-  | "removed-partial"
-  | "unknown";
+  "no" | "yes" | "partial" | "preview" | "removed-partial" | "unknown";

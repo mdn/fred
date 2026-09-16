@@ -180,6 +180,7 @@
       display: flex;
 
       gap: 1rem;
+
       justify-content: space-around;
 
       padding: 1rem;
@@ -204,6 +205,7 @@
         flex-wrap: wrap;
 
         column-gap: 1rem;
+
         align-items: baseline;
         justify-content: center;
 
@@ -540,6 +542,7 @@
         display: flex;
 
         gap: 1rem;
+
         align-items: center;
 
         padding-left: var(--stairs-padding-left);
@@ -675,6 +678,7 @@
       flex-direction: column;
 
       gap: 1.5rem;
+
       align-items: center;
       justify-content: flex-start;
 
@@ -936,6 +940,7 @@
       grid-row: span 5;
 
       gap: 0;
+
       align-content: start;
 
       padding: calc(var(--team-card-padding) - 1px);
@@ -1072,6 +1077,7 @@
         grid-column: span 2;
 
         gap: 0 var(--team-card-padding);
+
         align-content: start;
 
         cursor: unset;

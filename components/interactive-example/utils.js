@@ -4,7 +4,7 @@
  * @param {string} code
  */
 export function isCSSSupported(code) {
-  // http://regexr.com/3fvik
+  // https://regexr.com/3fvik
   const cssCommentsMatch = /(\/\*)[\s\S]+(\*\/)/g;
   const element = document.createElement("div");
 

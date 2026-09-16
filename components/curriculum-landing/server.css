@@ -604,6 +604,7 @@
           grid-template-columns: 3rem 1fr;
 
           gap: 1rem;
+
           align-items: center;
 
           height: max-content;
@@ -626,6 +627,7 @@
             grid-template-columns: auto auto;
 
             gap: 1rem 2rem;
+
             align-items: start;
 
             width: initial;
@@ -713,6 +715,7 @@
             grid-area: c;
 
             gap: 0.25rem;
+
             align-items: center;
             justify-content: center;
             justify-self: center;

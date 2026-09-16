@@ -17,7 +17,7 @@ export class ViewedObserver {
 
   /**
    * @param {Element} element
-   * @param {Function} callback
+   * @param {() => void} callback
    * @param {IntersectionObserverInit} [options]
    */
   constructor(element, callback, options = OPTIONS) {

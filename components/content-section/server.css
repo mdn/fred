@@ -2,6 +2,7 @@
 @import url("../prev-next/index.css");
 @import url("../notecard/index.css");
 @import url("../code-example/prism.css");
+@import url("../baseline-indicator/icon.css");
 
 .content-section {
   line-height: var(--font-line-content);
@@ -18,6 +19,10 @@
     margin: 1rem 0 0;
     font-weight: var(--font-weight-normal);
     line-height: var(--font-line-header);
+
+    code {
+      padding: 0 0.125em;
+    }
   }
 
   h2 {
@@ -108,6 +113,43 @@
         border-bottom-left-radius: 0.25rem;
       }
     }
+
+    &.example-good,
+    &.example-bad {
+      display: flex;
+      justify-content: space-between;
+
+      &::after {
+        display: inline-block;
+
+        flex-shrink: 0;
+
+        width: var(--font-size-medium);
+        height: var(--font-size-medium);
+
+        content: "";
+
+        mask-size: cover;
+      }
+    }
+
+    &.example-good {
+      background-color: var(--color-background-green);
+
+      &::after {
+        background-color: var(--color-text-green);
+        mask-image: url("../icon/circle-check.svg");
+      }
+    }
+
+    &.example-bad {
+      background-color: var(--color-background-red);
+
+      &::after {
+        background-color: var(--color-text-red);
+        mask-image: url("../icon/circle-x.svg");
+      }
+    }
   }
 
   code {
@@ -174,10 +216,15 @@
       }
 
       th {
+        min-width: 25%;
         font-weight: var(--font-weight-bold);
         background-color: transparent;
       }
     }
+  }
+
+  .table-container {
+    margin: 1rem 0;
   }
 
   .code-example,
@@ -339,6 +386,41 @@
           }
         }
       }
+    }
+  }
+
+  /* Alphabetical/grouped indexes (rari `CSS_Ref`, `ListGroups`, `APIListAlpha`, `css_ref_list`) */
+  .index {
+    .index-nav ul {
+      display: grid;
+
+      grid-template-columns: repeat(auto-fit, minmax(1.75rem, 1fr));
+
+      padding: 0;
+
+      list-style: none;
+
+      li {
+        margin: 0;
+        text-align: center;
+      }
+
+      a {
+        display: block;
+      }
+    }
+
+    > ul {
+      columns: 18rem;
+      column-gap: 2rem;
+    }
+
+    li {
+      break-inside: avoid;
+    }
+
+    .icon {
+      margin-left: 0.5ch;
     }
   }
 

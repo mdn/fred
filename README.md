@@ -189,3 +189,11 @@ If you're loading a path which isn't rendering anything (like the homepage), che
 ### Testing
 
 See [the testing README](./test/README.md).
+
+### Pull Request Analysis
+
+When a pull request is submitted, automated systems may be employed to run linting and test suites.
+
+Our infrastructure includes the use of AI-assisted tooling. These systems function as automated review assistants, similar to enhanced linters. They may analyze changes and provide suggestions or feedback, but they do not have the ability to make decisions, approve changes, or modify pull requests.
+
+AI-assisted linting/review is strictly limited to MDN’s engineering repositories (i.e. the code behind MDN), and is not applied to repositories that contain MDN’s content.

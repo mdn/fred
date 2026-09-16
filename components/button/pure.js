@@ -10,6 +10,9 @@ import { randomIdString } from "../utils/index.js";
  * @param {boolean} [options.iconOnly]
  * @param {import("./types.js").ButtonIconPositions} [options.iconPosition]
  * @param {boolean} [options.disabled]
+ * @param {boolean} [options.ariaDisabled]
+ * @param {string} [options.ariaDescription]
+ * @param {string} [options.title]
  * @param {string} [options.href]
  * @param {string} [options.target]
  * @param {string} [options.rel]
@@ -22,6 +25,9 @@ export default function Button({
   iconOnly,
   iconPosition,
   disabled = false,
+  ariaDisabled = false,
+  ariaDescription,
+  title,
   href,
   target,
   rel,
@@ -51,6 +57,8 @@ export default function Button({
           target=${ifDefined(target)}
           rel=${ifDefined(rel)}
           aria-labelledby=${labelId}
+          aria-description=${ifDefined(ariaDescription)}
+          title=${ifDefined(title)}
           data-variant=${ifDefined(variant)}
           data-action=${ifDefined(action)}
           part="button"
@@ -63,6 +71,9 @@ export default function Button({
           class="button"
           aria-labelledby=${labelId}
           ?disabled=${disabled}
+          aria-disabled=${ariaDisabled ? "true" : nothing}
+          aria-description=${ifDefined(ariaDescription)}
+          title=${ifDefined(title)}
           data-variant=${ifDefined(variant)}
           data-action=${ifDefined(action)}
           part="button"

@@ -1,10 +1,5 @@
 export type PlacementType =
-  | "side"
-  | "top"
-  | "hpTop"
-  | "hpMain"
-  | "hpFooter"
-  | "bottom";
+  "side" | "top" | "hpTop" | "hpMain" | "hpFooter" | "bottom";
 
 export type PlacementMap = Record<
   PlacementType,
@@ -44,9 +39,4 @@ export type PlacementData = {
 };
 
 export type Status =
-  | "success"
-  | "geo_unsupported"
-  | "cap_reached"
-  | "loading"
-  | "empty"
-  | "noads";
+  "success" | "geo_unsupported" | "cap_reached" | "loading" | "empty" | "noads";

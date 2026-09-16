@@ -6,21 +6,25 @@ import Button from "./pure.js";
 export class MDNButton extends LitElement {
   static styles = styles;
 
-  static properties = {
-    disabled: { type: Boolean },
-    variant: { type: String },
-    action: { type: String },
-    icon: { state: true },
-    iconOnly: { type: Boolean, attribute: "icon-only" },
-    iconPosition: { type: String, attribute: "icon-position" },
-    href: { type: String },
-    target: { type: String },
-    rel: { type: String },
-  };
+  static get properties() {
+    return {
+      disabled: { type: Boolean },
+      disabledReason: { type: String, attribute: "disabled-reason" },
+      variant: { type: String },
+      action: { type: String },
+      icon: { state: true },
+      iconOnly: { type: Boolean, attribute: "icon-only" },
+      iconPosition: { type: String, attribute: "icon-position" },
+      href: { type: String },
+      target: { type: String },
+      rel: { type: String },
+    };
+  }
 
   constructor() {
     super();
     this.disabled = false;
+    this.disabledReason = "";
     /** @type {import("@lit").TemplateResult | undefined} */
     this.icon = undefined;
     this.iconOnly = false;
@@ -38,10 +42,37 @@ export class MDNButton extends LitElement {
     this.rel = undefined;
   }
 
+  /**
+   * @param {MouseEvent} event
+   */
+  #click(event) {
+    if (!this.href && this.disabled && this.disabledReason) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener("click", this.#click, { capture: true });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener("click", this.#click, { capture: true });
+  }
+
   render() {
+    const title =
+      !this.href && this.disabled && this.disabledReason
+        ? this.disabledReason
+        : undefined;
     return Button({
       label: html`<slot></slot>`,
-      disabled: this.disabled,
+      disabled: this.disabledReason ? false : this.disabled,
+      ariaDisabled: this.disabledReason ? this.disabled : undefined,
+      ariaDescription: title,
+      title,
       icon: this.icon,
       iconOnly: this.iconOnly,
       iconPosition: this.iconPosition,

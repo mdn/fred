@@ -46,8 +46,9 @@ for (const [name, def] of customElements.__definitions) {
  * @param {import("@fred").CompilationStats} compilationStats
  */
 export async function render(path, partialContext, compilationStats) {
-  const locale = path.split("/")[1] || "en-US";
+  const locale = path.split("/", 2)[1] || "en-US";
 
+  /** @type {import("@fred").RenderContext} */
   const context = {
     path,
     ...(await addFluent(locale)),
@@ -117,9 +118,8 @@ export async function render(path, partialContext, compilationStats) {
               `Unknown Spa Page title=${context.pageTitle}, slug=${context.slug}`,
             );
           }
-          // @ts-expect-error
           case "Sandbox":
-            return Sandbox.render();
+            return Sandbox.render(context);
           case "SpaNotFound":
           default:
             return NotFound.render(context);
@@ -135,7 +135,8 @@ export async function render(path, partialContext, compilationStats) {
  * @param {import("@fred").PartialContext} partialContext
  */
 export async function renderSimplified(path, partialContext) {
-  const locale = path.split("/")[1] || "en-US";
+  const locale = path.split("/", 2)[1] || "en-US";
+  /** @type {import("@fred").RenderContext} */
   const context = {
     path,
     ...(await addFluent(locale)),

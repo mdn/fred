@@ -4,11 +4,12 @@ import { createRef, ref } from "lit/directives/ref.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 import { gleanClick } from "../../utils/glean.js";
+import circlePlay from "../icon/circle-play.svg?lit";
 import warningIcon from "../icon/triangle-alert.svg?lit";
 import { globalUser } from "../user/context.js";
 
 import styles from "./element.css?lit";
-import { decompressFromBase64 } from "./utils.js";
+import { codeToDataUrl, decompressFromBase64 } from "./utils.js";
 
 import "../play-controller/element.js";
 import "../button/element.js";
@@ -29,9 +30,11 @@ const SESSION_KEY = "playground-session-code";
 export class MDNPlayground extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    _gistID: { state: true },
-  };
+  static get properties() {
+    return {
+      _gistID: { state: true },
+    };
+  }
 
   constructor() {
     super();
@@ -66,6 +69,7 @@ export class MDNPlayground extends L10nMixin(LitElement) {
         this._autoRun = true;
         controller.runOnChange = true;
         this._storeSession();
+        this.requestUpdate();
       }
     }
   }
@@ -131,16 +135,7 @@ ${"```"}`,
     const controller = this._controller.value;
     if (controller) {
       const { css, html, js } = controller.code;
-      let code = `<!doctype html><body>`;
-      if (css) code += `<style>${css}</style>`;
-      if (html) code += html;
-      if (js) code += `<script>${js}</script>`;
-      code += `</body>`;
-      // encode non-space whitespace and percent
-      code = code.replaceAll(/([^\S ]|%)+/g, (str) => encodeURIComponent(str));
-      await navigator.clipboard.writeText(
-        `data:text/html;charset=utf-8,${code}`,
-      );
+      await navigator.clipboard.writeText(codeToDataUrl({ css, html, js }));
     }
   }
 
@@ -352,15 +347,17 @@ ${"```"}`,
                   data-id="clear"
                   >${this.l10n("playground-clear")`Clear`}</mdn-button
                 >
-                ${hasInitialCode
-                  ? html`<mdn-button
-                      variant="secondary"
-                      @click=${this._reset}
-                      ?disabled=${!isResettable}
-                      data-glean-id="playground: reset-click"
-                      >${this.l10n("playground-reset")`Reset`}</mdn-button
-                    >`
-                  : nothing}
+                ${
+                  hasInitialCode
+                    ? html`<mdn-button
+                        variant="secondary"
+                        @click=${this._reset}
+                        ?disabled=${!isResettable}
+                        data-glean-id="playground: reset-click"
+                        >${this.l10n("playground-reset")`Reset`}</mdn-button
+                      >`
+                    : nothing
+                }
               </menu>
             </aside>
             <details open>
@@ -386,23 +383,43 @@ ${"```"}`,
             </details>
           </section>
           <section class="playground__runner-console">
-            ${this._gistId
-              ? html`<aside class="playground__runner-menu">
-                  <menu>
-                    <mdn-button
-                      @click=${this._reportOpen}
-                      variant="secondary"
-                      .icon=${warningIcon}
-                      data-glean-id="playground: flag-click"
-                    >
-                      ${this.l10n(
-                        "playground-seeing-something-inappropriate",
-                      )`Seeing something inappropriate?`}
-                    </mdn-button>
-                  </menu>
-                </aside>`
-              : nothing}
-            <mdn-play-runner></mdn-play-runner>
+            ${
+              this._gistId
+                ? html`<aside class="playground__runner-menu">
+                    <menu>
+                      <mdn-button
+                        @click=${this._reportOpen}
+                        variant="secondary"
+                        .icon=${warningIcon}
+                        data-glean-id="playground: flag-click"
+                      >
+                        ${this.l10n(
+                          "playground-seeing-something-inappropriate",
+                        )`Seeing something inappropriate?`}
+                      </mdn-button>
+                    </menu>
+                  </aside>`
+                : nothing
+            }
+            ${
+              this._autoRun
+                ? nothing
+                : html`<mdn-button
+                    class="overlay-run-button"
+                    @click=${this._run}
+                    variant="plain"
+                  >
+                    <div class="overlay-run-button--header">
+                      ${circlePlay} ${this.l10n("playground-run")`Run`}
+                    </div>
+                    <div class="overlay-run-button--body">
+                      ${this.l10n.raw({ id: "playground-user-shared-warning" })}
+                    </div>
+                  </mdn-button>`
+            }
+            <mdn-play-runner
+              class=${this._autoRun ? nothing : "hidden"}
+            ></mdn-play-runner>
             <div class="playground__console">
               <div>${this.l10n("playground-console")`Console`}</div>
               <mdn-play-console></mdn-play-console>
@@ -510,7 +527,7 @@ ${"```"}`,
 customElements.define("mdn-playground", MDNPlayground);
 
 /**
- * @param {import("./types.js").PlaygroundStateParam | import("./types.js").PlaygroundSession | {}} stateOrSession
+ * @param {import("./types.js").PlaygroundStateParam | import("./types.js").PlaygroundSession} stateOrSession
  * @returns {import("./types.js").PlaygroundSession}
  */
 function stateToSession(stateOrSession) {

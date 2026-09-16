@@ -11,7 +11,7 @@ export interface SearchIndexFlexItem {
 
 export interface SearchIndex {
   flex: SearchIndexFlexItem[];
-  items: Item[];
+  items: SearchIndexItem[];
 }
 
 export type SearchResultItem = {
