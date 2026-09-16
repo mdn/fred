@@ -247,7 +247,7 @@ export class SidebarFilterer {
           ranges.set(index, index + needle.length);
         }
       }
-      const sortedRanges = [...ranges.entries()].sort(
+      const sortedRanges = [...ranges].sort(
         ([x1, y1], [x2, y2]) => x1 - x2 || y1 - y2,
       );
 
@@ -355,13 +355,11 @@ export class SidebarFilterer {
    * @returns {HTMLElement|undefined} The found element or undefined if none found.
    */
   findFirstElementBefore(el, candidates) {
-    return [...candidates]
-      .reverse()
-      .find(
-        (candidate) =>
-          candidate.compareDocumentPosition(el) &
-          Node.DOCUMENT_POSITION_FOLLOWING,
-      );
+    return candidates.findLast(
+      (candidate) =>
+        candidate.compareDocumentPosition(el) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    );
   }
 
   /**

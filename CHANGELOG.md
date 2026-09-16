@@ -1,5 +1,186 @@
 # Changelog
 
+## [2.9.1](https://github.com/mdn/fred/compare/v2.9.0...v2.9.1) (2026-09-11)
+
+
+### Miscellaneous
+
+* **deps-dev:** bump eslint-plugin-unicorn from 65.0.1 to 74.0.0 ([#1900](https://github.com/mdn/fred/issues/1900)) ([1f7587a](https://github.com/mdn/fred/commit/1f7587a77bbff0c8402ad1c96ba368fb0c29d5ff))
+* **deps:** bump @mdn/watify from 1.1.9 to 1.1.10 ([#1894](https://github.com/mdn/fred/issues/1894)) ([6967512](https://github.com/mdn/fred/commit/6967512b6738737284c2e8bd910678a5ddf69aa2))
+* **deps:** bump brace-expansion ([#1884](https://github.com/mdn/fred/issues/1884)) ([4d02eaa](https://github.com/mdn/fred/commit/4d02eaa0158953a94bd1aca4b22109c08eb65e9b))
+* **deps:** bump compression from 1.8.1 to 1.8.2 in the npm-prod group ([#1899](https://github.com/mdn/fred/issues/1899)) ([b8a8ff5](https://github.com/mdn/fred/commit/b8a8ff52877819841fa2ba3c2845f8c380670e74))
+* **deps:** bump qs from 6.15.2 to 6.16.0 ([#1902](https://github.com/mdn/fred/issues/1902)) ([842427f](https://github.com/mdn/fred/commit/842427f983d94341c18adb1f28b88b12e1f83388))
+* **deps:** bump svgo ([ba69f51](https://github.com/mdn/fred/commit/ba69f5159eb837ee75ef322ca68f2d09aae561df))
+* **deps:** bump svgo to 3.3.5/4.1.0 ([#1878](https://github.com/mdn/fred/issues/1878)) ([ba69f51](https://github.com/mdn/fred/commit/ba69f5159eb837ee75ef322ca68f2d09aae561df))
+* **deps:** bump ws and socket.io-adapter ([#1883](https://github.com/mdn/fred/issues/1883)) ([a6204ef](https://github.com/mdn/fred/commit/a6204ef17c6f22394ca8e711096b6650e4fe58c7))
+
+## [2.9.0](https://github.com/mdn/fred/compare/v2.8.0...v2.9.0) (2026-09-07)
+
+
+### Features
+
+* **baseline:** implement new banner design ([#1821](https://github.com/mdn/fred/issues/1821)) ([ba04401](https://github.com/mdn/fred/commit/ba04401033226365113d7a1e8c568557d2b8f1a7))
+* **index:** style index navigation links ([#1827](https://github.com/mdn/fred/issues/1827)) ([ac0a394](https://github.com/mdn/fred/commit/ac0a3949deed1769997fb071c81115f6d0d30157))
+* **observatory:** show COEP and COOP results in scoring ([#1843](https://github.com/mdn/fred/issues/1843)) ([9f5469b](https://github.com/mdn/fred/commit/9f5469b695de3b96d6b0732efa7f1b0dcd1a2161))
+* **sandbox:** add per-component preview routes ([2219bc6](https://github.com/mdn/fred/commit/2219bc6adfaa9f185b04c0e1815c113493d28586))
+
+
+### Bug Fixes
+
+* **baseline:** add `<code>` styling to discouraged reason ([#1852](https://github.com/mdn/fred/issues/1852)) ([82f41e7](https://github.com/mdn/fred/commit/82f41e7eb0d6af337efd93c02841606c140c4f0e))
+* **baseline:** add lang attribute to discouraged reason ([#1853](https://github.com/mdn/fred/issues/1853)) ([09e5bf0](https://github.com/mdn/fred/commit/09e5bf0222b63c9fa021fe523145845754a7d785))
+* **button:** make disabled state more obvious ([#1825](https://github.com/mdn/fred/issues/1825)) ([cadedeb](https://github.com/mdn/fred/commit/cadedebc28b9bd1c1be96a77d44f610809a7912f))
+* **search-modal:** add ARIA combobox semantics to quick search ([#1706](https://github.com/mdn/fred/issues/1706)) ([23c02d4](https://github.com/mdn/fred/commit/23c02d4aa6499d7b01e05ed47952029645a0ad55))
+
+
+### Miscellaneous
+
+* **baseline:** add sandbox component ([#1820](https://github.com/mdn/fred/issues/1820)) ([0327ed5](https://github.com/mdn/fred/commit/0327ed5616f518a0d6418e60b002d590be43341a))
+* **deps:** bump @codemirror/state from 6.7.1 to 6.7.2 in the npm-prod group ([#1837](https://github.com/mdn/fred/issues/1837)) ([03bee6c](https://github.com/mdn/fred/commit/03bee6c3c8de8d197e40e781f7886325718a99bb))
+* **deps:** bump @codemirror/state from 6.7.2 to 6.7.4 in the npm-prod group ([#1857](https://github.com/mdn/fred/issues/1857)) ([46e2af5](https://github.com/mdn/fred/commit/46e2af5c99f56dcbddc2b5c003d6d938811d93db))
+* **deps:** bump @codemirror/state in the npm-prod group ([46e2af5](https://github.com/mdn/fred/commit/46e2af5c99f56dcbddc2b5c003d6d938811d93db))
+* **deps:** bump @codemirror/state in the npm-prod group ([03bee6c](https://github.com/mdn/fred/commit/03bee6c3c8de8d197e40e781f7886325718a99bb))
+* **deps:** bump @mdn/rari from 0.2.33 to 0.2.34 ([#1864](https://github.com/mdn/fred/issues/1864)) ([c1ab958](https://github.com/mdn/fred/commit/c1ab958407a2c0a21eb0a5c4087fe18a043bc51b))
+* **deps:** bump fflate from 0.8.2 to 0.8.3 ([#1854](https://github.com/mdn/fred/issues/1854)) ([ba3c1d4](https://github.com/mdn/fred/commit/ba3c1d4854ba5cbecfcb0814c4787abc53f8f76f))
+* **deps:** bump js-yaml from 4.1.1 to 4.3.2 ([#1851](https://github.com/mdn/fred/issues/1851)) ([022ed57](https://github.com/mdn/fred/commit/022ed574f4364e59e9d367e8033b98b72b55ff18))
+* **deps:** bump postcss-selector-parser from 6.1.2 to 6.1.4 ([#1841](https://github.com/mdn/fred/issues/1841)) ([15c4a53](https://github.com/mdn/fred/commit/15c4a53a23ed5ed0f25c657d7fb9506a39f887f2))
+* **deps:** bump shell-quote and concurrently ([#1816](https://github.com/mdn/fred/issues/1816)) ([bfc255f](https://github.com/mdn/fred/commit/bfc255f827f34ff2dd79d19cc0204ba5d66e1e58))
+* **sandbox:** pass context to sandbox components ([#1819](https://github.com/mdn/fred/issues/1819)) ([f794093](https://github.com/mdn/fred/commit/f794093fe2e904f7edfc75a310a3418850fe3ea8))
+* **sandbox:** use import.meta.webpackContext ([#1818](https://github.com/mdn/fred/issues/1818)) ([4ae04ea](https://github.com/mdn/fred/commit/4ae04ea7d834ff28b4ae756b280ff60a24a257b1))
+* **test:** support filtering spec files ([#1848](https://github.com/mdn/fred/issues/1848)) ([0e0569e](https://github.com/mdn/fred/commit/0e0569eed5ac829737c244ec29b917f3c0a1fc84))
+
+## [2.8.0](https://github.com/mdn/fred/compare/v2.7.0...v2.8.0) (2026-08-19)
+
+
+### Features
+
+* **baseline:** add discouraged banner ([#763](https://github.com/mdn/fred/issues/763)) ([c363126](https://github.com/mdn/fred/commit/c363126bd2634e1fe72369a315b303c89df6039f))
+* **baseline:** add discouraged/removing icons to sidebar ([#1760](https://github.com/mdn/fred/issues/1760)) ([4e50fbb](https://github.com/mdn/fred/commit/4e50fbb9365039d9af2cf9c132e8aaaa42ec35a2))
+* point opensearch.xml at cloud function ([#1664](https://github.com/mdn/fred/issues/1664)) ([f79902d](https://github.com/mdn/fred/commit/f79902de21e80750caf1244d671e78ed63554760))
+
+
+### Bug Fixes
+
+* **a11y-menu:** add scroll margin to main content skip link target ([#1689](https://github.com/mdn/fred/issues/1689)) ([b8481de](https://github.com/mdn/fred/commit/b8481de63d3bc71f6fc709f4b228e2d17d756e2c))
+* **about-tabs:** add keyboard navigation to About page tabs ([#1715](https://github.com/mdn/fred/issues/1715)) ([8d3853d](https://github.com/mdn/fred/commit/8d3853d3041b9d77e2a2eff05cf3e735530a8567))
+* **compat-table:** simplify compat-support-flags fluent string ([#1738](https://github.com/mdn/fred/issues/1738)) ([cf53089](https://github.com/mdn/fred/commit/cf530893935ed4f3b7994fdde5f1e08c0a196215))
+* **icons:** space on index sections ([#1799](https://github.com/mdn/fred/issues/1799)) ([454bcf9](https://github.com/mdn/fred/commit/454bcf9dca6572a6aba3835f89fa45e42bc0ac29))
+* **play:** encode # in data urls ([#1743](https://github.com/mdn/fred/issues/1743)) ([b082b99](https://github.com/mdn/fred/commit/b082b997ed52c6d7eac6bece352a07f3a8237133))
+* **search:** only relabel top-level Web/API as 'Web APIs' ([#1792](https://github.com/mdn/fred/issues/1792)) ([fd7e5d6](https://github.com/mdn/fred/commit/fd7e5d6a99a178a0e317225a804108d43504e7d5))
+* **search:** relabel breadcrumbs cross-locale ([#1793](https://github.com/mdn/fred/issues/1793)) ([0611d70](https://github.com/mdn/fred/commit/0611d7053cd98b2c8a122d2b79cac1762d1ef6ae))
+* **search:** scroll only results ([#1548](https://github.com/mdn/fred/issues/1548)) ([6d87176](https://github.com/mdn/fred/commit/6d87176abec8532ca9ee933e6779eaddd2fede15))
+
+
+### Miscellaneous
+
+* **baseline:** ensure discouraged features are hidden ([#1753](https://github.com/mdn/fred/issues/1753)) ([c240ea6](https://github.com/mdn/fred/commit/c240ea680ece24dc144f1fce9547ccbbb184eb58))
+* **baseline:** hide baseline icon in sidebar ([#1766](https://github.com/mdn/fred/issues/1766)) ([c947723](https://github.com/mdn/fred/commit/c947723d6cdb8eb1391114394019bd87534a4bda))
+* **content-section:** remove no-op [@ts-nocheck](https://github.com/ts-nocheck) ([#1755](https://github.com/mdn/fred/issues/1755)) ([258fe3a](https://github.com/mdn/fred/commit/258fe3a41c6e634623b9dd541e29f9823724e0c7))
+* **deps-dev:** bump @rspack/* from 1.7 to 2.0 ([#1511](https://github.com/mdn/fred/issues/1511)) ([b720866](https://github.com/mdn/fred/commit/b72086676bd82ba5fb32cd8545f0ab5e07c34fe4))
+* **deps:** bump @codemirror/lang-html ([8af6d30](https://github.com/mdn/fred/commit/8af6d3056ae2b73a6a7848002f20fb2d71321882))
+* **deps:** bump @codemirror/lang-html from 6.4.11 to 6.4.12 in the npm-prod group across 1 directory ([#1779](https://github.com/mdn/fred/issues/1779)) ([8af6d30](https://github.com/mdn/fred/commit/8af6d3056ae2b73a6a7848002f20fb2d71321882))
+* **deps:** bump @mdn/rari from 0.2.30 to 0.2.31 ([#1796](https://github.com/mdn/fred/issues/1796)) ([b03af9f](https://github.com/mdn/fred/commit/b03af9f29f5a172a6c65ad581f4f8e9eed87b025))
+* **deps:** bump @mdn/rari from 0.2.31 to 0.2.32 ([#1803](https://github.com/mdn/fred/issues/1803)) ([c478c1f](https://github.com/mdn/fred/commit/c478c1fd604ad6fcfb821b81099e9dda6e313f75))
+* **deps:** bump @mdn/rari from 0.2.32 to 0.2.33 ([#1812](https://github.com/mdn/fred/issues/1812)) ([1b8d410](https://github.com/mdn/fred/commit/1b8d4104185c1d912a072690dbe3d1c52f196bf2))
+* **deps:** bump adm-zip and firefox-profile ([#1807](https://github.com/mdn/fred/issues/1807)) ([78115ef](https://github.com/mdn/fred/commit/78115ef3485dd812cfac19d05fe6f909b7390360))
+* **deps:** bump body-parser ([#1728](https://github.com/mdn/fred/issues/1728)) ([4b369c5](https://github.com/mdn/fred/commit/4b369c55d781e43ae05ea4353f7ad4af9198ce42))
+* **deps:** bump concurrently from 10.0.3 to 10.0.4 in the npm-prod group ([#1744](https://github.com/mdn/fred/issues/1744)) ([6bf14ba](https://github.com/mdn/fred/commit/6bf14bad33b85a0006b4226be0b869437894cf39))
+* **deps:** bump concurrently from 10.0.4 to 10.0.5 in the npm-prod group ([#1805](https://github.com/mdn/fred/issues/1805)) ([87d5257](https://github.com/mdn/fred/commit/87d52572f60ce56f42e764cec3b956cdfbfb4915))
+* **deps:** bump concurrently in the npm-prod group ([87d5257](https://github.com/mdn/fred/commit/87d52572f60ce56f42e764cec3b956cdfbfb4915))
+* **deps:** bump concurrently in the npm-prod group ([6bf14ba](https://github.com/mdn/fred/commit/6bf14bad33b85a0006b4226be0b869437894cf39))
+* **deps:** bump immutable from 5.1.5 to 5.1.9 ([#1740](https://github.com/mdn/fred/issues/1740)) ([30e3f6d](https://github.com/mdn/fred/commit/30e3f6def7379bde9b105470c2d4f24c019578eb))
+* **deps:** bump react-router and react-router-dom ([#1741](https://github.com/mdn/fred/issues/1741)) ([c7d6c76](https://github.com/mdn/fred/commit/c7d6c768ba5f19393b9262b413e336c17652a9bc))
+* **deps:** bump react-router and react-router-dom ([#1778](https://github.com/mdn/fred/issues/1778)) ([7c3b010](https://github.com/mdn/fred/commit/7c3b0102b14ff186328cefcefe42cd8462edf3f9))
+* **deps:** bump svgo ([#1737](https://github.com/mdn/fred/issues/1737)) ([e3ed66f](https://github.com/mdn/fred/commit/e3ed66fd953759ac91db688cbacbfdab2c94c29d))
+* **deps:** bump tar from 7.5.16 to 7.5.20 ([#1729](https://github.com/mdn/fred/issues/1729)) ([d3fa875](https://github.com/mdn/fred/commit/d3fa875c31235536846b39fa0eba9b1d8ffa72d8))
+* **deps:** bump tar from 7.5.20 to 7.5.22 ([#1747](https://github.com/mdn/fred/issues/1747)) ([dd990fa](https://github.com/mdn/fred/commit/dd990fa566453ccf1f5778881a9c82c520b41bcc))
+* **l10n:** update French locale ([#1801](https://github.com/mdn/fred/issues/1801)) ([4a388a6](https://github.com/mdn/fred/commit/4a388a6ce514f3358fbce6d50f6942657f7033c1))
+* **menu:** update menu entries ([#1739](https://github.com/mdn/fred/issues/1739)) ([aceec76](https://github.com/mdn/fred/commit/aceec76312134321fdb4e19384635254a788edd1))
+* **menu:** update menu entries ([#1756](https://github.com/mdn/fred/issues/1756)) ([c5ecd99](https://github.com/mdn/fred/commit/c5ecd995680b23b91f3d170a0902e53ceb8c913d))
+* **menu:** update menu entries ([#1757](https://github.com/mdn/fred/issues/1757)) ([d51b1df](https://github.com/mdn/fred/commit/d51b1df32a989bfedf351feac2dd5cfd1ec4d820))
+* **menu:** update menu entries ([#1810](https://github.com/mdn/fred/issues/1810)) ([4f659aa](https://github.com/mdn/fred/commit/4f659aad44320bedba197543d064268c5301277b))
+* **play:** add note referencing original file ([#1725](https://github.com/mdn/fred/issues/1725)) ([8e50747](https://github.com/mdn/fred/commit/8e50747eafc704bc45be23be7f16c6c1f358e3c1))
+
+## [2.7.0](https://github.com/mdn/fred/compare/v2.6.5...v2.7.0) (2026-07-16)
+
+
+### Features
+
+* **baseline:** add link to developer-signals repo ([#1212](https://github.com/mdn/fred/issues/1212)) ([0da991f](https://github.com/mdn/fred/commit/0da991f3588a57b0e8683c41ef88799952999b22))
+* **cli:** add single `fred` entrypoint with subcommands ([#1697](https://github.com/mdn/fred/issues/1697)) ([ce53f48](https://github.com/mdn/fred/commit/ce53f4883f9bbe0b0d2519659384188a73caef45))
+
+
+### Bug Fixes
+
+* **baseline:** update copy to reference 'browser support' ([#1709](https://github.com/mdn/fred/issues/1709)) ([ccf9c76](https://github.com/mdn/fred/commit/ccf9c76636fda892375f74c91a36d093b1c43615))
+* **compat-table:** group support history by prefix/altname ([#1587](https://github.com/mdn/fred/issues/1587)) ([b089c65](https://github.com/mdn/fred/commit/b089c657eab3b38b7efae0ce225cde96fffb4eb7))
+* **components:** correct invalid attributes ([#1633](https://github.com/mdn/fred/issues/1633)) ([10d9130](https://github.com/mdn/fred/commit/10d9130513d3abcfdf0fe7a5766f13c72f0fd4db))
+* **external-link:** glue the icon to the last word ([#1656](https://github.com/mdn/fred/issues/1656)) ([baed6c3](https://github.com/mdn/fred/commit/baed6c382dce7ee7cdb715e72432708ddcad8bf5))
+* **lit-analyzer:** fix missing imports, fail in CI ([#1631](https://github.com/mdn/fred/issues/1631)) ([302b4dc](https://github.com/mdn/fred/commit/302b4dcca306d56339aa5412a48af47993199562))
+* pin tsc + wdio to their packages ([#1681](https://github.com/mdn/fred/issues/1681)) ([3c35716](https://github.com/mdn/fred/commit/3c3571639644ecdde46602352a5d3d3996718c1f))
+* **playground:** "false" shown at top of page ([#1627](https://github.com/mdn/fred/issues/1627)) ([aa134e1](https://github.com/mdn/fred/commit/aa134e1c022776abc8ca21dfa0d2fab0d8370411))
+
+
+### Miscellaneous
+
+* **deps:** bump @codemirror/state from 6.6.0 to 6.7.0 in the npm-prod group ([#1673](https://github.com/mdn/fred/issues/1673)) ([9e9239b](https://github.com/mdn/fred/commit/9e9239b12056dd6f348f67d0147b6d2aaa5c8d72))
+* **deps:** bump @codemirror/state in the npm-prod group ([9e9239b](https://github.com/mdn/fred/commit/9e9239b12056dd6f348f67d0147b6d2aaa5c8d72))
+* **deps:** bump @mdn/rari from 0.2.26 to 0.2.27 ([#1626](https://github.com/mdn/fred/issues/1626)) ([8669688](https://github.com/mdn/fred/commit/8669688f0430dd68c7ca9c6f2e08d6e445537132))
+* **deps:** bump concurrently from 9.2.1 to 10.0.1 ([#1617](https://github.com/mdn/fred/issues/1617)) ([79446be](https://github.com/mdn/fred/commit/79446bedb435c7716c17a7c3be64c83418d777a6))
+* **deps:** bump esbuild and tsx ([#1650](https://github.com/mdn/fred/issues/1650)) ([e4a8b86](https://github.com/mdn/fred/commit/e4a8b8624671a4bae55295e42db990155cfaeb88))
+* **deps:** bump http-proxy-middleware from 4.1.0 to 4.1.1 in the npm-prod group ([#1651](https://github.com/mdn/fred/issues/1651)) ([f62a85d](https://github.com/mdn/fred/commit/f62a85dbcae72204696af06ff4098f247640a5e3))
+* **deps:** bump http-proxy-middleware in the npm-prod group ([f62a85d](https://github.com/mdn/fred/commit/f62a85dbcae72204696af06ff4098f247640a5e3))
+* **deps:** bump react-router and react-router-dom ([#1635](https://github.com/mdn/fred/issues/1635)) ([0b1f304](https://github.com/mdn/fred/commit/0b1f30491838e34171c3521cf001444772604274))
+* **deps:** bump tar from 7.5.11 to 7.5.16 ([#1654](https://github.com/mdn/fred/issues/1654)) ([0dca91a](https://github.com/mdn/fred/commit/0dca91a183849c666aa899a36f7271cf68335d20))
+* **deps:** bump the npm-prod group across 1 directory with 2 updates ([#1640](https://github.com/mdn/fred/issues/1640)) ([40b9706](https://github.com/mdn/fred/commit/40b9706d24df28215a5c21a3ae909dcc7a506739))
+* **deps:** bump the npm-prod group with 2 updates ([#1690](https://github.com/mdn/fred/issues/1690)) ([8c132a7](https://github.com/mdn/fred/commit/8c132a77697961849d740ffd24b0c35c4b57c6ed))
+* **placement:** instrument pong fetch requests and errors ([#1713](https://github.com/mdn/fred/issues/1713)) ([62da398](https://github.com/mdn/fred/commit/62da3989ced82172423104bb6f576d111d24f02c))
+* **survey:** add canvas api survey ([#1630](https://github.com/mdn/fred/issues/1630)) ([ad364bd](https://github.com/mdn/fred/commit/ad364bd774bbeaffbd7f5aee953539b7cf8f1eed))
+
+## [2.6.5](https://github.com/mdn/fred/compare/v2.6.4...v2.6.5) (2026-06-01)
+
+
+### Bug Fixes
+
+* **button:** increase contrast ([#666](https://github.com/mdn/fred/issues/666)) ([60f3f48](https://github.com/mdn/fred/commit/60f3f481de1838e95fbb3fed9495b10f1a590678))
+* **compat-table:** support arbitrary nesting depth ([#1604](https://github.com/mdn/fred/issues/1604)) ([573fb9e](https://github.com/mdn/fred/commit/573fb9e9bddb4b2622f34222e92847d0b2b059f0))
+* **content-section:** add margin before table ([#1550](https://github.com/mdn/fred/issues/1550)) ([ad5f4ae](https://github.com/mdn/fred/commit/ad5f4ae0b6162d819bd2296ef4f5c8f7ca2099d4))
+
+
+### Miscellaneous
+
+* **deps:** bump @mdn/rari from 0.2.25 to 0.2.26 ([#1620](https://github.com/mdn/fred/issues/1620)) ([545b25a](https://github.com/mdn/fred/commit/545b25acd9636634c897b7a58e1eebf19c65cf76))
+* **deps:** bump http-proxy-middleware from 3.0.5 to 4.0.0 ([#1538](https://github.com/mdn/fred/issues/1538)) ([433da7c](https://github.com/mdn/fred/commit/433da7c7b56725ec271de6dbff08acbf81298508))
+* **deps:** bump qs and express ([#1598](https://github.com/mdn/fred/issues/1598)) ([84866ab](https://github.com/mdn/fred/commit/84866abc13aaba8d5a782d50de33292738344f85))
+* **footer:** remove foundation link ([#1607](https://github.com/mdn/fred/issues/1607)) ([4c726e6](https://github.com/mdn/fred/commit/4c726e63017f64d69ccfe0cafbe47d92c66f51fe))
+* **l10n:** add Japanese strings ([#1318](https://github.com/mdn/fred/issues/1318)) ([71fbab5](https://github.com/mdn/fred/commit/71fbab5c7d619479b692501a41a546c2f5651365))
+* **outer-layout:** skip Transcend snippet on Playground ([#1610](https://github.com/mdn/fred/issues/1610)) ([d0a8f0e](https://github.com/mdn/fred/commit/d0a8f0e581ccc7c44e62d27cbb2366a16f15ef99))
+
+## [2.6.4](https://github.com/mdn/fred/compare/v2.6.3...v2.6.4) (2026-05-22)
+
+
+### Bug Fixes
+
+* **l10n:** correct compat-support-flags rendering across locales ([#1562](https://github.com/mdn/fred/issues/1562)) ([2f5b04f](https://github.com/mdn/fred/commit/2f5b04fa8ea970c839102d211aa8efd06a585880))
+
+
+### Miscellaneous
+
+* **deps:** bump @mdn/rari from 0.2.24 to 0.2.25 ([#1597](https://github.com/mdn/fred/issues/1597)) ([ed147d1](https://github.com/mdn/fred/commit/ed147d19d49fdb3e1d6b8b3e222a492f86844bcd))
+
+## [2.6.3](https://github.com/mdn/fred/compare/v2.6.2...v2.6.3) (2026-05-21)
+
+
+### Bug Fixes
+
+* **content-section:** display index in multiple columns ([#1563](https://github.com/mdn/fred/issues/1563)) ([77cb0d0](https://github.com/mdn/fred/commit/77cb0d07f9b322e6e9d118932280193cfba5984e))
+
+
+### Miscellaneous
+
+* **deps:** bump @mdn/rari from 0.2.23 to 0.2.24 ([#1594](https://github.com/mdn/fred/issues/1594)) ([f7a9855](https://github.com/mdn/fred/commit/f7a985549bfc357d6b565ca0f17488a4c954d951))
+* **tests:** move from args to commands in cli ([#1590](https://github.com/mdn/fred/issues/1590)) ([f3afadc](https://github.com/mdn/fred/commit/f3afadc5f64d6f02e9cf923d70673adf545b6cc1))
+
 ## [2.6.2](https://github.com/mdn/fred/compare/v2.6.1...v2.6.2) (2026-05-15)
 
 

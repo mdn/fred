@@ -65,7 +65,7 @@ const postcssLoaders = (lit = false) => [
               mixins: {
                 "light-dark":
                   /**
-                   * @param {any} _mixin
+                   * @param {unknown} _mixin
                    * @param {string} property
                    * @param {string} light
                    * @param {string} dark
@@ -111,7 +111,6 @@ const common = {
     assetModuleFilename: "[name].[hash][ext]",
   },
   experiments: {
-    outputModule: true,
     futureDefaults: true,
   },
   optimization: {
@@ -183,6 +182,8 @@ const notServiceWorkerCommon = {
   plugins: [
     /** @type {import("@rspack/core").Plugin} */
     new StatsWriterPlugin({
+      /** @type {import("@rspack/core").StatsValue} */
+      stats: { entrypoints: true },
       fields: ["publicPath", "entrypoints"],
     }),
   ],
@@ -470,6 +471,11 @@ const legacyConfig = merge(
       }),
     ],
     module: {
+      parser: {
+        javascript: {
+          exportsPresence: false,
+        },
+      },
       rules: [
         {
           test: /\.jsx$/,

@@ -13,7 +13,7 @@ export default {
     "no-descending-specificity": null,
     "no-duplicate-selectors": null,
     "order/properties-order": [
-      propertyGroups.map((/** @type {any} */ group) => ({
+      propertyGroups.map((/** @type {Record<string, unknown>} */ group) => ({
         ...group,
         emptyLineBefore: "threshold",
         noEmptyLineBetween: true,
@@ -26,5 +26,6 @@ export default {
     "selector-id-pattern": null,
     "font-family-name-quotes": "always-unless-keyword",
     "at-rule-no-unknown": [true, { ignoreAtRules: ["mixin"] }],
+    "at-rule-prelude-no-invalid": [true, { ignoreAtRules: ["media", "mixin"] }],
   },
 };

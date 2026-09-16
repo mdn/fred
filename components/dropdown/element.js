@@ -21,10 +21,12 @@ import styles from "./element.css?lit";
 export class MDNDropdown extends LitElement {
   static styles = styles;
 
-  static properties = {
-    open: { type: Boolean },
-    loaded: { type: Boolean, reflect: true },
-  };
+  static get properties() {
+    return {
+      open: { type: Boolean },
+      loaded: { type: Boolean, reflect: true },
+    };
+  }
 
   constructor() {
     super();
@@ -42,7 +44,9 @@ export class MDNDropdown extends LitElement {
 
   /** @param {string} name  */
   _slotElements(name) {
-    const slot = this.shadowRoot?.querySelector(`slot[name="${name}"]`);
+    const slot = this.shadowRoot?.querySelector(
+      `slot[name="${CSS.escape(name)}"]`,
+    );
     if (slot instanceof HTMLSlotElement) {
       return slot.assignedElements();
     }

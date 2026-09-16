@@ -19,12 +19,14 @@ export class BreadcrumbsBar extends ServerComponent {
     return html`
       <div class="breadcrumbs-bar" data-scheme=${colorScheme}>
         ${this._renderToggleSidebar(context)} ${Breadcrumbs.render(context)}
-        ${context.renderer === "Doc"
-          ? html`<mdn-collection-save-button
-              doc-url=${context.doc.mdn_url}
-              doc-title=${context.doc.title}
-            ></mdn-collection-save-button>`
-          : nothing}
+        ${
+          context.renderer === "Doc"
+            ? html`<mdn-collection-save-button
+                doc-url=${context.doc.mdn_url}
+                doc-title=${context.doc.title}
+              ></mdn-collection-save-button>`
+            : nothing
+        }
         <mdn-color-theme></mdn-color-theme>
         ${this._renderLanguageSwitcher(context)}
       </div>

@@ -1,5 +1,7 @@
 import { html } from "lit";
 
+import "../observatory-comparison-table/element.js";
+
 /**
  *
  * @param {{result: import("@observatory").Result}} result

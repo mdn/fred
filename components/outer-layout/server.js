@@ -20,9 +20,11 @@ import {
   stylesForComponents,
 } from "./utils.js";
 
+const DEFAULT_LOCALE = "en-US";
+
 export class OuterLayout extends ServerComponent {
   /**
-   * @param {import("@fred").Context} context
+   * @param {import("@fred").RenderContext} context
    * @param {import("lit-html").TemplateResult | import("lit").nothing} markup
    */
   render(context, markup) {
@@ -69,7 +71,7 @@ export class OuterLayout extends ServerComponent {
       .filter((x) => x !== undefined);
 
     const area =
-      context.path.split("/")[3]?.toLowerCase() === "learn_web_development"
+      context.path.split("/", 4)[3]?.toLowerCase() === "learn_web_development"
         ? "learn"
         : undefined;
 
@@ -95,11 +97,13 @@ export class OuterLayout extends ServerComponent {
             content="width=device-width, initial-scale=1.0"
           />
           <title>${context.pageTitle || "MDN"}</title>
-          ${RUNTIME_ENV && runtimeEnvEntries.length > 0
-            ? unsafeHTML(`<script>process = {
+          ${
+            RUNTIME_ENV && runtimeEnvEntries.length > 0
+              ? unsafeHTML(`<script>process = {
   env: ${JSON.stringify(Object.fromEntries(runtimeEnvEntries))}
 };</script>`)
-            : nothing}
+              : nothing
+          }
           ${unsafeHTML(`<script>${inlineScript}</script>`)}
           ${styles.map(
             (path) =>
@@ -116,13 +120,16 @@ export class OuterLayout extends ServerComponent {
                 fetchpriority="low"
               />`,
           )}
-          ${TRANSCEND_AIRGAP_URL &&
-          html`<script
-            data-cfasync="false"
-            data-report-only="on"
-            data-prompt="0"
-            src=${TRANSCEND_AIRGAP_URL}
-          ></script>`}
+          ${
+            TRANSCEND_AIRGAP_URL && context.renderer !== "SpaPlay"
+              ? html`<script
+                  data-cfasync="false"
+                  data-report-only="on"
+                  data-prompt="0"
+                  src=${TRANSCEND_AIRGAP_URL}
+                ></script>`
+              : nothing
+          }
           ${scripts?.map(
             (path) => html`<script src=${path} type="module"></script>`,
           )}
@@ -136,8 +143,12 @@ export class OuterLayout extends ServerComponent {
           <link
             rel="search"
             type="application/opensearchdescription+xml"
-            href="/opensearch.xml"
-            title=${context.l10n("brand-web-docs")`MDN Web Docs`}
+            href=${`/opensearch.xml?locale=${context.locale}`}
+            title=${
+              context.locale === DEFAULT_LOCALE
+                ? "MDN"
+                : `MDN (${context.locale})`
+            }
           />
           <link
             rel="alternate"
@@ -152,7 +163,7 @@ export class OuterLayout extends ServerComponent {
   }
 
   /**
-   * @param {import("@fred").Context} context
+   * @param {import("@fred").RenderContext} context
    */
   _renderMeta(context) {
     const noIndexing =

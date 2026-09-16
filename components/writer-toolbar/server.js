@@ -18,17 +18,19 @@ export class WriterToolbar extends ServerComponent {
         href: prodUrl.toString(),
         variant: "plain",
       })}
-      ${context.localServer
-        ? html`
-            <mdn-writer-open-editor
-              filepath=${`${folder}/${filename}`}
-            ></mdn-writer-open-editor>
-            <mdn-writer-reload></mdn-writer-reload>
-            <mdn-record-visit
-              page-title=${context.doc.title}
-            ></mdn-record-visit>
-          `
-        : nothing}
+      ${
+        context.localServer
+          ? html`
+              <mdn-writer-open-editor
+                filepath=${`${folder}/${filename}`}
+              ></mdn-writer-open-editor>
+              <mdn-writer-reload></mdn-writer-reload>
+              <mdn-record-visit
+                page-title=${context.doc.title}
+              ></mdn-record-visit>
+            `
+          : nothing
+      }
     </div>`;
   }
 }

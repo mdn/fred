@@ -37,7 +37,7 @@ export function PublishDate(_context, { date }) {
   }
   return html`
     <time class="date">
-      ${Intl.DateTimeFormat(undefined, { dateStyle: "long" }).format(
+      ${new Intl.DateTimeFormat(undefined, { dateStyle: "long" }).format(
         new Date(date),
       )}
     </time>

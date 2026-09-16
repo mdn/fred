@@ -45,12 +45,16 @@ export class CurriculumModule extends ServerComponent {
             >
               ${doc?.topic ? renderTopicIcon(context, doc.topic) : nothing}
               <h1>${doc?.title}</h1>
-              ${doc?.topic
-                ? html`<p class="module-topic">${doc.topic}</p>`
-                : nothing}
-              ${doc?.group
-                ? html`<p class="module-group">${doc.group}</p>`
-                : nothing}
+              ${
+                doc?.topic
+                  ? html`<p class="module-topic">${doc.topic}</p>`
+                  : nothing
+              }
+              ${
+                doc?.group
+                  ? html`<p class="module-group">${doc.group}</p>`
+                  : nothing
+              }
             </header>
             <aside class="layout__right-sidebar curriculum-layout__toc">
               ${toc}
@@ -86,20 +90,24 @@ export class CurriculumModule extends ServerComponent {
 
     return html`
       <section class="curriculum-prev-next">
-        ${prev
-          ? Button.render(context, {
-              label: `Previous: ${prev.title}`,
-              icon: addAttrs(PrevIcon, { width: "16px", height: "16px" }),
-              href: prev.url,
-            })
-          : nothing}
-        ${next
-          ? Button.render(context, {
-              label: `Next: ${next.title}`,
-              icon: addAttrs(NextIcon, { width: "16px", height: "16px" }),
-              href: next.url,
-            })
-          : nothing}
+        ${
+          prev
+            ? Button.render(context, {
+                label: `Previous: ${prev.title}`,
+                icon: addAttrs(PrevIcon, { width: "16px", height: "16px" }),
+                href: prev.url,
+              })
+            : nothing
+        }
+        ${
+          next
+            ? Button.render(context, {
+                label: `Next: ${next.title}`,
+                icon: addAttrs(NextIcon, { width: "16px", height: "16px" }),
+                href: next.url,
+              })
+            : nothing
+        }
       </section>
     `;
   }

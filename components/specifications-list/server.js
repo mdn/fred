@@ -57,7 +57,7 @@ export class SpecificationsList extends ServerComponent {
    * @param {string} [title]
    */
   renderLink(url, title) {
-    const hash = url.split("#")[1];
+    const hash = url.split("#", 2)[1];
 
     const label = [
       title && html`${title}`,

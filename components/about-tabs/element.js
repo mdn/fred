@@ -5,9 +5,11 @@ import styles from "./element.css?lit";
 export class MDNAboutTabs extends LitElement {
   static styles = styles;
 
-  static properties = {
-    active_index: { type: Number },
-  };
+  static get properties() {
+    return {
+      active_index: { type: Number },
+    };
+  }
 
   constructor() {
     super();
@@ -84,17 +86,7 @@ export class MDNAboutTabs extends LitElement {
 
       const handleClick = (/** @type {Event} */ e) => {
         e.preventDefault();
-        if (tabEl.dataset.panelId) {
-          globalThis.location.hash = tabEl.dataset.panelId;
-        }
-        this.active_index = i;
-
-        requestAnimationFrame(() => {
-          const panel = panels[this.active_index];
-          if (panel && panel.getBoundingClientRect().top < 0) {
-            panel.scrollIntoView({ block: "start", inline: "nearest" });
-          }
-        });
+        this._activateTab(i, tabs, panels);
       };
 
       // @ts-expect-error
@@ -102,6 +94,21 @@ export class MDNAboutTabs extends LitElement {
       tabEl.addEventListener("click", handleClick);
       // @ts-expect-error
       tabEl.__handleClick = handleClick;
+
+      const handleKeydown = (/** @type {KeyboardEvent} */ e) => {
+        const nextIndex = this._nextTabIndex(e, i, tabs.length);
+        if (nextIndex === null) {
+          return;
+        }
+        e.preventDefault();
+        this._activateTab(nextIndex, tabs, panels);
+      };
+
+      // @ts-expect-error
+      tabEl.removeEventListener("keydown", tabEl.__handleKeydown);
+      tabEl.addEventListener("keydown", handleKeydown);
+      // @ts-expect-error
+      tabEl.__handleKeydown = handleKeydown;
     }
 
     for (const [i, panelEl] of panels.entries()) {
@@ -110,6 +117,57 @@ export class MDNAboutTabs extends LitElement {
       panelEl.classList.toggle("active", i === this.active_index);
       panelEl.classList.add("tabpanel");
     }
+  }
+
+  /**
+   * Decide which tab should become active in response to a keydown on the
+   * currently focused tab. Return the target tab's index, or `null` to let the
+   * key through unhandled (e.g. it isn't a navigation key we care about).
+   *
+   * @param {KeyboardEvent} e - the keydown event on the focused tab
+   * @param {number} currentIndex - index of the currently focused tab
+   * @param {number} count - total number of tabs
+   * @returns {number | null}
+   */
+  _nextTabIndex(e, currentIndex, count) {
+    // Left/Right only, to stay consistent with aria-orientation="horizontal".
+    // The observatory-results tablist uses native radios, which additionally
+    // move on Up/Down, but those don't apply to a horizontal tablist.
+    if (e.key === "ArrowRight") {
+      return (currentIndex + 1 + count) % count;
+    }
+    if (e.key === "ArrowLeft") {
+      return (currentIndex - 1 + count) % count;
+    }
+    return null;
+  }
+
+  /**
+   * Select the tab at `index`, sync the URL hash, move keyboard focus to it,
+   * and scroll its panel into view when it sits above the viewport. The scroll
+   * is deferred to the next frame because setting `active_index` reveals the
+   * panel asynchronously (Lit `updated` → `_wireSlots`), so the panel is still
+   * `display: none` at the moment `location.hash` is assigned.
+   * @param {number} index
+   * @param {HTMLElement[]} tabs
+   * @param {HTMLElement[]} panels
+   */
+  _activateTab(index, tabs, panels) {
+    this.active_index = index;
+    const nextTab = tabs[index];
+    if (nextTab instanceof HTMLElement) {
+      if (nextTab.dataset.panelId) {
+        globalThis.location.hash = nextTab.dataset.panelId;
+      }
+      nextTab.focus();
+    }
+
+    requestAnimationFrame(() => {
+      const panel = panels[this.active_index];
+      if (panel && panel.getBoundingClientRect().top < 0) {
+        panel.scrollIntoView({ block: "start", inline: "nearest" });
+      }
+    });
   }
 
   /** @param {Map<string | number | symbol, unknown>} changed */
@@ -122,7 +180,7 @@ export class MDNAboutTabs extends LitElement {
   render() {
     return html`
       <div class="tablist-wrapper">
-        <div class="tablist">
+        <div class="tablist" role="tablist" aria-orientation="horizontal">
           <slot name="tab"></slot>
         </div>
       </div>

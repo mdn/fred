@@ -6,11 +6,12 @@ import { Tooltip } from "./tooltip.js";
 import { Trend } from "./trend.js";
 
 import "../observatory-rescan-button/element.js";
+import "../observatory-human-duration/element.js";
 import "../dropdown/element.js";
 
 /**
  *
- * @param {{result: import("@observatory").Result, host: string, rescan: Function}} props
+ * @param {{result: import("@observatory").Result, host: string, rescan: (event: Event) => void}} props
  * @returns {import("@lit").TemplateResult}
  */
 export function Rating({ result, host, rescan }) {

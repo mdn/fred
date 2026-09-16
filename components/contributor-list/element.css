@@ -14,6 +14,7 @@ ul {
   grid-template-columns: repeat(auto-fit, minmax(var(--li-size), 1fr));
 
   gap: 2rem 1rem;
+
   align-content: start;
   justify-items: center;
 

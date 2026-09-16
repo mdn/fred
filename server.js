@@ -47,7 +47,7 @@ if (process.env.NODE_ENV === "production") {
 /**
  * @param {Request} req
  * @param {Response} res
- * @param {import("@rari").BuiltPage} page
+ * @param {import("@fred").RenderPage} page
  */
 async function serverRenderMiddleware(req, res, page) {
   try {
@@ -64,7 +64,7 @@ async function serverRenderMiddleware(req, res, page) {
       /** @type {Stats} */
       const stats = res.locals.webpack.devMiddleware.stats;
 
-      const compilationStats = stats.toJson().children;
+      const compilationStats = stats.toJson({ entrypoints: true }).children;
       if (!compilationStats) {
         throw new Error("cannot parse the rspack config, did you modify it?");
       }
@@ -147,6 +147,11 @@ export async function startServer() {
 
   app.use("/", express.static(FRED_BUILD_ROOT));
 
+  // Don't fall through to rari, express.static above should've served it:
+  app.use("/static/*_", (_req, res) => {
+    res.writeHead(404).end();
+  });
+
   app.get("/", async (_req, res, _next) => {
     res.writeHead(302, {
       Location: "/en-US/",
@@ -154,12 +159,18 @@ export async function startServer() {
     res.end();
   });
 
-  const RUMBA_URL = process.env.RUMBA_URL;
+  const CF_URL = process.env.CF_URL;
   app.all(
-    ["/api/*_", "/users/*_"],
-    RUMBA_URL
+    [
+      "/opensearch.xml",
+      "/api/v1/search/suggestions",
+      "/api/v1/search/go",
+      "/pong/*_",
+      "/pimg/*_",
+    ],
+    CF_URL
       ? createProxyMiddleware({
-          target: RUMBA_URL,
+          target: CF_URL,
           changeOrigin: true,
           proxyTimeout: 20_000,
           timeout: 20_000,
@@ -172,12 +183,12 @@ export async function startServer() {
         },
   );
 
-  const CF_URL = process.env.CF_URL;
+  const RUMBA_URL = process.env.RUMBA_URL;
   app.all(
-    ["/pong/*_", "/pimg/*_"],
-    CF_URL
+    ["/api/*_", "/users/*_"],
+    RUMBA_URL
       ? createProxyMiddleware({
-          target: CF_URL,
+          target: RUMBA_URL,
           changeOrigin: true,
           proxyTimeout: 20_000,
           timeout: 20_000,
@@ -228,6 +239,26 @@ export async function startServer() {
     next();
   });
 
+  app.get("/sandbox", (_req, res) => {
+    res.redirect(302, "/en-US/sandbox");
+  });
+
+  app.get(
+    ["/:locale/sandbox", "/:locale/sandbox/:component"],
+    async (req, res) => {
+      const { component } = req.params;
+
+      await serverRenderMiddleware(req, res, {
+        renderer: "Sandbox",
+        pageTitle: component ? `${component} sandbox` : "Fred sandbox",
+        url: req.path,
+        sandbox: {
+          component,
+        },
+      });
+    },
+  );
+
   app.use(
     createProxyMiddleware({
       target: RARI_URL,
@@ -240,7 +271,7 @@ export async function startServer() {
       selfHandleResponse: true,
       on: {
         proxyReq: async (req) => {
-          const locale = req.path.split("/")[1];
+          const locale = req.path.split("/", 2)[1];
           if (locale && /^q[a-t][a-z]$/.test(locale)) {
             // if the locale matches a qaa...qtz private use language tag,
             // which we use for testing fluent with pseudo-locales,
@@ -251,14 +282,6 @@ export async function startServer() {
         proxyRes: async (proxyRes, req, res) => {
           const contentType = proxyRes.headers["content-type"] || "";
           const statusCode = proxyRes.statusCode || 500;
-
-          if (req.path === "/sandbox") {
-            return serverRenderMiddleware(req, res, {
-              // @ts-expect-error
-              renderer: "Sandbox",
-              pageTitle: "Fred sandbox",
-            });
-          }
 
           if (
             (!contentType || contentType.includes("text/plain")) &&
