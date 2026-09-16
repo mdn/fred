@@ -1,7 +1,6 @@
 {
   "es": [
     "Web/API/Web_Animations_API/Using_the_Web_Animations_API",
-    "Web/CSS/Guides",
     "Web/CSS/Guides/Backgrounds_and_borders/Box-shadow_generator",
     "Web/CSS/Guides/Colors/Applying_color",
     "Web/CSS/Guides/Colors/Color_mixer",
@@ -10,7 +9,6 @@
     "Web/CSS/How_to/Layout_cookbook/Center_an_element",
     "Web/CSS/How_to/Layout_cookbook/Column_layouts",
     "Web/CSS/Reference/At-rules",
-    "Web/CSS/Reference/Properties",
     "Web/CSS/Reference/Selectors",
     "Web/CSS/Reference/Values",
     "Web/HTML/Guides",
@@ -93,7 +91,7 @@
     "Web/Privacy",
     "Web/WebDriver"
   ],
-  "zh-CN": ["Web/CSS/Reference/At-rules"],
+  "zh-CN": [],
   "zh-TW": [
     "Learn_web_development/Core",
     "Learn_web_development/Getting_started",

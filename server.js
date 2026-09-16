@@ -6,7 +6,7 @@ import { Worker } from "node:worker_threads";
 import cookieParser from "cookie-parser";
 import express from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
-import openEditor from "open-editor";
+import { getEditorInfo } from "open-editor";
 
 import { FRED_BUILD_ROOT } from "./build/env.js";
 import {
@@ -47,7 +47,7 @@ if (process.env.NODE_ENV === "production") {
 /**
  * @param {Request} req
  * @param {Response} res
- * @param {import("@rari").BuiltPage} page
+ * @param {import("@fred").RenderPage} page
  */
 async function serverRenderMiddleware(req, res, page) {
   try {
@@ -64,7 +64,7 @@ async function serverRenderMiddleware(req, res, page) {
       /** @type {Stats} */
       const stats = res.locals.webpack.devMiddleware.stats;
 
-      const compilationStats = stats.toJson().children;
+      const compilationStats = stats.toJson({ entrypoints: true }).children;
       if (!compilationStats) {
         throw new Error("cannot parse the rspack config, did you modify it?");
       }
@@ -147,12 +147,41 @@ export async function startServer() {
 
   app.use("/", express.static(FRED_BUILD_ROOT));
 
+  // Don't fall through to rari, express.static above should've served it:
+  app.use("/static/*_", (_req, res) => {
+    res.writeHead(404).end();
+  });
+
   app.get("/", async (_req, res, _next) => {
     res.writeHead(302, {
       Location: "/en-US/",
     });
     res.end();
   });
+
+  const CF_URL = process.env.CF_URL;
+  app.all(
+    [
+      "/opensearch.xml",
+      "/api/v1/search/suggestions",
+      "/api/v1/search/go",
+      "/pong/*_",
+      "/pimg/*_",
+    ],
+    CF_URL
+      ? createProxyMiddleware({
+          target: CF_URL,
+          changeOrigin: true,
+          proxyTimeout: 20_000,
+          timeout: 20_000,
+          headers: {
+            Connection: "keep-alive",
+          },
+        })
+      : (_req, res) => {
+          res.writeHead(502).end();
+        },
+  );
 
   const RUMBA_URL = process.env.RUMBA_URL;
   app.all(
@@ -172,26 +201,8 @@ export async function startServer() {
         },
   );
 
-  const CF_URL = process.env.CF_URL;
-  app.all(
-    ["/pong/*_", "/pimg/*_"],
-    CF_URL
-      ? createProxyMiddleware({
-          target: CF_URL,
-          changeOrigin: true,
-          proxyTimeout: 20_000,
-          timeout: 20_000,
-          headers: {
-            Connection: "keep-alive",
-          },
-        })
-      : (_req, res) => {
-          res.writeHead(502).end();
-        },
-  );
-
   if (WRITER_MODE) {
-    app.get("/_open", async (req, _res) => {
+    app.get("/_open", async (req, res) => {
       const { filepath } = req.query;
       const { CONTENT_ROOT, CONTENT_TRANSLATED_ROOT } = process.env;
       if (typeof filepath === "string") {
@@ -201,8 +212,19 @@ export async function startServer() {
             : CONTENT_TRANSLATED_ROOT) || "",
           filepath,
         );
-        openEditor([absolutePath]);
+        console.log(
+          `Attempting to open ${absolutePath} with ${process.env.EDITOR}`,
+        );
+        const { binary, arguments: args } = getEditorInfo([absolutePath]);
+        const child = spawn(binary, args, { detached: true, stdio: "ignore" });
+
+        child.on("error", (error) => {
+          console.error("Failed to open editor:", error);
+          return;
+        });
+        child.unref();
       }
+      res.sendStatus(204);
     });
   }
 
@@ -217,6 +239,26 @@ export async function startServer() {
     next();
   });
 
+  app.get("/sandbox", (_req, res) => {
+    res.redirect(302, "/en-US/sandbox");
+  });
+
+  app.get(
+    ["/:locale/sandbox", "/:locale/sandbox/:component"],
+    async (req, res) => {
+      const { component } = req.params;
+
+      await serverRenderMiddleware(req, res, {
+        renderer: "Sandbox",
+        pageTitle: component ? `${component} sandbox` : "Fred sandbox",
+        url: req.path,
+        sandbox: {
+          component,
+        },
+      });
+    },
+  );
+
   app.use(
     createProxyMiddleware({
       target: RARI_URL,
@@ -229,7 +271,7 @@ export async function startServer() {
       selfHandleResponse: true,
       on: {
         proxyReq: async (req) => {
-          const locale = req.path.split("/")[1];
+          const locale = req.path.split("/", 2)[1];
           if (locale && /^q[a-t][a-z]$/.test(locale)) {
             // if the locale matches a qaa...qtz private use language tag,
             // which we use for testing fluent with pseudo-locales,
@@ -240,14 +282,6 @@ export async function startServer() {
         proxyRes: async (proxyRes, req, res) => {
           const contentType = proxyRes.headers["content-type"] || "";
           const statusCode = proxyRes.statusCode || 500;
-
-          if (req.path === "/sandbox") {
-            return serverRenderMiddleware(req, res, {
-              // @ts-expect-error
-              renderer: "Sandbox",
-              pageTitle: "Fred sandbox",
-            });
-          }
 
           if (
             (!contentType || contentType.includes("text/plain")) &&

@@ -170,7 +170,9 @@ export class MDNSurvey extends L10nMixin(LitElement) {
         this.#onSubmitted();
       }
     };
-    window.addEventListener("message", this._messageListener, false);
+    window.addEventListener("message", this._messageListener, {
+      capture: false,
+    });
   }
 
   #removeMessageListener() {
@@ -209,31 +211,37 @@ export class MDNSurvey extends L10nMixin(LitElement) {
             @click=${this.#dismiss}
           ></mdn-button>
         </header>
-        ${this._survey.link
-          ? html`<a
-              class="external"
-              href=${this._source}
-              target="_blank"
-              title=${this.l10n(
-                "survey-take-survey-opens-in-a-new-tab",
-              )`Take survey (Opens in a new tab)`}
-              @click=${this.#onLinkClick}
-              >${this._survey.question}</a
-            >`
-          : html`<details ${ref(this._detailsRef)} @toggle=${this.#onToggle}>
-              <summary>${this._survey.question}</summary>
-              ${this._isOpen && this._source
-                ? html`
-                    <iframe
-                      title=${ifDefined(this._survey.question)}
-                      src=${this._source}
-                    ></iframe>
-                  `
-                : nothing}
-            </details>`}
-        ${this._survey.footnote
-          ? html` <footer>(${this._survey.footnote})</footer> `
-          : nothing}
+        ${
+          this._survey.link
+            ? html`<a
+                class="external"
+                href=${this._source}
+                target="_blank"
+                title=${this.l10n(
+                  "survey-take-survey-opens-in-a-new-tab",
+                )`Take survey (Opens in a new tab)`}
+                @click=${this.#onLinkClick}
+                >${this._survey.question}</a
+              >`
+            : html`<details ${ref(this._detailsRef)} @toggle=${this.#onToggle}>
+                <summary>${this._survey.question}</summary>
+                ${
+                  this._isOpen && this._source
+                    ? html`
+                        <iframe
+                          title=${ifDefined(this._survey.question)}
+                          src=${this._source}
+                        ></iframe>
+                      `
+                    : nothing
+                }
+              </details>`
+        }
+        ${
+          this._survey.footnote
+            ? html` <footer>(${this._survey.footnote})</footer> `
+            : nothing
+        }
       </div>
     `;
   }

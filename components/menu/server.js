@@ -64,94 +64,108 @@ export class Menu extends ServerComponent {
         ${TABS.map((tab) => {
           currentTab = tab.id;
           const result = html`<div class="menu__tab" data-section=${tab.id}>
-            ${"href" in tab
-              ? html`<a
-                  class="menu__tab-link"
-                  href=${tab.href}
-                  data-glean-id=${`menu_click_link: top-level -> ${tab.href}`}
-                  >${context.l10n(tab.buttonL10nId)}</a
-                >`
-              : html`<mdn-dropdown>
-                  <button class="menu__tab-button" type="button" slot="button">
-                    ${typeof tab.buttonL10nId === "string"
-                      ? html`<span class="menu__tab-label"
-                          >${context.l10n(tab.buttonL10nId)}</span
-                        >`
-                      : html`<span class="menu__tab-label" data-type="long"
-                            >${context.l10n(tab.buttonL10nId.long)}</span
-                          ><span class="menu__tab-label" data-type="short"
-                            >${context.l10n(tab.buttonL10nId.short)}</span
-                          >`}
-                  </button>
-                  <div class="menu__panel" slot="dropdown">
-                    <p class="menu__panel-title">
-                      ${tab.panelTitle.slug
-                        ? link(
-                            tab.panelTitle.slug,
-                            context.l10n(tab.panelTitle.l10nId),
-                            { primary: true },
-                          )
-                        : context.l10n(tab.panelTitle.l10nId)}
-                    </p>
-                    <div class="menu__panel-content">
-                      ${tab.panelGroups.map((group) => {
-                        const items = html`<ul>
-                          ${group.items.map(
-                            (item) =>
-                              html`<li>
-                                ${"render" in item
-                                  ? item.render()
-                                  : "slug" in item
-                                    ? link(
-                                        item.slug,
-                                        context.l10n(item.l10nId),
-                                        {
-                                          label: item.labelL10nId
-                                            ? context.l10n(item.labelL10nId)
-                                            : undefined,
-                                        },
-                                      )
-                                    : html`<a
-                                        class=${ifDefined(
-                                          [
-                                            item.icon && "menu__panel-icon",
-                                            (!item.href.startsWith("/") &&
-                                              "external") ||
-                                              (context.locale !== "en-US" &&
-                                                "only-in-en-us"),
-                                          ]
-                                            .filter(Boolean)
-                                            .join(" "),
-                                        )}
-                                        data-icon=${ifDefined(item.icon)}
-                                        href=${item.href}
-                                        aria-label=${ifDefined(
-                                          item.labelL10nId
-                                            ? context.l10n(item.labelL10nId)
-                                            : undefined,
-                                        )}
-                                        title=${ifDefined(
-                                          item.labelL10nId
-                                            ? context.l10n(item.labelL10nId)
-                                            : undefined,
-                                        )}
-                                        data-glean-id=${gleanId(item.href)}
-                                        >${context.l10n(item.l10nId)}</a
-                                      >`}
-                              </li>`,
-                          )}
-                        </ul>`;
+            ${
+              "href" in tab
+                ? html`<a
+                    class="menu__tab-link"
+                    href=${tab.href}
+                    data-glean-id=${`menu_click_link: top-level -> ${tab.href}`}
+                    >${context.l10n(tab.buttonL10nId)}</a
+                  >`
+                : html`<mdn-dropdown
+                    data-glean-toggle-open=${`menu_toggle: ${tab.id}`}
+                  >
+                    <button
+                      class="menu__tab-button"
+                      type="button"
+                      slot="button"
+                    >
+                      ${
+                        typeof tab.buttonL10nId === "string"
+                          ? html`<span class="menu__tab-label"
+                              >${context.l10n(tab.buttonL10nId)}</span
+                            >`
+                          : html`<span class="menu__tab-label" data-type="long"
+                                >${context.l10n(tab.buttonL10nId.long)}</span
+                              ><span class="menu__tab-label" data-type="short"
+                                >${context.l10n(tab.buttonL10nId.short)}</span
+                              >`
+                      }
+                    </button>
+                    <div class="menu__panel" slot="dropdown">
+                      <p class="menu__panel-title">
+                        ${
+                          tab.panelTitle.slug
+                            ? link(
+                                tab.panelTitle.slug,
+                                context.l10n(tab.panelTitle.l10nId),
+                                { primary: true },
+                              )
+                            : context.l10n(tab.panelTitle.l10nId)
+                        }
+                      </p>
+                      <div class="menu__panel-content">
+                        ${tab.panelGroups.map((group) => {
+                          const items = html`<ul>
+                            ${group.items.map(
+                              (item) =>
+                                html`<li>
+                                  ${
+                                    "render" in item
+                                      ? item.render()
+                                      : "slug" in item
+                                        ? link(
+                                            item.slug,
+                                            context.l10n(item.l10nId),
+                                            {
+                                              label: item.labelL10nId
+                                                ? context.l10n(item.labelL10nId)
+                                                : undefined,
+                                            },
+                                          )
+                                        : html`<a
+                                            class=${ifDefined(
+                                              [
+                                                item.icon && "menu__panel-icon",
+                                                (!item.href.startsWith("/") &&
+                                                  "external") ||
+                                                  (context.locale !== "en-US" &&
+                                                    "only-in-en-us"),
+                                              ]
+                                                .filter(Boolean)
+                                                .join(" "),
+                                            )}
+                                            data-icon=${ifDefined(item.icon)}
+                                            href=${item.href}
+                                            aria-label=${ifDefined(
+                                              item.labelL10nId
+                                                ? context.l10n(item.labelL10nId)
+                                                : undefined,
+                                            )}
+                                            title=${ifDefined(
+                                              item.labelL10nId
+                                                ? context.l10n(item.labelL10nId)
+                                                : undefined,
+                                            )}
+                                            data-glean-id=${gleanId(item.href)}
+                                            >${context.l10n(item.l10nId)}</a
+                                          >`
+                                  }
+                                </li>`,
+                            )}
+                          </ul>`;
 
-                        return group.titleL10nId
-                          ? html`<dl>
-                              <dt>${context.l10n(group.titleL10nId)}</dt>
-                              <dd>${items}</dd>
-                            </dl>`
-                          : items;
-                      })}
+                          return group.titleL10nId
+                            ? html`<dl>
+                                <dt>${context.l10n(group.titleL10nId)}</dt>
+                                <dd>${items}</dd>
+                              </dl>`
+                            : items;
+                        })}
+                      </div>
                     </div>
-                  </div>
-                </mdn-dropdown>`}
+                  </mdn-dropdown>`
+            }
           </div>`;
           currentTab = null;
           return result;

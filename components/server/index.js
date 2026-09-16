@@ -13,6 +13,9 @@ export class ServerComponent {
   /** @type {string | undefined} */
   static inlineScript;
 
+  /** `true` if we're rendering in a renderSimplified context */
+  simplifiedMode = false;
+
   /**
    * @template {typeof ServerComponent} T
    * @this {T}
@@ -28,6 +31,7 @@ export class ServerComponent {
     const component = new this();
 
     if ("renderSimplified" in asyncStore) {
+      component.simplifiedMode = true;
       return component.renderSimplified(...args);
     }
 
@@ -72,19 +76,23 @@ export class ServerComponent {
     return res;
   }
 
+  /* eslint-disable jsdoc/reject-any-type -- abstract render is overridden by subclasses (needs a supertype) yet consumed via generic `ReturnType<...>` (needs `any`); neither `unknown` nor `never` satisfies both */
   /**
    * @abstract
    * @param {...any} _args
    * @returns {any}
    */
+  /* eslint-enable jsdoc/reject-any-type */
   render(..._args) {
     throw new Error("Must be implemented by subclass");
   }
 
+  /* eslint-disable jsdoc/reject-any-type -- abstract render is overridden by subclasses (needs a supertype) yet consumed via generic `ReturnType<...>` (needs `any`); neither `unknown` nor `never` satisfies both */
   /**
    * @param {...any} args
    * @returns {any}
    */
+  /* eslint-enable jsdoc/reject-any-type */
   renderSimplified(...args) {
     return this.render(...args);
   }

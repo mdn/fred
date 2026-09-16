@@ -14,10 +14,12 @@ import "../placement-no/element.js";
  * @import * as Placements from "./types.js";
  */
 
+/* eslint-disable jsdoc/reject-any-type -- TS mixin constructors require `any[]` (error TS2545) */
 /**
  * @template {new (...args: any[]) => LitElement} TBase
  * @param {TBase} Base
  */
+/* eslint-enable jsdoc/reject-any-type */
 export const PlacementMixin = (Base) =>
   class PlacementElement extends Base {
     static ssr = false;
@@ -30,10 +32,12 @@ export const PlacementMixin = (Base) =>
       },
     });
 
+    /* eslint-disable jsdoc/reject-any-type -- TS mixin constructors require `any[]` (error TS2545) */
     /**
      *
      * @param  {...any} args
      */
+    /* eslint-enable jsdoc/reject-any-type */
     constructor(...args) {
       super(...args);
       /**

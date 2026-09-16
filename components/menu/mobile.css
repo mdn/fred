@@ -18,6 +18,7 @@
     display: flex;
 
     column-gap: 0.25rem;
+
     align-items: center;
 
     padding: var(--menu-button-padding);

@@ -186,6 +186,7 @@ export class Footer extends ServerComponent {
                     rel="noopener"
                     aria-label=${item.ariaLabel}
                     data-icon=${item.icon}
+                    data-glean-id=${`footer: social -> ${item.icon}`}
                   ></a>
                 </li>
               `,
@@ -206,6 +207,7 @@ export class Footer extends ServerComponent {
                             class=${link.external ? "external" : ""}
                             target=${link.external ? "_blank" : undefined}
                             rel=${link.external ? "noopener" : undefined}
+                            data-glean-id=${`footer: link -> ${link.href}`}
                           >
                             ${link.text}
                           </a>
@@ -230,7 +232,10 @@ export class Footer extends ServerComponent {
             ${mozillaLinks(context).map(
               (item) => html`
                 <li>
-                  <a href=${item.href} class=${item.external ? "external" : ""}
+                  <a
+                    href=${item.href}
+                    class=${item.external ? "external" : ""}
+                    data-glean-id=${`footer: mozilla -> ${item.href}`}
                     >${item.text}</a
                   >
                 </li>
@@ -238,13 +243,6 @@ export class Footer extends ServerComponent {
             )}
           </ul>
           <p>
-            ${context.l10n.raw({
-              id: "footer-mofo",
-              elements: {
-                moco: { tag: "a", href: "https://www.mozilla.org/" },
-                mofo: { tag: "a", href: "https://foundation.mozilla.org/" },
-              },
-            })}<br />
             ${context.l10n.raw({
               id: "footer-copyright",
               args: {

@@ -4,45 +4,63 @@ import { ServerComponent } from "../server/index.js";
 
 import { SandboxComponent } from "./class.js";
 
-export class Sandbox extends ServerComponent {
-  render() {
-    // @ts-expect-error
-    // eslint-disable-next-line no-undef
-    const modulesContext = require.context("../", true, /\/sandbox\.js$/);
-    // @ts-expect-error
-    const modules = modulesContext.keys().map((key) => modulesContext(key));
+/**
+ * @param {unknown} value
+ * @returns {value is typeof SandboxComponent}
+ */
+function isSandboxComponent(value) {
+  return Object.getPrototypeOf(value) === SandboxComponent;
+}
 
-    /** @type {(typeof SandboxComponent)[]} */
-    // @ts-expect-error
-    const components = modules.flatMap((module) =>
-      Object.values(module).filter(
-        (exported) => Object.getPrototypeOf(exported) === SandboxComponent,
-      ),
+export class Sandbox extends ServerComponent {
+  /**
+   * @param {import("@fred").SandboxContext} context
+   */
+  render(context) {
+    const modules = /** @type {Record<string, Record<string, unknown>>} */ (
+      import.meta.glob("../**/sandbox.js", { eager: true })
     );
-    const componentMap = Object.fromEntries(
-      components.map((component) => [
-        component.name.replace(/Sandbox$/, ""),
-        component,
-      ]),
+    const componentMap = new Map(
+      Object.entries(modules).flatMap(([key, module]) => {
+        const component = Object.values(module).find(isSandboxComponent);
+        const name = key.split("/").at(-2);
+        return name && component ? [[name, component]] : [];
+      }),
     );
+
+    const componentNames = [...componentMap.keys()].toSorted();
+    const selectedName = context.sandbox.component;
+    const selectedComponent = selectedName
+      ? componentMap.get(selectedName)
+      : undefined;
 
     return html`
       <body class="sandbox">
         <div class="sandbox__sidebar">
           <mdn-color-theme></mdn-color-theme>
           <ul>
-            ${Object.keys(componentMap).map(
-              (name) => html`<li><a href=${`#${name}`}>${name}</a></li>`,
+            ${componentNames.map(
+              (name) =>
+                html`<li>
+                  <a href=${`/${context.locale}/sandbox/${name}`}>${name}</a>
+                </li>`,
             )}
           </ul>
         </div>
-        ${Object.entries(componentMap).map(
-          ([name, component]) =>
-            html`<section class="sandbox__section" id=${name}>
-              <h1>${name}</h1>
-              ${component.render()}
-            </section>`,
-        )}
+        <main id="host">
+          ${
+            selectedComponent
+              ? html`<h1>${selectedName}</h1>
+                  ${selectedComponent.render(context)}`
+              : selectedName
+                ? html`<h1>Sandbox not found</h1>
+                    <p>
+                      No sandbox named <code>${selectedName}</code> exists.
+                    </p>`
+                : html`<h1>Fred sandbox</h1>
+                    <p>Select a component to render its sandbox.</p>`
+          }
+        </main>
       </body>
     `;
   }

@@ -10,16 +10,23 @@ baseline-not-extra = This feature is not Baseline because it does not work in so
 baseline-supported-in = Supported in { $browsers }
 baseline-unsupported-in = Not widely supported in { $browsers }
 baseline-supported-and-unsupported-in = Supported in { $supported }, but not widely supported in { $unsupported }
+baseline-signals = Want more browser support for this feature? <a data-l10n-name="link">Tell us why.</a>
 homepage-hero-title = Resources for Developers,<br> by Developers
+playground-user-shared-warning = This is a user-shared playground.<br>Always inspect the code before running it.
 homepage-hero-description = Documenting <a data-l10n-name="css">CSS</a>, <a data-l10n-name="html">HTML</a>, and <a data-l10n-name="js">JavaScript</a>, since 2005.
 not-found-title = Page not found
 not-found-description = Sorry, the page <code data-l10n-name="url">{ $url }</code> could not be found.
 not-found-fallback-english = <strong data-l10n-name="strong">Good news:</strong> The page you requested exists in <em data-l10n-name="em">English</em>.
 not-found-fallback-search = The page you requested doesn't exist, but you could try a site search for:
 not-found-back = Go back to the home page
-footer-mofo = Visit <a data-l10n-name="moco">Mozilla Corporation’s</a> not-for-profit parent, the <a data-l10n-name="mofo">Mozilla Foundation</a>.
 footer-copyright = Portions of this content are ©1998–{ $year } by individual mozilla.org contributors. Content available under <a data-l10n-name="cc">a Creative Commons license</a>.
 search-modal-site-search = Site search for <em>{ $query }</em>
+search-modal-results-status =
+    { $results ->
+        [0] No results found.
+        [one] { $results } result available.
+       *[other] { $results } results available.
+    }
 site-search-search-stats = Found { $results } documents.
 site-search-suggestion-matches =
     { $relation ->
@@ -50,41 +57,30 @@ obs-mdn = The { -brand-name-obs } provides effective security insights, guided b
 compat-browser-version-date = { $browser } { $version } – Release date: { $date }
 compat-browser-version-released = Release date: { $date }
 compat-link-source-title = File: { $filename }
-compat-support-prefix = Implemented with the vendor prefix: { $prefix }
-compat-support-altname = Alternate name: { $altname }
+compat-branch-prefix = Prefix: <code data-l10n-name="prefix">{ $prefix }</code>
+compat-branch-altname = Alternate name: <code data-l10n-name="altname">{ $altname }</code>
+compat-branch-prefix-altname = Prefix: <code data-l10n-name="prefix">{ $prefix }</code>, alternate name: <code data-l10n-name="altname">{ $altname }</code>
 compat-support-removed = Removed in { $version } and later
 compat-support-see-impl-url = See <a data-l10n-name="impl_url">{ $label }</a>
-compat-support-flags =
-    { NUMBER($has_added) ->
-        [one] From version { $version_added }
-       *[other] { "" }
-    }{ $has_last ->
-        [one]
-            { NUMBER($has_added) ->
-               *[zero] Until { $versionLast } users
-                [one] { " " }until { $versionLast } users
-            }
-       *[zero]
-            { NUMBER($has_added) ->
-               *[zero] Users
-                [one] { " " }users
-            }
-    }
-    { " " }must explicitly set the <code data-l10n-name="name">{ $flag_name }</code>{ " " }
-    { $flag_type ->
+compat-support-flag-range =
+    { $version_range ->
+        [range] From version { $version_added } until { $version_last }, users
+        [from] From version { $version_added }, users
+        [until] Until { $version_last }, users
+       *[none] Users
+    } must explicitly set the <code data-l10n-name="name">{ $flag_name }</code> { $flag_type ->
        *[preference] preference
         [runtime_flag] runtime flag
-    }{ NUMBER($has_value) ->
-        [one] { " " }to <code data-l10n-name="value">{ $flag_value }</code>
-       *[other] { "" }
-    }{ "." }
-    { NUMBER($has_pref_url) ->
-        [one]
+    }{ $has_value ->
+        [1] { " " }to <code data-l10n-name="value">{ $flag_value }</code>
+       *[0] { "" }
+    }.{ $has_pref_url ->
+        [1]
             { $flag_type ->
-                [preference] To change preferences in { $browser_name }, visit { $browser_pref_url }.
+                [preference] { " " }To change preferences in { $browser_name }, visit { $browser_pref_url }.
                *[other] { "" }
             }
-       *[other] { "" }
+       *[0] { "" }
     }
 compat-legend-yes = { compat-support-full }
 compat-legend-partial = { compat-support-partial }
@@ -117,17 +113,26 @@ article-footer-learn-how-to-contribute = Learn how to contribute
 article-footer-view-this-page-on-github = View this page on GitHub
 article-footer-this-will-take-you-to-github-to = This will take you to GitHub to file a new issue.
 article-footer-report-a-problem-with-this-conte = Report a problem with this content
-baseline-indicator-baseline-cross = Baseline Cross
-baseline-indicator-baseline-check = Baseline Check
+baseline-indicator-deprecated = Deprecated
 baseline-indicator-limited-availability = Limited availability
 baseline-indicator-baseline = Baseline
 baseline-indicator-widely-available = Widely available
 baseline-indicator-newly-available = Newly available
+baseline-indicator-to-be-removed = To be removed
+baseline-indicator-pending-removal = This feature is pending removal from browsers. Using it now may lead to broken functionality in future updates.
+baseline-indicator-avoid-using = Avoid using this feature in new projects.
+baseline-indicator-candidate-for-removal = This feature may be a candidate for removal from web standards or browsers.
+baseline-indicator-alternatives-use = Use the following features instead:
+baseline-indicator-alternatives-consider = Consider using the following features instead:
+baseline-indicator-alternatives-end = .
+baseline-indicator-baseline-discouraged = Baseline Discouraged
+baseline-indicator-baseline-discouraged-cross = Baseline Discouraged Cross
+baseline-indicator-baseline-cross = Baseline Cross
+baseline-indicator-baseline-check = Baseline Check
 baseline-indicator-check = check
 baseline-indicator-cross = cross
-baseline-indicator-learn-more = Learn more
 baseline-indicator-see-full-compatibility = See full compatibility
-baseline-indicator-report-feedback = Report feedback
+baseline-indicator-learn-more = Learn more
 blog-previous = Previous post
 blog-next = Next post
 blog-index-blog-it-better = Blog it better
@@ -228,6 +233,7 @@ homepage-contributor-spotlight-contributor-spotlight = Contributor Spotlight
 homepage-contributor-spotlight-get-involved = Get involved
 homepage-search-search-the-site = Search the site
 homepage-search-search = Search
+interactive-example-reset-disabled = Reset is disabled until you edit the example
 interactive-example-reset = Reset
 interactive-example-value-select = Value select
 interactive-example-the-current-value-is-not-support = The current value is not supported by your browser.
@@ -259,8 +265,8 @@ observatory-tests-and-scores-test-result = Test result
 observatory-tests-and-scores-description = Description
 observatory-tests-and-scores-modifier = Modifier
 observatory-tests-and-scores-failed-to-load-tests-and-scoring = Failed to load tests and scoring data. Please try again later.
-brand-web-docs = MDN Web Docs
 blog-rss-title = MDN Blog RSS Feed
+brand-web-docs = MDN Web Docs
 meta-description = The MDN Web Docs site provides information about Open Web technologies including HTML, CSS, and APIs for both Web sites and progressive web apps.
 logo-alt = The MDN logo
 pagination-pagination = Pagination
@@ -294,6 +300,7 @@ search-button-search-the-site = Search the site
 search-modal-loading-search-index = Loading search index…
 search-modal-search = Search
 search-modal-exit-search = Exit search
+search-modal-results-label = Search results
 sidebar-filter-filter-sidebar = Filter sidebar
 sidebar-filter-filter = Filter
 sidebar-filter-clear-filter-input = Clear filter input

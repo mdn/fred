@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/better-dom-traversing */
 import { html } from "@lit-labs/ssr";
 import { nothing } from "lit";
 
@@ -220,11 +221,7 @@ export class CurriculumLanding extends ServerComponent {
                 : nothing;
 
             return html`
-              <li
-                id=${listItemId}
-                class="modules-list-list-item"
-                key="mll-${i}"
-              >
+              <li id=${listItemId} class="modules-list-list-item">
                 <input
                   class="visually-hidden"
                   id=${radioId}
@@ -257,7 +254,10 @@ export class CurriculumLanding extends ServerComponent {
     const bannerLight = partnerBannerLight;
 
     return html`
-      <section class="curriculum-partner-banner-container">
+      <section
+        class="curriculum-partner-banner-container"
+        data-glean-view="curriculum: partner banner view"
+      >
         <div class="partner-banner">
           <section>
             <h2>Learn the curriculum with Scrimba and become job ready</h2>

@@ -25,12 +25,14 @@ import styles from "./element.css?lit";
 /** @import { PropertyValues } from "lit" */
 
 export class MDNPlayEditor extends LitElement {
-  static properties = {
-    language: { type: String },
-    minimal: { type: Boolean },
-    value: { attribute: false },
-    delay: { type: Number },
-  };
+  static get properties() {
+    return {
+      language: { type: String },
+      minimal: { type: Boolean },
+      value: { attribute: false },
+      delay: { type: Number },
+    };
+  }
 
   static styles = styles;
 

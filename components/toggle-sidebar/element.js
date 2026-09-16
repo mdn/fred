@@ -13,9 +13,11 @@ const MAIN_SIDEBAR_ID = "main-sidebar";
 export class MDNToggleSidebar extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    _canClose: { type: Boolean, state: true },
-  };
+  static get properties() {
+    return {
+      _canClose: { type: Boolean, state: true },
+    };
+  }
 
   constructor() {
     super();

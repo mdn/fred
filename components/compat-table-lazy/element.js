@@ -8,7 +8,7 @@ import {
   DEFAULT_LOCALE,
   ISSUE_METADATA_TEMPLATE,
 } from "../compat-table/constants.js";
-import { BCD_BASE_URL } from "../env/index.js";
+import { queryToUrl } from "../compat-table/utils.js";
 
 import styles from "./element.css?lit";
 
@@ -19,10 +19,12 @@ import styles from "./element.css?lit";
 export class MDNCompatTableLazy extends L10nMixin(LitElement) {
   static styles = styles;
 
-  static properties = {
-    query: {},
-    locale: {},
-  };
+  static get properties() {
+    return {
+      query: {},
+      locale: {},
+    };
+  }
 
   constructor() {
     super();
@@ -76,10 +78,7 @@ export class MDNCompatTableLazy extends L10nMixin(LitElement) {
   _dataTask = new Task(this, {
     args: () => [this.query],
     task: async ([query], { signal }) => {
-      const response = await fetch(
-        `${BCD_BASE_URL}/bcd/api/v0/current/${query}.json`,
-        { signal },
-      );
+      const response = await fetch(queryToUrl(query), { signal });
       if (!response.ok) {
         console.error("Failed to fetch BCD data:", response);
 

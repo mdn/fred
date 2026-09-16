@@ -144,6 +144,7 @@
       grid-template-columns: 1fr 1fr 1fr;
 
       gap: 1rem;
+
       justify-items: center;
 
       padding: 0.5rem;
@@ -207,6 +208,7 @@
             flex-direction: column;
 
             row-gap: var(--spacing);
+
             align-items: center;
 
             height: 10.5rem;

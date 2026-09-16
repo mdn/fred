@@ -132,3 +132,21 @@ export async function decompressFromBase64(base64String) {
   const state = new TextDecoder().decode(await decompressedStream);
   return { state, hash };
 }
+
+/**
+ * @param {{ css?: string, html?: string, js?: string }} code
+ */
+export function codeToDataUrl({ css, html, js }) {
+  let document = "<!doctype html><body>";
+  if (css) document += `<style>${css}</style>`;
+  if (html) document += html;
+  if (js) document += `<script>${js}</script>`;
+  document += "</body>";
+
+  // Allowlist characters we know not to be problematic in data URLs.
+  document = document.replaceAll(/[^ <>/{}=:;]+/g, (text) =>
+    encodeURIComponent(text),
+  );
+
+  return `data:text/html;charset=utf-8,${document}`;
+}

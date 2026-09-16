@@ -13,7 +13,6 @@ export function override(overrides, plugins = []) {
         name: "preset-default",
         params: {
           overrides: {
-            removeViewBox: false,
             ...overrides,
           },
         },

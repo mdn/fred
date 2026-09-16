@@ -6,12 +6,14 @@ export class MDNThemedImage extends LitElement {
   static styles = styles;
   static ssr = false;
 
-  static properties = {
-    srcLight: { type: String, attribute: "src-light" },
-    srcDark: { type: String, attribute: "src-dark" },
-    alt: { type: String },
-    _theme: { type: String },
-  };
+  static get properties() {
+    return {
+      srcLight: { type: String, attribute: "src-light" },
+      srcDark: { type: String, attribute: "src-dark" },
+      alt: { type: String },
+      _theme: { type: String },
+    };
+  }
 
   constructor() {
     super();

@@ -1,6 +1,9 @@
 import { html } from "@lit-labs/ssr";
 import { nothing } from "lit";
+import { join } from "lit/directives/join.js";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
+import { changeDocsLocale } from "../../utils/docs-locale-url.js";
 import { ServerComponent } from "../server/index.js";
 
 import inlineScript from "./inline.js?source&csp=true";
@@ -44,45 +47,193 @@ const LOCALIZED_BCD_IDS = {
   "zh-TW": "瀏覽器相容性",
 };
 
-const SURVEY_URL =
-  "https://survey.alchemer.com/s3/7634825/MDN-baseline-feedback";
-
 export class BaselineIndicator extends ServerComponent {
   static inlineScript = inlineScript;
 
   /**
-   *
-   * @param {import("@fred").Context<import("@rari").DocPage>} context
+   * @param {string | null | undefined} date
    */
-  render(context) {
+  parseDate(date) {
+    const lowDateRange = date?.match(/^([^0-9])/)?.[0];
+    return date ? new Date(date.slice(lowDateRange ? 1 : 0)) : undefined;
+  }
+
+  /**
+   * @param {import("./types.js").BaselineContext} context
+   * @param {boolean} [simple]
+   */
+  normalizeData(context, simple = false) {
     const { doc } = context;
 
     if (!doc) {
+      return;
+    }
+
+    const status = doc.status?.baseline;
+    const isDiscouraged = status === "discouraged" || status === "removing";
+    const baseline = doc.baseline;
+
+    if (!status || (!baseline && !isDiscouraged)) {
+      return;
+    }
+
+    const { baseline_low_date, asterisk, feature, support, alternatives } =
+      baseline || {};
+    const lowDate = this.parseDate(baseline_low_date);
+    const signalsLink = simple ? undefined : feature?.developer_signals?.url;
+
+    const titleText = isDiscouraged
+      ? context.l10n("baseline-indicator-deprecated")`Deprecated`
+      : status === "limited"
+        ? context.l10n(
+            "baseline-indicator-limited-availability",
+          )`Limited availability`
+        : context.l10n("baseline-indicator-baseline")`Baseline`;
+
+    const statusText =
+      status === "high"
+        ? context.l10n("baseline-indicator-widely-available")`Widely available`
+        : status === "low"
+          ? context.l10n("baseline-indicator-newly-available")`Newly available`
+          : status === "removing"
+            ? context.l10n("baseline-indicator-to-be-removed")`To be removed`
+            : undefined;
+
+    const extraText = [];
+
+    if (lowDate) {
+      if (status === "high") {
+        extraText.push(
+          context.l10n.raw({
+            id: "baseline-high-extra",
+            args: {
+              date: lowDate.toLocaleDateString(context.locale, {
+                year: "numeric",
+                month: "long",
+              }),
+            },
+          }),
+        );
+      } else if (status === "low") {
+        extraText.push(
+          context.l10n.raw({
+            id: "baseline-low-extra",
+            args: {
+              date: lowDate.toLocaleDateString(context.locale, {
+                year: "numeric",
+                month: "long",
+              }),
+            },
+          }),
+        );
+      }
+    }
+    if (isDiscouraged) {
+      const reason = feature?.discouraged?.reason_html;
+      extraText.push(
+        html`${
+          status === "removing"
+            ? context.l10n(
+                "baseline-indicator-pending-removal",
+              )`This feature is pending removal from browsers. Using it now may lead to broken functionality in future updates.`
+            : context.l10n(
+                "baseline-indicator-avoid-using",
+              )`Avoid using this feature in new projects.`
+        }
+        ${reason ? html`<span lang="en-US">${unsafeHTML(reason)}</span>` : nothing}
+        ${
+          status === "removing"
+            ? nothing
+            : context.l10n(
+                "baseline-indicator-candidate-for-removal",
+              )`This feature may be a candidate for removal from web standards or browsers.`
+        }`,
+      );
+      if (alternatives && alternatives.length > 0) {
+        const links = alternatives.map(
+          ({ name, description, mdn_url }) =>
+            html`<a
+              href=${changeDocsLocale(mdn_url, context.locale)}
+              title=${description}
+              data-glean-id=${`baseline_link_alternatives: ${name}`}
+              >${name}</a
+            >`,
+        );
+        const parts = new Intl.ListFormat(context.locale, {
+          type: "disjunction",
+        }).formatToParts(links.map((_, i) => String(i)));
+        const list = parts.map(({ type, value }) =>
+          type === "element" ? links[Number(value)] : value,
+        );
+        extraText.push(
+          html`${status === "removing" ? context.l10n("baseline-indicator-alternatives-use")`Use the following features instead:` : context.l10n("baseline-indicator-alternatives-consider")`Consider using the following features instead:`}
+          ${list}${context.l10n("baseline-indicator-alternatives-end")`.`}`,
+        );
+      }
+    } else if (status === "limited") {
+      extraText.push(context.l10n("baseline-not-extra"));
+    }
+
+    if (signalsLink) {
+      extraText.push(
+        context.l10n.raw({
+          id: "baseline-signals",
+          elements: {
+            link: {
+              tag: "a",
+              href: signalsLink,
+              target: "_blank",
+              class: "external",
+              rel: "noopener",
+              "data-glean-id": "baseline_link_signals",
+            },
+          },
+        }),
+      );
+    }
+
+    return {
+      status,
+      lowDate,
+      asterisk: isDiscouraged ? undefined : asterisk,
+      support,
+      signalsLink,
+      extraText,
+      titleText,
+      statusText,
+      isDiscouraged,
+    };
+  }
+
+  /**
+   * @param {import("./types.js").BaselineContext} context
+   */
+  render(context) {
+    const data = this.normalizeData(context);
+
+    if (!data) {
       return nothing;
     }
 
-    const status = doc.baseline;
-
-    if (!status) {
-      return nothing;
-    }
+    const {
+      status,
+      lowDate,
+      asterisk,
+      support,
+      signalsLink,
+      extraText,
+      titleText,
+      statusText,
+      isDiscouraged,
+    } = data;
 
     const bcdLink = `#${
       LOCALIZED_BCD_IDS[context.locale] || LOCALIZED_BCD_IDS[DEFAULT_LOCALE]
     }`;
 
-    const low_date_range = status.baseline_low_date?.match(/^([^0-9])/)?.[0];
-    const low_date = status.baseline_low_date
-      ? new Date(status.baseline_low_date.slice(low_date_range ? 1 : 0))
-      : undefined;
-
-    const level = status.baseline || "not";
-
-    const feedbackLink = `${SURVEY_URL}?page=${encodeURIComponent(context.url)}&level=${level}`;
-
     const isBrowserSupported =
       /** @param {import("./types.js").BrowserGroup} browser */ (browser) => {
-        return browser.ids.map((id) => status.support?.[id]).every(Boolean);
+        return browser.ids.map((id) => support?.[id]).every(Boolean);
       };
 
     const engineTitle =
@@ -128,108 +279,82 @@ export class BaselineIndicator extends ServerComponent {
         }
       };
 
+    const openByDefault = isDiscouraged || Boolean(signalsLink);
+
     return html`<details
-      class="baseline-indicator ${level}"
+      class="baseline-indicator ${status}"
       data-glean-toggle-open="baseline_toggle_open"
+      ?open=${openByDefault}
+      ?data-open-by-default=${openByDefault}
     >
       <summary>
         <span
           class="indicator"
           role="img"
-          aria-label=${level === "not"
-            ? context.l10n("baseline-indicator-baseline-cross")`Baseline Cross`
-            : context.l10n("baseline-indicator-baseline-check")`Baseline Check`}
+          aria-label=${
+            status === "discouraged"
+              ? context.l10n(
+                  "baseline-indicator-baseline-discouraged",
+                )`Baseline Discouraged`
+              : status === "removing"
+                ? context.l10n(
+                    "baseline-indicator-baseline-discouraged-cross",
+                  )`Baseline Discouraged Cross`
+                : status === "limited"
+                  ? context.l10n(
+                      "baseline-indicator-baseline-cross",
+                    )`Baseline Cross`
+                  : context.l10n(
+                      "baseline-indicator-baseline-check",
+                    )`Baseline Check`
+          }
         ></span>
         <div class="status-title">
-          ${level === "not"
-            ? html`<span class="not-bold"
-                >${context.l10n(
-                  "baseline-indicator-limited-availability",
-                )`Limited availability`}</span
-              >`
-            : html`
-                ${context.l10n("baseline-indicator-baseline")`Baseline`}
-                <span class="not-bold">
-                  ${level === "high"
-                    ? context.l10n(
-                        "baseline-indicator-widely-available",
-                      )`Widely available`
-                    : low_date?.getFullYear()}
-                </span>
-                ${status.asterisk && " *"}
-              `}
+          ${
+            status === "low"
+              ? html`${titleText} ${lowDate?.getFullYear()}`
+              : titleText
+          }
         </div>
-        ${level === "low"
-          ? html`<div class="pill">
-              ${context.l10n(
-                "baseline-indicator-newly-available",
-              )`Newly available`}
-            </div>`
-          : nothing}
-        <div class="browsers">
-          ${ENGINES.map(
-            ({ name, browsers }) =>
-              html`<span
-                key=${name}
-                class="engine"
-                title=${engineTitle(browsers)}
-              >
-                ${browsers.map(
-                  (browser) =>
-                    html`<span
-                      key=${browser.ids[0]}
-                      class=${`browser ${browser.ids[0]} ${
-                        isBrowserSupported(browser) ? "supported" : ""
-                      }`}
-                      role="img"
-                      aria-label=${`${browser.name} ${isBrowserSupported(browser) ? context.l10n("baseline-indicator-check")`check` : context.l10n("baseline-indicator-cross")`cross`}`}
-                    ></span>`,
+        ${
+          ["high", "low", "removing"].includes(status)
+            ? html`<div class="pill">${statusText}</div>`
+            : nothing
+        }
+        ${asterisk ? html`<div class="asterisk">*</div>` : nothing}
+        ${
+          support
+            ? html`<div class="browsers">
+                ${ENGINES.map(
+                  ({ browsers }) =>
+                    html`<span class="engine" title=${engineTitle(browsers)}>
+                      ${browsers.map(
+                        (browser) =>
+                          html`<span
+                            class=${`browser ${browser.ids[0]} ${
+                              isBrowserSupported(browser) ? "supported" : ""
+                            }`}
+                            role="img"
+                            aria-label=${`${browser.name} ${isBrowserSupported(browser) ? context.l10n("baseline-indicator-check")`check` : context.l10n("baseline-indicator-cross")`cross`}`}
+                          ></span>`,
+                      )}
+                    </span>`,
                 )}
-              </span>`,
-          )}
-        </div>
+              </div>`
+            : nothing
+        }
         <span class="icon icon-chevron"></span>
       </summary>
       <div class="extra">
-        ${level === "high" && low_date
-          ? html`<p>
-              ${context.l10n.raw({
-                id: "baseline-high-extra",
-                args: {
-                  date: low_date.toLocaleDateString(context.locale, {
-                    year: "numeric",
-                    month: "long",
-                  }),
-                },
-              })}
-            </p>`
-          : level === "low" && low_date
-            ? html`<p>
-                ${context.l10n.raw({
-                  id: "baseline-low-extra",
-                  args: {
-                    date: low_date.toLocaleDateString(DEFAULT_LOCALE, {
-                      year: "numeric",
-                      month: "long",
-                    }),
-                  },
-                })}
+        ${extraText.map((text) => html`<p>${text}</p>`)}
+        ${
+          asterisk
+            ? html`<p class="asterisk-note">
+                * ${context.l10n("baseline-asterisk")}
               </p>`
-            : html`<p>${context.l10n("baseline-not-extra")}</p>`}
-        ${status.asterisk
-          ? html`<p>* ${context.l10n("baseline-asterisk")}</p>`
-          : nothing}
+            : nothing
+        }
         <ul>
-          <li>
-            <a
-              href=${`/${context.locale}/docs/Glossary/Baseline/Compatibility`}
-              data-glean-id="baseline_link_learn_more"
-              target="_blank"
-              class="learn-more"
-            >
-              ${context.l10n("baseline-indicator-learn-more")`Learn more`}
-            </a>
-          </li>
           <li>
             <a href=${bcdLink} data-glean-id="baseline_link_bcd_table">
               ${context.l10n(
@@ -239,19 +364,44 @@ export class BaselineIndicator extends ServerComponent {
           </li>
           <li>
             <a
-              href=${feedbackLink}
-              data-glean-id="baseline_link_feedback"
-              class="feedback-link"
+              href=${`/${context.locale}/docs/Glossary/Baseline/Compatibility`}
+              data-glean-id="baseline_link_learn_more"
               target="_blank"
-              rel="noreferrer"
             >
-              ${context.l10n(
-                "baseline-indicator-report-feedback",
-              )`Report feedback`}
+              ${context.l10n("baseline-indicator-learn-more")`Learn more`}
             </a>
           </li>
         </ul>
       </div>
     </details>`;
+  }
+
+  /**
+   * @param {import("./types.js").BaselineContext} context
+   */
+  renderSimplified(context) {
+    const data = this.normalizeData(context, true);
+
+    if (!data) {
+      return nothing;
+    }
+
+    const { status, lowDate, asterisk, extraText, titleText, statusText } =
+      data;
+
+    return html`<p>
+      <strong>
+        ${titleText}
+        ${
+          status === "low"
+            ? html`${lowDate?.getFullYear()} ${statusText}`
+            : statusText || nothing
+        }
+        ${asterisk ? " *" : nothing}
+      </strong>
+      <br />
+      ${join(extraText, " ")}
+      ${asterisk ? html`<br />* ${context.l10n("baseline-asterisk")}` : nothing}
+    </p>`;
   }
 }

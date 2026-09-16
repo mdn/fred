@@ -3,11 +3,13 @@ import { LitElement, css, html } from "lit";
 /** @import { VConsole } from "../play-console/types.js" */
 
 export class MDNPlayController extends LitElement {
-  static properties = {
-    runOnStart: { type: Boolean, attribute: "run-on-start" },
-    runOnChange: { type: Boolean, attribute: "run-on-change" },
-    srcPrefix: { attribute: false },
-  };
+  static get properties() {
+    return {
+      runOnStart: { type: Boolean, attribute: "run-on-start" },
+      runOnChange: { type: Boolean, attribute: "run-on-change" },
+      srcPrefix: { attribute: false },
+    };
+  }
 
   static styles = css`
     :host {

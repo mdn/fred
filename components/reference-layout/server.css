@@ -10,7 +10,7 @@
       font-size: var(--font-size-largest);
       font-weight: normal;
 
-      line-height: var(--font-line-normal);
+      line-height: var(--font-line-header);
 
       code {
         font-family: inherit;
@@ -34,6 +34,7 @@
     flex-wrap: wrap;
 
     gap: 0.5rem;
+
     align-content: start;
     align-items: start;
     justify-content: space-between;

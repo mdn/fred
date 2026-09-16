@@ -1,3 +1,5 @@
+@import url("../baseline-indicator/icon.css");
+
 .left-sidebar {
   padding-bottom: 3rem;
   overflow-wrap: anywhere;
@@ -115,7 +117,7 @@
   }
 
   a,
-  span:not(.highlight-container) {
+  span:not(.sidebar-filter-mark-container) {
     display: inline-block;
     padding-block: 0.25rem;
     vertical-align: middle;

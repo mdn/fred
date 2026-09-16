@@ -89,7 +89,7 @@ export class TranslationBanner extends ServerComponent {
     const { locale } = context;
     if (
       locale === "en-US" ||
-      !context.doc.other_translations.some(({ locale }) => locale === "en-US")
+      context.doc.other_translations.every(({ locale }) => locale !== "en-US")
     ) {
       return nothing;
     }
@@ -99,7 +99,10 @@ export class TranslationBanner extends ServerComponent {
     // Note: Do not translate, this is intentionally in English.
 
     return html`<p class="translation-banner__switch" lang="en-US">
-      <mdn-button data-variant="secondary" href=${url}
+      <mdn-button
+        data-variant="secondary"
+        href=${url}
+        data-glean-id=${`language: ${context.locale} -> en-US (view)`}
         >View in English</mdn-button
       >
       <mdn-language-always-redirect-button locale=${context.locale} to="en-US"

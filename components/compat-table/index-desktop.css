@@ -81,19 +81,8 @@
     }
   }
 
-  /* TODO: removed to stop overflowing
-  .table-container {
-    width: 100vw;
-    margin: 0 -3rem;
-    overflow: auto;
-  } */
-
   .table-container-inner {
     position: relative;
-
-    /* TODO: removed to stop overflowing
-    min-width: max-content;
-    padding: 0 3rem; */
 
     &::after {
       position: absolute;
@@ -112,12 +101,6 @@
     .bc-browser-name {
       display: none;
     }
-  }
-
-  .bc-notes-list {
-    width: auto;
-    max-width: 80vw;
-    margin-left: 20%;
   }
 
   .bc-support {

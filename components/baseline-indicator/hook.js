@@ -1,10 +1,13 @@
 try {
   const indicator = document.querySelector(".baseline-indicator");
   if (indicator instanceof HTMLDetailsElement) {
-    indicator.addEventListener("toggle", () => {
+    const { openByDefault } = indicator.dataset;
+    if (openByDefault === undefined) {
+      indicator.addEventListener("toggle", () => {
+        saveState(indicator.open);
+      });
       saveState(indicator.open);
-    });
-    saveState(indicator.open);
+    }
   }
 
   /**

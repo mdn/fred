@@ -8,12 +8,14 @@ import styles from "./element.css?lit";
 export class MDNObservatoryHeaderLink extends LitElement {
   static styles = styles;
 
-  static properties = {
-    header: { type: String },
-    _headerExists: { type: Boolean, state: true },
-    _isChecking: { type: Boolean, state: true },
-    _hasChecked: { type: Boolean, state: true },
-  };
+  static get properties() {
+    return {
+      header: { type: String },
+      _headerExists: { type: Boolean, state: true },
+      _isChecking: { type: Boolean, state: true },
+      _hasChecked: { type: Boolean, state: true },
+    };
+  }
 
   constructor() {
     super();

@@ -46,6 +46,7 @@ dialog {
   display: flex;
 
   gap: 0.25rem;
+
   align-items: center;
 
   width: 100%;

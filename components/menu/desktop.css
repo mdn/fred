@@ -15,6 +15,7 @@
     display: flex;
 
     column-gap: 0.125rem;
+
     align-items: center;
 
     padding: var(--menu-button-padding);
@@ -47,7 +48,7 @@
       display: none;
     }
 
-    @media (width <= 1065px) {
+    @media (--screen-menu-compact) {
       &[data-type="long"] {
         display: none;
       }
