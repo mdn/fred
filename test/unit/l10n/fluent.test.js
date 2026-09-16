@@ -37,4 +37,27 @@ describe("Fluent.sanitize", () => {
       assert.deepEqual(Fluent.sanitize(input), expected);
     });
   }
+
+  it("does not reuse attributes from earlier translations", () => {
+    Fluent.sanitize('<a data-l10n-name="link">First</a>', {
+      link: { tag: "a", href: "https://example.com/first" },
+    });
+    assert.deepEqual(
+      Fluent.sanitize('<a data-l10n-name="link">Second</a>', {
+        link: { tag: "a", title: "Second" },
+      }),
+      unsafeHTML('<a data-l10n-name="link" title="Second">Second</a>'),
+    );
+  });
+
+  it("removes its hook when sanitization throws", () => {
+    const input = '<a data-l10n-name="link">Link</a>';
+    assert.throws(() =>
+      Fluent.sanitize(input, { link: { tag: "a", "invalid attribute": "x" } }),
+    );
+    assert.deepEqual(
+      Fluent.sanitize(input, { link: { tag: "a" } }),
+      unsafeHTML(input),
+    );
+  });
 });

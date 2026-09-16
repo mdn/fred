@@ -146,13 +146,16 @@ export class Fluent {
       },
     );
 
-    const sanitized = DOMPurify.sanitize(message, {
-      ALLOWED_TAGS: allowedTags,
-      ALLOWED_ATTR: allAllowedAttributes,
-      ALLOWED_URI_REGEXP: /^(?:https?|mailto):/i,
-    });
-
-    return safe ? sanitized : unsafeHTML(sanitized);
+    try {
+      const sanitized = DOMPurify.sanitize(message, {
+        ALLOWED_TAGS: allowedTags,
+        ALLOWED_ATTR: allAllowedAttributes,
+        ALLOWED_URI_REGEXP: /^(?:https?|mailto):/i,
+      });
+      return safe ? sanitized : unsafeHTML(sanitized);
+    } finally {
+      DOMPurify.removeHook("afterSanitizeAttributes");
+    }
   }
 
   /**
