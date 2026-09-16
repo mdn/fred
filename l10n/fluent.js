@@ -138,7 +138,7 @@ export class Fluent {
 
         // Track if HTML tags are used (to decide string vs unsafeHTML return)
         if (
-          ALLOWED_TAGS.includes(tagName) ||
+          ALLOWED_TAGS.has(tagName) ||
           (elementConfig && elementConfig.tag === tagName)
         ) {
           safe = false;
