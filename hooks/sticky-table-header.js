@@ -27,10 +27,12 @@ function countBodyRows(table) {
  * @param {HTMLTableElement} table
  * @param {HTMLElement} container
  * @param {HTMLTableSectionElement} thead
+ * @param {Element} section
  */
-function setupStickyHeader(table, container, thead) {
+function setupStickyHeader(table, container, thead, section) {
   const overlay = document.createElement("div");
-  overlay.className = "content-section sticky-table-header";
+  // Table styles are scoped to the section wrapper, so mirror its classes.
+  overlay.className = `${section.className} sticky-table-header`;
   // Keeps the clone out of the tab order, hit testing, and the a11y tree.
   overlay.inert = true;
   overlay.hidden = true;
@@ -169,5 +171,9 @@ for (const table of document.querySelectorAll(".table-container > table")) {
   if (countBodyRows(table) < ROW_THRESHOLD) {
     continue;
   }
-  setupStickyHeader(table, container, thead);
+  const section = container.closest(".content-section");
+  if (!section) {
+    continue;
+  }
+  setupStickyHeader(table, container, thead, section);
 }
