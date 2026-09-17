@@ -5,12 +5,14 @@
     "*.config.js",
     "**/coverage/**",
     "**/node_modules/**",
+    "build/**",
     "dist/**",
     "legacy/**",
     "out/**",
     "scripts/**",
     "test/**",
     "types/**",
-    "vendor/**"
+    "vendor/**",
+    "wdio.conf.js"
   ]
 }
