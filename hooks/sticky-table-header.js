@@ -43,10 +43,14 @@ function setupStickyHeader(table, container, thead, section) {
   for (const el of clone.querySelectorAll("[id]")) {
     el.removeAttribute("id");
   }
-  // Keeps the clone out of the tab order and the a11y tree. Inert nodes are
-  // skipped by hit testing, so the overlay itself stays hittable to swallow
-  // clicks that would otherwise reach content underneath.
-  clone.inert = true;
+  // Hide the duplicate from AT and the tab order, but keep links clickable
+  // (`inert` would also remove the clone from hit testing).
+  clone.setAttribute("aria-hidden", "true");
+  for (const el of clone.querySelectorAll(
+    "a[href], button, input, select, textarea, [tabindex]",
+  )) {
+    el.setAttribute("tabindex", "-1");
+  }
   overlay.append(clone);
   document.body.append(overlay);
 
