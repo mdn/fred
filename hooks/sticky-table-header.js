@@ -33,8 +33,6 @@ function setupStickyHeader(table, container, thead, section) {
   const overlay = document.createElement("div");
   // Table styles are scoped to the section wrapper, so mirror its classes.
   overlay.className = `${section.className} sticky-table-header`;
-  // Keeps the clone out of the tab order, hit testing, and the a11y tree.
-  overlay.inert = true;
   overlay.hidden = true;
 
   const clone = /** @type {HTMLTableElement} */ (table.cloneNode(false));
@@ -46,6 +44,10 @@ function setupStickyHeader(table, container, thead, section) {
   for (const el of clone.querySelectorAll("[id]")) {
     el.removeAttribute("id");
   }
+  // Keeps the clone out of the tab order and the a11y tree. Inert nodes are
+  // skipped by hit testing, so the overlay itself stays hittable to swallow
+  // clicks that would otherwise reach content underneath.
+  clone.inert = true;
   overlay.append(clone);
   document.body.append(overlay);
 
