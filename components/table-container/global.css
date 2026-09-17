@@ -16,3 +16,9 @@
     table-layout: fixed;
   }
 }
+
+@media print {
+  .sticky-table-header {
+    display: none;
+  }
+}
