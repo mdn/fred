@@ -43,6 +43,17 @@ export function asList(a) {
 }
 
 /**
+ * Checks whether a URL points to the current page without a fragment.
+ * @param {string} url
+ * @param {string} pathname
+ * @returns {boolean}
+ */
+export function isCurrentPageLink(url, pathname) {
+  const parsedUrl = new URL(url, "https://developer.mozilla.org");
+  return !parsedUrl.hash && parsedUrl.pathname === pathname;
+}
+
+/**
  * Finds the first compatibility depth in a BCD Identifier.
  * @param {import("@bcd").Identifier} identifier
  * @returns {number}
