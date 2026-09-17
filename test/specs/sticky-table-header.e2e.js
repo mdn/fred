@@ -1,3 +1,4 @@
+import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
 import { browser } from "@wdio/globals";
@@ -92,4 +93,35 @@ describe("sticky table header", () => {
       await assertAligned();
     });
   }
+
+  it("waits for the original header to pass the sticky boundary below a caption", async () => {
+    await openTable("ltr");
+    await browser.execute(() => {
+      const table = document.querySelector(".table-container table");
+      if (!(table instanceof HTMLTableElement)) {
+        throw new TypeError("Missing table");
+      }
+      const caption = table.createCaption();
+      caption.textContent = "Table caption";
+      caption.style.height = "100px";
+      window.scrollTo(0, 150);
+    });
+    await browser.executeAsync((done) => {
+      requestAnimationFrame(() => requestAnimationFrame(() => done()));
+    });
+    assert.equal(
+      await browser.execute(() =>
+        document.querySelector(".sticky-table-header")?.hasAttribute("hidden"),
+      ),
+      true,
+      "The clone must stay hidden while the original header is below the boundary",
+    );
+    await browser.execute(() => window.scrollTo(0, 260));
+    await browser.waitUntil(async () =>
+      browser.execute(() => {
+        const overlay = document.querySelector(".sticky-table-header");
+        return overlay instanceof HTMLElement && !overlay.hidden;
+      }),
+    );
+  });
 });

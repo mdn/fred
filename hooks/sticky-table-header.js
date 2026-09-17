@@ -105,10 +105,10 @@ function setupStickyHeader(table, container, thead, section) {
     rafId = 0;
     const headerOffset = getHeaderOffset();
     const tableRect = table.getBoundingClientRect();
-    const theadHeight = thead.getBoundingClientRect().height;
+    const theadRect = thead.getBoundingClientRect();
     const shouldStick =
-      tableRect.top < headerOffset &&
-      tableRect.bottom > headerOffset + theadHeight;
+      theadRect.top < headerOffset &&
+      tableRect.bottom > headerOffset + theadRect.height;
 
     const wasStuck = stuck;
     if (shouldStick !== stuck) {
