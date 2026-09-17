@@ -221,7 +221,7 @@ export class SidebarFilterer {
   collapseParent(parent) {
     const container = this.getContainerOf(parent);
     this.toggleElement(container, false);
-    parent.dataset.wasOpen = parent.dataset.wasOpen || String(parent.open);
+    parent.dataset.wasOpen ||= String(parent.open);
     parent.open = false;
   }
 

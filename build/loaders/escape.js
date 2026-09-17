@@ -4,6 +4,6 @@
 export default function escape(str) {
   return str
     .replaceAll(`\\`, `\\\\`)
-    .replaceAll(`$`, `\\$`)
+    .replaceAll(`$`, String.raw`\$`)
     .replaceAll(`\``, `\\\``);
 }
