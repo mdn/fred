@@ -36,6 +36,18 @@ describe("isCurrentPageLink", () => {
       expected: true,
     },
     {
+      name: "matches the current page in another locale",
+      url: "https://developer.mozilla.org/en-US/docs/Web/CSS/foo",
+      pathname: "/fr/docs/Web/CSS/foo",
+      expected: true,
+    },
+    {
+      name: "does not match another page in another locale",
+      url: "https://developer.mozilla.org/en-US/docs/Web/CSS/bar",
+      pathname: "/fr/docs/Web/CSS/foo",
+      expected: false,
+    },
+    {
       name: "keeps a fragment-only link",
       url: "#syntax",
       pathname: "/en-US/docs/Web/CSS/foo",

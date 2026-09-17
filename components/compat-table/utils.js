@@ -1,4 +1,7 @@
+import { changeDocsLocale } from "../../utils/docs-locale-url.js";
 import { BCD_BASE_URL } from "../env/index.js";
+
+import { DEFAULT_LOCALE } from "./constants.js";
 
 /**
  * A list of browsers to be hidden.
@@ -44,13 +47,18 @@ export function asList(a) {
 
 /**
  * Checks whether a URL points to the current page without a fragment.
+ * The locale is ignored, since BCD links always target the en-US page.
  * @param {string} url
  * @param {string} pathname
  * @returns {boolean}
  */
 export function isCurrentPageLink(url, pathname) {
   const parsedUrl = new URL(url, "https://developer.mozilla.org");
-  return !parsedUrl.hash && parsedUrl.pathname === pathname;
+  return (
+    !parsedUrl.hash &&
+    changeDocsLocale(parsedUrl.pathname, DEFAULT_LOCALE) ===
+      changeDocsLocale(pathname, DEFAULT_LOCALE)
+  );
 }
 
 /**
