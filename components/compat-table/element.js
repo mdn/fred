@@ -392,26 +392,22 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         ? html`<span>${unsafeHTML(compat.description)}</span>`
         : html`<code>${name}</code>`;
 
-      let titleNode;
       const titleContent = html`${title}${
         compat.status && this._renderStatusIcons(compat.status)
       }`;
-      if (compat.mdn_url && depth > 0) {
-        const href = changeDocsLocale(compat.mdn_url, locale);
-        titleNode = isCurrentPageLink(href, this._pathname)
-          ? html`<div class="bc-table-row-header">${titleContent}</div>`
-          : html`<a
+      const href =
+        compat.mdn_url && depth > 0
+          ? changeDocsLocale(compat.mdn_url, locale)
+          : undefined;
+      const titleNode =
+        href && !isCurrentPageLink(href, this._pathname)
+          ? html`<a
               href=${href}
               class="bc-table-row-header"
               data-glean-id=${`bcd: link -> ${href}`}
-            >
-              ${titleContent}
-            </a>`;
-      } else {
-        titleNode = html`<div class="bc-table-row-header">
-          ${titleContent}
-        </div>`;
-      }
+              >${titleContent}</a
+            >`
+          : html`<div class="bc-table-row-header">${titleContent}</div>`;
 
       const browserCells = browsers.map((browserName, browserIndex) => {
         // <CompatCell>
