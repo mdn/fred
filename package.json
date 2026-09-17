@@ -154,7 +154,7 @@
     }
   },
   "allowScripts": {
-    "@mdn/rari": true,
+    "@mdn/rari": false,
     "@parcel/watcher": true,
     "edgedriver": true,
     "esbuild": true,
