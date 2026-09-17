@@ -48,6 +48,12 @@ describe("isCurrentPageLink", () => {
       expected: false,
     },
     {
+      name: "matches a locale-less URL on a translated page",
+      url: "https://developer.mozilla.org/docs/Web/CSS/foo",
+      pathname: "/fr/docs/Web/CSS/foo",
+      expected: true,
+    },
+    {
       name: "keeps a fragment-only link",
       url: "#syntax",
       pathname: "/en-US/docs/Web/CSS/foo",

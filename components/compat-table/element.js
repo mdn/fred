@@ -4,11 +4,14 @@ import { createRef, ref } from "lit/directives/ref.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
-import { changeDocsLocale } from "../../utils/docs-locale-url.js";
+import {
+  changeDocsLocale,
+  removeDocsLocale,
+} from "../../utils/docs-locale-url.js";
 import { gleanClick } from "../../utils/glean.js";
 import { ViewedController } from "../viewed-controller/viewed-controller.js";
 
-import { ISSUE_METADATA_TEMPLATE } from "./constants.js";
+import { DEFAULT_LOCALE, ISSUE_METADATA_TEMPLATE } from "./constants.js";
 import styles from "./element.css?lit";
 import {
   getSupportBrowserReleaseDate,
@@ -395,9 +398,13 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       const titleContent = html`${title}${
         compat.status && this._renderStatusIcons(compat.status)
       }`;
+      // Only the en-US page is known to exist; elsewhere let the server
+      // redirect a locale-less URL to the reader's locale.
       const href =
         compat.mdn_url && depth > 0
-          ? changeDocsLocale(compat.mdn_url, locale)
+          ? locale === DEFAULT_LOCALE
+            ? changeDocsLocale(compat.mdn_url, locale)
+            : removeDocsLocale(compat.mdn_url)
           : undefined;
       const titleNode =
         href && !isCurrentPageLink(href, this._pathname)
