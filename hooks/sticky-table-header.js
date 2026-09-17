@@ -36,9 +36,8 @@ function setupStickyHeader(table, container, thead, section) {
   overlay.hidden = true;
 
   const clone = /** @type {HTMLTableElement} */ (table.cloneNode(false));
-  for (const colgroup of table.querySelectorAll(":scope > colgroup")) {
-    clone.append(colgroup.cloneNode(true));
-  }
+  const colgroup = document.createElement("colgroup");
+  clone.append(colgroup);
   clone.append(thead.cloneNode(true));
   clone.removeAttribute("id");
   for (const el of clone.querySelectorAll("[id]")) {
@@ -50,8 +49,6 @@ function setupStickyHeader(table, container, thead, section) {
   clone.inert = true;
   overlay.append(clone);
   document.body.append(overlay);
-
-  const cloneHead = clone.tHead;
 
   function syncSize() {
     const containerRect = container.getBoundingClientRect();
@@ -65,27 +62,31 @@ function setupStickyHeader(table, container, thead, section) {
     overlay.style.top = `${getHeaderOffset() - borderTop}px`;
     clone.style.width = `${tableRect.width}px`;
 
-    if (!cloneHead) {
-      return;
-    }
-    for (let r = 0; r < thead.rows.length; r++) {
-      const srcRow = thead.rows[r];
-      const dstRow = cloneHead.rows[r];
-      if (!srcRow || !dstRow) {
-        continue;
-      }
-      for (let c = 0; c < srcRow.cells.length; c++) {
-        const src = srcRow.cells[c];
-        const dst = dstRow.cells[c];
-        if (!src || !dst) {
+    // Body cells resolve column boundaries hidden by spanning header cells.
+    const boundaries = new Set();
+    for (const row of table.rows) {
+      for (const cell of row.cells) {
+        const { left, right, width } = cell.getBoundingClientRect();
+        if (width === 0) {
           continue;
         }
-        const w = src.getBoundingClientRect().width;
-        dst.style.width = `${w}px`;
-        dst.style.minWidth = `${w}px`;
-        dst.style.maxWidth = `${w}px`;
+        boundaries.add(left);
+        boundaries.add(right);
       }
     }
+    // Adjacent cells can report slightly different floats for the same edge.
+    const edges = [...boundaries]
+      .sort((a, b) => a - b)
+      .filter((edge, i, all) => i === 0 || edge - all[i - 1] > 0.5);
+    if (getComputedStyle(table).direction === "rtl") {
+      edges.reverse();
+    }
+    const columns = edges.slice(1).map((edge, i) => {
+      const col = document.createElement("col");
+      col.style.width = `${Math.abs(edge - edges[i])}px`;
+      return col;
+    });
+    colgroup.replaceChildren(...columns);
   }
 
   function syncScroll() {
