@@ -1,0 +1,19 @@
+{
+  "all": true,
+  "extension": [".js"],
+  "exclude": [
+    "*.config.js",
+    "**/coverage/**",
+    "**/node_modules/**",
+    "build/**",
+    "components/**/element.js",
+    "dist/**",
+    "legacy/**",
+    "out/**",
+    "scripts/**",
+    "test/**",
+    "types/**",
+    "vendor/**",
+    "wdio.conf.js"
+  ]
+}
