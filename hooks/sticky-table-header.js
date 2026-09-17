@@ -80,7 +80,11 @@ function setupStickyHeader(table, container, thead) {
   }
 
   function syncScroll() {
-    clone.style.transform = `translateX(${-container.scrollLeft}px)`;
+    // Geometric offset rather than `scrollLeft`, which is negative in RTL.
+    const dx =
+      table.getBoundingClientRect().left -
+      container.getBoundingClientRect().left;
+    clone.style.transform = `translateX(${dx}px)`;
   }
 
   let stuck = false;
