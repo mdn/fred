@@ -6,10 +6,7 @@
 .sticky-table-header {
   position: fixed;
   z-index: calc(var(--z-index-sidebar-mobile) - 1);
-
   overflow: hidden;
-
-  pointer-events: none;
 
   > table {
     margin: 0;

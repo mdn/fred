@@ -31,7 +31,8 @@ function countBodyRows(table) {
 function setupStickyHeader(table, container, thead) {
   const overlay = document.createElement("div");
   overlay.className = "content-section sticky-table-header";
-  overlay.setAttribute("aria-hidden", "true");
+  // Keeps the clone out of the tab order, hit testing, and the a11y tree.
+  overlay.inert = true;
   overlay.hidden = true;
 
   const clone = /** @type {HTMLTableElement} */ (table.cloneNode(false));
@@ -39,6 +40,10 @@ function setupStickyHeader(table, container, thead) {
     clone.append(colgroup.cloneNode(true));
   }
   clone.append(thead.cloneNode(true));
+  clone.removeAttribute("id");
+  for (const el of clone.querySelectorAll("[id]")) {
+    el.removeAttribute("id");
+  }
   overlay.append(clone);
   document.body.append(overlay);
 
