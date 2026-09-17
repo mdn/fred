@@ -6,6 +6,7 @@ import { randomIdString } from "../utils/index.js";
 /**
  * @param {object} options
  * @param {string | import("@lit").TemplateResult} options.label
+ * @param {string} [options.labelId] - Label ID unique within the containing tree.
  * @param {import("@lit").TemplateResult} [options.icon]
  * @param {boolean} [options.iconOnly]
  * @param {import("./types.js").ButtonIconPositions} [options.iconPosition]
@@ -21,6 +22,7 @@ import { randomIdString } from "../utils/index.js";
  */
 export default function Button({
   label,
+  labelId,
   icon,
   iconOnly,
   iconPosition,
@@ -34,12 +36,18 @@ export default function Button({
   variant = "primary",
   action,
 }) {
-  const labelId = randomIdString("label-");
+  const ariaLabel = typeof label === "string" ? label : undefined;
+  labelId =
+    ariaLabel === undefined ? (labelId ?? randomIdString("label-")) : undefined;
   const iconElement = icon
     ? html`<span class="icon" part="icon">${icon}</span>`
     : nothing;
   const labelElement = html`
-    <span id=${labelId} class="label" ?hidden=${iconOnly} part="label"
+    <span
+      id=${ifDefined(labelId)}
+      class="label"
+      ?hidden=${iconOnly}
+      part="label"
       >${label}</span
     >
   `;
@@ -56,7 +64,8 @@ export default function Button({
           href=${href}
           target=${ifDefined(target)}
           rel=${ifDefined(rel)}
-          aria-labelledby=${labelId}
+          aria-label=${ifDefined(ariaLabel)}
+          aria-labelledby=${ifDefined(labelId)}
           aria-description=${ifDefined(ariaDescription)}
           title=${ifDefined(title)}
           data-variant=${ifDefined(variant)}
@@ -69,7 +78,8 @@ export default function Button({
     : html`
         <button
           class="button"
-          aria-labelledby=${labelId}
+          aria-label=${ifDefined(ariaLabel)}
+          aria-labelledby=${ifDefined(labelId)}
           ?disabled=${disabled}
           aria-disabled=${ariaDisabled ? "true" : nothing}
           aria-description=${ifDefined(ariaDescription)}
