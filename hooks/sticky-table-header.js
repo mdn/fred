@@ -94,6 +94,7 @@ function setupStickyHeader(table, container, thead) {
 
   let stuck = false;
   let rafId = 0;
+  let resized = false;
 
   function check() {
     rafId = 0;
@@ -104,26 +105,38 @@ function setupStickyHeader(table, container, thead) {
       tableRect.top < headerOffset &&
       tableRect.bottom > headerOffset + theadHeight;
 
+    const wasStuck = stuck;
     if (shouldStick !== stuck) {
       stuck = shouldStick;
       overlay.hidden = !stuck;
     }
 
     if (stuck) {
-      syncSize();
+      // Cell widths only change on resize, so skip that work on plain scrolls.
+      if (resized || !wasStuck) {
+        syncSize();
+      }
       syncScroll();
     }
+    resized = false;
   }
 
-  function schedule() {
+  /**
+   * @param {boolean} [sizeChanged]
+   */
+  function schedule(sizeChanged = false) {
+    resized ||= sizeChanged;
     if (rafId) {
       return;
     }
     rafId = requestAnimationFrame(check);
   }
 
-  window.addEventListener("scroll", schedule, { passive: true });
-  window.addEventListener("resize", schedule, { passive: true });
+  const onScroll = () => schedule();
+  const onResize = () => schedule(true);
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onResize, { passive: true });
   container.addEventListener(
     "scroll",
     () => {
@@ -134,7 +147,7 @@ function setupStickyHeader(table, container, thead) {
     { passive: true },
   );
 
-  const resizeObserver = new ResizeObserver(schedule);
+  const resizeObserver = new ResizeObserver(onResize);
   resizeObserver.observe(table);
   resizeObserver.observe(container);
 
