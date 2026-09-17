@@ -6,6 +6,7 @@
     "**/coverage/**",
     "**/node_modules/**",
     "build/**",
+    "components/**/element.js",
     "dist/**",
     "legacy/**",
     "out/**",
