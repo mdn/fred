@@ -15,6 +15,7 @@ import {
   PORT,
   WRITER_MODE,
 } from "./components/env/index.js";
+import { resolvePreferredLocale } from "./utils/preferred-locale.js";
 import { handleRunner } from "./vendor/yari/libs/play/index.js";
 
 import "source-map-support/register.js";
@@ -148,6 +149,7 @@ export async function startServer() {
   }
 
   app.use("/", express.static(FRED_BUILD_ROOT));
+  app.use(cookieParser());
 
   // Don't fall through to rari, express.static above should've served it:
   app.use("/static/*_", (_req, res) => {
@@ -231,6 +233,15 @@ export async function startServer() {
   }
 
   const RARI_URL = process.env.RARI_URL || "http://localhost:8083";
+
+  app.get(["/docs", "/docs/*_"], (req, res) => {
+    const locale = resolvePreferredLocale({
+      preferredLocale: req.cookies?.preferredlocale,
+      acceptLanguage: req.get("accept-language"),
+    });
+    const query = req.originalUrl.slice(req.path.length);
+    res.redirect(302, `/${locale}${req.path}${query}`);
+  });
 
   // Convert HEAD requests to GET so Rari returns full response for rendering
   app.use((req, res, next) => {
