@@ -2,7 +2,10 @@ import assert from "node:assert/strict";
 
 import { describe, it } from "node:test";
 
-import { changeDocsLocale } from "../../../utils/docs-locale-url.js";
+import {
+  changeDocsLocale,
+  removeDocsLocale,
+} from "../../../utils/docs-locale-url.js";
 
 describe("changeDocsLocale", () => {
   const cases = [
@@ -53,6 +56,37 @@ describe("changeDocsLocale", () => {
   for (const { name, url, locale, expected } of cases) {
     it(name, () => {
       assert.equal(changeDocsLocale(url, locale), expected);
+    });
+  }
+});
+
+describe("removeDocsLocale", () => {
+  const cases = [
+    {
+      name: "removes the locale from a relative docs path",
+      url: "/en-US/docs/Web/foo",
+      expected: "/docs/Web/foo",
+    },
+    {
+      name: "removes the locale from a full URL",
+      url: "https://developer.mozilla.org/fr/docs/Web/foo",
+      expected: "https://developer.mozilla.org/docs/Web/foo",
+    },
+    {
+      name: "keeps a locale-less path unchanged",
+      url: "/docs/Web/foo",
+      expected: "/docs/Web/foo",
+    },
+    {
+      name: "keeps a non-docs URL unchanged",
+      url: "/en-US/plus",
+      expected: "/en-US/plus",
+    },
+  ];
+
+  for (const { name, url, expected } of cases) {
+    it(name, () => {
+      assert.equal(removeDocsLocale(url), expected);
     });
   }
 });
