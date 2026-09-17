@@ -35,6 +35,18 @@ describe("isCurrentPageLink", () => {
       pathname: "/en-US/docs/Web/CSS/foo",
       expected: true,
     },
+    {
+      name: "keeps a fragment-only link",
+      url: "#syntax",
+      pathname: "/en-US/docs/Web/CSS/foo",
+      expected: false,
+    },
+    {
+      name: "does not match a page differing by trailing slash",
+      url: "https://developer.mozilla.org/en-US/docs/Web/CSS/foo/",
+      pathname: "/en-US/docs/Web/CSS/foo",
+      expected: false,
+    },
   ];
 
   for (const { name, url, pathname, expected } of cases) {
