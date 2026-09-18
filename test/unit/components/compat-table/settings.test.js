@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { isBrowserVisible } from "../../../components/compat-table/settings.js";
+import { isBrowserVisible } from "../../../../components/compat-table/settings.js";
 
 describe("isBrowserVisible", () => {
   const cases = [

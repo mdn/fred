@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { gatherPlatformsAndBrowsers } from "../../../components/compat-table/browsers.js";
+import { gatherPlatformsAndBrowsers } from "../../../../components/compat-table/browsers.js";
 
 /**
  * @param {string} type
@@ -153,7 +153,7 @@ describe("gatherPlatformsAndBrowsers", () => {
         category,
         data,
         browserInfo,
-        /** @type {import("../../../components/compat-table/settings.js").BrowserVisibility} */ (
+        /** @type {import("../../../../components/compat-table/settings.js").BrowserVisibility} */ (
           visibility
         ),
       );
