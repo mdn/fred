@@ -4,10 +4,11 @@ import { createRef, ref } from "lit/directives/ref.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
+import { changeDocsLocale } from "../../utils/docs-locale-url.js";
 import { gleanClick } from "../../utils/glean.js";
 import { ViewedController } from "../viewed-controller/viewed-controller.js";
 
-import { DEFAULT_LOCALE, ISSUE_METADATA_TEMPLATE } from "./constants.js";
+import { ISSUE_METADATA_TEMPLATE } from "./constants.js";
 import styles from "./element.css?lit";
 import {
   getSupportBrowserReleaseDate,
@@ -24,6 +25,7 @@ import {
   groupSupportBranches,
   hasMore,
   hasNoteworthyNotes,
+  isCurrentPageLink,
   isFullySupportedWithoutLimitation,
   isNotSupportedAtAll,
   listFeatures,
@@ -390,27 +392,22 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         ? html`<span>${unsafeHTML(compat.description)}</span>`
         : html`<code>${name}</code>`;
 
-      let titleNode;
       const titleContent = html`${title}${
         compat.status && this._renderStatusIcons(compat.status)
       }`;
-      if (compat.mdn_url && depth > 0) {
-        const href = compat.mdn_url.replace(
-          `/${DEFAULT_LOCALE}/docs`,
-          `/${locale}/docs`,
-        );
-        titleNode = html`<a
-          href=${href}
-          class="bc-table-row-header"
-          data-glean-id=${`bcd: link -> ${href}`}
-        >
-          ${titleContent}
-        </a>`;
-      } else {
-        titleNode = html`<div class="bc-table-row-header">
-          ${titleContent}
-        </div>`;
-      }
+      const href =
+        compat.mdn_url && depth > 0
+          ? changeDocsLocale(compat.mdn_url, locale)
+          : undefined;
+      const titleNode =
+        href && !isCurrentPageLink(href, this._pathname)
+          ? html`<a
+              href=${href}
+              class="bc-table-row-header"
+              data-glean-id=${`bcd: link -> ${href}`}
+              >${titleContent}</a
+            >`
+          : html`<div class="bc-table-row-header">${titleContent}</div>`;
 
       const browserCells = browsers.map((browserName, browserIndex) => {
         // <CompatCell>
