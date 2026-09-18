@@ -15,7 +15,10 @@ import {
   PORT,
   WRITER_MODE,
 } from "./components/env/index.js";
-import { resolvePreferredLocale } from "./utils/preferred-locale.js";
+import {
+  PREFERRED_LOCALE_COOKIE_NAME,
+  resolvePreferredLocale,
+} from "./utils/preferred-locale.js";
 import { handleRunner } from "./vendor/yari/libs/play/index.js";
 
 import "source-map-support/register.js";
@@ -235,7 +238,7 @@ export async function startServer() {
 
   app.get(["/docs", "/docs/*_"], cookieParser(), (req, res) => {
     const locale = resolvePreferredLocale({
-      preferredLocale: req.cookies?.preferredlocale,
+      preferredLocale: req.cookies?.[PREFERRED_LOCALE_COOKIE_NAME],
       acceptLanguage: req.get("accept-language"),
     });
     const query = req.originalUrl.slice(req.path.length);
