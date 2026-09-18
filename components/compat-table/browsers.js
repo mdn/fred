@@ -1,12 +1,16 @@
 import { isBrowserVisible } from "./settings.js";
 
+/** @import { BrowserName, Browsers, Identifier } from "@bcd" */
+/** @import { HiddenBrowsers } from "@compat" */
+/** @import { BrowserVisibility } from "./settings.js" */
+
 /**
  * Returns visible platforms and browsers, plus exclusions for the settings dialog.
  * @param {string} category
- * @param {import("@bcd").Identifier} data
- * @param {Partial<import("@bcd").Browsers>} browserInfo
- * @param {import("./settings.js").BrowserVisibility} visibility
- * @returns {[string[], import("@bcd").BrowserName[], import("@compat").HiddenBrowsers]}
+ * @param {Identifier} data
+ * @param {Partial<Browsers>} browserInfo
+ * @param {BrowserVisibility} visibility
+ * @returns {[string[], BrowserName[], HiddenBrowsers]}
  */
 export function gatherPlatformsAndBrowsers(
   category,
@@ -14,10 +18,10 @@ export function gatherPlatformsAndBrowsers(
   browserInfo,
   visibility,
 ) {
-  const isVisible = (/** @type {import("@bcd").BrowserName} */ browser) =>
+  const isVisible = (/** @type {BrowserName} */ browser) =>
     isBrowserVisible(browser, visibility);
 
-  const runtimes = /** @type {import("@bcd").BrowserName[]} */ (
+  const runtimes = /** @type {BrowserName[]} */ (
     Object.entries(browserInfo)
       .filter(([, { type }]) => type == "server")
       .map(([key]) => key)
@@ -36,18 +40,18 @@ export function gatherPlatformsAndBrowsers(
     if (
       type !== "server" &&
       !platforms.includes(type) &&
-      isVisible(/** @type {import("@bcd").BrowserName} */ (browser))
+      isVisible(/** @type {BrowserName} */ (browser))
     ) {
       platforms.push(type);
     }
   }
 
-  /** @type {import("@bcd").BrowserName[]} */
+  /** @type {BrowserName[]} */
   let browsers = [];
 
   // Add browsers in platform order to align table cells
   for (const platform of platforms) {
-    const platformBrowsers = /** @type {import("@bcd").BrowserName[]} */ (
+    const platformBrowsers = /** @type {BrowserName[]} */ (
       Object.keys(browserInfo)
     );
     browsers.push(
@@ -59,7 +63,7 @@ export function gatherPlatformsAndBrowsers(
   }
 
   // Include excluded platforms so the dialog can explain every missing browser.
-  /** @type {import("@compat").HiddenBrowsers} */
+  /** @type {HiddenBrowsers} */
   const hidden = {};
 
   if (category === "webextensions") {
@@ -67,8 +71,7 @@ export function gatherPlatformsAndBrowsers(
       browserInfo,
     )) {
       if (!accepts_webextensions) {
-        hidden[/** @type {import("@bcd").BrowserName} */ (browser)] =
-          "not-applicable";
+        hidden[/** @type {BrowserName} */ (browser)] = "not-applicable";
       }
     }
   }
