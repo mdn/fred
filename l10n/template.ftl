@@ -57,6 +57,8 @@ obs-mdn = The { -brand-name-obs } provides effective security insights, guided b
 compat-browser-version-date = { $browser } { $version } – Release date: { $date }
 compat-browser-version-released = Release date: { $date }
 compat-link-source-title = File: { $filename }
+compat-settings-hide-browser = Hide { $browser }
+compat-settings-show-browser = Show { $browser }
 compat-branch-prefix = Prefix: <code data-l10n-name="prefix">{ $prefix }</code>
 compat-branch-altname = Alternate name: <code data-l10n-name="altname">{ $altname }</code>
 compat-branch-prefix-altname = Prefix: <code data-l10n-name="prefix">{ $prefix }</code>, alternate name: <code data-l10n-name="altname">{ $altname }</code>
@@ -159,6 +161,7 @@ color-theme-theme = Theme
 compat-link-report-issue-title = Report an issue with this compatibility data
 compat-link-report-issue = Report problems with this compatibility data
 compat-link-source = View data on GitHub
+compat-no-browsers = No browsers selected. Use "Settings" to choose which browsers to show.
 compat-experimental = Experimental
 compat-deprecated = Deprecated
 compat-nonstandard = Non-standard
@@ -177,6 +180,19 @@ compat-link-report-missing-title = Report missing compatibility data
 compat-link-report-missing = Report this issue
 compat-js-required = Enable JavaScript to view this browser compatibility table.
 compat-loading = Loading…
+compat-settings-platform-desktop = Desktop
+compat-settings-platform-mobile = Mobile
+compat-settings-platform-server = Server
+compat-settings-platform-xr = XR
+compat-settings-hidden-no-data = Browser not available for current feature. No support data available.
+compat-settings-hidden-not-applicable = Browser not available for current feature. WebExtensions features don't apply.
+compat-settings-legend = Legend
+compat-settings-open = Settings
+compat-settings-title = Browser compatibility settings
+compat-settings-intro = Select the browsers to show in compatibility tables. Your selection is saved in this browser.
+compat-settings-restore-defaults = Restore defaults
+compat-settings-cancel = Cancel
+compat-settings-save = Save
 content-feedback-content-is-out-of-date = Content is out of date
 content-feedback-missing-information = Missing information
 content-feedback-code-examples-not-working-as-exp = Code examples not working as expected

@@ -2,10 +2,16 @@
 
 @media (--screen-xlarge-and-wider) {
   .bc-table {
-    /* 33% for feature, 67% for browser columns. */
-    grid-template-columns: minmax(33%, max-content) repeat(
-        var(--compat-browser-count),
-        calc(67% / var(--compat-browser-count))
+    /* 33% for feature, up to 67% for browser columns. */
+    grid-template-columns: minmax(33%, 1fr) repeat(
+        var(--compat-table-browser-count),
+        minmax(
+          0,
+          min(
+            calc(67% / var(--compat-table-browser-count)),
+            var(--compat-browser-column-max)
+          )
+        )
       );
   }
 }

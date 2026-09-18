@@ -2,10 +2,9 @@
 
 @media (--screen-small-and-wider) {
   .bc-table {
-    /* Expand all columns. */
-    grid-template-columns: minmax(20vw, min-content) repeat(
-        var(--compat-browser-count),
-        auto
+    grid-template-columns: minmax(20vw, 1fr) repeat(
+        var(--compat-table-browser-count),
+        minmax(0, var(--compat-browser-column-max))
       );
 
     thead {
@@ -81,19 +80,9 @@
     }
   }
 
+  /* Anchor positioned cell content so `.table-container` clips it. */
   .table-container-inner {
     position: relative;
-
-    &::after {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-
-      width: 10px;
-      height: 10px;
-
-      content: "";
-    }
   }
 
   .bcd-cell-text-wrapper {
