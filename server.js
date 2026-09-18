@@ -15,10 +15,7 @@ import {
   PORT,
   WRITER_MODE,
 } from "./components/env/index.js";
-import {
-  PREFERRED_LOCALE_COOKIE_NAME,
-  resolvePreferredLocale,
-} from "./utils/preferred-locale.js";
+import { registerLocaleLessDocsRedirect } from "./utils/locale-less-docs-redirect.js";
 import { handleRunner } from "./vendor/yari/libs/play/index.js";
 
 import "source-map-support/register.js";
@@ -236,14 +233,7 @@ export async function startServer() {
 
   const RARI_URL = process.env.RARI_URL || "http://localhost:8083";
 
-  app.get(["/docs", "/docs/*_"], cookieParser(), (req, res) => {
-    const locale = resolvePreferredLocale({
-      preferredLocale: req.cookies?.[PREFERRED_LOCALE_COOKIE_NAME],
-      acceptLanguage: req.get("accept-language"),
-    });
-    const query = req.originalUrl.slice(req.path.length);
-    res.redirect(302, `/${locale}${req.path}${query}`);
-  });
+  registerLocaleLessDocsRedirect(app);
 
   // Convert HEAD requests to GET so Rari returns full response for rendering
   app.use((req, res, next) => {
