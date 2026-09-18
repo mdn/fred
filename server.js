@@ -131,8 +131,7 @@ const isDocumentRequest = (req) =>
   !!(
     req.headers["sec-fetch-dest"] === "document" ||
     req.headers.accept?.includes("text/html")
-  ) &&
-  req.headers["x-requested-with"] !== "XMLHttpRequest";
+  );
 
 /**
  * @param {import("express").Request} req
