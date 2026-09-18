@@ -15,11 +15,15 @@ import "../button/element.js";
 import "../modal/element.js";
 import styles from "./element.css?lit";
 
+/** @import { BrowserName, Browsers } from "@bcd" */
+/** @import { HiddenBrowserReason, HiddenBrowsers } from "@compat" */
+/** @import { BrowserVisibility } from "../compat-table/settings.js" */
+
 /** Unlisted platforms follow in alphabetical order. */
 const PLATFORM_ORDER = ["desktop", "mobile", "server"];
 
 /**
- * @type {readonly import("@bcd").BrowserName[]}
+ * @type {readonly BrowserName[]}
  */
 const BASELINE_BROWSERS = Object.freeze([
   "chrome",
@@ -31,7 +35,7 @@ const BASELINE_BROWSERS = Object.freeze([
   "safari_ios",
 ]);
 
-/** @type {readonly import("@bcd").BrowserName[]} */
+/** @type {readonly BrowserName[]} */
 const WEBVIEW_BROWSERS = Object.freeze(["webview_android", "webview_ios"]);
 
 /**
@@ -56,19 +60,19 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
 
   constructor() {
     super();
-    /** @type {Partial<import("@bcd").Browsers>} */
+    /** @type {Partial<Browsers>} */
     this.browserInfo = {};
     /**
      * Saved visibility, synced across tabs by the parent table.
-     * @type {import("../compat-table/settings.js").BrowserVisibility}
+     * @type {BrowserVisibility}
      */
     this.visibility = {};
     /**
      * Exclusions that override user choices.
-     * @type {import("@compat").HiddenBrowsers}
+     * @type {HiddenBrowsers}
      */
     this.hiddenBrowsers = {};
-    /** @type {Set<import("@bcd").BrowserName>} */
+    /** @type {Set<BrowserName>} */
     this._selected = new Set();
   }
 
@@ -77,7 +81,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   }
 
   get _platforms() {
-    /** @type {Map<string, import("@bcd").BrowserName[]>} */
+    /** @type {Map<string, BrowserName[]>} */
     const groups = new Map();
     for (const [name, browser] of Object.entries(this.browserInfo)) {
       if (!browser) {
@@ -85,7 +89,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
       }
       const platform = browser.type;
       const group = groups.get(platform) ?? [];
-      group.push(/** @type {import("@bcd").BrowserName} */ (name));
+      group.push(/** @type {BrowserName} */ (name));
       groups.set(platform, group);
     }
     return [...groups].sort(([a], [b]) => {
@@ -147,9 +151,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   }
 
   get _browsers() {
-    return /** @type {import("@bcd").BrowserName[]} */ (
-      Object.keys(this.browserInfo)
-    );
+    return /** @type {BrowserName[]} */ (Object.keys(this.browserInfo));
   }
 
   get _defaults() {
@@ -165,7 +167,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   }
 
   /**
-   * @param {import("../compat-table/settings.js").BrowserVisibility | null} visibility
+   * @param {BrowserVisibility | null} visibility
    */
   _preview(visibility) {
     this.dispatchEvent(
@@ -210,7 +212,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
    * @param {Event} event
    */
   _toggle({ currentTarget }) {
-    const browser = /** @type {import("@bcd").BrowserName} */ (
+    const browser = /** @type {BrowserName} */ (
       /** @type {HTMLElement} */ (currentTarget).dataset.browser
     );
     const selected = new Set(this._selected);
@@ -224,7 +226,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   }
 
   /**
-   * @param {import("@compat").HiddenBrowserReason} reason
+   * @param {HiddenBrowserReason} reason
    */
   _hiddenLabel(reason) {
     return reason === "no-data"
@@ -237,7 +239,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   }
 
   /**
-   * @param {import("@bcd").BrowserName} browser
+   * @param {BrowserName} browser
    */
   _renderHiddenNote(browser) {
     const reason = this.hiddenBrowsers[browser];
@@ -255,7 +257,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
 
   get _hiddenReasons() {
     const present = new Set(Object.values(this.hiddenBrowsers));
-    return /** @type {import("@compat").HiddenBrowserReason[]} */ ([
+    return /** @type {HiddenBrowserReason[]} */ ([
       "not-applicable",
       "no-data",
     ]).filter((reason) => present.has(reason));
@@ -281,7 +283,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
   }
 
   /**
-   * @param {import("@bcd").BrowserName} browser
+   * @param {BrowserName} browser
    * @param {boolean} selected
    */
   _renderBrowser(browser, selected) {
@@ -310,7 +312,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
 
   /**
    * @param {string} platform
-   * @param {import("@bcd").BrowserName[]} browsers
+   * @param {BrowserName[]} browsers
    */
   _renderPlatform(platform, browsers) {
     const rows = [
