@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.10.0](https://github.com/mdn/fred/compare/v2.9.2...v2.10.0) (2026-09-18)
+
+
+### Features
+
+* **compat-table:** add browser visibility settings ([#1880](https://github.com/mdn/fred/issues/1880)) ([01ae668](https://github.com/mdn/fred/commit/01ae668d58fbfed76b7cd8669fe8d1a886672dc2))
+
+
+### Miscellaneous
+
+* **deps:** bump @mdn/rari from 0.2.35 to 1.0.0 ([#1919](https://github.com/mdn/fred/issues/1919)) ([698309d](https://github.com/mdn/fred/commit/698309dc476213a86e9916753012ea3f453465bf))
+
 ## [2.9.2](https://github.com/mdn/fred/compare/v2.9.1...v2.9.2) (2026-09-16)
 
 
