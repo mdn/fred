@@ -1,4 +1,4 @@
-import { strictEqual } from "node:assert";
+import assert from "node:assert/strict";
 
 import { describe, it } from "node:test";
 
@@ -67,7 +67,7 @@ describe("resolvePreferredLocale", () => {
 
   for (const { name, expected, ...options } of cases) {
     it(name, () => {
-      strictEqual(resolvePreferredLocale(options), expected);
+      assert.equal(resolvePreferredLocale(options), expected);
     });
   }
 });
