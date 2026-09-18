@@ -25,6 +25,7 @@ import "source-map-support/register.js";
  */
 
 let devMode = true;
+// Set by scripts/server.js when `npm run start` launches Rari alongside Fred.
 const rariManagedByFred = process.env.RARI_MANAGED_BY_FRED === "true";
 /** @type {import("./build/render.js").render | undefined} */
 let prodRender;
