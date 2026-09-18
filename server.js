@@ -149,7 +149,6 @@ export async function startServer() {
   }
 
   app.use("/", express.static(FRED_BUILD_ROOT));
-  app.use(cookieParser());
 
   // Don't fall through to rari, express.static above should've served it:
   app.use("/static/*_", (_req, res) => {
@@ -234,7 +233,7 @@ export async function startServer() {
 
   const RARI_URL = process.env.RARI_URL || "http://localhost:8083";
 
-  app.get(["/docs", "/docs/*_"], (req, res) => {
+  app.get(["/docs", "/docs/*_"], cookieParser(), (req, res) => {
     const locale = resolvePreferredLocale({
       preferredLocale: req.cookies?.preferredlocale,
       acceptLanguage: req.get("accept-language"),
