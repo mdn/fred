@@ -50,6 +50,16 @@ describe("resolvePreferredLocale", () => {
       expected: "zh-TW",
     },
     {
+      name: "matches traditional Chinese script subtags",
+      acceptLanguage: "zh-Hant-TW",
+      expected: "zh-TW",
+    },
+    {
+      name: "matches simplified Chinese script subtags",
+      acceptLanguage: "zh-Hans-CN",
+      expected: "zh-CN",
+    },
+    {
       name: "ignores languages with zero quality",
       acceptLanguage: "fr;q=0, de;q=0.5",
       expected: "de",
