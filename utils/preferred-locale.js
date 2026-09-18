@@ -108,5 +108,15 @@ function matchLocale(language) {
   }
 
   const baseLanguage = normalized.split("-", 1)[0];
+  if (baseLanguage === "zh") {
+    const script = normalized.split("-").find((subtag) => subtag.length === 4);
+    if (script === "hant") {
+      return "zh-TW";
+    }
+    if (script === "hans") {
+      return "zh-CN";
+    }
+  }
+
   return LOCALES_BY_LANGUAGE.get(baseLanguage)?.[0];
 }
