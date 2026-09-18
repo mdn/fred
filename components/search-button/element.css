@@ -31,4 +31,17 @@
     border-bottom: 2px solid
       light-dark(var(--color-blue-50), var(--color-blue-80));
   }
+
+  @media (--screen-menu-compact) {
+    width: 2.5rem;
+
+    padding-left: 0.25rem;
+
+    background-color: transparent;
+    border: none;
+
+    &::before {
+      display: none;
+    }
+  }
 }
