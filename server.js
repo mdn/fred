@@ -127,7 +127,7 @@ const streamToBuffer = (stream) =>
  */
 const isDocumentRequest = (req) =>
   req.method === "GET" &&
-  !(req.url?.split("?", 1)[0] ?? "").endsWith(".json") &&
+  !req.path.endsWith(".json") &&
   !!(
     req.headers["sec-fetch-dest"] === "document" ||
     req.headers.accept?.includes("text/html")
