@@ -116,6 +116,71 @@ export default {
         };
       },
     },
+    "require-aria-label-for-title": {
+      meta: {
+        type: "problem",
+        docs: {
+          // "Relying on the title attribute is currently discouraged as many user agents do not expose the attribute in an accessible manner …"
+          // See: https://html.spec.whatwg.org/multipage/dom.html#the-title-attribute
+          description: "require aria-label for HTML elements with title",
+        },
+      },
+      create(context) {
+        return {
+          /**
+           * @param {import("estree").TaggedTemplateExpression} node
+           */
+          TaggedTemplateExpression(node) {
+            // Only process html`` tagged template literals.
+            const { tag } = node;
+            if (tag.type !== "Identifier" || tag.name !== "html") {
+              return;
+            }
+
+            // Reconstruct the template string by joining the static parts with
+            // a placeholder so attribute patterns remain searchable across
+            // expression boundaries.
+            const reconstructed = node.quasi.quasis
+              .map((q) => q.value.cooked ?? q.value.raw)
+              .join('"__EXPR__"');
+
+            // Match opening HTML tags; attributes may span multiple lines.
+            // Expressions are replaced with "__EXPR__" so no stray > chars.
+            const tagPattern = /<([a-z][a-z0-9-]*)(\s[^>]*)?\/?>/gis;
+
+            /**
+             * @param {string} tag
+             * @param {string} attr
+             */
+            const hasAttr = (tag, attr) =>
+              new RegExp(`(?:^|\\s)${attr}\\s*=`).test(tag);
+
+            // Skip elements where title has standardized HTML semantics
+            // (abbr expansion) or where aria-label is not applicable (link).
+            const SKIP_TAG_NAMES = new Set(["abbr", "link", "time"]);
+
+            for (const [fullTag, tagName] of reconstructed.matchAll(
+              tagPattern,
+            )) {
+              if (
+                !tagName ||
+                SKIP_TAG_NAMES.has(tagName) ||
+                !hasAttr(fullTag, "title") ||
+                hasAttr(fullTag, "aria-label") ||
+                hasAttr(fullTag, "aria-labelledby")
+              ) {
+                continue;
+              }
+
+              context.report({
+                node,
+                message: `<${tagName}> has a title attribute but no aria-label. Relying on the title attribute is discouraged as many user agents do not expose the attribute in an accessible manner. Add aria-label, or eslint-disable this rule with a comment explaining why.`,
+              });
+            }
+          },
+        };
+      },
+    },
     "server-html-import": {
       meta: {
         type: "problem",

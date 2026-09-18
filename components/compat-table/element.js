@@ -237,6 +237,9 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
         title=${this.l10n(
           "compat-link-report-issue-title",
         )`Report an issue with this compatibility data`}
+        aria-label=${this.l10n(
+          "compat-link-report-issue-title",
+        )`Report an issue with this compatibility data`}
       >
         ${this.l10n(
           "compat-link-report-issue",
@@ -250,6 +253,12 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
                 target="_blank"
                 rel="noopener noreferrer"
                 title=${this.l10n.raw({
+                  id: "compat-link-source-title",
+                  args: {
+                    filename: source_file,
+                  },
+                })}
+                aria-label=${this.l10n.raw({
                   id: "compat-link-source-title",
                   args: {
                     filename: source_file,
@@ -308,6 +317,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
           class=${cellClass}
           colspan=${browserCount}
           title=${platform}
+          aria-label=${platform}
           style="grid-column: ${columnStart} / ${columnEnd}"
         >
           <span class=${iconClass}></span>
@@ -951,6 +961,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
 
     title = `${browser.name} – ${title}`;
 
+    // eslint-disable-next-line fred/require-aria-label-for-title -- bc-version-label title is a date tooltip; aria-label would override the accessible version label text
     return html`<div
       class=${
         timeline ? "bcd-timeline-cell-text-wrapper" : "bcd-cell-text-wrapper"
