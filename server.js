@@ -133,20 +133,32 @@ const isDocumentRequest = (req) =>
     req.headers.accept?.includes("text/html")
   );
 
+/** @type {Set<string>} */
+const loggedRariProxyErrors = new Set();
+
 /**
+ * @param {Error} error
  * @param {import("express").Request} req
  * @param {import("express").Response} res
  * @param {string} rariUrl
  */
-const handleRariProxyError = (req, res, rariUrl) => {
+const handleRariProxyError = (error, req, res, rariUrl) => {
   if (res.headersSent || res.destroyed) {
     return;
   }
 
+  const errorCode =
+    "code" in error && typeof error.code === "string" ? error.code : error.name;
+  // Log once per code: the fallback page retries every 3 seconds.
+  if (!loggedRariProxyErrors.has(errorCode)) {
+    loggedRariProxyErrors.add(errorCode);
+    console.error(`Rari proxy error (${errorCode}) for ${rariUrl}:`, error);
+  }
+
   if (!isDocumentRequest(req)) {
     const message = rariManagedByFred
-      ? `Rari may still be starting at ${rariUrl}. If this persists, check the Rari terminal output.\n`
-      : `Rari is not available at ${rariUrl}. Start it separately with: node --env-file=.env --run rari -- serve, or check that an existing Rari process is running.\n`;
+      ? `Rari may still be starting at ${rariUrl} (${errorCode}). If this persists, check the Rari terminal output.\n`
+      : `Rari is not available at ${rariUrl} (${errorCode}). Start it separately with: node --env-file=.env --run rari -- serve, or check that an existing Rari process is running.\n`;
     res.writeHead(503, {
       "Cache-Control": "no-store",
       "Content-Length": Buffer.byteLength(message),
@@ -158,6 +170,7 @@ const handleRariProxyError = (req, res, rariUrl) => {
   }
 
   const escapedRariUrl = he.encode(rariUrl);
+  const escapedErrorCode = he.encode(errorCode);
   const guidance = rariManagedByFred
     ? `<p>Rari may still be starting. This page will retry automatically.</p>
     <p>If this persists, check the Rari terminal output for startup errors.</p>`
@@ -181,6 +194,7 @@ const handleRariProxyError = (req, res, rariUrl) => {
   <body>
     <h1>Waiting for Rari</h1>
     <p>Fred could not connect to Rari at <code>${escapedRariUrl}</code>.</p>
+    <p>Error: <code>${escapedErrorCode}</code></p>
     <p><a href="">Retry now</a></p>
     ${guidance}
   </body>
@@ -396,9 +410,9 @@ export async function startServer() {
           res.end(buffer);
         },
         ...((devMode || WRITER_MODE) && {
-          error: (_error, req, res) => {
+          error: (error, req, res) => {
             if ("locals" in res) {
-              handleRariProxyError(req, res, RARI_URL);
+              handleRariProxyError(error, req, res, RARI_URL);
             }
           },
         }),
