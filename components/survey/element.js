@@ -220,6 +220,9 @@ export class MDNSurvey extends L10nMixin(LitElement) {
                 title=${this.l10n(
                   "survey-take-survey-opens-in-a-new-tab",
                 )`Take survey (Opens in a new tab)`}
+                aria-label=${this.l10n(
+                  "survey-take-survey-opens-in-a-new-tab",
+                )`Take survey (Opens in a new tab)`}
                 @click=${this.#onLinkClick}
                 >${this._survey.question}</a
               >`
@@ -230,6 +233,7 @@ export class MDNSurvey extends L10nMixin(LitElement) {
                     ? html`
                         <iframe
                           title=${ifDefined(this._survey.question)}
+                          aria-label=${ifDefined(this._survey.question)}
                           src=${this._source}
                         ></iframe>
                       `
