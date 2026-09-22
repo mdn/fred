@@ -4,17 +4,19 @@ updates:
     directory: /
     schedule:
       interval: daily
+    open-pull-requests-limit: 10
     ignore:
       # matches .nvmrc
       - dependency-name: "@types/node"
         versions: [">=25"]
       # https://github.com/mdn/fred/issues/1704
-      - dependency-name: "typescript"
+      - dependency-name: typescript
         versions: [">=7"]
       # need to fix lint breakage before updating
-      - dependency-name: "eslint-plugin-unicorn"
+      - dependency-name: eslint-plugin-unicorn
         versions: [">65.0.1"]
     cooldown:
+      default-days: 3
       exclude:
         - "@mdn/*"
     groups:
@@ -40,7 +42,7 @@ updates:
       eslint:
         patterns:
           - "@eslint/*"
-          - "eslint"
+          - eslint
         update-types:
           - major
       rspack:
@@ -62,6 +64,9 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    open-pull-requests-limit: 10
+    cooldown:
+      default-days: 3
     commit-message:
       prefix: ci
       include: scope
