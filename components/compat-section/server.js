@@ -8,10 +8,10 @@ import { ServerComponent } from "../server/index.js";
 
 export class CompatSection extends ServerComponent {
   /**
-   * @param {import("@fred").Context} _context
+   * @param {import("@fred").Context} context
    * @param {import("@rari").Compat} section
    */
-  render(_context, { id, title, query, isH3 }) {
+  render(context, { id, title, query, isH3 }) {
     const level = isH3 ? 3 : 2;
     return html`<section
       class="content-section"
@@ -19,7 +19,7 @@ export class CompatSection extends ServerComponent {
     >
       ${HeadingAnchor.render(level, id ? String(id) : null, String(title))}
       <mdn-compat-table-lazy
-        locale="en-US"
+        locale=${context.locale}
         query=${query}
       ></mdn-compat-table-lazy>
     </section>`;
