@@ -19,7 +19,6 @@ import "../modal/element.js";
 import "../login-button/element.js";
 
 /**
- * @import { MDNPlayController } from "../play-controller/element.js";
  * @import { MDNModal } from "../modal/element.js";
  */
 
@@ -42,24 +41,19 @@ export class MDNPlayground extends L10nMixin(LitElement) {
     this._gistId = undefined;
   }
 
-  /** @returns {MDNPlayController | null} */
   get _controller() {
-    return /** @type {MDNPlayController | null} */ (
-      this.shadowRoot?.querySelector("mdn-play-controller") ?? null
-    );
+    return this.shadowRoot?.querySelector("mdn-play-controller");
   }
 
-  /** @returns {MDNModal | null} */
   get _shareModal() {
-    return /** @type {MDNModal | null} */ (
-      this.shadowRoot?.querySelector("mdn-modal.share") ?? null
+    return /** @type {MDNModal | null | undefined} */ (
+      this.shadowRoot?.querySelector("mdn-modal.share")
     );
   }
 
-  /** @returns {MDNModal | null} */
   get _reportModal() {
-    return /** @type {MDNModal | null} */ (
-      this.shadowRoot?.querySelector("mdn-modal.report") ?? null
+    return /** @type {MDNModal | null | undefined} */ (
+      this.shadowRoot?.querySelector("mdn-modal.report")
     );
   }
 
