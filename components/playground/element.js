@@ -323,10 +323,7 @@ ${"```"}`,
 
     return html`
       <div class="wrapper">
-        <mdn-play-controller
-          run-on-start
-          run-on-change
-        >
+        <mdn-play-controller run-on-start run-on-change>
           <section>
             <aside>
               <h1>${this.l10n("playground-playground")`Playground`}</h1>
