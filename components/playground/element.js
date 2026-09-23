@@ -41,6 +41,7 @@ export class MDNPlayground extends L10nMixin(LitElement) {
     this._gistId = undefined;
   }
 
+  // Not `ref()`: Lit SSR leaks a random `lit$…$` attribute on custom elements with element bindings.
   get _controller() {
     return this.shadowRoot?.querySelector("mdn-play-controller");
   }
