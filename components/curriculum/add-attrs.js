@@ -1,24 +1,34 @@
+// Lit caches parsed templates by the identity of their strings array.
+/** @type {WeakMap<import("@lit").SVGTemplateResult, Map<string, TemplateStringsArray>>} */
+const attrStrings = new WeakMap();
+
 /**
- *
  * @param {import("@lit").SVGTemplateResult} original
  * @param {{[key: string]: string}} attrs
  * @returns {import("@lit").SVGTemplateResult}
  */
-
 export function addAttrs(original, attrs) {
   // turn { role: 'img', 'aria-label': 'Foo' } into: role="img" aria-label="Foo"
   const attrString = Object.entries(attrs)
     .map(([k, v]) => `${k}="${v}"`)
     .join(" ");
-  const [head, ...restStrings] = original.strings;
+  const head = original.strings[0];
   if (!head) {
     return original;
   }
-  const newHead = head.replace(/<svg([\s\S]*?)>/, `<svg$1 ${attrString}>`);
-  const newStrings = [newHead, ...restStrings];
-  // @ts-expect-error
-  newStrings.raw = [newHead, ...restStrings];
-  // @ts-expect-error
-  original.strings = newStrings;
-  return original;
+  let variants = attrStrings.get(original);
+  if (!variants) {
+    variants = new Map();
+    attrStrings.set(original, variants);
+  }
+  let strings = variants.get(attrString);
+  if (!strings) {
+    const newHead = head.replace(/<svg([\s\S]*?)>/, `<svg$1 ${attrString}>`);
+    const restStrings = original.strings.slice(1);
+    strings = Object.assign([newHead, ...restStrings], {
+      raw: [newHead, ...restStrings],
+    });
+    variants.set(attrString, strings);
+  }
+  return { ...original, strings };
 }
