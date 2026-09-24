@@ -25,9 +25,11 @@ export function addAttrs(original, attrs) {
   if (!strings) {
     const newHead = head.replace(/<svg([\s\S]*?)>/, `<svg$1 ${attrString}>`);
     const restStrings = original.strings.slice(1);
-    strings = Object.assign([newHead, ...restStrings], {
-      raw: [newHead, ...restStrings],
-    });
+    strings = Object.freeze(
+      Object.assign([newHead, ...restStrings], {
+        raw: Object.freeze([newHead, ...restStrings]),
+      }),
+    );
     variants.set(attrString, strings);
   }
   return { ...original, strings };
