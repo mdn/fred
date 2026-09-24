@@ -15,6 +15,7 @@ import {
   PORT,
   WRITER_MODE,
 } from "./components/env/index.js";
+import { registerLocaleLessDocsRedirect } from "./utils/locale-less-docs-redirect.js";
 import { handleRunner } from "./vendor/yari/libs/play/index.js";
 
 import "source-map-support/register.js";
@@ -231,6 +232,8 @@ export async function startServer() {
   }
 
   const RARI_URL = process.env.RARI_URL || "http://localhost:8083";
+
+  registerLocaleLessDocsRedirect(app);
 
   // Convert HEAD requests to GET so Rari returns full response for rendering
   app.use((req, res, next) => {
