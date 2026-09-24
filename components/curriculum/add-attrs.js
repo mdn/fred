@@ -1,5 +1,5 @@
 // Lit caches parsed templates by the identity of their strings array.
-/** @type {WeakMap<import("@lit").SVGTemplateResult, Map<string, TemplateStringsArray>>} */
+/** @type {WeakMap<TemplateStringsArray, Map<string, TemplateStringsArray>>} */
 const attrStrings = new WeakMap();
 
 /**
@@ -16,10 +16,10 @@ export function addAttrs(original, attrs) {
   if (!head) {
     return original;
   }
-  let variants = attrStrings.get(original);
+  let variants = attrStrings.get(original.strings);
   if (!variants) {
     variants = new Map();
-    attrStrings.set(original, variants);
+    attrStrings.set(original.strings, variants);
   }
   let strings = variants.get(attrString);
   if (!strings) {
