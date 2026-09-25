@@ -5,6 +5,7 @@ import { Worker } from "node:worker_threads";
 
 import cookieParser from "cookie-parser";
 import express from "express";
+import he from "he";
 import { createProxyMiddleware } from "http-proxy-middleware";
 import { getEditorInfo } from "open-editor";
 
@@ -24,6 +25,8 @@ import "source-map-support/register.js";
  */
 
 let devMode = true;
+// Set by scripts/server.js when `npm run start` launches Rari alongside Fred.
+const rariManagedByFred = process.env.RARI_MANAGED_BY_FRED === "true";
 /** @type {import("./build/render.js").render | undefined} */
 let prodRender;
 
@@ -118,6 +121,94 @@ const streamToBuffer = (stream) =>
     stream.on("end", () => resolve(Buffer.concat(chunks)));
     stream.on("error", reject);
   });
+
+/**
+ * @param {import("express").Request} req
+ * @returns {boolean}
+ */
+const isDocumentRequest = (req) =>
+  req.method === "GET" &&
+  !req.path.endsWith(".json") &&
+  !!(
+    req.headers["sec-fetch-dest"] === "document" ||
+    req.headers.accept?.includes("text/html")
+  );
+
+/** @type {Set<string>} */
+const loggedRariProxyErrors = new Set();
+
+/**
+ * @param {Error} error
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {string} rariUrl
+ */
+const handleRariProxyError = (error, req, res, rariUrl) => {
+  if (res.headersSent || res.destroyed) {
+    return;
+  }
+
+  const errorCode =
+    "code" in error && typeof error.code === "string" ? error.code : error.name;
+  // Log once per code: the fallback page retries every 3 seconds.
+  if (!loggedRariProxyErrors.has(errorCode)) {
+    loggedRariProxyErrors.add(errorCode);
+    console.error(`Rari proxy error (${errorCode}) for ${rariUrl}:`, error);
+  }
+
+  if (!isDocumentRequest(req)) {
+    const message = rariManagedByFred
+      ? `Rari may still be starting at ${rariUrl} (${errorCode}). If this persists, check the Rari terminal output.\n`
+      : `Rari is not available at ${rariUrl} (${errorCode}). Start it separately with: node --env-file=.env --run rari -- serve, or check that an existing Rari process is running.\n`;
+    res.writeHead(503, {
+      "Cache-Control": "no-store",
+      "Content-Length": Buffer.byteLength(message),
+      "Content-Type": "text/plain; charset=utf-8",
+      "Retry-After": "3",
+    });
+    res.end(res.locals.wasHead ? undefined : message);
+    return;
+  }
+
+  const escapedRariUrl = he.encode(rariUrl);
+  const escapedErrorCode = he.encode(errorCode);
+  const guidance = rariManagedByFred
+    ? `<p>Rari may still be starting. This page will retry automatically.</p>
+    <p>If this persists, check the Rari terminal output for startup errors.</p>`
+    : `<p>Rari may still be starting, or it may not be running yet. This page will retry automatically.</p>
+    <p>Start Rari separately with:</p>
+    <pre><code>node --env-file=.env --run rari -- serve</code></pre>
+    <p>Or check that an existing Rari process is running.</p>`;
+  const html = `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="3">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Waiting for Rari</title>
+    <style>
+      body { color: #1b1b1b; font: 1rem/1.5 system-ui, sans-serif; margin: 3rem auto; max-width: 42rem; padding: 0 1rem; }
+      code { background: #eee; padding: .15rem .3rem; }
+      pre { background: #eee; overflow: auto; padding: 1rem; }
+    </style>
+  </head>
+  <body>
+    <h1>Waiting for Rari</h1>
+    <p>Fred could not connect to Rari at <code>${escapedRariUrl}</code>.</p>
+    <p>Error: <code>${escapedErrorCode}</code></p>
+    <p><a href="">Retry now</a></p>
+    ${guidance}
+  </body>
+</html>`;
+
+  res.writeHead(503, {
+    "Cache-Control": "no-store",
+    "Content-Length": Buffer.byteLength(html),
+    "Content-Type": "text/html; charset=utf-8",
+    "Retry-After": "3",
+  });
+  res.end(res.locals.wasHead ? undefined : html);
+};
 
 export async function startServer() {
   let app = express();
@@ -319,6 +410,13 @@ export async function startServer() {
           res.writeHead(statusCode, proxyRes.headers);
           res.end(buffer);
         },
+        ...((devMode || WRITER_MODE) && {
+          error: (error, req, res) => {
+            if ("locals" in res) {
+              handleRariProxyError(error, req, res, RARI_URL);
+            }
+          },
+        }),
       },
     }),
   );
