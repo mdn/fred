@@ -1,6 +1,5 @@
 import { Task } from "@lit/task";
 import { LitElement, html, nothing } from "lit";
-import { createRef, ref } from "lit/directives/ref.js";
 
 import { L10nMixin } from "../../l10n/mixin.js";
 import { gleanClick } from "../../utils/glean.js";
@@ -20,9 +19,7 @@ import "../modal/element.js";
 import "../login-button/element.js";
 
 /**
- * @import { MDNPlayController } from "../play-controller/element.js";
  * @import { MDNModal } from "../modal/element.js";
- * @import { Ref } from "lit/directives/ref.js";
  */
 
 const SESSION_KEY = "playground-session-code";
@@ -44,12 +41,22 @@ export class MDNPlayground extends L10nMixin(LitElement) {
     this._gistId = undefined;
   }
 
-  /** @type {Ref<MDNPlayController>} */
-  _controller = createRef();
-  /** @type {Ref<MDNModal>} */
-  _shareModal = createRef();
-  /** @type {Ref<MDNModal>} */
-  _reportModal = createRef();
+  // Not `ref()`: Lit SSR leaks a random `lit$…$` attribute on custom elements with element bindings.
+  get _controller() {
+    return this.shadowRoot?.querySelector("mdn-play-controller");
+  }
+
+  get _shareModal() {
+    return /** @type {MDNModal | null | undefined} */ (
+      this.shadowRoot?.querySelector("mdn-modal.share")
+    );
+  }
+
+  get _reportModal() {
+    return /** @type {MDNModal | null | undefined} */ (
+      this.shadowRoot?.querySelector("mdn-modal.report")
+    );
+  }
 
   _user = new Task(this, {
     task: async () => {
@@ -58,11 +65,11 @@ export class MDNPlayground extends L10nMixin(LitElement) {
   });
 
   _format() {
-    this._controller.value?.format();
+    this._controller?.format();
   }
 
   _run() {
-    const controller = this._controller.value;
+    const controller = this._controller;
     if (controller) {
       controller.run();
       if (!this._autoRun) {
@@ -75,11 +82,11 @@ export class MDNPlayground extends L10nMixin(LitElement) {
   }
 
   _share() {
-    this._shareModal.value?.showModal();
+    this._shareModal?.showModal();
   }
 
   _clear() {
-    const controller = this._controller.value;
+    const controller = this._controller;
     if (
       confirm(
         this.l10n(
@@ -99,7 +106,7 @@ export class MDNPlayground extends L10nMixin(LitElement) {
   }
 
   _reset() {
-    const controller = this._controller.value;
+    const controller = this._controller;
     if (
       confirm(
         this.l10n(
@@ -115,7 +122,7 @@ export class MDNPlayground extends L10nMixin(LitElement) {
   }
 
   async _copyMarkdown() {
-    const controller = this._controller.value;
+    const controller = this._controller;
     if (controller) {
       const markdown = Object.entries(controller.code)
         .map(
@@ -132,7 +139,7 @@ ${"```"}`,
   }
 
   async _copyDataUrl() {
-    const controller = this._controller.value;
+    const controller = this._controller;
     if (controller) {
       const { css, html, js } = controller.code;
       await navigator.clipboard.writeText(codeToDataUrl({ css, html, js }));
@@ -140,7 +147,7 @@ ${"```"}`,
   }
 
   async _createPermalink() {
-    const controller = this._controller.value;
+    const controller = this._controller;
     if (controller) {
       const res = await fetch("/api/v1/play/", {
         method: "POST",
@@ -167,7 +174,7 @@ ${"```"}`,
   }
 
   _storeSession() {
-    const controller = this._controller.value;
+    const controller = this._controller;
     if (controller) {
       const { srcPrefix, initialCode, code } = controller;
       /** @type {import("./types.js").PlaygroundSession} */
@@ -185,7 +192,7 @@ ${"```"}`,
     const { srcPrefix, initialCode, code, autoRun } = stateToSession(
       JSON.parse(sessionStorage.getItem(SESSION_KEY) || "{}"),
     );
-    const controller = this._controller.value;
+    const controller = this._controller;
     if (controller) {
       if (autoRun === false) {
         this._autoRun = false;
@@ -200,7 +207,7 @@ ${"```"}`,
   }
 
   async _loadFromUrl() {
-    const controller = this._controller.value;
+    const controller = this._controller;
     if (controller) {
       const params = new URLSearchParams(location.search);
       const idParam = params.get("id");
@@ -277,11 +284,11 @@ ${"```"}`,
   }
 
   _reportOpen() {
-    this._reportModal.value?.showModal();
+    this._reportModal?.showModal();
   }
 
   _reportCancel() {
-    this._reportModal.value?.close();
+    this._reportModal?.close();
   }
 
   async _reportSubmit() {
@@ -292,10 +299,10 @@ ${"```"}`,
       },
       body: JSON.stringify({
         id: this._gistId,
-        reason: this._reportModal.value?.querySelector("textarea")?.value,
+        reason: this._reportModal?.querySelector("textarea")?.value,
       }),
     });
-    this._reportModal.value?.close();
+    this._reportModal?.close();
   }
 
   connectedCallback() {
@@ -304,18 +311,14 @@ ${"```"}`,
   }
 
   render() {
-    const { code, initialCode } = this._controller.value ?? {};
+    const { code, initialCode } = this._controller ?? {};
     const hasCode = Object.values(code ?? {}).some(Boolean);
     const hasInitialCode = Object.values(initialCode ?? {}).some(Boolean);
     const isResettable = hasInitialCode && !compareCode(code, initialCode);
 
     return html`
       <div class="wrapper">
-        <mdn-play-controller
-          ${ref(this._controller)}
-          run-on-start
-          run-on-change
-        >
+        <mdn-play-controller run-on-start run-on-change>
           <section>
             <aside>
               <h1>${this.l10n("playground-playground")`Playground`}</h1>
@@ -427,7 +430,7 @@ ${"```"}`,
           </section>
         </mdn-play-controller>
       </div>
-      <mdn-modal ${ref(this._shareModal)} class="share">
+      <mdn-modal class="share">
         <section>
           <h2>${this.l10n("playground-share-markdown")`Share Markdown`}</h2>
           <mdn-button
@@ -492,7 +495,7 @@ ${"```"}`,
           })}
         </section>
       </mdn-modal>
-      <mdn-modal ${ref(this._reportModal)} class="report">
+      <mdn-modal class="report">
         <section>
           <p>
             ${this.l10n(
