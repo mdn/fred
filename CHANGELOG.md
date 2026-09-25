@@ -1,5 +1,27 @@
 # Changelog
 
+## [2.10.0](https://github.com/mdn/fred/compare/v2.9.2...v2.10.0) (2026-09-25)
+
+
+### Features
+
+* **compat-table:** add browser visibility settings ([#1880](https://github.com/mdn/fred/issues/1880)) ([01ae668](https://github.com/mdn/fred/commit/01ae668d58fbfed76b7cd8669fe8d1a886672dc2))
+
+
+### Bug Fixes
+
+* **compat-table:** omit same-page BCD links ([#1926](https://github.com/mdn/fred/issues/1926)) ([f48d176](https://github.com/mdn/fred/commit/f48d17662e480684552ea2d1b1f7a3ec16d4c135))
+* **menu:** correct "error handing" typo in JS guides menu ([#1935](https://github.com/mdn/fred/issues/1935)) ([68c0d4e](https://github.com/mdn/fred/commit/68c0d4e9eccf15c83c3f69c6b88aba099f7f6c6d))
+
+
+### Miscellaneous
+
+* **deps:** bump @codemirror/state from 6.7.5 to 6.7.6 in the npm-prod group ([#1939](https://github.com/mdn/fred/issues/1939)) ([7d30ac0](https://github.com/mdn/fred/commit/7d30ac0611faa3c7fd091cd0bc6e2443bd373205))
+* **deps:** bump @codemirror/state in the npm-prod group ([7d30ac0](https://github.com/mdn/fred/commit/7d30ac0611faa3c7fd091cd0bc6e2443bd373205))
+* **deps:** bump @mdn/rari from 0.2.35 to 1.0.0 ([#1919](https://github.com/mdn/fred/issues/1919)) ([698309d](https://github.com/mdn/fred/commit/698309dc476213a86e9916753012ea3f453465bf))
+* **deps:** bump @mdn/watify from 1.1.10 to 1.1.11 ([#1937](https://github.com/mdn/fred/issues/1937)) ([7ba49ef](https://github.com/mdn/fred/commit/7ba49ef3b0833bbaeb460a82e3d8e60624fcacda))
+* **l10n:** add French compat-settings messages ([#1945](https://github.com/mdn/fred/issues/1945)) ([7c5fc82](https://github.com/mdn/fred/commit/7c5fc82ade92ce3ffc47497ad0a46033eb6fce3f))
+
 ## [2.9.2](https://github.com/mdn/fred/compare/v2.9.1...v2.9.2) (2026-09-16)
 
 
