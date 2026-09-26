@@ -1,36 +1,39 @@
-article-footer-last-modified = このページは <a data-l10n-name="contributors">MDN の貢献者</a>によって <time data-l10n-name="date">{ $date }</time> に最終更新されました。
+# ユーザーインターフェイス用日本語訳ファイル
+#
+
+article-footer-last-modified = このページは <time data-l10n-name="date">{ $date }</time> に <a data-l10n-name="contributors">MDN の貢献者</a>によって最終更新されました。
 article-footer-source-title = フォルダー: { $folder } （新しいタブで開く）
-baseline-asterisk = この機能の一部は、対応レベルが異なる場合があります。
+baseline-asterisk = この機能の一部は、対応レベルにばらつきがある場合があります。
 baseline-high-extra = この機能は広く実装されており、多くのバージョンの端末やブラウザーで動作します。{ $date }以降、すべてのブラウザーで利用可能です。
 baseline-low-extra = { $date }以降、この機能は最新のバージョンの端末およびブラウザーで動作します。古い端末やブラウザーでは動作しないことがあります。
 baseline-not-extra = この機能はベースラインではありません。最も広く使用されているブラウザーの一部で動作しません。
-baseline-supported-in = { $browsers } が対応
-baseline-unsupported-in = { $browsers } が広く対応していない
+baseline-supported-in = { $browsers } で対応
+baseline-unsupported-in = { $browsers } で広く対応していない
 baseline-supported-and-unsupported-in = { $supported } が対応していますが、{ $unsupported } は広く対応していません。
+baseline-signals = もっと多くのブラウザーがこの機能に対応してほしいですか？ <a data-l10n-name="link">理由を教えてください。</a>
 homepage-hero-title = 開発者による、<br>開発者のためのリソース
+playground-user-shared-warning = この Playground はユーザーが共有しています。<br>実行する前に、常にコードを確認してください。
 homepage-hero-description = 2005 年から <a data-l10n-name="css">CSS</a>, <a data-l10n-name="html">HTML</a>, <a data-l10n-name="js">JavaScript</a> のドキュメントを作成しています。
-
 not-found-title = ページが見つかりません
 not-found-description = すみませんが、<code data-l10n-name="url">{ $url }</code> のページは見つかりませんでした。
 not-found-fallback-english = <strong data-l10n-name="strong">朗報:</strong> リクエストされたこのページは<em data-l10n-name="em">英語</em>版に存在します。
 not-found-fallback-search = リクエストされたページは存在しませんが、サイト内を検索してみてください。
 not-found-back = ホームページに戻る
-footer-mofo = <a data-l10n-name="moco">Mozilla Corporation</a> の非営利の親会社である <a data-l10n-name="mofo">Mozilla Foundation</a> を参照してください。
 footer-copyright = このコンテンツの一部は、©1998–{ $year } 個人の mozilla.org 協力者です。コンテンツは<a data-l10n-name="cc">クリエイティブ・コモンズ・ライセンス</a>のもとで利用できます。
 search-modal-site-search = サイトで <em>{ $query }</em> を検索
 search-modal-results-status =
     { $results ->
         [0] 結果が見つかりませんでした。
-       *[other] { $results } 件の結果が利用可能です。
+        [one] { $results } 件の結果が利用できます。
+       *[other] { $results } 件の結果が利用できます。
     }
-
 site-search-search-stats = { $results } 件の文書が見つかりました。
 site-search-suggestion-matches =
     { $relation ->
         [gt]
-            more than { $matches ->
-                [one] { $matches } 件の一致
-               *[other] { $matches } 件の一致
+            { $matches ->
+                [one] { $matches } 件を超える一致
+               *[other] { $matches } 件を超える一致
             }
        *[eq]
             { $matches ->
@@ -54,35 +57,26 @@ obs-mdn = { -brand-name-obs } は、Mozilla の専門知識と安全でより堅
 compat-browser-version-date = { $browser } { $version } – リリース日: { $date }
 compat-browser-version-released = リリース日: { $date }
 compat-link-source-title = ファイル: { $filename }
-compat-support-prefix = { $prefix } ベンダー接頭辞付きで実装
-compat-support-altname = 別名: { $altname }
+compat-settings-hide-browser = { $browser } を非表示
+compat-settings-show-browser = { $browser } を表示
+compat-branch-prefix = 接頭辞: <code data-l10n-name="prefix">{ $prefix }</code>
+compat-branch-altname = 別名: <code data-l10n-name="altname">{ $altname }</code>
+compat-branch-prefix-altname = 接頭辞: <code data-l10n-name="prefix">{ $prefix }</code>, 別名: <code data-l10n-name="altname">{ $altname }</code>
 compat-support-removed = { $version } 以降で除去
 compat-support-see-impl-url = <a data-l10n-name="impl_url">{ $label }</a> を参照
-compat-support-flags =
-    { $has_added ->
-        [1] バージョン { $version_added } 以降
-       *[0] { "" }
-    }{ $has_last ->
-        [1]
-            { $has_added ->
-               *[0] { $versionLast } までのユーザー
-                [1] { " " } { $versionLast } までのユーザー
-            }
-       *[0]
-            { $has_added ->
-               *[0] ユーザー
-                [1] { " " }ユーザー
-            }
-    }
-    は明示的に設定の必要あり: <code data-l10n-name="name">{ $flag_name }</code>{ " " }
-    { $flag_type ->
+compat-support-flag-range =
+    { $version_range ->
+        [range] バージョン { $version_added } から { $version_last } までのユーザー
+        [from] バージョン { $version_added } 以降のユーザー
+        [until] バージョン { $version_last } までのユーザー
+       *[none] ユーザー
+    }は明示的に設定の必要あり: <code data-l10n-name="name">{ $flag_name }</code> { $flag_type ->
        *[preference] 設定
         [runtime_flag] ランタイムフラグ
     }{ $has_value ->
         [1] { " " }to <code data-l10n-name="value">{ $flag_value }</code>
        *[0] { "" }
-    }{ "." }
-    { $has_pref_url ->
+    }.{ $has_pref_url ->
         [1]
             { $flag_type ->
                 [preference] { $browser_name } で設定を変更するには、{ $browser_pref_url } を参照してください。
@@ -121,14 +115,24 @@ article-footer-learn-how-to-contribute = 協力方法を知る
 article-footer-view-this-page-on-github = GitHub でこのページを表示
 article-footer-this-will-take-you-to-github-to = GitHub へ移動して新しい issue を登録します。
 article-footer-report-a-problem-with-this-conte = このコンテンツに関する問題を報告
-baseline-indicator-baseline-cross = Baseline Cross
-baseline-indicator-baseline-check = Baseline Check
+baseline-indicator-deprecated = 非推奨
 baseline-indicator-limited-availability = 利用可能性は限定的
 baseline-indicator-baseline = Baseline
 baseline-indicator-widely-available = 広く利用可能
 baseline-indicator-newly-available = 最近利用可能
-baseline-indicator-check = check
-baseline-indicator-cross = cross
+baseline-indicator-to-be-removed = 削除予定
+baseline-indicator-pending-removal = この機能は、ブラウザーから除去される予定です。現時点でこの機能を使用すると、今後の更新で正常に動作しなくなる可能性があります。
+baseline-indicator-avoid-using = この機能を新しいプロジェクトで使用することは避けてください。
+baseline-indicator-candidate-for-removal = この機能は、ウェブ標準やブラウザーから除去される可能性があります。
+baseline-indicator-alternatives-use = 代わりに次の機能を使用してください。
+baseline-indicator-alternatives-consider = 代わりに次の機能を使用することを検討してください。
+baseline-indicator-alternatives-end = .
+baseline-indicator-baseline-discouraged = Baseline Discouraged
+baseline-indicator-baseline-discouraged-cross = Baseline Discouraged Cross
+baseline-indicator-baseline-cross = Baseline Cross
+baseline-indicator-baseline-check = Baseline Check
+baseline-indicator-check = 対応
+baseline-indicator-cross = 未対応
 baseline-indicator-learn-more = もっと詳しく
 baseline-indicator-see-full-compatibility = 完全な互換性情報を見る
 baseline-indicator-report-feedback = フィードバックを報告
@@ -176,6 +180,19 @@ compat-link-report-missing-title = 互換性データの不足を報告
 compat-link-report-missing = この課題を報告
 compat-js-required = ブラウザー互換性一覧表を表示するには、JavaScript を有効にしてください。
 compat-loading = 読み込み中…
+compat-settings-platform-desktop = デスクトップ
+compat-settings-platform-mobile = モバイル
+compat-settings-platform-server = サーバー
+compat-settings-platform-xr = XR
+compat-settings-hidden-no-data = 現在の機能ではこのブラウザーの情報は利用できません。対応状況データが存在しません。
+compat-settings-hidden-not-applicable = 現在の機能では利用できるブラウザーではありません。WebExtensions の機能は適用されません。
+compat-settings-legend = 凡例
+compat-settings-open = 設定
+compat-settings-title = ブラウザー互換性設定
+compat-settings-intro = 互換性一覧に表示するブラウザーを選択してください。選択結果は、このブラウザーに保存されます。
+compat-settings-restore-defaults = デフォルトに戻す
+compat-settings-cancel = キャンセル
+compat-settings-save = 保存
 content-feedback-content-is-out-of-date = コンテンツが古い
 content-feedback-missing-information = 情報が欠けている
 content-feedback-code-examples-not-working-as-exp = コード例が期待通りに動作しない
@@ -232,6 +249,7 @@ homepage-contributor-spotlight-contributor-spotlight = 注目の貢献者
 homepage-contributor-spotlight-get-involved = 参加する
 homepage-search-search-the-site = サイトを検索
 homepage-search-search = 検索
+interactive-example-reset-disabled = サンプルを編集するまで、リセットは無効です
 interactive-example-reset = リセット
 interactive-example-value-select = 値の選択
 interactive-example-the-current-value-is-not-support = 現在の値はこのブラウザーが対応していません。
@@ -263,9 +281,9 @@ observatory-tests-and-scores-test-result = Test result
 observatory-tests-and-scores-description = Description
 observatory-tests-and-scores-modifier = Modifier
 observatory-tests-and-scores-failed-to-load-tests-and-scoring = Failed to load tests and scoring data. Please try again later.
-brand-web-docs = MDN Web Docs
 blog-rss-title = MDN Blog RSS フィード
-meta-description = The MDN Web Docs site provides information about Open Web technologies including HTML, CSS, and APIs for both Web sites and progressive web apps.
+brand-web-docs = MDN Web Docs
+meta-description = MDN Web Docs サイトでは、ウェブサイトやプログレッシブウェブアプリ向けの HTML、CSS、API などのオープンウェブ技術に関する情報を提供しています。
 logo-alt = MDN ロゴ
 pagination-pagination = Pagination
 playground-do-you-really-want-to-clear-ever = 本当にすべてをクリアしますか？
