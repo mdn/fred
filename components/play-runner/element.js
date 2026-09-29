@@ -155,7 +155,7 @@ export class MDNPlayRunner extends LitElement {
           ${ref(this._iframe)}
           src=${this._src}
           title="runner"
-          allow=${ifDefined(this.allow ?? "camera; microphone")}
+          allow=${ifDefined(this.allow)}
           sandbox=${[
             ...new Set([
               "allow-scripts",
