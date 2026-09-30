@@ -325,7 +325,10 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
                       ><span class="slug"
                         >${mdnUrl2Breadcrumb(url, this.locale)}</span
                       >
-                      <span class="title"
+                      <span
+                        class=${
+                          url.includes("#") ? "title title--fragment" : "title"
+                        }
                         >${HighlightMatch(title, this._query)}</span
                       ></a
                     >
