@@ -46,5 +46,5 @@ jobs:
       - name: Analyze bundle size
         uses: web-infra-dev/rsdoctor-action@f4e6e8ec8b71c748cf6dd546467e22e12341164e # main
         with:
-          file_path: out/static/client/.rsdoctor/rsdoctor-data.json
+          file_path: out/static/client/rsdoctor-data.json
           target_branch: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.ref || github.event.repository.default_branch }}
