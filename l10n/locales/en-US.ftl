@@ -32,6 +32,9 @@ reference-toc-header = In this article
 footer-copyright = Portions of this content are ©1998–{ $year } by individual mozilla.org contributors. Content available under <a data-l10n-name="cc">a Creative Commons license</a>.
 
 search-modal-site-search = Site search for <em>{ $query }</em>
+search-modal-no-results-feedback = Expected a result? Your query will be sent to MDN to help improve search.
+search-modal-no-results-submit = Report this search query
+search-modal-no-results-thanks = Thanks, your query was sent to MDN.
 
 search-modal-results-status = { $results ->
     [0] No results found.
