@@ -52,7 +52,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     const flex = items.map(({ title, url }, index) => ({
       index,
       title: title.toLowerCase(),
-      slugTail: url.split("/").pop()?.toLowerCase() || "",
+      slugTail: url.split(/[/#]/).pop()?.toLowerCase() || "",
     }));
 
     return {
