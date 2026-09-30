@@ -364,7 +364,12 @@ const clientConfig = merge(
               }
             : {
                 disableClientServer: true,
-                mode: "brief",
+                output: {
+                  mode: "brief",
+                  options: {
+                    type: ["json"],
+                  },
+                },
               },
         ),
       !isProd && new GenerateElementMapPlugin(),
