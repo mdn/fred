@@ -206,6 +206,8 @@ ${"```"}`,
       const idParam = params.get("id");
       const stateParam = params.get("state");
       const srcPrefixParam = params.get("srcPrefix");
+      const allow = params.has("allow") ? params.get("allow") || "" : undefined;
+      controller.allow = allow;
 
       if (idParam) {
         this._gistId = idParam;

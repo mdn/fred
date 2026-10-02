@@ -8,6 +8,7 @@ export class MDNPlayController extends LitElement {
       runOnStart: { type: Boolean, attribute: "run-on-start" },
       runOnChange: { type: Boolean, attribute: "run-on-change" },
       srcPrefix: { attribute: false },
+      allow: { attribute: false },
     };
   }
 
@@ -22,6 +23,8 @@ export class MDNPlayController extends LitElement {
     this.runOnStart = false;
     this.runOnChange = false;
     this.srcPrefix = "";
+    /** @type {string | undefined} */
+    this.allow = undefined;
     /** @type {Record<string, string>} */
     this._code = {};
     /** @type {Record<string, string>} */
@@ -86,6 +89,7 @@ export class MDNPlayController extends LitElement {
     const runner = this.querySelector("mdn-play-runner");
     if (runner) {
       runner.srcPrefix = this.srcPrefix;
+      runner.allow = this.allow;
       runner.code = this.code;
     }
   }
