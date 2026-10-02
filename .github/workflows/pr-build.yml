@@ -13,3 +13,12 @@ jobs:
     secrets: inherit
     with:
       partial: true
+
+  bundle-size:
+    if: github.event.pull_request.base.repo.owner.login == 'mdn' && github.event.pull_request.user.login != 'dependabot[bot]' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'bundlesize-rsdoctor'
+    permissions:
+      actions: read
+      contents: write
+      issues: write
+      pull-requests: write
+    uses: ./.github/workflows/bundle-size.yml
