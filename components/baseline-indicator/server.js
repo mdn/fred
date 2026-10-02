@@ -155,6 +155,7 @@ export class BaselineIndicator extends ServerComponent {
             html`<a
               href=${changeDocsLocale(mdn_url, context.locale)}
               title=${description}
+              aria-label=${`${name}: ${description}`}
               data-glean-id=${`baseline_link_alternatives: ${name}`}
               >${name}</a
             >`,
@@ -327,7 +328,11 @@ export class BaselineIndicator extends ServerComponent {
             ? html`<div class="browsers">
                 ${ENGINES.map(
                   ({ browsers }) =>
-                    html`<span class="engine" title=${engineTitle(browsers)}>
+                    html`<span
+                      class="engine"
+                      title=${engineTitle(browsers)}
+                      aria-label=${engineTitle(browsers)}
+                    >
                       ${browsers.map(
                         (browser) =>
                           html`<span

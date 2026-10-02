@@ -299,6 +299,7 @@ export class MDNCompatTableSettings extends L10nMixin(LitElement) {
       class="pill"
       aria-pressed=${selected}
       title=${action}
+      aria-label=${action}
       data-browser=${browser}
       @click=${this._toggle}
     >
