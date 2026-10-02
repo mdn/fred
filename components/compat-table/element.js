@@ -513,6 +513,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
             aria-controls=${ifDefined(hasHistory ? timelineId : undefined)}
             aria-expanded=${ifDefined(hasHistory ? isExpanded : undefined)}
             title=${ifDefined(hasHistory && "Toggle history")}
+            aria-label=${ifDefined(hasHistory && "Toggle history")}
             @click=${handleClick}
           >
             ${this._renderCellText(support, browser)}

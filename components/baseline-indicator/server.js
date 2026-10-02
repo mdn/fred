@@ -155,6 +155,7 @@ export class BaselineIndicator extends ServerComponent {
             html`<a
               href=${changeDocsLocale(mdn_url, context.locale)}
               title=${description}
+              aria-label=${`${name}: ${description}`}
               data-glean-id=${`baseline_link_alternatives: ${name}`}
               >${name}</a
             >`,

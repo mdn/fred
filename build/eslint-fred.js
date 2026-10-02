@@ -2,6 +2,13 @@ import path from "node:path";
 
 import { camelToKebabCase } from "../utils/name-transformation.js";
 
+/**
+ * @param {string} tag
+ * @param {string} attr
+ */
+const hasAttr = (tag, attr) =>
+  new RegExp(String.raw`(?:^|\s)${attr}\s*=`).test(tag);
+
 /** @type {import("eslint").ESLint.Plugin} */
 export default {
   rules: {
@@ -147,13 +154,6 @@ export default {
             // Match opening HTML tags; attributes may span multiple lines.
             // Expressions are replaced with "__EXPR__" so no stray > chars.
             const tagPattern = /<([a-z][a-z0-9-]*)(\s[^>]*)?\/?>/gis;
-
-            /**
-             * @param {string} tag
-             * @param {string} attr
-             */
-            const hasAttr = (tag, attr) =>
-              new RegExp(`(?:^|\\s)${attr}\\s*=`).test(tag);
 
             // Skip elements where title has standardized HTML semantics
             // (abbr expansion) or where aria-label is not applicable (link).
