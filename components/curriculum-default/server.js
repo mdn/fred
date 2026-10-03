@@ -34,6 +34,7 @@ export class CurriculumDefault extends ServerComponent {
         >
           <main
             id="content"
+            tabindex="-1"
             class="layout__content curriculum-layout__content curriculum-content-container curriculum-default curriculum-about curriculum-module topic-${topicCssClass}"
             lang=${doc.locale}
           >
