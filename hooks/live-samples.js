@@ -35,9 +35,7 @@ for (const iframe of document.querySelectorAll("iframe[data-live-id]")) {
       result.liveId = liveId;
       result.code = liveSampleCode;
       result.srcPrefix = livePath;
-      result.allow = iframe.hasAttribute("allow")
-        ? iframe.getAttribute("allow") || ""
-        : undefined;
+      result.allow = iframe.allow || undefined;
       result.sandbox = iframe.sandbox.toString();
       result.height = iframe.height;
       iframe.closest(".code-example")?.replaceWith(result);

@@ -82,9 +82,7 @@ export class MDNLiveSampleResult extends L10nMixin(LitElement) {
     playUrl.search = new URL(this._runnerSrc).search;
     if (this.srcPrefix)
       playUrl.searchParams.append("srcPrefix", this.srcPrefix);
-    if (this.allow !== undefined) {
-      playUrl.searchParams.set("allow", this.allow);
-    }
+    if (this.allow) playUrl.searchParams.set("allow", this.allow);
     this.breakoutLink = playUrl.href;
   }
 
