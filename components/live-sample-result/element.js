@@ -16,7 +16,7 @@ export class MDNLiveSampleResult extends L10nMixin(LitElement) {
     return {
       liveId: { attribute: "live-id" },
       code: { type: Object },
-      allowed: {},
+      allow: {},
       sandbox: {},
       srcPrefix: { attribute: "src-prefix" },
       height: {},
@@ -82,6 +82,7 @@ export class MDNLiveSampleResult extends L10nMixin(LitElement) {
     playUrl.search = new URL(this._runnerSrc).search;
     if (this.srcPrefix)
       playUrl.searchParams.append("srcPrefix", this.srcPrefix);
+    if (this.allow) playUrl.searchParams.set("allow", this.allow);
     this.breakoutLink = playUrl.href;
   }
 
