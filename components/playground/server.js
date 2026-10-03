@@ -9,7 +9,7 @@ export class Playground extends ServerComponent {
     return PageLayout.render(
       context,
       html`
-        <main id="content" class="playground">
+        <main id="content" tabindex="-1" class="playground">
           <mdn-playground></mdn-playground>
           <div class="sidebar">
             <mdn-placement-sidebar></mdn-placement-sidebar>

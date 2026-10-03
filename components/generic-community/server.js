@@ -125,7 +125,7 @@ export class GenericCommunity extends ServerComponent {
 
     return PageLayout.render(
       context,
-      html`<main id="content" class="community-container">
+      html`<main id="content" tabindex="-1" class="community-container">
         ${doc?.sections?.map(this.renderSection)}
       </main>`,
     );
