@@ -327,7 +327,9 @@ export function renderHtml(state = null) {
                 }
 
                 body {
-                  background-color: #fff;
+                  background-color: var(--background-primary);
+                  color: ${theme === "dark" ? "#fff" : "#15141aff"};
+                  color-scheme: ${theme === "dark" ? "dark" : "light"};
                   font:
                     400 1rem/1.1876 Inter,
                     BlinkMacSystemFont,
@@ -340,7 +342,6 @@ export function renderHtml(state = null) {
                     "Droid Sans",
                     "Helvetica Neue",
                     sans-sans;
-                  color: #15141aff;
                   font-size: 0.9rem;
                   line-height: 1.5;
                   padding: 2rem 1rem 1rem;
