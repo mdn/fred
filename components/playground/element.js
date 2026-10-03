@@ -209,7 +209,6 @@ ${"```"}`,
       const stateParam = params.get("state");
       const srcPrefixParam = params.get("srcPrefix");
       const allowParam = params.get("allow") || undefined;
-      controller.allow = allowParam;
 
       if (idParam) {
         this._gistId = idParam;
@@ -230,6 +229,8 @@ ${"```"}`,
         (controller.srcPrefix !== srcPrefix ||
           !compareCode(controller.initialCode, code))
       ) {
+        // Only MDN-opened samples may delegate permissions to untrusted code.
+        let allow = allowParam;
         try {
           if (
             !opener?.location?.origin ||
@@ -241,8 +242,10 @@ ${"```"}`,
           this._autoRun = false;
           controller.runOnStart = false;
           controller.runOnChange = false;
+          allow = undefined;
         }
         controller.srcPrefix = srcPrefix;
+        controller.allow = allow;
         controller.initialCode = code;
         controller.code = code;
         this._storeSession();
