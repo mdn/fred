@@ -34,3 +34,7 @@ a {
 #content {
   scroll-margin-block-start: var(--sticky-header-height);
 }
+
+#content:focus-visible {
+  outline: none;
+}
