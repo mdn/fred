@@ -11,7 +11,6 @@ import { ViewedController } from "../viewed-controller/viewed-controller.js";
 import "../compat-table-settings/element.js";
 
 import { gatherPlatformsAndBrowsers } from "./browsers.js";
-import { ISSUE_METADATA_TEMPLATE } from "./constants.js";
 import styles from "./element.css?lit";
 import {
   getSupportBrowserReleaseDate,
@@ -19,6 +18,7 @@ import {
   labelFromString,
   versionLabelFromSupport,
 } from "./feature-row.js";
+import { getFeatureLinkTargets, getIssueUrl } from "./links.js";
 import { getBrowserVisibility, onBrowserVisibilityChange } from "./settings.js";
 import {
   asList,
@@ -61,6 +61,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
       data: {},
       browserInfo: { attribute: "browserinfo" },
       _pathname: { state: true },
+      _linkQuery: { state: true },
       _visibility: { state: true },
       _previewVisibility: { state: true },
       _showTimelineId: { state: true },
@@ -81,6 +82,7 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     this.browserInfo = {};
     this.locale = "";
     this._pathname = "";
+    this._linkQuery = "";
     /**
      * Saved browser visibility. An empty object follows defaults.
      * @type {import("./settings.js").BrowserVisibility}
@@ -237,6 +239,9 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
    * @param {import("lit").PropertyValues<this>} changedProperties
    */
   willUpdate(changedProperties) {
+    if (changedProperties.has("query") || changedProperties.has("data")) {
+      this._linkQuery = "";
+    }
     if (
       changedProperties.has("query") ||
       changedProperties.has("data") ||
@@ -254,29 +259,42 @@ export class MDNCompatTable extends L10nMixin(LitElement) {
     }
   }
 
-  get _issueUrl() {
-    const url = "https://github.com/mdn/browser-compat-data/issues/new";
-    const sp = new URLSearchParams();
-    const metadata = ISSUE_METADATA_TEMPLATE.replaceAll(
-      "$DATE",
-      new Date().toISOString(),
-    )
-      .replaceAll("$QUERY_ID", this.query)
-      .trim();
-    sp.set("mdn-url", `https://developer.mozilla.org${this._pathname}`);
-    sp.set("metadata", metadata);
-    sp.set("title", `${this.query} - <SUMMARIZE THE PROBLEM>`);
-    sp.set("template", "data-problem.yml");
-
-    return `${url}?${sp.toString()}`;
+  /** @param {Event} event */
+  _onLinkFeatureChange(event) {
+    this._linkQuery = /** @type {HTMLSelectElement} */ (
+      event.currentTarget
+    ).value;
   }
 
   _renderIssueLink() {
-    const source_file = this.data.__compat?.source_file;
+    const targets = getFeatureLinkTargets(this.data, this.query);
+    const selected = targets.find(
+      (target) => target.query === this._linkQuery,
+    ) ??
+      targets[0] ?? { query: this.query };
+    const source_file = selected.sourceFile;
     return html`<div class="bc-on-github">
+      ${
+        targets.length > 1
+          ? html`<label class="bc-feature-select">
+              ${this.l10n("compat-link-feature")`Feature`}
+              <select @change=${this._onLinkFeatureChange}>
+                ${targets.map(
+                  (target) =>
+                    html`<option
+                      value=${target.query}
+                      .selected=${target.query === selected.query}
+                    >
+                      ${target.query}
+                    </option>`,
+                )}
+              </select>
+            </label>`
+          : nothing
+      }
       <a
         class="bc-github-link external external-icon"
-        href=${this._issueUrl}
+        href=${getIssueUrl(selected.query, this._pathname)}
         target="_blank"
         rel="noopener noreferrer"
         title=${this.l10n(

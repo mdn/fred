@@ -57,7 +57,33 @@ table {
 }
 
 .bc-on-github {
+  min-width: 0;
   font-size: var(--font-size-small);
+}
+
+.bc-feature-select {
+  display: flex;
+
+  gap: 0.5rem;
+
+  align-items: center;
+
+  margin-bottom: 0.5rem;
+
+  select {
+    min-width: 0;
+    max-width: 100%;
+
+    padding: 0.25rem;
+
+    font: inherit;
+
+    color: var(--color-text-primary);
+
+    background: var(--color-background-primary);
+    border: 1px solid var(--color-border-primary);
+    border-radius: 0.25rem;
+  }
 }
 
 .bc-no-browsers {
