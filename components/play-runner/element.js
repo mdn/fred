@@ -94,10 +94,9 @@ export class MDNPlayRunner extends LitElement {
       /** @type {const} */ ([
         this.code,
         this.defaults,
-        this.colorScheme === "light-dark"
-          ? this.theme.value
-          : (this.colorScheme ??
-            (this.defaults === "ix-tabbed" ? "light" : this.theme.value)),
+        this.colorScheme && this.colorScheme !== "light-dark"
+          ? this.colorScheme
+          : this.theme.value,
         this.srcPrefix,
         this.permalink,
       ]),
