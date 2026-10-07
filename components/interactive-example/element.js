@@ -15,6 +15,7 @@ import { InteractiveExampleWithTabs } from "./with-tabs.js";
  * @import { Ref } from 'lit/directives/ref.js';
  * @import { MDNPlayController } from "../play-controller/element.js";
  * @import { MDNPlayRunner } from "../play-runner/element.js";
+ * @import { RunnerColorScheme } from "../play-runner/types.js";
  */
 
 const GLEAN_EVENT_TYPES = ["focus", "copy", "cut", "paste", "click"];
@@ -36,6 +37,8 @@ export class InteractiveExampleBase extends LitElement {
     this._languages = [];
     /** @type {Record<string, string>} */
     this._code = {};
+    /** @type {RunnerColorScheme} */
+    this._colorScheme = "light";
   }
 
   /** @type {Ref<MDNPlayController>} */
