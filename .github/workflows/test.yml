@@ -90,6 +90,10 @@ jobs:
         run: npm test -- unit --coverage
 
       - name: Build
+        env:
+          FRED_PLAYGROUND_LOCAL: true
+          FRED_PORT: 3000
+          FRED_PLAYGROUND_PORT: 3001
         run: npm run build
 
       - name: Run e2e tests

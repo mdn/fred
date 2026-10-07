@@ -33,6 +33,10 @@ jobs:
       - name: (mdn/fred) Build tarball
         id: build
         working-directory: mdn/fred
+        env:
+          FRED_PLAYGROUND_LOCAL: true
+          FRED_PORT: 5042
+          FRED_PLAYGROUND_PORT: 5043
         run: |
           npm pkg set _gitSha=${{ github.sha }}
           npm pack
