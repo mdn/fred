@@ -56,14 +56,81 @@ describe("compatibility data links", () => {
       getFeatureLinkTargets(
         /** @type {import("@bcd").Identifier} */ (
           /** @type {unknown} */ ({
-            group: { child: { __compat: compat() } },
+            child: { __compat: compat() },
           })
         ),
         "api",
       ),
-      [{ query: "api.group.child", sourceFile: undefined }],
+      [{ query: "api.child", sourceFile: undefined }],
     );
     assert.deepEqual(getFeatureLinkTargets({}, "api"), []);
+  });
+
+  it("omits nested rows hidden by the large-table depth limit", () => {
+    const data = /** @type {import("@bcd").Identifier} */ (
+      /** @type {unknown} */ ({
+        __compat: compat("root.json"),
+        child: {
+          __compat: compat("child.json"),
+          ...Object.fromEntries(
+            Array.from({ length: 101 }, (_, i) => [
+              `nested${i}`,
+              { __compat: compat(`nested${i}.json`) },
+            ]),
+          ),
+        },
+      })
+    );
+    assert.deepEqual(getFeatureLinkTargets(data, "api.Example"), [
+      { query: "api.Example", sourceFile: "root.json" },
+      { query: "api.Example.child", sourceFile: "child.json" },
+    ]);
+  });
+
+  it("applies status filters and the 100-row limit to the selector", () => {
+    const stable = {
+      standard_track: true,
+      deprecated: false,
+      experimental: false,
+    };
+    const data = /** @type {import("@bcd").Identifier} */ (
+      /** @type {unknown} */ ({
+        __compat: { ...compat("root.json"), status: stable },
+        nonstandard: {
+          __compat: {
+            ...compat("nonstandard.json"),
+            status: { ...stable, standard_track: false },
+          },
+        },
+        deprecated: {
+          __compat: {
+            ...compat("deprecated.json"),
+            status: { ...stable, deprecated: true },
+          },
+        },
+        experimental: {
+          __compat: {
+            ...compat("experimental.json"),
+            status: { ...stable, experimental: true },
+          },
+        },
+        ...Object.fromEntries(
+          Array.from({ length: 105 }, (_, i) => [
+            `child${i}`,
+            { __compat: { ...compat(`child${i}.json`), status: stable } },
+          ]),
+        ),
+      })
+    );
+    const targets = getFeatureLinkTargets(data, "api.Example");
+    assert.equal(targets.length, 100);
+    assert.deepEqual(
+      targets.map(({ query }) => query),
+      [
+        "api.Example",
+        ...Array.from({ length: 99 }, (_, i) => `api.Example.child${i}`),
+      ],
+    );
   });
 
   it("reports the selected feature in the title and metadata, preserving the page URL", () => {
