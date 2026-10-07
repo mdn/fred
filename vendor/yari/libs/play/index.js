@@ -328,7 +328,7 @@ export function renderHtml(state = null) {
                 }
 
                 body {
-                  background-color: var(--background-primary);
+                  background-color: var(--background-primary, #fff);
                   color: ${theme === "dark" ? "#fff" : "#15141aff"};
                   color-scheme: ${theme === "dark" ? "dark" : "light"};
                   font:

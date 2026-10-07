@@ -86,7 +86,9 @@ describe("play renderHtml", () => {
 
         assert.ok(html.includes(expectedColorScheme));
         assert.ok(html.includes(expectedBackground));
-        assert.ok(html.includes("background-color: var(--background-primary)"));
+        assert.ok(
+          html.includes("background-color: var(--background-primary, #fff)"),
+        );
         assert.ok(html.includes(expectedColor));
       });
     }
