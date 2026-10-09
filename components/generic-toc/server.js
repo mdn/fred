@@ -8,7 +8,9 @@ export class GenericToc extends ServerComponent {
    * @param {import("@fred").Context<import("@rari").GenericPage>} context
    */
   render(context) {
-    if (context.hyData.toc.length === 0) return nothing;
+    if (context.hyData.toc.length === 0) {
+      return nothing;
+    }
 
     let styleVariant = "default";
     if (context.path.startsWith("/en-US/observatory/docs")) {

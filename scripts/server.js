@@ -31,7 +31,10 @@ const { commands, result } = concurrently(
 
 const stop = new Promise((resolve, reject) => {
   process.on("SIGINT", () => {
-    for (const cmd of commands) cmd.kill(); // Terminate all concurrently-run processes
+    // Terminate all concurrently-run processes.
+    for (const cmd of commands) {
+      cmd.kill();
+    }
     reject();
   });
   result.finally(() => resolve(null));
