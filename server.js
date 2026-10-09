@@ -9,6 +9,7 @@ import { createProxyMiddleware } from "http-proxy-middleware";
 import { getEditorInfo } from "open-editor";
 
 import { FRED_BUILD_ROOT } from "./build/env.js";
+import { handleProxyResponse } from "./build/proxy-response.js";
 import {
   OPEN_BROWSER_ON_START,
   PLAYGROUND_PORT,
@@ -103,21 +104,6 @@ async function serverRenderMiddleware(req, res, page) {
     res.writeHead(500).end();
   }
 }
-
-/**
- * @param {import("http").IncomingMessage} stream
- * @returns {Promise<Buffer>}
- */
-const streamToBuffer = (stream) =>
-  new Promise((resolve, reject) => {
-    /** @type {Buffer[]} */
-    const chunks = [];
-    stream.on("data", (chunk) => {
-      chunks.push(chunk);
-    });
-    stream.on("end", () => resolve(Buffer.concat(chunks)));
-    stream.on("error", reject);
-  });
 
 export async function startServer() {
   let app = express();
@@ -281,43 +267,14 @@ export async function startServer() {
             req.path = req.path.replace(locale, "en-US");
           }
         },
-        proxyRes: async (proxyRes, req, res) => {
-          const contentType = proxyRes.headers["content-type"] || "";
-          const statusCode = proxyRes.statusCode || 500;
-
-          if (
-            (!contentType || contentType.includes("text/plain")) &&
-            statusCode === 404
-          ) {
-            // render 404 page
-            res.statusCode = 404;
-            const locale = req.url?.match(/[^/]+/)?.[0] ?? "en-us";
-            const notFoundRes = await fetch(
-              `http://localhost:8083/${locale}/404/index.json`,
-            );
-            const json = await notFoundRes.json();
-            return serverRenderMiddleware(req, res, json);
-          }
-
-          if (
-            !contentType.includes("application/json") ||
-            req.path.endsWith(".json")
-          ) {
-            // stream assets
-            res.writeHead(statusCode, proxyRes.headers);
-            proxyRes.pipe(res);
-            return;
-          }
-
-          const buffer = await streamToBuffer(proxyRes);
-          const json = JSON.parse(buffer.toString("utf8"));
-
-          if ("renderer" in json) {
-            return serverRenderMiddleware(req, res, json);
-          }
-
-          res.writeHead(statusCode, proxyRes.headers);
-          res.end(buffer);
+        proxyRes: (proxyRes, req, res) => {
+          void handleProxyResponse(
+            proxyRes,
+            req,
+            res,
+            RARI_URL,
+            serverRenderMiddleware,
+          );
         },
       },
     }),
