@@ -4,6 +4,8 @@ import { createRef } from "lit/directives/ref.js";
 import { gleanClick } from "../../utils/glean.js";
 import { upgradePre } from "../code-example/element.js";
 
+import { getInteractiveExampleColorScheme } from "./color-scheme.js";
+
 import styles from "./element.css?lit";
 import { InteractiveExampleWithChoices } from "./with-choices.js";
 import { InteractiveExampleWithConsole } from "./with-console.js";
@@ -13,6 +15,7 @@ import { InteractiveExampleWithTabs } from "./with-tabs.js";
  * @import { Ref } from 'lit/directives/ref.js';
  * @import { MDNPlayController } from "../play-controller/element.js";
  * @import { MDNPlayRunner } from "../play-runner/element.js";
+ * @import { RunnerColorScheme } from "../play-runner/types.js";
  */
 
 const GLEAN_EVENT_TYPES = ["focus", "copy", "cut", "paste", "click"];
@@ -34,6 +37,8 @@ export class InteractiveExampleBase extends LitElement {
     this._languages = [];
     /** @type {Record<string, string>} */
     this._code = {};
+    /** @type {RunnerColorScheme} */
+    this._colorScheme = "light";
   }
 
   /** @type {Ref<MDNPlayController>} */
@@ -52,9 +57,11 @@ export class InteractiveExampleBase extends LitElement {
   _initialCode() {
     /** @type {Record<string, string>} */
     const initialCode = {};
-    for (const pre of this.closest("section")?.querySelectorAll(
-      ".code-example pre.interactive-example",
-    ) ?? []) {
+    const interactiveExamplePreElements =
+      this.closest("section")?.querySelectorAll(
+        ".code-example pre.interactive-example",
+      ) ?? [];
+    for (const pre of interactiveExamplePreElements) {
       const example = upgradePre(pre);
       if (example) {
         const { language, code } = example;
@@ -73,6 +80,9 @@ export class InteractiveExampleBase extends LitElement {
       .filter((x) => x !== undefined);
 
     this._languages = Object.keys(initialCode);
+    this._colorScheme = getInteractiveExampleColorScheme(
+      interactiveExamplePreElements,
+    );
     this._template =
       this._choices.length > 0
         ? "choices"
