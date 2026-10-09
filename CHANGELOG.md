@@ -1,5 +1,39 @@
 # Changelog
 
+## [2.10.0](https://github.com/mdn/fred/compare/v2.9.2...v2.10.0) (2026-10-09)
+
+
+### Features
+
+* **compat-table:** add browser visibility settings ([#1880](https://github.com/mdn/fred/issues/1880)) ([01ae668](https://github.com/mdn/fred/commit/01ae668d58fbfed76b7cd8669fe8d1a886672dc2))
+
+
+### Bug Fixes
+
+* **compat-table:** omit same-page BCD links ([#1926](https://github.com/mdn/fred/issues/1926)) ([f48d176](https://github.com/mdn/fred/commit/f48d17662e480684552ea2d1b1f7a3ec16d4c135))
+* **menu:** correct "error handing" typo in JS guides menu ([#1935](https://github.com/mdn/fred/issues/1935)) ([68c0d4e](https://github.com/mdn/fred/commit/68c0d4e9eccf15c83c3f69c6b88aba099f7f6c6d))
+* **play:** allow `blob:` media in runner ([#1979](https://github.com/mdn/fred/issues/1979)) ([cc812f2](https://github.com/mdn/fred/commit/cc812f2b8445dce0dca5409c84d221ea3b2196fd))
+
+
+### Miscellaneous
+
+* **deps:** bump @codemirror/state from 6.7.5 to 6.7.6 in the npm-prod group ([#1939](https://github.com/mdn/fred/issues/1939)) ([7d30ac0](https://github.com/mdn/fred/commit/7d30ac0611faa3c7fd091cd0bc6e2443bd373205))
+* **deps:** bump @codemirror/state in the npm-prod group ([7d30ac0](https://github.com/mdn/fred/commit/7d30ac0611faa3c7fd091cd0bc6e2443bd373205))
+* **deps:** bump @mdn/rari from 0.2.35 to 1.0.0 ([#1919](https://github.com/mdn/fred/issues/1919)) ([698309d](https://github.com/mdn/fred/commit/698309dc476213a86e9916753012ea3f453465bf))
+* **deps:** bump @mdn/rari from 1.0.0 to 1.1.0 ([#1982](https://github.com/mdn/fred/issues/1982)) ([d7c176d](https://github.com/mdn/fred/commit/d7c176d13602cda85f57dbd2b0547fc0b70b44c5))
+* **deps:** bump @mdn/rari from 1.1.0 to 1.2.0 ([#2000](https://github.com/mdn/fred/issues/2000)) ([d453bf8](https://github.com/mdn/fred/commit/d453bf881316c82170dbb9ffeb075ade6ca4fe27))
+* **deps:** bump @mdn/watify from 1.1.10 to 1.1.11 ([#1937](https://github.com/mdn/fred/issues/1937)) ([7ba49ef](https://github.com/mdn/fred/commit/7ba49ef3b0833bbaeb460a82e3d8e60624fcacda))
+* **deps:** bump brace-expansion ([#1963](https://github.com/mdn/fred/issues/1963)) ([968ca9f](https://github.com/mdn/fred/commit/968ca9fd5ddc4c600ab23761c0290eb048ca9e16))
+* **deps:** bump he from 1.2.0 to 2.0.0 ([#1996](https://github.com/mdn/fred/issues/1996)) ([4e98ee7](https://github.com/mdn/fred/commit/4e98ee7b8d80fbc7365a181c68ec1bb8b1e9b7a7))
+* **deps:** bump postcss-selector-parser, postcss-discard-comments, stylehacks, postcss-merge-rules, postcss-minify-selectors and postcss-unique-selectors ([#1992](https://github.com/mdn/fred/issues/1992)) ([221afaf](https://github.com/mdn/fred/commit/221afafa28d11dddab9d86cbd56dcca3e45e4628))
+* **deps:** bump proxy-addr from 2.0.7 to 2.0.8 ([#1991](https://github.com/mdn/fred/issues/1991)) ([041855e](https://github.com/mdn/fred/commit/041855e9435dee1ec7aab58addceb984eb1ca87b))
+* **deps:** bump source-map-js from 1.2.1 to 1.2.2 ([#1990](https://github.com/mdn/fred/issues/1990)) ([9bed826](https://github.com/mdn/fred/commit/9bed8269245229a18099b1cc040931ff9f2b5e7d))
+* **github:** use `.md` extension for PR template ([#1971](https://github.com/mdn/fred/issues/1971)) ([a3e98e7](https://github.com/mdn/fred/commit/a3e98e7e40e1984bdf11265f242fdddf1d4acce7))
+* **l10n:** add French compat-settings messages ([#1945](https://github.com/mdn/fred/issues/1945)) ([7c5fc82](https://github.com/mdn/fred/commit/7c5fc82ade92ce3ffc47497ad0a46033eb6fce3f))
+* **l10n:** add Spanish strings ([#1955](https://github.com/mdn/fred/issues/1955)) ([fb3fb79](https://github.com/mdn/fred/commit/fb3fb79c58cb72e263d6a4668808979a989603bb))
+* **menu:** update menu entries ([#1973](https://github.com/mdn/fred/issues/1973)) ([c03f2af](https://github.com/mdn/fred/commit/c03f2af8f74566a4f199812d543f8314b4cdcd30))
+* **menu:** update menu entries ([#1997](https://github.com/mdn/fred/issues/1997)) ([2122895](https://github.com/mdn/fred/commit/2122895164b2ea4f83736d744983195796b563d7))
+
 ## [2.9.2](https://github.com/mdn/fred/compare/v2.9.1...v2.9.2) (2026-09-16)
 
 
