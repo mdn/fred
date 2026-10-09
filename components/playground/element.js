@@ -226,14 +226,7 @@ ${"```"}`,
         (controller.srcPrefix !== srcPrefix ||
           !compareCode(controller.initialCode, code))
       ) {
-        try {
-          if (
-            !opener?.location?.origin ||
-            opener?.location?.origin !== location.origin
-          ) {
-            throw new Error("origin doesn't match");
-          }
-        } catch {
+        if (!hasSameOriginOpener()) {
           this._autoRun = false;
           controller.runOnStart = false;
           controller.runOnChange = false;
@@ -548,6 +541,20 @@ function stateToSession(stateOrSession) {
     srcPrefix: "",
     code: {},
   };
+}
+
+/**
+ * @returns {boolean} whether this window was opened by a same-origin page
+ */
+function hasSameOriginOpener() {
+  try {
+    return (
+      !!opener?.location?.origin && opener.location.origin === location.origin
+    );
+  } catch {
+    // Accessing a cross-origin opener's location throws.
+    return false;
+  }
 }
 
 /**
