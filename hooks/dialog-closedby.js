@@ -36,7 +36,9 @@ if (!("closedBy" in HTMLDialogElement.prototype)) {
       const inside =
         rect.top <= y && y <= rect.bottom && rect.left <= x && x <= rect.right;
 
-      if (!inside) source.close();
+      if (!inside) {
+        source.close();
+      }
     }
   });
 }

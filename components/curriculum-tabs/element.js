@@ -26,7 +26,9 @@ export class MDNCurriculumTabs extends L10nMixin(LitElement) {
       if (inputElement.id === hash) {
         const input =
           inputElement instanceof HTMLInputElement ? inputElement : undefined;
-        if (!input) continue;
+        if (!input) {
+          continue;
+        }
         input.checked = true;
         this.selectedtab = input.dataset.index
           ? Number(input.dataset.index)
