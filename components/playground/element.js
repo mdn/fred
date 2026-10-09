@@ -169,10 +169,11 @@ ${"```"}`,
   _storeSession() {
     const controller = this._controller.value;
     if (controller) {
-      const { srcPrefix, initialCode, code } = controller;
+      const { srcPrefix, allow, initialCode, code } = controller;
       /** @type {import("./types.js").PlaygroundSession} */
       const session = {
         srcPrefix,
+        allow,
         initialCode,
         code,
         autoRun: this._autoRun,
@@ -182,7 +183,7 @@ ${"```"}`,
   }
 
   _loadSession() {
-    const { srcPrefix, initialCode, code, autoRun } = stateToSession(
+    const { srcPrefix, allow, initialCode, code, autoRun } = stateToSession(
       JSON.parse(sessionStorage.getItem(SESSION_KEY) || "{}"),
     );
     const controller = this._controller.value;
@@ -193,6 +194,7 @@ ${"```"}`,
         controller.runOnChange = false;
       }
       controller.srcPrefix = srcPrefix;
+      controller.allow = allow;
       controller.initialCode = initialCode;
       controller.code = code;
       this.requestUpdate();
@@ -206,6 +208,7 @@ ${"```"}`,
       const idParam = params.get("id");
       const stateParam = params.get("state");
       const srcPrefixParam = params.get("srcPrefix");
+      const allowParam = params.get("allow") || undefined;
 
       if (idParam) {
         this._gistId = idParam;
@@ -220,18 +223,25 @@ ${"```"}`,
 
       const srcPrefix = srcPrefixParam || srcPrefixState;
 
+      // A same-origin opener (an MDN page) is required to auto-run and to
+      // delegate permissions to the sample.
+      const trusted = hasSameOriginOpener();
+      const allow = trusted ? allowParam : undefined;
+
       if (
         srcPrefix !== undefined &&
         code !== undefined &&
         (controller.srcPrefix !== srcPrefix ||
-          !compareCode(controller.initialCode, code))
+          !compareCode(controller.initialCode, code) ||
+          (trusted && controller.allow !== allow))
       ) {
-        if (!hasSameOriginOpener()) {
+        if (!trusted) {
           this._autoRun = false;
           controller.runOnStart = false;
           controller.runOnChange = false;
         }
         controller.srcPrefix = srcPrefix;
+        controller.allow = allow;
         controller.initialCode = code;
         controller.code = code;
         this._storeSession();
