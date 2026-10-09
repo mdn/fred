@@ -158,6 +158,7 @@ color-theme-light = Light
 color-theme-dark = Dark
 color-theme-switch-color-theme = Switch color theme
 color-theme-theme = Theme
+compat-link-feature = Feature
 compat-link-report-issue-title = Report an issue with this compatibility data
 compat-link-report-issue = Report problems with this compatibility data
 compat-link-source = View data on GitHub
