@@ -1,4 +1,7 @@
-import { changeDocsLocale } from "../../utils/docs-locale-url.js";
+import {
+  changeDocsLocale,
+  removeDocsLocale,
+} from "../../utils/docs-locale-url.js";
 import { BCD_BASE_URL } from "../env/index.js";
 
 import { DEFAULT_LOCALE } from "./constants.js";
@@ -54,6 +57,17 @@ export function isCurrentPageLink(url, pathname) {
     changeDocsLocale(parsedUrl.pathname, DEFAULT_LOCALE) ===
       changeDocsLocale(pathname, DEFAULT_LOCALE)
   );
+}
+
+/**
+ * @param {string} url
+ * @param {string} locale
+ * @returns {string}
+ */
+export function getCompatUrl(url, locale) {
+  return locale === DEFAULT_LOCALE
+    ? changeDocsLocale(url, locale)
+    : removeDocsLocale(url);
 }
 
 /**
