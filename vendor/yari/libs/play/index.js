@@ -4,7 +4,7 @@
 
 import * as crypto from "node:crypto";
 
-import he from "he";
+import { encode } from "he";
 
 export const ORIGIN_PLAY = process.env["ORIGIN_PLAY"] || "localhost";
 export const ORIGIN_MAIN = process.env["ORIGIN_MAIN"] || "localhost";
@@ -199,13 +199,13 @@ export function renderWarning(state, hrefWithCode, searchWithState) {
             <summary>view code</summary>
 
             <h2>html</h2>
-            <pre><code>${he.encode(htmlCode.trim())}</code></pre>
+            <pre><code>${encode(htmlCode.trim())}</code></pre>
 
             <h2>css</h2>
-            <pre><code>${he.encode(css.trim())}</code></pre>
+            <pre><code>${encode(css.trim())}</code></pre>
 
             <h2>js</h2>
-            <pre><code>${he.encode(js.trim())}</code></pre>
+            <pre><code>${encode(js.trim())}</code></pre>
           </details>
           <a
             class="leave"
