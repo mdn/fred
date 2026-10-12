@@ -7,6 +7,7 @@ export interface PlaygroundStateParam {
 
 export interface PlaygroundSession {
   srcPrefix: string;
+  allow?: string;
   code: Record<string, string>;
   initialCode?: Record<string, string>;
   autoRun?: boolean;

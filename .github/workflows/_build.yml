@@ -181,6 +181,7 @@ jobs:
               -o -path '*/en-us/web/api/geolocation_api/index.md' \
               -o -path '*/en-us/web/api/history_api/working_with_the_history_api/index.md' \
               -o -path '*/en-us/web/api/html_dom_api/index.md' \
+              -o -path '*/en-us/web/api/mediadevices/devicechange_event/index.md' \
               -o -path '*/en-us/web/api/performance/index.md' \
               -o -path '*/en-us/web/api/push_api/index.md' \
               -o -path '*/en-us/web/api/service_worker_api/index.md' \
