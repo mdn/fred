@@ -77,7 +77,9 @@ export function isCSSSupported(code) {
       notAppliedProperties.delete(substitute);
     }
     // If any other declaration is not supported, whole block should be marked as invalid
-    if (notAppliedProperties.size > 0) return false;
+    if (notAppliedProperties.size > 0) {
+      return false;
+    }
   }
   return true;
 }

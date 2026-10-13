@@ -66,7 +66,9 @@ export class MDNLanguageSwitcher extends L10nMixin(LitElement) {
   }
 
   _togglePreferredLocale() {
-    if (this.notFound) return;
+    if (this.notFound) {
+      return;
+    }
     const oldValue = this._preferredLocale ?? "0";
     if (this._isLocalePreferred) {
       resetPreferredLocale();
