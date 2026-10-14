@@ -294,7 +294,7 @@ export async function startServer() {
             const locale = req.url?.match(/[^/]+/)?.[0] ?? "en-us";
             try {
               const notFoundRes = await fetch(
-                `http://localhost:8083/${locale}/404/index.json`,
+                `${RARI_URL}/${locale}/404/index.json`,
               );
               const json = await notFoundRes.json();
               return await serverRenderMiddleware(req, res, json);
