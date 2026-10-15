@@ -179,3 +179,13 @@ mark {
   color: var(--color-text-primary);
   background-color: var(--color-background-yellow);
 }
+
+.title--fragment::before {
+  margin-inline-end: 0.5em;
+
+  font-size: 0.75em;
+
+  color: var(--color-text-secondary);
+
+  content: "#" / "";
+}
