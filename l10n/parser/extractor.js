@@ -1,8 +1,8 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { glob, readFile, writeFile } from "node:fs/promises";
 
 import path from "node:path";
 
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 import {
   Comment,
@@ -49,12 +49,49 @@ export async function extract(options = {}) {
 }
 
 /**
+ * Imports all `l10n.js` modules under the components directory and merges
+ * their exported `strings` Maps into a single Map.
+ *
+ * @param {string} componentsDir
+ * @returns {Promise<Map<string, string>>}
+ */
+async function scrapeL10nModules(componentsDir) {
+  /** @type {Map<string, string>} */
+  const map = new Map();
+  for await (const file of glob("**/l10n.js", { cwd: componentsDir })) {
+    const { strings } = await import(
+      pathToFileURL(path.join(componentsDir, file)).href
+    );
+    if (!(strings instanceof Map)) continue;
+    for (const [id, value] of strings) {
+      if (map.has(id) && map.get(id) !== value) {
+        throw new Error(
+          `L10n extractor: \`${id}\` is a duplicate id with different text`,
+        );
+      }
+      map.set(id, value);
+    }
+  }
+  return map;
+}
+
+/**
  * @param {string} manualEntryPath
  * @param {string} scrapeGlob
  */
 export async function createFluentResource(manualEntryPath, scrapeGlob) {
   const manualEntries = await getManualEntries(manualEntryPath);
   const tags = scrapeL10nTags(scrapeGlob);
+
+  const componentsDir = path.join(__dirname, "..", "..", "components");
+  for (const [id, value] of await scrapeL10nModules(componentsDir)) {
+    if (tags.has(id) && tags.get(id) !== value) {
+      throw new Error(
+        `L10n extractor: \`${id}\` is a duplicate id with different text`,
+      );
+    }
+    tags.set(id, value);
+  }
 
   return new Resource([
     new Comment(TEMPLATE_HEADER),
