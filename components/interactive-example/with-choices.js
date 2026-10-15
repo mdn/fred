@@ -172,6 +172,7 @@ export const InteractiveExampleWithChoices = (Base) =>
               <mdn-play-runner
                 ${ref(this._runner)}
                 defaults="ix-choice"
+                allow="camera; microphone"
                 sandbox="allow-modals"
               ></mdn-play-runner>
             </mdn-play-controller>
