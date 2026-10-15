@@ -292,14 +292,43 @@ export async function startServer() {
             // render 404 page
             res.statusCode = 404;
             const locale = req.url?.match(/[^/]+/)?.[0] ?? "en-us";
-            try {
+            /** @param {string} locale */
+            const getNotFoundPage = async (locale) => {
               const notFoundRes = await fetch(
                 `${RARI_URL}/${locale}/404/index.json`,
               );
-              const json = await notFoundRes.json();
-              return await serverRenderMiddleware(req, res, json);
+              if (
+                !notFoundRes.headers
+                  .get("content-type")
+                  ?.includes("application/json")
+              ) {
+                throw new Error(`Expected JSON for ${locale} 404 page`);
+              }
+              return notFoundRes.json();
+            };
+            try {
+              return await serverRenderMiddleware(
+                req,
+                res,
+                await getNotFoundPage(locale),
+              );
             } catch (error) {
-              console.error("Failed to render 404 page:", error);
+              if (locale === "en-US") {
+                console.error("Failed to render en-US 404 page:", error);
+              } else {
+                try {
+                  return await serverRenderMiddleware(
+                    req,
+                    res,
+                    await getNotFoundPage("en-US"),
+                  );
+                } catch (fallbackError) {
+                  console.error(
+                    "Failed to render en-US 404 page:",
+                    fallbackError,
+                  );
+                }
+              }
               res.end();
               return;
             }
