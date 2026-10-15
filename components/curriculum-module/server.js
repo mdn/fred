@@ -2,10 +2,10 @@ import { html } from "@lit-labs/ssr";
 import { nothing } from "lit";
 
 import { Button } from "../button/server.js";
+import { addAttrs } from "../curriculum/add-attrs.js";
 import NextIcon from "../curriculum/assets/curriculum-next.svg?lit";
 import PrevIcon from "../curriculum/assets/curriculum-prev.svg?lit";
 import {
-  addAttrs,
   renderCurriculumBody,
   renderSidebar,
   renderToc,
