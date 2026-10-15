@@ -10,7 +10,7 @@ export class SiteSearch extends ServerComponent {
   render(context) {
     return PageLayout.render(
       context,
-      html`<div id="content" class="site-search">
+      html`<div id="content" tabindex="-1" class="site-search">
         <h1 class="visually-hidden">
           ${context.l10n("site-search-search")`Search`}
         </h1>

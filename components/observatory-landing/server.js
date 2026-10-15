@@ -22,7 +22,7 @@ export class ObservatoryLanding extends ServerComponent {
     return PageLayout.render(
       context,
       html`
-        <main id="content" class="observatory">
+        <main id="content" tabindex="-1" class="observatory">
           <section class="observatory-top">
             <div class="observatory-top__form">
               <h1 class="observatory-top-form__title">
