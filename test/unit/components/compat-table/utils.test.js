@@ -1,7 +1,33 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { isCurrentPageLink } from "../../../../components/compat-table/utils.js";
+import {
+  getCompatUrl,
+  isCurrentPageLink,
+} from "../../../../components/compat-table/utils.js";
+
+describe("getCompatUrl", () => {
+  const cases = [
+    {
+      name: "adds en-US to links on English pages",
+      url: "https://developer.mozilla.org/en-US/docs/Web/CSS/foo",
+      locale: "en-US",
+      expected: "https://developer.mozilla.org/en-US/docs/Web/CSS/foo",
+    },
+    {
+      name: "removes the locale from links on translated pages",
+      url: "https://developer.mozilla.org/en-US/docs/Web/CSS/foo",
+      locale: "fr",
+      expected: "https://developer.mozilla.org/docs/Web/CSS/foo",
+    },
+  ];
+
+  for (const { name, url, locale, expected } of cases) {
+    it(name, () => {
+      assert.equal(getCompatUrl(url, locale), expected);
+    });
+  }
+});
 
 describe("isCurrentPageLink", () => {
   const cases = [
@@ -46,6 +72,12 @@ describe("isCurrentPageLink", () => {
       url: "https://developer.mozilla.org/en-US/docs/Web/CSS/bar",
       pathname: "/fr/docs/Web/CSS/foo",
       expected: false,
+    },
+    {
+      name: "matches a locale-less URL on a translated page",
+      url: "https://developer.mozilla.org/docs/Web/CSS/foo",
+      pathname: "/fr/docs/Web/CSS/foo",
+      expected: true,
     },
     {
       name: "keeps a fragment-only link",
