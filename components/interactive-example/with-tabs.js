@@ -55,6 +55,7 @@ export const InteractiveExampleWithTabs = (Base) =>
                 ${ref(this._runner)}
                 sandbox="allow-modals allow-top-navigation-by-user-activation"
                 defaults="ix-tabbed"
+                color-scheme=${this._colorScheme}
               ></mdn-play-runner>
             </div>
           </div>
