@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.10.1](https://github.com/mdn/fred/compare/v2.10.0...v2.10.1) (2026-10-16)
+
+
+### Bug Fixes
+
+* **content-section:** set text color for image alt texts ([#1984](https://github.com/mdn/fred/issues/1984)) ([3fdc6e0](https://github.com/mdn/fred/commit/3fdc6e0558eef5a73035e31ce180013df6caa69c))
+* **server:** catch fallback 404 errors ([#2015](https://github.com/mdn/fred/issues/2015)) ([d5a911d](https://github.com/mdn/fred/commit/d5a911d6a76e2bf931fa68990863873754991f97))
+
+
+### Miscellaneous
+
+* **deps:** bump express from 5.2.1 to 5.3.0 in the npm-prod group ([#2013](https://github.com/mdn/fred/issues/2013)) ([ff8e02a](https://github.com/mdn/fred/commit/ff8e02afd782e41c4c3be2eea641ae2592cc22b7))
+
 ## [2.10.0](https://github.com/mdn/fred/compare/v2.9.2...v2.10.0) (2026-10-13)
 
 
