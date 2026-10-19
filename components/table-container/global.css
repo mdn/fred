@@ -1,5 +1,7 @@
 .table-container {
   margin: 0;
   overflow-x: auto;
+
+  /* Suppress the vertical scrollbar Firefox and Chrome add beside block MathML fractions. */
   overflow-y: hidden;
 }
