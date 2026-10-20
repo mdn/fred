@@ -161,6 +161,10 @@ export default defineConfig([
   },
   prettierConfig,
   {
+    // `eslint-config-prettier` disables `curly`; the `all` option is safe with Prettier.
+    rules: { curly: ["error", "all"] },
+  },
+  {
     files: ["test/specs/**/*.js"],
     languageOptions: {
       globals: {

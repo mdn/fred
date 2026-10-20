@@ -92,7 +92,9 @@ export class CurriculumOverview extends ServerComponent {
   renderPrevNext(context, doc) {
     const { prev, next } = doc.prevNext || {};
 
-    if (!prev && !next) return nothing;
+    if (!prev && !next) {
+      return nothing;
+    }
 
     return html`
       <section class="curriculum-prev-next">

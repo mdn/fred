@@ -325,41 +325,55 @@ function isFullySupportedWithoutMajorLimitation(support) {
  * @returns {import("@compat").SimpleSupportStatementExtended | undefined}
  */
 export function getCurrentSupport(support) {
-  if (!support) return;
+  if (!support) {
+    return;
+  }
 
   // Full support without limitation.
   const noLimitationSupportItem = asList(support).find((item) =>
     isFullySupportedWithoutLimitation(item),
   );
-  if (noLimitationSupportItem) return noLimitationSupportItem;
+  if (noLimitationSupportItem) {
+    return noLimitationSupportItem;
+  }
 
   // Full support with only notes and version_added.
   const minorLimitationSupportItem = asList(support).find((item) =>
     isFullySupportedWithoutMajorLimitation(item),
   );
-  if (minorLimitationSupportItem) return minorLimitationSupportItem;
+  if (minorLimitationSupportItem) {
+    return minorLimitationSupportItem;
+  }
 
   // Full support with alternative name/prefix.
   const altnamePrefixSupportItem = asList(support).find(
     (item) => !item.version_removed && (item.prefix || item.alternative_name),
   );
-  if (altnamePrefixSupportItem) return altnamePrefixSupportItem;
+  if (altnamePrefixSupportItem) {
+    return altnamePrefixSupportItem;
+  }
 
   // Partial support.
   const partialSupportItem = asList(support).find(
     (item) => !item.version_removed && item.partial_implementation,
   );
-  if (partialSupportItem) return partialSupportItem;
+  if (partialSupportItem) {
+    return partialSupportItem;
+  }
 
   // Support with flags only.
   const flagSupportItem = asList(support).find(
     (item) => !item.version_removed && item.flags,
   );
-  if (flagSupportItem) return flagSupportItem;
+  if (flagSupportItem) {
+    return flagSupportItem;
+  }
 
   // No/Inactive support.
   const noSupportItem = asList(support).find((item) => item.version_removed);
-  if (noSupportItem) return noSupportItem;
+  if (noSupportItem) {
+    return noSupportItem;
+  }
 
   // Default (likely never reached).
   return getFirst(support);

@@ -28,7 +28,9 @@ export class MDNObservatoryHeaderLink extends LitElement {
   // Task to check if the header documentation page exists
   _checkHeaderTask = new Task(this, {
     task: async ([header]) => {
-      if (!header) return { exists: false };
+      if (!header) {
+        return { exists: false };
+      }
 
       const displayHeaderName = upperCaseHeaderName(header);
       const headerPath = `/en-US/docs/Web/HTTP/Reference/Headers/${encodeURIComponent(displayHeaderName)}`;
