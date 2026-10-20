@@ -70,13 +70,13 @@ compat-support-flag-range =
         [from] バージョン { $version_added } 以降のユーザー
         [until] バージョン { $version_last } までのユーザー
        *[none] ユーザー
-    }は明示的に設定の必要あり: <code data-l10n-name="name">{ $flag_name }</code> { $flag_type ->
+    }は{ $flag_type ->
        *[preference] 設定
         [runtime_flag] ランタイムフラグ
-    }{ $has_value ->
-        [1] { " " }to <code data-l10n-name="value">{ $flag_value }</code>
+    } <code data-l10n-name="name">{ $flag_name }</code> を{ $has_value ->
+        [1] { " " }<code data-l10n-name="value">{ $flag_value }</code> に
        *[0] { "" }
-    }.{ $has_pref_url ->
+    }設定する必要があります。{ $has_pref_url ->
         [1]
             { $flag_type ->
                 [preference] { $browser_name } で設定を変更するには、{ $browser_pref_url } を参照してください。
