@@ -6,7 +6,7 @@ import { randomIdString } from "../utils/index.js";
 /**
  * @param {object} options
  * @param {string | import("@lit").TemplateResult} options.label
- * @param {string} [options.labelId] - Label ID unique within the containing tree.
+ * @param {string} [options.labelId] - Label ID unique within the containing tree. Ignored for string labels.
  * @param {import("@lit").TemplateResult} [options.icon]
  * @param {boolean} [options.iconOnly]
  * @param {import("./types.js").ButtonIconPositions} [options.iconPosition]
@@ -37,7 +37,7 @@ export default function Button({
   action,
 }) {
   const ariaLabel = iconOnly && typeof label === "string" ? label : undefined;
-  labelId =
+  const resolvedLabelId =
     typeof label === "string"
       ? undefined
       : (labelId ?? randomIdString("label-"));
@@ -46,7 +46,7 @@ export default function Button({
     : nothing;
   const labelElement = html`
     <span
-      id=${ifDefined(labelId)}
+      id=${ifDefined(resolvedLabelId)}
       class="label"
       ?hidden=${iconOnly}
       part="label"
@@ -67,7 +67,7 @@ export default function Button({
           target=${ifDefined(target)}
           rel=${ifDefined(rel)}
           aria-label=${ifDefined(ariaLabel)}
-          aria-labelledby=${ifDefined(labelId)}
+          aria-labelledby=${ifDefined(resolvedLabelId)}
           aria-description=${ifDefined(ariaDescription)}
           title=${ifDefined(title)}
           data-variant=${ifDefined(variant)}
@@ -81,7 +81,7 @@ export default function Button({
         <button
           class="button"
           aria-label=${ifDefined(ariaLabel)}
-          aria-labelledby=${ifDefined(labelId)}
+          aria-labelledby=${ifDefined(resolvedLabelId)}
           ?disabled=${disabled}
           aria-disabled=${ariaDisabled ? "true" : nothing}
           aria-description=${ifDefined(ariaDescription)}
