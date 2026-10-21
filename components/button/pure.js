@@ -42,7 +42,7 @@ export default function Button({
       ? undefined
       : (labelId ?? randomIdString("label-"));
   const iconElement = icon
-    ? html`<span class="icon" part="icon">${icon}</span>`
+    ? html`<span class="icon" part="icon" aria-hidden="true">${icon}</span>`
     : nothing;
   const labelElement = html`
     <span
