@@ -3,7 +3,7 @@ import { registerHooks } from "node:module";
 import { describe, it } from "node:test";
 
 import { render } from "@lit-labs/ssr";
-import { html } from "lit";
+import { html, nothing } from "lit";
 
 import Button from "../../../components/button/pure.js";
 
@@ -69,12 +69,23 @@ describe("Button labels", () => {
         assert.match(output, /Second/);
       });
 
+      it(`uses an explicit label ID for template labels in ${name}, iconOnly=${iconOnly}`, () => {
+        const output = renderButtons([
+          { label: html`First`, labelId: "custom-label", href, iconOnly },
+        ]);
+        assert.equal(output.match(/\sid="custom-label"/g)?.length, 1);
+        assert.equal(
+          output.match(/aria-labelledby="custom-label"/g)?.length,
+          1,
+        );
+      });
+
       it(`preserves deterministic slotted labels for shadow-root ${name}, iconOnly=${iconOnly}`, () => {
         const template = html`<mdn-button
-            href=${href ?? ""}
+            href=${href ?? nothing}
             ?icon-only=${iconOnly}
             >First</mdn-button
-          ><mdn-button href=${href ?? ""} ?icon-only=${iconOnly}
+          ><mdn-button href=${href ?? nothing} ?icon-only=${iconOnly}
             >Second</mdn-button
           >`;
         const output = [...render(template)].join("");
@@ -84,7 +95,26 @@ describe("Button labels", () => {
         assert.equal(output.match(/aria-labelledby="label"/g)?.length, 2);
         assert.match(output, /<slot><\/slot>/);
         assert.doesNotMatch(output, /aria-label=/);
+        assert.equal(
+          output.match(/<a\s+class="button"/g)?.length ?? 0,
+          href ? 2 : 0,
+        );
+        assert.equal(
+          output.match(/<button\s+class="button"/g)?.length ?? 0,
+          href ? 0 : 2,
+        );
+        assert.equal(
+          output.match(/id="label"\s+class="label"\s+hidden/g)?.length ?? 0,
+          iconOnly ? 2 : 0,
+        );
       });
     }
   }
+
+  it("hides the icon from the accessibility tree", () => {
+    const output = renderButtons([
+      { label: "Read more", icon: html`<svg></svg>` },
+    ]);
+    assert.match(output, /class="icon"[^>]*aria-hidden="true"/);
+  });
 });
