@@ -44,7 +44,10 @@ describe("Button labels", () => {
         const output = renderButtons(buttons);
         assert.equal(output, renderButtons(buttons));
         assert.doesNotMatch(output, /\sid=|aria-labelledby=/);
-        assert.equal(output.match(/aria-label="Read more"/g)?.length, 2);
+        assert.equal(
+          output.match(/aria-label="Read more"/g)?.length ?? 0,
+          iconOnly ? 2 : 0,
+        );
       });
 
       it(`keeps distinct template labels associated with their ${name}, iconOnly=${iconOnly}`, () => {

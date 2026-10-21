@@ -36,9 +36,11 @@ export default function Button({
   variant = "primary",
   action,
 }) {
-  const ariaLabel = typeof label === "string" ? label : undefined;
+  const ariaLabel = iconOnly && typeof label === "string" ? label : undefined;
   labelId =
-    ariaLabel === undefined ? (labelId ?? randomIdString("label-")) : undefined;
+    typeof label === "string"
+      ? undefined
+      : (labelId ?? randomIdString("label-"));
   const iconElement = icon
     ? html`<span class="icon" part="icon">${icon}</span>`
     : nothing;
