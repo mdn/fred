@@ -1,5 +1,3 @@
-export const PREFERRED_LOCALE_COOKIE_NAME = "preferredlocale";
-
 const DEFAULT_LOCALE = "en-US";
 
 export const SUPPORTED_LOCALES = Object.freeze([

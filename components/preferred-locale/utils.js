@@ -1,4 +1,4 @@
-import { PREFERRED_LOCALE_COOKIE_NAME } from "../../utils/preferred-locale.js";
+import { PREFERRED_LOCALE_COOKIE_NAME } from "../../utils/preferred-locale-cookie.js";
 import {
   deleteCookie,
   getCookieValue,

@@ -1,9 +1,7 @@
 import cookieParser from "cookie-parser";
 
-import {
-  PREFERRED_LOCALE_COOKIE_NAME,
-  resolvePreferredLocale,
-} from "./preferred-locale.js";
+import { PREFERRED_LOCALE_COOKIE_NAME } from "./preferred-locale-cookie.js";
+import { resolvePreferredLocale } from "./preferred-locale.js";
 
 /** @param {import("express").Express} app */
 export function registerLocaleLessDocsRedirect(app) {
