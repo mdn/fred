@@ -69,6 +69,12 @@ await yargs(hideBin(process.argv))
           describe: "run fred and rari from this content repo",
           type: "string",
         })
+        .option("config", {
+          describe: "WebdriverIO configuration file",
+          type: "string",
+          choices: ["wdio.conf.js", "wdio.dev.conf.js"],
+          default: "wdio.conf.js",
+        })
         .option("spec", {
           describe: "only run these spec files",
           type: "array",
@@ -96,7 +102,7 @@ await yargs(hideBin(process.argv))
       /** @type {import("concurrently").ConcurrentlyCommandInput[]} */
       const jobs = [
         {
-          command: `npx --package=@wdio/cli wdio run wdio.conf.js${wdioArgs}`,
+          command: `npx --package=@wdio/cli wdio run ${argv.config}${wdioArgs}`,
           name: "wdio",
           prefixColor: "green",
         },

@@ -165,7 +165,7 @@ export default defineConfig([
     rules: { curly: ["error", "all"] },
   },
   {
-    files: ["test/specs/**/*.js"],
+    files: ["test/specs/**/*.js", "test/specs-dev/**/*.js"],
     languageOptions: {
       globals: {
         ...globals.mocha,
