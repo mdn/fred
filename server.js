@@ -125,16 +125,14 @@ export async function startServer() {
   if (devMode) {
     const { rspack } = await import("@rspack/core");
     const { default: rspackConfig } = await import("./rspack.config.js");
-    const { default: webpackDevMiddleware } =
-      await import("webpack-dev-middleware");
+    const { devMiddleware } = await import("@rspack/dev-middleware");
     const { default: webpackHotMiddleware } =
       await import("webpack-hot-middleware");
 
     const rspackCompiler = rspack(rspackConfig);
 
     app.use(
-      // @ts-expect-error
-      webpackDevMiddleware(rspackCompiler, {
+      devMiddleware(rspackCompiler, {
         serverSideRender: true,
         writeToDisk: true,
       }),
