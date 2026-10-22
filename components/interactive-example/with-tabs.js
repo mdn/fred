@@ -53,6 +53,7 @@ export const InteractiveExampleWithTabs = (Base) =>
               <h4>${this.l10n("interactive-example-output")`Output`}</h4>
               <mdn-play-runner
                 ${ref(this._runner)}
+                allow="camera; microphone"
                 sandbox="allow-modals allow-top-navigation-by-user-activation"
                 defaults="ix-tabbed"
               ></mdn-play-runner>
