@@ -1,7 +1,3 @@
-// Lit caches parsed templates by the identity of their strings array.
-/** @type {WeakMap<TemplateStringsArray, Map<string, TemplateStringsArray>>} */
-const attrStrings = new WeakMap();
-
 /**
  * @param {import("@lit").SVGTemplateResult} original
  * @param {{[key: string]: string}} attrs
@@ -16,21 +12,12 @@ export function addAttrs(original, attrs) {
   if (!head) {
     return original;
   }
-  let variants = attrStrings.get(original.strings);
-  if (!variants) {
-    variants = new Map();
-    attrStrings.set(original.strings, variants);
-  }
-  let strings = variants.get(attrString);
-  if (!strings) {
-    const newHead = head.replace(/<svg([\s\S]*?)>/, `<svg$1 ${attrString}>`);
-    const restStrings = original.strings.slice(1);
-    strings = Object.freeze(
-      Object.assign([newHead, ...restStrings], {
-        raw: Object.freeze([newHead, ...restStrings]),
-      }),
-    );
-    variants.set(attrString, strings);
-  }
+  const newHead = head.replace(/<svg([\s\S]*?)>/, `<svg$1 ${attrString}>`);
+  const restStrings = original.strings.slice(1);
+  const strings = Object.freeze(
+    Object.assign([newHead, ...restStrings], {
+      raw: Object.freeze([newHead, ...restStrings]),
+    }),
+  );
   return { ...original, strings };
 }
