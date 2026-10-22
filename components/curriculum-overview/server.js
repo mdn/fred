@@ -41,6 +41,7 @@ export class CurriculumOverview extends ServerComponent {
         >
           <main
             id="content"
+            tabindex="-1"
             class="layout__content curriculum-layout__content curriculum-content-container curriculum-overview topic-${topicCssClass}"
             lang=${doc.locale}
           >

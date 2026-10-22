@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/no-useless-switch-case */
-import { render as r } from "@lit-labs/ssr";
+import { html, render as r } from "@lit-labs/ssr";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 
 import { nothing } from "lit";
@@ -115,7 +115,10 @@ export async function render(path, partialContext, compilationStats) {
           case "SpaUnknown": {
             return PageLayout.render(
               context,
-              `Unknown Spa Page title=${context.pageTitle}, slug=${context.slug}`,
+              html`<main id="content" tabindex="-1">
+                Unknown Spa Page title=${context.pageTitle},
+                slug=${context.slug}
+              </main>`,
             );
           }
           case "Sandbox":
