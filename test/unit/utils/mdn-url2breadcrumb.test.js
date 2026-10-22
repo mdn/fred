@@ -44,4 +44,39 @@ describe("mdnUrl2Breadcrumb", () => {
       "en-US / Web APIs / History API",
     );
   });
+
+  describe("keeps the page for fragment URLs", () => {
+    const cases = [
+      {
+        name: "top-level Web page",
+        url: "/en-US/docs/Web/HTML#beginners_tutorials",
+        locale: "en-US",
+        expected: "HTML",
+      },
+      {
+        name: "nested page",
+        url: "/en-US/docs/Web/HTML/Reference/Elements/a#attributes",
+        locale: "en-US",
+        expected: "HTML / Reference / Elements / a",
+      },
+      {
+        name: "Web API page",
+        url: "/en-US/docs/Web/API/Element/append#examples",
+        locale: "en-US",
+        expected: "Web APIs / Element / append",
+      },
+      {
+        name: "cross-locale",
+        url: "/en-US/docs/Web/HTML#beginners_tutorials",
+        locale: "fr",
+        expected: "en-US / HTML",
+      },
+    ];
+
+    for (const { name, url, locale, expected } of cases) {
+      it(name, () => {
+        strictEqual(mdnUrl2Breadcrumb(url, locale), expected);
+      });
+    }
+  });
 });
