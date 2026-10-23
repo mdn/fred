@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.10.1](https://github.com/mdn/fred/compare/v2.10.0...v2.10.1) (2026-10-23)
+
+
+### Bug Fixes
+
+* **content-section:** set text color for image alt texts ([#1984](https://github.com/mdn/fred/issues/1984)) ([3fdc6e0](https://github.com/mdn/fred/commit/3fdc6e0558eef5a73035e31ce180013df6caa69c))
+* **server:** catch fallback 404 errors ([#2015](https://github.com/mdn/fred/issues/2015)) ([d5a911d](https://github.com/mdn/fred/commit/d5a911d6a76e2bf931fa68990863873754991f97))
+* **server:** replace webpack-dev-middleware with @rspack/dev-middleware ([#2033](https://github.com/mdn/fred/issues/2033)) ([e3b5cfd](https://github.com/mdn/fred/commit/e3b5cfdad58676450dd1d8c73676e03830c27b2e))
+* **table-container:** hide vertical overflow ([#2025](https://github.com/mdn/fred/issues/2025)) ([a6e34db](https://github.com/mdn/fred/commit/a6e34dbe462668620223af76ecaf3e160d58a54f))
+
+
+### Miscellaneous
+
+* **deps:** bump @mdn/rari from 1.2.0 to 1.2.1 ([#2039](https://github.com/mdn/fred/issues/2039)) ([e1b7184](https://github.com/mdn/fred/commit/e1b7184e95d1aaf33c18aeae15c4c6ca0c211518))
+* **deps:** bump express from 5.2.1 to 5.3.0 in the npm-prod group ([#2013](https://github.com/mdn/fred/issues/2013)) ([ff8e02a](https://github.com/mdn/fred/commit/ff8e02afd782e41c4c3be2eea641ae2592cc22b7))
+* **l10n:** update Japanese translations ([#1952](https://github.com/mdn/fred/issues/1952)) ([f032992](https://github.com/mdn/fred/commit/f03299293320f0e03bb7982e694ae734f6a4fef8))
+
 ## [2.10.0](https://github.com/mdn/fred/compare/v2.9.2...v2.10.0) (2026-10-13)
 
 
