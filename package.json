@@ -1,6 +1,6 @@
 {
   "name": "@mdn/fred",
-  "version": "2.10.0",
+  "version": "2.10.1",
   "repository": "https://github.com/mdn/fred",
   "license": "MPL-2.0",
   "author": "MDN Web Docs",
@@ -77,7 +77,7 @@
     "@fluent/syntax": "^0.19.0",
     "@jackolope/lit-analyzer": "^3.2.0",
     "@jackolope/ts-lit-plugin": "^3.1.6",
-    "@mdn/browser-compat-data": "^8.1.7",
+    "@mdn/browser-compat-data": "^8.1.6",
     "@mdn/yari": "^6.0.1",
     "@rsdoctor/rspack-plugin": "^1.6.5",
     "@rspack/cli": "^2.2.9",
