@@ -6,7 +6,10 @@
  * @returns {string} the breadcrumb-like string for the URL.
  */
 export function mdnUrl2Breadcrumb(url, locale) {
-  let parents = url
+  const fragmentIndex = url.indexOf("#");
+  const hasFragment = fragmentIndex !== -1;
+  const pathname = hasFragment ? url.slice(0, fragmentIndex) : url;
+  let parents = pathname
     .replaceAll("_", " ")
     .split("/")
     .filter((p) => !["", "docs"].includes(p));
@@ -24,7 +27,7 @@ export function mdnUrl2Breadcrumb(url, locale) {
     parents.shift();
   }
 
-  if (parents.length > 1) {
+  if (parents.length > 1 && !hasFragment) {
     // Remove current item.
     parents.pop();
   }
