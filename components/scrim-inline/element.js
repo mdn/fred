@@ -130,6 +130,7 @@ export class MDNScrimInline extends L10nMixin(LitElement) {
                     <iframe
                       src=${this._fullUrl}
                       title=${ifDefined(this.scrimTitle)}
+                      aria-label=${ifDefined(this.scrimTitle)}
                     ></iframe>
                   `
                 : html`
