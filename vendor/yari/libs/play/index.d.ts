@@ -1,11 +1,15 @@
 /** @import { IncomingMessage, ServerResponse } from "http" */
 /** @import * as express from "express" */
+/** @typedef {"ix-tabbed" | "ix-wat" | "ix-choice"} RunnerDefaults */
+/** @typedef {"light" | "dark" | "os-default"} Theme */
 /**
  * @typedef State
  * @property {string} html
  * @property {string} css
  * @property {string} js
  * @property {string} [src]
+ * @property {RunnerDefaults} [defaults]
+ * @property {Theme} [theme]
  */
 /**
  * @param {ServerResponse<IncomingMessage>} res
@@ -56,7 +60,11 @@ export type State = {
   css: string;
   js: string;
   src?: string | undefined;
+  defaults?: RunnerDefaults | undefined;
+  theme?: Theme | undefined;
 };
+export type RunnerDefaults = "ix-tabbed" | "ix-wat" | "ix-choice";
+export type Theme = "light" | "dark" | "os-default";
 import type { IncomingMessage } from "http";
 import type { ServerResponse } from "http";
 import type * as express from "express";
