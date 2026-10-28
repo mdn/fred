@@ -24,7 +24,7 @@ export class ReferenceLayout extends ServerComponent {
 
     return html`
       <div class="layout__2-sidebars-inline reference-layout">
-        <main id="content" class="layout__content">
+        <main id="content" tabindex="-1" class="layout__content">
           <div class="layout__header reference-layout__header">
             ${WRITER_MODE ? WriterToolbar.render(context) : nothing}
             ${TranslationBanner.render(context)}

@@ -90,7 +90,7 @@ export class GenericContent extends ServerComponent {
       ? "generic-content generic-content__plus-docs-content"
       : "generic-content";
 
-    return html`<main id="content" class=${className}>
+    return html`<main id="content" tabindex="-1" class=${className}>
       ${context.hyData.sections.map((section) => {
         if (section.type === "prose") {
           // Map plus docs assets path to imported asset paths

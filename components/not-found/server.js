@@ -10,7 +10,7 @@ export class NotFound extends ServerComponent {
   render(context) {
     return PageLayout.render(
       context,
-      html`<main id="content" class="not-found">
+      html`<main id="content" tabindex="-1" class="not-found">
         <h1>${context.l10n("not-found-title")}</h1>
         <mdn-not-found></mdn-not-found>
         <p>
