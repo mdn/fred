@@ -22,6 +22,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
       _query: { state: true },
       _selected: { state: true },
       _shiftFocus: { state: true },
+      _feedbackSubmitted: { state: true },
     };
   }
 
@@ -34,6 +35,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     this._shiftFocus = false;
     /** Capture whether user has engaged with the search. */
     this._hasEngaged = false;
+    this._feedbackSubmitted = false;
   }
 
   async _loadIndex() {
@@ -62,6 +64,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
   }
 
   showModal() {
+    this._hasMeasuredNoResults = false;
     this._loadIndex();
     this.shadowRoot?.querySelector("dialog")?.showModal();
     this.shadowRoot?.querySelector("input")?.select();
@@ -72,6 +75,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     if (target instanceof HTMLInputElement) {
       this._query = target.value;
       this._selected = 0;
+      this._feedbackSubmitted = false;
       if (!this._hasEngaged && inputType.startsWith("insert")) {
         this._hasEngaged = true;
         gleanClick(
@@ -192,6 +196,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
       this.showModal();
       if (selection) {
         this._query = selection;
+        this._feedbackSubmitted = false;
         if (!this._hasEngaged) {
           this._hasEngaged = true;
           gleanClick("quick-search-change: selection");
@@ -209,6 +214,14 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
       return quickSearch(query, await index);
     },
   });
+
+  _submitQueryFeedback() {
+    if (!this._query || this._feedbackSubmitted) {
+      return;
+    }
+    this._feedbackSubmitted = true;
+    gleanClick(`quick-search: no-results -> ${this._query}`);
+  }
 
   _close() {
     this.shadowRoot?.querySelector("dialog")?.close();
@@ -363,6 +376,26 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
               : nothing
           }
         </ul>
+        ${
+          searchComplete && siteSearchIndex === 0
+            ? html`<div class="feedback">
+                ${
+                  this._feedbackSubmitted
+                    ? html`<p role="status">
+                        ${this.l10n("search-modal-no-results-thanks")`Thanks, your query was sent to MDN.`}
+                      </p>`
+                    : html`<p>
+                          ${this.l10n("search-modal-no-results-feedback")`Expected a result? Your query will be sent to MDN to help improve search.`}
+                        </p>
+                        <mdn-button
+                          variant="secondary"
+                          @click=${this._submitQueryFeedback}
+                          >${this.l10n("search-modal-no-results-submit")`Report this search query`}</mdn-button
+                        >`
+                }
+              </div>`
+            : nothing
+        }
       </dialog>
     `;
   }
