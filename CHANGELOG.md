@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.10.2](https://github.com/mdn/fred/compare/v2.10.1...v2.10.2) (2026-10-30)
+
+
+### Miscellaneous
+
+* **deps:** bump qs from 6.16.0 to 6.17.1 ([#2053](https://github.com/mdn/fred/issues/2053)) ([547ddb1](https://github.com/mdn/fred/commit/547ddb11f4a9dd83df9b795a5f5c0572792223a3))
+* **deps:** bump serialize-javascript from 7.1.2 to 7.1.4 ([#2044](https://github.com/mdn/fred/issues/2044)) ([d6d208f](https://github.com/mdn/fred/commit/d6d208f9fc8ef016b96692cb08a3701bf28b4d35))
+* **deps:** bump undici from 8.11.2 to 8.12.3 ([#2043](https://github.com/mdn/fred/issues/2043)) ([31d88dd](https://github.com/mdn/fred/commit/31d88ddb4ecc83b29e6942db0dbd814c61d403b3))
+* **menu:** update menu entries ([#2054](https://github.com/mdn/fred/issues/2054)) ([7215de5](https://github.com/mdn/fred/commit/7215de58539e3c22cb6722888151223237f4fc0f))
+
 ## [2.10.1](https://github.com/mdn/fred/compare/v2.10.0...v2.10.1) (2026-10-23)
 
 
