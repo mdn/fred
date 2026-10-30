@@ -6,7 +6,9 @@
     "Web/CSS/Reference/At-rules",
     "Web/CSS/Reference/Selectors",
     "Web/CSS/Reference/Values",
-    "Web/HTML/Guides/Cheatsheet"
+    "Web/HTML/Guides/Cheatsheet",
+    "Web/HTML/Reference/Global_attributes",
+    "Web/MathML"
   ],
   "fr": [],
   "ja": [],
@@ -17,6 +19,7 @@
     "Web/API/Web_Workers_API/Using_web_workers",
     "Web/CSS/Guides",
     "Web/CSS/Guides/Colors/Applying_color",
+    "Web/CSS/Guides/Colors/Color_format_converter",
     "Web/CSS/Guides/Colors/Color_mixer",
     "Web/CSS/Guides/Shapes/Shape_generator",
     "Web/CSS/How_to/Layout_cookbook",
@@ -28,8 +31,10 @@
     "Web/CSS/Reference/Values",
     "Web/HTML/Guides",
     "Web/HTML/Guides/Cheatsheet",
+    "Web/HTML/Reference/Attributes",
     "Web/JavaScript/Guide/Using_classes",
-    "Web/WebDriver"
+    "Web/WebDriver",
+    "Web/XML"
   ],
   "pt-BR": [
     "Learn_web_development/Core",
@@ -53,6 +58,7 @@
     "Web/HTML/Guides/Cheatsheet",
     "Web/HTML/Guides/Date_and_time_formats",
     "Web/JavaScript/Guide/Using_classes",
+    "Web/JavaScript/Reference/Statements",
     "Web/Media",
     "Web/Privacy",
     "Web/URI",
@@ -80,7 +86,7 @@
     "Web/Privacy",
     "Web/WebDriver"
   ],
-  "zh-CN": [],
+  "zh-CN": ["Web/API/Geolocation_API", "Web/CSS/Guides/Shapes/Shape_generator"],
   "zh-TW": [
     "Learn_web_development/Core",
     "Learn_web_development/Getting_started",
