@@ -123,7 +123,9 @@ export class GenericAbout extends ServerComponent {
     });
 
     const h = html`
-      <main id="content" class="about-container">${bodyContent}</main>
+      <main id="content" tabindex="-1" class="about-container">
+        ${bodyContent}
+      </main>
     `;
     return PageLayout.render(context, h);
   }

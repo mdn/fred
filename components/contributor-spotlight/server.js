@@ -72,7 +72,7 @@ export class ContributorSpotlight extends ServerComponent {
       context,
       html`
         <div class="contributor-spotlight-container">
-          <main id="content" class="contributor-spotlight">
+          <main id="content" tabindex="-1" class="contributor-spotlight">
             ${header}
             <section class="profile-header">
               <img
