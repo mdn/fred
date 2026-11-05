@@ -15,6 +15,11 @@ permissions:
   contents: read
   pull-requests: write
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  # Let every `main` push finish, so each commit gets a baseline.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   bundle-size:
     runs-on: ubuntu-latest
