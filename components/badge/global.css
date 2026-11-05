@@ -26,3 +26,7 @@
     border-radius: 1em;
   }
 }
+
+.badge-demo-diff {
+  outline: 1px dashed var(--color-border-primary);
+}
