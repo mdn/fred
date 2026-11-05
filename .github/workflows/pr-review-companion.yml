@@ -27,8 +27,8 @@ jobs:
         id: identify-pr
         run: |
           PR=$(gh api "repos/$BASE_REPO/pulls?head=${HEAD_OWNER}:${HEAD_BRANCH}&state=open" --jq '.[0]')
-          echo "number=$(jq -r '.number // empty' <<< "$PR")" >> $GITHUB_OUTPUT
-          echo "base-ref=$(jq -r '.base.ref // empty' <<< "$PR")" >> $GITHUB_OUTPUT
+          echo "number=$(jq -r '.number // empty' <<< "$PR")" >> "$GITHUB_OUTPUT"
+          echo "base-ref=$(jq -r '.base.ref // empty' <<< "$PR")" >> "$GITHUB_OUTPUT"
         env:
           BASE_REPO: ${{ github.repository }}
           GITHUB_TOKEN: ${{ github.token }}
