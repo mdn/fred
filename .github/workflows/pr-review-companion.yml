@@ -21,12 +21,14 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       pr-number: ${{ steps.identify-pr.outputs.number }}
+      base-ref: ${{ steps.identify-pr.outputs.base-ref }}
     steps:
       - name: Identify PR
         id: identify-pr
         run: |
-          PR_NUMBER=$(gh api "repos/$BASE_REPO/pulls?head=${HEAD_OWNER}:${HEAD_BRANCH}&state=open" --jq '.[0].number')
-          echo "number=$PR_NUMBER" >> $GITHUB_OUTPUT
+          PR=$(gh api "repos/$BASE_REPO/pulls?head=${HEAD_OWNER}:${HEAD_BRANCH}&state=open" --jq '.[0]')
+          echo "number=$(jq -r '.number // empty' <<< "$PR")" >> "$GITHUB_OUTPUT"
+          echo "base-ref=$(jq -r '.base.ref // empty' <<< "$PR")" >> "$GITHUB_OUTPUT"
         env:
           BASE_REPO: ${{ github.repository }}
           GITHUB_TOKEN: ${{ github.token }}
@@ -66,6 +68,6 @@ jobs:
             gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" --body "$BODY"
           fi
         env:
-          BODY: "${{ github.sha }} was deployed to: ${{ needs.deploy.outputs.url }}"
+          BODY: "${{ github.event.workflow_run.head_sha }} (with `${{ needs.identify-pr.outputs.base-ref }}` merged in) was deployed to: ${{ needs.deploy.outputs.url }}"
           PR_NUMBER: ${{ needs.identify-pr.outputs.pr-number }}
           GITHUB_TOKEN: ${{ github.token }}
