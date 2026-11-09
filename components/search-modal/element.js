@@ -16,6 +16,19 @@ import "../button/element.js";
 // Long queries are likely pasted text, so don't offer to report them (PII).
 const MAX_REPORTABLE_QUERY_LENGTH = 50;
 
+// Email-like queries (*@*.*) are likely accidental PII submissions.
+const EMAIL_LIKE_QUERY = /\S@\S+\.\p{L}{2,}/u;
+
+/**
+ * @param {string} query
+ * @returns {boolean}
+ */
+function isSensitiveQuery(query) {
+  return (
+    query.length > MAX_REPORTABLE_QUERY_LENGTH || EMAIL_LIKE_QUERY.test(query)
+  );
+}
+
 export class MDNSearchModal extends L10nMixin(LitElement) {
   static ssr = false;
   static styles = styles;
@@ -225,7 +238,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
   _canReport() {
     return (
       Boolean(this._query) &&
-      this._query.length <= MAX_REPORTABLE_QUERY_LENGTH &&
+      !isSensitiveQuery(this._query) &&
       this._queryIndex.status === TaskStatus.COMPLETE &&
       !this._queryIndex.value?.length
     );
@@ -382,7 +395,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
                 >
                   <a
                     href=${searchUrl}
-                    data-glean-id=${`quick-search: site-search -> ${this._query}`}
+                    data-glean-id=${`quick-search: site-search -> ${isSensitiveQuery(this._query) ? "[redacted]" : this._query}`}
                     ><span class="title"
                       >${this.l10n.raw({
                         id: "search-modal-site-search",
