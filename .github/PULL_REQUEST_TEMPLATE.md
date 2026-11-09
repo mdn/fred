@@ -17,4 +17,3 @@
 <!-- 🔨 If this fully resolves a GitHub issue, use "Fixes #123" -->
 <!-- 👉 Highlight related pull requests using "Relates to #123" -->
 <!-- ❗ If another pull request should be merged first, use "**Depends on:** #123" -->
-

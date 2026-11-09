@@ -27,7 +27,15 @@
     mask-image: url("../icon/server.svg");
   }
 
-  /** Browser icons. */
+  &.icon-xr {
+    mask-image: url("../icon/glasses.svg");
+  }
+
+  /** Fallback first so browser icons override it. */
+
+  &.icon-browser {
+    mask-image: url("../icon/globe.svg");
+  }
 
   &.icon-bun {
     mask-image: url("../icon/browser/bun.svg");

@@ -12,8 +12,9 @@
   "devDependencies": {
     "@types/he": "^1.2.3"
   },
+  "packageManager": "npm@11.19.0",
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   },
   "export": "index.js"
 }

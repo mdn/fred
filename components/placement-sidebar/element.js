@@ -65,7 +65,7 @@ export class MDNPlacementSidebar extends PlacementMixin(LitElement) {
         ["--side-color-light", textColor],
         ["--side-background-dark", backgroundColorDark || backgroundColor],
         ["--side-color-dark", textColorDark || textColor],
-      ].filter(([_, v]) => Boolean(v)),
+      ].filter(([_, v]) => v),
     );
     const type = "side";
 

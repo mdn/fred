@@ -98,9 +98,15 @@ export class SidebarFilterer {
    * Resets and shows all sidebar items.
    */
   showAllItems() {
-    for (const { link } of this.items) this.resetLink(link);
-    for (const heading of this.allHeadings) this.resetHeading(heading);
-    for (const parent of this.allParents) this.resetParent(parent);
+    for (const { link } of this.items) {
+      this.resetLink(link);
+    }
+    for (const heading of this.allHeadings) {
+      this.resetHeading(heading);
+    }
+    for (const parent of this.allParents) {
+      this.resetParent(parent);
+    }
   }
 
   /**
@@ -165,7 +171,9 @@ export class SidebarFilterer {
         parents.add(parent);
       }
     }
-    for (const parent of parents) parent.normalize();
+    for (const parent of parents) {
+      parent.normalize();
+    }
   }
 
   /**
@@ -174,8 +182,12 @@ export class SidebarFilterer {
    * @returns {number} The count of matching items.
    */
   showOnlyMatchingItems(query) {
-    for (const heading of this.allHeadings) this.hideHeading(heading);
-    for (const parent of this.allParents) this.collapseParent(parent);
+    for (const heading of this.allHeadings) {
+      this.hideHeading(heading);
+    }
+    for (const parent of this.allParents) {
+      this.collapseParent(parent);
+    }
 
     // Split the query into search terms.
     const terms = splitQuery(query);
@@ -221,7 +233,7 @@ export class SidebarFilterer {
   collapseParent(parent) {
     const container = this.getContainerOf(parent);
     this.toggleElement(container, false);
-    parent.dataset.wasOpen = parent.dataset.wasOpen || String(parent.open);
+    parent.dataset.wasOpen ||= String(parent.open);
     parent.open = false;
   }
 
@@ -247,7 +259,7 @@ export class SidebarFilterer {
           ranges.set(index, index + needle.length);
         }
       }
-      const sortedRanges = [...ranges.entries()].sort(
+      const sortedRanges = [...ranges].sort(
         ([x1, y1], [x2, y2]) => x1 - x2 || y1 - y2,
       );
 

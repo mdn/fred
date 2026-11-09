@@ -6,10 +6,16 @@
   }
 
   .bc-table {
-    /* 25% for feature, 75% for browser columns. */
-    grid-template-columns: minmax(25%, max-content) repeat(
-        var(--compat-browser-count),
-        calc(75% / var(--compat-browser-count))
+    /* 25% for feature, up to 75% for browser columns. */
+    grid-template-columns: minmax(25%, 1fr) repeat(
+        var(--compat-table-browser-count),
+        minmax(
+          0,
+          min(
+            calc(75% / var(--compat-table-browser-count)),
+            var(--compat-browser-column-max)
+          )
+        )
       );
   }
 

@@ -1,26 +1,24 @@
+import { changeDocsLocale } from "../../utils/docs-locale-url.js";
 import { BCD_BASE_URL } from "../env/index.js";
 
+import { DEFAULT_LOCALE } from "./constants.js";
+
 /**
- * A list of browsers to be hidden.
- * @constant {string[]}
+ * Pair with `icon-browser` for the generic fallback.
+ * @param {import("@bcd").BrowserName} browser
+ * @returns {string}
  */
-export const SHOW_BROWSERS = [
-  "chrome",
-  "edge",
-  "firefox",
-  "opera",
-  "safari",
-  "chrome_android",
-  "firefox_android",
-  "opera_android",
-  "safari_ios",
-  "samsunginternet_android",
-  "webview_android",
-  "webview_ios",
-  "bun",
-  "deno",
-  "nodejs",
-];
+export function browserToIconName(browser) {
+  if (browser.startsWith("firefox")) {
+    return "firefox";
+  } else if (browser === "webview_android") {
+    return "webview";
+  } else if (browser === "webview_ios") {
+    return "safari";
+  } else {
+    return browser.split("_", 1)[0] ?? "";
+  }
+}
 
 /**
  * Gets the first element of an array or returns the value itself.
@@ -40,6 +38,22 @@ export function getFirst(a) {
  */
 export function asList(a) {
   return Array.isArray(a) ? a : [a];
+}
+
+/**
+ * Checks whether a URL points to the current page without a fragment.
+ * The locale is ignored, since BCD links always target the en-US page.
+ * @param {string} url
+ * @param {string} pathname
+ * @returns {boolean}
+ */
+export function isCurrentPageLink(url, pathname) {
+  const parsedUrl = new URL(url, "https://developer.mozilla.org");
+  return (
+    !parsedUrl.hash &&
+    changeDocsLocale(parsedUrl.pathname, DEFAULT_LOCALE) ===
+      changeDocsLocale(pathname, DEFAULT_LOCALE)
+  );
 }
 
 /**
@@ -311,41 +325,55 @@ function isFullySupportedWithoutMajorLimitation(support) {
  * @returns {import("@compat").SimpleSupportStatementExtended | undefined}
  */
 export function getCurrentSupport(support) {
-  if (!support) return;
+  if (!support) {
+    return;
+  }
 
   // Full support without limitation.
   const noLimitationSupportItem = asList(support).find((item) =>
     isFullySupportedWithoutLimitation(item),
   );
-  if (noLimitationSupportItem) return noLimitationSupportItem;
+  if (noLimitationSupportItem) {
+    return noLimitationSupportItem;
+  }
 
   // Full support with only notes and version_added.
   const minorLimitationSupportItem = asList(support).find((item) =>
     isFullySupportedWithoutMajorLimitation(item),
   );
-  if (minorLimitationSupportItem) return minorLimitationSupportItem;
+  if (minorLimitationSupportItem) {
+    return minorLimitationSupportItem;
+  }
 
   // Full support with alternative name/prefix.
   const altnamePrefixSupportItem = asList(support).find(
     (item) => !item.version_removed && (item.prefix || item.alternative_name),
   );
-  if (altnamePrefixSupportItem) return altnamePrefixSupportItem;
+  if (altnamePrefixSupportItem) {
+    return altnamePrefixSupportItem;
+  }
 
   // Partial support.
   const partialSupportItem = asList(support).find(
     (item) => !item.version_removed && item.partial_implementation,
   );
-  if (partialSupportItem) return partialSupportItem;
+  if (partialSupportItem) {
+    return partialSupportItem;
+  }
 
   // Support with flags only.
   const flagSupportItem = asList(support).find(
     (item) => !item.version_removed && item.flags,
   );
-  if (flagSupportItem) return flagSupportItem;
+  if (flagSupportItem) {
+    return flagSupportItem;
+  }
 
   // No/Inactive support.
   const noSupportItem = asList(support).find((item) => item.version_removed);
-  if (noSupportItem) return noSupportItem;
+  if (noSupportItem) {
+    return noSupportItem;
+  }
 
   // Default (likely never reached).
   return getFirst(support);

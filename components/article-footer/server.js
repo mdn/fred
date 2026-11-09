@@ -96,12 +96,8 @@ function Links(context) {
  * @param {import("@fred").Context<import("@rari").DocPage>} context
  */
 function GitHubSourceLink(context) {
-  const {
-    doc: {
-      locale,
-      source: { folder, github_url },
-    },
-  } = context;
+  const { locale, source } = context.doc;
+  const { folder, github_url } = source;
 
   return html`<a
     class="external"

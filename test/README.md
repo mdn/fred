@@ -26,6 +26,12 @@ To run e2e tests and bring up a fred dev server and rari server:
 npm test -- e2e --fred dev --rari
 ```
 
+To test development server startup and automatic page reloads:
+
+```
+npm test -- e2e --fred dev --rari --config wdio.dev.conf.js
+```
+
 To run only some files:
 
 ```

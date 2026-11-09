@@ -21,12 +21,12 @@ export function mdnUrl2Breadcrumb(url, locale) {
 
   if (parents.length > 1 && parents.at(0) === "Web") {
     // Remove virtual "Web" path.
-    parents.splice(0, 1);
+    parents.shift();
   }
 
   if (parents.length > 1) {
     // Remove current item.
-    parents.splice(-1, 1);
+    parents.pop();
   }
 
   return [...prefix, ...parents].join(" / ");

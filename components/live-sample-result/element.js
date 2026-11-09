@@ -47,7 +47,7 @@ export class MDNLiveSampleResult extends L10nMixin(LitElement) {
       if (replace || this._fullscreenReplace) {
         location.replace(this._runnerSrc);
       } else {
-        location.href = this._runnerSrc;
+        location.assign(this._runnerSrc);
       }
     } else {
       this._fullscreenPending = true;
@@ -80,8 +80,9 @@ export class MDNLiveSampleResult extends L10nMixin(LitElement) {
       location.href,
     );
     playUrl.search = new URL(this._runnerSrc).search;
-    if (this.srcPrefix)
+    if (this.srcPrefix) {
       playUrl.searchParams.append("srcPrefix", this.srcPrefix);
+    }
     this.breakoutLink = playUrl.href;
   }
 

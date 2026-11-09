@@ -32,6 +32,8 @@ reference-toc-header = In this article
 footer-copyright = Portions of this content are ©1998–{ $year } by individual mozilla.org contributors. Content available under <a data-l10n-name="cc">a Creative Commons license</a>.
 
 search-modal-site-search = Site search for <em>{ $query }</em>
+search-modal-no-results-report = Report missing results for <em>{ $query }</em>
+search-modal-no-results-thanks = Thanks for reporting.
 
 search-modal-results-status = { $results ->
     [0] No results found.
@@ -82,6 +84,9 @@ compat-link-report-missing-title = Report missing compatibility data
 compat-link-report-missing = Report this issue
 compat-link-source = View data on GitHub
 compat-link-source-title = File: { $filename }
+
+compat-settings-hide-browser = Hide { $browser }
+compat-settings-show-browser = Show { $browser }
 
 compat-deprecated = Deprecated
 compat-experimental = Experimental

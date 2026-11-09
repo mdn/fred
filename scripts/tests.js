@@ -32,13 +32,24 @@ await yargs(hideBin(process.argv))
       process.exitCode = 1;
     }
   })
-  .command("unit", "run unit tests", {}, () => {
-    try {
-      execSync(`node --test "**/*.test.js"`, { stdio: "inherit" });
-    } catch {
-      process.exitCode = 1;
-    }
-  })
+  .command(
+    "unit",
+    "run unit tests",
+    (yargs) =>
+      yargs.option("coverage", {
+        describe: "report test coverage with c8",
+        type: "boolean",
+        default: false,
+      }),
+    (argv) => {
+      const prefix = argv.coverage ? "npx c8 " : "";
+      try {
+        execSync(`${prefix}node --test "**/*.test.js"`, { stdio: "inherit" });
+      } catch {
+        process.exitCode = 1;
+      }
+    },
+  )
   .command(
     "e2e",
     "run e2e tests",
@@ -57,6 +68,12 @@ await yargs(hideBin(process.argv))
         .option("content", {
           describe: "run fred and rari from this content repo",
           type: "string",
+        })
+        .option("config", {
+          describe: "WebdriverIO configuration file",
+          type: "string",
+          choices: ["wdio.conf.js", "wdio.dev.conf.js"],
+          default: "wdio.conf.js",
         })
         .option("spec", {
           describe: "only run these spec files",
@@ -85,7 +102,7 @@ await yargs(hideBin(process.argv))
       /** @type {import("concurrently").ConcurrentlyCommandInput[]} */
       const jobs = [
         {
-          command: `npx --package=@wdio/cli wdio run wdio.conf.js${wdioArgs}`,
+          command: `npx --package=@wdio/cli wdio run ${argv.config}${wdioArgs}`,
           name: "wdio",
           prefixColor: "green",
         },
@@ -106,9 +123,7 @@ await yargs(hideBin(process.argv))
           name: "server",
           prefixColor: "red",
         });
-      }
-
-      if (argv.fred === "dev") {
+      } else if (argv.fred === "dev") {
         jobs.push({
           command: `npm run dev`,
           name: "server",

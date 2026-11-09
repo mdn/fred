@@ -112,7 +112,9 @@ const streamToBuffer = (stream) =>
   new Promise((resolve, reject) => {
     /** @type {Buffer[]} */
     const chunks = [];
-    stream.on("data", (chunk) => chunks.push(chunk));
+    stream.on("data", (chunk) => {
+      chunks.push(chunk);
+    });
     stream.on("end", () => resolve(Buffer.concat(chunks)));
     stream.on("error", reject);
   });
@@ -123,16 +125,14 @@ export async function startServer() {
   if (devMode) {
     const { rspack } = await import("@rspack/core");
     const { default: rspackConfig } = await import("./rspack.config.js");
-    const { default: webpackDevMiddleware } =
-      await import("webpack-dev-middleware");
+    const { devMiddleware } = await import("@rspack/dev-middleware");
     const { default: webpackHotMiddleware } =
       await import("webpack-hot-middleware");
 
     const rspackCompiler = rspack(rspackConfig);
 
     app.use(
-      // @ts-expect-error
-      webpackDevMiddleware(rspackCompiler, {
+      devMiddleware(rspackCompiler, {
         serverSideRender: true,
         writeToDisk: true,
       }),
@@ -146,6 +146,11 @@ export async function startServer() {
   }
 
   app.use("/", express.static(FRED_BUILD_ROOT));
+
+  // Don't fall through to rari, express.static above should've served it:
+  app.use("/static/*_", (_req, res) => {
+    res.writeHead(404).end();
+  });
 
   app.get("/", async (_req, res, _next) => {
     res.writeHead(302, {
@@ -285,11 +290,17 @@ export async function startServer() {
             // render 404 page
             res.statusCode = 404;
             const locale = req.url?.match(/[^/]+/)?.[0] ?? "en-us";
-            const notFoundRes = await fetch(
-              `http://localhost:8083/${locale}/404/index.json`,
-            );
-            const json = await notFoundRes.json();
-            return serverRenderMiddleware(req, res, json);
+            try {
+              const notFoundRes = await fetch(
+                `${RARI_URL}/${locale}/404/index.json`,
+              );
+              const json = await notFoundRes.json();
+              return await serverRenderMiddleware(req, res, json);
+            } catch (error) {
+              console.error("Failed to render 404 page:", error);
+              res.end();
+              return;
+            }
           }
 
           if (

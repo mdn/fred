@@ -54,8 +54,6 @@ post-merge:
   commands:
     npm-install:
       run: npm install --ignore-scripts
-    rari-postinstall:
-      run: npm run postinstall --prefix node_modules/@mdn/rari
 
 output:
   - summary

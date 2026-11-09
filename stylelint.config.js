@@ -1,4 +1,3 @@
-// @ts-expect-error
 import propertyGroups from "stylelint-config-recess-order/groups";
 
 /** @type {import('stylelint').Config} */
@@ -13,7 +12,7 @@ export default {
     "no-descending-specificity": null,
     "no-duplicate-selectors": null,
     "order/properties-order": [
-      propertyGroups.map((/** @type {Record<string, unknown>} */ group) => ({
+      propertyGroups.map((group) => ({
         ...group,
         emptyLineBefore: "threshold",
         noEmptyLineBetween: true,

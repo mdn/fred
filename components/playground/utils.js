@@ -138,9 +138,15 @@ export async function decompressFromBase64(base64String) {
  */
 export function codeToDataUrl({ css, html, js }) {
   let document = "<!doctype html><body>";
-  if (css) document += `<style>${css}</style>`;
-  if (html) document += html;
-  if (js) document += `<script>${js}</script>`;
+  if (css) {
+    document += `<style>${css}</style>`;
+  }
+  if (html) {
+    document += html;
+  }
+  if (js) {
+    document += `<script>${js}</script>`;
+  }
   document += "</body>";
 
   // Allowlist characters we know not to be problematic in data URLs.

@@ -4,7 +4,7 @@
 
 import * as crypto from "node:crypto";
 
-import he from "he";
+import { encode } from "he";
 
 export const ORIGIN_PLAY = process.env["ORIGIN_PLAY"] || "localhost";
 export const ORIGIN_MAIN = process.env["ORIGIN_MAIN"] || "localhost";
@@ -74,6 +74,7 @@ export const PLAYGROUND_UNSAFE_CSP_VALUE = cspToString({
     "'unsafe-eval'",
   ],
   "img-src": ["'self'", "blob:", "https:", "data:"],
+  "media-src": ["'self'", "blob:", "https:"],
   "base-uri": ["'self'"],
   "worker-src": ["'self'"],
   "manifest-src": ["'self'"],
@@ -198,13 +199,13 @@ export function renderWarning(state, hrefWithCode, searchWithState) {
             <summary>view code</summary>
 
             <h2>html</h2>
-            <pre><code>${he.encode(htmlCode.trim())}</code></pre>
+            <pre><code>${encode(htmlCode.trim())}</code></pre>
 
             <h2>css</h2>
-            <pre><code>${he.encode(css.trim())}</code></pre>
+            <pre><code>${encode(css.trim())}</code></pre>
 
             <h2>js</h2>
-            <pre><code>${he.encode(js.trim())}</code></pre>
+            <pre><code>${encode(js.trim())}</code></pre>
           </details>
           <a
             class="leave"
@@ -488,6 +489,16 @@ export function renderHtml(state = null) {
           window.console = consoleProxy;
           window.addEventListener("error", (e) => console.log(e.error));
         </script>
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            if (!(window.__mdnPlayJsStarted && window.__mdnPlayJsEnded)) {
+              console.warn(
+                "[Playground] The JavaScript did not run. This usually means " +
+                  "the HTML input contains an unclosed or malformed tag.",
+              );
+            }
+          });
+        </script>
         ${
           defaults === "ix-tabbed"
             ? html`<script>
@@ -530,10 +541,16 @@ export function renderHtml(state = null) {
       </head>
       <body>
         ${htmlCode}
-        <script type=${defaults === "ix-wat" ? "module" : ""}>
+        <!-- "" '' -->
+        <script></script>
+        <script>
+          window.__mdnPlayJsStarted = true;
+        </script>
+        <script id="mdn-play-js" type=${defaults === "ix-wat" ? "module" : ""}>
           ${js};
         </script>
-        <script>
+        <script id="mdn-play-js-end">
+          window.__mdnPlayJsEnded = true;
           try {
             const uuid =
               new URLSearchParams(location.search).get("uuid") || undefined;

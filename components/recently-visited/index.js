@@ -9,9 +9,8 @@ export class RecentlyVisitedPages {
   #getFromStorage() {
     const storage = localStorage.getItem(RecentlyVisitedPages.#key);
     if (storage) {
-      let pages;
       try {
-        pages = JSON.parse(storage);
+        const pages = JSON.parse(storage);
         if (Array.isArray(pages)) {
           return pages.map((page) => new RecentlyVisitedPage(page));
         }

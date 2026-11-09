@@ -13,7 +13,7 @@ import "@mdn/yari/client/src/document/index.scss";
 import "./legacy.css";
 import "../hooks/legacy-theme-controller.js";
 
-const root = ReactDOM.createRoot(document.getElementById("root")!);
+const root = ReactDOM.createRoot(document.querySelector("#root")!);
 root.render(
   <GleanProvider>
     <UserDataProvider>

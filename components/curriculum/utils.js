@@ -112,7 +112,9 @@ export function addAttrs(original, attrs) {
  * @returns {import("lit").TemplateResult | import("lit").nothing}
  */
 export function renderSidebar(context, doc) {
-  if (!doc.sidebar) return nothing;
+  if (!doc.sidebar) {
+    return nothing;
+  }
 
   return html`<nav class="left-sidebar">
     <div class="left-sidebar__content">
@@ -196,7 +198,9 @@ export function renderSidebarLink(_context, current, url, title) {
  * @returns {import("lit").TemplateResult | import("lit").nothing}
  */
 export function renderToc(context, toc, title) {
-  if (!toc || toc.length === 0) return nothing;
+  if (!toc || toc.length === 0) {
+    return nothing;
+  }
 
   const tocTitle = title;
 
@@ -238,7 +242,9 @@ export function renderTocItem(_context, item) {
  * @returns {string | null | undefined}
  */
 export function replaceCustomElementNames(content) {
-  if (!content) return content;
+  if (!content) {
+    return content;
+  }
   let ret = content;
   ret = ret.replaceAll("<scrim-inline", "<mdn-scrim-inline");
   ret = ret.replaceAll("</scrim-inline", "</mdn-scrim-inline");
@@ -252,7 +258,9 @@ export function replaceCustomElementNames(content) {
  * @returns {import("lit").TemplateResult | import("lit").nothing}
  */
 export function renderCurriculumBody(context, doc) {
-  if (!doc?.body) return nothing;
+  if (!doc?.body) {
+    return nothing;
+  }
 
   return html` ${doc.body.map((section) => renderSection(context, section))} `;
 }
