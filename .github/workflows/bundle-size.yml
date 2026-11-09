@@ -11,9 +11,7 @@ on:
       - main
 
 permissions:
-  actions: read
   contents: read
-  pull-requests: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -21,7 +19,7 @@ concurrency:
   queue: max
 
 jobs:
-  bundle-size:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -39,12 +37,44 @@ jobs:
       - name: Install
         run: npm ci
         env:
+          # Read-only here (`contents: read`), only raises the API rate limit.
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Build with Rsdoctor
         run: npm run build
         env:
           RSDOCTOR: true
+
+      - name: Upload Rsdoctor data + assets
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: rsdoctor-data
+          # The analyzer reads built assets to fill missing gzip sizes.
+          path: out/static/client
+          if-no-files-found: error
+          retention-days: 7
+
+  # Never runs PR code: the write token must not be exposed to dependencies or build scripts.
+  analyze:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: write
+
+    steps:
+      # The action reads the commit hash from the checkout.
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Download Rsdoctor data + assets
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: rsdoctor-data
+          path: out/static/client
 
       - name: Analyze bundle size
         uses: web-infra-dev/rsdoctor-action@d5bda00d0d6e966f75130e0634502ce63dc7b9d8 # v1.2.1
