@@ -54,7 +54,11 @@ jobs:
       - name: Comment in PR
         run: |
           COMMENT_ID=$(gh pr view "$PR_NUMBER" --repo "${{ github.repository }}" --json comments \
-            --jq ".comments | sort_by(.createdAt) | map(select(.author.login == \"github-actions\")) | .[0].id")
+            --jq '.comments
+              | map(select(.author.login == "github-actions" and ((.body | contains("<!-- pr-review-companion -->")) or (.body | contains(" was deployed to: ")))))
+              | sort_by(.createdAt)
+              | last
+              | .id // empty')
           if [ -n "$COMMENT_ID" ]; then
             gh api graphql -f query='
                 mutation($id:ID!, $body:String!) {
@@ -68,6 +72,8 @@ jobs:
             gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" --body "$BODY"
           fi
         env:
-          BODY: "${{ github.event.workflow_run.head_sha }} (with `${{ needs.identify-pr.outputs.base-ref }}` merged in) was deployed to: ${{ needs.deploy.outputs.url }}"
+          BODY: |
+            <!-- pr-review-companion -->
+            ${{ github.event.workflow_run.head_sha }} (with `${{ needs.identify-pr.outputs.base-ref }}` merged in) was deployed to: ${{ needs.deploy.outputs.url }}
           PR_NUMBER: ${{ needs.identify-pr.outputs.pr-number }}
           GITHUB_TOKEN: ${{ github.token }}
