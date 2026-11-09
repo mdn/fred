@@ -17,8 +17,8 @@ permissions:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  # Let every `main` push finish, so each commit gets a baseline.
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  # Queue runs instead of replacing the pending one, so each `main` commit gets a baseline.
+  queue: max
 
 jobs:
   bundle-size:
