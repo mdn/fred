@@ -90,8 +90,9 @@ export class MDNSurvey extends L10nMixin(LitElement) {
   }
 
   #markAsSeen() {
-    if (!this._survey || !this._surveyState || this._surveyState.seen_at)
+    if (!this._survey || !this._surveyState || this._surveyState.seen_at) {
       return;
+    }
 
     this._surveyState = {
       ...this._surveyState,
@@ -102,7 +103,9 @@ export class MDNSurvey extends L10nMixin(LitElement) {
   }
 
   #dismiss() {
-    if (!this._survey || !this._surveyState) return;
+    if (!this._survey || !this._surveyState) {
+      return;
+    }
 
     this._surveyState = {
       ...this._surveyState,
@@ -118,7 +121,9 @@ export class MDNSurvey extends L10nMixin(LitElement) {
   }
 
   #onToggle() {
-    if (!this._survey || !this._surveyState || this._isOpen) return;
+    if (!this._survey || !this._surveyState || this._isOpen) {
+      return;
+    }
 
     const details = this._detailsRef.value;
     if (details && details.open) {
@@ -129,7 +134,9 @@ export class MDNSurvey extends L10nMixin(LitElement) {
   }
 
   #markOpened() {
-    if (!this._survey || !this._surveyState) return;
+    if (!this._survey || !this._surveyState) {
+      return;
+    }
 
     this._surveyState = {
       ...this._surveyState,
@@ -140,7 +147,9 @@ export class MDNSurvey extends L10nMixin(LitElement) {
   }
 
   #onSubmitted() {
-    if (!this._survey || !this._surveyState) return;
+    if (!this._survey || !this._surveyState) {
+      return;
+    }
 
     this._surveyState = {
       ...this._surveyState,
@@ -155,7 +164,9 @@ export class MDNSurvey extends L10nMixin(LitElement) {
    * @param {string} action
    */
   #measure(action) {
-    if (!this._survey) return;
+    if (!this._survey) {
+      return;
+    }
 
     gleanClick(`survey: ${action} ${this._survey.bucket}`);
   }

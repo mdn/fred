@@ -7,10 +7,27 @@ import { gleanClick } from "../../utils/glean.js";
 import { mdnUrl2Breadcrumb } from "../../utils/mdn-url2breadcrumb.js";
 
 import exitIcon from "../icon/cancel.svg?lit";
+import flagIcon from "../icon/flag.svg?lit";
 
 import styles from "./element.css?lit";
 
 import "../button/element.js";
+
+// Long queries are likely pasted text, so don't offer to report them (PII).
+const MAX_REPORTABLE_QUERY_LENGTH = 50;
+
+// Email-like queries (*@*.*) are likely accidental PII submissions.
+const EMAIL_LIKE_QUERY = /\S@\S+\.\p{L}{2,}/u;
+
+/**
+ * @param {string} query
+ * @returns {boolean}
+ */
+function isSensitiveQuery(query) {
+  return (
+    query.length > MAX_REPORTABLE_QUERY_LENGTH || EMAIL_LIKE_QUERY.test(query)
+  );
+}
 
 export class MDNSearchModal extends L10nMixin(LitElement) {
   static ssr = false;
@@ -22,6 +39,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
       _query: { state: true },
       _selected: { state: true },
       _shiftFocus: { state: true },
+      _feedbackSubmitted: { state: true },
     };
   }
 
@@ -34,6 +52,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     this._shiftFocus = false;
     /** Capture whether user has engaged with the search. */
     this._hasEngaged = false;
+    this._feedbackSubmitted = false;
   }
 
   async _loadIndex() {
@@ -72,6 +91,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
     if (target instanceof HTMLInputElement) {
       this._query = target.value;
       this._selected = 0;
+      this._feedbackSubmitted = false;
       if (!this._hasEngaged && inputType.startsWith("insert")) {
         this._hasEngaged = true;
         gleanClick(
@@ -122,12 +142,15 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
 
   /** @returns {HTMLElement|null} */
   _getSelectedItem() {
-    return this.shadowRoot?.querySelector("[data-selected] a") ?? null;
+    return (
+      this.shadowRoot?.querySelector("[data-selected] :is(a, button)") ?? null
+    );
   }
 
   /** @param {number} index */
   _select(index) {
-    const results = (this._queryIndex.value?.length || 0) + 1;
+    const results =
+      (this._queryIndex.value?.length || 0) + 1 + (this._canReport() ? 1 : 0);
     const value = index % results;
     this._selected = value < 0 ? results + index : value;
     setTimeout(() => {
@@ -192,6 +215,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
       this.showModal();
       if (selection) {
         this._query = selection;
+        this._feedbackSubmitted = false;
         if (!this._hasEngaged) {
           this._hasEngaged = true;
           gleanClick("quick-search-change: selection");
@@ -209,6 +233,24 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
       return quickSearch(query, await index);
     },
   });
+
+  /** @returns {boolean} */
+  _canReport() {
+    return (
+      Boolean(this._query) &&
+      !isSensitiveQuery(this._query) &&
+      this._queryIndex.status === TaskStatus.COMPLETE &&
+      !this._queryIndex.value?.length
+    );
+  }
+
+  _submitQueryFeedback() {
+    if (!this._canReport() || this._feedbackSubmitted) {
+      return;
+    }
+    this._feedbackSubmitted = true;
+    gleanClick(`quick-search: no-results -> ${this._query}`);
+  }
 
   _close() {
     this.shadowRoot?.querySelector("dialog")?.close();
@@ -252,12 +294,19 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
       : null;
     const searchComplete =
       Boolean(this._query) && this._queryIndex.status === TaskStatus.COMPLETE;
-    const resultsStatus = searchComplete
-      ? this.l10n.raw({
-          id: "search-modal-results-status",
-          args: { results: siteSearchIndex },
-        })
-      : "";
+    const reportIndex = siteSearchIndex + 1;
+    const canReport = this._canReport();
+    const feedbackThanks = this.l10n(
+      "search-modal-no-results-thanks",
+    )`Thanks for reporting.`;
+    const resultsStatus = this._feedbackSubmitted
+      ? feedbackThanks
+      : searchComplete
+        ? this.l10n.raw({
+            id: "search-modal-results-status",
+            args: { results: siteSearchIndex },
+          })
+        : "";
     return html`
       <dialog
         @keydown=${this._keydown}
@@ -346,7 +395,7 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
                 >
                   <a
                     href=${searchUrl}
-                    data-glean-id=${`quick-search: site-search -> ${this._query}`}
+                    data-glean-id=${`quick-search: site-search -> ${isSensitiveQuery(this._query) ? "[redacted]" : this._query}`}
                     ><span class="title"
                       >${this.l10n.raw({
                         id: "search-modal-site-search",
@@ -359,6 +408,36 @@ export class MDNSearchModal extends L10nMixin(LitElement) {
                       })}</span
                     ></a
                   >
+                </li>`
+              : nothing
+          }
+          ${
+            canReport
+              ? html`<li
+                  id="search-modal-result-${reportIndex}"
+                  role="option"
+                  aria-selected=${this._selected === reportIndex ? "true" : "false"}
+                  ?data-selected=${this._selected === reportIndex}
+                  data-result=${reportIndex}
+                >
+                  <button
+                    type="button"
+                    aria-disabled=${this._feedbackSubmitted ? "true" : "false"}
+                    @click=${this._submitQueryFeedback}
+                  >
+                    <span class="icon" aria-hidden="true">${flagIcon}</span>
+                    <span class="title"
+                      >${
+                        this._feedbackSubmitted
+                          ? feedbackThanks
+                          : this.l10n.raw({
+                              id: "search-modal-no-results-report",
+                              args: { query: this._query },
+                              elements: { query: { tag: "code" } },
+                            })
+                      }</span
+                    >
+                  </button>
                 </li>`
               : nothing
           }

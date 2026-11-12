@@ -160,13 +160,45 @@ li > * {
   padding: 0.5rem 1.5rem;
 }
 
-a {
+a,
+button {
   display: grid;
   color: var(--color-link-normal);
   text-decoration: none;
 
   &:visited {
     color: var(--color-link-visited);
+  }
+}
+
+button {
+  grid-template-columns: auto 1fr;
+
+  gap: 0.5rem;
+
+  align-items: center;
+
+  font: inherit;
+
+  text-align: start;
+
+  cursor: pointer;
+
+  background: none;
+  border: 0;
+
+  &[aria-disabled="true"] {
+    color: var(--color-text-secondary);
+    cursor: default;
+  }
+}
+
+button .icon {
+  display: flex;
+
+  svg {
+    width: 1em;
+    height: 1em;
   }
 }
 

@@ -53,6 +53,7 @@ updates:
       wdio:
         patterns:
           - "@wdio/*"
+          - "webdriverio"
         update-types:
           - major
     commit-message:

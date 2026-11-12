@@ -54,6 +54,8 @@ obs-mdn = { -brand-name-obs } fournit des informations efficaces en matière de 
 compat-browser-version-date = { $browser } { $version } — Date de sortie : { $date }
 compat-browser-version-released = Date de sortie : { $date }
 compat-link-source-title = Fichier : { $filename }
+compat-settings-hide-browser = Masquer { $browser }
+compat-settings-show-browser = Afficher { $browser }
 compat-branch-prefix = Préfixe : <code data-l10n-name="prefix">{ $prefix }</code>
 compat-branch-altname = Nom alternatif : <code data-l10n-name="altname">{ $altname }</code>
 compat-branch-prefix-altname = Préfixe : <code data-l10n-name="prefix">{ $prefix }</code>, Nom alternatif : <code data-l10n-name="altname">{ $altname }</code>
@@ -156,6 +158,7 @@ color-theme-theme = Thème
 compat-link-report-issue-title = Signaler un problème avec ces données de compatibilité
 compat-link-report-issue = Signaler des problèmes avec ces données de compatibilité
 compat-link-source = Voir les données sur GitHub
+compat-no-browsers = Aucun navigateur sélectionné. Utilisez le bouton « Options » pour choisir les navigateurs à afficher.
 compat-experimental = Expérimental
 compat-deprecated = Obsolète
 compat-nonstandard = Non standard
@@ -174,6 +177,19 @@ compat-link-report-missing-title = Signaler des données de compatibilité manqu
 compat-link-report-missing = Signaler le problème
 compat-js-required = Activez JavaScript pour afficher ce tableau de compatibilité des navigateurs.
 compat-loading = Chargement…
+compat-settings-platform-desktop = Bureau
+compat-settings-platform-mobile = Mobile
+compat-settings-platform-server = Serveur
+compat-settings-platform-xr = XR
+compat-settings-hidden-no-data = Navigateur non disponible pour cette fonctionnalité. Aucune donnée de prise en charge n'est disponible.
+compat-settings-hidden-not-applicable = Navigateur non disponible pour cette fonctionnalité. Les fonctionnalités WebExtensions ne s'appliquent pas.
+compat-settings-legend = Légende
+compat-settings-open = Options
+compat-settings-title = Options pour la compatibilité des navigateurs
+compat-settings-intro = Sélectionnez les navigateurs à afficher dans les tableaux de compatibilité. Votre sélection est enregistrée dans ce navigateur.
+compat-settings-restore-defaults = Restaurer les valeurs par défaut
+compat-settings-cancel = Annuler
+compat-settings-save = Sauvegarder
 content-feedback-content-is-out-of-date = Le contenu n'est pas à jour
 content-feedback-missing-information = Informations manquantes
 content-feedback-code-examples-not-working-as-exp = Les exemples de code ne fonctionnent pas comme prévu
