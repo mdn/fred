@@ -4,21 +4,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { randomIdString } from "../utils/index.js";
 
 /**
- * @param {object} options
- * @param {string | import("@lit").TemplateResult} options.label
- * @param {string} [options.labelId] - Label ID unique within the containing tree. Ignored for string labels.
- * @param {import("@lit").TemplateResult} [options.icon]
- * @param {boolean} [options.iconOnly]
- * @param {import("./types.js").ButtonIconPositions} [options.iconPosition]
- * @param {boolean} [options.disabled]
- * @param {boolean} [options.ariaDisabled]
- * @param {string} [options.ariaDescription]
- * @param {string} [options.title]
- * @param {string} [options.href]
- * @param {string} [options.target]
- * @param {string} [options.rel]
- * @param {import("./types.js").ButtonVariants} [options.variant]
- * @param {import("./types.js").ButtonActions} [options.action]
+ * @param {import("./types.js").ButtonOptions} options
  */
 export default function Button({
   label,

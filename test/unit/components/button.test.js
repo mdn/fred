@@ -52,7 +52,9 @@ describe("Button labels", () => {
 
       it(`keeps distinct template labels associated with their ${name}, iconOnly=${iconOnly}`, () => {
         const output = renderButtons([
+          // @ts-expect-error untyped callers fall back to a random ID
           { label: html`First`, href, iconOnly },
+          // @ts-expect-error
           { label: html`Second`, href, iconOnly },
         ]);
         const ids = [...output.matchAll(/\sid="([^"]+)"/g)].map(
