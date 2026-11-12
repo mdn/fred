@@ -33,6 +33,8 @@ jobs:
       - name: (mdn/fred) Build tarball
         id: build
         working-directory: mdn/fred
+        env:
+          FRED_RUNTIME_ENV: true
         run: |
           npm pkg set _gitSha=${{ github.sha }}
           npm pack
@@ -127,6 +129,8 @@ jobs:
         working-directory: mdn/fred
         env:
           FRED_PORT: 5042
+          FRED_PLAYGROUND_LOCAL: true
+          FRED_PLAYGROUND_PORT: 5043
           # Increase GitHub API limit.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
