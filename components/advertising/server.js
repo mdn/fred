@@ -44,7 +44,7 @@ export class Advertising extends ServerComponent {
     return PageLayout.render(
       context,
       html`
-        <div id="content" class="sing-content">
+        <div id="content" tabindex="-1" class="sing-content">
           <main class="sing">
             <div class="sing__stats-container">
               <section class="sing__stats-header">

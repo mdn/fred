@@ -14,16 +14,18 @@ export class Homepage extends ServerComponent {
     return PageLayout.render(
       context,
       html`
-        <div id="content" class="homepage homepage--dark">
-          ${HomepageHeader.render(context)}
-        </div>
-        <div class="homepage">
-          <mdn-placement-hp-main></mdn-placement-hp-main>
-          ${HomepageBody.render(context)}
-        </div>
-        <div class="homepage homepage--dark">
-          ${HomepageFooter.render(context)}
-        </div>
+        <main id="content" tabindex="-1">
+          <div class="homepage homepage--dark">
+            ${HomepageHeader.render(context)}
+          </div>
+          <div class="homepage">
+            <mdn-placement-hp-main></mdn-placement-hp-main>
+            ${HomepageBody.render(context)}
+          </div>
+          <div class="homepage homepage--dark">
+            ${HomepageFooter.render(context)}
+          </div>
+        </main>
       `,
     );
   }

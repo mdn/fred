@@ -52,9 +52,10 @@ export class CurriculumLanding extends ServerComponent {
       html`
         <main
           id="content"
+          tabindex="-1"
           class="curriculum-content-container container curriculum-landing"
         >
-          <article id="content" class="curriculum-content" lang=${doc.locale}>
+          <article class="curriculum-content" lang=${doc.locale}>
             ${content}
           </article>
         </main>
