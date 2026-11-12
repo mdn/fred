@@ -83,6 +83,7 @@ export const InteractiveExampleWithConsole = (Base) =>
               defaults=${ifDefined(
                 this._languages.includes("wat") ? "ix-wat" : undefined,
               )}
+              allow="camera; microphone"
               sandbox="allow-modals"
             ></mdn-play-runner>
           </div>
