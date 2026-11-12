@@ -113,6 +113,13 @@ describe("Button labels", () => {
     }
   }
 
+  it("ignores the label ID for string labels", () => {
+    const output = renderButtons([
+      { label: "Read more", labelId: "custom-label" },
+    ]);
+    assert.doesNotMatch(output, /\sid=|aria-labelledby=/);
+  });
+
   it("hides the icon from the accessibility tree", () => {
     const output = renderButtons([
       { label: "Read more", icon: html`<svg></svg>` },
