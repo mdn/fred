@@ -26,6 +26,9 @@ MDN's next fr(ont)e(n)d.
 - `npm run build`
   - builds the production js/css/asset bundles
   - must be run at least once for `npm run preview` to work
+- `npm run ssr`
+  - renders the documents built by rari to HTML, using the production bundles
+  - uses one worker thread per available CPU core, set `SSR_WORKERS` to override (e.g. `SSR_WORKERS=4 npm run ssr`)
 - `npm run preview`
   - runs the preview server: using the production bundles with the rari server: useful for testing our prod rspack config
 - `npm run test`
