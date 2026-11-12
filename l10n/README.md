@@ -39,6 +39,10 @@ Hello <a href="https://example.com/">world</a>!
 
 The other examples are automatically extracted, and combined with the manually specified strings, into `./template.ftl`.
 
+### Markup
+
+Strings are rendered through an allowlist (see `./markup.js`), on both server and client. Markup outside of the allowlist is dropped, so `npm run l10n -- --lint` (run in CI, before pushing, and before committing `.ftl` files) rejects any string containing it.
+
 ### Pseudolocalization
 
 We have a few pseudo locales for testing if strings have been added, or if components will adapt to localized strings:
@@ -55,6 +59,13 @@ The l10n experience isn't fantastic at the moment, and we have improvements to m
 Strings to be localized can be sourced from `./template.ftl`: this will include both manually added strings, as well as strings scraped from the code. Localized strings should be placed in `./locales/{locale}.ftl`.
 
 Adding Fluent comments to explain what context strings appear in is an open task, but for now they can be found in code by searching for the ID: it'll appear as `{this|context}.l10n({the id})` or `{this|context}.l10n({ id: {the id} })`
+
+Strings can only contain the following markup, which `npm run l10n -- --lint` checks:
+
+- `<i>`, `<strong>`, `<em>` and `<br>`, without attributes.
+- Elements with a `data-l10n-name` attribute, if the English string has an element with the same tag and name. These can also have a `title` and `aria-label` attribute.
+- Tags must be closed in the order they were opened, attribute values must be double-quoted, and can't contain placeables (like `{ $name }`).
+- A literal `<` must be written as `&lt;`, and a literal `&lt;` as `&amp;lt;`.
 
 If one English string is used in multiple places and requires multiple different strings in a locale, file an issue to distinguish the IDs.
 
