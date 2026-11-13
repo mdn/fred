@@ -3,6 +3,7 @@ import { LitElement, html } from "lit";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import "../compat-table/element.js";
+import { escapeHtml } from "../../l10n/fluent.js";
 import { L10nMixin } from "../../l10n/mixin.js";
 import {
   DEFAULT_LOCALE,
@@ -96,7 +97,7 @@ export class MDNCompatTableLazy extends L10nMixin(LitElement) {
 
   render() {
     const noScript = unsafeHTML(
-      `<noscript>${this.l10n("compat-js-required")`Enable JavaScript to view this browser compatibility table.`}</noscript>`,
+      `<noscript>${escapeHtml(this.l10n("compat-js-required")`Enable JavaScript to view this browser compatibility table.`)}</noscript>`,
     );
     return this._dataTask.render({
       initial: () => html`<p>${noScript}</p>`,

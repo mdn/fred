@@ -28,6 +28,10 @@ pre-commit:
       glob: stylelint.config.js
       stage_fixed: true
 
+    - name: lint l10n strings
+      run: npm run l10n -- --lint
+      glob: "*.ftl"
+
 pre-push:
   piped: true
   jobs:
