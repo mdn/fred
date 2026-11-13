@@ -39,19 +39,16 @@ function formatDuration(seconds) {
 async function runWorker(batches) {
   const worker = new Worker(new URL("ssr-worker.js", import.meta.url));
   const exit = once(worker, "exit");
-  // Without this, a worker exiting early would leave us waiting forever.
-  const exitedEarly = exit.then(([code]) => {
-    throw new Error(`SSR worker exited unexpectedly with code ${code}`);
-  });
-  // Handled via the race below; also rejects on the final exit.
-  exitedEarly.catch(() => {});
   let rendered = 0;
   try {
     for (const batch of batches) {
       worker.postMessage(batch);
       const [count] = await Promise.race([
         once(worker, "message"),
-        exitedEarly,
+        // Without this, a worker exiting early would leave us waiting forever.
+        exit.then(([code]) => {
+          throw new Error(`SSR worker exited unexpectedly with code ${code}`);
+        }),
       ]);
       rendered += count;
     }
