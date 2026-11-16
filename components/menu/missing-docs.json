@@ -20,16 +20,13 @@
     "Web/CSS/Guides/Colors/Color_mixer",
     "Web/CSS/Guides/Shapes/Shape_generator",
     "Web/CSS/How_to/Layout_cookbook",
-    "Web/CSS/How_to/Layout_cookbook/Card",
-    "Web/CSS/How_to/Layout_cookbook/Column_layouts",
     "Web/CSS/Reference/At-rules",
     "Web/CSS/Reference/Properties",
     "Web/CSS/Reference/Selectors",
     "Web/CSS/Reference/Values",
     "Web/HTML/Guides",
     "Web/HTML/Guides/Cheatsheet",
-    "Web/JavaScript/Guide/Using_classes",
-    "Web/WebDriver"
+    "Web/JavaScript/Guide/Using_classes"
   ],
   "pt-BR": [
     "Learn_web_development/Core",
