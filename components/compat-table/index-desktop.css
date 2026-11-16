@@ -39,6 +39,13 @@
     tbody {
       --border: 1px solid var(--color-border-primary);
 
+      @media (--compat-sticky-header) {
+        :is(a, button, .timeline) {
+          /* Keep focus out from under the sticky header (~10.65rem tall). */
+          scroll-margin-top: calc(var(--sticky-header-height) + 11rem);
+        }
+      }
+
       /* Border. */
       tr {
         &:not(:first-child) {
