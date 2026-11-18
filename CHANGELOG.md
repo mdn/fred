@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.11.1](https://github.com/mdn/fred/compare/v2.11.0...v2.11.1) (2026-11-18)
+
+
+### Miscellaneous
+
+* **deps:** bump @mdn/rari from 1.2.2 to 1.3.0 ([#2096](https://github.com/mdn/fred/issues/2096)) ([6c0db0d](https://github.com/mdn/fred/commit/6c0db0da3165cb3bf12f2d79bd08bf50d9b23a2e))
+* **deps:** bump @mdn/watify from 1.1.11 to 1.1.12 ([#2080](https://github.com/mdn/fred/issues/2080)) ([7aded86](https://github.com/mdn/fred/commit/7aded86c1eeae60013c8e7da7876fea7794ade63))
+* **menu:** update menu entries ([#2089](https://github.com/mdn/fred/issues/2089)) ([7f4ae84](https://github.com/mdn/fred/commit/7f4ae840be56742c8c939ea12d6eb84887ea65a8))
+
 ## [2.11.0](https://github.com/mdn/fred/compare/v2.10.1...v2.11.0) (2026-11-10)
 
 
