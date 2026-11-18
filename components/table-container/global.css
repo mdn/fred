@@ -5,3 +5,20 @@
   /* Suppress the vertical scrollbar Firefox and Chrome add beside block MathML fractions. */
   overflow-y: hidden;
 }
+
+.sticky-table-header {
+  position: fixed;
+  z-index: calc(var(--z-index-sidebar-mobile) - 1);
+  overflow: hidden;
+
+  > table {
+    margin: 0;
+    table-layout: fixed;
+  }
+}
+
+@media print {
+  .sticky-table-header {
+    display: none;
+  }
+}
