@@ -1,21 +1,17 @@
 import { FluentBundle, FluentResource } from "@fluent/bundle";
-import insane from "insane";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 import enUS_ftl from "./locales/en-US.ftl";
+import { renderMarkup } from "./markup.js";
 
 /**
  * @import { FluentVariable } from "@fluent/bundle"
- * @import { AllowedTags } from "insane"
  */
 
 /** @type {Record<string, string>} */
 const ftlMap = {
   "en-US": enUS_ftl,
 };
-
-const ALLOWED_TAGS = new Set(["i", "strong", "br", "em"]);
-const ALLOWED_ATTRIBUTES = ["title", "aria-label"];
 
 export class Fluent {
   /**
@@ -66,7 +62,7 @@ export class Fluent {
     if (!message) {
       return;
     }
-    return Fluent.sanitize(message, elements);
+    return Fluent.render(message, elements);
   }
 
   /**
@@ -74,51 +70,9 @@ export class Fluent {
    * @param {Record<string, import("../types/fluent.js").Element>} [elements]
    * @returns {string | ReturnType<typeof unsafeHTML>}
    */
-  static sanitize(message, elements = {}) {
-    /** @type { Record<string, string[]> } */
-    const allowedAttributes = {};
-    for (const t of Object.values(elements)) {
-      allowedAttributes[t.tag] = [
-        ...Object.keys(t).filter((x) => x !== "tag"),
-        ...ALLOWED_ATTRIBUTES,
-      ];
-    }
-
-    const allowedTags = [
-      ...Object.values(elements).map((t) => t.tag),
-      ...ALLOWED_TAGS,
-    ];
-
-    let safe = true;
-    const sanitized = insane(
-      message,
-      {
-        allowedAttributes,
-        allowedTags: /** @type {AllowedTags[]} */ (allowedTags),
-        allowedSchemes: ["http", "https", "mailto"],
-        filter(token) {
-          // TODO: use element names directly
-          const name = token.attrs["data-l10n-name"];
-          if (name) {
-            for (const [k, v] of Object.entries(elements[name] || {})) {
-              token.attrs[k] = v;
-            }
-          }
-          if (
-            ALLOWED_TAGS.has(token.tag) ||
-            (name &&
-              Object.keys(elements).includes(name) &&
-              elements[name]?.tag === token.tag)
-          ) {
-            safe = false;
-            return true;
-          }
-          return false;
-        },
-      },
-      true,
-    );
-    return safe ? sanitized : unsafeHTML(sanitized);
+  static render(message, elements = {}) {
+    const { value, html } = renderMarkup(message, elements);
+    return html ? unsafeHTML(value) : value;
   }
 
   /**
@@ -176,8 +130,8 @@ export class Fluent {
 
 /**
  * HTML-escape string-valued args so that variable substitution can't inject
- * tags that confuse the downstream sanitizer. Only string values are touched
- * so that Number/Date selectors keep working.
+ * tags. Only string values are touched so that Number/Date selectors keep
+ * working.
  *
  * @param {Record<string, FluentVariable | undefined>} args
  * @returns {Record<string, FluentVariable>}
@@ -196,7 +150,7 @@ function escapeArgs(args) {
 /**
  * @param {string} s
  */
-function escapeHtml(s) {
+export function escapeHtml(s) {
   return s
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
