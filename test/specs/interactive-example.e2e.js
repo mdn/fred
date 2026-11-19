@@ -50,6 +50,9 @@ const RENDERED = {
   },
 };
 
+/** @type {WebdriverIO.BrowsingContext} */
+let page;
+
 /** @param {string} id */
 async function runnerTheme(id) {
   const src = await browser.execute((testId) => {
@@ -82,26 +85,21 @@ async function runnerTheme(id) {
 async function renderedTheme(id, theme) {
   const example = await $(`interactive-example[data-test-id="${id}"]`);
   const runner = await example.shadow$("mdn-play-runner");
-  const iframe = await runner.shadow$("iframe");
-  await browser.switchFrame(iframe);
-  try {
-    await browser.waitUntil(() =>
-      browser.execute(
-        (expected) => getComputedStyle(document.body).colorScheme === expected,
-        theme,
-      ),
-    );
-    return await browser.execute(() => ({
-      background: getComputedStyle(document.body).backgroundColor,
-      color: getComputedStyle(document.body).color,
-      colorScheme: getComputedStyle(document.body).colorScheme,
-      preferred: globalThis.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light",
-    }));
-  } finally {
-    await browser.switchFrame(null);
-  }
+  const frame = await page.frame(await runner.shadow$("iframe"));
+  await browser.waitUntil(() =>
+    frame.execute(
+      (expected) => getComputedStyle(document.body).colorScheme === expected,
+      theme,
+    ),
+  );
+  return await frame.execute(() => ({
+    background: getComputedStyle(document.body).backgroundColor,
+    color: getComputedStyle(document.body).color,
+    colorScheme: getComputedStyle(document.body).colorScheme,
+    preferred: globalThis.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light",
+  }));
 }
 
 /** @param {Theme} pageTheme */
@@ -119,7 +117,7 @@ async function expectThemes(pageTheme) {
 
 describe("Interactive example color scheme", () => {
   before(async () => {
-    await DocPage.open("en-US/docs/MDN/Kitchensink");
+    page = await DocPage.open("en-US/docs/MDN/Kitchensink");
     await browser.execute((examples) => {
       document.documentElement.dataset.theme = "light";
       for (const { id, colorScheme } of examples) {
