@@ -5,7 +5,7 @@ import DocPage from "../pageobjects/doc.page.js";
 
 /**
  * @typedef {"light" | "dark"} Theme
- * @typedef {{ id: string, colorScheme: "light-dark" | "light" | "dark" | undefined, expected: Record<Theme, Theme> }} Example
+ * @typedef {{ id: string, colorScheme: "light-dark" | "light" | "dark" | undefined, expected: Record<Theme, Theme>, preferred: Record<Theme, Theme> }} Example
  */
 
 /** @type {Example[]} */
@@ -14,21 +14,25 @@ const EXAMPLES = [
     id: "default",
     colorScheme: undefined,
     expected: { light: "light", dark: "light" },
+    preferred: { light: "light", dark: "dark" },
   },
   {
     id: "light-dark",
     colorScheme: "light-dark",
     expected: { light: "light", dark: "dark" },
+    preferred: { light: "light", dark: "dark" },
   },
   {
     id: "light",
     colorScheme: "light",
     expected: { light: "light", dark: "light" },
+    preferred: { light: "light", dark: "light" },
   },
   {
     id: "dark",
     colorScheme: "dark",
     expected: { light: "dark", dark: "dark" },
+    preferred: { light: "dark", dark: "dark" },
   },
 ];
 
@@ -91,6 +95,9 @@ async function renderedTheme(id, theme) {
       background: getComputedStyle(document.body).backgroundColor,
       color: getComputedStyle(document.body).color,
       colorScheme: getComputedStyle(document.body).colorScheme,
+      preferred: globalThis.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light",
     }));
   } finally {
     await browser.switchFrame(null);
@@ -99,12 +106,13 @@ async function renderedTheme(id, theme) {
 
 /** @param {Theme} pageTheme */
 async function expectThemes(pageTheme) {
-  for (const { id, expected } of EXAMPLES) {
+  for (const { id, expected, preferred } of EXAMPLES) {
     const theme = expected[pageTheme];
     await expect({ id, theme: await runnerTheme(id) }).toEqual({ id, theme });
     await expect({ id, ...(await renderedTheme(id, theme)) }).toEqual({
       id,
       ...RENDERED[theme],
+      preferred: preferred[pageTheme],
     });
   }
 }

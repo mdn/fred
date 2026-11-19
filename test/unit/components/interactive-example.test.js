@@ -5,7 +5,7 @@ import { getInteractiveExampleColorScheme } from "../../../components/interactiv
 
 describe("interactive example color scheme", () => {
   const cases = [
-    { name: "defaults to light", classLists: [], expected: "light" },
+    { name: "is undefined when unmarked", classLists: [], expected: undefined },
     {
       name: "follows the page theme when marked light-dark",
       classLists: [["interactive-example", "light-dark"]],

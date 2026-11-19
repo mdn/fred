@@ -13,7 +13,7 @@ const isColorScheme = (name) => COLOR_SCHEMES.has(name);
 
 /**
  * @param {Iterable<{ classList: Iterable<string> }>} preElements
- * @returns {RunnerColorScheme}
+ * @returns {RunnerColorScheme | undefined}
  */
 export function getInteractiveExampleColorScheme(preElements) {
   for (const pre of preElements) {
@@ -22,5 +22,5 @@ export function getInteractiveExampleColorScheme(preElements) {
       return colorScheme;
     }
   }
-  return "light";
+  return;
 }

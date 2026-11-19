@@ -37,8 +37,8 @@ export class InteractiveExampleBase extends LitElement {
     this._languages = [];
     /** @type {Record<string, string>} */
     this._code = {};
-    /** @type {RunnerColorScheme} */
-    this._colorScheme = "light";
+    /** @type {RunnerColorScheme | undefined} */
+    this._colorScheme = undefined;
   }
 
   /** @type {Ref<MDNPlayController>} */

@@ -1,5 +1,6 @@
 import { decode } from "he";
 import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { ref } from "lit/directives/ref.js";
 
 import "../button/element.js";
@@ -25,6 +26,9 @@ export const InteractiveExampleWithTabs = (Base) =>
   class extends L10nMixin(Base) {
     #render() {
       const id = "ix-tabbed";
+      // Inherited by the runner iframe, where it determines `prefers-color-scheme`.
+      const iframeColorScheme =
+        this._colorScheme === "light-dark" ? undefined : this._colorScheme;
 
       return html`
         <mdn-play-controller
@@ -55,7 +59,10 @@ export const InteractiveExampleWithTabs = (Base) =>
                 ${ref(this._runner)}
                 sandbox="allow-modals allow-top-navigation-by-user-activation"
                 defaults="ix-tabbed"
-                color-scheme=${this._colorScheme}
+                color-scheme=${this._colorScheme ?? "light"}
+                style=${ifDefined(
+                  iframeColorScheme && `color-scheme: ${iframeColorScheme}`,
+                )}
               ></mdn-play-runner>
             </div>
           </div>
