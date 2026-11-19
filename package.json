@@ -107,7 +107,7 @@
     "eslint": "^10.15.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import-x": "^4.18.1",
-    "eslint-plugin-jsdoc": "^65.4.7",
+    "eslint-plugin-jsdoc": "^65.4.8",
     "eslint-plugin-lit": "^2.3.1",
     "eslint-plugin-n": "^18.5.0",
     "eslint-plugin-unicorn": "^74.0.0",
