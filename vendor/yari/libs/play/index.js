@@ -327,10 +327,13 @@ export function renderHtml(state = null) {
                     format("woff2");
                 }
 
+                :root {
+                  color-scheme: ${theme === "dark" ? "dark" : "light"};
+                }
+
                 body {
                   background-color: var(--background-primary, #fff);
                   color: ${theme === "dark" ? "#fff" : "#15141aff"};
-                  color-scheme: ${theme === "dark" ? "dark" : "light"};
                   font:
                     400 1rem/1.1876 Inter,
                     BlinkMacSystemFont,
