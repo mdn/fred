@@ -4,6 +4,7 @@ import { nothing } from "lit";
 
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
+import { addAttrs } from "../curriculum/add-attrs.js";
 import landingStairwaySVG1 from "../curriculum/assets/curriculum-landing-stairway-1.svg?lit";
 import landingStairwaySVG2Small from "../curriculum/assets/curriculum-landing-stairway-2-small.svg?lit";
 import landingStairwaySVG2 from "../curriculum/assets/curriculum-landing-stairway-2.svg?lit";
@@ -11,11 +12,7 @@ import landingSVG from "../curriculum/assets/curriculum-landing-top.svg?lit";
 import partnerBannerDark from "../curriculum/assets/curriculum-partner-banner-illustration-large-dark.svg";
 import partnerBannerLight from "../curriculum/assets/curriculum-partner-banner-illustration-large-light.svg";
 import scrimBg from "../curriculum/assets/landing-scrim.png?url";
-import {
-  addAttrs,
-  renderModulesList,
-  renderSection,
-} from "../curriculum/utils.js";
+import { renderModulesList, renderSection } from "../curriculum/utils.js";
 import { PageLayout } from "../page-layout/server.js";
 import { ServerComponent } from "../server/index.js";
 
