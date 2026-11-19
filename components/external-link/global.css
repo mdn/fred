@@ -1,14 +1,9 @@
 .external {
-  position: relative;
-  padding-right: 1.125em;
-
   &::after {
-    position: absolute;
-
-    width: 1em;
-    height: 1em;
-
+    padding-right: 1em;
     margin-left: 0.125em;
+
+    text-wrap: nowrap;
 
     /*
       Unicode zero width space as `<content replacement>` to expose the alt text in the a11y tree.
@@ -19,8 +14,8 @@
     background-color: currentcolor;
 
     mask-image: url("../icon/external-link.svg");
-    mask-size: cover;
-
-    transform: translateY(calc(1lh / 2 - 0.5em));
+    mask-repeat: no-repeat;
+    mask-position: left 0.1em;
+    mask-size: contain;
   }
 }
