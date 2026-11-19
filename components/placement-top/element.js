@@ -16,6 +16,9 @@ import styles from "./element.css?lit";
  * @import { TemplateResult } from "lit";
  */
 
+// Black Friday banner is shown until the end of 2026-12-03, UTC.
+const BLACK_FRIDAY_END = Date.UTC(2026, 11, 4);
+
 export class MDNPlacementTop extends PlacementMixin(LitElement) {
   static styles = styles;
 
@@ -38,18 +41,30 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
   }
 
   renderFallback() {
+    const now = Date.now();
+    const blackFriday = now < BLACK_FRIDAY_END;
     return html`
       <div ${ref(this._fallbackRef)} class="fallback">
         <p class="fallback__copy">
-          Learn frontend, backend, and AI from our course partner
-          <a
-            href="https://scrimba.com/learn/frontend?via=mdn"
-            target="_blank"
-            rel="noreferrer"
-            data-glean-id="banner_scrimba_click"
-          >
-            Scrimba
-          </a>
+          ${
+            blackFriday
+              ? html`Learn web dev and AI with MDN's course partner —
+                  <a
+                    href="https://scrimba.com/?coupon=SCR-BLACK-FRI-2026&amp;via=mdn"
+                    target="_blank"
+                    rel="noreferrer"
+                    data-glean-id="banner_scrimba_click"
+                    >50% off Black Friday</a
+                  >`
+              : html`Learn frontend, backend, and AI from our course partner
+                  <a
+                    href="https://scrimba.com/learn/frontend?via=mdn"
+                    target="_blank"
+                    rel="noreferrer"
+                    data-glean-id="banner_scrimba_click"
+                    >Scrimba</a
+                  >`
+          }
         </p>
       </div>
     `;
