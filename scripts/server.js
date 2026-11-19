@@ -12,6 +12,7 @@ const { commands, result } = concurrently(
       name: "server",
       env: {
         ...process.env,
+        RARI_MANAGED_BY_FRED: "true",
       },
       prefixColor: "red",
     },
