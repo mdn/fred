@@ -20,7 +20,7 @@ export class ObservatoryResults extends ServerComponent {
     return PageLayout.render(
       context,
       html`
-        <main id="content" class="observatory">
+        <main id="content" tabindex="-1" class="observatory">
           <div class="observatory-results-wrapper">
             <section class="observatory-results">
               <section class="observatory-results__header">
