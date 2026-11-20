@@ -54,7 +54,7 @@ export class MDNPlacementTop extends PlacementMixin(LitElement) {
                     target="_blank"
                     rel="noreferrer"
                     data-glean-id="banner_scrimba_click"
-                    >50% off Black Friday</a
+                    >40% off Black Friday</a
                   >`
               : html`Learn frontend, backend, and AI from our course partner
                   <a
