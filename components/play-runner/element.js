@@ -16,7 +16,7 @@ import { compressAndBase64Encode } from "../playground/utils.js";
 import styles from "./element.css?lit";
 
 /**
- * @import { RunnerDefaults } from "./types.js"
+ * @import { RunnerColorScheme, RunnerDefaults } from "./types.js"
  * @import { VConsole } from "../play-console/types.js"
  * @import { Ref } from "lit/directives/ref.js";
  */
@@ -28,6 +28,7 @@ export class MDNPlayRunner extends LitElement {
     return {
       code: { type: Object },
       defaults: { type: String },
+      colorScheme: { type: String, attribute: "color-scheme" },
       srcPrefix: { type: String, attribute: "src-prefix" },
       allow: { type: String },
       sandbox: { type: String },
@@ -45,6 +46,8 @@ export class MDNPlayRunner extends LitElement {
     this.code = undefined;
     /** @type {RunnerDefaults | undefined} */
     this.defaults = undefined;
+    /** @type {RunnerColorScheme | undefined} */
+    this.colorScheme = undefined;
     /** @type {string | undefined} */
     this.srcPrefix = undefined;
     /** @type {string | undefined} */
@@ -91,7 +94,9 @@ export class MDNPlayRunner extends LitElement {
       /** @type {const} */ ([
         this.code,
         this.defaults,
-        this.theme.value,
+        this.colorScheme && this.colorScheme !== "light-dark"
+          ? this.colorScheme
+          : this.theme.value,
         this.srcPrefix,
         this.permalink,
       ]),
