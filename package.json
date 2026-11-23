@@ -81,7 +81,7 @@
     "@mdn/yari": "^6.0.1",
     "@rsdoctor/rspack-plugin": "^1.6.5",
     "@rspack/cli": "^2.3.3",
-    "@rspack/core": "^2.3.1",
+    "@rspack/core": "^2.3.3",
     "@rspack/dev-middleware": "^2.0.6",
     "@svgr/webpack": "^8.1.0",
     "@types/compression": "^1.8.1",
