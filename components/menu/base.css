@@ -71,10 +71,12 @@
 
   /* Icon */
 
-  :is([data-section="learn"], [data-section="tools"]) & {
-    &::before {
-      content: "";
-      mask-image: var(--menu-tab-icon);
+  @media not (--screen-menu-compact) {
+    :is([data-section="learn"], [data-section="tools"]) & {
+      &::before {
+        content: "";
+        mask-image: var(--menu-tab-icon);
+      }
     }
   }
 }
