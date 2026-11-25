@@ -428,6 +428,11 @@
       {
         "items": [
           {
+            "href": "/en-US/mcp",
+            "text": "MCP server",
+            "icon": "plug"
+          },
+          {
             "href": "/en-US/play",
             "text": "Playground",
             "icon": "circle-play"

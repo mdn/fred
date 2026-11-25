@@ -176,6 +176,10 @@
     mask-size: cover;
   }
 
+  &[data-icon="plug"]::before {
+    mask-image: url("../icon/plug.svg");
+  }
+
   &[data-icon="circle-play"]::before {
     mask-image: url("../icon/circle-play.svg");
   }
