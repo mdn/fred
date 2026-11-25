@@ -165,10 +165,10 @@ button {
   display: grid;
   color: var(--color-link-normal);
   text-decoration: none;
+}
 
-  &:visited {
-    color: var(--color-link-visited);
-  }
+a:visited {
+  color: var(--color-link-visited);
 }
 
 button {
