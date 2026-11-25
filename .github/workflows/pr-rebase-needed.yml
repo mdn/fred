@@ -19,6 +19,6 @@ jobs:
   labeler:
     uses: mdn/workflows/.github/workflows/pr-rebase-needed.yml@main
     with:
-      target-repo: "mdn/content"
+      target-repo: "mdn/fred"
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
