@@ -420,6 +420,7 @@ ${"```"}`,
                   </mdn-button>`
             }
             <mdn-play-runner
+              allow="camera; microphone"
               class=${this._autoRun ? nothing : "hidden"}
             ></mdn-play-runner>
             <div class="playground__console">
