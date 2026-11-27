@@ -1,6 +1,12 @@
 /* Compat (desktop) */
 
 @media (--screen-small-and-wider) {
+  .table-container,
+  .bc-table {
+    /* Unlike hidden/auto, clip keeps the sticky header from being captured. */
+    overflow-x: clip;
+  }
+
   .bc-table {
     grid-template-columns: minmax(20vw, 1fr) repeat(
         var(--compat-table-browser-count),
@@ -8,7 +14,20 @@
       );
 
     thead {
-      display: contents;
+      display: grid;
+
+      grid-template-columns: subgrid;
+      grid-column: 1 / -1;
+      grid-auto-flow: row dense;
+
+      background: var(--color-background-page);
+
+      /* The header would cover most of a short viewport. */
+      @media (--compat-sticky-header) {
+        position: sticky;
+        top: var(--sticky-header-height);
+        z-index: 1;
+      }
 
       .bc-platforms {
         th {
@@ -19,6 +38,13 @@
 
     tbody {
       --border: 1px solid var(--color-border-primary);
+
+      @media (--compat-sticky-header) {
+        :is(a, button, .timeline) {
+          /* Keep focus out from under the sticky header (~10.65rem tall). */
+          scroll-margin-top: calc(var(--sticky-header-height) + 11rem);
+        }
+      }
 
       /* Border. */
       tr {
