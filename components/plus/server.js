@@ -10,6 +10,9 @@ export class Plus extends ServerComponent {
    * @param {import("@fred").Context} context
    */
   render(context) {
-    return PageLayout.render(context, html`<div id="root"></div>`);
+    return PageLayout.render(
+      context,
+      html`<main id="content" tabindex="-1"><div id="root"></div></main>`,
+    );
   }
 }
