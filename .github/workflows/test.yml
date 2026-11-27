@@ -90,6 +90,8 @@ jobs:
         run: npm test -- unit --coverage
 
       - name: Build
+        env:
+          FRED_PLAYGROUND_LOCAL: true
         run: npm run build
 
       - name: Run e2e tests
