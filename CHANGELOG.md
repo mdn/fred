@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.12.0](https://github.com/mdn/fred/compare/v2.11.1...v2.12.0) (2026-11-27)
+
+
+### Features
+
+* **placement-top:** show Scrimba offer for 2 weeks ([#2102](https://github.com/mdn/fred/issues/2102)) ([fdf9cc4](https://github.com/mdn/fred/commit/fdf9cc4508f95f8566e8c07472f3b6729e1c37dd))
+
+
+### Bug Fixes
+
+* **placement-top:** change Scrimba Black Friday offer to 40% off ([#2107](https://github.com/mdn/fred/issues/2107)) ([b7ff4c9](https://github.com/mdn/fred/commit/b7ff4c93ec8bb247b5feaabcca86bc172e789d11))
+
+
+### Miscellaneous
+
+* **deps:** bump http-proxy-middleware ([bf6cb8d](https://github.com/mdn/fred/commit/bf6cb8dd51dba475354a7c1aabd49668f5244d1f))
+* **deps:** bump http-proxy-middleware from 4.2.1 to 4.2.2 in the npm-prod group ([#2099](https://github.com/mdn/fred/issues/2099)) ([bf6cb8d](https://github.com/mdn/fred/commit/bf6cb8dd51dba475354a7c1aabd49668f5244d1f))
+
 ## [2.11.1](https://github.com/mdn/fred/compare/v2.11.0...v2.11.1) (2026-11-18)
 
 
