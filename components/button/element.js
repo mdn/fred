@@ -69,6 +69,7 @@ export class MDNButton extends LitElement {
         : undefined;
     return Button({
       label: html`<slot></slot>`,
+      labelId: "label",
       disabled: this.disabledReason ? false : this.disabled,
       ariaDisabled: this.disabledReason ? this.disabled : undefined,
       ariaDescription: title,

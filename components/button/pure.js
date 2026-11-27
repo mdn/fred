@@ -4,23 +4,11 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { randomIdString } from "../utils/index.js";
 
 /**
- * @param {object} options
- * @param {string | import("@lit").TemplateResult} options.label
- * @param {import("@lit").TemplateResult} [options.icon]
- * @param {boolean} [options.iconOnly]
- * @param {import("./types.js").ButtonIconPositions} [options.iconPosition]
- * @param {boolean} [options.disabled]
- * @param {boolean} [options.ariaDisabled]
- * @param {string} [options.ariaDescription]
- * @param {string} [options.title]
- * @param {string} [options.href]
- * @param {string} [options.target]
- * @param {string} [options.rel]
- * @param {import("./types.js").ButtonVariants} [options.variant]
- * @param {import("./types.js").ButtonActions} [options.action]
+ * @param {import("./types.js").ButtonOptions} options
  */
 export default function Button({
   label,
+  labelId,
   icon,
   iconOnly,
   iconPosition,
@@ -34,12 +22,20 @@ export default function Button({
   variant = "primary",
   action,
 }) {
-  const labelId = randomIdString("label-");
+  const ariaLabel = iconOnly && typeof label === "string" ? label : undefined;
+  const resolvedLabelId =
+    typeof label === "string"
+      ? undefined
+      : (labelId ?? randomIdString("label-"));
   const iconElement = icon
-    ? html`<span class="icon" part="icon">${icon}</span>`
+    ? html`<span class="icon" part="icon" aria-hidden="true">${icon}</span>`
     : nothing;
   const labelElement = html`
-    <span id=${labelId} class="label" ?hidden=${iconOnly} part="label"
+    <span
+      id=${ifDefined(resolvedLabelId)}
+      class="label"
+      ?hidden=${iconOnly}
+      part="label"
       >${label}</span
     >
   `;
@@ -56,7 +52,8 @@ export default function Button({
           href=${href}
           target=${ifDefined(target)}
           rel=${ifDefined(rel)}
-          aria-labelledby=${labelId}
+          aria-label=${ifDefined(ariaLabel)}
+          aria-labelledby=${ifDefined(resolvedLabelId)}
           aria-description=${ifDefined(ariaDescription)}
           title=${ifDefined(title)}
           data-variant=${ifDefined(variant)}
@@ -69,7 +66,8 @@ export default function Button({
     : html`
         <button
           class="button"
-          aria-labelledby=${labelId}
+          aria-label=${ifDefined(ariaLabel)}
+          aria-labelledby=${ifDefined(resolvedLabelId)}
           ?disabled=${disabled}
           aria-disabled=${ariaDisabled ? "true" : nothing}
           aria-description=${ifDefined(ariaDescription)}
