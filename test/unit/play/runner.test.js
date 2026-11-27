@@ -51,4 +51,46 @@ describe("play renderHtml", () => {
     assert.ok(html < closer && closer < started && started < runner);
     assert.ok(runner < ended);
   });
+
+  describe("tabbed interactive example color scheme", () => {
+    /** @type {{ theme: "light" | "dark", expectedColorScheme: string, expectedBackground: string, expectedColor: string }[]} */
+    const cases = [
+      {
+        theme: "light",
+        expectedColorScheme: "color-scheme: light",
+        expectedBackground: "--background-primary: #fff",
+        expectedColor: "color: #15141aff",
+      },
+      {
+        theme: "dark",
+        expectedColorScheme: "color-scheme: dark",
+        expectedBackground: "--background-primary: #1b1b1b",
+        expectedColor: "color: #fff",
+      },
+    ];
+
+    for (const {
+      theme,
+      expectedColorScheme,
+      expectedBackground,
+      expectedColor,
+    } of cases) {
+      it(`uses the ${theme} theme for the example defaults`, () => {
+        const html = renderHtml({
+          html: "<p>ok</p>",
+          css: "",
+          js: "",
+          defaults: "ix-tabbed",
+          theme,
+        });
+
+        assert.ok(html.includes(expectedColorScheme));
+        assert.ok(html.includes(expectedBackground));
+        assert.ok(
+          html.includes("background-color: var(--background-primary, #fff)"),
+        );
+        assert.ok(html.includes(expectedColor));
+      });
+    }
+  });
 });
