@@ -1,34 +1,75 @@
-.left-sidebar,
-.content-section {
-  .icon.icon-baseline {
-    display: inline-block;
+:where(.left-sidebar, .content-section) .icon.icon-baseline,
+:is(ul, ol, dl) a > span[data-baseline] {
+  display: inline-block;
 
-    height: 0.8em;
-    aspect-ratio: 300/167;
+  height: 0.8em;
+  aspect-ratio: 300/167;
 
-    /* align with optical middle: */
-    margin-top: -0.1em;
+  /* align with optical middle: */
+  margin-top: -0.1em;
 
-    vertical-align: middle;
+  vertical-align: middle;
 
-    background-image: var(--baseline-img);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
+  background-image: var(--baseline-img);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
 
-    & ~ .icon {
-      display: none;
+:is(.left-sidebar, .content-section) .icon.icon-baseline {
+  & ~ .icon {
+    display: none;
+  }
+
+  &.discouraged {
+    @mixin light-dark --baseline-img, url("./icons/status/obsolete.svg"),
+      url("./icons/status/obsolete-dark.svg");
+  }
+
+  &.removing {
+    @mixin light-dark --baseline-img, url("./icons/status/pending-removal.svg"),
+      url("./icons/status/pending-removal-dark.svg");
+  }
+}
+
+a > span[data-baseline] {
+  display: none;
+}
+
+ul,
+ol,
+dl {
+  a > span[data-baseline] {
+    margin-left: 0.5ch;
+
+    &[data-baseline="high"] {
+      @mixin light-dark --baseline-img, url("./icons/status/high.svg"),
+        url("./icons/status/high-dark.svg");
     }
 
-    &.discouraged {
+    &[data-baseline="low"] {
+      @mixin light-dark --baseline-img, url("./icons/status/low.svg"),
+        url("./icons/status/low-dark.svg");
+    }
+
+    &[data-baseline="limited"] {
+      @mixin light-dark --baseline-img, url("./icons/status/limited.svg"),
+        url("./icons/status/limited-dark.svg");
+    }
+
+    &[data-baseline="discouraged"] {
       @mixin light-dark --baseline-img, url("./icons/status/obsolete.svg"),
         url("./icons/status/obsolete-dark.svg");
     }
 
-    &.removing {
+    &[data-baseline="removing"] {
       @mixin light-dark --baseline-img,
         url("./icons/status/pending-removal.svg"),
         url("./icons/status/pending-removal-dark.svg");
     }
+  }
+
+  a:has(> span[data-baseline]) ~ .icon {
+    display: none;
   }
 }
